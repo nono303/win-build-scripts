@@ -1,0 +1,15 @@
+diff --git "a/c:\\temp\\TortoiseGit\\main-d495914.000.c" "b/C:\\src\\httpd\\server\\main.c"
+index ec0ea68d9b..6a8e51e26a 100644
+--- "a/c:\\temp\\TortoiseGit\\main-d495914.000.c"
++++ "b/C:\\src\\httpd\\server\\main.c"
+@@ -45,6 +45,10 @@
+ #include <unistd.h>
+ #endif
+ 
++#include "openssl\applink.c"
++
++CRYPTO_malloc_init();
++
+ /* WARNING: Win32 binds http_main.c dynamically to the server. Please place
+  *          extern functions and global data in another appropriate module.
+  *
