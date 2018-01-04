@@ -1,0 +1,12 @@
+diff --git "a/c:\\temp\\TortoiseGit\\main-d495914.000.c" "b/C:\\src\\httpd\\server\\main.c"
+index ec0ea68d9b..cffb65b05f 100644
+--- "a/c:\\temp\\TortoiseGit\\main-d495914.000.c"
++++ "b/C:\\src\\httpd\\server\\main.c"
+@@ -44,6 +44,7 @@
+ #if APR_HAVE_UNISTD_H
+ #include <unistd.h>
+ #endif
++#include "openssl\applink.c"
+ 
+ /* WARNING: Win32 binds http_main.c dynamically to the server. Please place
+  *          extern functions and global data in another appropriate module.
