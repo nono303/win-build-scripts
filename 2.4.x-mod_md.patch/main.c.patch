@@ -1,6 +1,6 @@
-diff --git "a/c:\\temp\\TortoiseGit\\main-d495914.000.c" "b/C:\\src\\httpd\\server\\main.c"
+diff --git "a/c:\\temp\\TortoiseGit\\main-735052d.000.c" "b/C:\\src\\httpd\\server\\main.c"
 index ec0ea68d9b..cffb65b05f 100644
---- "a/c:\\temp\\TortoiseGit\\main-d495914.000.c"
+--- "a/c:\\temp\\TortoiseGit\\main-735052d.000.c"
 +++ "b/C:\\src\\httpd\\server\\main.c"
 @@ -44,6 +44,7 @@
  #if APR_HAVE_UNISTD_H

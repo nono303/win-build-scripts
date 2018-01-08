@@ -35,14 +35,12 @@ mkdir C:\httpd-sdk\build\libiconv
 cd /D C:\httpd-sdk\build\libiconv
 cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=C:\httpd-sdk\install -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON ..\..\src\libiconv
 nmake /NOLOGO /A /B clean install
-copy /Y C:\httpd-sdk\install\lib\iconv.lib C:\httpd-sdk\install\lib\libiconv.lib
-mkdir C:\httpd-sdk\install\include\libxml2
-copy /Y C:\httpd-sdk\install\include\libxml2\iconv.h C:\httpd-sdk\install\include\iconv.h
+	REM pour libxml2 2.9.7
+copy /Y C:\httpd-sdk\src\libiconv\include\iconv.h C:\httpd-sdk\install\include\iconv.h
 
 cd /D C:\httpd-sdk\src\libxml2\win32
 cscript configure.js compiler=nmakemsvc prefix=C:\httpd-sdk\install include=C:\httpd-sdk\install\include lib=C:\httpd-sdk\install\lib debug=no zlib=yes
 nmake /NOLOGO /A /B /f Makefile.msvc clean install
-copy /y C:\httpd-sdk\install\lib\libxml2.lib C:\httpd-sdk\install\lib\xml2.lib 
 
 cd ..
 rmdir /S /Q C:\httpd-sdk\build\pcre
@@ -92,7 +90,7 @@ mkdir C:\httpd-sdk\build\nghttp2
 cd /D C:\httpd-sdk\build\nghttp2
 cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=C:\httpd-sdk\install -DCMAKE_BUILD_TYPE=Release -DENABLE_LIB_ONLY=ON -DLIBEVENT_INCLUDE_DIR=C:/httpd-sdk/install/include -DJANSSON_INCLUDE_DIR=C:/httpd-sdk/install/include -DJANSSON_LIBRARIES=C:/httpd-sdk/install/lib/jansson.lib -DENABLE_WERROR=OFF -DENABLE_DEBUG=OFF -DENABLE_THREADS=ON -DENABLE_ASIO_LIB=OFF -DENABLE_FAILMALLOC=OFF -DWITH_LIBXML2=ON -DWITH_JEMALLOC=OFF -DWITH_SPDYLAY=OFF -DWITH_MRUBY=OFF -DWITH_NEVERBLEED=OFF ..\..\src\nghttp2
 nmake /B /NOLOGO clean install
-copy /Y C:\httpd-sdk\install\lib\nghttp2.dll C:\httpd-sdk\install\bin\nghttp2.dll
+move /Y C:\httpd-sdk\install\lib\nghttp2.dll C:\httpd-sdk\install\bin\nghttp2.dll
 
 cd ..
 rmdir /S /Q C:\httpd-sdk\build\libexpat
@@ -129,15 +127,17 @@ cd ..
 rmdir /S /Q C:\httpd-sdk\build\httpd
 mkdir C:\httpd-sdk\build\httpd
 cd /D C:\httpd-sdk\build\httpd
-	REM set CMAKE_BUILD_TYPE=RelWithDebInfo
-	set CMAKE_BUILD_TYPE=Release
+set CMAKE_BUILD_TYPE=RelWithDebInfo
+REM set CMAKE_BUILD_TYPE=Release
 cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=C:\httpd-sdk\install -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% -DINSTALL_PDB=ON -DENABLE_MODULES=i -DINSTALL_MANUAL=OFF -DLIBXML2_ICONV_INCLUDE_DIR=C:/httpd-sdk/install/include -DLIBXML2_ICONV_LIBRARIES=C:/httpd-sdk/install/lib/iconv.lib -DZLIB_LIBRARIES=C:/httpd-sdk/install/lib/zlib.lib -DJANSSON_INCLUDE_DIR=C:/httpd-sdk/install/include -DJANSSON_LIBRARIES=C:/httpd-sdk/install/lib/jansson.lib -DOPENSSL_ROOT_DIR=C:\httpd-sdk\install\ -DENABLE_SOCACHE_DC=O -DENABLE_CHARSET_LITE=O ..\..\src\httpd
-C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/httpd_flags.sh
+C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/httpd_flags_%CMAKE_BUILD_TYPE%.sh
 nmake /B /NOLOGO clean install
 mt.exe -manifest C:\httpd-sdk\httpd.exe.manifest -outputresource:C:\httpd-sdk\install\bin\httpd.exe;1
 
 cd /D C:\src\wku_bt-2.01
 nmake -f makefile.win32 BUILD=%CYGV% HTTPD=C:\httpd-sdk\install clean all install install-mod-crash
+copy /Y C:\src\wku_bt-2.01\testdiag.exe C:\httpd-sdk\install\bin\testdiag.exe
+copy /Y C:\src\wku_bt-2.01\testcrash.exe C:\httpd-sdk\install\bin\testcrash.exe
 
 cd /D C:\httpd-sdk\install\bin
 openssl version

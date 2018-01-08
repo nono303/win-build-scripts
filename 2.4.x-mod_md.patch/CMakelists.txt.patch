@@ -1,6 +1,6 @@
-diff --git "a/c:\\temp\\TortoiseGit\\CMakeLists-d495914.000.txt" "b/C:\\src\\httpd\\CMakeLists.txt"
-index 3cd8a34d14..e0c7fd8aa6 100644
---- "a/c:\\temp\\TortoiseGit\\CMakeLists-d495914.000.txt"
+diff --git "a/c:\\temp\\TortoiseGit\\CMakeLists-735052d.001.txt" "b/C:\\src\\httpd\\CMakeLists.txt"
+index 3cd8a34d14..51f843cc90 100644
+--- "a/c:\\temp\\TortoiseGit\\CMakeLists-735052d.001.txt"
 +++ "b/C:\\src\\httpd\\CMakeLists.txt"
 @@ -26,6 +26,7 @@ FIND_PACKAGE(LibXml2)
  FIND_PACKAGE(Lua51)
@@ -27,7 +27,7 @@ index 3cd8a34d14..e0c7fd8aa6 100644
    "modules/test/mod_dialup+O+rate limits static files to dialup modem speeds"
    "modules/test/mod_optional_fn_export+O+example optional function exporter"
    "modules/test/mod_optional_fn_import+O+example optional function importer"
-@@ -497,6 +501,31 @@ SET(mod_ssl_extra_sources
+@@ -497,6 +501,42 @@ SET(mod_ssl_extra_sources
    modules/ssl/ssl_util.c             modules/ssl/ssl_util_ocsp.c
    modules/ssl/ssl_util_ssl.c         modules/ssl/ssl_util_stapling.c
  )
@@ -36,17 +36,28 @@ index 3cd8a34d14..e0c7fd8aa6 100644
 +  SET(mod_md_extra_libs               "${CURL_LIBRARIES};${OPENSSL_LIBRARIES};${JANSSON_LIBRARIES}")
 +ENDIF()
 +SET(mod_md_extra_sources
-+  modules/md/md_acme.c		  modules/md/md_acme_acct.c
-+  modules/md/md_acme_authz.c	  modules/md/md_acme_drive.c
-+  modules/md/md_cmd_acme.c	  modules/md/md_cmd_main.c
-+  modules/md/md_cmd_reg.c	  modules/md/md_cmd_store.c
-+  modules/md/md_core.c		  modules/md/md_crypt.c
-+  modules/md/md_curl.c		  modules/md/md_http.c
-+  modules/md/md_json.c		  modules/md/md_jws.c
-+  modules/md/md_log.c		  modules/md/md_reg.c
-+  modules/md/md_store.c		  modules/md/md_store_fs.c
-+  modules/md/md_util.c		  modules/md/mod_md.c
-+  modules/md/mod_md_config.c	  modules/md/mod_md_os.c
++modules/md/md_cmd_main.c
++modules/md/md_cmd_reg.c
++modules/md/md_cmd_store.c
++modules/md/md_core.c
++modules/md/md_crypt.c
++modules/md/md_curl.c
++modules/md/md_http.c
++modules/md/md_json.c
++modules/md/md_jws.c
++modules/md/md_log.c
++modules/md/md_reg.c
++modules/md/md_store.c
++modules/md/md_store_fs.c
++modules/md/md_util.c
++modules/md/mod_md.c
++modules/md/mod_md_config.c
++modules/md/mod_md_os.c
++modules/md/md_acme.c
++modules/md/md_acme_acct.c
++modules/md/md_acme_authz.c
++modules/md/md_acme_drive.c
++modules/md/md_cmd_acme.c
 +)
 +SET(mod_fcgid_extra_sources
 +modules/fcgid/fcgid_proc_win.c		modules/fcgid/fcgid_proctbl_win.c
@@ -59,7 +70,7 @@ index 3cd8a34d14..e0c7fd8aa6 100644
  SET(mod_status_extra_defines         STATUS_DECLARE_EXPORT)
  SET(mod_watchdog_install_lib 1)
  SET(mod_xml2enc_requires             LIBXML2_FOUND)
-@@ -564,7 +593,7 @@ ELSE()
+@@ -564,7 +604,7 @@ ELSE()
  ENDIF()
  
  # for easy reference from .dll/.so builds
@@ -68,7 +79,7 @@ index 3cd8a34d14..e0c7fd8aa6 100644
  
  ADD_EXECUTABLE(gen_test_char server/gen_test_char.c)
  GET_TARGET_PROPERTY(GEN_TEST_CHAR_EXE gen_test_char LOCATION)
-@@ -636,6 +665,8 @@ SET(LIBHTTPD_SOURCES
+@@ -636,6 +676,8 @@ SET(LIBHTTPD_SOURCES
  
  CONFIGURE_FILE(os/win32/win32_config_layout.h
                 ${PROJECT_BINARY_DIR}/ap_config_layout.h)
@@ -77,7 +88,7 @@ index 3cd8a34d14..e0c7fd8aa6 100644
  
  SET(HTTPD_INCLUDE_DIRECTORIES
    ${PROJECT_BINARY_DIR}
-@@ -651,6 +682,8 @@ SET(HTTPD_INCLUDE_DIRECTORIES
+@@ -651,6 +693,8 @@ SET(HTTPD_INCLUDE_DIRECTORIES
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/proxy
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/session
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl
@@ -86,7 +97,7 @@ index 3cd8a34d14..e0c7fd8aa6 100644
    ${CMAKE_CURRENT_SOURCE_DIR}/server
    ${APR_INCLUDE_DIR}
    ${PCRE_INCLUDE_DIR}
-@@ -677,6 +710,7 @@ SET(other_installed_h
+@@ -677,6 +721,7 @@ SET(other_installed_h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/session/mod_session.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl/mod_ssl.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl/mod_ssl_openssl.h
@@ -94,7 +105,7 @@ index 3cd8a34d14..e0c7fd8aa6 100644
  )
  # When mod_serf is buildable, don't forget to copy modules/proxy/mod_serf.h
  
-@@ -765,7 +799,7 @@ FOREACH (mod ${MODULE_PATHS})
+@@ -765,7 +810,7 @@ FOREACH (mod ${MODULE_PATHS})
      SET(mod_extra_libs "${mod_name}_extra_libs")
      SET_TARGET_PROPERTIES(${mod_name} PROPERTIES
        SUFFIX .so
@@ -103,7 +114,7 @@ index 3cd8a34d14..e0c7fd8aa6 100644
      )
      TARGET_LINK_LIBRARIES(${mod_name} ${${mod_extra_libs}} libhttpd ${EXTRA_LIBS} ${APR_LIBRARIES} ${HTTPD_SYSTEM_LIBS})
      DEFINE_WITH_BLANKS(define_long_name "LONG_NAME" "${mod_name} for Apache HTTP Server")
-@@ -790,9 +824,9 @@ ENDFOREACH()
+@@ -790,9 +835,9 @@ ENDFOREACH()
  
  ###########   HTTPD LIBRARIES   ############
  ADD_LIBRARY(libhttpd SHARED ${LIBHTTPD_SOURCES} build/win32/httpd.rc)
@@ -116,7 +127,7 @@ index 3cd8a34d14..e0c7fd8aa6 100644
  SET(install_targets ${install_targets} libhttpd)
  SET(install_bin_pdb ${install_bin_pdb} $<TARGET_PDB_FILE:libhttpd>)
  TARGET_LINK_LIBRARIES(libhttpd ${EXTRA_LIBS} ${APR_LIBRARIES} ${PCRE_LIBRARIES} ${HTTPD_SYSTEM_LIBS})
-@@ -846,12 +880,12 @@ ENDIF()
+@@ -846,12 +891,12 @@ ENDIF()
  GET_PROPERTY(tmp_includes TARGET ab PROPERTY INCLUDE_DIRECTORIES)
  
  # getting duplicate manifest error with ApacheMonitor

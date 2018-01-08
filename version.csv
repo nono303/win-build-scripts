@@ -11,9 +11,9 @@ C:\src\libevent;2.1.8;
 C:\src\libexpat;2.2.5;
 C:\src\libiconv;master;1.14 KO compile
 C:\src\libssh2;1.8.0;
-C:\src\libxml2;2.9.6;2.9.7 KO compile
+C:\src\libxml2;2.9.7;
 C:\src\lua;5.3.2;
-C:\src\mod_md;1.1.7;
+C:\src\mod_md;1.1.8;
 C:\src\nghttp2;1.29.0;
 C:\src\openssl;1.1.0g;
 C:\src\pcre;master;
