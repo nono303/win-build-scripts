@@ -1,0 +1,13 @@
+diff --git "a/c:\\temp\\TortoiseGit\\FindLibevent-439b9b6.000.cmake" "b/C:\\httpd-sdk\\src\\nghttp2\\cmake\\FindLibevent.cmake"
+index 8f40d9fe..b289752a 100644
+--- "a/c:\\temp\\TortoiseGit\\FindLibevent-439b9b6.000.cmake"
++++ "b/C:\\httpd-sdk\\src\\nghttp2\\cmake\\FindLibevent.cmake"
+@@ -35,7 +35,7 @@ find_path(LIBEVENT_INCLUDE_DIR
+ )
+ 
+ if(LIBEVENT_INCLUDE_DIR)
+-  set(_version_regex "^#define[ \t]+_EVENT_VERSION[ \t]+\"([^\"]+)\".*")
++  set(_version_regex "^#define[ \t]+EVENT__VERSION[ \t]+\"([^\"]+)\".*")
+   if(EXISTS "${LIBEVENT_INCLUDE_DIR}/event2/event-config.h")
+     # Libevent 2.0
+     file(STRINGS "${LIBEVENT_INCLUDE_DIR}/event2/event-config.h"

@@ -1,0 +1,16 @@
+diff --git "a/c:\\temp\\TortoiseGit\\windows-makefile-b2758a2.000.tmpl" "b/C:\\httpd-sdk\\src\\openssl\\Configurations\\windows-makefile.tmpl"
+index 090a6023d8..03c02b1d43 100644
+--- "a/c:\\temp\\TortoiseGit\\windows-makefile-b2758a2.000.tmpl"
++++ "b/C:\\httpd-sdk\\src\\openssl\\Configurations\\windows-makefile.tmpl"
+@@ -223,9 +223,9 @@ list-tests:
+ 	@echo "Tests are not supported with your chosen Configure options"
+ 	@rem {- output_on() if !$disabled{tests}; "" -}
+ 
+-install: install_sw install_ssldirs install_docs
++install: install_sw install_ssldirs
+ 
+-uninstall: uninstall_docs uninstall_sw
++uninstall: uninstall_sw
+ 
+ libclean:
+ 	"$(PERL)" -e "map { m/(.*)\.dll$$/; unlink glob """$$1.*"""; } @ARGV" $(SHLIBS)

@@ -1,0 +1,12 @@
+diff --git "a/c:\\temp\\TortoiseGit\\ssl_engine_init-735052d.004.c" "b/C:\\src\\httpd\\modules\\ssl\\ssl_engine_init.c"
+index 0cfa766da4..568937bcc7 100644
+--- "a/c:\\temp\\TortoiseGit\\ssl_engine_init-735052d.004.c"
++++ "b/C:\\src\\httpd\\modules\\ssl\\ssl_engine_init.c"
+@@ -30,7 +30,6 @@
+ #include "mod_ssl.h"
+ #include "mod_ssl_openssl.h"
+ #include "mpm_common.h"
+-#include "mod_md.h"
+ 
+ /* Use the header, once mod_md is backported. break the dependency loop for now. */
+ #define MOD_MD_BACKPORTED   0

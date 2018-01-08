@@ -3,9 +3,7 @@ C:\src\apr-util;1.6.1;
 C:\src\brotli;1.0.2;
 C:\src\bzip2-1.0.6;1.0.6;
 C:\src\curl;7.57.0;
-C:\src\httpd;;"CMakeLists.txt
-build/win32/fixBaseAddrs.pl
-modules/md/"
+C:\src\httpd;2.4.29;+patchs
 C:\src\jansson;2.10;
 C:\src\libevent;2.1.8;
 C:\src\libexpat;2.2.5;
