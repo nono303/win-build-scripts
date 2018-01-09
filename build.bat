@@ -1,5 +1,21 @@
 REM patch -i C:\httpd-sdk\src\mod_md\patches\mod_ssl_md-2.4.x-v5.diff
 
+cd /D C:\httpd-sdk\src\jemalloc-cmake\
+sh -c "CC=cl ./autogen.sh"
+C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe msvc\jemalloc_vc2015.sln /m:8 /t:Clean,Build /p:Configuration=Release /p:DebugSymbols=false /p:DebugType=None /p:Plateform="x64"
+move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\x64\Release\jemalloc.dll c:\httpd-sdk\install\bin\jemalloc.dll
+move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\x64\Release\jemalloc.exp c:\httpd-sdk\install\lib\jemalloc.exp
+rm -f C:\httpd-sdk\src\jemalloc-cmake\msvc\x64\Release\jemalloc.iobj
+rm -f C:\httpd-sdk\src\jemalloc-cmake\msvc\x64\Release\jemalloc.ipdb
+move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\x64\Release\jemalloc.lib c:\httpd-sdk\install\lib\jemalloc.lib
+move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\x64\Release\jemalloc.pdb c:\httpd-sdk\install\bin\jemalloc.pdb
+move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\x64\Release\test_threads.exe c:\httpd-sdk\install\bin\test_threads.exe
+rm -f C:\httpd-sdk\src\jemalloc-cmake\msvc\x64\Release\test_threads.iobj
+rm -f C:\httpd-sdk\src\jemalloc-cmake\msvc\x64\Release\test_threads.ipdb
+move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\x64\Release\test_threads.pdb c:\httpd-sdk\install\bin\test_threads.pdb
+mkdir c:\httpd-sdk\install\include\jemalloc\
+copy /Y C:\httpd-sdk\src\jemalloc-cmake\include\jemalloc\jemalloc.h c:\httpd-sdk\install\include\jemalloc\jemalloc.h
+
 cd ..
 rmdir /S /Q C:\httpd-sdk\build\zlib
 mkdir C:\httpd-sdk\build\zlib
@@ -84,13 +100,13 @@ nmake /B /NOLOGO clean install
 	REM -- Libevent(SSL):  TRUE (LIBS='C:/httpd-sdk/install/lib/event.lib;C:/httpd-sdk/install/lib/event_openssl.lib')
 	REM -- Spdylay:        FALSE (LIBS='')
 	REM -- Jansson:        TRUE (LIBS='C:/httpd-sdk/install/lib/jansson.lib')
-	REM -- Jemalloc:       FALSE (LIBS='')
+	REM -- Jemalloc:       TRUE (LIBS='C:/httpd-sdk/install/lib/jemalloc.lib')
 	REM -- Zlib:           TRUE (LIBS='C:/httpd-sdk/install/lib/zlib.lib')
 cd ..
 rmdir /S /Q C:\httpd-sdk\build\nghttp2
 mkdir C:\httpd-sdk\build\nghttp2
 cd /D C:\httpd-sdk\build\nghttp2
-cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=C:\httpd-sdk\install -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% -DENABLE_LIB_ONLY=ON -DLIBEVENT_INCLUDE_DIR=C:/httpd-sdk/install/include -DJANSSON_INCLUDE_DIR=C:/httpd-sdk/install/include -DJANSSON_LIBRARIES=C:/httpd-sdk/install/lib/jansson.lib -DENABLE_WERROR=OFF -DENABLE_DEBUG=OFF -DENABLE_THREADS=ON -DENABLE_ASIO_LIB=OFF -DENABLE_FAILMALLOC=OFF -DWITH_LIBXML2=ON -DWITH_JEMALLOC=OFF -DWITH_SPDYLAY=OFF -DWITH_MRUBY=OFF -DWITH_NEVERBLEED=OFF ..\..\src\nghttp2
+cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=C:\httpd-sdk\install -DCMAKE_BUILD_TYPE=Release -DENABLE_LIB_ONLY=ON -DLIBEVENT_INCLUDE_DIR=C:/httpd-sdk/install/include -DJANSSON_INCLUDE_DIR=C:/httpd-sdk/install/include -DJANSSON_LIBRARIES=C:/httpd-sdk/install/lib/jansson.lib -DJEMALLOC_LIBRARIES=C:/httpd-sdk/install/lib/jemalloc.lib -DLIBEVENT_OPENSSL_LIBRARY=C:/httpd-sdk/install/lib/event_openssl.lib -DJEMALLOC_INCLUDE_DIR=C:/httpd-sdk/install/include -DENABLE_WERROR=OFF -DENABLE_DEBUG=OFF -DENABLE_THREADS=ON -DENABLE_ASIO_LIB=OFF -DENABLE_FAILMALLOC=OFF -DWITH_LIBXML2=ON -DWITH_JEMALLOC=ON -DWITH_SPDYLAY=OFF -DWITH_MRUBY=OFF -DWITH_NEVERBLEED=OFF ..\..\src\nghttp2
 nmake /B /NOLOGO clean install
 move /Y C:\httpd-sdk\install\lib\nghttp2.dll C:\httpd-sdk\install\bin\nghttp2.dll
 
@@ -101,7 +117,6 @@ cd /D C:\httpd-sdk\build\libexpat
 cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=C:\httpd-sdk\install -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% -DBUILD_doc=OFF -DBUILD_tests=OFF -DBUILD_examples=OFF -DBUILD_tools=OFF ..\..\src\libexpat\expat
 nmake /B /NOLOGO clean install
 
-	REM -- OPTIMISATION CFLAGS KO...
 cd ..
 rmdir /S /Q C:\httpd-sdk\build\apr
 mkdir C:\httpd-sdk\build\apr
@@ -109,7 +124,6 @@ cd /D C:\httpd-sdk\build\apr
 cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=C:\httpd-sdk\install -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% -DMIN_WINDOWS_VER=0x0600 -DAPR_HAVE_IPV6=OFF -DAPR_INSTALL_PRIVATE_H=ON -DAPR_BUILD_TESTAPR=OFF -DINSTALL_PDB=OFF ..\..\src\apr
 nmake /B /NOLOGO clean install
 
-	REM -- OPTIMISATION CFLAGS KO...
 cd ..
 rmdir /S /Q C:\httpd-sdk\build\apr-util
 mkdir C:\httpd-sdk\build\apr-util
@@ -134,10 +148,10 @@ C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/httpd_flags_%CMAKE_BUILD_TYPE%.sh
 nmake /B /NOLOGO clean install
 mt.exe -manifest C:\httpd-sdk\httpd.exe.manifest -outputresource:C:\httpd-sdk\install\bin\httpd.exe;1
 
-cd /D C:\src\wku_bt-2.01
+cd /D C:\src\wku_bt
 nmake -f makefile.win32 BUILD=%CYGV% HTTPD=C:\httpd-sdk\install clean all install install-mod-crash
-copy /Y C:\src\wku_bt-2.01\testdiag.exe C:\httpd-sdk\install\bin\testdiag.exe
-copy /Y C:\src\wku_bt-2.01\testcrash.exe C:\httpd-sdk\install\bin\testcrash.exe
+copy /Y C:\src\wku_bt\testdiag.exe C:\httpd-sdk\install\bin\testdiag.exe
+copy /Y C:\src\wku_bt\testcrash.exe C:\httpd-sdk\install\bin\testcrash.exe
 
 cd /D C:\httpd-sdk\install\bin
 openssl version
