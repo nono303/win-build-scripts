@@ -1,0 +1,30 @@
+diff --git "a/c:\\temp\\TortoiseGit\\Makefile-bc5a5d6.001.msvc" "b/C:\\httpd-sdk\\src\\libxml2\\win32\\Makefile.msvc"
+index 115a4517..a0ebd84b 100644
+--- "a/c:\\temp\\TortoiseGit\\Makefile-bc5a5d6.001.msvc"
++++ "b/C:\\httpd-sdk\\src\\libxml2\\win32\\Makefile.msvc"
+@@ -36,14 +36,14 @@ UTILS_INTDIR = int.utils.msvc
+ 
+ # The preprocessor and its options.
+ CPP = cl.exe /EP
+-CPPFLAGS = /nologo /I$(XML_SRCDIR)\include /D "NOLIBTOOL" 
++CPPFLAGS = /Z7 /nologo /I$(XML_SRCDIR)\include /D "NOLIBTOOL" 
+ !if "$(WITH_THREADS)" != "no"
+ CPPFLAGS = $(CPPFLAGS) /D "_REENTRANT"
+ !endif
+ 
+ # The compiler and its options.
+ CC = cl.exe
+-CFLAGS = /nologo /D "_WINDOWS" /D "_MBCS" /D "NOLIBTOOL" /W3 /wd4244 /wd4267 $(CRUNTIME)
++CFLAGS = /Z7 /nologo /D "_WINDOWS" /D "_MBCS" /D "NOLIBTOOL" /W3 /wd4244 /wd4267 $(CRUNTIME)
+ CFLAGS = $(CFLAGS) /I$(XML_SRCDIR) /I$(XML_SRCDIR)\include /I$(INCPREFIX)
+ !if "$(WITH_THREADS)" != "no"
+ CFLAGS = $(CFLAGS) /D "_REENTRANT"
+@@ -65,7 +65,7 @@ CFLAGS = $(CFLAGS) /D_CRT_SECURE_NO_DEPRECATE /D_CRT_NONSTDC_NO_DEPRECATE
+ 
+ # The linker and its options.
+ LD = link.exe
+-LDFLAGS = /nologo /VERSION:$(LIBXML_MAJOR_VERSION).$(LIBXML_MINOR_VERSION)
++LDFLAGS = /debug /nologo /VERSION:$(LIBXML_MAJOR_VERSION).$(LIBXML_MINOR_VERSION)
+ LDFLAGS = $(LDFLAGS) /LIBPATH:$(BINDIR) /LIBPATH:$(LIBPREFIX)
+ LIBS =
+ !if "$(WITH_FTP)" == "1" || "$(WITH_HTTP)" == "1"

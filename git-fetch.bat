@@ -10,7 +10,6 @@ for %%i in (
 "C:\src\libevent"
 "C:\src\libexpat"
 "C:\src\libiconv"
-"C:\src\libssh2"
 "C:\src\libxml2"
 "C:\src\lua"
 "C:\src\mod_fcgid"
@@ -21,9 +20,10 @@ for %%i in (
 "C:\src\pcre"
 "C:\src\zlib"
 "C:\src\php-src"
-"C:\src\pecl\pecl-memcache"
-"C:\src\pecl\xdebug"
+"C:\src\pecl-memcache"
+"C:\src\xdebug"
 "C:\php72-sdk"
+"C:\httpd-sdk\src\php-cgi-spawner"
 ) do (
     cd %%i
     git fetch
