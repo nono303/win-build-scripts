@@ -1,7 +1,10 @@
-diff --git "a/c:\\temp\\TortoiseGit\\CMakeLists-735052d.001.txt" "b/C:\\src\\httpd\\CMakeLists.txt"
-index 3cd8a34d14..51f843cc90 100644
---- "a/c:\\temp\\TortoiseGit\\CMakeLists-735052d.001.txt"
-+++ "b/C:\\src\\httpd\\CMakeLists.txt"
+ CMakeLists.txt | 70 +++++++++++++++++++++++++++++++++++++++++++++++++---------
+ 1 file changed, 59 insertions(+), 11 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 3cd8a34d14..8c2f0e871c 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -26,6 +26,7 @@ FIND_PACKAGE(LibXml2)
  FIND_PACKAGE(Lua51)
  FIND_PACKAGE(OpenSSL)
@@ -146,3 +149,13 @@ index 3cd8a34d14..51f843cc90 100644
  
  ###########  CONFIGURATION FILES ###########
  # Set up variables used in the .conf file templates
+@@ -953,6 +998,9 @@ MESSAGE(STATUS "  Brotli include directory......... : ${BROTLI_INCLUDE_DIR}")
+ MESSAGE(STATUS "  Brotli libraries ................ : ${BROTLI_LIBRARIES}")
+ MESSAGE(STATUS "  Extra include directories ....... : ${EXTRA_INCLUDES}")
+ MESSAGE(STATUS "  Extra compile flags ............. : ${EXTRA_COMPILE_FLAGS}")
++MESSAGE(STATUS "  Extra module link flags ......... : ${CMAKE_MODULE_LINKER_FLAGS}")
++MESSAGE(STATUS "  Extra shared link flags ......... : ${CMAKE_SHARED_LINKER_FLAGS}")
++MESSAGE(STATUS "  Extra static link flags ......... : ${CMAKE_STATIC_LINKER_FLAGS}")
+ MESSAGE(STATUS "  Extra libraries ................. : ${EXTRA_LIBS}")
+ 
+ MESSAGE(STATUS "  Modules built and loaded:")

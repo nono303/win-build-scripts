@@ -1,7 +1,7 @@
-diff --git "a/c:\\temp\\TortoiseGit\\FindLibevent-439b9b6.000.cmake" "b/C:\\httpd-sdk\\src\\nghttp2\\cmake\\FindLibevent.cmake"
+diff --git "a/c:\\temp\\TortoiseGit\\FindLibevent-652f57e.000.cmake" "b/C:\\src\\nghttp2\\cmake\\FindLibevent.cmake"
 index 8f40d9fe..b289752a 100644
---- "a/c:\\temp\\TortoiseGit\\FindLibevent-439b9b6.000.cmake"
-+++ "b/C:\\httpd-sdk\\src\\nghttp2\\cmake\\FindLibevent.cmake"
+--- "a/c:\\temp\\TortoiseGit\\FindLibevent-652f57e.000.cmake"
++++ "b/C:\\src\\nghttp2\\cmake\\FindLibevent.cmake"
 @@ -35,7 +35,7 @@ find_path(LIBEVENT_INCLUDE_DIR
  )
  

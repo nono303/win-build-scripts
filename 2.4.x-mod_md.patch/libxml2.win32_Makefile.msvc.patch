@@ -1,7 +1,7 @@
-diff --git "a/c:\\temp\\TortoiseGit\\Makefile-bc5a5d6.001.msvc" "b/C:\\httpd-sdk\\src\\libxml2\\win32\\Makefile.msvc"
+diff --git "a/c:\\temp\\TortoiseGit\\Makefile-bc5a5d6.002.msvc" "b/C:\\src\\libxml2\\win32\\Makefile.msvc"
 index 115a4517..a0ebd84b 100644
---- "a/c:\\temp\\TortoiseGit\\Makefile-bc5a5d6.001.msvc"
-+++ "b/C:\\httpd-sdk\\src\\libxml2\\win32\\Makefile.msvc"
+--- "a/c:\\temp\\TortoiseGit\\Makefile-bc5a5d6.002.msvc"
++++ "b/C:\\src\\libxml2\\win32\\Makefile.msvc"
 @@ -36,14 +36,14 @@ UTILS_INTDIR = int.utils.msvc
  
  # The preprocessor and its options.

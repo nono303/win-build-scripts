@@ -1,6 +1,6 @@
-diff --git "a/c:\\temp\\TortoiseGit\\makefile-288acf9.002.msc" "b/C:\\src\\bzip2-1.0.6\\makefile.msc"
+diff --git "a/c:\\temp\\TortoiseGit\\makefile-288acf9.000.msc" "b/C:\\src\\bzip2-1.0.6\\makefile.msc"
 index 6a628a7..d69da41 100644
---- "a/c:\\temp\\TortoiseGit\\makefile-288acf9.002.msc"
+--- "a/c:\\temp\\TortoiseGit\\makefile-288acf9.000.msc"
 +++ "b/C:\\src\\bzip2-1.0.6\\makefile.msc"
 @@ -4,7 +4,7 @@
  # Fixed up by JRS for bzip2-0.9.5d release.
