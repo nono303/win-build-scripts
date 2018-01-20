@@ -113,19 +113,14 @@ nmake /B /NOLOGO clean install
 move /Y C:\httpd-sdk\install\lib\nghttp2.dll C:\httpd-sdk\install\bin\nghttp2.dll
 copy /Y C:\httpd-sdk\build\nghttp2\lib\nghttp2.pdb C:\httpd-sdk\install\bin\nghttp2.pdb
 
-rmdir /S /Q C:\httpd-sdk\src\curl\builds
-mkdir C:\httpd-sdk\src\curl\builds
-cd /D C:\httpd-sdk\install
-wget http://windows.php.net/downloads/php-sdk/deps/vc15/x64/libssh2-1.8.0-vc15-x64.zip
-unzip -o libssh2-1.8.0-vc15-x64.zip
-rm -f libssh2-1.8.0-vc15-x64.zip
-cd /D C:\httpd-sdk\src\curl\winbuild
-nmake /f Makefile.vc mode=dll VC=15 WITH_DEVEL=C:/httpd-sdk/install/ WITH_SSL=dll WITH_NGHTTP2=dll WITH_ZLIB=dll WITH_SSH2=static ENABLE_SSPI=yes ENABLE_IPV6=no ENABLE_IDN=yes ENABLE_WINSSL=no GEN_PDB=yes MACHINE=%ARCH% DEBUG=no
-XCOPY /Y C:\httpd-sdk\src\curl\builds\libcurl-vc15-x64-release-dll-ssl-dll-zlib-dll-ssh2-static-sspi-nghttp2-dll\* C:\httpd-sdk\install /s /i
-copy /Y C:\httpd-sdk\install\lib\libcurl.pdb C:\httpd-sdk\install\bin\libcurl.pdb 
-move /Y C:\httpd-sdk\install\lib\libcurl.lib C:\httpd-sdk\install\lib\libcurl_imp.lib
-move /Y C:\httpd-sdk\install\lib\libcurl.pdb C:\httpd-sdk\install\lib\libcurl_imp.pdb
-rm -f C:\httpd-sdk\install\bin\curl.exe
+cd ..
+rmdir /S /Q C:\httpd-sdk\build\curl
+mkdir C:\httpd-sdk\build\curl
+cd /D C:\httpd-sdk\build\curl
+cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=C:\httpd-sdk\install -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% -DCMAKE_USE_WINSSL=ON -DBUILD_SHARED_LIBS=ON -DENABLE_IPV6=OFF -DCMAKE_USE_LIBSSH2=OFF -DENABLE_UNIX_SOCKETS=OFF -DBUILD_CURL_EXE=OFF ..\..\src\curl
+nmake /B /NOLOGO clean install
+copy /Y C:\httpd-sdk\build\curl\lib\libcurl.pdb C:\httpd-sdk\install\bin\libcurl.pdb
+rm -f C:\httpd-sdk\install\bin\curl-config
 
 cd ..
 rmdir /S /Q C:\httpd-sdk\build\libexpat
