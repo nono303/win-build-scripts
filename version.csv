@@ -1,22 +1,21 @@
-https://github.com/apache/apr.git;1.6.3
-https://github.com/apache/apr-util.git;1.6.1
-https://github.com/google/brotli.git;v1.0.2
-https://github.com/enthought/bzip2-1.0.6.git;master
-https://github.com/curl/curl.git;curl-7_57_0
-https://github.com/apache/httpd.git;2.4.29
-https://github.com/akheron/jansson.git;v2.10
-https://github.com/jemalloc/jemalloc-cmake.git;master
-https://github.com/libevent/libevent.git;master
-https://github.com/libexpat/libexpat.git;R_2_2_5
-https://github.com/LuaDist/libiconv;master
-https://github.com/libssh2/libssh2.git;libssh2-1.8.0
-https://github.com/GNOME/libxml2.git;v2.9.7
-https://github.com/LuaDist/lua;5.3.2
-https://github.com/pagespeed/mod_fcgid;master
-https://github.com/icing/mod_h2.git;master
-https://github.com/icing/mod_md;master
-https://github.com/nghttp2/nghttp2.git;master
-https://github.com/openssl/openssl.git;OpenSSL_1_1_0g
-https://github.com/luvit/pcre.git;master
-https://github.com/madler/zlib.git;master
-https://emptyhammock.com/projects/httpd/diag/;2.0.1
+https://github.com/apache/apr.git;1.6.3;
+https://github.com/apache/apr-util.git;1.6.1;
+https://github.com/google/brotli.git;v1.0.2;
+https://github.com/enthought/bzip2-1.0.6.git;master;!! DO NOT CHANGE
+https://github.com/curl/curl.git;curl-7_58_0;0206 curl-7_57_0 => curl-7_58_0
+https://github.com/apache/httpd.git;2.4.30;0219 2.4.29 => 2.4.30
+https://github.com/akheron/jansson.git;v2.11;0212 2.10 => 2.11
+https://github.com/jemalloc/jemalloc-cmake.git;4.3.1;0206 master => 4.3.1
+https://github.com/libevent/libevent.git;release-2.1.8-stable;0206 master => release-2.1.8-stable
+https://github.com/libexpat/libexpat.git;R_2_2_5;
+https://github.com/LuaDist/libiconv;master;!! DO NOT CHANGE
+https://github.com/GNOME/libxml2.git;v2.9.7;
+https://github.com/LuaDist/lua;5.3.2;
+https://github.com/pagespeed/mod_fcgid;master;!! DO NOT CHANGE
+https://github.com/icing/mod_h2.git;1.10.16;0212 master => 1.10.16
+https://github.com/icing/mod_md;master;!! DO NOT CHANGE for 1.1.8
+https://github.com/nghttp2/nghttp2.git;v1.30.0;0206 master => v1.30.0
+https://github.com/openssl/openssl.git;OpenSSL_1_1_0g;
+https://github.com/luvit/pcre.git;master;!! DO NOT CHANGE
+https://github.com/madler/zlib.git;master;
+https://emptyhammock.com/projects/httpd/diag/;2.0.1;

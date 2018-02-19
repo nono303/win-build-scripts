@@ -1,10 +1,7 @@
- support/win32/ApacheMonitor.rc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/support/win32/ApacheMonitor.rc b/support/win32/ApacheMonitor.rc
+diff --git "a/c:\\temp\\TortoiseGit\\ApacheMonitor-e4c27ee.000.rc" "b/C:\\src\\httpd\\support\\win32\\ApacheMonitor.rc"
 index d4203bf926..9d8211e830 100644
---- a/support/win32/ApacheMonitor.rc
-+++ b/support/win32/ApacheMonitor.rc
+--- "a/c:\\temp\\TortoiseGit\\ApacheMonitor-e4c27ee.000.rc"
++++ "b/C:\\src\\httpd\\support\\win32\\ApacheMonitor.rc"
 @@ -26,7 +26,7 @@
  IDI_APSRVMON            ICON    DISCARDABLE     "ApacheMonitor.ico"
  IDI_ICOSTOP             ICON    DISCARDABLE     "apstop.ico"

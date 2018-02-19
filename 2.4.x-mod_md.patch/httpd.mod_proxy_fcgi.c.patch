@@ -1,6 +1,6 @@
-diff --git "a/c:\\temp\\TortoiseGit\\mod_proxy_fcgi-22efe86.000.c" "b/C:\\src\\httpd\\modules\\proxy\\mod_proxy_fcgi.c"
+diff --git "a/c:\\temp\\TortoiseGit\\mod_proxy_fcgi-da7c2ee.000.c" "b/C:\\src\\httpd\\modules\\proxy\\mod_proxy_fcgi.c"
 index 41292e8726..9f7854f2a2 100644
---- "a/c:\\temp\\TortoiseGit\\mod_proxy_fcgi-22efe86.000.c"
+--- "a/c:\\temp\\TortoiseGit\\mod_proxy_fcgi-da7c2ee.000.c"
 +++ "b/C:\\src\\httpd\\modules\\proxy\\mod_proxy_fcgi.c"
 @@ -357,6 +357,10 @@ static apr_status_t send_environment(proxy_conn_rec *conn, request_rec *r,
  

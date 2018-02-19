@@ -1,0 +1,567 @@
+
+C:\httpd-sdk>for %i in ("C:\src\mod_md" "C:\src\nghttp2" "C:\src\nssm" "C:\src\openssl" "C:\src\pcre" "C:\src\pecl-memcache" "C:\src\php-cgi-spawner" "C:\src\php-src" "C:\src\wku_bt" "C:\src\xdebug" "C:\src\zlib" "C:\src\apr" "C:\src\apr-util" "C:\src\brotli" "C:\src\bzip2-1.0.6" "C:\src\curl" "C:\src\httpd" "C:\src\jansson" "C:\src\jemalloc-cmake" "C:\src\libevent" "C:\src\libexpat" "C:\src\libiconv" "C:\src\libxml2" "C:\src\lua" "C:\src\memcached" "C:\src\mod_fcgid" "C:\src\mod_h2" "C:\php72-sdk") do (
+cd %i  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+
+C:\httpd-sdk>(
+cd "C:\src\mod_md"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+https://github.com/icing/mod_md
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+
+C:\src\mod_md>(
+cd "C:\src\nghttp2"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+From https://github.com/nghttp2/nghttp2
+   39f0ce7c..fe51e7fa  master     -> origin/master
+https://github.com/nghttp2/nghttp2.git
+HEAD detached at v1.30.0
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   cmake/FindLibevent.cmake
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+C:\src\nghttp2>(
+cd "C:\src\nssm"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+https://git.nssm.cc/nssm/nssm.git
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   io.cpp
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	.gitignore
+	MSG00409.bin
+	MSG0040C.bin
+	MSG00410.bin
+	compile.bat
+	messages.h
+	messages.rc
+	nssm-nono.sln
+	nssm.vcxproj
+	nssm.vcxproj.filters
+	version.h
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+C:\src\nssm>(
+cd "C:\src\openssl"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+From https://github.com/openssl/openssl
+   144724c755..c99eaf2135  OpenSSL_1_1_0-stable -> origin/OpenSSL_1_1_0-stable
+   0b80103bfa..5f7470df83  master               -> origin/master
+From https://github.com/openssl/openssl
+ t [tag update]            OpenSSL_1_1_1-pre1 -> OpenSSL_1_1_1-pre1
+https://github.com/openssl/openssl.git
+HEAD detached at OpenSSL_1_1_0g
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   Configurations/windows-makefile.tmpl
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+C:\src\openssl>(
+cd "C:\src\pcre"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+https://github.com/luvit/pcre.git
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   132html
+	modified:   CheckMan
+	modified:   CleanTxt
+	modified:   Detrail
+	modified:   PrepareRelease
+	modified:   RunGrepTest
+	modified:   RunTest
+	modified:   ar-lib
+	modified:   compile
+	modified:   config.guess
+	modified:   config.sub
+	modified:   configure
+	modified:   depcomp
+	modified:   install-sh
+	modified:   missing
+	modified:   perltest.pl
+	modified:   test-driver
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+C:\src\pcre>(
+cd "C:\src\pecl-memcache"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+https://github.com/websupport-sk/pecl-memcache.git
+On branch NON_BLOCKING_IO_php7
+Your branch is up to date with 'origin/NON_BLOCKING_IO_php7'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   php7/memcache_session.c
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+C:\src\pecl-memcache>(
+cd "C:\src\php-cgi-spawner"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+https://github.com/deemru/php-cgi-spawner.git
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	src/php-cgi-spawner.exe
+	src/php-cgi-spawner.obj
+	src/php-cgi-spawner.res
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+C:\src\php-cgi-spawner>(
+cd "C:\src\php-src"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+From https://github.com/php/php-src
+   da5db1c9b2..08b4f3c745  PHP-7.1    -> origin/PHP-7.1
+   34ab10ef1b..fa7c32040c  PHP-7.2    -> origin/PHP-7.2
+   8543f566cf..a3afad5af0  master     -> origin/master
+https://github.com/php/php-src.git
+HEAD detached at php-7.2.2
+nothing to commit, working tree clean
+
+C:\src\php-src>(
+cd "C:\src\wku_bt"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+fatal: Not a git repository (or any of the parent directories): .git
+fatal: Not a git repository (or any of the parent directories): .git
+fatal: Not a git repository (or any of the parent directories): .git
+
+C:\src\wku_bt>(
+cd "C:\src\xdebug"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+https://github.com/xdebug/xdebug.git
+HEAD detached at 2.6.0
+nothing to commit, working tree clean
+
+C:\src\xdebug>(
+cd "C:\src\zlib"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+https://github.com/madler/zlib.git
+HEAD detached at origin/master
+nothing to commit, working tree clean
+
+C:\src\zlib>(
+cd "C:\src\apr"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+https://github.com/apache/apr.git
+HEAD detached at 1.6.3
+nothing to commit, working tree clean
+
+C:\src\apr>(
+cd "C:\src\apr-util"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+https://github.com/apache/apr-util.git
+HEAD detached at 1.6.1
+nothing to commit, working tree clean
+
+C:\src\apr-util>(
+cd "C:\src\brotli"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+https://github.com/google/brotli.git
+HEAD detached at v1.0.2
+nothing to commit, working tree clean
+
+C:\src\brotli>(
+cd "C:\src\bzip2-1.0.6"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+https://github.com/enthought/bzip2-1.0.6.git
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   format.pl
+	modified:   makefile.msc
+	modified:   xmlproc.sh
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+C:\src\bzip2-1.0.6>(
+cd "C:\src\curl"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+From https://github.com/curl/curl
+   b46cfbc06..f8e8028b0  master     -> origin/master
+https://github.com/curl/curl.git
+HEAD detached at curl-7_58_0
+nothing to commit, working tree clean
+
+C:\src\curl>(
+cd "C:\src\httpd"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+From https://github.com/apache/httpd
+   c89dd54220..f1fb2e3e4e  2.4.x             -> origin/2.4.x
+ * [new branch]            2.4.x-mpm_fdqueue -> origin/2.4.x-mpm_fdqueue
+   9fe06e086a..7cbd3655ca  trunk             -> origin/trunk
+From https://github.com/apache/httpd
+ * [new tag]               2.4.30     -> 2.4.30
+https://github.com/apache/httpd.git
+HEAD detached at 2.4.29
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   CMakeLists.txt
+	modified:   modules/http2/.gitignore
+	deleted:    modules/http2/Makefile.in
+	deleted:    modules/http2/NWGNUmakefile
+	deleted:    modules/http2/NWGNUmod_http2
+	deleted:    modules/http2/NWGNUproxyht2
+	deleted:    modules/http2/README.h2
+	deleted:    modules/http2/config2.m4
+	modified:   modules/http2/h2.h
+	modified:   modules/http2/h2_alt_svc.c
+	modified:   modules/http2/h2_alt_svc.h
+	modified:   modules/http2/h2_bucket_beam.c
+	modified:   modules/http2/h2_bucket_beam.h
+	modified:   modules/http2/h2_bucket_eos.c
+	modified:   modules/http2/h2_bucket_eos.h
+	modified:   modules/http2/h2_config.c
+	modified:   modules/http2/h2_config.h
+	modified:   modules/http2/h2_conn.c
+	modified:   modules/http2/h2_conn.h
+	modified:   modules/http2/h2_conn_io.c
+	modified:   modules/http2/h2_conn_io.h
+	modified:   modules/http2/h2_ctx.c
+	modified:   modules/http2/h2_ctx.h
+	modified:   modules/http2/h2_filter.c
+	modified:   modules/http2/h2_filter.h
+	modified:   modules/http2/h2_from_h1.c
+	modified:   modules/http2/h2_from_h1.h
+	modified:   modules/http2/h2_h2.c
+	modified:   modules/http2/h2_h2.h
+	modified:   modules/http2/h2_headers.c
+	modified:   modules/http2/h2_headers.h
+	modified:   modules/http2/h2_mplx.c
+	modified:   modules/http2/h2_mplx.h
+	modified:   modules/http2/h2_ngn_shed.c
+	modified:   modules/http2/h2_ngn_shed.h
+	modified:   modules/http2/h2_private.h
+	modified:   modules/http2/h2_proxy_session.c
+	modified:   modules/http2/h2_proxy_session.h
+	modified:   modules/http2/h2_proxy_util.c
+	modified:   modules/http2/h2_proxy_util.h
+	modified:   modules/http2/h2_push.c
+	modified:   modules/http2/h2_push.h
+	modified:   modules/http2/h2_request.c
+	modified:   modules/http2/h2_request.h
+	modified:   modules/http2/h2_session.c
+	modified:   modules/http2/h2_session.h
+	modified:   modules/http2/h2_stream.c
+	modified:   modules/http2/h2_stream.h
+	modified:   modules/http2/h2_switch.c
+	modified:   modules/http2/h2_switch.h
+	modified:   modules/http2/h2_task.c
+	modified:   modules/http2/h2_task.h
+	modified:   modules/http2/h2_util.c
+	modified:   modules/http2/h2_util.h
+	modified:   modules/http2/h2_version.h
+	modified:   modules/http2/h2_workers.c
+	modified:   modules/http2/h2_workers.h
+	modified:   modules/http2/mod_http2.c
+	deleted:    modules/http2/mod_http2.dep
+	deleted:    modules/http2/mod_http2.dsp
+	modified:   modules/http2/mod_http2.h
+	deleted:    modules/http2/mod_http2.mak
+	modified:   modules/http2/mod_proxy_http2.c
+	deleted:    modules/http2/mod_proxy_http2.dep
+	deleted:    modules/http2/mod_proxy_http2.dsp
+	modified:   modules/http2/mod_proxy_http2.h
+	deleted:    modules/http2/mod_proxy_http2.mak
+	modified:   modules/proxy/mod_proxy_fcgi.c
+	modified:   modules/ssl/ssl_engine_init.c
+	modified:   modules/ssl/ssl_engine_kernel.c
+	modified:   modules/ssl/ssl_private.h
+	modified:   modules/ssl/ssl_util_ssl.c
+	modified:   modules/ssl/ssl_util_ssl.h
+	modified:   server/main.c
+	modified:   support/win32/ApacheMonitor.rc
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	modules/fcgid/
+	modules/http2/Makefile.am
+	modules/http2/h2_version.h.in
+	modules/http2/m4/
+	modules/md/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+C:\src\httpd>(
+cd "C:\src\jansson"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+https://github.com/akheron/jansson.git
+HEAD detached at v2.11
+nothing to commit, working tree clean
+
+C:\src\jansson>(
+cd "C:\src\jemalloc-cmake"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+https://github.com/jemalloc/jemalloc-cmake.git
+HEAD detached at 4.3.1
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   msvc/projects/vc2015/jemalloc/jemalloc.vcxproj
+	modified:   msvc/projects/vc2015/test_threads/test_threads.vcxproj
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+C:\src\jemalloc-cmake>(
+cd "C:\src\libevent"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+https://github.com/libevent/libevent.git
+HEAD detached at release-2.1.8-stable
+nothing to commit, working tree clean
+
+C:\src\libevent>(
+cd "C:\src\libexpat"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+From https://github.com/libexpat/libexpat
+   19391f3..9c5ae30  master     -> origin/master
+https://github.com/libexpat/libexpat.git
+HEAD detached at R_2_2_5
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	expat/examples/x64/
+	expat/lib/x64/
+	expat/xmlwf/x64/
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+C:\src\libexpat>(
+cd "C:\src\libiconv"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+https://github.com/LuaDist/libiconv
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+
+C:\src\libiconv>(
+cd "C:\src\libxml2"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+https://github.com/GNOME/libxml2.git
+HEAD detached at v2.9.7
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   win32/Makefile.msvc
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+C:\src\libxml2>(
+cd "C:\src\lua"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+https://github.com/LuaDist/lua
+HEAD detached at 5.3.2
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   CMakeLists.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+C:\src\lua>(
+cd "C:\src\memcached"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+From https://github.com/memcached/memcached
+   5c0face..0348682  next       -> origin/next
+https://github.com/memcached/memcached
+HEAD detached at 1.5.5
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	_compile.sh
+	memcached-debug.exe
+	memcached.exe
+	release/
+	sizes.exe
+	testapp.exe
+	timedrun.exe
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+C:\src\memcached>(
+cd "C:\src\mod_fcgid"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+https://github.com/pagespeed/mod_fcgid
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+
+C:\src\mod_fcgid>(
+cd "C:\src\mod_h2"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+https://github.com/icing/mod_h2.git
+HEAD detached at v1.10.16
+nothing to commit, working tree clean
+
+C:\src\mod_h2>(
+cd "C:\php72-sdk"  
+ git fetch  
+ git fetch --tag  
+ git config --get remote.origin.url  
+ git status 
+) 
+https://github.com/OSTC/php-sdk-binary-tools.git
+On branch master
+Your branch is behind 'origin/master' by 19 commits, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	.svn/
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+C:\php72-sdk>cd c:\httpd-sdk 
