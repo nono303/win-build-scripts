@@ -1,7 +1,7 @@
-diff --git "a/c:\\temp\\TortoiseGit\\CMakeLists-e4c27ee.001.txt" "b/C:\\src\\httpd\\CMakeLists.txt"
+diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 3cd8a34d14..dd6da43929 100644
---- "a/c:\\temp\\TortoiseGit\\CMakeLists-e4c27ee.001.txt"
-+++ "b/C:\\src\\httpd\\CMakeLists.txt"
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -26,6 +26,7 @@ FIND_PACKAGE(LibXml2)
  FIND_PACKAGE(Lua51)
  FIND_PACKAGE(OpenSSL)
@@ -152,3 +152,65 @@ index 3cd8a34d14..dd6da43929 100644
  MESSAGE(STATUS "  Extra libraries ................. : ${EXTRA_LIBS}")
  
  MESSAGE(STATUS "  Modules built and loaded:")
+diff --git a/modules/proxy/mod_proxy_fcgi.c b/modules/proxy/mod_proxy_fcgi.c
+index 41292e8726..9f7854f2a2 100644
+--- a/modules/proxy/mod_proxy_fcgi.c
++++ b/modules/proxy/mod_proxy_fcgi.c
+@@ -357,6 +357,10 @@ static apr_status_t send_environment(proxy_conn_rec *conn, request_rec *r,
+ 
+         if (newfname) {
+             newfname = ap_strchr(newfname, '/');
++			// Windows
++			if ((ap_strstr(newfname, ":/")) != NULL)
++				memmove(newfname, newfname+1, strlen(newfname));
++			ap_log_rerror(APLOG_MARK, APLOG_DEBUG, 0, r, APLOGNO(01078) "SCRIPT_FILENAME %s", newfname);
+             r->filename = newfname;
+         }
+     }
+diff --git a/server/config.c b/server/config.c
+index ffd26fd592..ce05035a2d 100644
+--- a/server/config.c
++++ b/server/config.c
+@@ -158,6 +158,17 @@ AP_DECLARE(int) ap_run_post_config(apr_pool_t *pconf,
+ }
+  */
+ 
++ AP_DECLARE(int) ap_get_module_flags(const module *m)
++{
++    if (m->version < AP_MODULE_FLAGS_MMN_MAJOR
++            || (m->version == AP_MODULE_FLAGS_MMN_MAJOR
++                && (m->minor_version < AP_MODULE_FLAGS_MMN_MINOR))) {
++        return 0;
++    }
++
++    return m->flags;
++}
++
+ AP_IMPLEMENT_HOOK_RUN_ALL(int, open_logs,
+                           (apr_pool_t *pconf, apr_pool_t *plog,
+                            apr_pool_t *ptemp, server_rec *s),
+diff --git a/server/main.c b/server/main.c
+index 3a4b1a6254..0e99be954a 100644
+--- a/server/main.c
++++ b/server/main.c
+@@ -44,6 +44,7 @@
+ #if APR_HAVE_UNISTD_H
+ #include <unistd.h>
+ #endif
++#include "openssl\applink.c"
+ 
+ /* WARNING: Win32 binds http_main.c dynamically to the server. Please place
+  *          extern functions and global data in another appropriate module.
+diff --git a/support/win32/ApacheMonitor.rc b/support/win32/ApacheMonitor.rc
+index d4203bf926..9d8211e830 100644
+--- a/support/win32/ApacheMonitor.rc
++++ b/support/win32/ApacheMonitor.rc
+@@ -26,7 +26,7 @@
+ IDI_APSRVMON            ICON    DISCARDABLE     "ApacheMonitor.ico"
+ IDI_ICOSTOP             ICON    DISCARDABLE     "apstop.ico"
+ IDI_ICORUN              ICON    DISCARDABLE     "aprun.ico"
+-CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST  "ApacheMonitor.manifest"
++// CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST  "ApacheMonitor.manifest"
+ 
+ IDD_DLGSERVICES DIALOGEX 0, 0, 350, 192
+ STYLE DS_MODALFRAME | DS_SETFOREGROUND | WS_MINIMIZEBOX | WS_VISIBLE | 

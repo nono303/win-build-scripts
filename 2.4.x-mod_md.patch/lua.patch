@@ -1,7 +1,7 @@
-diff --git "a/c:\\temp\\TortoiseGit\\CMakeLists-fcdc5ef.000.txt" "b/C:\\src\\lua\\CMakeLists.txt"
+diff --git a/CMakeLists.txt b/CMakeLists.txt
 index b35d92b..b49574a 100644
---- "a/c:\\temp\\TortoiseGit\\CMakeLists-fcdc5ef.000.txt"
-+++ "b/C:\\src\\lua\\CMakeLists.txt"
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -118,11 +118,11 @@ if ( LUA_BUILD_AS_DLL )
    set_target_properties ( liblua PROPERTIES COMPILE_DEFINITIONS LUA_BUILD_AS_DLL )
  endif ()
