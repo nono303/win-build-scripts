@@ -1,0 +1,14 @@
+diff --git a/modules.mk.win b/modules.mk.win
+index 15e9d7e..dae5ada 100644
+--- a/modules.mk.win
++++ b/modules.mk.win
+@@ -218,8 +218,7 @@ $(MODRES).pch:
+ 
+ .c{$(OUTPUT_DIR)}.so:
+ 	$(SILENT)cl $(ALL_CFLAGS) /Fo$*.obj /Yuiconv.h /c $<
+-	$(SILENT)link $(ALL_LDFLAGS) $*.obj $(MODRES).obj $(API_LIBS) /out:$@ \
+-		/base:@"..\build\BaseAddr.ref",$(@F)
++	$(SILENT)link $(ALL_LDFLAGS) $*.obj $(MODRES).obj $(API_LIBS) /out:$@ 
+ 	$(SILENT)if exist $@.manifest \
+ 		$(SILENT)mt -nologo -manifest $@.manifest -outputresource:$@;2 \
+ 		& del "$@.manifest"
