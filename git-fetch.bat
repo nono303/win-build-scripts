@@ -10,6 +10,7 @@ for %%i in (
 "C:\src\xdebug"
 "C:\src\zlib"
 "C:\src\apr"
+"C:\src\apr-iconv"
 "C:\src\apr-util"
 "C:\src\brotli"
 "C:\src\bzip2-1.0.6"

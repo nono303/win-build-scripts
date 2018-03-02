@@ -291,15 +291,4 @@ C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/httpd_flags_%CMAKE_BUILD_TYPE%.sh
 nmake /B /NOLOGO clean install
 mt.exe -manifest C:\httpd-sdk\httpd.exe.manifest -outputresource:C:\httpd-sdk\install\bin\httpd.exe;1
 
-cd /D C:\src\wku_bt
-nmake -f makefile.win32 BUILD=%CYGV% HTTPD=C:\httpd-sdk\install clean all install install-mod-crash
-copy /Y C:\src\wku_bt\testdiag.exe C:\httpd-sdk\install\bin\testdiag.exe
-copy /Y C:\src\wku_bt\testcrash.exe C:\httpd-sdk\install\bin\testcrash.exe
-copy /Y C:\src\wku_bt\testdiag.pdb C:\httpd-sdk\install\bin\testdiag.pdb
-copy /Y C:\src\wku_bt\testcrash.pdb C:\httpd-sdk\install\bin\testcrash.pdb
-
-cd /D C:\httpd-sdk\install\bin
-openssl version
-httpd -V
-
 cd /D C:\httpd-sdk\

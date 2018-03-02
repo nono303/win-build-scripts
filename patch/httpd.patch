@@ -1,8 +1,20 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 3cd8a34d14..dd6da43929 100644
+index 3cd8a34d14..f2f76af018 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -26,6 +26,7 @@ FIND_PACKAGE(LibXml2)
+@@ -15,6 +15,11 @@
+ #
+ # Read README.cmake before using this.
+ 
++SET(mod_md_src "modules/md")
++# SET(mod_md_src "../mod_md/src")
++SET(mod_http2_src "modules/http2")
++# SET(mod_http2_src "../mod_h2/mod_http2")
++
+ PROJECT(HTTPD C)
+ 
+ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+@@ -26,6 +31,7 @@ FIND_PACKAGE(LibXml2)
  FIND_PACKAGE(Lua51)
  FIND_PACKAGE(OpenSSL)
  FIND_PACKAGE(ZLIB)
@@ -10,7 +22,7 @@ index 3cd8a34d14..dd6da43929 100644
  
  # Options for support libraries not supported by cmake-bundled FindFOO
  
-@@ -202,6 +203,7 @@ ENDIF()
+@@ -202,6 +208,7 @@ ENDIF()
  MESSAGE(STATUS "")
  MESSAGE(STATUS "Summary of feature detection:")
  MESSAGE(STATUS "")
@@ -18,16 +30,60 @@ index 3cd8a34d14..dd6da43929 100644
  MESSAGE(STATUS "LIBXML2_FOUND ............ : ${LIBXML2_FOUND}")
  MESSAGE(STATUS "LUA51_FOUND .............. : ${LUA51_FOUND}")
  MESSAGE(STATUS "NGHTTP2_FOUND ............ : ${NGHTTP2_FOUND}")
-@@ -351,6 +353,8 @@ SET(MODULE_LIST
+@@ -301,7 +308,7 @@ SET(MODULE_LIST
+   "modules/generators/mod_info+I+server information"
+   "modules/generators/mod_status+I+process/thread monitoring"
+   "modules/http/mod_mime+A+mapping of file-extension to MIME.  Disabling this module is normally not recommended."
+-  "modules/http2/mod_http2+i+HTTP/2 protocol support"
++  "${mod_http2_src}/mod_http2+i+HTTP/2 protocol support"
+   "modules/ldap/mod_ldap+i+LDAP caching and connection pooling services"
+   "modules/loggers/mod_log_config+A+logging configuration.  You won't be able to log requests to the server without this module."
+   "modules/loggers/mod_log_debug+I+configurable debug logging"
+@@ -351,6 +358,12 @@ SET(MODULE_LIST
    "modules/slotmem/mod_slotmem_plain+I+slotmem provider that uses plain memory"
    "modules/slotmem/mod_slotmem_shm+I+slotmem provider that uses shared memory"
    "modules/ssl/mod_ssl+i+SSL/TLS support"
-+  "modules/md/mod_md+i+certificate provisioning via the ACME protocol"
-+  "modules/fcgid/mod_fcgid+i+FastCGI implementation for Apache HTTP"
++  "${mod_md_src}/mod_md+i+certificate provisioning via the ACME protocol"
++  "../mod_fcgid/modules/fcgid/mod_fcgid+i+FastCGI implementation for Apache HTTP"
++  "../mod_h264_streaming/src/mod_h264_streaming+i+Adaptive streaming and pseudo streaming for Flash"
++  "../mod_wku_bt/mod_whatkilledus+i+mod_whatkilledus"
++  "../mod_wku_bt/mod_crash+i+FastCGI mod_crash"
++  "../mod_wku_bt/mod_backtrace+i+mod_backtrace"
    "modules/test/mod_dialup+O+rate limits static files to dialup modem speeds"
    "modules/test/mod_optional_fn_export+O+example optional function exporter"
    "modules/test/mod_optional_fn_import+O+example optional function importer"
-@@ -497,6 +501,38 @@ SET(mod_ssl_extra_sources
+@@ -409,18 +422,18 @@ SET(mod_http2_requires               NGHTTP2_FOUND)
+ SET(mod_http2_extra_defines          ssize_t=long)
+ SET(mod_http2_extra_libs             ${NGHTTP2_LIBRARIES})
+ SET(mod_http2_extra_sources
+-  modules/http2/h2_alt_svc.c
+-  modules/http2/h2_bucket_eos.c      modules/http2/h2_config.c
+-  modules/http2/h2_conn.c            modules/http2/h2_conn_io.c
+-  modules/http2/h2_ctx.c             modules/http2/h2_filter.c
+-  modules/http2/h2_from_h1.c         modules/http2/h2_h2.c
+-  modules/http2/h2_bucket_beam.c
+-  modules/http2/h2_mplx.c            modules/http2/h2_push.c
+-  modules/http2/h2_request.c         modules/http2/h2_headers.c
+-  modules/http2/h2_session.c         modules/http2/h2_stream.c 
+-  modules/http2/h2_switch.c          modules/http2/h2_ngn_shed.c 
+-  modules/http2/h2_task.c            modules/http2/h2_util.c
+-  modules/http2/h2_workers.c
++  ${mod_http2_src}/h2_alt_svc.c
++  ${mod_http2_src}/h2_bucket_eos.c      ${mod_http2_src}/h2_config.c
++  ${mod_http2_src}/h2_conn.c            ${mod_http2_src}/h2_conn_io.c
++  ${mod_http2_src}/h2_ctx.c             ${mod_http2_src}/h2_filter.c
++  ${mod_http2_src}/h2_from_h1.c         ${mod_http2_src}/h2_h2.c
++  ${mod_http2_src}/h2_bucket_beam.c
++  ${mod_http2_src}/h2_mplx.c            ${mod_http2_src}/h2_push.c
++  ${mod_http2_src}/h2_request.c         ${mod_http2_src}/h2_headers.c
++  ${mod_http2_src}/h2_session.c         ${mod_http2_src}/h2_stream.c 
++  ${mod_http2_src}/h2_switch.c          ${mod_http2_src}/h2_ngn_shed.c 
++  ${mod_http2_src}/h2_task.c            ${mod_http2_src}/h2_util.c
++  ${mod_http2_src}/h2_workers.c
+ )
+ SET(mod_ldap_extra_defines           LDAP_DECLARE_EXPORT)
+ SET(mod_ldap_extra_libs              wldap32)
+@@ -497,6 +510,61 @@ SET(mod_ssl_extra_sources
    modules/ssl/ssl_util.c             modules/ssl/ssl_util_ocsp.c
    modules/ssl/ssl_util_ssl.c         modules/ssl/ssl_util_stapling.c
  )
@@ -36,37 +92,60 @@ index 3cd8a34d14..dd6da43929 100644
 +  SET(mod_md_extra_libs               "${CURL_LIBRARIES};${OPENSSL_LIBRARIES};${JANSSON_LIBRARIES}")
 +ENDIF()
 +SET(mod_md_extra_sources
-+modules/md/md_acme_authz.c
-+modules/md/md_acme_acct.c
-+modules/md/md_acme.c
-+modules/md/md_core.c
-+modules/md/md_store.c
-+modules/md/md_curl.c
-+modules/md/md_http.c
-+modules/md/md_jws.c
-+modules/md/mod_md_os.c
-+modules/md/md_log.c
-+modules/md/mod_md.c
-+modules/md/md_crypt.c
-+modules/md/md_acme_drive.c
-+modules/md/md_util.c
-+modules/md/md_reg.c
-+modules/md/md_store_fs.c
-+modules/md/mod_md_config.c
-+modules/md/md_json.c
++${mod_md_src}/md_acme_authz.c
++${mod_md_src}/md_acme_acct.c
++${mod_md_src}/md_acme.c
++${mod_md_src}/md_core.c
++${mod_md_src}/md_store.c
++${mod_md_src}/md_curl.c
++${mod_md_src}/md_http.c
++${mod_md_src}/md_jws.c
++${mod_md_src}/mod_md_os.c
++${mod_md_src}/md_log.c
++${mod_md_src}/mod_md.c
++${mod_md_src}/md_crypt.c
++${mod_md_src}/md_acme_drive.c
++${mod_md_src}/md_util.c
++${mod_md_src}/md_reg.c
++${mod_md_src}/md_store_fs.c
++${mod_md_src}/mod_md_config.c
++${mod_md_src}/md_json.c
 +)
 +SET(mod_fcgid_extra_sources
-+modules/fcgid/fcgid_proc_win.c		modules/fcgid/fcgid_proctbl_win.c
-+modules/fcgid/fcgid_protocol.c		modules/fcgid/fcgid_spawn_ctl.c
-+modules/fcgid/mod_fcgid.c		modules/fcgid/fcgid_bridge.c
-+modules/fcgid/fcgid_bucket.c		modules/fcgid/fcgid_conf.c
-+modules/fcgid/fcgid_filter.c		modules/fcgid/fcgid_pm_main.c
-+modules/fcgid/fcgid_pm_win.c		
++../mod_fcgid/modules/fcgid/fcgid_proc_win.c	../mod_fcgid/modules/fcgid/fcgid_proctbl_win.c
++../mod_fcgid/modules/fcgid/fcgid_protocol.c	../mod_fcgid/modules/fcgid/fcgid_spawn_ctl.c
++../mod_fcgid/modules/fcgid/mod_fcgid.c		../mod_fcgid/modules/fcgid/fcgid_bridge.c
++../mod_fcgid/modules/fcgid/fcgid_bucket.c	../mod_fcgid/modules/fcgid/fcgid_conf.c
++../mod_fcgid/modules/fcgid/fcgid_filter.c	../mod_fcgid/modules/fcgid/fcgid_pm_main.c
++../mod_fcgid/modules/fcgid/fcgid_pm_win.c		
++)
++SET(mod_h264_streaming_extra_sources
++../mod_h264_streaming/src/mp4_writer.c
++../mod_h264_streaming/src/output_mp4.c
++../mod_h264_streaming/src/output_bucket.c
++../mod_h264_streaming/src/moov.c
++../mod_h264_streaming/src/mp4_process.c
++../mod_h264_streaming/src/mp4_reader.c
++../mod_h264_streaming/src/mp4_io.c
++../mod_h264_streaming/src/mod_h264_streaming.c		
++)
++SET(mod_whatkilledus_extra_libs               "dbghelp.lib")
++SET(mod_whatkilledus_extra_sources
++../mod_wku_bt/mod_whatkilledus.c
++../mod_wku_bt/diag.c		
++)
++SET(mod_backtrace_extra_libs               "dbghelp.lib")
++SET(mod_backtrace_extra_sources
++../mod_wku_bt/mod_backtrace.c
++../mod_wku_bt/diag.c		
++)
++SET(mod_crash_extra_sources
++../mod_wku_bt/mod_crash.c
 +)
  SET(mod_status_extra_defines         STATUS_DECLARE_EXPORT)
  SET(mod_watchdog_install_lib 1)
  SET(mod_xml2enc_requires             LIBXML2_FOUND)
-@@ -564,7 +600,7 @@ ELSE()
+@@ -564,7 +632,7 @@ ELSE()
  ENDIF()
  
  # for easy reference from .dll/.so builds
@@ -75,7 +154,15 @@ index 3cd8a34d14..dd6da43929 100644
  
  ADD_EXECUTABLE(gen_test_char server/gen_test_char.c)
  GET_TARGET_PROPERTY(GEN_TEST_CHAR_EXE gen_test_char LOCATION)
-@@ -636,6 +672,8 @@ SET(LIBHTTPD_SOURCES
+@@ -619,6 +687,7 @@ SET(LIBHTTPD_SOURCES
+   server/util.c
+   server/util_cfgtree.c
+   server/util_cookies.c
++  server/util_debug.c
+   server/util_expr_eval.c
+   server/util_expr_parse.c
+   server/util_fcgi.c
+@@ -636,6 +705,8 @@ SET(LIBHTTPD_SOURCES
  
  CONFIGURE_FILE(os/win32/win32_config_layout.h
                 ${PROJECT_BINARY_DIR}/ap_config_layout.h)
@@ -84,16 +171,18 @@ index 3cd8a34d14..dd6da43929 100644
  
  SET(HTTPD_INCLUDE_DIRECTORIES
    ${PROJECT_BINARY_DIR}
-@@ -651,6 +689,8 @@ SET(HTTPD_INCLUDE_DIRECTORIES
+@@ -651,6 +722,10 @@ SET(HTTPD_INCLUDE_DIRECTORIES
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/proxy
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/session
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl
 +  ${CMAKE_CURRENT_SOURCE_DIR}/modules/md
 +  ${CMAKE_CURRENT_SOURCE_DIR}/modules/fcgid
++  ${CMAKE_CURRENT_SOURCE_DIR}/modules/h264_streaming
++  ${CMAKE_CURRENT_SOURCE_DIR}/modules/wku_bt
    ${CMAKE_CURRENT_SOURCE_DIR}/server
    ${APR_INCLUDE_DIR}
    ${PCRE_INCLUDE_DIR}
-@@ -677,6 +717,7 @@ SET(other_installed_h
+@@ -677,6 +752,7 @@ SET(other_installed_h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/session/mod_session.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl/mod_ssl.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl/mod_ssl_openssl.h
@@ -101,7 +190,7 @@ index 3cd8a34d14..dd6da43929 100644
  )
  # When mod_serf is buildable, don't forget to copy modules/proxy/mod_serf.h
  
-@@ -765,7 +806,7 @@ FOREACH (mod ${MODULE_PATHS})
+@@ -765,7 +841,7 @@ FOREACH (mod ${MODULE_PATHS})
      SET(mod_extra_libs "${mod_name}_extra_libs")
      SET_TARGET_PROPERTIES(${mod_name} PROPERTIES
        SUFFIX .so
@@ -110,7 +199,7 @@ index 3cd8a34d14..dd6da43929 100644
      )
      TARGET_LINK_LIBRARIES(${mod_name} ${${mod_extra_libs}} libhttpd ${EXTRA_LIBS} ${APR_LIBRARIES} ${HTTPD_SYSTEM_LIBS})
      DEFINE_WITH_BLANKS(define_long_name "LONG_NAME" "${mod_name} for Apache HTTP Server")
-@@ -790,9 +831,9 @@ ENDFOREACH()
+@@ -790,9 +866,9 @@ ENDFOREACH()
  
  ###########   HTTPD LIBRARIES   ############
  ADD_LIBRARY(libhttpd SHARED ${LIBHTTPD_SOURCES} build/win32/httpd.rc)
@@ -123,7 +212,7 @@ index 3cd8a34d14..dd6da43929 100644
  SET(install_targets ${install_targets} libhttpd)
  SET(install_bin_pdb ${install_bin_pdb} $<TARGET_PDB_FILE:libhttpd>)
  TARGET_LINK_LIBRARIES(libhttpd ${EXTRA_LIBS} ${APR_LIBRARIES} ${PCRE_LIBRARIES} ${HTTPD_SYSTEM_LIBS})
-@@ -846,12 +887,12 @@ ENDIF()
+@@ -846,12 +922,12 @@ ENDIF()
  GET_PROPERTY(tmp_includes TARGET ab PROPERTY INCLUDE_DIRECTORIES)
  
  # getting duplicate manifest error with ApacheMonitor
@@ -142,7 +231,7 @@ index 3cd8a34d14..dd6da43929 100644
  
  ###########  CONFIGURATION FILES ###########
  # Set up variables used in the .conf file templates
-@@ -953,6 +994,9 @@ MESSAGE(STATUS "  Brotli include directory......... : ${BROTLI_INCLUDE_DIR}")
+@@ -953,6 +1029,9 @@ MESSAGE(STATUS "  Brotli include directory......... : ${BROTLI_INCLUDE_DIR}")
  MESSAGE(STATUS "  Brotli libraries ................ : ${BROTLI_LIBRARIES}")
  MESSAGE(STATUS "  Extra include directories ....... : ${EXTRA_INCLUDES}")
  MESSAGE(STATUS "  Extra compile flags ............. : ${EXTRA_COMPILE_FLAGS}")
@@ -167,28 +256,6 @@ index 41292e8726..9f7854f2a2 100644
              r->filename = newfname;
          }
      }
-diff --git a/server/config.c b/server/config.c
-index ffd26fd592..ce05035a2d 100644
---- a/server/config.c
-+++ b/server/config.c
-@@ -158,6 +158,17 @@ AP_DECLARE(int) ap_run_post_config(apr_pool_t *pconf,
- }
-  */
- 
-+ AP_DECLARE(int) ap_get_module_flags(const module *m)
-+{
-+    if (m->version < AP_MODULE_FLAGS_MMN_MAJOR
-+            || (m->version == AP_MODULE_FLAGS_MMN_MAJOR
-+                && (m->minor_version < AP_MODULE_FLAGS_MMN_MINOR))) {
-+        return 0;
-+    }
-+
-+    return m->flags;
-+}
-+
- AP_IMPLEMENT_HOOK_RUN_ALL(int, open_logs,
-                           (apr_pool_t *pconf, apr_pool_t *plog,
-                            apr_pool_t *ptemp, server_rec *s),
 diff --git a/server/main.c b/server/main.c
 index 3a4b1a6254..0e99be954a 100644
 --- a/server/main.c
