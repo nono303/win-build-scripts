@@ -1,8 +1,8 @@
 diff --git a/mod_h264_streaming.c b/mod_h264_streaming.c
-index 84b322d..9df3910 100644
+index 84b322d..d21feed 100644
 --- a/mod_h264_streaming.c
 +++ b/mod_h264_streaming.c
-@@ -160,13 +160,18 @@ static int drive_h264_streaming(request_rec *r)
+@@ -160,6 +160,8 @@ static int drive_h264_streaming(request_rec *r)
  
      if(http_status != 200)
      {
@@ -11,18 +11,7 @@ index 84b322d..9df3910 100644
        if(buckets)
        {
          buckets_exit(buckets);
-       }
- 
-       return http_status;
--    }
-+    } else {
-+		ap_log_rerror(APLOG_MARK, APLOG_ERR, rv, r,
-+			"file '%s' 'OK'", r->filename,);
-+	}
- 
-     ap_set_content_type(r, "video/mp4");
-   }
-@@ -279,7 +284,7 @@ extern "C" {
+@@ -279,7 +281,7 @@ extern "C" {
  #endif
  
  #ifdef BUILDING_H264_STREAMING
@@ -31,3 +20,47 @@ index 84b322d..9df3910 100644
  #elif BUILDING_SMOOTH_STREAMING
  module AP_MODULE_DECLARE_DATA smooth_streaming_module =
  #endif
+diff --git a/mp4_io.c b/mp4_io.c
+index 3f6b405..8474c24 100644
+--- a/mp4_io.c
++++ b/mp4_io.c
+@@ -566,12 +566,38 @@ static void mp4_context_exit(struct mp4_context_t* mp4_context)
+   free(mp4_context);
+ }
+ 
++// https://github.com/Wohlstand/UTF8-fopen/blob/master/check.c
++FILE* myOpen(const char*filename, const char*mode){
++	#ifdef _WIN32
++		int new_Len1 = 0;
++		int new_Len2 = 0;
++		int fn_len_s = strlen(filename);
++		int m_len_s  = strlen(mode);
++		if(fn_len_s==0) 
++			return NULL;
++		if(m_len_s==0)
++			return NULL;
++		wchar_t path[MAX_PATH];
++		wchar_t wmode[MAX_PATH];
++		new_Len1 = MultiByteToWideChar(CP_UTF8, 0, filename, fn_len_s, path, fn_len_s);
++		if(new_Len1>=MAX_PATH) return NULL;
++		path[new_Len1] = L'\0';
++		new_Len2 = MultiByteToWideChar(CP_UTF8, 0, mode, m_len_s, wmode, m_len_s);
++		if(new_Len2>=MAX_PATH) return NULL;
++		wmode[new_Len2] = L'\0';
++		FILE *f = _wfopen(path, wmode);
++		return f;
++	#else
++		return fopen(filename, mode);
++	#endif
++}
++
+ extern mp4_context_t* mp4_open(const char* filename, int64_t filesize,
+                                mp4_open_flags flags, int verbose)
+ {
+   mp4_context_t* mp4_context = mp4_context_init(filename, verbose);
+ 
+-  mp4_context->infile = fopen(filename, "rb");
++  mp4_context->infile = myOpen(filename, "rb");
+   if(mp4_context->infile == NULL)
+   {
+     mp4_context_exit(mp4_context);
