@@ -1,0 +1,33 @@
+diff --git a/mod_h264_streaming.c b/mod_h264_streaming.c
+index 84b322d..9df3910 100644
+--- a/mod_h264_streaming.c
++++ b/mod_h264_streaming.c
+@@ -160,13 +160,18 @@ static int drive_h264_streaming(request_rec *r)
+ 
+     if(http_status != 200)
+     {
++	ap_log_rerror(APLOG_MARK, APLOG_ERR, rv, r,
++		"file '%s' '%s'", r->filename,strerror(errno));
+       if(buckets)
+       {
+         buckets_exit(buckets);
+       }
+ 
+       return http_status;
+-    }
++    } else {
++		ap_log_rerror(APLOG_MARK, APLOG_ERR, rv, r,
++			"file '%s' 'OK'", r->filename,);
++	}
+ 
+     ap_set_content_type(r, "video/mp4");
+   }
+@@ -279,7 +284,7 @@ extern "C" {
+ #endif
+ 
+ #ifdef BUILDING_H264_STREAMING
+-module AP_MODULE_DECLARE_DATA h264_streaming_module =
++AP_DECLARE_MODULE(h264_streaming) = 
+ #elif BUILDING_SMOOTH_STREAMING
+ module AP_MODULE_DECLARE_DATA smooth_streaming_module =
+ #endif

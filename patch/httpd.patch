@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 3cd8a34d14..f2f76af018 100644
+index a571061ba5..a3a1433d7e 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -15,6 +15,11 @@
@@ -45,7 +45,7 @@ index 3cd8a34d14..f2f76af018 100644
    "modules/ssl/mod_ssl+i+SSL/TLS support"
 +  "${mod_md_src}/mod_md+i+certificate provisioning via the ACME protocol"
 +  "../mod_fcgid/modules/fcgid/mod_fcgid+i+FastCGI implementation for Apache HTTP"
-+  "../mod_h264_streaming/src/mod_h264_streaming+i+Adaptive streaming and pseudo streaming for Flash"
++# "../mod_h264_streaming/src/mod_h264_streaming+i+Adaptive streaming and pseudo streaming for Flash"
 +  "../mod_wku_bt/mod_whatkilledus+i+mod_whatkilledus"
 +  "../mod_wku_bt/mod_crash+i+FastCGI mod_crash"
 +  "../mod_wku_bt/mod_backtrace+i+mod_backtrace"
@@ -119,16 +119,16 @@ index 3cd8a34d14..f2f76af018 100644
 +../mod_fcgid/modules/fcgid/fcgid_filter.c	../mod_fcgid/modules/fcgid/fcgid_pm_main.c
 +../mod_fcgid/modules/fcgid/fcgid_pm_win.c		
 +)
-+SET(mod_h264_streaming_extra_sources
-+../mod_h264_streaming/src/mp4_writer.c
-+../mod_h264_streaming/src/output_mp4.c
-+../mod_h264_streaming/src/output_bucket.c
-+../mod_h264_streaming/src/moov.c
-+../mod_h264_streaming/src/mp4_process.c
-+../mod_h264_streaming/src/mp4_reader.c
-+../mod_h264_streaming/src/mp4_io.c
-+../mod_h264_streaming/src/mod_h264_streaming.c		
-+)
++# SET(mod_h264_streaming_extra_sources
++# ../mod_h264_streaming/src/mp4_writer.c
++# ../mod_h264_streaming/src/output_mp4.c
++# ../mod_h264_streaming/src/output_bucket.c
++# ../mod_h264_streaming/src/moov.c
++# ../mod_h264_streaming/src/mp4_process.c
++# ../mod_h264_streaming/src/mp4_reader.c
++# ../mod_h264_streaming/src/mp4_io.c
++# ../mod_h264_streaming/src/mod_h264_streaming.c	
++# )
 +SET(mod_whatkilledus_extra_libs               "dbghelp.lib")
 +SET(mod_whatkilledus_extra_sources
 +../mod_wku_bt/mod_whatkilledus.c
@@ -154,15 +154,7 @@ index 3cd8a34d14..f2f76af018 100644
  
  ADD_EXECUTABLE(gen_test_char server/gen_test_char.c)
  GET_TARGET_PROPERTY(GEN_TEST_CHAR_EXE gen_test_char LOCATION)
-@@ -619,6 +687,7 @@ SET(LIBHTTPD_SOURCES
-   server/util.c
-   server/util_cfgtree.c
-   server/util_cookies.c
-+  server/util_debug.c
-   server/util_expr_eval.c
-   server/util_expr_parse.c
-   server/util_fcgi.c
-@@ -636,6 +705,8 @@ SET(LIBHTTPD_SOURCES
+@@ -637,6 +705,8 @@ SET(LIBHTTPD_SOURCES
  
  CONFIGURE_FILE(os/win32/win32_config_layout.h
                 ${PROJECT_BINARY_DIR}/ap_config_layout.h)
@@ -171,18 +163,18 @@ index 3cd8a34d14..f2f76af018 100644
  
  SET(HTTPD_INCLUDE_DIRECTORIES
    ${PROJECT_BINARY_DIR}
-@@ -651,6 +722,10 @@ SET(HTTPD_INCLUDE_DIRECTORIES
+@@ -652,6 +722,10 @@ SET(HTTPD_INCLUDE_DIRECTORIES
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/proxy
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/session
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl
 +  ${CMAKE_CURRENT_SOURCE_DIR}/modules/md
 +  ${CMAKE_CURRENT_SOURCE_DIR}/modules/fcgid
-+  ${CMAKE_CURRENT_SOURCE_DIR}/modules/h264_streaming
++# ${CMAKE_CURRENT_SOURCE_DIR}/modules/h264_streaming
 +  ${CMAKE_CURRENT_SOURCE_DIR}/modules/wku_bt
    ${CMAKE_CURRENT_SOURCE_DIR}/server
    ${APR_INCLUDE_DIR}
    ${PCRE_INCLUDE_DIR}
-@@ -677,6 +752,7 @@ SET(other_installed_h
+@@ -678,6 +752,7 @@ SET(other_installed_h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/session/mod_session.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl/mod_ssl.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl/mod_ssl_openssl.h
@@ -190,7 +182,7 @@ index 3cd8a34d14..f2f76af018 100644
  )
  # When mod_serf is buildable, don't forget to copy modules/proxy/mod_serf.h
  
-@@ -765,7 +841,7 @@ FOREACH (mod ${MODULE_PATHS})
+@@ -766,7 +841,7 @@ FOREACH (mod ${MODULE_PATHS})
      SET(mod_extra_libs "${mod_name}_extra_libs")
      SET_TARGET_PROPERTIES(${mod_name} PROPERTIES
        SUFFIX .so
@@ -199,7 +191,7 @@ index 3cd8a34d14..f2f76af018 100644
      )
      TARGET_LINK_LIBRARIES(${mod_name} ${${mod_extra_libs}} libhttpd ${EXTRA_LIBS} ${APR_LIBRARIES} ${HTTPD_SYSTEM_LIBS})
      DEFINE_WITH_BLANKS(define_long_name "LONG_NAME" "${mod_name} for Apache HTTP Server")
-@@ -790,9 +866,9 @@ ENDFOREACH()
+@@ -791,9 +866,9 @@ ENDFOREACH()
  
  ###########   HTTPD LIBRARIES   ############
  ADD_LIBRARY(libhttpd SHARED ${LIBHTTPD_SOURCES} build/win32/httpd.rc)
@@ -212,7 +204,7 @@ index 3cd8a34d14..f2f76af018 100644
  SET(install_targets ${install_targets} libhttpd)
  SET(install_bin_pdb ${install_bin_pdb} $<TARGET_PDB_FILE:libhttpd>)
  TARGET_LINK_LIBRARIES(libhttpd ${EXTRA_LIBS} ${APR_LIBRARIES} ${PCRE_LIBRARIES} ${HTTPD_SYSTEM_LIBS})
-@@ -846,12 +922,12 @@ ENDIF()
+@@ -847,12 +922,12 @@ ENDIF()
  GET_PROPERTY(tmp_includes TARGET ab PROPERTY INCLUDE_DIRECTORIES)
  
  # getting duplicate manifest error with ApacheMonitor
@@ -231,18 +223,8 @@ index 3cd8a34d14..f2f76af018 100644
  
  ###########  CONFIGURATION FILES ###########
  # Set up variables used in the .conf file templates
-@@ -953,6 +1029,9 @@ MESSAGE(STATUS "  Brotli include directory......... : ${BROTLI_INCLUDE_DIR}")
- MESSAGE(STATUS "  Brotli libraries ................ : ${BROTLI_LIBRARIES}")
- MESSAGE(STATUS "  Extra include directories ....... : ${EXTRA_INCLUDES}")
- MESSAGE(STATUS "  Extra compile flags ............. : ${EXTRA_COMPILE_FLAGS}")
-+MESSAGE(STATUS "  Extra module link flags ......... : ${CMAKE_MODULE_LINKER_FLAGS}")
-+MESSAGE(STATUS "  Extra shared link flags ......... : ${CMAKE_SHARED_LINKER_FLAGS}")
-+MESSAGE(STATUS "  Extra static link flags ......... : ${CMAKE_STATIC_LINKER_FLAGS}")
- MESSAGE(STATUS "  Extra libraries ................. : ${EXTRA_LIBS}")
- 
- MESSAGE(STATUS "  Modules built and loaded:")
 diff --git a/modules/proxy/mod_proxy_fcgi.c b/modules/proxy/mod_proxy_fcgi.c
-index 41292e8726..9f7854f2a2 100644
+index 2e97408f3f..dfd0c1b396 100644
 --- a/modules/proxy/mod_proxy_fcgi.c
 +++ b/modules/proxy/mod_proxy_fcgi.c
 @@ -357,6 +357,10 @@ static apr_status_t send_environment(proxy_conn_rec *conn, request_rec *r,
