@@ -1,13 +1,13 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index a571061ba5..a3a1433d7e 100644
+index a571061ba5..92f3ef0dd9 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -15,6 +15,11 @@
  #
  # Read README.cmake before using this.
  
-+SET(mod_md_src "modules/md")
-+# SET(mod_md_src "../mod_md/src")
++# SET(mod_md_src "modules/md")
++SET(mod_md_src "../mod_md/src")
 +SET(mod_http2_src "modules/http2")
 +# SET(mod_http2_src "../mod_h2/mod_http2")
 +
@@ -39,11 +39,12 @@ index a571061ba5..a3a1433d7e 100644
    "modules/ldap/mod_ldap+i+LDAP caching and connection pooling services"
    "modules/loggers/mod_log_config+A+logging configuration.  You won't be able to log requests to the server without this module."
    "modules/loggers/mod_log_debug+I+configurable debug logging"
-@@ -351,6 +358,12 @@ SET(MODULE_LIST
+@@ -351,6 +358,13 @@ SET(MODULE_LIST
    "modules/slotmem/mod_slotmem_plain+I+slotmem provider that uses plain memory"
    "modules/slotmem/mod_slotmem_shm+I+slotmem provider that uses shared memory"
    "modules/ssl/mod_ssl+i+SSL/TLS support"
 +  "${mod_md_src}/mod_md+i+certificate provisioning via the ACME protocol"
++  "../mod_maxminddb/src/mod_maxminddb+i+MaxMind DB Apache Module"
 +  "../mod_fcgid/modules/fcgid/mod_fcgid+i+FastCGI implementation for Apache HTTP"
 +# "../mod_h264_streaming/src/mod_h264_streaming+i+Adaptive streaming and pseudo streaming for Flash"
 +  "../mod_wku_bt/mod_whatkilledus+i+mod_whatkilledus"
@@ -52,7 +53,7 @@ index a571061ba5..a3a1433d7e 100644
    "modules/test/mod_dialup+O+rate limits static files to dialup modem speeds"
    "modules/test/mod_optional_fn_export+O+example optional function exporter"
    "modules/test/mod_optional_fn_import+O+example optional function importer"
-@@ -409,18 +422,18 @@ SET(mod_http2_requires               NGHTTP2_FOUND)
+@@ -409,18 +423,18 @@ SET(mod_http2_requires               NGHTTP2_FOUND)
  SET(mod_http2_extra_defines          ssize_t=long)
  SET(mod_http2_extra_libs             ${NGHTTP2_LIBRARIES})
  SET(mod_http2_extra_sources
@@ -83,7 +84,7 @@ index a571061ba5..a3a1433d7e 100644
  )
  SET(mod_ldap_extra_defines           LDAP_DECLARE_EXPORT)
  SET(mod_ldap_extra_libs              wldap32)
-@@ -497,6 +510,61 @@ SET(mod_ssl_extra_sources
+@@ -497,6 +511,52 @@ SET(mod_ssl_extra_sources
    modules/ssl/ssl_util.c             modules/ssl/ssl_util_ocsp.c
    modules/ssl/ssl_util_ssl.c         modules/ssl/ssl_util_stapling.c
  )
@@ -119,22 +120,13 @@ index a571061ba5..a3a1433d7e 100644
 +../mod_fcgid/modules/fcgid/fcgid_filter.c	../mod_fcgid/modules/fcgid/fcgid_pm_main.c
 +../mod_fcgid/modules/fcgid/fcgid_pm_win.c		
 +)
-+# SET(mod_h264_streaming_extra_sources
-+# ../mod_h264_streaming/src/mp4_writer.c
-+# ../mod_h264_streaming/src/output_mp4.c
-+# ../mod_h264_streaming/src/output_bucket.c
-+# ../mod_h264_streaming/src/moov.c
-+# ../mod_h264_streaming/src/mp4_process.c
-+# ../mod_h264_streaming/src/mp4_reader.c
-+# ../mod_h264_streaming/src/mp4_io.c
-+# ../mod_h264_streaming/src/mod_h264_streaming.c	
-+# )
-+SET(mod_whatkilledus_extra_libs               "dbghelp.lib")
++SET(mod_maxminddb_extra_libs			${MAXMIND_LIBRARIES})
++SET(mod_whatkilledus_extra_libs			"dbghelp.lib")
 +SET(mod_whatkilledus_extra_sources
 +../mod_wku_bt/mod_whatkilledus.c
 +../mod_wku_bt/diag.c		
 +)
-+SET(mod_backtrace_extra_libs               "dbghelp.lib")
++SET(mod_backtrace_extra_libs			"dbghelp.lib")
 +SET(mod_backtrace_extra_sources
 +../mod_wku_bt/mod_backtrace.c
 +../mod_wku_bt/diag.c		
@@ -145,7 +137,7 @@ index a571061ba5..a3a1433d7e 100644
  SET(mod_status_extra_defines         STATUS_DECLARE_EXPORT)
  SET(mod_watchdog_install_lib 1)
  SET(mod_xml2enc_requires             LIBXML2_FOUND)
-@@ -564,7 +632,7 @@ ELSE()
+@@ -564,7 +624,7 @@ ELSE()
  ENDIF()
  
  # for easy reference from .dll/.so builds
@@ -154,7 +146,7 @@ index a571061ba5..a3a1433d7e 100644
  
  ADD_EXECUTABLE(gen_test_char server/gen_test_char.c)
  GET_TARGET_PROPERTY(GEN_TEST_CHAR_EXE gen_test_char LOCATION)
-@@ -637,6 +705,8 @@ SET(LIBHTTPD_SOURCES
+@@ -637,6 +697,8 @@ SET(LIBHTTPD_SOURCES
  
  CONFIGURE_FILE(os/win32/win32_config_layout.h
                 ${PROJECT_BINARY_DIR}/ap_config_layout.h)
@@ -163,18 +155,15 @@ index a571061ba5..a3a1433d7e 100644
  
  SET(HTTPD_INCLUDE_DIRECTORIES
    ${PROJECT_BINARY_DIR}
-@@ -652,6 +722,10 @@ SET(HTTPD_INCLUDE_DIRECTORIES
+@@ -652,6 +714,7 @@ SET(HTTPD_INCLUDE_DIRECTORIES
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/proxy
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/session
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl
-+  ${CMAKE_CURRENT_SOURCE_DIR}/modules/md
-+  ${CMAKE_CURRENT_SOURCE_DIR}/modules/fcgid
-+# ${CMAKE_CURRENT_SOURCE_DIR}/modules/h264_streaming
-+  ${CMAKE_CURRENT_SOURCE_DIR}/modules/wku_bt
++  ${CMAKE_CURRENT_SOURCE_DIR}/${mod_md_src}
    ${CMAKE_CURRENT_SOURCE_DIR}/server
    ${APR_INCLUDE_DIR}
    ${PCRE_INCLUDE_DIR}
-@@ -678,6 +752,7 @@ SET(other_installed_h
+@@ -678,6 +741,7 @@ SET(other_installed_h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/session/mod_session.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl/mod_ssl.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl/mod_ssl_openssl.h
@@ -182,7 +171,7 @@ index a571061ba5..a3a1433d7e 100644
  )
  # When mod_serf is buildable, don't forget to copy modules/proxy/mod_serf.h
  
-@@ -766,7 +841,7 @@ FOREACH (mod ${MODULE_PATHS})
+@@ -766,7 +830,7 @@ FOREACH (mod ${MODULE_PATHS})
      SET(mod_extra_libs "${mod_name}_extra_libs")
      SET_TARGET_PROPERTIES(${mod_name} PROPERTIES
        SUFFIX .so
@@ -191,7 +180,7 @@ index a571061ba5..a3a1433d7e 100644
      )
      TARGET_LINK_LIBRARIES(${mod_name} ${${mod_extra_libs}} libhttpd ${EXTRA_LIBS} ${APR_LIBRARIES} ${HTTPD_SYSTEM_LIBS})
      DEFINE_WITH_BLANKS(define_long_name "LONG_NAME" "${mod_name} for Apache HTTP Server")
-@@ -791,9 +866,9 @@ ENDFOREACH()
+@@ -791,9 +855,9 @@ ENDFOREACH()
  
  ###########   HTTPD LIBRARIES   ############
  ADD_LIBRARY(libhttpd SHARED ${LIBHTTPD_SOURCES} build/win32/httpd.rc)
@@ -204,7 +193,7 @@ index a571061ba5..a3a1433d7e 100644
  SET(install_targets ${install_targets} libhttpd)
  SET(install_bin_pdb ${install_bin_pdb} $<TARGET_PDB_FILE:libhttpd>)
  TARGET_LINK_LIBRARIES(libhttpd ${EXTRA_LIBS} ${APR_LIBRARIES} ${PCRE_LIBRARIES} ${HTTPD_SYSTEM_LIBS})
-@@ -847,12 +922,12 @@ ENDIF()
+@@ -847,12 +911,12 @@ ENDIF()
  GET_PROPERTY(tmp_includes TARGET ab PROPERTY INCLUDE_DIRECTORIES)
  
  # getting duplicate manifest error with ApacheMonitor

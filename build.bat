@@ -1,18 +1,21 @@
-REM patch -i C:\httpd-sdk\src\mod_md\patches\mod_ssl_md-2.4.x-v5.diff
+cd /D C:\httpd-sdk\build
+for /F "delims=" %%i in ('dir /b') do (rmdir "%%i" /s/q || del "%%i" /s/q)
+cd /D C:\httpd-sdk\install
+for /F "delims=" %%i in ('dir /b') do (rmdir "%%i" /s/q || del "%%i" /s/q)
 
 cd /D C:\httpd-sdk\src\jemalloc-cmake\
 sh -c "CC=cl ./autogen.sh"
-C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe msvc\jemalloc_vc2015.sln /m:8 /t:Clean,Build /p:Configuration=Release /p:DebugSymbols=false /p:DebugType=None /p:Plateform="x64"
-move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\x64\Release\jemalloc.dll c:\httpd-sdk\install\bin\jemalloc.dll
-move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\x64\Release\jemalloc.exp c:\httpd-sdk\install\lib\jemalloc.exp
-rm -f C:\httpd-sdk\src\jemalloc-cmake\msvc\x64\Release\jemalloc.iobj
-rm -f C:\httpd-sdk\src\jemalloc-cmake\msvc\x64\Release\jemalloc.ipdb
-move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\x64\Release\jemalloc.lib c:\httpd-sdk\install\lib\jemalloc.lib
-move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\x64\Release\jemalloc.pdb c:\httpd-sdk\install\bin\jemalloc.pdb
-move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\x64\Release\test_threads.exe c:\httpd-sdk\install\bin\test_threads.exe
-rm -f C:\httpd-sdk\src\jemalloc-cmake\msvc\x64\Release\test_threads.iobj
-rm -f C:\httpd-sdk\src\jemalloc-cmake\msvc\x64\Release\test_threads.ipdb
-move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\x64\Release\test_threads.pdb c:\httpd-sdk\install\bin\test_threads.pdb
+C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe msvc\jemalloc_vc2015.sln /m:8 /t:Clean,Build /p:Configuration=Release /p:DebugSymbols=false /p:DebugType=None /p:Plateform="%ARCH%"
+move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\%ARCH%\Release\jemalloc.dll c:\httpd-sdk\install\bin\jemalloc.dll
+move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\%ARCH%\Release\jemalloc.exp c:\httpd-sdk\install\lib\jemalloc.exp
+rm -f C:\httpd-sdk\src\jemalloc-cmake\msvc\%ARCH%\Release\jemalloc.iobj
+rm -f C:\httpd-sdk\src\jemalloc-cmake\msvc\%ARCH%\Release\jemalloc.ipdb
+move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\%ARCH%\Release\jemalloc.lib c:\httpd-sdk\install\lib\jemalloc.lib
+move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\%ARCH%\Release\jemalloc.pdb c:\httpd-sdk\install\bin\jemalloc.pdb
+move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\%ARCH%\Release\test_threads.exe c:\httpd-sdk\install\bin\test_threads.exe
+rm -f C:\httpd-sdk\src\jemalloc-cmake\msvc\%ARCH%\Release\test_threads.iobj
+rm -f C:\httpd-sdk\src\jemalloc-cmake\msvc\%ARCH%\Release\test_threads.ipdb
+move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\%ARCH%\Release\test_threads.pdb c:\httpd-sdk\install\bin\test_threads.pdb
 mkdir c:\httpd-sdk\install\include\jemalloc\
 copy /Y C:\httpd-sdk\src\jemalloc-cmake\include\jemalloc\jemalloc.h c:\httpd-sdk\install\include\jemalloc\jemalloc.h
 
@@ -130,14 +133,21 @@ cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=C:\httpd-sdk\install 
 nmake /B /NOLOGO clean install
 copy /Y C:\httpd-sdk\build\libexpat\expat.pdb C:\httpd-sdk\install\bin\expat.pdb
 
-rmdir /S /Q C:\src\apr-util\x64
-rmdir /S /Q C:\src\apr\x64
-rmdir /S /Q C:\src\apr-util\dbd\x64
-rmdir /S /Q C:\src\apr-util\dbm\x64
-rmdir /S /Q C:\src\apr-util\ldap\x64
-rmdir /S /Q C:\src\apr-util\crypto\x64
-rmdir /S /Q C:\src\apr\build\x64
-rmdir /S /Q C:\src\apr-iconv\x64
+rmdir /S /Q C:\httpd-sdk\src\libmaxminddb\projects\VS12\%ARCH%
+cd /D C:\httpd-sdk\src\libmaxminddb\projects\VS12
+"C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe" libmaxminddb.sln /m:1 /t:libmaxminddb /p:Configuration=Release /p:DebugSymbols=true /p:DebugType=None /p:Platform="%ARCH%"
+copy /Y C:\httpd-sdk\src\libmaxminddb\projects\VS12\%ARCH%\Release\libmaxminddb.lib C:\httpd-sdk\install\lib\libmaxminddb.lib
+copy /Y C:\httpd-sdk\src\libmaxminddb\include\maxminddb.h C:\httpd-sdk\install\include\maxminddb.h 
+copy /Y C:\httpd-sdk\src\libmaxminddb\include\maxminddb_config.h C:\httpd-sdk\install\include\maxminddb_config.h
+
+rmdir /S /Q C:\src\apr-util\%ARCH%
+rmdir /S /Q C:\src\apr\%ARCH%
+rmdir /S /Q C:\src\apr-util\dbd\%ARCH%
+rmdir /S /Q C:\src\apr-util\dbm\%ARCH%
+rmdir /S /Q C:\src\apr-util\ldap\%ARCH%
+rmdir /S /Q C:\src\apr-util\crypto\%ARCH%
+rmdir /S /Q C:\src\apr\build\%ARCH%
+rmdir /S /Q C:\src\apr-iconv\%ARCH%
 
 cd /D C:\httpd-sdk\src\apr\tools
 cl gen_test_char.c
@@ -146,33 +156,33 @@ rm *.exe *.obj
 
 REM apr_crypto_nss;apr_dbd_mysql;apr_dbd_oracle;apr_dbd_pgsql;apr_dbd_sqlite2;apr_dbd_sqlite3;apr_dbm_db;apr_dbm_gdbm;
 cd /D C:\src\apr-util
-"C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe" aprutil.sln /m:1 /t:apr;apr_crypto_openssl;apr_dbd_odbc;apr_ldap;aprapp;apriconv;aprutil;libapr;libaprapp;libapriconv;libapriconv_ccs_modules;libapriconv_ces_modules;libaprutil;preaprapp;preapriconv;preaprutil;prelibaprapp /p:Configuration=Release /p:DebugSymbols=true /p:DebugType=None /p:Platform="x64"
+"C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe" aprutil.sln /nowarn:msb4011 /nowarn:C4244 /nowarn:C4098 /m:1 /t:apr;apr_crypto_openssl;apr_dbd_odbc;apr_ldap;aprapp;apriconv;aprutil;libapr;libaprapp;libapriconv;libapriconv_ccs_modules;libapriconv_ces_modules;libaprutil;preaprapp;preapriconv;preaprutil;prelibaprapp /p:Configuration=Release /p:DebugSymbols=true /p:DebugType=None /p:Platform="%ARCH%"
 
-move /Y C:\src\apr-util\crypto\x64\Release\apr_crypto_openssl-1.dll c:\httpd-sdk\install\bin\apr_crypto_openssl-1.dll
-move /Y C:\src\apr-iconv\x64\Release\libapriconv-1.dll c:\httpd-sdk\install\bin\libapriconv-1.dll
-move /Y C:\src\apr\x64\Release\libapr-1.dll c:\httpd-sdk\install\bin\libapr-1.dll
-move /Y C:\src\apr-util\x64\Release\libaprutil-1.dll c:\httpd-sdk\install\bin\libaprutil-1.dll
-move /Y C:\src\apr-util\ldap\x64\Release\apr_ldap-1.dll c:\httpd-sdk\install\bin\apr_ldap-1.dll
-move /Y C:\src\apr-util\dbd\x64\Release\apr_dbd_odbc-1.dll c:\httpd-sdk\install\bin\apr_dbd_odbc-1.dll
+move /Y C:\src\apr-util\crypto\%ARCH%\Release\apr_crypto_openssl-1.dll c:\httpd-sdk\install\bin\apr_crypto_openssl-1.dll
+move /Y C:\src\apr-iconv\%ARCH%\Release\libapriconv-1.dll c:\httpd-sdk\install\bin\libapriconv-1.dll
+move /Y C:\src\apr\%ARCH%\Release\libapr-1.dll c:\httpd-sdk\install\bin\libapr-1.dll
+move /Y C:\src\apr-util\%ARCH%\Release\libaprutil-1.dll c:\httpd-sdk\install\bin\libaprutil-1.dll
+move /Y C:\src\apr-util\ldap\%ARCH%\Release\apr_ldap-1.dll c:\httpd-sdk\install\bin\apr_ldap-1.dll
+move /Y C:\src\apr-util\dbd\%ARCH%\Release\apr_dbd_odbc-1.dll c:\httpd-sdk\install\bin\apr_dbd_odbc-1.dll
 
-move /Y C:\src\apr-util\crypto\x64\Release\apr_crypto_openssl-1.pdb c:\httpd-sdk\install\bin\apr_crypto_openssl-1.pdb
-move /Y C:\src\apr-iconv\x64\Release\libapriconv-1.pdb c:\httpd-sdk\install\bin\libapriconv-1.pdb
-move /Y C:\src\apr\x64\Release\libapr-1.pdb c:\httpd-sdk\install\bin\libapr-1.pdb
-move /Y C:\src\apr-util\x64\Release\libaprutil-1.pdb c:\httpd-sdk\install\bin\libaprutil-1.pdb
-move /Y C:\src\apr-util\ldap\x64\Release\apr_ldap-1.pdb c:\httpd-sdk\install\bin\apr_ldap-1.pdb
-move /Y C:\src\apr-util\dbd\x64\Release\apr_dbd_odbc-1.pdb c:\httpd-sdk\install\bin\apr_dbd_odbc-1.pdb
+move /Y C:\src\apr-util\crypto\%ARCH%\Release\apr_crypto_openssl-1.pdb c:\httpd-sdk\install\bin\apr_crypto_openssl-1.pdb
+move /Y C:\src\apr-iconv\%ARCH%\Release\libapriconv-1.pdb c:\httpd-sdk\install\bin\libapriconv-1.pdb
+move /Y C:\src\apr\%ARCH%\Release\libapr-1.pdb c:\httpd-sdk\install\bin\libapr-1.pdb
+move /Y C:\src\apr-util\%ARCH%\Release\libaprutil-1.pdb c:\httpd-sdk\install\bin\libaprutil-1.pdb
+move /Y C:\src\apr-util\ldap\%ARCH%\Release\apr_ldap-1.pdb c:\httpd-sdk\install\bin\apr_ldap-1.pdb
+move /Y C:\src\apr-util\dbd\%ARCH%\Release\apr_dbd_odbc-1.pdb c:\httpd-sdk\install\bin\apr_dbd_odbc-1.pdb
 
-move /Y C:\src\apr-util\x64\LibR\aprutil-1.lib c:\httpd-sdk\install\lib\aprutil-1.lib
-move /Y C:\src\apr-iconv\x64\LibR\apriconv-1.lib c:\httpd-sdk\install\lib\apriconv-1.lib
-move /Y C:\src\apr\x64\LibR\apr-1.lib c:\httpd-sdk\install\lib\apr-1.lib
-move /Y C:\src\apr\x64\LibR\aprapp-1.lib c:\httpd-sdk\install\lib\aprapp-1.lib
-move /Y C:\src\apr-iconv\x64\Release\iconv\cp273.lib c:\httpd-sdk\install\lib\cp273.lib
-move /Y C:\src\apr-util\x64\Release\libaprutil-1.lib c:\httpd-sdk\install\lib\libaprutil-1.lib
-move /Y C:\src\apr-util\ldap\x64\Release\apr_ldap-1.lib c:\httpd-sdk\install\lib\apr_ldap-1.lib
-move /Y C:\src\apr-util\dbd\x64\Release\apr_dbd_odbc-1.lib c:\httpd-sdk\install\lib\apr_dbd_odbc-1.lib
-move /Y C:\src\apr-iconv\x64\Release\libapriconv-1.lib c:\httpd-sdk\install\lib\libapriconv-1.lib
-move /Y C:\src\apr\x64\Release\libapr-1.lib c:\httpd-sdk\install\lib\libapr-1.lib
-move /Y C:\src\apr\x64\Release\libaprapp-1.lib c:\httpd-sdk\install\lib\libaprapp-1.lib
+move /Y C:\src\apr-util\%ARCH%\LibR\aprutil-1.lib c:\httpd-sdk\install\lib\aprutil-1.lib
+move /Y C:\src\apr-iconv\%ARCH%\LibR\apriconv-1.lib c:\httpd-sdk\install\lib\apriconv-1.lib
+move /Y C:\src\apr\%ARCH%\LibR\apr-1.lib c:\httpd-sdk\install\lib\apr-1.lib
+move /Y C:\src\apr\%ARCH%\LibR\aprapp-1.lib c:\httpd-sdk\install\lib\aprapp-1.lib
+move /Y C:\src\apr-iconv\%ARCH%\Release\iconv\cp273.lib c:\httpd-sdk\install\lib\cp273.lib
+move /Y C:\src\apr-util\%ARCH%\Release\libaprutil-1.lib c:\httpd-sdk\install\lib\libaprutil-1.lib
+move /Y C:\src\apr-util\ldap\%ARCH%\Release\apr_ldap-1.lib c:\httpd-sdk\install\lib\apr_ldap-1.lib
+move /Y C:\src\apr-util\dbd\%ARCH%\Release\apr_dbd_odbc-1.lib c:\httpd-sdk\install\lib\apr_dbd_odbc-1.lib
+move /Y C:\src\apr-iconv\%ARCH%\Release\libapriconv-1.lib c:\httpd-sdk\install\lib\libapriconv-1.lib
+move /Y C:\src\apr\%ARCH%\Release\libapr-1.lib c:\httpd-sdk\install\lib\libapr-1.lib
+move /Y C:\src\apr\%ARCH%\Release\libaprapp-1.lib c:\httpd-sdk\install\lib\libaprapp-1.lib
 
 copy /Y C:\src\apr\include\apr.h C:\httpd-sdk\install\include\apr.h
 copy /Y C:\src\apr\include\apr_allocator.h C:\httpd-sdk\install\include\apr_allocator.h
@@ -285,9 +295,9 @@ cd ..
 rmdir /S /Q C:\httpd-sdk\build\httpd
 mkdir C:\httpd-sdk\build\httpd
 cd /D C:\httpd-sdk\build\httpd
-cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=C:\httpd-sdk\install -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% -DINSTALL_PDB=ON -DENABLE_MODULES=i -DINSTALL_MANUAL=OFF -DLIBXML2_ICONV_INCLUDE_DIR=C:/httpd-sdk/install/include -DLIBXML2_ICONV_LIBRARIES=C:/httpd-sdk/install/lib/iconv.lib -DZLIB_LIBRARIES=C:/httpd-sdk/install/lib/zlib.lib -DJANSSON_INCLUDE_DIR=C:/httpd-sdk/install/include -DJANSSON_LIBRARIES=C:/httpd-sdk/install/lib/jansson.lib -DOPENSSL_ROOT_DIR=C:\httpd-sdk\install\ -DENABLE_SOCACHE_DC=O -DENABLE_CHARSET_LITE=O ..\..\src\httpd
-REM -DEXTRA_COMPILE_FLAGS="/GL /GS- /Oy- /W0 /guard:cf- /FD /GF /Zc:inline /MP8 /LD /MD /Zi /Ox /wd9025" -DCMAKE_MODULE_LINKER_FLAGS=%EXTRA_LINK_FLAGS% -DCMAKE_SHARED_LINKER_FLAGS=%EXTRA_LINK_FLAGS% -DCMAKE_STATIC_LINKER_FLAGS=%EXTRA_LINK_FLAGS%
+cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=C:\httpd-sdk\install -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% -DINSTALL_PDB=ON -DENABLE_MODULES=i -DINSTALL_MANUAL=OFF -DLIBXML2_ICONV_INCLUDE_DIR=C:/httpd-sdk/install/include -DLIBXML2_ICONV_LIBRARIES=C:/httpd-sdk/install/lib/iconv.lib -DZLIB_LIBRARIES=C:/httpd-sdk/install/lib/zlib.lib -DJANSSON_INCLUDE_DIR=C:/httpd-sdk/install/include -DJANSSON_LIBRARIES=C:/httpd-sdk/install/lib/jansson.lib -DMAXMIND_LIBRARIES=C:/httpd-sdk/install/lib/libmaxminddb.lib -DOPENSSL_ROOT_DIR=C:\httpd-sdk\install\ -DENABLE_SOCACHE_DC=O -DENABLE_CHARSET_LITE=O ..\..\src\httpd
 C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/httpd_flags_%CMAKE_BUILD_TYPE%.sh
+C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/httpd_flags.sh %CYGV%
 nmake /B /NOLOGO clean install
 mt.exe -manifest C:\httpd-sdk\httpd.exe.manifest -outputresource:C:\httpd-sdk\install\bin\httpd.exe;1
 
@@ -304,7 +314,7 @@ cl /nologo -D HAVE_CONFIG_H -D WIN32 /GL /GS- /Oy- /guard:cf- /FD /GF /Zc:inline
 cl /nologo -D HAVE_CONFIG_H -D WIN32 /GL /GS- /Oy- /guard:cf- /FD /GF /Zc:inline /MP8 /LD /MD /Zi /Ox -I"C:/httpd-sdk/install/include" -I"C:/httpd-sdk/install/lib" -D BUILDING_H264_STREAMING /c /Fo C:/src/mod_h264_streaming/mp4_writer.c
 cl /nologo -D HAVE_CONFIG_H -D WIN32 /GL /GS- /Oy- /guard:cf- /FD /GF /Zc:inline /MP8 /LD /MD /Zi /Ox -I"C:/httpd-sdk/install/include" -I"C:/httpd-sdk/install/lib" -D BUILDING_H264_STREAMING /c /Fo C:/src/mod_h264_streaming/mp4_reader.c
 cl /nologo -D HAVE_CONFIG_H -D WIN32 /GL /GS- /Oy- /guard:cf- /FD /GF /Zc:inline /MP8 /LD /MD /Zi /Ox -I"C:/httpd-sdk/install/include" -I"C:/httpd-sdk/install/lib" -D BUILDING_H264_STREAMING /c /Fo C:/src/mod_h264_streaming/mp4_io.c
-link /nologo kernel32.lib "C:/httpd-sdk/install/lib/libhttpd.lib" "C:/httpd-sdk/install/lib/libapr-1.lib" "C:/httpd-sdk/install/lib/libaprutil-1.lib" -Dll /machine:x64 /LTCG /OPT:ICF /debug /out:mod_h264_streaming.so output_mp4.obj output_bucket.obj mp4_writer.obj mp4_reader.obj mp4_process.obj mp4_io.obj moov.obj mod_h264_streaming.obj
+link /nologo kernel32.lib "C:/httpd-sdk/install/lib/libhttpd.lib" "C:/httpd-sdk/install/lib/libapr-1.lib" "C:/httpd-sdk/install/lib/libaprutil-1.lib" -Dll /machine:%ARCH% /LTCG /OPT:ICF /debug /out:mod_h264_streaming.so output_mp4.obj output_bucket.obj mp4_writer.obj mp4_reader.obj mp4_process.obj mp4_io.obj moov.obj mod_h264_streaming.obj
 copy /Y C:\httpd-sdk\build\mod_h264_streaming\mod_h264_streaming.so C:\httpd-sdk\install\modules\mod_h264_streaming.so
 copy /Y C:\httpd-sdk\build\mod_h264_streaming\mod_h264_streaming.pdb C:\httpd-sdk\install\modules\mod_h264_streaming.pdb
 
