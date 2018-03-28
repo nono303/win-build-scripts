@@ -1,8 +1,8 @@
 diff --git a/Configurations/windows-makefile.tmpl b/Configurations/windows-makefile.tmpl
-index 090a6023d8..03c02b1d43 100644
+index e3e213f610..f2f73fd954 100644
 --- a/Configurations/windows-makefile.tmpl
 +++ b/Configurations/windows-makefile.tmpl
-@@ -223,9 +223,9 @@ list-tests:
+@@ -228,9 +228,9 @@ list-tests:
  	@echo "Tests are not supported with your chosen Configure options"
  	@rem {- output_on() if !$disabled{tests}; "" -}
  
