@@ -27,6 +27,9 @@ for %%i in (
 "C:\src\mod_fcgid"
 "C:\src\mod_h2"
 "C:\php72-sdk"
+"C:\src\libmaxminddb"
+"C:\src\mod_maxminddb"
+"C:\src\subversion"
 ) do (
     cd %%i
     git fetch
