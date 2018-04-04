@@ -31,7 +31,6 @@ for %%i in (
 "C:\src\mod_maxminddb"
 "C:\src\subversion"
 "C:\httpd-sdk\src\serf"
-"C:\httpd-sdk\src\FFmpeg"
 ) do (
     cd %%i
     git fetch

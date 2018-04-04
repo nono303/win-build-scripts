@@ -10,7 +10,7 @@ rmdir /S /Q C:\httpd-sdk\src\serf\.sconf_temp
 cd /D C:\httpd-sdk\src\serf\build
 python gen_def.py
 cd /D C:\src\serf
-python c:/scons/scons.py MSVC_VERSION=14.1 TARGET_ARCH=%serfbuild% APR=C:/httpd-sdk/install/lib/ APU=C:/httpd-sdk/install/lib/ OPENSSL=C:/httpd-sdk/install/lib/ ZLIB=C:/httpd-sdk/install/lib/ BROTLI=C:/httpd-sdk/install/ CPPFLAGS="/nologo /GL /GS- /Oy- /w /guard:cf- /FD /GF /Zc:inline /MP8 /LD /MD /Zi /Ox" LINKFLAGS="/nologo /LTCG /NODEFAULTLIB:libcmt.lib /OPT:ICF"
+python c:/bin/scons/scons.py MSVC_VERSION=14.1 TARGET_ARCH=%serfbuild% APR=C:/httpd-sdk/install/lib/ APU=C:/httpd-sdk/install/lib/ OPENSSL=C:/httpd-sdk/install/lib/ ZLIB=C:/httpd-sdk/install/lib/ BROTLI=C:/httpd-sdk/install/ CPPFLAGS="/nologo /GL /GS- /Oy- /w /guard:cf- /FD /GF /Zc:inline /MP8 /LD /MD /Zi /Ox" LINKFLAGS="/nologo /LTCG /NODEFAULTLIB:libcmt.lib /OPT:ICF"
 mklink /H C:\src\serf\serf-1.lib C:\src\serf\serf-2.lib
 
 cd /D C:\src\subversion
