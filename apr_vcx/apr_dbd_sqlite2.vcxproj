@@ -160,7 +160,7 @@
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>x86\Release\apr_dbd_sqlite2-1.dll</OutputFile>
-      <ImportLibrary>Release\apr_dbd_sqlite2-1.lib</ImportLibrary>
+      <ImportLibrary>x86\Release\apr_dbd_sqlite2-1.lib</ImportLibrary>
       <FixedBaseAddress>
       </FixedBaseAddress>
       <AdditionalDependencies>ws2_32.lib;mswsock.lib;sqlite2.lib;%(AdditionalDependencies)</AdditionalDependencies>

@@ -162,7 +162,7 @@
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>x86\Release\apr_crypto_openssl-1.dll</OutputFile>
-      <ImportLibrary>Release\apr_crypto_openssl-1.lib</ImportLibrary>
+      <ImportLibrary>x86\Release\apr_crypto_openssl-1.lib</ImportLibrary>
       <AdditionalLibraryDirectories>C:\httpd-sdk\install\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <FixedBaseAddress>
       </FixedBaseAddress>

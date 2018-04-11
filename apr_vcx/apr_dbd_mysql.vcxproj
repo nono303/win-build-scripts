@@ -211,7 +211,7 @@
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>x86\Release\apr_dbd_mysql-1.dll</OutputFile>
-      <ImportLibrary>Release\apr_dbd_mysql-1.lib</ImportLibrary>
+      <ImportLibrary>x86\Release\apr_dbd_mysql-1.lib</ImportLibrary>
       <AdditionalLibraryDirectories>..\..\mysql\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <FixedBaseAddress>
       </FixedBaseAddress>

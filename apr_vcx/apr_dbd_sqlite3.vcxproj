@@ -160,7 +160,7 @@
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>x86\Release\apr_dbd_sqlite3-1.dll</OutputFile>
-      <ImportLibrary>Release\apr_dbd_sqlite3-1.lib</ImportLibrary>
+      <ImportLibrary>x86\Release\apr_dbd_sqlite3-1.lib</ImportLibrary>
       <AdditionalLibraryDirectories>..\..\sqlite3;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <FixedBaseAddress>
       </FixedBaseAddress>

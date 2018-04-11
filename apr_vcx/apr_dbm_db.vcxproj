@@ -315,7 +315,7 @@
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>x86\Release\apr_dbm_db-1.dll</OutputFile>
-      <ImportLibrary>Release\apr_dbm_db-1.lib</ImportLibrary>
+      <ImportLibrary>x86\Release\apr_dbm_db-1.lib</ImportLibrary>
       <AdditionalLibraryDirectories>..\..\db;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <FixedBaseAddress>
       </FixedBaseAddress>

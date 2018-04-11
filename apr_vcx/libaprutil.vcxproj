@@ -213,7 +213,7 @@
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>x86\Release\libaprutil-1.dll</OutputFile>
-      <ImportLibrary>Release\libaprutil-1.lib</ImportLibrary>
+      <ImportLibrary>x86\Release\libaprutil-1.lib</ImportLibrary>
       <FixedBaseAddress>
       </FixedBaseAddress>
       <AdditionalDependencies>expat.lib;ws2_32.lib;mswsock.lib;libcrypto.lib;libssl.lib;%(AdditionalDependencies)</AdditionalDependencies>

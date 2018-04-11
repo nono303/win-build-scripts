@@ -161,7 +161,7 @@
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>x86\Release\libapriconv-1.dll</OutputFile>
-      <ImportLibrary>Release\libapriconv-1.lib</ImportLibrary>
+      <ImportLibrary>x86\Release\libapriconv-1.lib</ImportLibrary>
       <FixedBaseAddress>
       </FixedBaseAddress>
       <AdditionalDependencies>kernel32.lib;advapi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
