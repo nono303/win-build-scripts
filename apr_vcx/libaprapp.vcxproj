@@ -321,8 +321,8 @@
       <OmitFramePointers>false</OmitFramePointers>
       <AdditionalIncludeDirectories>../include;../include/arch;../include/arch/win32;../include/arch/unix;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WINNT;WIN32;_WINDOWS;APR_APP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\Release\libaprapp.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\x86\Release\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\x86\Release\libaprapp.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(OutDir)libaprapp-1</ProgramDataBaseFileName>
     </ClCompile>
@@ -331,11 +331,11 @@
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\..\Release\libaprapp.bsc</OutputFile>
+      <OutputFile>.\..\x86\Release\libaprapp.bsc</OutputFile>
     </Bscmake>
     <Lib>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>..\Release\libaprapp-1.lib</OutputFile>
+      <OutputFile>..\x86\Release\libaprapp-1.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>

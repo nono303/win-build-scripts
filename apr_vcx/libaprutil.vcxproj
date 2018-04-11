@@ -182,8 +182,8 @@
       <OmitFramePointers>false</OmitFramePointers>
       <AdditionalIncludeDirectories>./include;../apr/include;./include/private;./xml/expat/lib;../apr-iconv/include;./dbm/sdbm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;APR_DECLARE_EXPORT;APU_DECLARE_EXPORT;APU_USE_SDBM;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\Release\libaprutil.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\x86\Release\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\x86\Release\libaprutil.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)libaprutil_src</ProgramDataBaseFileName>
       <AdditionalOptions> $(XML_OPTIONS)</AdditionalOptions>
@@ -195,7 +195,7 @@
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <TypeLibraryName>.\Release\libaprutil.tlb</TypeLibraryName>
+      <TypeLibraryName>.\x86\Release\libaprutil.tlb</TypeLibraryName>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
     </Midl>
@@ -206,13 +206,13 @@
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release\libaprutil.bsc</OutputFile>
+      <OutputFile>.\x86\Release\libaprutil.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <OutputFile>Release\libaprutil-1.dll</OutputFile>
+      <OutputFile>x86\Release\libaprutil-1.dll</OutputFile>
       <ImportLibrary>Release\libaprutil-1.lib</ImportLibrary>
       <FixedBaseAddress>
       </FixedBaseAddress>

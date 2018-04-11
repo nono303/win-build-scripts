@@ -129,8 +129,8 @@
       <OmitFramePointers>false</OmitFramePointers>
       <AdditionalIncludeDirectories>../include;../../apr/include;../include/private;../../sqlite3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;APU_DSO_MODULE_BUILD;APU_HAVE_SQLITE3=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\Release\apr_dbd_sqlite3.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\x86\Release\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\x86\Release\apr_dbd_sqlite3.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)apr_dbd_sqlite3_src</ProgramDataBaseFileName>
     </ClCompile>
@@ -141,25 +141,25 @@
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <TypeLibraryName>.\Release\apr_dbd_sqlite3.tlb</TypeLibraryName>
+      <TypeLibraryName>.\x86\Release\apr_dbd_sqlite3.tlb</TypeLibraryName>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
     </Midl>
     <ResourceCompile>
       <Culture>0x0409</Culture>
-      <ResourceOutputFileName>Release/apr_dbd_sqlite3-1.res</ResourceOutputFileName>
+      <ResourceOutputFileName>x86/Release/apr_dbd_sqlite3-1.res</ResourceOutputFileName>
       <AdditionalIncludeDirectories>../include;../../apr/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>DLL_NAME=apr_dbd_sqlite3;NDEBUG;APU_VERSION_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release\apr_dbd_sqlite3.bsc</OutputFile>
+      <OutputFile>.\x86\Release\apr_dbd_sqlite3.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <OutputFile>Release\apr_dbd_sqlite3-1.dll</OutputFile>
+      <OutputFile>x86\Release\apr_dbd_sqlite3-1.dll</OutputFile>
       <ImportLibrary>Release\apr_dbd_sqlite3-1.lib</ImportLibrary>
       <AdditionalLibraryDirectories>..\..\sqlite3;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <FixedBaseAddress>

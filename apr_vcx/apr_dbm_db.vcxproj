@@ -284,8 +284,8 @@
       <OmitFramePointers>false</OmitFramePointers>
       <AdditionalIncludeDirectories>../include;../../apr/include;../include/private;../../db;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;APU_DSO_MODULE_BUILD;APU_HAVE_DB=1;APU_HAVE_DB_VERSION=4;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\Release\apr_dbm_db.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\x86\Release\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\x86\Release\apr_dbm_db.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)apr_dbm_db_src</ProgramDataBaseFileName>
     </ClCompile>
@@ -296,25 +296,25 @@
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <TypeLibraryName>.\Release\apr_dbm_db.tlb</TypeLibraryName>
+      <TypeLibraryName>.\x86\Release\apr_dbm_db.tlb</TypeLibraryName>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
     </Midl>
     <ResourceCompile>
       <Culture>0x0409</Culture>
-      <ResourceOutputFileName>Release/apr_dbm_db-1.res</ResourceOutputFileName>
+      <ResourceOutputFileName>x86/Release/apr_dbm_db-1.res</ResourceOutputFileName>
       <AdditionalIncludeDirectories>../include;../../apr/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>DLL_NAME=apr_dbm_db;NDEBUG;APU_VERSION_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release\apr_dbm_db.bsc</OutputFile>
+      <OutputFile>.\x86\Release\apr_dbm_db.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <OutputFile>Release\apr_dbm_db-1.dll</OutputFile>
+      <OutputFile>x86\Release\apr_dbm_db-1.dll</OutputFile>
       <ImportLibrary>Release\apr_dbm_db-1.lib</ImportLibrary>
       <AdditionalLibraryDirectories>..\..\db;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <FixedBaseAddress>

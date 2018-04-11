@@ -220,8 +220,8 @@
       <OmitFramePointers>false</OmitFramePointers>
       <AdditionalIncludeDirectories>./include;../apr/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;APR_DECLARE_STATIC;API_DECLARE_STATIC;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\LibR\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\LibR\apriconv.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\x86\LibR\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\x86\LibR\apriconv.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>iconv.h</PrecompiledHeaderFile>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -232,11 +232,11 @@
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\LibR\apriconv.bsc</OutputFile>
+      <OutputFile>.\x86\LibR\apriconv.bsc</OutputFile>
     </Bscmake>
     <Lib>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>LibR\apriconv-1.lib</OutputFile>
+      <OutputFile>x86\LibR\apriconv-1.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>

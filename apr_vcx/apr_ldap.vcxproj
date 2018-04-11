@@ -229,8 +229,8 @@
       <OmitFramePointers>false</OmitFramePointers>
       <AdditionalIncludeDirectories>../include;../../apr/include;../include/private;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\Release\apr_ldap.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\x86\Release\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\x86\Release\apr_ldap.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)apr_ldap_src</ProgramDataBaseFileName>
     </ClCompile>
@@ -241,25 +241,25 @@
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <TypeLibraryName>.\Release\apr_ldap.tlb</TypeLibraryName>
+      <TypeLibraryName>.\x86\Release\apr_ldap.tlb</TypeLibraryName>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
     </Midl>
     <ResourceCompile>
       <Culture>0x0409</Culture>
-      <ResourceOutputFileName>Release/apr_ldap-1.res</ResourceOutputFileName>
+      <ResourceOutputFileName>x86/Release/apr_ldap-1.res</ResourceOutputFileName>
       <AdditionalIncludeDirectories>../include;../../apr/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>DLL_NAME=apr_ldap;NDEBUG;APU_VERSION_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release\apr_ldap.bsc</OutputFile>
+      <OutputFile>.\x86\Release\apr_ldap.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <OutputFile>Release\apr_ldap-1.dll</OutputFile>
+      <OutputFile>x86\Release\apr_ldap-1.dll</OutputFile>
       <ImportLibrary>Release\apr_ldap-1.lib</ImportLibrary>
       <FixedBaseAddress>
       </FixedBaseAddress>

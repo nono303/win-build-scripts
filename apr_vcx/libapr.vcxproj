@@ -278,8 +278,8 @@
       <OmitFramePointers>false</OmitFramePointers>
       <AdditionalIncludeDirectories>./include;./include/arch;./include/arch/win32;./include/arch/unix;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;APR_DECLARE_EXPORT;WIN32;WINNT;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\Release\libapr.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\x86\Release\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\x86\Release\libapr.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)libapr_src</ProgramDataBaseFileName>
     </ClCompile>
@@ -290,7 +290,7 @@
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <TypeLibraryName>.\Release\libapr.tlb</TypeLibraryName>
+      <TypeLibraryName>.\x86\Release\libapr.tlb</TypeLibraryName>
       <MkTypLibCompatible>true</MkTypLibCompatible>
       <TargetEnvironment>Win32</TargetEnvironment>
     </Midl>
@@ -301,13 +301,13 @@
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\Release\libapr.bsc</OutputFile>
+      <OutputFile>.\x86\Release\libapr.bsc</OutputFile>
     </Bscmake>
     <Link>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <OutputFile>Release\libapr-1.dll</OutputFile>
+      <OutputFile>x86\Release\libapr-1.dll</OutputFile>
       <ImportLibrary>Release\libapr-1.lib</ImportLibrary>
       <FixedBaseAddress>
       </FixedBaseAddress>
@@ -642,8 +642,8 @@
 .\x64\Debug\gen_test_char.exe &gt; .\include\apr_escape_test_char.h</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Creating gen_test_char.exe and apr_escape_test_char.h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.\include\apr_escape_test_char.h;%(Outputs)</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">cl.exe /nologo /W3 /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /FD /I ".\include" /Fo.\Release\gen_test_char /Fe.\Release\gen_test_char.exe .\tools\gen_test_char.c 
-.\Release\gen_test_char.exe &gt; .\include\apr_escape_test_char.h</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">cl.exe /nologo /W3 /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /FD /I ".\include" /Fo.\x86\Release\gen_test_char /Fe.\x86\Release\gen_test_char.exe .\tools\gen_test_char.c 
+.\x86\Release\gen_test_char.exe &gt; .\include\apr_escape_test_char.h</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Creating gen_test_char.exe and apr_escape_test_char.h</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\include\apr_escape_test_char.h;%(Outputs)</Outputs>
     </CustomBuild>

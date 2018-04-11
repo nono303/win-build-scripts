@@ -219,8 +219,8 @@
       <OmitFramePointers>false</OmitFramePointers>
       <AdditionalIncludeDirectories>./include;../apr/include;./include/private;./xml/expat/lib;../apr-iconv/include;./dbm/sdbm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;APR_DECLARE_STATIC;APU_DECLARE_STATIC;API_DECLARE_STATIC;APU_USE_SDBM;HAVE_SQL_H;XML_STATIC;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\LibR\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\LibR\aprutil.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\x86\LibR\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\x86\LibR\aprutil.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(OutDir)aprutil-1</ProgramDataBaseFileName>
     </ClCompile>
@@ -230,11 +230,11 @@
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\LibR\aprutil.bsc</OutputFile>
+      <OutputFile>.\x86\LibR\aprutil.bsc</OutputFile>
     </Bscmake>
     <Lib>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>LibR\aprutil-1.lib</OutputFile>
+      <OutputFile>x86\LibR\aprutil-1.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -265,8 +265,8 @@
       <OmitFramePointers>false</OmitFramePointers>
       <AdditionalIncludeDirectories>../include;../include/arch;../include/arch/win32;../include/arch/unix;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WINNT;WIN32;_WINDOWS;APR_APP;APR_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AssemblerListingLocation>.\LibR\</AssemblerListingLocation>
-      <PrecompiledHeaderOutputFile>.\LibR\aprapp.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\x86\LibR\</AssemblerListingLocation>
+      <PrecompiledHeaderOutputFile>.\x86\LibR\aprapp.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ProgramDataBaseFileName>$(OutDir)aprapp-1</ProgramDataBaseFileName>
     </ClCompile>
@@ -275,11 +275,11 @@
     </ResourceCompile>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>.\..\LibR\aprapp.bsc</OutputFile>
+      <OutputFile>.\..\x86\LibR\aprapp.bsc</OutputFile>
     </Bscmake>
     <Lib>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>..\LibR\aprapp-1.lib</OutputFile>
+      <OutputFile>..\x86\LibR\aprapp-1.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug9x|Win32'">
