@@ -26,12 +26,12 @@ for %%i in (
 "C:\src\pcre"
 "C:\src\pecl-memcache"
 "C:\src\php-cgi-spawner"
+"C:\src\php72-sdk"
 "C:\src\php-src"
 "C:\src\serf"
 "C:\src\subversion"
 "C:\src\xdebug"
 "C:\src\zlib"
-"C:\php72-sdk"
 ) do (
     cd %%i
     git fetch
