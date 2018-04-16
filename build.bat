@@ -68,9 +68,9 @@ cd /D C:\httpd-sdk\build\libiconv
 cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=C:\httpd-sdk\install -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% -DBUILD_SHARED_LIBS=ON ..\..\src\libiconv
 nmake /NOLOGO /A /B clean install
 	REM pour libxml2 2.9.7
-copy /Y C:\httpd-sdk\src\libiconv\include\iconv.h C:\httpd-sdk\install\include\iconv.h
+copy /Y C:\httpd-sdk\src\libiconv\include\iconv.h C:\httpd-sdk\install\include\iconv.h 
 	REM pour libxml2 & httpd
-copy /Y C:\httpd-sdk\install\lib\libiconv.lib C:\httpd-sdk\install\lib\iconv.lib
+copy /Y C:\httpd-sdk\install\lib\libiconv.lib C:\httpd-sdk\install\lib\iconv.lib 
 copy /Y C:\httpd-sdk\build\libiconv\libcharset.pdb C:\httpd-sdk\install\bin\libcharset.pdb
 copy /Y C:\httpd-sdk\build\libiconv\libiconv.pdb C:\httpd-sdk\install\bin\libiconv.pdb
 
@@ -135,54 +135,56 @@ copy /Y C:\httpd-sdk\build\libexpat\expat.pdb C:\httpd-sdk\install\bin\expat.pdb
 
 rmdir /S /Q C:\httpd-sdk\src\libmaxminddb\projects\VS12\%ARCH%
 cd /D C:\httpd-sdk\src\libmaxminddb\projects\VS12
-"C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe" libmaxminddb.sln /m:1 /t:libmaxminddb /p:Configuration=Release /p:DebugSymbols=true /p:DebugType=None /p:Platform="%ARCH%"
-copy /Y C:\httpd-sdk\src\libmaxminddb\projects\VS12\%ARCH%\Release\libmaxminddb.lib C:\httpd-sdk\install\lib\libmaxminddb.lib
+"C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe" libmaxminddb.sln /m:8 /t:libmaxminddb /p:Configuration=Release /p:DebugSymbols=true /p:DebugType=None /p:Platform="%archmsbuild%"
+copy /Y C:\httpd-sdk\src\libmaxminddb\projects\VS12\%outmsbuild%\libmaxminddb.lib C:\httpd-sdk\install\lib\libmaxminddb.lib
 copy /Y C:\httpd-sdk\src\libmaxminddb\include\maxminddb.h C:\httpd-sdk\install\include\maxminddb.h 
 copy /Y C:\httpd-sdk\src\libmaxminddb\include\maxminddb_config.h C:\httpd-sdk\install\include\maxminddb_config.h
 
-rmdir /S /Q C:\src\apr-util\%ARCH%
-rmdir /S /Q C:\src\apr\%ARCH%
+rmdir /S /Q C:\src\apr-util\crypto\%ARCH%
 rmdir /S /Q C:\src\apr-util\dbd\%ARCH%
 rmdir /S /Q C:\src\apr-util\dbm\%ARCH%
 rmdir /S /Q C:\src\apr-util\ldap\%ARCH%
-rmdir /S /Q C:\src\apr-util\crypto\%ARCH%
-rmdir /S /Q C:\src\apr\build\%ARCH%
+rmdir /S /Q C:\src\apr-util\%ARCH%
+rmdir /S /Q C:\src\apr-iconv\build\preapriconv\
+rmdir /S /Q C:\src\apr-iconv\ccs\libapriconv_ccs_modules\
 rmdir /S /Q C:\src\apr-iconv\%ARCH%
+rmdir /S /Q C:\src\apr\build\%ARCH%
+rmdir /S /Q C:\src\apr\%ARCH%
+rm -f C:\src\apr\build\preaprapp.log
 
 cd /D C:\httpd-sdk\src\apr\tools
 cl gen_test_char.c
 gen_test_char.exe > C:\src\apr\include\apr_escape_test_char.h
-rm *.exe *.obj
+rm -f *.exe *.obj
 
 REM apr_crypto_nss;apr_dbd_mysql;apr_dbd_oracle;apr_dbd_pgsql;apr_dbd_sqlite2;apr_dbd_sqlite3;apr_dbm_db;apr_dbm_gdbm;
 cd /D C:\src\apr-util
-"C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe" aprutil.sln /nowarn:msb4011 /nowarn:C4244 /nowarn:C4098 /m:1 /t:apr;apr_crypto_openssl;apr_dbd_odbc;apr_ldap;aprapp;apriconv;aprutil;libapr;libaprapp;libapriconv;libapriconv_ccs_modules;libapriconv_ces_modules;libaprutil;preaprapp;preapriconv;preaprutil;prelibaprapp /p:Configuration=Release /p:DebugSymbols=true /p:DebugType=None /p:Platform="%ARCH%"
+"C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe" aprutil.sln /nowarn:msb4011 /nowarn:C4244 /nowarn:C4098 /m:8 /t:apr;apr_crypto_openssl;apr_dbd_odbc;apr_ldap;aprapp;apriconv;aprutil;libapr;libaprapp;libapriconv;libapriconv_ccs_modules;libapriconv_ces_modules;libaprutil;preaprapp;preapriconv;preaprutil;prelibaprapp /p:Configuration=Release /p:DebugSymbols=true /p:DebugType=None /p:Platform="%ARCH%"
+
+move /Y C:\src\apr\%ARCH%\Release\libapr-1.dll c:\httpd-sdk\install\bin\libapr-1.dll
+move /Y C:\src\apr\%ARCH%\Release\libapr-1.pdb c:\httpd-sdk\install\bin\libapr-1.pdb
+move /Y C:\src\apr\%ARCH%\LibR\apr-1.lib c:\httpd-sdk\install\lib\apr-1.lib
+move /Y C:\src\apr\%ARCH%\LibR\aprapp-1.lib c:\httpd-sdk\install\lib\aprapp-1.lib
+move /Y C:\src\apr\%ARCH%\Release\libapr-1.lib c:\httpd-sdk\install\lib\libapr-1.lib
+move /Y C:\src\apr\%ARCH%\Release\libaprapp-1.lib c:\httpd-sdk\install\lib\libaprapp-1.lib
+
+move /Y C:\src\apr-iconv\%ARCH%\Release\libapriconv-1.dll c:\httpd-sdk\install\bin\libapriconv-1.dll
+move /Y C:\src\apr-iconv\%ARCH%\Release\libapriconv-1.pdb c:\httpd-sdk\install\bin\libapriconv-1.pdb
+move /Y C:\src\apr-iconv\%ARCH%\Release\libapriconv-1.lib c:\httpd-sdk\install\lib\libapriconv-1.lib
+move /Y C:\src\apr-iconv\%ARCH%\LibR\apriconv-1.lib c:\httpd-sdk\install\lib\apriconv-1.lib
 
 move /Y C:\src\apr-util\crypto\%ARCH%\Release\apr_crypto_openssl-1.dll c:\httpd-sdk\install\bin\apr_crypto_openssl-1.dll
-move /Y C:\src\apr-iconv\%ARCH%\Release\libapriconv-1.dll c:\httpd-sdk\install\bin\libapriconv-1.dll
-move /Y C:\src\apr\%ARCH%\Release\libapr-1.dll c:\httpd-sdk\install\bin\libapr-1.dll
 move /Y C:\src\apr-util\%ARCH%\Release\libaprutil-1.dll c:\httpd-sdk\install\bin\libaprutil-1.dll
 move /Y C:\src\apr-util\ldap\%ARCH%\Release\apr_ldap-1.dll c:\httpd-sdk\install\bin\apr_ldap-1.dll
 move /Y C:\src\apr-util\dbd\%ARCH%\Release\apr_dbd_odbc-1.dll c:\httpd-sdk\install\bin\apr_dbd_odbc-1.dll
-
 move /Y C:\src\apr-util\crypto\%ARCH%\Release\apr_crypto_openssl-1.pdb c:\httpd-sdk\install\bin\apr_crypto_openssl-1.pdb
-move /Y C:\src\apr-iconv\%ARCH%\Release\libapriconv-1.pdb c:\httpd-sdk\install\bin\libapriconv-1.pdb
-move /Y C:\src\apr\%ARCH%\Release\libapr-1.pdb c:\httpd-sdk\install\bin\libapr-1.pdb
 move /Y C:\src\apr-util\%ARCH%\Release\libaprutil-1.pdb c:\httpd-sdk\install\bin\libaprutil-1.pdb
 move /Y C:\src\apr-util\ldap\%ARCH%\Release\apr_ldap-1.pdb c:\httpd-sdk\install\bin\apr_ldap-1.pdb
 move /Y C:\src\apr-util\dbd\%ARCH%\Release\apr_dbd_odbc-1.pdb c:\httpd-sdk\install\bin\apr_dbd_odbc-1.pdb
-
 move /Y C:\src\apr-util\%ARCH%\LibR\aprutil-1.lib c:\httpd-sdk\install\lib\aprutil-1.lib
-move /Y C:\src\apr-iconv\%ARCH%\LibR\apriconv-1.lib c:\httpd-sdk\install\lib\apriconv-1.lib
-move /Y C:\src\apr\%ARCH%\LibR\apr-1.lib c:\httpd-sdk\install\lib\apr-1.lib
-move /Y C:\src\apr\%ARCH%\LibR\aprapp-1.lib c:\httpd-sdk\install\lib\aprapp-1.lib
-move /Y C:\src\apr-iconv\%ARCH%\Release\iconv\cp273.lib c:\httpd-sdk\install\lib\cp273.lib
 move /Y C:\src\apr-util\%ARCH%\Release\libaprutil-1.lib c:\httpd-sdk\install\lib\libaprutil-1.lib
 move /Y C:\src\apr-util\ldap\%ARCH%\Release\apr_ldap-1.lib c:\httpd-sdk\install\lib\apr_ldap-1.lib
 move /Y C:\src\apr-util\dbd\%ARCH%\Release\apr_dbd_odbc-1.lib c:\httpd-sdk\install\lib\apr_dbd_odbc-1.lib
-move /Y C:\src\apr-iconv\%ARCH%\Release\libapriconv-1.lib c:\httpd-sdk\install\lib\libapriconv-1.lib
-move /Y C:\src\apr\%ARCH%\Release\libapr-1.lib c:\httpd-sdk\install\lib\libapr-1.lib
-move /Y C:\src\apr\%ARCH%\Release\libaprapp-1.lib c:\httpd-sdk\install\lib\libaprapp-1.lib
 
 copy /Y C:\src\apr\include\apr.h C:\httpd-sdk\install\include\apr.h
 copy /Y C:\src\apr\include\apr_allocator.h C:\httpd-sdk\install\include\apr_allocator.h
