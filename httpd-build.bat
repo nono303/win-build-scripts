@@ -61,18 +61,14 @@ REM libbz2 => bzip2
 copy /Y C:\httpd-sdk\build\bzip2-1.0.6\libbz2.lib c:\httpd-sdk\install\lib\bzip2.lib
 copy /Y C:\httpd-sdk\build\bzip2-1.0.6\libbz2.pdb c:\httpd-sdk\install\lib\bzip2.pdb
 
-cd ..
-rmdir /S /Q C:\httpd-sdk\build\libiconv
-mkdir C:\httpd-sdk\build\libiconv
-cd /D C:\httpd-sdk\build\libiconv
-cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=C:\httpd-sdk\install -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% -DBUILD_SHARED_LIBS=ON ..\..\src\libiconv
-nmake /NOLOGO /A /B clean install
-	REM pour libxml2 2.9.7
-copy /Y C:\httpd-sdk\src\libiconv\include\iconv.h C:\httpd-sdk\install\include\iconv.h 
-	REM pour libxml2 & httpd
-copy /Y C:\httpd-sdk\install\lib\libiconv.lib C:\httpd-sdk\install\lib\iconv.lib 
-copy /Y C:\httpd-sdk\build\libiconv\libcharset.pdb C:\httpd-sdk\install\bin\libcharset.pdb
-copy /Y C:\httpd-sdk\build\libiconv\libiconv.pdb C:\httpd-sdk\install\bin\libiconv.pdb
+cd /D C:\src\libiconv\build-VS2017-MT
+"C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe" libiconv.sln /nowarn:C4311 /nowarn:C4018 /nowarn:C4267 /nowarn:C4244 /m:8 /t:Rebuild /p:Configuration=Release /p:DebugSymbols=true /p:DebugType=None /p:Platform="%ARCH%"
+copy /Y C:\src\libiconv\build-VS2017-MT\x64\Release\libiconv.dll C:\httpd-sdk\install\bin\libiconv.dll
+copy /Y C:\src\libiconv\build-VS2017-MT\x64\Release\libiconv.pdb C:\httpd-sdk\install\bin\libiconv.pdb
+copy /Y C:\src\libiconv\build-VS2017-MT\x64\Release\libiconv.lib C:\httpd-sdk\install\lib\iconv.lib 
+copy /Y C:\src\libiconv\build-VS2017-MT\x64\Release\libiconv-static.lib C:\httpd-sdk\install\lib\iconv-a.lib 
+copy /Y C:\src\libiconv\build-VS2017-MT\x64\Release\iconv.pdb C:\httpd-sdk\install\bin\iconv.pdb
+copy /Y C:\src\libiconv\build-VS2017-MT\x64\Release\iconv.exe C:\httpd-sdk\install\bin\iconv.exe
 
 cd /D C:\httpd-sdk\src\libxml2\win32\
 cscript configure.js compiler=nmakemsvc prefix=C:\httpd-sdk\install include=C:\httpd-sdk\install\include lib=C:\httpd-sdk\install\lib debug=no zlib=yes
