@@ -23,22 +23,22 @@ mklink /J C:\httpd-sdk\src\subversion\Release C:\httpd-sdk\src\subversion\Releas
 rmdir /S /Q C:\httpd-sdk\src\subversion\build\win32\vcnet-vcproj
 python gen-make.py --release -t vcproj --with-jdk=C:\jdk8\%ARCH% --with-serf=C:\src\serf --with-sqlite=C:\httpd-sdk\src\sqlite-amalgamation --with-apr=C:\httpd-sdk\install --with-apr-util=C:\httpd-sdk\install --with-apr-iconv=C:\httpd-sdk\install --with-apr_memcache=C:\httpd-sdk\install --with-httpd=C:\httpd-sdk\install --with-openssl=C:\httpd-sdk\install --with-zlib=C:\httpd-sdk\install --vsnet-version=2017
 C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/subversion_vcxproj.sh
-"C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe" subversion_vcnet.sln /nowarn:C4702 /nowarn:C4703 /nologo /m:8 /t:__ALL__;__JAVAHL__ /p:Configuration=Release /p:Platform=%archmsbuild%  /p:DebugSymbols=true /p:DebugType=None
+"C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe" subversion_vcnet.sln /nowarn:C4702 /nowarn:LNK4087 /nowarn:C4703 /nowarn:C4132 /nowarn:C4389 /nowarn:C4244 /nowarn:C4245 /nowarn:C4267 /nowarn:C4018 /nologo /m:8 /t:__ALL__;__JAVAHL__ /p:Configuration=Release /p:Platform=%archmsbuild%  /p:DebugSymbols=true /p:DebugType=None
 
-REM !!! TOP HTTPD TR606 !!!
-pause
+rmdir /S /Q C:\httpd-sdk\install\svn
+mkdir C:\httpd-sdk\install\svn
 
 for /f "tokens=*" %%G in ('dir C:\src\subversion\Release\*.exe /s/b') do (
-COPY %%~pG%%~nG.exe D:\github\subversion\vc15\%ARCH%\%%~nG.exe
-COPY %%~pG%%~nG.pdb D:\github\subversion\vc15\%ARCH%\%%~nG.pdb
+COPY %%~pG%%~nG.exe C:\httpd-sdk\install\svn\%%~nG.exe
+COPY %%~pG%%~nG.pdb C:\httpd-sdk\install\svn\%%~nG.pdb
 )
 for /f "tokens=*" %%G in ('dir C:\src\subversion\Release\*.dll /s/b') do (
-COPY %%~pG%%~nG.dll D:\github\subversion\vc15\%ARCH%\%%~nG.dll
-COPY %%~pG%%~nG.pdb D:\github\subversion\vc15\%ARCH%\%%~nG.pdb
+COPY %%~pG%%~nG.dll C:\httpd-sdk\install\svn\%%~nG.dll
+COPY %%~pG%%~nG.pdb C:\httpd-sdk\install\svn\%%~nG.pdb
 )
 for /f "tokens=*" %%G in ('dir C:\src\subversion\Release\*.so /s/b') do (
-COPY %%~pG%%~nG.so D:\github\subversion\vc15\%ARCH%\%%~nG.so
-COPY %%~pG%%~nG.pdb D:\github\subversion\vc15\%ARCH%\%%~nG.pdb
+COPY %%~pG%%~nG.so C:\httpd-sdk\install\svn\%%~nG.so
+COPY %%~pG%%~nG.pdb C:\httpd-sdk\install\svn\%%~nG.pdb
 )
 
 cd /D C:\httpd-sdk
