@@ -61,14 +61,23 @@ REM libbz2 => bzip2
 copy /Y C:\httpd-sdk\build\bzip2-1.0.6\libbz2.lib c:\httpd-sdk\install\lib\bzip2.lib
 copy /Y C:\httpd-sdk\build\bzip2-1.0.6\libbz2.pdb c:\httpd-sdk\install\lib\bzip2.pdb
 
-cd /D C:\src\libiconv\build-VS2017-MT
+cd /D C:\src\libiconv\build-VS2017
 "C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe" libiconv.sln /nowarn:C4311 /nowarn:C4018 /nowarn:C4267 /nowarn:C4244 /m:8 /t:Rebuild /p:Configuration=Release /p:DebugSymbols=true /p:DebugType=None /p:Platform="%ARCH%"
-copy /Y C:\src\libiconv\build-VS2017-MT\x64\Release\libiconv.dll C:\httpd-sdk\install\bin\libiconv.dll
-copy /Y C:\src\libiconv\build-VS2017-MT\x64\Release\libiconv.pdb C:\httpd-sdk\install\bin\libiconv.pdb
-copy /Y C:\src\libiconv\build-VS2017-MT\x64\Release\libiconv.lib C:\httpd-sdk\install\lib\iconv.lib 
-copy /Y C:\src\libiconv\build-VS2017-MT\x64\Release\libiconv-static.lib C:\httpd-sdk\install\lib\iconv-a.lib 
-copy /Y C:\src\libiconv\build-VS2017-MT\x64\Release\iconv.pdb C:\httpd-sdk\install\bin\iconv.pdb
-copy /Y C:\src\libiconv\build-VS2017-MT\x64\Release\iconv.exe C:\httpd-sdk\install\bin\iconv.exe
+copy /Y C:\src\libiconv\build-VS2017\x64\Release\libiconv.dll C:\httpd-sdk\install\bin\libiconv.dll
+copy /Y C:\src\libiconv\build-VS2017\x64\Release\libiconv.pdb C:\httpd-sdk\install\bin\libiconv.pdb
+copy /Y C:\src\libiconv\build-VS2017\x64\Release\libiconv.lib C:\httpd-sdk\install\lib\iconv.lib 
+copy /Y C:\src\libiconv\build-VS2017\x64\Release\libiconv-static.lib C:\httpd-sdk\install\lib\iconv-a.lib 
+copy /Y C:\src\libiconv\build-VS2017\x64\Release\iconv.pdb C:\httpd-sdk\install\bin\iconv.pdb
+copy /Y C:\src\libiconv\build-VS2017\x64\Release\iconv.exe C:\httpd-sdk\install\bin\iconv.exe
+copy /Y C:\httpd-sdk\src\libiconv\include\iconv.h C:\httpd-sdk\install\include\iconv.h
+	# REM PHP
+copy /Y C:\src\libiconv\build-VS2017\x64\Release\libiconv.dll C:\php72-sdk\phpmaster\vc15\%ARCH%\deps\bin\libiconv.dll
+copy /Y C:\src\libiconv\build-VS2017\x64\Release\libiconv.pdb C:\php72-sdk\phpmaster\vc15\%ARCH%\deps\bin\libiconv.pdb
+copy /Y C:\src\libiconv\build-VS2017\x64\Release\libiconv.lib C:\php72-sdk\phpmaster\vc15\%ARCH%\deps\lib\libiconv.lib 
+copy /Y C:\src\libiconv\build-VS2017\x64\Release\libiconv-static.lib C:\php72-sdk\phpmaster\vc15\%ARCH%\deps\lib\libiconv_a.lib 
+copy /Y C:\src\libiconv\build-VS2017\x64\Release\iconv.pdb C:\php72-sdk\phpmaster\vc15\%ARCH%\deps\bin\iconv.pdb
+copy /Y C:\src\libiconv\build-VS2017\x64\Release\iconv.exe C:\php72-sdk\phpmaster\vc15\%ARCH%\deps\bin\iconv.exe
+copy /Y C:\httpd-sdk\src\libiconv\include\iconv.h C:\php72-sdk\phpmaster\vc15\%ARCH%\deps\include\iconv.h
 
 cd /D C:\httpd-sdk\src\libxml2\win32\
 cscript configure.js compiler=nmakemsvc prefix=C:\httpd-sdk\install include=C:\httpd-sdk\install\include lib=C:\httpd-sdk\install\lib debug=no zlib=yes
