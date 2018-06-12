@@ -1,5 +1,5 @@
 set TS=0
-set LTCG=0
+set LTCG=1
 set LOGNAME=C:\php72-sdk\silent-logs\%PHP_SDK_ARCH%_TS-%TS%_LTCG-%LTCG%_%Date:~-4%%Date:~-7,-5%%Date:~-10,-8%-%TIME:~-11,-9%%TIME:~-8,-6%%TIME:~-5,-3%.log
 
 if %TS% == 0 (
@@ -7,7 +7,6 @@ if %TS% == 0 (
 	set BUILDDIR=Release
 )
 if %TS% == 1 (
-	set ZTS=--disable-zts
 	set BUILDDIR=Release_TS
 )
 REM ** uniquement sur init
