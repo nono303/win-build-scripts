@@ -5,7 +5,7 @@ for /F "delims=" %%i in ('dir /b') do (rmdir "%%i" /s/q || del "%%i" /s/q)
 
 cd /D C:\httpd-sdk\src\jemalloc-cmake\
 sh -c "CC=cl ./autogen.sh"
-C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe msvc\jemalloc_vc2015.sln /m:8 /t:Clean,Build /p:Configuration=Release /p:DebugSymbols=false /p:DebugType=None /p:Plateform="%ARCH%"
+C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe msvc\jemalloc_vc2015.sln /m:8 /t:Clean,jemalloc /p:Configuration=Release /p:DebugSymbols=false /p:DebugType=None /p:Plateform="%ARCH%"
 move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\%ARCH%\Release\jemalloc.dll c:\httpd-sdk\install\bin\jemalloc.dll
 move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\%ARCH%\Release\jemalloc.exp c:\httpd-sdk\install\lib\jemalloc.exp
 rm -f C:\httpd-sdk\src\jemalloc-cmake\msvc\%ARCH%\Release\jemalloc.iobj
@@ -61,30 +61,11 @@ REM libbz2 => bzip2
 copy /Y C:\httpd-sdk\build\bzip2-1.0.6\libbz2.lib c:\httpd-sdk\install\lib\bzip2.lib
 copy /Y C:\httpd-sdk\build\bzip2-1.0.6\libbz2.pdb c:\httpd-sdk\install\lib\bzip2.pdb
 
-cd /D C:\src\libiconv\build-VS2017
-"C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe" libiconv.sln /nowarn:C4311 /nowarn:C4018 /nowarn:C4267 /nowarn:C4244 /m:8 /t:Rebuild /p:Configuration=Release /p:DebugSymbols=true /p:DebugType=None /p:Platform="%archmsbuild%"
-copy /Y C:\src\libiconv\build-VS2017\%outmsbuild%\libiconv.dll C:\httpd-sdk\install\bin\libiconv.dll
-copy /Y C:\src\libiconv\build-VS2017\%outmsbuild%\libiconv.pdb C:\httpd-sdk\install\bin\libiconv.pdb
-copy /Y C:\src\libiconv\build-VS2017\%outmsbuild%\libiconv.lib C:\httpd-sdk\install\lib\iconv.lib 
-copy /Y C:\src\libiconv\build-VS2017\%outmsbuild%\libiconv-static.lib C:\httpd-sdk\install\lib\iconv-a.lib 
-copy /Y C:\src\libiconv\build-VS2017\%outmsbuild%\iconv.pdb C:\httpd-sdk\install\bin\iconv.pdb
-copy /Y C:\src\libiconv\build-VS2017\%outmsbuild%\iconv.exe C:\httpd-sdk\install\bin\iconv.exe
-copy /Y C:\httpd-sdk\src\libiconv\include\iconv.h C:\httpd-sdk\install\include\iconv.h
-	REM PHP - LNK2001: symbole externe non résolu libiconv_set_relocation_prefix
-REM copy /Y C:\src\libiconv\build-VS2017\%ARCH%\libiconv.dll C:\php72-sdk\phpmaster\vc15\%ARCH%\deps\bin\libiconv.dll
-REM copy /Y C:\src\libiconv\build-VS2017\%ARCH%\libiconv.pdb C:\php72-sdk\phpmaster\vc15\%ARCH%\deps\bin\libiconv.pdb
-REM copy /Y C:\src\libiconv\build-VS2017\%ARCH%\libiconv.lib C:\php72-sdk\phpmaster\vc15\%ARCH%\deps\lib\libiconv.lib 
-REM copy /Y C:\src\libiconv\build-VS2017\%ARCH%\libiconv-static.lib C:\php72-sdk\phpmaster\vc15\%ARCH%\deps\lib\libiconv_a.lib 
-REM copy /Y C:\src\libiconv\build-VS2017\%ARCH%\iconv.pdb C:\php72-sdk\phpmaster\vc15\%ARCH%\deps\bin\iconv.pdb
-REM copy /Y C:\src\libiconv\build-VS2017\%ARCH%\iconv.exe C:\php72-sdk\phpmaster\vc15\%ARCH%\deps\bin\iconv.exe
-REM copy /Y C:\httpd-sdk\src\libiconv\include\iconv.h C:\php72-sdk\phpmaster\vc15\%ARCH%\deps\include\iconv.h
-REM rm -f C:\php72-sdk\phpmaster\vc15\%ARCH%\deps\bin\libiconv_debug.pdb
-REM rm -f C:\php72-sdk\phpmaster\vc15\%ARCH%\deps\lib\libiconv_a.lib
-REM rm -f C:\php72-sdk\phpmaster\vc15\%ARCH%\deps\lib\libiconv_a.pdb
-REM rm -f C:\php72-sdk\phpmaster\vc15\%ARCH%\deps\lib\libiconv_a_debug.lib
-REM rm -f C:\php72-sdk\phpmaster\vc15\%ARCH%\deps\lib\libiconv_a_debug.pdb
-REM rm -f C:\php72-sdk\phpmaster\vc15\%ARCH%\deps\bin\libiconv_debug.dll
-REM rm -f C:\php72-sdk\phpmaster\vc15\%ARCH%\deps\lib\libiconv_debug.lib
+"C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe" C:\src\libiconv\MSVC15\libiconv.sln /nowarn:C4090 /nowarn:C4244 /nowarn:C4267 /nowarn:c4018 /nowarn:MSB8012 /m:8 /t:Clean,libiconv_dll /p:Configuration=Release /p:DebugSymbols=true /p:DebugType=None /p:Platform="%archmsbuild%"
+copy /Y C:\src\libiconv\MSVC15\%archmsbuild%\bin\libiconv.dll C:\httpd-sdk\install\bin\libiconv.dll 
+copy /Y C:\src\libiconv\MSVC15\%archmsbuild%\bin\libiconv.pdb C:\httpd-sdk\install\bin\libiconv.pdb 
+copy /Y C:\src\libiconv\MSVC15\%archmsbuild%\lib\libiconv.lib C:\httpd-sdk\install\lib\iconv.lib 
+copy /Y C:\src\libiconv\source\include\iconv.h C:\httpd-sdk\install\include\iconv.h
 
 cd /D C:\httpd-sdk\src\libxml2\win32\
 cscript configure.js compiler=nmakemsvc prefix=C:\httpd-sdk\install include=C:\httpd-sdk\install\include lib=C:\httpd-sdk\install\lib debug=no zlib=yes
@@ -123,7 +104,7 @@ cd ..
 rmdir /S /Q C:\httpd-sdk\build\nghttp2
 mkdir C:\httpd-sdk\build\nghttp2
 cd /D C:\httpd-sdk\build\nghttp2
-cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=C:\httpd-sdk\install -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% -DENABLE_LIB_ONLY=ON -DLIBEVENT_INCLUDE_DIR=C:/httpd-sdk/install/include -DJANSSON_INCLUDE_DIR=C:/httpd-sdk/install/include -DJANSSON_LIBRARIES=C:/httpd-sdk/install/lib/jansson.lib -DJEMALLOC_LIBRARIES=C:/httpd-sdk/install/lib/jemalloc.lib -DLIBEVENT_OPENSSL_LIBRARY=C:/httpd-sdk/install/lib/event_openssl.lib -DJEMALLOC_INCLUDE_DIR=C:/httpd-sdk/install/include -DENABLE_WERROR=OFF -DENABLE_DEBUG=OFF -DENABLE_THREADS=ON -DENABLE_ASIO_LIB=OFF -DENABLE_FAILMALLOC=OFF -DWITH_LIBXML2=ON -DWITH_JEMALLOC=ON -DWITH_SPDYLAY=OFF -DWITH_MRUBY=OFF -DWITH_NEVERBLEED=OFF ..\..\src\nghttp2
+cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=C:\httpd-sdk\install -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% -DENABLE_LIB_ONLY=ON -DLIBEVENT_INCLUDE_DIR=C:/httpd-sdk/install/include -DJANSSON_INCLUDE_DIR=C:/httpd-sdk/install/include -DJANSSON_LIBRARIES=C:/httpd-sdk/install/lib/jansson.lib -DJEMALLOC_LIBRARY=C:/httpd-sdk/install/lib/jemalloc.lib -DLIBEVENT_OPENSSL_LIBRARY=C:/httpd-sdk/install/lib/event_openssl.lib -DJEMALLOC_INCLUDE_DIR=C:/httpd-sdk/install/include -DENABLE_WERROR=OFF -DENABLE_DEBUG=OFF -DENABLE_THREADS=ON -DENABLE_ASIO_LIB=OFF -DENABLE_FAILMALLOC=OFF -DWITH_LIBXML2=ON -DWITH_JEMALLOC=ON -DWITH_SPDYLAY=OFF -DWITH_MRUBY=OFF -DWITH_NEVERBLEED=OFF -DCYTHON_EXECUTABLE=C:\python27\Scripts ..\..\src\nghttp2
 nmake /B /NOLOGO clean install
 move /Y C:\httpd-sdk\install\lib\nghttp2.dll C:\httpd-sdk\install\bin\nghttp2.dll
 copy /Y C:\httpd-sdk\build\nghttp2\lib\nghttp2.pdb C:\httpd-sdk\install\bin\nghttp2.pdb
@@ -147,7 +128,7 @@ copy /Y C:\httpd-sdk\build\libexpat\expat.pdb C:\httpd-sdk\install\bin\expat.pdb
 
 rmdir /S /Q C:\httpd-sdk\src\libmaxminddb\projects\VS12\%ARCH%
 cd /D C:\httpd-sdk\src\libmaxminddb\projects\VS12
-"C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe" libmaxminddb.sln /m:8 /t:libmaxminddb /p:Configuration=Release /p:DebugSymbols=true /p:DebugType=None /p:Platform="%archmsbuild%"
+"C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe" libmaxminddb.sln /m:8 /t:Clean,libmaxminddb /p:Configuration=Release /p:DebugSymbols=true /p:DebugType=None /p:Platform="%archmsbuild%"
 copy /Y C:\httpd-sdk\src\libmaxminddb\projects\VS12\%outmsbuild%\libmaxminddb.lib C:\httpd-sdk\install\lib\libmaxminddb.lib
 copy /Y C:\httpd-sdk\src\libmaxminddb\include\maxminddb.h C:\httpd-sdk\install\include\maxminddb.h 
 copy /Y C:\httpd-sdk\src\libmaxminddb\include\maxminddb_config.h C:\httpd-sdk\install\include\maxminddb_config.h
@@ -171,7 +152,7 @@ rm -f *.exe *.obj
 
 REM apr_crypto_nss;apr_dbd_mysql;apr_dbd_oracle;apr_dbd_pgsql;apr_dbd_sqlite2;apr_dbd_sqlite3;apr_dbm_db;apr_dbm_gdbm;
 cd /D C:\src\apr-util
-"C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe" aprutil.sln /nowarn:msb4011 /nowarn:C4244 /nowarn:C4098 /m:8 /t:apr;apr_crypto_openssl;apr_dbd_odbc;apr_ldap;aprapp;apriconv;aprutil;libapr;libaprapp;libapriconv;libapriconv_ccs_modules;libapriconv_ces_modules;libaprutil;preaprapp;preapriconv;preaprutil;prelibaprapp /p:Configuration=Release /p:DebugSymbols=true /p:DebugType=None /p:Platform="%ARCH%"
+"C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe" aprutil.sln /nowarn:msb4011 /nowarn:C4244 /nowarn:C4098 /nowarn:C4267 /nowarn:C4311 /m:8 /t:apr;apr_crypto_openssl;apr_dbd_odbc;apr_ldap;aprapp;apriconv;aprutil;libapr;libaprapp;libapriconv;libapriconv_ccs_modules;libapriconv_ces_modules;libaprutil;preaprapp;preapriconv;preaprutil;prelibaprapp /p:Configuration=Release /p:DebugSymbols=true /p:DebugType=None /p:Platform="%ARCH%"
 
 move /Y C:\src\apr\%ARCH%\Release\libapr-1.dll c:\httpd-sdk\install\bin\libapr-1.dll
 move /Y C:\src\apr\%ARCH%\Release\libapr-1.pdb c:\httpd-sdk\install\bin\libapr-1.pdb
