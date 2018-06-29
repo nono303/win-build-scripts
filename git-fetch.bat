@@ -23,6 +23,7 @@ for %%i in (
 "C:\src\mod_h264_streaming"
 "C:\src\mod_maxminddb"
 "C:\src\mod_md"
+"C:\src\mod_wku_bt"
 "C:\src\nghttp2"
 "C:\src\nssm"
 "C:\src\openssl"
