@@ -1,7 +1,9 @@
 set TS=0
 set LTCG=1
+
 	REM AVX || SSE2 https://msdn.microsoft.com/fr-fr/library/7t5yh4fd.aspx
-REM set AVX= \/arch:AVX
+set AVX= \/arch:AVX
+
 set LOGNAME=C:\php72-sdk\silent-logs\%PHP_SDK_ARCH%_TS-%TS%_LTCG-%LTCG%_%Date:~-4%%Date:~-7,-5%%Date:~-10,-8%-%TIME:~-11,-9%%TIME:~-8,-6%%TIME:~-5,-3%.log
 
 if %TS% == 0 (
