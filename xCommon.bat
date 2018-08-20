@@ -4,6 +4,7 @@ set CMAKE_BUILD_TYPE=RelWithDebInfo
 REM AVX || SSE2 https://msdn.microsoft.com/fr-fr/library/7t5yh4fd.aspx
 set AVX= \/arch:AVX
 
+set MODULE_BAT_DIR=C:\httpd-sdk\modules_bat\
 rmdir /S /Q C:\httpd-sdk\build
 mklink /j C:\httpd-sdk\build C:\httpd-sdk\build_%ARCH%
 rmdir /S /Q C:\httpd-sdk\install
