@@ -1,8 +1,11 @@
 REM set CMAKE_BUILD_TYPE=Release
 set CMAKE_BUILD_TYPE=RelWithDebInfo
+REM https://stackoverflow.com/questions/601970/how-do-i-utilise-all-the-cores-for-nmake
+set CL=/MP
 
 REM AVX || SSE2 https://msdn.microsoft.com/fr-fr/library/7t5yh4fd.aspx
 set AVX=/arch:AVX
+set EXTCFLAGS=/GL /GS- /Oy- /guard:cf- /FD /GF /Zc:inline /MP8 /LD /MD /Zi /Ox %AVX%
 
 set MODULE_BAT_DIR=C:\httpd-sdk\modules_bat\
 rmdir /S /Q C:\httpd-sdk\build

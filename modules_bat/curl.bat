@@ -6,3 +6,4 @@ cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=C:\httpd-sdk\install 
 nmake /B /NOLOGO clean install
 copy /Y C:\httpd-sdk\build\curl\lib\libcurl.pdb C:\httpd-sdk\install\bin\libcurl.pdb
 rm -f C:\httpd-sdk\install\bin\curl-config
+cd /D C:\httpd-sdk\modules_bat

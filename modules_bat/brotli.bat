@@ -8,3 +8,4 @@ copy /Y C:\httpd-sdk\build\brotli\brotlicommon.pdb c:\httpd-sdk\install\bin\brot
 copy /Y C:\httpd-sdk\build\brotli\brotli.pdb c:\httpd-sdk\install\bin\brotli.pdb 
 copy /Y C:\httpd-sdk\build\brotli\brotlidec.pdb c:\httpd-sdk\install\bin\brotlidec.pdb
 copy /Y C:\httpd-sdk\build\brotli\brotlienc.pdb c:\httpd-sdk\install\bin\brotlienc.pdb
+cd /D C:\httpd-sdk\modules_bat
