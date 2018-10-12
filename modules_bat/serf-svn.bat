@@ -1,10 +1,7 @@
-cd /D C:\src\serf
-python c:/bin/scons/scons.py --clean
-git clean -fdx
-cd /D C:\httpd-sdk\src\serf\build
-python gen_def.py
-cd /D C:\src\serf
-	REM 1.3.9
-REM python c:/bin/scons/scons.py --no-cache MSVC_VERSION=14.1 TARGET_ARCH=%serfbuild% APR=C:/httpd-sdk/install/ APU=C:/httpd-sdk/install/ OPENSSL=C:/httpd-sdk/install/ / ZLIB=C:/httpd-sdk/install/
-	REM 2.0.0
-python c:/bin/scons/scons.py --no-cache MSVC_VERSION=14.1 TARGET_ARCH=%serfbuild% APR=C:/httpd-sdk/install/lib/ APU=C:/httpd-sdk/install/ OPENSSL=C:/httpd-sdk/install/ ZLIB=C:/httpd-sdk/install/lib/ BROTLI=C:/httpd-sdk/install/ EXPAT=C:/httpd-sdk/install/
+cd ..
+rmdir /S /Q C:\httpd-sdk\build\serf
+mkdir C:\httpd-sdk\build\serf
+cd /D C:\httpd-sdk\build\serf
+cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=C:\httpd-sdk\install -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% -DDEBUG=OFF -DSKIP_SHARED=OFF -DSKIP_STATIC=OFF -DLIBDIR=C:\httpd-sdk\install\lib\ -DGSSAPI=C:\httpd-sdk\install\ -DBROTLI=C:\httpd-sdk\install\ -DDISABLE_LOGGING=OFF -DSKIP_TESTS=ON -DENABLE_SLOW_TESTS=OFF -DAPR_STATIC=OFF -DEXPAT=C:\httpd-sdk\install\ -DAPR_ROOT=C:\httpd-sdk\install\ -DAPRUtil_ROOT=C:\httpd-sdk\install\ ..\..\src\serf 
+nmake /B /NOLOGO clean install
+cd /D C:\httpd-sdk\modules_bat
