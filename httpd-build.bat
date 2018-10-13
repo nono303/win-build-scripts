@@ -13,6 +13,8 @@ call %MODULE_BAT_DIR%libxml2.bat
 call %MODULE_BAT_DIR%pcre.bat
 call %MODULE_BAT_DIR%openssl.bat
 call %MODULE_BAT_DIR%libevent.bat
+call %MODULE_BAT_DIR%libev.bat
+call %MODULE_BAT_DIR%c-ares.bat
 call %MODULE_BAT_DIR%nghttp2.bat
 call %MODULE_BAT_DIR%curl.bat
 call %MODULE_BAT_DIR%libexpat.bat
