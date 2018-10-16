@@ -1,7 +1,7 @@
 rmdir /S /Q C:\httpd-sdk\build\bzip2-1.0.6
 mkdir C:\httpd-sdk\build\bzip2-1.0.6
 cd /D c:\httpd-sdk\src\bzip2-1.0.6
-nmake /f Makefile.msc clean lib bzip2
+nmake %NMAKE_OPTS% /f Makefile.msc clean lib bzip2
 move /Y C:\httpd-sdk\src\bzip2-1.0.6\*.lib C:\httpd-sdk\build\bzip2-1.0.6
 move /Y C:\httpd-sdk\src\bzip2-1.0.6\*.exe C:\httpd-sdk\build\bzip2-1.0.6
 move /Y C:\httpd-sdk\src\bzip2-1.0.6\*.obj C:\httpd-sdk\build\bzip2-1.0.6

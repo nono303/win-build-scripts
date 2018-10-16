@@ -4,7 +4,7 @@ mkdir C:\httpd-sdk\install\lib
 mkdir C:\httpd-sdk\install\bin
 mkdir C:\httpd-sdk\install\include
 cd /D C:\httpd-sdk\src\zlib
-nmake -f win32/Makefile.msc clean
+nmake %NMAKE_OPTS% /f win32/Makefile.msc clean
 if %ARCH% == x86 (
 	nmake -f win32/Makefile.msc LOC="-DASMV -DASMINF" OBJA="inffas32.obj match686.obj"
 )

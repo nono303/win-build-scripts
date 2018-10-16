@@ -1,5 +1,7 @@
 REM set CMAKE_BUILD_TYPE=Release
 set CMAKE_BUILD_TYPE=RelWithDebInfo
+REM /S : don't display cmd line
+set NMAKE_OPTS=/S /B /NOLOGO
 REM https://stackoverflow.com/questions/601970/how-do-i-utilise-all-the-cores-for-nmake
 set CL=/MP
 

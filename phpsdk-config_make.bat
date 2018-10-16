@@ -15,6 +15,4 @@ if %LTCG% == 1 (
 )
 sed -i 's/ \/W3 / /g' /cygdrive/c/src/php-src/Makefile
 sed -i 's/ \/wd4996 / /g' /cygdrive/c/src/php-src/Makefile
-REM full rebuild
-	REM nmake /B /NOLOGO
-nmake /NOLOGO
+nmake %NMAKE_OPTS%
