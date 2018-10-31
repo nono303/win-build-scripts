@@ -2,6 +2,9 @@ cd /D C:\httpd-sdk\build
 for /F "delims=" %%i in ('dir /b') do (rmdir "%%i" /s/q || del "%%i" /s/q)
 cd /D C:\httpd-sdk\install
 for /F "delims=" %%i in ('dir /b') do (rmdir "%%i" /s/q || del "%%i" /s/q)
+mkdir c:\httpd-sdk\install\bin\
+mkdir c:\httpd-sdk\install\lib\
+mkdir c:\httpd-sdk\install\include\
 
 call %MODULE_BAT_DIR%jemalloc.bat
 call %MODULE_BAT_DIR%zlib.bat
