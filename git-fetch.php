@@ -47,19 +47,20 @@ function execnono($cmd,$parts,$cwd,$env){
 	return null;
 }
 
-file_put_contents($fout,"name;url;branch;tag;status;new tag(s)".PHP_EOL,FILE_APPEND);
+file_put_contents($fout,'"name";"url";"branch";"tag";"status";"new tag(s)";"last tags"'.PHP_EOL,FILE_APPEND);
 foreach($repos as $repo){
 	$artname = basename($repo);
 	$upstream = execnono("git config --get remote.origin.url",NULL,$repo,NULL);
 	$current_tag = execnono("git describe --tags",NULL,$repo,NULL);
 	$current_branch = str_replace("(","",execnono("git branch | grep \* | cut -d ' ' -f2",NULL,$repo,NULL));
 	$gitclean = execnono("git clean -fdx",NULL,$repo,NULL);
+	if(FETCH)
+		$gitfecthtag = execnono("git fetch",NULL,$repo,NULL);
+	if(FETCH)
+		$gitfecthtag .= execnono("git fetch --tag",NULL,$repo,NULL);
 	$gitstatus = execnono("git status",NULL,$repo,NULL);
+	$gitlasttags = execnono('git log --tags --simplify-by-decoration --pretty="format:%ai %d" | head -n 5',NULL,$repo,NULL);
 
-	if(FETCH)
-		$gitfecth = execnono("git fetch",NULL,$repo,NULL);
-	if(FETCH)
-		$gitfecthtag = execnono("git fetch --tag",NULL,$repo,NULL);
 /*	$gitfecthtag = "   81d6c3e..4dbc141  master     -> origin/master
  * [new tag]         v1.11.2    -> v1.11.2
  * [new tag]         v1.11.3    -> v1.11.3";
@@ -89,7 +90,8 @@ foreach($repos as $repo){
 			}
 		}
 	}
+	//echo "  5l Tag: ".$gitlasttags.PHP_EOL;
 	echo "*************************".PHP_EOL;
-	file_put_contents($fout,'"'.$artname.'";"'.$upstream.'";"'.$current_branch.'";"'.$current_tag.'";"'.str_replace('"','\'',$statusarray).'";"'.$newtagsarray.'"'.PHP_EOL,FILE_APPEND);
+	file_put_contents($fout,'"'.$artname.'";"'.$upstream.'";"'.$current_branch.'";"'.$current_tag.'";"'.str_replace('"','\'',$statusarray).'";"'.$newtagsarray.'";"'.$gitlasttags.'"'.PHP_EOL,FILE_APPEND);
 }
 ?>
