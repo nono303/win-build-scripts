@@ -1,2 +1,4 @@
+echo off
 call ymdhis.bat
-call subversion-build.bat >> silent-logs\subversion-build_%ARCH%_%ymdhis%.log 2>&1
+SET LOGNAME=C:\httpd-sdk\_logs\subversion-build_%ARCH%_%ymdhis%.log
+call subversion-build.bat 2>&1 | tee %LOGNAME%

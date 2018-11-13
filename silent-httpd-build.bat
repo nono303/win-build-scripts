@@ -1,2 +1,4 @@
+echo off
 call ymdhis.bat
-call httpd-build.bat >> silent-logs\httpd-build_%ARCH%_%ymdhis%.log 2>&1
+SET LOGNAME=C:\httpd-sdk\_logs\httpd-build_%ARCH%_%ymdhis%.log
+call httpd-build.bat 2>&1 | tee %LOGNAME%

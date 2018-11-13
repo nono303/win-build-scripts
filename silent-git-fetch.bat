@@ -1,4 +1,4 @@
 echo off
 call ymdhis.bat
-call do_php git-fetch.php 
-REM >> silent-logs\git-fetch.%ymdhis%.log 2>&1
+SET LOGNAME=C:\httpd-sdk\_logs\git-fetch_%ymdhis%.log
+call do_php git-fetch.php  2>&1 | tee %LOGNAME%
