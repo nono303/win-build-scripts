@@ -4,7 +4,7 @@ date_default_timezone_set("Europe/Paris");
 
 DEFINE("FETCH",true);
 DEFINE("SRC_DIR","C:/src/");
-$fout = "C:/httpd-sdk/silent-logs/git-fetch.".date("Y-m-d_H-i-s").".csv";
+$fout = "C:/httpd-sdk/_logs/git-fetch.".date("Y-m-d_H-i-s").".csv";
 
 $repos = array();
 foreach(scandir(SRC_DIR) as $ele)
@@ -23,25 +23,20 @@ function execnono($cmd,$parts,$cwd,$env){
 		}
 	}
 	$process_cmd = '"' . $cmd . '"' . ' ' . $args;
-	// echo $process_cmd;
 	$options = array(
-				"suppress_errors" => false,
-				"bypass_shell" => false
-			);
-
+		"suppress_errors" => false,
+		"bypass_shell" => false
+	);
 	$descriptorspec = array(
-	   0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
-	   1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
+	   0 => array("pipe", "r"), // stdin is a pipe that the child will read from
+	   1 => array("pipe", "w"), // stdout is a pipe that the child will write to
 	   2 => array("pipe", "w")  // stderr is a file to write to
 	);
 	$process = proc_open($process_cmd, $descriptorspec, $pipes, $cwd, $env, $options);
 	if (is_resource($process)) {
 		$out = stream_get_contents($pipes[1]);
 		fclose($pipes[1]);
-		// It is important that you close any pipes before calling
-		// proc_close in order to avoid a deadlock
 		$return_value = proc_close($process);
-		// echo "command returned $return_value\n";
 		return trim($out);
 	}
 	return null;
@@ -53,7 +48,8 @@ foreach($repos as $repo){
 	$upstream = execnono("git config --get remote.origin.url",NULL,$repo,NULL);
 	$current_tag = execnono("git describe --tags",NULL,$repo,NULL);
 	$current_branch = str_replace("(","",execnono("git branch | grep \* | cut -d ' ' -f2",NULL,$repo,NULL));
-	$gitclean = execnono("git clean -fdx",NULL,$repo,NULL);
+	if($artname != "php72-sdk")
+		$gitclean = execnono("git clean -fdx",NULL,$repo,NULL);
 	if(FETCH)
 		$gitfecthtag = execnono("git fetch",NULL,$repo,NULL);
 	if(FETCH)
@@ -61,10 +57,6 @@ foreach($repos as $repo){
 	$gitstatus = execnono("git status",NULL,$repo,NULL);
 	$gitlasttags = execnono('git log --tags --simplify-by-decoration --pretty="format:%ai %d" | head -n 5',NULL,$repo,NULL);
 
-/*	$gitfecthtag = "   81d6c3e..4dbc141  master     -> origin/master
- * [new tag]         v1.11.2    -> v1.11.2
- * [new tag]         v1.11.3    -> v1.11.3";
-*/
 	echo $artname." [".$upstream."]".PHP_EOL;
 	echo "  Branch: ".$current_branch.PHP_EOL;
 	echo "  Tag   : ".$current_tag.PHP_EOL;
@@ -78,20 +70,7 @@ foreach($repos as $repo){
 			echo "    ".$status.PHP_EOL;
 		}
 	}
-	if($gitfecthtag){
-		echo "! New Tag(s): ".PHP_EOL;
-		$newtagsarray = "";
-		$cr = "";
-		foreach(explode("\n",$gitfecthtag) as $tag){
-			if(is_int(strpos($tag,"[new tag]"))){
-				$newtagsarray .=  $cr.($nt = substr($tag, strrpos($tag, ' ') + 1));
-				$cr = PHP_EOL;
-				echo "    ".$nt.PHP_EOL;
-			}
-		}
-	}
-	//echo "  5l Tag: ".$gitlasttags.PHP_EOL;
 	echo "*************************".PHP_EOL;
-	file_put_contents($fout,'"'.$artname.'";"'.$upstream.'";"'.$current_branch.'";"'.$current_tag.'";"'.str_replace('"','\'',$statusarray).'";"'.$newtagsarray.'";"'.$gitlasttags.'"'.PHP_EOL,FILE_APPEND);
+	file_put_contents($fout,'"'.$artname.'";"'.$upstream.'";"'.$current_branch.'";"'.$current_tag.'";"'.str_replace('"','\'',$statusarray).'";"'.$gitfecthtag.'";"'.$gitlasttags.'"'.PHP_EOL,FILE_APPEND);
 }
 ?>
