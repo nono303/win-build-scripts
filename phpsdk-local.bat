@@ -46,5 +46,10 @@ if %BUILDALL% == 1 (
 	set outdir=_avx
 		echo *** avx ts  ***
 		call C:\httpd-sdk\phpsdk-config_make.bat
+
+	copy /Y D:\github\NONO_phpwin-perfbuild\vc15-%PHP_SDK_ARCH%_avx-nts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc15\%PHP_SDK_ARCH%\nts\avx\php-7.2.x_memcache.dll
+	copy /Y D:\github\NONO_phpwin-perfbuild\vc15-%PHP_SDK_ARCH%_avx-ts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc15\%PHP_SDK_ARCH%\ts\avx\php-7.2.x_memcache.dll
+	copy /Y D:\github\NONO_phpwin-perfbuild\vc15-%PHP_SDK_ARCH%-nts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc15\%PHP_SDK_ARCH%\nts\php-7.2.x_memcache.dll
+	copy /Y D:\github\NONO_phpwin-perfbuild\vc15-%PHP_SDK_ARCH%-ts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc15\%PHP_SDK_ARCH%\ts\php-7.2.x_memcache.dll
 )
 exit /B
