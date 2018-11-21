@@ -42,35 +42,42 @@ function execnono($cmd,$parts,$cwd,$env){
 	return null;
 }
 
-file_put_contents($fout,'"name";"url";"branch";"tag";"status";"new tag(s)";"last tags"'.PHP_EOL,FILE_APPEND);
+file_put_contents($fout,'"name";"url";"branch";"tag";"last tags";"log tags";"status"'.PHP_EOL,FILE_APPEND);
+echo "*************************".PHP_EOL;
 foreach($repos as $repo){
-	$artname = basename($repo);
-	$upstream = execnono("git config --get remote.origin.url",NULL,$repo,NULL);
-	$current_tag = execnono("git describe --tags",NULL,$repo,NULL);
-	$current_branch = str_replace("(","",execnono("git branch | grep \* | cut -d ' ' -f2",NULL,$repo,NULL));
-	if($artname != "php72-sdk")
-		$gitclean = execnono("git clean -fdx",NULL,$repo,NULL);
-	if(FETCH)
-		$gitfecthtag = execnono("git fetch",NULL,$repo,NULL);
-	if(FETCH)
-		$gitfecthtag .= execnono("git fetch --tag",NULL,$repo,NULL);
-	$gitstatus = execnono("git status",NULL,$repo,NULL);
-	$gitlasttags = execnono('git log --tags --simplify-by-decoration --pretty="format:%ai %d" | head -n 5',NULL,$repo,NULL);
+	if(is_dir($repo."/.git")){
+		$artname = basename($repo);
+		$upstream = execnono("git config --get remote.origin.url",NULL,$repo,NULL);
+		$current_tag = execnono("git describe --tags",NULL,$repo,NULL);
+		$current_branch = str_replace("(","",execnono("git branch | grep \* | cut -d ' ' -f2",NULL,$repo,NULL));
+		if($artname != "php72-sdk")
+			$gitclean = execnono("git clean -fdx",NULL,$repo,NULL);
+		if(FETCH)
+			$gitfecthtag = execnono("git fetch",NULL,$repo,NULL);
+		if(FETCH)
+			$gitfecthtag .= execnono("git fetch --tag",NULL,$repo,NULL);
+		$gitstatus = execnono("git status",NULL,$repo,NULL);
+		$gitlasttags = execnono('git for-each-ref --sort=taggerdate --format %(tag)_,,,_%(taggerdate:raw) refs/tags | gawk \'BEGIN { FS = "_,,,_"  } ; { t=strftime("%Y-%m-%d",$2); printf "%s %s\n", t, $1  }\' | tail -n 10 | tac',NULL,$repo,NULL);
+		$gitlasttags2 = execnono('git log --tags --simplify-by-decoration --pretty="format:%ai %d" | head -n 5',NULL,$repo,NULL);
+		echo $artname." [".$upstream."]".PHP_EOL;
+		echo "  Branch: ".$current_branch.PHP_EOL;
+		echo "  Tag   : ".$current_tag.PHP_EOL;
+		echo "  Status: ";
 
-	echo $artname." [".$upstream."]".PHP_EOL;
-	echo "  Branch: ".$current_branch.PHP_EOL;
-	echo "  Tag   : ".$current_tag.PHP_EOL;
-	echo "  Status: ".PHP_EOL;
-	$statusarray = "";
-	$cr = "";
-	foreach(explode("\n",$gitstatus) as $status){
-		if(strlen($status) != 0 && !is_int(strpos($status,"On branch")) && !is_int(strpos($status,"HEAD detached at")) && !is_int(strpos($status,"Your branch is up to date with"))){
-			$statusarray .= $cr.$status;
-			$cr = PHP_EOL;
-			echo "    ".$status.PHP_EOL;
+		$statusarray = "";
+		$cr = "";
+		$sep = "";
+		foreach(explode("\n",$gitstatus) as $status){
+			if(strlen($status) != 0 && !is_int(strpos($status,"On branch")) && !is_int(strpos($status,"HEAD detached at")) && !is_int(strpos($status,"Your branch is up to date with"))){
+				$statusarray .= $cr.$status;
+				$cr = PHP_EOL;
+				echo $sep.$status.PHP_EOL;
+				$sep = "    ";
+			}
 		}
+
+		echo "*************************".PHP_EOL;
+		file_put_contents($fout,'"'.$artname.'";"'.$upstream.'";"'.$current_branch.'";"'.$current_tag.'";"'.$gitlasttags.'";"'.$gitlasttags2.'";"'.str_replace('"','\'',$statusarray).'"'.PHP_EOL,FILE_APPEND);
 	}
-	echo "*************************".PHP_EOL;
-	file_put_contents($fout,'"'.$artname.'";"'.$upstream.'";"'.$current_branch.'";"'.$current_tag.'";"'.str_replace('"','\'',$statusarray).'";"'.$gitfecthtag.'";"'.$gitlasttags.'"'.PHP_EOL,FILE_APPEND);
 }
 ?>
