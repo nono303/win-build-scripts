@@ -1,5 +1,6 @@
 REM set CMAKE_BUILD_TYPE=Release
 set CMAKE_BUILD_TYPE=RelWithDebInfo
+set WKITVER=10.0.17134.0
 
 REM https://msdn.microsoft.com/fr-fr/library/afyyse50.aspx
 REM /S	Supprime l'affichage des commandes exécutées. Pour supprimer l'affichage dans une partie d'un makefile, utilisez le modificateur de commande @ ou .SILENT. Pour définir ou supprimer l'option /S pour une partie d'un makefile, utilisez !CMDSWITCHES.
@@ -24,6 +25,7 @@ cd /D C:\httpd-sdk\build
 for /F "delims=" %%i in ('dir /b') do (rmdir "%%i" /s/q || del "%%i" /s/q)
 rmdir /S /Q C:\httpd-sdk\install
 mklink /J C:\httpd-sdk\install C:\httpd-sdk\install_%ARCH%%AVXB%
+set PHPDEPS=C:\php72-sdk\phpmaster\vc15\%ARCH%\depsnono
 set PATH=c:\python27;C:\PROGRA~1\Git\bin;C:\bin\nasm;c:\perl\bin;c:\perl\site\bin;c:\bin;C:\Windows\SysWOW64;C:\msvc15\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;C:\Windows\SysWOW64\wbem;c:\cyg%CYGV%\bin;C:\php72-sdk\bin\php
 call C:\msvc15\VC\Auxiliary\Build\vcvarsall.bat %ARCH%
 echo on
