@@ -14,16 +14,16 @@ rmdir /S /Q C:\httpd-sdk\install\svn
 mkdir C:\httpd-sdk\install\svn
 
 for /f "tokens=*" %%G in ('dir C:\src\subversion\Release\*.exe /s/b') do (
-COPY %%~pG%%~nG.exe C:\httpd-sdk\install\svn\%%~nG.exe
-COPY %%~pG%%~nG.pdb C:\httpd-sdk\install\svn\%%~nG.pdb
+Copy /Y %%~pG%%~nG.exe C:\httpd-sdk\install\svn\%%~nG.exe
+Copy /Y %%~pG%%~nG.pdb C:\httpd-sdk\install\svn\%%~nG.pdb
 )
 for /f "tokens=*" %%G in ('dir C:\src\subversion\Release\*.dll /s/b') do (
-COPY %%~pG%%~nG.dll C:\httpd-sdk\install\svn\%%~nG.dll
-COPY %%~pG%%~nG.pdb C:\httpd-sdk\install\svn\%%~nG.pdb
+Copy /Y %%~pG%%~nG.dll C:\httpd-sdk\install\svn\%%~nG.dll
+Copy /Y %%~pG%%~nG.pdb C:\httpd-sdk\install\svn\%%~nG.pdb
 )
 for /f "tokens=*" %%G in ('dir C:\src\subversion\Release\*.so /s/b') do (
-COPY %%~pG%%~nG.so C:\httpd-sdk\install\svn\%%~nG.so
-COPY %%~pG%%~nG.pdb C:\httpd-sdk\install\svn\%%~nG.pdb
+Copy /Y %%~pG%%~nG.so C:\httpd-sdk\install\svn\%%~nG.so
+Copy /Y %%~pG%%~nG.pdb C:\httpd-sdk\install\svn\%%~nG.pdb
 )
 
 set DEPS=\deps\
