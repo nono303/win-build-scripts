@@ -4,13 +4,14 @@ set path=%path%;%oldpath%
 cd /d C:\php72-sdk\
 
 set LTCG=1
+set PHPVER=7.2
 
-set BUILDALL=1
+set BUILDALL=0
 set BUILDLIB=0
 set BUILDPROTOBUF=0
 
 REM ** uniquement sur init: phpsdk_buildtree phpmaster
-call phpsdk_deps -u -b 7.3 -a %PHP_SDK_ARCH% -d C:\php72-sdk\phpmaster\vc15\%PHP_SDK_ARCH%\deps -t vc15 -s staging
+call phpsdk_deps -u -b %PHPVER% -a %PHP_SDK_ARCH% -d C:\php72-sdk\phpmaster\vc15\%PHP_SDK_ARCH%\deps -t vc15 -s staging
 
 if %BUILDLIB% == 1 (
 	rmdir %PHPDEPS%
@@ -35,24 +36,24 @@ set BUILDDIR=Release
 set outdir=-avx
 set intrinsics=,sse3,ssse3,sse4.1,sse4.2,avx
 	echo *** avx nts  ***
-	call C:\httpd-sdk\phpsdk-config_make.bat
+	call C:\httpd-sdk\phpsdk-config_make-%PHPVER%.bat
 if %BUILDALL% == 1 (
 	set outdir=
 	set intrinsics=
 		echo *** std nts  ***
-		call C:\httpd-sdk\phpsdk-config_make.bat
+		call C:\httpd-sdk\phpsdk-config_make-%PHPVER%.bat
 
 	set ZTS=
 	set TSNTS=ts
 	set BUILDDIR=Release_TS
 
 		echo *** std ts  ***
-		call C:\httpd-sdk\phpsdk-config_make.bat
+		call C:\httpd-sdk\phpsdk-config_make-%PHPVER%.bat
 
 	set outdir=-avx
 	set intrinsics=,sse3,ssse3,sse4.1,sse4.2,avx
 		echo *** avx ts  ***
-		call C:\httpd-sdk\phpsdk-config_make.bat
+		call C:\httpd-sdk\phpsdk-config_make-%PHPVER%.bat
 
 	copy /Y D:\github\NONO_phpwin-perfbuild\vc15-%PHP_SDK_ARCH%-avx-nts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc15\%PHP_SDK_ARCH%\nts\avx\php-7.3.x_memcache.dll
 	copy /Y D:\github\NONO_phpwin-perfbuild\vc15-%PHP_SDK_ARCH%-avx-ts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc15\%PHP_SDK_ARCH%\ts\avx\php-7.3.x_memcache.dll
