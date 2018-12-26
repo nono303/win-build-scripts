@@ -11,8 +11,8 @@ Copy /Y C:\httpd-sdk\install\modules\mod_md.pdb D:\github\NONO_mod_md\vc15\%ARCH
 Copy /Y C:\httpd-sdk\install\modules\mod_md.so D:\github\NONO_mod_md\vc15\%ARCH%%AVXB%\mod_md.so
 Copy /Y C:\httpd-sdk\install\modules\mod_ssl.pdb D:\github\NONO_mod_md\vc15\%ARCH%%AVXB%\mod_ssl.pdb
 Copy /Y C:\httpd-sdk\install\modules\mod_ssl.so D:\github\NONO_mod_md\vc15\%ARCH%%AVXB%\mod_ssl.so
-Copy /Y C:\httpd-sdk\install\bin\libcurl.dll D:\github\NONO_mod_md\vc15\%ARCH%%AVXB%\deps\libcurl.dll
-Copy /Y C:\httpd-sdk\install\bin\libcurl.pdb D:\github\NONO_mod_md\vc15\%ARCH%%AVXB%\deps\libcurl.pdb
-Copy /Y C:\httpd-sdk\install\bin\jansson.dll D:\github\NONO_mod_md\vc15\%ARCH%%AVXB%\deps\jansson.dll
-Copy /Y C:\httpd-sdk\install\bin\jansson.pdb D:\github\NONO_mod_md\vc15\%ARCH%%AVXB%\deps\jansson.pdb
+REM Copy /Y C:\httpd-sdk\install\bin\libcurl.dll D:\github\NONO_mod_md\vc15\%ARCH%%AVXB%\deps\libcurl.dll
+REM Copy /Y C:\httpd-sdk\install\bin\libcurl.pdb D:\github\NONO_mod_md\vc15\%ARCH%%AVXB%\deps\libcurl.pdb
+REM Copy /Y C:\httpd-sdk\install\bin\jansson.dll D:\github\NONO_mod_md\vc15\%ARCH%%AVXB%\deps\jansson.dll
+REM Copy /Y C:\httpd-sdk\install\bin\jansson.pdb D:\github\NONO_mod_md\vc15\%ARCH%%AVXB%\deps\jansson.pdb
 cd /D C:\httpd-sdk\modules_bat
