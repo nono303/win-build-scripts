@@ -1,9 +1,12 @@
 rmdir /S /Q C:\src\curl\builds
 cd /D C:\src\curl\winbuild
-REM WITH_SSH2=dll KO avec openssl 1.1.1
+REM WITH_SSH2=%DLLSTATIC% KO avec openssl 1.1.1
+REM dll || static
+set DLLSTATIC=dll
+git reset --hard
 move /Y C:\httpd-sdk\src\curl\src\tool_hugehelp.c.cvs C:\httpd-sdk\src\curl\src\tool_hugehelp.c
-nmake /f Makefile.vc mode=static VC=15 WITH_DEVEL=c:/httpd-sdk/install WITH_NGHTTP2=dll WITH_CARES=dll WITH_ZLIB=dll ENABLE_SSPI=yes ENABLE_IPV6=yes ENABLE_IDN=yes ENABLE_WINSSL=yes GEN_PDB=yes DEBUG=no MACHINE=%ARCH%
-nmake /f Makefile.vc mode=dll VC=15 WITH_DEVEL=c:/httpd-sdk/install WITH_NGHTTP2=dll WITH_CARES=dll WITH_ZLIB=dll ENABLE_SSPI=yes ENABLE_IPV6=yes ENABLE_IDN=yes ENABLE_WINSSL=yes GEN_PDB=yes DEBUG=no MACHINE=%ARCH%
+nmake /f Makefile.vc mode=static VC=15 WITH_DEVEL=c:/httpd-sdk/install WITH_NGHTTP2=%DLLSTATIC% WITH_CARES=%DLLSTATIC% WITH_ZLIB=%DLLSTATIC% ENABLE_SSPI=yes ENABLE_IPV6=yes ENABLE_IDN=yes ENABLE_WINSSL=yes GEN_PDB=yes DEBUG=no MACHINE=%ARCH%
+nmake /f Makefile.vc mode=dll VC=15 WITH_DEVEL=c:/httpd-sdk/install WITH_NGHTTP2=%DLLSTATIC% WITH_CARES=%DLLSTATIC% WITH_ZLIB=%DLLSTATIC% ENABLE_SSPI=yes ENABLE_IPV6=yes ENABLE_IDN=yes ENABLE_WINSSL=yes GEN_PDB=yes DEBUG=no MACHINE=%ARCH%
 
 Copy /Y C:\httpd-sdk\src\curl\builds\libcurl-vc15-%ARCH%-release-dll-cares-dll-zlib-dll-ipv6-sspi-winssl-nghttp2-dll\bin\libcurl.dll C:\httpd-sdk\install\bin\libcurl.dll
 Copy /Y C:\httpd-sdk\src\curl\builds\libcurl-vc15-%ARCH%-release-dll-cares-dll-zlib-dll-ipv6-sspi-winssl-nghttp2-dll\include\curl\curl.h C:\httpd-sdk\install\include\curl\curl.h
