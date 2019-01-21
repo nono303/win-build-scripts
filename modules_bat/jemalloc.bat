@@ -1,5 +1,5 @@
 cd /D C:\httpd-sdk\src\jemalloc-cmake\
-c:\cyg64\bin\sh.exe -c "CC=cl ./autogen.sh"
+c:\cyg%CYGV%\bin\sh.exe -c "CC=cl ./autogen.sh"
 C:\msvc15\MSBuild\15.0\Bin\MSBuild.exe msvc\jemalloc_vc2015.sln /p:Turbo=true /m:8 /p:CL_MPCount=8 /t:Clean,jemalloc /p:Configuration=Release /p:DebugSymbols=false /p:DebugType=None /p:Plateform="%ARCH%"
 move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\%archmsbuild%\Release\jemalloc.dll c:\httpd-sdk\install\bin\jemalloc.dll
 rm -f C:\httpd-sdk\src\jemalloc-cmake\msvc\%archmsbuild%\Release\jemalloc.exp
