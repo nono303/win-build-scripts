@@ -4,7 +4,7 @@ set path=%path%;%oldpath%
 cd /d C:\php72-sdk\
 
 set LTCG=1
-set PHPVER=7.2
+set PHPVER=7.3
 
 set BUILDALL=0
 set BUILDLIB=0
