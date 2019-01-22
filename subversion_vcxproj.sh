@@ -1,2 +1,2 @@
-/usr/bin/find /cygdrive/c/httpd-sdk/src/subversion/build/win32/vcnet-vcproj/ -type f -name "*.vcxproj" -exec sed -i 's/<PropertyGroup Label="Globals">/<PropertyGroup Label="Globals"><WindowsTargetPlatformVersion>10.0.17134.0<\/WindowsTargetPlatformVersion>/g' {} \;
+/usr/bin/find /cygdrive/c/httpd-sdk/src/subversion/build/win32/vcnet-vcproj/ -type f -name "*.vcxproj" -exec sed -i 's/<PropertyGroup Label="Globals">/<PropertyGroup Label="Globals"><WindowsTargetPlatformVersion>10.0.17763.0<\/WindowsTargetPlatformVersion>/g' {} \;
 /usr/bin/find /cygdrive/c/httpd-sdk/src/subversion/build/win32/vcnet-vcproj/ -type f -name "*.vcxproj" -exec sed -i 's/<AdditionalDependencies>/<AdditionalDependencies>brotlidec.lib;/g' {} \;

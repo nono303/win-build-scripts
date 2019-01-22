@@ -1,6 +1,6 @@
 REM set CMAKE_BUILD_TYPE=Release
 set CMAKE_BUILD_TYPE=RelWithDebInfo
-set WKITVER=10.0.17134.0
+set WKITVER=10.0.17763.0
 
 REM https://msdn.microsoft.com/fr-fr/library/afyyse50.aspx
 REM /S	Supprime l'affichage des commandes exécutées. Pour supprimer l'affichage dans une partie d'un makefile, utilisez le modificateur de commande @ ou .SILENT. Pour définir ou supprimer l'option /S pour une partie d'un makefile, utilisez !CMDSWITCHES.
