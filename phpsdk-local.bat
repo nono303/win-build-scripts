@@ -6,9 +6,9 @@ cd /d C:\php72-sdk\
 set LTCG=1
 set PHPVER=7.3
 
-set BUILDALL=0
+set BUILDALL=1
 set BUILDLIB=0
-set BUILDPROTOBUF=0
+set BUILDREQ=1
 
 REM ** uniquement sur init: phpsdk_buildtree phpmaster
 call phpsdk_deps -u -b %PHPVER% -a %PHP_SDK_ARCH% -d C:\php72-sdk\phpmaster\vc15\%PHP_SDK_ARCH%\deps -t vc15 -s staging
@@ -25,8 +25,9 @@ if %BUILDLIB% == 1 (
 	call %MODULE_BAT_DIR%libssh2-php.bat
 	call %MODULE_BAT_DIR%tidy-php.bat
 )
-if %BUILDPROTOBUF% == 1 (
+if %BUILDREQ% == 1 (
 	call %MODULE_BAT_DIR%protobuf-php.bat
+	call %MODULE_BAT_DIR%libdiff-php.bat
 )
 
 set ZTS=--disable-zts
