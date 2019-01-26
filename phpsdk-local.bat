@@ -27,7 +27,7 @@ if %BUILDLIB% == 1 (
 )
 if %BUILDREQ% == 1 (
 	call %MODULE_BAT_DIR%protobuf-php.bat
-	call %MODULE_BAT_DIR%libdiff-php.bat
+	call %MODULE_BAT_DIR%libxdiff-php.bat
 )
 
 set ZTS=--disable-zts
