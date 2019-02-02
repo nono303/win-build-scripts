@@ -20,8 +20,7 @@ call %MODULE_BAT_DIR%nghttp2.bat
 call %MODULE_BAT_DIR%curl.bat
 call %MODULE_BAT_DIR%libexpat.bat
 call %MODULE_BAT_DIR%libmaxminddb.bat
-call %MODULE_BAT_DIR%apr_compile.bat
-call %MODULE_BAT_DIR%apr_install.bat
+call %MODULE_BAT_DIR%apr.bat
 call %MODULE_BAT_DIR%lua.bat
 call %MODULE_BAT_DIR%httpd.bat
 call %MODULE_BAT_DIR%mod_h264_streaming.bat

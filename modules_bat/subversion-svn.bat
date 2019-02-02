@@ -1,10 +1,3 @@
-// PATCH APR https://github.com/openssl/openssl/issues/2865
-cd C:\httpd-sdk\src\apr-util
-git checkout msvc15-subversion
-call %MODULE_BAT_DIR%apr_compile.bat
-cd C:\httpd-sdk\src\apr-util
-git checkout msvc15-httpd
-
 mklink /H C:\httpd-sdk\install\lib\xml.lib C:\httpd-sdk\install\lib\expat.lib
 mklink /H C:\httpd-sdk\install\lib\zlib.pdb C:\httpd-sdk\install\lib\zlibstatic.pdb
 cd /D C:\src\subversion
@@ -40,8 +33,6 @@ Copy /Y C:\httpd-sdk\install\bin\libssl-1_1%sslarch%.dll D:\github\NONO_subversi
 Copy /Y C:\httpd-sdk\install\bin\libcrypto-1_1%sslarch%.dll D:\github\NONO_subversion\vc15\%ARCH%%AVXB%%DEPS%libcrypto-1_1%sslarch%.dll
 Copy /Y C:\httpd-sdk\install\bin\libssl-1_1%sslarch%.pdb D:\github\NONO_subversion\vc15\%ARCH%%AVXB%%DEPS%libssl-1_1%sslarch%.pdb
 Copy /Y C:\httpd-sdk\install\bin\libcrypto-1_1%sslarch%.pdb D:\github\NONO_subversion\vc15\%ARCH%%AVXB%%DEPS%libcrypto-1_1%sslarch%.pdb
-Copy /Y C:\httpd-sdk\install\bin\apr_crypto_openssl-1.pdb D:\github\NONO_subversion\vc15\%ARCH%%AVXB%\apr_crypto_openssl-1.pdb
-Copy /Y C:\httpd-sdk\install\bin\apr_crypto_openssl-1.dll D:\github\NONO_subversion\vc15\%ARCH%%AVXB%\apr_crypto_openssl-1.dll
 
 Copy /Y C:\httpd-sdk\install\bin\expat.dll D:\github\NONO_subversion\vc15\%ARCH%%AVXB%%DEPS%expat.dll
 Copy /Y C:\httpd-sdk\install\bin\libapr-1.dll D:\github\NONO_subversion\vc15\%ARCH%%AVXB%%DEPS%libapr-1.dll
