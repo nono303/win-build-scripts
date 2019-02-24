@@ -6,6 +6,7 @@ cd /d C:\php72-sdk\
 set LTCG=1
 set PHPVER=7.3
 
+REM -1 : only deps
 set BUILDALL=1
 set BUILDLIB=0
 set BUILDREQ=1
@@ -30,35 +31,37 @@ if %BUILDREQ% == 1 (
 	call %MODULE_BAT_DIR%libxdiff-php.bat
 )
 
-set ZTS=--disable-zts
-set TSNTS=nts
-set BUILDDIR=Release
-
-set outdir=-avx
-set intrinsics=,sse3,ssse3,sse4.1,sse4.2,avx
-	echo *** avx nts  ***
-	call C:\httpd-sdk\phpsdk-config_make-%PHPVER%.bat
-if %BUILDALL% == 1 (
-	set outdir=
-	set intrinsics=
-		echo *** std nts  ***
-		call C:\httpd-sdk\phpsdk-config_make-%PHPVER%.bat
-
-	set ZTS=
-	set TSNTS=ts
-	set BUILDDIR=Release_TS
-
-		echo *** std ts  ***
-		call C:\httpd-sdk\phpsdk-config_make-%PHPVER%.bat
+if NOT %BUILDALL% == -1 (
+	set ZTS=--disable-zts
+	set TSNTS=nts
+	set BUILDDIR=Release
 
 	set outdir=-avx
 	set intrinsics=,sse3,ssse3,sse4.1,sse4.2,avx
-		echo *** avx ts  ***
+		echo *** avx nts  ***
 		call C:\httpd-sdk\phpsdk-config_make-%PHPVER%.bat
+	if %BUILDALL% == 1 (
+		set outdir=
+		set intrinsics=
+			echo *** std nts  ***
+			call C:\httpd-sdk\phpsdk-config_make-%PHPVER%.bat
 
-	copy /Y D:\github\NONO_phpwin-perfbuild\vc15-%PHP_SDK_ARCH%-avx-nts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc15\%PHP_SDK_ARCH%\nts\avx\php-7.3.x_memcache.dll
-	copy /Y D:\github\NONO_phpwin-perfbuild\vc15-%PHP_SDK_ARCH%-avx-ts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc15\%PHP_SDK_ARCH%\ts\avx\php-7.3.x_memcache.dll
-	copy /Y D:\github\NONO_phpwin-perfbuild\vc15-%PHP_SDK_ARCH%-nts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc15\%PHP_SDK_ARCH%\nts\php-7.3.x_memcache.dll
-	copy /Y D:\github\NONO_phpwin-perfbuild\vc15-%PHP_SDK_ARCH%-ts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc15\%PHP_SDK_ARCH%\ts\php-7.3.x_memcache.dll
+		set ZTS=
+		set TSNTS=ts
+		set BUILDDIR=Release_TS
+
+			echo *** std ts  ***
+			call C:\httpd-sdk\phpsdk-config_make-%PHPVER%.bat
+
+		set outdir=-avx
+		set intrinsics=,sse3,ssse3,sse4.1,sse4.2,avx
+			echo *** avx ts  ***
+			call C:\httpd-sdk\phpsdk-config_make-%PHPVER%.bat
+
+		copy /Y D:\github\NONO_phpwin-perfbuild\vc15-%PHP_SDK_ARCH%-avx-nts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc15\%PHP_SDK_ARCH%\nts\avx\php-7.3.x_memcache.dll
+		copy /Y D:\github\NONO_phpwin-perfbuild\vc15-%PHP_SDK_ARCH%-avx-ts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc15\%PHP_SDK_ARCH%\ts\avx\php-7.3.x_memcache.dll
+		copy /Y D:\github\NONO_phpwin-perfbuild\vc15-%PHP_SDK_ARCH%-nts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc15\%PHP_SDK_ARCH%\nts\php-7.3.x_memcache.dll
+		copy /Y D:\github\NONO_phpwin-perfbuild\vc15-%PHP_SDK_ARCH%-ts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc15\%PHP_SDK_ARCH%\ts\php-7.3.x_memcache.dll
+	)
 )
 exit /B
