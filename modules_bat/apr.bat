@@ -145,5 +145,5 @@ copy /Y C:\src\apr-util\include\apr_anylock.h C:\httpd-sdk\install\include\apr_a
 copy /Y C:\src\apr-util\include\apr_base64.h C:\httpd-sdk\install\include\apr_base64.h
 copy /Y C:\src\apr-util\include\apr_buckets.h C:\httpd-sdk\install\include\apr_buckets.h
 
-Copy /Y C:\httpd-sdk\install\bin\apr_crypto_openssl-1.pdb D:\github\NONO_subversion\vc15\%ARCH%%AVXB%\apr_crypto_openssl-1.pdb
-Copy /Y C:\httpd-sdk\install\bin\apr_crypto_openssl-1.dll D:\github\NONO_subversion\vc15\%ARCH%%AVXB%\apr_crypto_openssl-1.dll
+REM Copy /Y C:\httpd-sdk\install\bin\apr_crypto_openssl-1.pdb D:\github\NONO_subversion\vc15\%ARCH%%AVXB%\apr_crypto_openssl-1.pdb
+REM Copy /Y C:\httpd-sdk\install\bin\apr_crypto_openssl-1.dll D:\github\NONO_subversion\vc15\%ARCH%%AVXB%\apr_crypto_openssl-1.dll
