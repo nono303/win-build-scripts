@@ -12,7 +12,7 @@ set BUILDLIB=0
 set BUILDREQ=1
 
 REM ** uniquement sur init: phpsdk_buildtree phpmaster
-call phpsdk_deps -u -b %PHPVER% -a %PHP_SDK_ARCH% -d C:\php72-sdk\phpmaster\vc15\%PHP_SDK_ARCH%\deps -t vc15 -s staging
+call phpsdk_deps -u -b %PHPVER% -a %PHP_SDK_ARCH% -d C:\php72-sdk\phpmaster\vc%MSVC_VER%\%PHP_SDK_ARCH%\deps -t vc%MSVC_VER% -s staging
 
 if %BUILDLIB% == 1 (
 	rmdir %PHPDEPS%
@@ -58,10 +58,10 @@ if NOT %BUILDALL% == -1 (
 			echo *** avx ts  ***
 			call C:\httpd-sdk\phpsdk-config_make-%PHPVER%.bat
 
-		copy /Y D:\github\NONO_phpwin-perfbuild\vc15-%PHP_SDK_ARCH%-avx-nts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc15\%PHP_SDK_ARCH%\nts\avx\php-7.3.x_memcache.dll
-		copy /Y D:\github\NONO_phpwin-perfbuild\vc15-%PHP_SDK_ARCH%-avx-ts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc15\%PHP_SDK_ARCH%\ts\avx\php-7.3.x_memcache.dll
-		copy /Y D:\github\NONO_phpwin-perfbuild\vc15-%PHP_SDK_ARCH%-nts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc15\%PHP_SDK_ARCH%\nts\php-7.3.x_memcache.dll
-		copy /Y D:\github\NONO_phpwin-perfbuild\vc15-%PHP_SDK_ARCH%-ts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc15\%PHP_SDK_ARCH%\ts\php-7.3.x_memcache.dll
+		copy /Y D:\github\NONO_phpwin-perfbuild\vc%MSVC_VER%-%PHP_SDK_ARCH%-avx-nts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc%MSVC_VER%\%PHP_SDK_ARCH%\nts\avx\php-7.3.x_memcache.dll
+		copy /Y D:\github\NONO_phpwin-perfbuild\vc%MSVC_VER%-%PHP_SDK_ARCH%-avx-ts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc%MSVC_VER%\%PHP_SDK_ARCH%\ts\avx\php-7.3.x_memcache.dll
+		copy /Y D:\github\NONO_phpwin-perfbuild\vc%MSVC_VER%-%PHP_SDK_ARCH%-nts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc%MSVC_VER%\%PHP_SDK_ARCH%\nts\php-7.3.x_memcache.dll
+		copy /Y D:\github\NONO_phpwin-perfbuild\vc%MSVC_VER%-%PHP_SDK_ARCH%-ts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc%MSVC_VER%\%PHP_SDK_ARCH%\ts\php-7.3.x_memcache.dll
 	)
 )
 exit /B
