@@ -5,8 +5,8 @@ REM dll || static
 set DLLSTATIC=dll
 git reset --hard
 move /Y C:\httpd-sdk\src\curl\src\tool_hugehelp.c.cvs C:\httpd-sdk\src\curl\src\tool_hugehelp.c
-nmake /f Makefile.vc mode=static VC=15 WITH_DEVEL=c:/httpd-sdk/install WITH_NGHTTP2=%DLLSTATIC% WITH_CARES=%DLLSTATIC% WITH_ZLIB=%DLLSTATIC% ENABLE_SSPI=yes ENABLE_IPV6=yes ENABLE_IDN=yes ENABLE_WINSSL=yes GEN_PDB=yes DEBUG=no MACHINE=%ARCH%
-nmake /f Makefile.vc mode=dll VC=15 WITH_DEVEL=c:/httpd-sdk/install WITH_NGHTTP2=%DLLSTATIC% WITH_CARES=%DLLSTATIC% WITH_ZLIB=%DLLSTATIC% ENABLE_SSPI=yes ENABLE_IPV6=yes ENABLE_IDN=yes ENABLE_WINSSL=yes GEN_PDB=yes DEBUG=no MACHINE=%ARCH%
+nmake /f Makefile.vc mode=static VC=%MSVC_VER% WITH_DEVEL=c:/httpd-sdk/install WITH_NGHTTP2=%DLLSTATIC% WITH_CARES=%DLLSTATIC% WITH_ZLIB=%DLLSTATIC% ENABLE_SSPI=yes ENABLE_IPV6=yes ENABLE_IDN=yes ENABLE_WINSSL=yes GEN_PDB=yes DEBUG=no MACHINE=%ARCH%
+nmake /f Makefile.vc mode=dll VC=%MSVC_VER% WITH_DEVEL=c:/httpd-sdk/install WITH_NGHTTP2=%DLLSTATIC% WITH_CARES=%DLLSTATIC% WITH_ZLIB=%DLLSTATIC% ENABLE_SSPI=yes ENABLE_IPV6=yes ENABLE_IDN=yes ENABLE_WINSSL=yes GEN_PDB=yes DEBUG=no MACHINE=%ARCH%
 
 Copy /Y C:\httpd-sdk\src\curl\builds\libcurl-vc%MSVC_VER%-%ARCH%-release-dll-cares-dll-zlib-dll-ipv6-sspi-winssl-nghttp2-dll\bin\libcurl.dll C:\httpd-sdk\install\bin\libcurl.dll
 Copy /Y C:\httpd-sdk\src\curl\builds\libcurl-vc%MSVC_VER%-%ARCH%-release-dll-cares-dll-zlib-dll-ipv6-sspi-winssl-nghttp2-dll\include\curl\curl.h C:\httpd-sdk\install\include\curl\curl.h
