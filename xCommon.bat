@@ -1,6 +1,12 @@
 REM set CMAKE_BUILD_TYPE=Release
 set CMAKE_BUILD_TYPE=RelWithDebInfo
-set WKITVER=10.0.17763.0
+set WKITVER=10.0.18362.0
+if %MSVC_VER% == 16 (
+	set MSVC_DEPS=vs16
+)
+if %MSVC_VER% == 15 (
+	set MSVC_DEPS=vc15
+)
 
 REM https://msdn.microsoft.com/fr-fr/library/afyyse50.aspx
 REM /S	Supprime l'affichage des commandes exécutées. Pour supprimer l'affichage dans une partie d'un makefile, utilisez le modificateur de commande @ ou .SILENT. Pour définir ou supprimer l'option /S pour une partie d'un makefile, utilisez !CMDSWITCHES.
@@ -25,7 +31,7 @@ cd /D C:\httpd-sdk\build
 for /F "delims=" %%i in ('dir /b') do (rmdir "%%i" /s/q || del "%%i" /s/q)
 rmdir /S /Q C:\httpd-sdk\install
 mklink /J C:\httpd-sdk\install C:\httpd-sdk\install_%ARCH%%AVXB%
-set PHPDEPS=C:\php72-sdk\phpmaster\vc%MSVC_VER%\%ARCH%\depsnono
+set PHPDEPS=C:\php72-sdk\phpmaster\%MSVC_DEPS%\%ARCH%\depsnono
 set PATH=c:\python27;C:\PROGRA~1\Git\bin;C:\bin\nasm;c:\perl\bin;c:\perl\site\bin;c:\bin;C:\Windows\SysWOW64;C:\msvc%MSVC_VER%\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;C:\Windows\SysWOW64\wbem;c:\cyg%CYGV%\bin;C:\php72-sdk\bin\php
 call C:\msvc%MSVC_VER%\VC\Auxiliary\Build\vcvarsall.bat %ARCH%
 echo on
