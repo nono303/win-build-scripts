@@ -12,11 +12,11 @@ if %SDKVER% == 7.1 (
 
 REM -1 : only deps
 set BUILDALL=1
-set BUILDLIB=0
+set BUILDLIB=1
 set BUILDREQ=1
 
 REM ** uniquement sur init: phpsdk_buildtree phpmaster
-call phpsdk_deps -u -b %SDKVER% -a %PHP_SDK_ARCH% -d C:\php72-sdk\phpmaster\vc%MSVC_VER%\%PHP_SDK_ARCH%\deps -t vc%MSVC_VER% -s staging
+call phpsdk_deps -u -b %SDKVER% -a %PHP_SDK_ARCH% -d C:\php72-sdk\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\deps -t %MSVC_DEPS% -s staging
 
 if %BUILDLIB% == 1 (
 	rmdir %PHPDEPS%
@@ -62,10 +62,10 @@ if NOT %BUILDALL% == -1 (
 			echo *** avx ts  ***
 			call C:\httpd-sdk\phpsdk-config_make-%PHPVER%.bat
 
-		copy /Y D:\github\NONO_phpwin-perfbuild\vc%MSVC_VER%-%PHP_SDK_ARCH%-avx-nts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc%MSVC_VER%\%PHP_SDK_ARCH%\nts\avx\php-%PHPVER%.x_memcache.dll
-		copy /Y D:\github\NONO_phpwin-perfbuild\vc%MSVC_VER%-%PHP_SDK_ARCH%-avx-ts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc%MSVC_VER%\%PHP_SDK_ARCH%\ts\avx\php-%PHPVER%.x_memcache.dll
-		copy /Y D:\github\NONO_phpwin-perfbuild\vc%MSVC_VER%-%PHP_SDK_ARCH%-nts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc%MSVC_VER%\%PHP_SDK_ARCH%\nts\php-%PHPVER%.x_memcache.dll
-		copy /Y D:\github\NONO_phpwin-perfbuild\vc%MSVC_VER%-%PHP_SDK_ARCH%-ts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\vc%MSVC_VER%\%PHP_SDK_ARCH%\ts\php-%PHPVER%.x_memcache.dll
+		copy /Y D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%PHP_SDK_ARCH%-avx-nts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\%MSVC_DEPS%\%PHP_SDK_ARCH%\nts\avx\php-%PHPVER%.x_memcache.dll
+		copy /Y D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%PHP_SDK_ARCH%-avx-ts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\%MSVC_DEPS%\%PHP_SDK_ARCH%\ts\avx\php-%PHPVER%.x_memcache.dll
+		copy /Y D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%PHP_SDK_ARCH%-nts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\%MSVC_DEPS%\%PHP_SDK_ARCH%\nts\php-%PHPVER%.x_memcache.dll
+		copy /Y D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%PHP_SDK_ARCH%-ts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\%MSVC_DEPS%\%PHP_SDK_ARCH%\ts\php-%PHPVER%.x_memcache.dll
 	)
 )
 exit /B
