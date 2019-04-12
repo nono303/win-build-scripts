@@ -13,7 +13,7 @@ REM https://stackoverflow.com/questions/601970/how-do-i-utilise-all-the-cores-fo
 set CL=/MP
 
 REM AVX || SSE2 https://msdn.microsoft.com/fr-fr/library/7t5yh4fd.aspx
-REM set AVX=/arch:AVX
+set AVX=/arch:AVX
 if DEFINED AVX (
 	SET AVXB=-avx
 )
