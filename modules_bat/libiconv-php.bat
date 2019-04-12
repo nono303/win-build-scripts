@@ -3,4 +3,5 @@ copy /Y C:\src\libiconv\MSvc%MSVC_VER%\%archmsbuild%\libiconv_a.lib %PHPDEPS%\li
 copy /Y C:\src\libiconv\MSvc%MSVC_VER%\%archmsbuild%\libiconv_a.pdb %PHPDEPS%\lib\libiconv_a.pdb
 copy /Y C:\src\libiconv\MSvc%MSVC_VER%\%archmsbuild%\bin\libiconv.dll %PHPDEPS%\bin\libiconv.dll
 copy /Y C:\src\libiconv\MSvc%MSVC_VER%\%archmsbuild%\bin\libiconv.pdb %PHPDEPS%\bin\libiconv.pdb
+copy /Y C:\httpd-sdk\src\libiconv\source\include\iconv.h %PHPDEPS%\include\iconv.h
 cd /D C:\httpd-sdk\modules_bat
