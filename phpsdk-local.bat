@@ -19,16 +19,15 @@ REM ** uniquement sur init: phpsdk_buildtree phpmaster
 call phpsdk_deps -u -b %SDKVER% -a %PHP_SDK_ARCH% -d C:\php72-sdk\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\deps -t %MSVC_DEPS% -s staging
 
 if %BUILDLIB% == 1 (
-	rmdir %PHPDEPS%
-	mkdir %PHPDEPS%\bin
-	mkdir %PHPDEPS%\include
-	mkdir %PHPDEPS%\lib
+	echo ON
+	REM en premier pour créer la structure depsnono
+	call %MODULE_BAT_DIR%libssh2-php.bat
 	call %MODULE_BAT_DIR%libxpm-php.bat
 	call %MODULE_BAT_DIR%freetype-php.bat
 	call %MODULE_BAT_DIR%libiconv-php.bat
 	call %MODULE_BAT_DIR%libpng-php.bat
-	call %MODULE_BAT_DIR%libssh2-php.bat
 	call %MODULE_BAT_DIR%tidy-php.bat
+	copy /Y %PHPDEPS%\bin\*.* D:\github\NONO_phpwin-perfbuild\\%MSVC_DEPS%-%ARCH%_deps\
 )
 if %BUILDREQ% == 1 (
 	call %MODULE_BAT_DIR%protobuf-php.bat

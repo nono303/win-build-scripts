@@ -1,3 +1,4 @@
+cd /D C:\src\libpng\projects\vstudio2019\
 MSBuild.exe C:\src\libpng\projects\vstudio2019\vstudio.sln /p:Turbo=true /m:8 /p:CL_MPCount=8 /t:Clean,libpng /p:Configuration="Release Library" /p:DebugSymbols=true /p:DebugType=None /p:Platform="%archmsbuild%"
 MSBuild.exe C:\src\libpng\projects\vstudio2019\vstudio.sln /p:Turbo=true /m:8 /p:CL_MPCount=8 /t:Clean,libpng /p:Configuration="Release" /p:DebugSymbols=true /p:DebugType=None /p:Platform="%archmsbuild%"
 copy /Y "C:\src\libpng\projects\vstudio2019\%outmsbuild%\libpng.dll" %PHPDEPS%\bin\libpng.dll
