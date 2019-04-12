@@ -6,7 +6,7 @@ copy /Y "C:\src\libxpm\windows\builds\%archmsbuild%\Static Release\libxpm_a.pdb"
 copy /Y "C:\src\libxpm\windows\builds\%archmsbuild%\DLL Release\libxpm_a.dll" %PHPDEPS%\bin\libxpm.dll
 copy /Y "C:\src\libxpm\windows\builds\%archmsbuild%\DLL Release\libxpm_a.pdb" %PHPDEPS%\bin\libxpm.pdb
 
-copy /Y C:\httpd-sdk\src\libxpm\include\X11\xpm.h %PHPDEPS%\include\xpm.h
 mkdir %PHPDEPS%\include\X11
-mklink /h %PHPDEPS%\include\X11\xpm.h %PHPDEPS%\include\xpm.h
+copy /Y C:\httpd-sdk\src\libxpm\include\X11\*.h %PHPDEPS%\include\X11
+mklink /h %PHPDEPS%\include\xpm.h %PHPDEPS%\include\X11\xpm.h
 cd /D C:\httpd-sdk\modules_bat
