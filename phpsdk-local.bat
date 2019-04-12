@@ -16,7 +16,7 @@ set BUILDLIB=1
 set BUILDREQ=1
 
 REM ** uniquement sur init: phpsdk_buildtree phpmaster
-call phpsdk_deps -u -b %SDKVER% -a %PHP_SDK_ARCH% -d C:\php72-sdk\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\deps -t %MSVC_DEPS% -s staging
+REM call phpsdk_deps -u -b %SDKVER% -a %PHP_SDK_ARCH% -d C:\php72-sdk\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\deps -t %MSVC_DEPS% -s staging
 
 if %BUILDLIB% == 1 (
 	echo ON
@@ -26,6 +26,7 @@ if %BUILDLIB% == 1 (
 	call %MODULE_BAT_DIR%freetype-php.bat
 	call %MODULE_BAT_DIR%libiconv-php.bat
 	call %MODULE_BAT_DIR%libpng-php.bat
+	call %MODULE_BAT_DIR%libjpeg-php.bat
 	call %MODULE_BAT_DIR%tidy-php.bat
 	copy /Y %PHPDEPS%\bin\*.* D:\github\NONO_phpwin-perfbuild\\%MSVC_DEPS%-%ARCH%_deps\
 )
