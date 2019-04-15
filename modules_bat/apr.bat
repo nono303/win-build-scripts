@@ -1,9 +1,22 @@
 cd /D C:\src\apr\
 git clean -f -d
+git reset
 cd /D C:\src\apr-util\
 git clean -f -d
+git reset
 cd /D C:\src\apr-iconv\
 git clean -f -d
+git reset
+if DEFINED AVX (
+	C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/vcxproj.sh "/cygdrive/c/httpd-sdk/src/apr/" "<EnableEnhancedInstructionSet>AdvancedVectorExtensions<\/EnableEnhancedInstructionSet>"
+	C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/vcxproj.sh "/cygdrive/c/httpd-sdk/src/apr-util/" "<EnableEnhancedInstructionSet>AdvancedVectorExtensions<\/EnableEnhancedInstructionSet>"
+	C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/vcxproj.sh "/cygdrive/c/httpd-sdk/src/apr-iconv/" "<EnableEnhancedInstructionSet>AdvancedVectorExtensions<\/EnableEnhancedInstructionSet>"
+) else (
+	C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/vcxproj.sh "/cygdrive/c/httpd-sdk/src/apr/"
+	C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/vcxproj.sh "/cygdrive/c/httpd-sdk/src/apr-util/" 
+	C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/vcxproj.sh "/cygdrive/c/httpd-sdk/src/apr-iconv/" 
+)
+
 
 cd /D C:\src\apr\tools
 cl gen_test_char.c
