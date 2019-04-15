@@ -12,10 +12,11 @@ set NMAKE_OPTS=/S /NOLOGO
 REM https://stackoverflow.com/questions/601970/how-do-i-utilise-all-the-cores-for-nmake
 set CL=/MP
 
-REM AVX || SSE2 https://msdn.microsoft.com/fr-fr/library/7t5yh4fd.aspx
 set AVX=/arch:AVX
+
 if DEFINED AVX (
 	SET AVXB=-avx
+	set AVXSED=\/arch:AVX
 )
 
 set EXTCFLAGS=/GL /GS- /Oy- /guard:cf- /FD /GF /Zc:inline /MP8 /LD /MD /Zi /Ox %AVX%
