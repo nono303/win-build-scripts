@@ -28,13 +28,12 @@ if %BUILDLIB% == 1 (
 	call %MODULE_BAT_DIR%libpng-php.bat
 	call %MODULE_BAT_DIR%libjpeg-php.bat
 	call %MODULE_BAT_DIR%tidy-php.bat
-	copy /Y %PHPDEPS%\bin\*.* D:\github\NONO_phpwin-perfbuild\\%MSVC_DEPS%-%ARCH%_deps\
 )
 if %BUILDREQ% == 1 (
 	call %MODULE_BAT_DIR%protobuf-php.bat
 	call %MODULE_BAT_DIR%libxdiff-php.bat
 )
-
+copy /Y %PHPDEPS%\bin\*.* D:\github\NONO_phpwin-perfbuild\\%MSVC_DEPS%-%ARCH%_deps\
 if NOT %BUILDALL% == -1 (
 	set ZTS=--disable-zts
 	set TSNTS=nts
