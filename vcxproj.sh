@@ -1,3 +1,2 @@
-/usr/bin/find /cygdrive/c/httpd-sdk/src/subversion/build/win32/vcnet-vcproj/ -type f -name "*.vcxproj" -exec sed -i 's/<\/ClCompile>/<WholeProgramOptimization>true<\/WholeProgramOptimization><MultiProcessorCompilation>true<\/MultiProcessorCompilation><EnableEnhancedInstructionSet>AdvancedVectorExtensions<\/EnableEnhancedInstructionSet><\/ClCompile>
-/g' {} \;
-/usr/bin/find /cygdrive/c/httpd-sdk/src/subversion/build/win32/vcnet-vcproj/ -type f -name "*.vcxproj" -exec sed -i 's/<\/Link>/<LinkTimeCodeGeneration>UseLinkTimeCodeGeneration<\/LinkTimeCodeGeneration><\/Link>/g' {} \;
+/usr/bin/find $1 -type f -name "*.vcxproj" -exec sed -i 's/<\/ClCompile>/<WholeProgramOptimization>true<\/WholeProgramOptimization><MultiProcessorCompilation>true<\/MultiProcessorCompilation>'$2'<\/ClCompile>/g' {} \;
+/usr/bin/find $1 -type f -name "*.vcxproj" -exec sed -i 's/<\/Link>/<LinkTimeCodeGeneration>UseLinkTimeCodeGeneration<\/LinkTimeCodeGeneration><\/Link>/g' {} \;
