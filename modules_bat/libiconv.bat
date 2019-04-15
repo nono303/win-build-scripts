@@ -1,3 +1,7 @@
+cd /D C:\httpd-sdk\src\libiconv
+git clean -d -f
+git reset --hard
+C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/vcxproj.sh "/cygdrive/c/httpd-sdk/src/libiconv/MSVC16/" %AVXVCX%
 MSBuild.exe C:\src\libiconv\MSvc%MSVC_VER%\libiconv.sln /nowarn:C4090 /nowarn:C4244 /nowarn:C4267 /nowarn:c4018 /nowarn:MSB8012 /p:Turbo=true /m:8 /p:CL_MPCount=8 /t:Clean,libiconv_dll /p:Configuration=Release /p:DebugSymbols=true /p:DebugType=None /p:Platform="%archmsbuild%"
 copy /Y C:\src\libiconv\MSvc%MSVC_VER%\%archmsbuild%\bin\libiconv.dll C:\httpd-sdk\install\bin\libiconv.dll 
 copy /Y C:\src\libiconv\MSvc%MSVC_VER%\%archmsbuild%\bin\libiconv.pdb C:\httpd-sdk\install\bin\libiconv.pdb 
