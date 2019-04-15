@@ -1,7 +1,6 @@
 cd /d C:\php72-sdk\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\php-src
 git reset --hard
 sed -i 's/libeay32st/libcrypto/g' /cygdrive/c/src/php-src/ext/phar/config.w32
-rmdir /S /Q C:\php72-sdk\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\build\%BUILDDIR%\
 mkdir C:\php72-sdk\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\build\%BUILDDIR%\
 call buildconf
 call configure --with-mp=8 --enable-object-out-dir=../build/ --disable-all --without-enchant --without-imap --without-snmp --without-xmlrpc --without-xsl --without-gmp --without-wddx --without-libwebp --without-interbase --without-ldap --without-oci8 --without-pgsql --without-uncritical-warn-choke --with-boost=C:\src\boost --enable-memcache=shared --enable-fd-setsize=2048 --without-analyzer --with-extra-includes="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.7\Include\um";"C:\Program Files (x86)\Windows Kits\10\Include\%WKITVER%\um";"..\depsnono\include" --with-extra-libs="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.7\Lib\um\%PHP_SDK_ARCH%";"C:\Program Files (x86)\Windows Kits\10\Lib\%WKITVER%\um\%PHP_SDK_ARCH%";"..\depsnono\lib" %ZTS% --without-gd --without-iconv --without-mysqlnd --without-pcre-jit --without-readline --without-libxml --without-dom --without-simplexml --without-xml --enable-cli --enable-zlib --enable-hash --enable-session --with-bz2
@@ -23,3 +22,4 @@ for /f "tokens=*" %%G in ('dir C:\php72-sdk\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%
 for /f "tokens=*" %%G in ('dir C:\php72-sdk\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\build\%BUILDDIR%\*.dll /s/b') do (
 	COPY /Y %%~pG%%~nG.dll D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%PHP_SDK_ARCH%%outdir%-%TSNTS%\%%~nG.dll
 )
+rmdir /S /Q C:\php72-sdk\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\build\%BUILDDIR%\
