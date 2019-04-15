@@ -3,7 +3,7 @@ mkdir C:\httpd-sdk\build\bzip2-1.0.6
 cd /D c:\httpd-sdk\src\bzip2-1.0.6
 git clean -d -f
 git reset --hard
-sed -i 's/MP8/MP8 %AVXMSC%/g' /cygdrive/c/httpd-sdk/src/bzip2-1.0.6/makefile.msc
+sed -i 's/MP8/MP8 %AVXSED%/g' /cygdrive/c/httpd-sdk/src/bzip2-1.0.6/makefile.msc
 nmake %NMAKE_OPTS% /f Makefile.msc clean lib bzip2
 move /Y C:\httpd-sdk\src\bzip2-1.0.6\*.lib C:\httpd-sdk\install\lib
 move /Y C:\httpd-sdk\src\bzip2-1.0.6\*.exe c:\httpd-sdk\install\bin

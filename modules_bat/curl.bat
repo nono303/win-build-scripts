@@ -4,6 +4,9 @@ REM WITH_SSH2=%DLLSTATIC% KO avec openssl 1.1.1
 REM dll || static
 set DLLSTATIC=dll
 git reset --hard
+git clean -d -f
+sed -i 's/\/W4/\/GL \/GS- \/Oy- \/guard:cf- \/FD \/GF \/Zc:inline \/MP8 \/LD \/MD \/Ox \/W3 %AVXSED%/g' /cygdrive/c/httpd-sdk/src/curl/winbuild/MakefileBuild.vc
+sed -i 's/LFLAGS     = \/nologo/LFLAGS     = \/nologo \/LTCG \/OPT:ICF/g' /cygdrive/c/httpd-sdk/src/curl/winbuild/MakefileBuild.vc
 move /Y C:\httpd-sdk\src\curl\src\tool_hugehelp.c.cvs C:\httpd-sdk\src\curl\src\tool_hugehelp.c
 nmake /f Makefile.vc mode=static VC=%MSVC_VER% WITH_DEVEL=c:/httpd-sdk/install WITH_NGHTTP2=%DLLSTATIC% WITH_CARES=%DLLSTATIC% WITH_ZLIB=%DLLSTATIC% ENABLE_SSPI=yes ENABLE_IPV6=yes ENABLE_IDN=yes ENABLE_WINSSL=yes GEN_PDB=yes DEBUG=no MACHINE=%ARCH%
 nmake /f Makefile.vc mode=dll VC=%MSVC_VER% WITH_DEVEL=c:/httpd-sdk/install WITH_NGHTTP2=%DLLSTATIC% WITH_CARES=%DLLSTATIC% WITH_ZLIB=%DLLSTATIC% ENABLE_SSPI=yes ENABLE_IPV6=yes ENABLE_IDN=yes ENABLE_WINSSL=yes GEN_PDB=yes DEBUG=no MACHINE=%ARCH%
