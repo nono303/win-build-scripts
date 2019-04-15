@@ -17,6 +17,7 @@ set AVX=/arch:AVX
 if DEFINED AVX (
 	SET AVXB=-avx
 	set AVXSED=\/arch:AVX
+	set AVXMSC=-arch:AVX
 )
 
 set EXTCFLAGS=/GL /GS- /Oy- /guard:cf- /FD /GF /Zc:inline /MP8 /LD /MD /Zi /Ox %AVX%
