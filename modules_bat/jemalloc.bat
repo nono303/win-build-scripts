@@ -1,5 +1,8 @@
 cd /D C:\httpd-sdk\src\jemalloc-cmake\
+git clean -f -d
+git reset
 c:\cyg%CYGV%\bin\sh.exe -c "CC=cl ./autogen.sh"
+C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/vcxproj.sh "/cygdrive/c/httpd-sdk/src/jemalloc-cmake/" %AVXVCX%
 MSBuild.exe msvc\jemalloc_vc2015.sln /p:Turbo=true /m:8 /p:CL_MPCount=8 /t:Clean,jemalloc /p:Configuration=Release /p:DebugSymbols=false /p:DebugType=None /p:Plateform="%ARCH%"
 move /Y C:\httpd-sdk\src\jemalloc-cmake\msvc\%archmsbuild%\Release\jemalloc.dll c:\httpd-sdk\install\bin\jemalloc.dll
 rm -f C:\httpd-sdk\src\jemalloc-cmake\msvc\%archmsbuild%\Release\jemalloc.exp
