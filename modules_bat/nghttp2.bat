@@ -8,6 +8,5 @@ sed -i 's/INCREMENTAL/LTCG/g' /cygdrive/c/httpd-sdk/build/nghttp2/lib/CMakeFiles
 	REM si -DENABLE_STATIC_LIB=NO 
 	REM sed -i 's/out:nghttp2.lib/LTCG \/out:nghttp2.lib/g' /cygdrive/c/httpd-sdk/build/nghttp2/lib/CMakeFiles/nghttp2_static.dir/build.make
 nmake %NMAKE_OPTS% clean install
-move /Y C:\httpd-sdk\install\lib\nghttp2.dll C:\httpd-sdk\install\bin\nghttp2.dll
 copy /Y C:\httpd-sdk\build\nghttp2\lib\nghttp2.pdb C:\httpd-sdk\install\bin\nghttp2.pdb
 cd /D C:\httpd-sdk\modules_bat
