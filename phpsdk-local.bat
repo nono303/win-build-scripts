@@ -10,6 +10,13 @@ if %SDKVER% == 7.1 (
 	set SDKVER=7.2
 )
 
+REM deps sans AVX
+SET AVX=
+SET AVXB=
+SET AVXSED=
+SET AVXMSC=
+SET AVXVCX=
+
 REM -1 : only deps
 set BUILDALL=1
 set BUILDLIB=1
@@ -34,6 +41,7 @@ if %BUILDREQ% == 1 (
 	call %MODULE_BAT_DIR%libxdiff-php.bat
 )
 copy /Y %PHPDEPS%\bin\*.* D:\github\NONO_phpwin-perfbuild\\%MSVC_DEPS%-%ARCH%_deps\
+copy /Y C:\httpd-sdk\install_%ARCH%\bin\brotli*.* D:\github\NONO_phpwin-perfbuild\\%MSVC_DEPS%-%ARCH%_deps\
 if NOT %BUILDALL% == -1 (
 	set ZTS=--disable-zts
 	set TSNTS=nts
