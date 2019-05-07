@@ -1,3 +1,4 @@
+set EXTCFLAGS=%EXTCFLAGSNGHTTP2%
 cd ..
 rmdir /S /Q C:\httpd-sdk\build\nghttp2
 mkdir C:\httpd-sdk\build\nghttp2
@@ -10,3 +11,4 @@ sed -i 's/INCREMENTAL/LTCG/g' /cygdrive/c/httpd-sdk/build/nghttp2/lib/CMakeFiles
 nmake %NMAKE_OPTS% clean install
 copy /Y C:\httpd-sdk\build\nghttp2\lib\nghttp2.pdb C:\httpd-sdk\install\bin\nghttp2.pdb
 cd /D C:\httpd-sdk\modules_bat
+set EXTCFLAGS=/GL %EXTCFLAGSNGHTTP2%

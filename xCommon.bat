@@ -22,7 +22,8 @@ if DEFINED AVX (
 )
 
 REM /GL ko sur nghttp2. /GL ko si /Zi http://forums.codeguru.com/showthread.php?556135-ZI-and-GL-incompatible
-set EXTCFLAGS=/GS- /Oy- /guard:cf- /FD /GF /Zc:inline /MP8 /LD /MD /Zi /Ox %AVX%
+set EXTCFLAGSNGHTTP2=/GS- /Oy- /guard:cf- /FD /GF /Zc:inline /MP8 /LD /MD /Zi /Ox %AVX%
+set EXTCFLAGS=/GL %EXTCFLAGSNGHTTP2%
 
 set MODULE_BAT_DIR=C:\httpd-sdk\modules_bat\
 
