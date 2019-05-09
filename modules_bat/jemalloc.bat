@@ -1,6 +1,6 @@
 cd /D C:\httpd-sdk\src\jemalloc-cmake\
 git clean -f -d
-git reset
+git reset --hard
 C:\cyg%CYGV%\bin\sh.exe -c "CC=cl ./autogen.sh"
 C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/vcxproj.sh "/cygdrive/c/httpd-sdk/src/jemalloc-cmake/msvc/projects/vc2015/jemalloc/" %AVXVCX%
 MSBuild.exe msvc\jemalloc_vc2015.sln /p:Turbo=true /m:8 /p:CL_MPCount=8 /t:Clean,jemalloc /p:Configuration=Release /p:DebugSymbols=false /p:DebugType=None /p:Plateform="%ARCH%"

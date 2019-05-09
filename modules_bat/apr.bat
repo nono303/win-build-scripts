@@ -1,12 +1,12 @@
 cd /D C:\src\apr\
 git clean -f -d
-git reset
+git reset --hard
 cd /D C:\src\apr-util\
 git clean -f -d
-git reset
+git reset --hard
 cd /D C:\src\apr-iconv\
 git clean -f -d
-git reset
+git reset --hard
 C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/vcxproj.sh "/cygdrive/c/httpd-sdk/src/apr/" %AVXVCX%
 C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/vcxproj.sh "/cygdrive/c/httpd-sdk/src/apr-util/" %AVXVCX%
 C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/vcxproj.sh "/cygdrive/c/httpd-sdk/src/apr-iconv/" %AVXVCX%
