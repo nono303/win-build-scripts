@@ -1,0 +1,1 @@
+/usr/bin/find /cygdrive/c/httpd-sdk/src/$1/ -type f -name "*.vcxproj" -exec sed -i 's/<PlatformToolset>v142/<PlatformToolset>v141/g' {} \; 
