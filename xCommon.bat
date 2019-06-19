@@ -1,7 +1,6 @@
 REM set CMAKE_BUILD_TYPE=Release
 set CMAKE_BUILD_TYPE=RelWithDebInfo
 set WKITVER=10.0.18362.0
-call C:\httpd-sdk\MSVC_DEPS.bat
 
 REM https://msdn.microsoft.com/fr-fr/library/afyyse50.aspx
 REM /S	Supprime l'affichage des commandes exécutées. Pour supprimer l'affichage dans une partie d'un makefile, utilisez le modificateur de commande @ ou .SILENT. Pour définir ou supprimer l'option /S pour une partie d'un makefile, utilisez !CMDSWITCHES.
@@ -30,9 +29,9 @@ set MODULE_BAT_DIR=C:\httpd-sdk\modules_bat\
 cd /D C:\httpd-sdk\build
 for /F "delims=" %%i in ('dir /b') do (rmdir "%%i" /s/q || del "%%i" /s/q)
 rmdir /S /Q C:\httpd-sdk\install
-mklink /J C:\httpd-sdk\install C:\httpd-sdk\install_%ARCH%%AVXB%
+mklink /J C:\httpd-sdk\install C:\httpd-sdk\%MSVC_DEPS%_%ARCH%%AVXB%
 set PHPDEPS=C:\php72-sdk\phpmaster\%MSVC_DEPS%\%ARCH%\depsnono
-set PATH=c:\python27;C:\PROGRA~1\Git\bin;C:\bin\nasm;c:\perl\bin;c:\perl\site\bin;c:\bin;C:\Windows\SysWOW64;C:\msvc%MSVC_VER%\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;C:\Windows\SysWOW64\wbem;c:\cyg%CYGV%\bin;C:\php72-sdk\bin\php;C:\cyg64\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\PROGRA~1\TortoiseGit\bin
-call C:\msvc%MSVC_VER%\VC\Auxiliary\Build\vcvarsall.bat %ARCH%
+set PATH=c:\python27;C:\PROGRA~1\Git\bin;C:\bin\nasm;c:\perl\bin;c:\perl\site\bin;c:\bin;C:\Windows\SysWOW64;C:\msvc16\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;C:\Windows\SysWOW64\wbem;c:\cyg%CYGV%\bin;C:\php72-sdk\bin\php;C:\cyg64\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\PROGRA~1\TortoiseGit\bin
+call C:\msvc16\VC\Auxiliary\Build\vcvarsall.bat %ARCH% -vcvars_ver=%vcvars_ver%
 echo on
 cd /D C:\httpd-sdk
