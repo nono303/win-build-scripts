@@ -1,3 +1,4 @@
 /usr/bin/find /cygdrive/c/httpd-sdk/build/libev-win -type f -name "build.make" -exec sed -i 's/\/INCREMENTAL/\/LTCG \/OPT:ICF/g' {} \;
+/usr/bin/find /cygdrive/c/httpd-sdk/build/libev-win -type f -name "build.make" -exec sed -i 's/_static.lib @CMakeFiles/_static.lib \/LTCG @CMakeFiles/g' {} \;
 /usr/bin/find /cygdrive/c/httpd-sdk/build/libev-win -type f -name "flags.make" -exec sed -i 's/-GS -W4 -wd4251 -wd4275//g' {} \;
 /usr/bin/find /cygdrive/c/httpd-sdk/build/libev-win -type f -name "flags.make" -exec sed -i 's/ \/O2 / \/GL \/GS- \/Oy- \/guard:cf- \/FD \/GF \/Zc:inline \/MP8 \/LD \/Ox \/EHsc \/wd4005 \/wd4244 \/wd4456 \/wd4100 \/wd4505 \/wd4133 '$1' /g' {} \;

@@ -1,15 +1,16 @@
-cd /D C:\src\apr\
-git clean -f -d
-git reset --hard
-cd /D C:\src\apr-util\
-git clean -f -d
-git reset --hard
-cd /D C:\src\apr-iconv\
-git clean -f -d
-git reset --hard
-C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/vcxproj.sh "/cygdrive/c/httpd-sdk/src/apr/" %AVXVCX%
-C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/vcxproj.sh "/cygdrive/c/httpd-sdk/src/apr-util/" %AVXVCX%
-C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/vcxproj.sh "/cygdrive/c/httpd-sdk/src/apr-iconv/" %AVXVCX%
+for %%X in (apr apr-util apr-iconv) do (
+	rmdir /S /Q C:\httpd-sdk\src\%%X\%ARCH%
+	cd /D C:\src\%%X\
+	git clean -f -d
+	git reset --hard
+	C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/vcxproj.sh "/cygdrive/c/httpd-sdk/src/%%X/" %AVXVCX%
+	if %MSVC_DEPS% == vc15 (C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/modules_bat/vcxproj2vc15.sh "%%X")
+)
+rmdir /S /Q C:\httpd-sdk\src\apr\build\preaprapp
+rmdir /S /Q C:\httpd-sdk\src\apr-util\build\preaprutil
+rmdir /S /Q C:\httpd-sdk\src\apr-iconv\build\preapriconv
+rmdir /S /Q C:\httpd-sdk\src\apr\build\%ARCH%
+
 cd /D C:\src\apr\tools
 cl gen_test_char.c
 gen_test_char.exe > C:\src\apr\include\apr_escape_test_char.h

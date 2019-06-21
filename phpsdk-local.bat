@@ -24,9 +24,13 @@ set BUILDREQ=1
 
 REM ** uniquement sur init: phpsdk_buildtree phpmaster
 
-REM C:\php72-sdk>call phpsdk_deps -u -b 7.3 -a x64 -d C:\php72-sdk\phpmaster\vs16\x64\deps -t vs16 -s staging
+REM C:\php72-sdk>call phpsdk_deps -u -b 7.3 -a x64 -d C:\php72-sdk\phpmaster\%MSVC_DEPS%\x64\deps -t %MSVC_DEPS% -s staging
 REM Fatal error: Uncaught SDK\Exception: The passed CRT 'vs16' doesn't match any availbale for branch '7.3' in C:\php72-sdk\lib\php\libsdk\SDK\Config.php:287
-REM call phpsdk_deps -u -b %SDKVER% -a %PHP_SDK_ARCH% -d C:\php72-sdk\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\deps -t %MSVC_DEPS% -s staging
+if %MSVC_DEPS% == vc15 (
+	call phpsdk_deps -u -b %SDKVER% -a %PHP_SDK_ARCH% -d C:\php72-sdk\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\deps -t %MSVC_DEPS% -s staging
+	set BUILDLIB=0
+	set BUILDREQ=0
+)
 
 if %BUILDLIB% == 1 (
 	echo ON
@@ -78,4 +82,5 @@ if NOT %BUILDALL% == -1 (
 		copy /Y D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%PHP_SDK_ARCH%-ts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\%MSVC_DEPS%\%PHP_SDK_ARCH%\ts\php-%PHPVER%.x_memcache.dll
 	)
 )
-exit /B
+cd /D C:\httpd-sdk\
+exit
