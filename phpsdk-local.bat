@@ -5,7 +5,6 @@ cd /d C:\php72-sdk\
 
 set PHPVER=7.3
 
-
 	REM deps sans AVX
 SET AVX=
 SET AVXB=
@@ -21,19 +20,6 @@ set UPDATEDEPS=0
 
 	REM ** uniquement sur init: phpsdk_buildtree phpmaster
 
-REM Gestion des deps auto : KO sur vs16 
-	REM call phpsdk_deps -u -b 7.3 -a x64 -d C:\php72-sdk\phpmaster\%MSVC_DEPS%\x64\deps -t %MSVC_DEPS% -s staging
-	REM Fatal error: Uncaught SDK\Exception: The passed CRT 'vs16' doesn't match any availbale for branch '7.3' in C:\php72-sdk\lib\php\libsdk\SDK\Config.php:287
-REM	set SDKVER=%PHPVER%
-REM	if %SDKVER% == 7.1 (
-REM		set SDKVER=7.2
-REM	)
-REM	if %MSVC_DEPS% == vc15 (
-REM		call phpsdk_deps -u -b %SDKVER% -a %PHP_SDK_ARCH% -d C:\php72-sdk\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\deps -t %MSVC_DEPS% -s staging
-REM		set BUILDLIB=0
-REM		set BUILDREQ=0
-REM	)
-
 if %UPDATEDEPS% == 1 (
 	rmdir /S /Q C:\php72-sdk\phpmaster\%MSVC_DEPS%\%ARCH%\deps
 	mkdir C:\php72-sdk\phpmaster\%MSVC_DEPS%\%ARCH%\deps
@@ -42,7 +28,6 @@ if %UPDATEDEPS% == 1 (
 	call C:\php72-sdk\bin\7za.exe x -y *
 	rm -f *.zip
 )
-
 if %BUILDLIB% == 1 (
 	echo ON
 	REM en premier pour créer la structure depsnono
