@@ -10,4 +10,7 @@ copy /Y C:\httpd-sdk\build\c-ares\bin\cares.pdb C:\httpd-sdk\install\bin\cares.p
 copy /Y C:\httpd-sdk\build\c-ares\bin\acountry.pdb C:\httpd-sdk\install\bin\acountry.pdb
 copy /Y C:\httpd-sdk\build\c-ares\bin\adig.pdb C:\httpd-sdk\install\bin\adig.pdb
 copy /Y C:\httpd-sdk\build\c-ares\bin\ahost.pdb C:\httpd-sdk\install\bin\ahost.pdb
+	REM pour curl static
+move /Y C:\httpd-sdk\install\lib\cares_static.lib C:\httpd-sdk\install\lib\libcares.lib 
+move /Y C:\httpd-sdk\build\c-ares\CMakeFiles\c-ares_static.dir\c-ares_static.pdb C:\httpd-sdk\install\lib\c-ares_static.pdb
 cd /D C:\httpd-sdk\modules_bat
