@@ -16,8 +16,8 @@ if %ARCH% == x86 (
 if %ARCH% == x64 (
 	nmake -f win32/Makefile.msc AS=ml64 LOC="-DASMV -DASMINF -I." OBJA="inffasx64.obj gvmat64.obj inffas8664.obj"
 )
-copy /Y C:\httpd-sdk\src\zlib\zlib.lib C:\httpd-sdk\install\lib\zlibstatic.lib
-copy /Y C:\httpd-sdk\src\zlib\zlib.pdb C:\httpd-sdk\install\lib\zlibstatic.pdb
+copy /Y C:\httpd-sdk\src\zlib\zlib.lib C:\httpd-sdk\install\lib\zlib_a.lib
+copy /Y C:\httpd-sdk\src\zlib\zlib.pdb C:\httpd-sdk\install\lib\zlib_a.pdb
 copy /Y C:\httpd-sdk\src\zlib\zlib1.dll c:\httpd-sdk\install\bin\zlib1.dll
 copy /Y C:\httpd-sdk\src\zlib\zlib1.pdb c:\httpd-sdk\install\bin\zlib1.pdb
 copy /Y C:\httpd-sdk\src\zlib\zdll.lib C:\httpd-sdk\install\lib\zlib.lib
