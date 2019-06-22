@@ -4,7 +4,7 @@ mkdir C:\httpd-sdk\install\lib
 mkdir C:\httpd-sdk\install\bin
 mkdir C:\httpd-sdk\install\include
 cd /D C:\httpd-sdk\src\zlib
-git clean -d -f
+git clean -fdx
 git reset --hard
 sed -i 's/ARFLAGS = -nologo/ARFLAGS = -nologo -ltcg/g' /cygdrive/c/src/zlib/win32/Makefile.msc
 sed -i 's/-incremental:no -opt:ref/-ltcg -opt:ICF/g' /cygdrive/c/src/zlib/win32/Makefile.msc

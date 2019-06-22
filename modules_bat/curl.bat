@@ -4,7 +4,7 @@ cd /D C:\httpd-sdk\src\curl\winbuild
 SET rd=-release-dll-cares-dll-zlib-dll-ipv6-sspi-winssl-nghttp2-dll
 SET rs=-release-static-cares-static-zlib-static-ipv6-sspi-winssl-nghttp2-static
 git reset --hard
-git clean -d -f
+git clean -fdx
 move /Y C:\httpd-sdk\src\curl\src\tool_hugehelp.c.cvs C:\httpd-sdk\src\curl\src\tool_hugehelp.c
 
 sed -i 's/\/W4/\/GL \/GS- \/Oy- \/guard:cf- \/FD \/GF \/Zc:inline \/MP8 \/LD \/MD \/Ox \/W3 %AVXSED%/g' /cygdrive/c/httpd-sdk/src/curl/winbuild/MakefileBuild.vc

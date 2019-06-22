@@ -1,5 +1,5 @@
 cd /D C:\httpd-sdk\src\jemalloc-cmake\
-git clean -f -d
+git clean -fdx
 git reset --hard
 if %MSVC_DEPS% == vc15 (C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/modules_bat/vcxproj2vc15.sh "jemalloc-cmake/msvc/projects/vc2015/jemalloc")
 C:\cyg%CYGV%\bin\sh.exe -c "CC=cl ./autogen.sh"

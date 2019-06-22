@@ -1,6 +1,6 @@
 rmdir /S /Q C:\httpd-sdk\src\libmaxminddb\projects\VS12\%ARCH%
 cd /D C:\httpd-sdk\src\libmaxminddb
-git clean -f -d
+git clean -fdx
 git reset --hard
 cd /D C:\httpd-sdk\src\libmaxminddb\projects\VS12
 C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/vcxproj.sh "/cygdrive/c/httpd-sdk/src/libmaxminddb/projects/VS12/" %AVXVCX%

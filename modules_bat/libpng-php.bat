@@ -1,5 +1,5 @@
 cd /D C:\src\libpng\
-git clean -f -d
+git clean -fdx
 git reset --hard
 if %MSVC_DEPS% == vc15 (C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/modules_bat/vcxproj2vc15.sh "libpng/projects/vstudio2019")
 cd /D C:\src\libpng\projects\vstudio2019\
