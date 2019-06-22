@@ -10,4 +10,6 @@ sed -i 's/ARFLAGS = \/nologo/ARFLAGS = \/nologo \/LTCG/g' /cygdrive/c/httpd-sdk/
 nmake %NMAKE_OPTS% /f Makefile.msvc clean install-libs
 copy /Y C:\httpd-sdk\src\libxml2\win32\bin.msvc\libxml2.pdb C:\httpd-sdk\install\bin\libxml2.pdb
 nmake %NMAKE_OPTS% /f Makefile.msvc distclean
+	REM pour PHP
+mklink /J C:\httpd-sdk\install\include\libxml C:\httpd-sdk\install\include\libxml2
 cd /D C:\httpd-sdk\modules_bat
