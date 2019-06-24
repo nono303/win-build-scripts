@@ -16,7 +16,7 @@ SET AVXVCX=
 set BUILDALL=1
 set BUILDLIB=1
 set BUILDREQ=1
-set UPDATEDEPS=0
+set UPDATEDEPS=1
 
 	REM ** uniquement sur init: phpsdk_buildtree phpmaster
 
