@@ -17,6 +17,7 @@ call %MODULE_BAT_DIR%libevent.bat
 call %MODULE_BAT_DIR%libev.bat
 call %MODULE_BAT_DIR%c-ares.bat
 call %MODULE_BAT_DIR%nghttp2.bat
+call %MODULE_BAT_DIR%libssh2.bat
 call %MODULE_BAT_DIR%curl.bat
 call %MODULE_BAT_DIR%libexpat.bat
 call %MODULE_BAT_DIR%libmaxminddb.bat
