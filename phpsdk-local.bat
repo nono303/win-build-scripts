@@ -6,14 +6,10 @@ cd /d C:\php72-sdk\
 set PHPVER=7.3
 
 	REM deps sans AVX
-SET AVX=
-SET AVXB=
-SET AVXSED=
-SET AVXMSC=
-SET AVXVCX=
+call C:\httpd-sdk\avx.bat 0
 
 	REM -1 : only deps
-set BUILDALL=1
+set BUILDALL=0
 set BUILDLIB=1
 set BUILDREQ=1
 set UPDATEDEPS=1
@@ -22,7 +18,8 @@ set UPDATEDEPS=1
 
 if %UPDATEDEPS% == 1 (
 	rmdir /S /Q C:\php72-sdk\phpmaster\%MSVC_DEPS%\%ARCH%\deps
-	mkdir C:\php72-sdk\phpmaster\%MSVC_DEPS%\%ARCH%\deps
+	powershell -command "Start-Sleep -s 1"
+	mkdir C:\php72-sdk\phpmaster\%MSVC_DEPS%\%ARCH%\deps	
 	call C:\php72-sdk\bin\php\do_php c:\httpd-sdk\php-getdeps.php
 	cd /D C:\php72-sdk\phpmaster\%MSVC_DEPS%\%ARCH%\deps
 	call C:\php72-sdk\bin\7za.exe x -y *
@@ -45,9 +42,9 @@ if %BUILDREQ% == 1 (
 	call %MODULE_BAT_DIR%libzmq-php.bat
 )
 
-REM ## TODO completer
-copy /Y %PHPDEPS%\bin\*.* D:\github\NONO_phpwin-perfbuild\\%MSVC_DEPS%-%ARCH%_deps\
-copy /Y C:\httpd-sdk\install_%ARCH%\bin\brotli*.* D:\github\NONO_phpwin-perfbuild\\%MSVC_DEPS%-%ARCH%_deps\
+rm -f D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%ARCH%_deps\*.*
+copy /Y %PHPDEPS%\bin\*.* D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%ARCH%_deps\
+REM copy /Y C:\httpd-sdk\install_%ARCH%\bin\brotli*.* D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%ARCH%_deps\
 
 if NOT %BUILDALL% == -1 (
 	set ZTS=--disable-zts
@@ -55,11 +52,13 @@ if NOT %BUILDALL% == -1 (
 	set BUILDDIR=Release
 
 	set outdir=-avx
+	call C:\httpd-sdk\avx.bat 1
 	set intrinsics=,sse3,ssse3,sse4.1,sse4.2,avx
 		echo *** avx nts  ***
 		call C:\httpd-sdk\phpsdk-config_make.bat
 	if %BUILDALL% == 1 (
 		set outdir=
+		call C:\httpd-sdk\avx.bat 0
 		set intrinsics=
 			echo *** std nts  ***
 			call C:\httpd-sdk\phpsdk-config_make.bat
@@ -72,6 +71,7 @@ if NOT %BUILDALL% == -1 (
 			call C:\httpd-sdk\phpsdk-config_make.bat
 
 		set outdir=-avx
+		call C:\httpd-sdk\avx.bat 1
 		set intrinsics=,sse3,ssse3,sse4.1,sse4.2,avx
 			echo *** avx ts  ***
 			call C:\httpd-sdk\phpsdk-config_make.bat

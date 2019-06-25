@@ -11,14 +11,7 @@ set NMAKE_OPTS=/S /NOLOGO
 REM https://stackoverflow.com/questions/601970/how-do-i-utilise-all-the-cores-for-nmake
 set CL=/MP
 
-set AVX=/arch:AVX
-
-if DEFINED AVX (
-	SET AVXB=-avx
-	set AVXSED=\/arch:AVX
-	set AVXMSC=-arch:AVX
-	set AVXVCX="<EnableEnhancedInstructionSet>AdvancedVectorExtensions<\/EnableEnhancedInstructionSet>"
-)
+call C:\httpd-sdk\avx.bat 1
 
 REM /GL ko sur nghttp2. /GL ko si /Zi http://forums.codeguru.com/showthread.php?556135-ZI-and-GL-incompatible
 set EXTCFLAGSNGHTTP2=/GS- /Oy- /guard:cf- /FD /GF /Zc:inline /MP8 /LD /MD /Zi /Ox %AVX%
@@ -33,5 +26,5 @@ mklink /J C:\httpd-sdk\install C:\httpd-sdk\%MSVC_DEPS%_%ARCH%%AVXB%
 set PHPDEPS=C:\php72-sdk\phpmaster\%MSVC_DEPS%\%ARCH%\depsnono
 set PATH=c:\python27;C:\PROGRA~1\Git\bin;C:\bin\nasm;c:\perl\bin;c:\perl\site\bin;c:\bin;C:\Windows\SysWOW64;C:\msvc16\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;C:\Windows\SysWOW64\wbem;c:\cyg%CYGV%\bin;C:\php72-sdk\bin\php;C:\cyg64\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\PROGRA~1\TortoiseGit\bin
 call C:\msvc16\VC\Auxiliary\Build\vcvarsall.bat %ARCH% -vcvars_ver=%vcvars_ver%
-echo on
 cd /D C:\httpd-sdk
+echo on
