@@ -1,6 +1,6 @@
 cd /D C:\src\libpng\
-git clean -fdx
 git reset --hard
+git clean -fdx
 if %MSVC_DEPS% == vc15 (C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/modules_bat/vcxproj2vc15.sh "libpng/projects/vstudio2019")
 cd /D C:\src\libpng\projects\vstudio2019\
 MSBuild.exe C:\src\libpng\projects\vstudio2019\vstudio.sln /p:Turbo=true /m:8 /p:CL_MPCount=8 /t:Clean,libpng /p:Configuration="Release Library" /p:DebugSymbols=true /p:DebugType=None /p:Platform="%archmsbuild%"

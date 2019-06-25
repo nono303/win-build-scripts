@@ -1,6 +1,7 @@
 mklink /H C:\httpd-sdk\install\lib\xml.lib C:\httpd-sdk\install\lib\expat.lib
 mklink /H C:\httpd-sdk\install\lib\zlib_a.pdb C:\httpd-sdk\install\lib\zlibstatic.pdb
 cd /D C:\src\subversion
+git reset --hard
 git clean -fdx
 mkdir C:\httpd-sdk\src\subversion\Release-%ARCH%
 mklink /J C:\httpd-sdk\src\subversion\Release C:\httpd-sdk\src\subversion\Release-%ARCH%

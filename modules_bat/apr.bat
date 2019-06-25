@@ -1,8 +1,8 @@
 for %%X in (apr apr-util apr-iconv) do (
 	rmdir /S /Q C:\httpd-sdk\src\%%X\%ARCH%
 	cd /D C:\src\%%X\
-	git clean -fdx
 	git reset --hard
+	git clean -fdx
 	C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/vcxproj.sh "/cygdrive/c/httpd-sdk/src/%%X/" %AVXVCX%
 	if %MSVC_DEPS% == vc15 (C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/modules_bat/vcxproj2vc15.sh "%%X")
 )
