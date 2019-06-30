@@ -31,7 +31,6 @@ if %BUILDLIB% == 1 (
 	call %MODULE_BAT_DIR%libssh2-php.bat
 	call %MODULE_BAT_DIR%libxpm-php.bat
 	call %MODULE_BAT_DIR%freetype-php.bat
-	call %MODULE_BAT_DIR%libiconv-php.bat
 	call %MODULE_BAT_DIR%libpng-php.bat
 	call %MODULE_BAT_DIR%libjpeg-php.bat
 	call %MODULE_BAT_DIR%tidy-php.bat
