@@ -29,13 +29,14 @@
 		"mpir",
 		"net-snmp",
 		"openldap",
-		"wineditline"
+		"wineditline",
+		//"libcurl"
 	);
 
 	$urlbase = "https://windows.php.net/downloadS/php-sdk/deps/";
 	$repdl = $urlbase.$msvc."/".$arch."/";
 	$serie = $urlbase."series/packages-master-".$msvc."-".$arch."-".$type.".txt";
-
+	echo $serie.PHP_EOL;
 
 $ch = curl_init();
 $opts = array(
