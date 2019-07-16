@@ -1,38 +1,45 @@
+set module=protobuf-php
+
 REM AVX
-call vc15
-call x86
-call silent-httpd-build.bat
-REM call silent-php-build.bat
-call silent-subversion-build.bat
-call x64
-call silent-httpd-build.bat
-REM call silent-php-build.bat
-call silent-subversion-build.bat
-call vs16
-call x86
-call silent-httpd-build.bat
-REM call silent-php-build.bat
-call silent-subversion-build.bat
-call x64
-call silent-httpd-build.bat
-REM call silent-php-build.bat
-call silent-subversion-build.bat
+call C:\httpd-sdk\vc15.bat
+call C:\httpd-sdk\x86.bat
+call C:\httpd-sdk\avx.bat 1
+call C:\httpd-sdk\modules_bat\%module%.bat
+
+call C:\httpd-sdk\vc15.bat
+call C:\httpd-sdk\x64.bat
+call C:\httpd-sdk\avx.bat 1
+call C:\httpd-sdk\modules_bat\%module%.bat
+
+call C:\httpd-sdk\vs16.bat
+call C:\httpd-sdk\x86.bat
+call C:\httpd-sdk\avx.bat 1
+call C:\httpd-sdk\modules_bat\%module%.bat
+
+call C:\httpd-sdk\vs16.bat
+call C:\httpd-sdk\x64.bat
+call C:\httpd-sdk\avx.bat 1
+call C:\httpd-sdk\modules_bat\%module%.bat
+
 REM !AVX
-call vc15
-call x86
-call avx 0
-call silent-httpd-build.bat
-call silent-subversion-build.bat
-call x64
-call avx 0
-call silent-httpd-build.bat
-call silent-subversion-build.bat
-call vs16
-call x86
-call avx 0
-call silent-httpd-build.bat
-call silent-subversion-build.bat
-call x64
-call avx 0
-call silent-httpd-build.bat
-call silent-subversion-build.bat
+call C:\httpd-sdk\vc15.bat
+call C:\httpd-sdk\x86.bat
+call C:\httpd-sdk\avx.bat 0
+call C:\httpd-sdk\modules_bat\%module%.bat
+
+call C:\httpd-sdk\vc15.bat
+call C:\httpd-sdk\x64.bat
+call C:\httpd-sdk\avx.bat 0
+call C:\httpd-sdk\modules_bat\%module%.bat
+
+call C:\httpd-sdk\vs16.bat
+call C:\httpd-sdk\x86.bat
+call C:\httpd-sdk\avx.bat 0
+call C:\httpd-sdk\modules_bat\%module%.bat
+
+call C:\httpd-sdk\vs16.bat
+call C:\httpd-sdk\x64.bat
+call C:\httpd-sdk\avx.bat 0
+call C:\httpd-sdk\modules_bat\%module%.bat
+
+pause
