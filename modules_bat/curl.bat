@@ -8,17 +8,19 @@ sed -i 's/\/W4/\/GL \/GS- \/Oy- \/guard:cf- \/FD \/GF \/Zc:inline \/MP8 \/LD \/M
 sed -i 's/LFLAGS     = \/nologo/LFLAGS     = \/nologo \/LTCG \/OPT:ICF/g' /cygdrive/c/httpd-sdk/src/curl/winbuild/MakefileBuild.vc
 sed -i 's/LNKLIB     = lib.exe/LNKLIB     = lib.exe \/LTCG/g' /cygdrive/c/httpd-sdk/src/curl/winbuild/MakefileBuild.vc
 
-SET rd=-release-dll-ssl-dll-cares-dll-zlib-dll-ssh2-static-ipv6-sspi-winssl-nghttp2-dll
-SET rs=-release-static-ssl-static-cares-static-zlib-static-ssh2-static-ipv6-sspi-winssl-nghttp2-static
+SET rd=-release-dll-cares-dll-zlib-dll-ipv6-sspi-winssl-nghttp2-dll
+SET rs=-release-static-cares-static-zlib-static-ipv6-sspi-winssl-nghttp2-static
 
 	REM static
-nmake /f Makefile.vc mode=static	VC=%MSVC_VER% WITH_DEVEL=c:/httpd-sdk/install WITH_CARES=static WITH_SSH2=static WITH_SSL=static WITH_NGHTTP2=static WITH_ZLIB=static ENABLE_SSPI=yes ENABLE_IPV6=yes ENABLE_IDN=yes ENABLE_WINSSL=yes GEN_PDB=yes DEBUG=no MACHINE=%ARCH%
+	REM WITH_SSH2=static WITH_SSL=static // doesn't work on mod_md
+nmake /f Makefile.vc mode=static	VC=%MSVC_VER% WITH_DEVEL=c:/httpd-sdk/install WITH_CARES=static WITH_NGHTTP2=static WITH_ZLIB=static ENABLE_SSPI=yes ENABLE_IPV6=yes ENABLE_IDN=yes ENABLE_WINSSL=yes GEN_PDB=yes DEBUG=no MACHINE=%ARCH%
 
 	REM dll
 		REM KO tout static : cares en dll
 		REM KO tout dll : ssh2 en static
 		REM OK nmake /f Makefile.vc mode=dll VC=%MSVC_VER% WITH_DEVEL=c:/httpd-sdk/install WITH_CARES=dll WITH_SSH2=static WITH_SSL=static WITH_NGHTTP2=static WITH_ZLIB=static ENABLE_SSPI=yes ENABLE_IPV6=yes ENABLE_IDN=yes ENABLE_WINSSL=yes GEN_PDB=yes DEBUG=no MACHINE=%ARCH%
-nmake /f Makefile.vc mode=dll VC=%MSVC_VER% WITH_DEVEL=c:/httpd-sdk/install WITH_CARES=dll WITH_SSH2=static WITH_SSL=dll WITH_NGHTTP2=dll WITH_ZLIB=dll ENABLE_SSPI=yes ENABLE_IPV6=yes ENABLE_IDN=yes ENABLE_WINSSL=yes GEN_PDB=yes DEBUG=no MACHINE=%ARCH%
+	REM WITH_SSH2=static WITH_SSL=dll // doesn't work on mod_md
+nmake /f Makefile.vc mode=dll VC=%MSVC_VER% WITH_DEVEL=c:/httpd-sdk/install WITH_CARES=dll WITH_NGHTTP2=dll WITH_ZLIB=dll ENABLE_SSPI=yes ENABLE_IPV6=yes ENABLE_IDN=yes ENABLE_WINSSL=yes GEN_PDB=yes DEBUG=no MACHINE=%ARCH%
 
 mkdir C:\httpd-sdk\install\include\curl\
 Copy /Y C:\httpd-sdk\src\curl\builds\libcurl-vc%MSVC_VER%-%ARCH%%rs%\lib\libcurl_a.lib C:\httpd-sdk\install\lib\libcurl_a.lib
