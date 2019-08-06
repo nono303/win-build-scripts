@@ -30,7 +30,7 @@
 		"net-snmp",
 		"openldap",
 		"wineditline",
-		//"libcurl"
+		"libcurl"
 	);
 
 	$urlbase = "https://windows.php.net/downloadS/php-sdk/deps/";
