@@ -9,6 +9,4 @@ nmake %NMAKE_OPTS% clean install
 mt.exe -manifest C:\httpd-sdk\modules_bat\httpd.exe.manifest -outputresource:C:\httpd-sdk\install\bin\httpd.exe;1
 Copy /Y C:\httpd-sdk\install\modules\mod_md.pdb D:\github\NONO_mod_md\%MSVC_DEPS%\%ARCH%%AVXB%\mod_md.pdb
 Copy /Y C:\httpd-sdk\install\modules\mod_md.so D:\github\NONO_mod_md\%MSVC_DEPS%\%ARCH%%AVXB%\mod_md.so
-Copy /Y C:\httpd-sdk\install\modules\mod_ssl.pdb D:\github\NONO_mod_md\%MSVC_DEPS%\%ARCH%%AVXB%\mod_ssl.pdb
-Copy /Y C:\httpd-sdk\install\modules\mod_ssl.so D:\github\NONO_mod_md\%MSVC_DEPS%\%ARCH%%AVXB%\mod_ssl.so
 cd /D C:\httpd-sdk\modules_bat
