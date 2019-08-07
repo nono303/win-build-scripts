@@ -31,7 +31,11 @@ if NOT %PHPVER% == 7.1 (
 
 sed -i 's/LDFLAGS=\/nologo/LDFLAGS=\/nologo \/LTCG \/NODEFAULTLIB:libcmt.lib  \/NODEFAULTLIB:MSVCRTD.lib \/OPT:ICF/g' /cygdrive/c/src/php-src/Makefile
 sed -i 's/ARFLAGS=\/nologo/ARFLAGS=\/nologo \/LTCG \/NODEFAULTLIB:libcmt.lib  \/NODEFAULTLIB:MSVCRTD.lib \/OPT:ICF/g' /cygdrive/c/src/php-src/Makefile
-sed -i 's/CFLAGS=\/nologo/CFLAGS=\/nologo \/GL \/GS- \/Oy- \/w/g' /cygdrive/c/src/php-src/Makefile
+if %PHPVER% == 7.3 (
+	sed -i 's/CFLAGS=\/nologo/CFLAGS=\/nologo \/GL \/GS- \/Oy- \/w/g' /cygdrive/c/src/php-src/Makefile
+) else (
+	sed -i 's/CFLAGS=\/nologo/CFLAGS=\/nologo \/GL \/GS- \/Oy- \/w %AVXSED%/g' /cygdrive/c/src/php-src/Makefile
+)
 sed -i 's/ \/W3 / /g' /cygdrive/c/src/php-src/Makefile
 sed -i 's/ \/wd4996 / /g' /cygdrive/c/src/php-src/Makefile
 
