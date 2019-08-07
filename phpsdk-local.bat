@@ -5,15 +5,12 @@ cd /d C:\php72-sdk\
 
 set PHPVER=7.3
 
-	REM deps sans AVX
-call C:\httpd-sdk\avx.bat 0
-
-	REM -1 : only deps
+REM -1 : only deps | 0 : avx nts | 1 : all
 set BUILDALL=1
-set BUILDTS=0
+set BUILDTS=1
 
-set BUILDLIB=1
-set BUILDREQ=1
+set BUILDLIB=0
+set BUILDREQ=0
 set UPDATEDEPS=0
 
 	REM ** uniquement sur init: phpsdk_buildtree phpmaster
@@ -31,6 +28,8 @@ set raznono=0
 if %BUILDLIB% == 1 set raznono=1
 if %BUILDREQ% == 1 set raznono=1
 if %raznono% == 1 (
+	REM deps sans AVX
+	call C:\httpd-sdk\avx.bat 0
 	rmdir /S /Q C:\php72-sdk\phpmaster\%MSVC_DEPS%\%ARCH%\depsnono
 	powershell -command "Start-Sleep -s 1"
 	mkdir C:\php72-sdk\phpmaster\%MSVC_DEPS%\%ARCH%\depsnono
@@ -55,37 +54,28 @@ if %BUILDREQ% == 1 (
 
 rm -f D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%ARCH%_deps\*.*
 copy /Y %PHPDEPS%\bin\*.* D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%ARCH%_deps\
-REM copy /Y C:\httpd-sdk\install_%ARCH%\bin\brotli*.* D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%ARCH%_deps\
 
 if NOT %BUILDALL% == -1 (
+	echo *** avx nts  ***
 	set ZTS=--disable-zts
 	set TSNTS=nts
 	set BUILDDIR=Release
-
-	set outdir=-avx
 	call C:\httpd-sdk\avx.bat 1
-	set intrinsics=,sse3,ssse3,sse4.1,sse4.2,avx
-		echo *** avx nts  ***
-		call C:\httpd-sdk\phpsdk-config_make.bat
+	call C:\httpd-sdk\phpsdk-config_make.bat
 	if %BUILDALL% == 1 (
-		set outdir=
+		echo *** std nts  ***
 		call C:\httpd-sdk\avx.bat 0
-		set intrinsics=
-			echo *** std nts  ***
-			call C:\httpd-sdk\phpsdk-config_make.bat
+		call C:\httpd-sdk\phpsdk-config_make.bat
 		if %BUILDTS% == 1 (
+			echo *** std ts  ***
 			set ZTS=
 			set TSNTS=ts
 			set BUILDDIR=Release_TS
+			call C:\httpd-sdk\phpsdk-config_make.bat
 
-				echo *** std ts  ***
-				call C:\httpd-sdk\phpsdk-config_make.bat
-
-			set outdir=-avx
+			echo *** avx ts  ***
 			call C:\httpd-sdk\avx.bat 1
-			set intrinsics=,sse3,ssse3,sse4.1,sse4.2,avx
-				echo *** avx ts  ***
-				call C:\httpd-sdk\phpsdk-config_make.bat
+			call C:\httpd-sdk\phpsdk-config_make.bat
 		)
 
 		copy /Y D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%PHP_SDK_ARCH%-avx-nts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\%MSVC_DEPS%\%PHP_SDK_ARCH%\nts\avx\php-%PHPVER%.x_memcache.dll
