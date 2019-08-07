@@ -5,6 +5,9 @@ if %1 == 1 (
 	set AVXSED=\/arch:AVX
 	set AVXMSC=-arch:AVX
 	set AVXVCX="<EnableEnhancedInstructionSet>AdvancedVectorExtensions<\/EnableEnhancedInstructionSet>"
+		REM php
+	set outdir=-avx
+	set intrinsics=,sse3,ssse3,sse4.1,sse4.2,avx
 	echo ~~-~~  AVX ~~-~~
 )
 if %1 == 0 (
@@ -13,6 +16,9 @@ if %1 == 0 (
 	set AVXSED=
 	set AVXMSC=
 	set AVXVCX=
+		REM php
+	set outdir=
+	set intrinsics=
 	echo ~~-~~ SSE2 ~~-~~
 )
 
