@@ -1,5 +1,3 @@
-
-
 cd /d C:\php72-sdk\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\php-src
 git reset --hard
 git clean -fdx
@@ -42,9 +40,9 @@ sed -i 's/ \/wd4996 / /g' /cygdrive/c/src/php-src/Makefile
 nmake %NMAKE_OPTS%
 
 for /f "tokens=*" %%G in ('dir C:\php72-sdk\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\build\%BUILDDIR%\*.exe /s/b') do (
-	COPY /Y %%~pG%%~nG.exe D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%PHP_SDK_ARCH%%outdir%-%TSNTS%\%%~nG.exe
+	COPY /Y %%~pG%%~nG.exe D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%PHP_SDK_ARCH%%outdirphp%-%TSNTS%\%%~nG.exe
 )
 for /f "tokens=*" %%G in ('dir C:\php72-sdk\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\build\%BUILDDIR%\*.dll /s/b') do (
-	COPY /Y %%~pG%%~nG.dll D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%PHP_SDK_ARCH%%outdir%-%TSNTS%\%%~nG.dll
+	COPY /Y %%~pG%%~nG.dll D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%PHP_SDK_ARCH%%outdirphp%-%TSNTS%\%%~nG.dll
 )
 rmdir /S /Q C:\php72-sdk\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\build\%BUILDDIR%\
