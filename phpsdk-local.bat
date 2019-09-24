@@ -7,7 +7,7 @@ set PHPVER=7.3
 
 REM -1 : only deps | 0 : avx nts | 1 : all
 set BUILDALL=1
-set BUILDTS=1
+set BUILDTS=0
 
 set BUILDLIB=0
 set BUILDREQ=0
