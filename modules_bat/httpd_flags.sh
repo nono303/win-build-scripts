@@ -1,2 +1,3 @@
 /usr/bin/find /cygdrive/c/httpd-sdk/build/httpd/CMakeFiles -type f -name "build.make" -exec sed -i 's/.dir\\C_\\httpd-sdk\\src\\mod_wku_bt\\diag.c.obj \/Fd/.dir\\C_\\httpd-sdk\\src\\mod_wku_bt\\diag.c.obj \/D DIAG_BITS_'$1' \/Fd/g' {} \;
-/usr/bin/find /cygdrive/c/httpd-sdk/build/httpd -type f -name "flags.make" -exec sed -i 's/RC_FLAGS = \/DWIN32/RC_FLAGS = \/nologo \/DWIN32/g' {} \;
+/usr/bin/find /cygdrive/c/httpd-sdk/build/httpd -type f -name "flags.make" -exec sed -i 's/RC_FLAGS = -DWIN32/RC_FLAGS = \/nologo -DWIN32/g' {} \;
+/usr/bin/find /cygdrive/c/httpd-sdk/build/httpd/CMakeFiles/gen_test_char.dir -type f -name "flags.make" -exec sed -i 's/\/w \/Ob1/\/w \/Ob1 \/GL \/GS- \/Oy- \/guard:cf- \/FD \/GF \/Zc:inline \/MP8 \/LD \/MD \/Zi \/Ox/g' {} \;
