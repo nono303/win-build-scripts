@@ -6,4 +6,6 @@ cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=C:\httpd-sdk\install 
 C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/modules_bat/libexpat.sh "%AVXSED%"
 nmake %NMAKE_OPTS% clean install
 copy /Y C:\httpd-sdk\build\libexpat\libexpat.pdb C:\httpd-sdk\install\bin\libexpat.pdb
+REM APR
+mklink /H C:\httpd-sdk\install\lib\expat.lib C:\httpd-sdk\install\lib\libexpat.lib
 cd /D C:\httpd-sdk\modules_bat

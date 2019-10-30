@@ -37,7 +37,7 @@ Copy /Y C:\httpd-sdk\install\bin\libcrypto-1_1%sslarch%.dll D:\github\NONO_subve
 Copy /Y C:\httpd-sdk\install\bin\libssl-1_1%sslarch%.pdb D:\github\NONO_subversion\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%libssl-1_1%sslarch%.pdb
 Copy /Y C:\httpd-sdk\install\bin\libcrypto-1_1%sslarch%.pdb D:\github\NONO_subversion\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%libcrypto-1_1%sslarch%.pdb
 
-Copy /Y C:\httpd-sdk\install\bin\expat.dll D:\github\NONO_subversion\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%expat.dll
+Copy /Y C:\httpd-sdk\install\bin\expat.dll D:\github\NONO_subversion\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%libexpat.dll
 Copy /Y C:\httpd-sdk\install\bin\libapr-1.dll D:\github\NONO_subversion\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%libapr-1.dll
 Copy /Y C:\httpd-sdk\install\bin\libapriconv-1.dll D:\github\NONO_subversion\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%libapriconv-1.dll
 Copy /Y C:\httpd-sdk\install\bin\libaprutil-1.dll D:\github\NONO_subversion\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%libaprutil-1.dll
@@ -47,7 +47,7 @@ Copy /Y C:\httpd-sdk\install\bin\brotlidec.dll D:\github\NONO_subversion\%MSVC_D
 Copy /Y C:\httpd-sdk\install\bin\libserf-2.dll D:\github\NONO_subversion\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%libserf-2.dll
 
 Copy /Y C:\httpd-sdk\install\bin\libssl-1_1%sslarch%.pdb D:\github\NONO_subversion\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%libssl-1_1%sslarch%.pdb
-Copy /Y C:\httpd-sdk\install\bin\expat.pdb D:\github\NONO_subversion\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%expat.pdb
+Copy /Y C:\httpd-sdk\install\bin\expat.pdb D:\github\NONO_subversion\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%libexpat.pdb
 Copy /Y C:\httpd-sdk\install\bin\libapr-1.pdb D:\github\NONO_subversion\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%libapr-1.pdb
 Copy /Y C:\httpd-sdk\install\bin\libapriconv-1.pdb D:\github\NONO_subversion\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%libapriconv-1.pdb
 Copy /Y C:\httpd-sdk\install\bin\libaprutil-1.pdb D:\github\NONO_subversion\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%libaprutil-1.pdb
