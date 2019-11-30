@@ -3,6 +3,7 @@ git reset --hard
 git clean -fdx
 REM Openssl in PHAR
 	sed -i 's/libeay32st/libcrypto/g' /cygdrive/c/src/php-src/ext/phar/config.w32
+
 rmdir /S /Q C:\php72-sdk\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\build\%BUILDDIR%\
 mkdir C:\php72-sdk\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\build\%BUILDDIR%\
 call buildconf
@@ -12,22 +13,26 @@ REM patch curl si self-build
 	REM mklink /h C:\php72-sdk\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\deps\include\curl\curlver.h C:\httpd-sdk\install\include\curl\curlver.h
 	REM sed -i 's/EXTENSION("curl", "interface.c multi.c share.c curl_file.c");/EXTENSION("curl", "interface.c multi.c share.c curl_file.c"); CHECK_LIB("cares.lib", "curl", PHP_CURL);/g' /cygdrive/c/src/php-src/configure.js
 
-REM call configure --help > c:\configure_%PHPVER%.txt
-REM exit /B
+REM export config options
+	REM call configure --help > c:\configure_%PHPVER%.txt
+	REM exit /B
 
 if %PHPVER% == 7.1 (
 	call configure --with-mp=8 --enable-object-out-dir=../build/ --without-gd --disable-embed --disable-phpdbgs --disable-phpdbg --disable-cli-win32 --disable-test-ini --disable-debug --disable-debug-pack --disable-ipv6 --disable-phpdbg-webhelper --disable-crt-debug --disable-security-flags --without-enchant --without-imap --without-snmp --without-xmlrpc --without-xsl --without-gmp --without-wddx --without-libwebp --without-interbase --without-ldap --without-oci8 --without-pgsql --without-uncritical-warn-choke --with-boost=C:\src\boost --enable-memcache=shared --enable-fd-setsize=2048 --without-analyzer --with-extra-includes="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.7\Include\um";"C:\Program Files (x86)\Windows Kits\10\Include\%WKITVER%\um";"..\depsnono\include";"C:\httpd-sdk\install\include" --with-extra-libs="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.7\Lib\um\%PHP_SDK_ARCH%";"C:\Program Files (x86)\Windows Kits\10\Lib\%WKITVER%\um\%PHP_SDK_ARCH%";"..\depsnono\lib";"C:\httpd-sdk\install\lib" %ZTS% 
 )
 
-REM BUG bartch if : portée variable phpveropts
+REM BUG batch if : portée variable phpveropts
+set native-intrinsics=0
 if %PHPVER% == 7.2 (
 	set phpveropts= --enable-sanitizer --without-wddx  --without-interbase
 )
 if %PHPVER% == 7.3 (
 	set phpveropts= --enable-sanitizer --enable-native-intrinsics=sse,sse2%intrinsics% --without-wddx  --without-interbase
+	set native-intrinsics=1
 )
 if %PHPVER% == 7.4 (
 	set phpveropts= --enable-sanitizer --enable-native-intrinsics=sse,sse2%intrinsics% --with-ffi --with-mhash
+	set native-intrinsics=1
 )
 
 if NOT %PHPVER% == 7.1 (
@@ -38,7 +43,8 @@ REM pause
 
 sed -i 's/LDFLAGS=\/nologo/LDFLAGS=\/nologo \/LTCG \/NODEFAULTLIB:libcmt.lib  \/NODEFAULTLIB:MSVCRTD.lib \/OPT:ICF/g' /cygdrive/c/src/php-src/Makefile
 sed -i 's/ARFLAGS=\/nologo/ARFLAGS=\/nologo \/LTCG \/NODEFAULTLIB:libcmt.lib  \/NODEFAULTLIB:MSVCRTD.lib \/OPT:ICF/g' /cygdrive/c/src/php-src/Makefile
-if %PHPVER% == 7.3 (
+
+if %native-intrinsics% == 1 (
 	sed -i 's/CFLAGS=\/nologo/CFLAGS=\/nologo \/GL \/GS- \/Oy- \/w/g' /cygdrive/c/src/php-src/Makefile
 ) else (
 	sed -i 's/CFLAGS=\/nologo/CFLAGS=\/nologo \/GL \/GS- \/Oy- \/w %AVXSED%/g' /cygdrive/c/src/php-src/Makefile
