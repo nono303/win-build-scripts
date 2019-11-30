@@ -3,10 +3,10 @@ call c:\httpd-sdk\%PHP_SDK_ARCH%.bat
 set path=%path%;%oldpath%
 cd /d C:\php72-sdk\
 
-set PHPVER=7.3
+set PHPVER=7.4
 
 REM -1 : only deps | 0 : avx nts | 1 : all
-set BUILDALL=1
+set BUILDALL=0
 set BUILDTS=0
 
 set BUILDLIB=0
@@ -50,6 +50,7 @@ if %BUILDREQ% == 1 (
 	call %MODULE_BAT_DIR%protobuf-php.bat
 	call %MODULE_BAT_DIR%libxdiff-php.bat
 	call %MODULE_BAT_DIR%libzmq-php.bat
+	call %MODULE_BAT_DIR%sqlite.bat
 )
 
 rm -f D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%ARCH%_deps\*.*
