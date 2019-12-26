@@ -9,7 +9,9 @@ REM /B	Force la génération même quand les horodatages coïncident. Recommandée un
 set NMAKE_OPTS=/S /NOLOGO
 
 REM https://stackoverflow.com/questions/601970/how-do-i-utilise-all-the-cores-for-nmake
-set CL=/MP
+
+SET MTPROC=8
+set CL=/MP%MTPROC%
 
 set MODULE_BAT_DIR=C:\httpd-sdk\modules_bat\
 
