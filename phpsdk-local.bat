@@ -3,7 +3,9 @@ call c:\httpd-sdk\%PHP_SDK_ARCH%.bat
 set path=%path%;%oldpath%
 cd /d C:\php72-sdk\
 
-set PHPVER=7.4
+cd /D c:\httpd-sdk\src\php-src
+FOR /F "tokens=* USEBACKQ" %%F IN (`git describe --tags`) DO ( SET PHPVER=%%F )
+set PHPVER=%PHPVER:~4,3%
 
 REM -1 : only deps | 0 : avx nts | 1 : all
 set BUILDALL=1
