@@ -6,12 +6,12 @@ cd /d C:\php72-sdk\
 set PHPVER=7.4
 
 REM -1 : only deps | 0 : avx nts | 1 : all
-set BUILDALL=0
-set BUILDTS=0
+set BUILDALL=1
+set BUILDTS=1
 
-set BUILDLIB=0
-set BUILDREQ=0
-set UPDATEDEPS=0
+set BUILDLIB=1
+set BUILDREQ=1
+set UPDATEDEPS=1
 
 	REM ** uniquement sur init: phpsdk_buildtree phpmaster
 
@@ -47,9 +47,10 @@ if %BUILDLIB% == 1 (
 	call %MODULE_BAT_DIR%tidy-php.bat
 )
 if %BUILDREQ% == 1 (
-	call %MODULE_BAT_DIR%protobuf-php.bat
+	REM *** DISABLED ***
+		REM call %MODULE_BAT_DIR%protobuf-php.bat
+		REM call %MODULE_BAT_DIR%libzmq-php.bat
 	call %MODULE_BAT_DIR%libxdiff-php.bat
-	call %MODULE_BAT_DIR%libzmq-php.bat
 	call %MODULE_BAT_DIR%sqlite.bat
 )
 
