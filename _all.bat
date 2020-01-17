@@ -1,4 +1,4 @@
-set module=protobuf-php
+set module=httpd
 
 REM AVX
 call C:\httpd-sdk\vc15.bat

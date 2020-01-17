@@ -10,7 +10,7 @@ set NMAKE_OPTS=/S /NOLOGO
 
 REM https://stackoverflow.com/questions/601970/how-do-i-utilise-all-the-cores-for-nmake
 
-SET MTPROC=8
+SET MTPROC=1
 set CL=/MP%MTPROC%
 
 set MODULE_BAT_DIR=C:\httpd-sdk\modules_bat\
