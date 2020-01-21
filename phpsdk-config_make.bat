@@ -14,8 +14,7 @@ REM patch curl si self-build
 	REM sed -i 's/EXTENSION("curl", "interface.c multi.c share.c curl_file.c");/EXTENSION("curl", "interface.c multi.c share.c curl_file.c"); CHECK_LIB("cares.lib", "curl", PHP_CURL);/g' /cygdrive/c/src/php-src/configure.js
 
 REM export config options
-	REM call configure --help > c:\configure_%PHPVER%.txt
-	REM exit /B
+	call configure --help > C:\httpd-sdk\_logs\configure_%PHPVER%.txt
 
 REM BUG batch if : portée variable phpveropts
 set native-intrinsics=0
@@ -37,10 +36,11 @@ if %PHPVER% == 7.4 (
 	set phpveropts= --enable-sanitizer --enable-native-intrinsics=sse,sse2%intrinsics% --with-mhash --with-ffi
 	set native-intrinsics=1
 
-	call configure --with-mp=%MTPROC% --enable-object-out-dir=../build/ --disable-embed --disable-phpdbgs --disable-phpdbg --disable-cli-win32 --disable-test-ini --disable-debug --disable-debug-pack --disable-ipv6 --disable-phpdbg-webhelper --disable-crt-debug --disable-security-flags --without-enchant --without-imap --without-snmp --without-xmlrpc --without-xsl --without-gmp --without-libwebp --without-ldap --without-oci8 --without-pgsql --without-uncritical-warn-choke --with-xdiff=shared --with-boost=C:\src\boost --with-protobuf=..\depsnono\ --with-iconv=C:\httpd-sdk\install --enable-sockets --enable-mbstring --enable-exif --enable-memcache=shared --enable-brotli=shared --enable-pdo --enable-opcache --enable-soap --enable-fileinfo --enable-com-dotnet --enable-fd-setsize=2048 --enable-intl --enable-phar-native-ssl --without-analyzer --with-curl=shared --with-tidy=shared --with-openssl --with-mysqli --with-pdo-mysql --with-bz2 --with-sqlite3 --with-pdo-sqlite --with-extra-includes="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.7\Include\um";"C:\Program Files (x86)\Windows Kits\10\Include\%WKITVER%\um";"..\depsnono\include";"C:\httpd-sdk\install\include" --with-extra-libs="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.7\Lib\um\%PHP_SDK_ARCH%";"C:\Program Files (x86)\Windows Kits\10\Lib\%WKITVER%\um\%PHP_SDK_ARCH%";"..\depsnono\lib";"C:\httpd-sdk\install\lib" --with-xdebug=shared %ZTS% %phpveropts%
+	call configure --with-mp=%MTPROC% --enable-object-out-dir=../build/ --disable-embed --disable-phpdbgs --disable-phpdbg --disable-cli-win32 --disable-test-ini --disable-debug --disable-debug-pack --disable-ipv6 --disable-phpdbg-webhelper --disable-crt-debug --disable-security-flags --without-enchant --without-imap --without-snmp --without-xmlrpc --without-xsl --without-gmp --without-libwebp --without-ldap --without-oci8 --without-pgsql --without-uncritical-warn-choke --with-xdiff=shared --with-iconv=C:\httpd-sdk\install --enable-sockets --enable-mbstring --enable-exif --enable-memcache=shared --enable-brotli=shared --enable-pdo --enable-opcache --enable-soap --enable-fileinfo --enable-com-dotnet --enable-fd-setsize=2048 --enable-intl --enable-phar-native-ssl --without-analyzer --with-curl=shared --with-tidy=shared --with-openssl --with-mysqli --with-pdo-mysql --with-bz2 --with-sqlite3 --with-pdo-sqlite --with-extra-includes="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.7\Include\um";"C:\Program Files (x86)\Windows Kits\10\Include\%WKITVER%\um";"..\depsnono\include";"C:\httpd-sdk\install\include" --with-extra-libs="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.7\Lib\um\%PHP_SDK_ARCH%";"C:\Program Files (x86)\Windows Kits\10\Lib\%WKITVER%\um\%PHP_SDK_ARCH%";"..\depsnono\lib";"C:\httpd-sdk\install\lib" --with-xdebug=shared %ZTS% %phpveropts%
 )
 
 REM pause
+REM EXIT /B
 
 sed -i 's/LDFLAGS=\/nologo/LDFLAGS=\/nologo \/LTCG \/NODEFAULTLIB:libcmt.lib  \/NODEFAULTLIB:MSVCRTD.lib \/OPT:ICF/g' /cygdrive/c/src/php-src/Makefile
 sed -i 's/ARFLAGS=\/nologo/ARFLAGS=\/nologo \/LTCG \/NODEFAULTLIB:libcmt.lib  \/NODEFAULTLIB:MSVCRTD.lib \/OPT:ICF/g' /cygdrive/c/src/php-src/Makefile
