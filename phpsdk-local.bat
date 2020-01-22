@@ -4,18 +4,19 @@ set path=%path%;%oldpath%
 cd /d C:\php72-sdk\
 
 cd /D c:\httpd-sdk\src\php-src
-FOR /F "tokens=* USEBACKQ" %%F IN (`git describe --tags`) DO ( SET PHPVER=%%F )
-set PHPVER=%PHPVER:~4,3%
+FOR /F "tokens=* USEBACKQ" %%F IN (`git describe --tags`) DO ( SET PHPGITVER=%%F )
+set PHPVER=%PHPGITVER:~4,3%
 
 REM -1 : only deps | 0 : avx nts | 1 : all
 set BUILDALL=1
-set BUILDTS=1
+set BUILDTS=0
 
-set BUILDLIB=1
-set BUILDREQ=1
-set UPDATEDEPS=1
+set BUILDLIB=0
+set BUILDREQ=0
+set UPDATEDEPS=0
 
-	REM ** uniquement sur init: phpsdk_buildtree phpmaster
+REM ** uniquement sur init: 
+	REM phpsdk_buildtree phpmaster
 
 if %UPDATEDEPS% == 1 (
 	rmdir /S /Q C:\php72-sdk\phpmaster\%MSVC_DEPS%\%ARCH%\deps
@@ -39,7 +40,9 @@ if %raznono% == 1 (
 	mkdir C:\php72-sdk\phpmaster\%MSVC_DEPS%\%ARCH%\depsnono\bin
 	mkdir C:\php72-sdk\phpmaster\%MSVC_DEPS%\%ARCH%\depsnono\include
 )
+set copydeps=0
 if %BUILDLIB% == 1 (
+	set copydeps=1
 	echo ON
 	REM en premier pour créer la structure depsnono
 	call %MODULE_BAT_DIR%libxpm-php.bat
@@ -49,15 +52,17 @@ if %BUILDLIB% == 1 (
 	call %MODULE_BAT_DIR%tidy-php.bat
 )
 if %BUILDREQ% == 1 (
+	set copydeps=1
 	REM *** DISABLED ***
 		REM call %MODULE_BAT_DIR%protobuf-php.bat
 		REM call %MODULE_BAT_DIR%libzmq-php.bat
 	call %MODULE_BAT_DIR%libxdiff-php.bat
 	call %MODULE_BAT_DIR%sqlite.bat
 )
-
-rm -f D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%ARCH%_deps\*.*
-copy /Y %PHPDEPS%\bin\*.* D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%ARCH%_deps\
+if %copydeps% == 1 (
+	rm -f D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%ARCH%_deps\*.*
+	copy /Y %PHPDEPS%\bin\*.* D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%ARCH%_deps\
+)
 
 if NOT %BUILDALL% == -1 (
 	echo *** avx nts  ***
