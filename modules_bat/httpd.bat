@@ -1,3 +1,4 @@
+call C:\httpd-sdk\modules_bat\mod_maxminddb.bat
 cd ..
 rmdir /S /Q C:\httpd-sdk\build\httpd
 mkdir C:\httpd-sdk\build\httpd
