@@ -4,7 +4,7 @@ git reset --hard
 git clean -fdx
 move /Y C:\httpd-sdk\src\curl\src\tool_hugehelp.c.cvs C:\httpd-sdk\src\curl\src\tool_hugehelp.c
 
-sed -i 's/\/W4/\/GL \/GS- \/Oy- \/guard:cf- \/FD \/GF \/Zc:inline \/MP8 \/LD \/MD \/Ox \/W3 %AVXSED%/g' /cygdrive/c/httpd-sdk/src/curl/winbuild/MakefileBuild.vc
+sed -i 's/\/W4/\/GL \/GS- \/Oy- \/guard:cf- \/FD \/GF \/Zc:inline \/MP%MTPROC% \/LD \/MD \/Ox \/W3 %AVXSED%/g' /cygdrive/c/httpd-sdk/src/curl/winbuild/MakefileBuild.vc
 sed -i 's/LFLAGS     = \/nologo/LFLAGS     = \/nologo \/LTCG \/OPT:ICF/g' /cygdrive/c/httpd-sdk/src/curl/winbuild/MakefileBuild.vc
 sed -i 's/LNKLIB     = lib.exe/LNKLIB     = lib.exe \/LTCG/g' /cygdrive/c/httpd-sdk/src/curl/winbuild/MakefileBuild.vc
 

@@ -8,7 +8,7 @@ git reset --hard
 git clean -fdx
 sed -i 's/ARFLAGS = -nologo/ARFLAGS = -nologo -ltcg/g' /cygdrive/c/src/zlib/win32/Makefile.msc
 sed -i 's/-incremental:no -opt:ref/-ltcg -opt:ICF/g' /cygdrive/c/src/zlib/win32/Makefile.msc
-sed -i 's/-O2/-GL -GS- -guard:cf- -FD -GF -Zc:inline -MP8 -LD -Ox %AVXMSC% -wd4267/g' /cygdrive/c/src/zlib/win32/Makefile.msc
+sed -i 's/-O2/-GL -GS- -guard:cf- -FD -GF -Zc:inline -MP%MTPROC% -LD -Ox %AVXMSC% -wd4267/g' /cygdrive/c/src/zlib/win32/Makefile.msc
 nmake %NMAKE_OPTS% /f win32/Makefile.msc clean
 if %ARCH% == x86 (
 	nmake -f win32/Makefile.msc LOC="-DASMV -DASMINF" OBJA="inffas32.obj match686.obj"
