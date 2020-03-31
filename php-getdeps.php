@@ -7,6 +7,12 @@
 	$arch = $_ENV["ARCH"];
 	// vs16 || vc15
 	$msvc = $_ENV["MSVC_DEPS"];
+	// https://windows.php.net/downloadS/php-sdk/deps/series/
+	if($msvc == "vs16"){
+		$package = "master";
+	} else {
+		$package = $_ENV["PHPVER"];
+	}
 	$outdir = "C:/php72-sdk/phpmaster/".$msvc."/".$arch."/deps/";
 	$depsreq = array(
 		"c-client",
@@ -35,7 +41,7 @@
 
 	$urlbase = "https://windows.php.net/downloadS/php-sdk/deps/";
 	$repdl = $urlbase.$msvc."/".$arch."/";
-	$serie = $urlbase."series/packages-master-".$msvc."-".$arch."-".$type.".txt";
+	$serie = $urlbase."series/packages-".$package."-".$msvc."-".$arch."-".$type.".txt";
 	echo $serie.PHP_EOL;
 
 $ch = curl_init();
