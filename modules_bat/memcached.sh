@@ -19,7 +19,6 @@ esac
 ./configure --cache-file=$ARCH_PRF.configure.cache --disable-dependency-tracking --enable-silent-rules${machine} --disable-dtrace --disable-sasl --disable-docs --disable-coverage --prefix=$MEMCACHE_ROOT/release/$ARCH_PRF/ $ARCH_PARAMS
 #   SSE2
 make clean && make CFLAGS=' -O3 -s -msse2 ' 
-exit
 cp -rf $MEMCACHE_ROOT/memcached.exe /cygdrive/d/github/NONO_memcached/cygwin/$ARCH_PRF/memcached.exe
 #   AVX
 make clean && make CFLAGS=' -O3 -s -march=sandybridge ' 
