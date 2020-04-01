@@ -1,0 +1,38 @@
+diff --git a/Makefile.am b/Makefile.am
+index 0d30161..73ac493 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,6 +1,6 @@
+ bin_PROGRAMS = memcached
+ pkginclude_HEADERS = protocol_binary.h
+-noinst_PROGRAMS = memcached-debug sizes testapp timedrun
++# noinst_PROGRAMS = memcached-debug sizes testapp timedrun
+ 
+ BUILT_SOURCES=
+ 
+diff --git a/configure.ac b/configure.ac
+index 0fd5c8d..cfef6b8 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -786,5 +786,8 @@ then
+   CFLAGS="$CFLAGS -errfmt=error -errwarn -errshort=tags"
+ fi
+ 
++AS_IF([test "x$host_os" = "xcygwin"],
++          [AC_DEFINE([__CYGWIN__], 1,[Cygwin OS])])
++
+ AC_CONFIG_FILES(Makefile doc/Makefile)
+ AC_OUTPUT
+diff --git a/extstore.c b/extstore.c
+index e825667..943e87b 100644
+--- a/extstore.c
++++ b/extstore.c
+@@ -773,7 +773,7 @@ static void *extstore_io_thread(void *arg) {
+                     }
+                     pthread_mutex_unlock(&p->mutex);
+                     if (do_op) {
+-#ifdef __APPLE__
++#if defined(__CYGWIN__) || defined(__APPLE__)
+                         ret = lseek(p->fd, SEEK_SET, p->offset + cur_io->offset);
+                         if (ret >= 0) {
+                             if (cur_io->iov == NULL) {
