@@ -51,6 +51,17 @@ REM ########################## PHP DEPENDENCIES BUILD VAR
 set INCLUDE=
 set PHPDEPS=%PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\depsnono
 
-REM ########################## CLEAN %PATH_BUILD%
-cd /D %PATH_BUILD%
+REM ########################## MAKE & CLEAN DIR
+mkdir %PATH_HTTPD_SDK%\_logs
+mkdir %PATH_BUILD%\vs16_x86-avx
+mkdir %PATH_BUILD%\vs16_x64-avx
+mkdir %PATH_BUILD%\vs16_x86
+mkdir %PATH_BUILD%\vs16_x64
+mkdir %PATH_BUILD%\vc15_x86-avx
+mkdir %PATH_BUILD%\vc15_x64-avx
+mkdir %PATH_BUILD%\vc15_x86
+mkdir %PATH_BUILD%\vc15_x64
+
+mkdir %PATH_BUILD%
+cd /D %PATH_BUILD%\
 for /F "delims=" %%i in ('dir /b') do (rmdir "%%i" /s/q || del "%%i" /s/q)
