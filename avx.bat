@@ -23,7 +23,7 @@ if %1 == 0 (
 )
 
 rmdir /S /Q %PATH_INSTALL%
-mklink /J %PATH_INSTALL% %PATH_HTTPD_SDK%\%MSVC_DEPS%_%ARCH%%AVXB%
+mklink /J %PATH_INSTALL% %PATH_HTTPD_SDK%\release\%MSVC_DEPS%_%ARCH%%AVXB%
 
 REM /GL ko sur nghttp2. /GL ko si /Zi http://forums.codeguru.com/showthread.php?556135-ZI-and-GL-incompatible
 set EXTCFLAGSNGHTTP2=/GS- /Oy- /guard:cf- /FD /GF /Zc:inline /MP8 /LD /MD /Zi /Ox %AVX%

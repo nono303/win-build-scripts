@@ -19,9 +19,9 @@ set PATH_BIN_MISC=C:\bin
 set PATH_BIN_CYGWIN=C:\cyg%CYGV%\bin
 
 	REM CYGWIN PATH
-FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_SRC% `) DO ( SET CYGPATH_SRC=%%F )
-FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_MODULE_BAT% `) DO ( SET CYGPATH_MODULE_BAT=%%F )
-FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_HTTPD_SDK% `) DO ( SET CYGPATH_HTTPD_SDK=%%F )
+FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_SRC%`) DO (SET CYGPATH_SRC=%%F)
+FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_MODULE_BAT%`) DO (SET CYGPATH_MODULE_BAT=%%F)
+FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_HTTPD_SDK%`) DO (SET CYGPATH_HTTPD_SDK=%%F)
 
 set PATH_WIN=%PATH_BIN_PYTHON%;%PATH_BIN_GIT%;%PATH_BIN_NASM%;%PATH_BIN_PERL%;%PATH_BIN_PERL_SITE%;%PATH_BIN_MISC%;%PATH_BIN_CYGWIN%;%PATH_VS%\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;%PATH_PHP_SDK%\bin\php;C:\Windows;C:\Windows\SysWOW64;C:\Windows\SysWOW64\wbem;C:\Windows\system32;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;
 
@@ -53,13 +53,13 @@ set PHPDEPS=%PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\depsnono
 
 REM ########################## MAKE & CLEAN DIR
 if not exist %PATH_HTTPD_SDK%\_logs\. mkdir %PATH_HTTPD_SDK%\_logs
-if not exist %PATH_HTTPD_SDK%\vs16_x86-avx\. mkdir %PATH_HTTPD_SDK%\vs16_x86-avx
-if not exist %PATH_HTTPD_SDK%\vs16_x64-avx\. mkdir %PATH_HTTPD_SDK%\vs16_x64-avx
-if not exist %PATH_HTTPD_SDK%\vs16_x86\. mkdir %PATH_HTTPD_SDK%\vs16_x86
-if not exist %PATH_HTTPD_SDK%\vs16_x64\. mkdir %PATH_HTTPD_SDK%\vs16_x64
-if not exist %PATH_HTTPD_SDK%\vc15_x86-avx\. mkdir %PATH_HTTPD_SDK%\vc15_x86-avx
-if not exist %PATH_HTTPD_SDK%\vc15_x64-avx\. mkdir %PATH_HTTPD_SDK%\vc15_x64-avx
-if not exist %PATH_HTTPD_SDK%\vc15_x86\. mkdir %PATH_HTTPD_SDK%\vc15_x86
-if not exist %PATH_HTTPD_SDK%\vc15_x64\. mkdir %PATH_HTTPD_SDK%\vc15_x64
+if not exist %PATH_HTTPD_SDK%\release\vs16_x86-avx\. mkdir %PATH_HTTPD_SDK%\release\vs16_x86-avx
+if not exist %PATH_HTTPD_SDK%\release\vs16_x64-avx\. mkdir %PATH_HTTPD_SDK%\release\vs16_x64-avx
+if not exist %PATH_HTTPD_SDK%\release\vs16_x86\. mkdir %PATH_HTTPD_SDK%\release\vs16_x86
+if not exist %PATH_HTTPD_SDK%\release\vs16_x64\. mkdir %PATH_HTTPD_SDK%\release\vs16_x64
+if not exist %PATH_HTTPD_SDK%\release\vc15_x86-avx\. mkdir %PATH_HTTPD_SDK%\release\vc15_x86-avx
+if not exist %PATH_HTTPD_SDK%\release\vc15_x64-avx\. mkdir %PATH_HTTPD_SDK%\release\vc15_x64-avx
+if not exist %PATH_HTTPD_SDK%\release\vc15_x86\. mkdir %PATH_HTTPD_SDK%\release\vc15_x86
+if not exist %PATH_HTTPD_SDK%\release\vc15_x64\. mkdir %PATH_HTTPD_SDK%\release\vc15_x64
 if exist %PATH_BUILD%\. rmdir %PATH_BUILD% /s/q
 mkdir %PATH_BUILD% 
