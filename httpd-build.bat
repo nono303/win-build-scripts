@@ -1,29 +1,29 @@
-cd /D C:\httpd-sdk\install
+cd /D %PATH_INSTALL%
 for /F "delims=" %%i in ('dir /b') do (rmdir "%%i" /s/q || del "%%i" /s/q)
-mkdir c:\httpd-sdk\install\bin\
-mkdir c:\httpd-sdk\install\lib\
-mkdir c:\httpd-sdk\install\include\
+mkdir %PATH_INSTALL%\bin\
+mkdir %PATH_INSTALL%\lib\
+mkdir %PATH_INSTALL%\include\
 
-call %MODULE_BAT_DIR%jemalloc.bat
-call %MODULE_BAT_DIR%zlib.bat
-call %MODULE_BAT_DIR%brotli.bat
-call %MODULE_BAT_DIR%jansson.bat
-call %MODULE_BAT_DIR%bzip2.bat
-call %MODULE_BAT_DIR%libiconv.bat
-call %MODULE_BAT_DIR%libxml2.bat
-call %MODULE_BAT_DIR%pcre.bat
-call %MODULE_BAT_DIR%openssl.bat
-call %MODULE_BAT_DIR%libevent.bat
-call %MODULE_BAT_DIR%libev.bat
-call %MODULE_BAT_DIR%c-ares.bat
-call %MODULE_BAT_DIR%nghttp2.bat
-call %MODULE_BAT_DIR%libssh2.bat
-call %MODULE_BAT_DIR%curl.bat
-call %MODULE_BAT_DIR%libexpat.bat
-call %MODULE_BAT_DIR%libmaxminddb.bat
-call %MODULE_BAT_DIR%apr.bat
-call %MODULE_BAT_DIR%lua.bat
-call %MODULE_BAT_DIR%httpd.bat
-call %MODULE_BAT_DIR%mod_h264_streaming.bat
+call %PATH_MODULE_BAT%\jemalloc.bat
+call %PATH_MODULE_BAT%\zlib.bat
+call %PATH_MODULE_BAT%\brotli.bat
+call %PATH_MODULE_BAT%\jansson.bat
+call %PATH_MODULE_BAT%\bzip2.bat
+call %PATH_MODULE_BAT%\libiconv.bat
+call %PATH_MODULE_BAT%\libxml2.bat
+call %PATH_MODULE_BAT%\pcre.bat
+call %PATH_MODULE_BAT%\openssl.bat
+call %PATH_MODULE_BAT%\libevent.bat
+call %PATH_MODULE_BAT%\libev.bat
+call %PATH_MODULE_BAT%\c-ares.bat
+call %PATH_MODULE_BAT%\nghttp2.bat
+call %PATH_MODULE_BAT%\libssh2.bat
+call %PATH_MODULE_BAT%\curl.bat
+call %PATH_MODULE_BAT%\libexpat.bat
+call %PATH_MODULE_BAT%\libmaxminddb.bat
+call %PATH_MODULE_BAT%\apr.bat
+call %PATH_MODULE_BAT%\lua.bat
+call %PATH_MODULE_BAT%\httpd.bat
+call %PATH_MODULE_BAT%\mod_h264_streaming.bat
 
-cd /D C:\httpd-sdk\
+cd /D %PATH_HTTPD_SDK%\

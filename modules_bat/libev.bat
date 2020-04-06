@@ -1,12 +1,12 @@
 cd ..
-rmdir /S /Q C:\httpd-sdk\build\libev-win
-mkdir C:\httpd-sdk\build\libev-win
-cd /D C:\httpd-sdk\build\libev-win
-cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=C:\httpd-sdk\install -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ..\..\src\libev-win
-C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/modules_bat/libev.sh "%AVXSED%"
+rmdir /S /Q %PATH_BUILD%\libev-win
+mkdir %PATH_BUILD%\libev-win
+cd /D %PATH_BUILD%\libev-win
+cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% %PATH_SRC%\libev-win
+bash %CYGPATH_MODULE_BAT%/libev.sh "%AVXSED%"
 nmake %NMAKE_OPTS%
-copy /Y C:\httpd-sdk\build\libev-win\libev_static.lib C:\httpd-sdk\install\lib\libev_static.lib
-copy /Y C:\httpd-sdk\build\libev-win\libev.dll C:\httpd-sdk\install\bin\libev.dll
-copy /Y C:\httpd-sdk\build\libev-win\libev.pdb C:\httpd-sdk\install\bin\libev.pdb
-copy /Y C:\httpd-sdk\src\libev-win\ev.h C:\httpd-sdk\install\include\ev.h
-cd /D C:\httpd-sdk\modules_bat
+copy /Y %PATH_BUILD%\libev-win\libev_static.lib %PATH_INSTALL%\lib\libev_static.lib
+copy /Y %PATH_BUILD%\libev-win\libev.dll %PATH_INSTALL%\bin\libev.dll
+copy /Y %PATH_BUILD%\libev-win\libev.pdb %PATH_INSTALL%\bin\libev.pdb
+copy /Y %PATH_SRC%\libev-win\ev.h %PATH_INSTALL%\include\ev.h
+cd /D %PATH_MODULE_BAT%

@@ -1,11 +1,11 @@
 cd ..
-rmdir /S /Q C:\httpd-sdk\build\libexpat
-mkdir C:\httpd-sdk\build\libexpat
-cd /D C:\httpd-sdk\build\libexpat
-cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=C:\httpd-sdk\install -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% -DEXPAT_BUILD_DOCS=OFF -DEXPAT_BUILD_TESTS=OFF -DEXPAT_BUILD_EXAMPLES=OFF -DEXPAT_BUILD_TOOLS=OFF ..\..\src\libexpat\expat
-C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/modules_bat/libexpat.sh "%AVXSED%"
+rmdir /S /Q %PATH_BUILD%\libexpat
+mkdir %PATH_BUILD%\libexpat
+cd /D %PATH_BUILD%\libexpat
+cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% -DEXPAT_BUILD_DOCS=OFF -DEXPAT_BUILD_TESTS=OFF -DEXPAT_BUILD_EXAMPLES=OFF -DEXPAT_BUILD_TOOLS=OFF %PATH_SRC%\libexpat\expat
+bash %CYGPATH_MODULE_BAT%/libexpat.sh "%AVXSED%"
 nmake %NMAKE_OPTS% clean install
-copy /Y C:\httpd-sdk\build\libexpat\libexpat.pdb C:\httpd-sdk\install\bin\libexpat.pdb
+copy /Y %PATH_BUILD%\libexpat\libexpat.pdb %PATH_INSTALL%\bin\libexpat.pdb
 REM APR
-mklink /H C:\httpd-sdk\install\lib\expat.lib C:\httpd-sdk\install\lib\libexpat.lib
-cd /D C:\httpd-sdk\modules_bat
+mklink /H %PATH_INSTALL%\lib\expat.lib %PATH_INSTALL%\lib\libexpat.lib
+cd /D %PATH_MODULE_BAT%

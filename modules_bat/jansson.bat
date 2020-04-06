@@ -1,9 +1,9 @@
 cd ..
-rmdir /S /Q C:\httpd-sdk\build\jansson
-mkdir C:\httpd-sdk\build\jansson
-cd /D C:\httpd-sdk\build\jansson
-cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=C:\httpd-sdk\install -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% -DUSE_URANDOM=OFF -DJANSSON_EXAMPLES=OFF -DJANSSON_BUILD_DOCS=OFF -DJANSSON_BUILD_SHARED_LIBS=ON ..\..\src\jansson
-C:\cyg64\bin\bash /cygdrive/c/httpd-sdk/modules_bat/jansson.sh "%AVXSED%"
+rmdir /S /Q %PATH_BUILD%\jansson
+mkdir %PATH_BUILD%\jansson
+cd /D %PATH_BUILD%\jansson
+cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% -DUSE_URANDOM=OFF -DJANSSON_EXAMPLES=OFF -DJANSSON_BUILD_DOCS=OFF -DJANSSON_BUILD_SHARED_LIBS=ON %PATH_SRC%\jansson
+bash %CYGPATH_MODULE_BAT%/jansson.sh "%AVXSED%"
 nmake %NMAKE_OPTS% clean install
-copy /Y C:\httpd-sdk\build\jansson\bin\jansson.pdb C:\httpd-sdk\install\bin\jansson.pdb
-cd /D C:\httpd-sdk\modules_bat
+copy /Y %PATH_BUILD%\jansson\bin\jansson.pdb %PATH_INSTALL%\bin\jansson.pdb
+cd /D %PATH_MODULE_BAT%

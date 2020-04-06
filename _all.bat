@@ -1,45 +1,45 @@
 set module=httpd
 
 REM AVX
-call C:\httpd-sdk\vc15.bat
-call C:\httpd-sdk\x86.bat
-call C:\httpd-sdk\avx.bat 1
-call C:\httpd-sdk\modules_bat\%module%.bat
+call %PATH_HTTPD_SDK%\vc15.bat
+call %PATH_HTTPD_SDK%\x86.bat
+call %PATH_HTTPD_SDK%\avx.bat 1
+call %PATH_MODULE_BAT%\%module%.bat
 
-call C:\httpd-sdk\vc15.bat
-call C:\httpd-sdk\x64.bat
-call C:\httpd-sdk\avx.bat 1
-call C:\httpd-sdk\modules_bat\%module%.bat
+call %PATH_HTTPD_SDK%\vc15.bat
+call %PATH_HTTPD_SDK%\x64.bat
+call %PATH_HTTPD_SDK%\avx.bat 1
+call %PATH_MODULE_BAT%\%module%.bat
 
-call C:\httpd-sdk\vs16.bat
-call C:\httpd-sdk\x86.bat
-call C:\httpd-sdk\avx.bat 1
-call C:\httpd-sdk\modules_bat\%module%.bat
+call %PATH_HTTPD_SDK%\vs16.bat
+call %PATH_HTTPD_SDK%\x86.bat
+call %PATH_HTTPD_SDK%\avx.bat 1
+call %PATH_MODULE_BAT%\%module%.bat
 
-call C:\httpd-sdk\vs16.bat
-call C:\httpd-sdk\x64.bat
-call C:\httpd-sdk\avx.bat 1
-call C:\httpd-sdk\modules_bat\%module%.bat
+call %PATH_HTTPD_SDK%\vs16.bat
+call %PATH_HTTPD_SDK%\x64.bat
+call %PATH_HTTPD_SDK%\avx.bat 1
+call %PATH_MODULE_BAT%\%module%.bat
 
 REM !AVX
-call C:\httpd-sdk\vc15.bat
-call C:\httpd-sdk\x86.bat
-call C:\httpd-sdk\avx.bat 0
-call C:\httpd-sdk\modules_bat\%module%.bat
+call %PATH_HTTPD_SDK%\vc15.bat
+call %PATH_HTTPD_SDK%\x86.bat
+call %PATH_HTTPD_SDK%\avx.bat 0
+call %PATH_MODULE_BAT%\%module%.bat
 
-call C:\httpd-sdk\vc15.bat
-call C:\httpd-sdk\x64.bat
-call C:\httpd-sdk\avx.bat 0
-call C:\httpd-sdk\modules_bat\%module%.bat
+call %PATH_HTTPD_SDK%\vc15.bat
+call %PATH_HTTPD_SDK%\x64.bat
+call %PATH_HTTPD_SDK%\avx.bat 0
+call %PATH_MODULE_BAT%\%module%.bat
 
-call C:\httpd-sdk\vs16.bat
-call C:\httpd-sdk\x86.bat
-call C:\httpd-sdk\avx.bat 0
-call C:\httpd-sdk\modules_bat\%module%.bat
+call %PATH_HTTPD_SDK%\vs16.bat
+call %PATH_HTTPD_SDK%\x86.bat
+call %PATH_HTTPD_SDK%\avx.bat 0
+call %PATH_MODULE_BAT%\%module%.bat
 
-call C:\httpd-sdk\vs16.bat
-call C:\httpd-sdk\x64.bat
-call C:\httpd-sdk\avx.bat 0
-call C:\httpd-sdk\modules_bat\%module%.bat
+call %PATH_HTTPD_SDK%\vs16.bat
+call %PATH_HTTPD_SDK%\x64.bat
+call %PATH_HTTPD_SDK%\avx.bat 0
+call %PATH_MODULE_BAT%\%module%.bat
 
 pause

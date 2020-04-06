@@ -6,5 +6,5 @@ set archmsbuild=Win32
 set outmsbuild=Release
 set CYGV=32
 echo ~~-~~  x86 ~~-~~
-call C:\httpd-sdk\xCommon.bat
-set PATH=%PATHORI%;C:\msvc16\MSBuild\Current\Bin
+call %PATH_HTTPD_SDK%\xCommon.bat
+set PATH=%PATH_WIN%;%PATH_VS%\MSBuild\Current\Bin
