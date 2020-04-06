@@ -15,6 +15,7 @@ set PATH_BIN_GIT=C:\PROGRA~1\Git\bin
 set PATH_BIN_NASM=C:\bin\nasm
 set PATH_BIN_PERL=C:\perl\bin
 set PATH_BIN_PERL_SITE=C:\perl\site\bin
+	REM sysinternals, nirsoft, etc.
 set PATH_BIN_MISC=C:\bin
 set PATH_BIN_CYGWIN=C:\cyg%CYGV%\bin
 
