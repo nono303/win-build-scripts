@@ -8,7 +8,7 @@ rmdir /S /Q %PATH_BUILD%\sqlite-amalgamation
 mkdir %PATH_BUILD%\sqlite-amalgamation
 cd /D %PATH_BUILD%\sqlite-amalgamation
 cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% -DBUILD_ENABLE_FTS3=ON -DBUILD_ENABLE_DBSTAT_VTAB=ON -DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON -DBUILD_ENABLE_RBU=ON -DBUILD_ENABLE_RTREE=ON -DBUILD_ENABLE_JSON1=ON -DBUILD_ENABLE_ICU=OFF -DBUILD_ENABLE_FTS5=ON %PATH_SRC%\sqlite-amalgamation 
-bash %CYGPATH_MODULE_BAT%/sqlite-svn.sh "%AVXSED%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULE_BAT%/sqlite-svn.sh "%AVXSED%"
 nmake %NMAKE_OPTS% clean install
 	REM PHP 7.4
 	copy /Y %PATH_SRC%\sqlite-amalgamation\sqlite3ext.h %PATH_INSTALL%\include\sqlite3\sqlite3ext.h

@@ -3,8 +3,8 @@ for %%X in (apr apr-util apr-iconv) do (
 	cd /D %PATH_SRC%\%%X\
 	git reset --hard
 	git clean -fdx
-	bash %CYGPATH_HTTPD_SDK%/vcxproj.sh "%CYGPATH_SRC%/%%X/" %AVXVCX%
-	if %MSVC_DEPS% == vc15 (bash %CYGPATH_MODULE_BAT%/vcxproj2vc15.sh "%%X")
+	%PATH_BIN_CYGWIN%\bash %CYGPATH_HTTPD_SDK%/vcxproj.sh "%CYGPATH_SRC%/%%X/" %AVXVCX%
+	if %MSVC_DEPS% == vc15 (%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULE_BAT%/vcxproj2vc15.sh "%%X")
 )
 rmdir /S /Q %PATH_SRC%\apr\build\preaprapp
 rmdir /S /Q %PATH_SRC%\apr-util\build\preaprutil

@@ -4,7 +4,7 @@ rmdir /S /Q %PATH_BUILD%\c-ares
 mkdir %PATH_BUILD%\c-ares
 cd /D %PATH_BUILD%\c-ares
 cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% -DCARES_STATIC=ON -DCARES_SHARED=ON -DCARES_INSTALL=ON -DCARES_STATIC_PIC=OFF -DCARES_BUILD_TESTS=OFF -DCARES_MSVC_STATIC_RUNTIME=OFF %PATH_SRC%\c-ares 
-bash %CYGPATH_MODULE_BAT%/c-ares.sh "%AVXSED%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULE_BAT%/c-ares.sh "%AVXSED%"
 nmake %NMAKE_OPTS% clean install
 copy /Y %PATH_BUILD%\c-ares\bin\cares.pdb %PATH_INSTALL%\bin\cares.pdb
 copy /Y %PATH_BUILD%\c-ares\bin\acountry.pdb %PATH_INSTALL%\bin\acountry.pdb

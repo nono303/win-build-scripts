@@ -1,7 +1,7 @@
 cd /D %PATH_SRC%\libjpeg
 git reset --hard
 git clean -fdx
-if %MSVC_DEPS% == vc15 (bash %CYGPATH_MODULE_BAT%/vcxproj2vc15.sh "libjpeg")
+if %MSVC_DEPS% == vc15 (%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULE_BAT%/vcxproj2vc15.sh "libjpeg")
 MSBuild.exe %PATH_SRC%\libjpeg\jpeg.sln /nowarn:C4267 /p:Turbo=true /m:8 /p:CL_MPCount=8 /t:Clean,jpeg /p:Configuration="Release" /p:DebugSymbols=true /p:DebugType=None /p:Platform="%archmsbuild%"
 copy /Y %PATH_SRC%\libjpeg\%outmsbuild%\jpeg.lib %PHPDEPS%\lib\libjpeg_a.lib
 copy /Y %PATH_SRC%\libjpeg\%outmsbuild%\jpeg.pdb %PHPDEPS%\lib\libjpeg_a.pdb
