@@ -1,10 +1,10 @@
 REM ########################## PATHS
 set PATH_HTTPD_SDK=C:\httpd-sdk
+set PATH_BUILD=%PATH_HTTPD_SDK%\build
+set PATH_INSTALL=%PATH_HTTPD_SDK%\install
+set PATH_MODULE_BAT=%PATH_HTTPD_SDK%\modules_bat
 set PATH_PHP_SDK=C:\php72-sdk
 set PATH_SRC=c:\src
-set PATH_BUILD=%PATH_BUILD%
-set PATH_INSTALL=%PATH_HTTPD_SDK%\install
-set PATH_MODULE_BAT=%PATH_MODULE_BAT%
 
 	REM dir /X > C:\Program Files (x86)\Microsoft Visual Studio\2019\Community
 set PATH_VS=C:\PROGRA~2\MICROS~1\2019\Community
@@ -16,7 +16,7 @@ set PATH_BIN_NASM=C:\bin\nasm
 set PATH_BIN_PERL=C:\perl\bin
 set PATH_BIN_PERL_SITE=C:\perl\site\bin
 set PATH_BIN_MISC=C:\bin
-set PATH_BIN_CYGWIN=C:\cyg64\bin
+set PATH_BIN_CYGWIN=C:\cyg%CYGV%\bin
 
 	REM CYGWIN PATH
 FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_SRC% `) DO ( SET CYGPATH_SRC=%%F )

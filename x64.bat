@@ -6,5 +6,5 @@ set archmsbuild=x64
 set outmsbuild=x64\Release
 set CYGV=64
 echo ~~-~~  x64 ~~-~~
-call %PATH_HTTPD_SDK%\xCommon.bat
+call .\xCommon.bat
 set PATH=%PATH_WIN%;%PATH_VS%\MSBuild\Current\Bin\amd64;
