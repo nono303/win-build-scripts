@@ -52,16 +52,14 @@ set INCLUDE=
 set PHPDEPS=%PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\depsnono
 
 REM ########################## MAKE & CLEAN DIR
-mkdir %PATH_HTTPD_SDK%\_logs
-mkdir %PATH_BUILD%\vs16_x86-avx
-mkdir %PATH_BUILD%\vs16_x64-avx
-mkdir %PATH_BUILD%\vs16_x86
-mkdir %PATH_BUILD%\vs16_x64
-mkdir %PATH_BUILD%\vc15_x86-avx
-mkdir %PATH_BUILD%\vc15_x64-avx
-mkdir %PATH_BUILD%\vc15_x86
-mkdir %PATH_BUILD%\vc15_x64
-
-mkdir %PATH_BUILD%
-cd /D %PATH_BUILD%\
-for /F "delims=" %%i in ('dir /b') do (rmdir "%%i" /s/q || del "%%i" /s/q)
+if not exist %PATH_HTTPD_SDK%\_logs\. mkdir %PATH_HTTPD_SDK%\_logs
+if not exist %PATH_HTTPD_SDK%\vs16_x86-avx\. mkdir %PATH_HTTPD_SDK%\vs16_x86-avx
+if not exist %PATH_HTTPD_SDK%\vs16_x64-avx\. mkdir %PATH_HTTPD_SDK%\vs16_x64-avx
+if not exist %PATH_HTTPD_SDK%\vs16_x86\. mkdir %PATH_HTTPD_SDK%\vs16_x86
+if not exist %PATH_HTTPD_SDK%\vs16_x64\. mkdir %PATH_HTTPD_SDK%\vs16_x64
+if not exist %PATH_HTTPD_SDK%\vc15_x86-avx\. mkdir %PATH_HTTPD_SDK%\vc15_x86-avx
+if not exist %PATH_HTTPD_SDK%\vc15_x64-avx\. mkdir %PATH_HTTPD_SDK%\vc15_x64-avx
+if not exist %PATH_HTTPD_SDK%\vc15_x86\. mkdir %PATH_HTTPD_SDK%\vc15_x86
+if not exist %PATH_HTTPD_SDK%\vc15_x64\. mkdir %PATH_HTTPD_SDK%\vc15_x64
+if exist %PATH_BUILD%\. rmdir %PATH_BUILD% /s/q
+mkdir %PATH_BUILD% 
