@@ -1,16 +1,15 @@
-rmdir /S /Q %PATH_BUILD%\bzip2-1.0.6
-mkdir %PATH_BUILD%\bzip2-1.0.6
-cd /D %PATH_SRC%\bzip2-1.0.6
-git reset --hard
-git clean -fdx
-sed -i 's/MP%NUMBER_OF_PROCESSORS%/MP%NUMBER_OF_PROCESSORS% %AVXSED%/g' %CYGPATH_SRC%/bzip2-1.0.6/makefile.msc
+call %PATH_MODULES_COMMON%/init.bat %1
+
+cd %PATH_SRC%\%1
+sed -i 's/-DWIN32 -MD -Ox -D_FILE_OFFSET_BITS=64 -nologo/\/DWIN32 \/MD \/Ox \/D_FILE_OFFSET_BITS=64 \/nologo \/Zi \/GL \/GS- \/Oy- \/w \/guard:cf- \/FD \/GF \/Zc:inline \/MP%NUMBER_OF_PROCESSORS% %AVXSED%/g' %CYGPATH_SRC%/$1/makefile.msc
+sed -i 's/lib \/out/lib \/nologo \/ltcg \/out/g' %CYGPATH_SRC%/$1/makefile.msc
 nmake %NMAKE_OPTS% /f Makefile.msc clean lib bzip2
-move /Y %PATH_SRC%\bzip2-1.0.6\*.lib %PATH_INSTALL%\lib
-move /Y %PATH_SRC%\bzip2-1.0.6\*.exe %PATH_INSTALL%\bin
-move /Y %PATH_SRC%\bzip2-1.0.6\libbz2.pdb %PATH_INSTALL%\lib\libbz2.pdb 
-move /Y %PATH_SRC%\bzip2-1.0.6\bzip2recover.pdb %PATH_INSTALL%\bin\bzip2recover.pdb
-move /Y %PATH_SRC%\bzip2-1.0.6\bzip2.pdb %PATH_INSTALL%\bin\bzip2.pdb
-copy /Y %PATH_SRC%\bzip2-1.0.6\bzlib.h %PATH_INSTALL%\include\bzlib.h
+move /Y %PATH_SRC%\$1\*.lib %PATH_INSTALL%\lib
+move /Y %PATH_SRC%\$1\*.exe %PATH_INSTALL%\bin
+move /Y %PATH_SRC%\$1\libbz2.pdb %PATH_INSTALL%\lib\libbz2.pdb 
+move /Y %PATH_SRC%\$1\bzip2recover.pdb %PATH_INSTALL%\bin\bzip2recover.pdb
+move /Y %PATH_SRC%\$1\bzip2.pdb %PATH_INSTALL%\bin\bzip2.pdb
+copy /Y %PATH_SRC%\$1\bzlib.h %PATH_INSTALL%\include\bzlib.h
 	REM libbz2 => bzip2  [pcre]
 mklink /h %PATH_INSTALL%\lib\bzip2.lib %PATH_INSTALL%\lib\libbz2.lib
 mklink /h %PATH_INSTALL%\lib\bzip2.pdb %PATH_INSTALL%\lib\libbz2.pdb
