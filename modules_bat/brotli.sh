@@ -1,3 +1,0 @@
-/usr/bin/find /cygdrive/c/httpd-sdk/build/brotli -type f -name "build.make" -exec sed -i 's/\/INCREMENTAL/\/LTCG \/OPT:ICF/g' {} \;
-/usr/bin/find /cygdrive/c/httpd-sdk/build/brotli -type f -name "build.make" -exec sed -i 's/-static.lib @CMakeFiles/-static.lib \/LTCG @CMakeFiles/g' {} \;
-/usr/bin/find /cygdrive/c/httpd-sdk/build/brotli -type f -name "flags.make" -exec sed -i 's/ \/O2 / \/GL \/GS- \/Oy- \/guard:cf- \/FD \/GF \/Zc:inline \/MP8 \/LD \/MD \/wd4996 \/Ox '$1' /g' {} \;
