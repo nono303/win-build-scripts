@@ -6,7 +6,7 @@ do
   sed -i -E 's/<PlatformToolset>v[^<]+/<PlatformToolset>v'$3'/g' $i
   if grep "WindowsTargetPlatformVersion" $i > /dev/null
     then
-     sed -i -E 's/<WindowsTargetPlatformVersion>[^<]+/<WindowsTargetPlatformVersion>v'$4'/g' $i
+     sed -i -E 's/<WindowsTargetPlatformVersion>[^<]+/<WindowsTargetPlatformVersion>'$4'/g' $i
     else
      sed -i 's/<\/RootNamespace>/<\/RootNamespace><WindowsTargetPlatformVersion>'$4'<\/WindowsTargetPlatformVersion>/g' $i
   fi
