@@ -10,7 +10,7 @@ python gen-make.py --release -t vcproj --with-jdk=C:\jdk8\%ARCH% --with-serf=%PA
 	REM ;__ALL_TESTS__ 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES%/subversion-svn.sh
 if %MSVC_DEPS% == vc15 (%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES%/vcxproj2vc15.sh "subversion/build/win32/vcnet-vcproj")
-%PATH_BIN_CYGWIN%\bash %CYGPATH_HTTPD_SDK%/vcxproj.sh "%CYGPATH_SRC%/subversion/build/win32/vcnet-vcproj/" %AVXVCX%
+%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/subversion/build/win32/vcnet-vcproj/" %AVXVCX% %PTFTS% %WKITVER%
 MSBuild.exe subversion_vcnet.sln /nowarn:C4702 /nowarn:LNK4087 /nowarn:C4703 /nowarn:C4132 /nowarn:C4389 /nowarn:C4244 /nowarn:C4245 /nowarn:C4267 /nowarn:C4018 /nowarn:C4334 /nowarn:C4189 /nowarn:C4312 /nowarn:C4090 /nowarn:C4152 /nowarn:C4146 /nologo /m:8 /t:Clean;__ALL__;__JAVAHL__ /p:Configuration=Release /p:Platform=%archmsbuild%  /p:DebugSymbols=true /p:DebugType=None
 
 for /f "tokens=*" %%G in ('dir %PATH_SRC%\subversion\Release\*.exe /s/b') do (

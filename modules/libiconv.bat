@@ -1,7 +1,7 @@
 cd /D %PATH_SRC%\libiconv
 git reset --hard
 git clean -fdx
-%PATH_BIN_CYGWIN%\bash %CYGPATH_HTTPD_SDK%/vcxproj.sh "%CYGPATH_SRC%/libiconv/MSvc%MSVC_VER%/" %AVXVCX%
+%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/libiconv/MSvc%MSVC_VER%/" %AVXVCX% %PTFTS% %WKITVER%
 if %MSVC_DEPS% == vc15 (
 	%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES%/libiconv.sh
 )
