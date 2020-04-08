@@ -1,0 +1,31 @@
+diff --git "a/win32/Makefile.msvc" "b/win32/Makefile.msvc"
+index f6a0182d..f4162ec0 100644
+--- "a/win32/Makefile.msvc"
++++ "b/win32/Makefile.msvc"
+@@ -44,7 +44,7 @@ CPPFLAGS = $(CPPFLAGS) /D "_REENTRANT"
+ 
+ # The compiler and its options.
+ CC = cl.exe
+-CFLAGS = /nologo /D "_WINDOWS" /D "_MBCS" /D "NOLIBTOOL" /W3 /wd4244 /wd4267 $(CRUNTIME)
++CFLAGS = /nologo /D "_WINDOWS" /D "_MBCS" /D "NOLIBTOOL" /W3 /GL /GS- /Oy- /guard:cf- /FD /GF /Zc:inline /LD /MD /Ox /wd4311 /wd4090 /wd4996 /wd4789 /wd4244 /wd4267 $(CRUNTIME)
+ CFLAGS = $(CFLAGS) /I$(XML_SRCDIR) /I$(XML_SRCDIR)\include /I$(INCPREFIX)
+ !if "$(WITH_THREADS)" != "no"
+ CFLAGS = $(CFLAGS) /D "_REENTRANT"
+@@ -60,7 +60,7 @@ CFLAGS = $(CFLAGS) /D_CRT_SECURE_NO_DEPRECATE /D_CRT_NONSTDC_NO_DEPRECATE
+ 
+ # The linker and its options.
+ LD = link.exe
+-LDFLAGS = /nologo /VERSION:$(LIBXML_MAJOR_VERSION).$(LIBXML_MINOR_VERSION)
++LDFLAGS = /debug /nologo /LTCG /OPT:ICF /VERSION:$(LIBXML_MAJOR_VERSION).$(LIBXML_MINOR_VERSION)
+ LDFLAGS = $(LDFLAGS) /LIBPATH:$(BINDIR) /LIBPATH:$(LIBPREFIX)
+ LIBS =
+ !if "$(WITH_FTP)" == "1" || "$(WITH_HTTP)" == "1"
+@@ -93,7 +93,7 @@ LIBS = $(LIBS) kernel32.lib
+ 
+ # The archiver and its options.
+ AR = lib.exe
+-ARFLAGS = /nologo
++ARFLAGS = /nologo /LTCG
+ 
+ # Optimisation and debug symbols.
+ !if "$(DEBUG)" == "1"
