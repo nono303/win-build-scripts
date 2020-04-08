@@ -1,1 +1,1 @@
-call do_php git-fetch.php
+call do_php %PATH_MODULES%\git.php %PATH_LOGS%
