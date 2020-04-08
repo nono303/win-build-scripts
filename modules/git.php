@@ -5,7 +5,7 @@ date_default_timezone_set("Europe/Paris");
 DEFINE("FETCH",true);
 define("GIT_GC",false);
 DEFINE("SRC_DIR","C:/src/");
-$fout = "C:/httpd-sdk/_logs/git-fetch.".date("Y-m-d_H-i-s").".csv";
+$fout = str_replace("\\","/",$argv[1])."/git.".date("Y-m-d_H-i-s").".csv";
 
 $repos = array();
 foreach(scandir(SRC_DIR) as $ele)
