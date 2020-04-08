@@ -9,6 +9,7 @@ set PATH_BUILD=%PATH_HTTPD_SDK%\build
 set PATH_INSTALL=%PATH_HTTPD_SDK%\install
 set PATH_MODULES=%PATH_HTTPD_SDK%\modules
 set PATH_MODULES_COMMON=%PATH_MODULES%\common
+set PATH_LOGS=%PATH_HTTPD_SDK%\_logs
 set PATH_PHP_SDK=C:\php72-sdk
 set PATH_SRC=c:\src
 
