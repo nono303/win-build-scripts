@@ -1,12 +1,12 @@
-call %PATH_MODULES%\jemalloc.bat
 call %PATH_MODULES%\zlib.bat
+call %PATH_MODULES%\openssl.bat
+call %PATH_MODULES%\jemalloc.bat
 call %PATH_MODULES%\brotli.bat
 call %PATH_MODULES%\jansson.bat
 call %PATH_MODULES%\bzip2.bat
 call %PATH_MODULES%\libiconv.bat
 call %PATH_MODULES%\libxml2.bat
 call %PATH_MODULES%\pcre.bat
-call %PATH_MODULES%\openssl.bat
 call %PATH_MODULES%\libevent.bat
 call %PATH_MODULES%\libev.bat
 call %PATH_MODULES%\c-ares.bat
