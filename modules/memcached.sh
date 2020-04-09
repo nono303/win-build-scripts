@@ -3,6 +3,7 @@ unameOut="$(uname -a)"
 cd $MEMCACHE_ROOT
 git reset --hard
 git clean -fdx
+# https://github.com/memcached/memcached/issues/639
 git apply c:/httpd-sdk/modules_bat/memcached.patch
 ./version.sh
 ./autogen.sh
