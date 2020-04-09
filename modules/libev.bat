@@ -1,12 +1,12 @@
-cd ..
-rmdir /S /Q %PATH_BUILD%\libev-win
-mkdir %PATH_BUILD%\libev-win
-cd /D %PATH_BUILD%\libev-win
-cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% %PATH_SRC%\libev-win
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES%/libev.sh "%AVXSED%"
+call %PATH_MODULES_COMMON%/init.bat %1 cmake
+
+cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% %PATH_SRC%\%1
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/flags.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES%/libev.sh "%CYGPATH_BUILD%/%1"
 nmake %NMAKE_OPTS%
-copy /Y %PATH_BUILD%\libev-win\libev_static.lib %PATH_INSTALL%\lib\libev_static.lib
-copy /Y %PATH_BUILD%\libev-win\libev.dll %PATH_INSTALL%\bin\libev.dll
-copy /Y %PATH_BUILD%\libev-win\libev.pdb %PATH_INSTALL%\bin\libev.pdb
-copy /Y %PATH_SRC%\libev-win\ev.h %PATH_INSTALL%\include\ev.h
-cd /D %PATH_MODULES%
+
+copy /Y %PATH_BUILD%\%1\libev_static.lib %PATH_INSTALL%\lib\libev_static.lib
+copy /Y %PATH_BUILD%\%1\CMakeFiles\libev_static.dir\libev_static.pdb %PATH_INSTALL%\lib\libev_static.pdb
+copy /Y %PATH_BUILD%\%1\libev.dll %PATH_INSTALL%\bin\libev.dll
+copy /Y %PATH_BUILD%\%1\libev.pdb %PATH_INSTALL%\bin\libev.pdb
+copy /Y %PATH_SRC%\%1\ev.h %PATH_INSTALL%\include\ev.h
