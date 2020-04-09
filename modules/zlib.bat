@@ -1,4 +1,4 @@
-call %PATH_MODULES_COMMON%/init.bat %1
+call %PATH_MODULES_COMMON%\init.bat %1
 
 REM https://stackoverflow.com/questions/29505121/cmake-zlib-build-on-windows
 git apply %PATH_MODULES%\zlib.patch

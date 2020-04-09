@@ -1,4 +1,4 @@
-call %PATH_MODULES_COMMON%/init.bat %1
+call %PATH_MODULES_COMMON%\init.bat %1
 
 cd /D %PATH_SRC%/%1/win32
 cscript configure.js compiler=nmakemsvc prefix=%PATH_INSTALL% include=%PATH_INSTALL%\include lib=%PATH_INSTALL%\lib debug=no zlib=yes

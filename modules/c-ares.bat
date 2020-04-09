@@ -1,4 +1,4 @@
-call %PATH_MODULES_COMMON%/init.bat %1 cmake
+call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
 cd /D %PATH_SRC%\%1
 call buildconf.bat

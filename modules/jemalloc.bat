@@ -1,4 +1,4 @@
-call %PATH_MODULES_COMMON%/init.bat %1
+call %PATH_MODULES_COMMON%\init.bat %1
 
 C:\cyg%CYGV%\bin\sh.exe -c "CC=cl ./autogen.sh"
 	REM C:\cyg%CYGV%\bin\sh.exe -c "./configure --help"

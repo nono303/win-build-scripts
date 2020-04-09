@@ -1,4 +1,4 @@
-call %PATH_MODULES_COMMON%/init.bat %1
+call %PATH_MODULES_COMMON%\init.bat %1
 
 sed -i 's/-DWIN32 -MD -Ox -D_FILE_OFFSET_BITS=64 -nologo/\/DWIN32 \/MD \/Ox \/D_FILE_OFFSET_BITS=64 \/nologo \/Zi \/GL \/GS- \/Oy- \/w \/guard:cf- \/FD \/GF \/Zc:inline \/MP%NUMBER_OF_PROCESSORS% %AVXSED%/g' %CYGPATH_SRC%/%1/makefile.msc
 sed -i 's/lib \/out/lib \/nologo \/ltcg \/out/g' %CYGPATH_SRC%/%1/makefile.msc
