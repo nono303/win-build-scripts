@@ -12,6 +12,3 @@ copy /Y %PATH_BUILD%\%1\bin\cares.pdb %PATH_INSTALL%\bin\cares.pdb
 copy /Y %PATH_BUILD%\%1\bin\acountry.pdb %PATH_INSTALL%\bin\acountry.pdb
 copy /Y %PATH_BUILD%\%1\bin\adig.pdb %PATH_INSTALL%\bin\adig.pdb
 copy /Y %PATH_BUILD%\%1\bin\ahost.pdb %PATH_INSTALL%\bin\ahost.pdb
-	REM use + rename pour curl static
-move /Y %PATH_INSTALL%\lib\cares_static.lib %PATH_INSTALL%\lib\libcares.lib 
-move /Y %PATH_INSTALL%\bin\cares_static.pdb %PATH_INSTALL%\lib\libcares.pdb
