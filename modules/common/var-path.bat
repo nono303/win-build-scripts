@@ -67,5 +67,5 @@ if not exist %PATH_HTTPD_SDK%\release\vc15_x86-avx\. mkdir %PATH_HTTPD_SDK%\rele
 if not exist %PATH_HTTPD_SDK%\release\vc15_x64-avx\. mkdir %PATH_HTTPD_SDK%\release\vc15_x64-avx
 if not exist %PATH_HTTPD_SDK%\release\vc15_x86\. mkdir %PATH_HTTPD_SDK%\release\vc15_x86
 if not exist %PATH_HTTPD_SDK%\release\vc15_x64\. mkdir %PATH_HTTPD_SDK%\release\vc15_x64
-if exist %PATH_BUILD%\. rmdir %PATH_BUILD% /s/q
+if exist %PATH_BUILD%\. rmdir /S /Q %PATH_BUILD%
 mkdir %PATH_BUILD% 
