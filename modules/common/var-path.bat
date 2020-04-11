@@ -6,6 +6,7 @@ CHCP 1251
 REM ########################## PATHS
 set PATH_HTTPD_SDK=C:\httpd-sdk
 set PATH_BUILD=%PATH_HTTPD_SDK%\build
+set SEDPATH_BUILD=C:\\\\httpd-sdk\\\\build
 set PATH_INSTALL=%PATH_HTTPD_SDK%\install
 set PATH_MODULES=%PATH_HTTPD_SDK%\modules
 set PATH_MODULES_COMMON=%PATH_MODULES%\common

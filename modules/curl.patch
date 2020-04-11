@@ -1,0 +1,28 @@
+diff --git a/winbuild/Makefile.vc b/winbuild/Makefile.vc
+index 7ad49f09f..c01e6c7cd 100644
+--- a/winbuild/Makefile.vc
++++ b/winbuild/Makefile.vc
+@@ -261,12 +261,20 @@ CONFIG_NAME_LIB = $(CONFIG_NAME_LIB)-winssl
+ CONFIG_NAME_LIB = $(CONFIG_NAME_LIB)-nghttp2-$(NGHTTP2)
+ !ENDIF
+ 
++!IFDEF CONFIGNAMELIB
++CONFIG_NAME_LIB=$(CONFIGNAMELIB)
++!ENDIF
++
+ !MESSAGE configuration name: $(CONFIG_NAME_LIB)
+ 
++!IFNDEF BUILDDIR
+ BUILD_DIR=../builds/$(CONFIG_NAME_LIB)
+-LIBCURL_DIROBJ = ..\builds\$(CONFIG_NAME_LIB)-obj-lib
+-CURL_DIROBJ = ..\builds\$(CONFIG_NAME_LIB)-obj-curl
+-DIRDIST = ..\builds\$(CONFIG_NAME_LIB)\
++!ELSE
++BUILD_DIR=$(BUILDDIR)/$(CONFIG_NAME_LIB)
++!ENDIF
++LIBCURL_DIROBJ = $(BUILD_DIR)-obj-lib
++CURL_DIROBJ = $(BUILD_DIR)-obj-curl
++DIRDIST = $(BUILD_DIR)\
+ 
+ $(MODE):
+ 	@SET DIROBJ=$(LIBCURL_DIROBJ)
