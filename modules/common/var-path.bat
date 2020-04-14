@@ -26,6 +26,12 @@ set PATH_BIN_PERL_SITE=C:\perl\site\bin
 	REM sysinternals, nirsoft, etc.
 set PATH_BIN_MISC=C:\bin
 set PATH_BIN_CYGWIN=C:\cyg%CYGV%\bin
+	REM svn for mobac
+SET PATH_BIN_SVN=D:\github\NONO_subversion\vs16\x64;D:\github\NONO_subversion\vs16\x64\deps
+
+	REM ant & java for mobac
+SET ANT_HOME=C:\Program Files\Eclipse\plugins\org.apache.ant_1.10.7.v20190926-0324
+SET JAVA_HOME=C:\jdk8\x64
 
 	REM CYGWIN PATH
 FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_SRC%`) DO (SET CYGPATH_SRC=%%F)
@@ -34,7 +40,7 @@ FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_MODULES_C
 FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_HTTPD_SDK%`) DO (SET CYGPATH_HTTPD_SDK=%%F)
 FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_BUILD%`) DO (SET CYGPATH_BUILD=%%F)
 
-set PATH_WIN=%PATH_BIN_PYTHON%;%PATH_BIN_GIT%;%PATH_BIN_NASM%;%PATH_BIN_PERL%;%PATH_BIN_PERL_SITE%;%PATH_BIN_MISC%;%PATH_BIN_CYGWIN%;%PATH_VS%\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;%PATH_PHP_SDK%\bin\php;C:\Windows;C:\Windows\SysWOW64;C:\Windows\SysWOW64\wbem;C:\Windows\system32;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;
+set PATH_WIN=%PATH_BIN_PYTHON%;%PATH_BIN_GIT%;%PATH_BIN_NASM%;%PATH_BIN_PERL%;%PATH_BIN_PERL_SITE%;%PATH_BIN_MISC%;%PATH_BIN_CYGWIN%;%PATH_BIN_SVN%;%PATH_VS%\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;%PATH_PHP_SDK%\bin\php;C:\Windows;C:\Windows\SysWOW64;C:\Windows\SysWOW64\wbem;C:\Windows\system32;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;
 
 cd /D %PATH_HTTPD_SDK%
 
