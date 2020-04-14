@@ -56,5 +56,7 @@ Copy /Y %PATH_INSTALL%\bin\brotlienc.dll D:\github\NONO_subversion\%MSVC_DEPS%\%
 Copy /Y %PATH_INSTALL%\bin\brotlicommon.dll D:\github\NONO_subversion\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%brotlicommon.pdb
 Copy /Y %PATH_INSTALL%\bin\brotlidec.dll D:\github\NONO_subversion\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%brotlidec.pdb
 Copy /Y %PATH_INSTALL%\bin\libserf-2.pdb D:\github\NONO_subversion\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%libserf-2.pdb
+Copy /Y %PATH_INSTALL%\bin\zlib1.dll D:\github\NONO_subversion\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%zlib1.pdb
+Copy /Y %PATH_INSTALL%\bin\zlib1.pdb D:\github\NONO_subversion\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%zlib1.pdb
 cd /D %PATH_MODULES%
 
