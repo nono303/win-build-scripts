@@ -23,16 +23,3 @@ index 0fd5c8d..cfef6b8 100644
 +
  AC_CONFIG_FILES(Makefile doc/Makefile)
  AC_OUTPUT
-diff --git a/extstore.c b/extstore.c
-index e825667..943e87b 100644
---- a/extstore.c
-+++ b/extstore.c
-@@ -773,7 +773,7 @@ static void *extstore_io_thread(void *arg) {
-                     }
-                     pthread_mutex_unlock(&p->mutex);
-                     if (do_op) {
--#ifdef __APPLE__
-+#if defined(__CYGWIN__) || defined(__APPLE__)
-                         ret = lseek(p->fd, SEEK_SET, p->offset + cur_io->offset);
-                         if (ret >= 0) {
-                             if (cur_io->iov == NULL) {
