@@ -1,6 +1,6 @@
 call %PATH_MODULES_COMMON%\init.bat mod_maxminddb
 REM https://github.com/maxmind/mod_maxminddb/issues/84
-git apply %PATH_MODULES%\mod_maxminddb.patch
+git apply --verbose %PATH_MODULES%\mod_maxminddb.patch
 
 call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
