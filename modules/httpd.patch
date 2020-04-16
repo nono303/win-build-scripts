@@ -1,0 +1,309 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index a7b18419dd..6f487142b5 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -15,6 +15,11 @@
+ #
+ # Read README.cmake before using this.
+ 
++# SET(mod_md_src "modules/md")
++SET(mod_md_src "../mod_md/src")
++# SET(mod_http2_src "modules/http2")
++SET(mod_http2_src "../mod_h2/mod_http2")
++
+ PROJECT(HTTPD C)
+ 
+ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+@@ -326,14 +331,14 @@ SET(MODULE_LIST
+   "modules/generators/mod_info+I+server information"
+   "modules/generators/mod_status+I+process/thread monitoring"
+   "modules/http/mod_mime+A+mapping of file-extension to MIME.  Disabling this module is normally not recommended."
+-  "modules/http2/mod_http2+i+HTTP/2 protocol support"
++  "${mod_http2_src}/mod_http2+i+HTTP/2 protocol support"
+   "modules/ldap/mod_ldap+i+LDAP caching and connection pooling services"
+   "modules/loggers/mod_log_config+A+logging configuration.  You won't be able to log requests to the server without this module."
+   "modules/loggers/mod_log_debug+I+configurable debug logging"
+   "modules/loggers/mod_log_forensic+I+forensic logging"
+   "modules/loggers/mod_logio+I+input and output logging"
+   "modules/lua/mod_lua+i+Apache Lua Framework"
+-  "modules/md/mod_md+i+Apache Managed Domains (Certificates)"
++  "${mod_md_src}/mod_md+i+Apache Managed Domains (Certificates)"
+   "modules/mappers/mod_actions+I+Action triggering on requests"
+   "modules/mappers/mod_alias+A+mapping of requests to different filesystem parts"
+   "modules/mappers/mod_dir+A+directory request handling"
+@@ -369,7 +374,7 @@ SET(MODULE_LIST
+   "modules/proxy/mod_proxy_hcheck+I+Apache proxy health check module.  Requires and is enabled by --enable-proxy."
+   "modules/proxy/mod_proxy_scgi+I+Apache proxy SCGI module.  Requires and is enabled by --enable-proxy."
+   "modules/proxy/mod_proxy_wstunnel+I+Apache proxy Websocket Tunnel module.  Requires and is enabled by --enable-proxy."
+-  "modules/http2/mod_proxy_http2+i+Apache proxy HTTP/2 module.  Requires --enable-proxy."
++  "${mod_http2_src}/mod_proxy_http2+i+Apache proxy HTTP/2 module.  Requires --enable-proxy."
+   "modules/session/mod_session+I+session module"
+   "modules/session/mod_session_cookie+I+session cookie module"
+   "modules/session/mod_session_crypto+i+session crypto module"
+@@ -382,6 +387,12 @@ SET(MODULE_LIST
+   "modules/test/mod_optional_fn_import+O+example optional function importer"
+   "modules/test/mod_optional_hook_export+O+example optional hook exporter"
+   "modules/test/mod_optional_hook_import+O+example optional hook importer"
++  "../mod_maxminddb/src/mod_maxminddb+i+MaxMind DB Apache Module"
++  "../mod_fcgid/modules/fcgid/mod_fcgid+i+FastCGI implementation for Apache HTTP"
++# "../mod_h264_streaming/src/mod_h264_streaming+i+Adaptive streaming and pseudo streaming for Flash"
++  "../mod_wku_bt/mod_whatkilledus+i+mod_whatkilledus"
++  "../mod_wku_bt/mod_crash+i+FastCGI mod_crash"
++  "../mod_wku_bt/mod_backtrace+i+mod_backtrace"
+ )
+ 
+ # Track which modules actually built have APIs to link against.
+@@ -435,19 +446,32 @@ SET(mod_http2_requires               NGHTTP2_FOUND)
+ SET(mod_http2_extra_defines          ssize_t=long)
+ SET(mod_http2_extra_includes         ${NGHTTP2_INCLUDE_DIR})
+ SET(mod_http2_extra_libs             ${NGHTTP2_LIBRARIES})
++# https://raw.githubusercontent.com/modcluster/ci.modcluster.io/master/windows/httpd/httpd-2.4.34_CMakeLists.txt.patch
++  SET(mod_http2_extra_includes         ${NGHTTP2_INCLUDE_DIR})
++  SET(mod_lbmethod_bybusyness_extra_libs   mod_proxy)
++  SET(mod_lbmethod_byrequests_extra_libs   mod_proxy)
++  SET(mod_lbmethod_bytraffic_extra_libs    mod_proxy)
+ SET(mod_http2_extra_sources
+-  modules/http2/h2_alt_svc.c
+-  modules/http2/h2_bucket_eos.c      modules/http2/h2_config.c
+-  modules/http2/h2_conn.c            modules/http2/h2_conn_io.c
+-  modules/http2/h2_ctx.c             modules/http2/h2_filter.c
+-  modules/http2/h2_from_h1.c         modules/http2/h2_h2.c
+-  modules/http2/h2_bucket_beam.c
+-  modules/http2/h2_mplx.c            modules/http2/h2_push.c
+-  modules/http2/h2_request.c         modules/http2/h2_headers.c
+-  modules/http2/h2_session.c         modules/http2/h2_stream.c 
+-  modules/http2/h2_switch.c
+-  modules/http2/h2_task.c            modules/http2/h2_util.c
+-  modules/http2/h2_workers.c
++  ${mod_http2_src}/h2_mplx.c
++  ${mod_http2_src}/h2_push.c
++  ${mod_http2_src}/h2_request.c
++  ${mod_http2_src}/h2_session.c
++  ${mod_http2_src}/h2_stream.c
++  ${mod_http2_src}/h2_switch.c
++  ${mod_http2_src}/h2_task.c
++  ${mod_http2_src}/h2_util.c
++  ${mod_http2_src}/h2_alt_svc.c
++  ${mod_http2_src}/h2_bucket_beam.c
++  ${mod_http2_src}/h2_bucket_eos.c
++  ${mod_http2_src}/h2_config.c
++  ${mod_http2_src}/h2_conn.c
++  ${mod_http2_src}/h2_conn_io.c
++  ${mod_http2_src}/h2_ctx.c
++  ${mod_http2_src}/h2_filter.c
++  ${mod_http2_src}/h2_from_h1.c
++  ${mod_http2_src}/h2_h2.c
++  ${mod_http2_src}/h2_headers.c
++  ${mod_http2_src}/h2_workers.c
+ )
+ SET(mod_ldap_extra_defines           LDAP_DECLARE_EXPORT)
+ SET(mod_ldap_extra_libs              wldap32)
+@@ -512,7 +536,8 @@ SET(mod_proxy_http2_extra_defines          ssize_t=long)
+ SET(mod_proxy_http2_extra_includes         ${NGHTTP2_INCLUDE_DIR})
+ SET(mod_proxy_http2_extra_libs             ${NGHTTP2_LIBRARIES} mod_proxy)
+ SET(mod_proxy_http2_extra_sources
+-  modules/http2/h2_proxy_session.c   modules/http2/h2_proxy_util.c
++  ${mod_http2_src}/h2_proxy_session.c   
++  ${mod_http2_src}/h2_proxy_util.c
+ )
+ SET(mod_ratelimit_extra_defines      AP_RL_DECLARE_EXPORT)
+ SET(mod_sed_extra_sources
+@@ -543,6 +568,70 @@ SET(mod_ssl_extra_sources
+   modules/ssl/ssl_util.c             modules/ssl/ssl_util_ocsp.c
+   modules/ssl/ssl_util_ssl.c         modules/ssl/ssl_util_stapling.c
+ )
++IF(CURL_FOUND)
++  SET(mod_md_extra_includes           "${CURL_INCLUDE_DIR};${OPENSSL_INCLUDE_DIR};${JANSSON_INCLUDE_DIR}")
++  SET(mod_md_extra_libs               "${CURL_LIBRARIES};${OPENSSL_LIBRARIES};${JANSSON_LIBRARIES}")
++ENDIF()
++SET(mod_md_extra_sources
++  ${mod_md_src}/md_store_fs.c
++  ${mod_md_src}/md_time.c
++  ${mod_md_src}/md_util.c
++  ${mod_md_src}/mod_md_config.c
++  ${mod_md_src}/mod_md_drive.c
++  ${mod_md_src}/mod_md_ocsp.c
++  ${mod_md_src}/mod_md_os.c
++  ${mod_md_src}/mod_md_status.c
++  ${mod_md_src}/md_acme.c
++  ${mod_md_src}/md_acme_acct.c
++  ${mod_md_src}/md_acme_authz.c
++  ${mod_md_src}/md_acme_drive.c
++  ${mod_md_src}/md_acme_order.c
++  ${mod_md_src}/md_acmev1_drive.c
++  ${mod_md_src}/md_acmev2_drive.c
++  ${mod_md_src}/md_cmd_acme.c
++  ${mod_md_src}/md_cmd_main.c
++  ${mod_md_src}/md_cmd_reg.c
++  ${mod_md_src}/md_cmd_store.c
++  ${mod_md_src}/md_core.c
++  ${mod_md_src}/md_crypt.c
++  ${mod_md_src}/md_curl.c
++  ${mod_md_src}/md_http.c
++  ${mod_md_src}/md_json.c
++  ${mod_md_src}/md_jws.c
++  ${mod_md_src}/md_log.c
++  ${mod_md_src}/md_ocsp.c
++  ${mod_md_src}/md_reg.c
++  ${mod_md_src}/md_result.c
++  ${mod_md_src}/md_status.c
++  ${mod_md_src}/md_store.c
++)
++SET(mod_fcgid_extra_sources
++../mod_fcgid/modules/fcgid/fcgid_proctbl_win.c
++../mod_fcgid/modules/fcgid/fcgid_protocol.c
++../mod_fcgid/modules/fcgid/fcgid_spawn_ctl.c
++../mod_fcgid/modules/fcgid/mod_fcgid.c
++../mod_fcgid/modules/fcgid/fcgid_bridge.c
++../mod_fcgid/modules/fcgid/fcgid_bucket.c
++../mod_fcgid/modules/fcgid/fcgid_conf.c
++../mod_fcgid/modules/fcgid/fcgid_filter.c
++../mod_fcgid/modules/fcgid/fcgid_pm_main.c
++../mod_fcgid/modules/fcgid/fcgid_pm_win.c
++../mod_fcgid/modules/fcgid/fcgid_proc_win.c
++)
++SET(mod_maxminddb_extra_libs			${MAXMIND_LIBRARIES})
++SET(mod_whatkilledus_extra_libs			"dbghelp.lib")
++SET(mod_whatkilledus_extra_sources
++../mod_wku_bt/mod_whatkilledus.c
++../mod_wku_bt/diag.c		
++)
++SET(mod_backtrace_extra_libs			"dbghelp.lib")
++SET(mod_backtrace_extra_sources
++../mod_wku_bt/mod_backtrace.c
++../mod_wku_bt/diag.c		
++)
++SET(mod_crash_extra_sources
++../mod_wku_bt/mod_crash.c
++)
+ SET(mod_status_extra_defines         STATUS_DECLARE_EXPORT)
+ SET(mod_watchdog_install_lib 1)
+ SET(mod_xml2enc_requires             LIBXML2_FOUND)
+@@ -610,7 +699,7 @@ ELSE()
+ ENDIF()
+ 
+ # for easy reference from .dll/.so builds
+-CONFIGURE_FILE(os/win32/BaseAddr.ref ${PROJECT_BINARY_DIR}/ COPYONLY)
++# CONFIGURE_FILE(os/win32/BaseAddr.ref ${PROJECT_BINARY_DIR}/ COPYONLY)
+ 
+ ADD_EXECUTABLE(gen_test_char server/gen_test_char.c)
+ GET_TARGET_PROPERTY(GEN_TEST_CHAR_EXE gen_test_char LOCATION)
+@@ -683,6 +772,8 @@ SET(LIBHTTPD_SOURCES
+ 
+ CONFIGURE_FILE(os/win32/win32_config_layout.h
+                ${PROJECT_BINARY_DIR}/ap_config_layout.h)
++CONFIGURE_FILE(server/mpm/winnt/mpm_winnt.h
++               ${PROJECT_BINARY_DIR}/mpm_winnt.h)
+ 
+ SET(HTTPD_INCLUDE_DIRECTORIES
+   ${PROJECT_BINARY_DIR}
+@@ -700,6 +791,7 @@ SET(HTTPD_INCLUDE_DIRECTORIES
+   ${CMAKE_CURRENT_SOURCE_DIR}/modules/proxy
+   ${CMAKE_CURRENT_SOURCE_DIR}/modules/session
+   ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl
++  ${CMAKE_CURRENT_SOURCE_DIR}/${mod_md_src}
+   ${CMAKE_CURRENT_SOURCE_DIR}/server
+   ${CMAKE_CURRENT_SOURCE_DIR}/server/mpm/winnt
+   ${APR_INCLUDE_DIR}
+@@ -728,6 +820,7 @@ SET(other_installed_h
+   ${CMAKE_CURRENT_SOURCE_DIR}/modules/session/mod_session.h
+   ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl/mod_ssl.h
+   ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl/mod_ssl_openssl.h
++  ${CMAKE_CURRENT_SOURCE_DIR}/modules/md/mod_md.h
+ )
+ # When mod_serf is buildable, don't forget to copy modules/proxy/mod_serf.h
+ 
+@@ -818,7 +911,7 @@ FOREACH (mod ${MODULE_PATHS})
+     SET(mod_extra_libs "${mod_name}_extra_libs")
+     SET_TARGET_PROPERTIES(${mod_name} PROPERTIES
+       SUFFIX .so
+-      LINK_FLAGS /base:@${PROJECT_BINARY_DIR}/BaseAddr.ref,${mod_name}.so
++      # LINK_FLAGS /base:@${PROJECT_BINARY_DIR}/BaseAddr.ref,${mod_name}.so
+     )
+     TARGET_LINK_LIBRARIES(${mod_name} ${${mod_extra_libs}} libhttpd ${EXTRA_LIBS} ${APR_LIBRARIES} ${HTTPD_SYSTEM_LIBS})
+     DEFINE_WITH_BLANKS(define_long_name "LONG_NAME" "${mod_name} for Apache HTTP Server")
+@@ -843,9 +936,9 @@ ENDFOREACH()
+ 
+ ###########   HTTPD LIBRARIES   ############
+ ADD_LIBRARY(libhttpd SHARED ${LIBHTTPD_SOURCES} build/win32/httpd.rc)
+-SET_TARGET_PROPERTIES(libhttpd PROPERTIES
+-  LINK_FLAGS /base:@${PROJECT_BINARY_DIR}/BaseAddr.ref,libhttpd.dll
+-)
++#SET_TARGET_PROPERTIES(libhttpd PROPERTIES
++#  LINK_FLAGS /base:@${PROJECT_BINARY_DIR}/BaseAddr.ref,libhttpd.dll
++#)
+ SET(install_targets ${install_targets} libhttpd)
+ SET(install_bin_pdb ${install_bin_pdb} $<TARGET_PDB_FILE:libhttpd>)
+ TARGET_LINK_LIBRARIES(libhttpd ${EXTRA_LIBS} ${APR_LIBRARIES} ${PCRE_LIBRARIES} ${HTTPD_SYSTEM_LIBS})
+@@ -899,12 +992,12 @@ ENDIF()
+ GET_PROPERTY(tmp_includes TARGET ab PROPERTY INCLUDE_DIRECTORIES)
+ 
+ # getting duplicate manifest error with ApacheMonitor
+-# ADD_EXECUTABLE(ApacheMonitor support/win32/ApacheMonitor.c support/win32/ApacheMonitor.rc)
+-# SET(install_targets ${install_targets} ApacheMonitor)
+-# SET(install_bin_pdb ${install_bin_pdb} $<TARGET_PDB_FILE:ApacheMonitor>)
+-# SET_TARGET_PROPERTIES(ApacheMonitor PROPERTIES WIN32_EXECUTABLE TRUE)
+-# SET_TARGET_PROPERTIES(ApacheMonitor PROPERTIES COMPILE_FLAGS "-DAPP_FILE -DLONG_NAME=ApacheMonitor -DBIN_NAME=ApacheMonitor.exe ${EXTRA_COMPILE_FLAGS}")
+-# TARGET_LINK_LIBRARIES(ApacheMonitor ${EXTRA_LIBS} ${HTTPD_SYSTEM_LIBS} comctl32 wtsapi32)
++ADD_EXECUTABLE(ApacheMonitor support/win32/ApacheMonitor.c support/win32/ApacheMonitor.rc)
++SET(install_targets ${install_targets} ApacheMonitor)
++SET(install_bin_pdb ${install_bin_pdb} $<TARGET_PDB_FILE:ApacheMonitor>)
++SET_TARGET_PROPERTIES(ApacheMonitor PROPERTIES WIN32_EXECUTABLE TRUE)
++SET_TARGET_PROPERTIES(ApacheMonitor PROPERTIES COMPILE_FLAGS "-DAPP_FILE -DLONG_NAME=ApacheMonitor -DBIN_NAME=ApacheMonitor.exe ${EXTRA_COMPILE_FLAGS}")
++TARGET_LINK_LIBRARIES(ApacheMonitor ${EXTRA_LIBS} ${HTTPD_SYSTEM_LIBS} comctl32 wtsapi32)
+ 
+ ###########  CONFIGURATION FILES ###########
+ # Set up variables used in the .conf file templates
+diff --git a/modules/proxy/mod_proxy_fcgi.c b/modules/proxy/mod_proxy_fcgi.c
+index 2e97408f3f..dfd0c1b396 100644
+--- a/modules/proxy/mod_proxy_fcgi.c
++++ b/modules/proxy/mod_proxy_fcgi.c
+@@ -357,6 +357,10 @@ static apr_status_t send_environment(proxy_conn_rec *conn, request_rec *r,
+ 
+         if (newfname) {
+             newfname = ap_strchr(newfname, '/');
++			// Windows
++			if ((ap_strstr(newfname, ":/")) != NULL)
++				memmove(newfname, newfname+1, strlen(newfname));
++			ap_log_rerror(APLOG_MARK, APLOG_DEBUG, 0, r, APLOGNO(01078) "SCRIPT_FILENAME %s", newfname);
+             r->filename = newfname;
+         }
+     }
+diff --git a/server/main.c b/server/main.c
+index 62e06df045..3ec4181f7a 100644
+--- a/server/main.c
++++ b/server/main.c
+@@ -44,6 +44,7 @@
+ #if APR_HAVE_UNISTD_H
+ #include <unistd.h>
+ #endif
++#include "ms\applink.c"
+ 
+ /* WARNING: Win32 binds http_main.c dynamically to the server. Please place
+  *          extern functions and global data in another appropriate module.
+diff --git a/support/ab.c b/support/ab.c
+index 8205620994..08488260c8 100644
+--- a/support/ab.c
++++ b/support/ab.c
+@@ -175,7 +175,7 @@ typedef STACK_OF(X509) X509_STACK_TYPE;
+  * by the OpenSSL library build to another CRT used by the ab.exe build.
+  * This became especially problematic with Visual Studio 2015.
+  */
+-#include <openssl/applink.c>
++#include <ms/applink.c>
+ #endif
+ 
+ #endif
+diff --git a/support/win32/ApacheMonitor.rc b/support/win32/ApacheMonitor.rc
+index d4203bf926..9d8211e830 100644
+--- a/support/win32/ApacheMonitor.rc
++++ b/support/win32/ApacheMonitor.rc
+@@ -26,7 +26,7 @@
+ IDI_APSRVMON            ICON    DISCARDABLE     "ApacheMonitor.ico"
+ IDI_ICOSTOP             ICON    DISCARDABLE     "apstop.ico"
+ IDI_ICORUN              ICON    DISCARDABLE     "aprun.ico"
+-CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST  "ApacheMonitor.manifest"
++// CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST  "ApacheMonitor.manifest"
+ 
+ IDD_DLGSERVICES DIALOGEX 0, 0, 350, 192
+ STYLE DS_MODALFRAME | DS_SETFOREGROUND | WS_MINIMIZEBOX | WS_VISIBLE | 

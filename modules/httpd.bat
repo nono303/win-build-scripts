@@ -1,6 +1,7 @@
-call %PATH_MODULES_COMMON%\init.bat mod_maxminddb
+set MODULE_EXTRA=mod_maxminddb
+call %PATH_MODULES_COMMON%\init.bat %MODULE_EXTRA%
 	REM https://github.com/maxmind/mod_maxminddb/issues/84
-git apply --verbose %PATH_MODULES%\mod_maxminddb.patch
+git apply --verbose %PATH_MODULES%\%MODULE_EXTRA%.patch
 
 	REM pour mod_md
 	REM openssl-ssh2_static_deps-dll	KO
@@ -19,6 +20,10 @@ Copy /Y %PATH_INSTALL%\curl\%CURL_VER%\bin\curl.exe %PATH_INSTALL%\bin\curl.exe
 
 call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
+cd /D %PATH_SRC%/%1
+git apply --verbose %PATH_MODULES%\%1.patch
+
+cd /D %PATH_BUILD%/%1
 cmake -Wno-dev -G "NMake Makefiles" ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
@@ -46,6 +51,11 @@ mt.exe -manifest %PATH_MODULES%\httpd.exe.manifest -outputresource:%PATH_INSTALL
 	REM http://uppod.ru/talk_2008
 set MODULE_EXTRA=mod_h264_streaming
 call %PATH_MODULES_COMMON%\init.bat %MODULE_EXTRA% cmake
+
+cd %PATH_SRC%\%MODULE_EXTRA%
+git apply --verbose %PATH_MODULES%\%MODULE_EXTRA%.patch
+
+cd %PATH_BUILD%\%MODULE_EXTRA%
 cl /nologo -D HAVE_CONFIG_H -D WIN32 %EXTCFLAGS% -I"%PATH_INSTALL%\include" -I"%PATH_INSTALL%\lib" -D BUILDING_H264_STREAMING /c /Fo C:/src\%MODULE_EXTRA%\mod_h264_streaming.c
 cl /nologo -D HAVE_CONFIG_H -D WIN32 %EXTCFLAGS% -I"%PATH_INSTALL%\include" -I"%PATH_INSTALL%\lib" -D BUILDING_H264_STREAMING /c /Fo C:/src\%MODULE_EXTRA%\output_mp4.c
 cl /nologo -D HAVE_CONFIG_H -D WIN32 %EXTCFLAGS% -I"%PATH_INSTALL%\include" -I"%PATH_INSTALL%\lib" -D BUILDING_H264_STREAMING /c /Fo C:/src\%MODULE_EXTRA%\output_bucket.c

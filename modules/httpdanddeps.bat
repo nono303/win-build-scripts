@@ -19,4 +19,3 @@ call %PATH_HTTPD_SDK%\build.bat sqlite
 call %PATH_HTTPD_SDK%\build.bat apr
 call %PATH_HTTPD_SDK%\build.bat lua
 call %PATH_HTTPD_SDK%\build.bat httpd
-call %PATH_HTTPD_SDK%\build.bat mod_h264_streaming
