@@ -4,5 +4,3 @@ cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% -DCMAK
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/flags.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 nmake %NMAKE_OPTS% clean install
 copy /Y %PATH_BUILD%\%1\libexpat.pdb %PATH_INSTALL%\bin\libexpat.pdb
-	REM APR
-REM mklink /H %PATH_INSTALL%\lib\expat.lib %PATH_INSTALL%\lib\libexpat.lib
