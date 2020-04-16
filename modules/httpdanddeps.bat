@@ -16,7 +16,6 @@ call %PATH_HTTPD_SDK%\build.bat curl
 call %PATH_HTTPD_SDK%\build.bat libexpat
 call %PATH_HTTPD_SDK%\build.bat libmaxminddb
 call %PATH_HTTPD_SDK%\build.bat sqlite
-exit /B
 call %PATH_HTTPD_SDK%\build.bat apr
 call %PATH_HTTPD_SDK%\build.bat lua
 call %PATH_HTTPD_SDK%\build.bat httpd
