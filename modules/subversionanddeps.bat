@@ -1,3 +1,2 @@
-call %PATH_MODULES%\sqlite.bat
-call %PATH_MODULES%\serf-svn.bat
-call %PATH_MODULES%\subversion-svn.bat
+call %PATH_HTTPD_SDK%\build.bat serf-svn
+call %PATH_HTTPD_SDK%\build.bat subversion-svn

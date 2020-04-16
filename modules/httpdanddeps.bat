@@ -1,21 +1,23 @@
-call %PATH_MODULES%\zlib.bat
-call %PATH_MODULES%\openssl.bat
-call %PATH_MODULES%\jemalloc.bat
-call %PATH_MODULES%\brotli.bat
-call %PATH_MODULES%\jansson.bat
-call %PATH_MODULES%\bzip2.bat
-call %PATH_MODULES%\libiconv.bat
-call %PATH_MODULES%\libxml2.bat
-call %PATH_MODULES%\pcre.bat
-call %PATH_MODULES%\libevent.bat
-call %PATH_MODULES%\libev.bat
-call %PATH_MODULES%\c-ares.bat
-call %PATH_MODULES%\nghttp2.bat
-call %PATH_MODULES%\libssh2.bat
-call %PATH_MODULES%\curl.bat
-call %PATH_MODULES%\libexpat.bat
-call %PATH_MODULES%\libmaxminddb.bat
-call %PATH_MODULES%\apr.bat
-call %PATH_MODULES%\lua.bat
-call %PATH_MODULES%\httpd.bat
-call %PATH_MODULES%\mod_h264_streaming.bat
+call %PATH_HTTPD_SDK%\build.bat zlib
+call %PATH_HTTPD_SDK%\build.bat openssl
+call %PATH_HTTPD_SDK%\build.bat jemalloc
+call %PATH_HTTPD_SDK%\build.bat brotli
+call %PATH_HTTPD_SDK%\build.bat jansson
+call %PATH_HTTPD_SDK%\build.bat bzip2
+call %PATH_HTTPD_SDK%\build.bat libiconv
+call %PATH_HTTPD_SDK%\build.bat libxml2
+call %PATH_HTTPD_SDK%\build.bat pcre
+call %PATH_HTTPD_SDK%\build.bat libevent
+call %PATH_HTTPD_SDK%\build.bat libev
+call %PATH_HTTPD_SDK%\build.bat c-ares
+call %PATH_HTTPD_SDK%\build.bat nghttp2
+call %PATH_HTTPD_SDK%\build.bat libssh2
+call %PATH_HTTPD_SDK%\build.bat curl
+call %PATH_HTTPD_SDK%\build.bat libexpat
+call %PATH_HTTPD_SDK%\build.bat libmaxminddb
+call %PATH_HTTPD_SDK%\build.bat sqlite
+exit /B
+call %PATH_HTTPD_SDK%\build.bat apr
+call %PATH_HTTPD_SDK%\build.bat lua
+call %PATH_HTTPD_SDK%\build.bat httpd
+call %PATH_HTTPD_SDK%\build.bat mod_h264_streaming
