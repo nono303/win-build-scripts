@@ -13,6 +13,7 @@ set PATH_MODULES_COMMON=%PATH_MODULES%\common
 set PATH_LOGS=%PATH_HTTPD_SDK%\_logs
 set PATH_PHP_SDK=C:\php72-sdk
 set PATH_SRC=c:\src
+set PATH_JDK=c:\jdk8
 
 	REM dir /X > C:\Program Files (x86)\Microsoft Visual Studio\2019\Community
 set PATH_VS=C:\PROGRA~2\MICROS~1\2019\Community
