@@ -2,7 +2,7 @@ call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
 	REM add nmake options : BUILDDIR & CONFIGNAMELIB in Makefile.vc
 cd %PATH_SRC%\%1
-git apply --verbose %PATH_MODULES%\curl.patch
+git apply --verbose %PATH_MODULES%\%1.patch
 sed -i 's/..\\\\builds/%SEDPATH_BUILD%\\\\%1/g' %CYGPATH_SRC%/%1/winbuild/MakefileBuild.vc
 
 	REM https://curl.haxx.se/mail/lib-2012-10/0163.html

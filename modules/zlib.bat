@@ -1,7 +1,7 @@
 call %PATH_MODULES_COMMON%\init.bat %1
 
 REM https://stackoverflow.com/questions/29505121/cmake-zlib-build-on-windows
-git apply --verbose %PATH_MODULES%\zlib.patch
+git apply --verbose %PATH_MODULES%\%1.patch
 
 sed -i 's/Zc:inline/Zc:inline -MP%NUMBER_OF_PROCESSORS% %AVXMSC%/g' %CYGPATH_SRC%/%1/win32/Makefile.msc
 nmake %NMAKE_OPTS% /f win32/Makefile.msc clean
