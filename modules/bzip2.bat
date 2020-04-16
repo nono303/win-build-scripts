@@ -14,11 +14,6 @@ move /Y %PATH_SRC%\%1\libbz2.pdb %PATH_INSTALL%\lib\libbz2.pdb
 move /Y %PATH_SRC%\%1\bzip2recover.pdb %PATH_INSTALL%\bin\bzip2recover.pdb
 move /Y %PATH_SRC%\%1\bzip2.pdb %PATH_INSTALL%\bin\bzip2.pdb
 copy /Y %PATH_SRC%\%1\bzlib.h %PATH_INSTALL%\include\bzlib.h
-
-	REM libbz2 => bzip2  [pcre]
-mklink /h %PATH_INSTALL%\lib\bzip2.lib %PATH_INSTALL%\lib\libbz2.lib
-mklink /h %PATH_INSTALL%\lib\bzip2.pdb %PATH_INSTALL%\lib\libbz2.pdb
-
 	REM libbz2 => bzip2 [PHP]
 mklink /h %PATH_INSTALL%\lib\libbz2_a.lib %PATH_INSTALL%\lib\libbz2.lib
 mklink /h %PATH_INSTALL%\lib\libbz2_a.pdb %PATH_INSTALL%\lib\libbz2.pdb
