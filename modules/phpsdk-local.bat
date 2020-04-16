@@ -57,7 +57,6 @@ if %BUILDREQ% == 1 (
 		REM call %PATH_MODULES%\protobuf-php.bat
 		REM call %PATH_MODULES%\libzmq-php.bat
 	call %PATH_MODULES%\libxdiff-php.bat
-	call %PATH_MODULES%\sqlite.bat
 )
 if %copydeps% == 1 (
 	rm -f D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%ARCH%_deps\*.*
