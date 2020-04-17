@@ -3,14 +3,10 @@ REM      USEMAK=1 erreur without log
 REM      USEDSW=1 KO
 REM      USESLN=1 KO
 
-@echo off
 for %%X in (apr apr-util apr-iconv) do (
-	echo on
 	call %PATH_MODULES_COMMON%\init.bat %%X cmake
 	%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES%/apr.sh "%AVXSED%" "%CYGPATH_SRC%/%%X" "%NUMBER_OF_PROCESSORS%" "%CYGPATH_SRC%"
 )
-echo on
-
 	REM https://www.apachelounge.com/viewtopic.php?t=8260
 	REM https://docs.microsoft.com/fr-fr/cpp/porting/modifying-winver-and-win32-winnt?view=vs-2019
 sed -i 's/_WIN32_WINNT 0x0501/_WIN32_WINNT 0x0601/g' %CYGPATH_SRC%/apr/include/apr.hw
@@ -20,7 +16,7 @@ sed -i 's/_WIN32_WINNT 0x0501/_WIN32_WINNT 0x0601/g' %CYGPATH_SRC%/apr/include/a
 	REM si en 2eme position
 REM copy /Y %PATH_INSTALL%\include\apr_escape_test_char.h %PATH_SRC%\apr\include\
 cd /D %PATH_SRC%\apr\tools
-cl gen_test_char.c
+cl /nologo gen_test_char.c
 gen_test_char.exe > %PATH_SRC%\apr\include\apr_escape_test_char.h
 REM rm -f *.exe *.obj
 
@@ -40,7 +36,7 @@ cd /D %PATH_BUILD%\apr-util
 
 	REM "dirty" XLATE ON
 sed -i 's/apu_have_apr_iconv_10 0/apu_have_apr_iconv_10 1/g' %CYGPATH_SRC%/apr-util/CMakeLists.txt
-sed -i 's/\${XMLLIB_LIBRARIES}/\${XMLLIB_LIBRARIES} c:\/httpd-sdk\/install\/lib\/libapriconv-1.lib/g' %CYGPATH_SRC%/apr-util/CMakeLists.txt
+sed -i 's/\${XMLLIB_LIBRARIES}/\${XMLLIB_LIBRARIES} %PROTECTEDSLASHPATH_INSTALL%\/lib\/libapriconv-1.lib/g' %CYGPATH_SRC%/apr-util/CMakeLists.txt
 mklink /h C:\src\apr-util\include\apr_iconv.h C:\src\apr-iconv\include\apr_iconv.h
 
 cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% -DAPU_HAVE_CRYPTO=ON -DAPU_HAVE_ODBC=ON -DAPR_BUILD_TESTAPR=OFF -DTEST_STATIC_LIBS=OFF -DINSTALL_PDB=ON %PATH_SRC%\apr-util
