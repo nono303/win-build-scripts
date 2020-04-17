@@ -1,5 +1,5 @@
 set oldpath=%path%
-call %PATH_HTTPD_SDK%\%PHP_SDK_ARCH%.bat
+call %PATH_BATCH%\%PHP_SDK_ARCH%.bat
 set path=%path%;%oldpath%
 cd /d %PATH_PHP_SDK%\
 
@@ -22,7 +22,7 @@ if %UPDATEDEPS% == 1 (
 	rmdir /S /Q %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\deps
 	powershell -command "Start-Sleep -s 1"
 	mkdir %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\deps	
-	call %PATH_PHP_SDK%\bin\php\do_php %PATH_HTTPD_SDK%\php-getdeps.php
+	call %PATH_PHP_SDK%\bin\php\do_php %PATH_BATCH%\php-getdeps.php
 	cd /D %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\deps
 	call %PATH_PHP_SDK%\bin\7za.exe x -y *
 	rm -f *.zip
@@ -32,7 +32,7 @@ if %BUILDLIB% == 1 set raznono=1
 if %BUILDREQ% == 1 set raznono=1
 if %raznono% == 1 (
 	REM deps sans AVX
-	call %PATH_HTTPD_SDK%\avx.bat 0
+	call %PATH_BATCH%\avx.bat 0
 	rmdir /S /Q %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\depsnono
 	powershell -command "Start-Sleep -s 1"
 	mkdir %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\depsnono
@@ -68,22 +68,22 @@ if NOT %BUILDALL% == -1 (
 	set ZTS=--disable-zts
 	set TSNTS=nts
 	set BUILDDIR=Release
-	call %PATH_HTTPD_SDK%\avx.bat 1
-	call %PATH_HTTPD_SDK%\phpsdk-config_make.bat
+	call %PATH_BATCH%\avx.bat 1
+	call %PATH_BATCH%\phpsdk-config_make.bat
 	if %BUILDALL% == 1 (
 		echo *** std nts  ***
-		call %PATH_HTTPD_SDK%\avx.bat 0
-		call %PATH_HTTPD_SDK%\phpsdk-config_make.bat
+		call %PATH_BATCH%\avx.bat 0
+		call %PATH_BATCH%\phpsdk-config_make.bat
 		if %BUILDTS% == 1 (
 			echo *** std ts  ***
 			set ZTS=
 			set TSNTS=ts
 			set BUILDDIR=Release_TS
-			call %PATH_HTTPD_SDK%\phpsdk-config_make.bat
+			call %PATH_BATCH%\phpsdk-config_make.bat
 
 			echo *** avx ts  ***
-			call %PATH_HTTPD_SDK%\avx.bat 1
-			call %PATH_HTTPD_SDK%\phpsdk-config_make.bat
+			call %PATH_BATCH%\avx.bat 1
+			call %PATH_BATCH%\phpsdk-config_make.bat
 		)
 
 		copy /Y D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%PHP_SDK_ARCH%-avx-nts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\%MSVC_DEPS%\%PHP_SDK_ARCH%\nts\avx\php-%PHPVER%.x_memcache.dll
@@ -92,5 +92,5 @@ if NOT %BUILDALL% == -1 (
 		copy /Y D:\github\NONO_phpwin-perfbuild\%MSVC_DEPS%-%PHP_SDK_ARCH%-ts\php_memcache.dll D:\github\NONO_PHP7-memcache-dll\%MSVC_DEPS%\%PHP_SDK_ARCH%\ts\php-%PHPVER%.x_memcache.dll
 	)
 )
-cd /D %PATH_HTTPD_SDK%\
+cd /D %PATH_BATCH%\
 exit

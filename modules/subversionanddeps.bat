@@ -1,2 +1,2 @@
-call %PATH_HTTPD_SDK%\build.bat serf
-call %PATH_HTTPD_SDK%\build.bat subversion
+call %PATH_BATCH%\build.bat serf
+call %PATH_BATCH%\build.bat subversion

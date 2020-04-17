@@ -14,7 +14,7 @@ REM patch curl si self-build
 	REM sed -i 's/EXTENSION("curl", "interface.c multi.c share.c curl_file.c");/EXTENSION("curl", "interface.c multi.c share.c curl_file.c"); CHECK_LIB("cares.lib", "curl", PHP_CURL);/g' %CYGPATH_SRC%/php-src/configure.js
 
 REM export config options
-	call configure --help > %PATH_HTTPD_SDK%\_logs\configure_%PHPGITVER:~4,-1%.txt
+	call configure --help > %PATH_BATCH%\_logs\configure_%PHPGITVER:~4,-1%.txt
 
 REM https://stackoverflow.com/questions/9102422/windows-batch-set-inside-if-not-working
 if %PHPVER% == 7.2 (
