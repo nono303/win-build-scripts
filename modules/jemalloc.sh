@@ -1,0 +1,2 @@
+sed -i 's/<PreprocessorDefinitions>_REENTRANT/<PreprocessorDefinitions>JEMALLOC_NO_PRIVATE_NAMESPACE;_REENTRANT/g' $1
+sed -i 's/<PreprocessorDefinitions>JEMALLOC_DEBUG/<PreprocessorDefinitions>JEMALLOC_NO_PRIVATE_NAMESPACE;JEMALLOC_DEBUG/g' $1
