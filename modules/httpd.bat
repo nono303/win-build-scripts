@@ -4,19 +4,13 @@ call %PATH_MODULES_COMMON%\init.bat %MODULE_EXTRA%
 git apply --verbose %PATH_MODULES%\%MODULE_EXTRA%.patch
 
 	REM pour mod_md
-	REM openssl-ssh2_static_deps-dll	KO
-set CURL_VER=openssl-ssh2_dll_deps-dll
+set CURL_VER=winssl_dll_deps-static
 set CURL_LIB_NAME=libcurl
 	REM github
 Copy /Y %PATH_INSTALL%\modules\mod_md.pdb D:\github\NONO_mod_md\%MSVC_DEPS%\%ARCH%%AVXB%\mod_md.pdb
 Copy /Y %PATH_INSTALL%\modules\mod_md.so D:\github\NONO_mod_md\%MSVC_DEPS%\%ARCH%%AVXB%\mod_md.so
 Copy /Y %PATH_INSTALL%\curl\%CURL_VER%\lib\%CURL_LIB_NAME%.pdb D:\github\NONO_mod_md\%MSVC_DEPS%\%ARCH%%AVXB%\%CURL_LIB_NAME%.pdb
 Copy /Y %PATH_INSTALL%\curl\%CURL_VER%\bin\%CURL_LIB_NAME%.dll D:\github\NONO_mod_md\%MSVC_DEPS%\%ARCH%%AVXB%\%CURL_LIB_NAME%.dll
-	REM release
-Copy /Y %PATH_INSTALL%\curl\%CURL_VER%\lib\%CURL_LIB_NAME%.pdb %PATH_INSTALL%\bin\%CURL_LIB_NAME%.pdb
-Copy /Y %PATH_INSTALL%\curl\%CURL_VER%\bin\%CURL_LIB_NAME%.dll %PATH_INSTALL%\bin\%CURL_LIB_NAME%.dll
-Copy /Y %PATH_INSTALL%\curl\%CURL_VER%\bin\curl.pdb %PATH_INSTALL%\bin\curl.pdb
-Copy /Y %PATH_INSTALL%\curl\%CURL_VER%\bin\curl.exe %PATH_INSTALL%\bin\curl.exe
 
 call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
@@ -32,17 +26,20 @@ cmake -Wno-dev -G "NMake Makefiles" ^
 -DENABLE_SOCACHE_DC=O ^
 -DENABLE_CHARSET_LITE=O ^
 -DENABLE_MODULES=i ^
--DLIBXML2_ICONV_INCLUDE_DIR=%PATH_INSTALL%/include -DLIBXML2_ICONV_LIBRARIES=%PATH_INSTALL%/lib/iconv.lib ^
--DZLIB_LIBRARIES=%PATH_INSTALL%/lib/zlib.lib ^
--DJANSSON_INCLUDE_DIR=%PATH_INSTALL%/include -DJANSSON_LIBRARIES=%PATH_INSTALL%/lib/jansson.lib ^
+-DLIBXML2_ICONV_INCLUDE_DIR=%SLASHPATH_INSTALL%/include ^
+-DLIBXML2_ICONV_LIBRARIES=%SLASHPATH_INSTALL%/lib/iconv.lib ^
+-DZLIB_LIBRARIES=%SLASHPATH_INSTALL%/lib/zlib.lib ^
+-DJANSSON_INCLUDE_DIR=%SLASHPATH_INSTALL%/include ^
+-DJANSSON_LIBRARIES=%SLASHPATH_INSTALL%/lib/jansson.lib ^
 -DMAXMIND_LIBRARIES=%PATH_INSTALL%/lib/libmaxminddb.lib ^
--DOPENSSL_ROOT_DIR=%PATH_INSTALL%\ ^
--DCURL_LIBRARY=%PATH_INSTALL%\curl\%CURL_VER%\lib\%CURL_LIB_NAME%.lib -DCURL_INCLUDE_DIR=%PATH_INSTALL%\curl\%CURL_VER%\include ^
+-DOPENSSL_ROOT_DIR=%SLASHPATH_INSTALL% ^
+-DCURL_LIBRARY=%SLASHPATH_INSTALL%/curl/%CURL_VER%/lib/%CURL_LIB_NAME%.lib ^
+-DCURL_INCLUDE_DIR=%SLASHPATH_INSTALL%/curl/%CURL_VER%/include ^
 -DEXTRA_COMPILE_FLAGS="%EXTCFLAGS%" ^
--DEXTRA_INCLUDES=%PATH_SRC%\openssl ^
+-DEXTRA_INCLUDES=%PATH_SRC%/openssl ^
 %PATH_SRC%\httpd 
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES%/httpd_flags.sh %CYGV%
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES%/httpd_flags.sh %CYGV% %CYGPATH_BUILD%
 
 nmake %NMAKE_OPTS% clean install
 mt.exe -manifest %PATH_MODULES%\httpd.exe.manifest -outputresource:%PATH_INSTALL%\bin\httpd.exe;1
