@@ -6,55 +6,23 @@ call %PATH_MODULES_COMMON%\ymdhis.bat
 IF /I "%~2"=="ALL" (
 	SET LOGNAME=%PATH_LOGS%\%1_ALL_%ymdhis%.log
 ) ELSE (
-	SET LOGNAME=%PATH_HTTPD_SDK%\_logs\%1_%MSVC_DEPS%-%ARCH%%AVXB%_%ymdhis%.log
+	SET LOGNAME=%PATH_LOGS%\%1_%MSVC_DEPS%-%ARCH%%AVXB%_%ymdhis%.log
 )
-
 IF /I "%~2"=="ALL" (
-	echo on
-	call %PATH_HTTPD_SDK%\vc15.bat 2>&1 | tee -a %LOGNAME%
-	call %PATH_HTTPD_SDK%\x86.bat 2>&1 | tee -a %LOGNAME%
-	call %PATH_HTTPD_SDK%\avx.bat 1 2>&1 | tee -a %LOGNAME%
-	call %PATH_MODULES%\%1.bat %1 2>&1 | tee -a %LOGNAME%
-
-	call %PATH_HTTPD_SDK%\vc15.bat 2>&1 | tee -a %LOGNAME%
-	call %PATH_HTTPD_SDK%\x64.bat 2>&1 | tee -a %LOGNAME%
-	call %PATH_HTTPD_SDK%\avx.bat 1 2>&1 | tee -a %LOGNAME%
-	call %PATH_MODULES%\%1.bat %1 2>&1 | tee -a %LOGNAME%
-
-	call %PATH_HTTPD_SDK%\vs16.bat 2>&1 | tee -a %LOGNAME%
-	call %PATH_HTTPD_SDK%\x86.bat 2>&1 | tee -a %LOGNAME%
-	call %PATH_HTTPD_SDK%\avx.bat 1 2>&1 | tee -a %LOGNAME%
-	call %PATH_MODULES%\%1.bat %1 2>&1 | tee -a %LOGNAME%
-
-	call %PATH_HTTPD_SDK%\vs16.bat 2>&1 | tee -a %LOGNAME%
-	call %PATH_HTTPD_SDK%\x64.bat 2>&1 | tee -a %LOGNAME%
-	call %PATH_HTTPD_SDK%\avx.bat 1 2>&1 | tee -a %LOGNAME%
-	call %PATH_MODULES%\%1.bat %1 2>&1 | tee -a %LOGNAME%
-
-	REM !AVX
-	call %PATH_HTTPD_SDK%\vc15.bat 2>&1 | tee -a %LOGNAME%
-	call %PATH_HTTPD_SDK%\x86.bat 2>&1 | tee -a %LOGNAME%
-	call %PATH_HTTPD_SDK%\avx.bat 0 2>&1 | tee -a %LOGNAME%
-	call %PATH_MODULES%\%1.bat %1 2>&1 | tee -a %LOGNAME%
-
-	call %PATH_HTTPD_SDK%\vc15.bat 2>&1 | tee -a %LOGNAME%
-	call %PATH_HTTPD_SDK%\x64.bat 2>&1 | tee -a %LOGNAME%
-	call %PATH_HTTPD_SDK%\avx.bat 0 2>&1 | tee -a %LOGNAME%
-	call %PATH_MODULES%\%1.bat %1 2>&1 | tee -a %LOGNAME%
-
-	call %PATH_HTTPD_SDK%\vs16.bat 2>&1 | tee -a %LOGNAME%
-	call %PATH_HTTPD_SDK%\x86.bat 2>&1 | tee -a %LOGNAME%
-	call %PATH_HTTPD_SDK%\avx.bat 0 2>&1 | tee -a %LOGNAME%
-	call %PATH_MODULES%\%1.bat %1 2>&1 | tee -a %LOGNAME%
-
-	call %PATH_HTTPD_SDK%\vs16.bat 2>&1 | tee -a %LOGNAME%
-	call %PATH_HTTPD_SDK%\x64.bat 2>&1 | tee -a %LOGNAME%
-	call %PATH_HTTPD_SDK%\avx.bat 0 2>&1 | tee -a %LOGNAME%
-	call %PATH_MODULES%\%1.bat %1 2>&1 | tee -a %LOGNAME%
+	for %%V in (vc15 vs16) do (
+		for %%X in (x86 x64) do (
+			for %%A in (0 1) do (
+				setlocal
+				call %PATH_HTTPD_SDK%\%%V.bat
+				call %PATH_HTTPD_SDK%\%%X.bat
+				call %PATH_HTTPD_SDK%\avx.bat %%A
+				call %PATH_MODULES%\%1.bat %1 2>&1 | tee -a %LOGNAME%
+				endlocal
+			)
+		)
+	)
 ) ELSE (
-	echo on
 	call %PATH_MODULES%\%1.bat %1 2>&1 | tee %LOGNAME%
 )
-@echo off
 dos2unix %LOGNAME%
 cd /D %PATH_HTTPD_SDK%
