@@ -6,11 +6,10 @@ CHCP 1251
 REM ########################## PATHS
 set PATH_HTTPD_SDK=C:\httpd-sdk
 set PATH_BUILD=%PATH_HTTPD_SDK%\build
-set SEDPATH_BUILD=C:\\\\httpd-sdk\\\\build
-set PATH_INSTALL=%PATH_HTTPD_SDK%\install
 set PATH_MODULES=%PATH_HTTPD_SDK%\modules
 set PATH_MODULES_COMMON=%PATH_MODULES%\common
 set PATH_LOGS=%PATH_HTTPD_SDK%\_logs
+
 set PATH_PHP_SDK=C:\php72-sdk
 set PATH_SRC=c:\src
 set PATH_JDK=c:\jdk8
@@ -28,7 +27,8 @@ set PATH_BIN_PERL_SITE=C:\perl\site\bin
 set PATH_BIN_MISC=C:\bin
 set PATH_BIN_CYGWIN=C:\cyg%CYGV%\bin
 	REM svn for mobac
-SET PATH_BIN_SVN=D:\github\NONO_subversion\vs16\x64;D:\github\NONO_subversion\vs16\x64\deps
+SET PATH_BIN_SVN=D:\github\NONO_subversion\vs16\x64;^
+D:\github\NONO_subversion\vs16\x64\deps
 
 	REM ant & java for mobac
 SET ANT_HOME=C:\Program Files\Eclipse\plugins\org.apache.ant_1.10.7.v20190926-0324
@@ -40,8 +40,25 @@ FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_MODULES%`
 FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_MODULES_COMMON%`) DO (SET CYGPATH_MODULES_COMMON=%%F)
 FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_HTTPD_SDK%`) DO (SET CYGPATH_HTTPD_SDK=%%F)
 FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_BUILD%`) DO (SET CYGPATH_BUILD=%%F)
+	REM SED BACKSLASH
+set SEDPATH_BUILD=%PATH_BUILD:\=\\\\%
 
-set PATH_WIN=%PATH_BIN_PYTHON%;%PATH_BIN_GIT%;%PATH_BIN_NASM%;%PATH_BIN_PERL%;%PATH_BIN_PERL_SITE%;%PATH_BIN_MISC%;%PATH_BIN_CYGWIN%;%PATH_BIN_SVN%;%PATH_VS%\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;%PATH_PHP_SDK%\bin\php;C:\Windows;C:\Windows\SysWOW64;C:\Windows\SysWOW64\wbem;C:\Windows\system32;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;
+set PATH_WIN=%PATH_BIN_PYTHON%;^
+%PATH_BIN_GIT%;^
+%PATH_BIN_NASM%;^
+%PATH_BIN_PERL%;^
+%PATH_BIN_PERL_SITE%;^
+%PATH_BIN_MISC%;^
+%PATH_BIN_CYGWIN%;^
+%PATH_BIN_SVN%;^
+%PATH_VS%\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;^
+%PATH_PHP_SDK%\bin\php;^
+C:\Windows;^
+C:\Windows\SysWOW64;^
+C:\Windows\SysWOW64\wbem;^
+C:\Windows\system32;^
+C:\Windows\System32\Wbem;^
+C:\Windows\System32\WindowsPowerShell\v1.0\;
 
 cd /D %PATH_HTTPD_SDK%
 
