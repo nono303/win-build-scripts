@@ -1,7 +1,7 @@
 call %PATH_MODULES_COMMON%\init.bat %1
 
-C:\cyg%CYGV%\bin\sh.exe -c "CC=cl ./autogen.sh"
-	REM C:\cyg%CYGV%\bin\sh.exe -c "./configure --help"
+%PATH_BIN_CYGWIN%\sh.exe -c "CC=cl ./autogen.sh"
+	REM %PATH_BIN_CYGWIN%\sh.exe -c "./configure --help"
 
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/msvc/projects/vc2017/jemalloc/" %AVXVCX% %PTFTS% %WKITVER%
 	REM https://github.com/jemalloc/jemalloc/issues/1099
