@@ -1,3 +1,0 @@
-/usr/bin/find /cygdrive/c/httpd-sdk/build/libzmq -type f -name "build.make" -exec sed -i 's/\/INCREMENTAL/\/LTCG \/OPT:ICF/g' {} \;
-/usr/bin/find /cygdrive/c/httpd-sdk/build/libzmq -type f -name "build.make" -exec sed -i 's/libzmq-mt-s-4_3_1.lib @CMakeFiles/libzmq-mt-s-4_3_1.lib \/LTCG @CMakeFiles/g' {} \;
-/usr/bin/find /cygdrive/c/httpd-sdk/build/libzmq -type f -name "flags.make" -exec sed -i 's/ \/O2 / \/GL \/GS- \/Oy- \/guard:cf- \/FD \/GF \/Zc:inline \/MP8 \/LD \/MD \/Ox '$1' /g' {} \;
