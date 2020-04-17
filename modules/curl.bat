@@ -16,18 +16,22 @@ sed -i 's/LNKLIB     = lib.exe/LNKLIB     = lib.exe \/LTCG/g' %CYGPATH_SRC%/%1/w
 	REM WITH_SSH2=static WITH_SSL=static // doesn't work on mod_md
 	REM libssh2 : req opensll & zlib / ko winssl
 	REM WITH_PREFIX=%PATH_INSTALL%
+	REM ***** Loop for all versions ***
+REM set CURL_MODE=static dll
+REM set CURL_SSLENGINE=openssl-ssh2 winssl
+REM for %%s in (%CURL_SSLENGINE%) do (
+REM 	for %%m in (%CURL_MODE%) do (
+REM 		for %%d in (%CURL_MODE%) do (
+REM 			echo on
+REM 			call %PATH_MODULES%\curl-sub.bat %1 %%m %%d %%s
+REM 		)
+REM 	)
+REM )
 
-set CURL_MODE=static dll
-set CURL_SSLENGINE=openssl-ssh2 winssl
-@echo off
-for %%s in (%CURL_SSLENGINE%) do (
-	for %%m in (%CURL_MODE%) do (
-		for %%d in (%CURL_MODE%) do (
-			echo on
-			call %PATH_MODULES%\curl-sub.bat %1 %%m %%d %%s
-		)
-	)
-)
-echo on
+	REM Apache
+call %PATH_MODULES%\curl-sub.bat %1 dll static winssl
+	REM PHP
+call %PATH_MODULES%\curl-sub.bat %1 static static openssl-ssh2
+
 if exist %PATH_INSTALL%\%1\. rmdir /S /Q %PATH_INSTALL%\%1
 move /Y %PATH_BUILD%\%1 %PATH_INSTALL%
