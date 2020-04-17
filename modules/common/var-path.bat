@@ -4,41 +4,45 @@ REM CHCP 65001 > tee: 'standard output': Permission denied > accents
 CHCP 1251 
 
 REM ########################## PATHS
-set PATH_HTTPD_SDK=C:\httpd-sdk
-set PATH_BUILD=%PATH_HTTPD_SDK%\build
-set PATH_MODULES=%PATH_HTTPD_SDK%\modules
+set PATH_SDK_ROOT=C:\sdk
+set PATH_BATCH=%PATH_SDK_ROOT%\batch
+set PATH_BUILD=%PATH_SDK_ROOT%\build
+set PATH_RELEASE=%PATH_SDK_ROOT%\release
+set PATH_MODULES=%PATH_BATCH%\modules
 set PATH_MODULES_COMMON=%PATH_MODULES%\common
-set PATH_LOGS=%PATH_HTTPD_SDK%\_logs
+set PATH_LOGS=%PATH_SDK_ROOT%\logs
 
-set PATH_PHP_SDK=C:\php72-sdk
-set PATH_SRC=c:\src
-set PATH_JDK=c:\jdk8
+set PATH_PHP_SDK=%PATH_SDK_ROOT%\src\php-sdk
+set PATH_SRC=%PATH_SDK_ROOT%\src
+set PATH_JDK=%PATH_SDK_ROOT%\softs\jdk8
 
-	REM dir /X > C:\Program Files (x86)\Microsoft Visual Studio\2019\Community
-set PATH_VS=C:\PROGRA~2\MICROS~1\2019\Community
+set PATH_VS=%PATH_SDK_ROOT%\softs\vs19\Community
 	
 	REM INSTALL BIN PATH
-set PATH_BIN_PYTHON=c:\python27
 set PATH_BIN_GIT=C:\PROGRA~1\Git\bin
-set PATH_BIN_NASM=C:\bin\nasm
-set PATH_BIN_PERL=C:\perl\bin
-set PATH_BIN_PERL_SITE=C:\perl\site\bin
+set PATH_BIN_PYTHON=%PATH_SDK_ROOT%\softs\python2
+set PATH_ROOT_CYGWIN=%PATH_SDK_ROOT%\softs\cyg
+set PATH_BIN_CYGWIN=%PATH_ROOT_CYGWIN%%CYGV%\bin
+set PATH_BIN_NASM=%PATH_SDK_ROOT%\softs\nasm
+set PATH_BIN_PERL=%PATH_SDK_ROOT%\softs\perl\bin
+set PATH_BIN_PERL_SITE=%PATH_SDK_ROOT%\softs\perl\site\bin
 	REM sysinternals, nirsoft, etc.
 set PATH_BIN_MISC=C:\bin
-set PATH_BIN_CYGWIN=C:\cyg%CYGV%\bin
 	REM svn for mobac
-SET PATH_BIN_SVN=D:\github\NONO_subversion\vs16\x64;^
-D:\github\NONO_subversion\vs16\x64\deps
+SET PATH_BIN_SVN=D:\github\NONO_subversion\vs16\x64;D:\github\NONO_subversion\vs16\x64\deps
 
 	REM ant & java for mobac
-SET ANT_HOME=C:\Program Files\Eclipse\plugins\org.apache.ant_1.10.7.v20190926-0324
-SET JAVA_HOME=C:\jdk8\x64
+SET ANT_HOME=%PATH_SDK_ROOT%\softs\eclipse\plugins\org.apache.ant_1.10.7.v20190926-0324
+SET JAVA_HOME=%PATH_JDK%\x64
+
+	REM outdir for memcached
+set MEMCACHED_PREFIX=/cygdrive/d/github/NONO_memcached/cygwin
 
 	REM CYGWIN PATH
 FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_SRC%`) DO (SET CYGPATH_SRC=%%F)
 FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_MODULES%`) DO (SET CYGPATH_MODULES=%%F)
 FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_MODULES_COMMON%`) DO (SET CYGPATH_MODULES_COMMON=%%F)
-FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_HTTPD_SDK%`) DO (SET CYGPATH_HTTPD_SDK=%%F)
+FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_BATCH%`) DO (SET CYGPATH_BATCH=%%F)
 FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_BUILD%`) DO (SET CYGPATH_BUILD=%%F)
 	REM SED BACKSLASH
 set SEDPATH_BUILD=%PATH_BUILD:\=\\\\%
@@ -60,15 +64,15 @@ C:\Windows\system32;^
 C:\Windows\System32\Wbem;^
 C:\Windows\System32\WindowsPowerShell\v1.0\;
 
-cd /D %PATH_HTTPD_SDK%
+cd /D %PATH_BATCH%
 
 REM ########################## CMAKE BUILD TYPE
-set CMAKE_BUILD_TYPE=RelWithDebInfo
 	REM set CMAKE_BUILD_TYPE=Release
+set CMAKE_BUILD_TYPE=RelWithDebInfo
 
 REM ########################## WINDOWS KIT VERSION
 	REM C:\Program Files (x86)\Windows Kits\10\Lib
-set WKITVER=10.0.18362.0
+set WKITVER=10.0.19041.0
 
 REM ########################## NMAKE OPTIONS
 	REM https://msdn.microsoft.com/fr-fr/library/afyyse50.aspx
@@ -82,14 +86,14 @@ set INCLUDE=
 set PHPDEPS=%PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\depsnono
 
 REM ########################## MAKE & CLEAN DIR
-if not exist %PATH_HTTPD_SDK%\_logs\. mkdir %PATH_HTTPD_SDK%\_logs
-if not exist %PATH_HTTPD_SDK%\release\vs16_x86-avx\. mkdir %PATH_HTTPD_SDK%\release\vs16_x86-avx
-if not exist %PATH_HTTPD_SDK%\release\vs16_x64-avx\. mkdir %PATH_HTTPD_SDK%\release\vs16_x64-avx
-if not exist %PATH_HTTPD_SDK%\release\vs16_x86\. mkdir %PATH_HTTPD_SDK%\release\vs16_x86
-if not exist %PATH_HTTPD_SDK%\release\vs16_x64\. mkdir %PATH_HTTPD_SDK%\release\vs16_x64
-if not exist %PATH_HTTPD_SDK%\release\vc15_x86-avx\. mkdir %PATH_HTTPD_SDK%\release\vc15_x86-avx
-if not exist %PATH_HTTPD_SDK%\release\vc15_x64-avx\. mkdir %PATH_HTTPD_SDK%\release\vc15_x64-avx
-if not exist %PATH_HTTPD_SDK%\release\vc15_x86\. mkdir %PATH_HTTPD_SDK%\release\vc15_x86
-if not exist %PATH_HTTPD_SDK%\release\vc15_x64\. mkdir %PATH_HTTPD_SDK%\release\vc15_x64
+if not exist %PATH_LOGS%\. mkdir %PATH_LOGS%
+if not exist %PATH_RELEASE%\vs16_x86-avx\. mkdir %PATH_RELEASE%\vs16_x86-avx
+if not exist %PATH_RELEASE%\vs16_x64-avx\. mkdir %PATH_RELEASE%\vs16_x64-avx
+if not exist %PATH_RELEASE%\vs16_x86\. mkdir %PATH_RELEASE%\vs16_x86
+if not exist %PATH_RELEASE%\vs16_x64\. mkdir %PATH_RELEASE%\vs16_x64
+if not exist %PATH_RELEASE%\vc15_x86-avx\. mkdir %PATH_RELEASE%\vc15_x86-avx
+if not exist %PATH_RELEASE%\vc15_x64-avx\. mkdir %PATH_RELEASE%\vc15_x64-avx
+if not exist %PATH_RELEASE%\vc15_x86\. mkdir %PATH_RELEASE%\vc15_x86
+if not exist %PATH_RELEASE%\vc15_x64\. mkdir %PATH_RELEASE%\vc15_x64
 if exist %PATH_BUILD%\. rmdir /S /Q %PATH_BUILD%
 mkdir %PATH_BUILD% 
