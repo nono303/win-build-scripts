@@ -13,9 +13,9 @@ IF /I "%~2"=="ALL" (
 		for %%X in (x86 x64) do (
 			for %%A in (0 1) do (
 				setlocal
-				call %PATH_HTTPD_SDK%\%%V.bat
-				call %PATH_HTTPD_SDK%\%%X.bat
-				call %PATH_HTTPD_SDK%\avx.bat %%A
+				call %PATH_BATCH%\%%V.bat
+				call %PATH_BATCH%\%%X.bat
+				call %PATH_BATCH%\avx.bat %%A
 				call %PATH_MODULES%\%1.bat %1 2>&1 | tee -a %LOGNAME%
 				endlocal
 			)
@@ -25,4 +25,4 @@ IF /I "%~2"=="ALL" (
 	call %PATH_MODULES%\%1.bat %1 2>&1 | tee %LOGNAME%
 )
 dos2unix %LOGNAME%
-cd /D %PATH_HTTPD_SDK%
+cd /D %PATH_BATCH%
