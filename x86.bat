@@ -6,5 +6,5 @@ set archmsbuild=Win32
 set outmsbuild=Release
 set CYGV=32
 echo ~~-~~  x86 ~~-~~
-call .\modules\common\var-path.bat
+call .\menv.bat
 set PATH=%PATH_WIN%;%PATH_VS%\MSBuild\Current\Bin
