@@ -1,0 +1,1 @@
+sed -i 's/<\/Project>/<ItemGroup><ResourceCompile Include="version.rc" \/><\/ItemGroup><\/Project>/g' $1
