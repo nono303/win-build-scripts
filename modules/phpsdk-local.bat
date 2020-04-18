@@ -53,9 +53,6 @@ if %BUILDLIB% == 1 (
 )
 if %BUILDREQ% == 1 (
 	set copydeps=1
-	REM *** DISABLED ***
-		REM call %PATH_MODULES%\protobuf-php.bat
-		REM call %PATH_MODULES%\libzmq-php.bat
 	call %PATH_MODULES%\libxdiff-php.bat
 )
 if %copydeps% == 1 (

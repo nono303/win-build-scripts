@@ -10,6 +10,14 @@ cmake ^
 -DEXPAT_BUILD_TESTS=OFF ^
 -DEXPAT_BUILD_EXAMPLES=OFF ^
 -DEXPAT_BUILD_TOOLS=OFF %PATH_SRC%\%1\expat
+
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/flags.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 nmake %NMAKE_OPTS% clean install
+
 copy /Y %PATH_BUILD%\%1\libexpat.pdb %PATH_INSTALL%\bin\libexpat.pdb
+
+	REM version
+CD /D %PATH_SRC%\%1 
+FOR /F "tokens=* USEBACKQ" %%F IN (`git describe --tags`) DO ( SET VERSION=%%F)
+set VERSION=%VERSION:_=.%
+%BIN_VERPATCH% /va %PATH_INSTALL%\bin\libexpat.dll "%VERSION:~2%.0" /pv "%VERSION:~2%.0")

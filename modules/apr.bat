@@ -37,7 +37,7 @@ cd /D %PATH_BUILD%\apr-util
 
 	REM "dirty" XLATE ON
 sed -i 's/apu_have_apr_iconv_10 0/apu_have_apr_iconv_10 1/g' %CYGPATH_SRC%/apr-util/CMakeLists.txt
-sed -i 's/\${XMLLIB_LIBRARIES}/\${XMLLIB_LIBRARIES} %PROTECTEDSLASHPATH_INSTALL%\/lib\/libapriconv-1.lib/g' %CYGPATH_SRC%/apr-util/CMakeLists.txt
+sed -i 's/\${XMLLIB_LIBRARIES}/\${XMLLIB_LIBRARIES} %PATH_INSTALL:\=\/%\/lib\/libapriconv-1.lib/g' %CYGPATH_SRC%/apr-util/CMakeLists.txt
 if not exist %PATH_SRC%\apr-util\include\apr_iconv.h mklink /h %PATH_SRC%\apr-util\include\apr_iconv.h %PATH_SRC%\apr-iconv\include\apr_iconv.h
 	REM apr_dbd_odbc.c.obj : warning LNK4197: export 'apr_dbd_odbc_driver' specified multiple times; using first specification
 sed -i 's/SET_PROPERTY(TARGET apr_dbd_odbc-1/# SET_PROPERTY(TARGET apr_dbd_odbc-1/g' %CYGPATH_SRC%/apr-util/CMakeLists.txt

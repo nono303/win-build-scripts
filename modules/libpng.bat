@@ -35,4 +35,6 @@ for %%X in (dll pdb) do (copy /Y "%PATH_SRC%\%1\%VCDIR%\%archmsbuild%\Release\li
 copy /Y %PATH_SRC%\%1\pnglibconf.h %PATH_INSTALL%\include\pnglibconf.h
 copy /Y %PATH_SRC%\%1\png.h %PATH_INSTALL%\include\png.h
 copy /Y %PATH_SRC%\%1\pngconf.h %PATH_INSTALL%\include\pngconf.h
-cd /D %PATH_MODULES%
+
+	REM version
+%BIN_VERPATCH% /va %PATH_INSTALL%\bin\libpng.dll "%LIBVER%.0" /pv "%LIBVER%.0")

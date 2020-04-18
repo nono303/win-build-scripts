@@ -29,22 +29,23 @@ set PATH_BIN_PERL_SITE=%PATH_SDK_ROOT%\softs\perl\site\bin
 	REM sysinternals, nirsoft, etc.
 set PATH_BIN_MISC=C:\bin
 	REM svn for mobac
-SET PATH_BIN_SVN=D:\github\NONO_subversion\vs16\x64;D:\github\NONO_subversion\vs16\x64\deps
+set PATH_BIN_SVN=D:\github\NONO_subversion\vs16\x64;D:\github\NONO_subversion\vs16\x64\deps
 
 	REM ant & java for mobac
-SET ANT_HOME=%PATH_SDK_ROOT%\softs\eclipse\plugins\org.apache.ant_1.10.7.v20190926-0324
-SET JAVA_HOME=%PATH_JDK%\x64
+set ANT_HOME=%PATH_SDK_ROOT%\softs\eclipse\plugins\org.apache.ant_1.10.7.v20190926-0324
+set JAVA_HOME=%PATH_JDK%\x64
 
 	REM outdir for memcached
 set MEMCACHED_PREFIX=/cygdrive/d/github/NONO_memcached/cygwin
+
+	REM for version patch if not present at build - https://www.codeproject.com/KB/install/VerPatch/verpatch-bin-1.0.10.zip
+set BIN_VERPATCH=%PATH_SDK_ROOT%\softs\verpatch.exe
 
 	REM CYGWIN PATH
 FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_SRC%`) DO (SET CYGPATH_SRC=%%F)
 FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_MODULES%`) DO (SET CYGPATH_MODULES=%%F)
 FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_MODULES_COMMON%`) DO (SET CYGPATH_MODULES_COMMON=%%F)
 FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_BATCH%`) DO (SET CYGPATH_BATCH=%%F)
-	REM SED BACKSLASH
-set SEDPATH_BUILD=%PATH_BUILD:\=\\\\%
 
 set PATH_WIN=%PATH_BIN_PYTHON%;^
 %PATH_BIN_GIT%;^

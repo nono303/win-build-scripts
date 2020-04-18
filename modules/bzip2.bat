@@ -17,3 +17,8 @@ copy /Y %PATH_SRC%\%1\bzlib.h %PATH_INSTALL%\include\bzlib.h
 	REM libbz2 => bzip2 [PHP]
 mklink /h %PATH_INSTALL%\lib\libbz2_a.lib %PATH_INSTALL%\lib\libbz2.lib
 mklink /h %PATH_INSTALL%\lib\libbz2_a.pdb %PATH_INSTALL%\lib\libbz2.pdb
+
+	REM version
+CD /D %PATH_SRC%\%1 
+FOR /F "tokens=* USEBACKQ" %%F IN (`git describe --tags`) DO (SET VERSION=%%F)
+for %%X in (bzip2recover bzip2) do (%BIN_VERPATCH% /va %PATH_INSTALL%\bin\%%X.exe "%VERSION:~6%.0" /pv "%VERSION:~6%.0")
