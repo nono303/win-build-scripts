@@ -25,13 +25,11 @@ REM rm -f *.exe *.obj
 cd /D %PATH_SRC%\apr-iconv
 nmake %NMAKE_OPTS% -f libapriconv.mak CFG="libapriconv - %archmsbuild% Release"
 
-copy /y %PATH_SRC%\apr-iconv\%outmsbuild%\libapriconv-1.pdb %PATH_INSTALL%\bin\libapriconv-1.pdb
-copy /y %PATH_SRC%\apr-iconv\%outmsbuild%\libapriconv-1.dll %PATH_INSTALL%\bin\libapriconv-1.dll
+for %%X in (dll pdb) do (copy /y %PATH_SRC%\apr-iconv\%outmsbuild%\libapriconv-1.%%X %PATH_INSTALL%\bin\libapriconv-1.%%X)
 copy /y %PATH_SRC%\apr-iconv\%outmsbuild%\libapriconv-1.lib %PATH_INSTALL%\lib\libapriconv-1.lib
-copy /y %PATH_SRC%\apr\%outmsbuild%\libapr-1.pdb %PATH_INSTALL%\bin\libapr-1.pdb
-copy /y %PATH_SRC%\apr\%outmsbuild%\libapr-1.dll %PATH_INSTALL%\bin\libapr-1.dll
+for %%X in (dll pdb) do (copy /y %PATH_SRC%\apr\%outmsbuild%\libapr-1.%%X %PATH_INSTALL%\bin\libapr-1.%%X)
 copy /y %PATH_SRC%\apr\%outmsbuild%\libapr-1.lib %PATH_INSTALL%\lib\libapr-1.lib
-for /f "tokens=*" %%G in ('dir %PATH_SRC%\apr\include\*.h /s/b') do (Copy /Y %%~pG%%~nG.h %PATH_INSTALL%\include\%%~nG.h)
+copy /Y %PATH_SRC%\apr\include\*.h %PATH_INSTALL%\include
 
 	REM *** APR & APR-UTIL ***
 
@@ -40,7 +38,9 @@ cd /D %PATH_BUILD%\apr-util
 	REM "dirty" XLATE ON
 sed -i 's/apu_have_apr_iconv_10 0/apu_have_apr_iconv_10 1/g' %CYGPATH_SRC%/apr-util/CMakeLists.txt
 sed -i 's/\${XMLLIB_LIBRARIES}/\${XMLLIB_LIBRARIES} %PROTECTEDSLASHPATH_INSTALL%\/lib\/libapriconv-1.lib/g' %CYGPATH_SRC%/apr-util/CMakeLists.txt
-mklink /h %PATH_SRC%\apr-util\include\apr_iconv.h %PATH_SRC%\apr-iconv\include\apr_iconv.h
+if not exist %PATH_SRC%\apr-util\include\apr_iconv.h mklink /h %PATH_SRC%\apr-util\include\apr_iconv.h %PATH_SRC%\apr-iconv\include\apr_iconv.h
+	REM apr_dbd_odbc.c.obj : warning LNK4197: export 'apr_dbd_odbc_driver' specified multiple times; using first specification
+sed -i 's/SET_PROPERTY(TARGET apr_dbd_odbc-1/# SET_PROPERTY(TARGET apr_dbd_odbc-1/g' %CYGPATH_SRC%/apr-util/CMakeLists.txt
 
 cmake ^
 -Wno-dev ^
@@ -60,6 +60,6 @@ nmake %NMAKE_OPTS% clean install
 if not exist %PATH_INSTALL%\include\arch\. mkdir %PATH_INSTALL%\include\arch
 copy /Y %PATH_SRC%\apr\include\arch\apr_private_common.h %PATH_INSTALL%\include\arch\apr_private_common.h
 if not exist %PATH_INSTALL%\include\arch\win32\. mkdir %PATH_INSTALL%\include\arch\win32
-for /f "tokens=*" %%G in ('dir %PATH_SRC%\apr\include\arch\win32\*.h /s/b') do (Copy /Y %%~pG%%~nG.h %PATH_INSTALL%\include\arch\win32\%%~nG.h)
+copy /Y %PATH_SRC%\apr\include\arch\win32\*.h %PATH_INSTALL%\include\arch\win32
 copy /Y %PATH_SRC%\apr-iconv\include\apr_iconv.h %PATH_INSTALL%\include\apr_iconv.h
-for /f "tokens=*" %%G in ('dir %PATH_SRC%\apr-util\include\*.h /s/b') do (Copy /Y %%~pG%%~nG.h %PATH_INSTALL%\include\%%~nG.h)
+copy /Y %PATH_SRC%\apr-util\include\*.h %PATH_INSTALL%\include
