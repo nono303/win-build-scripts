@@ -6,7 +6,7 @@ CHCP 1251
 REM ########################## PATHS
 set PATH_SDK_ROOT=C:\sdk
 set PATH_BATCH=%PATH_SDK_ROOT%\batch
-set PATH_BUILD=%PATH_SDK_ROOT%\build
+set PATH_BUILDROOT=%PATH_SDK_ROOT%\build
 set PATH_RELEASE=%PATH_SDK_ROOT%\release
 set PATH_MODULES=%PATH_BATCH%\modules
 set PATH_MODULES_COMMON=%PATH_MODULES%\common
@@ -43,7 +43,6 @@ FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_SRC%`) DO
 FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_MODULES%`) DO (SET CYGPATH_MODULES=%%F)
 FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_MODULES_COMMON%`) DO (SET CYGPATH_MODULES_COMMON=%%F)
 FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_BATCH%`) DO (SET CYGPATH_BATCH=%%F)
-FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_BUILD%`) DO (SET CYGPATH_BUILD=%%F)
 	REM SED BACKSLASH
 set SEDPATH_BUILD=%PATH_BUILD:\=\\\\%
 
@@ -87,13 +86,8 @@ set PHPDEPS=%PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\depsnono
 
 REM ########################## MAKE & CLEAN DIR
 if not exist %PATH_LOGS%\. mkdir %PATH_LOGS%
-if not exist %PATH_RELEASE%\vs16_x86-avx\. mkdir %PATH_RELEASE%\vs16_x86-avx
-if not exist %PATH_RELEASE%\vs16_x64-avx\. mkdir %PATH_RELEASE%\vs16_x64-avx
-if not exist %PATH_RELEASE%\vs16_x86\. mkdir %PATH_RELEASE%\vs16_x86
-if not exist %PATH_RELEASE%\vs16_x64\. mkdir %PATH_RELEASE%\vs16_x64
-if not exist %PATH_RELEASE%\vc15_x86-avx\. mkdir %PATH_RELEASE%\vc15_x86-avx
-if not exist %PATH_RELEASE%\vc15_x64-avx\. mkdir %PATH_RELEASE%\vc15_x64-avx
-if not exist %PATH_RELEASE%\vc15_x86\. mkdir %PATH_RELEASE%\vc15_x86
-if not exist %PATH_RELEASE%\vc15_x64\. mkdir %PATH_RELEASE%\vc15_x64
-if exist %PATH_BUILD%\. rmdir /S /Q %PATH_BUILD%
-mkdir %PATH_BUILD% 
+if not exist %PATH_BUILDROOT%\. mkdir %PATH_BUILDROOT%
+for %%X in (vs16_x86-avx vs16_x64-avx vs16_x86 vs16_x64 vc15_x86-avx vc15_x64-avx vc15_x86 vc15_x64) do (
+	if not exist %PATH_RELEASE%\%%X\. mkdir %PATH_RELEASE%\%%X
+	if not exist %PATH_BUILDROOT%\%%X\. mkdir %PATH_BUILDROOT%\%%X
+)
