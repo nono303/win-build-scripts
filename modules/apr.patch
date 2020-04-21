@@ -81,3 +81,27 @@ index 454b4fec..e6d9fc30 100644
 -
 +	xcopy /C /F /Y $(API_PATH)\$(ARCHPATH)\iconv\*.so  "$(PREFIX)\bin\iconv\"
 +	xcopy /C /F /Y $(API_PATH)\$(ARCHPATH)\iconv\*.pdb "$(PREFIX)\bin\iconv\"
+diff --git "a/include/apu.hw" "b/include/apu.hw"
+index 21fbedff..52898a05 100644
+--- "a/include/apu.hw"
++++ "b/include/apu.hw"
+@@ -124,16 +124,16 @@
+ #ifndef APU_DSO_MODULE_BUILD
+ #define APU_HAVE_PGSQL          0
+ #define APU_HAVE_MYSQL          0
+-#define APU_HAVE_SQLITE3        0
++#define APU_HAVE_SQLITE3        1
+ #define APU_HAVE_SQLITE2        0
+ #define APU_HAVE_ORACLE         0
+ #define APU_HAVE_ODBC           1
+ #endif
+ 
+-#define APU_HAVE_CRYPTO         0
++#define APU_HAVE_CRYPTO         1
+ 
+ #ifndef APU_DSO_MODULE_BUILD
+-#define APU_HAVE_OPENSSL        0
++#define APU_HAVE_OPENSSL        1
+ #define APU_HAVE_NSS            0
+ #define APU_HAVE_COMMONCRYPTO   0
+ #endif

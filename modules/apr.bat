@@ -15,6 +15,9 @@ set INCLUDE=%INCLUDE%;%PATH_INSTALL%\include
 cd /D %PATH_SRC%\apr-util
 	REM patch install
 git apply --verbose %PATH_MODULES%\%1.patch
+sed -i 's/_WIN32_WINNT 0x0501/_WIN32_WINNT 0x0601/g' %PATH_SRC%/apr/include/apr.hw
+	REM patch libcrypto path...
+sed -i 's/..\\\\openssl\\\\libcrypto.lib/%PATH_INSTALL:\=\\\\%\\\\lib\\\\libcrypto.lib/g' %PATH_SRC%/apr-util/Makefile.win
 	REM	DBD_LIST="sqlite3 pgsql oracle mysql freetds"
 	REM	DBM_LIST="db gdbm"
 nmake  %NMAKE_OPTS% ^
@@ -29,3 +32,8 @@ nmake  %NMAKE_OPTS% ^
 	CRYPTO_LIST="openssl" ^
 	PREFIX=%PATH_INSTALL% ^
 	buildall install
+
+if not exist %PATH_INSTALL%\include\arch\. mkdir %PATH_INSTALL%\include\arch
+copy /Y %PATH_SRC%\apr\include\arch\apr_private_common.h %PATH_INSTALL%\include\arch\apr_private_common.h
+if not exist %PATH_INSTALL%\include\arch\win32\. mkdir %PATH_INSTALL%\include\arch\win32
+copy /Y %PATH_SRC%\apr\include\arch\win32\*.h %PATH_INSTALL%\include\arch\win32
