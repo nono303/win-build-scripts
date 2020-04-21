@@ -1,6 +1,21 @@
 <?php
-	//print_r($_ENV);
-	//exit();
+	function delTree($dir) {
+		$files = array_diff(scandir($dir), array('.','..'));
+		foreach ($files as $file) {
+			if(is_dir($dir."/".$file)){
+				delTree("$dir/$file");
+			} else {
+				echo "\tdel fil '".$dir."/".$file."'".PHP_EOL;
+				unlink("$dir/$file");
+			}
+		}
+		echo "\tdel dir '".$dir."'".PHP_EOL;
+		return rmdir($dir);
+	} 
+
+	// print_r($_ENV);
+	// exit();
+
 	// stable || staging
 	$type = "staging";
 	// x86 || x64
@@ -13,7 +28,9 @@
 	} else {
 		$package = $_ENV["PHPVER"];
 	}
-	$outdir = "C:/php72-sdk/phpmaster/".$msvc."/".$arch."/deps/";
+	$basedir = $_ENV["PATH_PHP_SDK"]."/phpmaster/".$msvc."/".$arch."/";
+	$outdir = $basedir."deps/";
+	$zipdir = $basedir."zip/";
 	$depsreq = array(
 		"c-client",
 		"fbclient",
@@ -36,58 +53,119 @@
 		"net-snmp",
 		"openldap",
 		"wineditline",
-		"libcurl",
+		// "libcurl",
 	);
 
 	$urlbase = "https://windows.php.net/downloadS/php-sdk/deps/";
 	$repdl = $urlbase.$msvc."/".$arch."/";
-	$serie = $urlbase."series/packages-".$package."-".$msvc."-".$arch."-".$type.".txt";
-	echo $serie.PHP_EOL;
+	$package = "packages-".$package."-".$msvc."-".$arch."-".$type.".txt";
+	$serie = $urlbase."series/".$package;
+	$stampfile = "lastupate.txt";
 
-$ch = curl_init();
-$opts = array(
-	CURLOPT_RETURNTRANSFER	=> 1,
-	CURLOPT_HEADER			=> 0,
-	CURLOPT_CONNECTTIMEOUT	=> 2,
-	CURLOPT_TIMEOUT			=> 5,
-	CURLOPT_SSL_VERIFYPEER	=> 0,
-	CURLOPT_VERBOSE			=> 0,
-	CURLOPT_SSL_VERIFYHOST	=> 0,
-	CURLOPT_FOLLOWLOCATION	=> 1,
-	CURLINFO_HEADER_OUT		=> 0,
-	CURLOPT_FAILONERROR		=> 1,
-	CURLOPT_PRIVATE			=> 1,
-);
-curl_setopt_array($ch,$opts);
-curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
-curl_setopt($ch, CURLOPT_URL, $serie);
-$data = curl_exec ($ch);
-$error = curl_error($ch); 
-
-
-print_r($error);
-
-/*
-
-*/
-
+	$ch = curl_init();
+	$opts = array(
+		CURLOPT_RETURNTRANSFER	=> 1,
+		CURLOPT_HEADER			=> 0,
+		CURLOPT_CONNECTTIMEOUT	=> 2,
+		CURLOPT_TIMEOUT			=> 5,
+		CURLOPT_SSL_VERIFYPEER	=> 0,
+		CURLOPT_VERBOSE			=> 0,
+		CURLOPT_SSL_VERIFYHOST	=> 0,
+		CURLOPT_FOLLOWLOCATION	=> 1,
+		CURLINFO_HEADER_OUT		=> 0,
+		CURLOPT_FAILONERROR		=> 1,
+		CURLOPT_PRIVATE			=> 1,
+		CURLOPT_FILETIME		=> 1,
+	);
+	curl_setopt_array($ch,$opts);
+	curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
+	curl_setopt($ch, CURLOPT_URL, $serie);
+	$data = curl_exec ($ch);
+	$error = curl_error($ch); 
+	if(is_array($error)){
+		print_r($error);
+		echo "Unbale to retrive '".$serie."' > aborting!".PHP_EOL;
+		exit(-1);
+	}
+	$timestamp = curl_getinfo($ch, CURLINFO_FILETIME);
+	if ($timestamp == -1) {
+		echo "Unbale to retrieve datetime of '".$serie."' > aborting!".PHP_EOL;
+		exit(-1);
+	}
+	if(is_file($basedir.$stampfile)){
+		$lastupate = intval(trim(file_get_contents($basedir.$stampfile)));
+		if($lastupate > $timestamp){
+			echo "deps: up to date:".PHP_EOL;
+			echo " - ".date("Y-m-d H:i:s", $timestamp)." '".$package."'".PHP_EOL;
+			echo " - ".date("Y-m-d H:i:s", $lastupate)." '".$stampfile."'".PHP_EOL;
+			echo "> exiting".PHP_EOL;
+			exit(0);
+		} else {
+			echo "deps: out of date > download".PHP_EOL;
+			unlink($basedir.$stampfile);
+		}
+	} else {
+		echo "deps: not present > download".PHP_EOL;
+	}
+	if(is_dir($outdir)){
+		echo "cleaning '".$outdir."'".PHP_EOL;
+		delTree($outdir);
+		sleep(1);
+	}
+	if(!mkdir($outdir)){
+		echo "Unbale to create '".$outdir."' > aborting!".PHP_EOL;
+		exit(-1);
+	} else {
+		echo "creating '".$outdir."'".PHP_EOL;
+	}
+	if(!is_dir($zipdir)){
+		if(!mkdir($zipdir)){
+			echo "Unbale to create '".$zipdir."' > aborting!".PHP_EOL;
+			exit(-1);
+		} else {
+			echo "creating '".$zipdir."'".PHP_EOL;
+		}
+	}
 	$nddep = 0;
+	$opts = array(
+		CURLOPT_HEADER => 0,
+		CURLOPT_RETURNTRANSFER	=> 0,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_NOPROGRESS => 0,
+	);
+	$opts[CURLOPT_PROGRESSFUNCTION] = function ($ch, $download_size, $downloaded, $upload_size, $uploaded) {
+		if($download_size != 0)
+			echo str_pad(sprintf('%0.2f', ($downloaded / $download_size) * 100, 2),6," ",STR_PAD_LEFT)."%\r";
+	};
+	curl_setopt_array($ch, $opts);
 	foreach(explode("\n",$data) as $dep){
 		foreach($depsreq as  $depreq){
 			if(is_int(strpos($dep,$depreq))){
+				$destination = $zipdir.$dep;
 				$nddep++;
-				echo $repdl.$dep.PHP_EOL;
-				curl_setopt($ch, CURLOPT_URL, $repdl.$dep);
-				$data = curl_exec ($ch);
-				$error = curl_error($ch); 
-				
-				$destination = $outdir.$dep;
-				$file = fopen($destination, "w+");
-				fputs($file, $data);
-				fclose($file);
+				if(is_file($destination)){
+					echo "In cache: ".$dep.PHP_EOL;
+				} else {
+					echo "Download: ".$repdl.$dep.PHP_EOL;
+					curl_setopt($ch, CURLOPT_URL, $repdl.$dep);
+					$fp = fopen($destination, "w");
+					curl_setopt($ch, CURLOPT_FILE, $fp);
+					$data = curl_exec ($ch);
+					$error = curl_error($ch); 
+					if(is_array($error)){
+						print_r($error);
+						echo "Unbale to retrieve '".$repdl.$dep."' > aborting!".PHP_EOL;
+					}
+					fclose($fp);
+				}
 			}
 		}
 	}
 	echo $nddep." / ".sizeof($depsreq).PHP_EOL;
 	curl_close ($ch);
+	$unzip = $_ENV["BIN_SEVENZ"]." x -y ".$zipdir."* -o".$outdir.PHP_EOL;
+	echo "Unzip file to deps: '".$unzip."'".PHP_EOL;
+	passthru($unzip);
+	echo "create '".$stampfile."' with current timestamp".PHP_EOL;
+	file_put_contents($basedir.$stampfile,time());
 ?>
