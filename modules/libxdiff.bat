@@ -17,4 +17,4 @@ copy /Y %PATH_BUILD%\%1\xdiff.pdb %PATH_INSTALL%\bin
 	REM version
 CD /D %PATH_SRC%\%1 
 FOR /F "tokens=* USEBACKQ" %%F IN (`git describe --tags`) DO (SET VERSION=%%F)
-%BIN_VERPATCH% /va %PATH_INSTALL%\bin\xdiff.dll "%VERSION:~1%.0.0" /pv "%VERSION:~1%.0.0"
+%PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\xdiff.dll "%VERSION:~1%"

@@ -15,4 +15,4 @@ for %%X in (brotlicommon brotli brotlidec brotlienc) do (copy /Y %PATH_BUILD%\%1
 	REM version
 CD /D %PATH_SRC%\%1 
 FOR /F "tokens=* USEBACKQ" %%F IN (`git describe --tags`) DO (SET VERSION=%%F)
-for %%X in (brotlicommon.dll brotli.exe brotlidec.dll brotlienc.dll) do (%BIN_VERPATCH% /va %PATH_INSTALL%\bin\%%X "%VERSION:~1%.0" /pv "%VERSION:~1%.0")
+for %%X in (brotlicommon.dll brotli.exe brotlidec.dll brotlienc.dll) do (%PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\%%X "%VERSION:~1%")

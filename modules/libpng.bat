@@ -29,12 +29,12 @@ for %%C in ("Release" "Release Library") do (
 	/p:Platform="%archmsbuild%"
 )
 
-for %%X in (lib pdb) do (copy /Y "%PATH_SRC%\%1\%VCDIR%\%archmsbuild%\Release Library\libpng_a.%%X" %PATH_INSTALL%\lib\libpng_a.%%X)
-for %%X in (dll pdb) do (copy /Y "%PATH_SRC%\%1\%VCDIR%\%archmsbuild%\Release\libpng.%%X" %PATH_INSTALL%\bin\libpng.%%X)
+for %%X in (lib pdb) do (copy /Y "%PATH_SRC%\%1\%VCDIR%\%archmsbuild%\Release Library\libpng_a.%%X" %PATH_INSTALL%\lib)
+for %%X in (dll pdb) do (copy /Y "%PATH_SRC%\%1\%VCDIR%\%archmsbuild%\Release\libpng.%%X" %PATH_INSTALL%\bin)
 
 copy /Y %PATH_SRC%\%1\pnglibconf.h %PATH_INSTALL%\include\pnglibconf.h
 copy /Y %PATH_SRC%\%1\png.h %PATH_INSTALL%\include\png.h
 copy /Y %PATH_SRC%\%1\pngconf.h %PATH_INSTALL%\include\pngconf.h
 
 	REM version
-%BIN_VERPATCH% /va %PATH_INSTALL%\bin\libpng.dll "%LIBVER%.0" /pv "%LIBVER%.0")
+%PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\libpng.dll "%LIBVER%"

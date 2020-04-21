@@ -35,4 +35,4 @@ copy /Y %PATH_SRC%\%1\sqlite3ext.h %PATH_INSTALL%\include\sqlite3\sqlite3ext.h
 	REM version
 CD /D %PATH_SRC%\%1 
 FOR /F "tokens=* USEBACKQ" %%F IN (`git describe --tags`) DO ( SET VERSION=%%F)
-for %%X in (dll exe) do (%BIN_VERPATCH% /va %PATH_INSTALL%\bin\sqlite3.%%X "%VERSION%.0" /pv "%VERSION%.0")
+for %%X in (dll exe) do (%PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\sqlite3.%%X %VERSION%)
