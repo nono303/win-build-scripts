@@ -9,4 +9,4 @@ for %%X in (lua luac) do (copy /Y %PATH_BUILD%\%1\%%X.pdb %PATH_INSTALL%\bin\%%X
 CD /D %PATH_SRC%\%1 
 FOR /F "tokens=* USEBACKQ" %%F IN (`git describe --tags`) DO ( SET VERSION=%%F)
 for %%X in (dll exe) do (%PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\lua.%%X "%VERSION%.0" /pv "%VERSION%.0")
-%BIN_VERPATCH% %PATH_INSTALL%\bin\luac.exe "%VERSION%"
+%PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\luac.exe "%VERSION%"
