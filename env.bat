@@ -35,8 +35,11 @@ set ANT_HOME=%PATH_SDK_ROOT%\softs\eclipse\plugins\org.apache.ant_1.10.7.v201909
 set JAVA_HOME=%PATH_JDK%\x64
 	REM outdir for memcached
 set MEMCACHED_PREFIX=/cygdrive/d/github/NONO_memcached/cygwin
+
 	REM for version patch if not present at build - https://www.codeproject.com/KB/install/VerPatch/verpatch-bin-1.0.10.zip
 set BIN_VERPATCH=%PATH_SDK_ROOT%\softs\verpatch.exe
+	REM for testing matching pdb with exe and dll http://www.debuginfo.com/tools/chkmatch.html
+set BIN_CHKMATCH=%PATH_SDK_ROOT%\softs\ChkMatch.exe
 	REM for php-desp https://www.7-zip.org/download.html
 set BIN_SEVENZ=%PATH_SDK_ROOT%\softs\7z\7z.exe
 
