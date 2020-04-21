@@ -3,12 +3,10 @@ REM      USEMAK=1 erreur without log
 REM      USEDSW=1 KO
 REM      USESLN=1 KO
 
-@echo off
 for %%X in (apr apr-util apr-iconv) do (
 	call %PATH_MODULES_COMMON%\init.bat %%X cmake
 	%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES%/apr.sh "%AVXSED%" "%CYGPATH_SRC%/%%X" "%NUMBER_OF_PROCESSORS%" "%CYGPATH_SRC%"
 )
-echo on
 	REM https://www.apachelounge.com/viewtopic.php?t=8260
 	REM https://docs.microsoft.com/fr-fr/cpp/porting/modifying-winver-and-win32-winnt?view=vs-2019
 sed -i 's/_WIN32_WINNT 0x0501/_WIN32_WINNT 0x0601/g' %CYGPATH_SRC%/apr/include/apr.hw
