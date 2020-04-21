@@ -46,22 +46,17 @@ MSBuild.exe subversion_vcnet.sln ^
 	REM *** CREATE RELEASE ***
 
 set SVNOUTDIR=D:\github\NONO_subversion
-@echo off
 for %%X in (exe dll so) do (
 	for /f "tokens=*" %%G in ('dir %PATH_SRC%\subversion\Release\*.%%X /s/b') do (
-		echo on
 		Copy /Y %%~pG%%~nG.%%X %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%\%%~nG.%%X
 		Copy /Y %%~pG%%~nG.pdb %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%\%%~nG.pdb
 	)
 )
-echo on
 
 set DEPS=\deps
 if not exist %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\. mkdir %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\
 if %ARCH% == x64 (set sslarch=-x64)
-@echo off
 for %%X in (dll pdb) do (
-	echo on
 	Copy /Y %PATH_INSTALL%\bin\libssl-1_1%sslarch%.%%X  %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\libssl-1_1%sslarch%.%%X 
 	Copy /Y %PATH_INSTALL%\bin\libcrypto-1_1%sslarch%.%%X  %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\libcrypto-1_1%sslarch%.%%X 
 	Copy /Y %PATH_INSTALL%\bin\libexpat.%%X  %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\libexpat.%%X 
