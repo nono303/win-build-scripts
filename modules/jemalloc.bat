@@ -29,4 +29,4 @@ copy /Y %PATH_SRC%\%1\include\%1\jemalloc.h %PATH_INSTALL%\include\%1\jemalloc.h
 	REM version
 CD /D %PATH_SRC%\%1 
 FOR /F "tokens=* USEBACKQ" %%F IN (`git describe --tags`) DO (SET VERSION=%%F)
-%PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\jemalloc.dll "%VERSION%")
+%PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\jemalloc.dll "%VERSION%"
