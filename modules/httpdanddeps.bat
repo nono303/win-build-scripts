@@ -9,7 +9,7 @@ call %PATH_BATCH%\build.bat libxml2
 call %PATH_BATCH%\build.bat pcre
 call %PATH_BATCH%\build.bat libevent
 call %PATH_BATCH%\build.bat libev
-call %PATH_BATCH%\build.bat c-ares
+call %PATH_BATCH%\build.bat cares
 call %PATH_BATCH%\build.bat nghttp2
 call %PATH_BATCH%\build.bat libssh2
 call %PATH_BATCH%\build.bat curl
