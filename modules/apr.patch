@@ -35,9 +35,9 @@ index 454b4fec..e6d9fc30 100644
 -	copy $(APU_PATH)\$(ARCHPATH)\libaprutil-1.pdb	"$(PREFIX)\bin\" <.y
 -	copy $(APU_PATH)\ldap\$(ARCHPATH)\apr_ldap-1.dll "$(PREFIX)\bin\" <.y
 -	copy $(APU_PATH)\ldap\$(ARCHPATH)\apr_ldap-1.pdb "$(PREFIX)\bin\" <.y
-+	xcopy /C /F /Y CHANGES "$(PREFIX)\CHANGES.txt"
-+	xcopy /C /F /Y LICENSE "$(PREFIX)\LICENSE.txt"
-+	xcopy /C /F /Y NOTICE  "$(PREFIX)\NOTICE.txt" 
++	REM copy /Y CHANGES "$(PREFIX)\CHANGES.txt"
++	REM copy /Y LICENSE "$(PREFIX)\LICENSE.txt"
++	REM copy /Y NOTICE  "$(PREFIX)\NOTICE.txt" 
 +	xcopy /C /F /Y $(APR_PATH)\include\*.h		"$(PREFIX)\include\"
 +	xcopy /C /F /Y $(APU_PATH)\include\*.h		"$(PREFIX)\include\"
 +	xcopy /C /F /Y $(APR_PATH)\$(LIBSOSPATH)\apr-1.lib	"$(PREFIX)\lib\"
