@@ -1,0 +1,10 @@
+https://www.php.net/manual/fr/mysql-xdevapi.build.php
+
+https://github.com/php/pecl-database-mysql_xdevapi
+https://github.com/protocolbuffers/protobuf.git
+
+	REM config --with-boost https://www.boost.org/
+set PATH_ROOTNETFXSDK=C:\Program Files (x86)\Windows Kits\NETFXSDK\4.7
+set PATH_ROOTWKIT=C:\Windows Kits\10
+include + "%PATH_ROOTNETFXSDK%\Include\um";"%PATH_ROOTWKIT%\Include\%WKITVER%\um";
+lib + "%PATH_ROOTNETFXSDK%\Lib\um\%PHP_SDK_ARCH%";"%PATH_ROOTWKIT%\Lib\%WKITVER%\um\%PHP_SDK_ARCH%";
