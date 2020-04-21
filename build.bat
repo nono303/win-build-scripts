@@ -1,7 +1,5 @@
 @echo off
-REM https://www.robvanderwoude.com/battech_inputvalidation_commandline.php
-REM https://stackoverflow.com/questions/9102422/windows-batch-set-inside-if-not-working
-
+echo ########################### BEGIN '%1' %MSVC_DEPS% %ARCH% %AVXB:-=% ###########################
 call %PATH_MODULES_COMMON%\ymdhis.bat
 IF /I "%~2"=="ALL" (
 	SET LOGNAME=%PATH_LOGS%\%1_ALL_%ymdhis%.log
@@ -25,4 +23,5 @@ IF /I "%~2"=="ALL" (
 	call %PATH_MODULES%\%1.bat %1 2>&1 | tee %LOGNAME%
 )
 dos2unix %LOGNAME%
+echo ############################ END '%1' %MSVC_DEPS% %ARCH% %AVXB:-=% ############################
 cd /D %PATH_BATCH%
