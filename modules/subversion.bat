@@ -45,27 +45,20 @@ MSBuild.exe subversion_vcnet.sln ^
 
 	REM *** CREATE RELEASE ***
 
+@echo off
 set SVNOUTDIR=D:\github\NONO_subversion
 for %%X in (exe dll so) do (
 	for /f "tokens=*" %%G in ('dir %PATH_SRC%\subversion\Release\*.%%X /s/b') do (
-		Copy /Y %%~pG%%~nG.%%X %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%\%%~nG.%%X
-		Copy /Y %%~pG%%~nG.pdb %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%\%%~nG.pdb
+		xcopy /C /F /Y %%~pG%%~nG.%%X %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%\%%~nG.%%X
+		xcopy /C /F /Y %%~pG%%~nG.pdb %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%\%%~nG.pdb
 	)
 )
-
 set DEPS=\deps
 if not exist %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\. mkdir %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\
 if %ARCH% == x64 (set sslarch=-x64)
-for %%X in (dll pdb) do (
-	Copy /Y %PATH_INSTALL%\bin\libssl-1_1%sslarch%.%%X  %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\libssl-1_1%sslarch%.%%X 
-	Copy /Y %PATH_INSTALL%\bin\libcrypto-1_1%sslarch%.%%X  %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\libcrypto-1_1%sslarch%.%%X 
-	Copy /Y %PATH_INSTALL%\bin\libexpat.%%X  %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\libexpat.%%X 
-	Copy /Y %PATH_INSTALL%\bin\libapr-1.%%X  %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\libapr-1.%%X 
-	Copy /Y %PATH_INSTALL%\bin\libapriconv-1.%%X  %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\libapriconv-1.%%X 
-	Copy /Y %PATH_INSTALL%\bin\libaprutil-1.%%X  %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\libaprutil-1.%%X 
-	Copy /Y %PATH_INSTALL%\bin\brotlienc.%%X  %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\brotlienc.%%X 
-	Copy /Y %PATH_INSTALL%\bin\brotlicommon.%%X  %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\brotlicommon.%%X 
-	Copy /Y %PATH_INSTALL%\bin\brotlidec.%%X  %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\brotlidec.%%X 
-	Copy /Y %PATH_INSTALL%\bin\libserf-2.%%X  %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\libserf-2.%%X 
-	Copy /Y %PATH_INSTALL%\bin\zlib1.%%X  %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\zlib1.%%X 
+if %ARCH% == x86 (set sslarch=)
+for %%F in (libssl-1_1%sslarch% libcrypto-1_1%sslarch% libexpat libapr-1 libapriconv-1 libaprutil-1 brotlienc brotlicommon brotlidec libserf-2 zlib1) do (
+	for %%X in (dll pdb) do (
+		xcopy /C /F /Y %PATH_INSTALL%\bin\%%F.%%X  %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\%%F.%%X 
+	)
 )
