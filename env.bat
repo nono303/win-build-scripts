@@ -38,7 +38,7 @@ set MEMCACHED_PREFIX=/cygdrive/d/github/NONO_memcached/cygwin
 	REM for version patch if not present at build - https://www.codeproject.com/KB/install/VerPatch/verpatch-bin-1.0.10.zip
 set BIN_VERPATCH=%PATH_SDK_ROOT%\softs\verpatch.exe
 	REM for php-desp https://www.7-zip.org/download.html
-set BIN_SEVENZ=%PATH_SDK_ROOT%\softs\7z1900-x64.exe
+set BIN_SEVENZ=%PATH_SDK_ROOT%\softs\7z\7z.exe
 
 	REM CYGWIN PATH
 FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_SRC%`) DO (SET CYGPATH_SRC=%%F)
@@ -55,6 +55,7 @@ set PATH_WIN=%PATH_BIN_PYTHON%;^
 %PATH_BIN_CYGWIN%;^
 %PATH_BIN_SVN%;^
 %PATH_VS%\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;^
+%PATH_VS%\IDE;^
 %PATH_PHP_SDK%\bin\php;^
 C:\Windows;^
 C:\Windows\SysWOW64;^
@@ -69,10 +70,6 @@ REM ########################## CMAKE BUILD TYPE
 	REM set CMAKE_BUILD_TYPE=Release
 set CMAKE_BUILD_TYPE=RelWithDebInfo
 
-REM ########################## WINDOWS KIT VERSION
-	REM C:\Program Files (x86)\Windows Kits\10\Lib
-set WKITVER=10.0.19041.0
-
 REM ########################## NMAKE OPTIONS
 	REM https://msdn.microsoft.com/fr-fr/library/afyyse50.aspx
 	REM /S	Supprime l'affichage des commandes exécutées. Pour supprimer l'affichage dans une partie d'un makefile, utilisez le modificateur de commande @ ou .SILENT. Pour définir ou supprimer l'option /S pour une partie d'un makefile, utilisez !CMDSWITCHES.
@@ -80,9 +77,9 @@ REM ########################## NMAKE OPTIONS
 	REM /B	Force la génération même quand les horodatages coïncident. Recommandée uniquement pour les systèmes très rapides (résolution de deux secondes au plus).
 set NMAKE_OPTS=/S /NOLOGO
 
-REM ########################## PHP DEPENDENCIES BUILD VAR
-set INCLUDE=
-set PHPDEPS=%PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\depsnono
+REM ########################## WINDOWS KIT VERSION
+	REM see dir in %PATH_ROOTWKIT%\Lib
+set WKITVER=10.0.19041.0
 
 REM ########################## MAKE & CLEAN DIR
 if not exist %PATH_LOGS%\. mkdir %PATH_LOGS%
