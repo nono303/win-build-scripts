@@ -20,19 +20,18 @@ sed -i 's/LNKLIB     = lib.exe/LNKLIB     = lib.exe \/LTCG/g' %CYGPATH_SRC%/%1/w
 	REM libssh2 : req opensll & zlib / ko winssl
 	REM WITH_PREFIX=%PATH_INSTALL%
 
-	REM ***** Loop for all versions ***
-set CURL_MODE=static dll
+	REM set CURL_MODE=static dll
+set CURL_MODE=dll
+	REM set CURL_DEPS_MODE=static dll
+set CURL_DEPS_MODE=dll
+	REM set CURL_SSLENGINE=openssl-ssh2 winssl
+	REM openssl-ssh2 : PHP / winssl : HTTPD
 set CURL_SSLENGINE=openssl-ssh2 winssl
 for %%s in (%CURL_SSLENGINE%) do (
 	for %%m in (%CURL_MODE%) do (
-		for %%d in (%CURL_MODE%) do (
+		for %%d in (%CURL_DEPS_MODE%) do (
 			echo on
 			call %PATH_MODULES%\curl-sub.bat %1 %%m %%d %%s
 		)
 	)
 )
-
-	REM Apache
-REM call %PATH_MODULES%\curl-sub.bat %1 dll static winssl
-	REM PHP - openssl-ssh2_static_deps-static
-REM call %PATH_MODULES%\curl-sub.bat %1 static static openssl-ssh2
