@@ -1,17 +1,4 @@
 <?php
-error_reporting(E_ALL & ~E_NOTICE);
-date_default_timezone_set("Europe/Paris");
-
-DEFINE("FETCH",true);
-define("GIT_GC",false);
-DEFINE("SRC_DIR","C:/src/");
-$fout = str_replace("\\","/",$argv[1])."/git.".date("Y-m-d_H-i-s").".csv";
-
-$repos = array();
-foreach(scandir(SRC_DIR) as $ele)
-	if(is_dir(SRC_DIR.$ele) &&  $ele != "." && $ele != "..")
-		array_push($repos, SRC_DIR.$ele);
-
 function execnono($cmd,$parts,$cwd,$env){
 	$args = '';
 	if($parts){
@@ -42,6 +29,19 @@ function execnono($cmd,$parts,$cwd,$env){
 	}
 	return null;
 }
+
+error_reporting(E_ALL & ~E_NOTICE);
+date_default_timezone_set("Europe/Paris");
+
+DEFINE("FETCH",true);
+define("GIT_GC",false);
+$srcdir = str_replace("\\","/",$argv[2])."/";
+$fout = str_replace("\\","/",$argv[1])."/git.".date("Y-m-d_H-i-s").".csv";
+
+$repos = array();
+foreach(scandir($srcdir) as $ele)
+	if(is_dir($srcdir.$ele) &&  $ele != "." && $ele != "..")
+		array_push($repos, $srcdir.$ele);
 
 file_put_contents($fout,'"name";"url";"branch";"tag";"last tags";"log tags";"status"'.PHP_EOL,FILE_APPEND);
 echo "*************************".PHP_EOL;
