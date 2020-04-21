@@ -1,1 +1,1 @@
-/usr/bin/find $1 -type f -name "flags.make" -exec sed -i 's/-GS -W4 -wd4251 -wd4275/\/Zc:inline \/EHsc \/wd4005 \/wd4244 \/wd4456 \/wd4100 \/wd4505 \/wd4133/g' {} \;
+/usr/bin/find $1 -type f -name "flags.make" -exec sed -i 's/-GS -W4 -wd4251 -wd4275/\/Zc:inline \/EHsc -w/g' {} \;
