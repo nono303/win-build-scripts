@@ -70,6 +70,7 @@ cmake ^
 -DWITH_NEVERBLEED=OFF ^
 -DCYTHON_EXECUTABLE=%PATH_BIN_PYTHON%\Scripts ^
 %PATH_SRC%\%1
+
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/flags.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 nmake %NMAKE_OPTS% clean install
 copy %PATH_BUILD%\%1\lib\nghttp2.pdb %PATH_INSTALL%\bin\nghttp2.pdb
