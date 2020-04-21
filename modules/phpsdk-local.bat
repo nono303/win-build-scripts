@@ -37,9 +37,6 @@ call buildconf
 sed -i 's/libbz2_a/libbz2/g' %CYGPATH_SRC%/php-src/configure.js
 	REM sqlite3
 sed -i 's/libsqlite3/sqlite3/g' %CYGPATH_SRC%/php-src/configure.js
-		REM .\ext\sqlite3\php_sqlite3_structs.h(22): faxal error C1083: Cannot open include file: 'sqlite3.h': No such file or directory
-		REM phpsdk-config_make.bat : sed -i 's/CHECK_HEADER_ADD_INCLUDE("sqlite3/CHECK_HEADER_ADD_INCLUDE("sqlite3\/sqlite3/g' %CYGPATH_SRC%/php-src/configure.js : configure OK / compile KO
-for %%F in (sqlite3 sqlite3ext) do (if not exist %PATH_INSTALL%\include\%%F.h mklink /h %PATH_INSTALL%\include\%%F.h %PATH_INSTALL%\include\sqlite3\%%F.h)
 	REM curl
 sed -i 's/PHP_PHP_BUILD + "\/include\/curl/"%PHP_CURL:\=\/%" + "\/include\/curl/g' %CYGPATH_SRC%/php-src/configure.js
 sed -i 's/EXTENSION("curl", "interface.c multi.c share.c curl_file.c");/EXTENSION("curl", "interface.c multi.c share.c curl_file.c"); CHECK_LIB("cares.lib", "curl", PHP_CURL);/g' %CYGPATH_SRC%/php-src/configure.js
@@ -52,19 +49,21 @@ mklink /J %PATH_INSTALL%\include\libxml %PATH_INSTALL%\include\libxml2\libxml
 	REM ~~~~~~~~~~~~ export config options
 call configure --help > %PATH_LOGS%\configure_%PHPGITVER:~4,-1%.txt
 
-	REM ~~~~~~~~~~~~ make !
+	REM ~~~~~~~~~~~~ make NTS
 echo *** nts  ***
 set ZTS=--disable-zts
 set TSNTS=nts
 set BUILDDIR=Release
 call %PATH_MODULES%\phpsdk-config_make.bat
 copy /Y %PHP_OUTDIR%\%MSVC_DEPS%-%PHP_SDK_ARCH%%AVXB%-%TSNTS%\php_memcache.dll %PHP_MEMCACHE_OUTDIR%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXB:-=\%\php-%PHPVER%.x_memcache.dll
+
+	REM ~~~~~~~~~~~~ make TS
 if %PHP_BUILDTS% == 1 (
-	echo *** ts  ***
-	set ZTS=
-	set TSNTS=ts
-	set BUILDDIR=Release_TS
-	call %PATH_MODULES%\phpsdk-config_make.bat
-	copy /Y %PHP_OUTDIR%\%MSVC_DEPS%-%PHP_SDK_ARCH%%AVXB%-%TSNTS%\php_memcache.dll %PHP_MEMCACHE_OUTDIR%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXB:-=\%\php-%PHPVER%.x_memcache.dll
+echo *** ts  ***
+set ZTS=
+set TSNTS=ts
+set BUILDDIR=Release_TS
+call %PATH_MODULES%\phpsdk-config_make.bat
+copy /Y %PHP_OUTDIR%\%MSVC_DEPS%-%PHP_SDK_ARCH%%AVXB%-%TSNTS%\php_memcache.dll %PHP_MEMCACHE_OUTDIR%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXB:-=\%\php-%PHPVER%.x_memcache.dll
 )
 exit
