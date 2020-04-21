@@ -15,7 +15,7 @@ if %1 == 0 (
 	set AVXB=
 	set AVXSED=
 	set AVXMSC=
-	set AVXVCX=
+	set AVXVCX="\n"
 		REM php
 	set outdirphp=
 	set intrinsics=
