@@ -1,5 +1,8 @@
 call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
+	REM https://github.com/curl/curl/blob/master/GIT-INFO
+copy /Y %PATH_SRC%\%1\src\tool_hugehelp.c.cvs %PATH_SRC%\%1\src\tool_hugehelp.c
+
 	REM add nmake options : BUILDDIR & CONFIGNAMELIB in Makefile.vc
 cd %PATH_SRC%\%1
 git apply --verbose %PATH_MODULES%\%1.patch
@@ -16,22 +19,20 @@ sed -i 's/LNKLIB     = lib.exe/LNKLIB     = lib.exe \/LTCG/g' %CYGPATH_SRC%/%1/w
 	REM WITH_SSH2=static WITH_SSL=static // doesn't work on mod_md
 	REM libssh2 : req opensll & zlib / ko winssl
 	REM WITH_PREFIX=%PATH_INSTALL%
+
 	REM ***** Loop for all versions ***
-REM set CURL_MODE=static dll
-REM set CURL_SSLENGINE=openssl-ssh2 winssl
-REM for %%s in (%CURL_SSLENGINE%) do (
-REM 	for %%m in (%CURL_MODE%) do (
-REM 		for %%d in (%CURL_MODE%) do (
-REM 			echo on
-REM 			call %PATH_MODULES%\curl-sub.bat %1 %%m %%d %%s
-REM 		)
-REM 	)
-REM )
+set CURL_MODE=static dll
+set CURL_SSLENGINE=openssl-ssh2 winssl
+for %%s in (%CURL_SSLENGINE%) do (
+	for %%m in (%CURL_MODE%) do (
+		for %%d in (%CURL_MODE%) do (
+			echo on
+			call %PATH_MODULES%\curl-sub.bat %1 %%m %%d %%s
+		)
+	)
+)
 
 	REM Apache
-call %PATH_MODULES%\curl-sub.bat %1 dll static winssl
-	REM PHP
-call %PATH_MODULES%\curl-sub.bat %1 static static openssl-ssh2
-
-if exist %PATH_INSTALL%\%1\. rmdir /S /Q %PATH_INSTALL%\%1
-move /Y %PATH_BUILD%\%1 %PATH_INSTALL%
+REM call %PATH_MODULES%\curl-sub.bat %1 dll static winssl
+	REM PHP - openssl-ssh2_static_deps-static
+REM call %PATH_MODULES%\curl-sub.bat %1 static static openssl-ssh2
