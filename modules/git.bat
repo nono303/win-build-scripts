@@ -1,1 +1,0 @@
-call do_php %PATH_MODULES%\git.php %PATH_LOGS% %PATH_SRC%
