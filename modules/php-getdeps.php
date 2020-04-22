@@ -31,29 +31,46 @@
 	$basedir = $_ENV["PATH_PHP_SDK"]."/phpmaster/".$msvc."/".$arch."/";
 	$outdir = $basedir."deps/";
 	$zipdir = $basedir."zip/";
+
+
 	$depsreq = array(
-		"c-client",
-		"fbclient",
-		"glib",
-		"ICU",
-		"libargon2",
-		"libenchant",
-		"libffi",
-		"libintl",
-		"liblmdb",
-		"libonig",
-		"libpq",
-		"libqdbm",
-		"libsasl",
-		"libsodium",
-		"libwebp",
-		"libxslt",
-		"libzip",
-		"mpir",
-		"net-snmp",
-		"openldap",
-		"wineditline",
-		// "libcurl",
+						// 2020-04-22
+		// "apache",	//2.4.39
+		"c-client",		//2007f
+		"fbclient",		//3.0
+		// "freetype",	//2.9.1-1
+		"glib",			//2.53.3
+		"ICU",			//66.1
+		"libargon2",	//20190702
+		// "libbzip2",	//1.0.8
+		// "libcurl",	//7.69.1
+		"libenchant",	//1.6.1
+		"libffi",		//3.3-1
+		// "libiconv",	//1.16-2
+		"libintl",		//0.18.3-5
+		// "libjpeg",	//9c
+		"liblmdb",		//0.9.22-3
+		"libonig",		//6.9.5
+		// "libpng",	//1.6.34-4
+		"libpq",		//11.4
+		"libqdbm",		//1.8.78
+		"libsasl",		//2.1.27-2
+		"libsodium",	//1.0.17
+		// "libssh2",	//1.9.0
+		// "libtidy",	//5.6.0-2
+		"libwebp",		//1.1.0
+		// "libxml2",	//2.9.10
+		// "libxpm",	//3.5.12-5
+		"libxslt",		//1.1.32
+		"libzip",		//1.5.2
+		"mpir",			//3.0.0
+		"net-snmp",		//5.7.3-1
+		// "nghttp2",	//1.40.0
+		"openldap",		//2.4.47
+		// "openssl",	//1.1.1e
+		// "sqlite3",	//3.31.1
+		"wineditline",	//2.205-1
+		// "zlib",		//1.2.11
 	);
 
 	$urlbase = "https://windows.php.net/downloadS/php-sdk/deps/";
