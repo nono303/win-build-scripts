@@ -7,4 +7,3 @@ IF /I "%~2"=="cmake" (
 	mkdir %PATH_BUILD%\%1
 	cd /D %PATH_BUILD%\%1
 )
-echo on
