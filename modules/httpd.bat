@@ -16,7 +16,7 @@ if %CURL_BTYPE% == static (set CURL_LIB_NAME=curl.exe)
 	REM copy curl to %PATH_INSTALL%\bin
 xcopy /C /F /Y %PATH_INSTALL%\curl\%CURL_VER%\bin\%CURL_LIB_NAME:~0,-4%.pdb %PATH_INSTALL%\bin\%CURL_LIB_NAME:~0,-4%.pdb*
 xcopy /C /F /Y %PATH_INSTALL%\curl\%CURL_VER%\bin\%CURL_LIB_NAME% %PATH_INSTALL%\bin\%CURL_LIB_NAME%*
-if %CURL_BTYPE% == dll (xcopy /C /F /Y %PATH_INSTALL%\curl\%CURL_VER%\bin\curl.exe %PATH_INSTALL%\bin\curl.exe)
+if %CURL_BTYPE% == dll (xcopy /C /F /Y %PATH_INSTALL%\curl\%CURL_VER%\bin\curl.exe %PATH_INSTALL%\bin\curl.exe*)
 	REM copy curl to mod_md github
 if not "%GITHUB_MD%"=="" (
 	xcopy /C /F /Y %PATH_INSTALL%\curl\%CURL_VER%\bin\%CURL_LIB_NAME:~0,-4%.pdb %GITHUB_MD%\%MSVC_DEPS%\%ARCH%%AVXB%\%CURL_LIB_NAME:~0,-4%.pdb*
