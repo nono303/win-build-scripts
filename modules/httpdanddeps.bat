@@ -1,21 +1,22 @@
-call %PATH_BATCH%\build.bat zlib
-call %PATH_BATCH%\build.bat openssl
-call %PATH_BATCH%\build.bat jemalloc
-call %PATH_BATCH%\build.bat brotli
-call %PATH_BATCH%\build.bat jansson
-call %PATH_BATCH%\build.bat bzip2
-call %PATH_BATCH%\build.bat libiconv
-call %PATH_BATCH%\build.bat libxml2
-call %PATH_BATCH%\build.bat pcre
-call %PATH_BATCH%\build.bat libevent
-call %PATH_BATCH%\build.bat libev
-call %PATH_BATCH%\build.bat cares
-call %PATH_BATCH%\build.bat nghttp2
-call %PATH_BATCH%\build.bat libssh2
-call %PATH_BATCH%\build.bat curl
-call %PATH_BATCH%\build.bat libexpat
-call %PATH_BATCH%\build.bat libmaxminddb
-call %PATH_BATCH%\build.bat sqlite
-call %PATH_BATCH%\build.bat apr
-call %PATH_BATCH%\build.bat lua
-call %PATH_BATCH%\build.bat httpd
+call %PATH_BATCH%\build.bat clean ANDDEPS
+call %PATH_BATCH%\build.bat brotli ANDDEPS
+call %PATH_BATCH%\build.bat jansson ANDDEPS
+call %PATH_BATCH%\build.bat bzip2 ANDDEPS
+call %PATH_BATCH%\build.bat zlib ANDDEPS
+call %PATH_BATCH%\build.bat openssl ANDDEPS
+call %PATH_BATCH%\build.bat jemalloc ANDDEPS
+call %PATH_BATCH%\build.bat libiconv ANDDEPS
+call %PATH_BATCH%\build.bat libxml2 ANDDEPS
+call %PATH_BATCH%\build.bat pcre ANDDEPS
+call %PATH_BATCH%\build.bat libevent ANDDEPS
+call %PATH_BATCH%\build.bat libev ANDDEPS
+call %PATH_BATCH%\build.bat cares ANDDEPS
+call %PATH_BATCH%\build.bat nghttp2 ANDDEPS
+call %PATH_BATCH%\build.bat libssh2 ANDDEPS
+call %PATH_BATCH%\build.bat curl ANDDEPS
+call %PATH_BATCH%\build.bat libexpat ANDDEPS
+call %PATH_BATCH%\build.bat libmaxminddb ANDDEPS
+call %PATH_BATCH%\build.bat sqlite ANDDEPS
+call %PATH_BATCH%\build.bat apr ANDDEPS
+call %PATH_BATCH%\build.bat lua ANDDEPS
+call %PATH_BATCH%\build.bat httpd ANDDEPS
