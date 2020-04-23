@@ -26,4 +26,4 @@ for %%X in (exe pdb) do (for %%P in (wrjpgcom rdjpgcom cjpeg djpeg jpegtran) do 
 xcopy /E /C /F /Y "%PATH_SRC%\%1\*.h" %PATH_INSTALL%\include\*)
 
 	REM rename... manually
-for %%P in (wrjpgcom rdjpgcom cjpeg djpeg jpegtran) do (%PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\%%P.exe "9.4" "9-d")
+for %%P in (wrjpgcom rdjpgcom cjpeg djpeg jpegtran) do (call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\%%P.exe "9.4" "9-d")

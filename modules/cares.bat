@@ -24,7 +24,7 @@ move /y %PATH_INSTALL%\bin\cares_static.pdb %PATH_INSTALL%\lib\cares_static.pdb
 
 	REM version
 CD /D %PATH_SRC%\%1 
-FOR /F "tokens=* USEBACKQ" %%F IN (`git describe --tags`) DO ( SET VERSION=%%F)
+for /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set VERSION=%%F)
 set VERSION=%VERSION:_=.%
 for %%X in (cares acountry adig ahost) do (copy /Y %PATH_BUILD%\%1\bin\%%X.pdb %PATH_INSTALL%\bin\%%X.pdb)
-for %%X in (cares.dll acountry.exe adig.exe ahost.exe) do (%PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\%%X "%VERSION:~6%")
+for %%X in (cares.dll acountry.exe adig.exe ahost.exe) do (call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\%%X "%VERSION:~6%")

@@ -1,5 +1,5 @@
 call %PATH_MODULES_COMMON%\init.bat %1
-SET VCDIR=builds/windows/vc2010
+set VCDIR=builds/windows/vc2010
 
 	REM add Link option for LTCG
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES%/freetype.sh "%CYGPATH_SRC%/%1/%VCDIR%"

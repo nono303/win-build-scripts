@@ -1,12 +1,12 @@
 REM @echo off
 echo ########################### BEGIN '%1' %MSVC_DEPS% %ARCH% %AVXECHO% ###########################
 call %PATH_MODULES_COMMON%\ymdhis.bat
-IF /I "%~2"=="ALL" (
-	SET LOGNAME=%PATH_LOGS%\%1_ALL_%ymdhis%.log
-) ELSE (
-	SET LOGNAME=%PATH_LOGS%\%1_%MSVC_DEPS%-%ARCH%%AVXB%_%ymdhis%.log
+if /I "%~2"=="ALL" (
+	set LOGNAME=%PATH_LOGS%\%1_ALL_%ymdhis%.log
+) else (
+	set LOGNAME=%PATH_LOGS%\%1_%MSVC_DEPS%-%ARCH%%AVXB%_%ymdhis%.log
 )
-IF /I "%~2"=="ALL" (
+if /I "%~2"=="ALL" (
 	for %%V in (vc15 vs16) do (
 		for %%X in (x86 x64) do (
 			for %%A in (0 1) do (
@@ -20,8 +20,8 @@ IF /I "%~2"=="ALL" (
 		)
 	)
 	call dos2unix %LOGNAME%
-) ELSE (
-	IF /I "%~2"=="ANDDEPS" (
+) else (
+	if /I "%~2"=="ANDDEPS" (
 		call %PATH_MODULES%\%1.bat %1 2>&1
 	) else (
 		call %PATH_MODULES%\%1.bat %1 2>&1 | tee %LOGNAME%

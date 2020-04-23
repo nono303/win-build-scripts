@@ -9,7 +9,7 @@ I voluntary disable testing, man & co. in the “pipeline” to speed up its but
 
 ## HOW-TO
 
-1. check your paths in `xCommon.bat` according to **requirements**
+1. check your paths in `env.bat` according to **requirements**
 2. launch simple command prompt
 3. init
    1. `vc15.bat` or `vs16.bat`
@@ -118,3 +118,5 @@ I voluntary disable testing, man & co. in the “pipeline” to speed up its but
 | ActivePerl                   | x64  | 5.26.2603   | `C:\perl`                                                    |                     |
 | Netwide Assembler            | x64  | 2.14.02     | `C:\bin\nasm`                                                |                     |
 | Git                          | x64  | 2.26.0      | `C:\Program Files\Git`                                       |                     |
+| verpatch                          | x64  | 2.26.0      | `C:\Program Files\Git`                                       |                     |
+| 7z                          | x64  | 2.26.0      | `C:\Program Files\Git`                                       |                     |

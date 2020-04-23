@@ -19,5 +19,5 @@ MSBuild.exe nssm.sln ^
 /p:DebugType=None ^
 /p:Platform="%archmsbuild%"
 
-FOR /F "tokens=* USEBACKQ" %%F IN (`git describe --tags`) DO (SET VERSION=%%F)
+for /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set VERSION=%%F)
 for %%E in (exe pdb) do (copy /Y %PATH_SRC%\%1\out\Release\%archmsbuild%\nssm.%%E %PATH_INSTALL%\bin\nssm-%VERSION%.%%E)

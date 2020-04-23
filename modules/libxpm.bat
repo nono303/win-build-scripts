@@ -1,5 +1,5 @@
 call %PATH_MODULES_COMMON%\init.bat %1
-SET VCDIR=windows/vc15
+set VCDIR=windows/vc15
 
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/%VCDIR%" %AVXVCX% %PTFTS% %WKITVER%
 

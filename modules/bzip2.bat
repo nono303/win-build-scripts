@@ -21,5 +21,5 @@ copy /Y %PATH_SRC%\%1\bzlib.h %PATH_INSTALL%\include\bzlib.h
 
 	REM version
 CD /D %PATH_SRC%\%1 
-FOR /F "tokens=* USEBACKQ" %%F IN (`git describe --tags`) DO (SET VERSION=%%F)
-for %%X in (bzip2recover bzip2) do (%PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\%%X.exe "%VERSION:~6%")
+for /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set VERSION=%%F)
+for %%X in (bzip2recover bzip2) do (call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\%%X.exe "%VERSION:~6%")

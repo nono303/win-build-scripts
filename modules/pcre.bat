@@ -29,5 +29,5 @@ for %%X in (pcre16 pcre32) do (copy /Y %PATH_BUILD%\%1\%%X.pdb %PATH_INSTALL%\bi
 
 	REM version
 CD /D %PATH_SRC%\%1 
-FOR /F "tokens=* USEBACKQ" %%F IN (`git describe --tags`) DO ( SET VERSION=%%F)
-for %%X in (pcre pcre16 pcre32 pcreposix) do (%PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\%%X.dll "%VERSION:~5%")
+for /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set VERSION=%%F)
+for %%X in (pcre pcre16 pcre32 pcreposix) do (call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\%%X.dll "%VERSION:~5%")

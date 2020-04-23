@@ -33,5 +33,5 @@ copy /Y %PATH_BUILD%\%1\CMakeFiles\tidy_a.dir\tidy_a.pdb %PATH_INSTALL%\lib
 
 	REM version
 CD /D %PATH_SRC%\%1 
-FOR /F "tokens=* USEBACKQ" %%F IN (`git describe --tags`) DO (SET VERSION=%%F)
-for %%X in (exe dll) do (%PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\tidy.%%X "%VERSION%")
+for /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set VERSION=%%F)
+for %%X in (exe dll) do (call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\tidy.%%X "%VERSION%")

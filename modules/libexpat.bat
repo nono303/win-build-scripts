@@ -18,6 +18,6 @@ copy /Y %PATH_BUILD%\%1\libexpat.pdb %PATH_INSTALL%\bin\libexpat.pdb
 
 	REM version
 CD /D %PATH_SRC%\%1 
-FOR /F "tokens=* USEBACKQ" %%F IN (`git describe --tags`) DO ( SET VERSION=%%F)
+for /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set VERSION=%%F)
 set VERSION=%VERSION:_=.%
-%PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\libexpat.dll "%VERSION:~2%"
+call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\libexpat.dll "%VERSION:~2%"

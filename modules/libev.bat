@@ -25,5 +25,5 @@ copy /Y %PATH_SRC%\%1\ev.h %PATH_INSTALL%\include\ev.h
 	REM version
 REM for /f %%i in ('FINDSTR /C:"AM_INIT" %PATH_SRC%\%1\configure.ac') do for /F "tokens=1,2,3 delims=,\)" %%a in ("%%i") do set VERSION=%%b
 CD /D %PATH_SRC%\%1 
-FOR /F "tokens=* USEBACKQ" %%F IN (`git describe --tags`) DO (SET VERSION=%%F)
-%PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\%1.dll "%VERSION:~4%"
+for /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set VERSION=%%F)
+call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\%1.dll "%VERSION:~4%"

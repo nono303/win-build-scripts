@@ -1,5 +1,5 @@
 call %PATH_MODULES_COMMON%\init.bat %1
-SET VCDIR=projects/vstudio2017
+set VCDIR=projects/vstudio2017
 
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/%VCDIR%" %AVXVCX% %PTFTS% %WKITVER%
 
@@ -37,4 +37,4 @@ copy /Y %PATH_SRC%\%1\png.h %PATH_INSTALL%\include\png.h
 copy /Y %PATH_SRC%\%1\pngconf.h %PATH_INSTALL%\include\pngconf.h
 
 	REM version
-%PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\libpng.dll "%LIBVER%"
+call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\libpng.dll "%LIBVER%"
