@@ -10,7 +10,7 @@ if not exist %PATH_SRC%\apr-util\xml\expat\. mklink /J %PATH_SRC%\apr-util\xml\e
 if not exist %PATH_INSTALL%\lib\sqlite3.pdb mklink /H %PATH_INSTALL%\lib\sqlite3.pdb %PATH_INSTALL%\bin\sqlite3.pdb
 
 set LIB=%LIB%;%PATH_INSTALL%\lib
-set INCLUDE=%INCLUDE%;%PATH_INSTALL%\include
+set INCLUDE=%INCLUDE%;%PATH_INSTALL%\include;%PATH_INSTALL%\include\sqlite3
 
 cd /D %PATH_SRC%\apr-util
 	REM patch install
