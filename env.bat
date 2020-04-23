@@ -42,12 +42,16 @@ set BIN_VERPATCH=%PATH_SDK_ROOT%\softs\verpatch.exe
 set BIN_CHKMATCH=%PATH_SDK_ROOT%\softs\ChkMatch.exe
 	REM for php-desp https://www.7-zip.org/download.html
 set BIN_SEVENZ=%PATH_SDK_ROOT%\softs\7z\7z.exe
+	REM for testing dependencies https://github.com/lucasg/Dependencies
+set BIN_DEPENDS=B:\bin\dependencies\Dependencies.exe
+	REM for checking version https://docs.microsoft.com/fr-fr/sysinternals/downloads/sigcheck
+set BIN_SYGCHECK=C:\bin\wscc_sysinternals\sigcheck64.exe
 
 	REM CYGWIN PATH
-FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_SRC%`) DO (SET CYGPATH_SRC=%%F)
-FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_MODULES%`) DO (SET CYGPATH_MODULES=%%F)
-FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_MODULES_COMMON%`) DO (SET CYGPATH_MODULES_COMMON=%%F)
-FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_BATCH%`) DO (SET CYGPATH_BATCH=%%F)
+FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_SRC%`) do (set CYGPATH_SRC=%%F)
+FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_MODULES%`) do (set CYGPATH_MODULES=%%F)
+FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_MODULES_COMMON%`) do (set CYGPATH_MODULES_COMMON=%%F)
+FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_BATCH%`) do (set CYGPATH_BATCH=%%F)
 
 set PATH_WIN=%PATH_BIN_PYTHON%;^
 %PATH_BIN_GIT%;^
