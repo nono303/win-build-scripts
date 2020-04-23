@@ -1,5 +1,6 @@
 @echo off
 if %1 == 1 (
+	set AVXECHO=avx
 	set AVX=/arch:AVX
 	set AVXB=-avx
 	set AVXSED=\/arch:AVX
@@ -11,6 +12,7 @@ if %1 == 1 (
 	echo ~~-~~  AVX ~~-~~
 )
 if %1 == 0 (
+	set AVXECHO=sse2
 	set AVX=
 	set AVXB=
 	set AVXSED=
@@ -23,12 +25,10 @@ if %1 == 0 (
 )
 
 set PATH_BUILD=%PATH_BUILDROOT%\%MSVC_DEPS%_%ARCH%%AVXB%
-FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_BUILD%`) DO (SET CYGPATH_BUILD=%%F)
+for /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_BUILD%`) do (set CYGPATH_BUILD=%%F)
 set PATH_INSTALL=%PATH_RELEASE%\%MSVC_DEPS%_%ARCH%%AVXB%
-FOR /F "tokens=* USEBACKQ" %%F IN (`%PATH_BIN_CYGWIN%\cygpath -m %PATH_INSTALL%`) DO (SET SLASHPATH_INSTALL=%%F)
-if not exist %PATH_INSTALL%\lib\. mkdir %PATH_INSTALL%\lib
-if not exist %PATH_INSTALL%\bin\. mkdir %PATH_INSTALL%\bin
-if not exist %PATH_INSTALL%\include\. mkdir %PATH_INSTALL%\include
+for /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -m %PATH_INSTALL%`) do (set SLASHPATH_INSTALL=%%F)
+for %%s in (lib bin include) do (if not exist %PATH_INSTALL%\%%s\. mkdir %PATH_INSTALL%\%%s)
 
 	REM /GL ko sur nghttp2. /GL ko si /Zi http://forums.codeguru.com/showthread.php?556135-ZI-and-GL-incompatible
 set EXTCFLAGSNGHTTP2=/GS- /Oy- /guard:cf- /FD /GF /Zc:inline /MP%NUMBER_OF_PROCESSORS% /LD /MD /Zi /Ox %AVX%
