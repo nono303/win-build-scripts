@@ -1,13 +1,20 @@
+set LIB=
+set INCLUDE=
 set PHP_BUILDTS=0
 set PHP_OUTDIR=D:\github\NONO_phpwin-perfbuild
 set PHP_MEMCACHE_OUTDIR=D:\github\NONO_PHP7-memcache-dll
 
 	REM see curl.bat
-set PHP_CURL=%PATH_INSTALL%\curl\openssl-ssh2_static_deps-static
+	REM pour mod_md : DLL required -- WinSSL slow ? 
+set CURL_BTYPE=dll
+set CURL_VER=openssl-ssh2_%CURL_BTYPE%_deps-dll
+set PHP_CURL=%PATH_INSTALL%\curl\%CURL_VER%CURL_VER%
+if %CURL_BTYPE% == dll (set CURL_LIB_NAME=libcurl.dll)
+if %CURL_BTYPE% == static (set CURL_LIB_NAME=curl.exe)
 
 	REM version
 cd /D %PATH_SRC%\php-src
-FOR /F "tokens=* USEBACKQ" %%F IN (`git describe --tags`) DO ( SET PHPGITVER=%%F )
+FOR /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do ( set PHPGITVER=%%F )
 set PHPVER=%PHPGITVER:~4,3%
 echo %PHPVER%
 
