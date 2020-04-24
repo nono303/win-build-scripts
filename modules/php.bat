@@ -8,7 +8,7 @@ set PHP_MEMCACHE_OUTDIR=D:\github\NONO_PHP7-memcache-dll
 	REM pour mod_md : DLL required -- WinSSL slow ? 
 set CURL_BTYPE=dll
 set CURL_VER=openssl-ssh2_%CURL_BTYPE%_deps-dll
-set PHP_CURL=%PATH_INSTALL%\curl\%CURL_VER%CURL_VER%
+set PHP_CURL=%PATH_INSTALL%\curl\%CURL_VER%
 if %CURL_BTYPE% == dll (set CURL_LIB_NAME=libcurl.dll)
 if %CURL_BTYPE% == static (set CURL_LIB_NAME=curl.exe)
 
