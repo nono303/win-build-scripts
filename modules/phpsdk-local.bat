@@ -37,6 +37,8 @@ call buildconf
 sed -i 's/libbz2_a/libbz2/g' %CYGPATH_SRC%/php-src/configure.js
 	REM sqlite3
 sed -i 's/libsqlite3/sqlite3/g' %CYGPATH_SRC%/php-src/configure.js
+	REM wineditline
+sed -i 's/edit_a/edit_static/g' %CYGPATH_SRC%/php-src/configure.js
 	REM curl
 sed -i 's/PHP_PHP_BUILD + "\/include\/curl/"%PHP_CURL:\=\/%" + "\/include\/curl/g' %CYGPATH_SRC%/php-src/configure.js
 sed -i 's/EXTENSION("curl", "interface.c multi.c share.c curl_file.c");/EXTENSION("curl", "interface.c multi.c share.c curl_file.c"); CHECK_LIB("cares.lib", "curl", PHP_CURL);/g' %CYGPATH_SRC%/php-src/configure.js

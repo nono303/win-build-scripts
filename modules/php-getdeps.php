@@ -69,7 +69,7 @@
 		"openldap",		//2.4.47
 		// "openssl",	//1.1.1e
 		// "sqlite3",	//3.31.1
-		"wineditline",	//2.205-1
+		// "wineditline",	//2.205-1
 		// "zlib",		//1.2.11
 	);
 
