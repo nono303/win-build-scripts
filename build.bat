@@ -1,6 +1,20 @@
 @echo off
-echo ########################### BEGIN '%1' %MSVC_DEPS% %ARCH% %AVXECHO% ###########################
 call %PATH_MODULES_COMMON%\ymdhis.bat
+set BCMD=
+set BAFF=
+if exist %PATH_MODULES%\%1.bat (
+	set BCMD=%PATH_MODULES%\%1.bat %1
+	set BAFF=BUILD MODULE
+)
+if exist %PATH_UTILS%\%1.bat (
+	set BCMD=%PATH_UTILS%\%1.bat %1
+	set BAFF=TOOL
+)
+if "%BCMD%"=="" (
+	echo unknow commande '%1'
+	exit /B -1
+)
+echo %ymdhis% ####### BEGIN %BAFF% '%1' %MSVC_DEPS% %ARCH% %AVXECHO% ###########################
 if /I "%~2"=="DEBUG" (
 	echo on
 ) else (
@@ -21,7 +35,7 @@ if /I "%~2"=="ALL" (
 				call %PATH_BATCH%\%%V.bat
 				call %PATH_BATCH%\%%X.bat
 				call %PATH_BATCH%\avx.bat %%A
-				call %PATH_MODULES%\%1.bat %1 2>&1 | tee -a %LOGNAME%
+				call %BCMD% %1 2>&1 | tee -a %LOGNAME%
 				endlocal
 			)
 		)
@@ -29,11 +43,12 @@ if /I "%~2"=="ALL" (
 	call dos2unix %LOGNAME%
 ) else (
 	if /I "%~2"=="NOLOG" (
-		call %PATH_MODULES%\%1.bat %1 2>&1
+		call %BCMD% 2>&1
 	) else (
-		call %PATH_MODULES%\%1.bat %1 2>&1 | tee %LOGNAME%
+		call %BCMD% 2>&1 | tee %LOGNAME%
 		call dos2unix %LOGNAME%
 	)
 )
-echo ############################ END '%1' %MSVC_DEPS% %ARCH% %AVXECHO% ############################
+call %PATH_MODULES_COMMON%\ymdhis.bat
+echo %ymdhis% ####### END %BAFF% '%1' %MSVC_DEPS% %ARCH% %AVXECHO% ############################
 cd /D %PATH_BATCH%
