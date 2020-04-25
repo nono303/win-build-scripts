@@ -30,7 +30,6 @@ set CURL_SSLENGINE=openssl-ssh2 winssl
 for %%s in (%CURL_SSLENGINE%) do (
 	for %%m in (%CURL_MODE%) do (
 		for %%d in (%CURL_DEPS_MODE%) do (
-			echo on
 			call %PATH_MODULES%\curl-sub.bat %1 %%m %%d %%s
 		)
 	)

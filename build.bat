@@ -1,6 +1,13 @@
-REM @echo off
+@echo off
 echo ########################### BEGIN '%1' %MSVC_DEPS% %ARCH% %AVXECHO% ###########################
 call %PATH_MODULES_COMMON%\ymdhis.bat
+if /I "%~2"=="DEBUG" (
+	echo on
+) else (
+	if %DEBUG_BUILD% == 1 (
+		echo on
+	)
+)
 if /I "%~2"=="ALL" (
 	set LOGNAME=%PATH_LOGS%\%1_ALL_%ymdhis%.log
 ) else (
@@ -21,13 +28,12 @@ if /I "%~2"=="ALL" (
 	)
 	call dos2unix %LOGNAME%
 ) else (
-	if /I "%~2"=="ANDDEPS" (
+	if /I "%~2"=="NOLOG" (
 		call %PATH_MODULES%\%1.bat %1 2>&1
 	) else (
 		call %PATH_MODULES%\%1.bat %1 2>&1 | tee %LOGNAME%
 		call dos2unix %LOGNAME%
 	)
 )
-
 echo ############################ END '%1' %MSVC_DEPS% %ARCH% %AVXECHO% ############################
 cd /D %PATH_BATCH%

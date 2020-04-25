@@ -52,7 +52,6 @@ set ZTS=--disable-zts
 set TSNTS=nts
 set BUILDDIR=Release
 call %PATH_MODULES%\phpsdk-config_make.bat
-copy /Y %PHP_OUTDIR%\%MSVC_DEPS%-%PHP_SDK_ARCH%%AVXB%-%TSNTS%\php_memcache.dll %PHP_MEMCACHE_OUTDIR%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXB:-=\%\php-%PHPVER%.x_memcache.dll
 
 	REM ~~~~~~~~~~~~ make TS
 if %PHP_BUILDTS% == 1 (
@@ -61,6 +60,6 @@ set ZTS=
 set TSNTS=ts
 set BUILDDIR=Release_TS
 call %PATH_MODULES%\phpsdk-config_make.bat
-copy /Y %PHP_OUTDIR%\%MSVC_DEPS%-%PHP_SDK_ARCH%%AVXB%-%TSNTS%\php_memcache.dll %PHP_MEMCACHE_OUTDIR%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXB:-=\%\php-%PHPVER%.x_memcache.dll
 )
+	REM exit php-sdk shell
 exit

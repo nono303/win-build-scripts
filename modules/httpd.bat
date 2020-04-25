@@ -1,6 +1,3 @@
-	REM unset this var, specific for mod_md github
-set GITHUB_MD=D:\github\NONO_mod_md
-
 	REM ~~~~~~~~~~~~ mod_maxminddb
 set MODULE_EXTRA=mod_maxminddb
 call %PATH_MODULES_COMMON%\init.bat %MODULE_EXTRA%
@@ -18,9 +15,9 @@ xcopy /C /F /Y %PATH_INSTALL%\curl\%CURL_VER%\bin\%CURL_LIB_NAME:~0,-4%.pdb %PAT
 xcopy /C /F /Y %PATH_INSTALL%\curl\%CURL_VER%\bin\%CURL_LIB_NAME% %PATH_INSTALL%\bin\%CURL_LIB_NAME%*
 if %CURL_BTYPE% == dll (xcopy /C /F /Y %PATH_INSTALL%\curl\%CURL_VER%\bin\curl.exe %PATH_INSTALL%\bin\curl.exe*)
 	REM copy curl to mod_md github
-if not "%GITHUB_MD%"=="" (
-	xcopy /C /F /Y %PATH_INSTALL%\curl\%CURL_VER%\bin\%CURL_LIB_NAME:~0,-4%.pdb %GITHUB_MD%\%MSVC_DEPS%\%ARCH%%AVXB%\%CURL_LIB_NAME:~0,-4%.pdb*
-	xcopy /C /F /Y %PATH_INSTALL%\curl\%CURL_VER%\bin\%CURL_LIB_NAME% %GITHUB_MD%\%MSVC_DEPS%\%ARCH%%AVXB%\%CURL_LIB_NAME%*
+if not "%PATH_GITHUB_MODMD%"=="" (
+	xcopy /C /F /Y %PATH_INSTALL%\curl\%CURL_VER%\bin\%CURL_LIB_NAME:~0,-4%.pdb %PATH_GITHUB_MODMD%\%MSVC_DEPS%\%ARCH%%AVXB%\%CURL_LIB_NAME:~0,-4%.pdb*
+	xcopy /C /F /Y %PATH_INSTALL%\curl\%CURL_VER%\bin\%CURL_LIB_NAME% %PATH_GITHUB_MODMD%\%MSVC_DEPS%\%ARCH%%AVXB%\%CURL_LIB_NAME%*
 )
 
 	REM ~~~~~~~~~~~~ init
@@ -56,12 +53,6 @@ cmake -Wno-dev -G "NMake Makefiles" ^
 nmake %NMAKE_OPTS% clean install
 mt.exe -manifest %PATH_MODULES%\httpd.exe.manifest -outputresource:%PATH_INSTALL%\bin\httpd.exe;1
 
-	REM ~~~~~~~~~~~~ mod_md
-	REM copy mod_md to mod_md github
-if not "%GITHUB_MD%"=="" (
-	for %%X in (so pdb) do (copy /Y %PATH_INSTALL%\modules\mod_md.%%X D:\github\NONO_mod_md\%MSVC_DEPS%\%ARCH%%AVXB%\mod_md.%%X)
-)
-
 	REM ~~~~~~~~~~~~ mod_h264_streaming
 	REM http://uppod.ru/talk_2008
 set MODULE_EXTRA=mod_h264_streaming
@@ -69,9 +60,11 @@ call %PATH_MODULES_COMMON%\init.bat %MODULE_EXTRA% cmake
 cd %PATH_SRC%\%MODULE_EXTRA%
 git apply --verbose %PATH_MODULES%\%MODULE_EXTRA%.patch
 cd %PATH_BUILD%\%MODULE_EXTRA%
-for %%F in () do (mod_h264_streaming output_mp4 output_bucket moov mp4_process mp4_writer mp4_reader mp4_io) (
+for %%F in (mod_h264_streaming output_mp4 output_bucket moov mp4_process mp4_writer mp4_reader mp4_io) do (
 	cl /nologo -D HAVE_CONFIG_H -D WIN32 %EXTCFLAGS% -I"%PATH_INSTALL%\include" -I"%PATH_INSTALL%\lib" -D BUILDING_H264_STREAMING /c /Fo %PATH_SRC%\%MODULE_EXTRA%\%%F.c
 )
 link /nologo kernel32.lib "%PATH_INSTALL%\lib/libhttpd.lib" "%PATH_INSTALL%\lib/libapr-1.lib" "%PATH_INSTALL%\lib/libaprutil-1.lib" -Dll /machine:%ARCH% /LTCG /OPT:ICF /debug /out:mod_h264_streaming.so output_mp4.obj output_bucket.obj mp4_writer.obj mp4_reader.obj mp4_process.obj mp4_io.obj moov.obj mod_h264_streaming.obj
 copy /Y %PATH_BUILD%\%MODULE_EXTRA%\mod_h264_streaming.so %PATH_INSTALL%\modules\mod_h264_streaming.so
 copy /Y %PATH_BUILD%\%MODULE_EXTRA%\mod_h264_streaming.pdb %PATH_INSTALL%\modules\mod_h264_streaming.pdb
+	REM mod_md
+if not "%PATH_GITHUB_MODMD%"=="" (for %%X in (so pdb) do (copy /Y %PATH_INSTALL%\modules\mod_md.%%X %PATH_GITHUB_MODMD%\%MSVC_DEPS%\%ARCH%%AVXB%\mod_md.%%X))

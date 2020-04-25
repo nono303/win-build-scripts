@@ -1,8 +1,7 @@
 set LIB=
 set INCLUDE=
+	REM set 1 to build TS (thread safe)
 set PHP_BUILDTS=0
-set PHP_OUTDIR=D:\github\NONO_phpwin-perfbuild
-set PHP_MEMCACHE_OUTDIR=D:\github\NONO_PHP7-memcache-dll
 
 	REM see curl.bat
 	REM pour mod_md : DLL required -- WinSSL slow ? 
@@ -16,7 +15,6 @@ if %CURL_BTYPE% == static (set CURL_LIB_NAME=curl.exe)
 cd /D %PATH_SRC%\php-src
 FOR /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do ( set PHPGITVER=%%F )
 set PHPVER=%PHPGITVER:~4,3%
-echo %PHPVER%
 
 	REM GET precompiled sdk deps
 call %PATH_PHP_SDK%\bin\php\do_php %PATH_MODULES%\php-getdeps.php

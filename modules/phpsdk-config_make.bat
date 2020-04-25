@@ -89,7 +89,9 @@ sed -i 's/ \/W3 / \/w /g' %CYGPATH_SRC%/php-src/Makefile
 
 nmake %NMAKE_OPTS%
 
-for /f "tokens=*" %%G in ('dir %PHP_BUILD_DIR%\*.exe /s/b') do (xcopy /C /F /Y %%~pG%%~nG.exe %PHP_OUTDIR%\%MSVC_DEPS%-%PHP_SDK_ARCH%%outdirphp%-%TSNTS%\%%~nG.exe)
-for /f "tokens=*" %%G in ('dir %PHP_BUILD_DIR%\*.dll /s/b') do (xcopy /C /F /Y %%~pG%%~nG.dll %PHP_OUTDIR%\%MSVC_DEPS%-%PHP_SDK_ARCH%%outdirphp%-%TSNTS%\%%~nG.dll)
+for /f "tokens=*" %%G in ('dir %PHP_BUILD_DIR%\*.exe /s/b') do (xcopy /C /F /Y %%~pG%%~nG.exe %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%outdirphp%-%TSNTS%\%%~nG.exe)
+for /f "tokens=*" %%G in ('dir %PHP_BUILD_DIR%\*.dll /s/b') do (xcopy /C /F /Y %%~pG%%~nG.dll %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%outdirphp%-%TSNTS%\%%~nG.dll)
 	REM copy curl to %PATH_INSTALL%\bin
-xcopy /C /F /Y %PATH_INSTALL%\curl\%CURL_VER%\bin\%CURL_LIB_NAME% %PHP_OUTDIR%\%MSVC_DEPS%-%PHP_SDK_ARCH%%outdirphp%-%TSNTS%\*
+xcopy /C /F /Y %PATH_INSTALL%\curl\%CURL_VER%\bin\%CURL_LIB_NAME% %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%outdirphp%-%TSNTS%\*
+	REM php_memcache for github
+if not "%PATH_GITHUB_PHPMEMCACHE%"=="" (xcopy /C /F /Y %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%AVXB%-%TSNTS%\php_memcache.dll %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXDIR%\php-%PHPVER%.x_memcache.dll*)

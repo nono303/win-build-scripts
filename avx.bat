@@ -3,6 +3,7 @@ if %1 == 1 (
 	set AVXECHO=avx
 	set AVX=/arch:AVX
 	set AVXB=-avx
+	set AVXDIR=\avx
 	set AVXSED=\/arch:AVX
 	set AVXMSC=-arch:AVX
 	set AVXVCX="<EnableEnhancedInstructionSet>AdvancedVectorExtensions<\/EnableEnhancedInstructionSet>"
@@ -15,6 +16,7 @@ if %1 == 0 (
 	set AVXECHO=sse2
 	set AVX=
 	set AVXB=
+	set AVXDIR=
 	set AVXSED=
 	set AVXMSC=
 	set AVXVCX="\n"

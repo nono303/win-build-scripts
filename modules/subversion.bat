@@ -46,19 +46,19 @@ MSBuild.exe subversion_vcnet.sln ^
 	REM *** CREATE RELEASE ***
 
 @echo off
-set SVNOUTDIR=D:\github\NONO_subversion
+
 for %%X in (exe dll so) do (
 	for /f "tokens=*" %%G in ('dir %PATH_SRC%\subversion\Release\*.%%X /s/b') do (
-		xcopy /C /F /Y %%~pG%%~nG.%%X %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%\%%~nG.%%X
-		xcopy /C /F /Y %%~pG%%~nG.pdb %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%\%%~nG.pdb
+		xcopy /C /F /Y %%~pG%%~nG.%%X %PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%\%%~nG.%%X
+		xcopy /C /F /Y %%~pG%%~nG.pdb %PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%\%%~nG.pdb
 	)
 )
 set DEPS=\deps
-if not exist %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\. mkdir %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\
+if not exist %PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\. mkdir %PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\
 if %ARCH% == x64 (set sslarch=-x64)
 if %ARCH% == x86 (set sslarch=)
 for %%F in (libssl-1_1%sslarch% libcrypto-1_1%sslarch% libexpat libapr-1 libapriconv-1 libaprutil-1 brotlienc brotlicommon brotlidec libserf-2 zlib1) do (
 	for %%X in (dll pdb) do (
-		xcopy /C /F /Y %PATH_INSTALL%\bin\%%F.%%X  %SVNOUTDIR%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\%%F.%%X 
+		xcopy /C /F /Y %PATH_INSTALL%\bin\%%F.%%X  %PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\%%F.%%X 
 	)
 )

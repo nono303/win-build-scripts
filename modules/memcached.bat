@@ -1,2 +1,2 @@
-call %PATH_ROOT_CYGWIN%32\bin\bash --login -c '%CYGPATH_MODULES%/memcached.sh %CYGPATH_SRC%/memcached %CYGPATH_MODULES% %MEMCACHED_PREFIX%'
-call %PATH_ROOT_CYGWIN%64\bin\bash --login -c '%CYGPATH_MODULES%/memcached.sh %CYGPATH_SRC%/memcached %CYGPATH_MODULES% %MEMCACHED_PREFIX%'
+call %PATH_ROOT_CYGWIN%32\bin\bash --login -c '%CYGPATH_MODULES%/memcached.sh %CYGPATH_SRC%/memcached %CYGPATH_MODULES% %PATH_RELEASE_MEMCACHED%'
+call %PATH_ROOT_CYGWIN%64\bin\bash --login -c '%CYGPATH_MODULES%/memcached.sh %CYGPATH_SRC%/memcached %CYGPATH_MODULES% %PATH_RELEASE_MEMCACHED%'
