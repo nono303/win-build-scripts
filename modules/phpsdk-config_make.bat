@@ -21,7 +21,6 @@ set PHP_COMMON_CONFIGURE=^
 	--disable-cli-win32 ^
 	--disable-crt-debug ^
 	--disable-debug ^
-	--disable-debug-pack ^
 	--disable-embed ^
 	--disable-ipv6 ^
 	--disable-phpdbg ^
@@ -29,6 +28,7 @@ set PHP_COMMON_CONFIGURE=^
 	--disable-phpdbgs ^
 	--disable-security-flags ^
 	--disable-test-ini ^
+	--enable-debug-pack ^
 	--enable-fd-setsize=2048 ^
 	--enable-memcache=shared ^
 	--enable-object-out-dir=../build/ ^
@@ -89,9 +89,16 @@ sed -i 's/ \/W3 / \/w /g' %CYGPATH_SRC%/php-src/Makefile
 
 nmake %NMAKE_OPTS%
 
-for /f "tokens=*" %%G in ('dir %PHP_BUILD_DIR%\*.exe /s/b') do (xcopy /C /F /Y %%~pG%%~nG.exe %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%outdirphp%-%TSNTS%\%%~nG.exe)
-for /f "tokens=*" %%G in ('dir %PHP_BUILD_DIR%\*.dll /s/b') do (xcopy /C /F /Y %%~pG%%~nG.dll %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%outdirphp%-%TSNTS%\%%~nG.dll)
+for %%A in (exe dll) do (
+	for /f "tokens=*" %%G in ('dir %PHP_BUILD_DIR%\php*.%%A /s/b') do (
+		for %%E in (%%A pdb) do (
+			xcopy /C /F /Y %%~pG%%~nG.%%E %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%outdirphp%-%TSNTS%\*
+		)
+	)
+)
+
 	REM copy curl to %PATH_INSTALL%\bin
 xcopy /C /F /Y %PATH_INSTALL%\curl\%CURL_VER%\bin\%CURL_LIB_NAME% %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%outdirphp%-%TSNTS%\*
+xcopy /C /F /Y %PATH_INSTALL%\curl\%CURL_VER%\bin\%CURL_LIB_NAME:.dll=.pdb% %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%outdirphp%-%TSNTS%\*
 	REM php_memcache for github
-if not "%PATH_GITHUB_PHPMEMCACHE%"=="" (xcopy /C /F /Y %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%AVXB%-%TSNTS%\php_memcache.dll %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXDIR%\php-%PHPVER%.x_memcache.dll*)
+if not "%PATH_GITHUB_PHPMEMCACHE%"=="" (for %%A in (pdb dll) do (xcopy /C /F /Y %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%AVXB%-%TSNTS%\php_memcache.%%A %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXDIR%\*))
