@@ -18,7 +18,8 @@ set PATH_UTILS=%PATH_BATCH%\utils
 set PATH_LOGS=%PATH_SDK_ROOT%\logs
 set PATH_SRC=%PATH_SDK_ROOT%\src
 set PATH_PHP_SDK=%PATH_SRC%\php-sdk
-set PATH_ROOT_CYGWIN=%PATH_SDK_ROOT%\softs\cyg
+set PATH_SOFTS=%PATH_SDK_ROOT%\softs
+set PATH_ROOT_CYGWIN=%PATH_SOFTS%\cyg
 
 REM ########################## RELEASE PATH
 set PATH_RELEASE=%PATH_SDK_ROOT%\release
@@ -30,30 +31,30 @@ set PATH_RELEASE_PHP=D:\github\NONO_phpwin-perfbuild
 set PATH_GITHUB_PHPMEMCACHE=D:\github\NONO_PHP7-memcache-dll
 set PATH_GITHUB_MODMD=D:\github\NONO_mod_md
 	REM runtime home (ant & java for mobac)
-set PATH_JDK=%PATH_SDK_ROOT%\softs\jdk8
+set PATH_JDK=%PATH_SOFTS%\jdk8
 set JAVA_HOME=%PATH_JDK%\x64
-set ANT_HOME=%PATH_SDK_ROOT%\softs\eclipse\plugins\org.apache.ant_1.10.7.v20190926-0324
+set ANT_HOME=%PATH_SOFTS%\eclipse\plugins\org.apache.ant_1.10.7.v20190926-0324
 
 REM ########################## BIN PATH
-set PATH_VS=%PATH_SDK_ROOT%\softs\vs19\Community
+set PATH_VS=%PATH_SOFTS%\vs19\Community
 set PATH_BIN_GIT=C:\PROGRA~1\Git\bin
-set PATH_BIN_PYTHON=%PATH_SDK_ROOT%\softs\python2
+set PATH_BIN_PYTHON=%PATH_SOFTS%\python2
 set PATH_BIN_CYGWIN=%PATH_ROOT_CYGWIN%%CYGV%\bin
-set PATH_BIN_NASM=%PATH_SDK_ROOT%\softs\nasm
-set PATH_BIN_PERL=%PATH_SDK_ROOT%\softs\perl\bin
-set PATH_BIN_PERL_SITE=%PATH_SDK_ROOT%\softs\perl\site\bin
+set PATH_BIN_NASM=%PATH_SOFTS%\nasm
+set PATH_BIN_PERL=%PATH_SOFTS%\perl\bin
+set PATH_BIN_PERL_SITE=%PATH_SOFTS%\perl\site\bin
 	REM svn for mobac https://github.com/nono303/win-svn
 set PATH_BIN_SVN=%PATH_RELEASE_SVN%\vs16\x64;D:\github\NONO_subversion\vs16\x64\deps
-	REM for version patch if not present at build - https://www.codeproject.com/KB/install/VerPatch/verpatch-bin-1.0.10.zip
-set BIN_VERPATCH=%PATH_SDK_ROOT%\softs\verpatch.exe
+	REM for version patch if not present at build - https://github.com/pavel-a/ddverpatch (old https://www.nuget.org/packages/verpatch/1.0.14 / https://www.codeproject.com/Articles/37133/Simple-Version-Resource-Tool-for-Windows)
+set BIN_VERPATCH=%PATH_SOFTS%\verpatch.exe
 	REM for testing matching pdb with exe and dll http://www.debuginfo.com/tools/chkmatch.html
-set BIN_CHKMATCH=%PATH_SDK_ROOT%\softs\ChkMatch.exe
+set BIN_CHKMATCH=%PATH_SOFTS%\ChkMatch.exe
 	REM for php-desp https://www.7-zip.org/download.html
-set BIN_SEVENZ=%PATH_SDK_ROOT%\softs\7z\7z.exe
+set BIN_SEVENZ=%PATH_SOFTS%\7z\7z.exe
 	REM for testing dependencies https://github.com/lucasg/Dependencies
-set BIN_DEPENDS=%PATH_SDK_ROOT%\softs\dependencies\Dependencies.exe
+set BIN_DEPENDS=%PATH_SOFTS%\dependencies\Dependencies.exe
 	REM for checking version https://docs.microsoft.com/fr-fr/sysinternals/downloads/sigcheck
-set BIN_SYGCHECK=%PATH_SDK_ROOT%\softs\sigcheck64.exe
+set BIN_SYGCHECK=%PATH_SOFTS%\sigcheck64.exe
 
 REM ########################## CYGWIN PATH
 FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_SRC%`) do (set CYGPATH_SRC=%%F)
@@ -91,6 +92,8 @@ set CMAKE_BUILD_TYPE=RelWithDebInfo
 set NMAKE_OPTS=/S /NOLOGO
 	REM see dir in %PATH_ROOTWKIT%\Lib
 set WKITVER=10.0.19041.0
+	REM for updating *.rc
+set RC_COPYRIGHT=https://github.com/nono303/win-build-scripts
 
 REM ########################## INIT PATH
 if not exist %PATH_LOGS%\. mkdir %PATH_LOGS%
