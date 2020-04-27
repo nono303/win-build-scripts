@@ -3,11 +3,11 @@ call %PATH_MODULES_COMMON%\ymdhis.bat
 set BCMD=
 set BAFF=
 if exist %PATH_MODULES%\%1.bat (
-	set BCMD=%PATH_MODULES%\%1.bat %1
+	set BCMD=%PATH_MODULES%\%1.bat %*
 	set BAFF=BUILD MODULE
 )
 if exist %PATH_UTILS%\%1.bat (
-	set BCMD=%PATH_UTILS%\%1.bat %1
+	set BCMD=%PATH_UTILS%\%1.bat %*
 	set BAFF=TOOL
 )
 if "%BCMD%"=="" (
@@ -35,7 +35,7 @@ if /I "%~2"=="ALL" (
 				call %PATH_BATCH%\%%V.bat
 				call %PATH_BATCH%\%%X.bat
 				call %PATH_BATCH%\avx.bat %%A
-				call %BCMD% %1 2>&1 | tee -a %LOGNAME%
+				call %BCMD% 2>&1 | tee -a %LOGNAME%
 				endlocal
 			)
 		)
