@@ -10,15 +10,18 @@ cmake ^
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/flags.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 nmake %NMAKE_OPTS% clean install
 
-xcopy /C /F /Y %PATH_SRC%\%1\bin%CYGV%\edit.lib %PATH_INSTALL%\bin\
-xcopy /C /F /Y %PATH_SRC%\%1\bin%CYGV%\edit.dll %PATH_INSTALL%\bin\
-xcopy /C /F /Y %PATH_SRC%\%1\bin%CYGV%\edit_test.exe %PATH_INSTALL%\bin\
-xcopy /C /F /Y %PATH_SRC%\%1\bin%CYGV%\edit_test_dll.exe %PATH_INSTALL%\bin\
-xcopy /C /F /Y %PATH_SRC%\%1\lib%CYGV%\edit_static.lib %PATH_INSTALL%\lib\
-if not exist %PATH_INSTALL%\include\editline\. mkdir %PATH_INSTALL%\include\editline
-xcopy /C /F /Y %PATH_SRC%\%1\include\editline\readline.h %PATH_INSTALL%\include\editline\
+	REM TODO C:\sdk\src\wineditline\CMakeLists.txt
+set VERSION=2.2
+for /f "tokens=*" %%G in ('dir %PATH_SRC%\%1\bin%CYGV%\*.dll %PATH_SRC%\%1\bin%CYGV%\*.exe /b') do (
+	call %PATH_MODULES_COMMON%\version.bat %PATH_SRC%\%1\bin%CYGV%\%%G "%VERSION%"
+	xcopy /C /F /Y %PATH_SRC%\%1\bin%CYGV%\%%G %PATH_INSTALL%\bin\*
+)
 
-xcopy /C /F /Y %PATH_BUILD%\%1\src\edit_test_dll.pdb %PATH_INSTALL%\bin\
-xcopy /C /F /Y %PATH_BUILD%\%1\src\edit.pdb %PATH_INSTALL%\bin\
-xcopy /C /F /Y %PATH_BUILD%\%1\src\CMakeFiles\edit_static.dir\edit_static.pdb %PATH_INSTALL%\lib\
-xcopy /C /F /Y %PATH_BUILD%\%1\src\edit_test.pdb %PATH_INSTALL%\bin\
+xcopy /C /F /Y %PATH_SRC%\%1\bin%CYGV%\*.lib %PATH_INSTALL%\lib\*
+xcopy /C /F /Y %PATH_SRC%\%1\src\editline\*.h %PATH_INSTALL%\include\*
+
+xcopy /C /F /Y %PATH_BUILD%\%1\src\edit_test_dll.pdb %PATH_INSTALL%\bin\*
+xcopy /C /F /Y %PATH_BUILD%\%1\src\edit.pdb %PATH_INSTALL%\bin\*
+xcopy /C /F /Y %PATH_BUILD%\%1\src\edit.pdb %PATH_INSTALL%\lib\*
+xcopy /C /F /Y %PATH_BUILD%\%1\src\edit_test.pdb %PATH_INSTALL%\bin\*
+xcopy /C /F /Y %PATH_BUILD%\%1\src\CMakeFiles\edit_static.dir\edit_static.pdb %PATH_INSTALL%\lib\*
