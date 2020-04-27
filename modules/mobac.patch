@@ -1,0 +1,85 @@
+Index: build.xml
+===================================================================
+--- build.xml	(revision 2459)
++++ build.xml	(working copy)
+@@ -3,9 +3,6 @@
+ 	<property file="src/main/resources/mobac/mobac.properties" />
+ 
+ 	<property name="rev.prop.file" value="src/main/resources/mobac/mobac-rev.properties" />
+-	<property name="jar.name" value="Mobile_Atlas_Creator.jar" />
+-	<property name="zip.name" value="Mobile Atlas Creator ${mobac.version}.zip" />
+-	<property name="zip_src.name" value="Mobile Atlas Creator ${mobac.version} src.zip" />
+ 	<property name="main.class" value="mobac.StartMOBAC" />
+ 
+ 	<property name="rtlibraryjar.non_osx" value="${java.home}/lib/rt.jar" />
+@@ -215,6 +212,9 @@
+ 		</condition>
+ 		<echo message="MOBAC revision: ${mobac.revision.new}" />
+ 		<antcall target="svnversion_write_property_file" />
++		<property name="jar.name" value="Mobile_Atlas_Creator_${mobac.revision.new}.jar" />
++		<property name="zip.name" value="Mobile Atlas Creator ${mobac.version}-${mobac.revision.new}.zip" />
++	    <property name="zip_src.name" value="Mobile Atlas Creator ${mobac.version}-${mobac.revision.new} src.zip" />
+ 	</target>
+ 
+ 	<target name="svnversion_write_property_file" unless="mobac.revision.exported">
+Index: src/main/java/mobac/gui/MainGUI.java
+===================================================================
+--- src/main/java/mobac/gui/MainGUI.java	(revision 2459)
++++ src/main/java/mobac/gui/MainGUI.java	(working copy)
+@@ -163,7 +163,7 @@
+ 	private static Color checkboxBackgroundColor = new Color(0, 0, 0, 40);
+ 	private static Color labelForegroundColor = Color.WHITE;
+ 
+-	public static final int LEFT_PANEL_MIN_SIZE = 254;
++	public static final int LEFT_PANEL_MIN_SIZE = 270;
+ 
+ 	private static final int LEFT_PANEL_MARGIN = 2;
+ 
+@@ -737,6 +737,7 @@
+ 		addLayers.addActionListener(AddMapLayer.INSTANCE);
+ 		atlasContentPanel.addContent(new JLabel(I18nUtils.localizedStringForKey("lp_atlas_name_label_title")), gbc_std);
+ 		atlasContentPanel.addContent(atlasNameTextField, gbc_eol.fill(GBC.HORIZONTAL));
++		atlasContentPanel.setPreferredSize(new Dimension(100, 150));
+ 
+ 		leftPanelContent = new JPanel(new GridBagLayout());
+ 		leftPanelContent.add(mapSourcePanel, gbc_eol);
+Index: src/main/java/mobac/gui/panels/JMapSourcesPanel.java
+===================================================================
+--- src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2459)
++++ src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(working copy)
+@@ -45,7 +45,7 @@
+ 		JScrollPane mapSourceTreeScrollPane = new JScrollPane(mapSourceTree, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+ 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+ 
+-		mapSourceTreeScrollPane.setPreferredSize(new Dimension(100, 200));
++		mapSourceTreeScrollPane.setPreferredSize(new Dimension(100, 550));
+ 		mapSourceTreeScrollPane.setAutoscrolls(true);
+ 		addContent(mapSourceTreeScrollPane, GBC.eol().fill().insets(0, 1, 0, 0));
+ 	}
+Index: src/main/java/mobac/gui/settings/SettingsGUI.java
+===================================================================
+--- src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2459)
++++ src/main/java/mobac/gui/settings/SettingsGUI.java	(working copy)
+@@ -97,7 +97,7 @@
+ 
+ 	public static Logger log = Logger.getLogger(SettingsGUI.class);
+ 
+-	private static final Integer[] THREADCOUNT_LIST = { 1, 2, 4, 6 };
++	private static final Integer[] THREADCOUNT_LIST = { 1, 2, 4, 6, 12, 24 };
+ 
+ 	private static final long MBIT1 = 1000000 / 8;
+ 
+Index: src/main/java/mobac/program/download/MobacTrustManager.java
+===================================================================
+--- src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2459)
++++ src/main/java/mobac/program/download/MobacTrustManager.java	(working copy)
+@@ -106,7 +106,8 @@
+ 				// TODO: Add GUI for manually adding this certificate as trusted.
+ 				String message = "Untrusted certificate encountered: publicKeyHash=\"" + pubKeySha256Hash
+ 						+ "\"; certificate issued for " + cert.getSubjectDN();
+-				throw new CertificateException(message);
++				// throw new CertificateException(message);
++				log.warn(message);
+ 			}
+ 		}
+ 	}
