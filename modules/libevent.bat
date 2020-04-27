@@ -4,3 +4,15 @@ cmake -Wno-dev -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% -DCMAK
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/flags.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 
 nmake %NMAKE_OPTS% clean install
+
+	REM version
+CD /D %PATH_SRC%\%1 
+for /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set VERSION=%%F)
+for /F "tokens=2 delims=-" %%a in ("%VERSION%") do set VERSION=%%a
+	REM copy
+for %%F in (event event_extra event_openssl event_core) do (
+	call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\lib\%%F.dll "%VERSION%"
+	move /Y %PATH_INSTALL%\lib\%%F.dll %PATH_INSTALL%\bin\%%F.dll
+	xcopy /C /F /Y %PATH_BUILD%\%1\bin\%%F.pdb %PATH_INSTALL%\bin\*
+	xcopy /C /F /Y %PATH_BUILD%\%1\bin\%%F.pdb %PATH_INSTALL%\lib\*
+)
