@@ -1,0 +1,36 @@
+diff --git "a/vs_version.h" "b/vs_version.h"
+index 3f9ba19..452faa4 100644
+--- "a/vs_version.h"
++++ "b/vs_version.h"
+@@ -144,8 +144,8 @@ class xybuf
+ 	};
+ 
+ 	void chkword( WORD v ) {
+-		if (*(PWORD)m_curptr != v)
+-			throw ":chkword";
++		//if (*(PWORD)m_curptr != v)
++		//	throw ":chkword";
+ 		m_curptr += sizeof(WORD);
+ 	}
+ 
+@@ -195,16 +195,16 @@ class xybuf
+ 		PWORD porig = marksize();
+ 
+ 		WORD wLength = *porig;
+-		if ( wLength > 1024 || wLength < 5*sizeof(WORD))
+-			throw ":string desc size bad";
++		//if ( wLength > 1024 || wLength < 5*sizeof(WORD))
++		//	throw ":string desc size bad";
+ 		checkspace(5*sizeof(WORD) + wLength);
+ 		WORD wValueLength = *((PWORD)m_curptr);
+ 		incptr(2);
+ 		chkword(1); //type
+ 
+ 		size_t nLength = wcsnlen( (LPWSTR)( getptr() ), wLength/sizeof(WCHAR) );
+-		if (nLength == 0 || nLength == (wLength/sizeof(WCHAR)) )
+-			throw ":string name len bad";
++		//if (nLength == 0 || nLength == (wLength/sizeof(WCHAR)) )
++		//	throw ":string name len bad";
+ 		*wsname = (LPCWSTR)getptr(); //should point to name
+ 		unsigned bLength = (nLength + 1)*sizeof(WCHAR);
+ 		incptr( bLength );
