@@ -15,6 +15,12 @@ sed -i 's/libcares/cares_static/g' %CYGPATH_SRC%/%1/winbuild/MakefileBuild.vc
 sed -i 's/\/W4/\/GL \/GS- \/Oy- \/guard:cf- \/FD \/GF \/Zc:inline \/MP%NUMBER_OF_PROCESSORS% \/LD \/MD \/Ox \/W3 %AVXSED%/g' %CYGPATH_SRC%/%1/winbuild/MakefileBuild.vc
 sed -i 's/LFLAGS     = \/nologo/LFLAGS     = \/nologo \/LTCG \/OPT:ICF/g' %CYGPATH_SRC%/%1/winbuild/MakefileBuild.vc
 sed -i 's/LNKLIB     = lib.exe/LNKLIB     = lib.exe \/LTCG/g' %CYGPATH_SRC%/%1/winbuild/MakefileBuild.vc
+	REM copyright symbol issue
+for %%I in (lib/libcurl.rc src/curl.rc) do (
+	REM verpatch doesn't work without any error output !!
+	sed -i -E 's/"LegalCopyright",.*/"LegalCopyright",   "%RC_COPYRIGHT:/=\/%\\\\0"/g' %CYGPATH_SRC%/%1/%%I
+	sed -i -E 's/"InternalName",.*/"InternalName",     "%ARCH% %AVXECHO% MSVC %vcvars_ver%\\\\0"/g' %CYGPATH_SRC%/%1/%%I
+)
 
 	REM WITH_SSH2=static WITH_SSL=static // doesn't work on mod_md
 	REM libssh2 : req opensll & zlib / ko winssl
