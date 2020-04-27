@@ -1,7 +1,7 @@
-diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
+diff --git a/CMakeLists.txt b/CMakeLists.txt
 index a7b18419dd..97d24d02a1 100644
---- "a/CMakeLists.txt"
-+++ "b/CMakeLists.txt"
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -15,6 +15,11 @@
  #
  # Read README.cmake before using this.
@@ -281,3 +281,56 @@ index a7b18419dd..97d24d02a1 100644
  
  ###########  CONFIGURATION FILES ###########
  # Set up variables used in the .conf file templates
+diff --git a/modules/proxy/mod_proxy_fcgi.c b/modules/proxy/mod_proxy_fcgi.c
+index 2e97408f3f..dfd0c1b396 100644
+--- a/modules/proxy/mod_proxy_fcgi.c
++++ b/modules/proxy/mod_proxy_fcgi.c
+@@ -357,6 +357,10 @@ static apr_status_t send_environment(proxy_conn_rec *conn, request_rec *r,
+ 
+         if (newfname) {
+             newfname = ap_strchr(newfname, '/');
++			// Windows - https://www.apachelounge.com/viewtopic.php?p=36336
++			if ((ap_strstr(newfname, ":/")) != NULL)
++				memmove(newfname, newfname+1, strlen(newfname));
++			ap_log_rerror(APLOG_MARK, APLOG_DEBUG, 0, r, APLOGNO(01078) "SCRIPT_FILENAME %s", newfname);
+             r->filename = newfname;
+         }
+     }
+diff --git a/server/main.c b/server/main.c
+index 62e06df045..3ec4181f7a 100644
+--- a/server/main.c
++++ b/server/main.c
+@@ -44,6 +44,7 @@
+ #if APR_HAVE_UNISTD_H
+ #include <unistd.h>
+ #endif
++#include "ms\applink.c"
+ 
+ /* WARNING: Win32 binds http_main.c dynamically to the server. Please place
+  *          extern functions and global data in another appropriate module.
+diff --git a/support/ab.c b/support/ab.c
+index 8205620994..08488260c8 100644
+--- a/support/ab.c
++++ b/support/ab.c
+@@ -175,7 +175,7 @@ typedef STACK_OF(X509) X509_STACK_TYPE;
+  * by the OpenSSL library build to another CRT used by the ab.exe build.
+  * This became especially problematic with Visual Studio 2015.
+  */
+-#include <openssl/applink.c>
++#include <ms/applink.c>
+ #endif
+ 
+ #endif
+diff --git a/support/win32/ApacheMonitor.rc b/support/win32/ApacheMonitor.rc
+index d4203bf926..9d8211e830 100644
+--- a/support/win32/ApacheMonitor.rc
++++ b/support/win32/ApacheMonitor.rc
+@@ -26,7 +26,7 @@
+ IDI_APSRVMON            ICON    DISCARDABLE     "ApacheMonitor.ico"
+ IDI_ICOSTOP             ICON    DISCARDABLE     "apstop.ico"
+ IDI_ICORUN              ICON    DISCARDABLE     "aprun.ico"
+-CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST  "ApacheMonitor.manifest"
++// CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST  "ApacheMonitor.manifest"
+ 
+ IDD_DLGSERVICES DIALOGEX 0, 0, 350, 192
+ STYLE DS_MODALFRAME | DS_SETFOREGROUND | WS_MINIMIZEBOX | WS_VISIBLE | 
