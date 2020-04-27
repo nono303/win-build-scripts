@@ -9,7 +9,8 @@ cmake -Wno-dev -G "NMake Makefiles" ^
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/flags.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 nmake %NMAKE_OPTS% clean install
-xcopy /E /C /F /Y %PATH_BUILD%\%1\lua*.pdb %PATH_INSTALL%\bin\
+
+for %%F in (lua luac) do (xcopy /E /C /F /Y %PATH_BUILD%\%1\%%F.pdb %PATH_INSTALL%\bin\*)
 
 	REM version
 CD /D %PATH_SRC%\%1 
