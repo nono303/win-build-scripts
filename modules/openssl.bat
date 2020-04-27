@@ -17,3 +17,13 @@ sed -i 's/ARFLAGS= \/nologo/ARFLAGS= \/nologo \/LTCG/g' %CYGPATH_SRC%/%1/makefil
 
 	REM install_sw > no docs
 nmake %NMAKE_OPTS% clean install_sw
+
+	REM move & version for engines - https://github.com/openssl/openssl/issues/7185
+REM !! TODO
+REM CD /D %PATH_SRC%\%1
+REM for /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set VERSION=%%F)
+REM set VERSION=%VERSION:_=.%
+for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\lib\engines-1_1\*.dll /b') do (call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\lib\engines-1_1\%%G "1.1.1.7" "1.1.1-g")
+if not exist %PATH_INSTALL%\bin\engines-1_1\. mkdir %PATH_INSTALL%\bin\engines-1_1
+move /y %PATH_INSTALL%\lib\engines-1_1\*.* %PATH_INSTALL%\bin\engines-1_1
+rmdir /S /Q %PATH_INSTALL%\lib\engines-1_1
