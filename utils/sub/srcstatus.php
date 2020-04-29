@@ -85,9 +85,11 @@
 				
 				$gitstatus = explode("\t",execnono("git rev-list --left-right --count ".$remotecur."...HEAD",NULL,$repo,NULL)) [0];
 				if($gitstatus && $gitstatus != "0"){
-					$gitstatus = $gitstatus." commit behind".PHP_EOL."details: git diff HEAD..".$remotecur;
+					$gitstatus = $gitstatus." commit(s) behind '".$remotecur."'";
+					$gitstatus2 = PHP_EOL."details: git diff HEAD..".$remotecur;
 				} else {
-					$gitstatus = "up to date";
+					$gitstatus2 = "";
+					$gitstatus = "up to date with '".$remotecur."'";
 				}
 				$gitlasttags2 = execnono('git log --tags --simplify-by-decoration --pretty="format:%ai %d" | head -n '.NB_TAGS,NULL,$repo,NULL);
 				if(GIT_GC){
@@ -110,31 +112,28 @@
 				$svninfo = execnono("svn log -l ".NB_TAGS,NULL,$repo,NULL);
 				$gitlasttags = "";
 				foreach(explode("\n",$svninfo) as $line){
-					echo $line.PHP_EOL;
 					preg_match("/r([0-9]+) .* ([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} [+-][0-9]{2}00)/",$line,$matches);
 					if($matches[1] && $matches[2]){
 						$head = "";
 						if($gitlasttags == "")
 							$gitlasttags = $matches[1];
-						echo "'".$current_tag."' == '".$matches[1]."'";
 						if($current_tag == $matches[1])
 							$head = "HEAD, ";
 						$gitlasttags2 .= $matches[2]." (".$head.$matches[1].")".PHP_EOL;
 					}
 				}
 				if($gitlasttags != $current_tag){
-					$gitstatus = "local revision outdated";
+					$gitstatus = "local: r".$current_tag." '".$remotecur."': r".$gitlasttags;
 				} else {
-					$gitstatus = "up to date";
+					$gitstatus = "up to date with '".$remotecur."'";
 				}
 			}
 			echo $artname." [".$upstream."]".PHP_EOL;
-			echo "  Branch: ".$remotecur.PHP_EOL;
-			echo "  Tag   : ".$current_tag.PHP_EOL;
-			echo "  Status: ".explode("\n",$gitstatus)[0].PHP_EOL;
+			echo "  Current tag: ".$current_tag.PHP_EOL;
+			echo "  Status     : ".explode("\n",$gitstatus)[0].PHP_EOL;
 
 			echo "*************************".PHP_EOL;
-			file_put_contents($argv[1],'"'.$artname.'";"'.$upstream.'";"'.$remotecur.'";"'.$gitstatus.'";"'.$current_tag.'";"'.$gitlasttags2.'"'.PHP_EOL,FILE_APPEND);
+			file_put_contents($argv[1],'"'.$artname.'";"'.$upstream.'";"'.$remotecur.'";"'.$gitstatus.$gitstatus2.'";"'.$current_tag.'";"'.$gitlasttags2.'"'.PHP_EOL,FILE_APPEND);
 			$artname = "";
 			$upstream = "";
 			$remotecur = "";
