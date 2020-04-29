@@ -289,7 +289,7 @@ index 2e97408f3f..dfd0c1b396 100644
  
          if (newfname) {
              newfname = ap_strchr(newfname, '/');
-+			// Windows - https://www.apachelounge.com/viewtopic.php?p=36336
++			// Windows
 +			if ((ap_strstr(newfname, ":/")) != NULL)
 +				memmove(newfname, newfname+1, strlen(newfname));
 +			ap_log_rerror(APLOG_MARK, APLOG_DEBUG, 0, r, APLOGNO(01078) "SCRIPT_FILENAME %s", newfname);
@@ -297,26 +297,36 @@ index 2e97408f3f..dfd0c1b396 100644
          }
      }
 diff --git a/server/main.c b/server/main.c
-index 62e06df045..3ec4181f7a 100644
+index 62e06df045..13ef956b2c 100644
 --- a/server/main.c
 +++ b/server/main.c
-@@ -44,6 +44,7 @@
+@@ -44,6 +44,13 @@
  #if APR_HAVE_UNISTD_H
  #include <unistd.h>
  #endif
-+#include "ms\applink.c"
++/* The following logic ensures we correctly glue FILE* within one CRT used
++ * by the OpenSSL library build to another CRT used by the ab.exe build.
++ * This became especially problematic with Visual Studio 2015.
++ * https://www.apachelounge.com/viewtopic.php?p=33600 
++ * C:\sdk\src\openssl\ms\applink.c
++*/
++#include <ms/applink.c>
  
  /* WARNING: Win32 binds http_main.c dynamically to the server. Please place
   *          extern functions and global data in another appropriate module.
 diff --git a/support/ab.c b/support/ab.c
-index 8205620994..08488260c8 100644
+index 8205620994..c3f6bbd0b6 100644
 --- a/support/ab.c
 +++ b/support/ab.c
-@@ -175,7 +175,7 @@ typedef STACK_OF(X509) X509_STACK_TYPE;
+@@ -174,8 +174,10 @@ typedef STACK_OF(X509) X509_STACK_TYPE;
+ /* The following logic ensures we correctly glue FILE* within one CRT used
   * by the OpenSSL library build to another CRT used by the ab.exe build.
   * This became especially problematic with Visual Studio 2015.
-  */
+- */
 -#include <openssl/applink.c>
++ * https://www.apachelounge.com/viewtopic.php?p=33600 
++ * C:\sdk\src\openssl\ms\applink.c
++*/
 +#include <ms/applink.c>
  #endif
  
