@@ -83,15 +83,33 @@ C:\Windows\System32\WindowsPowerShell\v1.0\;
 cd /D %PATH_BATCH%
 
 REM ########################## BUILD OPTION
+set NMAKE_OPTS_DBG=/NOLOGO
+set NMAKE_OPTS_REL=/S %NMAKE_OPTS_DBG%
+
+set MSBUILD_OPTS_COM=/nologo ^
+	/m:%NUMBER_OF_PROCESSORS% ^
+	/p:Turbo=true ^
+	/p:CL_MPCount=%NUMBER_OF_PROCESSORS% ^
+	/p:RunCodeAnalysis=false ^
+	/p:DebugType=None ^
+	/p:DebugSymbols=true
+set MSBUILD_OPTS_DBG=%MSBUILD_OPTS_COM% ^
+	/clp:EnableMPLogging;Summary; ShowCommandLine ^
+	/v:d
+set MSBUILD_OPTS_REL=%MSBUILD_OPTS_COM% ^
+	/clp:EnableMPLogging;NoSummary;NoItemAndPropertyList ^
+	/nowarn:MSB8012;C4244 ^
+	/v:m
+
+set CMAKE_OPTS_DBG=-G "NMake Makefiles"
+set CMAKE_OPTS_REL=-Wno-dev ^
+	%CMAKE_OPTS_DBG%
 	REM set CMAKE_BUILD_TYPE=Release
 set CMAKE_BUILD_TYPE=RelWithDebInfo
-	REM https://msdn.microsoft.com/fr-fr/library/afyyse50.aspx
-		REM /S	Supprime l'affichage des commandes exécutées.
-		REM /A	Force la génération de toutes les cibles évaluées, même quand elles ne sont pas obsolètes par rapport aux dépendants. Ne force pas la génération de cibles non apparentées.
-		REM /B	Force la génération même quand les horodatages coïncident.
-set NMAKE_OPTS=/S /NOLOGO
+
 	REM see dir in %PATH_ROOTWKIT%\Lib
 set WKITVER=10.0.19041.0
+
 	REM for updating *.rc
 set RC_COPYRIGHT=https://github.com/nono303/win-build-scripts
 
