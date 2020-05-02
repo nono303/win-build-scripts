@@ -7,6 +7,10 @@
 		return preg_replace('/\..+$/', '.' . $new_extension, $filename);
 	}
 
+	function binenv($env){
+		return str_replace("\\","/",$_ENV[$env]);
+	}
+
 	function debug($msg){
 		if(DEBUG) echo "#dbg: ".$msg.PHP_EOL;
 	}
@@ -44,7 +48,7 @@
 
 	function sigcheck($dir,$file=""){
 		global $data;
-		$sigcmd = "C:/sdk/softs/sigcheck64.exe -a -c -e -r -nobanner ".$dir."/".$file;
+		$sigcmd = binenv("BIN_SYGCHECK")." -a -c -e -r -nobanner ".$dir."/".$file;
 		debug($sigcmd);
 		$sig = execnono($sigcmd,NULL,$dir."/",NULL);
 		debug($sig);
@@ -74,7 +78,7 @@
 	}
 
 	function verpatch($dir,$file,$version,$copyright,$title){
-		$vercmd = "C:/sdk/src/ddverpatch/Release/verpatch.exe ".$dir."/".$file." ".$version." /rpdb /s copyright \"".$copyright."\" /s title \"".$title."\"";
+		$vercmd = binenv("BIN_VERPATCH")." ".$dir."/".$file." ".$version." /rpdb /s copyright \"".$copyright."\" /s title \"".$title."\"";
 		debug($vercmd);
 		//echo $vercmd.PHP_EOL;
 		$ver = execnono($vercmd,NULL,$dir."/",NULL);
@@ -126,9 +130,9 @@
 				}
 
 				$nbavx = 0;
-				$data[$cur][30] = "n/a";
+				$data[$cur][30] = "";
 				if(CHECK_AVX){
-					$obdcmd = 'C:/sdk/softs/cyg64/bin/sh.exe -c "objdump -M intel -d '.$dir."/".$file.' | ./opcode.sh -s AVX';
+					$obdcmd = binenv("PATH_BIN_CYGWIN").'/sh.exe -c "objdump -M intel -d '.$dir."/".$file.' | ./opcode.sh -s AVX';
 					debug($obdcmd);
 					$obd  = execnono($obdcmd,NULL,SCRIPT_DIR,NULL);
 					debug($obd);
@@ -147,7 +151,7 @@
 				$data[$cur][80] = "";
 				if(is_file($dir."/".$pdbfile)){
 					debug($dir."/".$pdbfile);
-					$chkmcmd = 'C:/sdk/softs/ChkMatch.exe -c '.$dir."/".$file.' '.$dir."/".$pdbfile;
+					$chkmcmd = binenv("BIN_CHKMATCH").' -c '.$dir."/".$file.' '.$dir."/".$pdbfile;
 					debug($chkmcmd);
 					$chkm = execnono($chkmcmd,NULL,SCRIPT_DIR,NULL);
 					debug($chkm);
