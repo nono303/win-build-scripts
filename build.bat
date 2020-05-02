@@ -42,7 +42,10 @@ if /I "%~2"=="ALL" (
 	)
 	call dos2unix %LOGNAME%
 ) else (
-	if /I "%~2"=="NOLOG" (
+	set NOLG=0
+	if /I "%~2"=="NOLOG" (set NOLG=1)
+	if "%1"=="logcheck" (set NOLG=1)
+	if "%NOLG%"=="1" (
 		call %BCMD% 2>&1
 	) else (
 		call %BCMD% 2>&1 | tee %LOGNAME%
@@ -50,5 +53,5 @@ if /I "%~2"=="ALL" (
 	)
 )
 call %PATH_MODULES_COMMON%\ymdhis.bat
-echo %ymdhis% ####### END %BAFF% '%1' %MSVC_DEPS% %ARCH% %AVXECHO% ############################
+echo %ymdhis% #######  END  %BAFF% '%1' %MSVC_DEPS% %ARCH% %AVXECHO% ###########################
 cd /D %PATH_BATCH%
