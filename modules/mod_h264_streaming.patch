@@ -1,8 +1,16 @@
 diff --git a/mod_h264_streaming.c b/mod_h264_streaming.c
-index 84b322d..d21feed 100644
+index 84b322d..f997bc1 100644
 --- a/mod_h264_streaming.c
 +++ b/mod_h264_streaming.c
-@@ -160,6 +160,8 @@ static int drive_h264_streaming(request_rec *r)
+@@ -36,6 +36,7 @@
+ #include "output_bucket.h"
+ #ifdef BUILDING_H264_STREAMING
+ #include "output_mp4.h"
++#include "mod_streaming_export.h"
+ #define X_MOD_STREAMING_KEY X_MOD_H264_STREAMING_KEY
+ #define X_MOD_STREAMING_VERSION X_MOD_H264_STREAMING_VERSION
+ #define H264_STREAMING_HANDLER "h264-streaming.extensions"
+@@ -160,6 +161,8 @@ static int drive_h264_streaming(request_rec *r)
  
      if(http_status != 200)
      {
@@ -11,7 +19,7 @@ index 84b322d..d21feed 100644
        if(buckets)
        {
          buckets_exit(buckets);
-@@ -279,7 +281,7 @@ extern "C" {
+@@ -279,7 +282,7 @@ extern "C" {
  #endif
  
  #ifdef BUILDING_H264_STREAMING

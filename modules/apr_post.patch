@@ -8,7 +8,7 @@ index 454b4fec..e6d9fc30 100644
  install:
 -	echo Y >.y
 -	echo A >.A
-+	echo on
++	REM echo on
  	@if NOT EXIST "$(PREFIX)\." mkdir "$(PREFIX)"
  	@if NOT EXIST "$(PREFIX)\bin\." mkdir "$(PREFIX)\bin"
  	@if NOT EXIST "$(PREFIX)\bin\iconv\." mkdir "$(PREFIX)\bin\iconv"
