@@ -102,8 +102,8 @@
 					$gitfecthtag = execnono("svn update",NULL,$repo,NULL);
 				}
 				$svninfo = execnono("svn info",NULL,$repo,NULL);
-				preg_match("/Repository Root:(.*)\n/",$svninfo,$matches);
-				$upstream = $matches[1];
+				preg_match("/Repository Root: ?(.*)\n/",$svninfo,$matches);
+				$upstream = trim($matches[1]);
 				preg_match("/Relative URL: \^\/(.*)\n/",$svninfo,$matches);
 				$remotecur = $matches[1];
 				preg_match("/Revision: (.*)\n/",$svninfo,$matches);
