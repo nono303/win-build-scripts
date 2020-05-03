@@ -1,3 +1,5 @@
+* disable debug
+* define __CYGWIN__
 diff --git a/Makefile.am b/Makefile.am
 index 0d30161..73ac493 100644
 --- a/Makefile.am
