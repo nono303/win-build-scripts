@@ -94,7 +94,7 @@ set MSBUILD_OPTS_COM=/nologo ^
 	/p:DebugType=None ^
 	/p:DebugSymbols=true
 set MSBUILD_OPTS_DBG=%MSBUILD_OPTS_COM% ^
-	/clp:EnableMPLogging;Summary; ShowCommandLine ^
+	/clp:EnableMPLogging;Summary;ShowCommandLine ^
 	/v:d
 set MSBUILD_OPTS_REL=%MSBUILD_OPTS_COM% ^
 	/clp:EnableMPLogging;NoSummary;NoItemAndPropertyList ^
