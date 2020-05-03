@@ -8,10 +8,10 @@
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES%/%1.sh %CYGPATH_SRC%/%1/msvc/projects/vc2017/jemalloc/jemalloc.vcxproj
 
 MSBuild.exe msvc\jemalloc_vc2017.sln ^
-%MSBUILD_OPTS% ^
-/t:Clean,jemalloc ^
-/p:Configuration=Release ^
-/p:Plateform="%ARCH%"
+	%MSBUILD_OPTS% ^
+	/t:Clean,jemalloc ^
+	/p:Configuration=Release ^
+	/p:Plateform="%ARCH%"
 
 for %%X in (dll pdb) do (move /Y %PATH_SRC%\%1\msvc\%archmsbuild%\Release\jemalloc.%%X %PATH_INSTALL%\bin)
 move /Y %PATH_SRC%\%1\msvc\%archmsbuild%\Release\jemalloc.lib %PATH_INSTALL%\lib
