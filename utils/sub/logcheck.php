@@ -50,6 +50,7 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 */
 	$search = array(
 		"warning " => 33,
+		"warning:" => 33,
 		"LTCG s" => 33,
 		"fatal " => 31,
 		"syntaxe " => 33,
@@ -72,7 +73,7 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 		checkLog($file,$search,false);
 	} elseif (is_file($dir."/".$argv[3])){
 		echo "> ".$file.PHP_EOL;
-		checkLog($dir."/".$file,$search,false);
+		checkLog($dir."/".$argv[3],$search,false);
 	} else {
 		echo "build logcheck [full|last|__xx__.log]".PHP_EOL;
 	}
