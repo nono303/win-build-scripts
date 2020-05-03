@@ -3,11 +3,11 @@
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/libiconv/MSvc%MSVC_VER%/" %AVXVCX% %PTFTS% %WKITVER%
 
 MSBuild.exe %PATH_SRC%\libiconv\MSvc%MSVC_VER%\libiconv.sln ^
-%MSBUILD_OPTS% ^
-/nowarn:C4267;C4090 ^
-/t:Clean,libiconv_static,libiconv_dll ^
-/p:Configuration=Release ^
-/p:Platform="%archmsbuild%"
+	%MSBUILD_OPTS% ^
+	/nowarn:C4267;C4090 ^
+	/t:Clean,libiconv_static,libiconv_dll ^
+	/p:Configuration=Release ^
+	/p:Platform="%archmsbuild%"
 
 xcopy /C /F /Y %PATH_SRC%\libiconv\MSvc%MSVC_VER%\%archmsbuild%\bin\libiconv.dll %PATH_INSTALL%\bin\* 
 xcopy /C /F /Y %PATH_SRC%\libiconv\MSvc%MSVC_VER%\%archmsbuild%\bin\libiconv.pdb %PATH_INSTALL%\bin\*
