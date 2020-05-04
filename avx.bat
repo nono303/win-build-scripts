@@ -19,6 +19,7 @@ if %1 == 0 (
 	set AVXDIR=
 	set AVXSED=
 	set AVXMSC=
+		REM https://github.com/XhmikosR/notepad2-mod/issues/111
 	set AVXVCX="<EnableEnhancedInstructionSet>NotSet<\/EnableEnhancedInstructionSet>\r\n"
 		REM php
 	set outdirphp=
