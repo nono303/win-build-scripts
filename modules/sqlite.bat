@@ -22,9 +22,10 @@ for %%C in ("-DBUILD_SHARED_LIBS=ON -DBUILD_SHELL=OFF" "-DBUILD_SHARED_LIBS=OFF 
 	-DBUILD_ENABLE_ICU=OFF ^
 	-DBUILD_ENABLE_FTS5=ON ^
 	!new! ^
-	%PATH_SRC%\%1 
+	%PATH_SRC%\%1
 
 	%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/flags.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+	sed -i 's/-W3//g' %CYGPATH_BUILD%/%1/CMakeFiles/sqlite3.dir/flags.make
 	nmake %NMAKE_OPTS% clean install
 )
 
