@@ -19,7 +19,7 @@ if %1 == 0 (
 	set AVXDIR=
 	set AVXSED=
 	set AVXMSC=
-	set AVXVCX="\r\n"
+	set AVXVCX="<EnableEnhancedInstructionSet>NotSet<\/EnableEnhancedInstructionSet>\r\n"
 		REM php
 	set outdirphp=
 	set intrinsics=
