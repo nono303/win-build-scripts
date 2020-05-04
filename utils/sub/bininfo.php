@@ -89,105 +89,122 @@
 	}
 
 	function check($dirbase,$dir,$recurse=false){
+		if(is_dir($dir)){
+			$ressig = sigcheck($dir);
+			foreach(scandir($dir) as $file){
+				if(is_dir($dir."/".$file) && $file != "." && $file != ".." && $recurse){
+					check($dirbase, $dir."/".$file,$recurse);
+				} elseif (is_file($dir."/".$file)) {
+					fileCheck($file,$dirbase,$dir,$recurse,$ressig);
+				}
+			}
+		} elseif (is_file($dir)) {
+			$file = basename($dir);
+			$dir = str_replace("/".$file,"",$dir);
+			fileCheck($file,$dir,$dir,$recurse,sigcheck($dir,$file));
+		}
+	}
+
+	function fileCheck($file,$dirbase,$dir,$recurse,$ressig){
 		global $col;
 		global $data;
 		global $cur;
-		$ressig = sigcheck($dir);
-		foreach(scandir($dir) as $file){
-			if(is_dir($dir."/".$file) && $file != "." && $file != ".." && $recurse){
-				check($dirbase, $dir."/".$file,$recurse);
-			} elseif(is_file($dir."/".$file) && (is_int(strpos($file,".exe")) || is_int(strpos($file,".dll")) || is_int(strpos($file,".so")))) {
-				debug($dir."/".$file);
+		if(is_file($dir."/".$file) && (is_int(strpos($file,".exe")) || is_int(strpos($file,".dll")) || is_int(strpos($file,".so")))) {
+			debug($dir."/".$file);
+			if($recurse) {
+				$data[$cur][00] = str_replace($dirbase,"",$dir)."/".$file;
+				} else {
 				$data[$cur][00] = $file;
+			}
 
-				$copyright = $_ENV["RC_COPYRIGHT"];
-				$title = $_ENV["ARCH"]." ".$_ENV["AVXECHO"]." MSVC ".$_ENV["vcvars_ver"];
-				if($ressig[$file]["copyright"] != $copyright && $file != "curl.exe" && $file != "libcurl.dll" && UPDATE_RC){
-					verpatch($dir,$file,$ressig[$file]["binaryversion"],$copyright,$title);
-					$ressig[$file] = sigcheck($dir,$file)[$file];
-				}
-				$data[$cur][50] =	$ressig[$file]["binaryversion"];
-				$data[$cur][60] =	$ressig[$file]["productversion"];
-				$data[$cur][5] =	$ressig[$file]["date"];
-				$data[$cur][190] =	$ressig[$file]["product"];
-				$data[$cur][110] =	$ressig[$file]["company"];
-				$data[$cur][120] =	$ressig[$file]["description"];
-				$data[$cur][65] =	$ressig[$file]["fileversion"];
-				$data[$cur][10] =	$ressig[$file]["machinetype"];
-				$data[$cur][150] =	$ressig[$file]["originalname"];
-				$data[$cur][160] =	$ressig[$file]["internalname"];
-				$data[$cur][170] =	$ressig[$file]["copyright"];
-				$data[$cur][180] =	$ressig[$file]["comments"];
-				if($data[$cur][170] == $copyright){
-					$data[$cur][175] = "OK";
-				} else {
-					$data[$cur][175] = "KO";
-				}
-				if($data[$cur][160] == $title){
-					$data[$cur][165] = "OK";
-				} else {
-					$data[$cur][165] = "KO";
-				}
+			$copyright = $_ENV["RC_COPYRIGHT"];
+			$title = $_ENV["ARCH"]." ".$_ENV["AVXECHO"]." MSVC ".$_ENV["vcvars_ver"];
+			if($ressig[$file]["copyright"] != $copyright && $file != "curl.exe" && $file != "libcurl.dll" && UPDATE_RC){
+				verpatch($dir,$file,$ressig[$file]["binaryversion"],$copyright,$title);
+				$ressig[$file] = sigcheck($dir,$file)[$file];
+			}
+			$data[$cur][50] =	$ressig[$file]["binaryversion"];
+			$data[$cur][60] =	$ressig[$file]["productversion"];
+			$data[$cur][5] =	$ressig[$file]["date"];
+			$data[$cur][190] =	$ressig[$file]["product"];
+			$data[$cur][110] =	$ressig[$file]["company"];
+			$data[$cur][120] =	$ressig[$file]["description"];
+			$data[$cur][65] =	$ressig[$file]["fileversion"];
+			$data[$cur][10] =	$ressig[$file]["machinetype"];
+			$data[$cur][150] =	$ressig[$file]["originalname"];
+			$data[$cur][160] =	$ressig[$file]["internalname"];
+			$data[$cur][170] =	$ressig[$file]["copyright"];
+			$data[$cur][180] =	$ressig[$file]["comments"];
+			if($data[$cur][170] == $copyright){
+				$data[$cur][175] = "OK";
+			} else {
+				$data[$cur][175] = "KO";
+			}
+			if($data[$cur][160] == $title){
+				$data[$cur][165] = "OK";
+			} else {
+				$data[$cur][165] = "KO";
+			}
 
-				$nbavx = 0;
-				$data[$cur][30] = "";
-				if(CHECK_AVX){
-					$obdcmd = binenv("PATH_BIN_CYGWIN").'/sh.exe -c "objdump -M intel -d '.$dir."/".$file.' | ./opcode.sh -s AVX';
-					debug($obdcmd);
-					$obd  = execnono($obdcmd,NULL,SCRIPT_DIR,NULL);
-					debug($obd);
-					foreach(explode("\n",$obd) as $line){
-						if(!is_int(strpos($line,"--")) && $line){
-							$data[$cur][30] .= substr($line,28).PHP_EOL;
-							$nbavx++;
-						}
+			$nbavx = 0;
+			$data[$cur][30] = "";
+			if(CHECK_AVX){
+				$obdcmd = binenv("PATH_BIN_CYGWIN").'/sh.exe -c "objdump -M intel -d '.$dir."/".$file.' | ./opcode.sh -s AVX';
+				debug($obdcmd);
+				$obd  = execnono($obdcmd,NULL,SCRIPT_DIR,NULL);
+				debug($obd);
+				foreach(explode("\n",$obd) as $line){
+					if(!is_int(strpos($line,"--")) && $line){
+						$data[$cur][30] .= substr($line,28).PHP_EOL;
+						$nbavx++;
 					}
-					if($nbavx > 0)
-					$data[$cur][30]="avx (".$nbavx.")";
 				}
+				if($nbavx > 0)
+				$data[$cur][30]="avx (".$nbavx.")";
+			}
 
-				$pdbfile = replace_extension($file,"pdb");
-				$data[$cur][70] = "n/a";
-				$data[$cur][80] = "";
-				if(is_file($dir."/".$pdbfile)){
-					debug($dir."/".$pdbfile);
-					$chkmcmd = binenv("BIN_CHKMATCH").' -c '.$dir."/".$file.' '.$dir."/".$pdbfile;
-					debug($chkmcmd);
-					$chkm = execnono($chkmcmd,NULL,SCRIPT_DIR,NULL);
-					debug($chkm);
-					preg_match("/Result: (.*)/",$chkm,$matches);
-					$data[$cur][70] = $pdbfile;
-					$pdbres = str_replace(")","",str_replace("Unmatched (reason: ","",$matches[1]));
-					$data[$cur][80] = $pdbres;
-				}
+			$pdbfile = replace_extension($file,"pdb");
+			$data[$cur][70] = "n/a";
+			$data[$cur][80] = "";
+			if(is_file($dir."/".$pdbfile)){
+				debug($dir."/".$pdbfile);
+				$chkmcmd = binenv("BIN_CHKMATCH").' -c '.$dir."/".$file.' '.$dir."/".$pdbfile;
+				debug($chkmcmd);
+				$chkm = execnono($chkmcmd,NULL,SCRIPT_DIR,NULL);
+				debug($chkm);
+				preg_match("/Result: (.*)/",$chkm,$matches);
+				$data[$cur][70] = $pdbfile;
+				$pdbres = str_replace(")","",str_replace("Unmatched (reason: ","",$matches[1]));
+				$data[$cur][80] = $pdbres;
+			}
 
-				$dbhcmd = "dumpbin /headers ".$dir."/".$file;
-				debug($dbhcmd);
-				$dbh = execnono($dbhcmd,NULL,$dir."/",NULL);
-				debug($dbh);
+			$dbhcmd = "dumpbin /headers ".$dir."/".$file;
+			debug($dbhcmd);
+			$dbh = execnono($dbhcmd,NULL,$dir."/",NULL);
+			debug($dbh);
 
-				preg_match("/ ([^ ]+) linker version/",$dbh,$matches);
-				$data[$cur][40] = $matches[1];
+			preg_match("/ ([^ ]+) linker version/",$dbh,$matches);
+			$data[$cur][40] = $matches[1];
 
-				if(is_int(strpos($dbh,"(LTCG)")))
-					$data[$cur][20] = "ltcg";
+			if(is_int(strpos($dbh,"(LTCG)")))
+				$data[$cur][20] = "ltcg";
 
-				// preg_match("/ ([^ ]+)\.pdb/",$dbh,$matches);
-				// $pdbdumpbin = $matches[1].".pdb";
-				// $data[$cur][10] = "!Na";
-				// if(is_int(strpos($dbh,"machine (x86)")))
-				// 	$data[$cur][10]="x86";
-				// if(is_int(strpos($dbh,"machine (x64)")))
-				// 	$data[$cur][10]="x64";
+			// preg_match("/ ([^ ]+)\.pdb/",$dbh,$matches);
+			// $pdbdumpbin = $matches[1].".pdb";
+			// $data[$cur][10] = "!Na";
+			// if(is_int(strpos($dbh,"machine (x86)")))
+			// 	$data[$cur][10]="x86";
+			// if(is_int(strpos($dbh,"machine (x64)")))
+			// 	$data[$cur][10]="x64";
 
-				ksort($data[$cur],SORT_NUMERIC);
-				foreach($data[$cur] as $k => $v)
-					if($col[$k]["pad"] != -1) echo str_pad($v,$col[$k]["pad"]," ");
-				echo PHP_EOL;
-				$cur++;
-			}		
+			ksort($data[$cur],SORT_NUMERIC);
+			foreach($data[$cur] as $k => $v)
+				if($col[$k]["pad"] != -1) echo str_pad($v,$col[$k]["pad"]," ");
+			echo PHP_EOL;
+			$cur++;
 		}
 	}
+
 	if(in_array("checkavx", $argv)){
 		define("CHECK_AVX",true);
 		echo "CHECK_AVX: ON".PHP_EOL;
@@ -204,6 +221,13 @@
 		echo "UPDATE_RC: OFF".PHP_EOL;
 	}
 	
+	if(in_array("recurse", $argv)){
+		define("RECURSE",true);
+		echo "RECURSE: ON".PHP_EOL;
+	} else {
+		define("RECURSE",false);
+		echo "RECURSE: OFF".PHP_EOL;
+	}
 
 	global $col;
 	$col = array (
@@ -230,6 +254,8 @@
 	);
 	if(!CHECK_AVX) 
 		$col[30]["pad"] = -1;
+	if(RECURSE)
+		$col[0]["pad"] = 35;
 
 	global $data;
 	$data = array();
@@ -248,7 +274,7 @@
 	}
 	echo PHP_EOL;
 	$cur++;
-	check($argv[1],$argv[1]);
+	check($argv[1],$argv[1],RECURSE);
 	$csv = "";
 	foreach($data as $v){
 		if(is_array($v)){
@@ -257,5 +283,6 @@
 			$csv .= $v.PHP_EOL;
 		}
 	}
-	file_put_contents($argv[2],$csv, FILE_APPEND);
+	if(is_file($argv[2]))
+		file_put_contents($argv[2],$csv, FILE_APPEND);
 ?>
