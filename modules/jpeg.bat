@@ -1,13 +1,11 @@
 call %PATH_MODULES_COMMON%\init.bat %1
 
 nmake /f Makefile.vs setupcopy-v16
-
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1" %AVXVCX% %PTFTS% %WKITVER%
 	REM remove 3 first junk char in vcxproj...
-	REM rename static lib : jpeg > %JPEG_LIB_NAME%
-set JPEG_LIB_NAME=libjpeg_a
-%PATH_BIN_CYGWIN%\bash %PATH_MODULES%/%1.sh "%CYGPATH_SRC%/%1" %JPEG_LIB_NAME%
-%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj_rename.sh "%CYGPATH_SRC%/%1/jpeg.vcxproj" %JPEG_LIB_NAME%
+for %%F in (cjpeg djpeg jpeg jpegtran rdjpgcom wrjpgcom) do (sed -i -E '1s/^^...//g' %CYGPATH_SRC%/%1/%%F.vcxproj)
+	REM pdb jor jpeg.lib
+sed -i 's/^<ClCompile^>/^<ClCompile^>^<ProgramDataBaseFileName^>$(OutDir)jpeg.pdb^<\/ProgramDataBaseFileName^>/g' %CYGPATH_SRC%/%1/jpeg.vcxproj
 
 for %%P in (jpeg apps) do (
 	MSBuild.exe %PATH_SRC%\%1\%%P.sln ^
@@ -21,8 +19,8 @@ for %%P in (jpeg apps) do (
 	/p:DebugType=None ^
 	/p:Platform="%archmsbuild%"
 )
-for %%X in (lib pdb) do (xcopy /C /F /Y "%PATH_SRC%\%1\Release\%archmsbuild%\%JPEG_LIB_NAME%.%%X" %PATH_INSTALL%\lib\)
-for %%X in (exe pdb) do (for %%P in (wrjpgcom rdjpgcom cjpeg djpeg jpegtran) do (xcopy /C /F /Y "%PATH_SRC%\%1\Release\%archmsbuild%\%%P.%%X" %PATH_INSTALL%\bin\))
+for %%X in (lib pdb) do (xcopy /C /F /Y "%PATH_SRC%\%1\Release\%archmsbuild%\jpeg.%%X" %PATH_INSTALL%\lib\*)
+for %%X in (exe pdb) do (for %%P in (wrjpgcom rdjpgcom cjpeg djpeg jpegtran) do (xcopy /C /F /Y "%PATH_SRC%\%1\Release\%archmsbuild%\%%P.%%X" %PATH_INSTALL%\bin\*))
 xcopy /E /C /F /Y "%PATH_SRC%\%1\*.h" %PATH_INSTALL%\include\*)
 
 	REM !! TODO
