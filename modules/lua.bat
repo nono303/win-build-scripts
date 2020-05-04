@@ -8,6 +8,7 @@ cmake %CMAKE_OPTS% ^
 	%PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/flags.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+
 nmake %NMAKE_OPTS% clean install
 
 for %%F in (lua luac) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%F.pdb %PATH_INSTALL%\bin\*)
