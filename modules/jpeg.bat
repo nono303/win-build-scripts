@@ -9,14 +9,10 @@ sed -i 's/^<ClCompile^>/^<ClCompile^>^<ProgramDataBaseFileName^>$(OutDir)jpeg.pd
 
 for %%P in (jpeg apps) do (
 	MSBuild.exe %PATH_SRC%\%1\%%P.sln ^
+	%MSBUILD_OPTS% ^
 	/nowarn:MSB8012 ^
-	/p:Turbo=true ^
-	/m:%NUMBER_OF_PROCESSORS% ^
-	/p:CL_MPCount=%NUMBER_OF_PROCESSORS% ^
 	/t:Build ^
 	/p:Configuration=Release ^
-	/p:DebugSymbols=true ^
-	/p:DebugType=None ^
 	/p:Platform="%archmsbuild%"
 )
 for %%X in (lib pdb) do (xcopy /C /F /Y "%PATH_SRC%\%1\Release\%archmsbuild%\jpeg.%%X" %PATH_INSTALL%\lib\*)
