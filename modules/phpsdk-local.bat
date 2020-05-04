@@ -1,7 +1,5 @@
-	REM only at init
-REM phpsdk_buildtree phpmaster
-
-call %PATH_MODULES_COMMON%\init.bat php-src
+@echo off
+if %CUR_DEBUG% == 1 (echo on)
 
 	REM ~~~~~~~~~~~~ Openssl in PHAR
 sed -i 's/libeay32st/libcrypto/g' %CYGPATH_SRC%/php-src/ext/phar/config.w32
@@ -35,6 +33,8 @@ call buildconf
 	REM ~~~~~~~~~~~~ Patch some stuff in this shity configure.js, accoring to self made deps
 	REM bz2
 sed -i 's/libbz2_a/libbz2/g' %CYGPATH_SRC%/php-src/configure.js
+	REM jpeg
+sed -i 's/libjpeg_a.lib;libjpeg.lib/jpeg.lib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM sqlite3
 sed -i 's/libsqlite3/sqlite3/g' %CYGPATH_SRC%/php-src/configure.js
 	REM wineditline
@@ -44,6 +44,8 @@ sed -i 's/zlib_a/zlib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM curl
 sed -i 's/PHP_PHP_BUILD + "\/include\/curl/"%PHP_CURL:\=\/%" + "\/include\/curl/g' %CYGPATH_SRC%/php-src/configure.js
 sed -i 's/EXTENSION("curl", "interface.c multi.c share.c curl_file.c");/EXTENSION("curl", "interface.c multi.c share.c curl_file.c"); CHECK_LIB("cares.lib", "curl", PHP_CURL);/g' %CYGPATH_SRC%/php-src/configure.js
+	REM freetype
+sed -i -E 's/CHECK_LIB\("freetype_a.lib;freetype.lib", "gd", PHP_GD\) (..)/CHECK_LIB\("freetype.lib", "gd", PHP_GD\) \\1 CHECK_LIB\("libbz2.lib", "gd", PHP_GD\) \1/g' %CYGPATH_SRC%/php-src/configure.js
 
 	REM ~~~~~~~~~~~~ export config options
 call configure --help > %PATH_LOGS%\configure_%PHPGITVER:~4,-1%.txt
@@ -57,11 +59,11 @@ call %PATH_MODULES%\phpsdk-config_make.bat
 
 	REM ~~~~~~~~~~~~ make TS
 if %PHP_BUILDTS% == 1 (
-echo *** ts  ***
-set ZTS=
-set TSNTS=ts
-set BUILDDIR=Release_TS
-call %PATH_MODULES%\phpsdk-config_make.bat
+	echo *** ts  ***
+	set ZTS=
+	set TSNTS=ts
+	set BUILDDIR=Release_TS
+	call %PATH_MODULES%\phpsdk-config_make.bat
 )
 	REM exit php-sdk shell
 exit
