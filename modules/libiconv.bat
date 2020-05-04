@@ -4,7 +4,7 @@
 
 MSBuild.exe %PATH_SRC%\libiconv\MSvc%MSVC_VER%\libiconv.sln ^
 	%MSBUILD_OPTS% ^
-	/nowarn:C4267;C4090 ^
+	/nowarn:C4267;C4090;C4018 ^
 	/t:Clean,libiconv_static,libiconv_dll ^
 	/p:Configuration=Release ^
 	/p:Platform="%archmsbuild%"
