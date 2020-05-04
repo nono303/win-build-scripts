@@ -60,6 +60,8 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 		"syntaxe " => 33,
 		"inattendu" => 33,
 		"impossible" => 33,
+		"incorrecte" => 33,
+		"sed:" => 33,
 		"non valide" => 36,
 		"introuvable" => 36,
 		"stop" => 31,
