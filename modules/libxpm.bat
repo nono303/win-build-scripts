@@ -1,4 +1,4 @@
-call %PATH_MODULES_COMMON%\init.bat %1
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1
 set VCDIR=windows/vc15
 
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/%VCDIR%" %AVXVCX% %PTFTS% %WKITVER%
@@ -14,29 +14,21 @@ tar xvf %LIBNAME%.tar.gz
 xcopy /E /C /F /Y %PATH_BUILD%\%LIBNAME%\src %PATH_SRC%\%1\src\
 rmdir /S /Q %PATH_BUILD%\%LIBNAME%
 
-	REM version (in sh cause &gt &lt...) 
-	REM https://www.zachburlingame.com/2011/02/versioning-a-native-cc-binary-with-visual-studio/
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES%/%1.sh %CYGPATH_SRC%/%1/%VCDIR%/libxpm.vcxproj
-
+	REM version
 xcopy /C /F /Y %PATH_MODULES%\%1_version.h %PATH_SRC%\%1\%VCDIR:/=\%\version.h*
 xcopy /C /F /Y %PATH_MODULES_COMMON%\version.rc %PATH_SRC%\%1\%VCDIR:/=\%\version.rc*
+sed -i 's/^<\/Project^>/^<ItemGroup^>^<ResourceCompile Include="version.rc" \/^>^<\/ItemGroup^>^<\/Project^>/g' %CYGPATH_SRC%/%1/%VCDIR%/libxpm.vcxproj
+sed -i -E 's/Static Release(.)Win32(.)"^>/Static Release\1Win32\2"^>\r\n    ^<Midl^>\r\n      ^<TargetEnvironment^>X86^<\/TargetEnvironment^>\r\n    ^<\/Midl^>/g' %CYGPATH_SRC%/%1/%VCDIR%/libxpm.vcxproj
+	REM version (in sh cause &gt &lt...) https://www.zachburlingame.com/2011/02/versioning-a-native-cc-binary-with-visual-studio/
+	REM "Static Release" win32 : LINK : warning LNK4068: /MACHINE not specified; defaulting to X86 [C:\sdk\src\libxpm\windows\vc15\libxpm.vcxproj]
+sed -i 's/^<\/Lib^>/^<TargetMachine^>Machine%ARCH%^<\/TargetMachine^>^<\/Lib^>/g' %CYGPATH_SRC%/%1/%VCDIR%/libxpm.vcxproj
 
 for %%C in ("Static Release" "DLL Release") do (
-	MSBuild.exe %PATH_SRC%\%1\%VCDIR%\libxpm.sln  ^
-	/nowarn:C4018 ^
-	/nowarn:C4244 ^
-	/nowarn:C4267 ^
-	/nowarn:C4311 ^
-	/nowarn:C4312 ^
-	/nowarn:C4013 ^
-	/nowarn:MSB8012 ^
-	/p:Turbo=true ^
-	/m:%NUMBER_OF_PROCESSORS% ^
-	/p:CL_MPCount=%NUMBER_OF_PROCESSORS% ^
+	MSBuild.exe %PATH_SRC%\%1\%VCDIR%\libxpm.sln ^
+	%MSBUILD_OPTS% ^
+	/nowarn:C4018;C4244;C4267;C4311;C4312;C4013;MSB8012 ^
 	/t:Clean,libxpm ^
 	/p:Configuration=%%C ^
-	/p:DebugSymbols=true ^
-	/p:DebugType=None ^
 	/p:Platform="%archmsbuild%"
 )
 
