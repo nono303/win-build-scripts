@@ -12,7 +12,7 @@ sed -i 's/..\\\\builds/%PATH_BUILD:\=\\\\%\\\\%1/g' %CYGPATH_SRC%/%1/winbuild/Ma
 sed -i 's/SSH2        = dll/SSH2        = dll\r\nWIN_LIBS     = $(WIN_LIBS) user32.lib/g' %CYGPATH_SRC%/%1/winbuild/MakefileBuild.vc
 sed -i 's/libcares/cares_static/g' %CYGPATH_SRC%/%1/winbuild/MakefileBuild.vc
 
-sed -i 's/\/W4/\/GL \/GS- \/Oy- \/guard:cf- \/FD \/GF \/Zc:inline \/MP%NUMBER_OF_PROCESSORS% \/LD \/MD \/Ox \/W3 %AVXSED%/g' %CYGPATH_SRC%/%1/winbuild/MakefileBuild.vc
+sed -i 's/\/W4/\/O2 \/GL \/MD \/Zi \/MP%NUMBER_OF_PROCESSORS% %AVXSED%/g' %CYGPATH_SRC%/%1/winbuild/MakefileBuild.vc
 sed -i 's/LFLAGS     = \/nologo/LFLAGS     = \/nologo \/LTCG \/OPT:ICF/g' %CYGPATH_SRC%/%1/winbuild/MakefileBuild.vc
 sed -i 's/LNKLIB     = lib.exe/LNKLIB     = lib.exe \/LTCG/g' %CYGPATH_SRC%/%1/winbuild/MakefileBuild.vc
 sed -i 's/(MAKE) \/NOLOGO/(MAKE) %NMAKE_OPTS:/=\/%/g' %CYGPATH_SRC%/%1/winbuild/Makefile.vc

@@ -27,11 +27,10 @@ cmake %CMAKE_OPTS% ^
 -DOPENSSL_ROOT_DIR=%SLASHPATH_INSTALL% ^
 -DCURL_LIBRARY=%SLASHPATH_INSTALL%/curl/%CURL_VER%/lib/%CURL_LIB_NAME:~0,-4%.lib ^
 -DCURL_INCLUDE_DIR=%SLASHPATH_INSTALL%/curl/%CURL_VER%/include ^
--DEXTRA_COMPILE_FLAGS="%EXTCFLAGS%" ^
 -DEXTRA_INCLUDES=%PATH_SRC%/openssl ^
 %PATH_SRC%\httpd 
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES%/httpd_flags.sh %CYGV% %CYGPATH_BUILD%
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES%/httpd_flags.sh %CYGV% %CYGPATH_BUILD% "%NUMBER_OF_PROCESSORS%" "%AVXSED%"
 nmake %NMAKE_OPTS% install
 	REM Targeting for Windows 10
 mt.exe -manifest %PATH_MODULES%\httpd.exe.manifest -outputresource:%PATH_INSTALL%\bin\httpd.exe;1

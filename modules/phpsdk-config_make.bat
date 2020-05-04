@@ -1,4 +1,3 @@
-	REM https://stackoverflow.com/questions/9102422/windows-batch-set-inside-if-not-working
 if %PHPVER% == 7.2 (
 	set phpveropts=	--without-wddx ^
 			--without-interbase
@@ -45,7 +44,7 @@ set PHP_COMMON_CONFIGURE=^
 	--without-oci8 ^
 	--without-pgsql ^
 	--without-uncritical-warn-choke ^
-	--with-extra-includes="%PHP_CURL%\include";"%PATH_INSTALL%\include";"%PATH_INSTALL%\include\sqlite3";"%PATH_INSTALL%\include\libxml2" ^
+	--with-extra-includes="%PHP_CURL%\include";"%PATH_INSTALL%\include";"%PATH_INSTALL%\include\sqlite3";"%PATH_INSTALL%\include\libxml2";"%PATH_INSTALL%\include\freetype2" ^
 	--with-extra-libs="%PHP_CURL%\lib";"%PATH_INSTALL%\lib" ^
 	--with-mp=%NUMBER_OF_PROCESSORS%
 
@@ -83,9 +82,20 @@ if %PHPVER% == 7.4 (
 	--without-interbase ^
 	%ZTS% %phpveropts%
 )
-sed -i -E 's/(..)FLAGS=\/nologo/\1FLAGS=\/nologo \/LTCG \/NODEFAULTLIB:libcmt.lib \/NODEFAULTLIB:MSVCRTD.lib \/OPT:ICF/g' %CYGPATH_SRC%/php-src/Makefile
-sed -i 's/CFLAGS=\/nologo/CFLAGS=\/nologo \/GL \/GS- \/Oy- %AVXSED%/g' %CYGPATH_SRC%/php-src/Makefile
-sed -i 's/ \/W3 / \/w /g' %CYGPATH_SRC%/php-src/Makefile
+
+	REM ARFLAGS
+sed -i 's/ARFLAGS=\/nologo/ARFLAGS=\/nologo \/LTCG/g' %CYGPATH_SRC%/php-src/Makefile
+	REM LDFLAGS
+sed -i -E 's/incremental:no/incremental:no \/LTCG \/NODEFAULTLIB:libcmt.lib \/NODEFAULTLIB:MSVCRTD.lib/g' %CYGPATH_SRC%/php-src/Makefile
+	REM CFLAGS
+sed -i 's/\/Ox/\/O2 \/GL/g' %CYGPATH_SRC%/php-src/Makefile
+	REM no warn
+sed -i 's/\/W3/\/w/g' %CYGPATH_SRC%/php-src/Makefile
+
+	REM after sed:
+REM LDFLAGS=/nologo /incremental:no /LTCG /NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:MSVCRTD.lib /debug /opt:ref,icf ... 
+REM ARFLAGS=/nologo /LTCG ...
+REM CFLAGS=/nologo $(BASE_INCLUDES) /D _WINDOWS /D WINDOWS=1 /D ZEND_WIN32=1 /D PHP_WIN32=1 /D WIN32 /D _MBCS /w /D _USE_MATH_DEFINES /FD /wd4996 /Zc:inline /Gw /Zc:__cplusplus /d2FuncCache1 /Zc:wchar_t /MP16 /Zi /LD /MD /w /O2 /GL /D NDebug /D NDEBUG /D ZEND_WIN32_FORCE_INLINE /GF /D ZEND_DEBUG=0 ... /D FD_SETSIZE=2048 /arch:AVX 
 
 nmake %NMAKE_OPTS%
 

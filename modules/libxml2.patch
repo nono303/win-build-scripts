@@ -7,7 +7,7 @@ index f6a0182d..f4162ec0 100644
  # The compiler and its options.
  CC = cl.exe
 -CFLAGS = /nologo /D "_WINDOWS" /D "_MBCS" /D "NOLIBTOOL" /W3 /wd4244 /wd4267 $(CRUNTIME)
-+CFLAGS = /nologo /D "_WINDOWS" /D "_MBCS" /D "NOLIBTOOL" /W3 /GL /GS- /Oy- /guard:cf- /FD /GF /Zc:inline /LD /MD /Ox /wd4311 /wd4090 /wd4996 /wd4789 /wd4244 /wd4267 $(CRUNTIME)
++CFLAGS = /nologo /D "_WINDOWS" /D "_MBCS" /D "NOLIBTOOL" /O2 /GL /MD /Zi /w $(CRUNTIME)
  CFLAGS = $(CFLAGS) /I$(XML_SRCDIR) /I$(XML_SRCDIR)\include /I$(INCPREFIX)
  !if "$(WITH_THREADS)" != "no"
  CFLAGS = $(CFLAGS) /D "_REENTRANT"
@@ -16,7 +16,7 @@ index f6a0182d..f4162ec0 100644
  # The linker and its options.
  LD = link.exe
 -LDFLAGS = /nologo /VERSION:$(LIBXML_MAJOR_VERSION).$(LIBXML_MINOR_VERSION)
-+LDFLAGS = /debug /nologo /LTCG /OPT:ICF /VERSION:$(LIBXML_MAJOR_VERSION).$(LIBXML_MINOR_VERSION)
++LDFLAGS = /debug /nologo /LTCG /OPT:ICF,REF /VERSION:$(LIBXML_MAJOR_VERSION).$(LIBXML_MINOR_VERSION)
  LDFLAGS = $(LDFLAGS) /LIBPATH:$(BINDIR) /LIBPATH:$(LIBPREFIX)
  LIBS =
  !if "$(WITH_FTP)" == "1" || "$(WITH_HTTP)" == "1"

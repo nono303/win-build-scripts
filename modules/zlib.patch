@@ -7,13 +7,13 @@ index 6831882..824fb65 100644
  AR = lib
  RC = rc
 -CFLAGS  = -nologo -MD -W3 -O2 -Oy- -Zi -Fd"zlib" $(LOC)
-+CFLAGS  = -nologo -MD -W3 -GL -GS- -Oy- -guard:cf- -FD -GF -LD -MD -Ox -Zc:inline -wd4267 -Oy- -Zi -Fd"zlib" $(LOC)
++CFLAGS  = -nologo -O2 -GL -MD -Zi -w -Fd"zlib" $(LOC)
  WFLAGS  = -D_CRT_SECURE_NO_DEPRECATE -D_CRT_NONSTDC_NO_DEPRECATE
 -ASFLAGS = -coff -Zi $(LOC)
 -LDFLAGS = -nologo -debug -incremental:no -opt:ref
 -ARFLAGS = -nologo
 +ASFLAGS = -Zi $(LOC)
-+LDFLAGS = -nologo -debug -ltcg -opt:ICF
++LDFLAGS = -nologo -debug -ltcg -opt:ICF,REF
 +ARFLAGS = -nologo -ltcg
  RCFLAGS = /dWIN32 /r
  
