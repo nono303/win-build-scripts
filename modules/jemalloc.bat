@@ -4,8 +4,8 @@
 
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/msvc/projects/vc2017/jemalloc/" %AVXVCX% %PTFTS% %WKITVER%
 	REM https://github.com/jemalloc/jemalloc/issues/1099
-	REM &gt &lt KO under batch > sh file...
-%PATH_BIN_CYGWIN%\bash %PATH_MODULES%/%1.sh %CYGPATH_SRC%/%1/msvc/projects/vc2017/jemalloc/jemalloc.vcxproj
+sed -i 's/^<PreprocessorDefinitions^>_REENTRANT/^<PreprocessorDefinitions^>JEMALLOC_NO_PRIVATE_NAMESPACE;_REENTRANT/g' %CYGPATH_SRC%/%1/msvc/projects/vc2017/jemalloc/jemalloc.vcxproj
+sed -i 's/^<PreprocessorDefinitions^>JEMALLOC_DEBUG/^<PreprocessorDefinitions^>JEMALLOC_NO_PRIVATE_NAMESPACE;JEMALLOC_DEBUG/g' %CYGPATH_SRC%/%1/msvc/projects/vc2017/jemalloc/jemalloc.vcxproj
 
 MSBuild.exe msvc\jemalloc_vc2017.sln ^
 	%MSBUILD_OPTS% ^
