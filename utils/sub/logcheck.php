@@ -18,9 +18,8 @@
 	function checkLog($file,$search,$afffile = true){
 		foreach(file($file) as $linenum => $data){
 			$aff = false;
-			preg_match("/####### BEGIN[^']+('[^']+')/",$data,$matches);
-			if($matches[1])
-				$curmod = $matches[1];
+			if(is_int(strpos($data,"####### BEGIN")))
+				$curmod = $data;
 			foreach($search as $word => $color){
 				if(is_int(stripos($data,$word))){
 					$data = preg_replace("/(".$word.")/i","\033[".$color."m\\1\033[39m",$data);
@@ -30,7 +29,11 @@
 			if($aff){
 				if ($afffile)
 					echo str_pad(basename($file), 42);
-				echo str_pad($curmod,20).str_pad($linenum+1,5).": ".trim($data).PHP_EOL;
+				if($curmod){
+					echo "\t\t".$curmod;
+					$curmod = "";
+				}
+				echo str_pad($linenum+1,5).": ".trim($data).PHP_EOL;
 			}
 		}
 	}
@@ -52,7 +55,8 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 		"warning " => 33,
 		"warning:" => 33,
 		"LTCG s" => 33,
-		"fatal " => 31,
+		" fatal " => 31,
+		" error " => 31,
 		"syntaxe " => 33,
 		"inattendu" => 33,
 		"impossible" => 33,
