@@ -9,6 +9,7 @@
 
 MSBuild.exe msvc\jemalloc_vc2017.sln ^
 	%MSBUILD_OPTS% ^
+	/nowarn:C4028 ^
 	/t:Clean,jemalloc ^
 	/p:Configuration=Release ^
 	/p:Plateform="%ARCH%"
