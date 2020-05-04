@@ -83,6 +83,9 @@ C:\Windows\System32\WindowsPowerShell\v1.0\;
 cd /D %PATH_BATCH%
 
 REM ########################## BUILD OPTION
+	REM see dir in %PATH_ROOTWKIT%\Lib
+set WKITVER=10.0.19041.0
+
 set NMAKE_OPTS_DBG=/NOLOGO
 set NMAKE_OPTS_REL=/S %NMAKE_OPTS_DBG%
 
@@ -92,7 +95,9 @@ set MSBUILD_OPTS_COM=/nologo ^
 	/p:CL_MPCount=%NUMBER_OF_PROCESSORS% ^
 	/p:RunCodeAnalysis=false ^
 	/p:DebugType=None ^
-	/p:DebugSymbols=true
+	/p:DebugSymbols=true ^
+	/p:WindowsTargetPlatformVersion=%WKITVER% ^
+	/p:PlatformToolset=v%PTFTS%
 set MSBUILD_OPTS_DBG=%MSBUILD_OPTS_COM% ^
 	/clp:EnableMPLogging;Summary;ShowCommandLine ^
 	/v:d
@@ -106,9 +111,6 @@ set CMAKE_OPTS_REL=-Wno-dev ^
 	%CMAKE_OPTS_DBG%
 	REM set CMAKE_BUILD_TYPE=Release
 set CMAKE_BUILD_TYPE=RelWithDebInfo
-
-	REM see dir in %PATH_ROOTWKIT%\Lib
-set WKITVER=10.0.19041.0
 
 	REM for updating *.rc
 set RC_COPYRIGHT=https://github.com/nono303/win-build-scripts
