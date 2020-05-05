@@ -85,8 +85,8 @@ if %PHPVER% == 7.4 (
 
 	REM ARFLAGS
 sed -i 's/ARFLAGS=\/nologo/ARFLAGS=\/nologo \/LTCG/g' %CYGPATH_SRC%/php-src/Makefile
-	REM LDFLAGS
-sed -i -E 's/incremental:no/incremental:no \/LTCG \/NODEFAULTLIB:libcmt.lib \/NODEFAULTLIB:MSVCRTD.lib/g' %CYGPATH_SRC%/php-src/Makefile
+	REM LDFLAGS (libcmt.lib : freetype2)
+sed -i -E 's/incremental:no/incremental:no \/LTCG \/NODEFAULTLIB:libcmt.lib/g' %CYGPATH_SRC%/php-src/Makefile
 	REM CFLAGS
 sed -i 's/\/Ox/\/O2 \/GL/g' %CYGPATH_SRC%/php-src/Makefile
 	REM no warn
