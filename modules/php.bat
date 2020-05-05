@@ -1,10 +1,7 @@
 	REM ~~~~~~~~~~~~ init src
-for %%M in (php-src pecl-memcache pecl-text-xdiff php-ext-brotli xdebug) do (call %PATH_MODULES_COMMON%\init.bat %%M)
-cd /D %PATH_SRC%/php-sdk
-git reset --hard
-	REM !! erase all /phpmaster
-REM git clean -fdx
-git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-sdk.patch
+for %%M in (php-src pecl-memcache pecl-text-xdiff php-ext-brotli xdebug php-sdk) do (call %PATH_MODULES_COMMON%\init.bat %%M)
+	REM other way only first time 'phpsdk_buildtree phpmaster'
+if not exist %PATH_SRC%\php-sdk\phpmaster\. mklink /J %PATH_SRC%\php-sdk\phpmaster %PATH_SDK_ROOT%\phpmaster 
 
 	REM ~~~~~~~~~~~~ init var
 set LIB=
@@ -28,8 +25,6 @@ set PHPVER=%PHPGITVER:~4,3%
 call %PATH_PHP_SDK%\bin\php\do_php %PATH_MODULES%\php-getdeps.php
 
 	REM ~~~~~~~~~~~~ create directory structure
-	REM other way only first time 'phpsdk_buildtree phpmaster'
-	REM mklink php-src & pecl > phpmaster
 if not exist %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\php-src\. mklink /J %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\php-src %PATH_SRC%\php-src
 if not exist %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\pecl\. mkdir %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\pecl
 for %%E in (pecl-memcache pecl-text-xdiff php-ext-brotli xdebug) do (
