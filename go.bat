@@ -16,10 +16,10 @@ for %%x in (%*) do (
 for /L %%i in (2,1,%argCount%) do (
 	if /I "!argVec[%%i]!"=="ALL"   set ARG_ALL=1
 	if /I "!argVec[%%i]!"=="NOLOG" set ARG_NOLOG=1
-	if /I "!argVec[%%i]!"=="DEBUG" set ARG_DEBUG=1
+	if /I "!argVec[%%i]!"=="VERBOSE" set ARG_DEBUG=1
 )
 
-	REM ~~~~~~~~~~~~ DEBUG
+	REM ~~~~~~~~~~~~ VERBOSE
 set CUR_DEBUG=0
 if %ARG_DEBUG% == 1 (
 	set CUR_DEBUG=1
@@ -61,9 +61,9 @@ if "%BCMD%"=="" (
 
 	REM ~~~~~~~~~~~~ RUN
 if %ARG_ALL% == 1 (
-	for %%V in (vc15 vs16) do (
-		for %%X in (x86 x64) do (
-			for %%A in (0 1) do (
+	for %%V in (vs16 vc15) do (
+		for %%X in (x64 x86) do (
+			for %%A in (1 0) do (
 				setlocal
 				call %PATH_BATCH%\%%V.bat
 				call %PATH_BATCH%\%%X.bat
