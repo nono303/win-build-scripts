@@ -1,6 +1,6 @@
 Index: build.xml
 ===================================================================
---- build.xml	(revision 2459)
+--- build.xml	(revision 2469)
 +++ build.xml	(working copy)
 @@ -3,9 +3,6 @@
  	<property file="src/main/resources/mobac/mobac.properties" />
@@ -24,7 +24,7 @@ Index: build.xml
  	<target name="svnversion_write_property_file" unless="mobac.revision.exported">
 Index: src/main/java/mobac/gui/MainGUI.java
 ===================================================================
---- src/main/java/mobac/gui/MainGUI.java	(revision 2459)
+--- src/main/java/mobac/gui/MainGUI.java	(revision 2469)
 +++ src/main/java/mobac/gui/MainGUI.java	(working copy)
 @@ -163,7 +163,7 @@
  	private static Color checkboxBackgroundColor = new Color(0, 0, 0, 40);
@@ -45,7 +45,7 @@ Index: src/main/java/mobac/gui/MainGUI.java
  		leftPanelContent.add(mapSourcePanel, gbc_eol);
 Index: src/main/java/mobac/gui/panels/JMapSourcesPanel.java
 ===================================================================
---- src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2459)
+--- src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2469)
 +++ src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(working copy)
 @@ -45,7 +45,7 @@
  		JScrollPane mapSourceTreeScrollPane = new JScrollPane(mapSourceTree, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -58,20 +58,33 @@ Index: src/main/java/mobac/gui/panels/JMapSourcesPanel.java
  	}
 Index: src/main/java/mobac/gui/settings/SettingsGUI.java
 ===================================================================
---- src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2459)
+--- src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2469)
 +++ src/main/java/mobac/gui/settings/SettingsGUI.java	(working copy)
 @@ -97,7 +97,7 @@
  
- 	public static Logger log = Logger.getLogger(SettingsGUI.class);
+ 	private static final Logger LOG = Logger.getLogger(SettingsGUI.class);
  
 -	private static final Integer[] THREADCOUNT_LIST = { 1, 2, 4, 6 };
 +	private static final Integer[] THREADCOUNT_LIST = { 1, 2, 4, 6, 12, 24 };
  
  	private static final long MBIT1 = 1000000 / 8;
  
+Index: src/main/java/mobac/mapsources/custom/BeanShellHttpMapSource.java
+===================================================================
+--- src/main/java/mobac/mapsources/custom/BeanShellHttpMapSource.java	(revision 2469)
++++ src/main/java/mobac/mapsources/custom/BeanShellHttpMapSource.java	(working copy)
+@@ -173,7 +173,7 @@
+ 			try {
+ 				interpreter.set("conn", conn);
+ 				interpreter.eval("addHeaders(conn);");
+-				System.out.println(conn.getRequestProperties());
++				// System.out.println(conn.getRequestProperties());
+ 			} catch (EvalError e) {
+ 				String msg = e.getMessage();
+ 				if (!AH_ERROR.equals(msg)) {
 Index: src/main/java/mobac/program/download/MobacTrustManager.java
 ===================================================================
---- src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2459)
+--- src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2469)
 +++ src/main/java/mobac/program/download/MobacTrustManager.java	(working copy)
 @@ -106,7 +106,8 @@
  				// TODO: Add GUI for manually adding this certificate as trusted.
