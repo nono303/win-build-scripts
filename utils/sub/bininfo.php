@@ -283,6 +283,5 @@
 			$csv .= $v.PHP_EOL;
 		}
 	}
-	if(is_file($argv[2]))
-		file_put_contents($argv[2],$csv, FILE_APPEND);
+	file_put_contents($argv[2],$csv, FILE_APPEND);
 ?>
