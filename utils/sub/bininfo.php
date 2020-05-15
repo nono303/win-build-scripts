@@ -1,54 +1,12 @@
 <?php
-	error_reporting(E_ERROR | E_WARNING | E_PARSE);
+	include( dirname(__FILE__) . '/_functions.php');
+
 	define("SCRIPT_DIR",dirname(__FILE__));
 	define("DEBUG",false);
 
-	function replace_extension($filename, $new_extension) {
-		return preg_replace('/\..+$/', '.' . $new_extension, $filename);
-	}
-
-	function binenv($env){
-		return str_replace("\\","/",$_ENV[$env]);
-	}
-
-	function debug($msg){
-		if(DEBUG) echo "#dbg: ".$msg.PHP_EOL;
-	}
-
-	function execnono($cmd,$parts,$cwd,$env){
-		$args = '';
-		if($parts){
-			foreach ($parts as $k => $part) {
-				if (is_string($k)) {
-					$args .= ' ' . escapeshellarg($k) . ' ' . escapeshellarg($part);
-				} else {
-					$args .= ' ' . escapeshellarg($part);
-				}
-			}
-		}
-		$process_cmd = '"' . $cmd . '"' . ' ' . $args;
-		$options = array(
-					"suppress_errors" => false,
-					"bypass_shell" => false
-				);
-		$descriptorspec = array(
-		   0 => array("pipe", "r"),	// stdin is a pipe that the child will read from
-		   1 => array("pipe", "w"),	// stdout is a pipe that the child will write to
-		   2 => array("pipe", "w")	// stderr is a file to write to
-		);
-		$process = proc_open($process_cmd, $descriptorspec, $pipes, $cwd, $env, $options);
-		if (is_resource($process)) {
-			$out = stream_get_contents($pipes[1]);
-			fclose($pipes[1]);
-			$return_value = proc_close($process);
-			return trim($out);
-		}
-		return null;
-	}
-
 	function sigcheck($dir,$file=""){
 		global $data;
-		$sigcmd = binenv("BIN_SYGCHECK")." -a -c -e -r -nobanner ".$dir."/".$file;
+		$sigcmd = pathenv("BIN_SYGCHECK")." -a -c -e -r -nobanner ".$dir."/".$file;
 		debug($sigcmd);
 		$sig = execnono($sigcmd,NULL,$dir."/",NULL);
 		debug($sig);
@@ -78,7 +36,7 @@
 	}
 
 	function verpatch($dir,$file,$version,$copyright,$title){
-		$vercmd = binenv("BIN_VERPATCH")." ".$dir."/".$file." ".$version." /rpdb /s copyright \"".$copyright."\" /s title \"".$title."\"";
+		$vercmd = pathenv("BIN_VERPATCH")." ".$dir."/".$file." ".$version." /rpdb /s copyright \"".$copyright."\" /s title \"".$title."\"";
 		debug($vercmd);
 		//echo $vercmd.PHP_EOL;
 		$ver = execnono($vercmd,NULL,$dir."/",NULL);
@@ -109,7 +67,8 @@
 		global $col;
 		global $data;
 		global $cur;
-		if(is_file($dir."/".$file) && (is_int(strpos($file,".exe")) || is_int(strpos($file,".dll")) || is_int(strpos($file,".so")))) {
+		global $ext;
+		if(is_file($dir."/".$file) && in_array(pathinfo($dir."/".$file)["extension"],$ext)) {
 			debug($dir."/".$file);
 			if($recurse) {
 				$data[$cur][00] = str_replace($dirbase,"",$dir)."/".$file;
@@ -119,7 +78,7 @@
 
 			$copyright = $_ENV["RC_COPYRIGHT"];
 			$title = $_ENV["ARCH"]." ".$_ENV["AVXECHO"]." MSVC ".$_ENV["vcvars_ver"];
-			if($ressig[$file]["copyright"] != $copyright && $file != "curl.exe" && $file != "libcurl.dll" && UPDATE_RC){
+			if($ressig[$file]["copyright"] != $copyright && UPDATE_RC){
 				verpatch($dir,$file,$ressig[$file]["binaryversion"],$copyright,$title);
 				$ressig[$file] = sigcheck($dir,$file)[$file];
 			}
@@ -135,21 +94,23 @@
 			$data[$cur][160] =	$ressig[$file]["internalname"];
 			$data[$cur][170] =	$ressig[$file]["copyright"];
 			$data[$cur][180] =	$ressig[$file]["comments"];
+			if($data[$cur][190] == "n/a")
+				$data[$cur][190] = "\033[33m".$data[$cur][190]."\033[39m";
 			if($data[$cur][170] == $copyright){
 				$data[$cur][175] = "OK";
 			} else {
-				$data[$cur][175] = "KO";
+				$data[$cur][175] = "\033[31mKO\033[39m";
 			}
 			if($data[$cur][160] == $title){
 				$data[$cur][165] = "OK";
 			} else {
-				$data[$cur][165] = "KO";
+				$data[$cur][165] = "\033[31mKO\033[39m";
 			}
 
 			$nbavx = 0;
 			$data[$cur][30] = "";
 			if(CHECK_AVX){
-				$obdcmd = binenv("PATH_BIN_CYGWIN").'/sh.exe -c "objdump -M intel -d '.$dir."/".$file.' | ./opcode.sh -s AVX';
+				$obdcmd = pathenv("PATH_BIN_CYGWIN").'/sh.exe -c "objdump -M intel -d '.$dir."/".$file.' | ./opcode.sh -s AVX';
 				debug($obdcmd);
 				$obd  = execnono($obdcmd,NULL,SCRIPT_DIR,NULL);
 				debug($obd);
@@ -164,11 +125,11 @@
 			}
 
 			$pdbfile = replace_extension($file,"pdb");
-			$data[$cur][70] = "n/a";
-			$data[$cur][80] = "";
+			$data[$cur][70] = "\033[33mn/a\033[39m";
+			$data[$cur][80] = "\033[33mn/a\033[39m";
 			if(is_file($dir."/".$pdbfile)){
 				debug($dir."/".$pdbfile);
-				$chkmcmd = binenv("BIN_CHKMATCH").' -c '.$dir."/".$file.' '.$dir."/".$pdbfile;
+				$chkmcmd = pathenv("BIN_CHKMATCH").' -c '.$dir."/".$file.' '.$dir."/".$pdbfile;
 				debug($chkmcmd);
 				$chkm = execnono($chkmcmd,NULL,SCRIPT_DIR,NULL);
 				debug($chkm);
@@ -176,6 +137,8 @@
 				$data[$cur][70] = $pdbfile;
 				$pdbres = str_replace(")","",str_replace("Unmatched (reason: ","",$matches[1]));
 				$data[$cur][80] = $pdbres;
+				if($data[$cur][80] != "Matched")
+					$data[$cur][80] = "\033[31m".$data[$cur][80]."\033[39m";
 			}
 
 			$dbhcmd = "dumpbin /headers ".$dir."/".$file;
@@ -199,34 +162,62 @@
 
 			ksort($data[$cur],SORT_NUMERIC);
 			foreach($data[$cur] as $k => $v)
-				if($col[$k]["pad"] != -1) echo str_pad($v,$col[$k]["pad"]," ");
+				if($col[$k]["pad"] != -1) {
+					if(is_int(strpos($v,"\033"))) {
+						echo str_pad($v,$col[$k]["pad"]+10," ");
+					} else {
+						echo str_pad($v,$col[$k]["pad"]," ");
+					}
+				}
 			echo PHP_EOL;
 			$cur++;
 		}
 	}
 
-	if(in_array("checkavx", $argv)){
+	foreach($argv as $arg){
+		if($arg == "checkavx")
+			$checkavx = true;
+		if($arg == "updaterc")
+			$updaterc = true;
+		if($arg == "recurse")
+			$recurse = true;
+		$matches = null;
+		preg_match("/ext:(.*)/",$arg,$matches);
+		if($matches[1])
+			$extarg = $matches[1];
+		$matches = null;
+		preg_match("/nb:(.*)/",$arg,$matches);
+		if($matches[1])
+			$nbfile = $matches[1];
+	}
+	global $ext;
+	if($extarg){
+		$ext = explode(",",$extarg);
+	} else {
+		$ext = ["exe","dll","so"];
+	}
+	echo "************************************".PHP_EOL;
+	echo "ext:      ".str_replace('"','',json_encode($ext)).PHP_EOL;
+	if($checkavx){
 		define("CHECK_AVX",true);
-		echo "CHECK_AVX: ON".PHP_EOL;
+		echo "checkavx: ON".PHP_EOL;
 	} else {
 		define("CHECK_AVX",false);
-		echo "CHECK_AVX: OFF".PHP_EOL;
+		echo "checkavx: OFF".PHP_EOL;
 	}
-	
-	if(in_array("updaterc", $argv)){
+	if($updaterc){
 		define("UPDATE_RC",true);
-		echo "UPDATE_RC: ON".PHP_EOL;
+		echo "updaterc: ON".PHP_EOL;
 	} else {
 		define("UPDATE_RC",false);
-		echo "UPDATE_RC: OFF".PHP_EOL;
+		echo "updaterc: OFF".PHP_EOL;
 	}
-	
-	if(in_array("recurse", $argv)){
+	if($recurse){
 		define("RECURSE",true);
-		echo "RECURSE: ON".PHP_EOL;
+		echo "recurse:  ON".PHP_EOL;
 	} else {
 		define("RECURSE",false);
-		echo "RECURSE: OFF".PHP_EOL;
+		echo "recurse:  OFF".PHP_EOL;
 	}
 
 	global $col;
@@ -264,8 +255,16 @@
 	$cur = 0;
 
 	$argv[1] = str_replace("\\","/",$argv[1]);
+	$affile = " ";
+	if($nbfile && is_dir($argv[1])){
+		if(($scanfile = sizeof(scandir($argv[1]))-2) == $nbfile) {
+			$affile = ": \033[32m".$nbfile." / ".$scanfile."\033[39m ";
+		} else {
+			$affile = ": \033[31m".$nbfile." / ".$scanfile."\033[39m ";
+		}
+	}
+	echo ">>>>>> ".$argv[1].$affile."<<<<<<".PHP_EOL;
 
-	echo "> ".$argv[1].PHP_EOL;
 	$data[$cur] = $argv[1];
 	$cur++;
 	foreach($col as $k => $v){
@@ -283,5 +282,6 @@
 			$csv .= $v.PHP_EOL;
 		}
 	}
-	file_put_contents($argv[2],$csv, FILE_APPEND);
+	if($argv[2] != "null")
+		file_put_contents($argv[2],preg_replace("/\\033\[3[0-9]m/","",$csv), FILE_APPEND);
 ?>
