@@ -1,4 +1,4 @@
-## Dirty old-fashioned cook batch scripts for Windows MSVC building
+# Dirty old-fashioned cook batch scripts for Windows MSVC building
 
 - Apache httpd and its deps
 - Apache subversion and its deps
@@ -14,7 +14,7 @@ I'll answer if detail needed and all feedback that may improve them will be appr
 
 Note, that the goal is to have quick pseudo-automated build for testing use I voluntary disable testing, man & co. in the “pipeline” to speed up it, but always launch manual testing build for new version before start cooking ;)
 
-### HOW-TO
+# HOW-TO
 
 1. Install **[requirements](#REQUIREMENTS)**
 
@@ -35,9 +35,9 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 5. `go help` for usage and... Enjoy!
 
-### [SOURCE VERSIONS](./SRC_VERSION.md)
+# [SOURCE VERSIONS](./SRC_VERSION.md)
 
-### REQUIREMENTS
+# REQUIREMENTS
 
 | soft                         | arch | "my"version | /config             |
 | ---------------------------- | ---- | ----------- | ------------------- |
