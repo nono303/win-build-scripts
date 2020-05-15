@@ -55,12 +55,15 @@ set BIN_SEVENZ=%PATH_SOFTS%\7z\7z.exe
 set BIN_DEPENDS=%PATH_SOFTS%\dependencies\Dependencies.exe
 	REM for checking version https://docs.microsoft.com/fr-fr/sysinternals/downloads/sigcheck
 set BIN_SYGCHECK=%PATH_SOFTS%\sigcheck64.exe
+	REM Visual Studio installer (surrounded with quote)
+set BIN_VSINSTALLER="C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe"
 
 REM ########################## CYGWIN PATH
 FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_SRC%`) do (set CYGPATH_SRC=%%F)
 FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_MODULES%`) do (set CYGPATH_MODULES=%%F)
 FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_MODULES_COMMON%`) do (set CYGPATH_MODULES_COMMON=%%F)
 FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_BATCH%`) do (set CYGPATH_BATCH=%%F)
+FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_UTILS%`) do (set CYGPATH_UTILS=%%F)
 
 REM ########################## set SYSTEM PATH
 set PATH_WIN=%PATH_BIN_PYTHON%;^
