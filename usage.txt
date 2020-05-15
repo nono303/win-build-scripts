@@ -1,0 +1,79 @@
+Usage: go command [options]
+---------------------------
+- build command:
+  * standalone: 
+      apr
+      brotli
+      bzip2
+      cares
+      clean
+      curl
+      dummy
+      freetype2
+      httpd
+      jansson
+      jemalloc
+      jpeg
+      libev
+      libevent
+      libexpat
+      libiconv
+      libmaxminddb
+      libpng
+      libssh2
+      libxdiff
+      libxml2
+      libxpm
+      lua
+      nghttp2
+      openssl
+      pcre
+      php
+      serf
+      sqlite
+      subversion
+      tidy
+      wineditline
+      zlib
+      ddverpatch
+      memcached
+      mobac
+      nssm
+      php-cgi-spawner
+      sdlna
+  * suite: 
+      httpdanddeps:      all depencies and httpd
+      subversionanddeps: all depencies and subversion. httpdanddeps MUST BE DONE PREVIOUSLY! 
+      phpanddeps:        all depencies and php NTS. httpdanddeps MUST BE DONE PREVIOUSLY! 
+      all:               all depencies and httpd, subversion and php NTS.
+- build options:
+    ALL:     build 'command' for all target (vc15-x86 vc15-x86-avx vc15-x64 vc15-x64-avx vs16-x86 vs16-x86-avx vs16-x64 vs16-x64-avx)
+    NOLOG:   don't tee stderr & stdout to a logfile in %PATH_LOGS% (...and show console colors)
+    VERBOSE: disable all batch echo off and silent build option
+---------------------------
+- util command:
+  * logcheck: check logfile(s) in to find 'strange' (warn, error, fatal...) loglines
+    > param: MUST HAVE ONE OF THEM
+        full:           check all logfiles present in %PATH_LOGS%
+	last:           check last logfile present in %PATH_LOGS%
+	<filename.log>: check specified logfile if present in %PATH_LOGS%
+  * srcstatus: get status (tag, revision, branch, commit behind...) of all src dir present in %PATH_SRC%, fetch remote scm and export a summarized csv file in %PATH_LOGS%
+               update srccreate with current your state
+    > option:
+        gitcg:   do a GIT garbage collector on all git scm
+	nofetch: don't fetch remote
+  * srccreate: git clone & svn co all required src into %PATH_SRC% defined in env.bat
+  * bininfo: check all binaries released (exe dll so) for datetime, MSVC version, architecture and option, 'StringFileInfo' embedded and export a summarized csv file in %PATH_LOGS%
+    > param: a path or a file to check
+    > option:
+        checkavx: test cpu instruction to check if AVX are present (slow)
+	updaterc: update StringFileInfo with build details (arch, MSVC version...)
+	recurse:  check subdir
+	ext:[ex1,ex2...]: by default, bininfo check *.exe *.dll *.so. you can override (extend or restric) these extensions with a comma separated list (without space) of extension to be checked. ex. ext:exe,dll
+	nb:[int]: number of file that must be present (and not only checked) in path param. can't be used with a file in param or recurse option
+  * version: output and write csv file in %PATH_LOG% of current normalized version of each module present in %PATH_SRC%
+  * configexport: export cygwin and MSVS config to %PATH_BATCH%\config. 
+                  import .vsconfg for MSVS 
+		  use setup.exe -P `awk 'NR==1{printf \$1}{printf ",%s", \$1}' cyg_XX_.packagelist` for cygwin (where _XX_ is 32 or 64...)
+  * curlperf: 
+---------------------------
