@@ -31,6 +31,8 @@ cd /D %PHP_SRC_DIR%
 call buildconf
 
 	REM ~~~~~~~~~~~~ Patch some stuff in this shity configure.js, accoring to self made deps
+	REM xpm
+sed -i 's/xpm.h/X11\\\\\\\\xpm.h/g' %CYGPATH_SRC%/php-src/configure.js
 	REM bz2
 sed -i 's/libbz2_a/libbz2/g' %CYGPATH_SRC%/php-src/configure.js
 	REM jpeg
@@ -42,6 +44,7 @@ sed -i 's/edit_a/edit_static/g' %CYGPATH_SRC%/php-src/configure.js
 	REM zlib
 sed -i 's/zlib_a/zlib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM curl
+sed -i 's/libcurl_a/libcurl_imp/g' %CYGPATH_SRC%/php-src/configure.js
 sed -i 's/PHP_PHP_BUILD + "\/include\/curl/"%PHP_CURL:\=\/%" + "\/include\/curl/g' %CYGPATH_SRC%/php-src/configure.js
 sed -i 's/EXTENSION("curl", "interface.c multi.c share.c curl_file.c");/EXTENSION("curl", "interface.c multi.c share.c curl_file.c"); CHECK_LIB("cares.lib", "curl", PHP_CURL);/g' %CYGPATH_SRC%/php-src/configure.js
 	REM freetype
