@@ -1,8 +1,9 @@
 @echo off
+if /I "%1"=="HELP" (
+	type usage.txt
+	exit /B
+)
 setlocal enabledelayedexpansion
-call %PATH_MODULES_COMMON%\ymdhis.bat
-echo %ymdhis% ####### BEGIN %BAFF% '%1' %MSVC_DEPS% %ARCH% %AVXECHO% ###########################
-
 	REM ~~~~~~~~~~~~ PARSING ARGS
 set ARG_NOLOG=0
 set ARG_DEBUG=0
@@ -18,7 +19,6 @@ for /L %%i in (2,1,%argCount%) do (
 	if /I "!argVec[%%i]!"=="NOLOG" set ARG_NOLOG=1
 	if /I "!argVec[%%i]!"=="VERBOSE" set ARG_DEBUG=1
 )
-
 	REM ~~~~~~~~~~~~ VERBOSE
 set CUR_DEBUG=0
 if %ARG_DEBUG% == 1 (
@@ -36,6 +36,7 @@ if %CUR_DEBUG% == 1 (
 )
 
 	REM ~~~~~~~~~~~~ LOGNAME
+call %PATH_MODULES_COMMON%\ymdhis.bat
 if %ARG_ALL% == 1 (
 	set LOGNAME=%PATH_LOGS%\%1_ALL_%ymdhis%.log
 ) else (
@@ -56,10 +57,12 @@ if exist %PATH_UTILS%\%1.bat (
 )
 if "%BCMD%"=="" (
 	echo unknow commande '%1'
+	type usage.txt
 	exit /B -1
 )
 
 	REM ~~~~~~~~~~~~ RUN
+echo %ymdhis% ####### BEGIN %BAFF% '%1' %MSVC_DEPS% %ARCH% %AVXECHO% ###########################
 if %ARG_ALL% == 1 (
 	for %%V in (vs16 vc15) do (
 		for %%X in (x64 x86) do (
