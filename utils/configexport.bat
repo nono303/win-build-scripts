@@ -1,4 +1,5 @@
-c:\cyg32\bin\cygcheck.exe -c -d | sed -e "1,2d" -e 's/ .*\$//' > cyg32.packagelist
-c:\cyg64\bin\cygcheck.exe -c -d | sed -e "1,2d" -e 's/ .*\$//' > cyg64.packagelist
-"C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" export --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community" --config "C:\httpd-sdk\config\.vsconfig"
-pause
+for %%A in (32 64) do (
+	REM https://gist.github.com/erikvip/63b236078d4ff4163fd3
+	call %PATH_ROOT_CYGWIN%%%A\bin\cygcheck -cd | tail -n+3 | cut -d' ' -f1 > %PATH_BATCH%\config\cyg%%A.packagelist 
+)
+call %BIN_VSINSTALLER% export --installPath "%PATH_VS%" --config "%PATH_BATCH%\config\.vsconfig"
