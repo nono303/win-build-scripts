@@ -12,9 +12,5 @@ cmake %CMAKE_OPTS% ^
 nmake %NMAKE_OPTS% clean install
 
 for %%F in (lua luac) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%F.pdb %PATH_INSTALL%\bin\*)
-
-	REM version
-CD /D %PATH_SRC%\%1 
-for /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set VERSION=%%F)
-for %%X in (dll exe) do (call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\lua.%%X "%VERSION%")
-call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\luac.exe "%VERSION%"
+for %%X in (dll exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\lua.%%X)
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\luac.exe
