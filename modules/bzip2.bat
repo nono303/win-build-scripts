@@ -13,9 +13,5 @@ xcopy /C /F /Y %PATH_SRC%\%1\*.exe %PATH_INSTALL%\bin\
 xcopy /C /F /Y %PATH_SRC%\%1\libbz2.pdb %PATH_INSTALL%\lib\
 xcopy /C /F /Y %PATH_SRC%\%1\bzip2recover.pdb %PATH_INSTALL%\bin\
 xcopy /C /F /Y %PATH_SRC%\%1\bzip2.pdb %PATH_INSTALL%\bin\
-copy /Y %PATH_SRC%\%1\bzlib.h %PATH_INSTALL%\include\*
-
-	REM version
-CD /D %PATH_SRC%\%1 
-for /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set VERSION=%%F)
-for %%X in (bzip2recover bzip2) do (call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\%%X.exe "%VERSION:~6%")
+xcopy /C /F /Y %PATH_SRC%\%1\bzlib.h %PATH_INSTALL%\include\*
+for %%X in (bzip2recover bzip2) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X.exe)

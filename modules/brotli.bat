@@ -11,8 +11,4 @@ cmake ^
 nmake %NMAKE_OPTS% clean install
 
 for %%X in (brotlicommon brotli brotlidec brotlienc) do (copy /Y %PATH_BUILD%\%1\%%X.pdb %PATH_INSTALL%\bin)
-
-	REM version
-CD /D %PATH_SRC%\%1 
-for /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set VERSION=%%F)
-for %%X in (brotlicommon.dll brotli.exe brotlidec.dll brotlienc.dll) do (call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\%%X "%VERSION:~1%")
+for %%X in (brotlicommon.dll brotli.exe brotlidec.dll brotlienc.dll) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)

@@ -28,8 +28,4 @@ nmake %NMAKE_OPTS% clean install
 
 xcopy /C /F /Y %PATH_BUILD%\%1\tidy.pdb %PATH_INSTALL%\bin\*
 xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\tidy_a.dir\tidy_a.pdb %PATH_INSTALL%\lib\*
-
-	REM version
-CD /D %PATH_SRC%\%1 
-for /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set VERSION=%%F)
-for %%X in (exe dll) do (call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\tidy.%%X "%VERSION%")
+for %%X in (exe dll) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\tidy.%%X)

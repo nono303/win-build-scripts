@@ -14,8 +14,4 @@ cmake ^
 nmake %NMAKE_OPTS% clean install
 
 xcopy /C /F /Y %PATH_BUILD%\%1\bin\jansson.pdb %PATH_INSTALL%\bin\*
-
-	REM version
-CD /D %PATH_SRC%\%1 
-for /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set VERSION=%%F)
-call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\jansson.dll "%VERSION:~1%"
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\jansson.dll

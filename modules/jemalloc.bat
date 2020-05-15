@@ -18,8 +18,4 @@ for %%X in (dll pdb) do (move /Y %PATH_SRC%\%1\msvc\%archmsbuild%\Release\jemall
 move /Y %PATH_SRC%\%1\msvc\%archmsbuild%\Release\jemalloc.lib %PATH_INSTALL%\lib
 if not exist %PATH_INSTALL%\include\%1\. mkdir %PATH_INSTALL%\include\%1\
 xcopy /C /F /Y %PATH_SRC%\%1\include\%1\jemalloc.h %PATH_INSTALL%\include\%1\*
-
-	REM version
-CD /D %PATH_SRC%\%1 
-for /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set VERSION=%%F)
-call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\jemalloc.dll "%VERSION%"
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\jemalloc.dll

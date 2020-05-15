@@ -16,8 +16,4 @@ xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\libev_static.dir\libev_static.pdb %PAT
 xcopy /C /F /Y %PATH_BUILD%\%1\libev.dll %PATH_INSTALL%\bin\*
 xcopy /C /F /Y %PATH_BUILD%\%1\libev.pdb %PATH_INSTALL%\bin\*
 xcopy /C /F /Y %PATH_SRC%\%1\ev.h %PATH_INSTALL%\include\*
-
-	REM version
-CD /D %PATH_SRC%\%1 
-for /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set VERSION=%%F)
-call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\%1.dll "%VERSION:~4%"
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%1.dll

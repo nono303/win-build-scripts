@@ -19,10 +19,5 @@ cmake %CMAKE_OPTS% ^
 nmake %NMAKE_OPTS% clean install
 
 move /Y %PATH_INSTALL%\bin\cares_static.pdb %PATH_INSTALL%\lib
-
-	REM version
-CD /D %PATH_SRC%\%1 
-for /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set VERSION=%%F)
-set VERSION=%VERSION:_=.%
 for %%X in (cares acountry adig ahost) do (copy /Y %PATH_BUILD%\%1\bin\%%X.pdb %PATH_INSTALL%\bin\%%X.pdb)
-for %%X in (cares.dll acountry.exe adig.exe ahost.exe) do (call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\%%X "%VERSION:~6%")
+for %%X in (cares.dll acountry.exe adig.exe ahost.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)

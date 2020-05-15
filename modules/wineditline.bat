@@ -9,9 +9,8 @@ cmake %CMAKE_OPTS% ^
 
 nmake %NMAKE_OPTS% clean install
 
-	REM !! TODO
 for /f "tokens=*" %%G in ('dir %PATH_SRC%\%1\bin%CYGV%\*.dll %PATH_SRC%\%1\bin%CYGV%\*.exe /b') do (
-	call %PATH_MODULES_COMMON%\version.bat %PATH_SRC%\%1\bin%CYGV%\%%G "2.2"
+	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_SRC%\%1\bin%CYGV%\%%G
 	xcopy /C /F /Y %PATH_SRC%\%1\bin%CYGV%\%%G %PATH_INSTALL%\bin\*
 )
 for %%D in (bin lib) do (xcopy /C /F /Y %PATH_SRC%\%1\%%D%CYGV%\*.* %PATH_INSTALL%\%%D\*)

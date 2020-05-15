@@ -19,5 +19,4 @@ for %%X in (lib pdb) do (xcopy /C /F /Y "%PATH_SRC%\%1\Release\%archmsbuild%\jpe
 for %%X in (exe pdb) do (for %%P in (wrjpgcom rdjpgcom cjpeg djpeg jpegtran) do (xcopy /C /F /Y "%PATH_SRC%\%1\Release\%archmsbuild%\%%P.%%X" %PATH_INSTALL%\bin\*))
 xcopy /E /C /F /Y "%PATH_SRC%\%1\*.h" %PATH_INSTALL%\include\*)
 
-	REM !! TODO
-for %%P in (wrjpgcom rdjpgcom cjpeg djpeg jpegtran) do (call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\%%P.exe "9.4" "9-d")
+for %%P in (wrjpgcom rdjpgcom cjpeg djpeg jpegtran) do (call call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%P.exe)

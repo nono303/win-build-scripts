@@ -31,8 +31,4 @@ for %%C in ("-DBUILD_SHARED_LIBS=ON -DBUILD_SHELL=OFF" "-DBUILD_SHARED_LIBS=OFF 
 
 for %%D in (dll pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\sqlite3.%%D %PATH_INSTALL%\bin\*)
 xcopy /C /F /Y %PATH_SRC%\%1\sqlite3ext.h %PATH_INSTALL%\include\sqlite3\*
-
-	REM version
-CD /D %PATH_SRC%\%1 
-for /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set VERSION=%%F)
-for %%X in (dll exe) do (call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\sqlite3.%%X %VERSION%)
+for %%X in (dll exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\sqlite3.%%X)
