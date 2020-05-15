@@ -1,14 +1,22 @@
 @echo off
+	REM https://curl.haxx.se/docs/ssl-compared.html
+
+set CURL_TESTURL=https://www.google.com/
 set old_path=%PATH%
-set PATH=C:\sdk\release\vs16_x64-avx\bin
-for /f "tokens=*" %%G in ('dir C:\sdk\release\vs16_x64-avx\curl /b') do (
-	call C:\sdk\release\vs16_x64-avx\curl\%%G\bin\curl -w "@C:/sdk/batch/utils/sub/curlperf.txt" -o NUL -s "https://cdn25.nono303.net/"
+call do_php %PATH_UTILS%\sub\bininfo.php %PATH_INSTALL%\curl null checkavx recurse
+
+set PATH=%PATH_INSTALL%\bin;c:\Windows\SysWOW64
+for /f "tokens=*" %%G in ('dir /O:-N %PATH_INSTALL%\curl /b') do (
+	echo ************************************
+	xcopy /C /F /Y %PATH_INSTALL%\curl\%%G\bin\libcurl.* %PATH_RELEASE_PHP%\vs16-x64-avx-nts\*
+	echo ------------------------------------
+	call %PATH_INSTALL%\curl\%%G\bin\curl --version & echo.
+	call %PATH_INSTALL%\curl\%%G\bin\curl --silent --show-error --insecure -w "@%PATH_UTILS:\=/%/sub/curlperf.txt" --tls-max 1.2 --output NUL "%CURL_TESTURL%?curl-%%G" --output NUL "%CURL_TESTURL%?curl-%%G"
+
+	cd /D %PATH_RELEASE_PHP%\vs16-x64-avx-nts
+	%PATH_BIN_CYGWIN%\sed -i -E 's/^extension_dir.*/extension_dir = "%PATH_RELEASE_PHP:\=\\\\%\\\\vs16-x64-avx-nts"/g' %CYGPATH_UTILS%/sub/php.ini
+	echo ------------------------------------
+	php -c %PATH_UTILS%\sub\php.ini -v
+	php -c %PATH_UTILS%\sub\php.ini %PATH_UTILS%\sub\curlperf.php "%CURL_TESTURL%?php-%%G"
 )
-set PATH=%oldpath%;C:\sdk\release\vs16_x64-avx\bin
-for /f "tokens=*" %%G in ('dir C:\sdk\release\vs16_x64-avx\curl /b') do (
-	cd /D D:\github\NONO_phpwin-perfbuild\vs16-x64-avx-nts
-	if exist D:\github\NONO_phpwin-perfbuild\vs16-x64-avx-nts\libcurl.dll del /F /Q D:\github\NONO_phpwin-perfbuild\vs16-x64-avx-nts\libcurl.dll
-	copy /Y C:\sdk\release\vs16_x64-avx\curl\%%G\bin\libcurl.dll D:\github\NONO_phpwin-perfbuild\vs16-x64-avx-nts\
-	c:\sdk\softs\cyg64\bin\sed -i -E 's/^extension_dir.*/extension_dir = "D:\\\\github\\\\NONO_phpwin-perfbuild\\\\vs16-x64-avx-nts"/g' /cygdrive/c/sdk/batch/utils/sub/php.ini
-	php -c C:\sdk\batch\utils\sub\php.ini C:\sdk\batch\utils\sub\curlperf.php "https://cdn25.nono303.net/check.png"
-)
+set PATH=%old_path%
