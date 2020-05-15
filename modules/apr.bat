@@ -35,8 +35,5 @@ if not exist %PATH_INSTALL%\include\arch\. mkdir %PATH_INSTALL%\include\arch
 xcopy /C /F /Y %PATH_SRC%\apr\include\arch\apr_private_common.h %PATH_INSTALL%\include\arch\*
 if not exist %PATH_INSTALL%\include\arch\win32\. mkdir %PATH_INSTALL%\include\arch\win32
 xcopy /C /F /Y %PATH_SRC%\apr\include\arch\win32\*.h %PATH_INSTALL%\include\arch\win32\*
-
-	REM set product name. add version for apr_dbd_odbc-1.dll
-CD /D %PATH_SRC%\apr-util 
-for /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set VERSION=%%F)
-for %%D in (apr_crypto_openssl-1 apr_dbd_odbc-1 apr_dbd_sqlite3-1) do (call %PATH_MODULES_COMMON%\version.bat %PATH_INSTALL%\bin\%%D.dll "%VERSION%")
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libapr-1.dll
+for %%D in (apr_crypto_openssl-1 apr_dbd_odbc-1 apr_dbd_sqlite3-1 apr_ldap-1 libaprutil-1) do (call do_php %PATH_UTILS%\sub\version.php apr-util %PATH_INSTALL%\bin\%%D.dll)
