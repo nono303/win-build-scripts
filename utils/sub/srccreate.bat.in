@@ -1,0 +1,10 @@
+@echo off
+echo ***********************
+echo * All src will be checkouted into dir "%PATH_SRC%" (see PATH_SRC in env.bat)
+echo ***********************
+:PROMPT
+SET /P AREYOUSURE=Do you want to continue? (Y/[N])
+IF /I "%AREYOUSURE%" NEQ "Y" exit /B
+echo on
+if not exist %PATH_SRC%\. mkdir %PATH_SRC%
+cd /D %PATH_SRC%
