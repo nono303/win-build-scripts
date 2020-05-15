@@ -1,31 +1,26 @@
 <?php
-	error_reporting(E_ERROR | E_WARNING | E_PARSE);
+	include( dirname(__FILE__) . '/_functions.php');
 
-	function getLastModifiedFile($dir){
-		foreach (scandir($dir) as $file) {
-			if ($file == '.' || $file == '..' || is_dir($dir.'/'.$file)) 
-				continue;
-			if (is_file($dir.'/'.$file) && is_int(strpos($file,".log"))) {
-				if (filemtime($dir.'/'.$file) > $mdate) {
-					$newest_file = $dir.'/'.$file;
-					$mdate = filemtime($dir.'/'.$file);
-				}
+	function checkWord($search,$data){
+		foreach($search as $word => $wdata){
+			if($wdata[1] == "reg"){
+				preg_match("/".$word."/i",$data,$matches);
+				if($matches[1])
+					return preg_replace("/(".$matches[1].")/i","\033[".$wdata[0]."m\\1\033[39m",$data);
+			} else if($wdata[1] == "str" && is_int(stripos($data,$word))) {
+				return preg_replace("/(".$word.")/i","\033[".$wdata[0]."m\\1\033[39m",$data);
 			}
 		}
-		return $newest_file;
+		return false;
 	}
 
-	function checkLog($file,$search,$afffile = true){
+	function checkLog($file,$search,$remove,$afffile = true){
 		foreach(file($file) as $linenum => $data){
-			$aff = false;
+			$aff = "";
 			if(is_int(strpos($data,"####### BEGIN")))
 				$curmod = $data;
-			foreach($search as $word => $color){
-				if(is_int(stripos($data,$word))){
-					$data = preg_replace("/(".$word.")/i","\033[".$color."m\\1\033[39m",$data);
-					$aff = true;
-				}
-			}
+			if(!checkWord($remove,$data))
+				$aff = checkWord($search,$data);
 			if($aff){
 				if ($afffile)
 					echo str_pad(basename($file), 42);
@@ -33,10 +28,11 @@
 					echo "\t\t".$curmod;
 					$curmod = "";
 				}
-				echo str_pad($linenum+1,5).": ".trim($data).PHP_EOL;
+				echo str_pad($linenum+1,5).": ".trim($aff).PHP_EOL;
 			}
 		}
 	}
+
 /*
 https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
 
@@ -52,19 +48,21 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 39 	Foreground Default 	Applies only the foreground portion of the defaults (see 0)
 */
 	$search = array(
-		"warning " => 33,
-		"warning:" => 33,
-		"LTCG s" => 33,
-		" fatal " => 31,
-		" error " => 31,
-		"syntaxe " => 33,
-		"inattendu" => 33,
-		"impossible" => 33,
-		"incorrecte" => 33,
-		"sed:" => 33,
-		"non valide" => 36,
-		"introuvable" => 36,
-		"stop" => 31,
+		"(Warning[: ])" => [33,"reg"],
+		"^(sed:)" => [33,"reg"],
+		" fatal " => [31,"str"],
+		" error " => [31,"str"],
+		"stop" => [31,"str"],
+		"syntaxe " => [33,"str"],
+		"inattendu" => [33,"str"],
+		"impossible" => [33,"str"],
+		"incorrecte" => [33,"str"],
+		"non valide" => [36,"str"],
+		"introuvable" => [36,"str"],
+
+	);
+	$remove = array(
+		"CMake Warning at CMake" => [39, "str"]
 	);
 	//print_r($argv);
 	//exit();
@@ -72,15 +70,15 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 	if($argv[3] == "full"){
 		foreach (scandir($dir) as $file) 
 			if ($file != '.' && $file != '..' && is_file($dir."/".$file)) 
-				checkLog($dir."/".$file,$search,true);
+				checkLog($dir."/".$file,$search,$remove,true);
 	} elseif ($argv[3] == "last"){
 		$file = getLastModifiedFile($dir);
 		echo "> ".basename($file).PHP_EOL;
-		checkLog($file,$search,false);
+		checkLog($file,$search,$remove,false);
 	} elseif (is_file($dir."/".$argv[3])){
-		echo "> ".$file.PHP_EOL;
-		checkLog($dir."/".$argv[3],$search,false);
+		echo "> ".$argv[3].PHP_EOL;
+		checkLog($dir."/".$argv[3],$search,$remove,false);
 	} else {
-		echo "build logcheck [full|last|__xx__.log]".PHP_EOL;
+		echo file_get_contents(dirname(__FILE__) . '/../../usage.txt');
 	}
 ?>
