@@ -1,145 +1,107 @@
 <?php
-	function execnono($cmd,$parts,$cwd,$env){
-		$args = '';
-		if($parts){
-			foreach ($parts as $k => $part) {
-				if (is_string($k)) {
-					$args .= ' ' . escapeshellarg($k) . ' ' . escapeshellarg($part);
-				} else {
-					$args .= ' ' . escapeshellarg($part);
-				}
-			}
-		}
-		$process_cmd = '"' . $cmd . '"' . ' ' . $args;
-		$options = array(
-			"suppress_errors" => false,
-			"bypass_shell" => false
-		);
-		$descriptorspec = array(
-		   0 => array("pipe", "r"), // stdin is a pipe that the child will read from
-		   1 => array("pipe", "w"), // stdout is a pipe that the child will write to
-		   2 => array("pipe", "w")  // stderr is a file to write to
-		);
-		$process = proc_open($process_cmd, $descriptorspec, $pipes, $cwd, $env, $options);
-		if (is_resource($process)) {
-			$out = stream_get_contents($pipes[1]);
-			fclose($pipes[1]);
-			$return_value = proc_close($process);
-			return trim($out);
-		}
-		return null;
-	}
+	include( dirname(__FILE__) . '/_functions.php');
 
-	error_reporting(E_ALL & ~E_NOTICE);
 	date_default_timezone_set("Europe/Paris");
 	define("NB_TAGS",5);
 
 	if(in_array("gitcg", $argv)){
 		define("GIT_GC",true);
-		echo "GIT_GC: ON".PHP_EOL;
+		echo "gitcg: ON".PHP_EOL;
 	} else {
 		define("GIT_GC",false);
-		echo "GIT_GC: OFF".PHP_EOL;
+		echo "gitcg: OFF".PHP_EOL;
 	}
 
 	if(in_array("nofetch", $argv)){
 		define("REPO_FETCH",false);
-		echo "REPO_FETCH: OFF".PHP_EOL;
+		echo "nofetch: ON".PHP_EOL;
 	} else {
 		define("REPO_FETCH",true);
-		echo "REPO_FETCH: ON".PHP_EOL;
+		echo "nofetch: OFF".PHP_EOL;
 	}
 
 	$srcdir = str_replace("\\","/",$_ENV["PATH_SRC"])."/";
 	echo "> ".$srcdir.PHP_EOL;
 
-	file_put_contents($argv[1],'"name";"url";"cur rem. branch";"status";"cur tag";"log tags"'.PHP_EOL,FILE_APPEND);
+	$srccreate = file_get_contents(dirname(__FILE__) . '/srccreate.bat.in');
+	file_put_contents($argv[1],'"name";"scm";"upstream";"head";"status";"branch";"log tags";"diff"'.PHP_EOL,FILE_APPEND);
 	echo "*************************".PHP_EOL;
 	foreach(scandir($srcdir) as $ele){
 		if(is_dir($repo = $srcdir.$ele) &&  $ele != "." && $ele != ".."){
-			$artname = basename($repo);
+			$name = basename($repo);
+			$type = "man";
 			if(is_dir($repo."/.git")){
+				// echo passthru("mklink /H C:\\sdk\\batch\\config\\scm\\git.".$name .".conf ".str_replace("/","\\",$repo)."\\.git\\config");
+				$type = "git";
 				$upstream = execnono("git config --get remote.origin.url",NULL,$repo,NULL);
-				$current_tag = execnono("git describe --tags",NULL,$repo,NULL);
+
+				$head = explode("^",execnono("git name-rev --name-only HEAD",NULL,$repo,NULL))[0];//execnono("git describe --tags",NULL,$repo,NULL);
+				preg_match("/^\* \(HEAD detached at ([^\)]+)\)/",execnono("git branch -a",NULL,$repo,NULL),$matches);
+				if(is_int(strpos($matches[1],"/")))
+					$head = $matches[1];
+				$srccreate .= "git clone ".$upstream." ".$ele.PHP_EOL."cd /D ".$ele.PHP_EOL."git checkout ".$head.PHP_EOL."cd /D ..".PHP_EOL;
 				$gitclean = execnono("git clean -fdx",NULL,$repo,NULL);
 				if(REPO_FETCH){
 					$gitfecthtag = execnono("git fetch",NULL,$repo,NULL);
 					$gitfecthtag .= execnono("git fetch --tag",NULL,$repo,NULL);
 				}
-				$excurbr = preg_match("/ -\> (.*)\n/",execnono("git branch -a",NULL,$repo,NULL),$matches);
-				$remotecur = $matches[1];
-
-				/* $gitstatus = execnono("git status",NULL,$repo,NULL);
-				$statusarray = "";
-				$cr = "";
-				$sep = "";
-				foreach(explode("\n",$gitstatus) as $status){
-					if(strlen($status) != 0 && !is_int(strpos($status,"On branch")) && !is_int(strpos($status,"HEAD detached at")) && !is_int(strpos($status,"Your branch is up to date with"))){
-						$statusarray .= $cr.$status;
-						$cr = PHP_EOL;
-						echo $sep.$status.PHP_EOL;
-						$sep = "    ";
-					}
-				}
-				*/
-				
-				$gitstatus = explode("\t",execnono("git rev-list --left-right --count ".$remotecur."...HEAD",NULL,$repo,NULL)) [0];
-				if($gitstatus && $gitstatus != "0"){
-					$gitstatus = $gitstatus." commit(s) behind '".$remotecur."'";
-					$gitstatus2 = PHP_EOL."details: git diff HEAD..".$remotecur;
+				preg_match("/ -\> (.*)\n/",execnono("git branch -a",NULL,$repo,NULL),$matches);
+				$branch = $matches[1];				
+				$status = explode("\t",execnono("git rev-list --left-right --count ".$branch."...HEAD",NULL,$repo,NULL)) [0];
+				if($status && $status != "0"){
+					$status = $status." commit(s) behind";
+					$diff= "git diff ".$head."..".$branch;
 				} else {
-					$gitstatus2 = "";
-					$gitstatus = "up to date with '".$remotecur."'";
+					$diff= "";
+					$status = "up to date";
 				}
-				$gitlasttags2 = execnono('git log --tags --simplify-by-decoration --pretty="format:%ai %d" | head -n '.NB_TAGS,NULL,$repo,NULL);
+				$logtags = execnono('git log --tags --simplify-by-decoration --pretty="format:%ai %d" | head -n '.NB_TAGS,NULL,$repo,NULL);
 				if(GIT_GC){
 					echo execnono("git reflog expire --all --expire=now",NULL,$repo,NULL);
 					echo execnono("git gc --prune=now --aggressive",NULL,$repo,NULL);
 				}
 
 			} elseif(is_dir($repo."/.svn")){
-				if(REPO_FETCH){
+				$type = "svn";
+				if(REPO_FETCH)
 					$gitfecthtag = execnono("svn update",NULL,$repo,NULL);
-				}
 				$svninfo = execnono("svn info",NULL,$repo,NULL);
 				preg_match("/Repository Root: ?(.*)\n/",$svninfo,$matches);
 				$upstream = trim($matches[1]);
 				preg_match("/Relative URL: \^\/(.*)\n/",$svninfo,$matches);
-				$remotecur = $matches[1];
+				$branch = trim($matches[1]);
 				preg_match("/Revision: (.*)\n/",$svninfo,$matches);
-				$current_tag = trim($matches[1]);
+				$head = trim($matches[1]);
+				$srccreate .= "svn co ".$upstream."/".$branch." ".$ele.PHP_EOL."cd /D ".$ele.PHP_EOL."svn update -r ".$head.PHP_EOL."cd /D ..".PHP_EOL;
 				
 				$svninfo = execnono("svn log -l ".NB_TAGS,NULL,$repo,NULL);
 				$gitlasttags = "";
 				foreach(explode("\n",$svninfo) as $line){
 					preg_match("/r([0-9]+) .* ([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} [+-][0-9]{2}00)/",$line,$matches);
 					if($matches[1] && $matches[2]){
-						$head = "";
+						$had = "";
 						if($gitlasttags == "")
 							$gitlasttags = $matches[1];
-						if($current_tag == $matches[1])
-							$head = "HEAD, ";
-						$gitlasttags2 .= $matches[2]." (".$head.$matches[1].")".PHP_EOL;
+						if($head == $matches[1])
+							$had = "HEAD, ";
+						$logtags .= $matches[2]." (".$had.$matches[1].")".PHP_EOL;
 					}
 				}
-				if($gitlasttags != $current_tag){
-					$gitstatus = "local: r".$current_tag." '".$remotecur."': r".$gitlasttags;
+				if($gitlasttags != $head){
+					$status = $gitlasttags;
 				} else {
-					$gitstatus = "up to date with '".$remotecur."'";
+					$status = "up to date";
 				}
 			}
-			echo $artname." [".$upstream."]".PHP_EOL;
-			echo "  Current tag: ".$current_tag.PHP_EOL;
-			echo "  Status     : ".explode("\n",$gitstatus)[0].PHP_EOL;
-
-			echo "*************************".PHP_EOL;
-			file_put_contents($argv[1],'"'.$artname.'";"'.$upstream.'";"'.$remotecur.'";"'.$gitstatus.$gitstatus2.'";"'.$current_tag.'";"'.$gitlasttags2.'"'.PHP_EOL,FILE_APPEND);
-			$artname = "";
+			echo str_pad($type,4).str_pad($name,20).str_pad($head,25).str_pad($status,26," ",STR_PAD_LEFT)."  ".str_pad($branch,20).PHP_EOL;
+			file_put_contents($argv[1],'"'.$name.'";"'.$type.'";"'.$upstream.'";"'.$head.'";"'.$status.'";"'.$branch.'";"'.$logtags.'";"'.$diff.'"'.PHP_EOL,FILE_APPEND);
+			$name = "";
 			$upstream = "";
-			$remotecur = "";
-			$gitstatus = "";
-			$current_tag = "";
-			$gitlasttags2 = "";
+			$branch = "";
+			$status = "";
+			$head = "";
+			$logtags = "";
 		}
 	}
+	file_put_contents(dirname(__FILE__) . "/../srccreate.bat",$srccreate);
 ?>
