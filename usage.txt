@@ -25,6 +25,7 @@ Usage: go command [options]
       libxml2
       libxpm
       lua
+      mod_fcgid
       nghttp2
       openssl
       pcre
