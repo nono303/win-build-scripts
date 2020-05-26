@@ -8,6 +8,7 @@ setlocal enabledelayedexpansion
 set ARG_NOLOG=0
 set ARG_DEBUG=0
 set ARG_ALL=0
+set ARG_KEEPSRC=0
 	REM setlocal enabledelayedexpansion
 set argCount=0
 for %%x in (%*) do (
@@ -18,6 +19,7 @@ for /L %%i in (2,1,%argCount%) do (
 	if /I "!argVec[%%i]!"=="ALL"   set ARG_ALL=1
 	if /I "!argVec[%%i]!"=="NOLOG" set ARG_NOLOG=1
 	if /I "!argVec[%%i]!"=="VERBOSE" set ARG_DEBUG=1
+	if /I "!argVec[%%i]!"=="KEEPSRC" set ARG_KEEPSRC=1
 )
 	REM ~~~~~~~~~~~~ VERBOSE
 set CUR_DEBUG=0
@@ -76,14 +78,14 @@ if %ARG_ALL% == 1 (
 			)
 		)
 	)
-	call dos2unix %LOGNAME%
+	call dos2unix -f %LOGNAME%
 ) else (
 	
 	if %ARG_NOLOG% == 1 (
 		call %BCMD% 2>&1
 	) else (
 		call %BCMD% 2>&1 | tee %LOGNAME%
-		call dos2unix %LOGNAME%
+		call dos2unix -f %LOGNAME%
 	)
 )
 call %PATH_MODULES_COMMON%\ymdhis.bat

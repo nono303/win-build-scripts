@@ -37,20 +37,20 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 ### REQUIREMENTS
 
-| soft                         | arch | "my"version | /config             |
-| ---------------------------- | ---- | ----------- | ------------------- |
-| Visual Studio 2019 Community |      | 16.5.5      | `.vsconfig`         |
-| Cygwin                       | x86  | 3.1.4       | `cyg32.packagelist` |
-| Cygwin                       | x64  | 3.1.4       | `cyg64.packagelist` |
-| Python 2.7                   | x64  | 2.7.17150   |                     |
-| Oracle JDK                   | x86  | 8.0.251     |                     |
-| Oracle JDK                   | x64  | 8.0.251     |                     |
-| ActivePerl                   | x64  | 5.28        |                     |
-| Netwide Assembler            | x64  | 2.14.02     |                     |
-| Git                          | x64  | 2.26.0      |                     |
-| verpatch                     | x64  | 1.0.15.1    |                     |
-| 7z                           | x64  | 19          |                     |
-| sigcheck64                   | x64  | 2.73        |                     |
-| ChkMatch                     |      | 1.0.3       |                     |
+| soft                         | arch | "my"version    | /config             |
+| ---------------------------- | ---- | -------------- | ------------------- |
+| Visual Studio 2019 Community |      | 16.6.0 (14.26) | `.vsconfig`         |
+| Cygwin                       | x86  | 3.1.4          | `cyg32.packagelist` |
+| Cygwin                       | x64  | 3.1.4          | `cyg64.packagelist` |
+| Python 2.7                   | x64  | 2.7.17150      |                     |
+| Oracle JDK                   | x86  | 8.0.251        |                     |
+| Oracle JDK                   | x64  | 8.0.251        |                     |
+| ActivePerl                   | x64  | 5.28.1         |                     |
+| Netwide Assembler            | x64  | 2.14.02        |                     |
+| Git                          | x64  | 2.26.2         |                     |
+| verpatch                     | x64  | 1.0.15.1       |                     |
+| 7z                           | x64  | 19             |                     |
+| sigcheck64                   | x64  | 2.73           |                     |
+| ChkMatch                     |      | 1.0.3          |                     |
 
 ### [SOURCE VERSIONS](./SRC_VERSION.md)

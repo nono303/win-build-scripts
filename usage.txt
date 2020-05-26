@@ -25,6 +25,7 @@ Usage: go command [options]
       libxml2
       libxpm
       lua
+      mod_fcgid
       nghttp2
       openssl
       pcre
@@ -47,9 +48,10 @@ Usage: go command [options]
       phpanddeps:        all depencies and php NTS. httpdanddeps MUST BE DONE PREVIOUSLY! 
       all:               all depencies and httpd, subversion and php NTS.
 - build options:
-    ALL:     build 'command' for all target (vc15-x86 vc15-x86-avx vc15-x64 vc15-x64-avx vs16-x86 vs16-x86-avx vs16-x64 vs16-x64-avx)
-    NOLOG:   don't tee stderr & stdout to a logfile in %PATH_LOGS% (...and show console colors)
-    VERBOSE: disable all batch echo off and silent build option
+    all:     build 'command' for all target (vc15-x86 vc15-x86-avx vc15-x64 vc15-x64-avx vs16-x86 vs16-x86-avx vs16-x64 vs16-x64-avx)
+    nolog:   don't tee stderr & stdout to a logfile in %PATH_LOGS% (...and show console colors)
+    verbose: disable all batch echo off and silent build option
+    keepsrc: don't clean, reset and potentially apply patch in src dir 
 ---------------------------
 - util command:
   * logcheck: check logfile(s) in to find 'strange' (warn, error, fatal...) loglines
