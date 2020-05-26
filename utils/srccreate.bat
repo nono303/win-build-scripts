@@ -110,11 +110,11 @@ svn update -r 2471
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1877787
+svn update -r 1878071
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v1.15.8
+git checkout tags/v1.15.9
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -186,7 +186,7 @@ git checkout tags/3.31.1
 cd /D ..
 git clone https://github.com/apache/subversion.git subversion
 cd /D subversion
-git checkout tags/1.13.0
+git checkout tags/1.14.0
 cd /D ..
 git clone https://github.com/htacg/tidy-html5 tidy
 cd /D tidy
