@@ -60,7 +60,7 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 		"non valide" => [36,"str"],
 		"introuvable" => [36,"str"],
 		"rejected" => [33,"str"],
-		"conflicts" => [33,"str"],
+		"conflicts " => [33,"str"],
 
 	);
 	$remove = array(
