@@ -50,3 +50,6 @@ for %%F in (libssl-1_1%sslarch% libcrypto-1_1%sslarch% libexpat libapr-1 libapri
 		xcopy /C /F /Y %PATH_INSTALL%\bin\%%F.%%X  %PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\*
 	)
 )
+	REM Launch TESTS
+REM cd /D C:\sdk\src\subversion
+REM win-tests.py --release --cleanup --parallel
