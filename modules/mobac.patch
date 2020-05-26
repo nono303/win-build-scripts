@@ -96,3 +96,36 @@ Index: src/main/java/mobac/program/download/MobacTrustManager.java
  			}
  		}
  	}
+Index: src/main/java/mobac/program/download/TileDownLoader.java
+===================================================================
+--- src/main/java/mobac/program/download/TileDownLoader.java	(revision 2471)
++++ src/main/java/mobac/program/download/TileDownLoader.java	(working copy)
+@@ -162,7 +162,7 @@
+ 		byte[] data = loadBodyDataInBuffer(conn);
+ 
+ 		if (code != HttpURLConnection.HTTP_OK)
+-			throw new DownloadFailedException(conn, code);
++			log.warn("HTTP Response code '"+code+"' for " + conn.getURL());
+ 
+ 		checkContentType(conn, data);
+ 		checkContentLength(conn, data);
+@@ -175,7 +175,7 @@
+ 		TileImageType imageType = Utilities.getImageType(data);
+ 		if (imageType == null)
+ 			throw new UnrecoverableDownloadException("The returned image is of unknown format");
+-		if (useTileStore) {
++		if (useTileStore && code == HttpURLConnection.HTTP_OK) {
+ 			TileStore.getInstance().putTileData(data, x, y, zoom, mapSource, timeLastModified, timeExpires, eTag);
+ 		}
+ 		Utilities.checkForInterruption();
+@@ -368,8 +368,8 @@
+ 		if (contentType != null) {
+ 			contentType = contentType.toLowerCase();
+ 			if (!contentType.startsWith("image/")) {
+-				if (log.isTraceEnabled() && contentType.startsWith("text/")) {
+-					log.trace("Content (" + contentType + "): " + new String(data));
++				if (contentType.startsWith("text/")) {
++					log.warn("Content (" + contentType + "): " + new String(data));
+ 				}
+ 				throw new UnrecoverableDownloadException("Content type of the loaded image is unknown: " + contentType,
+ 						UnrecoverableDownloadException.ERROR_CODE_CONTENT_TYPE);
