@@ -1,6 +1,6 @@
 Index: build.xml
 ===================================================================
---- build.xml	(revision 2471)
+--- build.xml	(revision 2473)
 +++ build.xml	(working copy)
 @@ -3,9 +3,6 @@
  	<property file="src/main/resources/mobac/mobac.properties" />
@@ -24,7 +24,7 @@ Index: build.xml
  	<target name="svnversion_write_property_file" unless="mobac.revision.exported">
 Index: src/main/java/mobac/gui/MainGUI.java
 ===================================================================
---- src/main/java/mobac/gui/MainGUI.java	(revision 2471)
+--- src/main/java/mobac/gui/MainGUI.java	(revision 2473)
 +++ src/main/java/mobac/gui/MainGUI.java	(working copy)
 @@ -163,7 +163,7 @@
  	private static Color checkboxBackgroundColor = new Color(0, 0, 0, 40);
@@ -45,7 +45,7 @@ Index: src/main/java/mobac/gui/MainGUI.java
  		leftPanelContent.add(mapSourcePanel, gbc_eol);
 Index: src/main/java/mobac/gui/panels/JMapSourcesPanel.java
 ===================================================================
---- src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2471)
+--- src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2473)
 +++ src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(working copy)
 @@ -45,7 +45,7 @@
  		JScrollPane mapSourceTreeScrollPane = new JScrollPane(mapSourceTree, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -58,7 +58,7 @@ Index: src/main/java/mobac/gui/panels/JMapSourcesPanel.java
  	}
 Index: src/main/java/mobac/gui/settings/SettingsGUI.java
 ===================================================================
---- src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2471)
+--- src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2473)
 +++ src/main/java/mobac/gui/settings/SettingsGUI.java	(working copy)
 @@ -97,7 +97,7 @@
  
@@ -71,7 +71,7 @@ Index: src/main/java/mobac/gui/settings/SettingsGUI.java
  
 Index: src/main/java/mobac/mapsources/custom/BeanShellHttpMapSource.java
 ===================================================================
---- src/main/java/mobac/mapsources/custom/BeanShellHttpMapSource.java	(revision 2471)
+--- src/main/java/mobac/mapsources/custom/BeanShellHttpMapSource.java	(revision 2473)
 +++ src/main/java/mobac/mapsources/custom/BeanShellHttpMapSource.java	(working copy)
 @@ -173,7 +173,7 @@
  			try {
@@ -84,7 +84,7 @@ Index: src/main/java/mobac/mapsources/custom/BeanShellHttpMapSource.java
  				if (!AH_ERROR.equals(msg)) {
 Index: src/main/java/mobac/program/download/MobacTrustManager.java
 ===================================================================
---- src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2471)
+--- src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2473)
 +++ src/main/java/mobac/program/download/MobacTrustManager.java	(working copy)
 @@ -106,7 +106,8 @@
  				// TODO: Add GUI for manually adding this certificate as trusted.
@@ -98,18 +98,19 @@ Index: src/main/java/mobac/program/download/MobacTrustManager.java
  	}
 Index: src/main/java/mobac/program/download/TileDownLoader.java
 ===================================================================
---- src/main/java/mobac/program/download/TileDownLoader.java	(revision 2471)
+--- src/main/java/mobac/program/download/TileDownLoader.java	(revision 2473)
 +++ src/main/java/mobac/program/download/TileDownLoader.java	(working copy)
-@@ -162,7 +162,7 @@
+@@ -161,9 +161,6 @@
+ 		int code = conn.getResponseCode();
  		byte[] data = loadBodyDataInBuffer(conn);
  
- 		if (code != HttpURLConnection.HTTP_OK)
+-		if (code != HttpURLConnection.HTTP_OK)
 -			throw new DownloadFailedException(conn, code);
-+			log.warn("HTTP Response code '"+code+"' for " + conn.getURL());
- 
+-
  		checkContentType(conn, data);
  		checkContentLength(conn, data);
-@@ -175,7 +175,7 @@
+ 
+@@ -175,7 +172,7 @@
  		TileImageType imageType = Utilities.getImageType(data);
  		if (imageType == null)
  			throw new UnrecoverableDownloadException("The returned image is of unknown format");
@@ -118,7 +119,23 @@ Index: src/main/java/mobac/program/download/TileDownLoader.java
  			TileStore.getInstance().putTileData(data, x, y, zoom, mapSource, timeLastModified, timeExpires, eTag);
  		}
  		Utilities.checkForInterruption();
-@@ -368,8 +368,8 @@
+@@ -316,12 +313,12 @@
+ 			data = Utilities.getInputBytes(wrappedInput);
+ 		} catch (IOException e) {
+ 			try (InputStream errorIn = conn.getErrorStream()) {
+-				byte[] errData = Utilities.getInputBytes(errorIn);
+-				log.trace("Retrieved " + errData.length + " error bytes for a HTTP " + conn.getResponseCode());
++				data = Utilities.getInputBytes(errorIn);
++				log.warn("[nono-patch] Retrieved " + data.length + " error bytes: " + conn.getResponseCode()+" "+ conn.getURL());
+ 			} catch (Exception ee) {
+ 				log.debug("Error retrieving error stream content: " + e);
+ 			}
+-			throw e;
++			// throw e;
+ 		}
+ 		log.trace("Retrieved " + data.length + " bytes for a HTTP " + conn.getResponseCode());
+ 		if (data.length == 0)
+@@ -368,8 +365,8 @@
  		if (contentType != null) {
  			contentType = contentType.toLowerCase();
  			if (!contentType.startsWith("image/")) {
