@@ -1,0 +1,13 @@
+diff --git "a/lib/zip_algorithm_xz.c" "b/lib/zip_algorithm_xz.c"
+index 6dd14ce7..0492fc40 100644
+--- "a/lib/zip_algorithm_xz.c"
++++ "b/lib/zip_algorithm_xz.c"
+@@ -36,6 +36,8 @@
+ 
+ #include <limits.h>
+ #include <stdlib.h>
++// https://github.com/ShiftMediaProject/liblzma/blob/master/windows/INSTALL-MSVC.txt
++#define LZMA_API_STATIC
+ #include <lzma.h>
+ 
+ struct ctx {

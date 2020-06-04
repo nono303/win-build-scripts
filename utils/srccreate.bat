@@ -72,6 +72,10 @@ git clone https://github.com/winlibs/libiconv.git libiconv
 cd /D libiconv
 git checkout tags/libiconv-1.16-1
 cd /D ..
+git clone https://github.com/ShiftMediaProject/liblzma.git liblzma
+cd /D liblzma
+git checkout tags/v5.2.5
+cd /D ..
 git clone https://github.com/maxmind/libmaxminddb.git libmaxminddb
 cd /D libmaxminddb
 git checkout tags/1.4.2
@@ -96,6 +100,10 @@ git clone https://gitlab.freedesktop.org/xorg/lib/libxpm libxpm
 cd /D libxpm
 git checkout tags/libXpm-3.5.13
 cd /D ..
+git clone https://github.com/nih-at/libzip libzip
+cd /D libzip
+git checkout tags/rel-1-6-1
+cd /D ..
 git clone https://github.com/xpol/lua lua
 cd /D lua
 git checkout origin/lua-5.3
@@ -106,15 +114,15 @@ git checkout tags/1.6.6
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2471
+svn update -r 2475
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1878071
+svn update -r 1878472
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v1.15.9
+git checkout tags/v1.15.10
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -134,7 +142,7 @@ git checkout tags/2.01.1
 cd /D ..
 git clone https://github.com/nghttp2/nghttp2.git nghttp2
 cd /D nghttp2
-git checkout tags/v1.40.0
+git checkout tags/v1.41.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -202,7 +210,7 @@ svn update -r 36
 cd /D ..
 git clone https://github.com/xdebug/xdebug.git xdebug
 cd /D xdebug
-git checkout tags/2.9.5
+git checkout tags/2.9.6
 cd /D ..
 git clone https://github.com/madler/zlib.git zlib
 cd /D zlib
