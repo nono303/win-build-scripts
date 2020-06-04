@@ -77,5 +77,5 @@ Usage: go command [options]
   * configexport: export cygwin and MSVS config to %PATH_BATCH%\config. 
                   import .vsconfg for MSVS 
 		  use setup.exe -P `awk 'NR==1{printf \$1}{printf ",%s", \$1}' cyg_XX_.packagelist` for cygwin (where _XX_ is 32 or 64...)
-  * curlperf: 
+  * curlperf: test curl tls performances between WinSSL & OpenSSL for curl.exe and php_curl extension
 ---------------------------
