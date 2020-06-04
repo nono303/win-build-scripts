@@ -1,5 +1,7 @@
 # Dirty old-fashioned cook batch scripts for Windows MSVC building
 
+##### *[...OK, but for building what?]((./SRC_VERSION.md))*
+
 - Apache httpd and its deps
 - Apache subversion and its deps
 - PHP and most of its deps (others come from [php-sdk prebuild deps](https://windows.php.net/downloadS/php-sdk/deps/))

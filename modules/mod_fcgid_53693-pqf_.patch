@@ -16,7 +16,7 @@ Index: modules/fcgid/fcgid_bridge.c
                 busy processes; the problem is just that we haven't spawned
                 anything yet, so waiting is pointless */
 +
-+/*			https://www.mail-archive.com/dev@httpd.apache.org/msg55268.html
++/*			https://bz.apache.org/bugzilla/show_bug.cgi?id=53693 / https://www.mail-archive.com/dev@httpd.apache.org/msg55262.html
 +            > apr_sleep(apr_time_from_msec(10));
 +			> ap_log_rerror(APLOG_MARK, APLOG_WARNING, 0, r,"mod_fcgid: ### handle_request: wait 10ms");
              if (i > 0 || j > 0 || count_busy_processes(r, &fcgi_request)) {

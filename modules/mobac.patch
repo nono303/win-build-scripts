@@ -1,6 +1,6 @@
 Index: build.xml
 ===================================================================
---- build.xml	(revision 2471)
+--- build.xml	(revision 2475)
 +++ build.xml	(working copy)
 @@ -3,9 +3,6 @@
  	<property file="src/main/resources/mobac/mobac.properties" />
@@ -18,13 +18,82 @@ Index: build.xml
  		<antcall target="svnversion_write_property_file" />
 +		<property name="jar.name" value="Mobile_Atlas_Creator_${mobac.revision.new}.jar" />
 +		<property name="zip.name" value="Mobile Atlas Creator ${mobac.version}-${mobac.revision.new}.zip" />
-+	    <property name="zip_src.name" value="Mobile Atlas Creator ${mobac.version}-${mobac.revision.new} src.zip" />
++		<property name="zip_src.name" value="Mobile Atlas Creator ${mobac.version}-${mobac.revision.new} src.zip" />
  	</target>
  
  	<target name="svnversion_write_property_file" unless="mobac.revision.exported">
+Index: src/main/java/mobac/exceptions/DownloadFailedException.java
+===================================================================
+--- src/main/java/mobac/exceptions/DownloadFailedException.java	(revision 2475)
++++ src/main/java/mobac/exceptions/DownloadFailedException.java	(working copy)
+@@ -18,6 +18,7 @@
+ 
+ import java.io.IOException;
+ import java.net.HttpURLConnection;
++import mobac.utilities.Utilities;
+ 
+ import org.apache.log4j.Logger;
+ 
+@@ -27,6 +28,7 @@
+ 
+ 	private final HttpURLConnection connection;
+ 	private final byte[] responseData;
++	private final boolean typeImage;
+ 
+ 	public DownloadFailedException(HttpURLConnection connection, byte[] responseData) throws IOException {
+ 		this(connection, responseData, null);
+@@ -37,6 +39,11 @@
+ 		super("HTTP error: " + connection.getResponseCode(), cause);
+ 		this.connection = connection;
+ 		this.responseData = responseData;
++		if (Utilities.getImageType(responseData) == null){
++			this.typeImage = false;
++		} else {
++			this.typeImage = true;
++		}
+ 	}
+ 
+ 	public int getHttpResponseCode() {
+@@ -47,6 +54,10 @@
+ 		}
+ 	}
+ 
++	public boolean isTypeImage() {
++		return typeImage;
++	}
++
+ 	public byte[] getResponseData() {
+ 		return responseData;
+ 	}
+@@ -53,9 +64,22 @@
+ 
+ 	public String generateReponseErrorText() {
+ 		try {
+-			return "HTTP " + connection.getResponseCode() + " " + connection.getResponseMessage();
+-		} catch (IOException e) {
+-			log.error("Failed to generate generate reponse error text", e);
++			String contentType = connection.getContentType();
++			String payload = "";
++			if(responseData != null && (contentType.startsWith("text/html") || contentType.startsWith("application/xml") || contentType.startsWith("application/json"))){
++				String stringdata = new String(responseData);
++				payload = stringdata.replace("<br>",System.getProperty("line.separator"));
++			}
++			return 
++				connection.getURL()
++				+System.getProperty("line.separator")
++				+"> " + connection.getResponseCode() + " " + connection.getResponseMessage()
++				+System.getProperty("line.separator")
++				+": " + contentType
++				+System.getProperty("line.separator")
++				+payload
++				;
++		} catch (Exception e) {
+ 			return "Unknown error";
+ 		}
+ 	}
 Index: src/main/java/mobac/gui/MainGUI.java
 ===================================================================
---- src/main/java/mobac/gui/MainGUI.java	(revision 2471)
+--- src/main/java/mobac/gui/MainGUI.java	(revision 2475)
 +++ src/main/java/mobac/gui/MainGUI.java	(working copy)
 @@ -163,7 +163,7 @@
  	private static Color checkboxBackgroundColor = new Color(0, 0, 0, 40);
@@ -43,9 +112,64 @@ Index: src/main/java/mobac/gui/MainGUI.java
  
  		leftPanelContent = new JPanel(new GridBagLayout());
  		leftPanelContent.add(mapSourcePanel, gbc_eol);
+Index: src/main/java/mobac/gui/mapview/Tile.java
+===================================================================
+--- src/main/java/mobac/gui/mapview/Tile.java	(revision 2475)
++++ src/main/java/mobac/gui/mapview/Tile.java	(working copy)
+@@ -185,6 +185,16 @@
+ 		tileState = TileState.TS_ERROR;
+ 	}
+ 
++	public void setErrorImage(byte[] imageData) {
++		try {
++			image = ImageIO.read(new ByteArrayInputStream(imageData));
++		} catch (IOException e) {
++			log.error("Failed to setErrorImage with payload data", e);
++			image = ERROR_IMAGE;
++		}
++		tileState = TileState.TS_ERROR;
++    }
++
+ 	public String getErrorMessage() {
+ 		return errorMessage;
+ 	}
+@@ -242,7 +252,13 @@
+ 		g.drawImage(image, x, y, tileSize, tileSize, bgColor, null);
+ 		if (errorMessage != null) {
+ 			g.setColor(Color.BLACK);
+-			g.drawString(errorMessage, x + 15, y + 15);
++			int i = 1;
++			for (String line : errorMessage.split("\n")){
++				for (String linepart : line.split("(?<=\\G.{45})")) {
++					g.drawString(linepart, x + 5, y + (15*i));
++					i++;
++				}
++			}
+ 		}
+ 	}
+ 
+Index: src/main/java/mobac/gui/mapview/TileLoader.java
+===================================================================
+--- src/main/java/mobac/gui/mapview/TileLoader.java	(revision 2475)
++++ src/main/java/mobac/gui/mapview/TileLoader.java	(working copy)
+@@ -118,8 +118,12 @@
+ 				tile.setErrorMessage("TLS error");
+ 			} catch (DownloadFailedException e) {
+ 				log.warn("Downloading of " + tile + " failed: " + e.getMessage());
+-				tile.setErrorImage();
+-				tile.setErrorMessage(e.generateReponseErrorText());
++				if(e.isTypeImage()){
++					tile.setErrorImage(e.getResponseData());
++				} else {
++					tile.setErrorImage();
++					tile.setErrorMessage(e.generateReponseErrorText());
++				}
+ 			} catch (IOException e) {
+ 				log.warn("Downloading of " + tile + " failed: " + e.getMessage());
+ 				tile.setErrorImage();
 Index: src/main/java/mobac/gui/panels/JMapSourcesPanel.java
 ===================================================================
---- src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2471)
+--- src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2475)
 +++ src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(working copy)
 @@ -45,7 +45,7 @@
  		JScrollPane mapSourceTreeScrollPane = new JScrollPane(mapSourceTree, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -58,7 +182,7 @@ Index: src/main/java/mobac/gui/panels/JMapSourcesPanel.java
  	}
 Index: src/main/java/mobac/gui/settings/SettingsGUI.java
 ===================================================================
---- src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2471)
+--- src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2475)
 +++ src/main/java/mobac/gui/settings/SettingsGUI.java	(working copy)
 @@ -97,7 +97,7 @@
  
@@ -69,22 +193,9 @@ Index: src/main/java/mobac/gui/settings/SettingsGUI.java
  
  	private static final long MBIT1 = 1000000 / 8;
  
-Index: src/main/java/mobac/mapsources/custom/BeanShellHttpMapSource.java
-===================================================================
---- src/main/java/mobac/mapsources/custom/BeanShellHttpMapSource.java	(revision 2471)
-+++ src/main/java/mobac/mapsources/custom/BeanShellHttpMapSource.java	(working copy)
-@@ -173,7 +173,7 @@
- 			try {
- 				interpreter.set("conn", conn);
- 				interpreter.eval("addHeaders(conn);");
--				System.out.println(conn.getRequestProperties());
-+				// System.out.println(conn.getRequestProperties());
- 			} catch (EvalError e) {
- 				String msg = e.getMessage();
- 				if (!AH_ERROR.equals(msg)) {
 Index: src/main/java/mobac/program/download/MobacTrustManager.java
 ===================================================================
---- src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2471)
+--- src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2475)
 +++ src/main/java/mobac/program/download/MobacTrustManager.java	(working copy)
 @@ -106,7 +106,8 @@
  				// TODO: Add GUI for manually adding this certificate as trusted.
@@ -98,34 +209,45 @@ Index: src/main/java/mobac/program/download/MobacTrustManager.java
  	}
 Index: src/main/java/mobac/program/download/TileDownLoader.java
 ===================================================================
---- src/main/java/mobac/program/download/TileDownLoader.java	(revision 2471)
+--- src/main/java/mobac/program/download/TileDownLoader.java	(revision 2475)
 +++ src/main/java/mobac/program/download/TileDownLoader.java	(working copy)
-@@ -162,7 +162,7 @@
- 		byte[] data = loadBodyDataInBuffer(conn);
- 
- 		if (code != HttpURLConnection.HTTP_OK)
--			throw new DownloadFailedException(conn, code);
-+			log.warn("HTTP Response code '"+code+"' for " + conn.getURL());
- 
- 		checkContentType(conn, data);
- 		checkContentLength(conn, data);
-@@ -175,7 +175,7 @@
- 		TileImageType imageType = Utilities.getImageType(data);
- 		if (imageType == null)
- 			throw new UnrecoverableDownloadException("The returned image is of unknown format");
--		if (useTileStore) {
-+		if (useTileStore && code == HttpURLConnection.HTTP_OK) {
- 			TileStore.getInstance().putTileData(data, x, y, zoom, mapSource, timeLastModified, timeExpires, eTag);
+@@ -320,15 +320,17 @@
+ 			}
+ 			data = Utilities.getInputBytes(wrappedInput);
+ 		} catch (IOException e) {
++			byte[] errData;
+ 			try (InputStream errorIn = conn.getErrorStream()) {
+-				byte[] errData = Utilities.getInputBytes(errorIn);
++				errData = Utilities.getInputBytes(errorIn);
+ 				log.trace("Retrieved " + errData.length + " error bytes for a HTTP " + conn.getResponseCode() + " from "
+ 						+ conn.getURL());
+-				throw new DownloadFailedException(conn, errData, e);
++				
+ 			} catch (Exception e1) {
+ 				log.debug("Error retrieving error stream content: " + e1);
+-				throw new DownloadFailedException(conn, null, e);
++				errData = null;
+ 			}
++			throw new DownloadFailedException(conn, errData, e);
  		}
- 		Utilities.checkForInterruption();
-@@ -368,8 +368,8 @@
+ 		log.trace("Retrieved " + data.length + " bytes for a HTTP " + conn.getResponseCode());
+ 		if (data.length == 0) {
+@@ -371,7 +373,7 @@
+ 		return (onlineETag.equals(eTag));
+ 	}
+ 
+-	protected static void checkContentType(HttpURLConnection conn, byte[] data) throws UnrecoverableDownloadException {
++	protected static void checkContentType(HttpURLConnection conn, byte[] data) throws DownloadFailedException, IOException {
+ 		String contentType = conn.getContentType();
  		if (contentType != null) {
  			contentType = contentType.toLowerCase();
- 			if (!contentType.startsWith("image/")) {
--				if (log.isTraceEnabled() && contentType.startsWith("text/")) {
--					log.trace("Content (" + contentType + "): " + new String(data));
-+				if (contentType.startsWith("text/")) {
-+					log.warn("Content (" + contentType + "): " + new String(data));
+@@ -379,8 +381,7 @@
+ 				if (log.isTraceEnabled() && contentType.startsWith("text/")) {
+ 					log.trace("Content (" + contentType + "): " + new String(data));
  				}
- 				throw new UnrecoverableDownloadException("Content type of the loaded image is unknown: " + contentType,
- 						UnrecoverableDownloadException.ERROR_CODE_CONTENT_TYPE);
+-				throw new UnrecoverableDownloadException("Content type of the loaded image is unknown: " + contentType,
+-						UnrecoverableDownloadException.ERROR_CODE_CONTENT_TYPE);
++				throw new DownloadFailedException(conn, data);
+ 			}
+ 		}
+ 	}

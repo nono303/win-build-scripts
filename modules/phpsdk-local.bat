@@ -31,6 +31,8 @@ cd /D %PHP_SRC_DIR%
 call buildconf
 
 	REM ~~~~~~~~~~~~ Patch some stuff in this shity configure.js, accoring to self made deps
+	REM zip
+sed -i 's/libzip_a/zip/g' %CYGPATH_SRC%/php-src/configure.js
 	REM xpm
 sed -i 's/xpm.h/X11\\\\\\\\xpm.h/g' %CYGPATH_SRC%/php-src/configure.js
 	REM bz2
