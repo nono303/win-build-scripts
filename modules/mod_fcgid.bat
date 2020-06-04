@@ -1,8 +1,7 @@
-REM @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
-rmdir %PATH_BUILD%/%1
-mkdir %PATH_BUILD%/%1
-cd /D %PATH_BUILD%/%1
+	REM https://bz.apache.org/bugzilla/attachment.cgi?id=35611
+xcopy /C /F /Y C:\sdk\batch\modules\fcgid_bridge.c C:\sdk\src\mod_fcgid\modules\fcgid\fcgid_bridge.c*
 
 cmake %CMAKE_OPTS% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
