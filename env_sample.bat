@@ -30,8 +30,8 @@ set PATH_RELEASE_PHP=D:\github\NONO_phpwin-perfbuild
 	REM copy for github : unset to disable
 set PATH_GITHUB_PHPMEMCACHE=D:\github\NONO_PHP7-memcache-dll
 set PATH_GITHUB_MODMD=D:\github\NONO_mod_md
-	REM runtime home (ant & java for mobac)
-set PATH_JDK=%PATH_SOFTS%\jdk8
+	REM JDK root (ant & java for mobac, java_hl for subversion)
+set PATH_JDK=%PATH_SOFTS%\openjdk11
 set JAVA_HOME=%PATH_JDK%\x64
 set ANT_HOME=%PATH_SOFTS%\eclipse\plugins\org.apache.ant_1.10.7.v20190926-0324
 
