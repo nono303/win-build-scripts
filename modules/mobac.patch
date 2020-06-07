@@ -1,6 +1,6 @@
 Index: build.xml
 ===================================================================
---- build.xml	(revision 2477)
+--- build.xml	(revision 2478)
 +++ build.xml	(working copy)
 @@ -3,9 +3,6 @@
  	<property file="src/main/resources/mobac/mobac.properties" />
@@ -24,7 +24,7 @@ Index: build.xml
  	<target name="svnversion_write_property_file" unless="mobac.revision.exported">
 Index: src/main/java/mobac/gui/MainGUI.java
 ===================================================================
---- src/main/java/mobac/gui/MainGUI.java	(revision 2477)
+--- src/main/java/mobac/gui/MainGUI.java	(revision 2478)
 +++ src/main/java/mobac/gui/MainGUI.java	(working copy)
 @@ -163,7 +163,7 @@
  	private static Color checkboxBackgroundColor = new Color(0, 0, 0, 40);
@@ -45,7 +45,7 @@ Index: src/main/java/mobac/gui/MainGUI.java
  		leftPanelContent.add(mapSourcePanel, gbc_eol);
 Index: src/main/java/mobac/gui/panels/JMapSourcesPanel.java
 ===================================================================
---- src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2477)
+--- src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2478)
 +++ src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(working copy)
 @@ -45,7 +45,7 @@
  		JScrollPane mapSourceTreeScrollPane = new JScrollPane(mapSourceTree, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -58,7 +58,7 @@ Index: src/main/java/mobac/gui/panels/JMapSourcesPanel.java
  	}
 Index: src/main/java/mobac/gui/settings/SettingsGUI.java
 ===================================================================
---- src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2477)
+--- src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2478)
 +++ src/main/java/mobac/gui/settings/SettingsGUI.java	(working copy)
 @@ -97,7 +97,7 @@
  
@@ -69,17 +69,48 @@ Index: src/main/java/mobac/gui/settings/SettingsGUI.java
  
  	private static final long MBIT1 = 1000000 / 8;
  
+Index: src/main/java/mobac/mapsources/loader/CustomMapSourceLoader.java
+===================================================================
+--- src/main/java/mobac/mapsources/loader/CustomMapSourceLoader.java	(revision 2478)
++++ src/main/java/mobac/mapsources/loader/CustomMapSourceLoader.java	(working copy)
+@@ -219,13 +219,13 @@
+ 		MapSource updatedMapSource = loadCustomMapSource(loaderInfo.getSourceFile());
+ 
+ 		if (!mapSource.getClass().getName().equals(updatedMapSource.getClass().getName())) {
+-			throw new RuntimeException("Reloading failed: The map source type has changed in file \""
+-					+ loaderInfo.getSourceFileSize() + "\"");
++			throw new MapSourceCreateException("Reloading failed: The map source type has changed in file \""
++					+ loaderInfo.getSourceFile().getName() + "\"");
+ 		}
+ 
+ 		if (!mapSource.getName().equals(updatedMapSource.getName())) {
+-			throw new RuntimeException("Reloading failed: The map source name has changed in file \""
+-					+ loaderInfo.getSourceFileSize() + "\"");
++			throw new MapSourceCreateException("Reloading failed: The map source name has changed in file \""
++					+ loaderInfo.getSourceFile().getName() + "\"");
+ 		}
+ 
+ 		((ReloadableMapSource<MapSource>) mapSource).applyChangesFrom(updatedMapSource);
 Index: src/main/java/mobac/program/download/MobacTrustManager.java
 ===================================================================
---- src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2477)
+--- src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2478)
 +++ src/main/java/mobac/program/download/MobacTrustManager.java	(working copy)
+@@ -97,7 +97,7 @@
+ 			defaultTrustManager.checkServerTrusted(chain, authType);
+ 		} catch (CertificateException e) {
+ 			X509Certificate cert = chain[0]; // get the leaf certificate
+-			log.error("SSL error: " + e.getMessage());
++			log.debug("SSL error: " + e.getMessage());
+ 			synchronized (this) {
+ 				String pubKeySha256Hash = getPublicKeySha256Hash(cert);
+ 				if (isCertificateTrusted(pubKeySha256Hash)) {
 @@ -106,7 +106,8 @@
  				// TODO: Add GUI for manually adding this certificate as trusted.
  				String message = "Untrusted certificate encountered: publicKeyHash=\"" + pubKeySha256Hash
  						+ "\"; certificate issued for " + cert.getSubjectDN();
 -				throw new CertificateException(message);
 +				// throw new CertificateException(message);
-+				log.warn(message);
++				log.debug(message);
  			}
  		}
  	}
