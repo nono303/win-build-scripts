@@ -9,5 +9,7 @@ sed -i -E 's/Revision: [0-9]+/Revision: %MOBAC_REVISION%/g' %CYGPATH_SRC%/%1/src
 call "%ANT_HOME%\bin\ant.bat" ^
 	clean_workspace, ^
 	delete_build, ^
-	build_mapsources, ^
+	svnversion_svn, ^
+	svnversion_write_property_file, ^
+	build, ^
 	create_jar
