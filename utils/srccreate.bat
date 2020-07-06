@@ -34,7 +34,7 @@ git checkout tags/cares-1_16_1
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-7_70_0
+git checkout tags/curl-7_71_1
 cd /D ..
 git clone git://git.sv.nongnu.org/freetype/freetype2.git freetype2
 cd /D freetype2
@@ -102,7 +102,7 @@ git checkout tags/libXpm-3.5.13
 cd /D ..
 git clone https://github.com/nih-at/libzip libzip
 cd /D libzip
-git checkout tags/rel-1-6-1
+git checkout tags/v1.7.1
 cd /D ..
 git clone https://github.com/xpol/lua lua
 cd /D lua
@@ -114,15 +114,15 @@ git checkout tags/1.6.6
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2477
+svn update -r 2488
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1878495
+svn update -r 1879533
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v1.15.10
+git checkout tags/v1.15.11
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -170,7 +170,7 @@ git checkout tags/1.1.23
 cd /D ..
 git clone https://github.com/kjdev/php-ext-brotli.git php-ext-brotli
 cd /D php-ext-brotli
-git checkout tags/0.7.0
+git checkout tags/0.9.0
 cd /D ..
 git clone https://github.com/microsoft/php-sdk-binary-tools.git php-sdk
 cd /D php-sdk
@@ -178,11 +178,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-7.4.6
+git checkout tags/php-7.4.7
 cd /D ..
 git clone https://github.com/nono303/simpleDLNA.git sdlna
 cd /D sdlna
-git checkout master
+git checkout tags/v1.0.3
 cd /D ..
 git clone https://github.com/apache/serf.git serf
 cd /D serf
@@ -190,7 +190,7 @@ git checkout trunk
 cd /D ..
 git clone https://github.com/azadkuh/sqlite-amalgamation sqlite
 cd /D sqlite
-git checkout tags/3.31.1
+git checkout tags/3.32.3
 cd /D ..
 git clone https://github.com/apache/subversion.git subversion
 cd /D subversion
