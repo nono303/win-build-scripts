@@ -21,4 +21,7 @@ cmake %CMAKE_OPTS% ^
 
 nmake %NMAKE_OPTS% clean install
 
+xcopy /C /F /Y %PATH_BUILD%\%1\src\*.pdb %PATH_INSTALL%\bin\*
+xcopy /C /F /Y %PATH_BUILD%\%1\lib\*.pdb %PATH_INSTALL%\bin\*
+
 for %%D in (zip.dll zipcmp.exe zipmerge.exe ziptool.exe) do (call do_php %PATH_UTILS%\sub\version.php apr-util %PATH_INSTALL%\bin\%%D)
