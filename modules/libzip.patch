@@ -1,13 +1,17 @@
-diff --git "a/lib/zip_algorithm_xz.c" "b/lib/zip_algorithm_xz.c"
-index 6dd14ce7..0492fc40 100644
---- "a/lib/zip_algorithm_xz.c"
-+++ "b/lib/zip_algorithm_xz.c"
-@@ -36,6 +36,8 @@
+diff --git a/lib/zip_algorithm_xz.c b/lib/zip_algorithm_xz.c
+index 026575a6..79a43860 100644
+--- a/lib/zip_algorithm_xz.c
++++ b/lib/zip_algorithm_xz.c
+@@ -35,9 +35,12 @@
+ #include "zipint.h"
  
  #include <limits.h>
- #include <stdlib.h>
 +// https://github.com/ShiftMediaProject/liblzma/blob/master/windows/INSTALL-MSVC.txt
 +#define LZMA_API_STATIC
  #include <lzma.h>
+ #include <stdlib.h>
  
++
  struct ctx {
+     zip_error_t *error;
+     bool compress;
