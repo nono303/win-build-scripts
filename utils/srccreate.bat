@@ -42,7 +42,7 @@ git checkout tags/VER-2-10-2
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
-git checkout tags/2.4.43
+git checkout tags/2.4.46
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -62,7 +62,7 @@ git checkout tags/rel-4.33
 cd /D ..
 git clone https://github.com/libevent/libevent.git libevent
 cd /D libevent
-git checkout tags/release-2.1.11-stable
+git checkout tags/release-2.1.12-stable
 cd /D ..
 git clone https://github.com/libexpat/libexpat.git libexpat
 cd /D libexpat
@@ -102,7 +102,7 @@ git checkout tags/libXpm-3.5.13
 cd /D ..
 git clone https://github.com/nih-at/libzip libzip
 cd /D libzip
-git checkout tags/v1.7.1
+git checkout tags/v1.7.3
 cd /D ..
 git clone https://github.com/xpol/lua lua
 cd /D lua
@@ -114,15 +114,15 @@ git checkout tags/1.6.6
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2488
+svn update -r 2489
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1879533
+svn update -r 1880654
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v1.15.11
+git checkout tags/v1.15.13
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -170,7 +170,7 @@ git checkout tags/1.1.23
 cd /D ..
 git clone https://github.com/kjdev/php-ext-brotli.git php-ext-brotli
 cd /D php-ext-brotli
-git checkout tags/0.9.0
+git checkout tags/0.11.0
 cd /D ..
 git clone https://github.com/microsoft/php-sdk-binary-tools.git php-sdk
 cd /D php-sdk
@@ -178,7 +178,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-7.4.7
+git checkout tags/php-7.4.8
 cd /D ..
 git clone https://github.com/nono303/simpleDLNA.git sdlna
 cd /D sdlna
