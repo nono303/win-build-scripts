@@ -31,8 +31,7 @@ set PATH_RELEASE_PHP=D:\github\NONO_phpwin-perfbuild
 set PATH_GITHUB_PHPMEMCACHE=D:\github\NONO_PHP7-memcache-dll
 set PATH_GITHUB_MODMD=D:\github\NONO_mod_md
 	REM JDK root (ant & java for mobac, java_hl for subversion)
-set PATH_JDK=%PATH_SOFTS%\openjdk11
-set JAVA_HOME=%PATH_JDK%\x64
+set JAVA_HOME=%PATH_SOFTS%\openjdk
 set ANT_HOME=%PATH_SOFTS%\eclipse\plugins\org.apache.ant_1.10.7.v20190926-0324
 
 REM ########################## BIN PATH
