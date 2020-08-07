@@ -10,7 +10,7 @@ python gen-make.py ^
 	--release ^
 	-t vcproj ^
 	--vsnet-version=2017 ^
-	--with-jdk=%PATH_JDK%\%ARCH% ^
+	--with-jdk=%JAVA_HOME% ^
 	--with-serf=%PATH_INSTALL%\include ^
 	--with-sqlite=%PATH_SRC%\sqlite ^
 	--with-openssl=%PATH_INSTALL% ^
