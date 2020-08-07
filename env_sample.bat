@@ -30,15 +30,14 @@ set PATH_RELEASE_PHP=D:\github\NONO_phpwin-perfbuild
 	REM copy for github : unset to disable
 set PATH_GITHUB_PHPMEMCACHE=D:\github\NONO_PHP7-memcache-dll
 set PATH_GITHUB_MODMD=D:\github\NONO_mod_md
-	REM runtime home (ant & java for mobac)
-set PATH_JDK=%PATH_SOFTS%\jdk8
-set JAVA_HOME=%PATH_JDK%\x64
+	REM JDK root (ant & java for mobac, java_hl for subversion)
+set JAVA_HOME=%PATH_SOFTS%\openjdk
 set ANT_HOME=%PATH_SOFTS%\eclipse\plugins\org.apache.ant_1.10.7.v20190926-0324
 
 REM ########################## BIN PATH
 set PATH_VS=%PATH_SOFTS%\vs19\Community
 set PATH_BIN_GIT=C:\PROGRA~1\Git\bin
-set PATH_BIN_PYTHON=%PATH_SOFTS%\python2
+set PATH_BIN_PYTHON=%PATH_SOFTS%\python2;%PATH_SOFTS%\python2\Scripts
 set PATH_BIN_CYGWIN=%PATH_ROOT_CYGWIN%%CYGV%\bin
 set PATH_BIN_NASM=%PATH_SOFTS%\nasm
 set PATH_BIN_PERL=%PATH_SOFTS%\perl\bin
