@@ -3,6 +3,8 @@ call %PATH_MODULES_COMMON%\init.bat %1 cmake
 	REM static rename
 sed -i 's/${LIB_NAME}s/${LIB_NAME}_a/g' %CYGPATH_SRC%/%1/CMakeLists.txt
 sed -i 's/tidy-static/tidy_a/g' %CYGPATH_SRC%/%1/CMakeLists.txt
+	REM shared rename
+sed -i 's/OUTPUT_NAME ${LIB_NAME} /OUTPUT_NAME lib${LIB_NAME} /g' %CYGPATH_SRC%/%1/CMakeLists.txt
 
 cmake %CMAKE_OPTS% ^
 	-DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
@@ -26,6 +28,6 @@ cmake %CMAKE_OPTS% ^
 
 nmake %NMAKE_OPTS% clean install
 
-xcopy /C /F /Y %PATH_BUILD%\%1\tidy.pdb %PATH_INSTALL%\bin\*
+xcopy /C /F /Y %PATH_BUILD%\%1\*.pdb %PATH_INSTALL%\bin\*
 xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\tidy_a.dir\tidy_a.pdb %PATH_INSTALL%\lib\*
-for %%X in (exe dll) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\tidy.%%X)
+for %%X in (tidy.exe libtidy.dll) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)

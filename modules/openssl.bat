@@ -1,5 +1,10 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1
 
+	REM https://wiki.openssl.org/index.php/Compilation_and_Installation
+	REM no-deprecated : errors with APR
+		REM apr_crypto_openssl.obj : error LNK2001: unresolved external symbol 
+		REM ERR_load_crypto_strings EVP_cleanup ENGINE_cleanup ERR_free_strings OpenSSL_add_all_algorithms
+
 perl Configure %perlbuild% ^
 shared no-unit-test no-external-tests no-ssl3 no-weak-ssl-ciphers no-tests zlib zlib-dynamic ^
 -threads zlib-dynamic ^
