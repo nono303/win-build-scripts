@@ -30,8 +30,9 @@ for %%C in ("-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" "-DBUILD_SHARED_LIBS=ON -
 	nmake %NMAKE_OPTS% clean install
 		REM for "-DBUILD_SHARED_LIBS=ON -DBUILD_SHELL=OFF"
 	sed -i 's/STATIC sqlite3.c/SHARED sqlite3.c/g' %CYGPATH_SRC%/%1/CMakeLists.txt
+	sed -i 's/OUTPUT_NAME   sqlite3/OUTPUT_NAME   libsqlite3/g' %CYGPATH_SRC%/%1/CMakeLists.txt
 )
 
-for %%D in (dll pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\sqlite3.%%D %PATH_INSTALL%\bin\*)
+for %%D in (dll pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\*.%%D %PATH_INSTALL%\bin\*)
 xcopy /C /F /Y %PATH_SRC%\%1\sqlite3ext.h %PATH_INSTALL%\include\sqlite3\*
-for %%X in (dll exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\sqlite3.%%X)
+for %%X in (libsqlite3.dll sqlite3.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
