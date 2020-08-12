@@ -1,7 +1,32 @@
-diff --git "a/php7/memcache_pool.h" "b/php7/memcache_pool.h"
-index 2382aa8..34497d0 100644
---- "a/php7/memcache_pool.h"
-+++ "b/php7/memcache_pool.h"
+diff --git a/php7/memcache.c b/php7/memcache.c
+index 89ca4e0..cc1b759 100644
+--- a/php7/memcache.c
++++ b/php7/memcache.c
+@@ -292,14 +292,14 @@ PHP_INI_BEGIN()
+ 	STD_PHP_INI_ENTRY("memcache.session_redundancy",	"2",			PHP_INI_ALL, OnUpdateRedundancy,	session_redundancy,	zend_memcache_globals,	memcache_globals)
+ 	STD_PHP_INI_ENTRY("memcache.compress_threshold",	"20000",		PHP_INI_ALL, OnUpdateCompressThreshold,	compress_threshold,	zend_memcache_globals,	memcache_globals)
+ 	STD_PHP_INI_ENTRY("memcache.lock_timeout",			"15",			PHP_INI_ALL, OnUpdateLockTimeout,		lock_timeout,		zend_memcache_globals,	memcache_globals)
+-	STD_PHP_INI_ENTRY("memcache.session_prefix_host_key",       			"0",			PHP_INI_ALL, OnUpdateBool, session_prefix_host_key, zend_memcache_globals, memcache_globals)
+-	STD_PHP_INI_ENTRY("memcache.session_prefix_host_key_remove_www",    	"1",			PHP_INI_ALL, OnUpdateBool, session_prefix_host_key_remove_www, zend_memcache_globals, memcache_globals)
+-	STD_PHP_INI_ENTRY("memcache.session_prefix_host_key_remove_subdomain",  "0",			PHP_INI_ALL, OnUpdateBool, session_prefix_host_key_remove_subdomain, zend_memcache_globals, memcache_globals)
++	STD_PHP_INI_BOOLEAN("memcache.session_prefix_host_key",       			"0",			PHP_INI_ALL, OnUpdateBool, session_prefix_host_key, zend_memcache_globals, memcache_globals)
++	STD_PHP_INI_BOOLEAN("memcache.session_prefix_host_key_remove_www",    	"1",			PHP_INI_ALL, OnUpdateBool, session_prefix_host_key_remove_www, zend_memcache_globals, memcache_globals)
++	STD_PHP_INI_BOOLEAN("memcache.session_prefix_host_key_remove_subdomain",  "0",			PHP_INI_ALL, OnUpdateBool, session_prefix_host_key_remove_subdomain, zend_memcache_globals, memcache_globals)
+ 	STD_PHP_INI_ENTRY("memcache.session_prefix_static_key",         		NULL,			PHP_INI_ALL, OnUpdatePrefixStaticKey, session_prefix_static_key, zend_memcache_globals, memcache_globals)
+ 	STD_PHP_INI_ENTRY("memcache.session_save_path",         				NULL,			PHP_INI_ALL, OnUpdateString, session_save_path, zend_memcache_globals, memcache_globals)
+-	STD_PHP_INI_ENTRY("memcache.prefix_host_key",       					"0",			PHP_INI_ALL, OnUpdateBool, prefix_host_key, zend_memcache_globals, memcache_globals)
+-	STD_PHP_INI_ENTRY("memcache.prefix_host_key_remove_www",    			"1",			PHP_INI_ALL, OnUpdateBool, prefix_host_key_remove_www, zend_memcache_globals, memcache_globals)
+-	STD_PHP_INI_ENTRY("memcache.prefix_host_key_remove_subdomain",  		"0",			PHP_INI_ALL, OnUpdateBool, prefix_host_key_remove_subdomain, zend_memcache_globals, memcache_globals)
++	STD_PHP_INI_BOOLEAN("memcache.prefix_host_key",       					"0",			PHP_INI_ALL, OnUpdateBool, prefix_host_key, zend_memcache_globals, memcache_globals)
++	STD_PHP_INI_BOOLEAN("memcache.prefix_host_key_remove_www",    			"1",			PHP_INI_ALL, OnUpdateBool, prefix_host_key_remove_www, zend_memcache_globals, memcache_globals)
++	STD_PHP_INI_BOOLEAN("memcache.prefix_host_key_remove_subdomain",  		"0",			PHP_INI_ALL, OnUpdateBool, prefix_host_key_remove_subdomain, zend_memcache_globals, memcache_globals)
+ 	STD_PHP_INI_ENTRY("memcache.prefix_static_key",         				NULL,			PHP_INI_ALL, OnUpdatePrefixStaticKey, prefix_static_key, zend_memcache_globals, memcache_globals)
+ PHP_INI_END()
+ /* }}} */
+diff --git a/php7/memcache_pool.h b/php7/memcache_pool.h
+index 2382aa8..c2669c5 100644
+--- a/php7/memcache_pool.h
++++ b/php7/memcache_pool.h
 @@ -415,15 +415,15 @@ ZEND_BEGIN_MODULE_GLOBALS(memcache)
  	long compress_threshold;
  	long lock_timeout;
