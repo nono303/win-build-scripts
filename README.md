@@ -41,12 +41,12 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | "my"version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2019 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 16.7.0 (14.27) | `.vsconfig`         |
+| [Visual Studio 2019 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 16.7.2 (14.27) | `.vsconfig`         |
 | [Cygwin](https://cygwin.com/install.html)                    | x86  | 3.1.6          | `cyg32.packagelist` |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.1.6          | `cyg64.packagelist` |
 | [Python 2.7](https://www.python.org/downloads/)              | x64  | 2.7.18         |                     |
 | [OpenJDK](https://jdk.java.net/14/)                          | x64  | 14.0.2         |                     |
-| [ActivePerl](https://downloads.activestate.com/ActivePerl/releases/) | x64  | 5.28.1         |                     |
+| [ActivePerl](https://downloads.activestate.com/ActivePerl/releases/) | x64  | 5.28.1.2801    |                     |
 | [Netwide Assembler](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.15.03        |                     |
 | [Git](https://git-scm.com/download/win)                      | x64  | 2.28.0         |                     |
 | verpatch                                                     | x64  | 1.0.15.1       |                     |

@@ -149,6 +149,7 @@
 			preg_match("/ ([^ ]+) linker version/",$dbh,$matches);
 			$data[$cur][40] = $matches[1];
 
+			$data[$cur][20] = "";
 			if(is_int(strpos($dbh,"(LTCG)")))
 				$data[$cur][20] = "ltcg";
 

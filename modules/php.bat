@@ -1,5 +1,12 @@
 	REM ~~~~~~~~~~~~ init src
 for %%M in (php-src pecl-memcache pecl-text-xdiff php-ext-brotli xdebug php-sdk) do (call %PATH_MODULES_COMMON%\init.bat %%M)
+	REM revision for pecl_memcache
+cd /D %PATH_SRC%\pecl-memcache
+FOR /F "tokens=* USEBACKQ" %%F in (`git rev-parse --short HEAD`) do (set PECLMEMCACHEGITVER=%%F)
+FOR /F "tokens=* USEBACKQ" %%F in (`git rev-parse --abbrev-ref HEAD`) do (set PECLMEMCACHEGITBRANCH=%%F)
+REM FOR /F "tokens=* USEBACKQ" %%F in (`git config --get remote.origin.url`) do (set PECLMEMCACHEGITUPSTREAM=%%F)
+sed -i 's/\$Revision\$/%PECLMEMCACHEGITBRANCH% - %PECLMEMCACHEGITVER%/g' %PATH_SRC%/pecl-memcache/php7/memcache.c
+
 	REM other way only first time 'phpsdk_buildtree phpmaster'
 if not exist %PATH_SRC%\php-sdk\phpmaster\. mklink /J %PATH_SRC%\php-sdk\phpmaster %PATH_SDK_ROOT%\phpmaster 
 
@@ -7,7 +14,7 @@ if not exist %PATH_SRC%\php-sdk\phpmaster\. mklink /J %PATH_SRC%\php-sdk\phpmast
 set LIB=
 set INCLUDE=
 	REM set 1 to build TS (thread safe)
-set PHP_BUILDTS=0
+set PHP_BUILDTS=1
 
 	REM ~~~~~~~~~~~~ curl
 set PHP_CURL=%PATH_INSTALL%\curl\openssl

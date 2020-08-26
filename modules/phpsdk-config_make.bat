@@ -1,18 +1,26 @@
-if %PHPVER% == 7.2 (
+if %PHPVER% == 7.1 (
 	set phpveropts=	--without-wddx ^
 			--without-interbase
+	set native-intrinsics=0
+)
+if %PHPVER% == 7.2 (
+	set phpveropts=	--without-wddx ^
+			--without-interbase ^
+			--enable-sanitizer
 	set native-intrinsics=0
 )
 if %PHPVER% == 7.3 (
 	set phpveropts=	--enable-native-intrinsics=sse,sse2%intrinsics% ^
 			--without-wddx ^
-			--without-interbase
+			--without-interbase ^
+			--enable-sanitizer
 	set native-intrinsics=1
 )
 if %PHPVER% == 7.4 (
 	set phpveropts=	--enable-native-intrinsics=sse,sse2%intrinsics% ^
 			--with-mhash ^
-			--with-ffi
+			--with-ffi ^
+			--enable-sanitizer
 	set native-intrinsics=1
 )
 
@@ -31,7 +39,6 @@ set PHP_COMMON_CONFIGURE=^
 	--enable-fd-setsize=2048 ^
 	--enable-memcache=shared ^
 	--enable-object-out-dir=../build/ ^
-	--enable-sanitizer ^
 	--without-analyzer ^
 	--without-enchant ^
 	--without-imap ^
@@ -111,3 +118,6 @@ for %%A in (exe dll) do (
 xcopy /C /F /Y %PHP_CURL%\bin\libcurl.* %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%outdirphp%-%TSNTS%\*
 	REM php_memcache for github
 if not "%PATH_GITHUB_PHPMEMCACHE%"=="" (for %%A in (pdb dll) do (xcopy /C /F /Y %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%AVXB%-%TSNTS%\php_memcache.%%A %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXDIR%\php-%PHPVER%.x_memcache.%%A*))
+
+if exist %PHP_BUILD_DIR%\. rmdir /S /Q %PHP_BUILD_DIR%
+mkdir %PHP_BUILD_DIR%
