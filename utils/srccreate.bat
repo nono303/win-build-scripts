@@ -22,7 +22,7 @@ git checkout tags/1.6.1
 cd /D ..
 git clone https://github.com/google/brotli.git brotli
 cd /D brotli
-git checkout tags/v1.0.7
+git checkout tags/v1.0.9
 cd /D ..
 git clone git://sourceware.org/git/bzip2.git bzip2
 cd /D bzip2
@@ -110,19 +110,19 @@ git checkout origin/lua-5.3
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
-git checkout tags/1.6.6
+git checkout tags/1.6.7
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2489
+svn update -r 2491
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1881177
+svn update -r 1882191
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v1.15.14
+git checkout tags/v1.15.16
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -150,7 +150,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/openssl/openssl.git openssl
 cd /D openssl
-git checkout tags/OpenSSL_1_1_1g
+git checkout tags/OpenSSL_1_1_1h
 cd /D ..
 git clone https://github.com/jwilk-mirrors/pcre pcre
 cd /D pcre
@@ -170,7 +170,7 @@ git checkout tags/1.1.23
 cd /D ..
 git clone https://github.com/kjdev/php-ext-brotli.git php-ext-brotli
 cd /D php-ext-brotli
-git checkout tags/0.11.0
+git checkout tags/0.11.1
 cd /D ..
 git clone https://github.com/microsoft/php-sdk-binary-tools.git php-sdk
 cd /D php-sdk
@@ -178,7 +178,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-7.4.9
+git checkout tags/php-7.4.11
 cd /D ..
 git clone https://github.com/nono303/simpleDLNA.git sdlna
 cd /D sdlna
@@ -210,7 +210,7 @@ svn update -r 36
 cd /D ..
 git clone https://github.com/xdebug/xdebug.git xdebug
 cd /D xdebug
-git checkout tags/2.9.6
+git checkout tags/2.9.8
 cd /D ..
 git clone https://github.com/madler/zlib.git zlib
 cd /D zlib
