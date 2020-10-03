@@ -1,0 +1,13 @@
+diff --git "a/build/generator/gen_win_dependencies.py" "b/build/generator/gen_win_dependencies.py"
+index 03048c0fe4..1600925cb6 100644
+--- "a/build/generator/gen_win_dependencies.py"
++++ "b/build/generator/gen_win_dependencies.py"
+@@ -1135,7 +1135,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
+                                stderr=subprocess.STDOUT).stdout
+       line = outfp.read().decode('utf8')
+       if line:
+-        vermatch = re.search(r'(([0-9]+(\.[0-9]+)+)(_[._0-9]+)?)', line, re.M)
++        vermatch = re.search(r'(([0-9]+((\.[0-9]+)+)?)(_[._0-9]+)?)', line, re.M)
+       else:
+         vermatch = None
+ 
