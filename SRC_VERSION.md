@@ -14,7 +14,7 @@
 | jpeg | 9.4 |
 | libev | 4.33 |
 | libevent | 2.1.12 |
-| libexpat | 2.2.9 |
+| libexpat | 2.2.10 |
 | libiconv | 1.16.1 |
 | liblzma | 5.2.5 |
 | libmaxminddb | 1.4.3 |
@@ -26,7 +26,7 @@
 | libzip | 1.7.3 |
 | lua | 5.3.6 |
 | memcached | 1.6.7 |
-| mobac | 2.1.3 |
+| mobac | 2.1.3.2493 |
 | mod_fcgid | 2.3.10.1 |
 | mod_h2 | 1.15.16 |
 | mod_h264_streaming | 2.2.7 |
