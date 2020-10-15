@@ -34,11 +34,11 @@ git checkout tags/cares-1_16_1
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-7_72_0
+git checkout tags/curl-7_73_0
 cd /D ..
 git clone git://git.sv.nongnu.org/freetype/freetype2.git freetype2
 cd /D freetype2
-git checkout tags/VER-2-10-2
+git checkout tags/VER-2-10-3
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
@@ -66,7 +66,7 @@ git checkout tags/release-2.1.12-stable
 cd /D ..
 git clone https://github.com/libexpat/libexpat.git libexpat
 cd /D libexpat
-git checkout tags/R_2_2_9
+git checkout tags/R_2_2_10
 cd /D ..
 git clone https://github.com/winlibs/libiconv.git libiconv
 cd /D libiconv
@@ -114,11 +114,11 @@ git checkout tags/1.6.7
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2491
+svn update -r 2493
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1882191
+svn update -r 1882514
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2

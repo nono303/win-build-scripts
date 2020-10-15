@@ -6,8 +6,8 @@
 | brotli | 1.0.9 |
 | bzip2 | 1.0.8 |
 | cares | 1.16.1 |
-| curl | 7.72.0 |
-| freetype2 | 2.10.2 |
+| curl | 7.73.0 |
+| freetype2 | 2.10.3 |
 | httpd | 2.4.46 |
 | jansson | 2.13.1 |
 | jemalloc | 5.2.1 |
@@ -43,12 +43,12 @@
 | php-ext-brotli | 0.11.1 |
 | php-sdk | 2.2.0 |
 | php-src | 7.4.11 |
-| sdlna | 1.0.2.1 |
+| sdlna | 1.0.3 |
 | serf | 2.0.0 |
 | sqlite | 3.32.3 |
 | subversion | 1.14.0 |
 | tidy | 5.7.28 |
-| verpatch | 1.0.14.4 |
+| verpatch | 1.0.15.1 |
 | wineditline | 2.2 |
 | xdebug | 2.9.8 |
 | zlib | 1.2.11 |
