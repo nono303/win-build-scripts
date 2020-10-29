@@ -25,7 +25,7 @@
 | libxpm | 3.5.13 |
 | libzip | 1.7.3 |
 | lua | 5.3.6 |
-| memcached | 1.6.7 |
+| memcached | 1.6.8 |
 | mobac | 2.1.3.2493 |
 | mod_fcgid | 2.3.10.1 |
 | mod_h2 | 1.15.16 |
@@ -42,10 +42,10 @@
 | php-cgi-spawner | 1.1.23 |
 | php-ext-brotli | 0.11.1 |
 | php-sdk | 2.2.0 |
-| php-src | 7.4.11 |
+| php-src | 7.4.12 |
 | sdlna | 1.0.3 |
 | serf | 2.0.0 |
-| sqlite | 3.32.3 |
+| sqlite | 3.33.0 |
 | subversion | 1.14.0 |
 | tidy | 5.7.28 |
 | verpatch | 1.0.15.1 |
