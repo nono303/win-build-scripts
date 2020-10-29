@@ -8,12 +8,20 @@
 	foreach (range('a', 'z') as $letter)
 		$letterpos[$letter] = $pos++;
 	$nogit = array(
-		"lua"				=> ["/version = \"([^\"]+)\"/",	pathenv("PATH_SRC")."/lua/dist.info"],
-		"mobac"				=> ["/mobac.version=(.*)/",	pathenv("PATH_SRC")."/mobac/src/main/resources/mobac/mobac.properties"],
-		"mod_fcgid"			=> ["/#define MODFCGID_VERSION_MAJOR *([0-9]+).*#define MODFCGID_VERSION_MINOR *([0-9]+).*#define MODFCGID_VERSION_SUBVER *([0-9]+).*#define MODFCGID_VERSION_DEV *([0-9]+)/s",	pathenv("PATH_SRC")."/mod_fcgid/modules/fcgid/fcgid_conf.h"],
-		"mod_h264_streaming"=> ["/#define VERSION \"([^\"]+)\"/", pathenv("PATH_SRC")."/mod_h264_streaming/config.h"],
-		"serf"				=> ["/#define SERF_MAJOR_VERSION *([0-9]+).*#define SERF_MINOR_VERSION *([0-9]+).*#define SERF_PATCH_VERSION *([0-9]+)/s",pathenv("PATH_SRC")."/serf/serf.h"],
-		"wineditline"		=> ["/WinEditLine_VERSION_MAJOR *([0-9]+).*WinEditLine_VERSION_MINOR *([0-9]+)/s",pathenv("PATH_SRC")."/wineditline/CMakeLists.txt"],
+		"sqlite"			=> ["/SQLITE_VERSION +\"([^\"]+)\"/",
+							pathenv("PATH_SRC")."/sqlite/sqlite3.h"],
+		"lua"				=> ["/version = \"([^\"]+)\"/",	
+							pathenv("PATH_SRC")."/lua/dist.info"],
+		"mobac"				=> ["/mobac.version=(.*)/",	
+							pathenv("PATH_SRC")."/mobac/src/main/resources/mobac/mobac.properties"],
+		"mod_fcgid"			=> ["/#define MODFCGID_VERSION_MAJOR *([0-9]+).*#define MODFCGID_VERSION_MINOR *([0-9]+).*#define MODFCGID_VERSION_SUBVER *([0-9]+).*#define MODFCGID_VERSION_DEV *([0-9]+)/s",	
+							pathenv("PATH_SRC")."/mod_fcgid/modules/fcgid/fcgid_conf.h"],
+		"mod_h264_streaming"=> ["/#define VERSION \"([^\"]+)\"/",
+							pathenv("PATH_SRC")."/mod_h264_streaming/config.h"],
+		"serf"				=> ["/#define SERF_MAJOR_VERSION *([0-9]+).*#define SERF_MINOR_VERSION *([0-9]+).*#define SERF_PATCH_VERSION *([0-9]+)/s",
+							pathenv("PATH_SRC")."/serf/serf.h"],
+		"wineditline"		=> ["/WinEditLine_VERSION_MAJOR *([0-9]+).*WinEditLine_VERSION_MINOR *([0-9]+)/s",
+							pathenv("PATH_SRC")."/wineditline/CMakeLists.txt"],
 	);
 
 	function getVersion($cur,$src){
