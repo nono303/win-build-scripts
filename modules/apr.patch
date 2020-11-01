@@ -1,0 +1,14 @@
+https://www.apachelounge.com/viewtopic.php?p=39558#39558
+diff --git "a/file_io/win32/pipe.c" "b/file_io/win32/pipe.c"
+index 8087fe155..f67090104 100644
+--- "a/file_io/win32/pipe.c"
++++ "b/file_io/win32/pipe.c"
+@@ -76,7 +76,7 @@ APR_DECLARE(apr_status_t) apr_file_pipe_create_ex(apr_file_t **in,
+                                                   apr_int32_t blocking,
+                                                   apr_pool_t *p)
+ {
+-    return apr_file_pipe_create_pools(in, out, APR_FULL_BLOCK, p, p);
++	return apr_file_pipe_create_pools(in, out, blocking, p, p);
+ }
+ 
+ APR_DECLARE(apr_status_t) apr_file_pipe_create_pools(apr_file_t **in,
