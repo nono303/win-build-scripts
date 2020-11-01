@@ -116,6 +116,8 @@ for %%A in (exe dll) do (
 
 	REM copy curl to %PATH_INSTALL%\bin
 xcopy /C /F /Y %PHP_CURL%\bin\libcurl.* %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%outdirphp%-%TSNTS%\*
+	REM php_memcache verpatch
+call c:\sdk\softs\verpatch.exe %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%AVXB%-%TSNTS%\php_memcache.dll /high %PECLMEMCACHEVERSION%-%PECLMEMCACHEGITCOMMIT% /pv %PHPVER% /rpdb /s desc "%PECLMEMCACHEGITBRANCH% - %PECLMEMCACHEGITCOMMIT% (%PECLMEMCACHEGITDATE%)" /s product "pecl-memcache %PHP_SDK_ARCH%%AVXB% %TSNTS% [%MSVC_DEPS%]" /s OriginalFilename "php_memcache.dll" /s InternalName "php_memcache.dll" /s LegalCopyright "https://github.com/nono303/PHP7-memcache-dll" /s LegalTrademarks "https://github.com/websupport-sk/pecl-memcache"
 	REM php_memcache for github
 if not "%PATH_GITHUB_PHPMEMCACHE%"=="" (for %%A in (pdb dll) do (xcopy /C /F /Y %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%AVXB%-%TSNTS%\php_memcache.%%A %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXDIR%\php-%PHPVER%.x_memcache.%%A*))
 
