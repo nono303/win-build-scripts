@@ -37,7 +37,7 @@
 | nssm | 2.24.113 |
 | openssl | 1.1.1.8 |
 | pcre | 8.44 |
-| pecl-memcache | 4.0.5.24 |
+| pecl-memcache | nbio_php8 4.0.5.2 - e090f05 |
 | pecl-text-xdiff | 2.0.1 |
 | php-cgi-spawner | 1.1.23 |
 | php-ext-brotli | 0.11.1 |
