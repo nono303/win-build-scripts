@@ -14,8 +14,12 @@ if not exist %PATH_SRC%\php-sdk\phpmaster\. mklink /J %PATH_SRC%\php-sdk\phpmast
 	REM ~~~~~~~~~~~~ init var
 set LIB=
 set INCLUDE=
-	REM set 1 to build TS (thread safe)
-set PHP_BUILDTS=1
+
+	REM ~~~~~~~~~~~~ current full build
+set PHP_FULLBUILD=7.4
+
+	REM ~~~~~~~~~~~~ thread safe
+set PHP_BUILDTS=0
 
 	REM ~~~~~~~~~~~~ curl
 set PHP_CURL=%PATH_INSTALL%\curl\openssl
