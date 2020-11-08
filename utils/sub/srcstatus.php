@@ -45,7 +45,7 @@
 					$gitfecthtag = execnono("git fetch",NULL,$repo,NULL);
 					$gitfecthtag .= execnono("git fetch --tag",NULL,$repo,NULL);
 				}
-				preg_match("/ -\> (.*)\n/",execnono("git branch -a",NULL,$repo,NULL),$matches);
+				preg_match("/^\* (.*)\n/",execnono("git branch -a",NULL,$repo,NULL),$matches);
 				$branch = $matches[1];				
 				$status = explode("\t",execnono("git rev-list --left-right --count ".$branch."...HEAD",NULL,$repo,NULL)) [0];
 				if($status && $status != "0"){
