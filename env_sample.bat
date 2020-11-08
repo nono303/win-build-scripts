@@ -28,7 +28,7 @@ set PATH_RELEASE_SVN=D:\github\NONO_subversion
 set PATH_RELEASE_MEMCACHED=/cygdrive/d/github/NONO_memcached/cygwin
 set PATH_RELEASE_PHP=D:\github\NONO_phpwin-perfbuild
 	REM copy for github : unset to disable
-set PATH_GITHUB_PHPMEMCACHE=D:\github\NONO_PHP7-memcache-dll
+set PATH_GITHUB_PHPMEMCACHE=D:\github\NONO_PHP-memcache-dll
 set PATH_GITHUB_MODMD=D:\github\NONO_mod_md
 	REM JDK root (ant & java for mobac, java_hl for subversion)
 set JAVA_HOME=%PATH_SOFTS%\openjdk

@@ -1,22 +1,39 @@
+echo phpsdk-config_make for %PHPVER%
+	REM ################# PHP7 #################
+set PHP7_COMMON_CONFIGURE=^
+	--disable-crt-debug ^
+	--without-xmlrpc
 if %PHPVER% == 7.1 (
-	set phpveropts=	--without-wddx ^
+	set phpveropts=	%PHP7_COMMON_CONFIGURE% ^
+			--without-wddx ^
 			--without-interbase
 	set native-intrinsics=0
 )
 if %PHPVER% == 7.2 (
-	set phpveropts=	--without-wddx ^
+	set phpveropts=	%PHP7_COMMON_CONFIGURE% ^
+			--without-wddx ^
 			--without-interbase ^
 			--enable-sanitizer
 	set native-intrinsics=0
 )
 if %PHPVER% == 7.3 (
-	set phpveropts=	--enable-native-intrinsics=sse,sse2%intrinsics% ^
+	set phpveropts=	%PHP7_COMMON_CONFIGURE% ^
+			--enable-native-intrinsics=sse,sse2%intrinsics% ^
 			--without-wddx ^
 			--without-interbase ^
 			--enable-sanitizer
 	set native-intrinsics=1
 )
 if %PHPVER% == 7.4 (
+	set phpveropts=	%PHP7_COMMON_CONFIGURE% ^
+			--enable-native-intrinsics=sse,sse2%intrinsics% ^
+			--with-mhash ^
+			--with-ffi ^
+			--enable-sanitizer
+	set native-intrinsics=1
+)
+	REM ################# PHP8 #################
+if %PHPVER% == 8.0 (
 	set phpveropts=	--enable-native-intrinsics=sse,sse2%intrinsics% ^
 			--with-mhash ^
 			--with-ffi ^
@@ -26,7 +43,6 @@ if %PHPVER% == 7.4 (
 
 set PHP_COMMON_CONFIGURE=^
 	--disable-cli-win32 ^
-	--disable-crt-debug ^
 	--disable-debug ^
 	--disable-embed ^
 	--disable-ipv6 ^
@@ -37,13 +53,11 @@ set PHP_COMMON_CONFIGURE=^
 	--disable-test-ini ^
 	--enable-debug-pack ^
 	--enable-fd-setsize=2048 ^
-	--enable-memcache=shared ^
 	--enable-object-out-dir=../build/ ^
 	--without-analyzer ^
 	--without-enchant ^
 	--without-imap ^
 	--without-snmp ^
-	--without-xmlrpc ^
 	--without-xsl ^
 	--without-gmp ^
 	--without-libwebp ^
@@ -55,7 +69,7 @@ set PHP_COMMON_CONFIGURE=^
 	--with-extra-libs="%PHP_CURL%\lib";"%PATH_INSTALL%\lib" ^
 	--with-mp=%NUMBER_OF_PROCESSORS%
 
-if %PHPVER% == 7.4 (
+if %PHPVER% == %PHP_FULLBUILD% (
 	call configure %PHP_COMMON_CONFIGURE% ^
 	--with-toolset=vs ^
 	--with-cygwin=%PATH_BIN_CYGWIN% ^
@@ -83,10 +97,11 @@ if %PHPVER% == 7.4 (
 	--with-tidy=shared ^
 	--with-xdebug=shared ^
 	--with-xdiff=shared ^
+	--enable-memcache=shared ^
 	%ZTS% %phpveropts%
 ) else (
 	call configure %PHP_COMMON_CONFIGURE% ^
-	--without-interbase ^
+	--enable-memcache=shared ^
 	%ZTS% %phpveropts%
 )
 
@@ -117,7 +132,7 @@ for %%A in (exe dll) do (
 	REM copy curl to %PATH_INSTALL%\bin
 xcopy /C /F /Y %PHP_CURL%\bin\libcurl.* %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%outdirphp%-%TSNTS%\*
 	REM php_memcache verpatch
-call c:\sdk\softs\verpatch.exe %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%AVXB%-%TSNTS%\php_memcache.dll /high %PECLMEMCACHEVERSION%-%PECLMEMCACHEGITCOMMIT% /pv %PHPVER% /rpdb /s desc "%PECLMEMCACHEGITBRANCH% - %PECLMEMCACHEGITCOMMIT% (%PECLMEMCACHEGITDATE%)" /s product "pecl-memcache %PHP_SDK_ARCH%%AVXB% %TSNTS% [%MSVC_DEPS%]" /s OriginalFilename "php_memcache.dll" /s InternalName "php_memcache.dll" /s LegalCopyright "https://github.com/nono303/PHP7-memcache-dll" /s LegalTrademarks "https://github.com/websupport-sk/pecl-memcache"
+call c:\sdk\softs\verpatch.exe %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%AVXB%-%TSNTS%\php_memcache.dll /high %PECLMEMCACHEVERSION%-%PECLMEMCACHEGITCOMMIT% /pv %PHPVER% /rpdb /s desc "%PECLMEMCACHEGITBRANCH% - %PECLMEMCACHEGITCOMMIT% (%PECLMEMCACHEGITDATE%)" /s product "pecl-memcache %PHP_SDK_ARCH%%AVXB% %TSNTS% [%MSVC_DEPS%]" /s OriginalFilename "php_memcache.dll" /s InternalName "php_memcache.dll" /s LegalCopyright "https://github.com/nono303/PHP-memcache-dll" /s LegalTrademarks "https://github.com/websupport-sk/pecl-memcache"
 	REM php_memcache for github
 if not "%PATH_GITHUB_PHPMEMCACHE%"=="" (for %%A in (pdb dll) do (xcopy /C /F /Y %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%AVXB%-%TSNTS%\php_memcache.%%A %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXDIR%\php-%PHPVER%.x_memcache.%%A*))
 
