@@ -7,7 +7,7 @@
 | bzip2 | 1.0.8 |
 | cares | 1.16.1 |
 | curl | 7.73.0 |
-| freetype2 | 2.10.3 |
+| freetype2 | 2.10.4 |
 | httpd | 2.4.46 |
 | jansson | 2.13.1 |
 | jemalloc | 5.2.1 |
@@ -15,6 +15,7 @@
 | libev | 4.33 |
 | libevent | 2.1.12 |
 | libexpat | 2.2.10 |
+| libffi | 3.3 |
 | libiconv | 1.16.1 |
 | liblzma | 5.2.5 |
 | libmaxminddb | 1.4.3 |
@@ -37,7 +38,7 @@
 | nssm | 2.24.113 |
 | openssl | 1.1.1.8 |
 | pcre | 8.44 |
-| pecl-memcache | nbio_php8 4.0.5.2 - e090f05 |
+| pecl-memcache | nbio_php8 4.0.5.2 - e090f05 + pr77 + pr78 |
 | pecl-text-xdiff | 2.0.1 |
 | php-cgi-spawner | 1.1.23 |
 | php-ext-brotli | 0.11.1 |

@@ -45,7 +45,7 @@
 		// "libbzip2",	//1.0.8
 		// "libcurl",	//7.69.1
 		"libenchant",	//1.6.1
-		"libffi",		//3.3-1
+		// "libffi",		//3.3-1
 		// "libiconv",	//1.16-2
 		"libintl",		//0.18.3-5
 		// "libjpeg",	//9c

@@ -68,6 +68,10 @@ git clone https://github.com/libexpat/libexpat.git libexpat
 cd /D libexpat
 git checkout tags/R_2_2_10
 cd /D ..
+git clone https://github.com/winlibs/libffi libffi
+cd /D libffi
+git checkout tags/libffi-3.3
+cd /D ..
 git clone https://github.com/winlibs/libiconv.git libiconv
 cd /D libiconv
 git checkout tags/libiconv-1.16-1
@@ -114,11 +118,11 @@ git checkout tags/1.6.8
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2493
+svn update -r 2495
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1883028
+svn update -r 1883337
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2

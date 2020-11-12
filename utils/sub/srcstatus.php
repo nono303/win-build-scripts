@@ -45,7 +45,7 @@
 					$gitfecthtag = execnono("git fetch",NULL,$repo,NULL);
 					$gitfecthtag .= execnono("git fetch --tag",NULL,$repo,NULL);
 				}
-				preg_match("/ -\> (.*)\n/",execnono("git branch -a",NULL,$repo,NULL),$matches);
+				preg_match("/^\* (.*)\n/",execnono("git branch -a",NULL,$repo,NULL),$matches);
 				$branch = $matches[1];				
 				$status = explode("\t",execnono("git rev-list --left-right --count ".$branch."...HEAD",NULL,$repo,NULL)) [0];
 				if($status && $status != "0"){
@@ -93,7 +93,7 @@
 					$status = "up to date";
 				}
 			}
-			echo str_pad($type,4).str_pad($name,20).str_pad($head,25).str_pad($status,26," ",STR_PAD_LEFT)."  ".str_pad($branch,20).PHP_EOL;
+			echo str_pad($type,4).str_pad($name,20).str_pad($head,26).str_pad($status,26," ",STR_PAD_LEFT)."  ".str_pad($branch,20).PHP_EOL;
 			file_put_contents($argv[1],'"'.$name.'";"'.$type.'";"'.$upstream.'";"'.$head.'";"'.$status.'";"'.$branch.'";"'.$logtags.'";"'.$diff.'"'.PHP_EOL,FILE_APPEND);
 			$name = "";
 			$upstream = "";
