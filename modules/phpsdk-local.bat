@@ -33,7 +33,7 @@ call buildconf
 	REM ~~~~~~~~~~~~ Patch some stuff in this shity configure.js, accoring to self made deps
 	REM liblzma_a
 sed -i 's/liblzma_a/liblzma/g' %CYGPATH_SRC%/php-src/configure.js
-	REM lib
+	REM libzip_a
 sed -i 's/libzip_a/zip/g' %CYGPATH_SRC%/php-src/configure.js
 	REM xpm
 sed -i 's/xpm.h/X11\\\\\\\\xpm.h/g' %CYGPATH_SRC%/php-src/configure.js
