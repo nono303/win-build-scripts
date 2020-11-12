@@ -1,4 +1,4 @@
-| src | version | 
+| src | version |
 | ---- | ---- |
 | apr | 1.7.0 |
 | apr-iconv | 1.2.2 |
@@ -15,6 +15,7 @@
 | libev | 4.33 |
 | libevent | 2.1.12 |
 | libexpat | 2.2.10 |
+| libffi | 3.3 |
 | libiconv | 1.16.1 |
 | liblzma | 5.2.5 |
 | libmaxminddb | 1.4.3 |
