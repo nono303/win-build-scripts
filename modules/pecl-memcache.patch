@@ -1,3 +1,30 @@
+diff --git a/src/memcache_binary_protocol.c b/src/memcache_binary_protocol.c
+index 707b351..1dc8fc6 100644
+--- a/src/memcache_binary_protocol.c
++++ b/src/memcache_binary_protocol.c
+@@ -26,7 +26,7 @@
+ #define MMC_DEBUG 0
+ 
+ #ifdef PHP_WIN32
+-#include <win32/php_stdint.h>
++#include <inttypes.h>
+ #include <winsock2.h>
+ #else
+ #include <stdint.h>
+diff --git a/src/memcache_pool.h b/src/memcache_pool.h
+index cb3d086..3a2ddc2 100644
+--- a/src/memcache_pool.h
++++ b/src/memcache_pool.h
+@@ -35,7 +35,7 @@
+ #endif
+ 
+ #ifdef PHP_WIN32
+-#include <win32/php_stdint.h>
++#include <inttypes.h>
+ #else
+ #include <stdint.h>
+ #endif
+
 From 56253120562364b67cbba818c636bde4fbf23cec Mon Sep 17 00:00:00 2001
 From: Andrija Vucinic <andrija.vucinic@gmail.com>
 Date: Thu, 5 Nov 2020 18:51:06 +0100
