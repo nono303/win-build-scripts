@@ -43,7 +43,7 @@
 | php-cgi-spawner | 1.1.23 |
 | php-ext-brotli | 0.11.1 |
 | php-sdk | 2.2.0 |
-| php-src | 7.4.12 |
+| php-src | 8.0.0rc4 |
 | sdlna | 1.0.3 |
 | serf | 2.0.0 |
 | sqlite | 3.33.0 |
@@ -51,5 +51,5 @@
 | tidy | 5.7.28 |
 | verpatch | 1.0.15.1 |
 | wineditline | 2.2 |
-| xdebug | 2.9.8 |
+| xdebug | 3.0.0b1 |
 | zlib | 1.2.11 |
