@@ -6,6 +6,7 @@ FOR /F "tokens=* USEBACKQ" %%F in (`git rev-parse --short HEAD`) do (set PECLMEM
 FOR /F "tokens=* USEBACKQ" %%F in (`git rev-parse --abbrev-ref HEAD`) do (set PECLMEMCACHEGITBRANCH=%%F)
 FOR /F "tokens=* USEBACKQ" %%F in (`git show -s --format^=%%cd --date=short %PECLMEMCACHEGITCOMMIT%`) do (set PECLMEMCACHEGITDATE=%%F)
 FOR /F "tokens=* USEBACKQ" %%F in (`grep PHP_MEMCACHE_VERSION /cygdrive/c/sdk/src/pecl-memcache/src/php_memcache.h ^| cut -d^'^"^' -f2`) do (set PECLMEMCACHEVERSION=%%F)
+FOR /F "tokens=* USEBACKQ" %%F in (`type C:\sdk\batch\modules\pecl-memcache.patch.version`) do (set PECLMEMCACHEPATCHVERSION=%%F)
 sed -i 's/\$Revision\$/%PECLMEMCACHEGITBRANCH% commit: %PECLMEMCACHEGITCOMMIT% (%PECLMEMCACHEGITDATE%)/g' %PATH_SRC%/pecl-memcache/src/memcache.c
 
 	REM other way only first time 'phpsdk_buildtree phpmaster'
@@ -16,10 +17,10 @@ set LIB=
 set INCLUDE=
 
 	REM ~~~~~~~~~~~~ current full build
-set PHP_FULLBUILD=8.0
+set PHP_FULLBUILD=9.0
 
 	REM ~~~~~~~~~~~~ thread safe
-set PHP_BUILDTS=0
+set PHP_BUILDTS=1
 
 	REM ~~~~~~~~~~~~ curl
 set PHP_CURL=%PATH_INSTALL%\curl\openssl
