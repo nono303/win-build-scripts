@@ -8,7 +8,7 @@ sed -i 's/SQLITE_OMIT_DECLTYPE/SQLITE_ENABLE_COLUMN_METADATA/g' %CYGPATH_SRC%/%1
 for %%C in ("-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" "-DBUILD_SHARED_LIBS=ON -DBUILD_SHELL=OFF") do (
 		REM dirty !! https://stackoverflow.com/questions/9556676/batch-file-how-to-replace-equal-signs-and-a-string-variable
 	set CUR=%%C
-	SETLOCAL ENABLEDELAYEDEXPANSION
+	setlocal enabledelayedexpansion
 	set new=!CUR:"=!
 
 	cmake %CMAKE_OPTS% ^
