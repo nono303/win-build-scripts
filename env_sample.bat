@@ -43,7 +43,8 @@ set PATH_BIN_NASM=%PATH_SOFTS%\nasm
 set PATH_BIN_PERL=%PATH_SOFTS%\perl\bin
 set PATH_BIN_PERL_SITE=%PATH_SOFTS%\perl\site\bin
 	REM svn for mobac https://github.com/nono303/win-svn
-set PATH_BIN_SVN=%PATH_RELEASE_SVN%\vs16\x64-avx;D:\github\NONO_subversion\vs16\x64-avx\deps
+set PATH_BIN_SVN=%PATH_RELEASE_SVN%\vs16\x64-avx
+set PATH_DEPS_SVN=%PATH_RELEASE_SVN%\vs16\x64-avx\deps
 	REM for version patch if not present at build - https://github.com/pavel-a/ddverpatch (old https://www.nuget.org/packages/verpatch/1.0.14 / https://www.codeproject.com/Articles/37133/Simple-Version-Resource-Tool-for-Windows)
 set BIN_VERPATCH=%PATH_SOFTS%\verpatch.exe
 	REM for testing matching pdb with exe and dll http://www.debuginfo.com/tools/chkmatch.html
@@ -72,6 +73,7 @@ set PATH_WIN=%PATH_BIN_PYTHON%;^
 %PATH_BIN_PERL_SITE%;^
 %PATH_BIN_CYGWIN%;^
 %PATH_BIN_SVN%;^
+%PATH_DEPS_SVN%;^
 %PATH_VS%\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;^
 %PATH_VS%\IDE;^
 %PATH_PHP_SDK%\bin\php;^
