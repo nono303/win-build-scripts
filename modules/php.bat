@@ -18,10 +18,10 @@ set LIB=
 set INCLUDE=
 
 	REM ~~~~~~~~~~~~ current full build
-set PHP_FULLBUILD=9.0
+set PHP_FULLBUILD=8.0
 
 	REM ~~~~~~~~~~~~ thread safe
-set PHP_BUILDTS=1
+set PHP_BUILDTS=0
 
 	REM ~~~~~~~~~~~~ curl
 set PHP_CURL=%PATH_INSTALL%\curl\openssl
