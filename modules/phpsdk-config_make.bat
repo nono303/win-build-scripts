@@ -98,6 +98,8 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--with-xdebug=shared ^
 	--with-xdiff=shared ^
 	--enable-memcache=shared ^
+	--enable-phpdbg ^
+	--enable-phpdbgs ^
 	%ZTS% %phpveropts%
 ) else (
 	call configure %PHP_COMMON_CONFIGURE% ^
