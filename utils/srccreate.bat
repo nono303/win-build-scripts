@@ -110,7 +110,7 @@ git checkout tags/v1.7.3
 cd /D ..
 git clone https://github.com/xpol/lua lua
 cd /D lua
-git checkout origin/lua-5.3
+git checkout lua-5.3
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
@@ -118,11 +118,11 @@ git checkout tags/1.6.8
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2495
+svn update -r 2500
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1883409
+svn update -r 1883853
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -182,7 +182,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-7.4.12
+git checkout tags/php-8.0.0RC5
 cd /D ..
 git clone https://github.com/nono303/simpleDLNA.git sdlna
 cd /D sdlna
@@ -214,7 +214,7 @@ svn update -r 36
 cd /D ..
 git clone https://github.com/xdebug/xdebug.git xdebug
 cd /D xdebug
-git checkout tags/2.9.8
+git checkout tags/3.0.0RC1
 cd /D ..
 git clone https://github.com/madler/zlib.git zlib
 cd /D zlib
