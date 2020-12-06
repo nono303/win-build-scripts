@@ -98,6 +98,7 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--with-xdebug=shared ^
 	--with-xdiff=shared ^
 	--enable-memcache=shared ^
+	--with-geos=shared ^
 	--enable-phpdbg ^
 	--enable-phpdbgs ^
 	%ZTS% %phpveropts%
