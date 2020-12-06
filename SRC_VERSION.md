@@ -8,6 +8,7 @@
 | cares | 1.17.1 |
 | curl | 7.73.0 |
 | freetype2 | 2.10.4 |
+| geos | 3.9.0beta2 |
 | httpd | 2.4.46 |
 | jansson | 2.13.1 |
 | jemalloc | 5.2.1 |
@@ -38,10 +39,11 @@
 | nssm | 2.24.113 |
 | openssl | 1.1.1.8 |
 | pcre | 8.44 |
-| pecl-memcache | nbio_php8 4.0.5.2 - e090f05 + pr77 + pr78 |
+| pecl-memcache | nbio_php8 8.0 - 36d7181 |
 | pecl-text-xdiff | 2.0.1 |
 | php-cgi-spawner | 1.1.23 |
 | php-ext-brotli | 0.11.1 |
+| php-geos | 1.0.1 |
 | php-sdk | 2.2.0 |
 | php-src | 8.0.0 |
 | sdlna | 1.0.3 |
@@ -51,5 +53,5 @@
 | tidy | 5.7.28 |
 | verpatch | 1.0.15.1 |
 | wineditline | 2.2 |
-| xdebug | 3.0.0 |
+| xdebug | 3.0.1 |
 | zlib | 1.2.11 |

@@ -30,7 +30,7 @@ git checkout tags/bzip2-1.0.8
 cd /D ..
 git clone https://github.com/c-ares/c-ares.git cares
 cd /D cares
-git checkout tags/cares-1_16_1
+git checkout tags/cares-1_17_1
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
@@ -39,6 +39,10 @@ cd /D ..
 git clone git://git.sv.nongnu.org/freetype/freetype2.git freetype2
 cd /D freetype2
 git checkout tags/VER-2-10-4
+cd /D ..
+git clone https://github.com/libgeos/geos geos
+cd /D geos
+git checkout tags/3.9.0beta2
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
@@ -114,7 +118,7 @@ git checkout lua-5.3
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
-git checkout tags/1.6.8
+git checkout tags/1.6.9
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
@@ -122,7 +126,7 @@ svn update -r 2500
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1883853
+svn update -r 1884153
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -146,7 +150,7 @@ git checkout tags/2.01.1
 cd /D ..
 git clone https://github.com/nghttp2/nghttp2.git nghttp2
 cd /D nghttp2
-git checkout tags/v1.41.0
+git checkout tags/v1.42.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -176,13 +180,17 @@ git clone https://github.com/kjdev/php-ext-brotli.git php-ext-brotli
 cd /D php-ext-brotli
 git checkout tags/0.11.1
 cd /D ..
+git clone https://github.com/nono303/php-geos php-geos
+cd /D php-geos
+git checkout php8
+cd /D ..
 git clone https://github.com/microsoft/php-sdk-binary-tools.git php-sdk
 cd /D php-sdk
 git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.0.0RC5
+git checkout tags/php-7.2.34
 cd /D ..
 git clone https://github.com/nono303/simpleDLNA.git sdlna
 cd /D sdlna
@@ -214,7 +222,7 @@ svn update -r 36
 cd /D ..
 git clone https://github.com/xdebug/xdebug.git xdebug
 cd /D xdebug
-git checkout tags/3.0.0RC1
+git checkout tags/3.0.1
 cd /D ..
 git clone https://github.com/madler/zlib.git zlib
 cd /D zlib
