@@ -5,9 +5,10 @@
 | apr-util | 1.6.1 |
 | brotli | 1.0.9 |
 | bzip2 | 1.0.8 |
-| cares | 1.16.1 |
+| cares | 1.17.1 |
 | curl | 7.73.0 |
 | freetype2 | 2.10.4 |
+| geos | 3.9.0beta2 |
 | httpd | 2.4.46 |
 | jansson | 2.13.1 |
 | jemalloc | 5.2.1 |
@@ -26,24 +27,25 @@
 | libxpm | 3.5.13 |
 | libzip | 1.7.3 |
 | lua | 5.3.6 |
-| memcached | 1.6.8 |
-| mobac | 2.1.3.2493 |
-| mod_fcgid | 2.3.10.1 |
+| memcached | 1.6.9 |
+| mobac | 2.1.3 r2500 |
+| mod_fcgid | 2.3.10.1 r1883853 |
 | mod_h2 | 1.15.16 |
 | mod_h264_streaming | 2.2.7 |
 | mod_maxminddb | 1.2.0 |
 | mod_md | 2.3.3 |
 | mod_wku_bt | 2.01.1 |
-| nghttp2 | 1.41.0 |
+| nghttp2 | 1.42 |
 | nssm | 2.24.113 |
 | openssl | 1.1.1.8 |
 | pcre | 8.44 |
-| pecl-memcache | nbio_php8 4.0.5.2 - e090f05 + pr77 + pr78 |
+| pecl-memcache | nbio_php8 8.0 - 36d7181 |
 | pecl-text-xdiff | 2.0.1 |
 | php-cgi-spawner | 1.1.23 |
 | php-ext-brotli | 0.11.1 |
+| php-geos | 1.0.1 |
 | php-sdk | 2.2.0 |
-| php-src | 8.0.0rc4 |
+| php-src | 8.0.0 |
 | sdlna | 1.0.3 |
 | serf | 2.0.0 |
 | sqlite | 3.33.0 |
@@ -51,5 +53,5 @@
 | tidy | 5.7.28 |
 | verpatch | 1.0.15.1 |
 | wineditline | 2.2 |
-| xdebug | 3.0.0b1 |
+| xdebug | 3.0.1 |
 | zlib | 1.2.11 |

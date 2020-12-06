@@ -101,9 +101,10 @@
 	$error = curl_error($ch); 
 	if(is_array($error)){
 		print_r($error);
-		echo "Unbale to retrive '".$serie."' > aborting!".PHP_EOL;
+		echo "Unbale to retrieve '".$serie."' > aborting!".PHP_EOL;
 		exit(-1);
 	}
+	echo "retrieve '".$serie."' > ok".PHP_EOL;
 	$timestamp = curl_getinfo($ch, CURLINFO_FILETIME);
 	if ($timestamp == -1) {
 		echo "Unbale to retrieve datetime of '".$serie."' > aborting!".PHP_EOL;
