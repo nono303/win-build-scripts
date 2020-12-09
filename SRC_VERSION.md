@@ -6,7 +6,7 @@
 | brotli | 1.0.9 |
 | bzip2 | 1.0.8 |
 | cares | 1.17.1 |
-| curl | 7.73.0 |
+| curl | 7.74.0 |
 | freetype2 | 2.10.4 |
 | geos | 3.9.0beta2 |
 | httpd | 2.4.46 |
@@ -37,7 +37,7 @@
 | mod_wku_bt | 2.01.1 |
 | nghttp2 | 1.42 |
 | nssm | 2.24.113 |
-| openssl | 1.1.1.8 |
+| openssl | 1.1.1i |
 | pcre | 8.44 |
 | pecl-memcache | nbio_php8 8.0 - 36d7181 |
 | pecl-text-xdiff | 2.0.1 |
