@@ -37,7 +37,7 @@ set ANT_HOME=%PATH_SOFTS%\eclipse\plugins\org.apache.ant_1.10.7.v20190926-0324
 REM ########################## BIN PATH
 set PATH_VS=%PATH_SOFTS%\vs19\Community
 set PATH_BIN_GIT=C:\PROGRA~1\Git\bin
-set PATH_BIN_PYTHON=%PATH_SOFTS%\python2;%PATH_SOFTS%\python2\Scripts
+set PATH_BIN_PYTHON=%PATH_SOFTS%\python3;%PATH_SOFTS%\python3\Scripts
 set PATH_BIN_CYGWIN=%PATH_ROOT_CYGWIN%%CYGV%\bin
 set PATH_BIN_NASM=%PATH_SOFTS%\nasm
 set PATH_BIN_PERL=%PATH_SOFTS%\perl\bin
