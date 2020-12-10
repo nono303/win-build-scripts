@@ -50,6 +50,8 @@
 				$ver_product = preg_replace("/-\D+$/","",$ver_product);
 				// splitter as .
 				$ver_product = preg_replace("/[-_]/",".",$ver_product);
+				// alpha / beta as .
+				$ver_product = str_replace(["alpha","beta"],".",$ver_product);
 				// pecl-memcache 5 'digit' version
 				if(($sctex = sizeof($ctex = explode(".",$ver_product))) > 4){
 					$ver_product = $ctex[0].".".$ctex[1].".".$ctex[2].".".$ctex[3];
