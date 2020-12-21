@@ -12,7 +12,7 @@ git clone https://github.com/apache/apr.git apr
 cd /D apr
 git checkout tags/1.7.0
 cd /D ..
-git clone https://github.com/apache/apr-iconv apr-iconv
+git clone https://github.com/apache/apr-iconv.git apr-iconv
 cd /D apr-iconv
 git checkout tags/1.2.2
 cd /D ..
@@ -42,7 +42,7 @@ git checkout tags/VER-2-10-4
 cd /D ..
 git clone https://github.com/libgeos/geos geos
 cd /D geos
-git checkout tags/3.9.0beta2
+git checkout tags/3.9.0
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
@@ -122,11 +122,11 @@ git checkout tags/1.6.9
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2500
+svn update -r 2505
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1884233
+svn update -r 1884673
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2

@@ -8,7 +8,7 @@
 | cares | 1.17.1 |
 | curl | 7.74.0 |
 | freetype2 | 2.10.4 |
-| geos | 3.9.0beta2 |
+| geos | 3.9.0 |
 | httpd | 2.4.46 |
 | jansson | 2.13.1 |
 | jemalloc | 5.2.1 |
@@ -28,7 +28,7 @@
 | libzip | 1.7.3 |
 | lua | 5.3.6 |
 | memcached | 1.6.9 |
-| mobac | 2.1.3 r2500 |
+| mobac | 2.1.3 r2505 |
 | mod_fcgid | 2.3.10.1 r1883853 |
 | mod_h2 | 1.15.16 |
 | mod_h264_streaming | 2.2.7 |
