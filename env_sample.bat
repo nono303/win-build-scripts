@@ -32,7 +32,7 @@ set PATH_GITHUB_PHPMEMCACHE=D:\github\NONO_PHP-memcache-dll
 set PATH_GITHUB_MODMD=D:\github\NONO_mod_md
 	REM JDK root (ant & java for mobac, java_hl for subversion)
 set JAVA_HOME=%PATH_SOFTS%\openjdk
-set ANT_HOME=%PATH_SOFTS%\eclipse\plugins\org.apache.ant_1.10.7.v20190926-0324
+set ANT_HOME=%PATH_SOFTS%\eclipse\plugins\org.apache.ant_1.10.8.v20200515-1239
 
 REM ########################## BIN PATH
 set PATH_VS=%PATH_SOFTS%\vs19\Community
