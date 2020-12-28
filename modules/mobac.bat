@@ -1,14 +1,5 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1
-
-	REM sqlite update - https://bitbucket.org/xerial/sqlite-jdbc/downloads/
-xcopy /C /F /Y %PATH_MODULES%\sqlite-jdbc-3.34.0.jar %PATH_SRC%\%1\lib\sqlite-jdbc-3.34.0.jar*
-rm -f %PATH_SRC%\%1\lib\sqlite-jdbc-3.16.1.jar
-
-sed -i -E 's/Revision: [0-9]+/Revision: %SCM_VERSION%/g' %CYGPATH_SRC%/%1/src/main/resources/mobac/mobac.properties
-call "%ANT_HOME%\bin\ant.bat" ^
-	clean_workspace, ^
-	delete_build, ^
-	svnversion_svn, ^
-	svnversion_write_property_file, ^
-	build, ^
-	create_jar
+	REM https://docs.gradle.org/current/userguide/command_line_interface.html
+call gradlew --console=verbose --no-daemon --parallel --max-workers %NUMBER_OF_PROCESSORS% mobac:jar 2>&1
+FOR /F "tokens=* USEBACKQ" %%F in (`svn info --show-item revision`) do (set SCM_VERSION=%%F)
+move /Y %PATH_SRC%\%1\mobac\build\libs\Mobile_Atlas_Creator.jar %PATH_SRC%\%1\Mobile_Atlas_Creator_%SCM_VERSION%.jar

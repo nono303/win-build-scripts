@@ -53,5 +53,6 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [7z](https://www.7-zip.org/download.html)                    | x64  | 19             |                     |
 | [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.80           |                     |
 | [ChkMatch](http://www.debuginfo.com/tools/chkmatch.html)     |      | 1.0.3          |                     |
+| [Gradle](https://gradle.org/) | | 6.7.1 | |
 
 ### [SOURCE VERSIONS](./SRC_VERSION.md)
