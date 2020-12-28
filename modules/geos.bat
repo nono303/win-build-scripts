@@ -12,10 +12,12 @@ REM cmake --clean-first --build %VCDIR% --config RelWithDebInfo ---parallel 16 -
 
 	MSBuild.exe %PATH_SRC%\%1\%VCDIR%\GEOS.sln ^
 	%MSBUILD_OPTS% ^
-	/nowarn:C4267;C4702 ^
+	/nowarn:C4267;C4702;C4018 ^
 	/t:geos,geos_c ^
 	/p:Configuration=%CMAKE_BUILD_TYPE% ^
 	/p:Platform="%archmsbuild%"
+
+for %%X in (geos geos_c) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_SRC%\%1\%VCDIR%\bin\%CMAKE_BUILD_TYPE%\%%X.dll)
 
 for %%E in (geos geos_c) do (
 	xcopy /C /F /Y %PATH_SRC%\%1\%VCDIR%\lib\%CMAKE_BUILD_TYPE%\%%E.lib %PATH_INSTALL%\lib\*

@@ -12,7 +12,7 @@ git clone https://github.com/apache/apr.git apr
 cd /D apr
 git checkout tags/1.7.0
 cd /D ..
-git clone https://github.com/apache/apr-iconv apr-iconv
+git clone https://github.com/apache/apr-iconv.git apr-iconv
 cd /D apr-iconv
 git checkout tags/1.2.2
 cd /D ..
@@ -34,7 +34,7 @@ git checkout tags/cares-1_17_1
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-7_73_0
+git checkout tags/curl-7_74_0
 cd /D ..
 git clone git://git.sv.nongnu.org/freetype/freetype2.git freetype2
 cd /D freetype2
@@ -42,7 +42,7 @@ git checkout tags/VER-2-10-4
 cd /D ..
 git clone https://github.com/libgeos/geos geos
 cd /D geos
-git checkout tags/3.9.0beta2
+git checkout tags/3.9.0
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
@@ -74,7 +74,7 @@ git checkout tags/R_2_2_10
 cd /D ..
 git clone https://github.com/winlibs/libffi libffi
 cd /D libffi
-git checkout tags/libffi-3.3
+git checkout master
 cd /D ..
 git clone https://github.com/winlibs/libiconv.git libiconv
 cd /D libiconv
@@ -122,11 +122,11 @@ git checkout tags/1.6.9
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2500
+svn update -r 2556
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1884153
+svn update -r 1884853
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -158,7 +158,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/openssl/openssl.git openssl
 cd /D openssl
-git checkout tags/OpenSSL_1_1_1h
+git checkout tags/OpenSSL_1_1_1i
 cd /D ..
 git clone https://github.com/jwilk-mirrors/pcre pcre
 cd /D pcre
@@ -166,7 +166,7 @@ git checkout tags/pcre-8.44
 cd /D ..
 git clone https://github.com/websupport-sk/pecl-memcache.git pecl-memcache
 cd /D pecl-memcache
-git checkout NON_BLOCKING_IO_php8
+git checkout tags/8.0-fixed
 cd /D ..
 git clone https://github.com/php/pecl-text-xdiff pecl-text-xdiff
 cd /D pecl-text-xdiff
@@ -190,7 +190,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-7.2.34
+git checkout tags/php-8.0.0
 cd /D ..
 git clone https://github.com/nono303/simpleDLNA.git sdlna
 cd /D sdlna

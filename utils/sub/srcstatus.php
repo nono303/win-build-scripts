@@ -19,6 +19,13 @@
 		define("REPO_FETCH",true);
 		echo "nofetch: OFF".PHP_EOL;
 	}
+	if(in_array("verbose", $argv)){
+		define("VERBOSE",true);
+		echo "verbose: ON".PHP_EOL;
+	} else {
+		define("VERBOSE",false);
+		echo "verbose: OFF".PHP_EOL;
+	}
 
 	$srcdir = str_replace("\\","/",$_ENV["PATH_SRC"])."/";
 	echo "> ".$srcdir.PHP_EOL;
@@ -33,21 +40,30 @@
 			if(is_dir($repo."/.git")){
 				// echo passthru("mklink /H C:\\sdk\\batch\\config\\scm\\git.".$name .".conf ".str_replace("/","\\",$repo)."\\.git\\config");
 				$type = "git";
-				$upstream = execnono("git config --get remote.origin.url",NULL,$repo,NULL);
+				if(VERBOSE) echo $repo.PHP_EOL;
+				$upstream = execnono($cmd = "git config --get remote.origin.url",NULL,$repo,NULL);
+				if(VERBOSE) echo $cmd.PHP_EOL;
 
-				$head = explode("^",execnono("git name-rev --name-only HEAD",NULL,$repo,NULL))[0];//execnono("git describe --tags",NULL,$repo,NULL);
-				preg_match("/^\* \(HEAD detached at ([^\)]+)\)/",execnono("git branch -a",NULL,$repo,NULL),$matches);
+				$head = explode("^",execnono($cmd = "git name-rev --name-only HEAD",NULL,$repo,NULL))[0];//execnono($cmd = "git describe --tags",NULL,$repo,NULL);
+				if(VERBOSE) echo $cmd.PHP_EOL;
+				preg_match("/^\* \(HEAD detached at ([^\)]+)\)/",execnono($cmd = "git branch -a",NULL,$repo,NULL),$matches);
+				if(VERBOSE) echo $cmd.PHP_EOL;
 				if(is_int(strpos($matches[1],"/")))
 					$head = $matches[1];
 				$srccreate .= "git clone ".$upstream." ".$ele.PHP_EOL."cd /D ".$ele.PHP_EOL."git checkout ".$head.PHP_EOL."cd /D ..".PHP_EOL;
-				$gitclean = execnono("git clean -fdx",NULL,$repo,NULL);
+				$gitclean = execnono($cmd = "git clean -fdx",NULL,$repo,NULL);
+				if(VERBOSE) echo $cmd.PHP_EOL;
 				if(REPO_FETCH){
-					$gitfecthtag = execnono("git fetch",NULL,$repo,NULL);
-					$gitfecthtag .= execnono("git fetch --tag",NULL,$repo,NULL);
+					$gitfecthtag = execnono($cmd = "git fetch",NULL,$repo,NULL);
+					if(VERBOSE) echo $cmd.PHP_EOL;
+					$gitfecthtag .= execnono($cmd = "git fetch --tag",NULL,$repo,NULL);
+					if(VERBOSE) echo $cmd.PHP_EOL;
 				}
-				preg_match("/^\* (.*)\n/",execnono("git branch -a",NULL,$repo,NULL),$matches);
+				preg_match("/^\* (.*)\n/",execnono($cmd = "git branch -a",NULL,$repo,NULL),$matches);
+				if(VERBOSE) echo $cmd.PHP_EOL;
 				$branch = $matches[1];				
-				$status = explode("\t",execnono("git rev-list --left-right --count ".$branch."...HEAD",NULL,$repo,NULL)) [0];
+				$status = explode("\t",execnono($cmd = "git rev-list --left-right --count ".$branch."...HEAD",NULL,$repo,NULL)) [0];
+				if(VERBOSE) echo $cmd.PHP_EOL;
 				if($status && $status != "0"){
 					$status = $status." commit(s) behind";
 					$diff= "git diff ".$head."..".$branch;
@@ -55,17 +71,23 @@
 					$diff= "";
 					$status = "up to date";
 				}
-				$logtags = execnono('git log --tags --simplify-by-decoration --pretty="format:%ai %d" | head -n '.NB_TAGS,NULL,$repo,NULL);
+				$logtags = execnono($cmd = 'git log --tags --simplify-by-decoration --pretty="format:%ai %d" | head -n '.NB_TAGS,NULL,$repo,NULL);
+				if(VERBOSE) echo $cmd.PHP_EOL;
 				if(GIT_GC){
-					echo execnono("git reflog expire --all --expire=now",NULL,$repo,NULL);
-					echo execnono("git gc --prune=now --aggressive",NULL,$repo,NULL);
+					echo execnono($cmd = "git reflog expire --all --expire=now",NULL,$repo,NULL);
+					if(VERBOSE) echo $cmd.PHP_EOL;
+					echo execnono($cmd = "git gc --prune=now --aggressive",NULL,$repo,NULL);
+					if(VERBOSE) echo $cmd.PHP_EOL;
 				}
 
 			} elseif(is_dir($repo."/.svn")){
 				$type = "svn";
-				if(REPO_FETCH)
-					$gitfecthtag = execnono("svn update",NULL,$repo,NULL);
-				$svninfo = execnono("svn info",NULL,$repo,NULL);
+				if(REPO_FETCH){
+					$gitfecthtag = execnono($cmd = "svn update",NULL,$repo,NULL);
+					if(VERBOSE) echo $cmd.PHP_EOL;
+				}
+				$svninfo = execnono($cmd = "svn info",NULL,$repo,NULL);
+				if(VERBOSE) echo $cmd.PHP_EOL;
 				preg_match("/Repository Root: ?(.*)\n/",$svninfo,$matches);
 				$upstream = trim($matches[1]);
 				preg_match("/Relative URL: \^\/(.*)\n/",$svninfo,$matches);
@@ -74,7 +96,8 @@
 				$head = trim($matches[1]);
 				$srccreate .= "svn co ".$upstream."/".$branch." ".$ele.PHP_EOL."cd /D ".$ele.PHP_EOL."svn update -r ".$head.PHP_EOL."cd /D ..".PHP_EOL;
 				
-				$svninfo = execnono("svn log -l ".NB_TAGS,NULL,$repo,NULL);
+				$svninfo = execnono($cmd = "svn log -l ".NB_TAGS,NULL,$repo,NULL);
+				if(VERBOSE) echo $cmd.PHP_EOL;
 				$gitlasttags = "";
 				foreach(explode("\n",$svninfo) as $line){
 					preg_match("/r([0-9]+) .* ([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} [+-][0-9]{2}00)/",$line,$matches);

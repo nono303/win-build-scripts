@@ -24,16 +24,3 @@ index cb3d086..402372f 100644
  #else
  #include <stdint.h>
  #endif
-diff --git a/src/php_memcache.h b/src/php_memcache.h
-index 4181849..4d1a89d 100644
---- a/src/php_memcache.h
-+++ b/src/php_memcache.h
-@@ -67,7 +67,7 @@ PHP_FUNCTION(memcache_close);
- PHP_FUNCTION(memcache_flush);
- PHP_FUNCTION(memcache_set_sasl_auth_data);
- 
--#define PHP_MEMCACHE_VERSION "4.0.5.2"
-+#define PHP_MEMCACHE_VERSION "8.0"
- 
- #define MMC_DEFAULT_TIMEOUT 1				/* seconds */
- #define MMC_DEFAULT_RETRY 15 				/* retry failed server after x seconds */

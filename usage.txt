@@ -64,6 +64,7 @@ Usage: go command [options]
     > option:
         gitcg:   do a GIT garbage collector on all git scm
 	nofetch: don't fetch remote
+	verbose: display all scm commands
   * srccreate: git clone & svn co all required src into %PATH_SRC% defined in env.bat
   * bininfo: check all binaries released (exe dll so) for datetime, MSVC version, architecture and option, 'StringFileInfo' embedded and export a summarized csv file in %PATH_LOGS%
     > param: a path or a file to check

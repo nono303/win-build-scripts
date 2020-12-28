@@ -37,7 +37,8 @@ if exist %PATH_SRC%\%1\. (
 		echo # %1 svn revision:!SCM_VERSION!
 		if %ARG_KEEPSRC% == 0 (
 			svn revert . -R
-			svn cleanup . --remove-unversioned --remove-ignored
+			REM --remove-ignored
+			svn cleanup . --remove-unversioned
 			if exist %PATH_MODULES%\%1.patch (
 				echo # apply %1.patch
 				svn patch %PATH_MODULES%\%1.patch .

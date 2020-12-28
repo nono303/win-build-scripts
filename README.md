@@ -41,17 +41,18 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | "my"version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2019 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 16.8.0 (14.28) | `.vsconfig`         |
+| [Visual Studio 2019 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 16.8.3 (14.28) | `.vsconfig`         |
 | [Cygwin](https://cygwin.com/install.html)                    | x86  | 3.1.7          | `cyg32.packagelist` |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.1.7          | `cyg64.packagelist` |
-| [Python 2.7](https://www.python.org/downloads/)              | x64  | 2.7.18         |                     |
+| [Python](https://www.python.org/downloads/)                  | x64  | 3.9.1          |                     |
 | [OpenJDK](https://jdk.java.net/15/)                          | x64  | 15.0.1         |                     |
 | [ActivePerl](https://platform.activestate.com/ActiveState/ActivePerl-5.28/auto-fork) | x64  | 5.28.1.2801    |                     |
 | [Netwide Assembler](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.15.05        |                     |
-| [Git](https://git-scm.com/download/win)                      | x64  | 2.28.0         |                     |
+| [Git](https://git-scm.com/download/win)                      | x64  | 2.29.2.3         |                     |
 | verpatch                                                     | x64  | 1.0.15.1       |                     |
 | [7z](https://www.7-zip.org/download.html)                    | x64  | 19             |                     |
 | [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.80           |                     |
 | [ChkMatch](http://www.debuginfo.com/tools/chkmatch.html)     |      | 1.0.3          |                     |
+| [Gradle](https://gradle.org/) | | 6.7.1 | |
 
 ### [SOURCE VERSIONS](./SRC_VERSION.md)

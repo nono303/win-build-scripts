@@ -1,81 +1,18 @@
-Index: .classpath
+Index: gradle/wrapper/gradle-wrapper.properties
 ===================================================================
---- .classpath	(revision 2488)
-+++ .classpath	(working copy)
-@@ -45,7 +45,7 @@
- 	</classpathentry>
- 	<classpathentry exported="true" kind="lib" path="lib/mapsforge/kxml2-2.3.0.jar"/>
- 	<classpathentry exported="true" kind="lib" path="lib/mapsforge/svg-salamander-0.1.19.jar"/>
--	<classpathentry exported="true" kind="lib" path="lib/sqlite-jdbc-3.16.1.jar"/>
-+	<classpathentry exported="true" kind="lib" path="lib/sqlite-jdbc-3.30.1.jar"/>
- 	<classpathentry exported="true" kind="lib" path="lib/jaxb-api-2.3.0.jar"/>
- 	<classpathentry exported="true" kind="lib" path="lib/jaxb-core-2.3.0.1.jar"/>
- 	<classpathentry exported="true" kind="lib" path="lib/istack-commons-runtime-3.0.5.jar"/>
-Index: build.xml
+--- gradle/wrapper/gradle-wrapper.properties	(revision 2556)
++++ gradle/wrapper/gradle-wrapper.properties	(working copy)
+@@ -1,5 +1,5 @@
+ distributionBase=GRADLE_USER_HOME
+ distributionPath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-6.7-bin.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-6.7.1-bin.zip
+ zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
+Index: mobac/src/main/java/mobac/gui/MainGUI.java
 ===================================================================
---- build.xml	(revision 2488)
-+++ build.xml	(working copy)
-@@ -3,9 +3,6 @@
- 	<property file="src/main/resources/mobac/mobac.properties" />
- 
- 	<property name="rev.prop.file" value="src/main/resources/mobac/mobac-rev.properties" />
--	<property name="jar.name" value="Mobile_Atlas_Creator.jar" />
--	<property name="zip.name" value="Mobile Atlas Creator ${mobac.version}.zip" />
--	<property name="zip_src.name" value="Mobile Atlas Creator ${mobac.version} src.zip" />
- 	<property name="main.class" value="mobac.StartMOBAC" />
- 
- 	<property name="rtlibraryjar.non_osx" value="${java.home}/lib/rt.jar" />
-@@ -17,7 +14,7 @@
- 	</tstamp>
- 
- 	<property name="je-version" value="3.3.93" />
--	<property name="sqlite-version" value="3.16.1" />
-+	<property name="sqlite-version" value="3.30.1" />
- 	<property name="mapsforge-version" value="0.9.1" />
- 
- 	<!-- Java target version -->
-@@ -66,16 +63,9 @@
- 
- 	<target name="build">
- 		<mkdir dir="build/mobac" />
--		<!-- Compile the starter class for Java 7 (shows an verbose -->
--		<!-- error if the JRE requirements are not met -->
--		<javac srcdir="src/main/java" destdir="build/mobac" target="1.7" source="1.7" debug="true" includeantruntime="false" encoding="UTF-8">
-+		<javac srcdir="src/main/java" destdir="build/mobac" debug="true" includeantruntime="false" encoding="UTF-8">
-+			<!--compilerarg value="-Xlint:deprecation" /-->
- 			<classpath refid="maincp" />
--			<include name="mobac/StartMOBAC.java" />
--		</javac>
--		<!-- Compile the other classes for Java 1.8 -->
--		<javac srcdir="src/main/java" destdir="build/mobac" target="${java-target}" source="${java-target}" debug="true" includeantruntime="false" encoding="UTF-8">
--			<classpath refid="maincp" />
--			<exclude name="mobac/StartMOBAC.java" />
- 			<exclude name="mobac/mapsources/mappacks/**" />
- 			<include name="mobac/**" />
- 		</javac>
-@@ -107,7 +97,7 @@
- 					<srcfiles dir="src/main/java/mobac/mapsources/mappacks/@{mappack}" />
- 				</uptodate>
- 				<echo message="No changes in map pack detected: @{mappack}" />
--				<javac srcdir="src/main/java" destdir="build/mp-@{mappack}" defaultexcludes="true" debug="true" target="${java-target}" source="${java-target}" includeantruntime="false" encoding="UTF-8">
-+				<javac srcdir="src/main/java" destdir="build/mp-@{mappack}" defaultexcludes="true" debug="true" includeantruntime="false" encoding="UTF-8">
- 					<include name="mobac/mapsources/mappacks/@{mappack}/**.java" />
- 					<classpath>
- 						<path refid="maincp" />
-@@ -215,6 +205,9 @@
- 		</condition>
- 		<echo message="MOBAC revision: ${mobac.revision.new}" />
- 		<antcall target="svnversion_write_property_file" />
-+		<property name="jar.name" value="Mobile_Atlas_Creator_${mobac.revision.new}.jar" />
-+		<property name="zip.name" value="Mobile Atlas Creator ${mobac.version}-${mobac.revision.new}.zip" />
-+		<property name="zip_src.name" value="Mobile Atlas Creator ${mobac.version}-${mobac.revision.new} src.zip" />
- 	</target>
- 
- 	<target name="svnversion_write_property_file" unless="mobac.revision.exported">
-Index: src/main/java/mobac/gui/MainGUI.java
-===================================================================
---- src/main/java/mobac/gui/MainGUI.java	(revision 2488)
-+++ src/main/java/mobac/gui/MainGUI.java	(working copy)
+--- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2556)
++++ mobac/src/main/java/mobac/gui/MainGUI.java	(working copy)
 @@ -163,7 +163,7 @@
  	private static Color checkboxBackgroundColor = new Color(0, 0, 0, 40);
  	private static Color labelForegroundColor = Color.WHITE;
@@ -93,10 +30,10 @@ Index: src/main/java/mobac/gui/MainGUI.java
  
  		leftPanelContent = new JPanel(new GridBagLayout());
  		leftPanelContent.add(mapSourcePanel, gbc_eol);
-Index: src/main/java/mobac/gui/panels/JMapSourcesPanel.java
+Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
 ===================================================================
---- src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2488)
-+++ src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(working copy)
+--- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2556)
++++ mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(working copy)
 @@ -45,7 +45,7 @@
  		JScrollPane mapSourceTreeScrollPane = new JScrollPane(mapSourceTree, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
  				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -106,10 +43,10 @@ Index: src/main/java/mobac/gui/panels/JMapSourcesPanel.java
  		mapSourceTreeScrollPane.setAutoscrolls(true);
  		addContent(mapSourceTreeScrollPane, GBC.eol().fill().insets(0, 1, 0, 0));
  	}
-Index: src/main/java/mobac/gui/settings/SettingsGUI.java
+Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
 ===================================================================
---- src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2488)
-+++ src/main/java/mobac/gui/settings/SettingsGUI.java	(working copy)
+--- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2556)
++++ mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(working copy)
 @@ -97,7 +97,7 @@
  
  	private static final Logger LOG = Logger.getLogger(SettingsGUI.class);
@@ -119,10 +56,10 @@ Index: src/main/java/mobac/gui/settings/SettingsGUI.java
  
  	private static final long MBIT1 = 1000000 / 8;
  
-Index: src/main/java/mobac/program/download/MobacTrustManager.java
+Index: mobac/src/main/java/mobac/program/download/MobacTrustManager.java
 ===================================================================
---- src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2488)
-+++ src/main/java/mobac/program/download/MobacTrustManager.java	(working copy)
+--- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2556)
++++ mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(working copy)
 @@ -97,7 +97,7 @@
  			defaultTrustManager.checkServerTrusted(chain, authType);
  		} catch (CertificateException e) {
