@@ -134,13 +134,16 @@ index a7b18419dd..5c9e4f55b8 100644
 -  modules/md/mod_md_config.c         modules/md/mod_md_drive.c
 -  modules/md/mod_md_os.c             modules/md/mod_md_status.c
 -  modules/md/mod_md_ocsp.c
++  ${mod_md_src}/mod_md_config.c
++  ${mod_md_src}/mod_md_drive.c
++  ${mod_md_src}/mod_md_ocsp.c
++  ${mod_md_src}/mod_md_os.c
 +  ${mod_md_src}/mod_md_status.c
 +  ${mod_md_src}/md_acme.c
 +  ${mod_md_src}/md_acme_acct.c
 +  ${mod_md_src}/md_acme_authz.c
 +  ${mod_md_src}/md_acme_drive.c
 +  ${mod_md_src}/md_acme_order.c
-+  ${mod_md_src}/md_acmev1_drive.c
 +  ${mod_md_src}/md_acmev2_drive.c
 +  ${mod_md_src}/md_cmd_acme.c
 +  ${mod_md_src}/md_cmd_main.c
@@ -149,6 +152,7 @@ index a7b18419dd..5c9e4f55b8 100644
 +  ${mod_md_src}/md_core.c
 +  ${mod_md_src}/md_crypt.c
 +  ${mod_md_src}/md_curl.c
++  ${mod_md_src}/md_event.c
 +  ${mod_md_src}/md_http.c
 +  ${mod_md_src}/md_json.c
 +  ${mod_md_src}/md_jws.c
@@ -161,10 +165,6 @@ index a7b18419dd..5c9e4f55b8 100644
 +  ${mod_md_src}/md_store_fs.c
 +  ${mod_md_src}/md_time.c
 +  ${mod_md_src}/md_util.c
-+  ${mod_md_src}/mod_md_config.c
-+  ${mod_md_src}/mod_md_drive.c
-+  ${mod_md_src}/mod_md_ocsp.c
-+  ${mod_md_src}/mod_md_os.c
  )
  SET(mod_optional_hook_export_extra_defines AP_DECLARE_EXPORT) # bogus reuse of core API prefix
  SET(mod_proxy_extra_defines          PROXY_DECLARE_EXPORT)
