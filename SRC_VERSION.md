@@ -28,12 +28,12 @@
 | libzip | 1.7.3 |
 | lua | 5.3.6 |
 | memcached | 1.6.9 |
-| mobac | 2.2.0 r2556 |
-| mod_fcgid | 2.3.10.1 r1883853 |
+| mobac | 2.2.0 r2563 |
+| mod_fcgid | 2.3.10.1 r1885133 |
 | mod_h2 | 1.15.16 |
 | mod_h264_streaming | 2.2.7 |
 | mod_maxminddb | 1.2.0 |
-| mod_md | 2.3.3 |
+| mod_md | 2.3.4 |
 | mod_wku_bt | 2.01.1 |
 | nghttp2 | 1.42 |
 | nssm | 2.24.113 |
@@ -53,5 +53,5 @@
 | tidy | 5.7.28 |
 | verpatch | 1.0.15.1 |
 | wineditline | 2.2 |
-| xdebug | 3.0.1 |
+| xdebug | 3.0.2 |
 | zlib | 1.2.11 |
