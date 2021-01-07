@@ -19,7 +19,7 @@
 | libffi | 3.3 |
 | libiconv | 1.16.1 |
 | liblzma | 5.2.5 |
-| libmaxminddb | 1.4.3 |
+| libmaxminddb | 1.5.0 |
 | libpng | 1.6.37 |
 | libssh2 | 1.9.0 |
 | libxdiff | 0.23 |
@@ -39,13 +39,13 @@
 | nssm | 2.24.113 |
 | openssl | 1.1.1i |
 | pcre | 8.44 |
-| pecl-memcache | nbio_php8 8.0 - 36d7181 |
+| pecl-memcache | nbio_php8 - 8.1-dev - e014963 |
 | pecl-text-xdiff | 2.0.1 |
 | php-cgi-spawner | 1.1.23 |
 | php-ext-brotli | 0.11.1 |
 | php-geos | 1.0.1 |
 | php-sdk | 2.2.0 |
-| php-src | 8.0.0 |
+| php-src | 8.0.1 |
 | sdlna | 1.0.3 |
 | serf | 2.0.0 |
 | sqlite | 3.34.0 |
