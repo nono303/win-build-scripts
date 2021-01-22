@@ -33,7 +33,7 @@
 | mod_h2 | 1.15.16 |
 | mod_h264_streaming | 2.2.7 |
 | mod_maxminddb | 1.2.0 |
-| mod_md | 2.3.4 |
+| mod_md | 2.3.6 |
 | mod_wku_bt | 2.01.1 |
 | nghttp2 | 1.42 |
 | nssm | 2.24.113 |
@@ -42,7 +42,7 @@
 | pecl-memcache | nbio_php8 - 8.1-dev - e014963 |
 | pecl-text-xdiff | 2.0.1 |
 | php-cgi-spawner | 1.1.23 |
-| php-ext-brotli | 0.11.1 |
+| php-ext-brotli | 0.13.0 |
 | php-geos | 1.0.1 |
 | php-sdk | 2.2.0 |
 | php-src | 8.0.1 |

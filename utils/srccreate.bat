@@ -126,7 +126,7 @@ svn update -r 2563
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1885226
+svn update -r 1885774
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -142,7 +142,7 @@ git checkout tags/1.2.0
 cd /D ..
 git clone https://github.com/icing/mod_md mod_md
 cd /D mod_md
-git checkout tags/v2.3.4
+git checkout tags/v2.3.6
 cd /D ..
 git clone https://github.com/nono303/mod_whatkilledus mod_wku_bt
 cd /D mod_wku_bt
@@ -178,7 +178,7 @@ git checkout tags/1.1.23
 cd /D ..
 git clone https://github.com/kjdev/php-ext-brotli.git php-ext-brotli
 cd /D php-ext-brotli
-git checkout tags/0.11.1
+git checkout tags/0.13.0
 cd /D ..
 git clone https://github.com/nono303/php-geos php-geos
 cd /D php-geos
