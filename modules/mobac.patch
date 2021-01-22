@@ -1,32 +1,40 @@
+Index: gradle/wrapper/gradle-wrapper.properties
+===================================================================
+--- gradle/wrapper/gradle-wrapper.properties	(revision 2563)
++++ gradle/wrapper/gradle-wrapper.properties	(working copy)
+@@ -1,5 +1,5 @@
+ distributionBase=GRADLE_USER_HOME
+ distributionPath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-6.7.1-bin.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-6.8-bin.zip
+ zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
 Index: mobac/build.gradle
 ===================================================================
---- mobac/build.gradle	(revision 2557)
+--- mobac/build.gradle	(revision 2563)
 +++ mobac/build.gradle	(working copy)
-@@ -3,8 +3,20 @@
+@@ -2,9 +2,17 @@
+     id 'java-library'
      id 'edu.sc.seis.launch4j' version '2.4.9'
  }
- 
 +repositories {
 +    jcenter()
 +    gradlePluginPortal()
 +    maven {
 +        url "https://repo1.maven.org/maven2/"
-+    }
-+    flatDir {
-+        // https://repository.mulesoft.org/nexus/content/repositories/public/com/github/blackears/svgSalamander/v1.1.1/svgSalamander-v1.1.1.jar
-+        dirs "$rootProject.projectDir/libs"
++        url "https://jitpack.io"
 +    }
 +}
-+
+ 
  dependencies {
 -    def mapsforgeVersion = '0.9.1'
-+    def mapsforgeVersion = '0.14.0'
++    def mapsforgeVersion = '0.15.0'
  
      implementation "org.mapsforge:mapsforge-core:${mapsforgeVersion}"
      implementation "org.mapsforge:mapsforge-map:${mapsforgeVersion}"
 Index: mobac/src/main/java/mobac/gui/MainGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2557)
+--- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2563)
 +++ mobac/src/main/java/mobac/gui/MainGUI.java	(working copy)
 @@ -163,7 +163,7 @@
  	private static Color checkboxBackgroundColor = new Color(0, 0, 0, 40);
@@ -47,7 +55,7 @@ Index: mobac/src/main/java/mobac/gui/MainGUI.java
  		leftPanelContent.add(mapSourcePanel, gbc_eol);
 Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2557)
+--- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2563)
 +++ mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(working copy)
 @@ -45,7 +45,7 @@
  		JScrollPane mapSourceTreeScrollPane = new JScrollPane(mapSourceTree, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -60,7 +68,7 @@ Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
  	}
 Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2557)
+--- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2563)
 +++ mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(working copy)
 @@ -97,7 +97,7 @@
  
@@ -73,7 +81,7 @@ Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
  
 Index: mobac/src/main/java/mobac/program/download/MobacTrustManager.java
 ===================================================================
---- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2557)
+--- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2563)
 +++ mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(working copy)
 @@ -97,7 +97,7 @@
  			defaultTrustManager.checkServerTrusted(chain, authType);
