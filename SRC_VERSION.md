@@ -6,7 +6,7 @@
 | brotli | 1.0.9 |
 | bzip2 | 1.0.8 |
 | cares | 1.17.1 |
-| curl | 7.74.0 |
+| curl | 7.75.0 |
 | freetype2 | 2.10.4 |
 | geos | 3.9.0 |
 | httpd | 2.4.46 |
@@ -28,28 +28,28 @@
 | libzip | 1.7.3 |
 | lua | 5.3.6 |
 | memcached | 1.6.9 |
-| mobac | 2.2.0 r2563 |
-| mod_fcgid | 2.3.10.1 r1885133 |
+| mobac | 2.2.0 r2564 |
+| mod_fcgid | 2.3.10.1 r1886206 |
 | mod_h2 | 1.15.16 |
 | mod_h264_streaming | 2.2.7 |
 | mod_maxminddb | 1.2.0 |
-| mod_md | 2.3.6 |
+| mod_md | 2.3.7 |
 | mod_wku_bt | 2.01.1 |
-| nghttp2 | 1.42 |
+| nghttp2 | 1.43 |
 | nssm | 2.24.113 |
 | openssl | 1.1.1i |
 | pcre | 8.44 |
 | pecl-memcache | nbio_php8 - 8.1-dev - e014963 |
 | pecl-text-xdiff | 2.0.1 |
 | php-cgi-spawner | 1.1.23 |
-| php-ext-brotli | 0.13.0 |
+| php-ext-brotli | 0.13.1 |
 | php-geos | 1.0.1 |
 | php-sdk | 2.2.0 |
-| php-src | 8.0.1 |
+| php-src | 8.0.2 |
 | sdlna | 1.0.3 |
 | serf | 2.0.0 |
-| sqlite | 3.34.0 |
-| subversion | 1.14.0 |
+| sqlite | 3.34.1 |
+| subversion | 1.14.1 |
 | tidy | 5.7.28 |
 | verpatch | 1.0.15.1 |
 | wineditline | 2.2 |

@@ -34,7 +34,7 @@ git checkout tags/cares-1_17_1
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-7_74_0
+git checkout tags/curl-7_75_0
 cd /D ..
 git clone git://git.sv.nongnu.org/freetype/freetype2.git freetype2
 cd /D freetype2
@@ -122,11 +122,11 @@ git checkout tags/1.6.9
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2563
+svn update -r 2564
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1885774
+svn update -r 1886206
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -142,7 +142,7 @@ git checkout tags/1.2.0
 cd /D ..
 git clone https://github.com/icing/mod_md mod_md
 cd /D mod_md
-git checkout tags/v2.3.6
+git checkout tags/v2.3.7
 cd /D ..
 git clone https://github.com/nono303/mod_whatkilledus mod_wku_bt
 cd /D mod_wku_bt
@@ -150,7 +150,7 @@ git checkout tags/2.01.1
 cd /D ..
 git clone https://github.com/nghttp2/nghttp2.git nghttp2
 cd /D nghttp2
-git checkout tags/v1.42.0
+git checkout tags/v1.43.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -178,11 +178,11 @@ git checkout tags/1.1.23
 cd /D ..
 git clone https://github.com/kjdev/php-ext-brotli.git php-ext-brotli
 cd /D php-ext-brotli
-git checkout tags/0.13.0
+git checkout tags/0.13.1
 cd /D ..
-git clone https://github.com/nono303/php-geos php-geos
+git clone https://github.com/ModelTech/php-geos php-geos
 cd /D php-geos
-git checkout php8
+git checkout master
 cd /D ..
 git clone https://github.com/microsoft/php-sdk-binary-tools.git php-sdk
 cd /D php-sdk
@@ -190,7 +190,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.0.1
+git checkout tags/php-8.0.2
 cd /D ..
 git clone https://github.com/nono303/simpleDLNA.git sdlna
 cd /D sdlna
@@ -202,11 +202,11 @@ git checkout trunk
 cd /D ..
 git clone https://github.com/azadkuh/sqlite-amalgamation sqlite
 cd /D sqlite
-git checkout tags/3.34.0
+git checkout tags/3.34.1
 cd /D ..
 git clone https://github.com/apache/subversion.git subversion
 cd /D subversion
-git checkout tags/1.14.0
+git checkout tags/1.14.1
 cd /D ..
 git clone https://github.com/htacg/tidy-html5 tidy
 cd /D tidy
