@@ -2,7 +2,7 @@
 
 set VCDIR=%MSVC_DEPS%_%ARCH%_%AVXECHO%
 if exist %VCDIR%\. rmdir /S /Q %VCDIR%
-cmake -S . -B %VCDIR% -G "Visual Studio 16 2019" -A x64 -DCMAKE_GENERATOR_TOOLSET=host=x64
+cmake -S . -B %VCDIR% -G "Visual Studio 16 2019" -A %archmsbuild% -DCMAKE_GENERATOR_TOOLSET=host=%ARCH% 
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/%VCDIR:\=/%" %AVXVCX% %PTFTS% %WKITVER%
 
 sed -i 's/true^<\/LinkIncremental/false^<\/LinkIncremental/g' %CYGPATH_SRC%/%1/%VCDIR%/geos_c.vcxproj

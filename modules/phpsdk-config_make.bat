@@ -41,6 +41,11 @@ if %PHPVER% == 8.0 (
 	set native-intrinsics=1
 )
 
+if %MSVC_VER% == 16 (
+	set phparchopts= --enable-phpdbg ^
+	--enable-phpdbgs
+)
+
 set PHP_COMMON_CONFIGURE=^
 	--disable-cli-win32 ^
 	--disable-debug ^
@@ -99,9 +104,7 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--with-xdiff=shared ^
 	--enable-memcache=shared ^
 	--with-geos=shared ^
-	--enable-phpdbg ^
-	--enable-phpdbgs ^
-	%ZTS% %phpveropts%
+	%ZTS% %phpveropts% %phparchopts%
 ) else (
 	call configure %PHP_COMMON_CONFIGURE% ^
 	--disable-bcmath ^
