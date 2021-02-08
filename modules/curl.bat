@@ -1,5 +1,6 @@
 for /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\date -u`) do (set LIBCURL_TIMESTAMP=%%F)
-for %%S in (openssl winssl) do (
+REM for %%S in (openssl winssl) do (
+for %%S in (openssl) do (
 	@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
 		REM https://github.com/curl/curl/blob/master/GIT-INFO
