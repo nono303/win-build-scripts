@@ -8,7 +8,7 @@
 | cares | 1.17.1 |
 | curl | 7.75.0 |
 | freetype2 | 2.10.4 |
-| geos | 3.9.0 |
+| geos | 3.9.1 |
 | httpd | 2.4.46 |
 | jansson | 2.13.1 |
 | jemalloc | 5.2.1 |
@@ -28,8 +28,8 @@
 | libzip | 1.7.3 |
 | lua | 5.3.6 |
 | memcached | 1.6.9 |
-| mobac | 2.2.0 r2564 |
-| mod_fcgid | 2.3.10.1 r1886206 |
+| mobac | 2.2.0 r2568 |
+| mod_fcgid | 2.3.10.1 r1886613 |
 | mod_h2 | 1.15.16 |
 | mod_h264_streaming | 2.2.7 |
 | mod_maxminddb | 1.2.0 |
@@ -37,7 +37,7 @@
 | mod_wku_bt | 2.01.1 |
 | nghttp2 | 1.43 |
 | nssm | 2.24.113 |
-| openssl | 1.1.1i |
+| openssl | 1.1.1j |
 | pcre | 8.44 |
 | pecl-memcache | nbio_php8 - 8.1-dev - e014963 |
 | pecl-text-xdiff | 2.0.1 |

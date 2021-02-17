@@ -42,7 +42,7 @@ git checkout tags/VER-2-10-4
 cd /D ..
 git clone https://github.com/libgeos/geos geos
 cd /D geos
-git checkout tags/3.9.0
+git checkout tags/3.9.1
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
@@ -74,7 +74,7 @@ git checkout tags/R_2_2_10
 cd /D ..
 git clone https://github.com/winlibs/libffi libffi
 cd /D libffi
-git checkout master
+git checkout tags/libffi-3.3
 cd /D ..
 git clone https://github.com/winlibs/libiconv.git libiconv
 cd /D libiconv
@@ -122,11 +122,11 @@ git checkout tags/1.6.9
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2564
+svn update -r 2568
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1886206
+svn update -r 1886613
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -158,7 +158,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/openssl/openssl.git openssl
 cd /D openssl
-git checkout tags/OpenSSL_1_1_1i
+git checkout tags/OpenSSL_1_1_1j
 cd /D ..
 git clone https://github.com/jwilk-mirrors/pcre pcre
 cd /D pcre
