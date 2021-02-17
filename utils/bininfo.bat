@@ -7,5 +7,5 @@ if exist %2\. (
 	call do_php %PATH_UTILS%\sub\%1.php %PATH_INSTALL%\bin %BININFO_LOG:\=/% %2 %3 nb:161 %4 %5 %6 %7
 	call do_php %PATH_UTILS%\sub\%1.php %PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB% %BININFO_LOG:\=/% %2 %3 nb:61 %4 %5 %6 %7
 		REM !! TMP (nts ts)
-	for %%E in (nts) do (call do_php %PATH_UTILS%\sub\%1.php %PATH_RELEASE_PHP%\%MSVC_DEPS%-%ARCH%%AVXB%-%%E  %BININFO_LOG:\=/% %2 %3 nb:36 %4 %5 %6 %7)
+	for %%E in (nts) do (call do_php %PATH_UTILS%\sub\%1.php %PATH_RELEASE_PHP%\%MSVC_DEPS%-%ARCH%%AVXB%-%%E  %BININFO_LOG:\=/% %2 %3 nb:32 %4 %5 %6 %7)
 )
