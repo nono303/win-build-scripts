@@ -86,7 +86,7 @@ git checkout tags/v5.2.5
 cd /D ..
 git clone https://github.com/maxmind/libmaxminddb.git libmaxminddb
 cd /D libmaxminddb
-git checkout tags/1.5.0
+git checkout tags/1.5.2
 cd /D ..
 git clone git://git.code.sf.net/p/libpng/code libpng
 cd /D libpng
@@ -126,11 +126,11 @@ svn update -r 2568
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1886613
+svn update -r 1886819
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v1.15.16
+git checkout tags/v1.15.17
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -222,7 +222,7 @@ svn update -r 36
 cd /D ..
 git clone https://github.com/xdebug/xdebug.git xdebug
 cd /D xdebug
-git checkout tags/3.0.2
+git checkout tags/3.0.3
 cd /D ..
 git clone https://github.com/madler/zlib.git zlib
 cd /D zlib

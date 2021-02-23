@@ -19,7 +19,7 @@
 | libffi | 3.3 |
 | libiconv | 1.16.1 |
 | liblzma | 5.2.5 |
-| libmaxminddb | 1.5.0 |
+| libmaxminddb | 1.5.2 |
 | libpng | 1.6.37 |
 | libssh2 | 1.9.0 |
 | libxdiff | 0.23 |
@@ -30,7 +30,7 @@
 | memcached | 1.6.9 |
 | mobac | 2.2.0 r2568 |
 | mod_fcgid | 2.3.10.1 r1886613 |
-| mod_h2 | 1.15.16 |
+| mod_h2 | 1.15.17 |
 | mod_h264_streaming | 2.2.7 |
 | mod_maxminddb | 1.2.0 |
 | mod_md | 2.3.7 |
@@ -53,5 +53,5 @@
 | tidy | 5.7.28 |
 | verpatch | 1.0.15.1 |
 | wineditline | 2.2 |
-| xdebug | 3.0.2 |
+| xdebug | 3.0.3 |
 | zlib | 1.2.11 |
