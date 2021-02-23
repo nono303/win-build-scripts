@@ -161,8 +161,6 @@ for %%A in (exe dll) do (
 	)
 )
 
-	REM copy curl to %PATH_INSTALL%\bin
-xcopy /C /F /Y %PHP_CURL%\bin\libcurl.* %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%outdirphp%-%TSNTS%\*
 	REM php_memcache verpatch
 set MEMCACHEVERPATCH=c:\sdk\softs\verpatch.exe %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%AVXB%-%TSNTS%\php_memcache.dll /high %PECLMEMCACHEVERSION%-%PECLMEMCACHEGITCOMMIT% /pv %PHPVER% /rpdb /s desc "%PECLMEMCACHEGITBRANCH% - %PECLMEMCACHEGITCOMMIT%%PECLMEMCACHEPATCHVERSION% (%PECLMEMCACHEGITDATE%)" /s product "pecl-memcache %PHP_SDK_ARCH%%AVXB% %TSNTS% [%MSVC_DEPS%]" /s OriginalFilename "php_memcache.dll" /s InternalName "php_memcache.dll" /s LegalCopyright "https://github.com/nono303/PHP-memcache-dll" /s LegalTrademarks "https://github.com/websupport-sk/pecl-memcache"
 echo %MEMCACHEVERPATCH%
