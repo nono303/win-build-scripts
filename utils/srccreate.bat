@@ -122,11 +122,11 @@ git checkout tags/1.6.9
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2568
+svn update -r 2569
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1886819
+svn update -r 1887640
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -142,7 +142,7 @@ git checkout tags/1.2.0
 cd /D ..
 git clone https://github.com/icing/mod_md mod_md
 cd /D mod_md
-git checkout tags/v2.3.7
+git checkout tags/v.2.4.0
 cd /D ..
 git clone https://github.com/nono303/mod_whatkilledus mod_wku_bt
 cd /D mod_wku_bt
@@ -190,7 +190,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.0.2
+git checkout tags/php-8.0.3
 cd /D ..
 git clone https://github.com/nono303/simpleDLNA.git sdlna
 cd /D sdlna
