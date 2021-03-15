@@ -15,5 +15,8 @@ sed -i 's/define LIBFFI_H/define LIBFFI_H\n#define FFI_BUILDING /g' %CYGPATH_SRC
 	/p:Configuration=Release ^
 	/p:Platform="%archmsbuild%"
 
-for %%D in (%VCDIR%\%ARCH%\Release\libffi.lib %VCDIR%\libffi\%ARCH%\Release\libffi.pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\%%D %PATH_INSTALL%\lib\*)
+if %ARCH% == x64 (set RELFFI=%ARCH%\Release)
+if %ARCH% == x86 (set RELFFI=Release)
+
+for %%D in (%VCDIR%\%RELFFI%\libffi.lib %VCDIR%\libffi\%RELFFI%\libffi.pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\%%D %PATH_INSTALL%\lib\*)
 for %%D in (src\x86\ffitarget.h fficonfig.h include\ffi.h) do (xcopy /C /F /Y %PATH_SRC%\%1\%%D %PATH_INSTALL%\include\*)
