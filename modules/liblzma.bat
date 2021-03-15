@@ -8,7 +8,7 @@ set VCCONF=Release
 MSBuild.exe %PATH_SRC%\%1\%VCDIR%\xz_win.sln ^
 %MSBUILD_OPTS% ^
 /t:Clean,liblzma,liblzma_dll ^
-/nowarn:C4267,C4996 ^
+/nowarn:C4267,C4996,C4028 ^
 /p:Configuration=%VCCONF% ^
 /p:ZLibSrcDir=C:\sdk\src\zlib ^
 /p:ZLibLib=%PATH_INSTALL%\lib\zlib.lib ^
