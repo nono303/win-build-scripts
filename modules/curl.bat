@@ -15,3 +15,4 @@ for %%S in (openssl) do (
 	sed -i 's/\[unreleased\]/%LIBCURL_TIMESTAMP%/g' %CYGPATH_SRC%/%1/include/curl/curlver.h
 	call %PATH_MODULES%\curl-sub.bat %1 %%S
 )
+curl https://curl.se/ca/cacert.pem -o %PATH_INSTALL%\bin\curl-ca-bundle.crt
