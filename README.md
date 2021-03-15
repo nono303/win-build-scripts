@@ -41,7 +41,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | "my"version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2019 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 16.8.5 (14.28) | `.vsconfig`         |
+| [Visual Studio 2019 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 16.9.1 (14.28) | `.vsconfig`         |
 | [Cygwin](https://cygwin.com/install.html)                    | x86  | 3.1.7          | `cyg32.packagelist` |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.1.7          | `cyg64.packagelist` |
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.9.2       |                     |
