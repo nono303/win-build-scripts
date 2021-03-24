@@ -28,8 +28,8 @@
 | libzip | 1.7.3 |
 | lua | 5.3.6 |
 | memcached | 1.6.9 |
-| mobac | 2.2.0 r2569 |
-| mod_fcgid | 2.3.10.1 r1887640 |
+| mobac | 2.2.0 r2574 |
+| mod_fcgid | 2.3.10.1 r1887988 |
 | mod_h2 | 1.15.17 |
 | mod_h264_streaming | 2.2.7 |
 | mod_maxminddb | 1.2.0 |
@@ -48,7 +48,7 @@
 | php-src | 8.0.3 |
 | sdlna | 1.0.3 |
 | serf | 2.0.0 |
-| sqlite | 3.34.1 |
+| sqlite | 3.35.2 |
 | subversion | 1.14.1 |
 | tidy | 5.7.28 |
 | verpatch | 1.0.15.1 |
