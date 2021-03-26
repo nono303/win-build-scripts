@@ -10,8 +10,6 @@
 	$nogit = array(
 		"sqlite"			=> ["/SQLITE_VERSION +\"([^\"]+)\"/",
 							pathenv("PATH_SRC")."/sqlite/sqlite3.h"],
-		"lua"				=> ["/version = \"([^\"]+)\"/",	
-							pathenv("PATH_SRC")."/lua/dist.info"],
 		"mobac"				=> ["/mobac.version=(.*)/",	
 							pathenv("PATH_SRC")."/mobac/src/main/resources/mobac/mobac.properties"],
 		"mod_fcgid"			=> ["/#define MODFCGID_VERSION_MAJOR *([0-9]+).*#define MODFCGID_VERSION_MINOR *([0-9]+).*#define MODFCGID_VERSION_SUBVER *([0-9]+).*#define MODFCGID_VERSION_DEV *([0-9]+)/s",	
