@@ -1,16 +1,52 @@
-call %PATH_MODULES_COMMON%\init.bat %1 cmake
+call %PATH_MODULES_COMMON%\init.bat %1
+call cl /w /MD /Zi /O2 /GL /MD /Zi /MP16 %AVX% /DNDEBUG /c /DLUA_BUILD_AS_DLL ^
+lutf8lib.c ^
+lvm.c ^
+lzio.c ^
+lundump.c ^
+ltests.c ^
+ltm.c ^
+lua.c ^
+lstrlib.c ^
+ltable.c ^
+ltablib.c ^
+lstate.c ^
+lstring.c ^
+loslib.c ^
+lparser.c ^
+loadlib.c ^
+lobject.c ^
+lopcodes.c ^
+lmathlib.c ^
+lmem.c ^
+linit.c ^
+liolib.c ^
+llex.c ^
+ldump.c ^
+lfunc.c ^
+lgc.c ^
+ldblib.c ^
+ldebug.c ^
+ldo.c ^
+lcode.c ^
+lcorolib.c ^
+lctype.c ^
+lapi.c ^
+lauxlib.c ^
+lbaselib.c
 
-sed -i 's/OUTPUT_NAME lua/OUTPUT_NAME liblua/g' %CYGPATH_SRC%/%1/CMakeLists.txt
+ren lua.obj lua.o
 
-cmake %CMAKE_OPTS% ^
-	-DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
-	-DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
-	-DLUA_BUILD_WLUA=OFF ^
-	-DLUA_BUILD_AS_DLL=ON ^
-	%PATH_SRC%\%1
+link /LTCG /OPT:REF,ICF /DEBUG /DLL /IMPLIB:liblua.lib	/OUT:liblua.dll *.obj
+link /LTCG /OPT:REF,ICF /DEBUG				/OUT:lua.exe lua.o liblua.lib
+lib  /LTCG						/OUT:liblua_static.lib *.obj
 
-	%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/flags.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
-	nmake %NMAKE_OPTS% clean install
+del *.obj
+del *.exp
+del *.o
 
-xcopy /C /F /Y %PATH_BUILD%\%1\*.pdb %PATH_INSTALL%\bin\*
-for %%X in (liblua.dll lua.exe luac.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
+
+for %%X in (liblua.dll lua.exe liblua.pdb lua.pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\%%X %PATH_INSTALL%\bin\*)
+for %%X in (liblua.lib liblua_static.lib) do (xcopy /C /F /Y %PATH_SRC%\%1\%%X %PATH_INSTALL%\lib\*)
+for %%X in (lualib.h luaconf.h lua.h) do (xcopy /C /F /Y %PATH_SRC%\%1\%%X %PATH_INSTALL%\include\*)
+for %%X in (liblua.dll lua.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)

@@ -42,8 +42,7 @@ if %PHPVER% == 8.0 (
 )
 
 if %MSVC_VER% == 16 (
-	set phparchopts= --enable-phpdbg ^
-	--enable-phpdbgs
+	REM set phparchopts= --enable-phpdbg --enable-phpdbgs
 )
 
 set PHP_COMMON_CONFIGURE=^
@@ -140,12 +139,14 @@ sed -i -E 's/incremental:no/incremental:no \/LTCG \/NODEFAULTLIB:libcmt.lib/g' %
 	REM CFLAGS
 sed -i 's/\/Ox/\/O2 \/GL/g' %CYGPATH_SRC%/php-src/Makefile
 	REM no warn
-sed -i 's/\/W3/\/w/g' %CYGPATH_SRC%/php-src/Makefile
+sed -i 's/d4996//g' %CYGPATH_SRC%/php-src/Makefile
+	REM 'warning U4004: too many rules' - https://docs.microsoft.com/en-us/cpp/error-messages/tool-errors/nmake-warning-u4004
+REM sed -i 's/phpdbg_win.obj: /phpdbg_win.obj:: /g' %CYGPATH_SRC%/php-src/Makefile
 
 	REM after sed:
-REM LDFLAGS=/nologo /incremental:no /LTCG /NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:MSVCRTD.lib /debug /opt:ref,icf ... 
-REM ARFLAGS=/nologo /LTCG ...
-REM CFLAGS=/nologo $(BASE_INCLUDES) /D _WINDOWS /D WINDOWS=1 /D ZEND_WIN32=1 /D PHP_WIN32=1 /D WIN32 /D _MBCS /w /D _USE_MATH_DEFINES /FD /wd4996 /Zc:inline /Gw /Zc:__cplusplus /d2FuncCache1 /Zc:wchar_t /MP16 /Zi /LD /MD /w /O2 /GL /D NDebug /D NDEBUG /D ZEND_WIN32_FORCE_INLINE /GF /D ZEND_DEBUG=0 ... /D FD_SETSIZE=2048 /arch:AVX 
+REM LDFLAGS=/nologo /incremental:no /LTCG /NODEFAULTLIB:libcmt.lib /debug /opt:ref,icf
+REM ARFLAGS=/nologo /LTCG
+REM CFLAGS=/nologo $(BASE_INCLUDES) /D _WINDOWS /D WINDOWS=1 /D ZEND_WIN32=1 /D PHP_WIN32=1 /D WIN32 /D _MBCS /D _USE_MATH_DEFINES /FD /w /Zc:inline /Gw /Zc:__cplusplus /d2FuncCache1 /Zc:wchar_t /MP16 /Zi /LD /MD /O2 /GL /D NDebug /D NDEBUG /D ZEND_WIN32_FORCE_INLINE /GF /D ZEND_DEBUG=0 /D FD_SETSIZE=2048
 
 nmake %NMAKE_OPTS%
 
@@ -160,8 +161,6 @@ for %%A in (exe dll) do (
 	)
 )
 
-	REM copy curl to %PATH_INSTALL%\bin
-xcopy /C /F /Y %PHP_CURL%\bin\libcurl.* %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%outdirphp%-%TSNTS%\*
 	REM php_memcache verpatch
 set MEMCACHEVERPATCH=c:\sdk\softs\verpatch.exe %PATH_RELEASE_PHP%\%MSVC_DEPS%-%PHP_SDK_ARCH%%AVXB%-%TSNTS%\php_memcache.dll /high %PECLMEMCACHEVERSION%-%PECLMEMCACHEGITCOMMIT% /pv %PHPVER% /rpdb /s desc "%PECLMEMCACHEGITBRANCH% - %PECLMEMCACHEGITCOMMIT%%PECLMEMCACHEPATCHVERSION% (%PECLMEMCACHEGITDATE%)" /s product "pecl-memcache %PHP_SDK_ARCH%%AVXB% %TSNTS% [%MSVC_DEPS%]" /s OriginalFilename "php_memcache.dll" /s InternalName "php_memcache.dll" /s LegalCopyright "https://github.com/nono303/PHP-memcache-dll" /s LegalTrademarks "https://github.com/websupport-sk/pecl-memcache"
 echo %MEMCACHEVERPATCH%

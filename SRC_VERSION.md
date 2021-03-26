@@ -8,36 +8,36 @@
 | cares | 1.17.1 |
 | curl | 7.75.0 |
 | freetype2 | 2.10.4 |
-| geos | 3.9.0 |
+| geos | 3.9.1 |
 | httpd | 2.4.46 |
 | jansson | 2.13.1 |
 | jemalloc | 5.2.1 |
 | jpeg | 9.4 |
 | libev | 4.33 |
 | libevent | 2.1.12 |
-| libexpat | 2.2.10 |
+| libexpat | 2.3.0 |
 | libffi | 3.3 |
 | libiconv | 1.16.1 |
 | liblzma | 5.2.5 |
-| libmaxminddb | 1.5.0 |
+| libmaxminddb | 1.5.2 |
 | libpng | 1.6.37 |
 | libssh2 | 1.9.0 |
 | libxdiff | 0.23 |
 | libxml2 | 2.9.10 |
 | libxpm | 3.5.13 |
 | libzip | 1.7.3 |
-| lua | 5.3.6 |
+| lua | 5.4.2 |
 | memcached | 1.6.9 |
-| mobac | 2.2.0 r2564 |
-| mod_fcgid | 2.3.10.1 r1886206 |
-| mod_h2 | 1.15.16 |
+| mobac | 2.2.0 r2574 |
+| mod_fcgid | 2.3.10.1 r1887988 |
+| mod_h2 | 1.15.17 |
 | mod_h264_streaming | 2.2.7 |
 | mod_maxminddb | 1.2.0 |
-| mod_md | 2.3.7 |
+| mod_md | 2.4.0 |
 | mod_wku_bt | 2.01.1 |
 | nghttp2 | 1.43 |
 | nssm | 2.24.113 |
-| openssl | 1.1.1i |
+| openssl | 1.1.1k |
 | pcre | 8.44 |
 | pecl-memcache | nbio_php8 - 8.1-dev - e014963 |
 | pecl-text-xdiff | 2.0.1 |
@@ -45,13 +45,13 @@
 | php-ext-brotli | 0.13.1 |
 | php-geos | 1.0.1 |
 | php-sdk | 2.2.0 |
-| php-src | 8.0.2 |
+| php-src | 8.0.3 |
 | sdlna | 1.0.3 |
-| serf | 2.0.0 |
-| sqlite | 3.34.1 |
+| serf | 1.4.0 |
+| sqlite | 3.35.2 |
 | subversion | 1.14.1 |
 | tidy | 5.7.28 |
 | verpatch | 1.0.15.1 |
 | wineditline | 2.2 |
-| xdebug | 3.0.2 |
+| xdebug | 3.0.3 |
 | zlib | 1.2.11 |
