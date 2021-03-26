@@ -70,7 +70,7 @@ git checkout tags/release-2.1.12-stable
 cd /D ..
 git clone https://github.com/libexpat/libexpat.git libexpat
 cd /D libexpat
-git checkout tags/R_2_2_10
+git checkout tags/R_2_3_0
 cd /D ..
 git clone https://github.com/winlibs/libffi libffi
 cd /D libffi
@@ -112,9 +112,9 @@ git clone https://github.com/nih-at/libzip libzip
 cd /D libzip
 git checkout tags/v1.7.3
 cd /D ..
-git clone https://github.com/xpol/lua lua
+git clone https://github.com/lua/lua lua
 cd /D lua
-git checkout lua-5.3
+git checkout tags/v5.4.2
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
@@ -126,7 +126,7 @@ svn update -r 2574
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1887988
+svn update -r 1888078
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -158,7 +158,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/openssl/openssl.git openssl
 cd /D openssl
-git checkout tags/OpenSSL_1_1_1j
+git checkout tags/OpenSSL_1_1_1k
 cd /D ..
 git clone https://github.com/jwilk-mirrors/pcre pcre
 cd /D pcre
