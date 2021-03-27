@@ -51,10 +51,9 @@ if exist %PATH_SRC%\%1\. (
 	)
 	REM https://stackoverflow.com/questions/26246151/setlocal-enabledelayedexpansion-causes-cd-and-pushd-to-not-persist
 	endlocal
-	if /I "%~2"=="cmake" (
-		if exist %PATH_BUILD%\%1\. rmdir /S /Q %PATH_BUILD%\%1
-		mkdir %PATH_BUILD%\%1
-		cd /D %PATH_BUILD%\%1
-		
-	)
+)
+if /I "%~2"=="cmake" (
+	if exist %PATH_BUILD%\%1\. rmdir /S /Q %PATH_BUILD%\%1
+	mkdir %PATH_BUILD%\%1
+	cd /D %PATH_BUILD%\%1
 )
