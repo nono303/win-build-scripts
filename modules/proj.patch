@@ -1,0 +1,13 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 1f9cfafc..5f2fc022 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -124,7 +124,7 @@ include(policies)
+ ################################################################################
+ # Check for sqlite3
+ ################################################################################
+-find_program(EXE_SQLITE3 sqlite3)
++find_program(EXE_SQLITE3 sqlite3 ${SQLITE3_BINARY})
+ if(NOT EXE_SQLITE3)
+   message(SEND_ERROR "sqlite3 binary not found!")
+ endif()
