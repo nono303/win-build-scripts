@@ -1,3 +1,4 @@
+@echo off
 for /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\date -u`) do (set LIBCURL_TIMESTAMP=%%F)
 REM for %%S in (openssl winssl) do (
 for %%S in (openssl) do (
