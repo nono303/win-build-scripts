@@ -26,10 +26,10 @@ set PATH_RELEASE=%PATH_SDK_ROOT%\release
 set PATH_RELEASE_SVN=D:\github\NONO_subversion
 	REM cygwin format
 set PATH_RELEASE_MEMCACHED=/cygdrive/d/github/NONO_memcached/cygwin
-set PATH_RELEASE_PHP=D:\github\NONO_phpwin-perfbuild
 	REM copy for github : unset to disable
 set PATH_GITHUB_PHPMEMCACHE=D:\github\NONO_PHP-memcache-dll
 set PATH_GITHUB_MODMD=D:\github\NONO_mod_md
+set FOLDER_RELEASE_CURL=_curl
 	REM JDK root (gradle & java for mobac, java_hl for subversion)
 set JAVA_HOME=%PATH_SOFTS%\openjdk
 set GRADLE_USER_HOME=%PATH_SOFTS%\gradle
