@@ -13,7 +13,7 @@
 | [c-ares](https://github.com/c-ares/c-ares.git
 ) | 1.17.1 |
 | [curl](https://github.com/curl/curl.git
-) | 7.75.0 |
+) | 7.760 |
 | [freetype2](git://git.sv.nongnu.org/freetype/freetype2.git
 ) | 2.10.4 |
 | [geos](https://github.com/libgeos/geos
@@ -25,7 +25,7 @@
 | [jemalloc](https://github.com/jemalloc/jemalloc.git
 ) | 5.2.1 |
 | [jpeg](https://github.com/mackyle/jpeg
-)                      | 9.4                           |
+) | 9.4 |
 | [libev](https://git.lighttpd.net/libev.git
 ) | 4.33 |
 | [libevent](https://github.com/libevent/libevent.git
@@ -55,7 +55,7 @@
 | [libzip](https://github.com/nih-at/libzip
 ) | 1.7.3 |
 | [lua](https://github.com/lua/lua
-) | 5.4.2 |
+) | 5.4.3 |
 | [memcached](https://github.com/memcached/memcached
 ) | 1.6.9 |
 | [mobac](https://svn.code.sf.net/p/mobac/code
@@ -100,7 +100,7 @@
 | [serf](https://github.com/apache/serf.git
 ) | 1.4.0 |
 | [sqlite](https://github.com/azadkuh/sqlite-amalgamation
-) | 3.35.2 |
+) | 3.35.3 |
 | [subversion](https://github.com/apache/subversion.git
 ) | 1.14.1 |
 | [tidy](https://github.com/htacg/tidy-html5
