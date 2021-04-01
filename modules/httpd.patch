@@ -355,6 +355,14 @@ diff --git a/support/win32/ApacheMonitor.rc b/support/win32/ApacheMonitor.rc
 index d4203bf926..9d8211e830 100644
 --- a/support/win32/ApacheMonitor.rc
 +++ b/support/win32/ApacheMonitor.rc
+@@ -18,6 +18,7 @@
+ 
+ #include "ApacheMonitor.h"
+ 
++#undef  LONG_NAME
+ #define LONG_NAME Apache HTTP Server Monitor
+ 
+ #include "../../build/win32/httpd.rc"
 @@ -26,7 +26,7 @@
  IDI_APSRVMON            ICON    DISCARDABLE     "ApacheMonitor.ico"
  IDI_ICOSTOP             ICON    DISCARDABLE     "apstop.ico"
