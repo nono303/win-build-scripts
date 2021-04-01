@@ -1,57 +1,115 @@
 | src | version |
 | ---- | ---- |
-| apr | 1.7.0 |
-| apr-iconv | 1.2.2 |
-| apr-util | 1.6.1 |
-| brotli | 1.0.9 |
-| bzip2 | 1.0.8 |
-| cares | 1.17.1 |
-| curl | 7.75.0 |
-| freetype2 | 2.10.4 |
-| geos | 3.9.1 |
-| httpd | 2.4.46 |
-| jansson | 2.13.1 |
-| jemalloc | 5.2.1 |
-| jpeg | 9.4 |
-| libev | 4.33 |
-| libevent | 2.1.12 |
-| libexpat | 2.3.0 |
-| libffi | 3.3 |
-| libiconv | 1.16.1 |
-| liblzma | 5.2.5 |
-| libmaxminddb | 1.5.2 |
-| libpng | 1.6.37 |
-| libssh2 | 1.9.0 |
-| libxdiff | 0.23 |
-| libxml2 | 2.9.10 |
-| libxpm | 3.5.13 |
-| libzip | 1.7.3 |
-| lua | 5.4.2 |
-| memcached | 1.6.9 |
-| mobac | 2.2.0 r2574 |
-| mod_fcgid | 2.3.10.1 r1887988 |
-| mod_h2 | 1.15.17 |
-| mod_h264_streaming | 2.2.7 |
-| mod_maxminddb | 1.2.0 |
-| mod_md | 2.4.0 |
-| mod_wku_bt | 2.01.1 |
-| nghttp2 | 1.43 |
-| nssm | 2.24.113 |
-| openssl | 1.1.1k |
-| pcre | 8.44 |
-| pecl-memcache | nbio_php8 - 8.1-dev - e014963 |
-| pecl-text-xdiff | 2.0.1 |
-| php-cgi-spawner | 1.1.23 |
-| php-ext-brotli | 0.13.1 |
-| php-geos | 1.0.1 |
-| php-sdk | 2.2.0 |
-| php-src | 8.0.3 |
-| sdlna | 1.0.3 |
-| serf | 1.4.0 |
-| sqlite | 3.35.2 |
-| subversion | 1.14.1 |
-| tidy | 5.7.28 |
-| verpatch | 1.0.15.1 |
-| wineditline | 2.2 |
-| xdebug | 3.0.3 |
-| zlib | 1.2.11 |
+| [apr](https://github.com/apache/apr.git
+) | 1.7.0 |
+| [apr-iconv](https://github.com/apache/apr-iconv.git
+) | 1.2.2 |
+| [apr-util](https://github.com/apache/apr-util.git
+) | 1.6.1 |
+| [brotli](https://github.com/google/brotli.git
+) | 1.0.9 |
+| [bzip2](git://sourceware.org/git/bzip2.git
+) | 1.0.8 |
+| [c-ares](https://github.com/c-ares/c-ares.git
+) | 1.17.1 |
+| [curl](https://github.com/curl/curl.git
+) | 7.760 |
+| [freetype2](git://git.sv.nongnu.org/freetype/freetype2.git
+) | 2.10.4 |
+| [geos](https://github.com/libgeos/geos
+) | 3.9.1 |
+| [httpd](https://github.com/apache/httpd.git
+) | 2.4.46 |
+| [jansson](https://github.com/akheron/jansson.git
+) | 2.13.1 |
+| [jemalloc](https://github.com/jemalloc/jemalloc.git
+) | 5.2.1 |
+| [jpeg](https://github.com/mackyle/jpeg
+) | 9.4 |
+| [libev](https://git.lighttpd.net/libev.git
+) | 4.33 |
+| [libevent](https://github.com/libevent/libevent.git
+) | 2.1.12 |
+| [libexpat](https://github.com/libexpat/libexpat.git
+) | 2.3.0 |
+| [libffi](https://github.com/winlibs/libffi
+) | 3.3 |
+| [libiconv](https://github.com/winlibs/libiconv.git
+) | 1.16.1 |
+| [liblzma](https://github.com/ShiftMediaProject/liblzma.git
+) | 5.2.5 |
+| [libmaxminddb](https://github.com/maxmind/libmaxminddb.git
+) | 1.5.2 |
+| [libpng](git://git.code.sf.net/p/libpng/code
+) | 1.6.37 |
+| [libssh2](https://github.com/libssh2/libssh2.git
+) | 1.9.0 |
+| [libtiff](https://gitlab.com/libtiff/libtiff
+) | 4.2.0 |
+| [libxdiff](https://github.com/opencor/libxdiff
+) | 0.23 |
+| [libxml2](https://github.com/GNOME/libxml2.git
+) | 2.9.10 |
+| [libxpm](https://gitlab.freedesktop.org/xorg/lib/libxpm
+) | 3.5.13 |
+| [libzip](https://github.com/nih-at/libzip
+) | 1.7.3 |
+| [lua](https://github.com/lua/lua
+) | 5.4.3 |
+| [memcached](https://github.com/memcached/memcached
+) | 1.6.9 |
+| [mobac](https://svn.code.sf.net/p/mobac/code
+) | 2.2.0 r2574 |
+| [mod_fcgid](http://svn.apache.org/repos/asf
+) | 2.3.10.1 r1888117 |
+| [mod_h2](https://github.com/icing/mod_h2.git
+) | 1.15.17 |
+| [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git
+) | 2.2.7 |
+| [mod_maxminddb](https://github.com/maxmind/mod_maxminddb.git
+) | 1.2.0 |
+| [mod_md](https://github.com/icing/mod_md
+) | 2.4.0 |
+| [mod_wku_bt](https://github.com/nono303/mod_whatkilledus
+) | 2.01.1 |
+| [nghttp2](https://github.com/nghttp2/nghttp2.git
+) | 1.43 |
+| [nssm](https://github.com/puppetlabs/nssm.git
+) | 2.24.113 |
+| [openssl](https://github.com/openssl/openssl.git
+) | 1.1.1k |
+| [pcre](https://github.com/jwilk-mirrors/pcre
+) | 8.44 |
+| [pecl-memcache](https://github.com/websupport-sk/pecl-memcache.git
+) | nbio_php8 - 8.1-dev - e014963 |
+| [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff
+) | 2.0.1 |
+| [php-cgi-spawner](https://github.com/deemru/php-cgi-spawner.git) | 1.1.23 |
+| [php-ext-brotli](https://github.com/kjdev/php-ext-brotli.git
+) | 0.13.1 |
+| [php-geos](https://github.com/ModelTech/php-geos
+) | 1.0.1 |
+| [php-sdk](https://github.com/microsoft/php-sdk-binary-tools.git
+) | 2.2.0 |
+| [php-src](https://github.com/php/php-src.git
+) | 8.0.3 |
+| [proj](https://github.com/OSGeo/PROJ.git
+) | 8.0.0 |
+| [sdlna](https://github.com/nono303/simpleDLNA.git
+) | 1.0.3 |
+| [serf](https://github.com/apache/serf.git
+) | 1.4.0 |
+| [sqlite](https://github.com/azadkuh/sqlite-amalgamation
+) | 3.35.3 |
+| [subversion](https://github.com/apache/subversion.git
+) | 1.14.1 |
+| [tidy](https://github.com/htacg/tidy-html5
+) | 5.7.28 |
+| [verpatch](https://github.com/pavel-a/ddverpatch
+) | 1.0.15.1 |
+| [wineditline](https://svn.code.sf.net/p/mingweditline/code
+) | 2.2 |
+| [xdebug](https://github.com/xdebug/xdebug.git
+) | 3.0.3 |
+| [zlib](https://github.com/madler/zlib.git
+) | 1.2.11 |

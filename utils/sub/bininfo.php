@@ -240,7 +240,7 @@
 			160 => array("name" =>	"internalname",	"pad" => -1),
 		165 => array("name" =>	"in",	"pad" => 3),
 			170 => array("name" =>	"copyright",	"pad" => -1),
-		175 => array("name" =>	"cr",	"pad" => 3),
+		175 => array("name" =>	"©",	"pad" => 3),
 			180 => array("name" =>	"comments",		"pad" => -1),
 		190 => array("name" =>	"product",		"pad" => 40),
 	);

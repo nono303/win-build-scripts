@@ -23,7 +23,7 @@ set PHP_FULLBUILD=8.0
 set PHP_BUILDTS=0
 
 	REM ~~~~~~~~~~~~ curl
-set PHP_CURL=%PATH_INSTALL%\curl\openssl
+set PHP_CURL=%PATH_INSTALL%\%FOLDER_RELEASE_CURL%\openssl
 
 	REM ~~~~~~~~~~~~ php version
 cd /D %PATH_SRC%\php-src

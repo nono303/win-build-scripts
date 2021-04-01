@@ -28,13 +28,13 @@ git clone git://sourceware.org/git/bzip2.git bzip2
 cd /D bzip2
 git checkout tags/bzip2-1.0.8
 cd /D ..
-git clone https://github.com/c-ares/c-ares.git cares
-cd /D cares
+git clone https://github.com/c-ares/c-ares.git c-ares
+cd /D c-ares
 git checkout tags/cares-1_17_1
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-7_75_0
+git checkout tags/curl-7_76_0
 cd /D ..
 git clone git://git.sv.nongnu.org/freetype/freetype2.git freetype2
 cd /D freetype2
@@ -96,6 +96,10 @@ git clone https://github.com/libssh2/libssh2.git libssh2
 cd /D libssh2
 git checkout tags/libssh2-1.9.0
 cd /D ..
+git clone https://gitlab.com/libtiff/libtiff libtiff
+cd /D libtiff
+git checkout tags/v4.2.0
+cd /D ..
 git clone https://github.com/opencor/libxdiff libxdiff
 cd /D libxdiff
 git checkout tags/v0.23
@@ -114,7 +118,7 @@ git checkout tags/v1.7.3
 cd /D ..
 git clone https://github.com/lua/lua lua
 cd /D lua
-git checkout tags/v5.4.2
+git checkout tags/v5.4.3
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
@@ -126,7 +130,7 @@ svn update -r 2574
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1888078
+svn update -r 1888261
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -191,6 +195,10 @@ cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
 git checkout tags/php-8.0.3
+cd /D ..
+git clone https://github.com/OSGeo/PROJ.git proj
+cd /D proj
+git checkout tags/8.0.0
 cd /D ..
 git clone https://github.com/nono303/simpleDLNA.git sdlna
 cd /D sdlna
