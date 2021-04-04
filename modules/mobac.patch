@@ -1,6 +1,6 @@
 Index: gradle/wrapper/gradle-wrapper.properties
 ===================================================================
---- gradle/wrapper/gradle-wrapper.properties	(revision 2563)
+--- gradle/wrapper/gradle-wrapper.properties	(revision 2574)
 +++ gradle/wrapper/gradle-wrapper.properties	(working copy)
 @@ -1,5 +1,5 @@
  distributionBase=GRADLE_USER_HOME
@@ -11,7 +11,7 @@ Index: gradle/wrapper/gradle-wrapper.properties
  zipStorePath=wrapper/dists
 Index: mobac/build.gradle
 ===================================================================
---- mobac/build.gradle	(revision 2563)
+--- mobac/build.gradle	(revision 2574)
 +++ mobac/build.gradle	(working copy)
 @@ -2,9 +2,17 @@
      id 'java-library'
@@ -34,7 +34,7 @@ Index: mobac/build.gradle
      implementation "org.mapsforge:mapsforge-map:${mapsforgeVersion}"
 Index: mobac/src/main/java/mobac/gui/MainGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2563)
+--- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2574)
 +++ mobac/src/main/java/mobac/gui/MainGUI.java	(working copy)
 @@ -163,7 +163,7 @@
  	private static Color checkboxBackgroundColor = new Color(0, 0, 0, 40);
@@ -55,7 +55,7 @@ Index: mobac/src/main/java/mobac/gui/MainGUI.java
  		leftPanelContent.add(mapSourcePanel, gbc_eol);
 Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2563)
+--- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2574)
 +++ mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(working copy)
 @@ -45,7 +45,7 @@
  		JScrollPane mapSourceTreeScrollPane = new JScrollPane(mapSourceTree, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -68,7 +68,7 @@ Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
  	}
 Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2563)
+--- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2574)
 +++ mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(working copy)
 @@ -97,7 +97,7 @@
  
@@ -81,7 +81,7 @@ Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
  
 Index: mobac/src/main/java/mobac/program/download/MobacTrustManager.java
 ===================================================================
---- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2563)
+--- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2574)
 +++ mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(working copy)
 @@ -97,7 +97,7 @@
  			defaultTrustManager.checkServerTrusted(chain, authType);
@@ -102,3 +102,34 @@ Index: mobac/src/main/java/mobac/program/download/MobacTrustManager.java
  			}
  		}
  	}
+Index: mobac/src/main/java/mobac/utilities/Utilities.java
+===================================================================
+--- mobac/src/main/java/mobac/utilities/Utilities.java	(revision 2574)
++++ mobac/src/main/java/mobac/utilities/Utilities.java	(working copy)
+@@ -200,14 +200,21 @@
+ 	 * Checks if the available JAXB version is at least v2.1
+ 	 */
+ 	public static boolean checkJAXBVersion() {
++		// We are trying to load the class JAXB which has
++		// been introduced with JAXB 2.1. Previous version do not contain
++		// this class and will therefore throw an exception.
++		// looking onto javax.xml.bind or jakarta.xml.bind (for >= JDK9)
++		Class<?> c;
+ 		try {
+-			// We are trying to load the class javax.xml.bind.JAXB which has
+-			// been introduced with JAXB 2.1. Previous version do not contain
+-			// this class and will therefore throw an exception.
+-			Class<?> c = Class.forName("javax.xml.bind.JAXB");
++			c = Class.forName("javax.xml.bind.JAXB");
+ 			return (c != null);
+ 		} catch (ClassNotFoundException e) {
+-			return false;
++			try {
++				c = Class.forName("jakarta.xml.bind.JAXB");
++				return (c != null);
++			} catch (ClassNotFoundException ex) {
++				return false;
++			}
+ 		}
+ 	}
+ 
