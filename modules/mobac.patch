@@ -1,17 +1,6 @@
-Index: gradle/wrapper/gradle-wrapper.properties
-===================================================================
---- gradle/wrapper/gradle-wrapper.properties	(revision 2563)
-+++ gradle/wrapper/gradle-wrapper.properties	(working copy)
-@@ -1,5 +1,5 @@
- distributionBase=GRADLE_USER_HOME
- distributionPath=wrapper/dists
--distributionUrl=https\://services.gradle.org/distributions/gradle-6.7.1-bin.zip
-+distributionUrl=https\://services.gradle.org/distributions/gradle-6.8.3-bin.zip
- zipStoreBase=GRADLE_USER_HOME
- zipStorePath=wrapper/dists
 Index: mobac/build.gradle
 ===================================================================
---- mobac/build.gradle	(revision 2563)
+--- mobac/build.gradle	(revision 2583)
 +++ mobac/build.gradle	(working copy)
 @@ -2,9 +2,17 @@
      id 'java-library'
@@ -32,9 +21,59 @@ Index: mobac/build.gradle
  
      implementation "org.mapsforge:mapsforge-core:${mapsforgeVersion}"
      implementation "org.mapsforge:mapsforge-map:${mapsforgeVersion}"
+@@ -14,20 +22,20 @@
+     api 'org.beanshell:bsh:2.0b5'
+     api 'commons-codec:commons-codec:1.15'
+     api 'commons-io:commons-io:2.8.0'
+-    api 'org.apache.commons:commons-lang3:3.11'
++    api 'org.apache.commons:commons-lang3:3.12.0'
+     api 'org.apache.commons:commons-text:1.9'
+     api 'log4j:log4j:1.2.17'
+     api 'com.github.kerner1000:javapng:2.1.2'
+     api 'org.xerial:sqlite-jdbc:3.34.0'
+-    api 'com.sleepycat:je:4.0.92'
++    api 'com.sleepycat:je:18.3.12'
+     api 'org.glassfish.jaxb:jaxb-runtime:3.0.0'
+     implementation 'net.sf.jtidy:jtidy:r938'
+-    implementation 'com.itextpdf:itextpdf:5.1.3'
++    implementation 'com.itextpdf:itextpdf:5.5.13.2'
+     implementation 'javax.media:jai-core:1.1.3'
+-    testImplementation 'org.jboss.resteasy:tjws:2.3.10.Final'
+-    testImplementation 'junit:junit:4.13.1'
+-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+-    testImplementation 'javax.servlet:servlet-api:2.5'
++    testImplementation 'org.jboss.resteasy:tjws:3.15.1.Final'
++    testImplementation 'junit:junit:4.13.2'
++    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
++    testImplementation 'javax.servlet:servlet-api:4.0.1'
+ 
+     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+ }
+Index: mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java
+===================================================================
+--- mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(revision 2583)
++++ mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(working copy)
+@@ -38,15 +38,10 @@
+ 	static {
+ 		// Sizes from 1024 to 32768
+ 		MAP_SIZE_VALUES = new Vector<Integer>(11);
+-		MAP_SIZE_VALUES.addElement(128000);
++		MAP_SIZE_VALUES.addElement(DEFAULT = 4194303);
+ 		MAP_SIZE_VALUES.addElement(1048575);
+ 		MAP_SIZE_VALUES.addElement(65536);
+-		MAP_SIZE_VALUES.addElement(DEFAULT = 32767);
+-		MAP_SIZE_VALUES.addElement(30000);
+-		MAP_SIZE_VALUES.addElement(25000);
+-		MAP_SIZE_VALUES.addElement(20000);
+-		MAP_SIZE_VALUES.addElement(15000);
+-		MAP_SIZE_VALUES.addElement(10000);
++		MAP_SIZE_VALUES.addElement(32767);
+ 		MAP_SIZE_VALUES.addElement(2048);
+ 		MAP_SIZE_VALUES.addElement(1024);
+ 	}
 Index: mobac/src/main/java/mobac/gui/MainGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2563)
+--- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2583)
 +++ mobac/src/main/java/mobac/gui/MainGUI.java	(working copy)
 @@ -163,7 +163,7 @@
  	private static Color checkboxBackgroundColor = new Color(0, 0, 0, 40);
@@ -55,7 +94,7 @@ Index: mobac/src/main/java/mobac/gui/MainGUI.java
  		leftPanelContent.add(mapSourcePanel, gbc_eol);
 Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2563)
+--- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2583)
 +++ mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(working copy)
 @@ -45,7 +45,7 @@
  		JScrollPane mapSourceTreeScrollPane = new JScrollPane(mapSourceTree, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -68,7 +107,7 @@ Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
  	}
 Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2563)
+--- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2583)
 +++ mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(working copy)
 @@ -97,7 +97,7 @@
  
@@ -81,7 +120,7 @@ Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
  
 Index: mobac/src/main/java/mobac/program/download/MobacTrustManager.java
 ===================================================================
---- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2563)
+--- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2583)
 +++ mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(working copy)
 @@ -97,7 +97,7 @@
  			defaultTrustManager.checkServerTrusted(chain, authType);
