@@ -1,4 +1,3 @@
-call %PATH_BATCH%\go.bat clean NOLOG
 call %PATH_BATCH%\go.bat brotli NOLOG
 call %PATH_BATCH%\go.bat jansson NOLOG
 call %PATH_BATCH%\go.bat bzip2 NOLOG
