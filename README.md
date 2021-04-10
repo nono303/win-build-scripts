@@ -44,7 +44,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [Visual Studio 2019 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 16.9.3 (14.28) | `.vsconfig`         |
 | [Cygwin](https://cygwin.com/install.html)                    | x86  | 3.2.0       | `cyg32.packagelist` |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.2.0       | `cyg64.packagelist` |
-| [Python](https://www.python.org/downloads/)                  | x64  | 3.9.2       |                     |
+| [Python](https://www.python.org/downloads/)                  | x64  | 3.9.4     |                     |
 | [OpenJDK](https://jdk.java.net/15/)                          | x64  | 15.0.2        |                     |
 | [ActivePerl](https://platform.activestate.com/ActiveState/ActivePerl-5.28/auto-fork) | x64  | 5.28.1.2801    |                     |
 | [Netwide Assembler](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.15.05        |                     |
