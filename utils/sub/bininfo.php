@@ -222,8 +222,9 @@
 	}
 
 	global $col;
+	$fnmax = 27;
 	$col = array (
-		0 => array("name" =>	"filename",		"pad" => 25),
+		0 => array("name" =>	"filename",		"pad" => $fnmax),
 		5 => array("name" =>	"date",			"pad" => 17),
 		10 => array("name" =>	"x",			"pad" => 3),
 		20 => array("name" =>	"link",			"pad" => 5),
@@ -232,11 +233,11 @@
 		50 => array("name" =>	"bver",			"pad" => 13),
 		60 => array("name" =>	"pver",			"pad" => 13),
 		65 => array("name" =>	"fver",			"pad" => 13),
-		70 => array("name" =>	"pdb",			"pad" => 25),
+		70 => array("name" =>	"pdb",			"pad" => $fnmax),
 		80 => array("name" =>	"pdbresult",	"pad" => 19),
 			110 => array("name" =>	"company",		"pad" => -1),
 			120 => array("name" =>	"description",	"pad" => -1),
-		150 => array("name" =>	"originalname",	"pad" => 25),
+		150 => array("name" =>	"originalname",	"pad" => $fnmax),
 			160 => array("name" =>	"internalname",	"pad" => -1),
 		165 => array("name" =>	"in",	"pad" => 3),
 			170 => array("name" =>	"copyright",	"pad" => -1),
@@ -259,9 +260,9 @@
 	$affile = " ";
 	if($nbfile && is_dir($argv[1])){
 		if(($scanfile = sizeof(scandir($argv[1]))-2) == $nbfile) {
-			$affile = ": \033[32m".$nbfile." / ".$scanfile."\033[39m ";
+			$affile = ": \033[32m".$scanfile." (".$nbfile.")\033[39m ";
 		} else {
-			$affile = ": \033[31m".$nbfile." / ".$scanfile."\033[39m ";
+			$affile = ": \033[31m".$scanfile." (".$nbfile.")\033[39m ";
 		}
 	}
 	echo ">>>>>> ".$argv[1].$affile."<<<<<<".PHP_EOL;
