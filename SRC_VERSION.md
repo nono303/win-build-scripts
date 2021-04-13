@@ -30,7 +30,7 @@
 | [libzip](https://github.com/nih-at/libzip) | 1.7.3 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.9 |
-| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.0 r2583 |
+| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.0 r2587 |
 | [mod_fcgid](http://svn.apache.org/repos/asf) | 2.3.10.1 |
 | [mod_h2](https://github.com/icing/mod_h2) | 1.15.17 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 |
