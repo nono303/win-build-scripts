@@ -6,7 +6,7 @@
 | [brotli](https://github.com/google/brotli) | 1.0.9 |
 | [bzip2](https://sourceware.org/git/bzip2) | 1.0.8 |
 | [c-ares](https://github.com/c-ares/c-ares) | 1.17.1 |
-| [curl](https://github.com/curl/curl) | 7.76.0 |
+| [curl](https://github.com/curl/curl) | 7.76.1 |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.10.4 |
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.51 |
 | [geos](https://github.com/libgeos/geos) | 3.9.1 |
@@ -23,14 +23,14 @@
 | [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.5.2 |
 | [libpng](https://sourceforge.net/p/libpng/code/ci/master/tree/) | 1.6.37 |
 | [libssh2](https://github.com/libssh2/libssh2) | 1.9.0 |
-| [libtiff](https://gitlab.com/libtiff/libtiff) | 4.2.0 |
+| [libtiff](https://gitlab.com/libtiff/libtiff) | 4.3.0 |
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
 | [libxml2](https://github.com/GNOME/libxml2) | 2.9.10 |
 | [libxpm](https://gitlab.freedesktop.org/xorg/lib/libxpm) | 3.5.13 |
 | [libzip](https://github.com/nih-at/libzip) | 1.7.3 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.9 |
-| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.0 r2587 |
+| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.0 r2589 |
 | [mod_fcgid](http://svn.apache.org/repos/asf) | 2.3.10.1 |
 | [mod_h2](https://github.com/icing/mod_h2) | 1.15.17 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 |
@@ -51,7 +51,7 @@
 | [proj](https://github.com/OSGeo/PROJ) | 8.0.0 |
 | [sdlna](https://github.com/nono303/simpleDLNA) | 1.0.3 |
 | [serf](https://github.com/apache/serf) | 1.4.0 |
-| [sqlite](https://github.com/azadkuh/sqlite-amalgamation) | 3.35.3 |
+| [sqlite](https://github.com/azadkuh/sqlite-amalgamation) | 3.35.4 |
 | [subversion](https://github.com/apache/subversion) | 1.14.1 |
 | [tidy](https://github.com/htacg/tidy-html5) | 5.7.28 |
 | [verpatch](https://github.com/pavel-a/ddverpatch) | 1.0.15.1 - 3cc989e |

@@ -34,7 +34,7 @@ git checkout tags/cares-1_17_1
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-7_76_0
+git checkout tags/curl-7_76_1
 cd /D ..
 git clone git://git.sv.nongnu.org/freetype/freetype2.git freetype2
 cd /D freetype2
@@ -102,7 +102,7 @@ git checkout tags/libssh2-1.9.0
 cd /D ..
 git clone https://gitlab.com/libtiff/libtiff libtiff
 cd /D libtiff
-git checkout tags/v4.2.0
+git checkout tags/v4.3.0rc1
 cd /D ..
 git clone https://github.com/opencor/libxdiff libxdiff
 cd /D libxdiff
@@ -130,11 +130,11 @@ git checkout tags/1.6.9
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2587
+svn update -r 2589
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1888711
+svn update -r 1889094
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -214,7 +214,7 @@ git checkout trunk
 cd /D ..
 git clone https://github.com/azadkuh/sqlite-amalgamation sqlite
 cd /D sqlite
-git checkout tags/3.35.3
+git checkout tags/3.35.4
 cd /D ..
 git clone https://github.com/apache/subversion.git subversion
 cd /D subversion
