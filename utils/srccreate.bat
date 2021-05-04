@@ -42,7 +42,7 @@ git checkout tags/VER-2-10-4
 cd /D ..
 git clone https://git.code.sf.net/p/geographiclib/code geographiclib
 cd /D geographiclib
-git checkout tags/v1.51
+git checkout tags/v1.52-c-fix
 cd /D ..
 git clone https://github.com/libgeos/geos geos
 cd /D geos
@@ -50,7 +50,7 @@ git checkout tags/3.9.1
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
-git checkout tags/2.4.46
+git checkout tags/2.4.47
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -90,7 +90,7 @@ git checkout tags/v5.2.5
 cd /D ..
 git clone https://github.com/maxmind/libmaxminddb.git libmaxminddb
 cd /D libmaxminddb
-git checkout tags/1.5.2
+git checkout tags/1.6.0
 cd /D ..
 git clone git://git.code.sf.net/p/libpng/code libpng
 cd /D libpng
@@ -130,15 +130,15 @@ git checkout tags/1.6.9
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2589
+svn update -r 2598
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1889094
+svn update -r 1889476
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v1.15.17
+git checkout tags/v1.15.19
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -198,7 +198,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.0.3
+git checkout tags/php-8.0.5
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
@@ -214,7 +214,7 @@ git checkout trunk
 cd /D ..
 git clone https://github.com/azadkuh/sqlite-amalgamation sqlite
 cd /D sqlite
-git checkout tags/3.35.4
+git checkout tags/3.35.5
 cd /D ..
 git clone https://github.com/apache/subversion.git subversion
 cd /D subversion
