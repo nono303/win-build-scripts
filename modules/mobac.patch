@@ -4,10 +4,10 @@ Index: mobac/build.gradle
 +++ mobac/build.gradle	(working copy)
 @@ -2,9 +2,17 @@
      id 'java-library'
-     id 'edu.sc.seis.launch4j' version '2.4.9'
+     id 'edu.sc.seis.launch4j' version '2.5.0'
  }
 +repositories {
-+    jcenter()
++    mavenCentral()
 +    gradlePluginPortal()
 +    maven {
 +        url "https://repo1.maven.org/maven2/"
