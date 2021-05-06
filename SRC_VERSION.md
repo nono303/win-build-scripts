@@ -47,8 +47,8 @@
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.13.1 |
 | [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1 |
 | [php-sdk](https://github.com/microsoft/php-sdk-binary-tools) | 2.2.0 |
-| [php-src](https://github.com/php/php-src) | 8.0.5 |
-| [proj](https://github.com/OSGeo/PROJ) | 8.0.0 |
+| [php-src](https://github.com/php/php-src) | 8.0.6 |
+| [proj](https://github.com/OSGeo/PROJ) | 8.0.1 |
 | [sdlna](https://github.com/nono303/simpleDLNA) | 1.0.3 |
 | [serf](https://github.com/apache/serf) | 1.4.0 |
 | [sqlite](https://github.com/azadkuh/sqlite-amalgamation) | 3.35.5 |
