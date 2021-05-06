@@ -36,9 +36,7 @@ nmake %NMAKE_OPTS% clean install
 for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\_%1\bin\*.* /b') do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\_%1\bin\%%G)
 for /f "tokens=*" %%G in ('dir %PATH_BUILD%\%1\bin\*.pdb /b') do  (xcopy /C /F /Y %PATH_BUILD%\%1\bin\%%G %PATH_INSTALL%\_%1\bin\*)
 
-for %%D in (B:\serveur\_gis\%1\bin B:\serveur\_gis\%1\share) do (
-	if exist %%D\. rmdir /S /Q %%D 
-	mkdir %%D
+if %LOCAL_COPY% == 1 if %LOCAL_COPY_AVXECHO% == %AVXECHO%  if %LOCAL_COPY_MSVC_VER% == %MSVC_VER% ( 
+	xcopy /C /F /Y %PATH_INSTALL%\_%1\bin\*.* %LOCAL_PATH_PROJ%\bin\*
+	xcopy /C /F /Y %PATH_INSTALL%\_%1\share\proj\*.* %LOCAL_PATH_PROJ%\share\*
 )
-xcopy /C /F /Y %PATH_INSTALL%\_%1\bin\*.* B:\serveur\_gis\%1\bin\*
-xcopy /C /F /Y %PATH_INSTALL%\_%1\share\proj\*.* B:\serveur\_gis\%1\share\*
