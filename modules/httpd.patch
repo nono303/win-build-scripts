@@ -87,7 +87,6 @@ index a7b18419dd..5c9e4f55b8 100644
 -  modules/http2/h2_switch.c
 -  modules/http2/h2_task.c            modules/http2/h2_util.c
 -  modules/http2/h2_workers.c
-+  ${mod_http2_src}/h2_workers.c
 +  ${mod_http2_src}/h2_alt_svc.c
 +  ${mod_http2_src}/h2_bucket_beam.c
 +  ${mod_http2_src}/h2_bucket_eos.c
@@ -107,6 +106,7 @@ index a7b18419dd..5c9e4f55b8 100644
 +  ${mod_http2_src}/h2_switch.c
 +  ${mod_http2_src}/h2_task.c
 +  ${mod_http2_src}/h2_util.c
++  ${mod_http2_src}/h2_workers.c
  )
  SET(mod_ldap_extra_defines           LDAP_DECLARE_EXPORT)
  SET(mod_ldap_extra_libs              wldap32)
