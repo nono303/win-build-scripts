@@ -8,10 +8,8 @@
 	foreach (range('a', 'z') as $letter)
 		$letterpos[$letter] = $pos++;
 	$nogit = array(
-		"sqlite"			=> ["/SQLITE_VERSION +\"([^\"]+)\"/",
-							pathenv("PATH_SRC")."/sqlite/sqlite3.h"],
-		"mobac"				=> ["/mobac.version=(.*)/",	
-							pathenv("PATH_SRC")."/mobac/src/main/resources/mobac/mobac.properties"],
+		"mobac"				=> ["/mobac.revision=(.*)/",	
+							pathenv("PATH_SRC")."/mobac/mobac/build/resources/main/mobac/mobac-rev.properties"],
 		"mod_fcgid"			=> ["/#define MODFCGID_VERSION_MAJOR *([0-9]+).*#define MODFCGID_VERSION_MINOR *([0-9]+).*#define MODFCGID_VERSION_SUBVER *([0-9]+).*#define MODFCGID_VERSION_DEV *([0-9]+)/s",	
 							pathenv("PATH_SRC")."/mod_fcgid/modules/fcgid/fcgid_conf.h"],
 		"mod_h264_streaming"=> ["/#define VERSION \"([^\"]+)\"/",
@@ -80,11 +78,12 @@
 		foreach(scandir($cur = pathenv("PATH_SRC")) as $src) {
 			if(is_dir($cur."/".$src) & $src != "." && $src != ".."){
 				$current = getVersion($cur,$src);
+				// $upstream = str_replace("git:","https:",execnono($cmd = "git config --get remote.origin.url",NULL,$cur."/".$src,NULL));
 				echo str_pad($src,20).str_pad($current["product"],12).str_pad($current["file"],12).PHP_EOL;
-				$md .= "| ".$src." | ".$current["file"]." |".PHP_EOL;
+				// $md .= "| [".$src."](".$upstream.") | ".$current["file"]." |".PHP_EOL;
 			}
 		}
-		file_put_contents(dirname(__FILE__) . '/../../SRC_VERSION.md',$md);
+		// file_put_contents(dirname(__FILE__) . '/../../SRC_VERSION.md',$md);
 	} elseif(sizeof($argv) >= 3){
 		if(is_dir($cur = pathenv("PATH_SRC"))."/".$argv[1]){
 			$current = getVersion($cur,$argv[1]);
