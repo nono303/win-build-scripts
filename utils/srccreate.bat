@@ -84,7 +84,7 @@ git clone https://github.com/winlibs/libiconv.git libiconv
 cd /D libiconv
 git checkout tags/libiconv-1.16-1
 cd /D ..
-git clone https://github.com/ShiftMediaProject/liblzma.git liblzma
+git clone https://git.tukaani.org/xz.git liblzma
 cd /D liblzma
 git checkout tags/v5.2.5
 cd /D ..
@@ -110,7 +110,7 @@ git checkout tags/v0.23
 cd /D ..
 git clone https://github.com/GNOME/libxml2.git libxml2
 cd /D libxml2
-git checkout tags/v2.9.10
+git checkout tags/v2.9.12
 cd /D ..
 git clone https://gitlab.freedesktop.org/xorg/lib/libxpm libxpm
 cd /D libxpm
@@ -134,7 +134,7 @@ svn update -r 2598
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1889561
+svn update -r 1889896
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2

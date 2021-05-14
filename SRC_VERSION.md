@@ -25,7 +25,7 @@
 | [libssh2](https://github.com/libssh2/libssh2) | 1.9.0 |
 | [libtiff](https://gitlab.com/libtiff/libtiff) | 4.3.0 |
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
-| [libxml2](https://github.com/GNOME/libxml2) | 2.9.10 |
+| [libxml2](https://github.com/GNOME/libxml2) | 2.9.12 |
 | [libxpm](https://gitlab.freedesktop.org/xorg/lib/libxpm) | 3.5.13 |
 | [libzip](https://github.com/nih-at/libzip) | 1.7.3 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
