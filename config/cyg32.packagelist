@@ -143,6 +143,7 @@ libpipeline1
 libpkgconf3
 libpopt-common
 libpopt0
+libprocps8
 libproxy1
 libpsl5
 libquadmath0
@@ -169,6 +170,7 @@ m4
 make
 man-db
 mintty
+nc
 ncurses
 openssl
 p11-kit
@@ -182,6 +184,7 @@ perl_autorebase
 perl_base
 pkg-config
 pkgconf
+procps-ng
 publicsuffix-list-dafsa
 python
 python-pip-wheel
