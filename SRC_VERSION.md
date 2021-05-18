@@ -10,7 +10,7 @@
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.10.4 |
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52-c-fix |
 | [geos](https://github.com/libgeos/geos) | 3.9.1 |
-| [httpd](https://github.com/apache/httpd) | 2.4.47 |
+| [httpd](https://github.com/apache/httpd) | 2.4.48 |
 | [jansson](https://github.com/akheron/jansson) | 2.13.1 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.2.1 |
 | [jpeg](https://github.com/mackyle/jpeg) | 9d |
@@ -42,7 +42,7 @@
 | [openssl](https://github.com/openssl/openssl) | 1.1.1k |
 | [pcre](https://github.com/jwilk-mirrors/pcre) | 8.44 |
 | [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | nbio_php8 - 8.1-dev - e014963 |
-| [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.0.1 |
+| [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1-dev |
 | [php-cgi-spawner](https://github.com/deemru/php-cgi-spawner) | 1.1.23 |
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.13.1 |
 | [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1 |
