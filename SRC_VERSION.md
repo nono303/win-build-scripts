@@ -16,7 +16,7 @@
 | [jpeg](https://github.com/mackyle/jpeg) | 9d |
 | [libev](https://git.lighttpd.net/libev) | 4.33 |
 | [libevent](https://github.com/libevent/libevent) | 2.1.12 |
-| [libexpat](https://github.com/libexpat/libexpat) | 2.3.0 |
+| [libexpat](https://github.com/libexpat/libexpat) | 2.4.1 |
 | [libffi](https://github.com/winlibs/libffi) | 3.3 |
 | [libiconv](https://github.com/winlibs/libiconv) | 1.16.1 |
 | [liblzma](https://github.com/ShiftMediaProject/liblzma) | 5.2.5 |
@@ -35,7 +35,7 @@
 | [mod_h2](https://github.com/icing/mod_h2) | 1.15.19 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
-| [mod_md](https://github.com/icing/mod_md) | 2.4.0 |
+| [mod_md](https://github.com/icing/mod_md) | 2.4.2 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) | 2.01.1 |
 | [nghttp2](https://github.com/nghttp2/nghttp2) | 1.43.0 |
 | [nssm](https://github.com/puppetlabs/nssm) | 2.24.113 |
