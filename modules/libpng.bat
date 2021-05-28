@@ -10,7 +10,7 @@ xcopy /C /F /Y %PATH_MODULES%\%1.sln %PATH_SRC%\%1\%VCDIR%\*
 
 MSBuild.exe %PATH_SRC%\%1\projects\vstudio\vstudio.sln ^
 %MSBUILD_OPTS% ^
-/t:pnglibconf ^
+/t:pnglibconf:Rebuild ^
 /p:Configuration=Release ^
 /p:Platform="Win32"
 
@@ -18,7 +18,7 @@ for %%C in ("Release" "Release Library") do (
 	MSBuild.exe %PATH_SRC%\%1\%VCDIR%\%1.sln ^
 	%MSBUILD_OPTS% ^
 	/nowarn:MSB8012 ^
-	/t:Clean,libpng ^
+	/t:Clean,libpng:Rebuild ^
 	/p:Configuration=%%C ^
 	/p:ZLibSrcDir=C:\sdk\src\zlib ^
 	/p:ZLibLib=%PATH_INSTALL%\lib\zlib.lib ^

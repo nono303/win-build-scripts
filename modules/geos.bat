@@ -13,7 +13,7 @@ REM cmake --clean-first --build %VCDIR% --config RelWithDebInfo ---parallel 16 -
 	MSBuild.exe %PATH_SRC%\%1\%VCDIR%\GEOS.sln ^
 	%MSBUILD_OPTS% ^
 	/nowarn:C4267;C4702;C4018;C4458 ^
-	/t:geos,geos_c ^
+	/t:geos:Rebuild,geos_c:Rebuild ^
 	/p:Configuration=%CMAKE_BUILD_TYPE% ^
 	/p:Platform="%archmsbuild%"
 
