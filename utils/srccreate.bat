@@ -34,7 +34,7 @@ git checkout tags/cares-1_17_1
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-7_76_1
+git checkout tags/curl-7_77_0
 cd /D ..
 git clone git://git.sv.nongnu.org/freetype/freetype2.git freetype2
 cd /D freetype2
@@ -50,7 +50,7 @@ git checkout tags/3.9.1
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
-git checkout tags/2.4.47
+git checkout tags/2.4.48
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -74,7 +74,7 @@ git checkout tags/release-2.1.12-stable
 cd /D ..
 git clone https://github.com/libexpat/libexpat.git libexpat
 cd /D libexpat
-git checkout tags/R_2_3_0
+git checkout tags/R_2_4_1
 cd /D ..
 git clone https://github.com/winlibs/libffi libffi
 cd /D libffi
@@ -84,7 +84,7 @@ git clone https://github.com/winlibs/libiconv.git libiconv
 cd /D libiconv
 git checkout tags/libiconv-1.16-1
 cd /D ..
-git clone https://github.com/ShiftMediaProject/liblzma.git liblzma
+git clone https://git.tukaani.org/xz.git liblzma
 cd /D liblzma
 git checkout tags/v5.2.5
 cd /D ..
@@ -110,7 +110,7 @@ git checkout tags/v0.23
 cd /D ..
 git clone https://github.com/GNOME/libxml2.git libxml2
 cd /D libxml2
-git checkout tags/v2.9.10
+git checkout tags/v2.9.12
 cd /D ..
 git clone https://gitlab.freedesktop.org/xorg/lib/libxpm libxpm
 cd /D libxpm
@@ -134,7 +134,7 @@ svn update -r 2598
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1889561
+svn update -r 1890285
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -150,7 +150,7 @@ git checkout tags/1.2.0
 cd /D ..
 git clone https://github.com/icing/mod_md mod_md
 cd /D mod_md
-git checkout tags/v.2.4.0
+git checkout tags/v2.4.2
 cd /D ..
 git clone https://github.com/nono303/mod_whatkilledus mod_wku_bt
 cd /D mod_wku_bt
@@ -178,7 +178,7 @@ git checkout NON_BLOCKING_IO_php8
 cd /D ..
 git clone https://github.com/php/pecl-text-xdiff pecl-text-xdiff
 cd /D pecl-text-xdiff
-git checkout tags/xdiff-2.0.1
+git checkout main
 cd /D ..
 git clone https://github.com/deemru/php-cgi-spawner.git php-cgi-spawner
 cd /D php-cgi-spawner

@@ -28,7 +28,7 @@ python gen-make.py ^
 MSBuild.exe subversion_vcnet.sln ^
 	%MSBUILD_OPTS% ^
 	/nowarn:C4702;LNK4087;MSB8065;C4703;C4132;C4389;C4244;C4245;C4267;C4018;C4334;C4189;C4312;C4090;C4152;C4146 ^
-	/t:Clean;__ALL__;__JAVAHL__ ^
+	/t:Clean;__ALL__:Rebuild;__JAVAHL__:Rebuild ^
 	/p:Configuration=%OUTDIR_CONF% ^
 	/p:Platform=%archmsbuild%
 

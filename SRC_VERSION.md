@@ -10,13 +10,13 @@
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.10.4 |
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52-c-fix |
 | [geos](https://github.com/libgeos/geos) | 3.9.1 |
-| [httpd](https://github.com/apache/httpd) | 2.4.47 |
+| [httpd](https://github.com/apache/httpd) | 2.4.48 |
 | [jansson](https://github.com/akheron/jansson) | 2.13.1 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.2.1 |
 | [jpeg](https://github.com/mackyle/jpeg) | 9d |
 | [libev](https://git.lighttpd.net/libev) | 4.33 |
 | [libevent](https://github.com/libevent/libevent) | 2.1.12 |
-| [libexpat](https://github.com/libexpat/libexpat) | 2.3.0 |
+| [libexpat](https://github.com/libexpat/libexpat) | 2.4.1 |
 | [libffi](https://github.com/winlibs/libffi) | 3.3 |
 | [libiconv](https://github.com/winlibs/libiconv) | 1.16.1 |
 | [liblzma](https://github.com/ShiftMediaProject/liblzma) | 5.2.5 |
@@ -25,7 +25,7 @@
 | [libssh2](https://github.com/libssh2/libssh2) | 1.9.0 |
 | [libtiff](https://gitlab.com/libtiff/libtiff) | 4.3.0 |
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
-| [libxml2](https://github.com/GNOME/libxml2) | 2.9.10 |
+| [libxml2](https://github.com/GNOME/libxml2) | 2.9.12 |
 | [libxpm](https://gitlab.freedesktop.org/xorg/lib/libxpm) | 3.5.13 |
 | [libzip](https://github.com/nih-at/libzip) | 1.7.3 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
@@ -35,14 +35,14 @@
 | [mod_h2](https://github.com/icing/mod_h2) | 1.15.19 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
-| [mod_md](https://github.com/icing/mod_md) | 2.4.0 |
+| [mod_md](https://github.com/icing/mod_md) | 2.4.2 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) | 2.01.1 |
 | [nghttp2](https://github.com/nghttp2/nghttp2) | 1.43.0 |
 | [nssm](https://github.com/puppetlabs/nssm) | 2.24.113 |
 | [openssl](https://github.com/openssl/openssl) | 1.1.1k |
 | [pcre](https://github.com/jwilk-mirrors/pcre) | 8.44 |
 | [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | nbio_php8 - 8.1-dev - e014963 |
-| [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.0.1 |
+| [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1-dev |
 | [php-cgi-spawner](https://github.com/deemru/php-cgi-spawner) | 1.1.23 |
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.13.1 |
 | [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1 |

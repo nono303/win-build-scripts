@@ -28,7 +28,6 @@ if %PHPVER% == 7.4 (
 	set phpveropts=	%PHP7_COMMON_CONFIGURE% ^
 			--enable-native-intrinsics=sse,sse2%intrinsics% ^
 			--with-mhash ^
-			--with-ffi ^
 			--enable-sanitizer
 	set native-intrinsics=1
 )
@@ -36,7 +35,6 @@ if %PHPVER% == 7.4 (
 if %PHPVER% == 8.0 (
 	set phpveropts=	--enable-native-intrinsics=sse,sse2%intrinsics% ^
 			--with-mhash ^
-			--with-ffi ^
 			--enable-sanitizer
 	set native-intrinsics=1
 )
@@ -73,6 +71,7 @@ set PHP_COMMON_CONFIGURE=^
 	--with-extra-libs="%PHP_CURL%\lib";"%PATH_INSTALL%\lib" ^
 	--with-mp=%NUMBER_OF_PROCESSORS%
 
+REM known bug for --with-ffi if php != 8.1 || 7.4
 if %PHPVER% == %PHP_FULLBUILD% (
 	call configure %PHP_COMMON_CONFIGURE% ^
 	--with-toolset=vs ^
@@ -103,6 +102,7 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--with-xdiff=shared ^
 	--enable-memcache=shared ^
 	--with-geos=shared ^
+	--with-ffi ^
 	%ZTS% %phpveropts% %phparchopts%
 ) else (
 	call configure %PHP_COMMON_CONFIGURE% ^
@@ -114,9 +114,7 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--without-dom ^
 	--disable-filter ^
 	--without-gd ^
-	--disable-hash ^
 	--without-iconv ^
-	--disable-json ^
 	--without-libxml ^
 	--without-mysqlnd ^
 	--disable-opcache ^
@@ -129,6 +127,7 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--disable-zip ^
 	--enable-embed ^
 	--enable-memcache=shared ^
+	--without-geos ^
 	%ZTS% %phpveropts%
 )
 

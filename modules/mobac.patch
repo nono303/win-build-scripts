@@ -1,6 +1,17 @@
+Index: gradle/wrapper/gradle-wrapper.properties
+===================================================================
+--- gradle/wrapper/gradle-wrapper.properties	(revision 2598)
++++ gradle/wrapper/gradle-wrapper.properties	(working copy)
+@@ -1,5 +1,5 @@
+ distributionBase=GRADLE_USER_HOME
+ distributionPath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-7.0-bin.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-7.0.2-bin.zip
+ zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
 Index: mobac/build.gradle
 ===================================================================
---- mobac/build.gradle	(revision 2583)
+--- mobac/build.gradle	(revision 2598)
 +++ mobac/build.gradle	(working copy)
 @@ -2,9 +2,17 @@
      id 'java-library'
@@ -51,7 +62,7 @@ Index: mobac/build.gradle
  }
 Index: mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(revision 2583)
+--- mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(revision 2598)
 +++ mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(working copy)
 @@ -38,15 +38,10 @@
  	static {
@@ -73,7 +84,7 @@ Index: mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java
  	}
 Index: mobac/src/main/java/mobac/gui/MainGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2583)
+--- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2598)
 +++ mobac/src/main/java/mobac/gui/MainGUI.java	(working copy)
 @@ -163,7 +163,7 @@
  	private static Color checkboxBackgroundColor = new Color(0, 0, 0, 40);
@@ -94,7 +105,7 @@ Index: mobac/src/main/java/mobac/gui/MainGUI.java
  		leftPanelContent.add(mapSourcePanel, gbc_eol);
 Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2583)
+--- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2598)
 +++ mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(working copy)
 @@ -45,7 +45,7 @@
  		JScrollPane mapSourceTreeScrollPane = new JScrollPane(mapSourceTree, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -107,7 +118,7 @@ Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
  	}
 Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2583)
+--- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2598)
 +++ mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(working copy)
 @@ -97,7 +97,7 @@
  
@@ -120,7 +131,7 @@ Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
  
 Index: mobac/src/main/java/mobac/program/download/MobacTrustManager.java
 ===================================================================
---- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2583)
+--- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2598)
 +++ mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(working copy)
 @@ -97,7 +97,7 @@
  			defaultTrustManager.checkServerTrusted(chain, authType);
