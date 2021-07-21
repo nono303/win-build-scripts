@@ -35,7 +35,7 @@ set JAVA_HOME=%PATH_SOFTS%\openjdk
 set GRADLE_USER_HOME=%PATH_SOFTS%\gradle
 
 REM ########################## BIN PATH
-set PATH_VS=%PATH_SOFTS%\vs22
+set PATH_VS=%PATH_SOFTS%\vs22\Community
 set PATH_BIN_GIT=C:\PROGRA~1\Git\bin
 set PATH_BIN_PYTHON=%PATH_SOFTS%\python3;%PATH_SOFTS%\python3\Scripts
 set PATH_BIN_CYGWIN=%PATH_ROOT_CYGWIN%%CYGV%\bin
