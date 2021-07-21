@@ -1,6 +1,6 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1
 
-REM 16 <> 17 
+REM /******** > 2021-07-21 TMP !! vs17 non disponible ********/
 if not exist %PATH_SRC%\libiconv\MSVC%MSVC_VER%\. mklink /J %PATH_SRC%\libiconv\MSVC%MSVC_VER% %PATH_SRC%\libiconv\MSVC16
 
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/libiconv/MSVC%MSVC_VER%/" %AVXVCX% %PTFTS% %WKITVER%
