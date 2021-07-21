@@ -1,35 +1,17 @@
-diff --git "a/bin/phpsdk_setshell.bat" "b/bin/phpsdk_setshell.bat"
-index aeb5b58..7b1c848 100644
---- "a/bin/phpsdk_setshell.bat"
-+++ "b/bin/phpsdk_setshell.bat"
-@@ -84,25 +84,7 @@ if 15 gtr %PHP_SDK_VS_NUM% (
- 	rem build the version range, e.g. "[15,16)"
+diff --git a/bin/phpsdk_setshell.bat b/bin/phpsdk_setshell.bat
+index aeb5b58..4dcd0ae 100644
+--- a/bin/phpsdk_setshell.bat
++++ b/bin/phpsdk_setshell.bat
+@@ -85,7 +85,7 @@ if 15 gtr %PHP_SDK_VS_NUM% (
  	set /a PHP_SDK_VS_RANGE=PHP_SDK_VS_NUM + 1
  	set PHP_SDK_VS_RANGE="[%PHP_SDK_VS_NUM%,!PHP_SDK_VS_RANGE%!)"
--
+ 
 -	for /f "tokens=1* delims=: " %%a in ('%~dp0\vswhere -nologo -version !PHP_SDK_VS_RANGE! -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath -format text') do (
--		set PHP_SDK_VC_DIR=%%b\VC
--	)
--	if not exist "!PHP_SDK_VC_DIR!" (
--		for /f "tokens=1* delims=: " %%a in ('%~dp0\vswhere -nologo -version !PHP_SDK_VS_RANGE! -products Microsoft.VisualStudio.Product.BuildTools -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath -format text') do (
--			set PHP_SDK_VC_DIR=%%b\VC
--		)
--		if not exist "!PHP_SDK_VC_DIR!" (
--			rem check for a preview release
--			for /f "tokens=1* delims=: " %%a in ('%~dp0\vswhere -nologo -version !PHP_SDK_VS_RANGE! -prerelease -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath -format text') do (
--				set PHP_SDK_VC_DIR=%%b\VC
--			)
--			if not exist "!PHP_SDK_VC_DIR!" (
--				echo Could not determine '%PHP_SDK_VS%' directory
--				goto out_error;
--			)
--		)
--	)
-+	set PHP_SDK_VC_DIR=%PATH_VS%\VC
- 	set VSCMD_ARG_no_logo=nologo
- )
- set TMPKEY=
-@@ -144,15 +126,15 @@ if 15 gtr %PHP_SDK_VS_NUM% (
++	for /f "tokens=1* delims=: " %%a in ('%~dp0\vswhere -nologo -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath -format text') do (
+ 		set PHP_SDK_VC_DIR=%%b\VC
+ 	)
+ 	if not exist "!PHP_SDK_VC_DIR!" (
+@@ -144,15 +144,15 @@ if 15 gtr %PHP_SDK_VS_NUM% (
  
  if /i "%PHP_SDK_ARCH%"=="x64" (
  	if 15 gtr %PHP_SDK_VS_NUM% (
