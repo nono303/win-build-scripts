@@ -26,5 +26,5 @@ if not exist %PATH_INSTALL%\include\geos\util\. (
 )
 xcopy /C /F /Y %PATH_SRC%\%1\include\geos.h %PATH_INSTALL%\include\*
 xcopy /C /F /Y %PATH_SRC%\%1\include\geos\export.h %PATH_INSTALL%\include\geos\*
-xcopy /C /F /Y %PATH_SRC%\%1\%VCDIR%\capi\geos_c.h %PATH_INSTALL%\include\*
+xcopy /C /F /Y %PATH_BUILD%\%1\capi\geos_c.h %PATH_INSTALL%\include\*
 xcopy /C /F /Y %PATH_SRC%\%1\include\geos\util\GEOSException.h %PATH_INSTALL%\include\geos\util\*
