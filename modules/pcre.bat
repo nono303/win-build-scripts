@@ -25,3 +25,4 @@ nmake %NMAKE_OPTS% clean install
 
 for %%X in (pcre16 pcre32) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X.pdb %PATH_INSTALL%\bin\*)
 for %%X in (pcre pcre16 pcre32 pcreposix) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X.dll)
+del /Q /F %PATH_INSTALL%\bin\pcre-config

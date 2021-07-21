@@ -20,7 +20,7 @@
 	$type = "staging";
 	// x86 || x64
 	$arch = $_ENV["ARCH"];
-	// vs16 || vc15
+	// vs16 || vc15 || vs17
 	$msvc = $_ENV["MSVC_DEPS"];
 	// https://windows.php.net/downloadS/php-sdk/deps/series/
 	if($msvc == "vs16"){
@@ -74,8 +74,18 @@
 	);
 
 	$urlbase = "https://windows.php.net/downloadS/php-sdk/deps/";
-	$repdl = $urlbase.$msvc."/".$arch."/";
-	$package = "packages-".$pckver."-".$msvc."-".$arch."-".$type.".txt";
+	
+
+		/******** > 2021-07-21 TMP !! vs17 non disponible ********/
+		if($msvc == "vs17"){
+			$msvcpackages = "vs16";
+		} else {
+			$msvcpackages = $msvc;
+		}
+		/******** < 2021-07-21 TMP !! vs17 non disponible ********/
+	$repdl = $urlbase.$msvcpackages."/".$arch."/";
+	$package = "packages-".$pckver."-".$msvcpackages."-".$arch."-".$type.".txt";
+
 	$serie = $urlbase."series/".$package;
 	$stampfile = "lastupate.txt";
 

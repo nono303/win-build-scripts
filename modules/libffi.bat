@@ -1,5 +1,7 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1
 
+REM /******** > 2021-07-21 TMP !! vs17 non disponible ********/
+if not exist %PATH_SRC%\%1\win32\%MSVC_DEPS%_%ARCH%\. mklink /J %PATH_SRC%\%1\win32\%MSVC_DEPS%_%ARCH% %PATH_SRC%\%1\win32\vs16_%ARCH%
 set VCDIR=win32\%MSVC_DEPS%_%ARCH%
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/%VCDIR:\=/%" %AVXVCX% %PTFTS% %WKITVER%
 

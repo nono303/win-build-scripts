@@ -77,7 +77,7 @@ libdns1106
 libdns169
 libedit0
 libevent-devel
-libevent2.0_5
+libevent2.1_7
 libexpat1
 libfam0
 libfdisk1
@@ -177,6 +177,8 @@ p11-kit
 p11-kit-trust
 patch
 perl
+perl-Class-Inspector
+perl-File-ShareDir
 perl-Scalar-List-Utils
 perl-Test-Harness
 perl-Unicode-Normalize
