@@ -89,6 +89,7 @@ cd /D %PATH_BATCH%
 REM ########################## BUILD OPTION
 	REM see dir in %PATH_ROOTWKIT%\Lib
 set WKITVER=10.0.20348.0
+FOR /F "tokens=* USEBACKQ" %%F in (`dir /b %PATH_VS%\VC\Tools\MSVC ^| grep %vcvars_ver%`) do (set VCTOOLSVER=%%F)
 
 set NMAKE_OPTS_DBG=/NOLOGO
 set NMAKE_OPTS_REL=/S %NMAKE_OPTS_DBG%
