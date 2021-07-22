@@ -2,6 +2,7 @@ for i in `/usr/bin/find $2 -type f -name "build.make" 2>/dev/null`
 do
   sed -i 's/\/INCREMENTAL /\/LTCG \/OPT:REF,ICF \/DEBUG /g' $i
   sed -i 's/link.exe \/lib/link.exe \/lib \/LTCG/g' $i
+  sed -i 's/lib.exe/lib.exe \/LTCG/g' $i
 done
 for i in `/usr/bin/find $2 -type f -name "flags.make" 2>/dev/null` 
 do
