@@ -302,10 +302,10 @@ index dfef19e8e4..83cec908c5 100644
  ###########  CONFIGURATION FILES ###########
  # Set up variables used in the .conf file templates
 diff --git a/modules/proxy/mod_proxy_fcgi.c b/modules/proxy/mod_proxy_fcgi.c
-index 2e97408f3f..dfd0c1b396 100644
+index 3382b9bfd5..d22dff315f 100644
 --- a/modules/proxy/mod_proxy_fcgi.c
 +++ b/modules/proxy/mod_proxy_fcgi.c
-@@ -357,6 +357,10 @@ static apr_status_t send_environment(proxy_conn_rec *conn, request_rec *r,
+@@ -366,6 +366,10 @@ static apr_status_t send_environment(proxy_conn_rec *conn, request_rec *r,
  
          if (newfname) {
              newfname = ap_strchr(newfname, '/');
@@ -335,7 +335,7 @@ index 62e06df045..13ef956b2c 100644
  /* WARNING: Win32 binds http_main.c dynamically to the server. Please place
   *          extern functions and global data in another appropriate module.
 diff --git a/support/ab.c b/support/ab.c
-index 8205620994..c3f6bbd0b6 100644
+index dc0dc8653b..3b023aae6b 100644
 --- a/support/ab.c
 +++ b/support/ab.c
 @@ -174,8 +174,10 @@ typedef STACK_OF(X509) X509_STACK_TYPE;
@@ -352,7 +352,7 @@ index 8205620994..c3f6bbd0b6 100644
  
  #endif
 diff --git a/support/win32/ApacheMonitor.rc b/support/win32/ApacheMonitor.rc
-index d4203bf926..9d8211e830 100644
+index d4203bf926..053f77522e 100644
 --- a/support/win32/ApacheMonitor.rc
 +++ b/support/win32/ApacheMonitor.rc
 @@ -18,6 +18,7 @@
@@ -363,7 +363,7 @@ index d4203bf926..9d8211e830 100644
  #define LONG_NAME Apache HTTP Server Monitor
  
  #include "../../build/win32/httpd.rc"
-@@ -26,7 +26,7 @@
+@@ -26,7 +27,7 @@
  IDI_APSRVMON            ICON    DISCARDABLE     "ApacheMonitor.ico"
  IDI_ICOSTOP             ICON    DISCARDABLE     "apstop.ico"
  IDI_ICORUN              ICON    DISCARDABLE     "aprun.ico"

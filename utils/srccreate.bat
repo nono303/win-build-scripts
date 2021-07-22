@@ -34,7 +34,7 @@ git checkout tags/cares-1_17_1
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-7_77_0
+git checkout tags/curl-7_78_0
 cd /D ..
 git clone git://git.sv.nongnu.org/freetype/freetype2.git freetype2
 cd /D freetype2

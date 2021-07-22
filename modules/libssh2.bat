@@ -14,9 +14,10 @@ for %%S in (YES NO) do (
 	-DCRYPTO_BACKEND=OpenSSL ^
 	-DENABLE_ZLIB_COMPRESSION=ON ^
 	%PATH_SRC%\%1
-	%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/flags.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 
-	nmake %NMAKE_OPTS% 
+	%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+	%NINJA% install
+
 	if %%S == YES (
 		for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\src\libssh2.%%X %PATH_INSTALL%\bin\*)
 	) else (
@@ -24,6 +25,3 @@ for %%S in (YES NO) do (
 		xcopy /C /F /Y %PATH_BUILD%\%1\src\CMakeFiles\libssh2.dir\libssh2.pdb %PATH_INSTALL%\lib\*
 	)
 )
-xcopy /C /F /Y %PATH_SRC%\%1\include\libssh2.h %PATH_INSTALL%\include\*
-xcopy /C /F /Y %PATH_SRC%\%1\include\libssh2_publickey.h %PATH_INSTALL%\include\*
-xcopy /C /F /Y %PATH_SRC%\%1\include\libssh2_sftp.h %PATH_INSTALL%\include\*

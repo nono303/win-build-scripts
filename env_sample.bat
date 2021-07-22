@@ -57,6 +57,8 @@ set BIN_DEPENDS=%PATH_SOFTS%\dependencies\Dependencies.exe
 set BIN_SYGCHECK=%PATH_SOFTS%\sigcheck64.exe
 	REM Visual Studio installer (surrounded with quote)
 set BIN_VSINSTALLER="C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe"
+	REM Ninja for compiling cmake build
+set BIN_NINJA=%PATH_SOFTS%\ninja.exe
 
 REM ########################## CYGWIN PATH
 FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_SRC%`) do (set CYGPATH_SRC=%%F)
@@ -89,6 +91,9 @@ cd /D %PATH_BATCH%
 REM ########################## BUILD OPTION
 	REM see dir in %PATH_ROOTWKIT%\Lib
 set WKITVER=10.0.20348.0
+FOR /F "tokens=* USEBACKQ" %%F in (`dir /b %PATH_VS%\VC\Tools\MSVC ^| grep %vcvars_ver%`) do (set VCTOOLSVER=%%F)
+
+set NINJA=%BIN_NINJA%
 
 set NMAKE_OPTS_DBG=/NOLOGO
 set NMAKE_OPTS_REL=/S %NMAKE_OPTS_DBG%
@@ -110,7 +115,7 @@ set MSBUILD_OPTS_REL=%MSBUILD_OPTS_COM% ^
 	/nowarn:MSB8012;C4244 ^
 	/v:m
 
-set CMAKE_OPTS_DBG=-G "NMake Makefiles"
+set CMAKE_OPTS_DBG=-G "Ninja"
 set CMAKE_OPTS_REL=-Wno-dev ^
 	%CMAKE_OPTS_DBG%
 	REM set CMAKE_BUILD_TYPE=Release

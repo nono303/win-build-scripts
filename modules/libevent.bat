@@ -15,8 +15,8 @@ cmake %CMAKE_OPTS% ^
 -DGIT_EXECUTABLE=%PATH_BIN_GIT%\git.exe ^
 %PATH_SRC%\%1
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/flags.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
-nmake %NMAKE_OPTS% clean install
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%NINJA% install
 
 for %%F in (event event_extra event_openssl event_core) do (
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\lib\%%F.dll

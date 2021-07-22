@@ -25,9 +25,8 @@ for %%C in ("-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" "-DBUILD_SHARED_LIBS=ON -
 	!new! ^
 	%PATH_SRC%\%1
 
-	%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/flags.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
-	sed -i 's/-W3//g' %CYGPATH_BUILD%/%1/CMakeFiles/sqlite3.dir/flags.make
-	nmake %NMAKE_OPTS% clean install
+	%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+	%NINJA% install
 		REM for "-DBUILD_SHARED_LIBS=ON -DBUILD_SHELL=OFF"
 	sed -i 's/STATIC sqlite3.c/SHARED sqlite3.c/g' %CYGPATH_SRC%/%1/CMakeLists.txt
 	sed -i 's/OUTPUT_NAME   sqlite3/OUTPUT_NAME   libsqlite3/g' %CYGPATH_SRC%/%1/CMakeLists.txt

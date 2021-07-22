@@ -17,8 +17,7 @@ cd /D %PATH_SRC%\apr-util
 echo # apply apr_post.patch && git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\apr_post.patch
 sed -i 's/MAKEOPT=-nologo/MAKEOPT=%NMAKE_OPTS:/=\/%/g' %PATH_SRC%/apr-util/Makefile.win
 
-nmake %NMAKE_OPTS% ^
-	/f Makefile.win ^
+nmake %NMAKE_OPTS% /f Makefile.win ^
 	USEMAK=1 ^
 	ARCH="%archmsbuild% Release" ^
 	APU_PATH=%PATH_SRC%\apr-util ^

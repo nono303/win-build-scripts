@@ -61,6 +61,7 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 		"introuvable" => [36,"str"],
 		"rejected" => [33,"str"],
 		"conflicts " => [33,"str"],
+		"improve linker performance" => [33,"str"],
 
 	);
 	$remove = array(

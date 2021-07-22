@@ -3,8 +3,7 @@
 set CURL_VER=openssl
 if not exist %PATH_INSTALL%\_%1\. mkdir %PATH_INSTALL%\_%1
 
-cmake ^
-%CMAKE_OPTS% ^
+cmake %CMAKE_OPTS% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL%\_%1 ^
 -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
 -DCOMMON_INSTALL_PATH=ON ^
@@ -16,10 +15,15 @@ cmake ^
 -DCONVERT_WARNINGS_TO_ERRORS=OFF ^
 %PATH_SRC%\%1
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/flags.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
-nmake %NMAKE_OPTS% clean install
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+REM error with js\all
+	REM FAILED: js/geographiclib.js js/geographiclib.min.js
+	REM cmd.exe /C "cd /D C:\sdk\build\vc15_x86-avx\geographiclib && C:\sdk\softs\vs22\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe ."
+	REM CMake Error:  Running 'C:/sdk/softs/vs22/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe' '-C' 'C:/sdk/build/vc15_x86-avx/geographiclib' '-t' 'recompact'
+	REM failed with:  ninja: error: failed recompaction: Permission denied
+%NINJA% src\all include\GeographicLib\all tools\all man\all doc\all matlab\all python\geographiclib\all examples\all cmake\all tests\all 
+%NINJA% install
 
-del /Q /F %PATH_INSTALL%\_%1\bin\*.dll
 for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\_%1\bin\*.exe /b') do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\_%1\bin\%%G)
 for /f "tokens=*" %%G in ('dir %PATH_BUILD%\%1\bin\*.pdb /b') do  (xcopy /C /F /Y %PATH_BUILD%\%1\bin\%%G %PATH_INSTALL%\_%1\bin\*)
 

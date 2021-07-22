@@ -3,7 +3,7 @@ call %PATH_MODULES_COMMON%\init.bat %1
 set VCDIR=windows\vs2019
 set VCCONF=Release
 
-%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/%VCDIR:\=/%" %AVXVCX% %PTFTS% %WKITVER%
+%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/%VCDIR:\=/%" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER%
 
 MSBuild.exe %PATH_SRC%\%1\%VCDIR%\xz_win.sln ^
 %MSBUILD_OPTS% ^
