@@ -1,6 +1,6 @@
 call %PATH_MODULES_COMMON%\init.bat %1
 
-nmake /f Makefile.vs setupcopy-v16
+nmake %NMAKE_OPTS% /f Makefile.vs setupcopy-v16
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER%
 	REM remove 3 first junk char in vcxproj...
 for %%F in (cjpeg djpeg jpeg jpegtran rdjpgcom wrjpgcom) do (sed -i -E '1s/^^...//g' %CYGPATH_SRC%/%1/%%F.vcxproj)
