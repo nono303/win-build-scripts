@@ -1,6 +1,6 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1
 
-%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1" %AVXVCX% %PTFTS% %WKITVER%
+%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER%
 
 set OUTDIR_CONF=Release
 MSBuild.exe nssm.sln ^

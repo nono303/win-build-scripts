@@ -21,7 +21,7 @@ python gen-make.py ^
 	--with-apr_memcache=%PATH_INSTALL% ^
 	--with-httpd=%PATH_INSTALL% 
 
-%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/build/win32/vcnet-vcproj/" %AVXVCX% %PTFTS% %WKITVER%
+%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/build/win32/vcnet-vcproj/" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER%
 
 	REM ~~~~~~~~~~~~ Make
 		REM /t:__ALL_TESTS__;
