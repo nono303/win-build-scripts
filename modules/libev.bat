@@ -6,10 +6,9 @@ cmake %CMAKE_OPTS% ^
 -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
 %PATH_SRC%\%1
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/flags.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES%/libev.sh "%CYGPATH_BUILD%/%1"
-
-nmake %NMAKE_OPTS%
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+sed -i 's/-GS -W4 -wd4251 -wd4275/\/Zc:inline \/EHsc -w/g' %CYGPATH_BUILD%/%1/build.ninja
+%NINJA%
 
 xcopy /C /F /Y %PATH_BUILD%\%1\libev_static.lib %PATH_INSTALL%\lib\*
 xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\libev_static.dir\libev_static.pdb %PATH_INSTALL%\lib\*

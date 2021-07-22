@@ -15,9 +15,9 @@ cmake %CMAKE_OPTS% ^
 -DCARES_MSVC_STATIC_RUNTIME=OFF ^
 %PATH_SRC%\%1 
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/flags.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
-nmake %NMAKE_OPTS% clean install
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%NINJA% install
 
 move /Y %PATH_INSTALL%\bin\cares_static.pdb %PATH_INSTALL%\lib
-for %%X in (cares acountry adig ahost) do (copy /Y %PATH_BUILD%\%1\bin\%%X.pdb %PATH_INSTALL%\bin\%%X.pdb)
+for %%X in (cares acountry adig ahost) do (xcopy /C /F /Y %PATH_BUILD%\%1\bin\%%X.pdb %PATH_INSTALL%\bin\*)
 for %%X in (cares.dll acountry.exe adig.exe ahost.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)

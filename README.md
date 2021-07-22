@@ -54,5 +54,6 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.81          |                     |
 | [ChkMatch](http://www.debuginfo.com/tools/chkmatch.html)     |      | 1.0.3          |                     |
 | [Gradle](https://gradle.org/) | | 7.1.1 | |
+| [Ninja](https://github.com/ninja-build/ninja/releases) | | 1.10.2 | |
 
 ### [SOURCE VERSIONS](./SRC_VERSION.md)

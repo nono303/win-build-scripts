@@ -9,8 +9,8 @@ cmake %CMAKE_OPTS% ^
 	-DEXPAT_MSVC_STATIC_CRT=OFF ^
 	-DEXPAT_BUILD_TOOLS=OFF %PATH_SRC%\%1\expat
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/flags.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
-nmake %NMAKE_OPTS% clean install
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%NINJA% install
 
 xcopy /C /F /Y %PATH_BUILD%\%1\libexpat.pdb %PATH_INSTALL%\bin\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libexpat.dll

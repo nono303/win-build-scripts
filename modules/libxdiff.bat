@@ -7,9 +7,8 @@ cmake %CMAKE_OPTS% ^
 	-DENABLE_TOOLS=OFF ^
 	%PATH_SRC%\%1
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/flags.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
-
-nmake %NMAKE_OPTS% clean install
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%NINJA% install
 
 xcopy /C /F /Y %PATH_BUILD%\%1\xdiff.pdb %PATH_INSTALL%\bin\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\xdiff.dll

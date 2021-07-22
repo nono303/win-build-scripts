@@ -24,9 +24,8 @@ cmake %CMAKE_OPTS% ^
 	-DADD_SYSTEM_RUNTIMES=OFF ^
 	%PATH_SRC%\%1
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/flags.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
-
-nmake %NMAKE_OPTS% clean install
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%NINJA% install
 
 xcopy /C /F /Y %PATH_BUILD%\%1\*.pdb %PATH_INSTALL%\bin\*
 xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\tidy_a.dir\tidy_a.pdb %PATH_INSTALL%\lib\*

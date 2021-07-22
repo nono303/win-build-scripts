@@ -18,7 +18,8 @@ cmake %CMAKE_OPTS% ^
 	-DAPRUtil_ROOT=%PATH_INSTALL%\ ^
 	%PATH_SRC%\%1 
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/flags.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
-nmake %NMAKE_OPTS% clean install
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%NINJA% install
+
 xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\serf_static.dir\serf_static.pdb %PATH_INSTALL%\lib\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libserf-2.dll
