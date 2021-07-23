@@ -2,7 +2,7 @@ link="<EnableCOMDATFolding>true<\/EnableCOMDATFolding><OptimizeReferences>true<\
 for i in `/usr/bin/find $1 -type f -name "*.vcxproj" 2>/dev/null` 
 do
   sed -i -E 's/<PlatformToolset>[^<]+/<VCToolsVersion>'$5'<\/VCToolsVersion><PlatformToolset>v'$3'/g' $i
-  sed -i -E 's/<WindowsTargetPlatformVersion>[^<]+/<WindowsTargetPlatformVersion>v'$4'/g' $i
+  sed -i -E 's/<WindowsTargetPlatformVersion>[^<]+/<WindowsTargetPlatformVersion>'$4'/g' $i
   sed -i -E 's/<Optimization>[^<]+/<Optimization>MaxSpeed/g' $i
   sed -i 's/<\/ClCompile>/<Optimization>MaxSpeed<\/Optimization><WholeProgramOptimization>true<\/WholeProgramOptimization><MultiProcessorCompilation>true<\/MultiProcessorCompilation>'$2'<\/ClCompile>/g' $i
   sed -i 's/<\/Link>/'$link'<LinkTimeCodeGeneration>UseLinkTimeCodeGeneration<\/LinkTimeCodeGeneration><\/Link>/g' $i
