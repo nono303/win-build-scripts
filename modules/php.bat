@@ -21,7 +21,8 @@ set INCLUDE=
 	REM ~~~~~~~~~~~~ current full build
 set PHP_FULLBUILD=8.0
 
-	REM ~~~~~~~~~~~~ thread safe
+	REM ~~~~~~~~~~~~ Thread Safe. 
+	REM              !! NTS will not be built if set to 1
 set PHP_BUILDTS=0
 
 	REM ~~~~~~~~~~~~ curl
