@@ -4,6 +4,8 @@ set VCDIR=windows\vs2019
 set VCCONF=Release
 
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/%VCDIR:\=/%" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER%
+REM liblzma.vcxproj : error for static lib defined with <Link> and not <Lib> for vc15
+sed -i 's/^<\/Link^>/^<\/Link^>^<Lib^>^<LinkTimeCodeGeneration^>true^<\/LinkTimeCodeGeneration^>^<EnableCOMDATFolding^>true^<\/EnableCOMDATFolding^>^<OptimizeReferences^>true^<\/OptimizeReferences^>^<\/Lib^>/g' %CYGPATH_SRC%/%1/%VCDIR:\=/%/liblzma.vcxproj
 
 MSBuild.exe %PATH_SRC%\%1\%VCDIR%\xz_win.sln ^
 %MSBUILD_OPTS% ^
