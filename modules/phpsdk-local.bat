@@ -57,15 +57,15 @@ sed -i -E 's/CHECK_LIB\("freetype_a.lib;freetype.lib", "gd", PHP_GD\) (..)/CHECK
 	REM ~~~~~~~~~~~~ export config options
 call configure --help > %PATH_LOGS%\configure_%PHPGITVER:~4,-1%.txt
 
+if %PHP_BUILDTS% == 0 (
 	REM ~~~~~~~~~~~~ make NTS
-echo *** nts  ***
-set ZTS=--disable-zts
-set TSNTS=nts
-set BUILDDIR=Release
-call %PATH_MODULES%\phpsdk-config_make.bat
-
+	echo *** nts  ***
+	set ZTS=--disable-zts
+	set TSNTS=nts
+	set BUILDDIR=Release
+	call %PATH_MODULES%\phpsdk-config_make.bat
+) else (
 	REM ~~~~~~~~~~~~ make TS
-if %PHP_BUILDTS% == 1 (
 	echo *** ts  ***
 	set ZTS=
 	set TSNTS=ts

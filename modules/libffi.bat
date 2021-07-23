@@ -22,8 +22,10 @@ sed -i 's/define LIBFFI_H/define LIBFFI_H\n#define FFI_BUILDING 1 /g' %CYGPATH_S
 	/p:Configuration=Release ^
 	/p:Platform="%archmsbuild%"
 
-if %ARCH% == x64 (set RELFFI=%ARCH%\Release)
-if %ARCH% == x86 (set RELFFI=Release)
-
-for %%D in (%VCDIR%\%RELFFI%\libffi.lib %VCDIR%\%RELFFI%\libffi.pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\%%D %PATH_INSTALL%\lib\*)
+REM lib & pdb are not build in same folder according to MSVC version...
+for %%D in (lib pdb) do (
+	for /F "delims=" %%I in ('dir /a:-D /s /b %PATH_SRC%\%1\%VCDIR%\libffi.%%D') do (
+		xcopy /C /F /Y %%I %PATH_INSTALL%\lib\*
+	)
+)
 for %%D in (src\x86\ffitarget.h fficonfig.h include\ffi.h) do (xcopy /C /F /Y %PATH_SRC%\%1\%%D %PATH_INSTALL%\include\*)
