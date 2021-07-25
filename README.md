@@ -41,7 +41,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | "my"version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.0.0p2 (14.30) | `.vsconfig`         |
+| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.0.0p2.1 (14.30) | `.vsconfig`         |
 | [Cygwin](https://cygwin.com/install.html)                    | x86  | 3.2.0       | `cyg32.packagelist` |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.2.0       | `cyg64.packagelist` |
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.9.6    |                     |
@@ -55,5 +55,6 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [ChkMatch](http://www.debuginfo.com/tools/chkmatch.html)     |      | 1.0.3          |                     |
 | [Gradle](https://gradle.org/) | | 7.1.1 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | | 1.10.2 | |
+| [NuGet](https://www.nuget.org/downloads) | x86 | 5.10.0 | |
 
 ### [SOURCE VERSIONS](./SRC_VERSION.md)
