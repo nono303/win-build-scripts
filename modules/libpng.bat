@@ -6,7 +6,7 @@ mkdir %PATH_SRC%\%1\%VCDIR%
 xcopy /C /F /Y %PATH_MODULES%\%1.vcxproj %PATH_SRC%\%1\%VCDIR%\*
 xcopy /C /F /Y %PATH_MODULES%\%1.sln %PATH_SRC%\%1\%VCDIR%\*
 
-%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/%VCDIR:\=/%" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER%
+%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/%VCDIR:\=/%" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
 
 MSBuild.exe %PATH_SRC%\%1\projects\vstudio\vstudio.sln ^
 %MSBUILD_OPTS% ^
