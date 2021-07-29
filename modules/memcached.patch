@@ -1,22 +1,22 @@
 * disable debug
 * define __CYGWIN__
 diff --git a/Makefile.am b/Makefile.am
-index 0d30161..73ac493 100644
+index 9b17bc7..ba0ff1e 100644
 --- a/Makefile.am
 +++ b/Makefile.am
 @@ -1,6 +1,6 @@
  bin_PROGRAMS = memcached
- pkginclude_HEADERS = protocol_binary.h
+ pkginclude_HEADERS = protocol_binary.h xxhash.h
 -noinst_PROGRAMS = memcached-debug sizes testapp timedrun
 +# noinst_PROGRAMS = memcached-debug sizes testapp timedrun
  
  BUILT_SOURCES=
  
 diff --git a/configure.ac b/configure.ac
-index 0fd5c8d..cfef6b8 100644
+index be2b460..b278788 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -786,5 +786,8 @@ then
+@@ -808,5 +808,8 @@ then
    CFLAGS="$CFLAGS -errfmt=error -errwarn -errshort=tags"
  fi
  
