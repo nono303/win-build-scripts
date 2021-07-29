@@ -7,6 +7,7 @@
 | [bzip2](https://sourceware.org/git/bzip2) | 1.0.8 |
 | [c-ares](https://github.com/c-ares/c-ares) | 1.17.1 |
 | [curl](https://github.com/curl/curl) | 7.78.0 |
+| [dependencies](https://github.com/lucasg/Dependencies) | 1.10 |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.11.0 |
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52 |
 | [geos](https://github.com/libgeos/geos) | 3.9.1 |
@@ -29,8 +30,8 @@
 | [libxpm](https://gitlab.freedesktop.org/xorg/lib/libxpm) | 3.5.13 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
-| [memcached](https://github.com/memcached/memcached) | 1.6.9 |
-| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.1 r2614 |
+| [memcached](https://github.com/memcached/memcached) | 1.6.10 |
+| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.1 r2620 |
 | [mod_fcgid](http://svn.apache.org/repos/asf) | 2.3.10.1 |
 | [mod_h2](https://github.com/icing/mod_h2) | 1.15.23 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 |
