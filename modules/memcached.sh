@@ -35,11 +35,11 @@ make clean && make CFLAGS+=' -Wno-char-subscripts -O3 -s -march=sandybridge '
 cp --verbose -rf $1/memcached.exe $3/$ARCH_PRF/memcached-avx-tls.exe
 
 cp --verbose -rf /bin/cygcrypto-1.1.dll $3/$ARCH_PRF/
-cp --verbose -rf /bin/cygevent_core-2-0-5.dll $3/$ARCH_PRF/
-cp --verbose -rf /bin/cygevent_extra-2-0-5.dll $3/$ARCH_PRF/
-cp --verbose -rf /bin/cygevent_openssl-2-0-5.dll $3/$ARCH_PRF/
-cp --verbose -rf /bin/cygevent_pthreads-2-0-5.dll $3/$ARCH_PRF/
-cp --verbose -rf /bin/cygevent-2-0-5.dll $3/$ARCH_PRF/
+cp --verbose -rf /bin/cygevent_core-2-1-7.dll $3/$ARCH_PRF/
+cp --verbose -rf /bin/cygevent_extra-2-1-7.dll $3/$ARCH_PRF/
+cp --verbose -rf /bin/cygevent_openssl-2-1-7.dll $3/$ARCH_PRF/
+cp --verbose -rf /bin/cygevent_pthreads-2-1-7.dll $3/$ARCH_PRF/
+cp --verbose -rf /bin/cygevent-2-1-7.dll $3/$ARCH_PRF/
 cp --verbose -rf /bin/cygssl-1.1.dll $3/$ARCH_PRF/
 cp --verbose -rf /bin/cygwin1.dll $3/$ARCH_PRF/
 cp --verbose -rf /bin/cygz.dll $3/$ARCH_PRF/
