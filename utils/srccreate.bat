@@ -138,7 +138,7 @@ svn update -r 2620
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1891871
+svn update -r 1891884
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -202,7 +202,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.0.8
+git checkout tags/php-8.0.9
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
