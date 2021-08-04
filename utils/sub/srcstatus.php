@@ -31,7 +31,7 @@
 	echo "> ".$srcdir.PHP_EOL;
 
 	$srccreate = file_get_contents(dirname(__FILE__) . '/srccreate.bat.in');
-	file_put_contents($argv[1],'"name";"scm";"upstream";"head";"status";"branch";"log tags";"diff"'.PHP_EOL,FILE_APPEND);
+	file_put_contents($argv[1],'"name";"scm";"upstream";"head";"status";"branch";"log tags";"last tag";"diff"'.PHP_EOL,FILE_APPEND);
 	echo "*************************".PHP_EOL;
 	foreach(scandir($srcdir) as $ele){
 		if(is_dir($repo = $srcdir.$ele) &&  $ele != "." && $ele != ".."){
@@ -71,7 +71,9 @@
 					$diff= "";
 					$status = "up to date";
 				}
+				
 				$logtags = execnono($cmd = 'git log --tags --simplify-by-decoration --pretty="format:%ai %d" | head -n '.NB_TAGS,NULL,$repo,NULL);
+				$ltd = secondsToTime(time() - ($strtime = strtotime(explode(" (",$logtags)[0])));
 				if(VERBOSE) echo $cmd.PHP_EOL;
 				if(GIT_GC){
 					echo execnono($cmd = "git reflog expire --all --expire=now",NULL,$repo,NULL);
@@ -107,6 +109,7 @@
 							$gitlasttags = $matches[1];
 						if($head == $matches[1])
 							$had = "HEAD, ";
+						$ltd = secondsToTime(time() - strtotime($matches[2]));
 						$logtags .= $matches[2]." (".$had.$matches[1].")".PHP_EOL;
 					}
 				}
@@ -117,7 +120,7 @@
 				}
 			}
 			echo str_pad($type,4).str_pad($name,20).str_pad($head,26).str_pad($status,26," ",STR_PAD_LEFT)."  ".str_pad($branch,20).PHP_EOL;
-			file_put_contents($argv[1],'"'.$name.'";"'.$type.'";"'.$upstream.'";"'.$head.'";"'.$status.'";"'.$branch.'";"'.$logtags.'";"'.$diff.'"'.PHP_EOL,FILE_APPEND);
+			file_put_contents($argv[1],'"'.$name.'";"'.$type.'";"'.$upstream.'";"'.$head.'";"'.$status.'";"'.$branch.'";"'.$logtags.'";"'.$ltd.'";"'.$diff.'"'.PHP_EOL,FILE_APPEND);
 			$name = "";
 			$upstream = "";
 			$branch = "";
