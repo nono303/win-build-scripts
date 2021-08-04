@@ -7,6 +7,7 @@ REM call %PATH_BATCH%\go.bat verpatch NOLOG
 REM call %PATH_BATCH%\go.bat sdlna NOLOG
 REM call %PATH_BATCH%\go.bat dependencies NOLOG
 REM call %PATH_BATCH%\go.bat mobac NOLOG
+REM call %PATH_BATCH%\go.bat mapsforgesrv NOLOG
 REM call %PATH_BATCH%\go.bat nssm NOLOG
 REM call %PATH_BATCH%\go.bat memcached NOLOG
 call %PATH_BATCH%\go.bat bininfo checkavx updaterc 
