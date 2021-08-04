@@ -30,6 +30,7 @@
 | [libxpm](https://gitlab.freedesktop.org/xorg/lib/libxpm) | 3.5.13 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
+| [mapsforgesrv](https://github.com/telemaxx/mapsforgesrv.git) | - 120c366 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.10 |
 | [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.1 r2620 |
 | [mod_fcgid](http://svn.apache.org/repos/asf) | 2.3.10.1 |
@@ -54,7 +55,7 @@
 | [serf](https://github.com/apache/serf) | 1.4.0 |
 | [sqlite](https://github.com/azadkuh/sqlite-amalgamation) | 3.36.0 |
 | [subversion](https://github.com/apache/subversion) | 1.14.1 |
-| [tidy](https://github.com/htacg/tidy-html5) | 5.8.0 |
+| [tidy](https://github.com/htacg/tidy-html5) | 5.9.8 |
 | [verpatch](https://github.com/pavel-a/ddverpatch) | 1.0.15.1 - 3cc989e |
 | [wineditline](https://svn.code.sf.net/p/mingweditline/code) | 2.2 |
 | [xdebug](https://github.com/xdebug/xdebug) | 3.0.4 |

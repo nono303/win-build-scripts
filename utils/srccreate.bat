@@ -134,11 +134,11 @@ git checkout tags/1.6.10
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2620
+svn update -r 2621
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1891884
+svn update -r 1892008
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -226,7 +226,7 @@ git checkout tags/1.14.1
 cd /D ..
 git clone https://github.com/htacg/tidy-html5 tidy
 cd /D tidy
-git checkout tags/5.8.0
+git checkout tags/5.9.8-next
 cd /D ..
 git clone https://github.com/pavel-a/ddverpatch verpatch
 cd /D verpatch
