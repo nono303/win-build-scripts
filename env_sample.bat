@@ -25,7 +25,7 @@ REM ########################## RELEASE PATH
 set PATH_RELEASE=%PATH_SDK_ROOT%\release
 set PATH_RELEASE_SVN=D:\github\NONO_subversion
 	REM cygwin format
-set PATH_RELEASE_MEMCACHED=/cygdrive/d/github/NONO_memcached/cygwin
+set PATH_RELEASE_MEMCACHED=/cygdrive/d/github/NONO_memcached/libevent-2.1
 	REM copy for github : unset to disable
 set PATH_GITHUB_PHPMEMCACHE=D:\github\NONO_PHP-memcache-dll
 set PATH_GITHUB_MODMD=D:\github\NONO_mod_md
@@ -91,6 +91,9 @@ cd /D %PATH_BATCH%
 REM ########################## BUILD OPTION
 	REM see dir in %PATH_ROOTWKIT%\Lib
 set WKITVER=10.0.20348.0
+	REM .NET installed SDK
+set DOTNETVER=4.8
+	REM Current MSVC full version (accordinf to vc15 vs16 vs17...)
 FOR /F "tokens=* USEBACKQ" %%F in (`dir /b %PATH_VS%\VC\Tools\MSVC ^| grep %vcvars_ver%`) do (set VCTOOLSVER=%%F)
 
 set NINJA=%BIN_NINJA%

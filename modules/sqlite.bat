@@ -11,6 +11,11 @@ for %%C in ("-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" "-DBUILD_SHARED_LIBS=ON -
 	setlocal enabledelayedexpansion
 	set new=!CUR:"=!
 
+	if %%C =="-DBUILD_SHARED_LIBS=ON -DBUILD_SHELL=OFF" (
+		sed -i 's/STATIC sqlite3.c/SHARED sqlite3.c/g' %CYGPATH_SRC%/%1/CMakeLists.txt
+		sed -i 's/OUTPUT_NAME   sqlite3/OUTPUT_NAME   libsqlite3/g' %CYGPATH_SRC%/%1/CMakeLists.txt
+	)
+
 	cmake %CMAKE_OPTS% ^
 	-DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 	-DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
@@ -27,11 +32,13 @@ for %%C in ("-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" "-DBUILD_SHARED_LIBS=ON -
 
 	%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 	%NINJA% install
-		REM for "-DBUILD_SHARED_LIBS=ON -DBUILD_SHELL=OFF"
-	sed -i 's/STATIC sqlite3.c/SHARED sqlite3.c/g' %CYGPATH_SRC%/%1/CMakeLists.txt
-	sed -i 's/OUTPUT_NAME   sqlite3/OUTPUT_NAME   libsqlite3/g' %CYGPATH_SRC%/%1/CMakeLists.txt
-)
 
-for %%D in (dll pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\*.%%D %PATH_INSTALL%\bin\*)
+	if %%C =="-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" (
+		xcopy /C /F /Y %PATH_BUILD%\%1\sqlite3.pdb %PATH_INSTALL%\lib\*
+		xcopy /C /F /Y %PATH_BUILD%\%1\sqlite3.pdb %PATH_INSTALL%\bin\*
+	) else (
+		xcopy /C /F /Y %PATH_BUILD%\%1\libsqlite3.pdb %PATH_INSTALL%\bin\*
+	)
+)
 xcopy /C /F /Y %PATH_SRC%\%1\sqlite3ext.h %PATH_INSTALL%\include\sqlite3\*
 for %%X in (libsqlite3.dll sqlite3.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)

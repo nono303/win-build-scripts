@@ -21,9 +21,9 @@ set INCLUDE=
 	REM ~~~~~~~~~~~~ current full build
 set PHP_FULLBUILD=8.0
 
-	REM ~~~~~~~~~~~~ Thread Safe. 
-	REM              !! NTS will not be built if set to 1
+	REM ~~~~~~~~~~~~ TS &&// NTS 
 set PHP_BUILDTS=0
+set PHP_BUILDNTS=1
 
 	REM ~~~~~~~~~~~~ curl
 set PHP_CURL=%PATH_INSTALL%\%FOLDER_RELEASE_CURL%\openssl

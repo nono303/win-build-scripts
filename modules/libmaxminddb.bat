@@ -1,7 +1,7 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1
 
 cd /D %PATH_SRC%\%1\projects\VS12
-%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/projects/VS12/" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER%
+%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/projects/VS12/" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
 sed -i 's/vc$(PlatformToolsetVersion).pdb/$(ProjectName).pdb/g' %CYGPATH_SRC%/%1/projects/VS12/libmaxminddb.props
 
 MSBuild.exe libmaxminddb.sln ^

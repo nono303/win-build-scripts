@@ -3,7 +3,7 @@
 call %BIN_SEVENZ% x -bb -o"%PATH_SRC%\%1\" -y %PATH_MODULES%\%1.zip
 
 set VCDIR=windows\nono
-%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/%VCDIR:\=/%" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER%
+%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/%VCDIR:\=/%" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
 
 for %%C in ("Static Release" "DLL Release") do (
 	MSBuild.exe %PATH_SRC%\%1\%VCDIR%\libxpm.sln ^

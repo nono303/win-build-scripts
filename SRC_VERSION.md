@@ -5,13 +5,14 @@
 | [apr-util](https://github.com/apache/apr-util) | 1.6.1 |
 | [brotli](https://github.com/google/brotli) | 1.0.9 |
 | [bzip2](https://sourceware.org/git/bzip2) | 1.0.8 |
-| [c-ares](https://github.com/c-ares/c-ares) | 1.17.1 |
-| [curl](https://github.com/curl/curl) | 7.78.0 |
+| [c-ares](https://github.com/c-ares/c-ares) | 1.17.2 |
+| [curl](https://github.com/curl/curl) | 7.79.0 |
+| [dependencies](https://github.com/lucasg/Dependencies) | 1.10 |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.11.0 |
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52 |
-| [geos](https://github.com/libgeos/geos) | 3.9.1 |
-| [httpd](https://github.com/apache/httpd) | 2.4.48 |
-| [jansson](https://github.com/akheron/jansson) | 2.13.1 |
+| [geos](https://github.com/libgeos/geos) | 3.8.2 |
+| [httpd](https://github.com/apache/httpd) | 2.4.49 |
+| [jansson](https://github.com/akheron/jansson) | 2.14 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.2.1 |
 | [jpeg](https://github.com/mackyle/jpeg) | 9d |
 | [libev](https://git.lighttpd.net/libev) | 4.33 |
@@ -22,24 +23,25 @@
 | [liblzma](https://github.com/ShiftMediaProject/liblzma) | 5.2.5 |
 | [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.6.0 |
 | [libpng](https://sourceforge.net/p/libpng/code/ci/master/tree/) | 1.6.37 |
-| [libssh2](https://github.com/libssh2/libssh2) | 1.9.0 |
+| [libssh2](https://github.com/libssh2/libssh2) | 1.10.0 |
 | [libtiff](https://gitlab.com/libtiff/libtiff) | 4.3.0 |
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
 | [libxml2](https://github.com/GNOME/libxml2) | 2.9.12 |
 | [libxpm](https://gitlab.freedesktop.org/xorg/lib/libxpm) | 3.5.13 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
-| [memcached](https://github.com/memcached/memcached) | 1.6.9 |
-| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.1 r2614 |
+| [mapsforgesrv](https://github.com/telemaxx/mapsforgesrv.git) | - 379b6ab |
+| [memcached](https://github.com/memcached/memcached) | 1.6.10 |
+| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.1 r2622 |
 | [mod_fcgid](http://svn.apache.org/repos/asf) | 2.3.10.1 |
-| [mod_h2](https://github.com/icing/mod_h2) | 1.15.23 |
+| [mod_h2](https://github.com/icing/mod_h2) | 1.15.24 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
-| [mod_md](https://github.com/icing/mod_md) | 2.4.4 |
+| [mod_md](https://github.com/icing/mod_md) | 2.4.7 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) | 2.01.1 |
 | [nghttp2](https://github.com/nghttp2/nghttp2) | 1.44.0 |
 | [nssm](https://github.com/puppetlabs/nssm) | 2.24.113 |
-| [openssl](https://github.com/openssl/openssl) | 1.1.1k |
+| [openssl](https://github.com/openssl/openssl) | 1.1.1l |
 | [pcre](https://github.com/jwilk-mirrors/pcre) | 8.45 |
 | [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | nbio_php8 - 8.1-dev - ccf702b |
 | [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1-dev |
@@ -47,13 +49,13 @@
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.13.1 |
 | [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1 |
 | [php-sdk](https://github.com/microsoft/php-sdk-binary-tools) | 2.2.0 |
-| [php-src](https://github.com/php/php-src) | 8.0.8 |
-| [proj](https://github.com/OSGeo/PROJ) | 8.1.0 |
+| [php-src](https://github.com/php/php-src) | 8.0.10 |
+| [proj](https://github.com/OSGeo/PROJ) | 8.1.1 |
 | [sdlna](https://github.com/nono303/simpleDLNA) | 1.0.3 |
 | [serf](https://github.com/apache/serf) | 1.4.0 |
 | [sqlite](https://github.com/azadkuh/sqlite-amalgamation) | 3.36.0 |
 | [subversion](https://github.com/apache/subversion) | 1.14.1 |
-| [tidy](https://github.com/htacg/tidy-html5) | 5.8.0 |
+| [tidy](https://github.com/htacg/tidy-html5) | 5.9.14 |
 | [verpatch](https://github.com/pavel-a/ddverpatch) | 1.0.15.1 - 3cc989e |
 | [wineditline](https://svn.code.sf.net/p/mingweditline/code) | 2.2 |
 | [xdebug](https://github.com/xdebug/xdebug) | 3.0.4 |

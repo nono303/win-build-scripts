@@ -5,11 +5,12 @@ Usage: go command [options]
       apr
       brotli
       bzip2
-      cares
-      clean
+      c-ares
       curl
-      dummy
+      dependencies
       freetype2
+      geographiclib
+      geos
       httpd
       jansson
       jemalloc
@@ -17,31 +18,35 @@ Usage: go command [options]
       libev
       libevent
       libexpat
+      libffi
       libiconv
+      liblzma
       libmaxminddb
       libpng
       libssh2
+      libtiff
       libxdiff
       libxml2
       libxpm
+      libzip
       lua
-      mod_fcgid
+      mapsforgesrv
+      memcached
+      mobac
       nghttp2
+      nssm
       openssl
       pcre
       php
+      proj
+      sdlna
       serf
       sqlite
       subversion
       tidy
+      verpatch
       wineditline
       zlib
-      ddverpatch
-      memcached
-      mobac
-      nssm
-      php-cgi-spawner
-      sdlna
   * suite: 
       httpdanddeps:      all depencies and httpd
       subversionanddeps: all depencies and subversion. httpdanddeps MUST BE DONE PREVIOUSLY! 
