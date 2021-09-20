@@ -51,8 +51,8 @@ sed -i 's/zlib_a/zlib/g' %CYGPATH_SRC%/php-src/configure.js
 sed -i 's/libcurl_a/libcurl_imp/g' %CYGPATH_SRC%/php-src/configure.js
 sed -i 's/PHP_PHP_BUILD + "\/include\/curl/"%PHP_CURL:\=\/%" + "\/include\/curl/g' %CYGPATH_SRC%/php-src/configure.js
 sed -i 's/EXTENSION("curl", "interface.c multi.c share.c curl_file.c");/EXTENSION("curl", "interface.c multi.c share.c curl_file.c"); CHECK_LIB("cares.lib", "curl", PHP_CURL);/g' %CYGPATH_SRC%/php-src/configure.js
-	REM freetype
-sed -i -E 's/CHECK_LIB\("freetype_a.lib;freetype.lib", "gd", PHP_GD\) (..)/CHECK_LIB\("freetype.lib", "gd", PHP_GD\) \\1 CHECK_LIB\("libbz2.lib", "gd", PHP_GD\) \1/g' %CYGPATH_SRC%/php-src/configure.js
+	REM freetype add lib bz2 et brotli
+sed -i -E 's/CHECK_LIB\("freetype_a.lib;freetype.lib", "gd", PHP_GD\) (..)/CHECK_LIB\("freetype.lib", "gd", PHP_GD\) \\1 CHECK_LIB\("libbz2.lib", "gd", PHP_GD\) \1 CHECK_LIB\("brotlidec.lib", "gd", PHP_GD\) \1/g' %CYGPATH_SRC%/php-src/configure.js
 
 	REM ~~~~~~~~~~~~ export config options
 call configure --help > %PATH_LOGS%\configure_%PHPGITVER:~4,-1%.txt
