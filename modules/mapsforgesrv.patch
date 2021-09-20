@@ -1,0 +1,11 @@
+diff --git a/mapsforgesrv/gradle/wrapper/gradle-wrapper.properties b/mapsforgesrv/gradle/wrapper/gradle-wrapper.properties
+index 05679dc..ffed3a2 100644
+--- a/mapsforgesrv/gradle/wrapper/gradle-wrapper.properties
++++ b/mapsforgesrv/gradle/wrapper/gradle-wrapper.properties
+@@ -1,5 +1,5 @@
+ distributionBase=GRADLE_USER_HOME
+ distributionPath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-7.1.1-bin.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-7.2-bin.zip
+ zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
