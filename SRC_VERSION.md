@@ -39,7 +39,7 @@
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
 | [mod_md](https://github.com/icing/mod_md) | 2.4.7 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) | 2.01.1 |
-| [nghttp2](https://github.com/nghttp2/nghttp2) | 1.44.0 |
+| [nghttp2](https://github.com/nghttp2/nghttp2) | 1.45.1 |
 | [nssm](https://github.com/puppetlabs/nssm) | 2.24.113 |
 | [openssl](https://github.com/openssl/openssl) | 1.1.1l |
 | [pcre](https://github.com/jwilk-mirrors/pcre) | 8.45 |
@@ -49,7 +49,7 @@
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.13.1 |
 | [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1 |
 | [php-sdk](https://github.com/microsoft/php-sdk-binary-tools) | 2.2.0 |
-| [php-src](https://github.com/php/php-src) | 8.0.10 |
+| [php-src](https://github.com/php/php-src) | 8.0.11 |
 | [proj](https://github.com/OSGeo/PROJ) | 8.1.1 |
 | [sdlna](https://github.com/nono303/simpleDLNA) | 1.0.3 |
 | [serf](https://github.com/apache/serf) | 1.4.0 |

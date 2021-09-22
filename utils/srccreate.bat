@@ -130,7 +130,7 @@ git checkout tags/v5.4.3
 cd /D ..
 git clone https://github.com/telemaxx/mapsforgesrv.git mapsforgesrv
 cd /D mapsforgesrv
-git checkout tags/v0.16.1
+git checkout master
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
@@ -142,7 +142,7 @@ svn update -r 2623
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1893459
+svn update -r 1893506
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -174,7 +174,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/openssl/openssl.git openssl
 cd /D openssl
-git checkout tags/OpenSSL_1_1_1k
+git checkout tags/OpenSSL_1_1_1l
 cd /D ..
 git clone https://github.com/jwilk-mirrors/pcre pcre
 cd /D pcre
