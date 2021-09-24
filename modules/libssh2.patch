@@ -1,0 +1,54 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index e6c95c8..32678c8 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -78,9 +78,9 @@ if(NOT LIBSSH2_VERSION OR
+ endif()
+ 
+ include(GNUInstallDirs)
+-install(
+-  FILES docs/AUTHORS COPYING docs/HACKING README RELEASE-NOTES NEWS
+-  DESTINATION ${CMAKE_INSTALL_DOCDIR})
++# install(
++#  FILES docs/AUTHORS COPYING docs/HACKING README RELEASE-NOTES NEWS
++#  DESTINATION ${CMAKE_INSTALL_DOCDIR})
+ 
+ include(max_warnings)
+ include(FeatureSummary)
+@@ -106,7 +106,7 @@ if(LINT)
+   add_dependencies(libssh2 lint)
+ endif()
+ 
+-add_subdirectory(docs)
++# add_subdirectory(docs)
+ 
+ feature_summary(WHAT ALL)
+ 
+diff --git a/include/libssh2.h b/include/libssh2.h
+index f17b502..b245bbc 100644
+--- a/include/libssh2.h
++++ b/include/libssh2.h
+@@ -46,12 +46,12 @@
+    to make the BANNER define (used by src/session.c) be a valid SSH
+    banner. Release versions have no appended strings and may of course not
+    have dashes either. */
+-#define LIBSSH2_VERSION                             "1.9.0_DEV"
++#define LIBSSH2_VERSION                             "1.10.0"
+ 
+ /* The numeric version number is also available "in parts" by using these
+    defines: */
+ #define LIBSSH2_VERSION_MAJOR                       1
+-#define LIBSSH2_VERSION_MINOR                       9
++#define LIBSSH2_VERSION_MINOR                       10
+ #define LIBSSH2_VERSION_PATCH                       0
+ 
+ /* This is the numeric version of the libssh2 version number, meant for easier
+@@ -69,7 +69,7 @@
+    and it is always a greater number in a more recent release. It makes
+    comparisons with greater than and less than work.
+ */
+-#define LIBSSH2_VERSION_NUM                         0x010900
++#define LIBSSH2_VERSION_NUM                         0x011000
+ 
+ /*
+  * This is the date and time when the full source package was created. The
