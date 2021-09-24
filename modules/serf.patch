@@ -1,0 +1,14 @@
+diff --git a/buckets/ssl_buckets.c b/buckets/ssl_buckets.c
+index 1b28560..f95292f 100644
+--- a/buckets/ssl_buckets.c
++++ b/buckets/ssl_buckets.c
+@@ -1654,8 +1654,7 @@ static int ssl_need_client_cert(SSL *ssl, X509 **cert, EVP_PKEY **pkey)
+             }
+             else {
+                 serf__log(LOGLVL_ERROR, LOGCOMP_SSL, __FILE__, ctx->config,
+-                          "OpenSSL cert error: %d %d %d\n", ERR_GET_LIB(err),
+-                          ERR_GET_FUNC(err),
++                          "OpenSSL cert error: %d %d\n", ERR_GET_LIB(err),
+                           ERR_GET_REASON(err));
+                 PKCS12_free(p12);
+                 bio_meth_free(biom);

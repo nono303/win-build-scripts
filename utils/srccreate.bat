@@ -34,7 +34,7 @@ git checkout tags/cares-1_17_2
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-7_79_0
+git checkout tags/curl-7_79_1
 cd /D ..
 git clone https://github.com/lucasg/Dependencies.git dependencies
 cd /D dependencies
@@ -130,7 +130,7 @@ git checkout tags/v5.4.3
 cd /D ..
 git clone https://github.com/telemaxx/mapsforgesrv.git mapsforgesrv
 cd /D mapsforgesrv
-git checkout tags/v0.16.1
+git checkout master
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
@@ -142,7 +142,7 @@ svn update -r 2623
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1893459
+svn update -r 1893595
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -166,7 +166,7 @@ git checkout tags/2.01.1
 cd /D ..
 git clone https://github.com/nghttp2/nghttp2.git nghttp2
 cd /D nghttp2
-git checkout tags/v1.44.0
+git checkout tags/v1.45.1
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -174,7 +174,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/openssl/openssl.git openssl
 cd /D openssl
-git checkout tags/OpenSSL_1_1_1k
+git checkout tags/openssl-3.0.0
 cd /D ..
 git clone https://github.com/jwilk-mirrors/pcre pcre
 cd /D pcre
@@ -206,7 +206,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.0.10
+git checkout tags/php-8.0.11
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj

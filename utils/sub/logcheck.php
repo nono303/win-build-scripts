@@ -65,7 +65,9 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 
 	);
 	$remove = array(
-		"CMake Warning at CMake" => [39, "str"]
+		"CMake Warning at CMake" => [39, "str"],
+		// gradle
+		"Daemon will be stopped at the end of the build" => [39, "str"]
 	);
 	//print_r($argv);
 	//exit();
