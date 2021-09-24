@@ -21,6 +21,10 @@ sed -i -E 's/BROTLI_LIB_VERSION(.), "([^\"]+)"/BROTLI_LIB_VERSION\1, "%LIB_VERSI
 if exist %PATH_SRC%\php-ext-brotli\brotli\. rmdir /S /Q %PATH_SRC%\php-ext-brotli\brotli
 mklink /J %PATH_SRC%\php-ext-brotli\brotli %PATH_SRC%\brotli
 
+	REM ~~~~~~~~~~~~ link openssl3 sources to module (applink.c)
+if exist %PATH_SRC%\php-src\openssl\. rmdir /S /Q %PATH_SRC%\php-src\openssl
+mklink /J %PATH_SRC%\php-src\openssl %PATH_SRC%\openssl\ms
+
 set PHP_SRC_DIR=%PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\php-src
 set PHP_BUILD_DIR=%PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\build\%BUILDDIR%
 
