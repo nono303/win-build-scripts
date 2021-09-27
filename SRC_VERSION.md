@@ -30,9 +30,9 @@
 | [libxpm](https://gitlab.freedesktop.org/xorg/lib/libxpm) | 3.5.13 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
-| [mapsforgesrv](https://github.com/telemaxx/mapsforgesrv.git) | - 379b6ab |
+| [mapsforgesrv](https://github.com/telemaxx/mapsforgesrv.git) | 0.16.1 - 37f1249 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.10 |
-| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.1 r2622 |
+| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2628 |
 | [mod_fcgid](http://svn.apache.org/repos/asf) | 2.3.10.1 |
 | [mod_h2](https://github.com/icing/mod_h2) | 1.15.24 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 |
