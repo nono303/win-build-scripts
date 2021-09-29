@@ -21,10 +21,6 @@ sed -i -E 's/BROTLI_LIB_VERSION(.), "([^\"]+)"/BROTLI_LIB_VERSION\1, "%LIB_VERSI
 if exist %PATH_SRC%\php-ext-brotli\brotli\. rmdir /S /Q %PATH_SRC%\php-ext-brotli\brotli
 mklink /J %PATH_SRC%\php-ext-brotli\brotli %PATH_SRC%\brotli
 
-	REM ~~~~~~~~~~~~ link openssl3 sources to module (applink.c)
-if exist %PATH_SRC%\php-src\openssl\. rmdir /S /Q %PATH_SRC%\php-src\openssl
-mklink /J %PATH_SRC%\php-src\openssl %PATH_SRC%\openssl\ms
-
 set PHP_SRC_DIR=%PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\php-src
 set PHP_BUILD_DIR=%PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\build\%BUILDDIR%
 
@@ -45,6 +41,8 @@ sed -i 's/xpm.h/X11\\\\\\\\xpm.h/g' %CYGPATH_SRC%/php-src/configure.js
 sed -i 's/libbz2_a/libbz2/g' %CYGPATH_SRC%/php-src/configure.js
 	REM jpeg
 sed -i 's/libjpeg_a.lib;libjpeg.lib/jpeg.lib/g' %CYGPATH_SRC%/php-src/configure.js
+	REM png
+sed -i 's/libpng_a.lib;libpng.lib/png_static.lib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM sqlite3
 sed -i 's/libsqlite3/sqlite3/g' %CYGPATH_SRC%/php-src/configure.js
 	REM wineditline
