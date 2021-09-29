@@ -4,8 +4,7 @@
 # tb303
 #	z: <> \\jupiter8.vpnu\c$
 #	y: <> \\tr606.vpnu\d$
-#	git checkout latetst tag C:\cygwin\usr\src\memcached
-#	/cygdrive/z/sdk/batch/modules/memcached_event-2.0.sh /usr/src/memcached /cygdrive/z/sdk/batch/modules /cygdrive/y/github/NONO_memcached/libevent-2.0
+#	/cygdrive/z/sdk/batch/modules/memcached_event-2.0.sh /cygdrive/z/sdk/src/memcached /cygdrive/z/sdk/batch/modules /cygdrive/y/github/NONO_memcached/libevent-2.0
 unameOut="$(uname -a)"
 cd $1
 git reset --hard
