@@ -1,33 +1,23 @@
-call %PATH_MODULES_COMMON%\init.bat %1
+call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
-set VCDIR=projects\vstudio\nono
-mkdir %PATH_SRC%\%1\%VCDIR%
-	REM adapted from https://github.com/winlibs/libpng
-xcopy /C /F /Y %PATH_MODULES%\%1.vcxproj %PATH_SRC%\%1\%VCDIR%\*
-xcopy /C /F /Y %PATH_MODULES%\%1.sln %PATH_SRC%\%1\%VCDIR%\*
+cmake %CMAKE_OPTS% ^
+-DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
+-DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
+-DPNG_BUILD_ZLIB=ON ^
+-DZLIB_INCLUDE_DIR=%SLASHPATH_INSTALL%/include ^
+-DZLIB_LIBRARY=%SLASHPATH_INSTALL%/lib/zlib.lib ^
+-DPNG_SHARED=ON ^
+-DPNG_STATIC=ON ^
+-DPNG_TESTS=OFF ^
+-DPNG_FRAMEWORK=OFF ^
+-DPNG_DEBUG=OFF ^
+-DPNG_HARDWARE_OPTIMIZATIONS=ON ^
+-Dld-version-script=OFF ^
+%PATH_SRC%\%1
 
-%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/%VCDIR:\=/%" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%NINJA% install
 
-MSBuild.exe %PATH_SRC%\%1\projects\vstudio\vstudio.sln ^
-%MSBUILD_OPTS% ^
-/t:pnglibconf:Rebuild ^
-/p:Configuration=Release ^
-/p:Platform="Win32"
-
-for %%C in ("Release" "Release Library") do (
-	MSBuild.exe %PATH_SRC%\%1\%VCDIR%\%1.sln ^
-	%MSBUILD_OPTS% ^
-	/nowarn:MSB8012 ^
-	/t:Clean,libpng:Rebuild ^
-	/p:Configuration=%%C ^
-	/p:ZLibSrcDir=C:\sdk\src\zlib ^
-	/p:ZLibLib=%PATH_INSTALL%\lib\zlib.lib ^
-	/p:Platform="%archmsbuild%"
-)
-
-if %ARCH% == x86 (set INTER_DIR=)
-if %ARCH% == x64 (set INTER_DIR=%archmsbuild%\)
-
-for %%X in (lib pdb) do (xcopy /C /F /Y "%PATH_SRC%\%1\%VCDIR%\%INTER_DIR%Release Library\libpng_a.%%X" %PATH_INSTALL%\lib\*)
-for %%X in (dll pdb) do (xcopy /C /F /Y "%PATH_SRC%\%1\%VCDIR%\%INTER_DIR%Release\libpng.%%X" %PATH_INSTALL%\bin\*)
-for %%X in (pnglibconf png pngconf) do (xcopy /C /F /Y %PATH_SRC%\%1\%%X.h %PATH_INSTALL%\include\*)
+move /y %PATH_INSTALL%\lib\libpng16_static.lib %PATH_INSTALL%\lib\png_static.lib
+xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\png_static.dir\png_static.pdb %PATH_INSTALL%\lib\*
+xcopy /C /F /Y %PATH_BUILD%\%1\libpng16.pdb %PATH_INSTALL%\bin\*

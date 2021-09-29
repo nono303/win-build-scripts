@@ -14,7 +14,7 @@ for %%S in (OFF ON) do (
 	-DFT_WITH_ZLIB=ON ^
 	-DFT_WITH_BZIP2=ON ^
 	-DFT_WITH_PNG=ON ^
-	-DPNG_LIBRARY=%PATH_INSTALL%\lib\libpng_a.lib ^
+	-DPNG_LIBRARY=%PATH_INSTALL%\lib\png_static.lib ^
 	-DFT_WITH_HARFBUZZ=OFF ^
 	-DFT_WITH_BROTLI=ON ^
 	%PATH_SRC%\%1
