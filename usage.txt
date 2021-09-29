@@ -53,7 +53,7 @@ Usage: go command [options]
       phpanddeps:        all depencies and php NTS. httpdanddeps MUST BE DONE PREVIOUSLY! 
       all:               all depencies and httpd, subversion and php NTS.
 - build options:
-    all:     build 'command' for all target (vc15-x86 vc15-x86-avx vc15-x64 vc15-x64-avx vs16-x86 vs16-x86-avx vs16-x64 vs16-x64-avx)
+    all:     build 'command' for all target combinations (vc15, vs16, vs17 / x86, x64 / sse2, avx)
     nolog:   don't tee stderr & stdout to a logfile in %PATH_LOGS% (...and show console colors)
     verbose: disable all batch echo off and silent build option
     keepsrc: don't clean, reset and potentially apply patch in src dir 
