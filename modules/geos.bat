@@ -13,7 +13,7 @@ cmake %CMAKE_OPTS% ^
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% install
 
-for %%X in (geos geos_c) do (
-	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_BUILD%\%1\bin\%%X.dll
-	xcopy /C /F /Y %PATH_BUILD%\%1\bin\%%X.pdb %PATH_INSTALL%\bin\*
+for %%X in (geos.dll geos_c.dll geosop.exe) do (
+	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X
+	xcopy /C /F /Y %PATH_BUILD%\%1\bin\%%~nX.pdb %PATH_INSTALL%\bin\*
 )
