@@ -34,23 +34,26 @@
 
 
 	$depsreq = array(
-						// 2020-04-22
+						// 2021-10-04
 		// "apache",
 		"c-client",		//2007f
 		"fbclient",		//3.0.6
 		// "freetype",
 		"glib",			//2.53.3
-		"ICU",			//68.1
+		"ICU",			//68.2
 		"libargon2",	//20190702
+	"libavif",		//0.9.0-1
 		// "libbzip2",
 		// "libcurl",
 		"libenchant",	//2.2.8
 		// "libffi",
 		// "libiconv",
-		"libintl",		//0.18.3-6
+		"libintl",		//0.18.3-7
 		// "libjpeg",
+		// "libjpeg-turbo"
 		"liblmdb",		//0.9.22-4
-		"libonig",		//6.9.6
+		// "liblzma",
+		"libonig",		//6.9.7.1
 		// "libpng",
 		"libpq",		//11.4
 		"libqdbm",		//1.8.78
