@@ -9,7 +9,7 @@ perl Configure %perlbuild% ^
 shared no-unit-test no-external-tests no-ssl3 no-weak-ssl-ciphers no-tests zlib zlib-dynamic ^
 -threads zlib-dynamic ^
 --prefix=%PATH_INSTALL% ^
---with-zlib-include=%SLASHPATH_INSTALL%/include ^
+--with-zlib-include=%PATH_INSTALL:\=/%/include ^
 --openssldir=%PATH_INSTALL%\conf ^
 -DOPENSSL_USE_IPV6=1 ^
 -DOPENSSL_NO_HEARTBEATS ^
