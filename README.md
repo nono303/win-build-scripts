@@ -45,7 +45,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [Cygwin](https://cygwin.com/install.html)                    | x86  | 3.2.0       | `cyg32.packagelist` |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.2.0       | `cyg64.packagelist` |
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.9.7    |                     |
-| [OpenJDK](https://jdk.java.net/16/)                         | x64  | 16.0.2   |                     |
+| [OpenJDK](https://jdk.java.net/17/)                        | x64  | 17  |                     |
 | [ActivePerl](https://platform.activestate.com/ActiveState/ActivePerl-5.28/auto-fork) | x64  | 5.28.1.2801    |                     |
 | [Netwide Assembler](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.15.05        |                     |
 | [Git](https://git-scm.com/download/win)                      | x64  | 2.33.0 |                     |
