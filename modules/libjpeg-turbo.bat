@@ -23,3 +23,8 @@ cmake %CMAKE_OPTS% ^
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 sed -i 's/\/w \/wd4996 \/MT //g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
+
+for %%E in (turbojpeg.pdb jpeg8.pdb CMakeFiles\jpeg-static.dir\jpeg-static.pdb CMakeFiles\turbojpeg-static.dir\turbojpeg-static.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%E %PATH_INSTALL%\lib\*)
+move /Y %PATH_INSTALL%\lib\jpeg8.pdb %PATH_INSTALL%\lib\jpeg.pdb 
+for %%E in (djpeg.pdb jpegtran.pdb rdjpgcom.pdb tjbench.pdb cjpeg.pdb wrjpgcom.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%E %PATH_INSTALL%\bin\*)
+for %%X in (turbojpeg.dll tjbench.exe rdjpgcom.exe wrjpgcom.exe jpeg8.dll cjpeg.exe djpeg.exe jpegtran.exe wrjpgcom.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
