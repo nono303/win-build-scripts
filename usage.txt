@@ -14,12 +14,12 @@ Usage: go command [options]
       httpd
       jansson
       jemalloc
-      jpeg
       libev
       libevent
       libexpat
       libffi
       libiconv
+      libjpeg-turbo
       liblzma
       libmaxminddb
       libpng
