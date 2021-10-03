@@ -39,12 +39,12 @@ sed -i 's/libzip_a/zip/g' %CYGPATH_SRC%/php-src/configure.js
 sed -i 's/xpm.h/X11\\\\\\\\xpm.h/g' %CYGPATH_SRC%/php-src/configure.js
 	REM bz2
 sed -i 's/libbz2_a/libbz2/g' %CYGPATH_SRC%/php-src/configure.js
-	REM jpeg
-sed -i 's/libjpeg_a.lib;libjpeg.lib/jpeg.lib/g' %CYGPATH_SRC%/php-src/configure.js
+	REM jpeg > libjpeg-turbo
+sed -i 's/libjpeg_a.lib;libjpeg.lib/turbojpeg-static.lib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM png
 sed -i 's/libpng_a.lib;libpng.lib/png_static.lib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM sqlite3
-sed -i 's/libsqlite3/sqlite3/g' %CYGPATH_SRC%/php-src/configure.js
+sed -i 's/libsqlite3_a.lib;libsqlite3.lib/sqlite3.lib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM wineditline
 sed -i 's/edit_a/edit_static/g' %CYGPATH_SRC%/php-src/configure.js
 	REM zlib
