@@ -7,19 +7,19 @@
 | [bzip2](https://sourceware.org/git/bzip2) | 1.0.8 |
 | [c-ares](https://github.com/c-ares/c-ares) | 1.17.2 |
 | [curl](https://github.com/curl/curl) | 7.79.1 |
-| [dependencies](https://github.com/lucasg/Dependencies) | 1.10 |
+| [dependencies](https://github.com/lucasg/Dependencies) | 1.10 - bcd50ce |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.11.0 |
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52 |
-| [geos](https://github.com/libgeos/geos) | 3.8.2 |
-| [httpd](https://github.com/apache/httpd) | 2.4.49 |
+| [geos](https://github.com/libgeos/geos) | 3.10.0.2 |
+| [httpd](https://github.com/apache/httpd) | 2.4.50 |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.2.1 |
-| [jpeg](https://github.com/mackyle/jpeg) | 9d |
 | [libev](https://git.lighttpd.net/libev) | 4.33 |
 | [libevent](https://github.com/libevent/libevent) | 2.1.12 |
 | [libexpat](https://github.com/libexpat/libexpat) | 2.4.1 |
 | [libffi](https://github.com/winlibs/libffi) | 3.3 |
 | [libiconv](https://github.com/winlibs/libiconv) | 1.16.1 |
+| [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) | 2.1.1 |
 | [liblzma](https://github.com/ShiftMediaProject/liblzma) | 5.2.5 |
 | [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.6.0 |
 | [libpng](https://sourceforge.net/p/libpng/code/ci/master/tree/) | 1.6.37 |

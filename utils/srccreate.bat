@@ -38,7 +38,7 @@ git checkout tags/curl-7_79_1
 cd /D ..
 git clone https://github.com/lucasg/Dependencies.git dependencies
 cd /D dependencies
-git checkout master
+git checkout origin/master
 cd /D ..
 git clone git://git.sv.nongnu.org/freetype/freetype2.git freetype2
 cd /D freetype2
@@ -50,11 +50,11 @@ git checkout tags/v1.52
 cd /D ..
 git clone https://github.com/libgeos/geos geos
 cd /D geos
-git checkout tags/3.8.2
+git checkout tags/3.10.0beta2
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
-git checkout tags/2.4.49
+git checkout tags/candidate-2.4.50-rc1
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -63,10 +63,6 @@ cd /D ..
 git clone https://github.com/jemalloc/jemalloc.git jemalloc
 cd /D jemalloc
 git checkout tags/5.2.1
-cd /D ..
-git clone https://github.com/mackyle/jpeg jpeg
-cd /D jpeg
-git checkout tags/v9d
 cd /D ..
 git clone https://git.lighttpd.net/libev.git libev
 cd /D libev
@@ -87,6 +83,10 @@ cd /D ..
 git clone https://github.com/winlibs/libiconv.git libiconv
 cd /D libiconv
 git checkout tags/libiconv-1.16-1
+cd /D ..
+git clone https://github.com/libjpeg-turbo/libjpeg-turbo libjpeg-turbo
+cd /D libjpeg-turbo
+git checkout tags/2.1.1
 cd /D ..
 git clone https://git.tukaani.org/xz.git liblzma
 cd /D liblzma
@@ -142,7 +142,7 @@ svn update -r 2628
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1893741
+svn update -r 1893848
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
