@@ -1,0 +1,12 @@
+diff --git "a/libtiff/tif_lzma.c" "b/libtiff/tif_lzma.c"
+index fc046475..5c355e7b 100644
+--- "a/libtiff/tif_lzma.c"
++++ "b/libtiff/tif_lzma.c"
+@@ -23,6 +23,7 @@
+ 
+ #include "tiffiop.h"
+ #ifdef LZMA_SUPPORT
++#define LZMA_API_STATIC
+ /*
+  * TIFF Library.
+  *

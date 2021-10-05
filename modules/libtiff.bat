@@ -43,7 +43,7 @@ REM support for Old JPEG compression (read-only) : ON ^
 REM use ISO JBIG compression (requires JBIT-KIT library) : ON ^
 -Djbig=OFF ^
 REM use liblzma (required for LZMA2 compression) : ON ^
--Dlzma=OFF ^
+-Dlzma=ON ^
 REM use libzstd (required for ZSTD compression) : ON ^
 -Dzstd=OFF ^
 REM use libwebp (required for WEBP compression) : ON ^
