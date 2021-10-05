@@ -35,17 +35,17 @@
 | [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2628 |
 | [mod_fcgid](http://svn.apache.org/repos/asf) | 2.3.10.1 |
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.0rc4 |
-| [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 |
+| [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
 | [mod_md](https://github.com/icing/mod_md) | 2.4.7 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) | 2.01.1 |
 | [nghttp2](https://github.com/nghttp2/nghttp2) | 1.45.1 |
-| [nssm](https://github.com/puppetlabs/nssm) | 2.24.113 |
+| [nssm](https://github.com/puppetlabs/nssm) | 2.24.113 - e8211e9 |
 | [openssl](https://github.com/openssl/openssl) | 1.1.1l |
 | [pcre](https://github.com/jwilk-mirrors/pcre) | 8.45 |
 | [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | nbio_php8 - 8.1-dev - ccf702b |
 | [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1-dev |
-| [php-cgi-spawner](https://github.com/deemru/php-cgi-spawner) | 1.1.23 |
+| [php-cgi-spawner](https://github.com/deemru/php-cgi-spawner) | 1.1.23 - 90197af |
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.13.1 |
 | [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1 |
 | [php-sdk](https://github.com/microsoft/php-sdk-binary-tools) | 2.2.0 |
@@ -58,5 +58,5 @@
 | [tidy](https://github.com/htacg/tidy-html5) | 5.9.14 |
 | [verpatch](https://github.com/pavel-a/ddverpatch) | 1.0.15.1 - 3cc989e |
 | [wineditline](https://svn.code.sf.net/p/mingweditline/code) | 2.2 |
-| [xdebug](https://github.com/xdebug/xdebug) | 3.0.4 |
+| [xdebug](https://github.com/xdebug/xdebug) | 3.1.0 |
 | [zlib](https://github.com/madler/zlib) | 1.2.11 |
