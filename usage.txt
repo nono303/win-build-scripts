@@ -1,57 +1,58 @@
 Usage: go command [options]
 ---------------------------
 - build command:
-  * standalone: 
-      apr
-      brotli
-      bzip2
-      c-ares
-      curl
-      dependencies
-      freetype2
-      geographiclib
-      geos
-      httpd
-      jansson
-      jemalloc
-      libev
-      libevent
-      libexpat
-      libffi
-      libiconv
-      libjpeg-turbo
-      liblzma
-      libmaxminddb
-      libpng
-      libssh2
-      libtiff
-      libxdiff
-      libxml2
-      libxpm
-      libzip
-      lua
-      mapsforgesrv
-      memcached
-      mobac
-      nghttp2
-      nssm
-      openssl
-      pcre
-      php
-      proj
-      sdlna
-      serf
-      sqlite
-      subversion
-      tidy
-      verpatch
-      wineditline
-      zlib
-  * suite: 
-      httpdanddeps:      all depencies and httpd
-      subversionanddeps: all depencies and subversion. httpdanddeps MUST BE DONE PREVIOUSLY! 
-      phpanddeps:        all depencies and php NTS. httpdanddeps MUST BE DONE PREVIOUSLY! 
-      all:               all depencies and httpd, subversion and php NTS.
+  * all
+    * clean
+    * httpdanddeps
+      * brotli
+      * jansson
+      * bzip2
+      * zlib
+      * openssl
+      * jemalloc
+      * libiconv
+      * libxml2
+      * pcre
+      * libevent
+      * libev
+      * c-ares
+      * nghttp2
+      * libssh2
+      * curl
+      * libexpat
+      * libmaxminddb
+      * sqlite
+      * apr
+      * lua
+      * httpd
+    * subversionanddeps
+      * serf
+      * subversion
+    * phpanddeps
+      * wineditline
+      * liblzma
+      * libzip
+      * libxpm
+      * libpng
+      * libjpeg-turbo
+      * tidy
+      * libxdiff
+      * freetype2
+      * libffi
+      * geos
+      * php
+    * projgeolibanddeps
+      * libtiff
+      * proj
+      * geographiclib
+  * dependencies
+  * mapsforgesrv
+  * memcached
+  * mobac
+  * nssm
+  * php-cgi-spawner
+  * sdlna
+  * verpatch
 - build options:
     all:     build 'command' for all target combinations (vc15, vs16, vs17 / x86, x64 / sse2, avx)
     nolog:   don't tee stderr & stdout to a logfile in %PATH_LOGS% (...and show console colors)
