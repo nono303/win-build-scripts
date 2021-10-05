@@ -1,4 +1,4 @@
-call %PATH_MODULES_COMMON%\init.bat %1 cmake
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
 	REM YES : static / NO : shared
 for %%S in (YES NO) do (

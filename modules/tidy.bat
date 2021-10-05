@@ -1,4 +1,4 @@
-call %PATH_MODULES_COMMON%\init.bat %1 cmake
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
 	REM static rename
 sed -i 's/${LIB_NAME}s/${LIB_NAME}_a/g' %CYGPATH_SRC%/%1/CMakeLists.txt

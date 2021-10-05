@@ -1,4 +1,4 @@
-call %PATH_MODULES_COMMON%\init.bat %1 cmake
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
 REM AVIF_CODEC_AOM - requires CMake, NASM
 REM AVIF_CODEC_DAV1D - requires Meson, Ninja, NASM
@@ -38,3 +38,7 @@ cmake %CMAKE_OPTS% ^
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% install
+
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\avif.dll
+xcopy /C /F /Y %PATH_BUILD%\%1\\avif.pdb %PATH_INSTALL%\lib\*
+xcopy /C /F /Y %PATH_BUILD%\%1\\avif.pdb %PATH_INSTALL%\bin\*

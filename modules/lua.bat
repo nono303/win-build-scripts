@@ -1,4 +1,4 @@
-call %PATH_MODULES_COMMON%\init.bat %1
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1
 call cl /w /MD /Zi /O2 /GL /MD /Zi /MP16 %AVX% /DNDEBUG /c /DLUA_BUILD_AS_DLL ^
 lutf8lib.c ^
 lvm.c ^
