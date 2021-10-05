@@ -42,7 +42,7 @@
 		"glib",			//2.53.3
 		"ICU",			//68.2
 		"libargon2",	//20190702
-	"libavif",		//0.9.0-1
+		// "libavif",
 		// "libbzip2",
 		// "libcurl",
 		"libenchant",	//2.2.8
@@ -77,20 +77,20 @@
 	);
 
 	$urlbase = "https://windows.php.net/downloadS/php-sdk/deps/";
-	
 
-		/******** > 2021-07-21 TMP !! vs17 non disponible ********/
-		if($msvc == "vs17"){
-			$msvcpackages = "vs16";
-		} else {
-			$msvcpackages = $msvc;
-		}
-		/******** < 2021-07-21 TMP !! vs17 non disponible ********/
+	/******** > 2021-07-21 TMP !! vs17 non disponible ********/
+	if($msvc == "vs17"){
+		$msvcpackages = "vs16";
+	} else {
+		$msvcpackages = $msvc;
+	}
+	/******** < 2021-07-21 TMP !! vs17 non disponible ********/
+
 	$repdl = $urlbase.$msvcpackages."/".$arch."/";
 	$package = "packages-".$pckver."-".$msvcpackages."-".$arch."-".$type.".txt";
 
 	$serie = $urlbase."series/".$package;
-	$stampfile = "lastupate.txt";
+	$stampfile = "lastupate".$pckver.".txt";
 
 	$ch = curl_init();
 	$opts = array(
