@@ -49,6 +49,8 @@ sed -i 's/libsqlite3_a.lib;libsqlite3.lib/sqlite3.lib/g' %CYGPATH_SRC%/php-src/c
 sed -i 's/edit_a/edit_static/g' %CYGPATH_SRC%/php-src/configure.js
 	REM zlib
 sed -i 's/zlib_a/zlib/g' %CYGPATH_SRC%/php-src/configure.js
+	REM avif
+sed -i 's/avif.h/avif\/avif.h/g' %CYGPATH_SRC%/php-src/configure.js
 	REM curl
 sed -i 's/libcurl_a/libcurl_imp/g' %CYGPATH_SRC%/php-src/configure.js
 sed -i 's/PHP_PHP_BUILD + "\/include\/curl/"%PHP_CURL:\=\/%" + "\/include\/curl/g' %CYGPATH_SRC%/php-src/configure.js

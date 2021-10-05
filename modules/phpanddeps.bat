@@ -8,5 +8,6 @@ call %PATH_BATCH%\go.bat tidy NOLOG
 call %PATH_BATCH%\go.bat libxdiff NOLOG
 call %PATH_BATCH%\go.bat freetype2 NOLOG
 call %PATH_BATCH%\go.bat libffi NOLOG
+call %PATH_BATCH%\go.bat libavif NOLOG
 call %PATH_BATCH%\go.bat geos NOLOG
 call %PATH_BATCH%\go.bat php NOLOG

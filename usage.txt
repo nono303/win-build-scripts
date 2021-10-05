@@ -39,6 +39,7 @@ Usage: go command [options]
       * libxdiff
       * freetype2
       * libffi
+      * libavif
       * geos
       * php
     * projgeolibanddeps
