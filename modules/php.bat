@@ -19,7 +19,7 @@ set LIB=
 set INCLUDE=
 
 	REM ~~~~~~~~~~~~ current full build
-set PHP_FULLBUILD=8.0
+set PHP_FULLBUILD=8.1
 
 	REM ~~~~~~~~~~~~ TS &&// NTS 
 set PHP_BUILDTS=0
