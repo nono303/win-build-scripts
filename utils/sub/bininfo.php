@@ -228,7 +228,7 @@
 		5 => array("name" =>	"date",			"pad" => 17),
 		10 => array("name" =>	"x",			"pad" => 3),
 		20 => array("name" =>	"link",			"pad" => 5),
-		30 => array("name" =>	"set",			"pad" => 11),
+		30 => array("name" =>	"set",			"pad" => 13),
 		40 => array("name" =>	"cl",			"pad" => 6),
 		50 => array("name" =>	"bver",			"pad" => 13),
 		60 => array("name" =>	"pver",			"pad" => 13),
