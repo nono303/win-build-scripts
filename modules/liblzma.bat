@@ -1,4 +1,4 @@
-call %PATH_MODULES_COMMON%\init.bat %1
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1
 
 set VCDIR=windows\vs2019
 set VCCONF=Release

@@ -1,4 +1,4 @@
-call %PATH_MODULES_COMMON%\init.bat %1 cmake
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
 cmake %CMAKE_OPTS% ^
 	-DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^

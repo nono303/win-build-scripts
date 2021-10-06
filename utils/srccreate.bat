@@ -8,6 +8,14 @@ IF /I "%AREYOUSURE%" NEQ "Y" exit /B
 echo on
 if not exist %PATH_SRC%\. mkdir %PATH_SRC%
 cd /D %PATH_SRC%
+git clone https://github.com/abseil/abseil-cpp.git abseil-cpp
+cd /D abseil-cpp
+git checkout tags/20210324.2
+cd /D ..
+git clone https://aomedia.googlesource.com/aom aom
+cd /D aom
+git checkout tags/v3.1.3-rc2
+cd /D ..
 git clone https://github.com/apache/apr.git apr
 cd /D apr
 git checkout tags/1.7.0
@@ -36,6 +44,10 @@ git clone https://github.com/curl/curl.git curl
 cd /D curl
 git checkout tags/curl-7_79_1
 cd /D ..
+git clone https://code.videolan.org/videolan/dav1d.git dav1d
+cd /D dav1d
+git checkout tags/0.9.2
+cd /D ..
 git clone https://github.com/lucasg/Dependencies.git dependencies
 cd /D dependencies
 git checkout master
@@ -50,11 +62,11 @@ git checkout tags/v1.52
 cd /D ..
 git clone https://github.com/libgeos/geos geos
 cd /D geos
-git checkout tags/3.8.2
+git checkout tags/3.10.0beta2
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
-git checkout tags/2.4.49
+git checkout tags/2.4.50
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -64,9 +76,9 @@ git clone https://github.com/jemalloc/jemalloc.git jemalloc
 cd /D jemalloc
 git checkout tags/5.2.1
 cd /D ..
-git clone https://github.com/mackyle/jpeg jpeg
-cd /D jpeg
-git checkout tags/v9d
+git clone https://github.com/AOMediaCodec/libavif.git libavif
+cd /D libavif
+git checkout tags/v0.9.2
 cd /D ..
 git clone https://git.lighttpd.net/libev.git libev
 cd /D libev
@@ -84,9 +96,17 @@ git clone https://github.com/winlibs/libffi libffi
 cd /D libffi
 git checkout tags/libffi-3.3
 cd /D ..
+git clone https://chromium.googlesource.com/codecs/libgav1 libgav1
+cd /D libgav1
+git checkout tags/v0.16.3
+cd /D ..
 git clone https://github.com/winlibs/libiconv.git libiconv
 cd /D libiconv
 git checkout tags/libiconv-1.16-1
+cd /D ..
+git clone https://github.com/libjpeg-turbo/libjpeg-turbo libjpeg-turbo
+cd /D libjpeg-turbo
+git checkout tags/2.1.1
 cd /D ..
 git clone https://git.tukaani.org/xz.git liblzma
 cd /D liblzma
@@ -120,6 +140,10 @@ git clone https://gitlab.freedesktop.org/xorg/lib/libxpm libxpm
 cd /D libxpm
 git checkout tags/libXpm-3.5.13
 cd /D ..
+git clone https://chromium.googlesource.com/libyuv/libyuv libyuv
+cd /D libyuv
+git checkout main
+cd /D ..
 git clone https://github.com/nih-at/libzip libzip
 cd /D libzip
 git checkout tags/v1.8.0
@@ -134,19 +158,19 @@ git checkout master
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
-git checkout tags/1.6.10
+git checkout tags/1.6.12
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2623
+svn update -r 2628
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1893595
+svn update -r 1893929
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v1.15.24
+git checkout tags/v2.0.0-rc4
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -174,7 +198,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/openssl/openssl.git openssl
 cd /D openssl
-git checkout tags/openssl-3.0.0
+git checkout tags/OpenSSL_1_1_1l
 cd /D ..
 git clone https://github.com/jwilk-mirrors/pcre pcre
 cd /D pcre
@@ -190,7 +214,7 @@ git checkout main
 cd /D ..
 git clone https://github.com/deemru/php-cgi-spawner.git php-cgi-spawner
 cd /D php-cgi-spawner
-git checkout tags/1.1.23
+git checkout master
 cd /D ..
 git clone https://github.com/kjdev/php-ext-brotli.git php-ext-brotli
 cd /D php-ext-brotli
@@ -206,7 +230,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.0.11
+git checkout tags/php-8.1.0RC3
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
@@ -242,7 +266,7 @@ svn update -r 36
 cd /D ..
 git clone https://github.com/xdebug/xdebug.git xdebug
 cd /D xdebug
-git checkout tags/3.0.4
+git checkout tags/3.1.0
 cd /D ..
 git clone https://github.com/madler/zlib.git zlib
 cd /D zlib

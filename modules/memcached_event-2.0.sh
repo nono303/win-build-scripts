@@ -1,11 +1,10 @@
 # tr606
-#	z: <> \\jupiter8.lan\c$
-#	/cygdrive/z/sdk/batch/modules/memcached_event-2.0.sh /cygdrive/z/sdk/src/memcached /cygdrive/z/sdk/batch/modules /cygdrive/d/github/NONO_memcached/libevent-2.0
+#	q: <> \\jupiter8.lan\c$
+#	/cygdrive/q/sdk/batch/modules/memcached_event-2.0.sh /cygdrive/q/sdk/src/memcached /cygdrive/q/sdk/batch/modules /cygdrive/d/github/NONO_memcached/libevent-2.0
 # tb303
-#	z: <> \\jupiter8.vpnu\c$
-#	y: <> \\tr606.vpnu\d$
-#	git checkout latetst tag C:\cygwin\usr\src\memcached
-#	/cygdrive/z/sdk/batch/modules/memcached_event-2.0.sh /usr/src/memcached /cygdrive/z/sdk/batch/modules /cygdrive/y/github/NONO_memcached/libevent-2.0
+#	q: <> \\jupiter8.vpnu\c$
+#	r: <> \\tr606.vpnu\d$
+#	/cygdrive/q/sdk/batch/modules/memcached_event-2.0.sh /cygdrive/q/sdk/src/memcached /cygdrive/q/sdk/batch/modules /cygdrive/r/github/NONO_memcached/libevent-2.0
 unameOut="$(uname -a)"
 cd $1
 git reset --hard

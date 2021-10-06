@@ -66,7 +66,7 @@ if "%BCMD%"=="" (
 	REM ~~~~~~~~~~~~ RUN
 echo %ymdhis% ####### BEGIN %BAFF% '%1' %MSVC_DEPS% %ARCH% %AVXECHO% ###########################
 if %ARG_ALL% == 1 (
-	for %%V in (vs16 vc15) do (
+	for %%V in (vs17 vs16 vc15) do (
 		for %%X in (x64 x86) do (
 			for %%A in (1 0) do (
 				setlocal

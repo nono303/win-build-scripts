@@ -8,6 +8,9 @@
 	foreach (range('a', 'z') as $letter)
 		$letterpos[$letter] = $pos++;
 	$nogit = array(
+		"php-cgi-spawner"	=> "1.1.23-90197af",
+		"libyuv"			=> ["/LIBYUV_VERSION (.*)/",	
+							pathenv("PATH_SRC")."/libyuv/include/libyuv/version.h"],
 		"mobac"				=> ["/mobac.revision=(.*)/",	
 							pathenv("PATH_SRC")."/mobac/mobac/build/resources/main/mobac/mobac-rev.properties"],
 		"mod_fcgid"			=> ["/#define MODFCGID_VERSION_MAJOR *([0-9]+).*#define MODFCGID_VERSION_MINOR *([0-9]+).*#define MODFCGID_VERSION_SUBVER *([0-9]+).*#define MODFCGID_VERSION_DEV *([0-9]+)/s",	
@@ -34,6 +37,8 @@
 					$ver_product .= $sep.trim($matches[$i]);
 					$sep = ".";
 				}
+			} elseif (is_string($nogit[$src])){
+				$ver_product = $nogit[$src];
 			} elseif (is_dir($cur."/".$src."/.git")){
 				$ver_product = execnono("git describe --tags",NULL,$cur."/".$src,NULL);
 				// remove name

@@ -4,12 +4,12 @@ cmake %CMAKE_OPTS% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
 -DBUILD_SHARED_LIBS=ON ^
--DZLIB_LIBRARY=%SLASHPATH_INSTALL%/lib/zlib.lib ^
--DZLIB_INCLUDE_DIR=%SLASHPATH_INSTALL%/include ^
--DJPEG_LIBRARY=%SLASHPATH_INSTALL%/lib/jpeg.lib ^
--DJPEG_INCLUDE_DIR=%SLASHPATH_INSTALL%/include ^
+-DZLIB_LIBRARY=%PATH_INSTALL:\=/%/lib/zlib.lib ^
+-DZLIB_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
+-DJPEG_LIBRARY=%PATH_INSTALL:\=/%/lib/turbojpeg-static.lib ^
+-DJPEG_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 REM -DLIBLZMA_LIBRARIES=C:/sdk/release/vs16_x64-avx/lib/liblzma.lib ^
-REM -DLIBLZMA_INCLUDE_DIRS=%SLASHPATH_INSTALL%/include ^
+REM -DLIBLZMA_INCLUDE_DIRS=%PATH_INSTALL:\=/%/include ^
 REM Enable extra compiler warnings : OFF ^
 -Dextra-warnings=OFF ^
 REM Compiler warnings are errors : OFF ^
@@ -43,7 +43,7 @@ REM support for Old JPEG compression (read-only) : ON ^
 REM use ISO JBIG compression (requires JBIT-KIT library) : ON ^
 -Djbig=OFF ^
 REM use liblzma (required for LZMA2 compression) : ON ^
--Dlzma=OFF ^
+-Dlzma=ON ^
 REM use libzstd (required for ZSTD compression) : ON ^
 -Dzstd=OFF ^
 REM use libwebp (required for WEBP compression) : ON ^

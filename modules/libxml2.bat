@@ -1,15 +1,55 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
-cd /D %PATH_SRC%/%1/win32
-cscript configure.js ^
-	compiler=msvc ^
-	vcmanifest=yes ^
-	prefix=%PATH_INSTALL% ^
-	include=%PATH_INSTALL%\include ^
-	lib=%PATH_INSTALL%\lib ^
-	debug=no ^
-	zlib=yes ^
-	lzma=no
-sed -i 's/Zc:inline/Zc:inline \/MP%NUMBER_OF_PROCESSORS% %AVXSED%/g' %CYGPATH_SRC%/%1/win32/Makefile.msvc
-nmake %NMAKE_OPTS% /f Makefile.msvc clean install-libs
-xcopy /C /F /Y %PATH_SRC%\%1\win32\bin.msvc\libxml2.pdb %PATH_INSTALL%\bin\*
+for %%C in (OFF ON) do (
+	cmake %CMAKE_OPTS% ^
+	-DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
+	-DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
+	-DBUILD_SHARED_LIBS=%%C ^
+	-DLIBXML2_WITH_C14N=ON ^
+	-DLIBXML2_WITH_CATALOG=ON ^
+	-DLIBXML2_WITH_DEBUG=ON ^
+	-DLIBXML2_WITH_DOCB=ON ^
+	-DLIBXML2_WITH_FTP=ON ^
+	-DLIBXML2_WITH_HTML=ON ^
+	-DLIBXML2_WITH_HTTP=ON ^
+	-DLIBXML2_WITH_ICONV=ON ^
+	-DLIBXML2_WITH_ICU=OFF ^
+	-DLIBXML2_WITH_ISO8859X=ON ^
+	-DLIBXML2_WITH_LEGACY=ON ^
+	-DLIBXML2_WITH_LZMA=ON ^
+	-DLIBXML2_WITH_MEM_DEBUG=OFF ^
+	-DLIBXML2_WITH_MODULES=ON ^
+	-DLIBXML2_WITH_OUTPUT=ON ^
+	-DLIBXML2_WITH_PATTERN=ON ^
+	-DLIBXML2_WITH_PROGRAMS=ON ^
+	-DLIBXML2_WITH_PUSH=ON ^
+	-DLIBXML2_WITH_PYTHON=OFF ^
+	-DLIBXML2_WITH_READER=ON ^
+	-DLIBXML2_WITH_REGEXPS=ON ^
+	-DLIBXML2_WITH_RUN_DEBUG=OFF ^
+	-DLIBXML2_WITH_SAX1=ON ^
+	-DLIBXML2_WITH_SCHEMAS=ON ^
+	-DLIBXML2_WITH_SCHEMATRON=ON ^
+	-DLIBXML2_WITH_TESTS=OFF ^
+	-DLIBXML2_WITH_THREADS=ON ^
+	-DLIBXML2_WITH_THREAD_ALLOC=OFF ^
+	-DLIBXML2_WITH_TREE=ON ^
+	-DLIBXML2_WITH_VALID=ON ^
+	-DLIBXML2_WITH_WRITER=ON ^
+	-DLIBXML2_WITH_XINCLUDE=ON ^
+	-DLIBXML2_WITH_XPATH=ON ^
+	-DLIBXML2_WITH_XPTR=ON ^
+	-DLIBXML2_WITH_ZLIB=ON ^
+	%PATH_SRC%\%1
+
+	%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+	REM iso C:\sdk\src\libxml2\win32\Makefile.msvc l.373
+	if %%C == OFF sed -i 's/-DHAVE_WIN32_THREADS -D_REENTRANT/-DHAVE_WIN32_THREADS -D_REENTRANT -DLIBXML_STATIC -DLIBXML_STATIC_FOR_DLL/g' %CYGPATH_BUILD%/%1/build.ninja
+	%NINJA% install
+)
+
+xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\LibXml2.dir\LibXml2.pdb %PATH_INSTALL%\lib\libxml2_a.pdb*
+move /Y %PATH_INSTALL%\lib\libxml2s.lib %PATH_INSTALL%\lib\libxml2_a.lib
+xcopy /C /F /Y %PATH_BUILD%\%1\libxml2.pdb %PATH_INSTALL%\lib\*
+for %%X in (xmlcatalog xmllint) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X.pdb %PATH_INSTALL%\bin\*)
+for %%X in (libxml2.dll xmlcatalog.exe xmllint.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)

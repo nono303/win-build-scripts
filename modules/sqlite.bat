@@ -4,7 +4,6 @@
 	REM sqlite_statement.obj : error LNK2001: unresolved external symbol sqlite3_column_table_name
 	REM sqlite_statement.obj : error LNK2001: unresolved external symbol sqlite3_column_decltype
 sed -i 's/SQLITE_OMIT_DECLTYPE/SQLITE_ENABLE_COLUMN_METADATA/g' %CYGPATH_SRC%/%1/CMakeLists.txt
-
 for %%C in ("-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" "-DBUILD_SHARED_LIBS=ON -DBUILD_SHELL=OFF") do (
 		REM dirty !! https://stackoverflow.com/questions/9556676/batch-file-how-to-replace-equal-signs-and-a-string-variable
 	set CUR=%%C
@@ -34,7 +33,7 @@ for %%C in ("-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" "-DBUILD_SHARED_LIBS=ON -
 	%NINJA% install
 
 	if %%C =="-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" (
-		xcopy /C /F /Y %PATH_BUILD%\%1\sqlite3.pdb %PATH_INSTALL%\lib\*
+		xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\SQLite3.dir\SQLite3.pdb %PATH_INSTALL%\lib\sqlite3.pdb*
 		xcopy /C /F /Y %PATH_BUILD%\%1\sqlite3.pdb %PATH_INSTALL%\bin\*
 	) else (
 		xcopy /C /F /Y %PATH_BUILD%\%1\libsqlite3.pdb %PATH_INSTALL%\bin\*

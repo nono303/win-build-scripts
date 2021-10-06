@@ -1,4 +1,4 @@
-call %PATH_MODULES_COMMON%\init.bat %1 cmake
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
 	REM YES : static / NO : shared
 for %%S in (YES NO) do (
@@ -9,7 +9,7 @@ for %%S in (YES NO) do (
 	-DBUILD_EXAMPLES=OFF ^
 	-DBUILD_TESTING=OFF ^
 	-DOPENSSL_ROOT_DIR=%PATH_INSTALL% ^
-	-DZLIB_LIBRARY=%SLASHPATH_INSTALL%/lib/zlib.lib ^
+	-DZLIB_LIBRARY=%PATH_INSTALL:\=/%/lib/zlib.lib ^
 	-DZLIB_INCLUDE_DIR=%PATH_INSTALL%\include ^
 	-DCRYPTO_BACKEND=OpenSSL ^
 	-DENABLE_ZLIB_COMPRESSION=ON ^

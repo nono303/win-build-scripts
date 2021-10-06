@@ -6,14 +6,16 @@ set PHP7_COMMON_CONFIGURE=^
 if %PHPVER% == 7.1 (
 	set phpveropts=	%PHP7_COMMON_CONFIGURE% ^
 			--without-wddx ^
-			--without-interbase
+			--without-interbase ^
+			--disable-phpdbg-webhelper
 	set native-intrinsics=0
 )
 if %PHPVER% == 7.2 (
 	set phpveropts=	%PHP7_COMMON_CONFIGURE% ^
 			--without-wddx ^
 			--without-interbase ^
-			--enable-sanitizer
+			--enable-sanitizer ^
+			--disable-phpdbg-webhelper
 	set native-intrinsics=0
 )
 if %PHPVER% == 7.3 (
@@ -21,26 +23,30 @@ if %PHPVER% == 7.3 (
 			--enable-native-intrinsics=sse,sse2%intrinsics% ^
 			--without-wddx ^
 			--without-interbase ^
-			--enable-sanitizer
+			--enable-sanitizer ^
+			--disable-phpdbg-webhelper
 	set native-intrinsics=1
 )
 if %PHPVER% == 7.4 (
 	set phpveropts=	%PHP7_COMMON_CONFIGURE% ^
 			--enable-native-intrinsics=sse,sse2%intrinsics% ^
 			--with-mhash ^
-			--enable-sanitizer
+			--enable-sanitizer ^
+			--disable-phpdbg-webhelper
 	set native-intrinsics=1
 )
-	REM ################# PHP8 #################
 if %PHPVER% == 8.0 (
+	set phpveropts=	--enable-native-intrinsics=sse,sse2%intrinsics% ^
+			--with-mhash ^
+			--enable-sanitizer ^
+			--disable-phpdbg-webhelper
+	set native-intrinsics=1
+)
+if %PHPVER% == 8.1 (
 	set phpveropts=	--enable-native-intrinsics=sse,sse2%intrinsics% ^
 			--with-mhash ^
 			--enable-sanitizer
 	set native-intrinsics=1
-)
-
-if %MSVC_VER% == 16 (
-	REM set phparchopts= --enable-phpdbg --enable-phpdbgs
 )
 
 set PHP_COMMON_CONFIGURE=^
@@ -49,7 +55,6 @@ set PHP_COMMON_CONFIGURE=^
 	--disable-embed ^
 	--disable-ipv6 ^
 	--disable-phpdbg ^
-	--disable-phpdbg-webhelper ^
 	--disable-phpdbgs ^
 	--disable-security-flags ^
 	--disable-test-ini ^
