@@ -1,5 +1,7 @@
 | src | version |
 | ---- | ---- |
+| [abseil-cpp](https://github.com/abseil/abseil-cpp.git) | 20210324.2 |
+| [aom](https://aomedia.googlesource.com/aom) | 3.1.3 |
 | [apr](https://github.com/apache/apr) | 1.7.0 |
 | [apr-iconv](https://github.com/apache/apr-iconv) | 1.2.2 |
 | [apr-util](https://github.com/apache/apr-util) | 1.6.1 |
@@ -7,6 +9,7 @@
 | [bzip2](https://sourceware.org/git/bzip2) | 1.0.8 |
 | [c-ares](https://github.com/c-ares/c-ares) | 1.17.2 |
 | [curl](https://github.com/curl/curl) | 7.79.1 |
+| [dav1d](https://code.videolan.org/videolan/dav1d.git) | 0.9.2 |
 | [dependencies](https://github.com/lucasg/Dependencies) | 1.10 - bcd50ce |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.11.0 |
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52 |
@@ -14,10 +17,12 @@
 | [httpd](https://github.com/apache/httpd) | 2.4.50 |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.2.1 |
+| [libavif](https://github.com/AOMediaCodec/libavif.git) | 0.9.2 |
 | [libev](https://git.lighttpd.net/libev) | 4.33 |
 | [libevent](https://github.com/libevent/libevent) | 2.1.12 |
 | [libexpat](https://github.com/libexpat/libexpat) | 2.4.1 |
 | [libffi](https://github.com/winlibs/libffi) | 3.3 |
+| [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.16.3 |
 | [libiconv](https://github.com/winlibs/libiconv) | 1.16.1 |
 | [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) | 2.1.1 |
 | [liblzma](https://github.com/ShiftMediaProject/liblzma) | 5.2.5 |
@@ -28,6 +33,7 @@
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
 | [libxml2](https://github.com/GNOME/libxml2) | 2.9.12 |
 | [libxpm](https://gitlab.freedesktop.org/xorg/lib/libxpm) | 3.5.13 |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1794 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
 | [mapsforgesrv](https://github.com/telemaxx/mapsforgesrv.git) | 0.16.1 - 37f1249 |

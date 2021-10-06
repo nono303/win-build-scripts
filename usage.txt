@@ -11,6 +11,7 @@ Usage: go command [options]
       * openssl
       * jemalloc
       * libiconv
+      * liblzma
       * libxml2
       * pcre
       * libevent
@@ -30,7 +31,6 @@ Usage: go command [options]
       * subversion
     * phpanddeps
       * wineditline
-      * liblzma
       * libzip
       * libxpm
       * libpng
@@ -39,6 +39,10 @@ Usage: go command [options]
       * libxdiff
       * freetype2
       * libffi
+      * aom
+      * libgav1
+      * dav1d
+      * libyuv
       * libavif
       * geos
       * php

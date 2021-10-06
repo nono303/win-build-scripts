@@ -8,6 +8,14 @@ IF /I "%AREYOUSURE%" NEQ "Y" exit /B
 echo on
 if not exist %PATH_SRC%\. mkdir %PATH_SRC%
 cd /D %PATH_SRC%
+git clone https://github.com/abseil/abseil-cpp.git abseil-cpp
+cd /D abseil-cpp
+git checkout tags/20210324.2
+cd /D ..
+git clone https://aomedia.googlesource.com/aom aom
+cd /D aom
+git checkout tags/v3.1.3-rc2
+cd /D ..
 git clone https://github.com/apache/apr.git apr
 cd /D apr
 git checkout tags/1.7.0
@@ -35,6 +43,10 @@ cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
 git checkout tags/curl-7_79_1
+cd /D ..
+git clone https://code.videolan.org/videolan/dav1d.git dav1d
+cd /D dav1d
+git checkout tags/0.9.2
 cd /D ..
 git clone https://github.com/lucasg/Dependencies.git dependencies
 cd /D dependencies
@@ -64,6 +76,10 @@ git clone https://github.com/jemalloc/jemalloc.git jemalloc
 cd /D jemalloc
 git checkout tags/5.2.1
 cd /D ..
+git clone https://github.com/AOMediaCodec/libavif.git libavif
+cd /D libavif
+git checkout tags/v0.9.2
+cd /D ..
 git clone https://git.lighttpd.net/libev.git libev
 cd /D libev
 git checkout tags/rel-4.33
@@ -79,6 +95,10 @@ cd /D ..
 git clone https://github.com/winlibs/libffi libffi
 cd /D libffi
 git checkout tags/libffi-3.3
+cd /D ..
+git clone https://chromium.googlesource.com/codecs/libgav1 libgav1
+cd /D libgav1
+git checkout tags/v0.16.3
 cd /D ..
 git clone https://github.com/winlibs/libiconv.git libiconv
 cd /D libiconv
@@ -120,6 +140,10 @@ git clone https://gitlab.freedesktop.org/xorg/lib/libxpm libxpm
 cd /D libxpm
 git checkout tags/libXpm-3.5.13
 cd /D ..
+git clone https://chromium.googlesource.com/libyuv/libyuv libyuv
+cd /D libyuv
+git checkout main
+cd /D ..
 git clone https://github.com/nih-at/libzip libzip
 cd /D libzip
 git checkout tags/v1.8.0
@@ -142,7 +166,7 @@ svn update -r 2628
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1893905
+svn update -r 1893929
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -206,7 +230,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.0.11
+git checkout tags/php-8.1.0RC3
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
