@@ -25,8 +25,9 @@ set PHP_SRC_DIR=%PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\php-src
 set PHP_BUILD_DIR=%PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\build\%BUILDDIR%
 
 	REM ~~~~~~~~~~~~ clean build dir & buildconf
-if exist %PHP_BUILD_DIR%\. rmdir /S /Q %PHP_BUILD_DIR%
-mkdir %PHP_BUILD_DIR%
+if not exist %PHP_BUILD_DIR%\. mklink /J %PHP_BUILD_DIR% %PATH_PHP_BUILD%
+cd /D %PHP_BUILD_DIR%
+for /F "delims=" %%i in ('dir /b') do (rmdir "%%i" /s/q || del "%%i" /s/q)
 cd /D %PHP_SRC_DIR%
 call buildconf
 

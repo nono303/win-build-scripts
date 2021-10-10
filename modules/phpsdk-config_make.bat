@@ -171,6 +171,3 @@ echo %MEMCACHEVERPATCH%
 call %MEMCACHEVERPATCH%
 	REM php_memcache for github
 if not "%PATH_GITHUB_PHPMEMCACHE%"=="" (for %%A in (pdb dll) do (xcopy /C /F /Y %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%outdirphp%\_php-%TSNTS%\php_memcache.%%A %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXDIR%\php-%PHPVER%.x_memcache.%%A*))
-
-if exist %PHP_BUILD_DIR%\. rmdir /S /Q %PHP_BUILD_DIR%
-mkdir %PHP_BUILD_DIR%
