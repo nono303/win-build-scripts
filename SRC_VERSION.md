@@ -1,7 +1,7 @@
 | src | version |
 | ---- | ---- |
 | [abseil-cpp](https://github.com/abseil/abseil-cpp.git) | 20210324.2 |
-| [aom](https://aomedia.googlesource.com/aom) | 3.1.3 |
+| [aom](https://aomedia.googlesource.com/aom) | v3.2.0-rc1 |
 | [apr](https://github.com/apache/apr) | 1.7.0 |
 | [apr-iconv](https://github.com/apache/apr-iconv) | 1.2.2 |
 | [apr-util](https://github.com/apache/apr-util) | 1.6.1 |
@@ -13,8 +13,9 @@
 | [dependencies](https://github.com/lucasg/Dependencies) | 1.10 - bcd50ce |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.11.0 |
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52 |
-| [geos](https://github.com/libgeos/geos) | 3.10.0.2 |
-| [httpd](https://github.com/apache/httpd) | 2.4.50 |
+| [geos](https://github.com/libgeos/geos) | 3.10.0.3 |
+| [httpd](https://github.com/apache/httpd) | 2.4.51 |
+| [icu](https://github.com/unicode-org/icu) | 69.1 |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.2.1 |
 | [libavif](https://github.com/AOMediaCodec/libavif.git) | 0.9.2 |
