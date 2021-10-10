@@ -40,7 +40,7 @@
 		"fbclient",		//3.0.6
 		// "freetype",
 		"glib",			//2.53.3
-		"ICU",			//68.2
+		// "ICU",		
 		"libargon2",	//20190702
 		// "libavif",
 		// "libbzip2",
