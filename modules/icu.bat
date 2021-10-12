@@ -5,10 +5,10 @@ set VCDIR=icu4c\source\allinone
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/icu4c" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
 
 REM https://unicode-org.github.io/icu/userguide/icu4c/build.html#skipping-the-uwp-projects-on-the-command-line
+REM 	/t:common,i18n,io,toolutil ^
 	MSBuild.exe %PATH_SRC%\%1\%VCDIR%\allinone.sln ^
 	%MSBUILD_OPTS% ^
 	/nowarn:C4018;C4116;C4267;C4312;MSB8028 ^
-	/t:common,i18n,io,toolutil ^
 	/p:Configuration=Release ^
 	/p:SkipUWP=true ^
 	/p:Platform="%archmsbuild%"
