@@ -1,7 +1,7 @@
 | src | version |
 | ---- | ---- |
 | [abseil-cpp](https://github.com/abseil/abseil-cpp.git) | 20210324.2 |
-| [aom](https://aomedia.googlesource.com/aom) | v3.2.0-rc1 |
+| [aom](https://aomedia.googlesource.com/aom) | v3.2.0-rc2 |
 | [apr](https://github.com/apache/apr) | 1.7.0 |
 | [apr-iconv](https://github.com/apache/apr-iconv) | 1.2.2 |
 | [apr-util](https://github.com/apache/apr-util) | 1.6.1 |
