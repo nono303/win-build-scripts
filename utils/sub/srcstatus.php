@@ -3,6 +3,7 @@
 
 	date_default_timezone_set("Europe/Paris");
 	define("NB_TAGS",5);
+	static $notags = ["dependencies", "libyuv", "mapsforgesrv", "mod_h264_streaming", "nssm", "pecl-memcache", "pecl-text-xdiff", "php-cgi-spawner", "php-geos", "php-sdk", "serf", "verpatch"];
 
 	if(in_array("gitcg", $argv)){
 		define("GIT_GC",true);
@@ -34,6 +35,7 @@
 	file_put_contents($argv[1],'"name";"scm";"upstream";"head";"status";"branch";"log tags";"last tag";"diff"'.PHP_EOL,FILE_APPEND);
 	echo "*************************".PHP_EOL;
 	foreach(scandir($srcdir) as $ele){
+	// foreach(["libyuv"] as $ele){
 		if(is_dir($repo = $srcdir.$ele) &&  $ele != "." && $ele != ".."){
 			$name = basename($repo);
 			$type = "man";
@@ -54,14 +56,27 @@
 				$gitclean = execnono($cmd = "git clean -fdx",NULL,$repo,NULL);
 				if(VERBOSE) echo $cmd.PHP_EOL;
 				if(REPO_FETCH){
-					$gitfecthtag = execnono($cmd = "git fetch",NULL,$repo,NULL);
+					execnono($cmd = "git fetch",NULL,$repo,NULL);
 					if(VERBOSE) echo $cmd.PHP_EOL;
-					$gitfecthtag .= execnono($cmd = "git fetch --tag",NULL,$repo,NULL);
+					execnono($cmd = "git fetch --tag",NULL,$repo,NULL);
 					if(VERBOSE) echo $cmd.PHP_EOL;
 				}
-				preg_match("/^\* (.*)\n/",execnono($cmd = "git branch -a",NULL,$repo,NULL),$matches);
+				preg_match("/^\* (.*)\n/m",$res = execnono($cmd = "git branch -a",NULL,$repo,NULL),$matches);
 				if(VERBOSE) echo $cmd.PHP_EOL;
-				$branch = $matches[1];				
+				$branch = $matches[1];
+				if(in_array($ele,$notags)){
+					$pullres = execnono($cmd = "git pull",NULL,$repo,NULL);
+					if(VERBOSE) echo $cmd.PHP_EOL.$pullres.PHP_EOL;
+					$logtags = $branch;
+					$ltd = "/";
+					if ($ele == "libyuv"){
+						preg_match("/ LIBYUV_VERSION ([0-9]+)/",file_get_contents($srcdir."/libyuv/include/libyuv/version.h"),$matches);
+						$logtags .= " (".$matches[1].")";
+					}
+				} else {
+					$logtags = execnono($cmd = 'git log --tags --simplify-by-decoration --pretty="format:%ai %d" | head -n '.NB_TAGS,NULL,$repo,NULL);
+					$ltd = secondsToTime(time() - ($strtime = strtotime(explode(" (",$logtags)[0])));
+				}
 				$status = explode("\t",execnono($cmd = "git rev-list --left-right --count ".$branch."...HEAD",NULL,$repo,NULL)) [0];
 				if(VERBOSE) echo $cmd.PHP_EOL;
 				if($status && $status != "0"){
@@ -72,8 +87,7 @@
 					$status = "up to date";
 				}
 				
-				$logtags = execnono($cmd = 'git log --tags --simplify-by-decoration --pretty="format:%ai %d" | head -n '.NB_TAGS,NULL,$repo,NULL);
-				$ltd = secondsToTime(time() - ($strtime = strtotime(explode(" (",$logtags)[0])));
+				
 				if(VERBOSE) echo $cmd.PHP_EOL;
 				if(GIT_GC){
 					echo execnono($cmd = "git reflog expire --all --expire=now",NULL,$repo,NULL);
@@ -85,7 +99,7 @@
 			} elseif(is_dir($repo."/.svn")){
 				$type = "svn";
 				if(REPO_FETCH){
-					$gitfecthtag = execnono($cmd = "svn update",NULL,$repo,NULL);
+					execnono($cmd = "svn update",NULL,$repo,NULL);
 					if(VERBOSE) echo $cmd.PHP_EOL;
 				}
 				$svninfo = execnono($cmd = "svn info",NULL,$repo,NULL);
