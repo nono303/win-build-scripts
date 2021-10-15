@@ -1,7 +1,7 @@
 | src | version |
 | ---- | ---- |
 | [abseil-cpp](https://github.com/abseil/abseil-cpp.git) | 20210324.2 |
-| [aom](https://aomedia.googlesource.com/aom) | v3.2.0-rc2 |
+| [aom](https://aomedia.googlesource.com/aom) | v3.2.0.3 |
 | [apr](https://github.com/apache/apr) | 1.7.0 |
 | [apr-iconv](https://github.com/apache/apr-iconv) | 1.2.2 |
 | [apr-util](https://github.com/apache/apr-util) | 1.6.1 |
@@ -34,7 +34,7 @@
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
 | [libxml2](https://github.com/GNOME/libxml2) | 2.9.12 |
 | [libxpm](https://gitlab.freedesktop.org/xorg/lib/libxpm) | 3.5.13 |
-| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1794 |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1798 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
 | [mapsforgesrv](https://github.com/telemaxx/mapsforgesrv.git) | 0.16.1 - 37f1249 |
@@ -56,7 +56,7 @@
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.13.1 |
 | [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1 |
 | [php-sdk](https://github.com/microsoft/php-sdk-binary-tools) | 2.2.0 |
-| [php-src](https://github.com/php/php-src) | 8.0.11 |
+| [php-src](https://github.com/php/php-src) | 8.1.0.4 |
 | [proj](https://github.com/OSGeo/PROJ) | 8.1.1 |
 | [sdlna](https://github.com/nono303/simpleDLNA) | 1.0.3 |
 | [serf](https://github.com/apache/serf) | 1.4.0 |
