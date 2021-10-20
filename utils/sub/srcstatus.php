@@ -71,7 +71,7 @@
 					$ltd = "/";
 					if ($ele == "libyuv"){
 						preg_match("/ LIBYUV_VERSION ([0-9]+)/",file_get_contents($srcdir."/libyuv/include/libyuv/version.h"),$matches);
-						$logtags .= " (".$matches[1].")";
+						$logtags .= "(".$matches[1].")";
 					}
 				} else {
 					$logtags = execnono($cmd = 'git log --tags --simplify-by-decoration --pretty="format:%ai %d" | head -n '.NB_TAGS,NULL,$repo,NULL);
