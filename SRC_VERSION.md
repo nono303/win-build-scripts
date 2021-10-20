@@ -1,7 +1,7 @@
 | src | version |
 | ---- | ---- |
 | [abseil-cpp](https://github.com/abseil/abseil-cpp.git) | 20210324.2 |
-| [aom](https://aomedia.googlesource.com/aom) | v3.2.0.3 |
+| [aom](https://aomedia.googlesource.com/aom) | v3.2.0rc3 |
 | [apr](https://github.com/apache/apr) | 1.7.0 |
 | [apr-iconv](https://github.com/apache/apr-iconv) | 1.2.2 |
 | [apr-util](https://github.com/apache/apr-util) | 1.6.1 |
@@ -13,7 +13,7 @@
 | [dependencies](https://github.com/lucasg/Dependencies) | 1.10 - bcd50ce |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.11.0 |
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52 |
-| [geos](https://github.com/libgeos/geos) | 3.10.0.3 |
+| [geos](https://github.com/libgeos/geos) | 3.10.0rc3 |
 | [httpd](https://github.com/apache/httpd) | 2.4.51 |
 | [icu](https://github.com/unicode-org/icu) | 69.1 |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
@@ -34,7 +34,7 @@
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
 | [libxml2](https://github.com/GNOME/libxml2) | 2.9.12 |
 | [libxpm](https://gitlab.freedesktop.org/xorg/lib/libxpm) | 3.5.13 |
-| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1798 |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1801 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
 | [mapsforgesrv](https://github.com/telemaxx/mapsforgesrv.git) | 0.16.1 - 37f1249 |
@@ -46,7 +46,7 @@
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
 | [mod_md](https://github.com/icing/mod_md) | 2.4.7 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) | 2.01.1 |
-| [nghttp2](https://github.com/nghttp2/nghttp2) | 1.45.1 |
+| [nghttp2](https://github.com/nghttp2/nghttp2) | 1.46.0 |
 | [nssm](https://github.com/puppetlabs/nssm) | 2.24.113 - e8211e9 |
 | [openssl](https://github.com/openssl/openssl) | 1.1.1l |
 | [pcre](https://github.com/jwilk-mirrors/pcre) | 8.45 |
@@ -65,5 +65,5 @@
 | [tidy](https://github.com/htacg/tidy-html5) | 5.9.14 |
 | [verpatch](https://github.com/pavel-a/ddverpatch) | 1.0.15.1 - 3cc989e |
 | [wineditline](https://svn.code.sf.net/p/mingweditline/code) | 2.2 |
-| [xdebug](https://github.com/xdebug/xdebug) | 3.1.0 |
+| [xdebug](https://github.com/xdebug/xdebug) | 3.1.1 |
 | [zlib](https://github.com/madler/zlib) | 1.2.11 |
