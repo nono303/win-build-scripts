@@ -62,7 +62,7 @@ git checkout tags/v1.52
 cd /D ..
 git clone https://github.com/libgeos/geos geos
 cd /D geos
-git checkout tags/3.10.0rc3
+git checkout tags/3.10.0
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
@@ -70,7 +70,7 @@ git checkout tags/2.4.51
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout tags/release-69-1
+git checkout cldr/2021-10-19
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -82,7 +82,7 @@ git checkout tags/5.2.1
 cd /D ..
 git clone https://github.com/AOMediaCodec/libavif.git libavif
 cd /D libavif
-git checkout tags/v0.9.2
+git checkout tags/v0.9.3
 cd /D ..
 git clone https://git.lighttpd.net/libev.git libev
 cd /D libev
@@ -170,7 +170,7 @@ svn update -r 2632
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1894399
+svn update -r 1894464
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2

@@ -13,12 +13,12 @@
 | [dependencies](https://github.com/lucasg/Dependencies) | 1.10 - bcd50ce |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.11.0 |
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52 |
-| [geos](https://github.com/libgeos/geos) | 3.10.0rc3 |
+| [geos](https://github.com/libgeos/geos) | 3.10.0 |
 | [httpd](https://github.com/apache/httpd) | 2.4.51 |
-| [icu](https://github.com/unicode-org/icu) | 69.1 |
+| [icu](https://github.com/unicode-org/icu) | 70.1 - cldr/2021-10-19 |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.2.1 |
-| [libavif](https://github.com/AOMediaCodec/libavif.git) | 0.9.2 |
+| [libavif](https://github.com/AOMediaCodec/libavif.git) | 0.9.3 |
 | [libev](https://git.lighttpd.net/libev) | 4.33 |
 | [libevent](https://github.com/libevent/libevent) | 2.1.12 |
 | [libexpat](https://github.com/libexpat/libexpat) | 2.4.1 |
