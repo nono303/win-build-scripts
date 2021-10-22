@@ -8,6 +8,7 @@ REM icudtXX.pdb
 sed -i 's/NXCOMPAT/NXCOMPAT \/LTCG \/OPT:REF,ICF \/DEBUG/g' %CYGPATH_SRC%/%1/icu4c/source/tools/pkgdata/pkgdata.cpp
 
 REM https://unicode-org.github.io/icu/userguide/icu4c/build.html#skipping-the-uwp-projects-on-the-command-line
+REM 	/t:cal,cintltst,common,ctestfw,date,derb,genbrk,genccode,gencmn,gencnval,genrb,gentest,i18n,intltest,makeconv,makedata,pkgdata,stubdata,toolutil,uconv,io,gensprep,iotest,icupkg,gendict,gencfu,gennorm2,icuinfo,testplug,makedata_uwp,i18n_uwp,common_uwp, ^
 	MSBuild.exe %PATH_SRC%\%1\%VCDIR%\allinone.sln ^
 	%MSBUILD_OPTS% ^
 	/t:cal,cintltst,common,date,derb,genbrk,genccode,gencmn,gencnval,genrb,i18n,makeconv,makedata,pkgdata,stubdata,toolutil,uconv,io,gensprep,icupkg,gendict,gencfu,gennorm2,icuinfo ^
@@ -23,6 +24,6 @@ for %%C in (dt in io tu uc) do (
 	xcopy /C /F /Y %PATH_SRC%\icu\icu4c\lib64\icu%%C.lib %PATH_INSTALL%\lib\*
 	xcopy /C /F /Y %PATH_SRC%\icu\icu4c\lib64\icu%%C.pdb %PATH_INSTALL%\lib\*
 )
-xcopy /C /F /Y %PATH_SRC%\icu\icu4c\source\data\out\build\icudt69l\icudt69.pdb %PATH_INSTALL%\bin\*
+xcopy /C /F /Y %PATH_SRC%\icu\icu4c\source\data\out\build\icudt%ICUV%l\icudt%ICUV%.pdb %PATH_INSTALL%\bin\*
 if not exist %PATH_INSTALL%\include\unicode\. mkdir %PATH_INSTALL%\include\unicode
 xcopy /C /F /Y %PATH_SRC%\%1\icu4c\include\unicode\*.h %PATH_INSTALL%\include\unicode\*
