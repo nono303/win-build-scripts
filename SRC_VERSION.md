@@ -7,15 +7,15 @@
 | [apr-util](https://github.com/apache/apr-util) | 1.6.1 |
 | [brotli](https://github.com/google/brotli) | 1.0.9 |
 | [bzip2](https://sourceware.org/git/bzip2) | 1.0.8 |
-| [c-ares](https://github.com/c-ares/c-ares) | 1.17.2 |
+| [c-ares](https://github.com/c-ares/c-ares) | 1.18.0 |
 | [curl](https://github.com/curl/curl) | 7.79.1 |
 | [dav1d](https://code.videolan.org/videolan/dav1d.git) | 0.9.2 |
-| [dependencies](https://github.com/lucasg/Dependencies) | 1.10 - bcd50ce |
+| [dependencies](https://github.com/lucasg/Dependencies) | 1.11.1 |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.11.0 |
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52 |
 | [geos](https://github.com/libgeos/geos) | 3.10.0 |
 | [httpd](https://github.com/apache/httpd) | 2.4.51 |
-| [icu](https://github.com/unicode-org/icu) | 70.1 - cldr/2021-10-19 |
+| [icu](https://github.com/unicode-org/icu) | 70.1 - cldr/2021-10-25 |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.2.1 |
 | [libavif](https://github.com/AOMediaCodec/libavif.git) | 0.9.3 |

@@ -38,7 +38,7 @@ git checkout tags/bzip2-1.0.8
 cd /D ..
 git clone https://github.com/c-ares/c-ares.git c-ares
 cd /D c-ares
-git checkout tags/cares-1_17_2
+git checkout tags/cares-1_18_0
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
@@ -50,7 +50,7 @@ git checkout tags/0.9.2
 cd /D ..
 git clone https://github.com/lucasg/Dependencies.git dependencies
 cd /D dependencies
-git checkout master
+git checkout tags/v1.11.1
 cd /D ..
 git clone git://git.sv.nongnu.org/freetype/freetype2.git freetype2
 cd /D freetype2
@@ -70,7 +70,7 @@ git checkout tags/2.4.51
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout cldr/2021-10-19
+git checkout cldr/2021-10-25
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -170,7 +170,7 @@ svn update -r 2632
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1894464
+svn update -r 1894570
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
