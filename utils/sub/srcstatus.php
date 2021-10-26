@@ -3,7 +3,20 @@
 
 	date_default_timezone_set("Europe/Paris");
 	define("NB_TAGS",5);
-	static $notags = ["dependencies", "libyuv", "mapsforgesrv", "mod_h264_streaming", "nssm", "pecl-memcache", "pecl-text-xdiff", "php-cgi-spawner", "php-geos", "php-sdk", "serf", "verpatch"];
+	static $notags = [
+	// "dependencies", 
+	"libyuv", 
+	"mapsforgesrv", 
+	"mod_h264_streaming", 
+	"nssm", 
+	"pecl-memcache", 
+	"pecl-text-xdiff", 
+	"php-cgi-spawner", 
+	"php-geos", 
+	"php-sdk", 
+	"serf", 
+	"verpatch"
+	];
 
 	if(in_array("gitcg", $argv)){
 		define("GIT_GC",true);
