@@ -38,7 +38,7 @@ git checkout tags/bzip2-1.0.8
 cd /D ..
 git clone https://github.com/c-ares/c-ares.git c-ares
 cd /D c-ares
-git checkout tags/cares-1_18_0
+git checkout tags/cares-1_18_1
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
@@ -170,7 +170,7 @@ svn update -r 2632
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1894570
+svn update -r 1894583
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -234,7 +234,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.1.0RC4
+git checkout tags/php-8.1.0RC5
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
