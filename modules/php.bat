@@ -34,8 +34,8 @@ FOR /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do ( set PHPGITVER=%%F
 set PHPVER=%PHPGITVER:~4,3%
 
 	REM ~~~~~~~~~~~~ precompiled sdk deps
-call %PATH_PHP_SDK%\bin\php\do_php %PATH_MODULES%\php-getdeps.php
-if %ERRORLEVEL% GEQ 1 EXIT /B 1
+REM call %PATH_PHP_SDK%\bin\php\do_php %PATH_MODULES%\php-getdeps.php
+REM if %ERRORLEVEL% GEQ 1 EXIT /B 1
 
 	REM ~~~~~~~~~~~~ create directory structure
 if not exist %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\php-src\. mklink /J %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\php-src %PATH_SRC%\php-src
@@ -43,7 +43,7 @@ if not exist %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\pecl\. mkdir %PATH_PHP_
 for %%E in (pecl-memcache pecl-text-xdiff php-ext-brotli xdebug) do (
 	if not exist %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\pecl\%%E\. mklink /J %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\pecl\%%E %PATH_SRC%\%%E
 )
-if not exist %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\build\. mkdir %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\build
+
 if exist %PATH_PHP_SDK%\phpsdk-local.bat del /Q /F %PATH_PHP_SDK%\phpsdk-local.bat
 xcopy /C /F /Y %PATH_MODULES%\phpsdk-local.bat %PATH_PHP_SDK%\phpsdk-local.bat*
 

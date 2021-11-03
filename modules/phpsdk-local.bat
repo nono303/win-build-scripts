@@ -25,8 +25,9 @@ set PHP_SRC_DIR=%PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\php-src
 set PHP_BUILD_DIR=%PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\build\%BUILDDIR%
 
 	REM ~~~~~~~~~~~~ clean build dir & buildconf
-if exist %PHP_BUILD_DIR%\. rmdir /S /Q %PHP_BUILD_DIR%
-mkdir %PHP_BUILD_DIR%
+if not exist %PHP_BUILD_DIR%. mklink /J %PHP_BUILD_DIR% %PATH_PHP_BUILD%
+cd /D %PHP_BUILD_DIR%
+call %PATH_BIN_CYGWIN%\rm.exe -rdf  *
 cd /D %PHP_SRC_DIR%
 call buildconf
 
@@ -45,6 +46,7 @@ sed -i 's/libjpeg_a.lib;libjpeg.lib/turbojpeg-static.lib/g' %CYGPATH_SRC%/php-sr
 sed -i 's/libpng_a.lib;libpng.lib/png_static.lib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM sqlite3
 sed -i 's/libsqlite3_a.lib;libsqlite3.lib/sqlite3.lib/g' %CYGPATH_SRC%/php-src/configure.js
+sed -i 's/sqlite3ext.h/sqlite3\/sqlite3ext.h/g' %CYGPATH_SRC%/php-src/configure.js
 	REM wineditline
 sed -i 's/edit_a/edit_static/g' %CYGPATH_SRC%/php-src/configure.js
 	REM zlib

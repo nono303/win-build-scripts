@@ -72,8 +72,8 @@ set PHP_COMMON_CONFIGURE=^
 	--without-oci8 ^
 	--without-pgsql ^
 	--without-uncritical-warn-choke ^
-	--with-extra-includes="%PHP_CURL%\include";"%PATH_INSTALL%\include";"%PATH_INSTALL%\include\sqlite3";"%PATH_INSTALL%\include\libxml2";"%PATH_INSTALL%\include\freetype2" ^
-	--with-extra-libs="%PHP_CURL%\lib";"%PATH_INSTALL%\lib" ^
+	--with-extra-includes="%PHP_CURL%\include" ^
+	--with-extra-libs="%PHP_CURL%\lib" ^
 	--with-mp=%NUMBER_OF_PROCESSORS%
 
 REM known bug for --with-ffi if php != 8.1 || 7.4
@@ -81,7 +81,7 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	call configure %PHP_COMMON_CONFIGURE% ^
 	--with-toolset=vs ^
 	--with-cygwin=%PATH_BIN_CYGWIN% ^
-	--with-php-build=..\deps ^
+	--with-php-build=%PATH_INSTALL% ^
 	--enable-brotli=shared ^
 	--enable-com-dotnet ^
 	--enable-exif ^
@@ -171,6 +171,3 @@ echo %MEMCACHEVERPATCH%
 call %MEMCACHEVERPATCH%
 	REM php_memcache for github
 if not "%PATH_GITHUB_PHPMEMCACHE%"=="" (for %%A in (pdb dll) do (xcopy /C /F /Y %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%outdirphp%\_php-%TSNTS%\php_memcache.%%A %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXDIR%\php-%PHPVER%.x_memcache.%%A*))
-
-if exist %PHP_BUILD_DIR%\. rmdir /S /Q %PHP_BUILD_DIR%
-mkdir %PHP_BUILD_DIR%

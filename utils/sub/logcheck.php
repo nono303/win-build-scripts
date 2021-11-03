@@ -67,7 +67,11 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 	$remove = array(
 		"CMake Warning at CMake" => [39, "str"],
 		// gradle
-		"Daemon will be stopped at the end of the build" => [39, "str"]
+		"Daemon will be stopped at the end of the build" => [39, "str"],
+		// dav1d
+		"fvisibility=hidden" => [39, "str"],
+		// php-src
+		"Using unknown MSVC version" => [39, "str"],
 	);
 	//print_r($argv);
 	//exit();

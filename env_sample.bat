@@ -18,6 +18,8 @@ set PATH_UTILS=%PATH_BATCH%\utils
 set PATH_LOGS=%PATH_SDK_ROOT%\logs
 set PATH_SRC=%PATH_SDK_ROOT%\src
 set PATH_PHP_SDK=%PATH_SRC%\php-sdk
+REM for junction on ramdrive
+set PATH_PHP_BUILD=R:\sdkbuild\php
 set PATH_SOFTS=%PATH_SDK_ROOT%\softs
 set PATH_ROOT_CYGWIN=%PATH_SOFTS%\cyg
 

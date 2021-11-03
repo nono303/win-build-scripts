@@ -36,8 +36,7 @@ Index: mobac/build.gradle
      implementation "org.mapsforge:mapsforge-themes:${mapsforgeVersion}"
      api 'org.beanshell:bsh:2.0b5'
      api 'commons-codec:commons-codec:1.15'
--    api 'commons-io:commons-io:2.8.0'
-+    api 'commons-io:commons-io:2.11.0'
+     api 'commons-io:commons-io:2.11.0'
      api 'org.apache.commons:commons-lang3:3.12.0'
      api 'org.apache.commons:commons-text:1.9'
      api 'log4j:log4j:1.2.17'

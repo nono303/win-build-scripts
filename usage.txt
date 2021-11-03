@@ -45,6 +45,7 @@ Usage: go command [options]
       * libyuv
       * libavif
       * geos
+      * icu
       * php
     * projgeolibanddeps
       * libtiff

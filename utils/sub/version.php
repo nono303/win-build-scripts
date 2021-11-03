@@ -9,6 +9,8 @@
 		$letterpos[$letter] = $pos++;
 	$nogit = array(
 		"php-cgi-spawner"	=> "1.1.23-90197af",
+		"icu"			=> ["/U_ICU_VERSION \"(.*)\"/",	
+							pathenv("PATH_SRC")."/icu/icu4c/source/common/unicode/uvernum.h"],
 		"libyuv"			=> ["/LIBYUV_VERSION (.*)/",	
 							pathenv("PATH_SRC")."/libyuv/include/libyuv/version.h"],
 		"mobac"				=> ["/mobac.revision=(.*)/",	
