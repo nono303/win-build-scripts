@@ -1,6 +1,6 @@
 | src | version |
 | ---- | ---- |
-| [abseil-cpp](https://github.com/abseil/abseil-cpp.git) | 20211102.rc1 |
+| [abseil-cpp](https://github.com/abseil/abseil-cpp.git) | 20211102.rc2 |
 | [aom](https://aomedia.googlesource.com/aom) | v3.2.0rc3 |
 | [apr](https://github.com/apache/apr) | 1.7.0 |
 | [apr-iconv](https://github.com/apache/apr-iconv) | 1.2.2 |
@@ -13,7 +13,7 @@
 | [dependencies](https://github.com/lucasg/Dependencies) | 1.11.1 |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.11.0 |
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52 |
-| [geos](https://github.com/libgeos/geos) | 3.10.0 |
+| [geos](https://github.com/libgeos/geos) | 3.10.1 |
 | [httpd](https://github.com/apache/httpd) | 2.4.51 |
 | [icu](https://github.com/unicode-org/icu) | 70.1 |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
@@ -23,7 +23,7 @@
 | [libevent](https://github.com/libevent/libevent) | 2.1.12 |
 | [libexpat](https://github.com/libexpat/libexpat) | 2.4.1 |
 | [libffi](https://github.com/winlibs/libffi) | 3.3 |
-| [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.16.3 |
+| [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.17.0 |
 | [libiconv](https://github.com/winlibs/libiconv) | 1.16.1 |
 | [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) | 2.1.1 |
 | [liblzma](https://github.com/ShiftMediaProject/liblzma) | 5.3.2alpha |
