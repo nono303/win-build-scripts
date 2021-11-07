@@ -44,11 +44,11 @@
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.0rc4 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
-| [mod_md](https://github.com/icing/mod_md) | 2.4.7 |
+| [mod_md](https://github.com/icing/mod_md) | 2.4.9 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) | 2.01.1 |
 | [nghttp2](https://github.com/nghttp2/nghttp2) | 1.46.0 |
 | [nssm](https://github.com/puppetlabs/nssm) | 2.24.113 - e8211e9 |
-| [openssl](https://github.com/openssl/openssl) | 1.1.1l |
+| [openssl](https://github.com/openssl/openssl) | 3.0.0 |
 | [pcre](https://github.com/jwilk-mirrors/pcre) | 8.45 |
 | [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | nbio_php8 - 8.1-dev - ccf702b |
 | [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1-dev |

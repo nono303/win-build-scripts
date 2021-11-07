@@ -170,7 +170,7 @@ svn update -r 2632
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1894725
+svn update -r 1894802
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -186,7 +186,7 @@ git checkout tags/1.2.0
 cd /D ..
 git clone https://github.com/icing/mod_md mod_md
 cd /D mod_md
-git checkout tags/v2.4.8
+git checkout tags/v2.4.9
 cd /D ..
 git clone https://github.com/nono303/mod_whatkilledus mod_wku_bt
 cd /D mod_wku_bt
@@ -202,7 +202,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/openssl/openssl.git openssl
 cd /D openssl
-git checkout tags/OpenSSL_1_1_1l
+git checkout tags/openssl-3.0.0
 cd /D ..
 git clone https://github.com/jwilk-mirrors/pcre pcre
 cd /D pcre
