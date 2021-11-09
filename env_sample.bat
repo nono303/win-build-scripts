@@ -94,7 +94,7 @@ REM ########################## BUILD OPTION
 	REM todo dynamic
 set OPENSSL_SUF=3
 	REM see dir in %PATH_ROOTWKIT%\Lib
-set WKITVER=10.0.20348.0
+set WKITVER=10.0.22000.0
 	REM .NET installed SDK
 set DOTNETVER=4.8
 	REM Current MSVC full version (accordinf to vc15 vs16 vs17...)
