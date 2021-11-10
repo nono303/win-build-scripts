@@ -8,7 +8,7 @@
 | [brotli](https://github.com/google/brotli) | 1.0.9 |
 | [bzip2](https://sourceware.org/git/bzip2) | 1.0.8 |
 | [c-ares](https://github.com/c-ares/c-ares) | 1.18.1 |
-| [curl](https://github.com/curl/curl) | 7.79.1 |
+| [curl](https://github.com/curl/curl) | 7.80.0 |
 | [dav1d](https://code.videolan.org/videolan/dav1d.git) | 0.9.2 |
 | [dependencies](https://github.com/lucasg/Dependencies) | 1.11.1 |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.11.0 |
@@ -56,7 +56,7 @@
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.13.1 |
 | [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1 |
 | [php-sdk](https://github.com/microsoft/php-sdk-binary-tools) | 2.2.0 |
-| [php-src](https://github.com/php/php-src) | 8.1.0rc5 |
+| [php-src](https://github.com/php/php-src) | 8.1.0rc6 |
 | [proj](https://github.com/OSGeo/PROJ) | 8.2.0 |
 | [sdlna](https://github.com/nono303/simpleDLNA) | 1.0.3 |
 | [serf](https://github.com/apache/serf) | 1.4.0 |

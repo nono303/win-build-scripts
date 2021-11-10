@@ -42,7 +42,7 @@ git checkout tags/cares-1_18_1
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-7_79_1
+git checkout tags/curl-7_80_0
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -170,7 +170,7 @@ svn update -r 2632
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1894870
+svn update -r 1894911
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -234,7 +234,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.1.0RC5
+git checkout tags/php-8.1.0RC6
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
