@@ -9,7 +9,7 @@ meson ^
 -Dtestdata_tests=false ^
 -Denable_examples=false ^
 -Denable_tools=true ^
--Denable_avx512=true ^
+-Denable_avx512=false ^
 -Denable_asm=true ^
 %PATH_SRC%\%1
 
