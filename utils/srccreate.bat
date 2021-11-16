@@ -10,7 +10,7 @@ if not exist %PATH_SRC%\. mkdir %PATH_SRC%
 cd /D %PATH_SRC%
 git clone https://github.com/abseil/abseil-cpp.git abseil-cpp
 cd /D abseil-cpp
-git checkout tags/20211102.rc2
+git checkout tags/20211102.0
 cd /D ..
 git clone https://aomedia.googlesource.com/aom aom
 cd /D aom
@@ -170,7 +170,7 @@ svn update -r 2632
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1894911
+svn update -r 1895081
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
