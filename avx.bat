@@ -1,4 +1,5 @@
 @echo off
+REM https://docs.microsoft.com/fr-fr/cpp/build/reference/arch-x64?view=msvc-170
 if %1 == 1 (
 	set AVXECHO=avx
 	set AVX=/arch:AVX
