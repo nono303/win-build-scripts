@@ -7,22 +7,35 @@
 	$pos = 1;
 	foreach (range('a', 'z') as $letter)
 		$letterpos[$letter] = $pos++;
+	$proot = $argv[1];
+	if(in_array($proot,["mod_maxminddb","mod_fcgid","mod_h2","mod_md","mod_wku_bt","mod_h264_streaming"]))
+		$proot = "httpd";
+	if(in_array($proot,["pecl-memcache","php-geos","pecl-text-xdiff","php-ext-brotli","xdebug","php-src"]))
+		$proot = "php";
 	$nogit = array(
-		"php-cgi-spawner"	=> "1.1.23-90197af",
-		"icu"			=> ["/U_ICU_VERSION \"(.*)\"/",	
-							pathenv("PATH_SRC")."/icu/icu4c/source/common/unicode/uvernum.h"],
+		"php-cgi-spawner"	=> "1.1.24",
+		"php-geos"			=> ["/PHP_GEOS_VERSION \"([0-9\.]+)/",	
+							pathenv("PATH_SRC")."/".$argv[1]."/php_geos.h"],
+		"pecl-text-xdiff"	=> ["/PHP_XDIFF_VERSION \"([0-9\.]+)/",	
+							pathenv("PATH_SRC")."/".$argv[1]."/php_xdiff.h"],
+		"pecl-memcache"		=> ["/PHP_MEMCACHE_VERSION \"([0-9\.]+)/",	
+							pathenv("PATH_SRC")."/".$argv[1]."/src/php_memcache.h"],
+		"icu"				=> ["/U_ICU_VERSION \"(.*)\"/",	
+							pathenv("PATH_SRC")."/".$argv[1]."/icu4c/source/common/unicode/uvernum.h"],
+		"nssm"				=> ["/NSSM_VERSIONINFO (.*),(.*),(.*),(.*)/",	
+							pathenv("PATH_SRC")."/".$argv[1]."/version.h"],
 		"libyuv"			=> ["/LIBYUV_VERSION (.*)/",	
-							pathenv("PATH_SRC")."/libyuv/include/libyuv/version.h"],
+							pathenv("PATH_SRC")."/".$argv[1]."/include/libyuv/version.h"],
 		"mobac"				=> ["/mobac.revision=(.*)/",	
-							pathenv("PATH_SRC")."/mobac/mobac/build/resources/main/mobac/mobac-rev.properties"],
+							pathenv("PATH_SRC")."/".$argv[1]."/mobac/build/resources/main/mobac/mobac-rev.properties"],
 		"mod_fcgid"			=> ["/#define MODFCGID_VERSION_MAJOR *([0-9]+).*#define MODFCGID_VERSION_MINOR *([0-9]+).*#define MODFCGID_VERSION_SUBVER *([0-9]+).*#define MODFCGID_VERSION_DEV *([0-9]+)/s",	
-							pathenv("PATH_SRC")."/mod_fcgid/modules/fcgid/fcgid_conf.h"],
+							pathenv("PATH_SRC")."/".$argv[1]."/modules/fcgid/fcgid_conf.h"],
 		"mod_h264_streaming"=> ["/#define VERSION \"([^\"]+)\"/",
-							pathenv("PATH_SRC")."/mod_h264_streaming/config.h"],
+							pathenv("PATH_SRC")."/".$argv[1]."/config.h"],
 		"serf"				=> ["/#define SERF_MAJOR_VERSION *([0-9]+).*#define SERF_MINOR_VERSION *([0-9]+).*#define SERF_PATCH_VERSION *([0-9]+)/s",
-							pathenv("PATH_SRC")."/serf/serf.h"],
+							pathenv("PATH_SRC")."/".$argv[1]."/serf.h"],
 		"wineditline"		=> ["/WinEditLine_VERSION_MAJOR *([0-9]+).*WinEditLine_VERSION_MINOR *([0-9]+)/s",
-							pathenv("PATH_SRC")."/wineditline/CMakeLists.txt"],
+							pathenv("PATH_SRC")."/".$argv[1]."/CMakeLists.txt"],
 	);
 
 	function getVersion($cur,$src){
@@ -42,7 +55,7 @@
 			} elseif (is_string($nogit[$src])){
 				$ver_product = $nogit[$src];
 			} elseif (is_dir($cur."/".$src."/.git")){
-				$ver_product = execnono("git describe --tags",NULL,$cur."/".$src,NULL);
+				$ver_product = pathenv("SCM_TAG");
 				// remove name
 				$ver_product = str_replace($src,"",$ver_product);
 				// remove other prefix
@@ -54,7 +67,7 @@
 				// splitter as .
 				$ver_product = preg_replace("/[-_]/",".",$ver_product);
 				// alpha / beta as .
-				$ver_product = str_replace(["alpha","beta"],".",$ver_product);
+				$ver_product = str_replace(["alpha","beta","rc","RC"],".",$ver_product);
 				// pecl-memcache 5 'digit' version
 				if(($sctex = sizeof($ctex = explode(".",$ver_product))) > 4){
 					$ver_product = $ctex[0].".".$ctex[1].".".$ctex[2].".".$ctex[3];
@@ -95,10 +108,36 @@
 		if(is_dir($cur = pathenv("PATH_SRC"))."/".$argv[1]){
 			$current = getVersion($cur,$argv[1]);
 			$rpdb = " /rpdb";
-			if($argv[3] == "norpdb")
+			if($argv[3] == "norpdb"){
 				$rpdb = "";
-			$cmd = pathenv("BIN_VERPATCH")." ".$argv[2]." \"".$current["file"]."\" /va".$rpdb." /high /pv \"".$current["product"]."\" /s product \"".basename($argv[2],".".pathinfo($argv[2], PATHINFO_EXTENSION))."\"";
-			echo $cmd.PHP_EOL;
+			} elseif($argv[3] != ""){
+				$description = $argv[3]." ";
+			}
+			if(pathenv("ARCH")){
+				$arch = pathenv("ARCH");
+			}elseif(pathenv("PHP_SDK_ARCH")){
+				$arch = pathenv("PHP_SDK_ARCH");
+			}
+			$description .= "arch:".$arch.pathenv("AVXB")." vcver:".pathenv("vcvars_ver")."[".pathenv("MSVC_DEPS")."]";
+			if(pathenv("SCM_VERSION"))
+				$description .= " commit:".pathenv("SCM_VERSION");
+			if(pathenv("SCM_TAG"))
+				$description .= " tag:".pathenv("SCM_TAG");
+			if(pathenv("SCM_BRANCH") != "HEAD" && pathenv("SCM_BRANCH") != "")
+				$description .= " branch:".pathenv("SCM_BRANCH");
+			if(pathenv("SCM_VERSION_DATE"))
+				$description .= " date:".pathenv("SCM_VERSION_DATE");
+
+			$pname = basename($argv[2],".".pathinfo($argv[2], PATHINFO_EXTENSION));
+			if($pname != $proot)
+				$pname = $proot.":".$pname;
+
+			$cmd = pathenv("BIN_VERPATCH")." ".$argv[2]." \"".$current["file"]."\" /va".$rpdb." /high /pv \"".$current["product"]."\" /s description \"".$description."\" /s product \"".$pname."\" /s LegalTrademarks \"".pathenv("SCM_URL")."\" /s LegalCopyright \"https://github.com/nono303/win-build-scripts\"";
+			if(pathenv("DEBUG_BUILD") == 1){
+				echo $cmd.PHP_EOL;
+			} else {
+				echo "[version] ".$argv[2].PHP_EOL;
+			}
 			passthru($cmd);
 		} else {
 			echo "version.php '".$argv[1]."' '".$argv[2]."': '".pathenv("PATH_SRC")."/".$argv[1]."' doesn't exist";
