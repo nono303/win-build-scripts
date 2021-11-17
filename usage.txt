@@ -82,7 +82,6 @@ Usage: go command [options]
     > param: a path or a file to check
     > option:
         checkavx: test cpu instruction to check if AVX are present (slow)
-	updaterc: update StringFileInfo with build details (arch, MSVC version...)
 	recurse:  check subdir
 	ext:[ex1,ex2...]: by default, bininfo check *.exe *.dll *.so. you can override (extend or restric) these extensions with a comma separated list (without space) of extension to be checked. ex. ext:exe,dll
 	nb:[int]: number of file that must be present (and not only checked) in path param. can't be used with a file in param or recurse option
