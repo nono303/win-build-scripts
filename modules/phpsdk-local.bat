@@ -6,14 +6,14 @@ sed -i 's/libeay32st/libcrypto/g' %CYGPATH_SRC%/php-src/ext/phar/config.w32
 
 	REM ~~~~~~~~~~~~ pecl-text-xdiff : libxdiff version
 cd /D %PATH_SRC%\libxdiff
-FOR /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set LIB_VERSION=%%F)
+FOR /F "tokens=* USEBACKQ" %%F in (`git tag --points-at HEAD`) do (set LIB_VERSION=%%F)
 call %PATH_MODULES_COMMON%\init.bat pecl-text-xdiff
 sed -i 's/extern char libxdiff_version/\/\/ extern char libxdiff_version/g' %CYGPATH_SRC%/pecl-text-xdiff/xdiff.c
 sed -i 's/libxdiff_version)/"%LIB_VERSION:~1%")/g' %CYGPATH_SRC%/pecl-text-xdiff/xdiff.c
 
 	REM ~~~~~~~~~~~~ php-ext-brotli : brotli version
 cd /D %PATH_SRC%\brotli
-FOR /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set LIB_VERSION=%%F)
+FOR /F "tokens=* USEBACKQ" %%F in (`git tag --points-at HEAD`) do (set LIB_VERSION=%%F)
 call %PATH_MODULES_COMMON%\init.bat php-ext-brotli
 sed -i -E 's/BROTLI_LIB_VERSION(.), "([^\"]+)"/BROTLI_LIB_VERSION\1, "%LIB_VERSION:~1%"/g' %CYGPATH_SRC%/php-ext-brotli/config.w32
 
