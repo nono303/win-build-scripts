@@ -10,14 +10,16 @@ if "%CUR_DEBUG%"=="1" (
 	set NMAKE_OPTS=%NMAKE_OPTS_REL%
 	set MSBUILD_OPTS=%MSBUILD_OPTS_REL%
 )
+setlocal enabledelayedexpansion
 if exist %PATH_SRC%\%1\. (
 	cd %PATH_SRC%\%1
 	echo ^> %PATH_SRC%\%1
-	REM dirty !! https://stackoverflow.com/questions/9556676/batch-file-how-to-replace-equal-signs-and-a-string-variable
-	set SCM_VERSION=
-	setlocal enabledelayedexpansion
 	if exist %PATH_SRC%\%1\.git\. (
 		FOR /F "tokens=* USEBACKQ" %%F in (`git rev-parse --short HEAD`) do (set SCM_VERSION=%%F)
+		for /F "tokens=* USEBACKQ" %%F in (`git tag --points-at HEAD`) do (set SCM_TAG=%%F)
+		FOR /F "tokens=* USEBACKQ" %%F in (`git rev-parse --abbrev-ref HEAD`) do (set SCM_BRANCH=%%F)
+		FOR /F "tokens=* USEBACKQ" %%F in (`git show -s --format^=%%cd --date=short !SCM_VERSION!`) do (set SCM_VERSION_DATE=%%F)
+		FOR /F "tokens=* USEBACKQ" %%F in (`git config --get remote.origin.url`) do (set SCM_URL=%%F)
 		echo # %1 git commit:!SCM_VERSION!
 		if %ARG_KEEPSRC% == 0 (
 			git reset --hard
@@ -49,9 +51,24 @@ if exist %PATH_SRC%\%1\. (
 			)
 		)
 	)
-	REM https://stackoverflow.com/questions/26246151/setlocal-enabledelayedexpansion-causes-cd-and-pushd-to-not-persist
-	endlocal
+	
 )
+REM https://stackoverflow.com/questions/9556676/batch-file-how-to-replace-equal-signs-and-a-string-variable
+REM https://stackoverflow.com/questions/26246151/setlocal-enabledelayedexpansion-causes-cd-and-pushd-to-not-persist
+endlocal & ^
+cd %PATH_SRC%\%1& ^
+set SCM_VERSION=%SCM_VERSION%& ^
+set SCM_TAG=%SCM_TAG%& ^
+set SCM_BRANCH=%SCM_BRANCH%& ^
+set SCM_VERSION_DATE=%SCM_VERSION_DATE%& ^
+set SCM_URL=%SCM_URL%
+
+REM echo SCM_VERSION:%SCM_VERSION%
+REM echo SCM_TAG:%SCM_TAG%
+REM echo SCM_BRANCH:%SCM_BRANCH%
+REM echo SCM_VERSION_DATE:%SCM_VERSION_DATE%
+REM echo SCM_URL:%SCM_URL%
+
 if /I "%~2"=="cmake" (
 	if exist %PATH_BUILD%\%1\. rmdir /S /Q %PATH_BUILD%\%1
 	mkdir %PATH_BUILD%\%1
