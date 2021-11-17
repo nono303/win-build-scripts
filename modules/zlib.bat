@@ -8,3 +8,4 @@ if %ARCH% == x64 (nmake %NMAKE_OPTS% /f win32/Makefile.msc LOC="-DASMV -DASMINF 
 for %%E in (zlib.lib zlib.pdb zdll.lib) do (xcopy /C /F /Y %PATH_SRC%\%1\%%E %PATH_INSTALL%\lib\*)
 for %%E in (zlib1.dll zlib1.pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\%%E %PATH_INSTALL%\bin\*)
 for %%E in (zlib.h zconf.h) do (xcopy /C /F /Y %PATH_SRC%\%1\%%E %PATH_INSTALL%\include\*)
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\zlib1.dll

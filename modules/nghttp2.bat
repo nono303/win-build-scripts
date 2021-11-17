@@ -45,5 +45,6 @@ for %%C in ("-DENABLE_STATIC_LIB=YES -DENABLE_SHARED_LIB=NO" "-DENABLE_STATIC_LI
 		move /Y %PATH_INSTALL%\lib\nghttp2.lib %PATH_INSTALL%\lib\nghttp2_static.lib
 	) else (
 		xcopy /C /F /Y %PATH_BUILD%\%1\lib\nghttp2.pdb %PATH_INSTALL%\bin\*
+		call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\nghttp2.dll
 	)
 )

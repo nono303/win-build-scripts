@@ -14,6 +14,7 @@ MSBuild.exe %PATH_SRC%\libiconv\MSVC%MSVC_VER%\libiconv.sln ^
 
 xcopy /C /F /Y %PATH_SRC%\libiconv\MSVC%MSVC_VER%\%archmsbuild%\bin\libiconv.dll %PATH_INSTALL%\bin\* 
 xcopy /C /F /Y %PATH_SRC%\libiconv\MSVC%MSVC_VER%\%archmsbuild%\bin\libiconv.pdb %PATH_INSTALL%\bin\*
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libiconv.dll
 	REM for libxml2 & httpd
 xcopy /C /F /Y %PATH_SRC%\libiconv\MSVC%MSVC_VER%\%archmsbuild%\lib\libiconv.lib %PATH_INSTALL%\lib\iconv.lib*
 xcopy /C /F /Y %PATH_SRC%\libiconv\MSVC%MSVC_VER%\%archmsbuild%\lib\libiconv_a.lib %PATH_INSTALL%\lib\*

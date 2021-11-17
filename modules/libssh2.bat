@@ -20,6 +20,7 @@ for %%S in (YES NO) do (
 
 	if %%S == YES (
 		for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\src\libssh2.%%X %PATH_INSTALL%\bin\*)
+		call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libssh2.dll
 	) else (
 		xcopy /C /F /Y %PATH_BUILD%\%1\src\libssh2.lib %PATH_INSTALL%\lib\*
 		xcopy /C /F /Y %PATH_BUILD%\%1\src\CMakeFiles\libssh2.dir\libssh2.pdb %PATH_INSTALL%\lib\*

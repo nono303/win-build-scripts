@@ -20,6 +20,7 @@ MSBuild.exe %PATH_SRC%\%1\%VCDIR%\xz_win.sln ^
 	REM C:\sdk\src\liblzma\windows\vs2019\%VCCONF%\x64\liblzma_dll\liblzma.lib
 for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\%VCDIR%\%VCCONF%\%archmsbuild%\liblzma_dll\liblzma.%%X %PATH_INSTALL%\bin\*)
 for %%X in (lib pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\%VCDIR%\%VCCONF%\%archmsbuild%\liblzma\liblzma.%%X %PATH_INSTALL%\lib\*)
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\liblzma.dll
 	REM xcopy /C /F /Y %PATH_SRC%\%1\src\liblzma\lzma\*.h %PATH_INSTALL%\include\*
 xcopy /C /F /Y %PATH_SRC%\%1\src\liblzma\api\lzma.h %PATH_INSTALL%\include\*
 if not exist %PATH_SRC%\%1\src\liblzma\api\lzma\. mkdir %PATH_SRC%\%1\src\liblzma\api\lzma

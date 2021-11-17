@@ -38,4 +38,7 @@ for %%M in (engines-%OPENSSL_SUF% ossl-modules) do (
 	move /y %PATH_INSTALL%\lib\%%M\*.* %PATH_INSTALL%\bin\%%M
 	rmdir /S /Q %PATH_INSTALL%\lib\%%M
 )
-call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\openssl.exe
+
+for %%M in (libcrypto-%OPENSSL_SUF%%sslarch%.dll libssl-%OPENSSL_SUF%%sslarch%.dll openssl.exe) do (
+	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%M
+)

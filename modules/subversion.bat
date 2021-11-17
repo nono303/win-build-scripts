@@ -35,6 +35,7 @@ MSBuild.exe subversion_vcnet.sln ^
 	REM ~~~~~~~~~~~~ Copy Release
 for %%X in (exe dll so) do (
 	for /f "tokens=*" %%G in ('dir %PATH_SRC%\%1\%OUTDIR_CONF%\*.%%X /s/b') do (
+		call do_php %PATH_UTILS%\sub\version.php %1 %%~pG%%~nG.%%X
 		xcopy /C /F /Y %%~pG%%~nG.%%X %PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%\*
 		xcopy /C /F /Y %%~pG%%~nG.pdb %PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%\*
 	)
