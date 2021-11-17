@@ -2,7 +2,7 @@
 	error_reporting(E_ALL & ~E_NOTICE);
 
 	function replace_extension($filename, $new_extension) {
-		return preg_replace('/\..+$/', '.' . $new_extension, $filename);
+		return preg_replace('/\.[^\.]+$/', '.' . $new_extension, $filename);
 	}
 
 	function pathenv($env){
