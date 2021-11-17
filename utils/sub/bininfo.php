@@ -35,17 +35,6 @@
 		return $ressig;
 	}
 
-	function verpatch($dir,$file,$version,$copyright,$title){
-		$vercmd = pathenv("BIN_VERPATCH")." ".$dir."/".$file." ".$version." /rpdb /s copyright \"".$copyright."\" /s title \"".$title."\"";
-		debug($vercmd);
-		//echo $vercmd.PHP_EOL;
-		$ver = execnono($vercmd,NULL,$dir."/",NULL);
-		debug($ver);
-		//echo $ver.PHP_EOL;
-		preg_match("/ParseBinaryVersionResource: :(.*)\n/",$ver,$matches);
-		if($matches[1]) echo "\t!! verpatch: ".$matches[1].PHP_EOL;
-	}
-
 	function check($dirbase,$dir,$recurse=false){
 		if(is_dir($dir)){
 			$ressig = sigcheck($dir);
@@ -78,35 +67,25 @@
 
 			$copyright = $_ENV["RC_COPYRIGHT"];
 			$title = $_ENV["ARCH"]." ".$_ENV["AVXECHO"]." MSVC ".$_ENV["vcvars_ver"];
-			if($ressig[$file]["copyright"] != $copyright && UPDATE_RC){
-				verpatch($dir,$file,$ressig[$file]["binaryversion"],$copyright,$title);
-				$ressig[$file] = sigcheck($dir,$file)[$file];
-			}
 			$data[$cur][50] =	$ressig[$file]["binaryversion"];
 			$data[$cur][60] =	$ressig[$file]["productversion"];
 			$data[$cur][5] =	$ressig[$file]["date"];
-			$data[$cur][190] =	$ressig[$file]["product"];
+			$data[$cur][88] =	$ressig[$file]["product"];
 			$data[$cur][110] =	$ressig[$file]["company"];
-			$data[$cur][120] =	$ressig[$file]["description"];
+			$data[$cur][120] =	strlen($ressig[$file]["description"]) > 140 ? substr($ressig[$file]["description"],0,140)."..." : $ressig[$file]["description"];
 			$data[$cur][65] =	$ressig[$file]["fileversion"];
 			$data[$cur][10] =	$ressig[$file]["machinetype"];
 			$data[$cur][150] =	$ressig[$file]["originalname"];
 			$data[$cur][160] =	$ressig[$file]["internalname"];
 			$data[$cur][170] =	$ressig[$file]["copyright"];
 			$data[$cur][180] =	$ressig[$file]["comments"];
-			if($data[$cur][190] == "n/a")
-				$data[$cur][190] = "\033[33m".$data[$cur][190]."\033[39m";
+			if($data[$cur][88] == "n/a")
+				$data[$cur][88] = "\033[33m".$data[$cur][88]."\033[39m";
 			if($data[$cur][170] == $copyright){
-				$data[$cur][175] = "OK";
+				$data[$cur][85] = "OK";
 			} else {
-				$data[$cur][175] = "\033[31mKO\033[39m";
+				$data[$cur][85] = "\033[31mKO\033[39m";
 			}
-			if($data[$cur][160] == $title){
-				$data[$cur][165] = "OK";
-			} else {
-				$data[$cur][165] = "\033[31mKO\033[39m";
-			}
-
 			$nbavx = 0;
 			$data[$cur][30] = "";
 			if(CHECK_AVX){
@@ -137,8 +116,11 @@
 				$data[$cur][70] = $pdbfile;
 				$pdbres = str_replace(")","",str_replace("Unmatched (reason: ","",$matches[1]));
 				$data[$cur][80] = $pdbres;
-				if($data[$cur][80] != "Matched")
+				if($data[$cur][80] != "Matched"){
 					$data[$cur][80] = "\033[31m".$data[$cur][80]."\033[39m";
+				} else {
+					$data[$cur][80] = "OK";
+				}
 			}
 
 			$dbhcmd = "dumpbin /headers ".$dir."/".$file;
@@ -178,8 +160,6 @@
 	foreach($argv as $arg){
 		if($arg == "checkavx")
 			$checkavx = true;
-		if($arg == "updaterc")
-			$updaterc = true;
 		if($arg == "recurse")
 			$recurse = true;
 		$matches = null;
@@ -206,13 +186,6 @@
 		define("CHECK_AVX",false);
 		echo "checkavx: OFF".PHP_EOL;
 	}
-	if($updaterc){
-		define("UPDATE_RC",true);
-		echo "updaterc: ON".PHP_EOL;
-	} else {
-		define("UPDATE_RC",false);
-		echo "updaterc: OFF".PHP_EOL;
-	}
 	if($recurse){
 		define("RECURSE",true);
 		echo "recurse:  ON".PHP_EOL;
@@ -222,28 +195,28 @@
 	}
 
 	global $col;
-	$fnmax = 27;
 	$col = array (
-		0 => array("name" =>	"filename",		"pad" => $fnmax),
-		5 => array("name" =>	"date",			"pad" => 17),
-		10 => array("name" =>	"x",			"pad" => 3),
-		20 => array("name" =>	"link",			"pad" => 5),
-		30 => array("name" =>	"set",			"pad" => 13),
-		40 => array("name" =>	"cl",			"pad" => 6),
-		50 => array("name" =>	"bver",			"pad" => 13),
-		60 => array("name" =>	"pver",			"pad" => 13),
-		65 => array("name" =>	"fver",			"pad" => 13),
-		70 => array("name" =>	"pdb",			"pad" => $fnmax),
-		80 => array("name" =>	"pdbresult",	"pad" => 19),
+		0 => array("name" =>	"filename",		"pad" => 28),
+		5 => array("name" =>	"date",			"pad" => 18),
+		10 => array("name" =>	"x",			"pad" => 4),
+		20 => array("name" =>	"link",			"pad" => 6),
+		30 => array("name" =>	"set",			"pad" => 14),
+		40 => array("name" =>	"cl",			"pad" => 7),
+			50 => array("name" =>	"bver",			"pad" => -1),
+		60 => array("name" =>	"pver",			"pad" => 10),
+			65 => array("name" =>	"fver",			"pad" => -1),
+			70 => array("name" =>	"pdb",			"pad" => -1),
+		80 => array("name" =>	"pdb",	"pad" => 4),
+		85 => array("name" =>	"©   ",	"pad" => 4),
+		88 => array("name" =>	"product",		"pad" => 38),
 			110 => array("name" =>	"company",		"pad" => -1),
-			120 => array("name" =>	"description",	"pad" => -1),
-		150 => array("name" =>	"originalname",	"pad" => $fnmax),
+		120 => array("name" =>	"description",	"pad" => 130),
+			150 => array("name" =>	"originalname",	"pad" => -1),
 			160 => array("name" =>	"internalname",	"pad" => -1),
-		165 => array("name" =>	"in",	"pad" => 3),
 			170 => array("name" =>	"copyright",	"pad" => -1),
-		175 => array("name" =>	"©",	"pad" => 3),
+		
 			180 => array("name" =>	"comments",		"pad" => -1),
-		190 => array("name" =>	"product",		"pad" => 40),
+		
 	);
 	if(!CHECK_AVX) 
 		$col[30]["pad"] = -1;
