@@ -51,12 +51,12 @@ Usage: go command [options]
       * libtiff
       * proj
       * geographiclib
+    * nssm
+    * php-cgi-spawner
   * dependencies
   * mapsforgesrv
   * memcached
   * mobac
-  * nssm
-  * php-cgi-spawner
   * sdlna
   * verpatch
 - build options:
