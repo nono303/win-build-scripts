@@ -1,7 +1,199 @@
-diff --git "a/vs_version.h" "b/vs_version.h"
+diff --git a/verpatch.sln b/verpatch.sln
+index 047d91f..c8cdef7 100644
+--- a/verpatch.sln
++++ b/verpatch.sln
+@@ -6,12 +6,18 @@ EndProject
+ Global
+ 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+ 		Debug|Win32 = Debug|Win32
++		Debug|x64 = Debug|x64
+ 		Release|Win32 = Release|Win32
++		Release|x64 = Release|x64
+ 	EndGlobalSection
+ 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+ 		{E08F11BD-35BC-4496-82BB-1CFD56BB044C}.Debug|Win32.ActiveCfg = Debug|Win32
+ 		{E08F11BD-35BC-4496-82BB-1CFD56BB044C}.Debug|Win32.Build.0 = Debug|Win32
++		{E08F11BD-35BC-4496-82BB-1CFD56BB044C}.Debug|x64.ActiveCfg = Debug|x64
++		{E08F11BD-35BC-4496-82BB-1CFD56BB044C}.Debug|x64.Build.0 = Debug|x64
+ 		{E08F11BD-35BC-4496-82BB-1CFD56BB044C}.Release|Win32.ActiveCfg = Release|Win32
+ 		{E08F11BD-35BC-4496-82BB-1CFD56BB044C}.Release|Win32.Build.0 = Release|Win32
++		{E08F11BD-35BC-4496-82BB-1CFD56BB044C}.Release|x64.ActiveCfg = Release|x64
++		{E08F11BD-35BC-4496-82BB-1CFD56BB044C}.Release|x64.Build.0 = Release|x64
+ 	EndGlobalSection
+ EndGlobal
+diff --git a/verpatch.vcxproj b/verpatch.vcxproj
+index 568990e..d483577 100644
+--- a/verpatch.vcxproj
++++ b/verpatch.vcxproj
+@@ -5,10 +5,18 @@
+       <Configuration>Debug</Configuration>
+       <Platform>Win32</Platform>
+     </ProjectConfiguration>
++    <ProjectConfiguration Include="Debug|x64">
++      <Configuration>Debug</Configuration>
++      <Platform>x64</Platform>
++    </ProjectConfiguration>
+     <ProjectConfiguration Include="Release|Win32">
+       <Configuration>Release</Configuration>
+       <Platform>Win32</Platform>
+     </ProjectConfiguration>
++    <ProjectConfiguration Include="Release|x64">
++      <Configuration>Release</Configuration>
++      <Platform>x64</Platform>
++    </ProjectConfiguration>
+   </ItemGroup>
+   <PropertyGroup Label="Globals">
+     <ProjectGuid>{E08F11BD-35BC-4496-82BB-1CFD56BB044C}</ProjectGuid>
+@@ -22,29 +30,48 @@
+     <WholeProgramOptimization>true</WholeProgramOptimization>
+     <PlatformToolset>v120_xp</PlatformToolset>
+   </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
++    <ConfigurationType>Application</ConfigurationType>
++    <CharacterSet>Unicode</CharacterSet>
++    <WholeProgramOptimization>true</WholeProgramOptimization>
++    <PlatformToolset>v120_xp</PlatformToolset>
++  </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+     <ConfigurationType>Application</ConfigurationType>
+     <CharacterSet>Unicode</CharacterSet>
+     <PlatformToolset>v120_xp</PlatformToolset>
+   </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
++    <ConfigurationType>Application</ConfigurationType>
++    <CharacterSet>Unicode</CharacterSet>
++    <PlatformToolset>v120_xp</PlatformToolset>
++  </PropertyGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+   <ImportGroup Label="ExtensionSettings">
+   </ImportGroup>
+   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
++  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
+   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+   </ImportGroup>
++  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
+   <PropertyGroup Label="UserMacros" />
+   <PropertyGroup>
+     <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
++    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
++    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+   </PropertyGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <ClCompile>
+@@ -72,6 +99,30 @@
+       <Command>cd /d $(OutDir) &amp;&amp; $(ProjectDir)ver-self.cmd</Command>
+     </PostBuildEvent>
+   </ItemDefinitionGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
++    <ClCompile>
++      <Optimization>Disabled</Optimization>
++      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
++      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
++      <PrecompiledHeader>NotUsing</PrecompiledHeader>
++      <WarningLevel>Level3</WarningLevel>
++      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
++    </ClCompile>
++    <Link>
++      <OutputFile>$(OutDir)verpatch.exe</OutputFile>
++      <GenerateDebugInformation>true</GenerateDebugInformation>
++      <SubSystem>Console</SubSystem>
++      <LargeAddressAware>false</LargeAddressAware>
++      <TerminalServerAware>false</TerminalServerAware>
++      <RandomizedBaseAddress>false</RandomizedBaseAddress>
++      <DataExecutionPrevention>true</DataExecutionPrevention>
++    </Link>
++    <PostBuildEvent>
++      <Message>Add version and helptext...</Message>
++      <Command>cd /d $(OutDir) &amp;&amp; $(ProjectDir)ver-self.cmd</Command>
++    </PostBuildEvent>
++  </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+     <ClCompile>
+       <Optimization>MinSpace</Optimization>
+@@ -102,13 +153,44 @@
+       <Command>cd /d $(OutDir) &amp;&amp; $(ProjectDir)ver-self.cmd</Command>
+     </PostBuildEvent>
+   </ItemDefinitionGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
++    <ClCompile>
++      <Optimization>MinSpace</Optimization>
++      <IntrinsicFunctions>true</IntrinsicFunctions>
++      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_A_NOISE_DBG=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
++      <FunctionLevelLinking>true</FunctionLevelLinking>
++      <PrecompiledHeader>NotUsing</PrecompiledHeader>
++      <WarningLevel>Level3</WarningLevel>
++      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
++      <WholeProgramOptimization>false</WholeProgramOptimization>
++      <FloatingPointModel>Fast</FloatingPointModel>
++    </ClCompile>
++    <Link>
++      <OutputFile>$(OutDir)verpatch.exe</OutputFile>
++      <GenerateDebugInformation>true</GenerateDebugInformation>
++      <SubSystem>Console</SubSystem>
++      <LargeAddressAware>false</LargeAddressAware>
++      <TerminalServerAware>false</TerminalServerAware>
++      <OptimizeReferences>true</OptimizeReferences>
++      <EnableCOMDATFolding>true</EnableCOMDATFolding>
++      <RandomizedBaseAddress>false</RandomizedBaseAddress>
++      <DataExecutionPrevention>true</DataExecutionPrevention>
++    </Link>
++    <PostBuildEvent>
++      <Message>Add version and helptext...</Message>
++      <Command>cd /d $(OutDir) &amp;&amp; $(ProjectDir)ver-self.cmd</Command>
++    </PostBuildEvent>
++  </ItemDefinitionGroup>
+   <ItemGroup>
+     <ClCompile Include="peExtras.cpp" />
+     <ClCompile Include="peutils.cpp" />
+     <ClCompile Include="relstamp.cpp" />
+     <ClCompile Include="stdafx.cpp">
+       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
++      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
++      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+     </ClCompile>
+     <ClCompile Include="vs_version.cpp" />
+   </ItemGroup>
+@@ -122,15 +204,20 @@
+   <ItemGroup>
+     <CustomBuildStep Include="usage.txt">
+       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
++      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
++      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+     </CustomBuildStep>
+     <CustomBuildStep Include="ver-self.cmd">
+       <FileType>Document</FileType>
+       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
++      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
++      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+     </CustomBuildStep>
+     <CustomBuildStep Include="verpatch-ReadMe.txt">
+       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
++      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+     </CustomBuildStep>
+   </ItemGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+diff --git a/vs_version.h b/vs_version.h
 index 3f9ba19..452faa4 100644
---- "a/vs_version.h"
-+++ "b/vs_version.h"
+--- a/vs_version.h
++++ b/vs_version.h
 @@ -144,8 +144,8 @@ class xybuf
  	};
  

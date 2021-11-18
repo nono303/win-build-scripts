@@ -14,6 +14,8 @@
 		$proot = "php";
 	$nogit = array(
 		"php-cgi-spawner"	=> "1.1.24",
+		"verpatch"			=> ["/set _ver=\"([^ ]+)/",	
+							pathenv("PATH_SRC")."/".$argv[1]."/ver-self.cmd"],
 		"php-geos"			=> ["/PHP_GEOS_VERSION \"([0-9\.]+)/",	
 							pathenv("PATH_SRC")."/".$argv[1]."/php_geos.h"],
 		"pecl-text-xdiff"	=> ["/PHP_XDIFF_VERSION \"([0-9\.]+)/",	
@@ -133,7 +135,7 @@
 				$pname = $proot.":".$pname;
 
 			$cmd = pathenv("BIN_VERPATCH")." ".$argv[2]." \"".$current["file"]."\" /va".$rpdb." /high /pv \"".$current["product"]."\" /s description \"".$description."\" /s product \"".$pname."\" /s LegalTrademarks \"".pathenv("SCM_URL")."\" /s LegalCopyright \"https://github.com/nono303/win-build-scripts\"";
-			if(pathenv("DEBUG_BUILD") == 1){
+			if(pathenv("CUR_DEBUG") == 1){
 				echo $cmd.PHP_EOL;
 			} else {
 				echo "[version] ".$argv[2].PHP_EOL;
