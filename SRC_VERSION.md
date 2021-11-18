@@ -41,7 +41,7 @@
 | [memcached](https://github.com/memcached/memcached) | 1.6.12 |
 | [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2628 |
 | [mod_fcgid](http://svn.apache.org/repos/asf) | 2.3.10.1 |
-| [mod_h2](https://github.com/icing/mod_h2) | 2.0.0rc4 |
+| [mod_h2](https://github.com/icing/mod_h2) | 2.0.0 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
 | [mod_md](https://github.com/icing/mod_md) | 2.4.9 |
