@@ -2,6 +2,10 @@
 	REM ~~~~~~~~~~~~ current full build
 set PHP_FULLBUILD=8.1
 
+	REM ~~~~~~~~~~~~ TS - NTS 
+set PHP_BUILDTS=0
+set PHP_BUILDNTS=1
+
 	REM revision & version for pecl_memcache
 call %PATH_MODULES_COMMON%\init.bat pecl-memcache
 set PECLMEMCACHEGITCOMMIT=%SCM_VERSION%
@@ -22,10 +26,6 @@ if not exist %PATH_SRC%\php-sdk\phpmaster\. mklink /J %PATH_SRC%\php-sdk\phpmast
 	REM ~~~~~~~~~~~~ init var
 set LIB=
 set INCLUDE=
-
-	REM ~~~~~~~~~~~~ TS - NTS 
-set PHP_BUILDTS=0
-set PHP_BUILDNTS=1
 
 	REM ~~~~~~~~~~~~ curl
 set PHP_CURL=%PATH_INSTALL%\%FOLDER_RELEASE_CURL%\openssl
