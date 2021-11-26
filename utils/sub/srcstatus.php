@@ -78,6 +78,7 @@
 				if(VERBOSE) echo $cmd.PHP_EOL;
 				$branch = $matches[1];
 				if(in_array($ele,$notags)){
+					$reset = execnono($cmd = "git reset --hard",NULL,$repo,NULL);
 					$pullres = execnono($cmd = "git pull",NULL,$repo,NULL);
 					if(VERBOSE) echo $cmd.PHP_EOL.$pullres.PHP_EOL;
 					$logtags = $branch;
