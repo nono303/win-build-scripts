@@ -1,4 +1,5 @@
 echo phpsdk-config_make for %PHPVER%
+cd /D %PHP_SRC_DIR%
 	REM ################# PHP7 #################
 set PHP7_COMMON_CONFIGURE=^
 	--disable-crt-debug ^
@@ -35,6 +36,7 @@ if %PHPVER% == 7.4 (
 			--disable-phpdbg-webhelper
 	set native-intrinsics=1
 )
+REM ################# PHP8 #################
 if %PHPVER% == 8.0 (
 	set phpveropts=	--enable-native-intrinsics=sse,sse2%intrinsics% ^
 			--with-mhash ^
@@ -45,7 +47,8 @@ if %PHPVER% == 8.0 (
 if %PHPVER% == 8.1 (
 	set phpveropts=	--enable-native-intrinsics=sse,sse2%intrinsics% ^
 			--with-mhash ^
-			--enable-sanitizer
+			--enable-sanitizer ^
+			--with-php-build=%PATH_INSTALL%
 	set native-intrinsics=1
 )
 
@@ -81,7 +84,6 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	call configure %PHP_COMMON_CONFIGURE% ^
 	--with-toolset=vs ^
 	--with-cygwin=%PATH_BIN_CYGWIN% ^
-	--with-php-build=%PATH_INSTALL% ^
 	--enable-brotli=shared ^
 	--enable-com-dotnet ^
 	--enable-exif ^
@@ -164,23 +166,23 @@ for %%A in (exe dll) do (
 		)
 	)
 )
-
-call %PATH_MODULES_COMMON%\init.bat php-src
-for %%X in (php-cgi.exe php.exe php8.dll php_curl.dll php_fileinfo.dll php_gd.dll php_intl.dll php_opcache.dll php_openssl.dll php_tidy.dll) do (
-	call do_php %PATH_UTILS%\sub\version.php php-src %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%outdirphp%\_php-%TSNTS%\%%X "build:%TSNTS%"
+if %PHPVER% == %PHP_FULLBUILD% (
+	call %PATH_MODULES_COMMON%\init.bat php-src
+	for %%X in (php-cgi.exe php.exe php8.dll php_curl.dll php_fileinfo.dll php_gd.dll php_intl.dll php_opcache.dll php_openssl.dll php_tidy.dll) do (
+		call do_php %PATH_UTILS%\sub\version.php php-src %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%outdirphp%\_php-%TSNTS%\%%X "build:%TSNTS%"
+	)
+	call %PATH_MODULES_COMMON%\init.bat pecl-text-xdiff
+	call do_php %PATH_UTILS%\sub\version.php pecl-text-xdiff %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%outdirphp%\_php-%TSNTS%\php_xdiff.dll "php:%PHPVER% build:%TSNTS%"
+	call %PATH_MODULES_COMMON%\init.bat php-ext-brotli
+	call do_php %PATH_UTILS%\sub\version.php php-ext-brotli %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%outdirphp%\_php-%TSNTS%\php_brotli.dll "php:%PHPVER% build:%TSNTS%"
+	call %PATH_MODULES_COMMON%\init.bat php-geos
+	call do_php %PATH_UTILS%\sub\version.php php-geos %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%outdirphp%\_php-%TSNTS%\php_geos.dll "php:%PHPVER% build:%TSNTS%"
+	call %PATH_MODULES_COMMON%\init.bat xdebug
+	call do_php %PATH_UTILS%\sub\version.php xdebug %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%outdirphp%\_php-%TSNTS%\php_xdebug.dll "php:%PHPVER% build:%TSNTS%"
 )
+	REM php_memcache for github
 call %PATH_MODULES_COMMON%\init.bat pecl-memcache
 call do_php %PATH_UTILS%\sub\version.php pecl-memcache %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%outdirphp%\_php-%TSNTS%\php_memcache.dll "php:%PHPVER% build:%TSNTS%"
-call %PATH_MODULES_COMMON%\init.bat pecl-text-xdiff
-call do_php %PATH_UTILS%\sub\version.php pecl-text-xdiff %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%outdirphp%\_php-%TSNTS%\php_xdiff.dll "php:%PHPVER% build:%TSNTS%"
-call %PATH_MODULES_COMMON%\init.bat php-ext-brotli
-call do_php %PATH_UTILS%\sub\version.php php-ext-brotli %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%outdirphp%\_php-%TSNTS%\php_brotli.dll "php:%PHPVER% build:%TSNTS%"
-call %PATH_MODULES_COMMON%\init.bat php-geos
-call do_php %PATH_UTILS%\sub\version.php php-geos %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%outdirphp%\_php-%TSNTS%\php_geos.dll "php:%PHPVER% build:%TSNTS%"
-call %PATH_MODULES_COMMON%\init.bat xdebug
-call do_php %PATH_UTILS%\sub\version.php xdebug %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%outdirphp%\_php-%TSNTS%\php_xdebug.dll "php:%PHPVER% build:%TSNTS%"
-
-	REM php_memcache for github
 if not "%PATH_GITHUB_PHPMEMCACHE%"=="" (
 	for %%A in (pdb dll) do (
 		xcopy /C /F /Y %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%outdirphp%\_php-%TSNTS%\php_memcache.%%A %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXDIR%\php-%PHPVER%.x_memcache.%%A*
