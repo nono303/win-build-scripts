@@ -25,7 +25,7 @@
 | [libffi](https://github.com/winlibs/libffi) | 3.3 |
 | [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.17.0 |
 | [libiconv](https://github.com/winlibs/libiconv) | 1.16.1 |
-| [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) | 2.1.1 |
+| [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) | 2.1.2 |
 | [liblzma](https://github.com/ShiftMediaProject/liblzma) | 5.3.2alpha |
 | [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.6.0 |
 | [libpng](https://sourceforge.net/p/libpng/code/ci/master/tree/) | 1.6.37 |
@@ -34,7 +34,7 @@
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
 | [libxml2](https://github.com/GNOME/libxml2) | 2.9.12 |
 | [libxpm](https://gitlab.freedesktop.org/xorg/lib/libxpm) | 3.5.13 |
-| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1803 |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1805 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
 | [mapsforgesrv](https://github.com/telemaxx/mapsforgesrv.git) | 0.16.1 - 4506b36 |
@@ -56,7 +56,7 @@
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.13.1 |
 | [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1 |
 | [php-sdk](https://github.com/microsoft/php-sdk-binary-tools) | 2.2.0 |
-| [php-src](https://github.com/php/php-src) | 8.1.0rc6 |
+| [php-src](https://github.com/php/php-src) | 8.1.0 |
 | [proj](https://github.com/OSGeo/PROJ) | 8.2.0 |
 | [sdlna](https://github.com/nono303/simpleDLNA) | 1.0.3 |
 | [serf](https://github.com/apache/serf) | 1.4.0 |
