@@ -1,5 +1,5 @@
 link="<EnableCOMDATFolding>true<\/EnableCOMDATFolding><OptimizeReferences>true<\/OptimizeReferences>"
-for i in `/usr/bin/find $1 -type f -name "*.vcxproj" -o -name "*.config" -o -name "*.csproj" 2>/dev/null` 
+for i in `/usr/bin/find $1 -type f -name "*.vcxproj" -o -name "*.config" -o -name "*.csproj" -o -name "*.props" 2>/dev/null` 
 do
   # MSVC
   sed -i -E 's/<PlatformToolset>[^<]+/<VCToolsVersion>'$5'<\/VCToolsVersion><PlatformToolset>v'$3'/g' $i
