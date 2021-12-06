@@ -15,7 +15,7 @@ REM 	/t:cal,cintltst,common,ctestfw,date,derb,genbrk,genccode,gencmn,gencnval,ge
 	/nowarn:C4018;C4116;C4267;C4312;C4146;MSB8028 ^
 	/p:Configuration=Release ^
 	/p:SkipUWP=true ^
-	/p:Platform="%archmsbuild%"
+	/p:Platform=%archmsbuild%
 
 for %%C in (dt in io tu uc) do (
 	xcopy /C /F /Y %PATH_SRC%\icu\icu4c\bin64\icu%%C%ICUV%.dll %PATH_INSTALL%\bin\*
