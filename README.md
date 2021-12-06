@@ -48,14 +48,14 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [OpenJDK](https://jdk.java.net/17/)                        | x64  | 17.0.1 |                     |
 | [ActivePerl](https://platform.activestate.com/ActiveState/ActivePerl-5.28/auto-fork) | x64  | 5.28.1.2801    |                     |
 | [Netwide Assembler](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.15.05        |                     |
-| [Git](https://git-scm.com/download/win)                      | x64  | 2.34.0 |                     |
+| [Git](https://git-scm.com/download/win)                      | x64  | 2.34.1 |                     |
 | verpatch                                                     | x64  | 1.0.15.1       |                     |
-| [7z](https://www.7-zip.org/download.html)                    | x64  | 21.04       |                     |
+| [7z](https://www.7-zip.org/download.html)                    | x64  | 21.06      |                     |
 | [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.82         |                     |
 | [ChkMatch](http://beefchunk.com/documentation/sys-programming/os-win32/debug/www.debuginfo.com/tools/chkmatch.html) |      | 1.0.3          |                     |
-| [Gradle](https://gradle.org/install/) | | 7.3 | |
+| [Gradle](https://gradle.org/install/) | | 7.3.1 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | | 1.10.2 | |
-| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 0.60.1 | |
+| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 0.60.2 | |
 | [NuGet](https://www.nuget.org/downloads) | x86 | 6.0.0 | |
 
 ### [SOURCE VERSIONS](./SRC_VERSION.md)
