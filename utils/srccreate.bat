@@ -54,7 +54,7 @@ git checkout tags/v1.11.1
 cd /D ..
 git clone git://git.sv.nongnu.org/freetype/freetype2.git freetype2
 cd /D freetype2
-git checkout tags/VER-2-11-0
+git checkout tags/VER-2-11-1
 cd /D ..
 git clone https://git.code.sf.net/p/geographiclib/code geographiclib
 cd /D geographiclib
@@ -170,11 +170,11 @@ svn update -r 2632
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1895348
+svn update -r 1895612
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v2.0.0
+git checkout tags/v2.0.1
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -270,7 +270,7 @@ svn update -r 36
 cd /D ..
 git clone https://github.com/xdebug/xdebug.git xdebug
 cd /D xdebug
-git checkout tags/3.1.1
+git checkout tags/3.1.2
 cd /D ..
 git clone https://github.com/madler/zlib.git zlib
 cd /D zlib

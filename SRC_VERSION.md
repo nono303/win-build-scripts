@@ -11,7 +11,7 @@
 | [curl](https://github.com/curl/curl) | 7.80.0 |
 | [dav1d](https://code.videolan.org/videolan/dav1d.git) | 0.9.2 |
 | [dependencies](https://github.com/lucasg/Dependencies) | 1.11.1 |
-| [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.11.0 |
+| [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.11.1 |
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52 |
 | [geos](https://github.com/libgeos/geos) | 3.10.1 |
 | [httpd](https://github.com/apache/httpd) | 2.4.51 |
@@ -41,7 +41,7 @@
 | [memcached](https://github.com/memcached/memcached) | 1.6.12 |
 | [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2628 |
 | [mod_fcgid](http://svn.apache.org/repos/asf) | 2.3.10.1 |
-| [mod_h2](https://github.com/icing/mod_h2) | 2.0.0 |
+| [mod_h2](https://github.com/icing/mod_h2) | 2.0.1 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
 | [mod_md](https://github.com/icing/mod_md) | 2.4.9 |
@@ -65,5 +65,5 @@
 | [tidy](https://github.com/htacg/tidy-html5) | 5.9.14 |
 | [verpatch](https://github.com/pavel-a/ddverpatch) | 1.0.15.1 - 3cc989e |
 | [wineditline](https://svn.code.sf.net/p/mingweditline/code) | 2.2 |
-| [xdebug](https://github.com/xdebug/xdebug) | 3.1.1 |
+| [xdebug](https://github.com/xdebug/xdebug) | 3.1.2 |
 | [zlib](https://github.com/madler/zlib) | 1.2.11 |
