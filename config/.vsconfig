@@ -12,9 +12,9 @@
     "Microsoft.VisualStudio.Component.VC.Redist.14.Latest",
     "Microsoft.VisualStudio.ComponentGroup.WebToolsExtensions.CMake",
     "Microsoft.VisualStudio.Component.VC.CMake.Project",
-    "Microsoft.VisualStudio.Component.VC.v141.x86.x64",
+    "Microsoft.VisualStudio.Component.NuGet.BuildTools",
     "Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64",
-    "Microsoft.Net.Component.4.7.SDK",
-    "Microsoft.VisualStudio.Component.Windows10SDK.20348"
+    "Microsoft.Net.Component.4.8.SDK",
+    "Microsoft.VisualStudio.Component.Windows11SDK.22000"
   ]
 }
