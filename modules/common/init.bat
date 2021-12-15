@@ -36,6 +36,11 @@ if exist %PATH_SRC%\%1\. (
 	)
 	if exist %PATH_SRC%\%1\.svn\. (
 		FOR /F "tokens=* USEBACKQ" %%F in (`svn info --show-item revision`) do (set SCM_VERSION=%%F)
+		REM svn log %SCM_URL%/tags/
+		REM svn ls -v %SCM_URL%/tags/
+		FOR /F "tokens=* USEBACKQ" %%F in (`svn info ^| grep 'Relative URL' ^| grep -oE '/.*'`) do (set SCM_BRANCH=%%F)
+		FOR /F "tokens=* USEBACKQ" %%F in (`svn info ^| grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}'`) do (set SCM_VERSION_DATE=%%F)
+		FOR /F "tokens=* USEBACKQ" %%F in (`svn info ^| grep 'Repository Root' ^| grep -oE 'http.*'`) do (set SCM_URL=%%F)
 		echo # %1 svn revision:!SCM_VERSION!
 		if %ARG_KEEPSRC% == 0 (
 			svn revert . -R
@@ -68,6 +73,7 @@ REM echo SCM_TAG:%SCM_TAG%
 REM echo SCM_BRANCH:%SCM_BRANCH%
 REM echo SCM_VERSION_DATE:%SCM_VERSION_DATE%
 REM echo SCM_URL:%SCM_URL%
+REM pause
 
 if /I "%~2"=="cmake" (
 	if exist %PATH_BUILD%\%1\. rmdir /S /Q %PATH_BUILD%\%1
