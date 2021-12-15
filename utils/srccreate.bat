@@ -158,7 +158,7 @@ git checkout tags/v5.4.3
 cd /D ..
 git clone https://github.com/telemaxx/mapsforgesrv.git mapsforgesrv
 cd /D mapsforgesrv
-git checkout master
+git checkout tags/0.16.2
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
@@ -166,15 +166,15 @@ git checkout tags/1.6.12
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2632
+svn update -r 2633
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1895612
+svn update -r 1895975
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v2.0.1
+git checkout tags/v2.0.2
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -202,7 +202,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/openssl/openssl.git openssl
 cd /D openssl
-git checkout tags/openssl-3.0.0
+git checkout tags/openssl-3.0.1
 cd /D ..
 git clone https://github.com/jwilk-mirrors/pcre pcre
 cd /D pcre

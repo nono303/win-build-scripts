@@ -34,14 +34,14 @@
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
 | [libxml2](https://github.com/GNOME/libxml2) | 2.9.12 |
 | [libxpm](https://gitlab.freedesktop.org/xorg/lib/libxpm) | 3.5.13 |
-| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1805 |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1807 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
-| [mapsforgesrv](https://github.com/telemaxx/mapsforgesrv.git) | 0.16.1 - 4506b36 |
+| [mapsforgesrv](https://github.com/telemaxx/mapsforgesrv.git) | 0.16.2 - 9901ed0 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.12 |
-| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2628 |
+| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2633 |
 | [mod_fcgid](http://svn.apache.org/repos/asf) | 2.3.10.1 |
-| [mod_h2](https://github.com/icing/mod_h2) | 2.0.1 |
+| [mod_h2](https://github.com/icing/mod_h2) | 2.0.2 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
 | [mod_md](https://github.com/icing/mod_md) | 2.4.9 |
@@ -56,7 +56,7 @@
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.13.1 |
 | [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1 |
 | [php-sdk](https://github.com/microsoft/php-sdk-binary-tools) | 2.2.0 |
-| [php-src](https://github.com/php/php-src) | 8.1.0 |
+| [php-src](https://github.com/php/php-src) | 8.1.1 |
 | [proj](https://github.com/OSGeo/PROJ) | 8.2.0 |
 | [sdlna](https://github.com/nono303/simpleDLNA) | 1.0.3 |
 | [serf](https://github.com/apache/serf) | 1.4.0 |
