@@ -66,7 +66,7 @@ git checkout tags/3.10.1
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
-git checkout tags/2.4.51
+git checkout tags/2.4.52
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
@@ -94,7 +94,7 @@ git checkout tags/release-2.1.12-stable
 cd /D ..
 git clone https://github.com/libexpat/libexpat.git libexpat
 cd /D libexpat
-git checkout tags/R_2_4_1
+git checkout tags/R_2_4_2
 cd /D ..
 git clone https://github.com/winlibs/libffi libffi
 cd /D libffi
@@ -170,7 +170,7 @@ svn update -r 2635
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1896098
+svn update -r 1896209
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2

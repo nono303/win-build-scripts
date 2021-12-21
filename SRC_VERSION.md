@@ -14,14 +14,14 @@
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.11.1 |
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52 |
 | [geos](https://github.com/libgeos/geos) | 3.10.1 |
-| [httpd](https://github.com/apache/httpd) | 2.4.51 |
+| [httpd](https://github.com/apache/httpd) | 2.4.52 |
 | [icu](https://github.com/unicode-org/icu) | 70.1 |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.2.1 |
 | [libavif](https://github.com/AOMediaCodec/libavif.git) | 0.9.3 |
 | [libev](https://git.lighttpd.net/libev) | 4.33 |
 | [libevent](https://github.com/libevent/libevent) | 2.1.12 |
-| [libexpat](https://github.com/libexpat/libexpat) | 2.4.1 |
+| [libexpat](https://github.com/libexpat/libexpat) | 2.4.2 |
 | [libffi](https://github.com/winlibs/libffi) | 3.3 |
 | [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.17.0 |
 | [libiconv](https://github.com/winlibs/libiconv) | 1.16.1 |
