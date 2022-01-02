@@ -8,6 +8,10 @@ IF /I "%AREYOUSURE%" NEQ "Y" exit /B
 echo on
 if not exist %PATH_SRC%\. mkdir %PATH_SRC%
 cd /D %PATH_SRC%
+git clone https://github.com/nono303/mapsforgesrv.git _mapsforgesrv
+cd /D _mapsforgesrv
+git checkout master
+cd /D ..
 git clone https://github.com/abseil/abseil-cpp.git abseil-cpp
 cd /D abseil-cpp
 git checkout tags/20211102.0
@@ -166,11 +170,11 @@ git checkout tags/1.6.12
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2635
+svn update -r 2637
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1896209
+svn update -r 1896620
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -238,7 +242,7 @@ git checkout tags/php-8.1.1
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
-git checkout tags/8.2.0
+git checkout tags/8.2.1
 cd /D ..
 git clone https://github.com/nono303/simpleDLNA.git sdlna
 cd /D sdlna
@@ -250,7 +254,7 @@ git checkout trunk
 cd /D ..
 git clone https://github.com/azadkuh/sqlite-amalgamation sqlite
 cd /D sqlite
-git checkout tags/3.36.0
+git checkout tags/3.37.1
 cd /D ..
 git clone https://github.com/apache/subversion.git subversion
 cd /D subversion

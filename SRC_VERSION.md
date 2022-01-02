@@ -39,7 +39,7 @@
 | [lua](https://github.com/lua/lua) | 5.4.3 |
 | [mapsforgesrv](https://github.com/telemaxx/mapsforgesrv.git) | 0.16.3 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.12 |
-| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2635 |
+| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2637 |
 | [mod_fcgid](http://svn.apache.org/repos/asf) | 2.3.10.1 |
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.2 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
@@ -57,10 +57,10 @@
 | [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1 |
 | [php-sdk](https://github.com/microsoft/php-sdk-binary-tools) | 2.2.0 |
 | [php-src](https://github.com/php/php-src) | 8.1.1 |
-| [proj](https://github.com/OSGeo/PROJ) | 8.2.0 |
+| [proj](https://github.com/OSGeo/PROJ) | 8.2.1 |
 | [sdlna](https://github.com/nono303/simpleDLNA) | 1.0.3 |
 | [serf](https://github.com/apache/serf) | 1.4.0 |
-| [sqlite](https://github.com/azadkuh/sqlite-amalgamation) | 3.36.0 |
+| [sqlite](https://github.com/azadkuh/sqlite-amalgamation) | 3.37.1 |
 | [subversion](https://github.com/apache/subversion) | 1.14.1 |
 | [tidy](https://github.com/htacg/tidy-html5) | 5.9.14 |
 | [verpatch](https://github.com/pavel-a/ddverpatch) | 1.0.15.1 - 3cc989e |
