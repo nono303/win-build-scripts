@@ -4,18 +4,19 @@
 	date_default_timezone_set("Europe/Paris");
 	define("NB_TAGS",5);
 	static $notags = [
-	// "dependencies", 
-	"libyuv", 
-	"mapsforgesrv", 
-	"mod_h264_streaming", 
-	"nssm", 
-	"pecl-memcache", 
-	"pecl-text-xdiff", 
-	"php-cgi-spawner", 
-	"php-geos", 
-	"php-sdk", 
-	"serf", 
-	"verpatch"
+		// "dependencies", 
+		"apr",
+		"apr-util",
+		"libyuv",
+		"mod_h264_streaming", 
+		"nssm", 
+		"pecl-memcache", 
+		"pecl-text-xdiff", 
+		"php-cgi-spawner", 
+		"php-geos", 
+		"php-sdk", 
+		"serf", 
+		"verpatch"
 	];
 
 	if(in_array("gitcg", $argv)){
@@ -81,11 +82,11 @@
 					$reset = execnono($cmd = "git reset --hard",NULL,$repo,NULL);
 					$pullres = execnono($cmd = "git pull",NULL,$repo,NULL);
 					if(VERBOSE) echo $cmd.PHP_EOL.$pullres.PHP_EOL;
-					$logtags = $branch;
+					$logtags = execnono($cmd = "git rev-parse --short HEAD",NULL,$repo,NULL);
 					$ltd = "/";
 					if ($ele == "libyuv"){
 						preg_match("/ LIBYUV_VERSION ([0-9]+)/",file_get_contents($srcdir."/libyuv/include/libyuv/version.h"),$matches);
-						$logtags .= "(".$matches[1].")";
+						$logtags .= " (".$matches[1].")";
 					}
 				} else {
 					$logtags = execnono($cmd = 'git log --tags --simplify-by-decoration --pretty="format:%ai %d" | head -n '.NB_TAGS,NULL,$repo,NULL);
