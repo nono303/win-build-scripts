@@ -8,10 +8,6 @@ IF /I "%AREYOUSURE%" NEQ "Y" exit /B
 echo on
 if not exist %PATH_SRC%\. mkdir %PATH_SRC%
 cd /D %PATH_SRC%
-git clone https://github.com/nono303/mapsforgesrv.git _mapsforgesrv
-cd /D _mapsforgesrv
-git checkout master
-cd /D ..
 git clone https://github.com/abseil/abseil-cpp.git abseil-cpp
 cd /D abseil-cpp
 git checkout tags/20211102.0
@@ -22,7 +18,7 @@ git checkout tags/v3.2.0-rc3
 cd /D ..
 git clone https://github.com/apache/apr.git apr
 cd /D apr
-git checkout tags/1.7.0
+git checkout 1.7.x
 cd /D ..
 git clone https://github.com/apache/apr-iconv apr-iconv
 cd /D apr-iconv
@@ -30,7 +26,7 @@ git checkout tags/1.2.2
 cd /D ..
 git clone https://github.com/apache/apr-util.git apr-util
 cd /D apr-util
-git checkout tags/1.6.1
+git checkout 1.7.x
 cd /D ..
 git clone https://github.com/google/brotli.git brotli
 cd /D brotli
@@ -46,7 +42,7 @@ git checkout tags/cares-1_18_1
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-7_80_0
+git checkout tags/curl-7_81_0
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -162,7 +158,7 @@ git checkout tags/v5.4.3
 cd /D ..
 git clone https://github.com/telemaxx/mapsforgesrv.git mapsforgesrv
 cd /D mapsforgesrv
-git checkout tags/0.16.3-for_Java11
+git checkout Developer_Java11
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
@@ -170,11 +166,11 @@ git checkout tags/1.6.12
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2637
+svn update -r 2638
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1896620
+svn update -r 1896764
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2

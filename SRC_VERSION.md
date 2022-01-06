@@ -2,13 +2,13 @@
 | ---- | ---- |
 | [abseil-cpp](https://github.com/abseil/abseil-cpp.git) | 20211102.rc2 |
 | [aom](https://aomedia.googlesource.com/aom) | v3.2.0rc3 |
-| [apr](https://github.com/apache/apr) | 1.7.0 |
+| [apr](https://github.com/apache/apr) | 1.7.1-dev - d96ad0b89 |
 | [apr-iconv](https://github.com/apache/apr-iconv) | 1.2.2 |
-| [apr-util](https://github.com/apache/apr-util) | 1.6.1 |
+| [apr-util](https://github.com/apache/apr-util) | 1.7.0-dev - 0755139a |
 | [brotli](https://github.com/google/brotli) | 1.0.9 |
 | [bzip2](https://sourceware.org/git/bzip2) | 1.0.8 |
 | [c-ares](https://github.com/c-ares/c-ares) | 1.18.1 |
-| [curl](https://github.com/curl/curl) | 7.80.0 |
+| [curl](https://github.com/curl/curl) | 7.81.0 |
 | [dav1d](https://code.videolan.org/videolan/dav1d.git) | 0.9.2 |
 | [dependencies](https://github.com/lucasg/Dependencies) | 1.11.1 |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.11.1 |
@@ -39,7 +39,7 @@
 | [lua](https://github.com/lua/lua) | 5.4.3 |
 | [mapsforgesrv](https://github.com/telemaxx/mapsforgesrv.git) | 0.16.3 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.12 |
-| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2637 |
+| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2638 |
 | [mod_fcgid](http://svn.apache.org/repos/asf) | 2.3.10.1 |
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.2 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
@@ -47,19 +47,19 @@
 | [mod_md](https://github.com/icing/mod_md) | 2.4.9 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) | 2.01.1 |
 | [nghttp2](https://github.com/nghttp2/nghttp2) | 1.46.0 |
-| [nssm](https://github.com/puppetlabs/nssm) | 2.24.113 - e8211e9 |
+| [nssm](https://github.com/puppetlabs/nssm) | 2.25 - a1c3260 |
 | [openssl](https://github.com/openssl/openssl) | 3.0.0 |
 | [pcre](https://github.com/jwilk-mirrors/pcre) | 8.45 |
 | [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | nbio_php8 - 8.1-dev - ccf702b |
-| [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1-dev |
+| [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1-dev - 2075a4d |
 | [php-cgi-spawner](https://github.com/deemru/php-cgi-spawner) | 1.1.23 - 90197af |
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.13.1 |
-| [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1 |
-| [php-sdk](https://github.com/microsoft/php-sdk-binary-tools) | 2.2.0 |
+| [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1 - e4f9578 |
+| [php-sdk](https://github.com/microsoft/php-sdk-binary-tools) | 2.2.0 - 1bb6a4a |
 | [php-src](https://github.com/php/php-src) | 8.1.1 |
 | [proj](https://github.com/OSGeo/PROJ) | 8.2.1 |
 | [sdlna](https://github.com/nono303/simpleDLNA) | 1.0.3 |
-| [serf](https://github.com/apache/serf) | 1.4.0 |
+| [serf](https://github.com/apache/serf) | 1.4.0 - 1cb2ab7 |
 | [sqlite](https://github.com/azadkuh/sqlite-amalgamation) | 3.37.1 |
 | [subversion](https://github.com/apache/subversion) | 1.14.1 |
 | [tidy](https://github.com/htacg/tidy-html5) | 5.9.14 |
