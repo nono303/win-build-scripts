@@ -10,13 +10,6 @@ for %%X in (dll exe pdb) do (xcopy /C /F /Y %PATH_INSTALL%\%FOLDER_RELEASE_CURL%
 call %PATH_MODULES_COMMON%\init.bat %1 cmake
 set HTTPD_VERSION=%SCM_TAG%
 
-	REM openssl3
-	REM https://patch-diff.githubusercontent.com/raw/apache/httpd/pull/258
-echo # apply %1-pr258.patch
-cd /D %PATH_SRC%\%1 
-git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\%1-pr258.patch
-cd /D %PATH_BUILD%\%1
-
 cmake %CMAKE_OPTS% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
