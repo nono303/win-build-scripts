@@ -1,0 +1,248 @@
+https://stackoverflow.com/a/52989329
+diff --git "a/buckets/apr_brigade.c" "b/buckets/apr_brigade.c"
+index 951e2a08..e1c9d57e 100644
+--- "a/buckets/apr_brigade.c"
++++ "b/buckets/apr_brigade.c"
+@@ -355,31 +355,23 @@ APU_DECLARE(apr_status_t) apr_brigade_split_line(apr_bucket_brigade *bbOut,
+ 
+ 
+ #if !APU_HAVE_MEMMEM
+-static const void *
+-memmem(const void *hay, size_t hay_len, const void *needle, size_t needle_len)
++// https://stackoverflow.com/a/52989329
++static const void *memmem(const void *haystack, size_t haystack_len, 
++    const void * const needle, const size_t needle_len)
+ {
+-
+-    if (hay_len < needle_len || !needle_len || !hay_len) {
+-        return NULL;
+-    }
+-    else {
+-
+-        apr_size_t len = hay_len - needle_len + 1;
+-        const void *end = hay + hay_len;
+-
+-        while ((hay = memchr(hay, *(char *)needle, len))) {
+-            len = end - hay - needle_len + 1;
+-
+-            if (memcmp(hay, needle, needle_len) == 0 ) {
+-                break;
+-            }
+-
+-            --len;
+-            ++hay;
++    if (haystack == NULL) return NULL; // or assert(haystack != NULL);
++    if (haystack_len == 0) return NULL;
++    if (needle == NULL) return NULL; // or assert(needle != NULL);
++    if (needle_len == 0) return NULL;
++    
++    for (const char *h = haystack;
++            haystack_len >= needle_len;
++            ++h, --haystack_len) {
++        if (!memcmp(h, needle, needle_len)) {
++            return h;
+         }
+-
+-        return hay;
+     }
++    return NULL;
+ }
+ #endif
+ 
+https://bz.apache.org/bugzilla/show_bug.cgi?id=63413
+diff --git a/aprutil.dep b/aprutil.dep
+index 53098d81..ce08eb9d 100644
+--- a/aprutil.dep
++++ b/aprutil.dep
+@@ -377,6 +377,12 @@
+ 	".\include\apr_xml.h"\
+ 	".\include\apu.h"\
+ 	".\include\private\apu_config.h"\
++
++
++.\xml\apr_xml_expat.c : \
++	".\include\apr_xml.h"\
++	".\include\apu.h"\
++	".\include\private\apu_config.h"\
+ 	
+ 
+ !IF  "$(CFG)" == "aprutil - Win32 Release"
+diff --git a/aprutil.mak b/aprutil.mak
+index 4ec4ec7d..cef988a1 100644
+--- a/aprutil.mak
++++ b/aprutil.mak
+@@ -103,6 +103,7 @@ CLEAN :
+ 	-@erase "$(INTDIR)\apr_thread_pool.obj"
+ 	-@erase "$(INTDIR)\apr_uri.obj"
+ 	-@erase "$(INTDIR)\apr_xml.obj"
++	-@erase "$(INTDIR)\apr_xml_expat.obj"
+ 	-@erase "$(INTDIR)\aprutil-1.idb"
+ 	-@erase "$(INTDIR)\aprutil-1.pdb"
+ 	-@erase "$(INTDIR)\apu_dso.obj"
+@@ -218,6 +219,7 @@ LIB32_OBJS= \
+ 	"$(INTDIR)\apr_uri.obj" \
+ 	"$(INTDIR)\xlate.obj" \
+ 	"$(INTDIR)\apr_xml.obj" \
++	"$(INTDIR)\apr_xml_expat.obj" \
+ 	"..\apr-iconv\LibR\apriconv-1.lib"
+ 
+ "$(OUTDIR)\aprutil-1.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
+@@ -295,6 +297,7 @@ CLEAN :
+ 	-@erase "$(INTDIR)\apr_thread_pool.obj"
+ 	-@erase "$(INTDIR)\apr_uri.obj"
+ 	-@erase "$(INTDIR)\apr_xml.obj"
++	-@erase "$(INTDIR)\apr_xml_expat.obj"
+ 	-@erase "$(INTDIR)\aprutil-1.idb"
+ 	-@erase "$(INTDIR)\aprutil-1.pdb"
+ 	-@erase "$(INTDIR)\apu_dso.obj"
+@@ -415,6 +418,7 @@ LIB32_OBJS= \
+ 	"$(INTDIR)\apr_uri.obj" \
+ 	"$(INTDIR)\xlate.obj" \
+ 	"$(INTDIR)\apr_xml.obj" \
++	"$(INTDIR)\apr_xml_expat.obj" \
+ 	"..\apr-iconv\LibD\apriconv-1.lib"
+ 
+ "$(OUTDIR)\aprutil-1.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
+@@ -492,6 +496,7 @@ CLEAN :
+ 	-@erase "$(INTDIR)\apr_thread_pool.obj"
+ 	-@erase "$(INTDIR)\apr_uri.obj"
+ 	-@erase "$(INTDIR)\apr_xml.obj"
++	-@erase "$(INTDIR)\apr_xml_expat.obj"
+ 	-@erase "$(INTDIR)\aprutil-1.idb"
+ 	-@erase "$(INTDIR)\aprutil-1.pdb"
+ 	-@erase "$(INTDIR)\apu_dso.obj"
+@@ -612,6 +617,7 @@ LIB32_OBJS= \
+ 	"$(INTDIR)\apr_uri.obj" \
+ 	"$(INTDIR)\xlate.obj" \
+ 	"$(INTDIR)\apr_xml.obj" \
++	"$(INTDIR)\apr_xml_expat.obj" \
+ 	"..\apr-iconv\x64\LibR\apriconv-1.lib"
+ 
+ "$(OUTDIR)\aprutil-1.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
+@@ -689,6 +695,7 @@ CLEAN :
+ 	-@erase "$(INTDIR)\apr_thread_pool.obj"
+ 	-@erase "$(INTDIR)\apr_uri.obj"
+ 	-@erase "$(INTDIR)\apr_xml.obj"
++	-@erase "$(INTDIR)\apr_xml_expat.obj"
+ 	-@erase "$(INTDIR)\aprutil-1.idb"
+ 	-@erase "$(INTDIR)\aprutil-1.pdb"
+ 	-@erase "$(INTDIR)\apu_dso.obj"
+@@ -809,6 +816,7 @@ LIB32_OBJS= \
+ 	"$(INTDIR)\apr_uri.obj" \
+ 	"$(INTDIR)\xlate.obj" \
+ 	"$(INTDIR)\apr_xml.obj" \
++	"$(INTDIR)\apr_xml_expat.obj" \
+ 	"..\apr-iconv\x64\LibD\apriconv-1.lib"
+ 
+ "$(OUTDIR)\aprutil-1.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
+@@ -1171,6 +1179,12 @@ SOURCE=.\xml\apr_xml.c
+ 	$(CPP) $(CPP_PROJ) $(SOURCE)
+ 
+ 
++SOURCE=.\xml\apr_xml_expat.c
++
++"$(INTDIR)\apr_xml_expat.obj" : $(SOURCE) "$(INTDIR)" ".\include\private\apu_config.h" ".\include\apu.h"
++	$(CPP) $(CPP_PROJ) $(SOURCE)
++
++
+ SOURCE=.\include\apr_ldap.hw
+ 
+ !IF  "$(CFG)" == "aprutil - Win32 Release"
+diff --git a/libaprutil.dep b/libaprutil.dep
+index 6ff8a746..766eddaa 100644
+--- a/libaprutil.dep
++++ b/libaprutil.dep
+@@ -281,6 +281,12 @@
+ 	".\include\apr_xml.h"\
+ 	".\include\apu.h"\
+ 	".\include\private\apu_config.h"\
++
++
++.\xml\apr_xml_expat.c : \
++	".\include\apr_xml.h"\
++	".\include\apu.h"\
++	".\include\private\apu_config.h"\
+ 	
+ 
+ !IF  "$(CFG)" == "libaprutil - Win32 Release"
+diff --git a/libaprutil.mak b/libaprutil.mak
+index f00d14ae..e6e68b80 100644
+--- a/libaprutil.mak
++++ b/libaprutil.mak
+@@ -93,6 +93,7 @@ CLEAN :
+ 	-@erase "$(INTDIR)\apr_thread_pool.obj"
+ 	-@erase "$(INTDIR)\apr_uri.obj"
+ 	-@erase "$(INTDIR)\apr_xml.obj"
++	-@erase "$(INTDIR)\apr_xml_expat.obj"
+ 	-@erase "$(INTDIR)\apu_dso.obj"
+ 	-@erase "$(INTDIR)\apu_version.obj"
+ 	-@erase "$(INTDIR)\crypt_blowfish.obj"
+@@ -205,6 +206,7 @@ LINK32_OBJS= \
+ 	"$(INTDIR)\apr_uri.obj" \
+ 	"$(INTDIR)\xlate.obj" \
+ 	"$(INTDIR)\apr_xml.obj" \
++	"$(INTDIR)\apr_xml_expat.obj" \
+ 	"$(INTDIR)\libaprutil.res" \
+ 	"..\apr\Release\libapr-1.lib" \
+ 	"..\apr-iconv\Release\libapriconv-1.lib"
+@@ -287,6 +289,7 @@ CLEAN :
+ 	-@erase "$(INTDIR)\apr_thread_pool.obj"
+ 	-@erase "$(INTDIR)\apr_uri.obj"
+ 	-@erase "$(INTDIR)\apr_xml.obj"
++	-@erase "$(INTDIR)\apr_xml_expat.obj"
+ 	-@erase "$(INTDIR)\apu_dso.obj"
+ 	-@erase "$(INTDIR)\apu_version.obj"
+ 	-@erase "$(INTDIR)\crypt_blowfish.obj"
+@@ -403,6 +406,7 @@ LINK32_OBJS= \
+ 	"$(INTDIR)\apr_uri.obj" \
+ 	"$(INTDIR)\xlate.obj" \
+ 	"$(INTDIR)\apr_xml.obj" \
++	"$(INTDIR)\apr_xml_expat.obj" \
+ 	"$(INTDIR)\libaprutil.res" \
+ 	"..\apr\Debug\libapr-1.lib" \
+ 	"..\apr-iconv\Debug\libapriconv-1.lib"
+@@ -485,6 +489,7 @@ CLEAN :
+ 	-@erase "$(INTDIR)\apr_thread_pool.obj"
+ 	-@erase "$(INTDIR)\apr_uri.obj"
+ 	-@erase "$(INTDIR)\apr_xml.obj"
++	-@erase "$(INTDIR)\apr_xml_expat.obj"
+ 	-@erase "$(INTDIR)\apu_dso.obj"
+ 	-@erase "$(INTDIR)\apu_version.obj"
+ 	-@erase "$(INTDIR)\crypt_blowfish.obj"
+@@ -601,6 +606,7 @@ LINK32_OBJS= \
+ 	"$(INTDIR)\apr_uri.obj" \
+ 	"$(INTDIR)\xlate.obj" \
+ 	"$(INTDIR)\apr_xml.obj" \
++	"$(INTDIR)\apr_xml_expat.obj" \
+ 	"$(INTDIR)\libaprutil.res" \
+ 	"..\apr\x64\Release\libapr-1.lib" \
+ 	"..\apr-iconv\x64\Release\libapriconv-1.lib"
+@@ -683,6 +689,7 @@ CLEAN :
+ 	-@erase "$(INTDIR)\apr_thread_pool.obj"
+ 	-@erase "$(INTDIR)\apr_uri.obj"
+ 	-@erase "$(INTDIR)\apr_xml.obj"
++	-@erase "$(INTDIR)\apr_xml_expat.obj"
+ 	-@erase "$(INTDIR)\apu_dso.obj"
+ 	-@erase "$(INTDIR)\apu_version.obj"
+ 	-@erase "$(INTDIR)\crypt_blowfish.obj"
+@@ -799,6 +806,7 @@ LINK32_OBJS= \
+ 	"$(INTDIR)\apr_uri.obj" \
+ 	"$(INTDIR)\xlate.obj" \
+ 	"$(INTDIR)\apr_xml.obj" \
++	"$(INTDIR)\apr_xml_expat.obj" \
+ 	"$(INTDIR)\libaprutil.res" \
+ 	"..\apr\x64\Debug\libapr-1.lib" \
+ 	"..\apr-iconv\x64\Debug\libapriconv-1.lib"
+@@ -1121,6 +1129,12 @@ SOURCE=.\xml\apr_xml.c
+ 	$(CPP) $(CPP_PROJ) $(SOURCE)
+ 
+ 
++SOURCE=.\xml\apr_xml_expat.c
++
++"$(INTDIR)\apr_xml_expat.obj" : $(SOURCE) "$(INTDIR)" ".\include\private\apu_config.h" ".\include\apu.h"
++	$(CPP) $(CPP_PROJ) $(SOURCE)
++
++
+ SOURCE=.\include\apr_ldap.hw
+ 
+ !IF  "$(CFG)" == "libaprutil - Win32 Release"
