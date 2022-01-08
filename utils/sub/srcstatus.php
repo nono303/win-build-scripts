@@ -46,7 +46,7 @@
 	echo "> ".$srcdir.PHP_EOL;
 
 	$srccreate = file_get_contents(dirname(__FILE__) . '/srccreate.bat.in');
-	file_put_contents($argv[1],'"name";"scm";"upstream";"head";"status";"branch";"log tags";"last tag";"diff"'.PHP_EOL,FILE_APPEND);
+	file_put_contents($argv[1],'"name";"scm";"upstream";"head";"status";"branch";"log tags";"last tag"'.PHP_EOL,FILE_APPEND);
 	echo "*************************".PHP_EOL;
 	foreach(scandir($srcdir) as $ele){
 	// foreach(["libyuv"] as $ele){
@@ -59,7 +59,6 @@
 				if(VERBOSE) echo $repo.PHP_EOL;
 				$upstream = execnono($cmd = "git config --get remote.origin.url",NULL,$repo,NULL);
 				if(VERBOSE) echo $cmd.PHP_EOL;
-
 				$head = explode("^",execnono($cmd = "git name-rev --name-only HEAD",NULL,$repo,NULL))[0];//execnono($cmd = "git describe --tags",NULL,$repo,NULL);
 				if(VERBOSE) echo $cmd.PHP_EOL;
 				preg_match("/^\* \(HEAD detached at ([^\)]+)\)/",execnono($cmd = "git branch -a",NULL,$repo,NULL),$matches);
@@ -82,27 +81,24 @@
 					$reset = execnono($cmd = "git reset --hard",NULL,$repo,NULL);
 					$pullres = execnono($cmd = "git pull",NULL,$repo,NULL);
 					if(VERBOSE) echo $cmd.PHP_EOL.$pullres.PHP_EOL;
-					$logtags = execnono($cmd = "git rev-parse --short HEAD",NULL,$repo,NULL);
-					$ltd = "/";
+					$tmp = explode(" ",execnono($cmd = 'git log --no-walk --pretty="format:%h %ad" --date=iso-strict HEAD',NULL,$repo,NULL));
+					$logtags = $tmp[0];
+					$ltd = secondsToNbDay(time() - ($strtime = strtotime($tmp[1])));
 					if ($ele == "libyuv"){
 						preg_match("/ LIBYUV_VERSION ([0-9]+)/",file_get_contents($srcdir."/libyuv/include/libyuv/version.h"),$matches);
 						$logtags .= " (".$matches[1].")";
 					}
 				} else {
 					$logtags = execnono($cmd = 'git log --tags --simplify-by-decoration --pretty="format:%ai %d" | head -n '.NB_TAGS,NULL,$repo,NULL);
-					$ltd = secondsToTime(time() - ($strtime = strtotime(explode(" (",$logtags)[0])));
+					$ltd = secondsToNbDay(time() - ($strtime = strtotime(explode(" (",$logtags)[0])));
 				}
 				$status = explode("\t",execnono($cmd = "git rev-list --left-right --count ".$branch."...HEAD",NULL,$repo,NULL)) [0];
 				if(VERBOSE) echo $cmd.PHP_EOL;
 				if($status && $status != "0"){
 					$status = $status." commit(s) behind";
-					$diff= "git diff ".$head."..".$branch;
 				} else {
-					$diff= "";
 					$status = "up to date";
 				}
-				
-				
 				if(VERBOSE) echo $cmd.PHP_EOL;
 				if(GIT_GC){
 					echo execnono($cmd = "git reflog expire --all --expire=now",NULL,$repo,NULL);
@@ -110,7 +106,6 @@
 					echo execnono($cmd = "git gc --prune=now --aggressive",NULL,$repo,NULL);
 					if(VERBOSE) echo $cmd.PHP_EOL;
 				}
-
 			} elseif(is_dir($repo."/.svn")){
 				$type = "svn";
 				if(REPO_FETCH){
@@ -126,7 +121,6 @@
 				preg_match("/Revision: (.*)\n/",$svninfo,$matches);
 				$head = trim($matches[1]);
 				$srccreate .= "svn co ".$upstream."/".$branch." ".$ele.PHP_EOL."cd /D ".$ele.PHP_EOL."svn update -r ".$head.PHP_EOL."cd /D ..".PHP_EOL;
-				
 				$svninfo = execnono($cmd = "svn log -l ".NB_TAGS,NULL,$repo,NULL);
 				if(VERBOSE) echo $cmd.PHP_EOL;
 				$gitlasttags = "";
@@ -138,7 +132,7 @@
 							$gitlasttags = $matches[1];
 						if($head == $matches[1])
 							$had = "HEAD, ";
-						$ltd = secondsToTime(time() - strtotime($matches[2]));
+						$ltd = secondsToNbDay(time() - strtotime($matches[2]));
 						$logtags .= $matches[2]." (".$had.$matches[1].")".PHP_EOL;
 					}
 				}
@@ -149,7 +143,7 @@
 				}
 			}
 			echo str_pad($type,4).str_pad($name,20).str_pad($head,26).str_pad($status,26," ",STR_PAD_LEFT)."  ".str_pad($branch,20).PHP_EOL;
-			file_put_contents($argv[1],'"'.$name.'";"'.$type.'";"'.$upstream.'";"'.$head.'";"'.$status.'";"'.$branch.'";"'.$logtags.'";"'.$ltd.'";"'.$diff.'"'.PHP_EOL,FILE_APPEND);
+			file_put_contents($argv[1],'"'.$name.'";"'.$type.'";"'.$upstream.'";"'.$head.'";"'.$status.'";"'.$branch.'";"'.$logtags.'";"'.$ltd.'"'.PHP_EOL,FILE_APPEND);
 			$name = "";
 			$upstream = "";
 			$branch = "";
