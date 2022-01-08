@@ -158,7 +158,7 @@ git checkout tags/v5.4.3
 cd /D ..
 git clone https://github.com/telemaxx/mapsforgesrv.git mapsforgesrv
 cd /D mapsforgesrv
-git checkout Developer_Java11
+git checkout tags/v0.17.0_for_Java11
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
@@ -170,7 +170,7 @@ svn update -r 2638
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1896764
+svn update -r 1896827
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2

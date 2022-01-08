@@ -2,7 +2,7 @@
 | ---- | ---- |
 | [abseil-cpp](https://github.com/abseil/abseil-cpp.git) | 20211102.rc2 |
 | [aom](https://aomedia.googlesource.com/aom) | v3.2.0rc3 |
-| [apr](https://github.com/apache/apr) | 1.7.1-dev - d96ad0b89 |
+| [apr](https://github.com/apache/apr) | 1.7.1-dev - 012fd3e00 |
 | [apr-iconv](https://github.com/apache/apr-iconv) | 1.2.2 |
 | [apr-util](https://github.com/apache/apr-util) | 1.7.0-dev - 0755139a |
 | [brotli](https://github.com/google/brotli) | 1.0.9 |
@@ -37,7 +37,7 @@
 | [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1807 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
-| [mapsforgesrv](https://github.com/telemaxx/mapsforgesrv.git) | 0.16.3 |
+| [mapsforgesrv](https://github.com/telemaxx/mapsforgesrv.git) | 0.17.0 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.12 |
 | [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2638 |
 | [mod_fcgid](http://svn.apache.org/repos/asf) | 2.3.10.1 |
