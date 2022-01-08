@@ -32,7 +32,7 @@ Index: mobac/build.gradle
  
  dependencies {
 -    def mapsforgeVersion = '0.9.1'
-+    def mapsforgeVersion = '0.16.0'
++    def mapsforgeVersion = '0.17.0'
  
      implementation "org.mapsforge:mapsforge-core:${mapsforgeVersion}"
      implementation "org.mapsforge:mapsforge-map:${mapsforgeVersion}"
