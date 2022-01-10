@@ -55,7 +55,7 @@
 | [php-cgi-spawner](https://github.com/deemru/php-cgi-spawner) | 1.1.23 - 90197af |
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.13.1 |
 | [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1 - e4f9578 |
-| [php-sdk](https://github.com/microsoft/php-sdk-binary-tools) | 2.2.0 - 1bb6a4a |
+| [php-sdk](https://github.com/php/php-sdk-binary-tools) | 2.2.1-dev - cc7c11a |
 | [php-src](https://github.com/php/php-src) | 8.1.1 |
 | [proj](https://github.com/OSGeo/PROJ) | 8.2.1 |
 | [sdlna](https://github.com/nono303/simpleDLNA) | 1.0.3 |

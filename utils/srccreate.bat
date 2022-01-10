@@ -170,7 +170,7 @@ svn update -r 2638
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1896827
+svn update -r 1896878
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -228,7 +228,7 @@ git clone https://github.com/ModelTech/php-geos php-geos
 cd /D php-geos
 git checkout master
 cd /D ..
-git clone https://github.com/microsoft/php-sdk-binary-tools.git php-sdk
+git clone https://github.com/php/php-sdk-binary-tools.git php-sdk
 cd /D php-sdk
 git checkout master
 cd /D ..
