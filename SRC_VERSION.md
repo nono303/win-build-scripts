@@ -48,6 +48,8 @@
 | [mod_md](https://github.com/icing/mod_md) | 2.4.9 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) | 2.01.1 |
 | [nghttp2](https://github.com/nghttp2/nghttp2) | 1.46.0 |
+| [nghttp3](https://github.com/ngtcp2/nghttp3) | 0.1.0 |
+| [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 0.1.0 |
 | [nssm](https://github.com/puppetlabs/nssm) | 2.25 - a1c3260 |
 | [openssl](https://github.com/openssl/openssl) | 3.0.1 |
 | [pcre](https://github.com/jwilk-mirrors/pcre) | 8.45 |
