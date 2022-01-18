@@ -62,7 +62,7 @@ git checkout tags/v1.52
 cd /D ..
 git clone https://github.com/libgeos/geos geos
 cd /D geos
-git checkout tags/3.10.1
+git checkout tags/3.10.2
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
@@ -94,7 +94,7 @@ git checkout tags/release-2.1.12-stable
 cd /D ..
 git clone https://github.com/libexpat/libexpat.git libexpat
 cd /D libexpat
-git checkout tags/R_2_4_2
+git checkout tags/R_2_4_3
 cd /D ..
 git clone https://github.com/winlibs/libffi libffi
 cd /D libffi
@@ -162,15 +162,19 @@ git checkout tags/v0.17.0_for_Java11
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
-git checkout tags/1.6.12
+git checkout tags/1.6.13
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
 svn update -r 2638
 cd /D ..
+git clone https://github.com/JBlond/mod_bikeshed.git mod_bikeshed
+cd /D mod_bikeshed
+git checkout tags/1.0.0
+cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1896878
+svn update -r 1897174
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -196,11 +200,19 @@ git clone https://github.com/nghttp2/nghttp2.git nghttp2
 cd /D nghttp2
 git checkout tags/v1.46.0
 cd /D ..
+git clone https://github.com/ngtcp2/nghttp3.git nghttp3
+cd /D nghttp3
+git checkout tags/v0.1.0
+cd /D ..
+git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
+cd /D ngtcp2
+git checkout tags/v0.1.0
+cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
 git checkout master
 cd /D ..
-git clone https://github.com/openssl/openssl.git openssl
+git clone https://github.com/openssl/openssl openssl
 cd /D openssl
 git checkout tags/openssl-3.0.1
 cd /D ..
@@ -250,7 +262,7 @@ git checkout trunk
 cd /D ..
 git clone https://github.com/azadkuh/sqlite-amalgamation sqlite
 cd /D sqlite
-git checkout tags/3.37.1
+git checkout tags/3.37.2
 cd /D ..
 git clone https://github.com/apache/subversion.git subversion
 cd /D subversion

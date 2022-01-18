@@ -55,7 +55,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [ChkMatch](http://beefchunk.com/documentation/sys-programming/os-win32/debug/www.debuginfo.com/tools/chkmatch.html) |      | 1.0.3          |                     |
 | [Gradle](https://gradle.org/install/) | | 7.3.3 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | | 1.10.2 | |
-| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 0.60.3 | |
+| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 0.61.0 | |
 | [NuGet](https://www.nuget.org/downloads) | x86 | 6.0.0 | |
 
 ### [SOURCE VERSIONS](./SRC_VERSION.md)

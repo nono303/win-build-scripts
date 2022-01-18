@@ -8,7 +8,7 @@ for %%C in ("-DENABLE_STATIC_LIB=YES -DENABLE_SHARED_LIB=NO" "-DENABLE_STATIC_LI
 	setlocal enabledelayedexpansion
 	set new=!CUR:"=!
 
-	cmake -Wno-dev %CMAKE_OPTS% ^
+	cmake %CMAKE_OPTS% ^
 	-DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 	-DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
 	-DENABLE_LIB_ONLY=ON ^
