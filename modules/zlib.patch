@@ -1,96 +1,68 @@
-diff --git "a/win32/Makefile.msc" "b/win32/Makefile.msc"
-index 6831882..824fb65 100644
---- "a/win32/Makefile.msc"
-+++ "b/win32/Makefile.msc"
-@@ -26,11 +26,11 @@ AS = ml
- LD = link
- AR = lib
- RC = rc
--CFLAGS  = -nologo -MD -W3 -O2 -Oy- -Zi -Fd"zlib" $(LOC)
-+CFLAGS  = -nologo -O2 -GL -MD -Zi -w -Fd"zlib" $(LOC)
- WFLAGS  = -D_CRT_SECURE_NO_DEPRECATE -D_CRT_NONSTDC_NO_DEPRECATE
--ASFLAGS = -coff -Zi $(LOC)
--LDFLAGS = -nologo -debug -incremental:no -opt:ref
--ARFLAGS = -nologo
-+ASFLAGS = -Zi $(LOC)
-+LDFLAGS = -nologo -debug -ltcg -opt:ICF,REF
-+ARFLAGS = -nologo -ltcg
- RCFLAGS = /dWIN32 /r
- 
- OBJS = adler32.obj compress.obj crc32.obj deflate.obj gzclose.obj gzlib.obj gzread.obj \
-@@ -39,8 +39,7 @@ OBJA =
- 
- 
- # targets
--all: $(STATICLIB) $(SHAREDLIB) $(IMPLIB) \
--     example.exe minigzip.exe example_d.exe minigzip_d.exe
-+all: $(STATICLIB) $(SHAREDLIB) $(IMPLIB)
- 
- $(STATICLIB): $(OBJS) $(OBJA)
- 	$(AR) $(ARFLAGS) -out:$@ $(OBJS) $(OBJA)
-@@ -49,30 +48,10 @@ $(IMPLIB): $(SHAREDLIB)
- 
- $(SHAREDLIB): $(TOP)/win32/zlib.def $(OBJS) $(OBJA) zlib1.res
- 	$(LD) $(LDFLAGS) -def:$(TOP)/win32/zlib.def -dll -implib:$(IMPLIB) \
--	  -out:$@ -base:0x5A4C0000 $(OBJS) $(OBJA) zlib1.res
-+	  -out:$@ $(OBJS) $(OBJA) zlib1.res
- 	if exist $@.manifest \
- 	  mt -nologo -manifest $@.manifest -outputresource:$@;2
- 
--example.exe: example.obj $(STATICLIB)
--	$(LD) $(LDFLAGS) example.obj $(STATICLIB)
--	if exist $@.manifest \
--	  mt -nologo -manifest $@.manifest -outputresource:$@;1
--
--minigzip.exe: minigzip.obj $(STATICLIB)
--	$(LD) $(LDFLAGS) minigzip.obj $(STATICLIB)
--	if exist $@.manifest \
--	  mt -nologo -manifest $@.manifest -outputresource:$@;1
--
--example_d.exe: example.obj $(IMPLIB)
--	$(LD) $(LDFLAGS) -out:$@ example.obj $(IMPLIB)
--	if exist $@.manifest \
--	  mt -nologo -manifest $@.manifest -outputresource:$@;1
--
--minigzip_d.exe: minigzip.obj $(IMPLIB)
--	$(LD) $(LDFLAGS) -out:$@ minigzip.obj $(IMPLIB)
--	if exist $@.manifest \
--	  mt -nologo -manifest $@.manifest -outputresource:$@;1
--
- {$(TOP)}.c.obj:
- 	$(CC) -c $(WFLAGS) $(CFLAGS) $<
- 
-@@ -86,7 +65,7 @@ minigzip_d.exe: minigzip.obj $(IMPLIB)
- 	$(AS) -c $(ASFLAGS) $<
- 
- {$(TOP)/contrib/masmx86}.asm.obj:
--	$(AS) -c $(ASFLAGS) $<
-+	$(AS) /safeseh -c -coff $(ASFLAGS) $<
- 
- adler32.obj: $(TOP)/adler32.c $(TOP)/zlib.h $(TOP)/zconf.h
- 
-@@ -139,16 +118,6 @@ minigzip.obj: $(TOP)/test/minigzip.c $(TOP)/zlib.h $(TOP)/zconf.h
- zlib1.res: $(TOP)/win32/zlib1.rc
- 	$(RC) $(RCFLAGS) /fo$@ $(TOP)/win32/zlib1.rc
- 
--# testing
--test: example.exe minigzip.exe
--	example
--	echo hello world | minigzip | minigzip -d
--
--testdll: example_d.exe minigzip_d.exe
--	example_d
--	echo hello world | minigzip_d | minigzip_d -d
--
--
- # cleanup
- clean:
- 	-del $(STATICLIB)
-@@ -157,7 +126,4 @@ clean:
- 	-del *.obj
- 	-del *.res
- 	-del *.exp
--	-del *.exe
- 	-del *.pdb
--	-del *.manifest
--	-del foo.gz
+# https://stackoverflow.com/questions/29505121/cmake-zlib-build-on-windows
+--- CMakeLists.txt 2017-01-15 08:29:40.000000000 +0200
++++ CMakeLists.txt  2018-09-03 13:41:00.314805100 +0300
+@@ -79,10 +79,10 @@
+ endif()
+
+ set(ZLIB_PC ${CMAKE_CURRENT_BINARY_DIR}/zlib.pc)
+-configure_file( ${CMAKE_CURRENT_SOURCE_DIR}/zlib.pc.cmakein
+-       ${ZLIB_PC} @ONLY)
+-configure_file(    ${CMAKE_CURRENT_SOURCE_DIR}/zconf.h.cmakein
+-       ${CMAKE_CURRENT_BINARY_DIR}/zconf.h @ONLY)
++configure_file(${CMAKE_CURRENT_SOURCE_DIR}/zlib.pc.cmakein
++        ${ZLIB_PC} @ONLY)
++configure_file(${CMAKE_CURRENT_SOURCE_DIR}/zconf.h.cmakein
++        ${CMAKE_CURRENT_BINARY_DIR}/zconf.h @ONLY)
+ include_directories(${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_SOURCE_DIR})
+
+
+@@ -136,30 +136,34 @@
+         set(ZLIB_ASMS contrib/amd64/amd64-match.S)
+     endif ()
+
+-   if(ZLIB_ASMS)
+-       add_definitions(-DASMV)
+-       set_source_files_properties(${ZLIB_ASMS} PROPERTIES LANGUAGE C COMPILE_FLAGS -DNO_UNDERLINE)
+-   endif()
++    if(ZLIB_ASMS)
++        add_definitions(-DASMV)
++        set_source_files_properties(${ZLIB_ASMS} PROPERTIES LANGUAGE C COMPILE_FLAGS -DNO_UNDERLINE)
++    endif()
+ endif()
+
+ if(MSVC)
+     if(ASM686)
+-       ENABLE_LANGUAGE(ASM_MASM)
++        ENABLE_LANGUAGE(ASM_MASM)
+         set(ZLIB_ASMS
+-           contrib/masmx86/inffas32.asm
+-           contrib/masmx86/match686.asm
+-       )
++            contrib/masmx86/inffas32.asm
++            contrib/masmx86/match686.asm
++        )
+     elseif (AMD64)
+-       ENABLE_LANGUAGE(ASM_MASM)
++        ENABLE_LANGUAGE(ASM_MASM)
+         set(ZLIB_ASMS
+-           contrib/masmx64/gvmat64.asm
+-           contrib/masmx64/inffasx64.asm
+-       )
++            contrib/masmx64/gvmat64.asm
++            contrib/masmx64/inffasx64.asm
++        )
++        set(ZLIB_SRCS
++            ${ZLIB_SRCS}
++            contrib/masmx64/inffas8664.c
++        )
+     endif()
+
+-   if(ZLIB_ASMS)
+-       add_definitions(-DASMV -DASMINF)
+-   endif()
++    if(ZLIB_ASMS)
++        add_definitions(-DASMV -DASMINF)
++    endif()
+ endif()
+
+ # parse the full version number from zlib.h and include in ZLIB_FULL_VERSION
