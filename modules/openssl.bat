@@ -19,8 +19,6 @@ sed -i 's/ARFLAGS= \/nologo/ARFLAGS= \/nologo \/LTCG/g' %CYGPATH_SRC%/%1/makefil
 
 if %ARCH% == x64 (set sslarch=-x64)
 if %ARCH% == x86 (set sslarch=)
-REM specific QUIC https://github.com/quictls/openssl/
-sed -i 's/_81//g' %CYGPATH_SRC%/%1/makefile
 sed -i -E 's/LDOUTFLAG(.+)(\\\.+)\.dll/LDOUTFLAG\1\2-%OPENSSL_SUF%%sslarch%\.dll/g' /cygdrive/c/sdk/src/openssl/makefile
 sed -i -E 's/--name ([[:alpha:]]+)\\\/--name /g' %CYGPATH_SRC%/%1/makefile
 sed -i -E 's/INSTALL_ENGINES="engines..capi.dll" "engines..loader_attic.dll" "engines..padlock.dll"/INSTALL_ENGINES="engines\\\capi-%OPENSSL_SUF%%sslarch%.dll" "engines\\\loader_attic-%OPENSSL_SUF%%sslarch%.dll" "engines\\\padlock-%OPENSSL_SUF%%sslarch%.dll"/g' %CYGPATH_SRC%/%1/makefile
