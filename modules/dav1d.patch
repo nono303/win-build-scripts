@@ -1,0 +1,13 @@
+diff --git a/meson.build b/meson.build
+index a9cfa04..3c08691 100644
+--- a/meson.build
++++ b/meson.build
+@@ -398,7 +398,7 @@ if is_asm_enabled and host_machine.cpu_family().startswith('x86')
+ 
+     # check NASM version
+     if nasm.found()
+-        nasm_r = run_command(nasm, '-v')
++        nasm_r = run_command(nasm, '-v', check: true)
+ 
+         if nasm_r.returncode() != 0
+             error('failed running nasm to obtain its version')
