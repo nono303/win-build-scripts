@@ -52,6 +52,7 @@
 | [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 0.1.0 |
 | [nssm](https://github.com/puppetlabs/nssm) | 2.25 - a1c3260 |
 | [openssl](https://github.com/openssl/openssl) | 3.0.1 |
+| [openssl-quic](https://github.com/quictls/openssl) | 3.0.1 |
 | [pcre](https://github.com/jwilk-mirrors/pcre) | 8.45 |
 | [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | nbio_php8 - 8.1-dev - ccf702b |
 | [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1-dev - 2075a4d |
@@ -59,7 +60,7 @@
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.13.1 |
 | [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1 - e4f9578 |
 | [php-sdk](https://github.com/php/php-sdk-binary-tools) | 2.2.1-dev - cc7c11a |
-| [php-src](https://github.com/php/php-src) | 8.1.1 |
+| [php-src](https://github.com/php/php-src) | 8.1.2 |
 | [proj](https://github.com/OSGeo/PROJ) | 8.2.1 |
 | [sdlna](https://github.com/nono303/simpleDLNA) | 1.0.3 |
 | [serf](https://github.com/apache/serf) | 1.4.0 - 1cb2ab7 |
