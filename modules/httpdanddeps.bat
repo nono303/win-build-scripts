@@ -12,6 +12,10 @@ call %PATH_BATCH%\go.bat pcre NOLOG
 call %PATH_BATCH%\go.bat libevent NOLOG
 call %PATH_BATCH%\go.bat libev NOLOG
 call %PATH_BATCH%\go.bat c-ares NOLOG
+if %QUIC_BUILD% == 1 (
+	call %PATH_BATCH%\go.bat ngtcp2 NOLOG
+	call %PATH_BATCH%\go.bat nghttp3 NOLOG
+)
 call %PATH_BATCH%\go.bat nghttp2 NOLOG
 call %PATH_BATCH%\go.bat libssh2 NOLOG
 call %PATH_BATCH%\go.bat curl NOLOG
