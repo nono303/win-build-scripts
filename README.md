@@ -25,16 +25,18 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 3. launch simple command prompt in check-outed directory
 
 4. init
-   1. `vc15.bat` or `vs16.bat`or `vs17.bat`
+   1. **Choose your toolset version:** `vc15.bat` or `vs16.bat`or `vs17.bat`
 
-   2. `x86.bat` or `x64.bat`
+   2. **Choose your architecture:** `x86.bat` or `x64.bat`
 
-   3. `avx.bat 0` or `avx.bat 1`
+   3. **Choose your CPU instruction level:** `avx.bat 0` or `avx.bat 1` _(0 mean **SSE2**)_
 
-      shortcut example: `C:\Windows\System32\cmd.exe /k vs16 && x64 && avx 1`
+   3. **Disable or Enable QUIC (HTTP3) support:** `quic.bat 0` or `quic.bat 1` 
+
+      shortcut example: `C:\Windows\System32\cmd.exe /k vs16 && x64 && avx 1 && quic 1`
 
    4. `go srccreate` to clone and checkout all src
-
+   
 5. `go help` for usage and... Enjoy!
 
 ### REQUIREMENTS
