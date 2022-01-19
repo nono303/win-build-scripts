@@ -24,7 +24,7 @@ for %%C in ("-DENABLE_STATIC_LIB=ON -DENABLE_SHARED_LIB=OFF" "-DENABLE_STATIC_LI
 		xcopy /C /F /Y %PATH_BUILD%\%1\lib\CMakeFiles\nghttp3_static.dir\nghttp3_static.pdb %PATH_INSTALL%\lib\*
 		move /Y %PATH_INSTALL%\lib\nghttp3.lib %PATH_INSTALL%\lib\nghttp3_static.lib
 	) else (
-		xcopy /C /F /Y %PATH_BUILD%\%1\lib\lib\nghttp3.pdb %PATH_INSTALL%\bin\*
+		xcopy /C /F /Y %PATH_BUILD%\%1\lib\nghttp3.pdb %PATH_INSTALL%\bin\*
 		call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\nghttp3.dll
 	)
 )
