@@ -17,6 +17,8 @@ Usage: go command [options]
       * libevent
       * libev
       * c-ares
+      * ngtcp2 (if QUIC enabled)
+      * nghttp3 (if QUIC enabled)
       * nghttp2
       * libssh2
       * curl
