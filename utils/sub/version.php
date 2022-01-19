@@ -13,6 +13,8 @@
 	if(in_array($proot,["pecl-memcache","php-geos","pecl-text-xdiff","php-ext-brotli","xdebug","php-src"]))
 		$proot = "php";
 	$nogit = array(
+		"openssl-quic"		=> ["/VERSION_NUMBER=([0-9\.]+)/",	
+							pathenv("PATH_SRC")."/".$argv[1]."/makefile"],
 		"php-cgi-spawner"	=> "1.1.24",
 		"verpatch"			=> ["/set _ver=\"([^ ]+)/",	
 							pathenv("PATH_SRC")."/".$argv[1]."/ver-self.cmd"],
