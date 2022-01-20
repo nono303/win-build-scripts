@@ -43,10 +43,11 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.1.0-p2.0 (14.31) | `.vsconfig`         |
+| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.1.0-p3.0 (14.31) | `.vsconfig`         |
 | [Cygwin](https://cygwin.com/install.html)                    | x86  | 3.3.3   | `cyg32.packagelist` |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.3.3           | `cyg64.packagelist` |
-| [Python](https://www.python.org/downloads/)                  | x64  | 3.10.1 |                     |
+| [Python](https://www.python.org/downloads/)                  | x64  | 3.10.2 |                     |
+| [Node.js](https://nodejs.org/en/download/current/) | x64 | 17.4.0 | |
 | [OpenJDK](https://jdk.java.net/17/)                        | x64  | 17.0.1 |                     |
 | [ActivePerl](https://platform.activestate.com/ActiveState/ActivePerl-5.28/auto-fork) | x64  | 5.28.1.2801    |                     |
 | [Netwide Assembler](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.15.05        |                     |
@@ -54,9 +55,10 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | verpatch                                                     | x64  | 1.0.15.1       |                     |
 | [7z](https://www.7-zip.org/download.html)                    | x64  | 21.07     |                     |
 | [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.82         |                     |
-| [ChkMatch](http://beefchunk.com/documentation/sys-programming/os-win32/debug/www.debuginfo.com/tools/chkmatch.html) |      | 1.0.3          |                     |
-| [Gradle](https://gradle.org/install/) | | 7.3.3 | |
-| [Ninja](https://github.com/ninja-build/ninja/releases) | | 1.10.2 | |
+| [ChkMatch](http://beefchunk.com/documentation/sys-programming/os-win32/debug/www.debuginfo.com/tools/chkmatch.html) | x86 | 1.0.3          |                     |
+| [Gradle](https://gradle.org/install/) | [java] | 7.3.3 | |
+| [CMake](https://cmake.org/download/) | x64 | 3.22.1 | |
+| [Ninja](https://github.com/ninja-build/ninja/releases) | x64 | 1.10.2 | |
 | [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 0.61.0 | |
 | [NuGet](https://www.nuget.org/downloads) | x86 | 6.0.0 | |
 

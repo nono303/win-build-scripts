@@ -39,6 +39,7 @@ set GRADLE_USER_HOME=%PATH_SOFTS%\gradle
 REM ########################## BIN PATH
 set PATH_VS=%PATH_SOFTS%\vs22\Community
 set PATH_BIN_GIT=C:\PROGRA~1\Git\bin
+set PATH_BIN_CMAKE=%PATH_SOFTS%\cmake\bin
 set PATH_BIN_PYTHON=%PATH_SOFTS%\python3;%PATH_SOFTS%\python3\Scripts
 set PATH_BIN_CYGWIN=%PATH_ROOT_CYGWIN%%CYGV%\bin
 set PATH_BIN_NASM=%PATH_SOFTS%\nasm
@@ -71,8 +72,10 @@ FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_BATCH%`) 
 FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_UTILS%`) do (set CYGPATH_UTILS=%%F)
 
 REM ########################## set SYSTEM PATH
-set PATH_WIN=%PATH_BIN_PYTHON%;^
+set PATH_WIN=%PATH_SOFTS%;^
+%PATH_BIN_PYTHON%;^
 %PATH_BIN_GIT%;^
+%PATH_BIN_CMAKE%;^
 %PATH_BIN_NASM%;^
 %PATH_BIN_NODE%;^
 %PATH_BIN_PERL%;^
