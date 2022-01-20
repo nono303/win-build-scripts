@@ -1,6 +1,6 @@
 @echo off
 for %%X in (apr apr-iconv apr-util) do (
-	call %PATH_MODULES_COMMON%\init.bat %%X cmake
+	call %PATH_MODULES_COMMON%\init.bat %%X
 	%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES%/apr.sh "%AVXSED%" "%CYGPATH_SRC%/%%X" "%NUMBER_OF_PROCESSORS%" "%CYGPATH_SRC%"
 )
 
