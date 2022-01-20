@@ -21,11 +21,11 @@ REM error with js\all
 	REM cmd.exe /C "cd /D C:\sdk\build\vc15_x86-avx\geographiclib && C:\sdk\softs\vs22\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe ."
 	REM CMake Error:  Running 'C:/sdk/softs/vs22/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/Ninja/ninja.exe' '-C' 'C:/sdk/build/vc15_x86-avx/geographiclib' '-t' 'recompact'
 	REM failed with:  ninja: error: failed recompaction: Permission denied
-%NINJA% src\all include\GeographicLib\all tools\all man\all doc\all matlab\all python\geographiclib\all examples\all cmake\all tests\all 
-%NINJA% install
+%NINJA% src\install include\GeographicLib\install tools\install
 
 for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\_%1\bin\*.exe /b') do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\_%1\bin\%%G)
 for /f "tokens=*" %%G in ('dir %PATH_BUILD%\%1\bin\*.pdb /b') do  (xcopy /C /F /Y %PATH_BUILD%\%1\bin\%%G %PATH_INSTALL%\_%1\bin\*)
+xcopy /C /F /Y %PATH_BUILD%\%1\src\CMakeFiles\GeographicLib_STATIC.dir\GeographicLib_STATIC.pdb %PATH_INSTALL%\_%1\lib\Geographic.pdb*
 
 if %LOCAL_COPY% == 1 if %LOCAL_COPY_AVXECHO% == %AVXECHO%  if %LOCAL_COPY_MSVC_VER% == %MSVC_VER% ( 
 	if exist %LOCAL_PATH_GEOGRAPHICLIB%\bin\. rmdir /S /Q %LOCAL_PATH_GEOGRAPHICLIB%\bin 
