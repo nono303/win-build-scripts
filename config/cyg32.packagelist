@@ -4,6 +4,7 @@ autoconf
 autoconf-archive
 autoconf2.1
 autoconf2.5
+autoconf2.7
 autogen
 automake
 automake1.10
@@ -86,6 +87,7 @@ libgc1
 libgc2
 libgcc1
 libgccpp1
+libgcrypt20
 libgdbm4
 libgdbm6
 libgdbm_compat4
@@ -96,6 +98,8 @@ libgnutls30
 libgomp1
 libgpg-error0
 libgpgme11
+libgsasl-common
+libgsasl7
 libgssapi_krb5_2
 libguile17
 libguile2.0_22
@@ -115,6 +119,7 @@ libisccfg163
 libisl13
 libisl15
 libisl22
+libisl23
 libjson-c-common
 libjson-c2
 libk5crypto3
@@ -134,7 +139,9 @@ libmpfr6
 libncursesw10
 libnettle6
 libnghttp2_14
+libntlm0
 libopenldap2_4_2
+libopenldap2_5_0
 libopts25
 libp11-kit0
 libpcre1

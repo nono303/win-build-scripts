@@ -5,16 +5,13 @@
     "Microsoft.VisualStudio.Workload.CoreEditor",
     "Microsoft.VisualStudio.Component.Roslyn.Compiler",
     "Microsoft.Component.MSBuild",
-    "Microsoft.VisualStudio.Component.NuGet",
     "Microsoft.Net.Component.4.8.TargetingPack",
     "Microsoft.VisualStudio.Component.VC.CoreIde",
     "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
     "Microsoft.VisualStudio.Component.VC.Redist.14.Latest",
     "Microsoft.VisualStudio.ComponentGroup.WebToolsExtensions.CMake",
-    "Microsoft.VisualStudio.Component.VC.CMake.Project",
-    "Microsoft.VisualStudio.Component.NuGet.BuildTools",
-    "Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64",
+    "Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64"
     "Microsoft.Net.Component.4.8.SDK",
-    "Microsoft.VisualStudio.Component.Windows11SDK.22000"
+    "Microsoft.VisualStudio.Component.Windows11SDK.22000",
   ]
 }
