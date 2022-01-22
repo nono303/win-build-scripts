@@ -4,7 +4,7 @@
 	date_default_timezone_set("Europe/Paris");
 	define("NB_TAGS",5);
 	static $notags = [
-		// "dependencies", 
+		"openssl-quic", 
 		"apr",
 		"apr-util",
 		"libyuv",
