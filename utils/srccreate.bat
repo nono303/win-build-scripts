@@ -140,9 +140,9 @@ git clone https://github.com/GNOME/libxml2.git libxml2
 cd /D libxml2
 git checkout tags/v2.9.12
 cd /D ..
-git clone https://gitlab.freedesktop.org/xorg/lib/libxpm libxpm
+git clone https://github.com/nono303/libxpm.git libxpm
 cd /D libxpm
-git checkout tags/libXpm-3.5.13
+git checkout tags/libxpm-3.5.13
 cd /D ..
 git clone https://chromium.googlesource.com/libyuv/libyuv libyuv
 cd /D libyuv
@@ -156,9 +156,9 @@ git clone https://github.com/lua/lua lua
 cd /D lua
 git checkout tags/v5.4.3
 cd /D ..
-git clone https://github.com/telemaxx/mapsforgesrv.git mapsforgesrv
+git clone https://github.com/nono303/mapsforgesrv.git mapsforgesrv
 cd /D mapsforgesrv
-git checkout tags/v0.17.0_for_Java11
+git checkout tags/0.17.0
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
@@ -166,7 +166,7 @@ git checkout tags/1.6.13
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2638
+svn update -r 2639
 cd /D ..
 git clone https://github.com/JBlond/mod_bikeshed.git mod_bikeshed
 cd /D mod_bikeshed
@@ -174,7 +174,7 @@ git checkout tags/1.0.0
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1897188
+svn update -r 1897356
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -202,7 +202,7 @@ git checkout tags/v1.46.0
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3
-git checkout tags/v0.1.0
+git checkout tags/v0.1.1
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2

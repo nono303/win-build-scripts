@@ -2,7 +2,7 @@
 | ---- | ---- |
 | [abseil-cpp](https://github.com/abseil/abseil-cpp.git) | 20211102.rc2 |
 | [aom](https://aomedia.googlesource.com/aom) | v3.2.0rc3 |
-| [apr](https://github.com/apache/apr) | 1.7.1-dev - 0794dc981 |
+| [apr](https://github.com/apache/apr) | 1.7.1-dev - 4bc244e2f |
 | [apr-iconv](https://github.com/apache/apr-iconv) | 1.2.2 |
 | [apr-util](https://github.com/apache/apr-util) | 1.7.0-dev - 5e143fa9 |
 | [brotli](https://github.com/google/brotli) | 1.0.9 |
@@ -33,13 +33,13 @@
 | [libtiff](https://gitlab.com/libtiff/libtiff) | 4.3.0 |
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
 | [libxml2](https://github.com/GNOME/libxml2) | 2.9.12 |
-| [libxpm](https://gitlab.freedesktop.org/xorg/lib/libxpm) | 3.5.13 |
+| [libxpm](https://github.com/nono303/libxpm.git) | 3.5.13 |
 | [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1808 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
-| [mapsforgesrv](https://github.com/telemaxx/mapsforgesrv.git) | 0.17.0 |
+| [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) | 0.17.0 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.13 |
-| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2638 |
+| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2639 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
 | [mod_fcgid](http://svn.apache.org/repos/asf) | 2.3.10.1 |
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.2 |
@@ -48,11 +48,11 @@
 | [mod_md](https://github.com/icing/mod_md) | 2.4.9 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) | 2.01.1 |
 | [nghttp2](https://github.com/nghttp2/nghttp2) | 1.46.0 |
-| [nghttp3](https://github.com/ngtcp2/nghttp3) | 0.1.0 |
+| [nghttp3](https://github.com/ngtcp2/nghttp3) | 0.1.1 |
 | [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 0.1.0 |
 | [nssm](https://github.com/puppetlabs/nssm) | 2.25 - a1c3260 |
 | [openssl](https://github.com/openssl/openssl) | 3.0.1 |
-| [openssl-quic](https://github.com/quictls/openssl) | 3.0.1 |
+| [openssl-quic](https://github.com/quictls/openssl) | 3.0.1 - ab8b87bdb4 |
 | [pcre](https://github.com/jwilk-mirrors/pcre) | 8.45 |
 | [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | nbio_php8 - 8.1-dev - ccf702b |
 | [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1-dev - 2075a4d |
