@@ -1,6 +1,4 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1
-	REM copied from https://github.com/winlibs/libxpm
-call %BIN_SEVENZ% x -bb -o"%PATH_SRC%\%1\" -y %PATH_MODULES%\%1.zip
 
 set VCDIR=windows\nono
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/%VCDIR:\=/%" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
