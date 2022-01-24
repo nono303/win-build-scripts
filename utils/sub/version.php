@@ -123,14 +123,14 @@
 				$arch = pathenv("PHP_SDK_ARCH");
 			}
 			$description .= "arch:".$arch.pathenv("AVXB")." vcver:".pathenv("vcvars_ver")."[".pathenv("MSVC_DEPS")."]";
-			if(pathenv("SCM_VERSION"))
-				$description .= " commit:".pathenv("SCM_VERSION");
+			if(pathenv("SCM_COMORREV"))
+				$description .= " commit:".pathenv("SCM_COMORREV");
 			if(pathenv("SCM_TAG"))
 				$description .= " tag:".pathenv("SCM_TAG");
 			if(pathenv("SCM_BRANCH") != "HEAD" && pathenv("SCM_BRANCH") != "")
 				$description .= " branch:".pathenv("SCM_BRANCH");
-			if(pathenv("SCM_VERSION_DATE"))
-				$description .= " date:".pathenv("SCM_VERSION_DATE");
+			if(pathenv("SCM_COMORREV_DATE"))
+				$description .= " date:".pathenv("SCM_COMORREV_DATE");
 
 			$pname = basename($argv[2],".".pathinfo($argv[2], PATHINFO_EXTENSION));
 			if($pname != $proot)
