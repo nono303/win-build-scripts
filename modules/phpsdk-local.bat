@@ -1,33 +1,6 @@
 @echo off
 if %CUR_DEBUG% == 1 (echo on)
 
-	REM ~~~~~~~~~~~~ Openssl in PHAR
-sed -i 's/libeay32st/libcrypto/g' %CYGPATH_SRC%/php-src/ext/phar/config.w32
-
-	REM ~~~~~~~~~~~~ pecl-text-xdiff : libxdiff version
-cd /D %PATH_SRC%\libxdiff
-FOR /F "tokens=* USEBACKQ" %%F in (`git tag --points-at HEAD`) do (set LIB_VERSION=%%F)
-call %PATH_MODULES_COMMON%\init.bat pecl-text-xdiff
-sed -i 's/extern char libxdiff_version/\/\/ extern char libxdiff_version/g' %CYGPATH_SRC%/pecl-text-xdiff/xdiff.c
-sed -i 's/libxdiff_version)/"%LIB_VERSION:~1%")/g' %CYGPATH_SRC%/pecl-text-xdiff/xdiff.c
-
-	REM ~~~~~~~~~~~~ php-ext-brotli : brotli version
-cd /D %PATH_SRC%\brotli
-FOR /F "tokens=* USEBACKQ" %%F in (`git tag --points-at HEAD`) do (set LIB_VERSION=%%F)
-call %PATH_MODULES_COMMON%\init.bat php-ext-brotli
-sed -i -E 's/BROTLI_LIB_VERSION(.), "([^\"]+)"/BROTLI_LIB_VERSION\1, "%LIB_VERSION:~1%"/g' %CYGPATH_SRC%/php-ext-brotli/config.w32
-
-	REM ~~~~~~~~~~~~ link brotli sources to module
-if exist %PATH_SRC%\php-ext-brotli\brotli\. rmdir /S /Q %PATH_SRC%\php-ext-brotli\brotli
-mklink /J %PATH_SRC%\php-ext-brotli\brotli %PATH_SRC%\brotli
-
-	REM ~~~~~~~~~~~~ link openssl3 sources to module (applink.c)
-if exist %PATH_SRC%\php-src\openssl\. rmdir /S /Q %PATH_SRC%\php-src\openssl
-mklink /J %PATH_SRC%\php-src\openssl %PATH_SRC%\openssl\ms
-
-set PHP_SRC_DIR=%PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\php-src
-set PHP_BUILD_DIR=%PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%PHP_SDK_ARCH%\build\%BUILDDIR%
-
 	REM ~~~~~~~~~~~~ clean build dir & buildconf
 if not exist %PHP_BUILD_DIR%. mklink /J %PHP_BUILD_DIR% %PATH_PHP_BUILD%
 cd /D %PHP_BUILD_DIR%
@@ -36,6 +9,9 @@ cd /D %PHP_SRC_DIR%
 call buildconf
 
 	REM ~~~~~~~~~~~~ Patch some stuff in this shity configure.js, accoring to self made deps
+	REM libxml2s
+sed -i 's/libxml2_a_dll.lib;libxml2_a.lib/libxml2s.lib/g' %CYGPATH_SRC%/php-src/configure.js
+REM sed -i 's/CHECK_LIB\("libxml2s.lib", "libxml"\) (..)/CHECK_LIB\("icuuc.lib", "libxml"\) \\1 CHECK_LIB\("libxml2s.lib", "libxml"\) \\1/g' %CYGPATH_SRC%/php-src/configure.js
 	REM liblzma_a
 sed -i 's/liblzma_a/liblzma/g' %CYGPATH_SRC%/php-src/configure.js
 	REM libzip_a
@@ -65,14 +41,13 @@ sed -i 's/EXTENSION("curl", "interface.c multi.c share.c curl_file.c");/EXTENSIO
 sed -i -E 's/CHECK_LIB\("freetype_a.lib;freetype.lib", "gd", PHP_GD\) (..)/CHECK_LIB\("freetype.lib", "gd", PHP_GD\) \\1 CHECK_LIB\("libbz2.lib", "gd", PHP_GD\) \1 CHECK_LIB\("brotlidec.lib", "gd", PHP_GD\) \1/g' %CYGPATH_SRC%/php-src/configure.js
 
 	REM ~~~~~~~~~~~~ export config options
-call configure --help > %PATH_LOGS%\configure_%PHPGITVER:~4,-1%.txt
+call configure --help > %PATH_LOGS%\configure_%PHPVER%.txt
 
 if %PHP_BUILDNTS% == 1 (
 	REM ~~~~~~~~~~~~ make NTS
 	echo *** nts  ***
 	set ZTS=--disable-zts
 	set TSNTS=nts
-	set BUILDDIR=Release
 	call %PATH_MODULES%\phpsdk-config_make.bat
 )
 if %PHP_BUILDTS% == 1 (
@@ -80,7 +55,6 @@ if %PHP_BUILDTS% == 1 (
 	echo *** ts  ***
 	set ZTS=
 	set TSNTS=ts
-	set BUILDDIR=Release_TS
 	call %PATH_MODULES%\phpsdk-config_make.bat
 )
 	REM exit php-sdk shell
