@@ -1,7 +1,6 @@
 # LINK FLAGS (dll exe) (LINK_FLAGS with debug)
 sed -i -E 's/LINK_FLAGS =(.*) \/INCREMENTAL[^ ]*(.*)/LINK_FLAGS =\1\2/gI' $2/build.ninja
 sed -i -E 's/LINK_FLAGS =(.*) \/WX(.*)/LINK_FLAGS =\1\2/gI' $2/build.ninja
-
 sed -i -E 's/LINK_FLAGS =(.*)\/machine:(...)(.*)\/debug(.*)/LINK_FLAGS =\1\/machine:\2 \/DEBUG\3\/NOLOGO \/LTCG \/OPT:REF,ICF\4/gI' $2/build.ninja
 # LINK FLAGS (lib)
 sed -i -E 's/LINK_FLAGS = \/machine:(...)/LINK_FLAGS = \/LTCG \/machine:\1/gI' $2/build.ninja
