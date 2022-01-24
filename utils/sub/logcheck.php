@@ -53,6 +53,7 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 		" fatal " => [31,"str"],
 		" error " => [31,"str"],
 		"stop" => [31,"str"],
+		"err open" => [31,"str"], // version
 		"syntaxe " => [33,"str"],
 		"inattendu" => [33,"str"],
 		"impossible" => [33,"str"],
