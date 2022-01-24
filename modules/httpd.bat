@@ -54,13 +54,13 @@ for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\modules\*.so /b') do (
 
 	REM ~~~~~~~~~~~ external modules -   mod_wku_bt 
 for %%X in (mod_maxminddb mod_fcgid mod_h264_streaming mod_md) do (
-	call %PATH_MODULES_COMMON%\init.bat %%X
+	call %PATH_MODULES_COMMON%\init.bat %%X varonly
 	call do_php %PATH_UTILS%\sub\version.php %%X %PATH_INSTALL%\modules\%%X.so "httpd:%HTTPD_VERSION%"
 )
-call %PATH_MODULES_COMMON%\init.bat mod_h2
+call %PATH_MODULES_COMMON%\init.bat mod_h2 varonly
 call do_php %PATH_UTILS%\sub\version.php mod_h2 %PATH_INSTALL%\modules\mod_http2.so "httpd:%HTTPD_VERSION%"
 call do_php %PATH_UTILS%\sub\version.php mod_h2 %PATH_INSTALL%\modules\mod_proxy_http2.so "httpd:%HTTPD_VERSION%"
-call %PATH_MODULES_COMMON%\init.bat mod_wku_bt
+call %PATH_MODULES_COMMON%\init.bat mod_wku_bt varonly
 call do_php %PATH_UTILS%\sub\version.php mod_wku_bt %PATH_INSTALL%\modules\mod_backtrace.so "httpd:%HTTPD_VERSION%"
 call do_php %PATH_UTILS%\sub\version.php mod_wku_bt %PATH_INSTALL%\modules\mod_whatkilledus.so "httpd:%HTTPD_VERSION%"
 
