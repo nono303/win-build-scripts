@@ -1,5 +1,9 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
+	REM if -DLIBXML2_WITH_ICU=ON / don't use ICU bultin libs in C:\Windows Kits\10\Lib\10.0.22000.0\um\x64\
+REM set LIB=%PATH_INSTALL%\lib;%LIB%
+REM set INCLUDE=%PATH_INSTALL%\include;%INCLUDE%
+
 for %%C in (OFF ON) do (
 	cmake %CMAKE_OPTS% ^
 	-DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
@@ -43,13 +47,15 @@ for %%C in (OFF ON) do (
 	%PATH_SRC%\%1
 
 	%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
-	REM iso C:\sdk\src\libxml2\win32\Makefile.msvc l.373
-	if %%C == OFF sed -i 's/-DHAVE_WIN32_THREADS -D_REENTRANT/-DHAVE_WIN32_THREADS -D_REENTRANT -DLIBXML_STATIC -DLIBXML_STATIC_FOR_DLL/g' %CYGPATH_BUILD%/%1/build.ninja
+	if %%C == OFF (
+		REM iso C:\sdk\src\libxml2\win32\Makefile.msvc l.373
+		sed -i 's/-DHAVE_WIN32_THREADS -D_REENTRANT/-DHAVE_WIN32_THREADS -D_REENTRANT -DLIBXML_STATIC -DLIBXML_STATIC_FOR_DLL/g' %CYGPATH_BUILD%/%1/build.ninja
+		sed -i 's/LibXml2.pdb/libxml2s.pdb/g' %CYGPATH_BUILD%/%1/build.ninja
+	)
 	%NINJA% install
 )
 
-xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\LibXml2.dir\LibXml2.pdb %PATH_INSTALL%\lib\libxml2_a.pdb*
-move /Y %PATH_INSTALL%\lib\libxml2s.lib %PATH_INSTALL%\lib\libxml2_a.lib
+xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\LibXml2.dir\libxml2s.pdb %PATH_INSTALL%\lib\libxml2s.pdb*
 xcopy /C /F /Y %PATH_BUILD%\%1\libxml2.pdb %PATH_INSTALL%\lib\*
 for %%X in (xmlcatalog xmllint) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X.pdb %PATH_INSTALL%\bin\*)
 for %%X in (libxml2.dll xmlcatalog.exe xmllint.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
