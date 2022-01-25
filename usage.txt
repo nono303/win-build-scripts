@@ -12,6 +12,7 @@ Usage: go command [options]
       * jemalloc
       * libiconv
       * liblzma
+      * icu
       * libxml2
       * pcre
       * libevent
@@ -47,7 +48,6 @@ Usage: go command [options]
       * libyuv
       * libavif
       * geos
-      * icu
       * php
     * projgeolibanddeps
       * libtiff

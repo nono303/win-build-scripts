@@ -7,6 +7,7 @@ call %PATH_BATCH%\go.bat openssl NOLOG
 call %PATH_BATCH%\go.bat jemalloc NOLOG
 call %PATH_BATCH%\go.bat libiconv NOLOG
 call %PATH_BATCH%\go.bat liblzma NOLOG
+call %PATH_BATCH%\go.bat icu NOLOG
 call %PATH_BATCH%\go.bat libxml2 NOLOG
 call %PATH_BATCH%\go.bat pcre NOLOG
 call %PATH_BATCH%\go.bat libevent NOLOG
