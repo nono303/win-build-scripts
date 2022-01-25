@@ -1,7 +1,7 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
 set CURL_VER=openssl
-if not exist %PATH_INSTALL%\_%1\. mkdir %PATH_INSTALL%\_%1
+if exist %PATH_INSTALL%\_%1\. rmdir /S /Q %PATH_INSTALL%\_%1 && mkdir %PATH_INSTALL%\_%1
 
 REM https://proj.org/install.html#cmake-configure-options
 cmake ^
