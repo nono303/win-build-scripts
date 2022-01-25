@@ -1,8 +1,8 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
 	REM if -DLIBXML2_WITH_ICU=ON / don't use ICU bultin libs in C:\Windows Kits\10\Lib\10.0.22000.0\um\x64\
-REM set LIB=%PATH_INSTALL%\lib;%LIB%
-REM set INCLUDE=%PATH_INSTALL%\include;%INCLUDE%
+set LIB=%PATH_INSTALL%\lib;%LIB%
+set INCLUDE=%PATH_INSTALL%\include;%INCLUDE%
 
 for %%C in (OFF ON) do (
 	cmake %CMAKE_OPTS% ^
@@ -17,7 +17,7 @@ for %%C in (OFF ON) do (
 	-DLIBXML2_WITH_HTML=ON ^
 	-DLIBXML2_WITH_HTTP=ON ^
 	-DLIBXML2_WITH_ICONV=ON ^
-	-DLIBXML2_WITH_ICU=OFF ^
+	-DLIBXML2_WITH_ICU=ON ^
 	-DLIBXML2_WITH_ISO8859X=ON ^
 	-DLIBXML2_WITH_LEGACY=ON ^
 	-DLIBXML2_WITH_LZMA=ON ^
