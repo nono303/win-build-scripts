@@ -36,7 +36,7 @@ for %%C in ("-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" "-DBUILD_SHARED_LIBS=ON -
 		xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\SQLite3.dir\SQLite3.pdb %PATH_INSTALL%\lib\sqlite3.pdb*
 		xcopy /C /F /Y %PATH_BUILD%\%1\sqlite3.pdb %PATH_INSTALL%\bin\*
 	) else (
-		xcopy /C /F /Y %PATH_BUILD%\%1\libsqlite3.pdb %PATH_INSTALL%\bin\*
+		for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\libsqlite3.%%X %PATH_INSTALL%\bin\*)
 	)
 )
 xcopy /C /F /Y %PATH_SRC%\%1\sqlite3ext.h %PATH_INSTALL%\include\sqlite3\*
