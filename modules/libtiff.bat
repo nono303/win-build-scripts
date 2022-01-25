@@ -8,8 +8,8 @@ cmake %CMAKE_OPTS% ^
 -DZLIB_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 -DJPEG_LIBRARY=%PATH_INSTALL:\=/%/lib/turbojpeg-static.lib ^
 -DJPEG_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
-REM -DLIBLZMA_LIBRARIES=C:/sdk/release/vs16_x64-avx/lib/liblzma.lib ^
-REM -DLIBLZMA_INCLUDE_DIRS=%PATH_INSTALL:\=/%/include ^
+-DLIBLZMA_LIBRARIES=C:/sdk/release/vs16_x64-avx/lib/liblzma.lib ^
+-DLIBLZMA_INCLUDE_DIRS=%PATH_INSTALL:\=/%/include ^
 REM Enable extra compiler warnings : OFF ^
 -Dextra-warnings=OFF ^
 REM Compiler warnings are errors : OFF ^
