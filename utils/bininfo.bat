@@ -1,7 +1,7 @@
 @echo off
 set BININFO_LOG=%PATH_LOGS%\%1_%MSVC_DEPS%-%ARCH%%AVXB%_%ymdhis%.csv
 if %QUIC_BUILD% == 1 (
-	set NBBIN=251
+	set NBBIN=252
 ) else (
 	set NBBIN=246
 )
