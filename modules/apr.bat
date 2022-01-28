@@ -34,9 +34,17 @@ if not exist %PATH_INSTALL%\include\arch\. mkdir %PATH_INSTALL%\include\arch
 xcopy /C /F /Y %PATH_SRC%\apr\include\arch\apr_private_common.h %PATH_INSTALL%\include\arch\*
 if not exist %PATH_INSTALL%\include\arch\win32\. mkdir %PATH_INSTALL%\include\arch\win32
 xcopy /C /F /Y %PATH_SRC%\apr\include\arch\win32\*.h %PATH_INSTALL%\include\arch\win32\*
-for %%D in (apr_crypto_openssl-1 apr_dbd_odbc-1 apr_dbd_sqlite3-1 apr_ldap-1 libaprutil-1 libapr-1 libapriconv-1) do (
+
+call %PATH_MODULES_COMMON%\init.bat apr varonly
+call do_php %PATH_UTILS%\sub\version.php apr %PATH_INSTALL%\bin\libapr-1.dll
+
+call %PATH_MODULES_COMMON%\init.bat apr-util varonly
+for %%D in (libaprutil apr_ldap-1 apr_dbd_odbc-1 apr_dbd_sqlite3-1 apr_crypto_openssl-1) do (
 	call do_php %PATH_UTILS%\sub\version.php apr-util %PATH_INSTALL%\bin\%%D.dll
 )
+
+call %PATH_MODULES_COMMON%\init.bat apr-iconv varonly
+call do_php %PATH_UTILS%\sub\version.php apr-iconv %PATH_INSTALL%\bin\libapriconv-1.dll
 for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\bin\iconv\*.so /b') do (
-	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\iconv\%%G
+	call do_php %PATH_UTILS%\sub\version.php apr-iconv %PATH_INSTALL%\bin\iconv\%%G
 )
