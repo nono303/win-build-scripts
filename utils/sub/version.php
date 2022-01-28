@@ -13,26 +13,30 @@
 	if(in_array($proot,["pecl-memcache","php-geos","pecl-text-xdiff","php-ext-brotli","xdebug","php-src"]))
 		$proot = "php";
 	$nogit = array(
-		"openssl-quic"		=> ["/VERSION_NUMBER=([0-9\.]+)/",	
+		"apr"				=> ["/#define APR_MAJOR_VERSION *([0-9]+).*#define APR_MINOR_VERSION *([0-9]+).*#define APR_PATCH_VERSION *([0-9]+)/s",
+							pathenv("PATH_SRC")."/".$argv[1]."/include/apr_version.h"],
+		"apr-util"			=> ["/#define APU_MAJOR_VERSION *([0-9]+).*#define APU_MINOR_VERSION *([0-9]+).*#define APU_PATCH_VERSION *([0-9]+)/s",
+							pathenv("PATH_SRC")."/".$argv[1]."/include/apu_version.h"],
+		"openssl-quic"		=> ["/VERSION_NUMBER=([0-9\.]+)/",
 							pathenv("PATH_SRC")."/".$argv[1]."/makefile"],
 		"php-cgi-spawner"	=> "1.1.24",
-		"verpatch"			=> ["/set _ver=\"([^ ]+)/",	
+		"verpatch"			=> ["/set _ver=\"([^ ]+)/",
 							pathenv("PATH_SRC")."/".$argv[1]."/ver-self.cmd"],
-		"php-geos"			=> ["/PHP_GEOS_VERSION \"([0-9\.]+)/",	
+		"php-geos"			=> ["/PHP_GEOS_VERSION \"([0-9\.]+)/",
 							pathenv("PATH_SRC")."/".$argv[1]."/php_geos.h"],
-		"pecl-text-xdiff"	=> ["/PHP_XDIFF_VERSION \"([0-9\.]+)/",	
+		"pecl-text-xdiff"	=> ["/PHP_XDIFF_VERSION \"([0-9\.]+)/",
 							pathenv("PATH_SRC")."/".$argv[1]."/php_xdiff.h"],
-		"pecl-memcache"		=> ["/PHP_MEMCACHE_VERSION \"([0-9\.]+)/",	
+		"pecl-memcache"		=> ["/PHP_MEMCACHE_VERSION \"([0-9\.]+)/",
 							pathenv("PATH_SRC")."/".$argv[1]."/src/php_memcache.h"],
-		"icu"				=> ["/U_ICU_VERSION \"(.*)\"/",	
+		"icu"				=> ["/U_ICU_VERSION \"(.*)\"/",
 							pathenv("PATH_SRC")."/".$argv[1]."/icu4c/source/common/unicode/uvernum.h"],
-		"nssm"				=> ["/NSSM_VERSIONINFO (.*),(.*),(.*),(.*)/",	
+		"nssm"				=> ["/NSSM_VERSIONINFO (.*),(.*),(.*),(.*)/",
 							pathenv("PATH_SRC")."/".$argv[1]."/version.h"],
-		"libyuv"			=> ["/LIBYUV_VERSION (.*)/",	
+		"libyuv"			=> ["/LIBYUV_VERSION (.*)/",
 							pathenv("PATH_SRC")."/".$argv[1]."/include/libyuv/version.h"],
-		"mobac"				=> ["/mobac.revision=(.*)/",	
+		"mobac"				=> ["/mobac.revision=(.*)/",
 							pathenv("PATH_SRC")."/".$argv[1]."/mobac/build/resources/main/mobac/mobac-rev.properties"],
-		"mod_fcgid"			=> ["/#define MODFCGID_VERSION_MAJOR *([0-9]+).*#define MODFCGID_VERSION_MINOR *([0-9]+).*#define MODFCGID_VERSION_SUBVER *([0-9]+).*#define MODFCGID_VERSION_DEV *([0-9]+)/s",	
+		"mod_fcgid"			=> ["/#define MODFCGID_VERSION_MAJOR *([0-9]+).*#define MODFCGID_VERSION_MINOR *([0-9]+).*#define MODFCGID_VERSION_SUBVER *([0-9]+).*#define MODFCGID_VERSION_DEV *([0-9]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/modules/fcgid/fcgid_conf.h"],
 		"mod_h264_streaming"=> ["/#define VERSION \"([^\"]+)\"/",
 							pathenv("PATH_SRC")."/".$argv[1]."/config.h"],
@@ -50,12 +54,14 @@
 			$tagok = true;
 			// git source overrided
 			if (is_array($nogit[$src])){
+				# echo "    ###".$nogit[$src][0].PHP_EOL;
 				preg_match($nogit[$src][0],file_get_contents($nogit[$src][1]),$matches);
 				$sep = "";
 				for($i = 1; $i < sizeof($matches); $i++){
 					$ver_product .= $sep.trim($matches[$i]);
 					$sep = ".";
 				}
+				echo "    # nogit version: ".$ver_product.PHP_EOL;
 			} elseif (is_string($nogit[$src])){
 				$ver_product = $nogit[$src];
 			} elseif (is_dir($cur."/".$src."/.git")){
@@ -112,10 +118,11 @@
 		if(is_dir($cur = pathenv("PATH_SRC"))."/".$argv[1]){
 			$current = getVersion($cur,$argv[1]);
 			$rpdb = " /rpdb";
+			$descadd = "";
 			if($argv[3] == "norpdb"){
 				$rpdb = "";
 			} elseif($argv[3] != ""){
-				$description = $argv[3]." ";
+				$descadd = " ".$argv[3];
 			}
 			if(pathenv("ARCH")){
 				$arch = pathenv("ARCH");
@@ -131,7 +138,8 @@
 				$description .= " branch:".pathenv("SCM_BRANCH");
 			if(pathenv("SCM_COMORREV_DATE"))
 				$description .= " date:".pathenv("SCM_COMORREV_DATE");
-
+			if($descadd)
+				$description .= $descadd;
 			$pname = basename($argv[2],".".pathinfo($argv[2], PATHINFO_EXTENSION));
 			if($pname != $proot)
 				$pname = $proot.":".$pname;
