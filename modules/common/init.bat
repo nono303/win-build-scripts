@@ -1,4 +1,9 @@
 @echo off
+set "SCM_COMORREV="
+set "SCM_TAG="
+set "SCM_BRANCH="
+set "SCM_COMORREV_DATE="
+set "SCM_URL="
 if "%CUR_DEBUG%"=="1" (
 	echo on
 	set CMAKE_OPTS=%CMAKE_OPTS_DBG%
@@ -20,7 +25,7 @@ if exist %PATH_SRC%\%1\. (
 		FOR /F "tokens=* USEBACKQ" %%F in (`git rev-parse --abbrev-ref HEAD`) do (set SCM_BRANCH=%%F)
 		FOR /F "tokens=* USEBACKQ" %%F in (`git show -s --format^=%%cd --date=short !SCM_COMORREV!`) do (set SCM_COMORREV_DATE=%%F)
 		FOR /F "tokens=* USEBACKQ" %%F in (`git config --get remote.origin.url`) do (set SCM_URL=%%F)
-		if /I "%~2"=="varonly" (exit /B)
+		if /I "%~2"=="varonly" (goto end)
 		echo     # %1 git commit:!SCM_COMORREV!
 		if %ARG_KEEPSRC% == 0 (
 			git reset --hard
@@ -42,7 +47,7 @@ if exist %PATH_SRC%\%1\. (
 		FOR /F "tokens=* USEBACKQ" %%F in (`svn info ^| grep 'Relative URL' ^| grep -oE '/.*'`) do (set SCM_BRANCH=%%F)
 		FOR /F "tokens=* USEBACKQ" %%F in (`svn info ^| grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}'`) do (set SCM_COMORREV_DATE=%%F)
 		FOR /F "tokens=* USEBACKQ" %%F in (`svn info ^| grep 'Repository Root' ^| grep -oE 'http.*'`) do (set SCM_URL=%%F)
-		if /I "%~2"=="varonly" (exit /B)
+		if /I "%~2"=="varonly" (goto end)
 		echo     # %1 svn revision:!SCM_COMORREV!
 		if %ARG_KEEPSRC% == 0 (
 			svn revert . -R
@@ -60,6 +65,7 @@ if exist %PATH_SRC%\%1\. (
 	)
 	
 )
+:end
 REM https://stackoverflow.com/questions/9556676/batch-file-how-to-replace-equal-signs-and-a-string-variable
 REM https://stackoverflow.com/questions/26246151/setlocal-enabledelayedexpansion-causes-cd-and-pushd-to-not-persist
 endlocal & ^
@@ -69,14 +75,13 @@ set SCM_TAG=%SCM_TAG%& ^
 set SCM_BRANCH=%SCM_BRANCH%& ^
 set SCM_COMORREV_DATE=%SCM_COMORREV_DATE%& ^
 set SCM_URL=%SCM_URL%
-
-REM echo SCM_COMORREV:%SCM_COMORREV%
-REM echo SCM_TAG:%SCM_TAG%
-REM echo SCM_BRANCH:%SCM_BRANCH%
-REM echo SCM_COMORREV_DATE:%SCM_COMORREV_DATE%
-REM echo SCM_URL:%SCM_URL%
-REM pause
-
+if "%CUR_DEBUG%"=="1" (
+	echo SCM_COMORREV:%SCM_COMORREV%
+	echo SCM_TAG:%SCM_TAG%
+	echo SCM_BRANCH:%SCM_BRANCH%
+	echo SCM_COMORREV_DATE:%SCM_COMORREV_DATE%
+	echo SCM_URL:%SCM_URL%
+)
 if /I "%~2"=="cmake" (
 	if exist %PATH_BUILD%\%1\. rmdir /S /Q %PATH_BUILD%\%1
 	mkdir %PATH_BUILD%\%1
