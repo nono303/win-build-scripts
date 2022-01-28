@@ -11,7 +11,6 @@ call buildconf
 	REM ~~~~~~~~~~~~ Patch some stuff in this shity configure.js, accoring to self made deps
 	REM libxml2s
 sed -i -E 's/CHECK_LIB\("libxml2_a_dll.lib;libxml2_a.lib", "libxml"\) (..)/CHECK_LIB\("icuuc.lib", "libxml"\) \\1 CHECK_LIB\("libxml2s.lib", "libxml"\) \\1/g' %CYGPATH_SRC%/php-src/configure.js
-exit
 	REM liblzma_a
 sed -i 's/liblzma_a/liblzma/g' %CYGPATH_SRC%/php-src/configure.js
 	REM libzip_a
