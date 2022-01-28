@@ -39,7 +39,7 @@ call %PATH_MODULES_COMMON%\init.bat apr varonly
 call do_php %PATH_UTILS%\sub\version.php apr %PATH_INSTALL%\bin\libapr-1.dll
 
 call %PATH_MODULES_COMMON%\init.bat apr-util varonly
-for %%D in (libaprutil apr_ldap-1 apr_dbd_odbc-1 apr_dbd_sqlite3-1 apr_crypto_openssl-1) do (
+for %%D in (libaprutil-1 apr_ldap-1 apr_dbd_odbc-1 apr_dbd_sqlite3-1 apr_crypto_openssl-1) do (
 	call do_php %PATH_UTILS%\sub\version.php apr-util %PATH_INSTALL%\bin\%%D.dll
 )
 
