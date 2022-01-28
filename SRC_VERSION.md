@@ -34,7 +34,7 @@
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
 | [libxml2](https://github.com/GNOME/libxml2) | 2.9.12 |
 | [libxpm](https://github.com/nono303/libxpm.git) | 3.5.13 |
-| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1808 |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1809 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
 | [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) | 0.17.0 |

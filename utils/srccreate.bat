@@ -154,7 +154,7 @@ git checkout tags/v1.8.0
 cd /D ..
 git clone https://github.com/lua/lua lua
 cd /D lua
-git checkout tags/v5.4.3
+git checkout tags/v5.4.4
 cd /D ..
 git clone https://github.com/nono303/mapsforgesrv.git mapsforgesrv
 cd /D mapsforgesrv
@@ -174,7 +174,7 @@ git checkout tags/1.0.0
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
 cd /D mod_fcgid
-svn update -r 1897356
+svn update -r 1897566
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
