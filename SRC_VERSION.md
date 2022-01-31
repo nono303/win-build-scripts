@@ -21,7 +21,7 @@
 | [libavif](https://github.com/AOMediaCodec/libavif.git) | 0.9.3 |
 | [libev](https://git.lighttpd.net/libev) | 4.33 |
 | [libevent](https://github.com/libevent/libevent) | 2.1.12 |
-| [libexpat](https://github.com/libexpat/libexpat) | 2.4.3 |
+| [libexpat](https://github.com/libexpat/libexpat) | 2.4.4 |
 | [libffi](https://github.com/winlibs/libffi) | 3.3 |
 | [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.17.0 |
 | [libiconv](https://github.com/winlibs/libiconv) | 1.16.1 |
@@ -37,7 +37,7 @@
 | [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1809 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
-| [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) | 0.17.0 |
+| [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) | 0.17.1 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.13 |
 | [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2639 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
