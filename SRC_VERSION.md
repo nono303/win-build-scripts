@@ -1,7 +1,7 @@
 | src | version |
 | ---- | ---- |
 | [abseil-cpp](https://github.com/abseil/abseil-cpp.git) | 20211102.rc2 |
-| [aom](https://aomedia.googlesource.com/aom) | v3.2.0rc3 |
+| [aom](https://aomedia.googlesource.com/aom) | v3.3.0rc1 |
 | [apr](https://github.com/apache/apr) | 1.7.1-dev - 4bc244e2f |
 | [apr-iconv](https://github.com/apache/apr-iconv) | 1.2.2 |
 | [apr-util](https://github.com/apache/apr-util) | 1.7.0-dev - 5e143fa9 |
@@ -34,12 +34,12 @@
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
 | [libxml2](https://github.com/GNOME/libxml2) | 2.9.12 |
 | [libxpm](https://github.com/nono303/libxpm.git) | 3.5.13 |
-| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1809 |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1810 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
 | [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) | 0.17.1 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.13 |
-| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2639 |
+| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2646 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
 | [mod_fcgid](http://svn.apache.org/repos/asf) | 2.3.10.1 |
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.2 |
@@ -69,5 +69,5 @@
 | [tidy](https://github.com/htacg/tidy-html5) | 5.9.14 |
 | [verpatch](https://github.com/pavel-a/ddverpatch) | 1.0.15.1 - 3cc989e |
 | [wineditline](https://svn.code.sf.net/p/mingweditline/code) | 2.2 |
-| [xdebug](https://github.com/xdebug/xdebug) | 3.1.2 |
+| [xdebug](https://github.com/xdebug/xdebug) | 3.1.3 |
 | [zlib](https://github.com/madler/zlib) | 1.2.11 |
