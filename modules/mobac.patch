@@ -1,25 +1,10 @@
-Index: gradle/wrapper/gradle-wrapper.properties
-===================================================================
---- gradle/wrapper/gradle-wrapper.properties	(revision 2635)
-+++ gradle/wrapper/gradle-wrapper.properties	(working copy)
-@@ -1,5 +1,5 @@
--distributionBase=GRADLE_USER_HOME
--distributionPath=wrapper/dists
--distributionUrl=https\://services.gradle.org/distributions/gradle-7.3.3-all.zip
--zipStoreBase=GRADLE_USER_HOME
--zipStorePath=wrapper/dists
-+distributionBase=GRADLE_USER_HOME
-+distributionPath=wrapper/dists
-+distributionUrl=https\://services.gradle.org/distributions/gradle-7.3.3-all.zip
-+zipStoreBase=GRADLE_USER_HOME
-+zipStorePath=wrapper/dists
 Index: mobac/build.gradle
 ===================================================================
 --- mobac/build.gradle	(revision 2635)
 +++ mobac/build.gradle	(working copy)
 @@ -2,9 +2,17 @@
      id 'java-library'
-     id 'edu.sc.seis.launch4j' version '2.5.0'
+     id 'edu.sc.seis.launch4j' version '2.5.1'
  }
 +repositories {
 +    mavenCentral()
@@ -46,7 +31,7 @@ Index: mobac/build.gradle
 +    api 'org.xerial:sqlite-jdbc:3.36.0.3'
 +    api 'com.sleepycat:je:18.3.12'
 +    api 'org.glassfish.jaxb:jaxb-runtime:3.0.2'
-     api 'org.slf4j:slf4j-api:1.7.32'
+     api 'org.slf4j:slf4j-api:1.7.35'
      implementation 'ch.qos.logback:logback-classic:1.2.10'
      implementation 'net.sf.jtidy:jtidy:r938'
 -    implementation 'com.itextpdf:itextpdf:5.1.3'
