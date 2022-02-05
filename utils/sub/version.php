@@ -36,8 +36,6 @@
 							pathenv("PATH_SRC")."/".$argv[1]."/include/libyuv/version.h"],
 		"mobac"				=> ["/mobac.revision=(.*)/",
 							pathenv("PATH_SRC")."/".$argv[1]."/mobac/build/resources/main/mobac/mobac-rev.properties"],
-		"mod_fcgid"			=> ["/#define MODFCGID_VERSION_MAJOR *([0-9]+).*#define MODFCGID_VERSION_MINOR *([0-9]+).*#define MODFCGID_VERSION_SUBVER *([0-9]+).*#define MODFCGID_VERSION_DEV *([0-9]+)/s",
-							pathenv("PATH_SRC")."/".$argv[1]."/modules/fcgid/fcgid_conf.h"],
 		"mod_h264_streaming"=> ["/#define VERSION \"([^\"]+)\"/",
 							pathenv("PATH_SRC")."/".$argv[1]."/config.h"],
 		"serf"				=> ["/#define SERF_MAJOR_VERSION *([0-9]+).*#define SERF_MINOR_VERSION *([0-9]+).*#define SERF_PATCH_VERSION *([0-9]+)/s",
@@ -148,7 +146,7 @@
 			if(pathenv("CUR_DEBUG") == 1){
 				echo $cmd.PHP_EOL;
 			} else {
-				echo "[version] ".$argv[2].PHP_EOL;
+				echo "[version] '".$current["product"]."' ".$argv[2].PHP_EOL;
 			}
 			passthru($cmd);
 		} else {
