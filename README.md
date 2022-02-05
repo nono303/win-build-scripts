@@ -51,7 +51,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [OpenJDK](https://jdk.java.net/17/)                        | x64  | 17.0.2 |                     |
 | [ActivePerl](https://platform.activestate.com/ActiveState/ActivePerl-5.28/auto-fork) | x64  | 5.28.1.2801    |                     |
 | [Netwide Assembler](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.15.05        |                     |
-| [Git](https://git-scm.com/download/win)                      | x64  | 2.35.1 |                     |
+| [Git](https://git-scm.com/download/win)                      | x64  | 2.35.1.2 |                     |
 | verpatch                                                     | x64  | 1.0.15.1       |                     |
 | [7z](https://www.7-zip.org/download.html)                    | x64  | 21.07     |                     |
 | [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.82         |                     |

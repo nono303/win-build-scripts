@@ -41,7 +41,7 @@
 | [memcached](https://github.com/memcached/memcached) | 1.6.13 |
 | [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2646 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
-| [mod_fcgid](http://svn.apache.org/repos/asf) | 2.3.10.1 |
+| [mod_fcgid](https://github.com/nono303/mod_fcgid) | 2.3.10.1 |
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.2 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
