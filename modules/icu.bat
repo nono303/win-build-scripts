@@ -5,7 +5,7 @@ set VCDIR=icu4c\source\allinone
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/icu4c" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
 
 REM icudtXX.pdb
-sed -i 's/NXCOMPAT/NXCOMPAT \/LTCG \/OPT:REF,ICF \/DEBUG/g' %CYGPATH_SRC%/%1/icu4c/source/tools/pkgdata/pkgdata.cpp
+sed -i 's/NXCOMPAT/NXCOMPAT \/OPT:REF,ICF \/DEBUG/g' %CYGPATH_SRC%/%1/icu4c/source/tools/pkgdata/pkgdata.cpp
 
 REM https://unicode-org.github.io/icu/userguide/icu4c/build.html#skipping-the-uwp-projects-on-the-command-line
 REM 	/t:cal,cintltst,common,ctestfw,date,derb,genbrk,genccode,gencmn,gencnval,genrb,gentest,i18n,intltest,makeconv,makedata,pkgdata,stubdata,toolutil,uconv,io,gensprep,iotest,icupkg,gendict,gencfu,gennorm2,icuinfo,testplug,makedata_uwp,i18n_uwp,common_uwp, ^
