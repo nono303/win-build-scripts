@@ -15,7 +15,7 @@
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52 |
 | [geos](https://github.com/libgeos/geos) | 3.10.2 |
 | [httpd](https://github.com/apache/httpd) | 2.4.52 |
-| [icu](https://github.com/unicode-org/icu) | 70.1 |
+| [icu](https://github.com/unicode-org/icu) | 70.1 - cldr/2022-02-08 |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.2.1 |
 | [libavif](https://github.com/AOMediaCodec/libavif.git) | 0.9.3 |
@@ -37,7 +37,7 @@
 | [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1810 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
-| [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) | 0.17.1 |
+| [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) | 0.17.2.1 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.13 |
 | [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2646 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |

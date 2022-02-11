@@ -70,7 +70,7 @@ git checkout tags/2.4.52
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout tags/release-70-1
+git checkout cldr/2022-02-08
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -158,7 +158,7 @@ git checkout tags/v5.4.4
 cd /D ..
 git clone https://github.com/nono303/mapsforgesrv.git mapsforgesrv
 cd /D mapsforgesrv
-git checkout tags/0.17.1
+git checkout tags/0.17.2.1
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
@@ -166,15 +166,15 @@ git checkout tags/1.6.13
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2646
+svn update -r 2648
 cd /D ..
 git clone https://github.com/JBlond/mod_bikeshed.git mod_bikeshed
 cd /D mod_bikeshed
 git checkout tags/1.0.0
 cd /D ..
-svn co http://svn.apache.org/repos/asf/httpd/mod_fcgid/trunk mod_fcgid
+git clone https://github.com/nono303/mod_fcgid.git mod_fcgid
 cd /D mod_fcgid
-svn update -r 1897785
+git checkout tags/2.3.10.1
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
