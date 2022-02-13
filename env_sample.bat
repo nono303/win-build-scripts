@@ -145,8 +145,10 @@ for %%X in (vs16_x86-avx vs16_x64-avx vs16_x86 vs16_x64 vc15_x86-avx vc15_x64-av
 REM ########################## LOCAL COPY PATH
 REM copy MOBAC, PROJ & GEOGRAPHICLIB release to LOCAL_PATH_XXX if LOCAL_COPY=1 && LOCAL_COPY_AVXECHO == AVXECHO && LOCAL_COPY_MSVC_VER == MSVC_VER
 set LOCAL_COPY=1
-set LOCAL_COPY_AVXECHO=avx
-set LOCAL_COPY_MSVC_VER=16
 set LOCAL_PATH_MOBAC=C:\PROGRA~2\mobac
+set LOCAL_PATH_MOBAC2=F:\logiciels\_Carto
 set LOCAL_PATH_PROJ=B:\serveur\_gis\proj
 set LOCAL_PATH_GEOGRAPHICLIB=B:\serveur\_gis\geographiclib
+REM only for PROJ & GEOGRAPHICLIB
+set LOCAL_COPY_AVXECHO=avx
+set LOCAL_COPY_MSVC_VER=17
