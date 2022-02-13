@@ -41,10 +41,7 @@ link /LTCG /OPT:REF,ICF /DEBUG /DLL /IMPLIB:liblua.lib	/OUT:liblua.dll *.obj
 link /LTCG /OPT:REF,ICF /DEBUG				/OUT:lua.exe lua.o liblua.lib
 lib  /LTCG						/OUT:liblua_static.lib *.obj
 
-del *.obj
-del *.exp
-del *.o
-
+for %%X in (obj exp o) do (del /Q /F *.%%X)
 
 for %%X in (liblua.dll lua.exe liblua.pdb lua.pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\%%X %PATH_INSTALL%\bin\*)
 for %%X in (liblua.lib liblua_static.lib) do (xcopy /C /F /Y %PATH_SRC%\%1\%%X %PATH_INSTALL%\lib\*)
