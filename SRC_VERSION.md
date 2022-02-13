@@ -38,8 +38,8 @@
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
 | [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) | 0.17.2.1 |
-| [memcached](https://github.com/memcached/memcached) | 1.6.13 |
-| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2646 |
+| [memcached](https://github.com/memcached/memcached) | 1.6.14 |
+| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2656 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
 | [mod_fcgid](https://github.com/nono303/mod_fcgid) | 2.3.10.1 |
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.2 |
