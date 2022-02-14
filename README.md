@@ -49,7 +49,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.10.2 |                     |
 | [Node.js](https://nodejs.org/en/download/current/) | x64 | 17.5.0 | |
 | [OpenJDK](https://jdk.java.net/17/)                        | x64  | 17.0.2 |                     |
-| [ActivePerl](https://platform.activestate.com/ActiveState/ActivePerl-5.28/auto-fork) | x64  | 5.28.1.2801    |                     |
+| [Strawberry Perl](https://strawberryperl.com/releases.html) | x64  | 5.32.1.1 |                     |
 | [Netwide Assembler](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.15.05        |                     |
 | [Git](https://git-scm.com/download/win)                      | x64  | 2.35.1.2 |                     |
 | verpatch                                                     | x64  | 1.0.15.1       |                     |
@@ -57,7 +57,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.82         |                     |
 | [ChkMatch](http://beefchunk.com/documentation/sys-programming/os-win32/debug/www.debuginfo.com/tools/chkmatch.html) | x86 | 1.0.3          |                     |
 | [Gradle](https://gradle.org/install/) | [java] | 7.3.3 | |
-| [CMake](https://cmake.org/download/) | x64 | 3.22.2 | |
+| [CMake](https://cmake.org/download/) | x64 | 3.23.0-rc1 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | x64 | 1.10.2 | |
 | [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 0.61.1 | |
 | [NuGet](https://www.nuget.org/downloads) | x86 | 6.0.0 | |

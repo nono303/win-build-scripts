@@ -44,8 +44,8 @@ set PATH_BIN_PYTHON=%PATH_SOFTS%\python3;%PATH_SOFTS%\python3\Scripts
 set PATH_BIN_CYGWIN=%PATH_ROOT_CYGWIN%%CYGV%\bin
 set PATH_BIN_NASM=%PATH_SOFTS%\nasm
 set PATH_BIN_NODE=%PATH_SOFTS%\nodejs
-set PATH_BIN_PERL=%PATH_SOFTS%\perl\bin
-set PATH_BIN_PERL_SITE=%PATH_SOFTS%\perl\site\bin
+set PATH_BIN_PERL=%PATH_SOFTS%\perl\perl\bin
+set PATH_BIN_PERL_SITE=%PATH_SOFTS%\perl\perl\site\bin
 	REM svn for mobac https://github.com/nono303/win-svn
 set PATH_BIN_SVN=%PATH_RELEASE_SVN%\vs16\x64-avx
 set PATH_DEPS_SVN=%PATH_RELEASE_SVN%\vs16\x64-avx\deps
