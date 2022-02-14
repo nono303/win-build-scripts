@@ -37,7 +37,7 @@
 | [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1810 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
-| [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) | 0.17.2.1 |
+| [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) | 0.17.2 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.14 |
 | [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2656 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
@@ -45,7 +45,7 @@
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.2 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
-| [mod_md](https://github.com/icing/mod_md) | 2.4.9 |
+| [mod_md](https://github.com/icing/mod_md) | 2.4.11 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) | 2.01.1 |
 | [nghttp2](https://github.com/nghttp2/nghttp2) | 1.46.0 |
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 0.1.1 |

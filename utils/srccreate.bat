@@ -158,7 +158,7 @@ git checkout tags/v5.4.4
 cd /D ..
 git clone https://github.com/nono303/mapsforgesrv.git mapsforgesrv
 cd /D mapsforgesrv
-git checkout tags/0.17.2.1
+git checkout tags/0.17.2
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
@@ -190,7 +190,7 @@ git checkout tags/1.2.0
 cd /D ..
 git clone https://github.com/icing/mod_md mod_md
 cd /D mod_md
-git checkout tags/v2.4.10
+git checkout tags/v2.4.11
 cd /D ..
 git clone https://github.com/nono303/mod_whatkilledus mod_wku_bt
 cd /D mod_wku_bt
