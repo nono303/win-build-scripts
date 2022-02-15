@@ -30,10 +30,13 @@ for %%C in ("-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" "-DBUILD_SHARED_LIBS=ON -
 	%PATH_SRC%\%1
 
 	%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+	if %%C =="-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" (
+		sed -i 's/SQLite3.pdb/sqlite3.pdb/g' %CYGPATH_BUILD%/%1/build.ninja
+	)
 	%NINJA% install
 
 	if %%C =="-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" (
-		xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\SQLite3.dir\SQLite3.pdb %PATH_INSTALL%\lib\sqlite3.pdb*
+		xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\SQLite3.dir\sqlite3.pdb %PATH_INSTALL%\lib\*
 		xcopy /C /F /Y %PATH_BUILD%\%1\sqlite3.pdb %PATH_INSTALL%\bin\*
 	) else (
 		for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\libsqlite3.%%X %PATH_INSTALL%\bin\*)
