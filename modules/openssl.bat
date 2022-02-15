@@ -1,4 +1,8 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %OPENSSL_SCM%
+@echo off 
+REM warning: failed to remove NUL: Invalid argument
+cd %PATH_SRC%\%1
+rm -f NUL
+call %PATH_MODULES_COMMON%\init.bat %OPENSSL_SCM%
 
 	REM https://wiki.openssl.org/index.php/Compilation_and_Installation
 	REM no-deprecated / -DOPENSSL_NO_DEPRECATED_3_0 (https://github.com/openssl/openssl/pull/13866) : failed for libssh2 / apr
