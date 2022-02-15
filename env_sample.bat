@@ -140,10 +140,13 @@ set RC_COPYRIGHT=https://github.com/nono303/win-build-scripts
 REM ########################## INIT PATH
 if not exist %PATH_LOGS%\. mkdir %PATH_LOGS%
 if not exist %PATH_BUILDROOT%\. mkdir %PATH_BUILDROOT%
-for %%X in (vs16_x86-avx vs16_x64-avx vs16_x86 vs16_x64 vc15_x86-avx vc15_x64-avx vc15_x86 vc15_x64) do (
-	if not exist %PATH_RELEASE%\%%X\. mkdir %PATH_RELEASE%\%%X
-	if not exist %PATH_BUILDROOT%\%%X\. mkdir %PATH_BUILDROOT%\%%X
+for %%X in (vc15 vs16 vs17) do (
+	for %%Y in (x86 x64 x86-avx x64-avx) do (
+		if not exist %PATH_RELEASE%\%%X_%%Y\. mkdir %PATH_RELEASE%\%%X_%%Y
+		if not exist %PATH_BUILDROOT%\%%X_%%Y\. mkdir %PATH_BUILDROOT%\%%X_%%Y
+	)
 )
+if not exist %PATH_BUILDROOT%\php\. mkdir %PATH_BUILDROOT%\php
 
 REM ########################## LOCAL COPY PATH
 REM copy MOBAC, PROJ & GEOGRAPHICLIB release to LOCAL_PATH_XXX if LOCAL_COPY=1 && LOCAL_COPY_AVXECHO == AVXECHO && LOCAL_COPY_MSVC_VER == MSVC_VER
