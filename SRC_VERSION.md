@@ -7,7 +7,7 @@
 | [apr-util](https://github.com/apache/apr-util) | 1.7.0-dev - 5e143fa9 |
 | [brotli](https://github.com/google/brotli) | 1.0.9 |
 | [bzip2](https://sourceware.org/git/bzip2) | 1.0.8 |
-| [c-ares](https://github.com/c-ares/c-ares) | 1.18.1 |
+| [cares](https://github.com/c-ares/c-ares) | 1.18.1 |
 | [curl](https://github.com/curl/curl) | 7.81.0 |
 | [dav1d](https://code.videolan.org/videolan/dav1d.git) | 0.9.2 |
 | [dependencies](https://github.com/lucasg/Dependencies) | 1.11.1 |
@@ -71,3 +71,4 @@
 | [wineditline](https://svn.code.sf.net/p/mingweditline/code) | 2.2 |
 | [xdebug](https://github.com/xdebug/xdebug) | 3.1.3 |
 | [zlib](https://github.com/madler/zlib) | 1.2.11 |
+| [zstd](https://github.com/facebook/zstd/tree/v1.5.2) | 1.5.2 |

@@ -36,8 +36,8 @@ git clone git://sourceware.org/git/bzip2.git bzip2
 cd /D bzip2
 git checkout tags/bzip2-1.0.8
 cd /D ..
-git clone https://github.com/c-ares/c-ares.git c-ares
-cd /D c-ares
+git clone https://github.com/c-ares/c-ares.git cares
+cd /D cares
 git checkout tags/cares-1_18_1
 cd /D ..
 git clone https://github.com/curl/curl.git curl
@@ -291,4 +291,8 @@ cd /D ..
 git clone https://github.com/madler/zlib.git zlib
 cd /D zlib
 git checkout tags/v1.2.11
+cd /D ..
+git clone https://github.com/facebook/zstd.git zstd
+cd /D zstd
+git checkout tags/v1.5.2
 cd /D ..
