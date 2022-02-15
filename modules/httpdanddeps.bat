@@ -12,7 +12,7 @@ call %PATH_BATCH%\go.bat libxml2 NOLOG
 call %PATH_BATCH%\go.bat pcre NOLOG
 call %PATH_BATCH%\go.bat libevent NOLOG
 call %PATH_BATCH%\go.bat libev NOLOG
-call %PATH_BATCH%\go.bat c-ares NOLOG
+call %PATH_BATCH%\go.bat cares NOLOG
 if %QUIC_BUILD% == 1 (
 	call %PATH_BATCH%\go.bat ngtcp2 NOLOG
 	call %PATH_BATCH%\go.bat nghttp3 NOLOG
