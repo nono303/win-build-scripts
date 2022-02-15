@@ -17,7 +17,7 @@ Usage: go command [options]
       * pcre
       * libevent
       * libev
-      * c-ares
+      * cares
       * ngtcp2 (if QUIC enabled)
       * nghttp3 (if QUIC enabled)
       * nghttp2
@@ -34,6 +34,7 @@ Usage: go command [options]
       * subversion
     * phpanddeps
       * wineditline
+      * zstd
       * libzip
       * libxpm
       * libpng
@@ -80,6 +81,8 @@ Usage: go command [options]
 	nofetch: don't fetch remote
 	verbose: display all scm commands
   * srccreate: git clone & svn co all required src into %PATH_SRC% defined in env.bat
+  * libcheck: check all librairies released (lib) have a pdb file
+    > param: a path to check
   * bininfo: check all binaries released (exe dll so) for datetime, MSVC version, architecture and option, 'StringFileInfo' embedded and export a summarized csv file in %PATH_LOGS%
     > param: a path or a file to check
     > option:
@@ -91,5 +94,4 @@ Usage: go command [options]
   * configexport: export cygwin and MSVS config to %PATH_BATCH%\config. 
                   import .vsconfg for MSVS 
 		  use setup.exe -P `awk 'NR==1{printf \$1}{printf ",%s", \$1}' cyg_XX_.packagelist` for cygwin (where _XX_ is 32 or 64...)
-  * curlperf: test curl tls performances between WinSSL & OpenSSL for curl.exe and php_curl extension
 ---------------------------
