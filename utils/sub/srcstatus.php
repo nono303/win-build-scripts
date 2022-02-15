@@ -46,7 +46,7 @@
 	echo "> ".$srcdir.PHP_EOL;
 
 	$srccreate = file_get_contents(dirname(__FILE__) . '/srccreate.bat.in');
-	file_put_contents($argv[1],'"name";"scm";"upstream";"head";"status";"branch";"log tags";"last tag"'.PHP_EOL,FILE_APPEND);
+	file_put_contents($argv[1],'"name";"scm";"origin";"head";"status";"branch";"log tags";"last tag"'.PHP_EOL,FILE_APPEND);
 	echo "*************************".PHP_EOL;
 	foreach(scandir($srcdir) as $ele){
 	// foreach(["libyuv"] as $ele){
