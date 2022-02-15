@@ -12,12 +12,14 @@ cmake %CMAKE_OPTS% ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+sed -i 's/libgav1\.lib/libgav1_static\.lib/g' %CYGPATH_BUILD%/%1/build.ninja
+
 %NINJA% 
 
 xcopy /C /F /Y %PATH_BUILD%\%1\gav1_decode.exe %PATH_INSTALL%\bin\*
 xcopy /C /F /Y %PATH_BUILD%\%1\gav1_decode.pdb %PATH_INSTALL%\bin\*
-xcopy /C /F /Y %PATH_BUILD%\%1\libgav1.lib %PATH_INSTALL%\lib\*
-xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\libgav1_static.dir\libgav1_static.pdb %PATH_INSTALL%\lib\libgav1.pdb*
+xcopy /C /F /Y %PATH_BUILD%\%1\libgav1_static.lib %PATH_INSTALL%\lib\*
+xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\libgav1_static.dir\libgav1_static.pdb %PATH_INSTALL%\lib\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\gav1_decode.exe
 
 if not exist %PATH_INSTALL%\include\gav1\. mkdir %PATH_INSTALL%\include\gav1
