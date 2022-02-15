@@ -1,4 +1,5 @@
 call %PATH_BATCH%\go.bat wineditline NOLOG
+call %PATH_BATCH%\go.bat zstd NOLOG
 call %PATH_BATCH%\go.bat libzip NOLOG
 call %PATH_BATCH%\go.bat libxpm NOLOG
 call %PATH_BATCH%\go.bat libpng NOLOG
