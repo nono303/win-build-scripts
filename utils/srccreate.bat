@@ -84,6 +84,10 @@ git clone https://github.com/AOMediaCodec/libavif.git libavif
 cd /D libavif
 git checkout tags/v0.9.3
 cd /D ..
+git clone https://github.com/ebiggers/libdeflate.git libdeflate
+cd /D libdeflate
+git checkout tags/v1.10
+cd /D ..
 git clone https://git.lighttpd.net/libev.git libev
 cd /D libev
 git checkout tags/rel-4.33

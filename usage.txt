@@ -18,8 +18,8 @@ Usage: go command [options]
       * libevent
       * libev
       * cares
-      * ngtcp2 (if QUIC enabled)
       * nghttp3 (if QUIC enabled)
+      * ngtcp2 (if QUIC enabled)
       * nghttp2
       * libssh2
       * curl
@@ -51,6 +51,7 @@ Usage: go command [options]
       * geos
       * php
     * projgeolibanddeps
+      * libdeflate
       * libtiff
       * proj
       * geographiclib

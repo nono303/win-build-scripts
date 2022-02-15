@@ -3,13 +3,16 @@
 cmake %CMAKE_OPTS% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
+-DCMAKE_DISABLE_FIND_PACKAGE_PkgConfig=ON ^
 -DBUILD_SHARED_LIBS=ON ^
 -DZLIB_LIBRARY=%PATH_INSTALL:\=/%/lib/zlib.lib ^
 -DZLIB_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 -DJPEG_LIBRARY=%PATH_INSTALL:\=/%/lib/turbojpeg-static.lib ^
 -DJPEG_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
--DLIBLZMA_LIBRARIES=C:/sdk/release/vs16_x64-avx/lib/liblzma.lib ^
+-DLIBLZMA_LIBRARIES=%PATH_INSTALL:\=/%/lib/liblzma.lib ^
 -DLIBLZMA_INCLUDE_DIRS=%PATH_INSTALL:\=/%/include ^
+-DDeflate_LIBRARIES=%PATH_INSTALL:\=/%/lib/libdeflatestatic.lib ^
+-DDeflate_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 -Dextra-warnings=OFF ^
 -Dfatal-warnings=OFF ^
 -Dld-version-script=OFF ^
@@ -21,7 +24,7 @@ cmake %CMAKE_OPTS% ^
 -Dlogluv=ON ^
 -Dmdi=ON ^
 -Dzlib=ON ^
--Dlibdeflate=OFF ^
+-Dlibdeflate=ON ^
 -Dpixarlog=ON ^
 -Djpeg=ON ^
 -Dold-jpeg=ON ^
