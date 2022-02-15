@@ -11,4 +11,8 @@ cmake ^
 %NINJA% install
 
 for %%X in (brotlicommon brotli brotlidec brotlienc) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X.pdb %PATH_INSTALL%\bin\*)
+xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\brotlicommon-static.dir\brotlicommon-static.pdb %PATH_INSTALL%\lib\*
+xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\brotlidec-static.dir\brotlidec-static.pdb %PATH_INSTALL%\lib\*
+xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\brotlienc-static.dir\brotlienc-static.pdb %PATH_INSTALL%\lib\*
+
 for %%X in (brotlicommon.dll brotli.exe brotlidec.dll brotlienc.dll) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)

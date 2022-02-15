@@ -24,6 +24,5 @@ for %%S in (OFF ON) do (
 	%NINJA% install
 )
 
-xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\freetype.dir\freetype.pdb %PATH_INSTALL%\lib\*
 xcopy /C /F /Y %PATH_BUILD%\%1\freetype.pdb %PATH_INSTALL%\bin\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\freetype.dll

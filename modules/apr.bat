@@ -30,6 +30,11 @@ nmake %NMAKE_OPTS% /f Makefile.win ^
 	SystemRoot=%SystemRoot% ^
 	buildall install
 
+REM pdb are not build in same folder according to arch...
+for /F "delims=" %%I in ('dir /a:-D /s /b %PATH_SRC%\apr\apr-1.pdb') do (xcopy /C /F /Y %%I %PATH_INSTALL%\lib\*)
+for /F "delims=" %%I in ('dir /a:-D /s /b %PATH_SRC%\apr-util\aprutil-1.pdb') do (xcopy /C /F /Y %%I %PATH_INSTALL%\lib\*)
+for /F "delims=" %%I in ('dir /a:-D /s /b %PATH_SRC%\apr-iconv\apriconv-1.pdb') do (xcopy /C /F /Y %%I %PATH_INSTALL%\lib\*)
+
 if not exist %PATH_INSTALL%\include\arch\. mkdir %PATH_INSTALL%\include\arch
 xcopy /C /F /Y %PATH_SRC%\apr\include\arch\apr_private_common.h %PATH_INSTALL%\include\arch\*
 if not exist %PATH_INSTALL%\include\arch\win32\. mkdir %PATH_INSTALL%\include\arch\win32

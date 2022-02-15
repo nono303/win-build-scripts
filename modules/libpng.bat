@@ -19,6 +19,6 @@ cmake %CMAKE_OPTS% ^
 %NINJA% install
 
 move /y %PATH_INSTALL%\lib\libpng16_static.lib %PATH_INSTALL%\lib\png_static.lib
-for %%E in (CMakeFiles\png_static.dir\png_static.pdb libpng16.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%E %PATH_INSTALL%\lib\*)
+xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\png_static.dir\png_static.pdb %PATH_INSTALL%\lib\*
 for %%E in (pngfix.pdb png-fix-itxt.pdb libpng16.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%E %PATH_INSTALL%\bin\*)
 for %%X in (libpng16.dll png-fix-itxt.exe pngfix.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)

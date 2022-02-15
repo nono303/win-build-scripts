@@ -19,11 +19,10 @@ cmake %CMAKE_OPTS% ^
 
 xcopy /C /F /Y %PATH_BUILD%\%1\lib\CMakeFiles\ngtcp2_static.dir\ngtcp2_static.pdb %PATH_INSTALL%\lib\*
 xcopy /C /F /Y %PATH_BUILD%\%1\crypto\openssl\CMakeFiles\ngtcp2_crypto_openssl_static.dir\ngtcp2_crypto_openssl_static.pdb %PATH_INSTALL%\lib\*
-xcopy /C /F /Y %PATH_BUILD%\%1\crypto\openssl\ngtcp2_crypto_openssl.pdb %PATH_INSTALL%\lib\*
-xcopy /C /F /Y %PATH_BUILD%\%1\lib\ngtcp2.pdb %PATH_INSTALL%\lib\*
+xcopy /C /F /Y %PATH_BUILD%\%1\crypto\openssl\ngtcp2_crypto_openssl.pdb %PATH_INSTALL%\bin\*
+xcopy /C /F /Y %PATH_BUILD%\%1\lib\ngtcp2.pdb %PATH_INSTALL%\bin\*
 
 for %%X in (ngtcp2 ngtcp2_crypto_openssl) do (
 	move /Y %PATH_INSTALL%\lib\%%X.dll %PATH_INSTALL%\bin\%%X.dll
-	xcopy /Y %PATH_INSTALL%\lib\%%X.pdb %PATH_INSTALL%\bin\*
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X.dll
 )

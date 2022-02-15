@@ -22,5 +22,4 @@ for %%F in (event event_extra event_openssl event_core) do (
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\lib\%%F.dll
 	move /Y %PATH_INSTALL%\lib\%%F.dll %PATH_INSTALL%\bin
 	xcopy /C /F /Y %PATH_BUILD%\%1\bin\%%F.pdb %PATH_INSTALL%\bin\*
-	xcopy /C /F /Y %PATH_BUILD%\%1\bin\%%F.pdb %PATH_INSTALL%\lib\*
 )

@@ -22,7 +22,6 @@ for %%C in (dt in io tu uc) do (
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\icu%%C%ICUV%.dll
 	xcopy /C /F /Y %PATH_SRC%\icu\icu4c\lib64\icu%%C.pdb %PATH_INSTALL%\bin\icu%%C%ICUV%.pdb*
 	xcopy /C /F /Y %PATH_SRC%\icu\icu4c\lib64\icu%%C.lib %PATH_INSTALL%\lib\*
-	xcopy /C /F /Y %PATH_SRC%\icu\icu4c\lib64\icu%%C.pdb %PATH_INSTALL%\lib\*
 )
 xcopy /C /F /Y %PATH_SRC%\icu\icu4c\source\data\out\build\icudt%ICUV%l\icudt%ICUV%.pdb %PATH_INSTALL%\bin\*
 if not exist %PATH_INSTALL%\include\unicode\. mkdir %PATH_INSTALL%\include\unicode
