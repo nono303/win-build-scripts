@@ -96,6 +96,9 @@ C:\Windows\System32\WindowsPowerShell\v1.0\;
 cd /D %PATH_BATCH%
 
 REM ########################## BUILD OPTION
+	REM ~~~~~~~~~~~ curl for mod_md		dll WinSSL https://github.com/icing/mod_md/issues/14
+	REM		2021-02-08		https://www.apachelounge.com/viewtopic.php?p=39826#39826
+set CURL_VER=openssl
 	REM see dir in %PATH_ROOTWKIT%\Lib
 set WKITVER=10.0.22000.0
 	REM .NET installed SDK

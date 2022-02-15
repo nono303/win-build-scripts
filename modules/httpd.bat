@@ -2,9 +2,6 @@
 	REM ~~~~~~~~~~~ external modules
 for %%M in (mod_maxminddb mod_fcgid mod_h2 mod_md mod_wku_bt mod_h264_streaming) do (call %PATH_MODULES_COMMON%\init.bat %%M)
 
-	REM ~~~~~~~~~~~ curl for mod_md		dll WinSSL https://github.com/icing/mod_md/issues/14
-	REM		2021-02-08		https://www.apachelounge.com/viewtopic.php?p=39826#39826
-set CURL_VER=openssl
 for %%X in (dll exe pdb) do (xcopy /C /F /Y %PATH_INSTALL%\%FOLDER_RELEASE_CURL%\%CURL_VER%\bin\*.%%X %PATH_INSTALL%\bin\*)
 
 call %PATH_MODULES_COMMON%\init.bat %1 cmake
@@ -41,6 +38,9 @@ sed -i 's/DBIN_NAME=mod_h264_streaming.so/DBIN_NAME=mod_h264_streaming.so -DBUIL
 REM C:\sdk\src\httpd\support\win32\ApacheMonitor.rc(21) : warning RC4005: 'LONG_NAME' : redefinition
 sed -i 's/-DLONG_NAME=ApacheMonitor //g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
+
+REM delete unused exp in /lib
+del /Q /F "%PATH_INSTALL%\lib\*.exp"
 
 	REM Targeting for Windows 10
 mt.exe -manifest %PATH_MODULES%\httpd.exe.manifest -outputresource:%PATH_INSTALL%\bin\httpd.exe;1
