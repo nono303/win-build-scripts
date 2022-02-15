@@ -1,5 +1,5 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1
-call cl /w /MD /Zi /O2 /GL /MD /Zi /MP16 %AVX% /DNDEBUG /c /DLUA_BUILD_AS_DLL ^
+call cl /w /MD /Zi /O2 /GL /MD /Zi /MP16 %AVX% /DNDEBUG /c /DLUA_BUILD_AS_DLL /Fdliblua_static.pdb /FS ^
 lutf8lib.c ^
 lvm.c ^
 lzio.c ^
@@ -44,6 +44,7 @@ lib  /LTCG						/OUT:liblua_static.lib *.obj
 for %%X in (obj exp o) do (del /Q /F *.%%X)
 
 for %%X in (liblua.dll lua.exe liblua.pdb lua.pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\%%X %PATH_INSTALL%\bin\*)
+xcopy /C /F /Y %PATH_SRC%\%1\liblua_static.pdb %PATH_INSTALL%\lib\*
 for %%X in (liblua.lib liblua_static.lib) do (xcopy /C /F /Y %PATH_SRC%\%1\%%X %PATH_INSTALL%\lib\*)
 for %%X in (lualib.h luaconf.h lua.h lauxlib.h) do (xcopy /C /F /Y %PATH_SRC%\%1\%%X %PATH_INSTALL%\include\*)
 for %%X in (liblua.dll lua.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
