@@ -25,8 +25,10 @@ cmake %CMAKE_OPTS% ^
 	%PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+sed -i 's/tidy_a\.pdb/tidy_static\.pdb/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
 
-xcopy /C /F /Y %PATH_BUILD%\%1\*.pdb %PATH_INSTALL%\bin\*
-xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\tidy_a.dir\tidy_a.pdb %PATH_INSTALL%\lib\*
+move /Y %PATH_INSTALL%\lib\libtidy.pdb %PATH_INSTALL%\bin\libtidy.pdb
+xcopy /C /F /Y %PATH_BUILD%\%1\tidy.pdb %PATH_INSTALL%\bin\*
+xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\tidy_a.dir\tidy_static.pdb %PATH_INSTALL%\lib\*
 for %%X in (tidy.exe libtidy.dll) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
