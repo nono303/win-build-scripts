@@ -1,8 +1,0 @@
-    dns_resolution  %{time_namelookup}\n
-   tcp_established  %{time_connect}\n
-ssl_handshake_done  %{time_appconnect}\n
-  time_pretransfer  %{time_pretransfer}\n
-     time_redirect  %{time_redirect}\n
-time_starttransfer  %{time_starttransfer}\n
-                    --------\n
-        time_total  %{time_total}\n\n
