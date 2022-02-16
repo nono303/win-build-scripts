@@ -14,4 +14,5 @@ call %PATH_BATCH%\go.bat dav1d NOLOG
 call %PATH_BATCH%\go.bat libyuv NOLOG
 call %PATH_BATCH%\go.bat libavif NOLOG
 call %PATH_BATCH%\go.bat geos NOLOG
+call %PATH_BATCH%\go.bat libsodium NOLOG
 call %PATH_BATCH%\go.bat php NOLOG

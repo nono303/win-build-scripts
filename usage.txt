@@ -49,6 +49,7 @@ Usage: go command [options]
       * libyuv
       * libavif
       * geos
+      * libsodium
       * php
     * projgeolibanddeps
       * libdeflate

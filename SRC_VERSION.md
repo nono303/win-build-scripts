@@ -30,6 +30,7 @@
 | [liblzma](https://github.com/ShiftMediaProject/liblzma) | 5.3.2alpha |
 | [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.6.0 |
 | [libpng](https://sourceforge.net/p/libpng/code/ci/master/tree/) | 1.6.37 |
+| [libsodium](https://github.com/jedisct1/libsodium.git) | 1.0.18 |
 | [libssh2](https://github.com/libssh2/libssh2) | 1.10.0 |
 | [libtiff](https://gitlab.com/libtiff/libtiff) | 4.3.0 |
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |

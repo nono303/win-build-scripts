@@ -128,6 +128,10 @@ git clone git://git.code.sf.net/p/libpng/code libpng
 cd /D libpng
 git checkout tags/v1.6.37
 cd /D ..
+git clone https://github.com/jedisct1/libsodium.git libsodium
+cd /D libsodium
+git checkout tags/1.0.18-RELEASE
+cd /D ..
 git clone https://github.com/libssh2/libssh2.git libssh2
 cd /D libssh2
 git checkout tags/libssh2-1.10.0
