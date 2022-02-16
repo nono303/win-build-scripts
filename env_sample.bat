@@ -106,8 +106,6 @@ set DOTNETVER=4.8
 	REM Current MSVC full version (accordinf to vc15 vs16 vs17...)
 FOR /F "tokens=* USEBACKQ" %%F in (`dir /b %PATH_VS%\VC\Tools\MSVC ^| grep %vcvars_ver%`) do (set VCTOOLSVER=%%F)
 
-set NINJA=%BIN_NINJA%
-
 set NMAKE_OPTS_DBG=/NOLOGO
 set NMAKE_OPTS_REL=/S %NMAKE_OPTS_DBG%
 

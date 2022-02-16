@@ -9,11 +9,13 @@ if "%CUR_DEBUG%"=="1" (
 	set CMAKE_OPTS=%CMAKE_OPTS_DBG%
 	set NMAKE_OPTS=%NMAKE_OPTS_DBG%
 	set MSBUILD_OPTS=%MSBUILD_OPTS_DBG%
+	set NINJA=%BIN_NINJA% -v
 ) else (
 	@echo off
 	set CMAKE_OPTS=%CMAKE_OPTS_REL%
 	set NMAKE_OPTS=%NMAKE_OPTS_REL%
 	set MSBUILD_OPTS=%MSBUILD_OPTS_REL%
+	set NINJA=%BIN_NINJA%
 )
 setlocal enabledelayedexpansion
 if exist %PATH_SRC%\%1\. (
