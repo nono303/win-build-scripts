@@ -21,8 +21,15 @@ for %%S in (OFF ON) do (
 		REM LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
 	REM sed -i 's/LTCG/LTCG \/NODEFAULTLIB:libcmt.lib/g' %PATH_BUILD%/%1/CMakeFiles/freetype.dir/build.make
 	%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+	if %%S == OFF (
+		sed -i 's/freetype.lib/freetype_static.lib/g' %CYGPATH_BUILD%/%1/build.ninja
+		sed -i 's/freetype.pdb/freetype_static.pdb/g' %CYGPATH_BUILD%/%1/build.ninja
+		sed -i 's/freetype.lib/freetype_static.lib/g' %CYGPATH_BUILD%/%1/cmake_install.cmake
+	)
 	%NINJA% install
+
 )
 
+xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\freetype.dir\freetype_static.pdb %PATH_INSTALL%\lib\*
 xcopy /C /F /Y %PATH_BUILD%\%1\freetype.pdb %PATH_INSTALL%\bin\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\freetype.dll
