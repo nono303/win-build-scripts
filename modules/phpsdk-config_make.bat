@@ -111,7 +111,6 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--enable-memcache=shared ^
 	--with-geos=shared ^
 	--with-ffi ^
-	--with-xsl ^
 	--with-sodium ^
 	%ZTS% %phpveropts% %phparchopts%
 ) else (

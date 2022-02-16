@@ -33,7 +33,7 @@ sed -i 's/zlib_a/zlib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM avif
 sed -i 's/avif.h/avif\/avif.h/g' %CYGPATH_SRC%/php-src/configure.js
 	REM curl
-sed -i 's/libcurl_a/libcurl_imp/g' %CYGPATH_SRC%/php-src/configure.js
+sed -i 's/libcurl_a.lib;libcurl.lib/libcurl_imp.lib/g' %CYGPATH_SRC%/php-src/configure.js
 sed -i 's/PHP_PHP_BUILD + "\/include\/curl/"%PHP_CURL:\=\/%" + "\/include\/curl/g' %CYGPATH_SRC%/php-src/configure.js
 sed -i 's/EXTENSION("curl", "interface.c multi.c share.c curl_file.c");/EXTENSION("curl", "interface.c multi.c share.c curl_file.c"); CHECK_LIB("cares.lib", "curl", PHP_CURL);/g' %CYGPATH_SRC%/php-src/configure.js
 	REM freetype add lib bz2 et brotli
