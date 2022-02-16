@@ -16,7 +16,8 @@ for %%D in (bin lib) do (xcopy /C /F /Y %PATH_SRC%\%1\%%D%CYGV%\*.* %PATH_INSTAL
 if not exist %PATH_INSTALL%\include\editline\. mkdir %PATH_INSTALL%\include\editline
 xcopy /C /F /Y %PATH_SRC%\%1\include\editline\readline.h %PATH_INSTALL%\include\editline\*
 
-xcopy /C /F /Y %PATH_BUILD%\%1\src\edit_test_dll.pdb %PATH_INSTALL%\bin\*
-xcopy /C /F /Y %PATH_BUILD%\%1\src\edit_test.pdb %PATH_INSTALL%\bin\*
+move /Y %PATH_INSTALL%\bin\edit.lib %PATH_INSTALL%\lib\edit.lib 
+for %%X in (edit_test.exe edit_test_dll.exe) do (del /Q /F %PATH_INSTALL%\bin\%%X)
 xcopy /C /F /Y %PATH_BUILD%\%1\src\edit.pdb %PATH_INSTALL%\bin\*
 xcopy /C /F /Y %PATH_BUILD%\%1\src\CMakeFiles\edit_static.dir\edit_static.pdb %PATH_INSTALL%\lib\*
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\edit.dll
