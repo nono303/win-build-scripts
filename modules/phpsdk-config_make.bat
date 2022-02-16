@@ -106,10 +106,13 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--with-sqlite3 ^
 	--with-tidy=shared ^
 	--with-xdebug=shared ^
+	--with-xdebug-compression ^
 	--with-xdiff=shared ^
 	--enable-memcache=shared ^
 	--with-geos=shared ^
 	--with-ffi ^
+	--with-xsl ^
+	--with-sodium ^
 	%ZTS% %phpveropts% %phparchopts%
 ) else (
 	call configure %PHP_COMMON_CONFIGURE% ^
