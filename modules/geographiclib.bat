@@ -1,6 +1,5 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
-set CURL_VER=openssl
 if not exist %PATH_INSTALL%\_%1\. mkdir %PATH_INSTALL%\_%1
 
 cmake %CMAKE_OPTS% ^
