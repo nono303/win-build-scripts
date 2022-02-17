@@ -1,43 +1,52 @@
 <?php
 	include( dirname(__FILE__) . '/_functions.php');
+	DEFINE("PAD",35);
+	$afftype = ["pdb" => "STATIC","dll" => "SHARED"];
 
 	if(is_dir($argv[1] = str_replace("\\","/",$argv[1]))){
 		echo ">>>>>> ".$argv[1]." <<<<<<".PHP_EOL;
-		$pdbpresent = array_map('basename', glob($argv[1].'/*.pdb', GLOB_BRACE));
-		foreach(explode("\n",trim(execnono("grep --binary-files=text --include=\*.lib -oRine '[0-9a-zA-Z_-]*\.pdb'",NULL,$argv[1],NULL))) as $entry){
-			if($entry){
+		foreach(["pdb" => "/","dll" => "/../bin/"] as $k => $v){
+			if(sizeof($entries = array_filter(explode("\n",trim(execnono("grep --binary-files=text --include=\*.lib -oRine '[0-9a-zA-Z_-]*\.".$k."'",NULL,$argv[1],NULL))))) == 0)
+				continue;
+			echo "\t****** ".$afftype[$k]." ******".PHP_EOL;
+			$pdbordlllist[$k] = array_map('basename', glob($argv[1].$v.'*.'.$k, GLOB_BRACE));
+			foreach($entries as $entry){
 				$ret = explode(":",$entry);
-				if(!is_array($final[$liste = end(explode("/",$ret[0]))]))
-					$final[$liste] = [];
-				if(!in_array($value = str_replace("-Fd","",$ret[2]),$final[$liste = end(explode("/",$ret[0]))])) 
-					array_push($final[$liste],$value);
+				if(!is_array($final[$k][$libname = end(explode("/",$ret[0]))]))
+					$final[$k][$libname] = [];
+				if(!in_array($value = str_replace("-Fd","",$ret[2]),$final[$k][$libname = end(explode("/",$ret[0]))])) 
+					array_push($final[$k][$libname],$value);
 			}
-		}
-		if(is_array($final)){
-			foreach($final as $lib => $tabpdb){
-				echo "# ".$lib.PHP_EOL;
-				foreach($tabpdb as $pdb){
-					echo "\t";
-					if(in_array($pdb,$pdbpresent)){
-						if(explode(".",$pdb)[0] == explode(".",$lib)[0]){
-							echo "\033[32m".$pdb."\033[39m";
-						} else {
-							echo "\033[35m".$pdb."\033[39m";
+			if(is_array($final[$k])){
+				foreach($final[$k] as $lib => $tabresultat){
+					if(!is_array($final["pdb"]) || !($k == "dll" && array_key_exists($lib,$final["pdb"]))){
+						echo str_pad($lib,PAD);
+						$echres = "";
+						foreach($tabresultat as $pdbordll){
+							if(in_array($pdbordll,$pdbordlllist[$k])){
+								if(explode(".",$pdbordll)[0] == explode(".",$lib)[0] || $k == "dll"){
+									$echres .= str_pad("\033[32m".$pdbordll."\033[39m",PAD);
+								} else {
+									$echres .= str_pad("\033[35m".$pdbordll."\033[39m",PAD);
+								}
+								$pdbordlllist[$k] = array_diff($pdbordlllist[$k],[$pdbordll]);
+							} elseif($pdbordll == "vc140.pdb"){
+								$echres .= str_pad("\033[33m".$pdbordll."\033[39m",PAD);
+							} else {
+								$echres .= str_pad("\033[31m".$pdbordll."\033[39m",PAD);
+							}
 						}
-						$pdbpresent = array_diff($pdbpresent,[$pdb]);
-					} elseif($pdb == "vc140.pdb"){
-						echo "\033[33m".$pdb."\033[39m";
-					} else {
-						echo "\033[31m".$pdb."\033[39m";
+						echo $echres.PHP_EOL;
 					}
-					echo PHP_EOL;
 				}
 			}
-		}
-		if(sizeof($pdbpresent) > 0){
-			echo "# UNUSED".PHP_EOL;
-			foreach($pdbpresent as $unused)
-				echo "\t\033[36m".$unused."\033[39m".PHP_EOL;
+			if(sizeof($pdbordlllist[$k]) > 0){
+				echo "# UNUSED".PHP_EOL;
+				foreach($pdbordlllist[$k] as $unused)
+					echo "\t\033[36m".$unused."\033[39m".PHP_EOL;
+			} else {
+				// echo "\033[36m# NO UNUSED\033[39m".PHP_EOL;
+			}
 		}
 	}
 ?>
