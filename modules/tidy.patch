@@ -1,24 +1,26 @@
 diff --git a/include/tidyplatform.h b/include/tidyplatform.h
-index 89b6a77..e19f50f 100644
+index 2fca4c4..4dc457a 100644
 --- a/include/tidyplatform.h
 +++ b/include/tidyplatform.h
 @@ -485,7 +485,9 @@ extern "C" {
  #    define utimbuf _utimbuf /* Windows seems to want utimbuf */
  #    define stat _stat
  #    define utime _utime
-+#ifndef vsnprintf
- #    define vsnprintf _vsnprintf
-+#endif
+-#    define vsnprintf _vsnprintf
++#    ifndef vsnprintf
++#      define vsnprintf _vsnprintf
++#    endif
  #  endif
  
  #endif
 @@ -515,7 +517,9 @@ extern "C" {
- #endif
+ #  endif
  
  #  define access _access
-+#ifndef strcasecmp
- #  define strcasecmp _stricmp
-+#endif
+-#  define strcasecmp _stricmp
++#  ifndef strcasecmp
++#    define strcasecmp _stricmp
++#  endif
  
  #  ifndef va_copy
  #    define va_copy(dest, src) (dest = src)
