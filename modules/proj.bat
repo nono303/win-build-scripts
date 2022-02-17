@@ -1,6 +1,5 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
-set CURL_VER=openssl
 if exist %PATH_INSTALL%\_%1\. rmdir /S /Q %PATH_INSTALL%\_%1 && mkdir %PATH_INSTALL%\_%1
 
 REM https://proj.org/install.html#cmake-configure-options
@@ -16,8 +15,8 @@ cmake ^
 -DBUILD_PROJSYNC=ON ^
 -DBUILD_SHARED_LIBS=ON ^
 -DENABLE_CURL=ON ^
--DCURL_LIBRARY=%PATH_INSTALL:\=/%/%FOLDER_RELEASE_CURL%/%CURL_VER%/lib/libcurl_imp.lib ^
--DCURL_INCLUDE_DIR=%PATH_INSTALL:\=/%/%FOLDER_RELEASE_CURL%/%CURL_VER%/include ^
+-DCURL_LIBRARY=%PATH_INSTALL:\=/%/lib/libcurl_imp.lib ^
+-DCURL_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 -DSQLITE3_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 -DSQLITE3_LIBRARY=%PATH_INSTALL:\=/%/lib/sqlite3.lib ^
 -DEXE_SQLITE3=%PATH_INSTALL:\=/%/bin/sqlite3.exe ^

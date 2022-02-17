@@ -2,8 +2,6 @@
 	REM ~~~~~~~~~~~ external modules
 for %%M in (mod_maxminddb mod_fcgid mod_h2 mod_md mod_wku_bt mod_h264_streaming) do (call %PATH_MODULES_COMMON%\init.bat %%M)
 
-for %%X in (dll exe pdb) do (xcopy /C /F /Y %PATH_INSTALL%\%FOLDER_RELEASE_CURL%\%CURL_VER%\bin\*.%%X %PATH_INSTALL%\bin\*)
-
 call %PATH_MODULES_COMMON%\init.bat %1 cmake
 set HTTPD_VERSION=%SCM_TAG%
 
@@ -24,8 +22,8 @@ cmake %CMAKE_OPTS% ^
 -DJANSSON_LIBRARIES=%PATH_INSTALL:\=/%/lib/jansson.lib ^
 -DMAXMIND_LIBRARIES=%PATH_INSTALL%/lib/libmaxminddb.lib ^
 -DOPENSSL_ROOT_DIR=%PATH_INSTALL:\=/% ^
--DCURL_LIBRARY=%PATH_INSTALL:\=/%/%FOLDER_RELEASE_CURL%/%CURL_VER%/lib/libcurl_imp.lib ^
--DCURL_INCLUDE_DIR=%PATH_INSTALL:\=/%/%FOLDER_RELEASE_CURL%/%CURL_VER%/include ^
+-DCURL_LIBRARY=%PATH_INSTALL:\=/%/lib/libcurl_imp.lib ^
+-DCURL_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 -DEXTRA_INCLUDES=%PATH_SRC:\=/%/openssl ^
 %PATH_SRC%\%1 
 
@@ -68,5 +66,7 @@ call do_php %PATH_UTILS%\sub\version.php mod_wku_bt %PATH_INSTALL%\modules\mod_w
 	REM ~~~~~~~~~~~~ mod_md
 if not "%PATH_GITHUB_MODMD%"=="" (
 	for %%X in (so pdb) do (xcopy /C /F /Y %PATH_INSTALL%\modules\mod_md.%%X %PATH_GITHUB_MODMD%\%MSVC_DEPS%\%ARCH%%AVXB%\*)
-	xcopy /C /F /Y %PATH_INSTALL%\%FOLDER_RELEASE_CURL%\%CURL_VER%\bin\libcurl.* %PATH_GITHUB_MODMD%\%MSVC_DEPS%\%ARCH%%AVXB%\*
+		REM ~~~~~~~~~~~ curl for mod_md		dll WinSSL https://github.com/icing/mod_md/issues/14
+		REM		2021-02-08		https://www.apachelounge.com/viewtopic.php?p=39826#39826
+	xcopy /C /F /Y %PATH_INSTALL%\bin\libcurl.* %PATH_GITHUB_MODMD%\%MSVC_DEPS%\%ARCH%%AVXB%\*
 )

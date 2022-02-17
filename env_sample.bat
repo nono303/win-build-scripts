@@ -31,7 +31,6 @@ set PATH_RELEASE_MEMCACHED=/cygdrive/d/github/NONO_memcached/libevent-2.1
 	REM copy for github : unset to disable
 set PATH_GITHUB_PHPMEMCACHE=D:\github\NONO_PHP-memcache-dll
 set PATH_GITHUB_MODMD=D:\github\NONO_mod_md
-set FOLDER_RELEASE_CURL=_curl
 	REM JDK root (gradle & java for mobac, java_hl for subversion)
 set JAVA_HOME=%PATH_SOFTS%\openjdk
 set GRADLE_USER_HOME=%PATH_SOFTS%\gradle
@@ -96,9 +95,6 @@ C:\Windows\System32\WindowsPowerShell\v1.0\;
 cd /D %PATH_BATCH%
 
 REM ########################## BUILD OPTION
-	REM ~~~~~~~~~~~ curl for mod_md		dll WinSSL https://github.com/icing/mod_md/issues/14
-	REM		2021-02-08		https://www.apachelounge.com/viewtopic.php?p=39826#39826
-set CURL_VER=openssl
 	REM see dir in %PATH_ROOTWKIT%\Lib
 set WKITVER=10.0.22000.0
 	REM .NET installed SDK

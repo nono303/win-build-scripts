@@ -13,8 +13,6 @@ REM ********
 	REM ~~~~~~~~~~~~ var
 set LIB=
 set INCLUDE=
-	REM curl build
-set PHP_CURL=%PATH_INSTALL%\%FOLDER_RELEASE_CURL%\openssl
 
 	REM ~~~~~~~~~~~~ php-src
 call %PATH_MODULES_COMMON%\init.bat php-src

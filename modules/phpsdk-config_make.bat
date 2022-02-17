@@ -75,8 +75,6 @@ set PHP_COMMON_CONFIGURE=^
 	--without-oci8 ^
 	--without-pgsql ^
 	--without-uncritical-warn-choke ^
-	--with-extra-includes="%PHP_CURL%\include" ^
-	--with-extra-libs="%PHP_CURL%\lib" ^
 	--with-mp=%NUMBER_OF_PROCESSORS%
 
 REM known bug for --with-ffi if php != 8.1 || 7.4
