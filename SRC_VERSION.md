@@ -6,7 +6,7 @@
 | [apr-iconv](https://github.com/apache/apr-iconv) | 1.2.2 |
 | [apr-util](https://github.com/apache/apr-util) | 1.7.0-dev - 5e143fa9 |
 | [brotli](https://github.com/google/brotli) | 1.0.9 |
-| [bzip2](https://sourceware.org/git/bzip2) | 1.0.8 |
+| [bzip2](https://gitlab.com/bzip2/bzip2.git) | 1.1.0 |
 | [cares](https://github.com/c-ares/c-ares) | 1.18.1 |
 | [curl](https://github.com/curl/curl) | 7.81.0 |
 | [dav1d](https://code.videolan.org/videolan/dav1d.git) | 0.9.2 |
@@ -41,7 +41,7 @@
 | [lua](https://github.com/lua/lua) | 5.4.3 |
 | [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) | 0.17.2 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.14 |
-| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2656 |
+| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2660 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
 | [mod_fcgid](https://github.com/nono303/mod_fcgid) | 2.3.10.1 |
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.2 |

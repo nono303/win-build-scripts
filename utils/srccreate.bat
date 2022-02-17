@@ -32,9 +32,9 @@ git clone https://github.com/google/brotli.git brotli
 cd /D brotli
 git checkout tags/v1.0.9
 cd /D ..
-git clone git://sourceware.org/git/bzip2.git bzip2
+git clone https://gitlab.com/bzip2/bzip2.git bzip2
 cd /D bzip2
-git checkout tags/bzip2-1.0.8
+git checkout master
 cd /D ..
 git clone https://github.com/c-ares/c-ares.git cares
 cd /D cares
@@ -174,7 +174,7 @@ git checkout tags/1.6.14
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2656
+svn update -r 2660
 cd /D ..
 git clone https://github.com/JBlond/mod_bikeshed.git mod_bikeshed
 cd /D mod_bikeshed

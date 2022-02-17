@@ -1,17 +1,23 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
-sed -i 's/-DWIN32 -MD -Ox -D_FILE_OFFSET_BITS=64 -nologo/\/DWIN32 \/D_FILE_OFFSET_BITS=64 \/nologo \/O2 \/GL \/MD \/Zi \/w \/MP%NUMBER_OF_PROCESSORS% %AVXSED%/g' %CYGPATH_SRC%/%1/makefile.msc
-sed -i 's/lib \/out/lib \/nologo \/ltcg \/out/g' %CYGPATH_SRC%/%1/makefile.msc
-sed -i 's/-o bzip2/\/Fdbzip2.pdb/g' %CYGPATH_SRC%/%1/makefile.msc
-sed -i 's/-o bzip2recover/\/Fdbzip2recover.pdb/g' %CYGPATH_SRC%/%1/makefile.msc
-sed -i 's/-o \$\*\.obj/\/Fdlibbz2.pdb/g' %CYGPATH_SRC%/%1/makefile.msc
+cmake %CMAKE_OPTS% ^
+-DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
+-DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
+-DENABLE_WERROR=OFF ^
+-DENABLE_DEBUG=OFF ^
+-DENABLE_APP=ON ^
+-DENABLE_DOCS=OFF ^
+-DENABLE_EXAMPLES=OFF ^
+-DENABLE_LIB_ONLY=OFF ^
+-DENABLE_STATIC_LIB=ON ^
+-DENABLE_SHARED_LIB=ON ^
+%PATH_SRC%\%1
 
-nmake %NMAKE_OPTS% /f Makefile.msc lib bzip2
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%NINJA% install
 
-xcopy /C /F /Y %PATH_SRC%\%1\*.lib %PATH_INSTALL%\lib\*
-xcopy /C /F /Y %PATH_SRC%\%1\*.exe %PATH_INSTALL%\bin\
-xcopy /C /F /Y %PATH_SRC%\%1\libbz2.pdb %PATH_INSTALL%\lib\
-xcopy /C /F /Y %PATH_SRC%\%1\bzip2recover.pdb %PATH_INSTALL%\bin\
-xcopy /C /F /Y %PATH_SRC%\%1\bzip2.pdb %PATH_INSTALL%\bin\
-xcopy /C /F /Y %PATH_SRC%\%1\bzlib.h %PATH_INSTALL%\include\*
-for %%X in (bzip2recover bzip2) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X.exe)
+for %%X in (bunzip.exe bzcat.exe) do (DEL /Q /F %PATH_INSTALL%\bin\%%X) 
+MOVE /Y %PATH_INSTALL%\lib\bz2.dll %PATH_INSTALL%\bin\bz2.dll
+xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\bz2_static.dir\bz2_static.pdb %PATH_INSTALL%\lib\*
+for %%X in (bzip2recover.pdb bzip2.pdb bz2.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*)
+for %%X in (bzip2.exe bzip2recover.exe bz2.dll) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
