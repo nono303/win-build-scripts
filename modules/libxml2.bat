@@ -4,6 +4,7 @@
 set LIB=%PATH_INSTALL%\lib;%LIB%
 set INCLUDE=%PATH_INSTALL%\include;%INCLUDE%
 
+REM OFF : static ON : shared
 for %%C in (OFF ON) do (
 	cmake %CMAKE_OPTS% ^
 	-DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
