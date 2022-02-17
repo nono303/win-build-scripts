@@ -21,7 +21,7 @@ for %%S in (YES NO) do (
 		sed -i 's/libssh2.pdb/libssh2_static.pdb/g' %CYGPATH_BUILD%/%1/build.ninja
 		sed -i 's/libssh2.lib/libssh2_static.lib/g' %CYGPATH_BUILD%/%1/src/cmake_install.cmake
 	) else (
-		REM force lib generation cf. \sdk\src\libssh2\include\libssh2.h
+		REM force lib generation in shared '__declspec(dllexport)' cf. /sdk/src/libssh2/include/libssh2.h
 		sed -i 's/\/D_WINDOWS/\/D_WINDOWS \/DLIBSSH2_WIN32 \/D_WINDLL \/D_LIBSSH2_LIBRARY/g' %CYGPATH_BUILD%/%1/build.ninja
 	)
 	%NINJA% install
