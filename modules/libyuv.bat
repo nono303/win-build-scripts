@@ -17,7 +17,7 @@ REM mjpeg_decoder.cc.obj : error LNK2001: unresolved external symbol jpeg_abort_
 REM mjpeg_decoder.cc.obj : error LNK2001: unresolved external symbol jpeg_std_error
 REM mjpeg_decoder.cc.obj : error LNK2001: unresolved external symbol jpeg_resync_to_restart
 REM mjpeg_decoder.cc.obj : error LNK2001: unresolved external symbol jpeg_read_raw_data
-sed -i 's/LINK_LIBRARIES = kernel32.lib/LINK_LIBRARIES = kernel32.lib C:\\\sdk\\\release\\\vs17_x64-avx\\\lib\\\jpeg.lib/g' %CYGPATH_BUILD%/%1/build.ninja
+sed -i 's/LINK_LIBRARIES = kernel32.lib/LINK_LIBRARIES = kernel32.lib %PATH_INSTALL:\=\\\%\\\lib\\\jpeg.lib/g' %CYGPATH_BUILD%/%1/build.ninja
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 REM !install : CMake Error at cmake_install.cmake:36 (file):  file INSTALL cannot find "C:/sdk/build/vs17_x64-avx/libyuv/yuvconvert": No
 %NINJA%

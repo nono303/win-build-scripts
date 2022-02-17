@@ -13,7 +13,7 @@ MSBuild.exe %PATH_SRC%\%1\%VCDIR%\xz_win.sln ^
 /t:Clean,liblzma:Rebuild,liblzma_dll:Rebuild ^
 /nowarn:C4267,C4996,C4028,C4133 ^
 /p:Configuration=%OUTDIR_CONF% ^
-/p:ZLibSrcDir=C:\sdk\src\zlib ^
+/p:ZLibSrcDir=%PATH_SRC%\zlib ^
 /p:ZLibLib=%PATH_INSTALL%\lib\zlib.lib ^
 /p:Platform="%archmsbuild%"
 
