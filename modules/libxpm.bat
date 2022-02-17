@@ -12,8 +12,9 @@ for %%C in ("Static Release" "DLL Release") do (
 	/p:Platform="%archmsbuild%"
 )
 
-for %%X in (lib pdb) do (xcopy /C /F /Y "%PATH_SRC%\%1\windows\builds\%archmsbuild%\Static Release\libxpm_a.%%X" %PATH_INSTALL%\lib\)
-for %%X in (dll pdb) do (xcopy /C /F /Y "%PATH_SRC%\%1\windows\builds\%archmsbuild%\DLL Release\libxpm.%%X" %PATH_INSTALL%\bin\)
+for %%X in (lib pdb) do (xcopy /C /F /Y "%PATH_SRC%\%1\windows\builds\%archmsbuild%\Static Release\libxpm_a.%%X" %PATH_INSTALL%\lib\*)
+for %%X in (dll pdb) do (xcopy /C /F /Y "%PATH_SRC%\%1\windows\builds\%archmsbuild%\DLL Release\libxpm.%%X" %PATH_INSTALL%\bin\*)
+xcopy /C /F /Y "%PATH_SRC%\%1\windows\builds\%archmsbuild%\DLL Release\libxpm.lib" %PATH_INSTALL%\lib\*
 
 if not exist %PATH_INSTALL%\include\X11\. mkdir %PATH_INSTALL%\include\X11
 xcopy /E /C /F /Y %PATH_SRC%\%1\include\X11 %PATH_INSTALL%\include\X11\
