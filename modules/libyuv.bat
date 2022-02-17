@@ -9,22 +9,17 @@ cmake %CMAKE_OPTS% ^
 -DTEST=0 ^
 %PATH_SRC%\%1
 
-REM mjpeg_decoder.cc.obj : error LNK2001: unresolved external symbol jpeg_CreateDecompress
-REM mjpeg_decoder.cc.obj : error LNK2001: unresolved external symbol jpeg_destroy_decompress
-REM mjpeg_decoder.cc.obj : error LNK2001: unresolved external symbol jpeg_read_header
-REM mjpeg_decoder.cc.obj : error LNK2001: unresolved external symbol jpeg_start_decompress
-REM mjpeg_decoder.cc.obj : error LNK2001: unresolved external symbol jpeg_abort_decompress
-REM mjpeg_decoder.cc.obj : error LNK2001: unresolved external symbol jpeg_std_error
-REM mjpeg_decoder.cc.obj : error LNK2001: unresolved external symbol jpeg_resync_to_restart
-REM mjpeg_decoder.cc.obj : error LNK2001: unresolved external symbol jpeg_read_raw_data
-sed -i 's/LINK_LIBRARIES = kernel32.lib/LINK_LIBRARIES = kernel32.lib %PATH_INSTALL:\=\\\%\\\lib\\\jpeg.lib/g' %CYGPATH_BUILD%/%1/build.ninja
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
-REM !install : CMake Error at cmake_install.cmake:36 (file):  file INSTALL cannot find "C:/sdk/build/vs17_x64-avx/libyuv/yuvconvert": No
+	REM mjpeg_decoder.cc.obj : error LNK2001: unresolved external symbol jpeg_*
+sed -i 's/LINK_LIBRARIES = kernel32.lib/LINK_LIBRARIES = kernel32.lib %PATH_INSTALL:\=\\\%\\\lib\\\jpeg.lib/g' %CYGPATH_BUILD%/%1/build.ninja
+	REM shared lib for dll: include/libyuv/basic_types.h:48:#define LIBYUV_API __declspec(dllexport)
+sed -i 's/DWIN32/DWIN32 \/DLIBYUV_BUILDING_SHARED_LIBRARY=1/g' %CYGPATH_BUILD%/%1/build.ninja
+	REM !install : CMake Error at cmake_install.cmake:36 (file):  file INSTALL cannot find "C:/sdk/build/vs17_x64-avx/libyuv/yuvconvert": No
 %NINJA%
 
-for %%X in (CMakeFiles\yuv_static.dir\yuv_static.pdb yuv_static.lib) do (
-	xcopy /C /F /Y %PATH_BUILD%\%1\%%X  %PATH_INSTALL%\lib\*
-)
+
+for %%X in (yuv.lib yuvconvert.lib) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\lib\*)
+for %%X in (CMakeFiles\yuv_static.dir\yuv_static.pdb yuv_static.lib) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\lib\*)
 for %%X in (libyuv.dll yuvconvert.exe) do (
 	xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*
 	xcopy /C /F /Y %PATH_BUILD%\%1\%%~nX.pdb %PATH_INSTALL%\bin\*
