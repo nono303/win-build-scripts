@@ -59,3 +59,4 @@ for %%C in (OFF ON) do (
 xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\LibXml2.dir\libxml2s.pdb %PATH_INSTALL%\lib\libxml2s.pdb*
 for %%X in (xmlcatalog xmllint) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X.pdb %PATH_INSTALL%\bin\*)
 for %%X in (libxml2.dll xmlcatalog.exe xmllint.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
+DEL /Q /F %PATH_INSTALL%\bin\xml2-config

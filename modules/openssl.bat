@@ -46,3 +46,4 @@ for %%M in (engines-%OPENSSL_SUF% ossl-modules) do (
 for %%M in (libcrypto-%OPENSSL_SUF%%sslarch%.dll libssl-%OPENSSL_SUF%%sslarch%.dll openssl.exe) do (
 	call do_php %PATH_UTILS%\sub\version.php %OPENSSL_SCM% %PATH_INSTALL%\bin\%%M
 )
+DEL /Q /F %PATH_INSTALL%\bin\c_rehash.pl
