@@ -17,6 +17,9 @@ cd /D %PATH_SRC%\apr-util
 echo # apply apr_post.patch && git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\apr_post.patch
 sed -i 's/MAKEOPT=-nologo/MAKEOPT=%NMAKE_OPTS:/=\/%/g' %PATH_SRC%/apr-util/Makefile.win
 
+	REM ICU shared sqlite3
+for %%X in (mak dsp) do (sed -i 's/sqlite3.lib/sqlite3.lib %PATH_INSTALL:\=\\/%\/lib\/icuuc.lib %PATH_INSTALL:\=\\/%\/lib\/icuin.lib/g' %PATH_SRC%/apr-util/dbd/apr_dbd_sqlite3.%%X)
+
 nmake %NMAKE_OPTS% /f Makefile.win ^
 	USEMAK=1 ^
 	ARCH="%archmsbuild% Release" ^

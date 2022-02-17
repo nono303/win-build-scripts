@@ -32,6 +32,8 @@ cmake ^
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 sed -i 's/proj.lib/proj_imp.lib/g' %CYGPATH_BUILD%/%1/build.ninja
+	REM ICU shared sqlite3
+sed -i 's/LINK_LIBRARIES =/LINK_LIBRARIES = %PATH_INSTALL:\=\\/%\/lib\/icuuc.lib %PATH_INSTALL:\=\\/%\/lib\/icuin.lib/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
 
 for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\_%1\bin\*.* /b') do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\_%1\bin\%%G)
