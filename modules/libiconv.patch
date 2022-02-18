@@ -1,0 +1,26 @@
+diff --git a/source/include/iconv.h b/source/include/iconv.h
+index 3b3fc50..b2e4c2e 100644
+--- a/source/include/iconv.h
++++ b/source/include/iconv.h
+@@ -29,7 +29,7 @@
+ #else
+ #define LIBICONV_DLL_EXPORTED
+ #endif
+-extern LIBICONV_DLL_EXPORTED int _libiconv_version;
++int _libiconv_version = _LIBICONV_VERSION;
+ 
+ /* We would like to #include any system header file which could define
+    iconv_t, 1. in order to eliminate the risk that the user gets compilation
+diff --git a/source/lib/iconv.c b/source/lib/iconv.c
+index b920820..b7e051a 100644
+--- a/source/lib/iconv.c
++++ b/source/lib/iconv.c
+@@ -598,7 +598,7 @@ const char * iconv_canonicalize (const char * name)
+   return name;
+ }
+ 
+-int _libiconv_version = _LIBICONV_VERSION;
++// int _libiconv_version = _LIBICONV_VERSION;
+ 
+ #if defined __FreeBSD__ && !defined __gnu_freebsd__
+ /* GNU libiconv is the native FreeBSD iconv implementation since 2002.
