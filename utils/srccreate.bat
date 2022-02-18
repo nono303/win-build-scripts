@@ -14,7 +14,7 @@ git checkout tags/20211102.0
 cd /D ..
 git clone https://aomedia.googlesource.com/aom aom
 cd /D aom
-git checkout tags/v3.3.0-rc1
+git checkout tags/v3.3.0-rc2
 cd /D ..
 git clone https://github.com/apache/apr.git apr
 cd /D apr
@@ -100,9 +100,9 @@ git clone https://github.com/libexpat/libexpat.git libexpat
 cd /D libexpat
 git checkout tags/R_2_4_4
 cd /D ..
-git clone https://github.com/winlibs/libffi libffi
+git clone https://github.com/nono303/libffi.git libffi
 cd /D libffi
-git checkout tags/libffi-3.3
+git checkout tags/msvc-3.4.2
 cd /D ..
 git clone https://chromium.googlesource.com/codecs/libgav1 libgav1
 cd /D libgav1
@@ -258,7 +258,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.1.2
+git checkout tags/php-8.1.3
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj

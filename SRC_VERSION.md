@@ -1,7 +1,7 @@
 | src | version |
 | ---- | ---- |
 | [abseil-cpp](https://github.com/abseil/abseil-cpp.git) | 20211102.rc2 |
-| [aom](https://aomedia.googlesource.com/aom) | v3.3.0rc1 |
+| [aom](https://aomedia.googlesource.com/aom) | v3.3.0 |
 | [apr](https://github.com/apache/apr) | 1.7.1-dev - 4bc244e2f |
 | [apr-iconv](https://github.com/apache/apr-iconv) | 1.2.2 |
 | [apr-util](https://github.com/apache/apr-util) | 1.7.0-dev - 5e143fa9 |
@@ -23,7 +23,7 @@
 | [libev](https://git.lighttpd.net/libev) | 4.33 |
 | [libevent](https://github.com/libevent/libevent) | 2.1.12 |
 | [libexpat](https://github.com/libexpat/libexpat) | 2.4.4 |
-| [libffi](https://github.com/winlibs/libffi) | 3.3 |
+| [libffi](https://github.com/nono303/libffi) | 3.4.2 |
 | [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.17.0 |
 | [libiconv](https://github.com/winlibs/libiconv) | 1.16.1 |
 | [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) | 2.1.2 |
@@ -62,7 +62,7 @@
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.13.1 |
 | [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1 - e4f9578 |
 | [php-sdk](https://github.com/php/php-sdk-binary-tools) | 2.2.1-dev - cc7c11a |
-| [php-src](https://github.com/php/php-src) | 8.1.2 |
+| [php-src](https://github.com/php/php-src) | 8.1.3 |
 | [proj](https://github.com/OSGeo/PROJ) | 8.2.1 |
 | [sdlna](https://github.com/nono303/simpleDLNA) | 1.0.3 |
 | [serf](https://github.com/apache/serf) | 1.4.0 - 1cb2ab7 |
