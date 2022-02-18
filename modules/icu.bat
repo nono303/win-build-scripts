@@ -1,3 +1,11 @@
+REM ?icutu         # tool util
+REM ?icudt         # stub data
+REM +icuuc         # Common and Data libraries
+REM +icuin         # Internationalization library
+REM +icuio         # Stream and I/O Library
+REM -icule         # Layout library
+REM -iculx         # Paragraph Layout library
+
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1
 
 FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\grep 'U_ICU_VERSION_SHORT' /cygdrive/c/sdk/src/icu/icu4c/source/common/unicode/uvernum.h ^| %PATH_BIN_CYGWIN%\tr -dc '0-9'`) do (set ICUV=%%F)
