@@ -16,7 +16,7 @@ cmake %CMAKE_OPTS% ^
 -DENABLE_SHARED_LIB=ON ^
 %PATH_SRC%\%1
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX:/=\/%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% lib/install crypto/install
 
 xcopy /C /F /Y %PATH_BUILD%\%1\lib\CMakeFiles\ngtcp2_static.dir\ngtcp2_static.pdb %PATH_INSTALL%\lib\*

@@ -9,7 +9,7 @@ cmake %CMAKE_OPTS% ^
 -DTEST=0 ^
 %PATH_SRC%\%1
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX:/=\/%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 	REM mjpeg_decoder.cc.obj : error LNK2001: unresolved external symbol jpeg_*
 sed -i 's/LINK_LIBRARIES = kernel32.lib/LINK_LIBRARIES = kernel32.lib %PATH_INSTALL:\=\\\%\\\lib\\\jpeg.lib/g' %CYGPATH_BUILD%/%1/build.ninja
 	REM shared lib for dll: include/libyuv/basic_types.h:48:#define LIBYUV_API __declspec(dllexport)

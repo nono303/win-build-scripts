@@ -13,7 +13,7 @@ cmake ^
 -DZSTD_PROGRAMS_LINK_SHARED=OFF ^
 %PATH_SRC%\%1\build\cmake
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX:/=\/%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 sed -i 's/libzstd_static.pdb/zstd_static.pdb/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
 

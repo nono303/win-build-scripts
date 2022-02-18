@@ -1,15 +1,12 @@
 @echo off
 REM https://docs.microsoft.com/fr-fr/cpp/build/reference/arch-x64?view=msvc-170
+REM AVX: sandybridge
 if %1 == 1 (
 	set AVXECHO=avx
 	set AVX=/arch:AVX
 	set AVXB=-avx
-	set AVXDIR=\avx
-	set AVXSED=\/arch:AVX
-	set AVXMSC=-arch:AVX
 	set AVXVCX="<EnableEnhancedInstructionSet>AdvancedVectorExtensions<\/EnableEnhancedInstructionSet>\r\n"
 		REM php
-	set outdirphp=-avx
 	set intrinsics=,sse3,ssse3,sse4.1,sse4.2,avx
 	echo ~~-~~  AVX ~~-~~
 )
@@ -17,13 +14,9 @@ if %1 == 0 (
 	set AVXECHO=sse2
 	set AVX=
 	set AVXB=
-	set AVXDIR=
-	set AVXSED=
-	set AVXMSC=
 		REM https://github.com/XhmikosR/notepad2-mod/issues/111
 	set AVXVCX="<EnableEnhancedInstructionSet>NotSet<\/EnableEnhancedInstructionSet>\r\n"
 		REM php
-	set outdirphp=
 	set intrinsics=
 	echo ~~-~~ SSE2 ~~-~~
 )

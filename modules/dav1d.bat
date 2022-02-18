@@ -13,7 +13,7 @@ meson ^
 -Denable_asm=true ^
 %PATH_SRC%\%1
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/meson.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/meson.sh "%AVX:/=\/%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 sed -i -E 's/Fdsrc\\\libdav1d.*\.pdb"/Fdsrc\\\libdav1d.pdb" "\/FS"/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
 

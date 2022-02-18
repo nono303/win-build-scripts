@@ -41,7 +41,7 @@ cmake %CMAKE_OPTS% ^
 -Dcheck-ycbcr-subsampling=ON ^
 %PATH_SRC%\%1
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX:/=\/%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% install
 
 for %%X in (tiff.dll tiffmedian.exe tiffset.exe tiffsplit.exe tiffdump.exe tiffinfo.exe tiffcp.exe tiffcrop.exe tiffdither.exe tiff2rgba.exe tiffcmp.exe tiff2pdf.exe tiff2ps.exe fax2tiff.exe raw2tiff.exe fax2ps.exe ppm2tiff.exe pal2rgb.exe tiff2bw.exe tiffxx.dll) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)

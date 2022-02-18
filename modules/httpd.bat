@@ -27,7 +27,7 @@ cmake %CMAKE_OPTS% ^
 -DEXTRA_INCLUDES=%PATH_SRC:\=/%/openssl ^
 %PATH_SRC%\%1 
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVXSED%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX:/=\/%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 REM mod_wku-bt
 sed -i 's/DBIN_NAME=mod_backtrace.so/DBIN_NAME=mod_backtrace.so -DDIAG_BITS_%CYGV%/g' %CYGPATH_BUILD%/%1/build.ninja
 sed -i 's/DBIN_NAME=mod_whatkilledus.so/DBIN_NAME=mod_whatkilledus.so -DDIAG_BITS_%CYGV%/g' %CYGPATH_BUILD%/%1/build.ninja
