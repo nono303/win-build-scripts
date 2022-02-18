@@ -1,6 +1,7 @@
+avx=$(echo $1| sed 's#/#\\/#g')
 for i in `/usr/bin/find $2 -type f -name "*.mak" 2>/dev/null` 
 do
-  sed -i -E 's/ \/Zi \/O. / \/O2 \/GL \/MD \/Zi \/MP'$3' '$1' /g' $i
+  sed -i -E 's/ \/Zi \/O. / \/O2 \/GL \/MD \/Zi \/MP'$3' '$avx' /g' $i
   sed -i 's/incremental:no/incremental:no \/LTCG \/OPT:ICF,REF \/debug/g' $i
   sed -i -E 's/base:"[^"]+"/dynamicbase/g' $i
   sed -i 's/link.exe \/lib/link.exe \/lib \/LTCG \/OPT:ICF,REF/g' $i
@@ -15,7 +16,7 @@ do
 done
 for i in `/usr/bin/find $2 -type f -name "*.mk.win" 2>/dev/null` 
 do
-  sed -i -E 's/ \/Zi \/O. / \/O2 \/GL \/MD \/Zi \/MP'$3' '$1' /g' $i
+  sed -i -E 's/ \/Zi \/O. / \/O2 \/GL \/MD \/Zi \/MP'$3' '$avx' /g' $i
   sed -i 's/incremental:no/incremental:no \/LTCG \/OPT:ICF,REF \/debug/g' $i
   sed -i 's/link.exe \/lib/link.exe \/lib \/LTCG \/OPT:ICF,REF/g' $i
   sed -i 's/link.exe -lib/link.exe -lib -LTCG/g' $i

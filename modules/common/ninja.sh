@@ -1,3 +1,4 @@
+avx=$(echo $1| sed 's#/#\\/#g')
 # LINK FLAGS (dll exe) (LINK_FLAGS with debug)
 sed -i -E 's/LINK_FLAGS =(.*) \/INCREMENTAL[^ ]*(.*)/LINK_FLAGS =\1\2/gI' $2/build.ninja
 sed -i -E 's/LINK_FLAGS =(.*) \/WX(.*)/LINK_FLAGS =\1\2/gI' $2/build.ninja
@@ -11,6 +12,6 @@ sed -i 's/FLAGS = -DWIN32/FLAGS = -DWIN32 -nologo/gI' $2/build.ninja
 # warn
 sed -i -E 's/[\/-]W[0-4]/\/w/g' $2/build.ninja
 # opti
-sed -i 's/ \/O2 \/Ob1 / \/O2 \/GL \/MD \/MP'$3' '$1' \/w /gI' $2/build.ninja
-# found		/DWIN32 /D_WINDOWS /W4 /MD /Zi /O2 /Ob1 /DNDEBUG
-# result	/DWIN32 /D_WINDOWS /w /MD /Zi /O2 /GL /MD /MP16 /arch:AVX /DNDEBUG
+sed -i 's/ \/O2 \/Ob1 / \/Zf \/O2 \/GL \/MD \/MP'$3' '$avx' \/w /gI' $2/build.ninja
+# found		/DWIN32 /D_WINDOWS /W4 /MD /Zi /ZF /O2 /Ob1 /DNDEBUG
+# result	/DWIN32 /D_WINDOWS /w /MD /Zi /ZF /O2 /GL /MD /MP16 /arch:AVX /DNDEBUG

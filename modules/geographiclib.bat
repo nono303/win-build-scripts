@@ -14,7 +14,7 @@ cmake %CMAKE_OPTS% ^
 -DCONVERT_WARNINGS_TO_ERRORS=OFF ^
 %PATH_SRC%\%1
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX:/=\/%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 REM error with js\all
 	REM FAILED: js/geographiclib.js js/geographiclib.min.js
 	REM cmd.exe /C "cd /D C:\sdk\build\vc15_x86-avx\geographiclib && C:\sdk\softs\vs22\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe ."

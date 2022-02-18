@@ -10,7 +10,7 @@ cmake %CMAKE_OPTS% ^
 -DENABLE_TOOLS=0 ^
 %PATH_SRC%\%1
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX:/=\/%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% install
 
 xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\aom.dir\aom.pdb %PATH_INSTALL%\lib\*

@@ -15,7 +15,7 @@ cmake %CMAKE_OPTS% ^
 -Dld-version-script=OFF ^
 %PATH_SRC%\%1
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX:/=\/%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% install
 
 move /y %PATH_INSTALL%\lib\libpng16_static.lib %PATH_INSTALL%\lib\png_static.lib

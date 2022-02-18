@@ -24,7 +24,7 @@ cmake %CMAKE_OPTS% ^
 	-DADD_SYSTEM_RUNTIMES=OFF ^
 	%PATH_SRC%\%1
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX:/=\/%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 sed -i 's/tidy_a\.pdb/tidy_static\.pdb/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
 
