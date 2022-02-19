@@ -98,7 +98,7 @@ git checkout tags/release-2.1.12-stable
 cd /D ..
 git clone https://github.com/libexpat/libexpat.git libexpat
 cd /D libexpat
-git checkout tags/R_2_4_4
+git checkout tags/R_2_4_5
 cd /D ..
 git clone https://github.com/nono303/libffi.git libffi
 cd /D libffi
@@ -108,7 +108,7 @@ git clone https://chromium.googlesource.com/codecs/libgav1 libgav1
 cd /D libgav1
 git checkout tags/v0.17.0
 cd /D ..
-git clone https://github.com/winlibs/libiconv.git libiconv
+git clone https://github.com/winlibs/libiconv libiconv
 cd /D libiconv
 git checkout tags/libiconv-1.16-1
 cd /D ..
@@ -144,7 +144,7 @@ git clone https://github.com/opencor/libxdiff libxdiff
 cd /D libxdiff
 git checkout tags/v0.23
 cd /D ..
-git clone https://github.com/GNOME/libxml2.git libxml2
+git clone https://gitlab.gnome.org/GNOME/libxml2.git libxml2
 cd /D libxml2
 git checkout tags/v2.9.12
 cd /D ..
@@ -174,7 +174,7 @@ git checkout tags/1.6.14
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2660
+svn update -r 2661
 cd /D ..
 git clone https://github.com/JBlond/mod_bikeshed.git mod_bikeshed
 cd /D mod_bikeshed
@@ -210,11 +210,11 @@ git checkout tags/v1.46.0
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3
-git checkout tags/v0.1.1
+git checkout tags/v0.2.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v0.1.0
+git checkout tags/v0.2.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm

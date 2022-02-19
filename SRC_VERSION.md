@@ -22,7 +22,7 @@
 | [libdeflate](https://github.com/ebiggers/libdeflate.git) | 1.10 |
 | [libev](https://git.lighttpd.net/libev) | 4.33 |
 | [libevent](https://github.com/libevent/libevent) | 2.1.12 |
-| [libexpat](https://github.com/libexpat/libexpat) | 2.4.4 |
+| [libexpat](https://github.com/libexpat/libexpat) | 2.4.5 |
 | [libffi](https://github.com/nono303/libffi) | 3.4.2 |
 | [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.17.0 |
 | [libiconv](https://github.com/winlibs/libiconv) | 1.16.1 |
@@ -34,7 +34,7 @@
 | [libssh2](https://github.com/libssh2/libssh2) | 1.10.0 |
 | [libtiff](https://gitlab.com/libtiff/libtiff) | 4.3.0 |
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
-| [libxml2](https://github.com/GNOME/libxml2) | 2.9.12 |
+| [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.9.12 |
 | [libxpm](https://github.com/nono303/libxpm.git) | 3.5.13 |
 | [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1810 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
@@ -50,8 +50,8 @@
 | [mod_md](https://github.com/icing/mod_md) | 2.4.11 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) | 2.01.1 |
 | [nghttp2](https://github.com/nghttp2/nghttp2) | 1.46.0 |
-| [nghttp3](https://github.com/ngtcp2/nghttp3) | 0.1.1 |
-| [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 0.1.0 |
+| [nghttp3](https://github.com/ngtcp2/nghttp3) | 0.2.0 |
+| [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 0.2.0 |
 | [nssm](https://github.com/puppetlabs/nssm) | 2.25 - a1c3260 |
 | [openssl](https://github.com/openssl/openssl) | 3.0.1 |
 | [openssl-quic](https://github.com/quictls/openssl) | 3.0.1 - ab8b87bdb4 |
