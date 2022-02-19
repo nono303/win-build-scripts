@@ -17,8 +17,6 @@ set INCLUDE=
 	REM ~~~~~~~~~~~~ php-src
 call %PATH_MODULES_COMMON%\init.bat php-src
 set PHPVER=%SCM_TAG:~4,3%
-	REM Openssl in PHAR
-sed -i 's/libeay32st/libcrypto/g' %CYGPATH_SRC%/php-src/ext/phar/config.w32
 	REM link openssl3 sources to module (applink.c)
 if exist %PATH_SRC%\php-src\openssl\. rmdir /S /Q %PATH_SRC%\php-src\openssl
 mklink /J %PATH_SRC%\php-src\openssl %PATH_SRC%\openssl\ms

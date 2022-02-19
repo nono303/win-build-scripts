@@ -12,3 +12,33 @@ index 1ad7e370cc..4b7e9d628a 100644
  		{0, NULL}
  	};
  	int i;
+diff --git "a/ext/iconv/iconv.c" "b/ext/iconv/iconv.c"
+index 4850c00624..b1e383734e 100644
+--- "a/ext/iconv/iconv.c"
++++ "b/ext/iconv/iconv.c"
+@@ -194,7 +194,7 @@ PHP_MINIT_FUNCTION(miconv)
+ 	{
+ 		static char buf[16];
+ 		snprintf(buf, sizeof(buf), "%d.%d",
+-			_libiconv_version >> 8, _libiconv_version & 0xff);
++			_LIBICONV_VERSION >> 8, _LIBICONV_VERSION & 0xff);
+ 		version = buf;
+ 	}
+ #elif HAVE_GLIBC_ICONV
+diff --git "a/ext/phar/config.w32" "b/ext/phar/config.w32"
+index c68ba08f2c..241f3eeddb 100644
+--- "a/ext/phar/config.w32"
++++ "b/ext/phar/config.w32"
+@@ -13,10 +13,10 @@ if (PHP_PHAR != "no") {
+ 		ADD_FLAG("CFLAGS_PHAR", "/D COMPILE_DL_PHAR ");
+ 	}
+ 	if (PHP_PHAR_NATIVE_SSL != "no") {
+-		if (CHECK_LIB("libeay32st.lib", "phar")) {
++		if (CHECK_LIB("libcrypto.lib", "phar")) {
+ 			/* We don't really need GDI for this, but there's no
+ 			way to avoid linking it in the static openssl build */
+-			ADD_FLAG("LIBS_PHAR", "libeay32st.lib gdi32.lib");
++			ADD_FLAG("LIBS_PHAR", "libcrypto.lib gdi32.lib");
+ 			if (PHP_DEBUG == "no") {
+ 				/* Silence irrelevant-to-us warning in release builds */
+ 				ADD_FLAG("LDFLAGS_PHAR", "/IGNORE:4089 ");
