@@ -25,8 +25,8 @@ sed -i 's/libbz2_a/bz2/g' %CYGPATH_SRC%/php-src/configure.js
 sed -i 's/libjpeg_a.lib;libjpeg.lib/jpeg.lib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM png
 sed -i 's/libpng_a.lib;libpng.lib/libpng16.lib/g' %CYGPATH_SRC%/php-src/configure.js
-	REM libiconv
-sed -i 's/libiconv_a.lib/iconv.lib/g' %CYGPATH_SRC%/php-src/configure.js
+	REM libiconv shared : KO php8.dll.def : error LNK2001: unresolved external symbol _libiconv_version
+REM sed -i 's/libiconv_a.lib/iconv.lib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM sqlite3
 sed -i 's/libsqlite3_a.lib;//g' %CYGPATH_SRC%/php-src/configure.js
 sed -i 's/sqlite3ext.h/sqlite3\/sqlite3ext.h/g' %CYGPATH_SRC%/php-src/configure.js
