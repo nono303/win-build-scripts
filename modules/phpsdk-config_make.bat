@@ -70,7 +70,6 @@ set PHP_COMMON_CONFIGURE=^
 	--without-snmp ^
 	--without-xsl ^
 	--without-gmp ^
-	--without-libwebp ^
 	--without-ldap ^
 	--without-oci8 ^
 	--without-pgsql ^
@@ -125,6 +124,8 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--with-mhash=shared ^
 	--enable-ctype=shared ^
 	--enable-bcmath=shared ^
+	--with-libwebp=shared ^
+	--with-libavif=shared ^
 	%ZTS% %phpveropts% %phparchopts%
 ) else (
 	call configure %PHP_COMMON_CONFIGURE% ^

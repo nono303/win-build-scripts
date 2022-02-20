@@ -16,6 +16,8 @@ REM STATIC
 sed -i -E 's/CHECK_LIB\("libxml2_a_dll.lib;libxml2_a.lib", "libxml"\) (..)/CHECK_LIB\("icuuc.lib", "libxml"\) \\1 CHECK_LIB\("libxml2s.lib", "libxml"\) \\1/g' %CYGPATH_SRC%/php-src/configure.js
 	REM edit
 sed -i 's/edit_a.lib;edit.lib/edit_static.lib/g' %CYGPATH_SRC%/php-src/configure.js
+	REM webp
+sed -i 's/libwebp.lib/webp.lib/g' %CYGPATH_SRC%/php-src/configure.js
 
 REM SHARED
 	REM libiconv - shared with patch ext/iconv/iconv.c : _libiconv_version > _LIBICONV_VERSION
