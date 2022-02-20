@@ -29,9 +29,6 @@ Usage: go command [options]
       * apr
       * lua
       * httpd
-    * subversionanddeps
-      * serf
-      * subversion
     * phpanddeps
       * wineditline
       * zstd
@@ -41,6 +38,8 @@ Usage: go command [options]
       * giflib
       * freeglut
       * libwebp
+      * libdeflate
+      * libtiff
       * libjpeg-turbo
       * tidy
       * libxdiff
@@ -53,10 +52,13 @@ Usage: go command [options]
       * libavif
       * geos
       * libsodium
+      * mpir
+      * libxslt
       * php
+    * subversionanddeps
+      * serf
+      * subversion
     * projgeolibanddeps
-      * libdeflate
-      * libtiff
       * proj
       * geographiclib
     * nssm

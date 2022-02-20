@@ -7,6 +7,10 @@ call %PATH_BATCH%\go.bat libjpeg-turbo NOLOG
 call %PATH_BATCH%\go.bat giflib NOLOG
 call %PATH_BATCH%\go.bat freeglut NOLOG
 call %PATH_BATCH%\go.bat libwebp NOLOG
+call %PATH_BATCH%\go.bat libdeflate NOLOG
+call %PATH_BATCH%\go.bat libtiff NOLOG
+REM rebuild libwebp again for tiff support
+call %PATH_BATCH%\go.bat libwebp NOLOG
 call %PATH_BATCH%\go.bat tidy NOLOG
 call %PATH_BATCH%\go.bat libxdiff NOLOG
 call %PATH_BATCH%\go.bat freetype2 NOLOG
@@ -18,4 +22,6 @@ call %PATH_BATCH%\go.bat libyuv NOLOG
 call %PATH_BATCH%\go.bat libavif NOLOG
 call %PATH_BATCH%\go.bat geos NOLOG
 call %PATH_BATCH%\go.bat libsodium NOLOG
+call %PATH_BATCH%\go.bat mpir NOLOG
+call %PATH_BATCH%\go.bat libxslt NOLOG
 call %PATH_BATCH%\go.bat php NOLOG
