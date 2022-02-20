@@ -68,8 +68,6 @@ set PHP_COMMON_CONFIGURE=^
 	--without-enchant ^
 	--without-imap ^
 	--without-snmp ^
-	--without-xsl ^
-	--without-gmp ^
 	--without-ldap ^
 	--without-oci8 ^
 	--without-pgsql ^
@@ -81,7 +79,7 @@ set PHP_COMMON_CONFIGURE=^
 REM known bug for --with-ffi if php != 8.1 || 7.4
 if %PHPVER% == %PHP_FULLBUILD% (
 	call configure %PHP_COMMON_CONFIGURE% ^
-	--enable-mbstring ^
+	--enable-mbstring=shared ^
 	--enable-phar-native-ssl ^
 	--enable-brotli=shared ^
 	--enable-com-dotnet=shared ^
@@ -126,6 +124,8 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--enable-bcmath=shared ^
 	--with-libwebp=shared ^
 	--with-libavif=shared ^
+	--with-xsl=shared ^
+	--with-gmp=shared ^
 	%ZTS% %phpveropts% %phparchopts%
 ) else (
 	call configure %PHP_COMMON_CONFIGURE% ^
@@ -188,7 +188,7 @@ for %%A in (exe dll) do (
 )
 if %PHPVER% == %PHP_FULLBUILD% (
 	call %PATH_MODULES_COMMON%\init.bat php-src varonly
-	for %%X in (php-cgi.exe php.exe php8.dll php_curl.dll php_fileinfo.dll php_gd.dll php_intl.dll php_opcache.dll php_openssl.dll php_tidy.dll php_bcmath.dll php_bz2.dll php_calendar.dll php_com_dotnet.dll php_ctype.dll php_dom.dll php_exif.dll php_ffi.dll php_ftp.dll php_iconv.dll php_mysqli.dll php_pdo_mysql.dll php_pdo_sqlite.dll php_readline.dll php_simplexml.dll php_soap.dll php_sockets.dll php_sodium.dll php_sqlite3.dll php_xml.dll php_xmlreader.dll php_xmlwriter.dll php_zip.dll php_zlib.dll) do (
+	for %%X in (php-cgi.exe php.exe php8.dll php_curl.dll php_fileinfo.dll php_gd.dll php_intl.dll php_opcache.dll php_openssl.dll php_tidy.dll php_bcmath.dll php_bz2.dll php_calendar.dll php_com_dotnet.dll php_ctype.dll php_dom.dll php_exif.dll php_ffi.dll php_ftp.dll php_iconv.dll php_mysqli.dll php_pdo_mysql.dll php_pdo_sqlite.dll php_readline.dll php_simplexml.dll php_soap.dll php_sockets.dll php_sodium.dll php_sqlite3.dll php_xml.dll php_xmlreader.dll php_xmlwriter.dll php_zip.dll php_zlib.dll php_xsl.dll php_mbstring.dll php_gmp.dll) do (
 		call do_php %PATH_UTILS%\sub\version.php php-src %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\%%X "build:%TSNTS%"
 	)
 	call %PATH_MODULES_COMMON%\init.bat pecl-text-xdiff varonly
