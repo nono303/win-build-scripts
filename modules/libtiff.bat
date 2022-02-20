@@ -31,7 +31,7 @@ cmake %CMAKE_OPTS% ^
 -Djbig=OFF ^
 -Dlzma=ON ^
 -Dzstd=ON ^
--Dwebp=OFF ^
+-Dwebp=ON ^
 -Djpeg12=OFF ^
 -Dcxx=ON ^
 -Dstrip-chopping=ON ^
@@ -44,5 +44,5 @@ cmake %CMAKE_OPTS% ^
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% install
 
-for %%X in (tiff.dll tiffmedian.exe tiffset.exe tiffsplit.exe tiffdump.exe tiffinfo.exe tiffcp.exe tiffcrop.exe tiffdither.exe tiff2rgba.exe tiffcmp.exe tiff2pdf.exe tiff2ps.exe fax2tiff.exe raw2tiff.exe fax2ps.exe ppm2tiff.exe pal2rgb.exe tiff2bw.exe tiffxx.dll) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
-for %%D in (libtiff\tiffxx.pdb libtiff\tiff.pdb tools\fax2ps.pdb tools\fax2tiff.pdb tools\pal2rgb.pdb tools\ppm2tiff.pdb tools\raw2tiff.pdb tools\tiff2bw.pdb tools\tiff2pdf.pdb tools\tiff2ps.pdb tools\tiff2rgba.pdb tools\tiffcmp.pdb tools\tiffcp.pdb tools\tiffcrop.pdb tools\tiffdither.pdb tools\tiffdump.pdb tools\tiffinfo.pdb tools\tiffmedian.pdb tools\tiffset.pdb tools\tiffsplit.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%D %PATH_INSTALL%\bin\*)
+for %%X in (tiff.dll tiffmedian.exe tiffset.exe tiffsplit.exe tiffdump.exe tiffinfo.exe tiffcp.exe tiffcrop.exe tiffdither.exe tiff2rgba.exe tiffcmp.exe tiff2pdf.exe tiff2ps.exe fax2tiff.exe raw2tiff.exe fax2ps.exe ppm2tiff.exe pal2rgb.exe tiff2bw.exe tiffxx.dll tiffgt.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
+for %%D in (libtiff\tiffxx.pdb libtiff\tiff.pdb tools\fax2ps.pdb tools\fax2tiff.pdb tools\pal2rgb.pdb tools\ppm2tiff.pdb tools\raw2tiff.pdb tools\tiff2bw.pdb tools\tiff2pdf.pdb tools\tiff2ps.pdb tools\tiff2rgba.pdb tools\tiffcmp.pdb tools\tiffcp.pdb tools\tiffcrop.pdb tools\tiffdither.pdb tools\tiffdump.pdb tools\tiffinfo.pdb tools\tiffmedian.pdb tools\tiffset.pdb tools\tiffsplit.pdb tools\tiffgt.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%D %PATH_INSTALL%\bin\*)
