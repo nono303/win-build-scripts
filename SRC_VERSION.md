@@ -11,6 +11,7 @@
 | [curl](https://github.com/curl/curl) | 7.81.0 |
 | [dav1d](https://code.videolan.org/videolan/dav1d.git) | 0.9.2 |
 | [dependencies](https://github.com/lucasg/Dependencies) | 1.11.1 |
+| [freeglut](https://github.com/dcnieho/FreeGLUT.git) | 3.2.2 |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.11.1 |
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52 |
 | [geos](https://github.com/libgeos/geos) | 3.10.2 |
@@ -38,6 +39,7 @@
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
 | [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.9.12 |
 | [libxpm](https://github.com/nono303/libxpm.git) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.13 |
+| [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.35 |
 | [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1810 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
@@ -51,6 +53,7 @@
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
 | [mod_md](https://github.com/icing/mod_md) | 2.4.11 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) - _[src](https://emptyhammock.com/media/downloads/wku_bt-2.01.zip)_ | 2.0.2 |
+| [mpir](https://github.com/BrianGladman/mpir) | 3.0.0 - 33be900 |
 | [nghttp2](https://github.com/nghttp2/nghttp2) | 1.46.0 |
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 0.2.0 |
 | [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 0.2.0 |

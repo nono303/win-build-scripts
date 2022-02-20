@@ -72,10 +72,6 @@ git clone https://github.com/gongjianbo/GifLib giflib
 cd /D giflib
 git checkout master
 cd /D ..
-git clone https://github.com/markkilgard/glut glut
-cd /D glut
-git checkout master
-cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
 git checkout tags/2.4.52
@@ -168,6 +164,10 @@ git clone https://github.com/nono303/libxpm.git libxpm
 cd /D libxpm
 git checkout tags/libxpm-3.5.13
 cd /D ..
+git clone https://gitlab.gnome.org/GNOME/libxslt libxslt
+cd /D libxslt
+git checkout tags/v1.1.35
+cd /D ..
 git clone https://chromium.googlesource.com/libyuv/libyuv libyuv
 cd /D libyuv
 git checkout main
@@ -219,6 +219,10 @@ cd /D ..
 git clone https://github.com/nono303/mod_whatkilledus mod_wku_bt
 cd /D mod_wku_bt
 git checkout tags/2.0.2
+cd /D ..
+git clone git://github.com/BrianGladman/mpir.git mpir
+cd /D mpir
+git checkout master
 cd /D ..
 git clone https://github.com/nghttp2/nghttp2.git nghttp2
 cd /D nghttp2
