@@ -52,6 +52,10 @@ git clone https://github.com/lucasg/Dependencies.git dependencies
 cd /D dependencies
 git checkout tags/v1.11.1
 cd /D ..
+git clone https://github.com/dcnieho/FreeGLUT.git freeglut
+cd /D freeglut
+git checkout tags/FG_3_2_2
+cd /D ..
 git clone git://git.sv.nongnu.org/freetype/freetype2.git freetype2
 cd /D freetype2
 git checkout tags/VER-2-11-1
@@ -63,6 +67,14 @@ cd /D ..
 git clone https://github.com/libgeos/geos geos
 cd /D geos
 git checkout tags/3.10.2
+cd /D ..
+git clone https://github.com/gongjianbo/GifLib giflib
+cd /D giflib
+git checkout master
+cd /D ..
+git clone https://github.com/markkilgard/glut glut
+cd /D glut
+git checkout master
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
@@ -140,6 +152,10 @@ git clone https://gitlab.com/libtiff/libtiff libtiff
 cd /D libtiff
 git checkout tags/v4.3.0rc1
 cd /D ..
+git clone https://chromium.googlesource.com/webm/libwebp libwebp
+cd /D libwebp
+git checkout tags/v1.2.2
+cd /D ..
 git clone https://github.com/opencor/libxdiff libxdiff
 cd /D libxdiff
 git checkout tags/v0.23
@@ -202,7 +218,7 @@ git checkout tags/v2.4.11
 cd /D ..
 git clone https://github.com/nono303/mod_whatkilledus mod_wku_bt
 cd /D mod_wku_bt
-git checkout tags/2.01.1
+git checkout tags/2.0.2
 cd /D ..
 git clone https://github.com/nghttp2/nghttp2.git nghttp2
 cd /D nghttp2

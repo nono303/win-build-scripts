@@ -14,6 +14,7 @@
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.11.1 |
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52 |
 | [geos](https://github.com/libgeos/geos) | 3.10.2 |
+| [giflib](https://github.com/gongjianbo/GifLib) | 5.2.1 |
 | [httpd](https://github.com/apache/httpd) | 2.4.52 |
 | [icu](https://github.com/unicode-org/icu) | 70.1 - cldr/2022-02-08 |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
@@ -23,7 +24,7 @@
 | [libev](https://git.lighttpd.net/libev) | 4.33 |
 | [libevent](https://github.com/libevent/libevent) | 2.1.12 |
 | [libexpat](https://github.com/libexpat/libexpat) | 2.4.5 |
-| [libffi](https://github.com/nono303/libffi) | 3.4.2 |
+| [libffi](https://github.com/nono303/libffi) - _[upstream + src](https://github.com/libffi/libffi)_ | 3.4.2 |
 | [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.17.0 |
 | [libiconv](https://github.com/winlibs/libiconv) | 1.16.1 |
 | [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) | 2.1.2 |
@@ -33,22 +34,23 @@
 | [libsodium](https://github.com/jedisct1/libsodium.git) | 1.0.18 |
 | [libssh2](https://github.com/libssh2/libssh2) | 1.10.0 |
 | [libtiff](https://gitlab.com/libtiff/libtiff) | 4.3.0 |
+| [libwepb](https://chromium.googlesource.com/webm/libwebp) | 1.2.2 |
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
 | [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.9.12 |
-| [libxpm](https://github.com/nono303/libxpm.git) | 3.5.13 |
+| [libxpm](https://github.com/nono303/libxpm.git) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.13 |
 | [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1810 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
-| [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) | 0.17.2 |
+| [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | 0.17.2 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.14 |
 | [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2660 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
-| [mod_fcgid](https://github.com/nono303/mod_fcgid) | 2.3.10.1 |
+| [mod_fcgid](https://github.com/nono303/mod_fcgid) - _[upstream + src](https://github.com/pagespeed/mod_fcgid)_ | 2.3.10.1 |
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.2 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
 | [mod_md](https://github.com/icing/mod_md) | 2.4.11 |
-| [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) | 2.01.1 |
+| [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) - _[src](https://emptyhammock.com/media/downloads/wku_bt-2.01.zip)_ | 2.0.2 |
 | [nghttp2](https://github.com/nghttp2/nghttp2) | 1.46.0 |
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 0.2.0 |
 | [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 0.2.0 |
@@ -64,7 +66,7 @@
 | [php-sdk](https://github.com/php/php-sdk-binary-tools) | 2.2.1-dev - cc7c11a |
 | [php-src](https://github.com/php/php-src) | 8.1.3 |
 | [proj](https://github.com/OSGeo/PROJ) | 8.2.1 |
-| [sdlna](https://github.com/nono303/simpleDLNA) | 1.0.3 |
+| [sdlna](https://github.com/nono303/simpleDLNA) - _[upstream + src](https://github.com/nmaier/simpleDLNA)_ | 1.0.3 |
 | [serf](https://github.com/apache/serf) | 1.4.0 - 1cb2ab7 |
 | [sqlite](https://github.com/azadkuh/sqlite-amalgamation) | 3.37.2 |
 | [subversion](https://github.com/apache/subversion) | 1.14.1 |

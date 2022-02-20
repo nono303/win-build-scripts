@@ -38,6 +38,9 @@ Usage: go command [options]
       * libzip
       * libxpm
       * libpng
+      * giflib
+      * freeglut
+      * libwebp
       * libjpeg-turbo
       * tidy
       * libxdiff
