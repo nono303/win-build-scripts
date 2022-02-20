@@ -4,6 +4,7 @@
 	date_default_timezone_set("Europe/Paris");
 	define("NB_TAGS",5);
 	static $notags = [
+		"mpir",
 		"bzip2", 
 		"openssl-quic", 
 		"apr",
