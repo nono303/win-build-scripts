@@ -50,7 +50,8 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [Node.js](https://nodejs.org/en/download/current/) | x64 | 17.5.0 | |
 | [OpenJDK](https://jdk.java.net/17/)                        | x64  | 17.0.2 |                     |
 | [Strawberry Perl](https://strawberryperl.com/releases.html) | x64  | 5.32.1.1 |                     |
-| [Netwide Assembler](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.15.05        |                     |
+| [NASM](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.15.05        |                     |
+| [YASM](https://yasm.tortall.net/Download.html) | x64 | 1.3.0 | |
 | [Git](https://git-scm.com/download/win)                      | x64  | 2.35.1.2 |                     |
 | verpatch                                                     | x64  | 1.0.15.1       |                     |
 | [7z](https://www.7-zip.org/download.html)                    | x64  | 21.07     |                     |
