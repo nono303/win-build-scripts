@@ -12,8 +12,6 @@ call buildconf
 
 REM STATIC
 
-	REM gmp - shared
-sed -i 's/mpir_a.lib/mpir_static.lib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM libxml2s
 sed -i -E 's/CHECK_LIB\("libxml2_a_dll.lib;libxml2_a.lib", "libxml"\) (..)/CHECK_LIB\("icuuc.lib", "libxml"\) \\1 CHECK_LIB\("libxml2s.lib", "libxml"\) \\1/g' %CYGPATH_SRC%/php-src/configure.js
 	REM edit
@@ -23,6 +21,8 @@ sed -i 's/libwebp.lib/webp.lib/g' %CYGPATH_SRC%/php-src/configure.js
 
 REM SHARED
 
+	REM gmp - shared
+sed -i 's/mpir_a.lib/mpir_sandybridge.lib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM libiconv - shared with patch ext/iconv/iconv.c : _libiconv_version > _LIBICONV_VERSION
 sed -i 's/libiconv_a.lib/iconv.lib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM lzma
@@ -60,6 +60,8 @@ if %PHP_BUILDNTS% == 1 (
 	echo *** nts  ***
 	set ZTS=--disable-zts
 	set TSNTS=nts
+		REM unused
+	set TSREL=Release
 	call %PATH_MODULES%\phpsdk-config_make.bat
 )
 if %PHP_BUILDTS% == 1 (
@@ -67,6 +69,8 @@ if %PHP_BUILDTS% == 1 (
 	echo *** ts  ***
 	set ZTS=
 	set TSNTS=ts
+		REM unused
+	set TSREL=Release_TS
 	call %PATH_MODULES%\phpsdk-config_make.bat
 )
 	REM exit php-sdk shell
