@@ -63,7 +63,7 @@ Usage: go command [options]
       * geographiclib
     * nssm
     * php-cgi-spawner
-  * dependencies
+    * dependencies
   * mapsforgesrv
   * memcached
   * mobac
