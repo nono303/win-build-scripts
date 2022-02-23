@@ -17,14 +17,14 @@
 | [geos](https://github.com/libgeos/geos) | 3.10.2 |
 | [giflib](https://github.com/gongjianbo/GifLib) | 5.2.1 |
 | [httpd](https://github.com/apache/httpd) | 2.4.52 |
-| [icu](https://github.com/unicode-org/icu) | 70.1 - cldr/2022-02-08 |
+| [icu](https://github.com/unicode-org/icu) | 70.1 - cldr/2022-02-22 |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.2.1 |
 | [libavif](https://github.com/AOMediaCodec/libavif.git) | 0.9.3 |
 | [libdeflate](https://github.com/ebiggers/libdeflate.git) | 1.10 |
 | [libev](https://git.lighttpd.net/libev) | 4.33 |
 | [libevent](https://github.com/libevent/libevent) | 2.1.12 |
-| [libexpat](https://github.com/libexpat/libexpat) | 2.4.5 |
+| [libexpat](https://github.com/libexpat/libexpat) | 2.4.6 |
 | [libffi](https://github.com/nono303/libffi) - _[upstream + src](https://github.com/libffi/libffi)_ | 3.4.2 |
 | [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.17.0 |
 | [libiconv](https://github.com/winlibs/libiconv) | 1.16.1 |
@@ -37,7 +37,7 @@
 | [libtiff](https://gitlab.com/libtiff/libtiff) | 4.3.0 |
 | [libwepb](https://chromium.googlesource.com/webm/libwebp) | 1.2.2 |
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
-| [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.9.12 |
+| [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.9.13 |
 | [libxpm](https://github.com/nono303/libxpm.git) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.13 |
 | [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.35 |
 | [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1810 |
@@ -45,7 +45,7 @@
 | [lua](https://github.com/lua/lua) | 5.4.3 |
 | [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | 0.17.2 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.14 |
-| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2660 |
+| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2663 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
 | [mod_fcgid](https://github.com/nono303/mod_fcgid) - _[upstream + src](https://github.com/pagespeed/mod_fcgid)_ | 2.3.10.1 |
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.2 |
@@ -53,8 +53,8 @@
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
 | [mod_md](https://github.com/icing/mod_md) | 2.4.11 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) - _[src](https://emptyhammock.com/media/downloads/wku_bt-2.01.zip)_ | 2.0.2 |
-| [mpir](https://github.com/BrianGladman/mpir) | 3.0.0 - 33be900 |
-| [nghttp2](https://github.com/nghttp2/nghttp2) | 1.46.0 |
+| [mpir](https://github.com/nono303/mpir) - _[upstream](https://github.com/BrianGladman/mpir)_ - _[src](https://github.com/wbhart/mpir)_ | 3.0.0 |
+| [nghttp2](https://github.com/nghttp2/nghttp2) | 1.47.0 |
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 0.2.0 |
 | [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 0.2.0 |
 | [nssm](https://github.com/puppetlabs/nssm) | 2.25 - a1c3260 |

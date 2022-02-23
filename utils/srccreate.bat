@@ -78,7 +78,7 @@ git checkout tags/2.4.52
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout cldr/2022-02-08
+git checkout cldr/2022-02-22
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -106,7 +106,7 @@ git checkout tags/release-2.1.12-stable
 cd /D ..
 git clone https://github.com/libexpat/libexpat.git libexpat
 cd /D libexpat
-git checkout tags/R_2_4_5
+git checkout tags/R_2_4_6
 cd /D ..
 git clone https://github.com/nono303/libffi.git libffi
 cd /D libffi
@@ -138,7 +138,7 @@ git checkout tags/v1.6.37
 cd /D ..
 git clone https://github.com/jedisct1/libsodium.git libsodium
 cd /D libsodium
-git checkout tags/1.0.18-RELEASE
+git checkout tags/1.0.18
 cd /D ..
 git clone https://github.com/libssh2/libssh2.git libssh2
 cd /D libssh2
@@ -158,7 +158,7 @@ git checkout tags/v0.23
 cd /D ..
 git clone https://gitlab.gnome.org/GNOME/libxml2.git libxml2
 cd /D libxml2
-git checkout tags/v2.9.12
+git checkout tags/v2.9.13
 cd /D ..
 git clone https://github.com/nono303/libxpm.git libxpm
 cd /D libxpm
@@ -190,7 +190,7 @@ git checkout tags/1.6.14
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2661
+svn update -r 2663
 cd /D ..
 git clone https://github.com/JBlond/mod_bikeshed.git mod_bikeshed
 cd /D mod_bikeshed
@@ -220,13 +220,13 @@ git clone https://github.com/nono303/mod_whatkilledus mod_wku_bt
 cd /D mod_wku_bt
 git checkout tags/2.0.2
 cd /D ..
-git clone git://github.com/BrianGladman/mpir.git mpir
+git clone https://github.com/nono303/mpir.git mpir
 cd /D mpir
 git checkout master
 cd /D ..
 git clone https://github.com/nghttp2/nghttp2.git nghttp2
 cd /D nghttp2
-git checkout tags/v1.46.0
+git checkout tags/v1.47.0
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3
