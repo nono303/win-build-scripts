@@ -37,14 +37,14 @@
 https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
 
 30 	Foreground Black 	Applies non-bold/bright black to foreground
-31 	Foreground Red 	Applies non-bold/bright red to foreground
+31 	Foreground Red 		Applies non-bold/bright red to foreground
 32 	Foreground Green 	Applies non-bold/bright green to foreground
 33 	Foreground Yellow 	Applies non-bold/bright yellow to foreground
 34 	Foreground Blue 	Applies non-bold/bright blue to foreground
 35 	Foreground Magenta 	Applies non-bold/bright magenta to foreground
 36 	Foreground Cyan 	Applies non-bold/bright cyan to foreground
 37 	Foreground White 	Applies non-bold/bright white to foreground
-38 	Foreground Extended 	Applies extended color value to the foreground (see details below)
+38 	Foreground Extended Applies extended color value to the foreground (see details below)
 39 	Foreground Default 	Applies only the foreground portion of the defaults (see 0)
 */
 	$search = array(
@@ -54,6 +54,8 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 		" error " => [31,"str"],
 		"stop" => [31,"str"],
 		"err open" => [31,"str"], // version
+		"error while editing pdb path" => [33,"str"], // version
+		"Update file checksum failed, the file may be damaged" => [33,"str"], // version
 		"syntaxe " => [33,"str"],
 		"inattendu" => [33,"str"],
 		"impossible" => [33,"str"],
@@ -63,16 +65,13 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 		"rejected" => [33,"str"],
 		"conflicts " => [33,"str"],
 		"improve linker performance" => [33,"str"],
-
+		"ne peut trouver le fichier" => [36,"str"], //mpir
 	);
 	$remove = array(
-		"CMake Warning at CMake" => [39, "str"],
-		// gradle
-		"Daemon will be stopped at the end of the build" => [39, "str"],
-		// dav1d
-		"fvisibility=hidden" => [39, "str"],
-		// php-src
-		"Using unknown MSVC version" => [39, "str"],
+		// "CMake Warning at CMake" => [39, "str"],
+		"Daemon will be stopped at the end of the build" => [39, "str"],// gradle
+		"fvisibility=hidden" => [39, "str"],// dav1d
+		"Using unknown MSVC version" => [39, "str"],// php-src
 	);
 	//print_r($argv);
 	//exit();
