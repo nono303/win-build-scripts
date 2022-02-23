@@ -10,6 +10,6 @@ sed -i 's/\/W3/\/w/g' $2/build.ninja
 # add quote for AVX - https://www.cyberciti.biz/faq/unix-linux-bash-script-check-if-variable-is-empty/
 [ ! -z "$avx" ] && avx="\"$avx\""
 # opti
-sed -i 's/ "\/Zi" / "\/O2" "\/Zf" "\/Zi" "\/GL" "\/MP'$3'" '$avx' "\/DWIN32" "\/D_WINDOWS" "\/DNDEBUG" /g' $2/build.ninja
+sed -i 's/ "\/Zi" / "\/O2" "\/Zf" "\/Zi" "\/FS" "\/GL" "\/MP'$3'" '$avx' "\/DWIN32" "\/D_WINDOWS" "\/DNDEBUG" /g' $2/build.ninja
 # found		"/MD" "/nologo" "/showIncludes" "/W3" "/O2" "/Zi"
-# result	"/MD" "/nologo" "/showIncludes" "/W3" "/O2" "/Zi" "/GL" "/MP16" "/arch:AVX" "/DWIN32" "/D_WINDOWS" "/DNDEBUG"
+# result	"/MD" "/nologo" "/showIncludes" "/W3" "/O2" "/Zf" "/Zi" "/FS" "/GL" "/MP16" "/arch:AVX" "/DWIN32" "/D_WINDOWS" "/DNDEBUG"

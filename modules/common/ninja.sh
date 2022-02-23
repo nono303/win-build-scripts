@@ -12,6 +12,6 @@ sed -i 's/FLAGS = -DWIN32/FLAGS = -DWIN32 -nologo/gI' $2/build.ninja
 # warn
 sed -i -E 's/[\/-]W[0-4]/\/w/g' $2/build.ninja
 # opti
-sed -i 's/ \/O2 \/Ob1 / \/Zf \/O2 \/GL \/MD \/MP'$3' '$avx' \/w /gI' $2/build.ninja
+sed -i 's/ \/O2 \/Ob1 / \/Zf \/Zi \/FS \/O2 \/GL \/MD \/MP'$3' '$avx' \/w /gI' $2/build.ninja
 # found		/DWIN32 /D_WINDOWS /W4 /MD /Zi /ZF /O2 /Ob1 /DNDEBUG
-# result	/DWIN32 /D_WINDOWS /w /MD /Zi /ZF /O2 /GL /MD /MP16 /arch:AVX /DNDEBUG
+# result	/DWIN32 /D_WINDOWS /w /MD /Zf /Zi /FS /O2 /GL /MD /MP16 /arch:AVX /DNDEBUG
