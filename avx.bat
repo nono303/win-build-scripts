@@ -1,6 +1,9 @@
 @echo off
-REM https://docs.microsoft.com/fr-fr/cpp/build/reference/arch-x64?view=msvc-170
-REM AVX: sandybridge
+
+REM https://docs.microsoft.com/fr-fr/cpp/build/reference/arch-x64
+
+	REM https://en.wikipedia.org/wiki/List_of_Intel_CPU_microarchitectures
+set AVXMPIR=pentium4-sse2
 if %1 == 1 (
 	set AVXECHO=avx
 	set AVX=/arch:AVX
@@ -8,6 +11,7 @@ if %1 == 1 (
 	set AVXVCX="<EnableEnhancedInstructionSet>AdvancedVectorExtensions<\/EnableEnhancedInstructionSet>\r\n"
 		REM php
 	set intrinsics=,sse3,ssse3,sse4.1,sse4.2,avx
+	if %archmsbuild% == x64 (set AVXMPIR=sandybridge)
 	echo ~~-~~  AVX ~~-~~
 )
 if %1 == 0 (
@@ -18,6 +22,7 @@ if %1 == 0 (
 	set AVXVCX="<EnableEnhancedInstructionSet>NotSet<\/EnableEnhancedInstructionSet>\r\n"
 		REM php
 	set intrinsics=
+	if %archmsbuild% == x64 (set AVXMPIR=core2-penryn)
 	echo ~~-~~ SSE2 ~~-~~
 )
 

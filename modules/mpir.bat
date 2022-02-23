@@ -1,18 +1,26 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1
+@echo off
+set ARG_KEEPSRC=1
+call %PATH_MODULES_COMMON%\init.bat %1
 
-set VCDIR=msvc/vs22
-sed -i 's/mpir^<\/TargetName^>/mpir_static^<\/TargetName^>/g' %PATH_SRC%/%1/%VCDIR%/lib_mpir_gc/lib_mpir_gc.vcxproj
+set MPIRDIR=vs22
+set MPIRCONF=Release
+set MPIROUT=build
+set VCDIR=msvc
 
-for %%Y in (dll_mpir_gc lib_mpir_gc) do (
-	%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/%VCDIR%/%%Y" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
-	MSBuild.exe %PATH_SRC%\%1\%VCDIR%\%%Y\%%Y.vcxproj ^
+	REM clean out dir
+if exist %PATH_SRC%\%1\%MPIROUT%\%MPIRDIR%-%archmsbuild%_%MPIRCONF%_%AVXMPIR%\. rmdir /S /Q %PATH_SRC%\%1\%MPIROUT%\%MPIRDIR%-%archmsbuild%_%MPIRCONF%_%AVXMPIR%
+
+	REM 29. sandybridge                (x64)
+	REM 20. core2_penryn               (x64)
+	REM 12. pentium4_sse2            (win32)
+call python %PATH_SRC%\%1\%VCDIR%\mpir_config.py 22 29,20,12
+for %%Y in (dll_mpir_%AVXMPIR:-=_% lib_mpir_%AVXMPIR:-=_%) do (
+		REM clean build dir
+	if exist %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\%%Y\%archmsbuild%\. rmdir /S /Q %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\%%Y\%archmsbuild%
+	MSBuild.exe %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\%%Y\%%Y.vcxproj ^
 		%MSBUILD_OPTS% ^
-		/p:Configuration=Release ^
+		/p:Configuration=%MPIRCONF% ^
 		/p:Platform=%archmsbuild%
-	
 )
-for %%X in (gmp-impl.h gmp-mparam.h gmp.h gmpxx.h longlong.h mpir.h mpirxx.h) do (for /F "delims=" %%I in ('dir /a:-D /s /b %PATH_SRC%\%1\%VCDIR:/=\%\%%X') do (xcopy /C /F /Y %%I %PATH_INSTALL%\include\*))
-for %%X in (mpir.dll mpir.pdb) do (for /F "delims=" %%I in ('dir /a:-D /s /b %PATH_SRC%\%1\%VCDIR:/=\%\%%X') do (xcopy /C /F /Y %%I %PATH_INSTALL%\bin\*))
-for %%X in (mpir.lib mpir_static.lib mpir_static.pdb) do (for /F "delims=" %%I in ('dir /a:-D /s /b %PATH_SRC%\%1\%VCDIR:/=\%\%%X') do (xcopy /C /F /Y %%I %PATH_INSTALL%\lib\*))
-call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\mpir.dll
-
+for %%D in (bin lib include) do (xcopy /C /F /Y %PATH_SRC%\%1\%MPIROUT%\%MPIRDIR%-%archmsbuild%_%MPIRCONF%_%AVXMPIR%\%%D\*.* %PATH_INSTALL%\%%D\*)
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\mpir_%AVXMPIR%.dll
