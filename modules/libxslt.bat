@@ -1,5 +1,9 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
+	REM fix find LibXml2
+xcopy /C /F /Y %PATH_MODULES%\libxlst.FindLibXml2.cmake %PATH_SRC%\%1\FindLibXml2.cmake*
+sed -i 's/LibXml2 CONFIG/LibXml2/g' %CYGPATH_SRC%/%1/CMakeLists.txt
+
 cmake %CMAKE_OPTS% ^
 	-DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 	-DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
@@ -13,6 +17,7 @@ cmake %CMAKE_OPTS% ^
 	-DLIBXSLT_WITH_TESTS=OFF ^
 	-DLIBXSLT_WITH_THREADS=ON ^
 	-DLIBXSLT_WITH_XSLT_DEBUG=ON ^
+	-DLIBXML2_INCLUDE_DIR=%PATH_INSTALL%\include\libxml2;%PATH_INSTALL%\include ^
 %PATH_SRC%\%1 
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
