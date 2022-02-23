@@ -50,8 +50,13 @@ sed -i -E 's/BROTLI_LIB_VERSION(.), "([^\"]+)"/BROTLI_LIB_VERSION\1, "%LIB_VERSI
 if exist %PATH_SRC%\php-ext-brotli\brotli\. rmdir /S /Q %PATH_SRC%\php-ext-brotli\brotli
 mklink /J %PATH_SRC%\php-ext-brotli\brotli %PATH_SRC%\brotli
 
-	REM !! --with-libxmlshared=shared : win32/dllmain.obj : error LNK2001: unresolved external symbol xmlDllMain
-REM if not exist %PATH_INSTALL%\include\libxml\. mklink /J %PATH_INSTALL%\include\libxml %PATH_INSTALL%\include\libxml2\libxml
+	REM ~~~~~~~~~~~~ libxml: static || shared
+set PHP_LIBXML=static
+echo libxml2: %PHP_LIBXML%
+if %PHP_LIBXML% == shared (
+		REM !! https://gist.github.com/auroraeosrose/3452993 --with-libxmlshared=shared : win32/dllmain.obj : error LNK2001: unresolved external symbol xmlDllMain
+	if not exist %PATH_INSTALL%\include\libxml\. mklink /J %PATH_INSTALL%\include\libxml %PATH_INSTALL%\include\libxml2\libxml
+)
 
 	REM ~~~~~~~~~~~~ php-sdk
 call %PATH_MODULES_COMMON%\init.bat php-sdk

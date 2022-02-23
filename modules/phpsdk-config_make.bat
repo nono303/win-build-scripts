@@ -51,6 +51,11 @@ if %PHPVER% == 8.1 (
 			--with-php-build=%PATH_INSTALL%
 	set native-intrinsics=1
 )
+if %PHP_LIBXML% == shared (
+	set PHP_LIBXML_CONFIG=--with-libxmlshared=shared
+) else (
+	set PHP_LIBXML_CONFIG=--with-libxml=shared
+)
 
 set PHP_COMMON_CONFIGURE=^
 	--disable-cli-win32 ^
@@ -110,7 +115,6 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--enable-xmlreader=shared ^
 	--enable-xmlwriter=shared ^
 	--with-simplexml=shared ^
-	--with-libxml=shared ^
 	--with-dom=shared ^
 	--with-iconv=shared ^
 	--enable-zip=shared ^
@@ -125,7 +129,10 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--with-libavif=shared ^
 	--with-xsl=shared ^
 	--with-gmp=shared ^
-	%ZTS% %phpveropts% %phparchopts%
+	%PHP_LIBXML_CONFIG% ^
+	%ZTS% ^
+	%phpveropts% ^
+	%phparchopts%
 ) else (
 	call configure %PHP_COMMON_CONFIGURE% ^
 	--disable-bcmath ^
