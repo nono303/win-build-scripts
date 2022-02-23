@@ -23,15 +23,15 @@
 					if(!is_array($final["pdb"]) || !($k == "dll" && array_key_exists($lib,$final["pdb"]))){
 						echo str_pad($lib,PAD);
 						$liblist = array_diff($liblist,[$lib]);
-						
 						$echres = "";
 						foreach($tabresultat as $pdbordll){
-							if(in_array($pdbordll,$pdbordlllist[$k])){
+							if(in_array($pdbordll,$pdbordlllist[$k]) || in_array($pdbordll,$pdbordllused[$k])){
 								if(explode(".",$pdbordll)[0] == explode(".",$lib)[0] || $k == "dll"){
 									$echres .= str_pad("\033[92m".$pdbordll."\033[39m",PAD);
 								} else {
 									$echres .= str_pad("\033[95m".$pdbordll."\033[39m",PAD);
 								}
+								$pdbordllused[$k][] = $pdbordll;
 								$pdbordlllist[$k] = array_diff($pdbordlllist[$k],[$pdbordll]);
 							} elseif($pdbordll == "vc140.pdb"){
 								$echres .= str_pad("\033[33m".$pdbordll."\033[39m",PAD);
