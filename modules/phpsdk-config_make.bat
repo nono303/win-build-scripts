@@ -75,7 +75,6 @@ set PHP_COMMON_CONFIGURE=^
 	--with-toolset=vs ^
 	--with-cygwin=%PATH_BIN_CYGWIN% ^
 	--with-mp=%NUMBER_OF_PROCESSORS%
-
 REM known bug for --with-ffi if php != 8.1 || 7.4
 if %PHPVER% == %PHP_FULLBUILD% (
 	call configure %PHP_COMMON_CONFIGURE% ^
@@ -162,12 +161,10 @@ sed -i -E 's/incremental:no/incremental:no \/LTCG \/NODEFAULTLIB:libcmt.lib/g' %
 sed -i 's/\/Ox/\/O2 \/GL \/Zf \/D PHP_ICONV_PREFIX=%PATH_INSTALL:\=\/%/g' %CYGPATH_SRC%/php-src/Makefile
 	REM no warn
 sed -i 's/d4996//g' %CYGPATH_SRC%/php-src/Makefile
+	REM fix for iconv shared : LINK : fatal error LNK1181: cannot open input file 'php_iconv.lib'
+sed -i -E 's/LIBS_LIBXML=(.*)php_iconv.lib(.*)/LIBS_LIBXML=\\1\\2/g' %CYGPATH_SRC%/php-src/Makefile
 	REM PHP 7.X 'warning U4004: too many rules' - https://docs.microsoft.com/en-us/cpp/error-messages/tool-errors/nmake-warning-u4004
 REM sed -i 's/phpdbg_win.obj: /phpdbg_win.obj:: /g' %CYGPATH_SRC%/php-src/Makefile
-	REM fix for iconv shared : LINK : fatal error LNK1181: cannot open input file 'php_iconv.lib'
-	REM add shared liblzma.lib for libxml 
-		REM static way patch: [libxml2/xzlib.c  #ifdef LIBXML_LZMA_ENABLED +#define LZMA_API_STATIC]
-sed -i 's/LIBS_LIBXML=icuuc.lib libxml2s.lib iconv.lib php_iconv.lib/LIBS_LIBXML=icuuc.lib libxml2s.lib iconv.lib liblzma.lib/g' %CYGPATH_SRC%/php-src/Makefile
 
 	REM after sed:
 REM LDFLAGS=/nologo /incremental:no /LTCG /NODEFAULTLIB:libcmt.lib /debug /opt:ref,icf
