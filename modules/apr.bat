@@ -33,10 +33,10 @@ nmake %NMAKE_OPTS% /f Makefile.win ^
 	SystemRoot=%SystemRoot% ^
 	buildall install
 
-REM pdb are not build in same folder according to arch...
-for /F "delims=" %%I in ('dir /a:-D /s /b %PATH_SRC%\apr\apr-1.pdb') do (xcopy /C /F /Y %%I %PATH_INSTALL%\lib\*)
-for /F "delims=" %%I in ('dir /a:-D /s /b %PATH_SRC%\apr-util\aprutil-1.pdb') do (xcopy /C /F /Y %%I %PATH_INSTALL%\lib\*)
-for /F "delims=" %%I in ('dir /a:-D /s /b %PATH_SRC%\apr-iconv\apriconv-1.pdb') do (xcopy /C /F /Y %%I %PATH_INSTALL%\lib\*)
+REM pdb & lib are not build in same folder according to ARCH...
+for %%D in (apr\apr-1.pdb apr-util\aprutil-1.pdb apr-iconv\apriconv-1.pdb apr-util\crypto\apr_crypto_openssl-1.lib apr-util\dbd\apr_dbd_odbc-1.lib apr-util\dbd\apr_dbd_sqlite3-1.lib apr-util\ldap\apr_ldap-1.lib apr-iconv\libapriconv-1.lib) do (
+	for /F "delims=" %%I in ('dir /a:-D /s /b %PATH_SRC%\%%D') do (xcopy /C /F /Y %%I %PATH_INSTALL%\lib\*)
+)
 
 if not exist %PATH_INSTALL%\include\arch\. mkdir %PATH_INSTALL%\include\arch
 xcopy /C /F /Y %PATH_SRC%\apr\include\arch\apr_private_common.h %PATH_INSTALL%\include\arch\*
