@@ -18,7 +18,7 @@ sed -i 's/DWIN32/DWIN32 \/DLIBYUV_BUILDING_SHARED_LIBRARY=1/g' %CYGPATH_BUILD%/%
 %NINJA%
 
 
-for %%X in (yuv.lib yuvconvert.lib) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\lib\*)
+xcopy /C /F /Y %PATH_BUILD%\%1\yuv.lib %PATH_INSTALL%\lib\*
 for %%X in (CMakeFiles\yuv_static.dir\yuv_static.pdb yuv_static.lib) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\lib\*)
 for %%X in (libyuv.dll yuvconvert.exe) do (
 	xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*
