@@ -1,3 +1,17 @@
+diff --git "a/ev.h" "b/ev.h"
+index 4669c39..a38ac2f 100644
+--- "a/ev.h"
++++ "b/ev.h"
+@@ -204,7 +204,7 @@ struct ev_loop;
+ #ifdef EV_API_STATIC
+ # define EV_API_DECL static
+ #else
+-# define EV_API_DECL extern
++# define EV_API_DECL __declspec(dllexport)
+ #endif
+ 
+ /* EV_PROTOTYPES can be used to switch of prototype declarations */
+
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 new file mode 100644
 index 0000000..5beeb04
