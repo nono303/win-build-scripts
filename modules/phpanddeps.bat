@@ -8,6 +8,7 @@ call %PATH_BATCH%\go.bat giflib NOLOG
 call %PATH_BATCH%\go.bat freeglut NOLOG
 call %PATH_BATCH%\go.bat libwebp NOLOG
 call %PATH_BATCH%\go.bat libdeflate NOLOG
+call %PATH_BATCH%\go.bat lerc NOLOG
 call %PATH_BATCH%\go.bat libtiff NOLOG
 REM rebuild libwebp again for tiff support
 call %PATH_BATCH%\go.bat libwebp NOLOG

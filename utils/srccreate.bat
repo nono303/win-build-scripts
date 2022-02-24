@@ -78,7 +78,7 @@ git checkout tags/2.4.52
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout cldr/2022-02-22
+git checkout cldr/2022-02-23
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -87,6 +87,10 @@ cd /D ..
 git clone https://github.com/jemalloc/jemalloc.git jemalloc
 cd /D jemalloc
 git checkout tags/5.2.1
+cd /D ..
+git clone https://github.com/Esri/lerc.git lerc
+cd /D lerc
+git checkout tags/v3.0
 cd /D ..
 git clone https://github.com/AOMediaCodec/libavif.git libavif
 cd /D libavif
