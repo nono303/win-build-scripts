@@ -17,9 +17,10 @@
 | [geos](https://github.com/libgeos/geos) | 3.10.2 |
 | [giflib](https://github.com/gongjianbo/GifLib) | 5.2.1 |
 | [httpd](https://github.com/apache/httpd) | 2.4.52 |
-| [icu](https://github.com/unicode-org/icu) | 70.1 - cldr/2022-02-22 |
+| [icu](https://github.com/unicode-org/icu) | 70.1 - cldr/2022-02-23 |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.2.1 |
+| [lerc](https://github.com/Esri/lerc.git) | 3.0 |
 | [libavif](https://github.com/AOMediaCodec/libavif.git) | 0.9.3 |
 | [libdeflate](https://github.com/ebiggers/libdeflate.git) | 1.10 |
 | [libev](https://git.lighttpd.net/libev) | 4.33 |
@@ -40,7 +41,7 @@
 | [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.9.13 |
 | [libxpm](https://github.com/nono303/libxpm.git) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.13 |
 | [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.35 |
-| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1810 |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1811 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
 | [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | 0.17.2 |

@@ -39,6 +39,7 @@ Usage: go command [options]
       * freeglut
       * libwebp
       * libdeflate
+      * lerc
       * libtiff
       * libjpeg-turbo
       * tidy
