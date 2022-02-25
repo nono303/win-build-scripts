@@ -51,6 +51,7 @@ cmake ^
 	%PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+for %%Y in (libcurl-target.cmake lib\cmake_install.cmake build.ninja) do (sed -i 's/libcurl_imp\.lib/libcurl\.lib/g' %CYGPATH_BUILD%/%1/%%Y)
 %NINJA% install
 
 xcopy /C /F /Y %PATH_BUILD%\%1\lib\libcurl.pdb %PATH_INSTALL%\bin\*
