@@ -14,11 +14,12 @@ REM STATIC
 
 	REM edit
 sed -i 's/edit_a.lib;edit.lib/edit_static.lib/g' %CYGPATH_SRC%/php-src/configure.js
-	REM webp
-sed -i 's/libwebp.lib/webp_static.lib/g' %CYGPATH_SRC%/php-src/configure.js
+
 
 REM SHARED
 
+	REM webp
+sed -i 's/libwebp.lib/webp.lib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM gmp - shared
 sed -i 's/mpir_a.lib/mpir_%AVXMPIR%.lib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM libiconv - shared with patch ext/iconv/iconv.c : _libiconv_version > _LIBICONV_VERSION
