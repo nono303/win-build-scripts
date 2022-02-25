@@ -16,7 +16,7 @@ for %%S in (OFF ON) do (
 	-DFT_DISABLE_BROTLI=OFF ^
 	-DFT_DISABLE_HARFBUZZ=ON ^
 	-DFT_DISABLE_PNG=OFF ^
-	-DPNG_LIBRARY=%PATH_INSTALL%\lib\png_static.lib ^
+	-DPNG_LIBRARY=%PATH_INSTALL%\lib\libpng16.lib ^
 	%PATH_SRC%\%1
 		REM LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
 	REM sed -i 's/LTCG/LTCG \/NODEFAULTLIB:libcmt.lib/g' %PATH_BUILD%/%1/CMakeFiles/freetype.dir/build.make
