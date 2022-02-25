@@ -1,12 +1,12 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
-	REM patch PHP - https://github.com/storesafe/cordova-sqlite-storage/issues/906
-	REM sqlite_statement.obj : error LNK2001: unresolved external symbol sqlite3_column_table_name / sqlite3_column_decltype
-sed -i 's/SQLITE_OMIT_DECLTYPE/SQLITE_ENABLE_COLUMN_METADATA/g' %CYGPATH_SRC%/%1/CMakeLists.txt
-	REM ICU include
-sed -i 's/INSTALL_INTERFACE:include^>/INSTALL_INTERFACE:include^> %PATH_INSTALL:\=\\/%\/include/g' %CYGPATH_SRC%/%1/CMakeLists.txt
-
 for %%C in ("-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" "-DBUILD_SHARED_LIBS=ON -DBUILD_SHELL=OFF") do (
+	call %PATH_MODULES_COMMON%\init.bat %1 cmake
+		REM patch PHP - https://github.com/storesafe/cordova-sqlite-storage/issues/906
+		REM sqlite_statement.obj : error LNK2001: unresolved external symbol sqlite3_column_table_name / sqlite3_column_decltype
+	sed -i 's/SQLITE_OMIT_DECLTYPE/SQLITE_ENABLE_COLUMN_METADATA/g' %CYGPATH_SRC%/%1/CMakeLists.txt
+		REM ICU include
+	sed -i 's/INSTALL_INTERFACE:include^>/INSTALL_INTERFACE:include^> %PATH_INSTALL:\=\\/%\/include/g' %CYGPATH_SRC%/%1/CMakeLists.txt
 		REM dirty !! https://stackoverflow.com/questions/9556676/batch-file-how-to-replace-equal-signs-and-a-string-variable
 	set CUR=%%C
 	setlocal enabledelayedexpansion
@@ -14,7 +14,8 @@ for %%C in ("-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" "-DBUILD_SHARED_LIBS=ON -
 
 	if %%C =="-DBUILD_SHARED_LIBS=ON -DBUILD_SHELL=OFF" (
 		sed -i 's/STATIC sqlite3.c/SHARED sqlite3.c/g' %CYGPATH_SRC%/%1/CMakeLists.txt
-		sed -i 's/OUTPUT_NAME   sqlite3/OUTPUT_NAME   libsqlite3/g' %CYGPATH_SRC%/%1/CMakeLists.txt
+	) else (
+		sed -i 's/OUTPUT_NAME   sqlite3/OUTPUT_NAME   sqlite3_static/g' %CYGPATH_SRC%/%1/CMakeLists.txt
 	)
 
 	cmake %CMAKE_OPTS% ^
@@ -38,21 +39,18 @@ for %%C in ("-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" "-DBUILD_SHARED_LIBS=ON -
 
 	%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 		REM ICU  lib
-	sed -i 's/LINK_LIBRARIES =/LINK_LIBRARIES = %PATH_INSTALL:\=\\/%\/lib\/icuuc.lib %PATH_INSTALL:\=\\/%\/lib\/icuin.lib/g' %CYGPATH_BUILD%/%1/build.ninja
+	sed -i 's/LINK_LIBRARIES =/LINK_LIBRARIES = %PATH_INSTALL:\=\\/%\/lib\/icuuc.lib %PATH_INSTALL:\=\\/%\/lib\/icuin.lib/g' %CYGPATH_BUILD%/%1/build.ninja	
+
 	if %%C =="-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" (
-		sed -i 's/SQLite3.pdb/sqlite3.pdb/g' %CYGPATH_BUILD%/%1/build.ninja
+		sed -i 's/SQLite3\.pdb/sqlite3_static\.pdb/g' %CYGPATH_BUILD%/%1/build.ninja
+		%NINJA% sqlite3_static.lib
+		for %%X in (CMakeFiles\SQLite3.dir\sqlite3_static.pdb sqlite3_static.lib) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\lib\*)
 	) else (
 			REM https://sqlite.org/forum/info/9bfd09f4772035e7
 		sed -i 's/DWIN32/DWIN32 \/DSQLITE_API=__declspec^(dllexport^)/g' %CYGPATH_BUILD%/%1/build.ninja
-	)
-	%NINJA% install
-
-	if %%C =="-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" (
-		xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\SQLite3.dir\sqlite3.pdb %PATH_INSTALL%\lib\*
-		xcopy /C /F /Y %PATH_BUILD%\%1\sqlite3.pdb %PATH_INSTALL%\bin\*
-	) else (
-		for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\libsqlite3.%%X %PATH_INSTALL%\bin\*)
+		%NINJA% install
+		for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\sqlite3.%%X %PATH_INSTALL%\bin\*)
 	)
 )
 xcopy /C /F /Y %PATH_SRC%\%1\sqlite3ext.h %PATH_INSTALL%\include\sqlite3\*
-for %%X in (libsqlite3.dll sqlite3.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\sqlite3.dll
