@@ -20,9 +20,9 @@ cmake %CMAKE_OPTS% ^
 -DZLIB_LIBRARIES=%PATH_INSTALL:\=/%/lib/zlib.lib ^
 -DJANSSON_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 -DJANSSON_LIBRARIES=%PATH_INSTALL:\=/%/lib/jansson.lib ^
--DMAXMIND_LIBRARIES=%PATH_INSTALL%/lib/libmaxminddb.lib ^
+-DMAXMIND_LIBRARIES=%PATH_INSTALL%/lib/libmaxminddb_static.lib ^
 -DOPENSSL_ROOT_DIR=%PATH_INSTALL:\=/% ^
--DCURL_LIBRARY=%PATH_INSTALL:\=/%/lib/libcurl_imp.lib ^
+-DCURL_LIBRARY=%PATH_INSTALL:\=/%/lib/libcurl.lib ^
 -DCURL_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 -DEXTRA_INCLUDES=%PATH_SRC:\=/%/openssl ^
 %PATH_SRC%\%1 
