@@ -29,7 +29,7 @@
 | [libffi](https://github.com/nono303/libffi) - _[upstream + src](https://github.com/libffi/libffi)_ | 3.4.2 |
 | [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.17.0 |
 | [libiconv](https://github.com/winlibs/libiconv) | 1.16.1 |
-| [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) | 2.1.2 |
+| [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) | 2.1.3 |
 | [liblzma](https://github.com/ShiftMediaProject/liblzma) | 5.3.2alpha |
 | [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.6.0 |
 | [libpng](https://sourceforge.net/p/libpng/code/ci/master/tree/) | 1.6.37 |

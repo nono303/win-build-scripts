@@ -126,7 +126,7 @@ git checkout tags/libiconv-1.16-1
 cd /D ..
 git clone https://github.com/libjpeg-turbo/libjpeg-turbo libjpeg-turbo
 cd /D libjpeg-turbo
-git checkout tags/2.1.2
+git checkout tags/2.1.3
 cd /D ..
 git clone https://git.tukaani.org/xz.git liblzma
 cd /D liblzma
