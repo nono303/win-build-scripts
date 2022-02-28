@@ -15,10 +15,10 @@ cmake ^
 -DBUILD_PROJSYNC=ON ^
 -DBUILD_SHARED_LIBS=ON ^
 -DENABLE_CURL=ON ^
--DCURL_LIBRARY=%PATH_INSTALL:\=/%/lib/libcurl_imp.lib ^
+-DCURL_LIBRARY=%PATH_INSTALL:\=/%/lib/libcurl.lib ^
 -DCURL_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 -DSQLITE3_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
--DSQLITE3_LIBRARY=%PATH_INSTALL:\=/%/lib/sqlite3.lib ^
+-DSQLITE3_LIBRARY=%PATH_INSTALL:\=/%/lib/libsqlite3.lib ^
 -DEXE_SQLITE3=%PATH_INSTALL:\=/%/bin/sqlite3.exe ^
 -DENABLE_TIFF=ON ^
 -DTIFF_LIBRARY=%PATH_INSTALL:\=/%/lib/tiff.lib ^
