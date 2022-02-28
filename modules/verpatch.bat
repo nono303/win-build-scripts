@@ -11,4 +11,5 @@ MSBuild.exe verpatch.sln ^
 
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_SRC%\%1\%outmsbuild%\verpatch.exe
 for %%X in (exe pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\%outmsbuild%\verpatch.%%X %PATH_SOFTS%\*)
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_SOFTS%\verpatch.exe
 call do_php %PATH_UTILS%\sub\bininfo.php %PATH_SOFTS%\verpatch.exe null checkavx
