@@ -21,9 +21,10 @@ cmake %CMAKE_OPTS% ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
-sed -i 's/\/w \/wd4996 \/MT //g' %CYGPATH_BUILD%/%1/build.ninja
 for %%Y in (cmake_install.cmake build.ninja) do (sed -i 's/-static\./_static\./g' %CYGPATH_BUILD%/%1/%%Y)
-for %%Y in (sharedlib/cmake_install.cmake build.ninja) do (sed -i 's/jpeg8\.dll/jpeg\.dll/g' %CYGPATH_BUILD%/%1/%%Y)
+for %%X in (dll pdb) do (
+	for %%Y in (sharedlib/cmake_install.cmake build.ninja) do (sed -i 's/jpeg8\.%%X/jpeg\.%%X/g' %CYGPATH_BUILD%/%1/%%Y)
+)
 %NINJA% install
 for %%E in (jpeg.lib CMakeFiles\jpeg_static.dir\jpeg_static.pdb CMakeFiles\turbojpeg_static.dir\turbojpeg_static.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%E %PATH_INSTALL%\lib\*)
 for %%E in (djpeg.pdb jpegtran.pdb rdjpgcom.pdb tjbench.pdb cjpeg.pdb wrjpgcom.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%E %PATH_INSTALL%\bin\*)
