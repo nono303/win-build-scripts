@@ -46,7 +46,7 @@ set DEPS=\deps
 if not exist %PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\. mkdir %PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\
 if %ARCH% == x64 (set sslarch=-x64)
 if %ARCH% == x86 (set sslarch=)
-for %%F in (libssl-%OPENSSL_SUF%%sslarch% libcrypto-%OPENSSL_SUF%%sslarch% libexpat libapr-1 libapriconv-1 libaprutil-1 brotlienc brotlicommon brotlidec libserf-2 zlib1) do (
+for %%F in (libssl-%OPENSSL_SUF%%sslarch% libcrypto-%OPENSSL_SUF%%sslarch% libexpat libapr-1 libapriconv-1 libaprutil-1 brotlienc brotlicommon brotlidec libserf-2 zlib) do (
 	for %%X in (dll pdb) do (
 		xcopy /C /F /Y %PATH_INSTALL%\bin\%%F.%%X  %PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\*
 	)
