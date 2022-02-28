@@ -43,14 +43,18 @@ for %%C in ("-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" "-DBUILD_SHARED_LIBS=ON -
 
 	if %%C =="-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" (
 		sed -i 's/SQLite3\.pdb/sqlite3_static\.pdb/g' %CYGPATH_BUILD%/%1/build.ninja
-		%NINJA% sqlite3_static.lib
-		for %%X in (CMakeFiles\SQLite3.dir\sqlite3_static.pdb sqlite3_static.lib) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\lib\*)
+		%NINJA% sqlite3_static.lib sqlite3.exe
+		for %%X in (CMakeFiles\SQLite3.dir\sqlite3_static.pdb sqlite3_static.lib) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\lib\*)		
+		for %%Y in (exe pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\sqlite3.%%Y %PATH_INSTALL%\bin\*)
 	) else (
 			REM https://sqlite.org/forum/info/9bfd09f4772035e7
 		sed -i 's/DWIN32/DWIN32 \/DSQLITE_API=__declspec^(dllexport^)/g' %CYGPATH_BUILD%/%1/build.ninja
+		for %%X in (dll pdb lib) do (
+			for %%Y in (cmake_install.cmake build.ninja) do (sed -i 's/sqlite3\.%%X/libsqlite3\.%%X/g' %CYGPATH_BUILD%/%1/%%Y)
+		)
 		%NINJA% install
-		for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\sqlite3.%%X %PATH_INSTALL%\bin\*)
+		for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\libsqlite3.%%X %PATH_INSTALL%\bin\*)
 	)
 )
 xcopy /C /F /Y %PATH_SRC%\%1\sqlite3ext.h %PATH_INSTALL%\include\sqlite3\*
-call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\sqlite3.dll
+for %%Y in (sqlite3.exe libsqlite3.dll) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%Y)
