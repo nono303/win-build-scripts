@@ -13,7 +13,6 @@ cmake -Wno-dev -G "Visual Studio 17 2022" ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%PATH_BUILD:\=/%/%1/" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
-sed -i -E 's/    ^<LinkIncremental.*//g' %CYGPATH_BUILD%/%1/aom.vcxproj
 set AOMCONF=RelWithDebInfo
 MSBuild.exe %PATH_BUILD%\%1\%VCDIR%\AOM.sln ^
 	%MSBUILD_OPTS% ^
@@ -23,4 +22,6 @@ MSBuild.exe %PATH_BUILD%\%1\%VCDIR%\AOM.sln ^
 
 xcopy /C /F /Y %PATH_BUILD%\%1\%AOMCONF%\aom.lib %PATH_INSTALL%\lib\*
 for %%X in (aom.pdb aom.dll) do (xcopy /C /F /Y  %PATH_BUILD%\%1\%AOMCONF%\%%X %PATH_INSTALL%\bin\*)
+if not exist %PATH_INSTALL%\include\aom\. mkdir %PATH_INSTALL%\include\aom
+xcopy /C /F /Y  %PATH_SRC%\%1\aom\*.h %PATH_INSTALL%\include\aom\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\aom.dll
