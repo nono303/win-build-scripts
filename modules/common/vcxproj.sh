@@ -12,7 +12,7 @@ do
   sed -i -E 's/<Optimization>[^<]+/<Optimization>MaxSpeed/g' $i
   sed -i 's/<\/ClCompile>/<Optimization>MaxSpeed<\/Optimization><WholeProgramOptimization>true<\/WholeProgramOptimization><MultiProcessorCompilation>true<\/MultiProcessorCompilation>'$2'<\/ClCompile>/g' $i
   # LINK Flags
-  sed -i -E 's/    <LinkIncremental.*//g' $i
+  sed -i -E 's/ *<.?LinkIncremental.*//g' $i
   sed -i 's/<\/Link>/'$link'<LinkTimeCodeGeneration>UseLinkTimeCodeGeneration<\/LinkTimeCodeGeneration><\/Link>/g' $i
   # LIB Flags
   sed -i 's/<\/Lib>/'$link'<LinkTimeCodeGeneration>true<\/LinkTimeCodeGeneration><\/Lib>/g' $i
