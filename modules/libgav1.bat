@@ -33,4 +33,4 @@ for %%Y in (dll pdb) do (xcopy /C /F /Y  %PATH_BUILD%\%1\%AOMCONF%\libgav1.%%Y %
 xcopy /C /F /Y  %PATH_BUILD%\%1\%AOMCONF%\libgav1.lib %PATH_INSTALL%\lib\*
 if not exist %PATH_INSTALL%\include\gav1\. mkdir %PATH_INSTALL%\include\gav1
 xcopy /C /F /Y %PATH_SRC%\%1\src\gav1\*.h %PATH_INSTALL%\include\gav1\*
-for %%X in (libgav1.dll abseil.dll) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libgav1.dll
