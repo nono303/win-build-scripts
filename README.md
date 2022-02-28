@@ -57,8 +57,8 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [7z](https://www.7-zip.org/download.html)                    | x64  | 21.07     |                     |
 | [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.82         |                     |
 | [ChkMatch](http://beefchunk.com/documentation/sys-programming/os-win32/debug/www.debuginfo.com/tools/chkmatch.html) | x86 | 1.0.3          |                     |
-| [Gradle](https://gradle.org/install/) | [java] | 7.3.3 | |
-| [CMake](https://cmake.org/download/) | x64 | 3.23.0-rc1 | |
+| [Gradle](https://gradle.org/install/) | [java] | 7.4 | |
+| [CMake](https://cmake.org/download/) | x64 | 3.23.0-rc2 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | x64 | 1.10.2 | |
 | [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 0.61.2 | |
 | [NuGet](https://www.nuget.org/downloads) | x86 | 6.0.0 | |
