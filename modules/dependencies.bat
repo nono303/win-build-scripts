@@ -12,6 +12,6 @@ MSBuild.exe Dependencies.sln %MSBUILD_OPTS% ^
 
 if exist %PATH_INSTALL%\_%1\. rmdir /S /Q %PATH_INSTALL%\_%1
 mkdir %PATH_INSTALL%\_%1
-for %%X in (DependenciesGui.exe DependenciesLib.dll ClrPhlib.dll Dragablz.dll) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_SRC%\%1\bin\%OUTDIR_CONF%%ARCH%\%%X)
+for %%X in (DependenciesGui.exe DependenciesLib.dll) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_SRC%\%1\bin\%OUTDIR_CONF%%ARCH%\%%X norpdb)
 xcopy /C /F /Y %PATH_SRC%\%1\bin\%OUTDIR_CONF%%ARCH%\* %PATH_INSTALL%\_%1\*
 call do_php %PATH_UTILS%\sub\bininfo.php %PATH_INSTALL%\_%1\ checkavx
