@@ -13,6 +13,8 @@
 	if(in_array($proot,["pecl-memcache","php-geos","pecl-text-xdiff","php-ext-brotli","xdebug","php-src"]))
 		$proot = "php";
 	$nogit = array(
+		"giflib"			=> ['/giflib VERSION ([0-9\.]+)/s',
+							pathenv("PATH_SRC")."/".$argv[1]."/5.2.1/CMakeLists.txt"],
 		"mpir"				=> ['/#define _MSC_MPIR_VERSION "([0-9\.]+)"/s',
 							pathenv("PATH_SRC")."/".$argv[1]."/gmp.h"],
 		"bzip2"				=> ['/VALUE "ProductVersion", "([0-9\.]+)/s',
@@ -63,7 +65,8 @@
 					$ver_product .= $sep.trim($matches[$i]);
 					$sep = ".";
 				}
-				echo "    # nogit version: ".$ver_product." [".$nogit[$src][1]."]".PHP_EOL;
+				if(pathenv("CUR_DEBUG") == 1)
+					echo "    # nogit version: ".$ver_product." [".$nogit[$src][1]."]".PHP_EOL;
 			} elseif (is_string($nogit[$src])){
 				$ver_product = $nogit[$src];
 			} elseif (is_dir($cur."/".$src."/.git")){
