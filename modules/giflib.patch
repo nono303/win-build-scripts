@@ -1,0 +1,152 @@
+diff --git a/5.2.1/CMakeLists.txt b/5.2.1/CMakeLists.txt
+index 2a71200..ce68757 100644
+--- a/5.2.1/CMakeLists.txt
++++ b/5.2.1/CMakeLists.txt
+@@ -1,8 +1,6 @@
+ ﻿cmake_minimum_required (VERSION 3.8)
+ 
+-project (GifLib 
+-        VERSION 5.2.1
+-        )
++project (giflib VERSION 5.2.1)
+ 
+ include_directories(${PROJECT_SOURCE_DIR}/source)
+ aux_source_directory(${PROJECT_SOURCE_DIR}/source source_files)
+@@ -11,7 +9,7 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
+ set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR})
+ file(GLOB head_files "${PROJECT_SOURCE_DIR}/source/*.h")
+ 
+-add_library(GifLib STATIC ${head_files} ${source_files})
++add_library(giflib SHARED ${head_files} ${source_files})
+ install(FILES ${head_files} DESTINATION include)
+ 
+ IF (MSVC)
+@@ -19,6 +17,6 @@ IF (MSVC)
+ #  add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+   set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")
+   set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MDd")
+-  set(build_flags "-D_CRT_NONSTDC_NO_DEPRECATE -D_CRT_SECURE_NO_WARNINGS")
+-  set_target_properties(GifLib PROPERTIES COMPILE_FLAGS ${build_flags})
++  set(build_flags "-D_CRT_NONSTDC_NO_DEPRECATE -D_CRT_SECURE_NO_WARNINGS -DLIBRARY_EXPORTS=1")
++  set_target_properties(giflib PROPERTIES COMPILE_FLAGS ${build_flags})
+ ENDIF ()
+diff --git a/5.2.1/source/gif_font.c b/5.2.1/source/gif_font.c
+index d90783c..17ab740 100644
+--- a/5.2.1/source/gif_font.c
++++ b/5.2.1/source/gif_font.c
+@@ -239,7 +239,7 @@ GifDrawBoxedText8x8(SavedImage *Image,
+ 		      border + LineCount * GIF_FONT_HEIGHT + border - 1, bg);
+ 	(void)strcpy(dup, (char *)legend);
+ 	char *lasts;
+-	cp = strtok_r(dup, "\r\n", &lasts);
++	cp = strtok_s(dup, "\r\n", &lasts);
+ 	do {
+ 	    int leadspace = 0;
+ 
+@@ -248,7 +248,7 @@ GifDrawBoxedText8x8(SavedImage *Image,
+ 
+ 	    GifDrawText8x8(Image, x + border + (leadspace * GIF_FONT_WIDTH),
+ 			   y + border + (GIF_FONT_HEIGHT * i++), cp, fg);
+-	    cp = strtok_r(NULL, "\r\n", &lasts);
++	    cp = strtok_s(NULL, "\r\n", &lasts);
+ 	} while (cp);
+ 	(void)free((void *)dup);
+ 
+diff --git a/5.2.1/source/gif_lib.h b/5.2.1/source/gif_lib.h
+index f8feb3c..4af82a3 100644
+--- a/5.2.1/source/gif_lib.h
++++ b/5.2.1/source/gif_lib.h
+@@ -9,8 +9,18 @@ SPDX-License-Identifier: MIT
+ #ifndef _GIF_LIB_H_
+ #define _GIF_LIB_H_ 1
+ 
++#ifdef WIN32
++#    ifdef LIBRARY_EXPORTS
++#        define LIBRARY_API __declspec(dllexport)
++#    else
++#        define LIBRARY_API __declspec(dllimport)
++#    endif
++#elif
++#    define LIBRARY_API
++#endif
++
+ #ifdef __cplusplus
+-extern "C" {
++extern LIBRARY_API "C" {
+ #endif /* __cplusplus */
+ 
+ #define GIFLIB_MAJOR 5
+@@ -227,7 +237,7 @@ int GifQuantizeBuffer(unsigned int Width, unsigned int Height,
+ /******************************************************************************
+  Error handling and reporting.
+ ******************************************************************************/
+-extern const char *GifErrorString(int ErrorCode);     /* new in 2012 - ESR */
++extern LIBRARY_API const char *GifErrorString(int ErrorCode);     /* new in 2012 - ESR */
+ 
+ /*****************************************************************************
+  Everything below this point is new after version 1.2, supporting `slurp
+@@ -238,28 +248,28 @@ extern const char *GifErrorString(int ErrorCode);     /* new in 2012 - ESR */
+  Color map handling from gif_alloc.c
+ ******************************************************************************/
+ 
+-extern ColorMapObject *GifMakeMapObject(int ColorCount,
++extern LIBRARY_API ColorMapObject *GifMakeMapObject(int ColorCount,
+                                      const GifColorType *ColorMap);
+-extern void GifFreeMapObject(ColorMapObject *Object);
+-extern ColorMapObject *GifUnionColorMap(const ColorMapObject *ColorIn1,
++extern LIBRARY_API void GifFreeMapObject(ColorMapObject *Object);
++extern LIBRARY_API ColorMapObject *GifUnionColorMap(const ColorMapObject *ColorIn1,
+                                      const ColorMapObject *ColorIn2,
+                                      GifPixelType ColorTransIn2[]);
+-extern int GifBitSize(int n);
++extern LIBRARY_API int GifBitSize(int n);
+ 
+ /******************************************************************************
+  Support for the in-core structures allocation (slurp mode).              
+ ******************************************************************************/
+ 
+-extern void GifApplyTranslation(SavedImage *Image, GifPixelType Translation[]);
+-extern int GifAddExtensionBlock(int *ExtensionBlock_Count,
++extern LIBRARY_API void GifApplyTranslation(SavedImage *Image, GifPixelType Translation[]);
++extern LIBRARY_API int GifAddExtensionBlock(int *ExtensionBlock_Count,
+ 				ExtensionBlock **ExtensionBlocks, 
+ 				int Function, 
+ 				unsigned int Len, unsigned char ExtData[]);
+-extern void GifFreeExtensions(int *ExtensionBlock_Count,
++extern LIBRARY_API void GifFreeExtensions(int *ExtensionBlock_Count,
+ 			      ExtensionBlock **ExtensionBlocks);
+-extern SavedImage *GifMakeSavedImage(GifFileType *GifFile,
++extern LIBRARY_API SavedImage *GifMakeSavedImage(GifFileType *GifFile,
+                                   const SavedImage *CopyFrom);
+-extern void GifFreeSavedImages(GifFileType *GifFile);
++extern LIBRARY_API void GifFreeSavedImages(GifFileType *GifFile);
+ 
+ /******************************************************************************
+  5.x functions for GIF89 graphics control blocks
+@@ -284,21 +294,21 @@ int EGifGCBToSavedExtension(const GraphicsControlBlock *GCB,
+ 
+ #define GIF_FONT_WIDTH  8
+ #define GIF_FONT_HEIGHT 8
+-extern const unsigned char GifAsciiTable8x8[][GIF_FONT_WIDTH];
++extern LIBRARY_API const unsigned char GifAsciiTable8x8[][GIF_FONT_WIDTH];
+ 
+-extern void GifDrawText8x8(SavedImage *Image,
++extern LIBRARY_API void GifDrawText8x8(SavedImage *Image,
+                      const int x, const int y,
+                      const char *legend, const int color);
+ 
+-extern void GifDrawBox(SavedImage *Image,
++extern LIBRARY_API void GifDrawBox(SavedImage *Image,
+                     const int x, const int y,
+                     const int w, const int d, const int color);
+ 
+-extern void GifDrawRectangle(SavedImage *Image,
++extern LIBRARY_API void GifDrawRectangle(SavedImage *Image,
+                    const int x, const int y,
+                    const int w, const int d, const int color);
+ 
+-extern void GifDrawBoxedText8x8(SavedImage *Image,
++extern LIBRARY_API void GifDrawBoxedText8x8(SavedImage *Image,
+                           const int x, const int y,
+                           const char *legend,
+                           const int border, const int bg, const int fg);

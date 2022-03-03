@@ -1,0 +1,50 @@
+Index: src/editline/readline.h
+===================================================================
+--- src/editline/readline.h	(revision 36)
++++ src/editline/readline.h	(working copy)
+@@ -39,6 +39,16 @@
+ #ifndef _READLINE_H_
+ #define _READLINE_H_
+ 
++#ifdef WIN32
++#    ifdef LIBRARY_EXPORTS
++#        define LIBRARY_API __declspec(dllexport)
++#    else
++#        define LIBRARY_API __declspec(dllimport)
++#    endif
++#elif
++#    define LIBRARY_API
++#endif
++
+ #include <windows.h>
+ 
+ /*
+@@ -105,17 +115,17 @@
+ /*
+ extern variables
+ */
+-extern char *rl_line_buffer;
+-extern char *rl_prompt;
+-extern int rl_point;
+-extern int rl_attempted_completion_over;
+-extern int rl_completion_append_character;
+-extern const char rl_basic_word_break_characters[];
+-extern const char *rl_completer_word_break_characters;
+-extern const char *rl_readline_name;
+-extern rl_completion_func_t *rl_attempted_completion_function;
+-extern rl_compentry_func_t *rl_completion_entry_function;
+-extern rl_compentryfree_func_t *rl_user_completion_entry_free_function;
++extern LIBRARY_API char *rl_line_buffer;
++extern LIBRARY_API char *rl_prompt;
++extern LIBRARY_API int rl_point;
++extern LIBRARY_API int rl_attempted_completion_over;
++extern LIBRARY_API int rl_completion_append_character;
++extern LIBRARY_API const char rl_basic_word_break_characters[];
++extern LIBRARY_API const char *rl_completer_word_break_characters;
++extern LIBRARY_API const char *rl_readline_name;
++extern LIBRARY_API rl_completion_func_t *rl_attempted_completion_function;
++extern LIBRARY_API rl_compentry_func_t *rl_completion_entry_function;
++extern LIBRARY_API rl_compentryfree_func_t *rl_user_completion_entry_free_function;
+ 
+ #ifdef __cplusplus
+ }
