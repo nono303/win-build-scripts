@@ -129,6 +129,7 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--with-libavif=shared ^
 	--with-xsl=shared ^
 	--with-gmp=shared ^
+	--enable-zstd=shared ^
 	%PHP_LIBXML_CONFIG% ^
 	%ZTS% ^
 	%phpveropts% ^
@@ -199,6 +200,8 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	call do_php %PATH_UTILS%\sub\version.php pecl-text-xdiff %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_xdiff.dll "php:%PHPVER% build:%TSNTS%"
 	call %PATH_MODULES_COMMON%\init.bat php-ext-brotli varonly
 	call do_php %PATH_UTILS%\sub\version.php php-ext-brotli %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_brotli.dll "php:%PHPVER% build:%TSNTS%"
+	call %PATH_MODULES_COMMON%\init.bat php-ext-zstd varonly
+	call do_php %PATH_UTILS%\sub\version.php php-ext-zstd %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_zstd.dll "php:%PHPVER% build:%TSNTS%"
 	call %PATH_MODULES_COMMON%\init.bat php-geos varonly
 	call do_php %PATH_UTILS%\sub\version.php php-geos %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_geos.dll "php:%PHPVER% build:%TSNTS%"
 	call %PATH_MODULES_COMMON%\init.bat xdebug varonly
