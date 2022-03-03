@@ -8,16 +8,10 @@ call %PATH_BIN_CYGWIN%\rm.exe -rdf  *
 cd /D %PHP_SRC_DIR%
 call buildconf
 
-	REM ~~~~~~~~~~~~ Patch some stuff in this shity configure.js, accoring to self made deps
-
-REM STATIC
+	REM ~~~~~~~~~~~~ Patch some lib name, accoring to self made SHARED deps
 
 	REM edit
-sed -i 's/edit_a.lib;edit.lib/edit_static.lib/g' %CYGPATH_SRC%/php-src/configure.js
-
-
-REM SHARED
-
+sed -i 's/edit_a.lib;edit.lib/edit.lib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM webp
 sed -i 's/libwebp.lib/webp.lib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM gmp - shared
