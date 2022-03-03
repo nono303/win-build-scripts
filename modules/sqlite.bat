@@ -2,43 +2,45 @@
 
 for %%C in ("-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" "-DBUILD_SHARED_LIBS=ON -DBUILD_SHELL=OFF") do (
 	call %PATH_MODULES_COMMON%\init.bat %1 cmake
-		REM patch PHP - https://github.com/storesafe/cordova-sqlite-storage/issues/906
-		REM sqlite_statement.obj : error LNK2001: unresolved external symbol sqlite3_column_table_name / sqlite3_column_decltype
-	sed -i 's/SQLITE_OMIT_DECLTYPE/SQLITE_ENABLE_COLUMN_METADATA/g' %CYGPATH_SRC%/%1/CMakeLists.txt
-		REM ICU include
-	sed -i 's/INSTALL_INTERFACE:include^>/INSTALL_INTERFACE:include^> %PATH_INSTALL:\=\\/%\/include/g' %CYGPATH_SRC%/%1/CMakeLists.txt
 		REM dirty !! https://stackoverflow.com/questions/9556676/batch-file-how-to-replace-equal-signs-and-a-string-variable
 	set CUR=%%C
 	setlocal enabledelayedexpansion
 	set new=!CUR:"=!
 
+		REM ICU include
+	sed -i 's/INSTALL_INTERFACE:include^>/INSTALL_INTERFACE:include^> %PATH_INSTALL:\=\\/%\/include/g' %CYGPATH_SRC%/%1/CMakeLists.txt
 	if %%C =="-DBUILD_SHARED_LIBS=ON -DBUILD_SHELL=OFF" (
 		sed -i 's/STATIC sqlite3.c/SHARED sqlite3.c/g' %CYGPATH_SRC%/%1/CMakeLists.txt
 	) else (
 		sed -i 's/OUTPUT_NAME   sqlite3/OUTPUT_NAME   sqlite3_static/g' %CYGPATH_SRC%/%1/CMakeLists.txt
 	)
 
+	REM -DSQLITE_ENABLE_COLUMN_METADATA=ON -DSQLITE_OMIT_DECLTYPE=OFF 
+		REM https://github.com/storesafe/cordova-sqlite-storage/issues/906
+		REM PHP: sqlite_statement.obj : error LNK2001: unresolved external symbol sqlite3_column_table_name / sqlite3_column_decltype
 	cmake %CMAKE_OPTS% ^
-	-DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
-	-DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
-	-DSQLITE_ENABLE_DBSTAT_VTAB=ON ^
-	-DSQLITE_ENABLE_FTS3=ON ^
-	-DSQLITE_ENABLE_FTS4=ON ^
-	-DSQLITE_ENABLE_FTS5=ON ^
-	-DSQLITE_ENABLE_GEOPOLY=ON ^
-	-DSQLITE_ENABLE_ICU=ON ^
-	-DSQLITE_ENABLE_JSON1=ON ^
-	-DSQLITE_ENABLE_MATH_FUNCTIONS=ON ^
-	-DSQLITE_ENABLE_RBU=ON ^
-	-DSQLITE_ENABLE_RTREE=ON ^
-	-DSQLITE_ENABLE_STAT4=ON ^
-	-DSQLITE_USE_URI=ON ^
-	-DSQLITE_RECOMMENDED_OPTIONS=ON ^
-	!new! ^
-	%PATH_SRC%\%1
+		-DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
+		-DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
+		-DSQLITE_ENABLE_COLUMN_METADATA=ON ^
+		-DSQLITE_OMIT_DECLTYPE=OFF ^
+		-DSQLITE_ENABLE_DBSTAT_VTAB=ON ^
+		-DSQLITE_ENABLE_FTS3=ON ^
+		-DSQLITE_ENABLE_FTS4=ON ^
+		-DSQLITE_ENABLE_FTS5=ON ^
+		-DSQLITE_ENABLE_GEOPOLY=ON ^
+		-DSQLITE_ENABLE_ICU=ON ^
+		-DSQLITE_ENABLE_MATH_FUNCTIONS=ON ^
+		-DSQLITE_ENABLE_RBU=ON ^
+		-DSQLITE_ENABLE_RTREE=ON ^
+		-DSQLITE_ENABLE_STAT4=ON ^
+		-DSQLITE_OMIT_JSON=OFF ^
+		-DSQLITE_USE_URI=OFF ^
+		-DSQLITE_RECOMMENDED_OPTIONS=ON ^
+		!new! ^
+		%PATH_SRC%\%1
 
 	%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
-		REM ICU  lib
+		REM ICU lib
 	sed -i 's/LINK_LIBRARIES =/LINK_LIBRARIES = %PATH_INSTALL:\=\\/%\/lib\/icuuc.lib %PATH_INSTALL:\=\\/%\/lib\/icuin.lib/g' %CYGPATH_BUILD%/%1/build.ninja	
 
 	if %%C =="-DBUILD_SHARED_LIBS=OFF -DBUILD_SHELL=ON" (
