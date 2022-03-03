@@ -78,7 +78,7 @@ git checkout tags/2.4.52
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout cldr/2022-02-23
+git checkout tags/cldr/2022-02-23
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -186,7 +186,7 @@ git checkout tags/v5.4.4
 cd /D ..
 git clone https://github.com/nono303/mapsforgesrv.git mapsforgesrv
 cd /D mapsforgesrv
-git checkout tags/0.17.2
+git checkout master
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
@@ -194,7 +194,7 @@ git checkout tags/1.6.14
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2663
+svn update -r 2664
 cd /D ..
 git clone https://github.com/JBlond/mod_bikeshed.git mod_bikeshed
 cd /D mod_bikeshed
@@ -238,7 +238,7 @@ git checkout tags/v0.2.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v0.2.0
+git checkout tags/v0.2.1
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -272,6 +272,10 @@ git clone https://github.com/kjdev/php-ext-brotli.git php-ext-brotli
 cd /D php-ext-brotli
 git checkout tags/0.13.1
 cd /D ..
+git clone https://github.com/kjdev/php-ext-zstd.git php-ext-zstd
+cd /D php-ext-zstd
+git checkout tags/0.11.0
+cd /D ..
 git clone https://github.com/ModelTech/php-geos php-geos
 cd /D php-geos
 git checkout master
@@ -286,7 +290,7 @@ git checkout tags/php-8.1.3
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
-git checkout tags/8.2.1
+git checkout tags/9.0.0
 cd /D ..
 git clone https://github.com/nono303/simpleDLNA.git sdlna
 cd /D sdlna
@@ -298,7 +302,7 @@ git checkout trunk
 cd /D ..
 git clone https://github.com/azadkuh/sqlite-amalgamation sqlite
 cd /D sqlite
-git checkout tags/3.37.2
+git checkout tags/3.38.0
 cd /D ..
 git clone https://github.com/apache/subversion.git subversion
 cd /D subversion
