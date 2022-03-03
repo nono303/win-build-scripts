@@ -103,7 +103,7 @@
 				}
 				if(VERBOSE) echo $cmd.PHP_EOL;
 				if(GIT_GC){
-					echo execnono($cmd = "git reflog expire --all --expire=now",NULL,$repo,NULL);
+					echo execnono($cmd = "git reflog expire --all --expire=now --expire-unreachable=now",NULL,$repo,NULL);
 					if(VERBOSE) echo $cmd.PHP_EOL;
 					echo execnono($cmd = "git gc --prune=now --aggressive",NULL,$repo,NULL);
 					if(VERBOSE) echo $cmd.PHP_EOL;
