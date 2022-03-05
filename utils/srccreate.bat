@@ -110,7 +110,7 @@ git checkout tags/release-2.1.12-stable
 cd /D ..
 git clone https://github.com/libexpat/libexpat.git libexpat
 cd /D libexpat
-git checkout tags/R_2_4_6
+git checkout tags/R_2_4_7
 cd /D ..
 git clone https://github.com/nono303/libffi.git libffi
 cd /D libffi

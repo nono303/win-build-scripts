@@ -25,7 +25,7 @@
 | [libdeflate](https://github.com/ebiggers/libdeflate.git) | 1.10 |
 | [libev](https://git.lighttpd.net/libev) | 4.33 |
 | [libevent](https://github.com/libevent/libevent) | 2.1.12 |
-| [libexpat](https://github.com/libexpat/libexpat) | 2.4.6 |
+| [libexpat](https://github.com/libexpat/libexpat) | 2.4.7 |
 | [libffi](https://github.com/nono303/libffi) - _[upstream + src](https://github.com/libffi/libffi)_ | 3.4.2 |
 | [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.17.0 |
 | [libiconv](https://github.com/winlibs/libiconv) | 1.16.1 |
