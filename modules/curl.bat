@@ -47,6 +47,8 @@ cmake ^
 	-DOPENSSL_INCLUDE_DIR=%PATH_INSTALL%\include ^
 	-DLIBSSH2_LIBRARY=%PATH_INSTALL%\lib\libssh2.lib ^
 	-DLIBSSH2_INCLUDE_DIR=%PATH_INSTALL%\include ^
+	-DHAVE_LDAP_SSL=ON ^
+	-DCURL_STATIC_CRT=OFF ^
 	%QUIC% ^
 	%PATH_SRC%\%1
 
@@ -64,4 +66,5 @@ for %%E in (libcurl.dll curl.exe) do (
 	REM KO -- Found CURL: C:/sdk/release/vs17_x64-avx/lib/cmake/CURL/CURLConfig.cmake (found version "7.81.0-DEV")
 	REM OK -- Found CURL: C:/sdk/release/vs17_x64-avx/lib/libcurl_imp.lib (found version "7.81.0-DEV")
 rmdir /S /Q %PATH_INSTALL%\lib\cmake\CURL
+DEL /Q /F %PATH_INSTALL%\bin\curl-config
 curl https://curl.se/ca/cacert.pem -o %PATH_INSTALL%\bin\curl-ca-bundle.crt

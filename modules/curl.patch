@@ -1,17 +1,3 @@
-diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
-index 125b0a02b..e60127cb1 100644
---- "a/CMakeLists.txt"
-+++ "b/CMakeLists.txt"
-@@ -528,7 +528,7 @@ endfunction()
- option(USE_NGTCP2 "Use ngtcp2 and nghttp3 libraries for HTTP/3 support" OFF)
- if(USE_NGTCP2)
-   if(USE_OPENSSL)
--    find_package(NGTCP2 REQUIRED OpenSSL)
-+    find_package(NGTCP2 REQUIRED)
-     CheckQuicSupportInOpenSSL()
-   elseif(USE_GNUTLS)
-     # TODO add GnuTLS support as vtls library.
-
 diff --git a/lib/url.c b/lib/url.c
 index c02d2c201..f5705c94b 100644
 --- a/lib/url.c
