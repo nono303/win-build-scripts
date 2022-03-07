@@ -47,7 +47,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [Cygwin](https://cygwin.com/install.html)                    | x86  | 3.3.4   | `cyg32.packagelist` |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.3.4           | `cyg64.packagelist` |
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.10.2 |                     |
-| [Node.js](https://nodejs.org/en/download/current/) | x64 | 17.5.0 | |
+| [Node.js](https://nodejs.org/en/download/current/) | x64 | 17.6.0 | |
 | [OpenJDK](https://jdk.java.net/17/)                        | x64  | 17.0.2 |                     |
 | [Strawberry Perl](https://strawberryperl.com/releases.html) | x64  | 5.32.1.1 |                     |
 | [NASM](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.15.05        |                     |

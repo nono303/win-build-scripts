@@ -8,7 +8,7 @@
 | [brotli](https://github.com/google/brotli) | 1.0.9 |
 | [bzip2](https://gitlab.com/bzip2/bzip2.git) | 1.1.0 |
 | [cares](https://github.com/c-ares/c-ares) | 1.18.1 |
-| [curl](https://github.com/curl/curl) | 7.81.0 |
+| [curl](https://github.com/curl/curl) | 7.82.0 |
 | [dav1d](https://code.videolan.org/videolan/dav1d.git) | 0.9.2 |
 | [dependencies](https://github.com/lucasg/Dependencies) | 1.11.1 |
 | [freeglut](https://github.com/dcnieho/FreeGLUT.git) | 3.2.2 |
