@@ -97,7 +97,7 @@ index b11c57bc44..e4dfb70c4b 100644
 +    PHP_LIBXML = PHP_LIBXMLSHARED;
 +    PHP_LIBXML_SHARED = PHP_LIBXMLSHARED_SHARED;
 +	if (CHECK_LIB("libxml2.lib", "libxml") &&
-+	    CHECK_LIB("iconv.lib", "libxml") &&
++	    CHECK_LIB("libiconv.lib", "libxml") &&
 +		CHECK_LIB("liblzma.lib", "libxml") &&
 +		CHECK_LIB("icuuc.lib", "libxml") &&
 +		CHECK_HEADER_ADD_INCLUDE("libxml/threads.h", "CFLAGS_LIBXML", PHP_PHP_BUILD + "\\include\\libxml2") &&
@@ -113,7 +113,7 @@ index b11c57bc44..e4dfb70c4b 100644
 +	}
 +} else if (PHP_LIBXML == "yes") {
 +	if (CHECK_LIB("libxml2_a_dll.lib", "libxml") &&
-+	    CHECK_LIB("iconv.lib", "libxml") &&
++	    CHECK_LIB("libiconv.lib", "libxml") &&
 +		CHECK_LIB("liblzma.lib", "libxml") &&
 +		CHECK_LIB("icuuc.lib", "libxml") &&
 +		CHECK_HEADER_ADD_INCLUDE("libxml/parser.h", "CFLAGS_LIBXML", PHP_PHP_BUILD + "\\include\\libxml2") &&
