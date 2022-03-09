@@ -7,6 +7,7 @@
 	$pos = 1;
 	foreach (range('a', 'z') as $letter)
 		$letterpos[$letter] = $pos++;
+	$argv[1] = strtolower($argv[1]);
 	$proot = $argv[1];
 	if(in_array($proot,["mod_maxminddb","mod_fcgid","mod_h2","mod_md","mod_wku_bt","mod_h264_streaming"]))
 		$proot = "httpd";
