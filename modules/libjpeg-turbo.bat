@@ -25,7 +25,15 @@ for %%Y in (cmake_install.cmake build.ninja) do (sed -i 's/-static\./_static\./g
 for %%X in (dll pdb) do (
 	for %%Y in (sharedlib/cmake_install.cmake build.ninja) do (sed -i 's/jpeg8\.%%X/jpeg\.%%X/g' %CYGPATH_BUILD%/%1/%%Y)
 )
-%NINJA% install
-for %%E in (jpeg.lib CMakeFiles\jpeg_static.dir\jpeg_static.pdb CMakeFiles\turbojpeg_static.dir\turbojpeg_static.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%E %PATH_INSTALL%\lib\*)
-for %%E in (djpeg.pdb jpegtran.pdb rdjpgcom.pdb tjbench.pdb cjpeg.pdb wrjpgcom.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%E %PATH_INSTALL%\bin\*)
-for %%X in (turbojpeg.dll tjbench.exe rdjpgcom.exe wrjpgcom.exe jpeg.dll cjpeg.exe djpeg.exe jpegtran.exe wrjpgcom.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
+
+for %%X in (turbojpeg jpeg) do (
+	sed -i -E 's/TARGET_COMPILE_PDB.*/TARGET_COMPILE_PDB = %%X\.pdb/g' %CYGPATH_BUILD%/%1/build.ninja
+	%NINJA% %%X
+	move /Y %PATH_BUILD%\%1\%%X.lib %PATH_INSTALL%\lib\%%X.lib
+	for %%Y in (pdb dll) do (move /Y %PATH_BUILD%\%1\%%X.%%Y %PATH_INSTALL%\bin\%%X.%%Y)
+	del /S %PATH_BUILD%\%1\*.obj
+	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X.dll
+)
+for %%X in (%PATH_BUILD%\%1\jconfig.h %PATH_SRC%\%1\jerror.h %PATH_SRC%\%1\jmorecfg.h %PATH_SRC%\%1\jpeglib.h %PATH_SRC%\%1\turbojpeg.h) do (
+	xcopy /C /F /Y %%X %PATH_INSTALL%\include\*
+)

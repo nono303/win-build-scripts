@@ -8,9 +8,9 @@ cmake %CMAKE_OPTS% ^
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 sed -i 's/-GS -W4 -wd4251 -wd4275/\/Zc:inline \/EHsc -w/g' %CYGPATH_BUILD%/%1/build.ninja
-%NINJA%
+%NINJA% libev.dll
 
-for %%X in (libev_static.lib libev.lib CMakeFiles\libev_static.dir\libev_static.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\lib\*)
 for %%X in (pdb dll) do (xcopy /C /F /Y %PATH_BUILD%\%1\libev.%%X %PATH_INSTALL%\bin\*)
+xcopy /C /F /Y %PATH_BUILD%\%1\libev.lib %PATH_INSTALL%\lib\*
 xcopy /C /F /Y %PATH_SRC%\%1\ev.h %PATH_INSTALL%\include\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%1.dll

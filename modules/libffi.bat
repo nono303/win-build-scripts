@@ -5,17 +5,13 @@ set VCDIR=msvc_build
 
 if %ARCH% == x86 (sed -i 's/X86_WIN64/X86_WIN32/g' %CYGPATH_SRC%/%1/msvc_build/include/ffi.h)
 
-for %%D in (static dynamic) do (
-	MSBuild.exe %PATH_SRC%\%1\%VCDIR%\Ffi_staticLib.sln ^
-	%MSBUILD_OPTS% ^
-	/nowarn:C4018,C4102,C4013 ^
-	/p:Configuration=%%D-Release ^
-	/p:Platform="%archmsbuild%"
-)
+MSBuild.exe %PATH_SRC%\%1\%VCDIR%\Ffi_staticLib.sln ^
+%MSBUILD_OPTS% ^
+/nowarn:C4018,C4102,C4013 ^
+/p:Configuration=dynamic-Release ^
+/p:Platform="%archmsbuild%"
 
-for %%D in (libffi.lib libffi_static.lib libffi_static.pdb) do (
-	for /F "delims=" %%I in ('dir /a:-D /s /b %PATH_SRC%\%1\%VCDIR%\out\%%D') do (xcopy /C /F /Y %%I %PATH_INSTALL%\lib\*)
-)
+for /F "delims=" %%I in ('dir /a:-D /s /b %PATH_SRC%\%1\%VCDIR%\out\libffi.lib') do (xcopy /C /F /Y %%I %PATH_INSTALL%\lib\*)
 for %%D in (libffi.dll libffi.pdb) do (
 	for /F "delims=" %%I in ('dir /a:-D /s /b %PATH_SRC%\%1\%VCDIR%\out\%%D') do (xcopy /C /F /Y %%I %PATH_INSTALL%\bin\*)
 )

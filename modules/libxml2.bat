@@ -1,7 +1,7 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1
 
 cd /D win32
-for %%X in (libxml2_a_dll libxml2_a) do (
+for %%X in (libxml2_a_dll libxml) do (
 	cscript /nologo /e:jscript configure.js ^
 	trio=no ^
 	threads=native ^
@@ -46,6 +46,7 @@ for %%X in (libxml2_a_dll libxml2_a) do (
 	include=%PATH_INSTALL%\include ^
 	lib=%PATH_INSTALL%\lib
 
+	sed -i 's/iconv.lib/libiconv\.lib/g'  %CYGPATH_SRC%/%1/win32/Makefile
 	sed -i 's/LDFLAGS = \/nologo/LDFLAGS = \/nologo \/LTCG \/OPT:ICF,REF \/DEBUG/g'  %CYGPATH_SRC%/%1/win32/Makefile
 	sed -i 's/ARFLAGS = \/nologo/ARFLAGS = \/nologo \/LTCG/g'  %CYGPATH_SRC%/%1/win32/Makefile
 	sed -i 's/Z7/Zi/g'  %CYGPATH_SRC%/%1/win32/Makefile
@@ -57,7 +58,8 @@ for %%X in (libxml2_a_dll libxml2_a) do (
 	nmake %NMAKE_OPTS% /f Makefile %%X
 )
 
-nmake %NMAKE_OPTS% /f Makefile install-dist
-xcopy /C /F /Y %PATH_SRC%\%1\win32\bin.msvc\libxml2.pdb %PATH_INSTALL%\bin\*
-for %%X in (libxml2_a.pdb libxml2_a_dll.pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\win32\%%X %PATH_INSTALL%\lib\*)
-for %%X in (libxml2.dll xmlcatalog.exe xmllint.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
+if not exist %PATH_INSTALL%\include\libxml2\libxml\. md %PATH_INSTALL%\include\libxml2\libxml\
+xcopy /C /F /Y %PATH_SRC%\%1\include\libxml\*.h %PATH_INSTALL%\include\libxml2\libxml\*
+for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\win32\bin.msvc\libxml2.%%X %PATH_INSTALL%\bin\*)
+for %%X in (win32\libxml2_a_dll.pdb win32\bin.msvc\libxml2.lib win32\bin.msvc\libxml2_a_dll.lib) do (xcopy /C /F /Y %PATH_SRC%\%1\%%X %PATH_INSTALL%\lib\*)
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libxml2.dll

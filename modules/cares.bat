@@ -7,7 +7,7 @@ cd /D %PATH_BUILD%\%1
 cmake %CMAKE_OPTS% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
--DCARES_STATIC=ON ^
+-DCARES_STATIC=OFF ^
 -DCARES_SHARED=ON ^
 -DCARES_INSTALL=ON ^
 -DCARES_STATIC_PIC=OFF ^
@@ -18,6 +18,5 @@ cmake %CMAKE_OPTS% ^
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% install
 
-move /Y %PATH_INSTALL%\bin\cares_static.pdb %PATH_INSTALL%\lib
 for %%X in (cares acountry adig ahost) do (xcopy /C /F /Y %PATH_BUILD%\%1\bin\%%X.pdb %PATH_INSTALL%\bin\*)
 for %%X in (cares.dll acountry.exe adig.exe ahost.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
