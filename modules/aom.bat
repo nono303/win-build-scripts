@@ -21,7 +21,7 @@ MSBuild.exe %PATH_BUILD%\%1\%VCDIR%\AOM.sln ^
 	/p:Platform="%archmsbuild%"
 
 xcopy /C /F /Y %PATH_BUILD%\%1\%AOMCONF%\aom.lib %PATH_INSTALL%\lib\*
-for %%X in (aom.pdb aom.dll) do (xcopy /C /F /Y  %PATH_BUILD%\%1\%AOMCONF%\%%X %PATH_INSTALL%\bin\*)
+for %%X in (pdb dll) do (xcopy /C /F /Y  %PATH_BUILD%\%1\%AOMCONF%\aom.%%X %PATH_INSTALL%\bin\*)
 if not exist %PATH_INSTALL%\include\aom\. mkdir %PATH_INSTALL%\include\aom
 xcopy /C /F /Y  %PATH_SRC%\%1\aom\*.h %PATH_INSTALL%\include\aom\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\aom.dll
