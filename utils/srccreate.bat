@@ -74,7 +74,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
-git checkout tags/2.4.52
+git checkout tags/2.4.53-rc1-candidate
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
@@ -252,9 +252,9 @@ git clone https://github.com/quictls/openssl openssl-quic
 cd /D openssl-quic
 git checkout openssl-3.0.1+quic
 cd /D ..
-git clone https://github.com/jwilk-mirrors/pcre pcre
-cd /D pcre
-git checkout tags/pcre-8.45
+git clone https://github.com/PhilipHazel/pcre2.git pcre2
+cd /D pcre2
+git checkout tags/pcre2-10.39
 cd /D ..
 git clone https://github.com/websupport-sk/pecl-memcache.git pecl-memcache
 cd /D pecl-memcache

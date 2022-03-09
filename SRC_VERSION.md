@@ -16,7 +16,7 @@
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52 |
 | [geos](https://github.com/libgeos/geos) | 3.10.2 |
 | [giflib](https://github.com/gongjianbo/GifLib) | 5.2.1 |
-| [httpd](https://github.com/apache/httpd) | 2.4.52 |
+| [httpd](https://github.com/apache/httpd) | 2.4.53.1 |
 | [icu](https://github.com/unicode-org/icu) | 70.1 - cldr/2022-02-23 |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.2.1 |
@@ -61,7 +61,7 @@
 | [nssm](https://github.com/puppetlabs/nssm) | 2.25 - a1c3260 |
 | [openssl](https://github.com/openssl/openssl) | 3.0.1 |
 | [openssl-quic](https://github.com/quictls/openssl) | 3.0.1 - ab8b87bdb4 |
-| [pcre](https://github.com/jwilk-mirrors/pcre) | 8.45 |
+| [pcre2](https://github.com/PhilipHazel/pcre2) | 10.39 |
 | [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | nbio_php8 - 8.1-dev - ccf702b |
 | [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1-dev - 2075a4d |
 | [php-cgi-spawner](https://github.com/deemru/php-cgi-spawner) | 1.1.23 - 90197af |
