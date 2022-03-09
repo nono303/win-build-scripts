@@ -14,7 +14,7 @@ Usage: go command [options]
       * liblzma
       * icu
       * libxml2
-      * pcre
+      * pcre2
       * libevent
       * libev
       * cares
