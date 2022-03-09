@@ -21,10 +21,11 @@ set PATH_PHP_SDK=%PATH_SRC%\php-sdk
 REM for junction on ramdrive
 set PATH_PHP_BUILD=R:\sdkbuild\php
 set PATH_SOFTS=%PATH_SDK_ROOT%\softs
-set PATH_ROOT_CYGWIN=%PATH_SOFTS%\cyg
+set PATH_ROOT_CYGWIN=%PATH_SOFTS%\cyg 
 
 REM ########################## RELEASE PATH
 set PATH_RELEASE=%PATH_SDK_ROOT%\release
+set DIR_LIB_UNUSED=lib_unused
 set PATH_RELEASE_SVN=D:\github\NONO_subversion
 	REM cygwin format
 set PATH_RELEASE_MEMCACHED=/cygdrive/d/github/NONO_memcached/libevent-2.1
