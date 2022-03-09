@@ -33,7 +33,7 @@ nmake %NMAKE_OPTS% /f Makefile.win ^
 	buildall install
 
 REM pdb & lib are not build in same folder according to ARCH...
-for %%D in (apr\apr-1.pdb apr-util\aprutil-1.pdb apr-iconv\apriconv-1.pdb apr-util\crypto\apr_crypto_openssl-1.lib apr-util\dbd\apr_dbd_odbc-1.lib apr-util\dbd\apr_dbd_sqlite3-1.lib apr-util\ldap\apr_ldap-1.lib apr-iconv\libapriconv-1.lib) do (
+for %%D in (apr\apr-1.pdb apr-util\aprutil-1.pdb apr-iconv\apriconv-1.pdb apr-iconv\apriconv-1.lib apr-util\crypto\apr_crypto_openssl-1.lib apr-util\dbd\apr_dbd_odbc-1.lib apr-util\dbd\apr_dbd_sqlite3-1.lib apr-util\ldap\apr_ldap-1.lib apr-iconv\libapriconv-1.lib) do (
 	for /F "delims=" %%I in ('dir /a:-D /s /b %PATH_SRC%\%%D') do (xcopy /C /F /Y %%I %PATH_INSTALL%\lib\*)
 )
 
@@ -54,4 +54,7 @@ call %PATH_MODULES_COMMON%\init.bat apr-iconv varonly
 call do_php %PATH_UTILS%\sub\version.php apr-iconv %PATH_INSTALL%\bin\libapriconv-1.dll
 for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\bin\iconv\*.so /b') do (
 	call do_php %PATH_UTILS%\sub\version.php apr-iconv %PATH_INSTALL%\bin\iconv\%%G
+)
+for %%D in (apr-1.lib apr-1.pdb apriconv-1.lib apriconv-1.pdb aprutil-1.lib aprutil-1.pdb) do (
+	move /Y %PATH_INSTALL%\lib\%%D %PATH_INSTALL%\%%DIR_LIB_UNUSED%%
 )
