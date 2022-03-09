@@ -43,7 +43,10 @@
 					}
 				}
 			}
-			if(sizeof($pdbordlllist[$k]) > 0){
+			if(
+				sizeof($pdbordlllist[$k]) > 0 
+				&& ($k == "dll" && !is_int(strpos($argv[1],pathenv("DIR_LIB_UNUSED")))) 
+			) {
 				echo "\033[96m# ".strtoupper($k)." WITH NO LIB\033[39m".PHP_EOL;
 				foreach($pdbordlllist[$k] as $unused)
 					echo "\t\033[96m".$unused."\033[39m".PHP_EOL;
