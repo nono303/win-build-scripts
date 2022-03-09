@@ -1,9 +1,9 @@
 @echo off
 set BININFO_LOG=%PATH_LOGS%\%1_%MSVC_DEPS%-%ARCH%%AVXB%_%ymdhis%.csv
 if %QUIC_BUILD% == 1 (
-	set NBBIN=272
+	set NBBIN=256
 ) else (
-	set NBBIN=266
+	set NBBIN=250
 )
 if exist %2\. (
 	call do_php %PATH_UTILS%\sub\%1.php %2 %BININFO_LOG:\=/% %2 %3 %4 %5 %6 %7 %8
