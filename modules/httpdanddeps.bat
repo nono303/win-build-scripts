@@ -9,7 +9,7 @@ call %PATH_BATCH%\go.bat libiconv NOLOG
 call %PATH_BATCH%\go.bat liblzma NOLOG
 call %PATH_BATCH%\go.bat icu NOLOG
 call %PATH_BATCH%\go.bat libxml2 NOLOG
-call %PATH_BATCH%\go.bat pcre NOLOG
+call %PATH_BATCH%\go.bat pcre2 NOLOG
 call %PATH_BATCH%\go.bat libevent NOLOG
 call %PATH_BATCH%\go.bat libev NOLOG
 call %PATH_BATCH%\go.bat cares NOLOG
