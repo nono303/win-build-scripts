@@ -16,6 +16,7 @@ cmake %CMAKE_OPTS% ^
 	-DBUILD_DOC=OFF ^
 	-DLIBLZMA_INCLUDE_DIR=%PATH_INSTALL%\include ^
 	-DZstd_LIBRARY=%PATH_INSTALL%\lib\zstd.lib ^
+	-DZLIB_LIBRARY=%PATH_INSTALL%\lib\zlib.lib ^
 	-DZstd_INCLUDE_DIR=%PATH_INSTALL%\include ^
 	%PATH_SRC%\%1
 
@@ -25,4 +26,4 @@ cmake %CMAKE_OPTS% ^
 xcopy /C /F /Y %PATH_BUILD%\%1\src\*.pdb %PATH_INSTALL%\bin\*
 xcopy /C /F /Y %PATH_BUILD%\%1\lib\*.pdb %PATH_INSTALL%\bin\*
 
-for %%D in (zip.dll zipcmp.exe zipmerge.exe ziptool.exe) do (call do_php %PATH_UTILS%\sub\version.php apr-util %PATH_INSTALL%\bin\%%D)
+for %%D in (zip.dll zipcmp.exe zipmerge.exe ziptool.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%D)
