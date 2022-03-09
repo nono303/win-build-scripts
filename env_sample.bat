@@ -107,6 +107,7 @@ set NMAKE_OPTS_DBG=/NOLOGO
 set NMAKE_OPTS_REL=/S %NMAKE_OPTS_DBG%
 
 set MSBUILD_OPTS_COM=/nologo ^
+	/nr:false ^
 	/m:%NUMBER_OF_PROCESSORS% ^
 	/p:Turbo=true ^
 	/p:CL_MPCount=%NUMBER_OF_PROCESSORS% ^
