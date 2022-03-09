@@ -30,3 +30,4 @@ for %%X in (libyuv.dll yuvconvert.exe) do (
 if not exist %PATH_INSTALL%\include\editline\. mkdir %PATH_INSTALL%\include\libyuv
 xcopy /C /F /Y %PATH_SRC%\%1\include\libyuv.h %PATH_INSTALL%\include\*
 xcopy /C /F /Y %PATH_SRC%\%1\include\libyuv\*.h %PATH_INSTALL%\include\libyuv\*
+move /Y %PATH_INSTALL%\lib\*_static.* %PATH_INSTALL%\%DIR_LIB_UNUSED%
