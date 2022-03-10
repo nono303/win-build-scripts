@@ -1,9 +1,9 @@
 Usage: go command [options]
 ---------------------------
 - build command:
-  * all
+  * full
     * clean
-    * httpdanddeps
+    * [httpdanddeps]
       * brotli
       * jansson
       * bzip2
@@ -29,7 +29,7 @@ Usage: go command [options]
       * apr
       * lua
       * httpd
-    * phpanddeps
+    * [phpanddeps]
       * wineditline
       * zstd
       * libzip
@@ -56,10 +56,10 @@ Usage: go command [options]
       * mpir
       * libxslt
       * php
-    * subversionanddeps
+    * [subversionanddeps]
       * serf
       * subversion
-    * projgeolibanddeps
+    * [projgeolibanddeps]
       * proj
       * geographiclib
     * nssm
@@ -70,6 +70,10 @@ Usage: go command [options]
   * mobac
   * sdlna
   * verpatch
+- build full:
+    no param:    build ALL modules in the order listed above
+    _xx_anddeps: build ONLY _xx_ and all submodule required for _xx_ {httpdanddeps, phpanddeps, subversionanddeps, projgeolibanddeps}
+    module :     build FROM module in the order listed above
 - build options:
     all:     build 'command' for all target combinations (vc15, vs16, vs17 / x86, x64 / sse2, avx)
     nolog:   don't tee stderr & stdout to a logfile in %PATH_LOGS% (...and show console colors)
