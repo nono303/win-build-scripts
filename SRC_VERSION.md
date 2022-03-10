@@ -2,9 +2,9 @@
 | ---- | ---- |
 | [abseil-cpp](https://github.com/abseil/abseil-cpp.git) | 20211102.rc2 |
 | [aom](https://aomedia.googlesource.com/aom) | v3.3.0 |
-| [apr](https://github.com/apache/apr) | 1.7.1-dev - 4bc244e2f |
+| [apr](https://github.com/apache/apr) | 1.7.1-dev - 63c68a409 |
 | [apr-iconv](https://github.com/apache/apr-iconv) | 1.2.2 |
-| [apr-util](https://github.com/apache/apr-util) | 1.7.0-dev - 5e143fa9 |
+| [apr-util](https://github.com/apache/apr-util) | 1.7.0-dev - 16eee54b |
 | [brotli](https://github.com/google/brotli) | 1.0.9 |
 | [bzip2](https://gitlab.com/bzip2/bzip2.git) | 1.1.0 |
 | [cares](https://github.com/c-ares/c-ares) | 1.18.1 |
@@ -16,7 +16,7 @@
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52 |
 | [geos](https://github.com/libgeos/geos) | 3.10.2 |
 | [giflib](https://github.com/gongjianbo/GifLib) | 5.2.1 |
-| [httpd](https://github.com/apache/httpd) | 2.4.53.1 |
+| [httpd](https://github.com/apache/httpd) | 2.4.53.2 |
 | [icu](https://github.com/unicode-org/icu) | 70.1 - cldr/2022-02-23 |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.2.1 |

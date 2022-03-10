@@ -74,7 +74,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
-git checkout tags/2.4.53-rc1-candidate
+git checkout tags/2.4.53-rc2-candidate
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
