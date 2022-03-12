@@ -1,3 +1,4 @@
+@echo off
 IF not [%2] == [] GOTO %2
 call %PATH_BATCH%\go.bat clean NOLOG
 :httpdanddeps
