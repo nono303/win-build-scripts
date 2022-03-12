@@ -39,10 +39,12 @@ if %CUR_DEBUG% == 1 (
 
 	REM ~~~~~~~~~~~~ LOGNAME
 call %PATH_MODULES_COMMON%\ymdhis.bat
+set PREFIXLOG=%1
+if %1 == full (IF not [%2] == [] (set PREFIXLOG=%1-%2))
 if %ARG_ALL% == 1 (
-	set LOGNAME=%PATH_LOGS%\%1_ALL_%ymdhis%.log
+	set LOGNAME=%PATH_LOGS%\%PREFIXLOG%_ALL_%ymdhis%.log
 ) else (
-	set LOGNAME=%PATH_LOGS%\%1_%MSVC_DEPS%-%ARCH%%AVXB%_%ymdhis%.log
+	set LOGNAME=%PATH_LOGS%\%PREFIXLOG%_%MSVC_DEPS%-%ARCH%%AVXB%_%ymdhis%.log
 )
 
 	REM ~~~~~~~~~~~~ FIND BATCH
