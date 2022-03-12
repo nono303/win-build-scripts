@@ -33,4 +33,3 @@ for %%X in (pcre2-8 pcre2-posix) do (
 )
 xcopy /C /F /Y %PATH_BUILD%\%1\pcre2grep.pdb %PATH_INSTALL%\bin\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\pcre2grep.exe
-del /Q /F %PATH_INSTALL%\bin\pcre2-config
