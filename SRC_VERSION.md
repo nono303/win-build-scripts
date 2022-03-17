@@ -16,7 +16,7 @@
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52 |
 | [geos](https://github.com/libgeos/geos) | 3.10.2 |
 | [giflib](https://github.com/gongjianbo/GifLib) | 5.2.1 |
-| [httpd](https://github.com/apache/httpd) | 2.4.53.2 |
+| [httpd](https://github.com/apache/httpd) | 2.4.53 |
 | [icu](https://github.com/unicode-org/icu) | 70.1 - cldr/2022-02-23 |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.2.1 |
@@ -41,7 +41,7 @@
 | [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.9.13 |
 | [libxpm](https://github.com/nono303/libxpm.git) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.13 |
 | [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.35 |
-| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1812 |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1813 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
 | [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | 0.17.2 |
@@ -59,8 +59,8 @@
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 0.2.0 |
 | [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 0.2.1 |
 | [nssm](https://github.com/puppetlabs/nssm) | 2.25 - a1c3260 |
-| [openssl](https://github.com/openssl/openssl) | 3.0.1 |
-| [openssl-quic](https://github.com/quictls/openssl) | 3.0.1 - ab8b87bdb4 |
+| [openssl](https://github.com/openssl/openssl) | 3.0.2 |
+| [openssl-quic](https://github.com/quictls/openssl) | 3.0.2 - 7f2ab56a2b |
 | [pcre2](https://github.com/PhilipHazel/pcre2) | 10.39 |
 | [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | nbio_php8 - 8.1-dev - ccf702b |
 | [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1-dev - 2075a4d |
@@ -69,7 +69,7 @@
 | [php-ext-zstd](https://github.com/kjdev/php-ext-zstd) | 0.11.0 |
 | [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1 - e4f9578 |
 | [php-sdk](https://github.com/php/php-sdk-binary-tools) | 2.2.1-dev - cc7c11a |
-| [php-src](https://github.com/php/php-src) | 8.1.3 |
+| [php-src](https://github.com/php/php-src) | 8.1.4 |
 | [proj](https://github.com/OSGeo/PROJ) | 9.0.0 |
 | [sdlna](https://github.com/nono303/simpleDLNA) - _[upstream + src](https://github.com/nmaier/simpleDLNA)_ | 1.0.3 |
 | [serf](https://github.com/apache/serf) | 1.4.0 - 1cb2ab7 |

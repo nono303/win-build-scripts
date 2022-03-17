@@ -74,7 +74,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
-git checkout tags/2.4.53-rc2-candidate
+git checkout tags/2.4.53
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
@@ -188,6 +188,10 @@ git clone https://github.com/nono303/mapsforgesrv.git mapsforgesrv
 cd /D mapsforgesrv
 git checkout master
 cd /D ..
+git clone https://github.com/telemaxx/mapsforgesrv.git mapsforgesrv.ori
+cd /D mapsforgesrv.ori
+git checkout master
+cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
 git checkout tags/1.6.14
@@ -246,11 +250,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/openssl/openssl openssl
 cd /D openssl
-git checkout tags/openssl-3.0.1
+git checkout tags/openssl-3.0.2
 cd /D ..
 git clone https://github.com/quictls/openssl openssl-quic
 cd /D openssl-quic
-git checkout openssl-3.0.1+quic
+git checkout openssl-3.0.2+quic
 cd /D ..
 git clone https://github.com/PhilipHazel/pcre2.git pcre2
 cd /D pcre2
@@ -286,7 +290,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.1.3
+git checkout tags/php-8.1.4
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
