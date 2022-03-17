@@ -56,5 +56,5 @@ for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\bin\iconv\*.so /b') do (
 	call do_php %PATH_UTILS%\sub\version.php apr-iconv %PATH_INSTALL%\bin\iconv\%%G
 )
 for %%D in (apr-1.lib apr-1.pdb apriconv-1.lib apriconv-1.pdb aprutil-1.lib aprutil-1.pdb) do (
-	move /Y %PATH_INSTALL%\lib\%%D %PATH_INSTALL%\%%DIR_LIB_UNUSED%%
+	move /Y %PATH_INSTALL%\lib\%%D %PATH_INSTALL%\%DIR_LIB_UNUSED%
 )
