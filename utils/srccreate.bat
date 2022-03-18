@@ -78,7 +78,7 @@ git checkout tags/2.4.53
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout tags/cldr/2022-02-23
+git checkout tags/release-71-rc
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson

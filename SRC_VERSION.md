@@ -17,7 +17,7 @@
 | [geos](https://github.com/libgeos/geos) | 3.10.2 |
 | [giflib](https://github.com/gongjianbo/GifLib) | 5.2.1 |
 | [httpd](https://github.com/apache/httpd) | 2.4.53 |
-| [icu](https://github.com/unicode-org/icu) | 70.1 - cldr/2022-02-23 |
+| [icu](https://github.com/unicode-org/icu) | release-71-rc |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.2.1 |
 | [lerc](https://github.com/Esri/lerc.git) | 3.0 |
