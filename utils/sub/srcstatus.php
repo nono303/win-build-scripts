@@ -18,7 +18,10 @@
 		"php-geos", 
 		"php-sdk", 
 		"serf", 
-		"verpatch"
+		"verpatch",
+		"mapsforgesrv",
+		"mapsforgesrv.ori",
+
 	];
 
 	if(in_array("gitcg", $argv)){
