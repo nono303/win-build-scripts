@@ -5,13 +5,17 @@ meson ^
 --prefix %PATH_INSTALL% ^
 --buildtype debugoptimized ^
 --default-library=shared ^
--Dfuzzing_engine=none ^
--Denable_tests=false ^
--Dtestdata_tests=false ^
--Denable_examples=false ^
+-Dbitdepths=8 ^
+-Denable_asm=true ^
 -Denable_tools=true ^
--Denable_avx512=false ^
--Denable_asm=false ^
+-Denable_examples=false ^
+-Denable_tests=false ^
+-Denable_docs=false ^
+-Dlogging=true ^
+-Dtestdata_tests=false ^
+-Dfuzzing_engine=none ^
+-Dstack_alignment=0 ^
+-Dxxhash_muxer=auto ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/meson.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
