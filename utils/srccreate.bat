@@ -46,7 +46,7 @@ git checkout tags/curl-7_82_0
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
-git checkout tags/0.9.2
+git checkout tags/1.0.0
 cd /D ..
 git clone https://github.com/lucasg/Dependencies.git dependencies
 cd /D dependencies
@@ -224,6 +224,10 @@ git clone https://github.com/icing/mod_md mod_md
 cd /D mod_md
 git checkout tags/v2.4.11
 cd /D ..
+svn co https://svn.code.sf.net/p/mod-qos/source/trunk/httpd_src/modules/qos mod_qos
+cd /D mod_qos
+svn update -r 2647
+cd /D ..
 git clone https://github.com/nono303/mod_whatkilledus mod_wku_bt
 cd /D mod_wku_bt
 git checkout tags/2.0.2
@@ -255,6 +259,10 @@ cd /D ..
 git clone https://github.com/quictls/openssl openssl-quic
 cd /D openssl-quic
 git checkout openssl-3.0.2+quic
+cd /D ..
+git clone https://github.com/jwilk-mirrors/pcre.git pcre
+cd /D pcre
+git checkout tags/8.45
 cd /D ..
 git clone https://github.com/PhilipHazel/pcre2.git pcre2
 cd /D pcre2

@@ -14,6 +14,8 @@
 	if(in_array($proot,["pecl-memcache","php-geos","pecl-text-xdiff","php-ext-brotli","xdebug","php-src"]))
 		$proot = "php";
 	$nogit = array(
+		"mod_qos"			=> ['/g_revision\[\] = "([0-9\.]+)/s',
+							pathenv("PATH_SRC")."/".$argv[1]."/mod_qos.c"],
 		"giflib"			=> ['/giflib VERSION ([0-9\.]+)/s',
 							pathenv("PATH_SRC")."/".$argv[1]."/5.2.1/CMakeLists.txt"],
 		"mpir"				=> ['/#define _MSC_MPIR_VERSION "([0-9\.]+)"/s',

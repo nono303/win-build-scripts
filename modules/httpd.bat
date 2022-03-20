@@ -10,9 +10,7 @@ cmake %CMAKE_OPTS% ^
 -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
 -DINSTALL_PDB=ON ^
 -DINSTALL_MANUAL=OFF ^
--DENABLE_SOCACHE_DC=O ^
--DENABLE_CHARSET_LITE=O ^
--DENABLE_MODULES=i ^
+-DENABLE_MODULES=A ^
 -DLUA_LIBRARIES=%PATH_INSTALL:\=/%/lib/liblua.lib ^
 -DLUA_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 -DLIBXML2_ICONV_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
@@ -51,7 +49,7 @@ for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\modules\*.so /b') do (
 )
 
 	REM ~~~~~~~~~~~ external modules -   mod_wku_bt 
-for %%X in (mod_maxminddb mod_fcgid mod_h264_streaming mod_md) do (
+for %%X in (mod_maxminddb mod_fcgid mod_h264_streaming mod_md mod_qos) do (
 	call %PATH_MODULES_COMMON%\init.bat %%X varonly
 	call do_php %PATH_UTILS%\sub\version.php %%X %PATH_INSTALL%\modules\%%X.so "httpd:%HTTPD_VERSION%"
 )
