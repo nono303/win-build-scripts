@@ -21,6 +21,5 @@ cmake %CMAKE_OPTS% ^
 
 for %%X in (lib\ngtcp2.pdb crypto\openssl\ngtcp2_crypto_openssl.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*)
 for %%X in (ngtcp2 ngtcp2_crypto_openssl) do (
-	move /Y %PATH_INSTALL%\lib\%%X.dll %PATH_INSTALL%\bin\%%X.dll
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X.dll
 )
