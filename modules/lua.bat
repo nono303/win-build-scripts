@@ -37,8 +37,8 @@ lbaselib.c
 
 ren lua.obj lua.o
 
-link /LTCG /OPT:REF,ICF /DEBUG /DLL /IMPLIB:liblua.lib	/OUT:liblua.dll *.obj
-link /LTCG /OPT:REF,ICF /DEBUG				/OUT:lua.exe lua.o liblua.lib
+link /NOLOGO /LTCG /OPT:REF,ICF /DEBUG /DLL /IMPLIB:liblua.lib	/OUT:liblua.dll *.obj
+link /NOLOGO /LTCG /OPT:REF,ICF /DEBUG				/OUT:lua.exe lua.o liblua.lib
 
 for %%X in (obj exp o) do (del /Q /F *.%%X)
 
