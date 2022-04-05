@@ -31,3 +31,6 @@ if not exist %PATH_INSTALL%\include\editline\. mkdir %PATH_INSTALL%\include\liby
 xcopy /C /F /Y %PATH_SRC%\%1\include\libyuv.h %PATH_INSTALL%\include\*
 xcopy /C /F /Y %PATH_SRC%\%1\include\libyuv\*.h %PATH_INSTALL%\include\libyuv\*
 move /Y %PATH_INSTALL%\lib\*_static.* %PATH_INSTALL%\%DIR_LIB_UNUSED%
+
+	REM fix 'C:\sdk\release\vs17_x64-avx\include\libyuv/scale.h(224): warning C4115: 'libyuv': named type definition in parentheses' for libavif
+sed -i 's/libyuv::FilterMode/FilterMode/g' %PATH_INSTALL%/include/libyuv/scale.h
