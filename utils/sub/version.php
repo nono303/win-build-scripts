@@ -125,19 +125,33 @@
 	} elseif(sizeof($argv) >= 3){
 		if(is_dir($cur = pathenv("PATH_SRC"))."/".$argv[1]){
 			$current = getVersion($cur,$argv[1]);
-			$rpdb = " /rpdb";
-			$descadd = "";
-			if($argv[3] == "norpdb"){
-				$rpdb = "";
-			} elseif($argv[3] != ""){
-				$descadd = " ".$argv[3];
-			}
+
 			if(pathenv("ARCH")){
 				$arch = pathenv("ARCH");
 			}elseif(pathenv("PHP_SDK_ARCH")){
 				$arch = pathenv("PHP_SDK_ARCH");
 			}
 			$description .= "arch:".$arch.pathenv("AVXB")." vcver:".pathenv("vcvars_ver")."[".pathenv("MSVC_DEPS")."]";
+
+			$rpdb = " /rpdb";
+			$descadd = "";
+			if($argv[3] == "norpdb"){
+				$rpdb = "";
+			} elseif($argv[3] == "memcached"){
+				$rpdb = "";
+				preg_match("/(libevent-[0-9]\.[0-9])/",$argv[2],$matches);
+				$libevent = str_replace("-",":",$matches[1]);
+				$gccver = end(explode(" ",explode("\n",shell_exec("gcc --version"))[0]));
+				if(is_int(strpos($argv[2],"\\x86\\")))
+					$arch = "x86";
+				if(is_int(strpos($argv[2],"\\x64\\")))
+					$arch = "x64";
+				if(is_int(strpos($argv[2],"-avx")))
+					$avx = "-avx";
+				$description = "arch:".$arch.$avx." gcc:".$gccver." ".$libevent;
+			} elseif($argv[3] != ""){
+				$descadd = " ".$argv[3];
+			}
 			if(pathenv("SCM_COMORREV"))
 				$description .= " commit:".pathenv("SCM_COMORREV");
 			if(pathenv("SCM_TAG"))
