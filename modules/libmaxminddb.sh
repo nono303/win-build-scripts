@@ -5,9 +5,6 @@ do
   sed -i -E 's/<PlatformToolset>[<]+/<VCToolsVersion>'$5'<\/VCToolsVersion><PlatformToolset>v'$3'/g' $i
   # Windows Kit
   sed -i -E 's/<WindowsTargetPlatformVersion>[<]+/<WindowsTargetPlatformVersion>'$4'/g' $i
-  # .NET
-  sed -i -E 's/<TargetFrameworkVersion>[<]+/<TargetFrameworkVersion>v'$6'/g' $i
-  sed -i -E 's/NETFramework,Version=["]+/NETFramework,Version=v'$6'/g' $i
   # C CXX Flags
   sed -i -E 's/<Optimization>[<]+/<Optimization>MaxSpeed/g' $i
   sed -i 's/<\/ClCompile>/<Optimization>MaxSpeed<\/Optimization><MultiProcessorCompilation>true<\/MultiProcessorCompilation>'$2'<\/ClCompile>/g' $i
