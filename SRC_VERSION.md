@@ -2,7 +2,7 @@
 | ---- | ---- |
 | [abseil-cpp](https://github.com/abseil/abseil-cpp.git) | 20211102.rc2 |
 | [aom](https://aomedia.googlesource.com/aom) | v3.3.0 |
-| [apr](https://github.com/apache/apr) | 1.7.1-dev - 63c68a409 |
+| [apr](https://github.com/apache/apr) | 1.8.0-dev - 7032ac5 |
 | [apr-iconv](https://github.com/apache/apr-iconv) | 1.2.2 |
 | [apr-util](https://github.com/apache/apr-util) | 1.7.0-dev - 16eee54b |
 | [brotli](https://github.com/google/brotli) | 1.0.9 |
