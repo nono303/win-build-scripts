@@ -3,7 +3,7 @@
 	REM fix internal libname
 sed -i 's/bz2-1/bz2/g' %PATH_SRC%/%1/libbz2.def
 
-cmake %CMAKE_OPTS% ^
+cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
 -DENABLE_WERROR=OFF ^

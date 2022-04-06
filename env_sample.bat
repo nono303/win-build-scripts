@@ -124,11 +124,11 @@ set MSBUILD_OPTS_REL=%MSBUILD_OPTS_COM% ^
 	/nowarn:MSB8012;C4244 ^
 	/v:m
 
-set CMAKE_OPTS_DBG=-G "Ninja"
-set CMAKE_OPTS_REL=-Wno-dev ^
-	%CMAKE_OPTS_DBG%
-	REM set CMAKE_BUILD_TYPE=Release
+set CMAKE_OPTS_DBG=
+set CMAKE_OPTS_REL=-Wno-dev
 set CMAKE_BUILD_TYPE=RelWithDebInfo
+set CMAKE_TGT_VS="Visual Studio 17 2022"
+set CMAKE_TGT_NINJA="Ninja"
 
 	REM for updating *.rc
 set RC_COPYRIGHT=https://github.com/nono303/win-build-scripts

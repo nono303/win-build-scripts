@@ -6,7 +6,7 @@ sed -i 's/tidy-static/tidy_a/g' %CYGPATH_SRC%/%1/CMakeLists.txt
 	REM shared rename
 sed -i 's/OUTPUT_NAME ${LIB_NAME} /OUTPUT_NAME lib${LIB_NAME} /g' %CYGPATH_SRC%/%1/CMakeLists.txt
 
-cmake %CMAKE_OPTS% ^
+cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
 -DBUILD_SHARED_LIB=ON ^

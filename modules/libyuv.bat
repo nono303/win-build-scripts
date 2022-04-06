@@ -1,8 +1,9 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
-REM ninja: error: build.ninja:993: multiple rules generate yuv.lib [-w dupbuild=err]
+	REM ninja: error: build.ninja:993: multiple rules generate yuv.lib [-w dupbuild=err]
 sed -i 's/ly_lib_name} )/ly_lib_name}_static \)/g' %CYGPATH_SRC%/%1/CMakeLists.txt
-cmake %CMAKE_OPTS% ^
+
+cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
 -DBUILD_SHARED_LIBS=1 ^
