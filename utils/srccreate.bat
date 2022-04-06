@@ -18,7 +18,7 @@ git checkout tags/v3.3.0-rc2
 cd /D ..
 git clone https://github.com/apache/apr.git apr
 cd /D apr
-git checkout 1.7.x
+git checkout 1.8.x
 cd /D ..
 git clone https://github.com/apache/apr-iconv apr-iconv
 cd /D apr-iconv
