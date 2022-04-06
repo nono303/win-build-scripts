@@ -7,12 +7,12 @@ set NSSM_VER=2.25.0
 sed -i -E 's/for \/f.*/set description=%NSSM_VER:.=-%-0/g' %CYGPATH_SRC%/%1/version.cmd
 
 set OUTDIR_CONF=Release
-MSBuild.exe nssm.sln ^
-	%MSBUILD_OPTS% ^
-	/nowarn:C4311;C4302;C4312 ^
-	/t:Build ^
-	/p:Configuration=%OUTDIR_CONF% ^
-	/p:Platform="%archmsbuild%"
+
+MSBuild.exe nssm.sln %MSBUILD_OPTS% ^
+/t:Build ^
+/nowarn:C4311;C4302;C4312 ^
+/p:Configuration=%OUTDIR_CONF% ^
+/p:Platform="%archmsbuild%"
 
 for %%E in (exe pdb) do (
 	xcopy /C /F /Y %PATH_SRC%\%1\out\%OUTDIR_CONF%\%archmsbuild%\nssm.%%E %PATH_INSTALL%\bin\nssm-%NSSM_VER%.%%E*

@@ -3,12 +3,10 @@
 set VCDIR=builds\msvc\vs2019
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/%VCDIR%" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
 
-MSBuild.exe %PATH_SRC%\%1\%VCDIR%\libsodium.sln ^
-%MSBUILD_OPTS% ^
+MSBuild.exe %PATH_SRC%\%1\%VCDIR%\libsodium.sln %MSBUILD_OPTS% ^
 /nowarn:C4197 ^
 /p:Configuration=DynRelease ^
 /p:Platform=%archmsbuild%
-
 
 for /F "delims=" %%I in ('dir /a:-D /s /b %PATH_SRC%\%1\bin\libsodium.lib') do (xcopy /C /F /Y %%I %PATH_INSTALL%\lib\*)
 for %%X in (libsodium.dll libsodium.pdb) do (
