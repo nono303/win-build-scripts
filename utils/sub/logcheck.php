@@ -72,6 +72,9 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 		"Daemon will be stopped at the end of the build" => [39, "str"],// gradle
 		"fvisibility=hidden" => [39, "str"],// dav1d
 		"Using unknown MSVC version" => [39, "str"],// php-src
+		// subversion java-hl
+		"warning: [serial]" => [39, "str"],
+		"warning: [removal]" => [39, "str"],
 	);
 	//print_r($argv);
 	//exit();
