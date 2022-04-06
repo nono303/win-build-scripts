@@ -7,31 +7,30 @@ if not exist %PATH_SRC%\%1\%OUTDIR_CONF%\. mklink /J %PATH_SRC%\%1\%OUTDIR_CONF%
 
 	REM ~~~~~~~~~~~~ Configure
 python gen-make.py ^
-	--release ^
-	-t vcproj ^
-	--vsnet-version=2017 ^
-	--with-jdk=%JAVA_HOME% ^
-	--with-serf=%PATH_INSTALL%\include ^
-	--with-sqlite=%PATH_SRC%\sqlite ^
-	--with-openssl=%PATH_INSTALL% ^
-	--with-apr=%PATH_INSTALL% ^
-	--with-apr-iconv=%PATH_INSTALL% ^
-	--with-apr_memcache=%PATH_INSTALL% ^
-	--with-apr-util=%PATH_INSTALL% ^
-	--with-zlib=%PATH_INSTALL% ^
-	--with-httpd=%PATH_INSTALL% 
+--release ^
+-t vcproj ^
+--vsnet-version=2017 ^
+--with-jdk=%JAVA_HOME% ^
+--with-serf=%PATH_INSTALL%\include ^
+--with-sqlite=%PATH_SRC%\sqlite ^
+--with-openssl=%PATH_INSTALL% ^
+--with-apr=%PATH_INSTALL% ^
+--with-apr-iconv=%PATH_INSTALL% ^
+--with-apr_memcache=%PATH_INSTALL% ^
+--with-apr-util=%PATH_INSTALL% ^
+--with-zlib=%PATH_INSTALL% ^
+--with-httpd=%PATH_INSTALL% 
 
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/build/win32/vcnet-vcproj/" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
 sed -i 's/serf-2\.lib/libserf-2\.lib/g'  %CYGPATH_SRC%/%1/build/win32/vcnet-vcproj/libsvn_ra_dll.vcxproj
 
 	REM ~~~~~~~~~~~~ Make
 		REM /t:__ALL_TESTS__;
-MSBuild.exe subversion_vcnet.sln ^
-	%MSBUILD_OPTS% ^
-	/nowarn:C4702;LNK4087;MSB8065;C4703;C4132;C4389;C4244;C4245;C4267;C4018;C4334;C4189;C4312;C4090;C4152;C4146 ^
-	/t:Clean;__ALL__:Rebuild;__JAVAHL__:Rebuild ^
-	/p:Configuration=%OUTDIR_CONF% ^
-	/p:Platform=%archmsbuild%
+MSBuild.exe subversion_vcnet.sln %MSBUILD_OPTS% ^
+/t:Clean;__ALL__:Rebuild;__JAVAHL__:Rebuild ^
+/nowarn:C4702;LNK4087;MSB8065;C4703;C4132;C4389;C4244;C4245;C4267;C4018;C4334;C4189;C4312;C4090;C4152;C4146 ^
+/p:Configuration=%OUTDIR_CONF% ^
+/p:Platform=%archmsbuild%
 
 	REM ~~~~~~~~~~~~ Copy Release
 for %%X in (exe dll so) do (
