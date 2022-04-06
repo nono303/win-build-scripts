@@ -1,10 +1,16 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
 sed -i 's/_EVENT_/EVENT__/g' %CYGPATH_SRC%/%1/cmake/FindLibevent.cmake
+	:: fix useless cmake warning when ENABLE_HTTP3=OFF and openssl doesn't support QUIC
+sed -i 's/WARNING "OpenSSL/"   OpenSSL/g' %CYGPATH_SRC%/%1/CMakeLists.txt
 
-if %QUIC_BUILD% == 1 (set QUIC=-DENABLE_HTTP3=ON -DLIBNGTCP2_INCLUDE_DIR=%PATH_INSTALL:\=/%/include -DLIBNGTCP2_CRYPTO_OPENSSL_LIBRARY=%PATH_INSTALL:\=/%/lib/ngtcp2_static.lib -DLIBNGTCP2_CRYPTO_OPENSSL_INCLUDE_DIR=%PATH_INSTALL:\=/%/include)
+if %QUIC_BUILD% == 1 (
+	set QUIC=-DENABLE_HTTP3=ON -DLIBNGTCP2_INCLUDE_DIR=%PATH_INSTALL:\=/%/include -DLIBNGTCP2_CRYPTO_OPENSSL_LIBRARY=%PATH_INSTALL:\=/%/lib/ngtcp2_static.lib -DLIBNGTCP2_CRYPTO_OPENSSL_INCLUDE_DIR=%PATH_INSTALL:\=/%/include
+) else (
+	set QUIC=-DENABLE_HTTP3=OFF
+)
 
-cmake %CMAKE_OPTS% ^
+cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
 -DENABLE_LIB_ONLY=ON ^
