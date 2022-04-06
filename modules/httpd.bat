@@ -5,7 +5,7 @@ for %%M in (mod_maxminddb mod_fcgid mod_h2 mod_md mod_wku_bt mod_h264_streaming)
 call %PATH_MODULES_COMMON%\init.bat %1 cmake
 set HTTPD_VERSION=%SCM_TAG%
 
-cmake %CMAKE_OPTS% ^
+cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
 -DINSTALL_PDB=ON ^
@@ -23,7 +23,7 @@ cmake %CMAKE_OPTS% ^
 -DCURL_LIBRARY=%PATH_INSTALL:\=/%/lib/libcurl.lib ^
 -DCURL_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 -DEXTRA_INCLUDES=%PATH_SRC:\=/%/openssl ^
-%PATH_SRC%\%1 
+%PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 REM mod_wku-bt
