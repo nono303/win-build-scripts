@@ -78,7 +78,7 @@ git checkout tags/2.4.53
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout cldr/2022-03-31
+git checkout cldr/2022-04-11
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -94,7 +94,7 @@ git checkout tags/v3.0
 cd /D ..
 git clone https://github.com/AOMediaCodec/libavif.git libavif
 cd /D libavif
-git checkout tags/v0.9.3
+git checkout tags/v0.10.1
 cd /D ..
 git clone https://github.com/ebiggers/libdeflate.git libdeflate
 cd /D libdeflate
@@ -194,7 +194,7 @@ git checkout tags/1.6.15
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2664
+svn update -r 2666
 cd /D ..
 git clone https://github.com/JBlond/mod_bikeshed.git mod_bikeshed
 cd /D mod_bikeshed
@@ -242,7 +242,7 @@ git checkout tags/v0.3.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v0.3.0
+git checkout tags/v0.3.1
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -294,7 +294,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.1.4
+git checkout tags/php-8.1.5
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
