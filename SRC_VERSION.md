@@ -41,10 +41,10 @@
 | [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.9.13 |
 | [libxpm](https://github.com/nono303/libxpm.git) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.13 |
 | [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.35 |
-| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1819 |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1822 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
-| [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | 0.17.2 |
+| [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | 0.17.5 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.15 |
 | [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2666 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
@@ -52,18 +52,18 @@
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.2 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
-| [mod_md](https://github.com/icing/mod_md) | 2.4.11 |
+| [mod_md](https://github.com/icing/mod_md) | 2.4.13 |
 | [mod_qos](https://sourceforge.net/p/mod-qos/source/HEAD/tree/trunk/httpd_src/modules/qos/) | 11.71 r2647 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) - _[src](https://emptyhammock.com/media/downloads/wku_bt-2.01.zip)_ | 2.0.2 |
 | [mpir](https://github.com/nono303/mpir) - _[upstream](https://github.com/BrianGladman/mpir)_ - _[src](https://github.com/wbhart/mpir)_ | 3.0.0 |
 | [nghttp2](https://github.com/nghttp2/nghttp2) | 1.47.0 |
-| [nghttp3](https://github.com/ngtcp2/nghttp3) | 0.3.0 |
-| [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 0.3.1 |
+| [nghttp3](https://github.com/ngtcp2/nghttp3) | 0.4.0 |
+| [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 0.4.0 |
 | [nssm](https://github.com/puppetlabs/nssm) | 2.25 - a1c3260 |
 | [openssl](https://github.com/openssl/openssl) | 3.0.2 |
 | [openssl-quic](https://github.com/quictls/openssl) | 3.0.2 - 7f2ab56a2b |
 | [pcre](https://github.com/jwilk-mirrors/pcre) | 8.45 |
-| [pcre2](https://github.com/PhilipHazel/pcre2) | 10.39 |
+| [pcre2](https://github.com/PhilipHazel/pcre2) | 10.40 |
 | [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | nbio_php8 - 8.1-dev - ccf702b |
 | [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1-dev - 2075a4d |
 | [php-cgi-spawner](https://github.com/deemru/php-cgi-spawner) | 1.1.23 - 90197af |

@@ -218,11 +218,11 @@ git checkout tags/1.2.0
 cd /D ..
 git clone https://github.com/icing/mod_md mod_md
 cd /D mod_md
-git checkout tags/v2.4.11
+git checkout tags/v2.4.13
 cd /D ..
 svn co https://svn.code.sf.net/p/mod-qos/source/trunk/httpd_src/modules/qos mod_qos
 cd /D mod_qos
-svn update -r 2648
+svn update -r 2649
 cd /D ..
 git clone https://github.com/nono303/mod_whatkilledus mod_wku_bt
 cd /D mod_wku_bt
@@ -238,11 +238,11 @@ git checkout tags/v1.47.0
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3
-git checkout tags/v0.3.0
+git checkout tags/v0.4.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v0.3.1
+git checkout tags/v0.4.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -262,7 +262,7 @@ git checkout tags/pcre-8.45
 cd /D ..
 git clone https://github.com/PhilipHazel/pcre2.git pcre2
 cd /D pcre2
-git checkout tags/pcre2-10.39
+git checkout tags/pcre2-10.40
 cd /D ..
 git clone https://github.com/websupport-sk/pecl-memcache.git pecl-memcache
 cd /D pecl-memcache

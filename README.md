@@ -43,16 +43,16 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.2.0-p2.1 (14.32) | `.vsconfig`         |
+| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.2.0-p4 (14.32) | `.vsconfig`         |
 | [Cygwin](https://cygwin.com/install.html)                    | x86  | 3.3.4   | `cyg32.packagelist` |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.3.4           | `cyg64.packagelist` |
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.10.4 |                     |
-| [Node.js](https://nodejs.org/en/download/current/) | x64 | 17.9.0 | |
-| [OpenJDK](https://jdk.java.net/18/)                      | x64  | 18.0.0 |                     |
+| [Node.js](https://nodejs.org/en/download/current/) | x64 | 18.0.0 | |
+| [OpenJDK](https://jdk.java.net/18/)                      | x64  | 18.0.1 |                     |
 | [Strawberry Perl](https://strawberryperl.com/releases.html) | x64  | 5.32.1.1 |                     |
 | [NASM](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.15.05        |                     |
 | [YASM](https://yasm.tortall.net/Download.html) | x64 | 1.3.0 | |
-| [Git](https://git-scm.com/download/win)                      | x64  | 2.35.2 |                     |
+| [Git](https://git-scm.com/download/win)                      | x64  | 2.36.0 |                     |
 | verpatch                                                     | x64  | 1.0.15.1       |                     |
 | [7z](https://www.7-zip.org/download.html)                    | x64  | 21.07     |                     |
 | [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.82         |                     |
@@ -60,7 +60,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [Gradle](https://gradle.org/install/) | [java] | 7.4.2 | |
 | [CMake](https://cmake.org/download/) | x64 | 3.23.1 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | x64 | 1.10.2 | |
-| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 0.62.0 | |
+| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 0.62.1 | |
 | [NuGet](https://www.nuget.org/downloads) | x86 | 6.1.0 | |
 
 ### [SOURCE VERSIONS](./SRC_VERSION.md)
