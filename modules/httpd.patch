@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index ef8da3f31c..c4f8d262b0 100644
+index ef8da3f31c..e8418a3552 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -15,6 +15,10 @@
@@ -128,7 +128,7 @@ index ef8da3f31c..c4f8d262b0 100644
  )
  SET(mod_ldap_extra_defines           LDAP_DECLARE_EXPORT)
  SET(mod_ldap_extra_libs              wldap32)
-@@ -471,25 +492,42 @@ SET(mod_lua_extra_sources
+@@ -471,25 +492,44 @@ SET(mod_lua_extra_sources
    modules/lua/lua_passwd.c           modules/lua/lua_request.c
    modules/lua/lua_vmprep.c           modules/lua/lua_dbd.c
  )
@@ -176,6 +176,7 @@ index ef8da3f31c..c4f8d262b0 100644
 +  ${mod_md_src}/md_status.c
 +  ${mod_md_src}/md_store.c
 +  ${mod_md_src}/md_store_fs.c
++  ${mod_md_src}/md_tailscale.c
 +  ${mod_md_src}/md_time.c
 +  ${mod_md_src}/md_util.c
 +  ${mod_md_src}/mod_md_config.c
@@ -183,10 +184,11 @@ index ef8da3f31c..c4f8d262b0 100644
 +  ${mod_md_src}/mod_md_ocsp.c
 +  ${mod_md_src}/mod_md_os.c
 +  ${mod_md_src}/mod_md_status.c
++  
  )
  SET(mod_optional_hook_export_extra_defines AP_DECLARE_EXPORT) # bogus reuse of core API prefix
  SET(mod_proxy_extra_defines          PROXY_DECLARE_EXPORT)
-@@ -519,7 +557,8 @@ SET(mod_proxy_http2_extra_defines          ssize_t=long)
+@@ -519,7 +559,8 @@ SET(mod_proxy_http2_extra_defines          ssize_t=long)
  SET(mod_proxy_http2_extra_includes         ${NGHTTP2_INCLUDE_DIR})
  SET(mod_proxy_http2_extra_libs             ${NGHTTP2_LIBRARIES} mod_proxy)
  SET(mod_proxy_http2_extra_sources
@@ -196,7 +198,7 @@ index ef8da3f31c..c4f8d262b0 100644
  )
  SET(mod_ratelimit_extra_defines      AP_RL_DECLARE_EXPORT)
  SET(mod_sed_extra_sources
-@@ -558,6 +597,55 @@ IF(LIBXML2_FOUND)
+@@ -558,6 +599,55 @@ IF(LIBXML2_FOUND)
    SET(mod_xml2enc_extra_libs         "${LIBXML2_LIBRARIES};${LIBXML2_ICONV_LIBRARIES}")
  ENDIF()
  SET(mod_watchdog_extra_defines       AP_WD_DECLARE_EXPORT)
@@ -252,7 +254,7 @@ index ef8da3f31c..c4f8d262b0 100644
  
  SET(MODULE_PATHS)
  FOREACH (modinfo ${MODULE_LIST})
-@@ -617,7 +705,7 @@ ELSE()
+@@ -617,7 +707,7 @@ ELSE()
  ENDIF()
  
  # for easy reference from .dll/.so builds
@@ -261,7 +263,7 @@ index ef8da3f31c..c4f8d262b0 100644
  
  ADD_EXECUTABLE(gen_test_char server/gen_test_char.c)
  GET_TARGET_PROPERTY(GEN_TEST_CHAR_EXE gen_test_char LOCATION)
-@@ -703,8 +791,8 @@ SET(HTTPD_INCLUDE_DIRECTORIES
+@@ -703,8 +793,8 @@ SET(HTTPD_INCLUDE_DIRECTORIES
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/dav/main
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/filters
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators
@@ -272,7 +274,7 @@ index ef8da3f31c..c4f8d262b0 100644
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/proxy
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/session
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl
-@@ -712,6 +800,11 @@ SET(HTTPD_INCLUDE_DIRECTORIES
+@@ -712,6 +802,11 @@ SET(HTTPD_INCLUDE_DIRECTORIES
    ${CMAKE_CURRENT_SOURCE_DIR}/server/mpm/winnt
    ${APR_INCLUDE_DIR}
    ${PCRE_INCLUDE_DIR}
@@ -284,7 +286,7 @@ index ef8da3f31c..c4f8d262b0 100644
  )
  
  # The .h files we install from outside the main include directory
-@@ -729,7 +822,7 @@ SET(other_installed_h
+@@ -729,7 +824,7 @@ SET(other_installed_h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/filters/mod_xml2enc.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators/mod_cgi.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators/mod_status.h
@@ -293,7 +295,7 @@ index ef8da3f31c..c4f8d262b0 100644
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/loggers/mod_log_config.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/mappers/mod_rewrite.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/proxy/mod_proxy.h
-@@ -826,7 +919,7 @@ FOREACH (mod ${MODULE_PATHS})
+@@ -826,7 +921,7 @@ FOREACH (mod ${MODULE_PATHS})
      SET(mod_extra_libs "${mod_name}_extra_libs")
      SET_TARGET_PROPERTIES(${mod_name} PROPERTIES
        SUFFIX .so
@@ -302,7 +304,7 @@ index ef8da3f31c..c4f8d262b0 100644
      )
      TARGET_LINK_LIBRARIES(${mod_name} ${${mod_extra_libs}} libhttpd ${EXTRA_LIBS} ${APR_LIBRARIES} ${HTTPD_SYSTEM_LIBS})
      DEFINE_WITH_BLANKS(define_long_name "LONG_NAME" "${mod_name} for Apache HTTP Server")
-@@ -852,7 +945,7 @@ ENDFOREACH()
+@@ -852,7 +947,7 @@ ENDFOREACH()
  ###########   HTTPD LIBRARIES   ############
  ADD_LIBRARY(libhttpd SHARED ${LIBHTTPD_SOURCES} build/win32/httpd.rc)
  SET_TARGET_PROPERTIES(libhttpd PROPERTIES
@@ -311,7 +313,7 @@ index ef8da3f31c..c4f8d262b0 100644
  )
  SET(install_targets ${install_targets} libhttpd)
  SET(install_bin_pdb ${install_bin_pdb} $<TARGET_PDB_FILE:libhttpd>)
-@@ -907,12 +1000,12 @@ ENDIF()
+@@ -907,12 +1002,12 @@ ENDIF()
  GET_PROPERTY(tmp_includes TARGET ab PROPERTY INCLUDE_DIRECTORIES)
  
  # getting duplicate manifest error with ApacheMonitor

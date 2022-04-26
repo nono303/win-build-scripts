@@ -52,7 +52,7 @@
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.2 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
-| [mod_md](https://github.com/icing/mod_md) | 2.4.13 |
+| [mod_md](https://github.com/icing/mod_md) | 2.4.14 |
 | [mod_qos](https://sourceforge.net/p/mod-qos/source/HEAD/tree/trunk/httpd_src/modules/qos/) | 11.71 r2647 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) - _[src](https://emptyhammock.com/media/downloads/wku_bt-2.01.zip)_ | 2.0.2 |
 | [mpir](https://github.com/nono303/mpir) - _[upstream](https://github.com/BrianGladman/mpir)_ - _[src](https://github.com/wbhart/mpir)_ | 3.0.0 |
