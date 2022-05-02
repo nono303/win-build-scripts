@@ -1,5 +1,99 @@
 # changelog
 
+
+## 1.5.4 _(2022-05-02)_
+
+*  rewrite cmake target Ninja
+`env_sample.bat`
+`modules/brotli.bat`
+`modules/bzip2.bat`
+`modules/cares.bat`
+`modules/curl.bat`
+`modules/freeglut.bat`
+`modules/freetype2.bat`
+`modules/geographiclib.bat`
+`modules/geos.bat`
+`modules/giflib.bat`
+`modules/jansson.bat`
+`modules/lerc.bat`
+`modules/libavif.bat`
+`modules/libev.bat`
+`modules/libevent.bat`
+`modules/libexpat.bat`
+`modules/libjpeg-turbo.bat`
+`modules/libpng.bat`
+`modules/libssh2.bat`
+`modules/libtiff.bat`
+`modules/libwebp.bat`
+`modules/libxdiff.bat`
+`modules/libxslt.bat`
+`modules/libyuv.bat`
+`modules/libzip.bat`
+`modules/nghttp3.bat`
+`modules/ngtcp2.bat`
+`modules/pcre.bat`
+`modules/pcre2.bat`
+`modules/proj.bat`
+`modules/sqlite.bat`
+`modules/tidy.bat`
+`modules/wineditline.bat`
+`modules/zlib.bat`
+`modules/zstd.bat`
+*  rewrite cmake target VS
+`modules/aom.bat`
+`modules/libgav1.bat`
+`modules/libmaxminddb.bat`
+*  rewrite msbuild
+`modules/dependencies.bat`
+`modules/icu.bat`
+`modules/jemalloc.bat`
+`modules/libffi.bat`
+`modules/libiconv.bat`
+`modules/liblzma.bat`
+`modules/libsodium.bat`
+`modules/libxpm.bat`
+`modules/mpir.bat`
+`modules/nssm.bat`
+`modules/sdlna.bat`
+`modules/verpatch.bat`
+*  fix useless cmake warning when ENABLE_HTTP3=OFF and openssl doesn't support QUIC
+`modules/httpd.bat`
+*  rewrite cmake target Ninja
+`modules/serf.bat`
+*  rewrite msbuild
+`modules/subversion.bat`
+*  fix useless cmake warning when ENABLE_HTTP3=OFF and openssl doesn't support QUIC
+`modules/nghttp2.bat`
+*  some rewite and fix OpenSSL lib path
+`modules/apr.bat`
+*  disable subversion java-hl warnings (with jre-18)
+`utils/sub/logcheck.php`
+*  bump to apr 1.8.0
+`SRC_VERSION.md`
+*  apre 1.8.x
+`utils/srccreate.bat`
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  update src & tools
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  mod_md 2.4.14
+`SRC_VERSION.md`
+`modules/httpd.patch`
+*  add QS_NO_STATUS_HOOK
+`modules/httpd.bat`
+*  upgrade src & tools
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  add changelog.md
+*  add changelog
+`README.md`
+
+
 ## 1.5.3 _(2022-04-05)_
 
 *  1.2.12 : fix no asm
