@@ -64,3 +64,4 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [NuGet](https://www.nuget.org/downloads) | x86 | 6.1.0 | |
 
 ### [SOURCE VERSIONS](./SRC_VERSION.md)
+### [CHANGELOG](./changelog.md)
