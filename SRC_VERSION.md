@@ -8,11 +8,11 @@
 | [brotli](https://github.com/google/brotli) | 1.0.9 |
 | [bzip2](https://gitlab.com/bzip2/bzip2.git) | 1.1.0 |
 | [cares](https://github.com/c-ares/c-ares) | 1.18.1 |
-| [curl](https://github.com/curl/curl) | 7.82.0 |
+| [curl](https://github.com/curl/curl) | 7.83.0 |
 | [dav1d](https://code.videolan.org/videolan/dav1d.git) | 1.0.0 |
 | [dependencies](https://github.com/lucasg/Dependencies) | 1.11.1 |
 | [freeglut](https://github.com/dcnieho/FreeGLUT.git) | 3.2.2 |
-| [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.12.0 |
+| [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.12.1 |
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52 |
 | [geos](https://github.com/libgeos/geos) | 3.10.2 |
 | [giflib](https://github.com/gongjianbo/GifLib) | 5.2.1 |
@@ -41,19 +41,19 @@
 | [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.9.13 |
 | [libxpm](https://github.com/nono303/libxpm.git) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.13 |
 | [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.35 |
-| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1822 |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1823 |
 | [libzip](https://github.com/nih-at/libzip) | 1.8.0 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
 | [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | 0.17.5 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.15 |
-| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2666 |
+| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.2 r2667 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
 | [mod_fcgid](https://github.com/nono303/mod_fcgid) - _[upstream + src](https://github.com/pagespeed/mod_fcgid)_ | 2.3.10.1 |
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.2 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
 | [mod_md](https://github.com/icing/mod_md) | 2.4.14 |
-| [mod_qos](https://sourceforge.net/p/mod-qos/source/HEAD/tree/trunk/httpd_src/modules/qos/) | 11.71 r2647 |
+| [mod_qos](https://sourceforge.net/p/mod-qos/source/HEAD/tree/trunk/httpd_src/modules/qos/) | 11.71 r2650 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) - _[src](https://emptyhammock.com/media/downloads/wku_bt-2.01.zip)_ | 2.0.2 |
 | [mpir](https://github.com/nono303/mpir) - _[upstream](https://github.com/BrianGladman/mpir)_ - _[src](https://github.com/wbhart/mpir)_ | 3.0.0 |
 | [nghttp2](https://github.com/nghttp2/nghttp2) | 1.47.0 |
