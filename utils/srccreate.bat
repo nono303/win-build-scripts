@@ -42,7 +42,7 @@ git checkout tags/cares-1_18_1
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-7_83_0
+git checkout tags/curl-7_83_1
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -58,7 +58,7 @@ git checkout tags/FG_3_2_2
 cd /D ..
 git clone git://git.sv.nongnu.org/freetype/freetype2.git freetype2
 cd /D freetype2
-git checkout tags/VER-2-12-0
+git checkout tags/VER-2-12-1
 cd /D ..
 git clone https://git.code.sf.net/p/geographiclib/code geographiclib
 cd /D geographiclib
@@ -86,7 +86,7 @@ git checkout tags/v2.14
 cd /D ..
 git clone https://github.com/jemalloc/jemalloc.git jemalloc
 cd /D jemalloc
-git checkout tags/5.2.1
+git checkout tags/5.3.0
 cd /D ..
 git clone https://github.com/Esri/lerc.git lerc
 cd /D lerc
@@ -162,7 +162,7 @@ git checkout tags/v0.23
 cd /D ..
 git clone https://gitlab.gnome.org/GNOME/libxml2.git libxml2
 cd /D libxml2
-git checkout tags/v2.9.13
+git checkout tags/v2.9.14
 cd /D ..
 git clone https://github.com/nono303/libxpm.git libxpm
 cd /D libxpm
@@ -194,7 +194,7 @@ git checkout tags/1.6.15
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2667
+svn update -r 2678
 cd /D ..
 git clone https://github.com/JBlond/mod_bikeshed.git mod_bikeshed
 cd /D mod_bikeshed
@@ -218,11 +218,11 @@ git checkout tags/1.2.0
 cd /D ..
 git clone https://github.com/icing/mod_md mod_md
 cd /D mod_md
-git checkout tags/v2.4.14
+git checkout tags/v2.4.16
 cd /D ..
 svn co https://svn.code.sf.net/p/mod-qos/source/trunk/httpd_src/modules/qos mod_qos
 cd /D mod_qos
-svn update -r 2650
+svn update -r 2658
 cd /D ..
 git clone https://github.com/nono303/mod_whatkilledus mod_wku_bt
 cd /D mod_wku_bt
@@ -238,23 +238,23 @@ git checkout tags/v1.47.0
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3
-git checkout tags/v0.4.0
+git checkout tags/v0.4.1
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v0.4.0
+git checkout tags/v0.5.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
 git checkout master
 cd /D ..
-git clone https://github.com/openssl/openssl openssl
+git clone https://github.com/openssl/openssl.git openssl
 cd /D openssl
-git checkout tags/openssl-3.0.2
+git checkout tags/openssl-3.0.3
 cd /D ..
 git clone https://github.com/quictls/openssl openssl-quic
 cd /D openssl-quic
-git checkout openssl-3.0.2+quic
+git checkout openssl-3.0.3+quic
 cd /D ..
 git clone https://github.com/jwilk-mirrors/pcre.git pcre
 cd /D pcre
@@ -294,7 +294,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.1.5
+git checkout tags/php-8.1.6
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
