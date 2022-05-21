@@ -1,6 +1,26 @@
 # changelog
 
 
+## 1.5.5 _(2022-05-21)_
+
+*  update configexport to include python
+`config/.vsconfig`
+`config/cyg32.packagelist`
+`config/cyg64.packagelist`
+`config/python.pip`
+`utils/configexport.bat`
+*  r2678
+`modules/mobac.patch`
+*  1ac8262c
+`modules/apr-util.patch`
+*  bump to MSVC 17.3.0-p1
+`vs17.bat`
+*  upgrade tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+
+
 ## 1.5.4 _(2022-05-02)_
 
 *  rewrite cmake target Ninja
@@ -92,6 +112,8 @@
 *  add changelog.md
 *  add changelog
 `README.md`
+*  1.5.4
+`changelog.md`
 
 
 ## 1.5.3 _(2022-04-05)_
