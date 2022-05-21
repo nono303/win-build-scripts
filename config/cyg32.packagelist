@@ -196,7 +196,6 @@ pkg-config
 pkgconf
 procps-ng
 publicsuffix-list-dafsa
-python
 python-pip-wheel
 python-setuptools-wheel
 python2
