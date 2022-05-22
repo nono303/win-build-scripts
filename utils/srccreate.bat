@@ -150,7 +150,7 @@ git checkout tags/libssh2-1.10.0
 cd /D ..
 git clone https://gitlab.com/libtiff/libtiff libtiff
 cd /D libtiff
-git checkout tags/v4.3.0rc1
+git checkout tags/v4.4.0rc1
 cd /D ..
 git clone https://chromium.googlesource.com/webm/libwebp libwebp
 cd /D libwebp
