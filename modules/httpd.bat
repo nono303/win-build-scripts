@@ -1,6 +1,6 @@
 @echo off
 	REM ~~~~~~~~~~~ external modules
-for %%M in (mod_maxminddb mod_fcgid mod_h2 mod_md mod_wku_bt mod_h264_streaming) do (call %PATH_MODULES_COMMON%\init.bat %%M)
+for %%M in (mod_maxminddb mod_fcgid mod_h2 mod_md mod_wku_bt mod_h264_streaming mod_qos) do (call %PATH_MODULES_COMMON%\init.bat %%M)
 
 call %PATH_MODULES_COMMON%\init.bat %1 cmake
 set HTTPD_VERSION=%SCM_TAG%
