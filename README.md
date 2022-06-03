@@ -43,7 +43,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.3.0-p1 (14.33) | `.vsconfig`         |
+| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.3.0-p1.1 (14.33) | `.vsconfig`         |
 | [Cygwin](https://cygwin.com/install.html)                    | x86  | 3.3.5   | `cyg32.packagelist` |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.3.5           | `cyg64.packagelist` |
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.10.4 |                     |
@@ -58,7 +58,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.82         |                     |
 | [ChkMatch](https://web.archive.org/web/20210205095232/https://www.debuginfo.com/tools/chkmatch.html) | x86 | 1.0.3          |                     |
 | [Gradle](https://gradle.org/install/) | [java] | 7.4.2 | |
-| [CMake](https://cmake.org/download/) | x64 | 3.23.1 | |
+| [CMake](https://cmake.org/download/) | x64 | 3.23.2 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | x64 | 1.11.0 | |
 | [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 0.62.1 | |
 | [NuGet](https://www.nuget.org/downloads) | x86 | 6.2.0 | |

@@ -78,7 +78,7 @@ git checkout tags/2.4.53
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout cldr/2022-04-11
+git checkout cldr/2022-05-28
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -98,7 +98,7 @@ git checkout tags/v0.10.1
 cd /D ..
 git clone https://github.com/ebiggers/libdeflate.git libdeflate
 cd /D libdeflate
-git checkout tags/v1.10
+git checkout tags/v1.11
 cd /D ..
 git clone https://git.lighttpd.net/libev.git libev
 cd /D libev
@@ -194,7 +194,7 @@ git checkout tags/1.6.15
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2678
+svn update -r 2681
 cd /D ..
 git clone https://github.com/JBlond/mod_bikeshed.git mod_bikeshed
 cd /D mod_bikeshed
@@ -203,6 +203,10 @@ cd /D ..
 git clone https://github.com/nono303/mod_fcgid.git mod_fcgid
 cd /D mod_fcgid
 git checkout tags/2.3.10.1
+cd /D ..
+svn co http://svn.apache.org/repos/asf/httpd/mod_ftp/trunk mod_ftp
+cd /D mod_ftp
+svn update -r 1901604
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -270,7 +274,7 @@ git checkout NON_BLOCKING_IO_php8
 cd /D ..
 git clone https://github.com/php/pecl-text-xdiff pecl-text-xdiff
 cd /D pecl-text-xdiff
-git checkout main
+git checkout tags/2.1.1
 cd /D ..
 git clone https://github.com/deemru/php-cgi-spawner.git php-cgi-spawner
 cd /D php-cgi-spawner
