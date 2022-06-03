@@ -151,7 +151,7 @@ index ef8da3f31c..e8418a3552 100644
 -  modules/md/md_ocsp.c               modules/md/md_util.c               
 -  modules/md/mod_md_config.c         modules/md/mod_md_drive.c
 -  modules/md/mod_md_os.c             modules/md/mod_md_status.c
--  modules/md/mod_md_ocsp.c           
+-  modules/md/mod_md_ocsp.c           modules/md/md_tailscale.c
 +  ${mod_md_src}/md_acme.c
 +  ${mod_md_src}/md_acme_acct.c
 +  ${mod_md_src}/md_acme_authz.c
@@ -365,23 +365,19 @@ index 7da7aa2ca2..78d9d92a71 100644
  
  /* WARNING: Win32 binds http_main.c dynamically to the server. Please place
   *          extern functions and global data in another appropriate module.
-diff --git a/support/ab.c b/support/ab.c
-index dc0dc8653b..3b023aae6b 100644
---- a/support/ab.c
-+++ b/support/ab.c
-@@ -174,8 +174,10 @@ typedef STACK_OF(X509) X509_STACK_TYPE;
- /* The following logic ensures we correctly glue FILE* within one CRT used
+diff --git "a/support/ab.c" "b/support/ab.c"
+index ee3420d389..47b936a68e 100644
+--- "a/support/ab.c"
++++ "b/support/ab.c"
+@@ -184,7 +184,7 @@ typedef STACK_OF(X509) X509_STACK_TYPE;
   * by the OpenSSL library build to another CRT used by the ab.exe build.
   * This became especially problematic with Visual Studio 2015.
-- */
+  */
 -#include <openssl/applink.c>
-+ * https://www.apachelounge.com/viewtopic.php?p=33600 
-+ * C:\sdk\src\openssl\ms\applink.c
-+*/
 +#include <ms/applink.c>
  #endif
  
- #endif
+ #if (OPENSSL_VERSION_NUMBER >= 0x00909000)
 diff --git a/support/win32/ApacheMonitor.rc b/support/win32/ApacheMonitor.rc
 index d4203bf926..053f77522e 100644
 --- a/support/win32/ApacheMonitor.rc
