@@ -1,28 +1,18 @@
 @echo off
+
+set LIB=%LIB%;%PATH_INSTALL%\lib;%PATH_INSTALL_OSSL%\lib
+set INCLUDE=%INCLUDE%;%PATH_INSTALL%\include;%PATH_INSTALL%\include\sqlite3;%PATH_INSTALL_OSSL%\include
+set SSLCRP=libcrypto
+set SSLLIB=libssl
+
 for %%X in (apr apr-iconv apr-util) do (
 	call %PATH_MODULES_COMMON%\init.bat %%X
 	%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES%/apr.sh "%AVX%" "%CYGPATH_SRC%/%%X" "%NUMBER_OF_PROCESSORS%" "%CYGPATH_SRC%"
 )
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES%/apr_once.sh "%OPENSSL_SCM%" "%CYGPATH_SRC%" "%NMAKE_OPTS:/=\\/%"
 
 if not exist %PATH_SRC%\apr-util\xml\expat\. mklink /J %PATH_SRC%\apr-util\xml\expat %PATH_SRC%\libexpat\expat
-
-set LIB=%LIB%;%PATH_INSTALL%\lib
-set INCLUDE=%INCLUDE%;%PATH_INSTALL%\include;%PATH_INSTALL%\include\sqlite3
-
-	REM https://www.apachelounge.com/viewtopic.php?t=8260 / https://docs.microsoft.com/fr-fr/cpp/porting/modifying-winver-and-win32-winnt?view=vs-2019
-sed -i 's/_WIN32_WINNT 0x0501/_WIN32_WINNT 0x0601/g' %PATH_SRC%/apr/include/apr.hw
-
 cd /D %PATH_SRC%\apr-util
-echo # apply apr_post.patch 
-git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\apr_post.patch
-
-sed -i 's/MAKEOPT=-nologo/MAKEOPT=%NMAKE_OPTS:/=\/%/g' %PATH_SRC%/apr-util/Makefile.win
-
-	REM ICU shared sqlite3
-for %%X in (mak dsp) do (sed -i 's/sqlite3.lib/libsqlite3.lib %PATH_INSTALL:\=\\/%\/lib\/icuuc.lib %PATH_INSTALL:\=\\/%\/lib\/icuin.lib/g' %PATH_SRC%/apr-util/dbd/apr_dbd_sqlite3.%%X)
-	REM OpenSSL lib path
-sed -i 's/..\\\\openssl\\\\libcrypto.lib/%PATH_INSTALL:\=\\\\%\\\\lib\\\\libcrypto.lib/g' %PATH_SRC%/apr-util/Makefile.win
-for %%X in (mak dsp) do (sed -i 's/\$^(SSLCRP^)\.lib \$^(SSLLIB^)\.lib/%PATH_INSTALL:\=\\/%\/lib\/libssl.lib %PATH_INSTALL:\=\\/%\/lib\/libcrypto.lib/g' %PATH_SRC%/apr-util/crypto/apr_crypto_openssl.%%X)
 
 nmake %NMAKE_OPTS% /f Makefile.win ^
 USEMAK=1 ^
