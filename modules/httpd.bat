@@ -19,10 +19,10 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DJANSSON_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 -DJANSSON_LIBRARIES=%PATH_INSTALL:\=/%/lib/jansson.lib ^
 -DMAXMIND_LIBRARIES=%PATH_INSTALL%/lib/maxminddb.lib ^
--DOPENSSL_ROOT_DIR=%PATH_INSTALL:\=/% ^
+-DOPENSSL_ROOT_DIR=%PATH_INSTALL_OSSL:\=/% ^
 -DCURL_LIBRARY=%PATH_INSTALL:\=/%/lib/libcurl.lib ^
 -DCURL_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
--DEXTRA_INCLUDES=%PATH_SRC:\=/%/openssl ^
+-DEXTRA_INCLUDES=%PATH_SRC:\=/%/%OPENSSL_SCM% ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
@@ -61,12 +61,3 @@ call do_php %PATH_UTILS%\sub\version.php mod_h2 %PATH_INSTALL%\modules\mod_proxy
 call %PATH_MODULES_COMMON%\init.bat mod_wku_bt varonly
 call do_php %PATH_UTILS%\sub\version.php mod_wku_bt %PATH_INSTALL%\modules\mod_backtrace.so "httpd:%HTTPD_VERSION%"
 call do_php %PATH_UTILS%\sub\version.php mod_wku_bt %PATH_INSTALL%\modules\mod_whatkilledus.so "httpd:%HTTPD_VERSION%"
-
-)
-	REM ~~~~~~~~~~~~ mod_md
-if not "%PATH_GITHUB_MODMD%"=="" (
-	for %%X in (so pdb) do (xcopy /C /F /Y %PATH_INSTALL%\modules\mod_md.%%X %PATH_GITHUB_MODMD%\%MSVC_DEPS%\%ARCH%%AVXB%\*)
-		REM ~~~~~~~~~~~ curl for mod_md		dll WinSSL https://github.com/icing/mod_md/issues/14
-		REM		2021-02-08		https://www.apachelounge.com/viewtopic.php?p=39826#39826
-	xcopy /C /F /Y %PATH_INSTALL%\bin\libcurl.* %PATH_GITHUB_MODMD%\%MSVC_DEPS%\%ARCH%%AVXB%\*
-)
