@@ -1,6 +1,55 @@
 # changelog
 
 
+## 1.5.6 _(2022-06-04)_
+
+*  http://tomdonovan.net/download/mod_ftp-1.0.1_24_win32.zip
+`modules/mod_ftp.patch`
+*  init mod_qos
+`modules/httpd.bat`
+*  update src remove mod_ftp
+`modules/mod_ftp.patch`
+`utils/srccreate.bat`
+*  r2680
+`modules/mobac.patch`
+*  2.4.54
+`modules/httpd.patch`
+*  update src & tools
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  add mod_md standalone build with quic 0
+`modules/mod_md.bat`
+*  remove mod_md copy on PATH_GITHUB_MODMD (reported on mod_md.bat)
+`modules/httpd.bat`
+*  use PATH_INSTALL_OSSL instead of PATH_INSTALL_ for openssl lib & include use OPENSSL_SCM instead of 'openssl' for openssl src
+`modules/curl.bat`
+`modules/libevent.bat`
+`modules/libssh2.bat`
+`modules/libzip.bat`
+`modules/nghttp2.bat`
+`modules/ngtcp2.bat`
+`modules/openssl.bat`
+`modules/php.bat`
+`modules/phpsdk-config_make.bat`
+`modules/serf.bat`
+`modules/subversion.bat`
+`quic.bat`
+`utils/bininfo.bat`
+`utils/libcheck.bat`
+*  merge apr_post.patch to apr-util.patch
+`modules/apr-util.patch`
+`modules/apr_post.patch`
+*  clean & refactor apr use OPENSSL_SCM & PATH_INSTALL_OSSL
+`modules/apr.bat`
+`modules/apr.sh`
+`modules/apr_once.sh`
+
+
 ## 1.5.5 _(2022-05-21)_
 
 *  update configexport to include python
@@ -19,6 +68,8 @@
 `README.md`
 `SRC_VERSION.md`
 `utils/srccreate.bat`
+*  1.5.5
+`changelog.md`
 
 
 ## 1.5.4 _(2022-05-02)_
