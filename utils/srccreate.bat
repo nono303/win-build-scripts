@@ -66,7 +66,7 @@ git checkout tags/v1.52
 cd /D ..
 git clone https://github.com/libgeos/geos geos
 cd /D geos
-git checkout tags/3.10.2
+git checkout tags/3.10.3
 cd /D ..
 git clone https://github.com/gongjianbo/GifLib giflib
 cd /D giflib
@@ -74,7 +74,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
-git checkout tags/2.4.53
+git checkout tags/2.4.54-rc2-candidate
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
@@ -206,7 +206,7 @@ git checkout tags/2.3.10.1
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_ftp/trunk mod_ftp
 cd /D mod_ftp
-svn update -r 1901604
+svn update -r 1901626
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -222,7 +222,7 @@ git checkout tags/1.2.0
 cd /D ..
 git clone https://github.com/icing/mod_md mod_md
 cd /D mod_md
-git checkout tags/v2.4.16
+git checkout tags/v2.4.17
 cd /D ..
 svn co https://svn.code.sf.net/p/mod-qos/source/trunk/httpd_src/modules/qos mod_qos
 cd /D mod_qos

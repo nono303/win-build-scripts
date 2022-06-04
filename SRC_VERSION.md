@@ -16,7 +16,7 @@
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52 |
 | [geos](https://github.com/libgeos/geos) | 3.10.3 |
 | [giflib](https://github.com/gongjianbo/GifLib) | 5.2.1 |
-| [httpd](https://github.com/apache/httpd) | 2.4.54 RC1 |
+| [httpd](https://github.com/apache/httpd) | 2.4.54 rc2 |
 | [icu](https://github.com/unicode-org/icu) | 72.0.1 - cldr/2022-05-28 |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.3.0 |
@@ -46,7 +46,7 @@
 | [lua](https://github.com/lua/lua) | 5.4.3 |
 | [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | 0.17.6 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.15 |
-| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.3 r2680 |
+| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.3 r2681 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
 | [mod_fcgid](https://github.com/nono303/mod_fcgid) - _[upstream + src](https://github.com/pagespeed/mod_fcgid)_ | 2.3.10.1 |
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.2 |

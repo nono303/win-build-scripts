@@ -47,7 +47,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [Cygwin](https://cygwin.com/install.html)                    | x86  | 3.3.5   | `cyg32.packagelist` |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.3.5           | `cyg64.packagelist` |
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.10.4 |                     |
-| [Node.js](https://nodejs.org/en/download/current/) | x64 | 18.2.0 | |
+| [Node.js](https://nodejs.org/en/download/current/) | x64 | 18.3.0 | |
 | [OpenJDK](https://jdk.java.net/18/)                      | x64  | 18.0.1.1 |                     |
 | [Strawberry Perl](https://strawberryperl.com/releases.html) | x64  | 5.32.1.1 |                     |
 | [NASM](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.15.05        |                     |
@@ -60,7 +60,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [Gradle](https://gradle.org/install/) | [java] | 7.4.2 | |
 | [CMake](https://cmake.org/download/) | x64 | 3.23.2 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | x64 | 1.11.0 | |
-| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 0.62.1 | |
+| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 0.62.2 | |
 | [NuGet](https://www.nuget.org/downloads) | x86 | 6.2.0 | |
 
 ### [SOURCE VERSIONS](./SRC_VERSION.md)
