@@ -19,7 +19,7 @@ call %PATH_MODULES_COMMON%\init.bat php-src
 set PHPVER=%SCM_TAG:~4,3%
 	REM link openssl3 sources to module (applink.c)
 if exist %PATH_SRC%\php-src\openssl\. rmdir /S /Q %PATH_SRC%\php-src\openssl
-mklink /J %PATH_SRC%\php-src\openssl %PATH_SRC%\openssl\ms
+mklink /J %PATH_SRC%\php-src\openssl %PATH_SRC%\%OPENSSL_SCM%\ms
 
 	REM ~~~~~~~~~~~~ php-geos
 call %PATH_MODULES_COMMON%\init.bat php-geos

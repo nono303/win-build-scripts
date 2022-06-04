@@ -10,3 +10,4 @@ if %QUIC_BUILD% == 1 (
 	set OPENSSL_SCM=openssl
 	echo ~-~ NO QUIC ~-~
 )
+set PATH_INSTALL_OSSL=%PATH_INSTALL%\_openssl\%OPENSSL_SCM%
