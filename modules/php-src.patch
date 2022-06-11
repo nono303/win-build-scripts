@@ -1,12 +1,28 @@
-diff --git a/main/network.c b/main/network.c
-index 1ad7e370cc..4b7e9d628a 100644
---- a/main/network.c
-+++ b/main/network.c
-@@ -118,7 +118,9 @@ static const char *php_gai_strerror(int code)
+diff --git "a/main/network.c" "b/main/network.c"
+index 1ad7e370cc..9cc9de2a2c 100644
+--- "a/main/network.c"
++++ "b/main/network.c"
+@@ -104,7 +104,7 @@ static const char *php_gai_strerror(int code)
+ 		int code;
+ 		const char *msg;
+ 	} values[] = {
+-#  ifdef EAI_ADDRFAMILY
++#  ifdef EAI_ADDRFAMILY /* Not available in MSVC */
+ 		{EAI_ADDRFAMILY, "Address family for hostname not supported"},
+ #  endif
+ 		{EAI_AGAIN, "Temporary failure in name resolution"},
+@@ -112,13 +112,15 @@ static const char *php_gai_strerror(int code)
+ 		{EAI_FAIL, "Non-recoverable failure in name resolution"},
+ 		{EAI_FAMILY, "ai_family not supported"},
+ 		{EAI_MEMORY, "Memory allocation failure"},
+-#  ifdef EAI_NODATA
++#  ifdef EAI_NODATA /* Not available in MSVC */
+ 		{EAI_NODATA, "No address associated with hostname"},
+ #  endif
  		{EAI_NONAME, "Name or service not known"},
  		{EAI_SERVICE, "Servname not supported for ai_socktype"},
  		{EAI_SOCKTYPE, "ai_socktype not supported"},
-+#  ifdef EAI_SYSTEM
++#  ifdef EAI_SYSTEM /* Not available in MSVC */
  		{EAI_SYSTEM, "System error"},
 +#  endif
  		{0, NULL}
