@@ -84,7 +84,7 @@ set PHP_COMMON_CONFIGURE=^
 	--with-mp=%NUMBER_OF_PROCESSORS%
 REM known bug for --with-ffi if php != 8.1 || 7.4
 if %PHPVER% == %PHP_FULLBUILD% (
-	call configure %PHP_COMMON_CONFIGURE% ^
+	set FINAL_CONFIGURE=%PHP_COMMON_CONFIGURE% ^
 	--enable-mbstring=shared ^
 	--enable-phar-native-ssl ^
 	--enable-brotli=shared ^
@@ -137,7 +137,7 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	%phpveropts% ^
 	%phparchopts%
 ) else (
-	call configure %PHP_COMMON_CONFIGURE% ^
+	set FINAL_CONFIGURE=%PHP_COMMON_CONFIGURE% ^
 	--disable-bcmath ^
 	--disable-brotli ^
 	--disable-calendar ^
@@ -162,6 +162,8 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--without-geos ^
 	%ZTS% %phpveropts%
 )
+echo configure %FINAL_CONFIGURE%
+call configure %FINAL_CONFIGURE%
 
 	REM ARFLAGS
 sed -i 's/ARFLAGS=\/nologo/ARFLAGS=\/nologo \/LTCG/g' %CYGPATH_SRC%/php-src/Makefile
