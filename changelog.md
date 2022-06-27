@@ -1,6 +1,35 @@
 # changelog
 
 
+## 1.5.7 _(2022-06-27)_
+
+*  2683
+`modules/mobac.patch`
+*  comment for /main/network.c
+`modules/php-src.patch`
+*  display configure option
+`modules/phpsdk-config_make.bat`
+*  412f666
+`modules/serf.patch`
+*  3.11.0
+`modules/geos.bat`
+`modules/geos.patch`
+*  revision 2683
+`modules/mobac.patch`
+*  https://bz.apache.org/bugzilla/show_bug.cgi?id=66121
+`modules/apr.patch`
+*  extract patch CURL_PATCH_WIN_OPENSSL
+`env_sample.bat`
+`modules/curl.bat`
+`modules/curl_ca-win.patch`
+*  force calling quic.bat %QUIC_BUILD% at the end
+`avx.bat`
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+
+
 ## 1.5.6 _(2022-06-04)_
 
 *  http://tomdonovan.net/download/mod_ftp-1.0.1_24_win32.zip
@@ -48,6 +77,8 @@
 `modules/apr.bat`
 `modules/apr.sh`
 `modules/apr_once.sh`
+*  tag 1.5.6
+`changelog.md`
 
 
 ## 1.5.5 _(2022-05-21)_
