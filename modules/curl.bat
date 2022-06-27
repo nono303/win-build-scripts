@@ -1,5 +1,14 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
+if %CURL_PATCH_WIN_OPENSSL% == 1 (
+	setlocal enabledelayedexpansion
+	set CURL_DESC=patched for openssl backend using Windows CA store
+	cd /D %PATH_SRC%\%1
+	git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\curl_ca-win.patch
+	cd /D %PATH_BUILD%\%1
+)
+if %CURL_PATCH_WIN_OPENSSL% == 1 (echo    ^>^>^> %CURL_DESC%)
+
 	REM https://github.com/curl/curl/blob/master/GIT-INFO
 copy /Y %PATH_SRC%\%1\src\tool_hugehelp.c.cvs %PATH_SRC%\%1\src\tool_hugehelp.c
 
@@ -61,7 +70,7 @@ xcopy /C /F /Y %PATH_BUILD%\%1\lib\libcurl.pdb %PATH_INSTALL%\bin\*
 xcopy /C /F /Y %PATH_BUILD%\%1\src\curl.pdb %PATH_INSTALL%\bin\*
 
 for %%E in (libcurl.dll curl.exe) do (
-	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%E "ssl_backend: !CURL_SSL_ENGINE!"
+	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%E "%CURL_DESC%"
 )
 	REM for http cmake find
 	REM KO -- Found CURL: C:/sdk/release/vs17_x64-avx/lib/cmake/CURL/CURLConfig.cmake (found version "7.81.0-DEV")
