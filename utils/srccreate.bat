@@ -10,11 +10,11 @@ if not exist %PATH_SRC%\. mkdir %PATH_SRC%
 cd /D %PATH_SRC%
 git clone https://github.com/abseil/abseil-cpp.git abseil-cpp
 cd /D abseil-cpp
-git checkout tags/20211102.0
+git checkout tags/20220623.rc1
 cd /D ..
 git clone https://aomedia.googlesource.com/aom aom
 cd /D aom
-git checkout tags/v3.3.0-rc2
+git checkout tags/v3.4.0
 cd /D ..
 git clone https://github.com/apache/apr.git apr
 cd /D apr
@@ -42,7 +42,7 @@ git checkout tags/cares-1_18_1
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-7_83_1
+git checkout tags/curl-7_84_0
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -66,7 +66,7 @@ git checkout tags/v1.52
 cd /D ..
 git clone https://github.com/libgeos/geos geos
 cd /D geos
-git checkout tags/3.10.3
+git checkout tags/3.11.0beta2
 cd /D ..
 git clone https://github.com/gongjianbo/GifLib giflib
 cd /D giflib
@@ -74,7 +74,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
-git checkout tags/2.4.54-rc2-candidate
+git checkout tags/2.4.54
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
@@ -98,7 +98,7 @@ git checkout tags/v0.10.1
 cd /D ..
 git clone https://github.com/ebiggers/libdeflate.git libdeflate
 cd /D libdeflate
-git checkout tags/v1.11
+git checkout tags/v1.12
 cd /D ..
 git clone https://git.lighttpd.net/libev.git libev
 cd /D libev
@@ -178,7 +178,7 @@ git checkout main
 cd /D ..
 git clone https://github.com/nih-at/libzip libzip
 cd /D libzip
-git checkout tags/v1.8.0
+git checkout tags/v1.9.0
 cd /D ..
 git clone https://github.com/lua/lua lua
 cd /D lua
@@ -194,7 +194,7 @@ git checkout tags/1.6.15
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2681
+svn update -r 2683
 cd /D ..
 git clone https://github.com/JBlond/mod_bikeshed.git mod_bikeshed
 cd /D mod_bikeshed
@@ -206,7 +206,7 @@ git checkout tags/2.3.10.1
 cd /D ..
 svn co http://svn.apache.org/repos/asf/httpd/mod_ftp/trunk mod_ftp
 cd /D mod_ftp
-svn update -r 1901626
+svn update -r 1902275
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -238,15 +238,15 @@ git checkout master
 cd /D ..
 git clone https://github.com/nghttp2/nghttp2.git nghttp2
 cd /D nghttp2
-git checkout tags/v1.47.0
+git checkout tags/v1.48.0
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3
-git checkout tags/v0.4.1
+git checkout tags/v0.5.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v0.5.0
+git checkout tags/v0.6.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -298,11 +298,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.1.6
+git checkout tags/php-8.1.7
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
-git checkout tags/9.0.0
+git checkout tags/9.0.1
 cd /D ..
 git clone https://github.com/nono303/simpleDLNA.git sdlna
 cd /D sdlna
@@ -334,7 +334,7 @@ svn update -r 36
 cd /D ..
 git clone https://github.com/xdebug/xdebug.git xdebug
 cd /D xdebug
-git checkout tags/3.1.4
+git checkout tags/3.1.5
 cd /D ..
 git clone https://github.com/madler/zlib.git zlib
 cd /D zlib
