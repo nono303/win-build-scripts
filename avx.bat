@@ -39,4 +39,5 @@ set VSCMD_SKIP_SENDTELEMETRY=1
 set VCPKG_KEEP_ENV_VARS=VSCMD_SKIP_SENDTELEMETRY
 
 call %PATH_VS%\VC\Auxiliary\Build\vcvarsall.bat %ARCH% %WKITVER% -vcvars_ver=%vcvars_ver%
+call quic.bat %QUIC_BUILD%
 @echo off
