@@ -19,6 +19,7 @@ shared no-unit-test no-external-tests no-ssl3 no-weak-ssl-ciphers no-tests zlib 
 -DOPENSSL_USE_IPV6=1 ^
 -DOPENSSL_NO_HEARTBEATS ^
 -L"/OPT:ICF,REF /LTCG " +"/w /O2 /GL /MD /Zi /MP%NUMBER_OF_PROCESSORS% %AVX%"
+
 REM perl configdata.pm --dump
 
 sed -i 's/\/W3 \/wd4090 \/nologo \/O2 -threads +/\/nologo /g' %CYGPATH_SRC%/%OPENSSL_SCM%/makefile
@@ -27,13 +28,6 @@ sed -i 's/ARFLAGS= \/nologo/ARFLAGS= \/nologo \/LTCG/g' %CYGPATH_SRC%/%OPENSSL_S
 
 if %ARCH% == x64 (set sslarch=-x64)
 if %ARCH% == x86 (set sslarch=)
-sed -i -E 's/LDOUTFLAG(.+)(\\\.+)\.dll/LDOUTFLAG\1\2-%OPENSSL_SUF%%sslarch%\.dll/g' /cygdrive/c/sdk/src/%OPENSSL_SCM%/makefile
-sed -i -E 's/--name ([[:alpha:]]+)\\\/--name /g' %CYGPATH_SRC%/%OPENSSL_SCM%/makefile
-	REM waiting - https://github.com/faramir-dev/openssl/commit/dfdcdbd66ccab463e918e3e99a8d77210e8f1ae4
-sed -i -E 's/INSTALL_ENGINES="engines..capi.dll" "engines..loader_attic.dll" "engines..padlock.dll"/INSTALL_ENGINES="engines\\\capi-%OPENSSL_SUF%%sslarch%.dll" "engines\\\loader_attic-%OPENSSL_SUF%%sslarch%.dll" "engines\\\padlock-%OPENSSL_SUF%%sslarch%.dll"/g' %CYGPATH_SRC%/%OPENSSL_SCM%/makefile
-sed -i -E 's/INSTALL_ENGINEPDBS="engines..capi.pdb" "engines..loader_attic.pdb" "engines..padlock.pdb"/INSTALL_ENGINEPDBS="engines\\\capi-%OPENSSL_SUF%%sslarch%.pdb" "engines\\\loader_attic-%OPENSSL_SUF%%sslarch%.pdb" "engines\\\padlock-%OPENSSL_SUF%%sslarch%.pdb"/g' %CYGPATH_SRC%/%OPENSSL_SCM%/makefile
-sed -i -E 's/INSTALL_MODULES="providers..legacy.dll"/INSTALL_MODULES="providers\\\legacy-%OPENSSL_SUF%%sslarch%.dll"/g' %CYGPATH_SRC%/%OPENSSL_SCM%/makefile
-sed -i -E 's/INSTALL_MODULEPDBS="providers..legacy.pdb"/INSTALL_MODULEPDBS="providers\\\legacy-%OPENSSL_SUF%%sslarch%.pdb"/g' %CYGPATH_SRC%/%OPENSSL_SCM%/makefile
 
 	REM install_sw > no docs
 nmake %NMAKE_OPTS% install_sw

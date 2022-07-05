@@ -10,7 +10,7 @@ Index: mobac/build.gradle
  }
  
  dependencies {
--    def mapsforgeVersion = '0.17.0'
+-    def mapsforgeVersion = '0.18.0'
 -    // def mapsforgeVersion = 'master-SNAPSHOT'
 +    def mapsforgeVersion = '0.18.0'
  
