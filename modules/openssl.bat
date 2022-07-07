@@ -7,7 +7,9 @@ if exist %PATH_INSTALL_OSSL% rmdir /S /Q %PATH_INSTALL_OSSL%
 mkdir %PATH_INSTALL_OSSL%
 
 call %PATH_MODULES_COMMON%\init.bat %OPENSSL_SCM%
-
+if %OPENSSL_SCM% == openssl-quic (
+	git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\%1.patch
+)
 	REM https://wiki.openssl.org/index.php/Compilation_and_Installation
 	REM no-deprecated / -DOPENSSL_NO_DEPRECATED_3_0 (https://github.com/openssl/openssl/pull/13866) : failed for libssh2 / apr
 perl Configure %perlbuild% ^
