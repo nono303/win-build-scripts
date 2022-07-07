@@ -134,11 +134,11 @@ set CMAKE_TGT_NINJA="Ninja"
 set RC_COPYRIGHT=https://github.com/nono303/win-build-scripts
 
 	REM curl.patch for Window (with 'CURL_SSL_BACKEND openssl')
-	REM [1] patched:
+	REM [1] patched: (mandatory for mod_md)
 		REM * successfully imported Windows CA store
 	REM [0] native (with 'CURL_CA_BUNDLE C:\__path-to__\curl-ca-bundle.crt'):
 		REM *  CAfile: C:\__path-to__\curl-ca-bundle.crt
-set CURL_PATCH_WIN_OPENSSL=0
+set CURL_PATCH_WIN_OPENSSL=1
 
 REM ########################## INIT PATH
 if not exist %PATH_LOGS%\. mkdir %PATH_LOGS%
