@@ -94,7 +94,7 @@
 						$logtags .= " (".$matches[1].")";
 					}
 				} else {
-					$logtags = execnono($cmd = 'git log --tags --simplify-by-decoration --pretty="format:%ai %d" | head -n '.NB_TAGS,NULL,$repo,NULL);
+					$logtags = execnono($cmd = 'git log --tags --simplify-by-decoration --author-date-order --pretty="format:%ai %d" | head -n '.NB_TAGS,NULL,$repo,NULL);
 					$ltd = secondsToNbDay(time() - ($strtime = strtotime(explode(" (",$logtags)[0])));
 				}
 				$status = explode("\t",execnono($cmd = "git rev-list --left-right --count ".$branch."...HEAD",NULL,$repo,NULL)) [0];
