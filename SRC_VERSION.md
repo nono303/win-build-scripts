@@ -2,7 +2,7 @@
 | ---- | ---- |
 | [abseil-cpp](https://github.com/abseil/abseil-cpp.git) | 20220623.rc1 |
 | [aom](https://aomedia.googlesource.com/aom) | 3.4.0 |
-| [apr](https://github.com/apache/apr) | 1.8.0-dev - fd0bcf142 |
+| [apr](https://github.com/apache/apr) | 1.8.0-dev - 4ff4bca2a |
 | [apr-iconv](https://github.com/apache/apr-iconv) | 1.2.2 |
 | [apr-util](https://github.com/apache/apr-util) | 1.7.0-dev - c206237f |
 | [brotli](https://github.com/google/brotli) | 1.0.9 |
@@ -14,10 +14,10 @@
 | [freeglut](https://github.com/dcnieho/FreeGLUT.git) | 3.2.2 |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.12.1 |
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52 |
-| [geos](https://github.com/libgeos/geos) | 3.11.0beta2 |
+| [geos](https://github.com/libgeos/geos) | 3.11.0 |
 | [giflib](https://github.com/gongjianbo/GifLib) | 5.2.1 |
 | [httpd](https://github.com/apache/httpd) | 2.4.54 |
-| [icu](https://github.com/unicode-org/icu) | 72.0.1 - cldr/2022-05-28 |
+| [icu](https://github.com/unicode-org/icu) | 72.0.1 - cldr/2022-06-27 |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.3.0 |
 | [lerc](https://github.com/Esri/lerc.git) | 3.0 |
@@ -27,7 +27,7 @@
 | [libevent](https://github.com/libevent/libevent) | 2.1.12 |
 | [libexpat](https://github.com/libexpat/libexpat) | 2.4.8 |
 | [libffi](https://github.com/nono303/libffi) - _[upstream + src](https://github.com/libffi/libffi)_ | 3.4.2 |
-| [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.17.0 |
+| [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.18.0 |
 | [libiconv](https://github.com/winlibs/libiconv) | 1.16.1 |
 | [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) | 2.1.3 |
 | [liblzma](https://github.com/ShiftMediaProject/liblzma) | 5.3.2alpha |
@@ -41,15 +41,15 @@
 | [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.9.14 |
 | [libxpm](https://github.com/nono303/libxpm.git) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.13 |
 | [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.35 |
-| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1831 |
-| [libzip](https://github.com/nih-at/libzip) | 1.9.0 |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | r1832 |
+| [libzip](https://github.com/nih-at/libzip) | 1.9.2 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
 | [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | 0.18.0 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.15 |
-| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.3.2 r2683 |
+| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.3.2 r2684 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
 | [mod_fcgid](https://github.com/nono303/mod_fcgid) - _[upstream + src](https://github.com/pagespeed/mod_fcgid)_ | 2.3.10.1 |
-| [mod_h2](https://github.com/icing/mod_h2) | 2.0.2 |
+| [mod_h2](https://github.com/icing/mod_h2) | 2.0.3 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
 | [mod_md](https://github.com/icing/mod_md) | 2.4.17 |
@@ -60,8 +60,8 @@
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 0.5.0 |
 | [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 0.6.0 |
 | [nssm](https://github.com/puppetlabs/nssm) | 2.25 - a1c3260 |
-| [openssl](https://github.com/openssl/openssl) | 3.0.3 |
-| [openssl-quic](https://github.com/quictls/openssl) | 3.0.3 - 368c9d5 |
+| [openssl](https://github.com/openssl/openssl) | 3.0.5 |
+| [openssl-quic](https://github.com/quictls/openssl/tree/openssl-3.0.5+quic) | 3.0.5 - 75e9408 |
 | [pcre](https://github.com/jwilk-mirrors/pcre) | 8.45 |
 | [pcre2](https://github.com/PhilipHazel/pcre2) | 10.40 |
 | [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | nbio_php8 - 8.1-dev - ccf702b |
@@ -71,10 +71,10 @@
 | [php-ext-zstd](https://github.com/kjdev/php-ext-zstd) | 0.11.0 |
 | [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1 - e4f9578 |
 | [php-sdk](https://github.com/php/php-sdk-binary-tools) | 2.2.1-dev - 6ee0f95 |
-| [php-src](https://github.com/php/php-src) | 8.1.7 |
+| [php-src](https://github.com/php/php-src) | 8.1.8 |
 | [proj](https://github.com/OSGeo/PROJ) | 9.0.1 |
 | [sdlna](https://github.com/nono303/simpleDLNA) - _[upstream + src](https://github.com/nmaier/simpleDLNA)_ | 1.0.3 |
-| [serf](https://github.com/apache/serf) | 1.4.0 - 14f8246 |
+| [serf](https://github.com/apache/serf.git) | 2.0.0 - 2f72c5c |
 | [sqlite](https://github.com/azadkuh/sqlite-amalgamation) | 3.38.2 |
 | [subversion](https://github.com/apache/subversion) | 1.14.2 |
 | [tidy](https://github.com/htacg/tidy-html5) | 5.9.14 |

@@ -52,15 +52,15 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [Strawberry Perl](https://strawberryperl.com/releases.html) | x64  | 5.32.1.1 |                     |
 | [NASM](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.15.05        |                     |
 | [YASM](https://yasm.tortall.net/Download.html) | x64 | 1.3.0 | |
-| [Git](https://git-scm.com/download/win)                      | x64  | 2.36.1 |                     |
+| [Git](https://git-scm.com/download/win)                      | x64  | 2.37.0 |                     |
 | verpatch                                                     | x64  | 1.0.15.1       |                     |
 | [7z](https://www.7-zip.org/download.html)                    | x64  | 22.00   |                     |
 | [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.82         |                     |
 | [ChkMatch](https://web.archive.org/web/20210205095232/https://www.debuginfo.com/tools/chkmatch.html) | x86 | 1.0.3          |                     |
 | [Gradle](https://gradle.org/install/) | [java] | 7.4.2 | |
-| [CMake](https://cmake.org/download/) | x64 | 3.24.0 rc1 | |
+| [CMake](https://cmake.org/download/) | x64 | 3.24.0 rc2 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | x64 | 1.11.0 | |
-| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 0.63.0rc1 | |
+| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 0.63.0 | |
 | [NuGet](https://www.nuget.org/downloads) | x86 | 6.2.1 | |
 
 ### [SOURCE VERSIONS](./SRC_VERSION.md)
