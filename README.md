@@ -43,22 +43,22 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.3.0-p2 (14.33) | `.vsconfig`         |
+| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.3.0-p4 (14.33) | `.vsconfig`         |
 | [Cygwin](https://cygwin.com/install.html)                    | x86  | 3.3.5   | `cyg32.packagelist` |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.3.5           | `cyg64.packagelist` |
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.10.5 |                     |
-| [Node.js](https://nodejs.org/en/download/current/) | x64 | 18.4.0 | |
-| [OpenJDK](https://jdk.java.net/18/)                      | x64  | 18.0.1.1 |                     |
+| [Node.js](https://nodejs.org/en/download/current/) | x64 | 18.6.0 | |
+| [OpenJDK](https://jdk.java.net/18/)                      | x64  | 18.0.2 |                     |
 | [Strawberry Perl](https://strawberryperl.com/releases.html) | x64  | 5.32.1.1 |                     |
 | [NASM](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.15.05        |                     |
 | [YASM](https://yasm.tortall.net/Download.html) | x64 | 1.3.0 | |
-| [Git](https://git-scm.com/download/win)                      | x64  | 2.37.0 |                     |
+| [Git](https://git-scm.com/download/win)                      | x64  | 2.37.1 |                     |
 | verpatch                                                     | x64  | 1.0.15.1       |                     |
-| [7z](https://www.7-zip.org/download.html)                    | x64  | 22.00   |                     |
-| [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.82         |                     |
+| [7z](https://www.7-zip.org/download.html)                    | x64  | 22.01  |                     |
+| [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.90       |                     |
 | [ChkMatch](https://web.archive.org/web/20210205095232/https://www.debuginfo.com/tools/chkmatch.html) | x86 | 1.0.3          |                     |
-| [Gradle](https://gradle.org/install/) | [java] | 7.4.2 | |
-| [CMake](https://cmake.org/download/) | x64 | 3.24.0 rc2 | |
+| [Gradle](https://gradle.org/install/) | [java] | 7.5 | |
+| [CMake](https://cmake.org/download/) | x64 | 3.24.0 rc4 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | x64 | 1.11.0 | |
 | [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 0.63.0 | |
 | [NuGet](https://www.nuget.org/downloads) | x86 | 6.2.1 | |

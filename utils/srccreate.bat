@@ -78,7 +78,7 @@ git checkout tags/2.4.54
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout cldr/2022-06-27
+git checkout icu4x/2022-07-25/71.x
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -90,7 +90,7 @@ git checkout tags/5.3.0
 cd /D ..
 git clone https://github.com/Esri/lerc.git lerc
 cd /D lerc
-git checkout tags/v3.0
+git checkout tags/v4.0.0
 cd /D ..
 git clone https://github.com/AOMediaCodec/libavif.git libavif
 cd /D libavif
@@ -154,7 +154,7 @@ git checkout tags/v4.4.0rc1
 cd /D ..
 git clone https://chromium.googlesource.com/webm/libwebp libwebp
 cd /D libwebp
-git checkout tags/v1.2.2
+git checkout tags/v1.2.3
 cd /D ..
 git clone https://github.com/opencor/libxdiff libxdiff
 cd /D libxdiff
@@ -194,7 +194,7 @@ git checkout tags/1.6.15
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2684
+svn update -r 2701
 cd /D ..
 git clone https://github.com/JBlond/mod_bikeshed.git mod_bikeshed
 cd /D mod_bikeshed
@@ -218,7 +218,7 @@ git checkout tags/1.2.0
 cd /D ..
 git clone https://github.com/icing/mod_md mod_md
 cd /D mod_md
-git checkout tags/v2.4.17
+git checkout tags/v2.4.18
 cd /D ..
 svn co https://svn.code.sf.net/p/mod-qos/source/trunk/httpd_src/modules/qos mod_qos
 cd /D mod_qos
@@ -238,11 +238,11 @@ git checkout tags/v1.48.0
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3
-git checkout tags/v0.5.0
+git checkout tags/v0.6.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v0.6.0
+git checkout tags/v0.7.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
