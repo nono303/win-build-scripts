@@ -13,7 +13,7 @@
 | [dependencies](https://github.com/lucasg/Dependencies) | 1.11.1 |
 | [freeglut](https://github.com/dcnieho/FreeGLUT.git) | 3.2.2 |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.12.1 |
-| [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 1.52 |
+| [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 2.0.0 - b3ee8cc7 |
 | [geos](https://github.com/libgeos/geos) | 3.11.0 |
 | [giflib](https://github.com/gongjianbo/GifLib) | 5.2.1 |
 | [httpd](https://github.com/apache/httpd) | 2.4.54 |
@@ -23,30 +23,30 @@
 | [lerc](https://github.com/Esri/lerc.git) | 4.0.0 |
 | [libavif](https://github.com/AOMediaCodec/libavif.git) | 0.10.1 |
 | [libdeflate](https://github.com/ebiggers/libdeflate.git) | 1.12 |
-| [libev](https://git.lighttpd.net/libev) | 4.33 |
+| [libev](https://git.lighttpd.net/libev) | 4.33 - a5960a2 |
 | [libevent](https://github.com/libevent/libevent) | 2.1.12 |
 | [libexpat](https://github.com/libexpat/libexpat) | 2.4.8 |
 | [libffi](https://github.com/nono303/libffi) - _[upstream + src](https://github.com/libffi/libffi)_ | 3.4.2 |
 | [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.18.0 |
-| [libiconv](https://github.com/winlibs/libiconv) | 1.16.1 |
+| [libiconv](https://github.com/pffang/libiconv-for-Windows) | 1.17 - 3ecec21 |
 | [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) | 2.1.3 |
 | [liblzma](https://github.com/ShiftMediaProject/liblzma) | 5.3.2alpha |
 | [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.6.0 |
-| [libpng](https://sourceforge.net/p/libpng/code/ci/master/tree/) | 1.6.37 |
-| [libsodium](https://github.com/jedisct1/libsodium.git) | 1.0.18 |
+| [libpng](https://sourceforge.net/p/libpng/code/ci/master/tree/) | 1.6.38 - a37d48365 |
+| [libsodium](https://github.com/jedisct1/libsodium.git) | 1.0.18.0 - 0a6178f2 |
 | [libssh2](https://github.com/libssh2/libssh2) | 1.10.0 |
 | [libtiff](https://gitlab.com/libtiff/libtiff) | 4.4.0 |
 | [libwepb](https://chromium.googlesource.com/webm/libwebp) | 1.2.3 |
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
 | [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.9.14 |
 | [libxpm](https://github.com/nono303/libxpm.git) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.13 |
-| [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.35 |
+| [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.35 - eaa53788 |
 | [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | r1833 |
 | [libzip](https://github.com/nih-at/libzip) | 1.9.2 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
 | [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | 0.18.0 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.15 |
-| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.3.2 r2701 |
+| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.3.3 r2709 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
 | [mod_fcgid](https://github.com/nono303/mod_fcgid) - _[upstream + src](https://github.com/pagespeed/mod_fcgid)_ | 2.3.10.1 |
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.3 |
@@ -64,11 +64,11 @@
 | [openssl-quic](https://github.com/quictls/openssl/tree/openssl-3.0.5+quic) | 3.0.5 - 75e9408 |
 | [pcre](https://github.com/jwilk-mirrors/pcre) | 8.45 |
 | [pcre2](https://github.com/PhilipHazel/pcre2) | 10.40 |
-| [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | nbio_php8 - 8.1-dev - ccf702b |
+| [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | nbio_php8 - 8.0.1 |
 | [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1-dev - 21857db |
 | [php-cgi-spawner](https://github.com/deemru/php-cgi-spawner) | 1.1.23 - 90197af |
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.13.1 |
-| [php-ext-zstd](https://github.com/kjdev/php-ext-zstd) | 0.11.0 |
+| [php-ext-zstd](https://github.com/kjdev/php-ext-zstd) | 0.11.0 - 4504e41 |
 | [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1 - e4f9578 |
 | [php-sdk](https://github.com/php/php-sdk-binary-tools) | 2.2.1-dev - 6ee0f95 |
 | [php-src](https://github.com/php/php-src) | 8.1.8 |

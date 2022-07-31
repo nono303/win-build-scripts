@@ -62,7 +62,7 @@ git checkout tags/VER-2-12-1
 cd /D ..
 git clone https://git.code.sf.net/p/geographiclib/code geographiclib
 cd /D geographiclib
-git checkout tags/v1.52
+git checkout main
 cd /D ..
 git clone https://github.com/libgeos/geos geos
 cd /D geos
@@ -100,9 +100,9 @@ git clone https://github.com/ebiggers/libdeflate.git libdeflate
 cd /D libdeflate
 git checkout tags/v1.12
 cd /D ..
-git clone https://git.lighttpd.net/libev.git libev
+git clone https://git.lighttpd.net/mirrors/libev.git libev
 cd /D libev
-git checkout tags/rel-4.33
+git checkout master
 cd /D ..
 git clone https://github.com/libevent/libevent.git libevent
 cd /D libevent
@@ -120,9 +120,9 @@ git clone https://chromium.googlesource.com/codecs/libgav1 libgav1
 cd /D libgav1
 git checkout tags/v0.18.0
 cd /D ..
-git clone https://github.com/winlibs/libiconv libiconv
+git clone https://github.com/pffang/libiconv-for-Windows.git libiconv
 cd /D libiconv
-git checkout tags/libiconv-1.16-1
+git checkout master
 cd /D ..
 git clone https://github.com/libjpeg-turbo/libjpeg-turbo libjpeg-turbo
 cd /D libjpeg-turbo
@@ -138,11 +138,11 @@ git checkout tags/1.6.0
 cd /D ..
 git clone git://git.code.sf.net/p/libpng/code libpng
 cd /D libpng
-git checkout tags/v1.6.37
+git checkout libpng16
 cd /D ..
 git clone https://github.com/jedisct1/libsodium.git libsodium
 cd /D libsodium
-git checkout tags/1.0.18
+git checkout master
 cd /D ..
 git clone https://github.com/libssh2/libssh2.git libssh2
 cd /D libssh2
@@ -170,7 +170,7 @@ git checkout tags/libxpm-3.5.13
 cd /D ..
 git clone https://gitlab.gnome.org/GNOME/libxslt libxslt
 cd /D libxslt
-git checkout tags/v1.1.35
+git checkout master
 cd /D ..
 git clone https://chromium.googlesource.com/libyuv/libyuv libyuv
 cd /D libyuv
@@ -194,7 +194,7 @@ git checkout tags/1.6.15
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2701
+svn update -r 2709
 cd /D ..
 git clone https://github.com/JBlond/mod_bikeshed.git mod_bikeshed
 cd /D mod_bikeshed
@@ -202,7 +202,7 @@ git checkout tags/1.0.0
 cd /D ..
 git clone https://github.com/nono303/mod_fcgid.git mod_fcgid
 cd /D mod_fcgid
-git checkout tags/2.3.10.1
+git checkout tags/2.3.10.2
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -266,7 +266,7 @@ git checkout tags/pcre2-10.40
 cd /D ..
 git clone https://github.com/websupport-sk/pecl-memcache.git pecl-memcache
 cd /D pecl-memcache
-git checkout NON_BLOCKING_IO_php8
+git checkout tags/8.0.1
 cd /D ..
 git clone https://github.com/php/pecl-text-xdiff pecl-text-xdiff
 cd /D pecl-text-xdiff
@@ -282,7 +282,7 @@ git checkout tags/0.13.1
 cd /D ..
 git clone https://github.com/kjdev/php-ext-zstd.git php-ext-zstd
 cd /D php-ext-zstd
-git checkout tags/0.11.0
+git checkout master
 cd /D ..
 git clone https://github.com/ModelTech/php-geos php-geos
 cd /D php-geos
