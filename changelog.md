@@ -1,6 +1,60 @@
 # changelog
 
 
+## 1.5.8 _(2022-07-31)_
+
+*  https://github.com/openssl/openssl/issues/18723
+`modules/mobac.patch`
+`modules/openssl.bat`
+*  https://github.com/openssl/openssl/pull/18732
+`modules/openssl.patch`
+*  fix date ordering for tags log
+`utils/sub/srcstatus.php`
+*  set default QUIC_BUILD=1
+`quic.bat`
+*  set CMAKE_INSTALL_MANDIR (default unseted)
+`modules/proj.bat`
+*  git apply openssl.patch for openssl-quic
+`modules/openssl.bat`
+*  set CURL_PATCH_WIN_OPENSSL=1 (mandatory for mod_md with curl openssl backend)
+`env_sample.bat`
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  2701 - gradle 7.5 - comment msg_too_many_tiles
+`modules/mobac.patch`
+*  https://svn.apache.org/viewvc?view=revision&revision=1902576
+`modules/apr.patch`
+*  bump tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  uncomment vsconfig export
+`utils/configexport.bat`
+*  better SCM_BRANCH value for git
+`modules/common/init.bat`
+*  remove static $notags better $branch value improve csv content lisibility
+`utils/sub/srcstatus.php`
+*  bump tools version
+`README.md`
+`config/python.pip`
+*  r2709
+`modules/mobac.patch`
+*  8.0.1
+`modules/pecl-memcache.patch`
+*  tag to branch for php-ext-zstd, libxslt, libsodium, libpng, geographiclib, libiconv, libev
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+`utils/sub/version.php`
+*  1.5.2 > 2.0.0
+`modules/geographiclib.bat`
+*  change scm (1.17)
+`modules/libiconv.bat`
+*  fix  PNG_BUILD_ZLIB: ON > OFF
+`modules/libpng.bat`
+
+
 ## 1.5.7 _(2022-06-27)_
 
 *  2683
@@ -28,6 +82,8 @@
 `README.md`
 `SRC_VERSION.md`
 `utils/srccreate.bat`
+*  1.5.7
+`changelog.md`
 
 
 ## 1.5.6 _(2022-06-04)_
