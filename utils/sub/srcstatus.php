@@ -2,27 +2,7 @@
 	include( dirname(__FILE__) . '/_functions.php');
 
 	date_default_timezone_set("Europe/Paris");
-	define("NB_TAGS",5);
-	static $notags = [
-		"mpir",
-		"bzip2", 
-		"openssl-quic", 
-		"apr",
-		"apr-util",
-		"libyuv",
-		"mod_h264_streaming", 
-		"nssm", 
-		"pecl-memcache", 
-		"pecl-text-xdiff", 
-		"php-cgi-spawner", 
-		"php-geos", 
-		"php-sdk", 
-		"serf", 
-		"verpatch",
-		"mapsforgesrv",
-		"mapsforgesrv.ori",
-
-	];
+	define("NB_TAGS",8);
 
 	if(in_array("gitcg", $argv)){
 		define("GIT_GC",true);
@@ -54,17 +34,15 @@
 	file_put_contents($argv[1],'"name";"scm";"origin";"head";"status";"branch";"log tags";"last tag"'.PHP_EOL,FILE_APPEND);
 	echo "*************************".PHP_EOL;
 	foreach(scandir($srcdir) as $ele){
-	// foreach(["libyuv"] as $ele){
 		if(is_dir($repo = $srcdir.$ele) &&  $ele != "." && $ele != ".."){
 			$name = basename($repo);
 			$type = "man";
 			if(is_dir($repo."/.git")){
-				// echo passthru("mklink /H C:\\sdk\\batch\\config\\scm\\git.".$name .".conf ".str_replace("/","\\",$repo)."\\.git\\config");
 				$type = "git";
 				if(VERBOSE) echo $repo.PHP_EOL;
 				$upstream = execnono($cmd = "git config --get remote.origin.url",NULL,$repo,NULL);
 				if(VERBOSE) echo $cmd.PHP_EOL;
-				$head = explode("^",execnono($cmd = "git name-rev --name-only HEAD",NULL,$repo,NULL))[0];//execnono($cmd = "git describe --tags",NULL,$repo,NULL);
+				$head = explode("^",execnono($cmd = "git name-rev --name-only HEAD",NULL,$repo,NULL))[0]; //execnono($cmd = "git describe --tags",NULL,$repo,NULL);
 				if(VERBOSE) echo $cmd.PHP_EOL;
 				preg_match("/^\* \(HEAD detached at ([^\)]+)\)/",execnono($cmd = "git branch -a",NULL,$repo,NULL),$matches);
 				if(VERBOSE) echo $cmd.PHP_EOL;
@@ -79,20 +57,47 @@
 					execnono($cmd = "git fetch --tag",NULL,$repo,NULL);
 					if(VERBOSE) echo $cmd.PHP_EOL;
 				}
-				preg_match("/^\* (.*)\n/m",$res = execnono($cmd = "git branch -a",NULL,$repo,NULL),$matches);
-				if(VERBOSE) echo $cmd.PHP_EOL;
-				$branch = $matches[1];
-				if(in_array($ele,$notags)){
+				$commit = trim(execnono($cmd = "git rev-parse --short HEAD",NULL,$repo,NULL));
+				preg_match("/HEAD ->(.*)\n/m",$res = execnono($cmd = "git branch -a --contains ".$commit." | grep -v detached",NULL,$repo,NULL),$matches);
+				if($matches[1]) {
+					$branch = $matches[1];
+				} else {
+					preg_match("/\* (.*)\n/m",$res,$matches);
+					if($matches[1]) {
+						$branch = $matches[1];
+					} else {
+						$allb = array_filter(explode("\n",$res));
+						if(sizeof($allb) == 0){
+							$branch = $allb[0];
+						} elseif(sizeof($allb) == 1){
+							$branch = $allb[0];
+						} else {
+							// print_r($allb);
+							// arbitraire
+							$branch = end($allb);
+						}
+					}
+				}
+				$branch = end(explode("/",$branch));
+				if(is_int(strpos($branch,"no branch")))
+					$branch = "";
+				// head is branch
+				if(!is_int(strpos($head,"/"))){
+					$branch = $head;
 					$reset = execnono($cmd = "git reset --hard",NULL,$repo,NULL);
 					$pullres = execnono($cmd = "git pull",NULL,$repo,NULL);
 					if(VERBOSE) echo $cmd.PHP_EOL.$pullres.PHP_EOL;
-					$tmp = explode(" ",execnono($cmd = 'git log --no-walk --pretty="format:%h %ad" --date=iso-strict HEAD',NULL,$repo,NULL));
-					$logtags = $tmp[0];
+					$tmp = explode(" ",$res = execnono($cmd = 'git log --no-walk --pretty="format:%h %ad" --date=iso-strict HEAD',NULL,$repo,NULL));
 					$ltd = secondsToNbDay(time() - ($strtime = strtotime($tmp[1])));
+					$logtags = date("Y-m-d H:i:s O",$strtime) ." (HEAD, commit: ".$tmp[0];
+					$head = "branch/".$head;
 					if ($ele == "libyuv"){
 						preg_match("/ LIBYUV_VERSION ([0-9]+)/",file_get_contents($srcdir."/libyuv/include/libyuv/version.h"),$matches);
-						$logtags .= " (".$matches[1].")";
+						$logtags .= ", ".$matches[1].")";
+					} else {
+						$logtags .= ", ".$head.")";
 					}
+				// head is tag
 				} else {
 					$logtags = execnono($cmd = 'git log --tags --simplify-by-decoration --author-date-order --pretty="format:%ai %d" | head -n '.NB_TAGS,NULL,$repo,NULL);
 					$ltd = secondsToNbDay(time() - ($strtime = strtotime(explode(" (",$logtags)[0])));
@@ -146,6 +151,7 @@
 				} else {
 					$status = "up to date";
 				}
+				$head = "revision/".$head;
 			}
 			echo str_pad($type,4).str_pad($name,20).str_pad($head,26).str_pad($status,26," ",STR_PAD_LEFT)."  ".str_pad($branch,20).PHP_EOL;
 			file_put_contents($argv[1],'"'.$name.'";"'.$type.'";"'.$upstream.'";"'.$head.'";"'.$status.'";"'.$branch.'";"'.$logtags.'";"'.$ltd.'"'.PHP_EOL,FILE_APPEND);
