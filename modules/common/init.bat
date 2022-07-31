@@ -24,7 +24,7 @@ if exist %PATH_SRC%\%1\. (
 	if exist %PATH_SRC%\%1\.git\. (
 		FOR /F "tokens=* USEBACKQ" %%F in (`git rev-parse --short HEAD`) do (set SCM_COMORREV=%%F)
 		for /F "tokens=* USEBACKQ" %%F in (`git tag --points-at HEAD`) do (set SCM_TAG=%%F)
-		FOR /F "tokens=* USEBACKQ" %%F in (`git rev-parse --abbrev-ref HEAD`) do (set SCM_BRANCH=%%F)
+		FOR /F "tokens=* USEBACKQ" %%F in (`git branch -a --contains !SCM_COMORREV! ^| grep -v detached ^| grep -v /`) do (set SCM_BRANCH=%%F)
 		FOR /F "tokens=* USEBACKQ" %%F in (`git show -s --format^=%%cd --date=short !SCM_COMORREV!`) do (set SCM_COMORREV_DATE=%%F)
 		FOR /F "tokens=* USEBACKQ" %%F in (`git config --get remote.origin.url`) do (set SCM_URL=%%F)
 		if /I "%~2"=="varonly" (goto end)
