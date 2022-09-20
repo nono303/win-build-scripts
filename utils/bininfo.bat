@@ -19,5 +19,5 @@ for %%E in (nts) do (
 	call do_php %PATH_UTILS%\sub\%1.php %PATH_INSTALL%\_php-%%E %BININFO_LOG:\=/% %2 %3 nb:86 %4 %5 %6 %7
 )
 	call do_php %PATH_UTILS%\sub\%1.php %PATH_INSTALL%\_proj\bin %BININFO_LOG:\=/% %2 %3 nb:20 %4 %5 %6 %7
-	call do_php %PATH_UTILS%\sub\%1.php %PATH_INSTALL%\_geographiclib\bin %BININFO_LOG:\=/% %2 %3 nb:22 %4 %5 %6 %7
+	call do_php %PATH_UTILS%\sub\%1.php %PATH_INSTALL%\_geographiclib\bin %BININFO_LOG:\=/% %2 %3 nb:24 %4 %5 %6 %7
 )
