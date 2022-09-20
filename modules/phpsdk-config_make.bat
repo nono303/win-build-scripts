@@ -132,6 +132,7 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--with-xsl=shared ^
 	--with-gmp=shared ^
 	--enable-zstd=shared ^
+	--enable-gd=shared ^
 	%PHP_LIBXML_CONFIG% ^
 	%ZTS% ^
 	%phpveropts% ^
