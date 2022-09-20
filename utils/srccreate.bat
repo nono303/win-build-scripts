@@ -10,11 +10,11 @@ if not exist %PATH_SRC%\. mkdir %PATH_SRC%
 cd /D %PATH_SRC%
 git clone https://github.com/abseil/abseil-cpp.git abseil-cpp
 cd /D abseil-cpp
-git checkout tags/20220623.0
+git checkout tags/20220623.1
 cd /D ..
 git clone https://aomedia.googlesource.com/aom aom
 cd /D aom
-git checkout tags/v3.4.0
+git checkout tags/v3.5.0-rc1
 cd /D ..
 git clone https://github.com/apache/apr.git apr
 cd /D apr
@@ -42,7 +42,7 @@ git checkout tags/cares-1_18_1
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-7_84_0
+git checkout tags/curl-7_85_0
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -78,7 +78,7 @@ git checkout tags/2.4.54
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout icu4x/2022-07-25/71.x
+git checkout cldr/2022-09-12
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -98,7 +98,7 @@ git checkout tags/v0.10.1
 cd /D ..
 git clone https://github.com/ebiggers/libdeflate.git libdeflate
 cd /D libdeflate
-git checkout tags/v1.12
+git checkout tags/v1.14
 cd /D ..
 git clone https://git.lighttpd.net/mirrors/libev.git libev
 cd /D libev
@@ -114,7 +114,7 @@ git checkout tags/R_2_4_8
 cd /D ..
 git clone https://github.com/nono303/libffi.git libffi
 cd /D libffi
-git checkout tags/msvc-3.4.2
+git checkout tags/v3.4.3
 cd /D ..
 git clone https://chromium.googlesource.com/codecs/libgav1 libgav1
 cd /D libgav1
@@ -126,11 +126,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/libjpeg-turbo/libjpeg-turbo libjpeg-turbo
 cd /D libjpeg-turbo
-git checkout tags/2.1.3
+git checkout tags/2.1.4
 cd /D ..
 git clone https://git.tukaani.org/xz.git liblzma
 cd /D liblzma
-git checkout tags/v5.3.2alpha
+git checkout tags/v5.3.3alpha
 cd /D ..
 git clone https://github.com/maxmind/libmaxminddb.git libmaxminddb
 cd /D libmaxminddb
@@ -154,7 +154,7 @@ git checkout tags/v4.4.0rc1
 cd /D ..
 git clone https://chromium.googlesource.com/webm/libwebp libwebp
 cd /D libwebp
-git checkout tags/v1.2.3
+git checkout tags/v1.2.4
 cd /D ..
 git clone https://github.com/opencor/libxdiff libxdiff
 cd /D libxdiff
@@ -190,11 +190,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
-git checkout tags/1.6.15
+git checkout tags/1.6.17
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2709
+svn update -r 2712
 cd /D ..
 git clone https://github.com/JBlond/mod_bikeshed.git mod_bikeshed
 cd /D mod_bikeshed
@@ -206,7 +206,7 @@ git checkout tags/2.3.10.2
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v2.0.3
+git checkout tags/v2.0.4
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -218,7 +218,7 @@ git checkout tags/1.2.0
 cd /D ..
 git clone https://github.com/icing/mod_md mod_md
 cd /D mod_md
-git checkout tags/v2.4.18
+git checkout tags/v2.4.19
 cd /D ..
 svn co https://svn.code.sf.net/p/mod-qos/source/trunk/httpd_src/modules/qos mod_qos
 cd /D mod_qos
@@ -234,15 +234,15 @@ git checkout master
 cd /D ..
 git clone https://github.com/nghttp2/nghttp2.git nghttp2
 cd /D nghttp2
-git checkout tags/v1.48.0
+git checkout tags/v1.49.0
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3
-git checkout tags/v0.6.0
+git checkout tags/v0.7.1
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v0.7.0
+git checkout tags/v0.9.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -264,9 +264,9 @@ git clone https://github.com/PhilipHazel/pcre2.git pcre2
 cd /D pcre2
 git checkout tags/pcre2-10.40
 cd /D ..
-git clone https://github.com/websupport-sk/pecl-memcache.git pecl-memcache
+git clone https://github.com/nono303/pecl-memcache.git pecl-memcache
 cd /D pecl-memcache
-git checkout tags/8.0.1
+git checkout main
 cd /D ..
 git clone https://github.com/php/pecl-text-xdiff pecl-text-xdiff
 cd /D pecl-text-xdiff
@@ -294,11 +294,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.1.8
+git checkout tags/php-8.1.10
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
-git checkout tags/9.0.1
+git checkout tags/9.1.0
 cd /D ..
 git clone https://github.com/nono303/simpleDLNA.git sdlna
 cd /D sdlna
