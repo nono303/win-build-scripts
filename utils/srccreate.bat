@@ -110,7 +110,7 @@ git checkout tags/release-2.1.12-stable
 cd /D ..
 git clone https://github.com/libexpat/libexpat.git libexpat
 cd /D libexpat
-git checkout tags/R_2_4_8
+git checkout tags/R_2_4_9
 cd /D ..
 git clone https://github.com/nono303/libffi.git libffi
 cd /D libffi
@@ -234,7 +234,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/nghttp2/nghttp2.git nghttp2
 cd /D nghttp2
-git checkout tags/v1.49.0
+git checkout tags/v1.48.0
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3

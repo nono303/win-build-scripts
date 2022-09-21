@@ -25,7 +25,7 @@
 | [libdeflate](https://github.com/ebiggers/libdeflate.git) | 1.14 |
 | [libev](https://git.lighttpd.net/libev) | 4.33 - 5b75258 |
 | [libevent](https://github.com/libevent/libevent) | 2.1.12 |
-| [libexpat](https://github.com/libexpat/libexpat) | 2.4.8 |
+| [libexpat](https://github.com/libexpat/libexpat) | 2.4.9 |
 | [libffi](https://github.com/nono303/libffi) - _[upstream + src](https://github.com/libffi/libffi)_ | 3.4.3 |
 | [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.18.0 |
 | [libiconv](https://github.com/pffang/libiconv-for-Windows) | 1.17 - 3ecec21 |
@@ -40,13 +40,13 @@
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
 | [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.9.14 |
 | [libxpm](https://github.com/nono303/libxpm.git) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.13 |
-| [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.37 - 8d519c86 |
-| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | r1844 |
+| [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.37 - a76d2d29 |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | r1844 - f9fda6e7 |
 | [libzip](https://github.com/nih-at/libzip) | 1.9.2 |
 | [lua](https://github.com/lua/lua) | 5.4.3 |
-| [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | 0.18.0 |
+| [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | 0.18.0 - de3aabe |
 | [memcached](https://github.com/memcached/memcached) | 1.6.17 |
-| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.3.3 r2712 |
+| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.3.3 - r2712 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
 | [mod_fcgid](https://github.com/nono303/mod_fcgid) - _[upstream + src](https://github.com/pagespeed/mod_fcgid)_ | 2.3.10.2 |
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.4 |
@@ -64,7 +64,7 @@
 | [openssl-quic](https://github.com/quictls/openssl/tree/openssl-3.0.5+quic) | 3.0.5 - 75e9408 |
 | [pcre](https://github.com/jwilk-mirrors/pcre) | 8.45 |
 | [pcre2](https://github.com/PhilipHazel/pcre2) | 10.40 |
-| [pecl-memcache](https://github.com/nono303/pecl-memcache) - _[upstream + src](https://github.com/websupport-sk/pecl-memcache)_ | 8.1.0.103 |
+| [pecl-memcache](https://github.com/nono303/pecl-memcache) - _[upstream + src](https://github.com/websupport-sk/pecl-memcache)_ | 8.1.0.103 - a5ff2df |
 | [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1-dev - 21857db |
 | [php-cgi-spawner](https://github.com/deemru/php-cgi-spawner) | 1.1.23 - 90197af |
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.13.1 |
