@@ -1,7 +1,5 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
-	REM fix find LibXml2
-xcopy /C /F /Y %PATH_MODULES%\libxlst.FindLibXml2.cmake %PATH_SRC%\%1\FindLibXml2.cmake*
 sed -i 's/LibXml2 CONFIG/LibXml2/g' %CYGPATH_SRC%/%1/CMakeLists.txt
 
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^

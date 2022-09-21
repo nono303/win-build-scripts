@@ -16,8 +16,8 @@
 	$nogit = array(
 		"php-ext-zstd"		=> ["/#define PHP_ZSTD_EXT_VERSION \"([0-9\.]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/php_zstd.h"],
-		"libxslt"			=> ["/libxslt1 VERSION ([0-9\.]+)/s",
-							pathenv("PATH_SRC")."/".$argv[1]."/CMakeLists.txt"],
+		"libxslt"			=> ["/MAJOR_VERSION\], \[([0-9]+).*MINOR_VERSION\], \[([0-9]+).*MICRO_VERSION\], \[([0-9]+)/s",
+							pathenv("PATH_SRC")."/".$argv[1]."/configure.ac"],
 		"libsodium"			=> ["/#define LIBSODIUM_VERSION_STRING \"([0-9\.]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/builds/msvc/resource.rc"],
 		"libpng"			=> ["/#define PNG_LIBPNG_VER_MAJOR *([0-9]+).*#define PNG_LIBPNG_VER_MINOR *([0-9]+).*#define PNG_LIBPNG_VER_RELEASE *([0-9]+).*/s",
