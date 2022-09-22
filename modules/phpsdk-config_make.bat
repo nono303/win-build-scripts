@@ -79,8 +79,8 @@ set PHP_COMMON_CONFIGURE=^
 	--without-uncritical-warn-choke ^
 	--with-toolset=vs ^
 	--with-cygwin=%PATH_BIN_CYGWIN% ^
-	--with-extra-includes=%PATH_INSTALL_OSSL%\include ^
-	--with-extra-libs=%PATH_INSTALL_OSSL%\lib ^
+	--with-extra-includes=%PATH_INSTALL_OSSL%\include;%PATH_INSTALL%\include ^
+	--with-extra-libs=%PATH_INSTALL_OSSL%\lib;%PATH_INSTALL%\lib ^
 	--with-mp=%NUMBER_OF_PROCESSORS%
 REM known bug for --with-ffi if php != 8.1 || 7.4
 if %PHPVER% == %PHP_FULLBUILD% (
@@ -161,7 +161,9 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--enable-embed ^
 	--enable-memcache=shared ^
 	--without-geos ^
-	%ZTS% %phpveropts%
+	%ZTS% ^
+	%phpveropts% ^
+	%phparchopts%
 )
 echo configure %FINAL_CONFIGURE%
 call configure %FINAL_CONFIGURE%
@@ -213,10 +215,11 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	call do_php %PATH_UTILS%\sub\version.php xdebug %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_xdebug.dll "php:%PHPVER% build:%TSNTS%"
 )
 	REM php_memcache for github
+if %AVXECHO% == sse2 (set AVXPATH=) else (set AVXPATH=\avx)
 call %PATH_MODULES_COMMON%\init.bat pecl-memcache varonly
 call do_php %PATH_UTILS%\sub\version.php pecl-memcache %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcache.dll "php:%PHPVER% build:%TSNTS%"
 if not "%PATH_GITHUB_PHPMEMCACHE%"=="" (
 	for %%A in (pdb dll) do (
-		xcopy /C /F /Y %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcache.%%A %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXB:-=\%\php-%PHPVER%.x_memcache.%%A*
+		xcopy /C /F /Y %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcache.%%A %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXPATH%\php-%PHPVER%.x_memcache.%%A*
 	)
 )
