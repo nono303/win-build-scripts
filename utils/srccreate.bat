@@ -14,7 +14,7 @@ git checkout tags/20220623.1
 cd /D ..
 git clone https://aomedia.googlesource.com/aom aom
 cd /D aom
-git checkout tags/v3.5.0-rc1
+git checkout tags/v3.5.0
 cd /D ..
 git clone https://github.com/apache/apr.git apr
 cd /D apr
@@ -78,7 +78,7 @@ git checkout tags/2.4.54
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout cldr/2022-09-12
+git checkout tags/release-72-rc
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -264,9 +264,9 @@ git clone https://github.com/PhilipHazel/pcre2.git pcre2
 cd /D pcre2
 git checkout tags/pcre2-10.40
 cd /D ..
-git clone https://github.com/nono303/pecl-memcache.git pecl-memcache
+git clone https://github.com/websupport-sk/pecl-memcache.git pecl-memcache
 cd /D pecl-memcache
-git checkout main
+git checkout tags/8.0.1
 cd /D ..
 git clone https://github.com/php/pecl-text-xdiff pecl-text-xdiff
 cd /D pecl-text-xdiff
@@ -302,7 +302,7 @@ git checkout tags/9.1.0
 cd /D ..
 git clone https://github.com/nono303/simpleDLNA.git sdlna
 cd /D sdlna
-git checkout tags/v1.0.3
+git checkout master
 cd /D ..
 git clone https://github.com/apache/serf.git serf
 cd /D serf
