@@ -3,7 +3,8 @@ cd /D %PHP_SRC_DIR%
 	REM ################# PHP7 #################
 set PHP7_COMMON_CONFIGURE=^
 	--disable-crt-debug ^
-	--without-xmlrpc
+	--without-xmlrpc ^
+	--without-oci8 ^
 if %PHPVER% == 7.1 (
 	set phpveropts=	%PHP7_COMMON_CONFIGURE% ^
 			--without-wddx ^
@@ -37,24 +38,26 @@ if %PHPVER% == 7.4 (
 	set native-intrinsics=1
 )
 REM ################# PHP8 #################
+set PHP8_COMMON_CONFIGURE=^
+	--enable-native-intrinsics=sse,sse2%intrinsics% ^
+	--with-mhash ^
+	--enable-sanitizer
 if %PHPVER% == 8.0 (
-	set phpveropts=	--enable-native-intrinsics=sse,sse2%intrinsics% ^
-			--with-mhash ^
-			--enable-sanitizer ^
-			--disable-phpdbg-webhelper
+	set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
+			--disable-phpdbg-webhelper ^
+			--without-oci8 ^
 	set native-intrinsics=1
 )
 if %PHPVER% == 8.1 (
-	set phpveropts=	--enable-native-intrinsics=sse,sse2%intrinsics% ^
-			--with-mhash ^
-			--enable-sanitizer ^
-			--with-php-build=%PATH_INSTALL%
+	set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
+			--with-php-build=%PATH_INSTALL% ^
+			--without-oci8 ^
 	set native-intrinsics=1
 )
-if %PHP_LIBXML% == shared (
-	set PHP_LIBXML_CONFIG=--with-libxmlshared=shared
-) else (
-	set PHP_LIBXML_CONFIG=--with-libxml=shared
+if %PHPVER% == 8.2 (
+	set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
+			--with-php-build=%PATH_INSTALL%
+	set native-intrinsics=1
 )
 
 set PHP_COMMON_CONFIGURE=^
@@ -74,7 +77,6 @@ set PHP_COMMON_CONFIGURE=^
 	--without-imap ^
 	--without-snmp ^
 	--without-ldap ^
-	--without-oci8 ^
 	--without-pgsql ^
 	--without-uncritical-warn-choke ^
 	--with-toolset=vs ^
@@ -133,7 +135,7 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--with-gmp=shared ^
 	--enable-zstd=shared ^
 	--enable-gd=shared ^
-	%PHP_LIBXML_CONFIG% ^
+	--with-libxml=shared ^
 	%ZTS% ^
 	%phpveropts% ^
 	%phparchopts%
@@ -161,6 +163,7 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--enable-embed ^
 	--enable-memcache=shared ^
 	--without-geos ^
+	--without-readline ^
 	%ZTS% ^
 	%phpveropts% ^
 	%phparchopts%
