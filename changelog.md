@@ -1,6 +1,69 @@
 # changelog
 
 
+## 1.5.9 _(2022-09-23)_
+
+*  update nb geographiclib
+`utils/bininfo.bat`
+*  disable warn
+`modules/icu.bat`
+`modules/libffi.bat`
+*  deprecated: PROJ_LIB_ENV_VAR_TRIED_LAST > PROJ_DATA_ENV_VAR_TRIED_LAST
+`modules/proj.bat`
+*  fix version
+`modules/libxslt.patch`
+*  fix dll export definition (LIBYUV_API for DetileToYUY2)
+`modules/libyuv.patch`
+*  remove '* ' in front of branch name
+`modules/common/init.bat`
+*  bump to 2.0.0
+`modules/geographiclib.bat`
+*  REM: jupiter8 must be launch last for version
+`modules/memcached_event-2.0.sh`
+*  disable gradle version patch
+`modules/mobac.patch`
+*  --enable-gd=shared
+`modules/phpsdk-config_make.bat`
+*  REM: big message when building openssl add HTTPD_VERSION in so version
+`modules/mod_md.bat`
+*  change SCM: https://github.com/nono303/pecl-memcache#main (including all PR)
+`modules/pecl-memcache.patch`
+*  vcvars_ver: 14.33 > 14.34 bump scr & tools
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+`vs17.bat`
+*  fix libxslt version & missing cmake
+`modules/libxlst.FindLibXml2.cmake`
+`modules/libxslt.bat`
+`modules/libxslt.patch`
+`utils/sub/version.php`
+*  bump src version
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  fix for pecl-memcache: AVXPATH fix for pecl-memcache only build: phparchopts fix for php ! 8.1: with-extra-includes & with-extra-libs
+`modules/phpsdk-config_make.bat`
+*  force PHP_SDK_VC_DIR for !vs17 build
+`modules/php.bat`
+*  bump - WKITVER: 10.0.22000.0 > 10.0.22621.0 - DOTNETVER: 4.8 > 4.8.1
+`env_sample.bat`
+*  3.1.5
+`modules/xdebug.patch`
+*  PHP7_COMMON: +without-oci8 add PHP8_COMMON add PHPVER == 8.2 remove PHP_LIBXML pecl-memcache standalone: +without-readline
+`modules/phpsdk-config_make.bat`
+*  add VERSION PATCH for php-src & pecl-memcache remove PHP_LIBXML
+`modules/pecl-memcache.patch`
+`modules/php.bat`
+`modules/php8.0_php-src.patch`
+`modules/php8.1_php-src.patch`
+`modules/php8.2_pecl-memcache.patch`
+`modules/php8.2_php-src.patch`
+*  bump src & tools
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+
+
 ## 1.5.8 _(2022-07-31)_
 
 *  https://github.com/openssl/openssl/issues/18723
@@ -53,6 +116,8 @@
 `modules/libiconv.bat`
 *  fix  PNG_BUILD_ZLIB: ON > OFF
 `modules/libpng.bat`
+*  tag 1.5.8
+`changelog.md`
 
 
 ## 1.5.7 _(2022-06-27)_
