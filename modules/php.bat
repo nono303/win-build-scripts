@@ -22,6 +22,11 @@ set PHPVER=%SCM_TAG:~4,3%
 	REM link openssl3 sources to module (applink.c)
 if exist %PATH_SRC%\php-src\openssl\. rmdir /S /Q %PATH_SRC%\php-src\openssl
 mklink /J %PATH_SRC%\php-src\openssl %PATH_SRC%\%OPENSSL_SCM%\ms
+	REM VERSION PATCH
+if exist %PATH_MODULES%\php%PHPVER%_php-src.patch (
+	echo     # apply php%PHPVER%_php-src.patch
+	git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php%PHPVER%_php-src.patch
+)
 
 	REM ~~~~~~~~~~~~ php-geos
 call %PATH_MODULES_COMMON%\init.bat php-geos
@@ -35,6 +40,11 @@ call %PATH_MODULES_COMMON%\init.bat pecl-memcache
 FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\find -name 'memcache.c' -type f -exec dirname {} +`) do (set PECLMEMCACHECYGSRCDIR=%%F)
 FOR /F "tokens=* USEBACKQ" %%F in (`grep PHP_MEMCACHE_VERSION %CYGPATH_SRC%/pecl-memcache/%PECLMEMCACHECYGSRCDIR%/php_memcache.h ^| cut -d^'^"^' -f2`) do (set PECLMEMCACHEVERSION=%%F)
 sed -i -E 's/, PHP_MEMCACHE_VERSION/, "%PECLMEMCACHEVERSION% | branch: %SCM_BRANCH% | commit: %SCM_COMORREV% | date: %SCM_COMORREV_DATE% | https:\/\/github.com\/nono303\/PHP-memcache-dll"/g' %CYGPATH_SRC%/pecl-memcache/%PECLMEMCACHECYGSRCDIR%/memcache.c
+	REM VERSION PATCH
+if exist %PATH_MODULES%\php%PHPVER%_pecl-memcache.patch (
+	echo     # apply php%PHPVER%_pecl-memcache.patch
+	git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php%PHPVER%_pecl-memcache.patch
+)
 
 	REM ~~~~~~~~~~~~ pecl-text-xdiff : libxdiff version
 cd /D %PATH_SRC%\libxdiff
@@ -51,14 +61,6 @@ sed -i -E 's/BROTLI_LIB_VERSION(.), "([^\"]+)"/BROTLI_LIB_VERSION\1, "%LIB_VERSI
 	REM link brotli sources to module
 if exist %PATH_SRC%\php-ext-brotli\brotli\. rmdir /S /Q %PATH_SRC%\php-ext-brotli\brotli
 mklink /J %PATH_SRC%\php-ext-brotli\brotli %PATH_SRC%\brotli
-
-	REM ~~~~~~~~~~~~ libxml: static || shared
-set PHP_LIBXML=static
-echo libxml2: %PHP_LIBXML%
-if %PHP_LIBXML% == shared (
-		REM !! https://gist.github.com/auroraeosrose/3452993 --with-libxmlshared=shared : win32/dllmain.obj : error LNK2001: unresolved external symbol xmlDllMain
-	if not exist %PATH_INSTALL%\include\libxml\. mklink /J %PATH_INSTALL%\include\libxml %PATH_INSTALL%\include\libxml2\libxml
-)
 
 	REM ~~~~~~~~~~~~ php-sdk
 call %PATH_MODULES_COMMON%\init.bat php-sdk
