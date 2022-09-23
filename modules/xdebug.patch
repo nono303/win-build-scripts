@@ -1,8 +1,8 @@
 diff --git "a/src/tracing/tracing.h" "b/src/tracing/tracing.h"
-index 78ee2e59..f3e0490d 100644
+index be35b193..e38eb461 100644
 --- "a/src/tracing/tracing.h"
 +++ "b/src/tracing/tracing.h"
-@@ -20,10 +20,7 @@
+@@ -18,10 +18,7 @@
  
  #include "php.h"
  
