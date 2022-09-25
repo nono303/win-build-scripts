@@ -206,7 +206,7 @@ git checkout tags/2.3.10.2
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v2.0.4
+git checkout tags/v2.0.7
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -234,7 +234,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/nghttp2/nghttp2.git nghttp2
 cd /D nghttp2
-git checkout tags/v1.48.0
+git checkout tags/v1.50.0
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3

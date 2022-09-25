@@ -33,7 +33,7 @@
 | [liblzma](https://github.com/ShiftMediaProject/liblzma) | 5.3.3-alpha |
 | [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.6.0 |
 | [libpng](https://sourceforge.net/p/libpng/code/ci/master/tree/) | 1.6.39 - 12222e6fb |
-| [libsodium](https://github.com/jedisct1/libsodium.git) | 1.0.18.0 - c281249f |
+| [libsodium](https://github.com/jedisct1/libsodium.git) | 1.0.18.0 - 3a99e1ec |
 | [libssh2](https://github.com/libssh2/libssh2) | 1.10.0 |
 | [libtiff](https://gitlab.com/libtiff/libtiff) | 4.4.0 |
 | [libwepb](https://chromium.googlesource.com/webm/libwebp) | 1.2.4 |
@@ -41,7 +41,7 @@
 | [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.9.14 |
 | [libxpm](https://github.com/nono303/libxpm.git) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.13 |
 | [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.37 - 7bcc8dca |
-| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | r1844 - 344bd4dd |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | r1845 - b9adaef1 |
 | [libzip](https://github.com/nih-at/libzip) | 1.9.2 |
 | [lua](https://github.com/lua/lua) | 5.4.4 |
 | [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | 0.18.0 - de3aabe |
@@ -49,14 +49,14 @@
 | [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.3.3 - r2712 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
 | [mod_fcgid](https://github.com/nono303/mod_fcgid) - _[upstream + src](https://github.com/pagespeed/mod_fcgid)_ | 2.3.10.2 |
-| [mod_h2](https://github.com/icing/mod_h2) | 2.0.4 :warning: |
+| [mod_h2](https://github.com/icing/mod_h2) | 2.0.7 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
 | [mod_md](https://github.com/icing/mod_md) | 2.4.19 |
 | [mod_qos](https://sourceforge.net/p/mod-qos/source/HEAD/tree/trunk/httpd_src/modules/qos/) | 11.72 r2654 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) - _[src](https://emptyhammock.com/media/downloads/wku_bt-2.01.zip)_ | 2.0.2 |
 | [mpir](https://github.com/nono303/mpir) - _[upstream](https://github.com/BrianGladman/mpir)_ - _[src](https://github.com/wbhart/mpir)_ | 3.0.0 - 34850830 |
-| [nghttp2](https://github.com/nghttp2/nghttp2) | 1.48.0 :warning: |
+| [nghttp2](https://github.com/nghttp2/nghttp2) | 1.50.0 |
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 0.7.1 |
 | [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 0.9.0 |
 | [nssm](https://github.com/puppetlabs/nssm) | 2.25 - a1c3260 |
