@@ -10,6 +10,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_VS% -A %archmsbuild% ^
 
 MSBuild.exe %PATH_BUILD%\%1\%VCDIR%\maxminddb.sln %MSBUILD_OPTS% ^
 /t:maxminddb ^
+/nowarn:C4068 ^
 /p:Configuration=%CMAKE_BUILD_TYPE% ^
 /p:Platform="%archmsbuild%"
 
