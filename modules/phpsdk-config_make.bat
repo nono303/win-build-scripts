@@ -45,13 +45,13 @@ set PHP8_COMMON_CONFIGURE=^
 if %PHPVER% == 8.0 (
 	set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
 			--disable-phpdbg-webhelper ^
-			--without-oci8 ^
+			--without-oci8
 	set native-intrinsics=1
 )
 if %PHPVER% == 8.1 (
 	set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
 			--with-php-build=%PATH_INSTALL% ^
-			--without-oci8 ^
+			--without-oci8
 	set native-intrinsics=1
 )
 if %PHPVER% == 8.2 (
@@ -129,12 +129,12 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--with-mhash=shared ^
 	--enable-ctype=shared ^
 	--enable-bcmath=shared ^
+	--with-gd=shared ^
 	--with-libwebp=shared ^
 	--with-libavif=shared ^
 	--with-xsl=shared ^
 	--with-gmp=shared ^
 	--enable-zstd=shared ^
-	--enable-gd=shared ^
 	--with-libxml=shared ^
 	%ZTS% ^
 	%phpveropts% ^
