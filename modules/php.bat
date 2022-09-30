@@ -54,13 +54,9 @@ sed -i 's/extern char libxdiff_version/\/\/ extern char libxdiff_version/g' %CYG
 sed -i 's/libxdiff_version)/"%LIB_VERSION:~1%")/g' %CYGPATH_SRC%/pecl-text-xdiff/xdiff.c
 
 	REM ~~~~~~~~~~~~ php-ext-brotli : brotli version
-cd /D %PATH_SRC%\brotli
-FOR /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set LIB_VERSION=%%F)
 call %PATH_MODULES_COMMON%\init.bat php-ext-brotli
-sed -i -E 's/BROTLI_LIB_VERSION(.), "([^\"]+)"/BROTLI_LIB_VERSION\1, "%LIB_VERSION:~1%"/g' %CYGPATH_SRC%/php-ext-brotli/config.w32
-	REM link brotli sources to module
-if exist %PATH_SRC%\php-ext-brotli\brotli\. rmdir /S /Q %PATH_SRC%\php-ext-brotli\brotli
-mklink /J %PATH_SRC%\php-ext-brotli\brotli %PATH_SRC%\brotli
+call %PATH_MODULES_COMMON%\init.bat brotli varonly
+sed -i 's/AC_DEFINE/AC_DEFINE\("BROTLI_LIB_VERSION", "%SCM_TAG:~1%", "system library version"\);AC_DEFINE/g' %CYGPATH_SRC%/php-ext-brotli/config.w32
 
 	REM ~~~~~~~~~~~~ libgd
 call %PATH_MODULES_COMMON%\init.bat libgd
