@@ -1,3 +1,23 @@
+diff --git "a/ext/gd/gd.c" "b/ext/gd/gd.c"
+index 7a093b1774..4040efdf15 100644
+--- "a/ext/gd/gd.c"
++++ "b/ext/gd/gd.c"
+@@ -608,6 +608,15 @@ PHP_MINFO_FUNCTION(gd)
+ #endif
+ #ifdef HAVE_GD_TGA
+ 	php_info_print_table_row(2, "TGA Read Support", "enabled");
++#endif
++#ifdef HAVE_GD_ZLIB
++	php_info_print_table_row(2, "ZLIB Support", "enabled");
++#endif
++#ifdef HAVE_GD_TIFF
++	php_info_print_table_row(2, "TIFF Support", "enabled - not implemented");
++#endif
++#ifdef HAVE_GD_HEIF
++	php_info_print_table_row(2, "HEIF Support", "enabled - not implemented");
+ #endif
+ 	php_info_print_table_end();
+ 	DISPLAY_INI_ENTRIES();
 diff --git "a/ext/gd/config.w32" "b/ext/gd/config.w32"
 index b2b9badeba..a1e92ce6d5 100644
 --- "a/ext/gd/config.w32"
@@ -79,7 +99,7 @@ index b2b9badeba..a1e92ce6d5 100644
 +		AC_DEFINE('HAVE_LIBHEIF', 1, "HEIF support");
 +		AC_DEFINE('HAVE_GD_HEIF', 1, "HEIF support");
 +		AC_DEFINE('HAVE_LIBZ', 1, "ZLIB support");
-+		AC_DEFINE('HAVE_GD_Z', 1, "ZLIB support");
++		AC_DEFINE('HAVE_GD_ZLIB', 1, "ZLIB support");
 +		AC_DEFINE('HAVE_LIBTIFF', 1, "TIFF support");
 +		AC_DEFINE('HAVE_GD_TIFF', 1, "TIFF support");
 +
