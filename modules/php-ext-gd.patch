@@ -1,0 +1,114 @@
+diff --git "a/ext/gd/config.w32" "b/ext/gd/config.w32"
+index b2b9badeba..a1e92ce6d5 100644
+--- "a/ext/gd/config.w32"
++++ "b/ext/gd/config.w32"
+@@ -6,24 +6,24 @@ ARG_WITH("libavif", "avif support", "yes");
+ 
+ if (PHP_GD != "no") {
+ 	if (
+-		CHECK_LIB("libjpeg_a.lib;libjpeg.lib", "gd", PHP_GD) &&
+-		CHECK_LIB("freetype_a.lib;freetype.lib", "gd", PHP_GD) &&
++		CHECK_LIB("jpeg.lib", "gd", PHP_GD) &&
++		CHECK_LIB("heif.lib", "gd", PHP_GD) &&
++		CHECK_LIB("tiff.lib", "gd", PHP_GD) &&
++		CHECK_LIB("freetype.lib", "gd", PHP_GD) &&
+ 		CHECK_HEADER_ADD_INCLUDE("ft2build.h", "CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include\\freetype2;" + PHP_PHP_BUILD + "\\include\\freetype") &&
+-		CHECK_LIB("libpng_a.lib;libpng.lib", "gd", PHP_GD) &&
++		CHECK_LIB("libpng16.lib", "gd", PHP_GD) &&
+ 		CHECK_HEADER_ADD_INCLUDE("gd.h", "CFLAGS_GD", PHP_GD + ";ext\\gd\\libgd") &&
+-		(CHECK_HEADER_ADD_INCLUDE("png.h", "CFLAGS_GD", PHP_GD +  ";" + PHP_PHP_BUILD + "\\include\\libpng16") ||
+-		CHECK_HEADER_ADD_INCLUDE("png.h", "CFLAGS_GD", PHP_GD +  ";" + PHP_PHP_BUILD + "\\include\\libpng15") ||
+-		CHECK_HEADER_ADD_INCLUDE("png.h", "CFLAGS_GD", PHP_GD +  ";" + PHP_PHP_BUILD + "\\include\\libpng12")) &&
+-		(CHECK_LIB("libiconv_a.lib;libiconv.lib", "gd", PHP_GD) || CHECK_LIB("iconv_a.lib;iconv.lib", "gd", PHP_GD)) &&
++		(CHECK_HEADER_ADD_INCLUDE("png.h", "CFLAGS_GD", PHP_GD +  ";" + PHP_PHP_BUILD + "\\include\\libpng16")) &&
++		(CHECK_LIB("libiconv.lib", "gd", PHP_GD) ) &&
+ 		 CHECK_HEADER_ADD_INCLUDE("iconv.h", "CFLAGS_GD", PHP_GD) &&
+-		(((PHP_ZLIB=="no") && (CHECK_LIB("zlib_a.lib;zlib.lib", "gd", PHP_GD) )) ||
++		(((PHP_ZLIB=="no") && (CHECK_LIB("zlib.lib", "gd", PHP_GD) )) ||
+ 			(PHP_ZLIB_SHARED && CHECK_LIB("zlib.lib", "gd", PHP_GD)) || (PHP_ZLIB == "yes" && (!PHP_ZLIB_SHARED))) &&
+-		CHECK_LIB("libXpm_a.lib", "gd", PHP_GD) &&
++		CHECK_LIB("libxpm.lib", "gd", PHP_GD) &&
+ 		CHECK_HEADER_ADD_INCLUDE("xpm.h", "CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include\\X11")
+ 		) {
+ 
+ 		if (PHP_LIBWEBP != "no") {
+-			if ((CHECK_LIB("libwebp_a.lib", "gd", PHP_GD) || CHECK_LIB("libwebp.lib", "gd", PHP_GD)) &&
++			if ((CHECK_LIB("webp.lib", "gd", PHP_GD)) &&
+ 				CHECK_HEADER_ADD_INCLUDE("decode.h", "CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include\\webp") &&
+ 				CHECK_HEADER_ADD_INCLUDE("encode.h", "CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include\\webp")) {
+ 				AC_DEFINE("HAVE_LIBWEBP", 1, "WebP support");
+@@ -37,9 +37,13 @@ if (PHP_GD != "no") {
+ 				CHECK_LIB("aom_a.lib", "gd", PHP_GD) &&
+ 				CHECK_HEADER_ADD_INCLUDE("avif.h", "CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include\\avif")) {
+ 				ADD_FLAG("CFLAGS_GD", "/D HAVE_LIBAVIF /D HAVE_GD_AVIF");
++				AC_DEFINE("HAVE_LIBAVIF", 1, "AVIF support");
++				AC_DEFINE("HAVE_GD_AVIF", 1, "AVIF support");
+ 			} else if (CHECK_LIB("avif.lib", "gd", PHP_GD) &&
+ 				CHECK_HEADER_ADD_INCLUDE("avif.h", "CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include\\avif")) {
+ 				ADD_FLAG("CFLAGS_GD", "/D HAVE_LIBAVIF /D HAVE_GD_AVIF");
++				AC_DEFINE("HAVE_LIBAVIF", 1, "AVIF support");
++				AC_DEFINE("HAVE_GD_AVIF", 1, "AVIF support");
+ 			} else {
+ 				WARNING("libavif not enabled; libraries and headers not found");
+ 			}
+@@ -48,25 +52,25 @@ if (PHP_GD != "no") {
+ 		CHECK_LIB("Gdi32.lib", "gd", PHP_GD);
+ 
+ 		EXTENSION("gd", "gd.c", null, "-Iext/gd/libgd");
+-		ADD_SOURCES("ext/gd/libgd", "gd2copypal.c gd.c \
+-			gdcache.c gdfontg.c gdfontl.c gdfontmb.c gdfonts.c gdfontt.c \
+-			gdft.c gd_gd2.c gd_gd.c gd_gif_in.c gd_gif_out.c gdhelpers.c gd_io.c gd_io_dp.c \
+-			gd_io_file.c gd_io_ss.c gd_jpeg.c gdkanji.c gd_png.c gd_ss.c \
+-			gdtables.c gd_topal.c gd_wbmp.c gdxpm.c wbmp.c gd_xbm.c gd_security.c gd_transform.c \
+-			gd_filter.c gd_pixelate.c gd_rotate.c gd_color_match.c gd_webp.c gd_avif.c \
+-			gd_crop.c gd_interpolation.c gd_matrix.c gd_bmp.c gd_tga.c", "gd");
++		ADD_SOURCES("ext/gd/libgd", "gd.c gdcache.c gd_color.c gd_color_match.c gdfontg.c gdfontl.c gdfontmb.c gdfonts.c gdfontt.c gdft.c gdfx.c gd_filename.c gd_filter.c gd_bmp.c gd_gd2.c gd_gd.c gd_gif_in.c gd_gif_out.c gdhelpers.c gd_io.c gd_io_dp.c gd_io_file.c gd_io_ss.c gd_jpeg.c gd_security.c gd_tga.c gd_tiff.c gd_xbm.c gdkanji.c gd_nnquant.c gd_png.c gd_ss.c gdtables.c gd_topal.c gd_transform.c gd_wbmp.c gdxpm.c wbmp.c gd_interpolation.c gd_matrix.c gd_rotate.c gd_version.c gd_crop.c gd_color_map.c gd_heif.c gd_avif.c gd_webp.c", "gd");
+ 		AC_DEFINE('HAVE_LIBGD', 1, 'GD support');
+-		AC_DEFINE('HAVE_GD_BUNDLED', 1, "Bundled GD");
+ 		AC_DEFINE('HAVE_GD_PNG', 1, "PNG support");
+ 		AC_DEFINE('HAVE_GD_BMP', 1, "BMP support");
+ 		AC_DEFINE('HAVE_GD_TGA', 1, "TGA support");
+ 		AC_DEFINE('HAVE_LIBPNG', 1, "PNG support");
+ 		AC_DEFINE('HAVE_LIBJPEG', 1, "JPEG support");
+ 		AC_DEFINE('HAVE_GD_JPG', 1, "JPEG support");
+-		AC_DEFINE('HAVE_XPM', 1, "XPM support");
++		AC_DEFINE('HAVE_LIBXPM', 1, "XPM support");
+ 		AC_DEFINE('HAVE_GD_XPM', 1, "XPM support");
+ 		AC_DEFINE('HAVE_LIBFREETYPE', 1, "Freetype support");
+ 		AC_DEFINE('HAVE_GD_FREETYPE', 1, "Freetype support");
++		AC_DEFINE('HAVE_LIBHEIF', 1, "HEIF support");
++		AC_DEFINE('HAVE_GD_HEIF', 1, "HEIF support");
++		AC_DEFINE('HAVE_LIBZ', 1, "ZLIB support");
++		AC_DEFINE('HAVE_GD_Z', 1, "ZLIB support");
++		AC_DEFINE('HAVE_LIBTIFF', 1, "TIFF support");
++		AC_DEFINE('HAVE_GD_TIFF', 1, "TIFF support");
++
+ 		ADD_FLAG("CFLAGS_GD", " \
+ /D PHP_GD_EXPORTS=1 \
+ /D HAVE_GD_DYNAMIC_CTX_EX=1 \
+@@ -89,7 +93,24 @@ if (PHP_GD != "no") {
+ /D HAVE_COLORCLOSESTHWB  \
+ /D HAVE_GD_GET_INTERPOLATION \
+ /D USE_GD_IOCTX \
+-/D MSWIN32 \
++/D MSWIN32=1 \
++/D WIN32=1 \
++/D _WIN32=1 \
++/D BGDWIN32=1 \
++/D ENABLE_GD_FORMATS=1 \
++/D HAVE_FT2BUILD_H=1 \
++/D HAVE_GD_H=1 \
++/D HAVE_ICONV_H=1 \
++/D HAVE_LIBFREETYPE=1 \
++/D HAVE_LIBJPEG=1 \
++/D HAVE_LIBPNG=1 \
++/D HAVE_LIBWEBP=1 \
++/D HAVE_LIBHEIF=1 \
++/D HAVE_LIBAVIF=1 \
++/D HAVE_LIBZ=1 \
++/D HAVE_LIBXPM=1 \
++/D HAVE_LIBTIFF=1 \
++/D HAVE_STDINT_H=1 \
+ 		");
+ 		if (ICC_TOOLSET) {
+ 			ADD_FLAG("LDFLAGS_GD", "/nodefaultlib:libcmt");

@@ -62,6 +62,13 @@ sed -i -E 's/BROTLI_LIB_VERSION(.), "([^\"]+)"/BROTLI_LIB_VERSION\1, "%LIB_VERSI
 if exist %PATH_SRC%\php-ext-brotli\brotli\. rmdir /S /Q %PATH_SRC%\php-ext-brotli\brotli
 mklink /J %PATH_SRC%\php-ext-brotli\brotli %PATH_SRC%\brotli
 
+	REM ~~~~~~~~~~~~ libgd
+call %PATH_MODULES_COMMON%\init.bat libgd
+if exist %PATH_SRC%\php-src\ext\gd\libgd\. rmdir /S /Q %PATH_SRC%\php-src\ext\gd\libgd
+mklink /J %PATH_SRC%\php-src\ext\gd\libgd %PATH_SRC%\libgd\src
+cd /D %PATH_SRC%\php-src
+git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-ext-gd.patch
+
 	REM ~~~~~~~~~~~~ php-sdk
 call %PATH_MODULES_COMMON%\init.bat php-sdk
 

@@ -1,0 +1,28 @@
+diff --git a/src/gd_webp.c b/src/gd_webp.c
+index e9ad8023..fa0b7c6d 100644
+--- a/src/gd_webp.c
++++ b/src/gd_webp.c
+@@ -8,6 +8,10 @@
+ #include "config.h"
+ #endif /* HAVE_CONFIG_H */
+ 
++#ifdef _MSC_VER
++#include <BaseTsd.h>
++typedef SSIZE_T ssize_t;
++#endif
+ 
+ #include <stdio.h>
+ #include <math.h>
+diff --git a/windows/Makefile.vc b/windows/Makefile.vc
+index dbec163f..775e34af 100644
+--- a/windows/Makefile.vc
++++ b/windows/Makefile.vc
+@@ -99,7 +99,7 @@ LIB_OBJS= \
+   $(LIBGD_OBJ_DIR)\gd_webp.obj
+ 
+ LIBS=kernel32.lib ole32.lib user32.lib advapi32.lib shell32.lib ws2_32.lib Dnsapi.lib Gdi32.Lib
+-LIBS_GD=libjpeg_a.lib freetype_a.lib libpng_a.lib libiconv_a.lib  zlib_a.lib libheif_a.lib libwebp_a.lib libxpm_a.lib libavif_a.lib libtiff.lib
++LIBS_GD=jpeg.lib freetype.lib libpng16.lib libiconv.lib zlib.lib heif.lib webp.lib libxpm.lib avif.lib tiff.lib
+ 
+ PROG_EXES= \
+ 	$(LIBGD_OBJ_DIR)\gdcmpgif.exe \
