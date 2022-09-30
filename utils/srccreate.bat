@@ -120,6 +120,14 @@ git clone https://chromium.googlesource.com/codecs/libgav1 libgav1
 cd /D libgav1
 git checkout tags/v0.18.0
 cd /D ..
+git clone https://github.com/libgd/libgd.git libgd
+cd /D libgd
+git checkout tags/gd-2.3.3
+cd /D ..
+git clone https://github.com/strukturag/libheif.git libheif
+cd /D libheif
+git checkout tags/v1.13.0
+cd /D ..
 git clone https://github.com/pffang/libiconv-for-Windows.git libiconv
 cd /D libiconv
 git checkout master
@@ -134,7 +142,7 @@ git checkout tags/v5.3.3alpha
 cd /D ..
 git clone https://github.com/maxmind/libmaxminddb.git libmaxminddb
 cd /D libmaxminddb
-git checkout tags/1.6.0
+git checkout tags/1.7.0
 cd /D ..
 git clone git://git.code.sf.net/p/libpng/code libpng
 cd /D libpng
@@ -206,7 +214,7 @@ git checkout tags/2.3.10.2
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v2.0.7
+git checkout tags/v2.0.8
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -294,7 +302,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.1.10
+git checkout tags/php-8.1.11
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
