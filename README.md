@@ -47,12 +47,12 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [Cygwin](https://cygwin.com/install.html)                    | x86  | 3.3.6  | `cyg32.packagelist` |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.3.6          | `cyg64.packagelist` |
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.10.7 |                     |
-| [Node.js](https://nodejs.org/en/download/current/) | x64 | 18.9.1 | |
+| [Node.js](https://nodejs.org/en/download/current/) | x64 | 18.10.0 | |
 | [OpenJDK](https://jdk.java.net/18/)                      | x64  | 18.0.2.1 |                     |
 | [Strawberry Perl](https://strawberryperl.com/releases.html) | x64  | 5.32.1.1 |                     |
 | [NASM](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.15.05        |                     |
 | [YASM](https://yasm.tortall.net/Download.html) | x64 | 1.3.0 | |
-| [Git](https://git-scm.com/download/win)                      | x64  | 2.37.3 |                     |
+| [Git](https://git-scm.com/download/win)                      | x64  | 2.38.0 |                     |
 | verpatch                                                     | x64  | 1.0.15.1       |                     |
 | [7z](https://www.7-zip.org/download.html)                    | x64  | 22.01  |                     |
 | [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.90       |                     |
@@ -60,7 +60,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [Gradle](https://gradle.org/install/) | [java] | 7.5.1 | |
 | [CMake](https://cmake.org/download/) | x64 | 3.24.2 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | x64 | 1.11.1 | |
-| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 0.63.2 | |
+| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 0.63.3 | |
 | [NuGet](https://www.nuget.org/downloads) | x86 | 6.3.0 | |
 
 ### [SOURCE VERSIONS](./SRC_VERSION.md)

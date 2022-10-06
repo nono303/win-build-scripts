@@ -11,7 +11,7 @@
 | [curl](https://github.com/curl/curl) | 7.85.0 |
 | [dav1d](https://code.videolan.org/videolan/dav1d.git) | 1.0.0 |
 | [dependencies](https://github.com/lucasg/Dependencies) | 1.11.1 |
-| [freeglut](https://github.com/dcnieho/FreeGLUT.git) | 3.2.2 |
+| [freeglut](https://github.com/dcnieho/FreeGLUT.git) | 3.4.0-rc1 |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.12.1 |
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 2.0.0 - b3ee8cc7 |
 | [geos](https://github.com/libgeos/geos) | 3.11.0 |
@@ -33,7 +33,7 @@
 | [libiconv](https://github.com/pffang/libiconv-for-Windows) | 1.17 - 3ecec21 |
 | [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) | 2.1.4 |
 | [liblzma](https://github.com/ShiftMediaProject/liblzma) | 5.3.3-alpha |
-| [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.7.0 |
+| [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.7.1 |
 | [libpng](https://sourceforge.net/p/libpng/code/ci/master/tree/) | 1.6.39 - 12222e6fb |
 | [libsodium](https://github.com/jedisct1/libsodium.git) | 1.0.18.0 - 3a99e1ec |
 | [libssh2](https://github.com/libssh2/libssh2) | 1.10.0 |
@@ -43,15 +43,15 @@
 | [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.9.14 |
 | [libxpm](https://github.com/nono303/libxpm.git) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.13 |
 | [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.37 - 7bcc8dca |
-| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1845 - 9ba40a8f |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1845 - 97bd3bba |
 | [libzip](https://github.com/nih-at/libzip) | 1.9.2 |
 | [lua](https://github.com/lua/lua) | 5.4.4 |
 | [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | 0.18.0 - d6f6863 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.17 |
-| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.3.3 - r2712 |
+| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.3.3 - r2713 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
 | [mod_fcgid](https://github.com/nono303/mod_fcgid) - _[upstream + src](https://github.com/pagespeed/mod_fcgid)_ | 2.3.10.2 |
-| [mod_h2](https://github.com/icing/mod_h2) | 2.0.8 |
+| [mod_h2](https://github.com/icing/mod_h2) | 2.0.9 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
 | [mod_md](https://github.com/icing/mod_md) | 2.4.19 |
