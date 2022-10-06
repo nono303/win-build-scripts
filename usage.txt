@@ -55,6 +55,7 @@ Usage: go command [options]
       * libsodium
       * mpir
       * libxslt
+      * libheif
       * php
     * [subversionanddeps]
       * serf
