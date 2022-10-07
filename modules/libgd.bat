@@ -2,6 +2,7 @@
  cd /D %PATH_SRC%\%1
 git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\%1_pr692.patch
 
+REM missing libraqm, libfontconfig, libimagequant
 cd /D %PATH_BUILD%\%1
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^

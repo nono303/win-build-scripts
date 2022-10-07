@@ -66,37 +66,6 @@ index 6b3e5b3b..b8656951 100644
 -INCLUDE(CPack)
 +endif (USE_EXT_GD)
 \ No newline at end of file
-diff --git a/src/gd_webp.c b/src/gd_webp.c
-index e9ad8023..fa0b7c6d 100644
---- a/src/gd_webp.c
-+++ b/src/gd_webp.c
-@@ -8,6 +8,10 @@
- #include "config.h"
- #endif /* HAVE_CONFIG_H */
- 
-+#ifdef _MSC_VER
-+#include <BaseTsd.h>
-+typedef SSIZE_T ssize_t;
-+#endif
- 
- #include <stdio.h>
- #include <math.h>
-diff --git a/src/gdxpm.c b/src/gdxpm.c
-index 4ac84662..bd8c4d9e 100644
---- a/src/gdxpm.c
-+++ b/src/gdxpm.c
-@@ -39,9 +39,9 @@ BGD_DECLARE(gdImagePtr) gdImageCreateFromXpm(char *filename)
- /*
-   Function: gdImageCreateFromXpm
- 
--    <gdImageCreateFromXbm> is called to load images from XPM X Window
-+    <gdImageCreateFromXpm> is called to load images from XPM X Window
-     System color bitmap format files. This function is available only
--    if HAVE_XPM is selected in the Makefile and the Xpm library is
-+    if HAVE_LIBXPM is selected in the Makefile and the Xpm library is
-     linked with the application. Unlike most gd file functions, the
-     Xpm functions *require filenames*, not file
-     pointers. <gdImageCreateFromXpm> returns a <gdImagePtr> to the new
 diff --git a/windows/Makefile.vc b/windows/Makefile.vc
 index dbec163f..1a0f9353 100644
 --- a/windows/Makefile.vc
@@ -146,3 +115,34 @@ index dbec163f..1a0f9353 100644
  
  {$(LIBGD_SRC_DIR)\}.c{$(LIBGD_OBJ_DIR)\}.obj:
  	$(CC) $(CFLAGS) /c /Fo"$@" /Fd$*.pdb $<
+--- a/src/gdxpm.c
++++ b/src/gdxpm.c
+@@ -39,9 +39,9 @@ BGD_DECLARE(gdImagePtr) gdImageCreateFromXpm(char *filename)
+ /*
+   Function: gdImageCreateFromXpm
+ 
+-    <gdImageCreateFromXbm> is called to load images from XPM X Window
++    <gdImageCreateFromXpm> is called to load images from XPM X Window
+     System color bitmap format files. This function is available only
+-    if HAVE_XPM is selected in the Makefile and the Xpm library is
++    if HAVE_LIBXPM is selected in the Makefile and the Xpm library is
+     linked with the application. Unlike most gd file functions, the
+     Xpm functions *require filenames*, not file
+     pointers. <gdImageCreateFromXpm> returns a <gdImagePtr> to the new
+diff --git a/src/gd_webp.c b/src/gd_webp.c
+index e9ad8023..fa0b7c6d 100644
+--- a/src/gd_webp.c
++++ b/src/gd_webp.c
+@@ -8,6 +8,10 @@
+ #include "config.h"
+ #endif /* HAVE_CONFIG_H */
+ 
++#ifdef _MSC_VER
++#include <BaseTsd.h>
++typedef SSIZE_T ssize_t;
++#endif
+ 
+ #include <stdio.h>
+ #include <math.h>
+diff --git a/src/gdxpm.c b/src/gdxpm.c
+index 4ac84662..bd8c4d9e 100644
