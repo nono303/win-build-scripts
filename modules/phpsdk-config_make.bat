@@ -85,6 +85,7 @@ set PHP_COMMON_CONFIGURE=^
 	--with-extra-libs=%PATH_INSTALL_OSSL%\lib;%PATH_INSTALL%\lib ^
 	--with-mp=%NUMBER_OF_PROCESSORS%
 REM known bug for --with-ffi if php != 8.1 || 7.4
+REM [%PHPVER% != %PHP_FULLBUILD%]: add --disable-zlib ^ if not memcache
 if %PHPVER% == %PHP_FULLBUILD% (
 	set FINAL_CONFIGURE=%PHP_COMMON_CONFIGURE% ^
 	--enable-mbstring=shared ^
@@ -130,8 +131,6 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--enable-ctype=shared ^
 	--enable-bcmath=shared ^
 	--with-gd=shared ^
-	--with-libwebp=shared ^
-	--with-libavif=shared ^
 	--with-xsl=shared ^
 	--with-gmp=shared ^
 	--enable-zstd=shared ^
@@ -161,9 +160,10 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--disable-xmlreader ^
 	--disable-zip ^
 	--enable-embed ^
-	--enable-memcache=shared ^
 	--without-geos ^
 	--without-readline ^
+	--disable-zstd ^
+	--enable-memcache=shared ^
 	%ZTS% ^
 	%phpveropts% ^
 	%phparchopts%
