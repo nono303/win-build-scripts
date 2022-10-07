@@ -24,8 +24,12 @@ if exist %PATH_SRC%\php-src\openssl\. rmdir /S /Q %PATH_SRC%\php-src\openssl
 mklink /J %PATH_SRC%\php-src\openssl %PATH_SRC%\%OPENSSL_SCM%\ms
 	REM VERSION PATCH
 if exist %PATH_MODULES%\php%PHPVER%_php-src.patch (
-	echo     # apply php%PHPVER%_php-src.patch
-	git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php%PHPVER%_php-src.patch
+	if %ARG_KEEPSRC% == 0 (
+		echo     # apply php%PHPVER%_php-src.patch
+		git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php%PHPVER%_php-src.patch
+	REM ~~~~~~~~~~~~ ext/gd external [git diff -- ext/gd > /c/sdk/batch/modules/php-ext-gd.patch]
+		git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-ext-gd.patch
+	)
 )
 
 	REM ~~~~~~~~~~~~ php-geos
@@ -42,8 +46,10 @@ FOR /F "tokens=* USEBACKQ" %%F in (`grep PHP_MEMCACHE_VERSION %CYGPATH_SRC%/pecl
 sed -i -E 's/, PHP_MEMCACHE_VERSION/, "%PECLMEMCACHEVERSION% | branch: %SCM_BRANCH% | commit: %SCM_COMORREV% | date: %SCM_COMORREV_DATE% | https:\/\/github.com\/nono303\/PHP-memcache-dll"/g' %CYGPATH_SRC%/pecl-memcache/%PECLMEMCACHECYGSRCDIR%/memcache.c
 	REM VERSION PATCH
 if exist %PATH_MODULES%\php%PHPVER%_pecl-memcache.patch (
-	echo     # apply php%PHPVER%_pecl-memcache.patch
-	git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php%PHPVER%_pecl-memcache.patch
+	if %ARG_KEEPSRC% == 0 (
+		echo     # apply php%PHPVER%_pecl-memcache.patch
+		git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php%PHPVER%_pecl-memcache.patch
+	)
 )
 
 	REM ~~~~~~~~~~~~ pecl-text-xdiff : libxdiff version
@@ -57,13 +63,6 @@ sed -i 's/libxdiff_version)/"%LIB_VERSION:~1%")/g' %CYGPATH_SRC%/pecl-text-xdiff
 call %PATH_MODULES_COMMON%\init.bat php-ext-brotli
 call %PATH_MODULES_COMMON%\init.bat brotli varonly
 sed -i 's/AC_DEFINE/AC_DEFINE\("BROTLI_LIB_VERSION", "%SCM_TAG:~1%", "system library version"\);AC_DEFINE/g' %CYGPATH_SRC%/php-ext-brotli/config.w32
-
-	REM ~~~~~~~~~~~~ libgd
-call %PATH_MODULES_COMMON%\init.bat libgd
-if exist %PATH_SRC%\php-src\ext\gd\libgd\. rmdir /S /Q %PATH_SRC%\php-src\ext\gd\libgd
-mklink /J %PATH_SRC%\php-src\ext\gd\libgd %PATH_SRC%\libgd\src
-cd /D %PATH_SRC%\php-src
-git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-ext-gd.patch
 
 	REM ~~~~~~~~~~~~ php-sdk
 call %PATH_MODULES_COMMON%\init.bat php-sdk
