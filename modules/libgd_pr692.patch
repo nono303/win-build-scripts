@@ -1,0 +1,1462 @@
+From 87280791ddea7cc9f9ae6db643c5a8fdbd8ede79 Mon Sep 17 00:00:00 2001
+From: Martin Reboredo <yakoyoku@gmail.com>
+Date: Thu, 18 Mar 2021 09:42:08 -0300
+Subject: [PATCH 1/7] Implement application-supplied memory allocators
+
+---
+ cmake/modules/FindPTHREAD.cmake |  51 ++---------
+ src/gd.h                        |  10 ++
+ src/gdhelpers.c                 | 157 +++++++++++++++++++++++++++++++-
+ tests/CMakeLists.txt            |   1 +
+ tests/Makefile.am               |   1 +
+ tests/gdmem/CMakeLists.txt      |   7 ++
+ tests/gdmem/Makemodule.am       |   7 ++
+ tests/gdmem/coin.png            | Bin 0 -> 657 bytes
+ tests/gdmem/malloc.c            |  77 ++++++++++++++++
+ 9 files changed, 263 insertions(+), 48 deletions(-)
+ create mode 100644 tests/gdmem/CMakeLists.txt
+ create mode 100644 tests/gdmem/Makemodule.am
+ create mode 100644 tests/gdmem/coin.png
+ create mode 100644 tests/gdmem/malloc.c
+
+diff --git a/cmake/modules/FindPTHREAD.cmake b/cmake/modules/FindPTHREAD.cmake
+index 0331e1756..f9c58bf7f 100644
+--- a/cmake/modules/FindPTHREAD.cmake
++++ b/cmake/modules/FindPTHREAD.cmake
+@@ -42,49 +42,12 @@
+ #############################################################################
+ 
+ 
+-  FIND_PATH(PTHREAD_INCLUDE_DIR pthread.h
+-    "$ENV{PTHREAD_HOME}/include"
+-    "$ENV{PTHREAD_DIR}/include"
+-    /usr/include
+-    "C:/MinGW/include"
+-  )
+-  #MESSAGE("DBG PTHREAD_INCLUDE_DIR=${PTHREAD_INCLUDE_DIR}")
++include(FindThreads)
++FIND_PACKAGE(Threads)
+ 
+-  # pthreadVSE pthreadGCE pthreadGC pthreadVC1 pthreadVC2 are comming from web
+-  FIND_LIBRARY(PTHREAD_LIBRARY
+-    NAMES pthread pthreadGC2 pthreadVSE pthreadGCE pthreadGC pthreadVC1 pthreadVC2
+-    PATHS
+-    "$ENV{PTHREAD_HOME}/lib"
+-    "$ENV{PTHREAD_DIR}/lib"
+-    /usr/lib
+-    /usr/local/lib
+-    /lib
+-    "C:/MinGW/lib"
+-    )
++IF(CMAKE_THREAD_LIBS_INIT)
++  SET(HAVE_PTHREAD TRUE)
++  SET(PTHREAD_FOUND TRUE)
+ 
+-  #MESSAGE(STATUS "DBG PTHREAD_LIBRARY=${PTHREAD_LIBRARY}")
+-
+-  ## --------------------------------
+-
+-  IF(PTHREAD_LIBRARY)
+-    SET(PTHREAD_LIBRARIES ${PTHREAD_LIBRARY})
+-  ELSE(PTHREAD_LIBRARY)
+-    #MESSAGE(SEND_ERROR "pthread library not found.")
+-  ENDIF(PTHREAD_LIBRARY)
+-
+-  IF(NOT PTHREAD_INCLUDE_DIR)
+-    #MESSAGE(SEND_ERROR "pthread include dir not found.")
+-  ENDIF(NOT PTHREAD_INCLUDE_DIR)
+-
+-  IF(PTHREAD_LIBRARIES AND PTHREAD_INCLUDE_DIR)
+-    SET(PTHREAD_INCLUDE_DIRS ${PTHREAD_INCLUDE_DIR})
+-    SET(PTHREAD_FOUND TRUE)
+-  ELSE(PTHREAD_LIBRARIES AND PTHREAD_INCLUDE_DIR)
+-    SET(PTHREAD_FOUND FALSE)
+-  ENDIF(PTHREAD_LIBRARIES AND PTHREAD_INCLUDE_DIR)
+-
+-  MARK_AS_ADVANCED(
+-    PTHREAD_INCLUDE_DIR
+-    PTHREAD_LIBRARY
+-  )
+-  #MESSAGE(STATUS "PTHREAD_FOUND : ${PTHREAD_FOUND}")
++  MESSAGE(STATUS "Find PThreads: ${PTHREAD_FOUND}")
++ENDIF(CMAKE_THREAD_LIBS_INIT)
+diff --git a/src/gd.h b/src/gd.h
+index b03323889..5b4adde8f 100644
+--- a/src/gd.h
++++ b/src/gd.h
+@@ -1698,6 +1698,16 @@ BGD_DECLARE(int) gdTransformAffineBoundingBox(gdRectPtr src, const double affine
+ /* resolution affects ttf font rendering, particularly hinting */
+ #define GD_RESOLUTION           96      /* pixels per inch */
+ 
++typedef void *(*gdCallocf)(size_t nmemb, size_t size);
++typedef void *(*gdMallocf)(size_t size);
++typedef void *(*gdReallocf)(void *ptr, size_t size);
++typedef void (*gdFreef)(void *ptr);
++
++BGD_DECLARE(void) gdSetMemoryCallocMethod(gdCallocf callocf);
++BGD_DECLARE(void) gdSetMemoryMallocMethod(gdMallocf mallocf);
++BGD_DECLARE(void) gdSetMemoryReallocMethod(gdReallocf reallocf);
++BGD_DECLARE(void) gdSetMemoryFreeMethod(gdFreef freef);
++BGD_DECLARE(void) gdSetMemoryAllocationMethods(gdCallocf callocf, gdMallocf mallocf, gdReallocf reallocf, gdFreef freef);
+ 
+ /* Version information functions */
+ BGD_DECLARE(int) gdMajorVersion(void);
+diff --git a/src/gdhelpers.c b/src/gdhelpers.c
+index 302dc1866..432e00512 100644
+--- a/src/gdhelpers.c
++++ b/src/gdhelpers.c
+@@ -14,6 +14,11 @@
+ 
+ #define SEP_TEST (separators[*((unsigned char *) s)])
+ 
++static gdCallocf gdMemCallocf = calloc;
++static gdMallocf gdMemMallocf = malloc;
++static gdReallocf gdMemReallocf = realloc;
++static gdFreef gdMemFreef = free;
++
+ char *
+ gd_strtok_r(char *s, const char *sep, char **state)
+ {
+@@ -66,19 +71,19 @@ gd_strtok_r(char *s, const char *sep, char **state)
+ 
+ void * gdCalloc (size_t nmemb, size_t size)
+ {
+-	return calloc (nmemb, size);
++	return gdMemCallocf (nmemb, size);
+ }
+ 
+ void *
+ gdMalloc (size_t size)
+ {
+-	return malloc (size);
++	return gdMemMallocf (size);
+ }
+ 
+ void *
+ gdRealloc (void *ptr, size_t size)
+ {
+-	return realloc (ptr, size);
++	return gdMemReallocf (ptr, size);
+ }
+ 
+ void *
+@@ -112,5 +117,149 @@ gdReallocEx (void *ptr, size_t size)
+ */
+ BGD_DECLARE(void) gdFree (void *ptr)
+ {
+-	free (ptr);
++	gdMemFreef (ptr);
++}
++
++/*
++  Function gdSetMemoryCallocMethod
++
++    <gdSetMemoryCallocMethod> sets the memory allocation (initialized with
++    zeroes) method used by GD.
++
++    This function is not thread-safe. Should be called once and before any
++    operation with the library.
++
++  Parameters:
++
++    callocf - Function pointer to the memory allocation method. If it is NULL,
++              no operation is performed.
++
++  Returns:
++
++    Nothing.
++*/
++BGD_DECLARE(void) gdSetMemoryCallocMethod(gdCallocf callocf)
++{
++	if (callocf != NULL)
++		gdMemCallocf = callocf;
++}
++
++/*
++  Function gdSetMemoryMallocMethod
++
++    <gdSetMemoryMallocMethod> sets the memory allocation method used by GD.
++
++    This function is not thread-safe. Should be called once and before any
++    operation with the library.
++
++  Parameters:
++
++    mallocf - Function pointer to the memory allocation method. If it is NULL,
++              no operation is performed.
++
++  Returns:
++
++    Nothing.
++
++  Example:
++    (start code)
++
++	// ... set a custom malloc first before any operation ...
++	gdSetMemoryMallocMethod(customMalloc);
++
++    gdImagePtr im;
++    FILE *in;
++    in = fopen("mypng.png", "rb");
++    im = gdImageCreateFromPng(in);
++    fclose(in);
++    gdImageDestroy(im);
++
++    (end code)
++*/
++BGD_DECLARE(void) gdSetMemoryMallocMethod(gdMallocf mallocf)
++{
++	if (mallocf != NULL)
++		gdMemMallocf = mallocf;
++}
++
++/*
++  Function gdSetMemoryReallocMethod
++
++    <gdSetMemoryReallocMethod> sets the memory allocation method used by GD.
++
++    This function is not thread-safe. Should be called once and before any
++    operation with the library.
++
++  Parameters:
++
++    reallocf - Function pointer to the memory reallocation method. If it is
++               NULL, no operation is performed.
++
++  Returns:
++
++    Nothing.
++*/
++BGD_DECLARE(void) gdSetMemoryReallocMethod(gdReallocf reallocf)
++{
++	if (reallocf != NULL)
++		gdMemReallocf = reallocf;
++}
++
++/*
++  Function gdSetMemoryFreeMethod
++
++    <gdSetMemoryFreeMethod> sets the memory release method used by GD.
++
++    This function is not thread-safe. Should be called once and before any
++    operation with the library.
++
++  Parameters:
++
++    freef - Function pointer to the memory release method. If it is NULL, no
++            operation is performed.
++
++  Returns:
++
++    Nothing.
++*/
++BGD_DECLARE(void) gdSetMemoryFreeMethod(gdFreef freef)
++{
++	if (freef != NULL)
++		gdMemFreef = freef;
++}
++
++/*
++  Function gdSetMemoryAllocationMethods
++
++    <gdSetMemoryAllocationMethods> sets the memory allocation methods used by
++    GD.
++
++    This function is not thread-safe. Should be called once and before any
++    operation with the library.
++
++  Parameters:
++
++    callocf - Function pointer to the memory allocation method, initialized
++              with zeroes. If it is NULL, the assignation is not performed.
++    mallocf - Function pointer to the memory allocation method. If it is NULL,
++              the assignation is not performed.
++    reallocf - Function pointer to the memory reallocation method. If it is
++               NULL, the assignation is not performed.
++    freef - Function pointer to the memory release method. If it is NULL, the
++            assignation is not performed.
++
++  Returns:
++
++    Nothing.
++*/
++BGD_DECLARE(void) gdSetMemoryAllocationMethods(gdCallocf callocf, gdMallocf mallocf, gdReallocf reallocf, gdFreef freef)
++{
++	if (callocf != NULL)
++		gdMemCallocf = callocf;
++	if (mallocf != NULL)
++		gdMemMallocf = mallocf;
++	if (reallocf != NULL)
++		gdMemReallocf = reallocf;
++	if (freef != NULL)
++		gdMemFreef = freef;
+ }
+diff --git a/tests/CMakeLists.txt b/tests/CMakeLists.txt
+index 25a19baf2..5f3d2e370 100644
+--- a/tests/CMakeLists.txt
++++ b/tests/CMakeLists.txt
+@@ -79,6 +79,7 @@ if (BUILD_TEST)
+ 		gdimagetruecolortopalette
+ 		gdinterpolatedscale
+ 		gdmatrix
++		gdmem
+ 		gdnewfilectx
+ 		gdtest
+ 		gdtiled
+diff --git a/tests/Makefile.am b/tests/Makefile.am
+index 51177a6d0..b9e014964 100644
+--- a/tests/Makefile.am
++++ b/tests/Makefile.am
+@@ -74,6 +74,7 @@ include gdimagestringup/Makemodule.am
+ include gdimagestringup16/Makemodule.am
+ include gdimagetruecolortopalette/Makemodule.am
+ include gdinterpolatedscale/Makemodule.am
++include gdmem/Makemodule.am
+ include gdnewfilectx/Makemodule.am
+ include gdtest/Makemodule.am
+ include gdtiled/Makemodule.am
+diff --git a/tests/gdmem/CMakeLists.txt b/tests/gdmem/CMakeLists.txt
+new file mode 100644
+index 000000000..5b2e6c76f
+--- /dev/null
++++ b/tests/gdmem/CMakeLists.txt
+@@ -0,0 +1,7 @@
++IF(PNG_FOUND)
++LIST(APPEND TESTS_FILES
++	malloc
++)
++ENDIF(PNG_FOUND)
++
++ADD_GD_TESTS()
+diff --git a/tests/gdmem/Makemodule.am b/tests/gdmem/Makemodule.am
+new file mode 100644
+index 000000000..c46c03070
+--- /dev/null
++++ b/tests/gdmem/Makemodule.am
+@@ -0,0 +1,7 @@
++if HAVE_LIBPNG
++libgd_test_programs += \
++	gdmem/malloc
++endif
++
++EXTRA_DIST += \
++	gdmem/CMakeLists.txt
+diff --git a/tests/gdmem/coin.png b/tests/gdmem/coin.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..c9ba7a322204b7accbc108843d940695b41f508d
+GIT binary patch
+literal 657
+zcmV;C0&e|@P)<h;3K|Lk000e1NJLTq000mG000mO1^@s6AM^iV0004mX+uL$Nkc;*
+zaB^>EX>4Tx04R}tkv&MmKpe$iTcsi`f_6}G$WWauh>GZ@RVYG*P%E_RU~=gfG-*gu
+zTpR`0f`cE6RR<SmT^(EnLGS~_&CN;CMN0f%QfLw5!Ery{-Fw`<1N`+eQ_YSsK-DZG
+zm52+O?5YraMF71BV+I2fGxa%9Ou}<~-NVP%yBN>%KKJJcD>;(^K7n|a>4rtTK|Hl-
+z>74h8BdjPX#OK7L23?T&k?XR{Z=4Gb`*~)>NT=qBBg8_Xjpa6GMMEW?B#tVoM*04X
+z%L?Z$&T6^Jn)l={4CS<yWv<g4LIR6ef(QXJswklh3o%+XQcR?1Kknflbo?T@WO9|j
+z$gzM5R7j2={11M2Yvw1$-K0<)=zOv5k6|FV3p8rB{e5iPjT0d73|wg~f29sgf0ABn
+zY0)E~XB)V<ZfWu!aJd8YKk1SoIZ}Y8Kc5HQ&*+=7K;JFUz2^4T+{ftykfyGZH^9Lm
+zFjAoGb&q#<wfFY#nPz`Kj&yRe4P7tD00006VoOIv0RI600RN!9r;`8x010qNS#tmY
+zE+YT{E+YYWr9XB6000McNliru<pUB91s1f>sY?I=02y>eSad^gZEa<4bO1wgWnpw>
+zWFU8GbZ8()Nlj2!fese{003!8L_t(I%VS^|v|yD#!~g$f5R6Y9BQDLM>SzkPu&ZUn
+zr}=d!gcdEwZ3q)Cr>(vT(I{GuFbEr9BII;rfGs?jC=G1t8W6UTfpPUsJW+-v5Ls|3
+r4poN)Bm)BjLufe-(*eaPaTovqoq#8<6A6~500000NkvXXu0mjfofQmD
+
+literal 0
+HcmV?d00001
+
+diff --git a/tests/gdmem/malloc.c b/tests/gdmem/malloc.c
+new file mode 100644
+index 000000000..fd17d301e
+--- /dev/null
++++ b/tests/gdmem/malloc.c
+@@ -0,0 +1,77 @@
++#include "gd.h"
++#include "gdtest.h"
++
++void *testcalloc(size_t nmemb, size_t size)
++{
++	char *ptr;
++
++	ptr = calloc(nmemb, size);
++
++	for (size_t i = 0; i < size; i++)
++		*(ptr + i) = 0;
++
++	return (void *)ptr;
++}
++
++void *testmalloc(size_t size)
++{
++	char *ptr;
++
++	ptr = malloc(size);
++
++	for (size_t i = 0; i < size; i++)
++		*(ptr + i) = 0;
++
++	return (void *)ptr;
++}
++
++void *testrealloc(void *ptr, size_t size)
++{
++	char *ret;
++
++	ret = realloc(ptr, size);
++
++	return (void *)ret;
++}
++
++void testfree(void *ptr)
++{
++	if (ptr != NULL)
++		free(ptr);
++}
++
++int main()
++{
++	gdImagePtr im1, im2;
++	FILE *fp;
++	CuTestImageResult result = {0, 0};
++
++	fp = gdTestFileOpen2("gdmem", "coin.png");
++	if (!gdTestAssert(fp != NULL))
++		return gdNumFailures();
++
++	im1 = gdImageCreateFromPng(fp);
++	if (!gdTestAssert(im1 != NULL))
++		goto door1;
++
++	gdSetMemoryCallocMethod(testcalloc);
++	gdSetMemoryMallocMethod(testmalloc);
++	gdSetMemoryReallocMethod(testrealloc);
++	gdSetMemoryFreeMethod(testfree);
++	fseek(fp, 0, SEEK_SET);
++	im2 = gdImageCreateFromPng(fp);
++	if (!gdTestAssert(im2 != NULL))
++		goto door2;
++
++	gdTestImageDiff(im1, im2, NULL, &result);
++	gdTestAssertMsg(result.pixels_changed == 0, "pixels changed: %d\n", result.pixels_changed);
++
++	gdImageDestroy(im2);
++door2:
++	gdSetMemoryFreeMethod(free);
++	gdImageDestroy(im1);
++door1:
++	fclose(fp);
++
++	return gdNumFailures();
++}
+\ No newline at end of file
+
+From 5a4b49432092e5f8e719275a74ef92659bcadc33 Mon Sep 17 00:00:00 2001
+From: Martin Reboredo <yakoyoku@gmail.com>
+Date: Thu, 8 Apr 2021 12:12:51 -0300
+Subject: [PATCH 2/7] Dist missing files and split off CMake/pthreads
+
+---
+ cmake/modules/FindPTHREAD.cmake | 51 ++++++++++++++++++++++++++++-----
+ tests/gdmem/Makemodule.am       |  3 +-
+ tests/gdmem/malloc.c            |  2 +-
+ 3 files changed, 47 insertions(+), 9 deletions(-)
+
+diff --git a/cmake/modules/FindPTHREAD.cmake b/cmake/modules/FindPTHREAD.cmake
+index f9c58bf7f..0331e1756 100644
+--- a/cmake/modules/FindPTHREAD.cmake
++++ b/cmake/modules/FindPTHREAD.cmake
+@@ -42,12 +42,49 @@
+ #############################################################################
+ 
+ 
+-include(FindThreads)
+-FIND_PACKAGE(Threads)
++  FIND_PATH(PTHREAD_INCLUDE_DIR pthread.h
++    "$ENV{PTHREAD_HOME}/include"
++    "$ENV{PTHREAD_DIR}/include"
++    /usr/include
++    "C:/MinGW/include"
++  )
++  #MESSAGE("DBG PTHREAD_INCLUDE_DIR=${PTHREAD_INCLUDE_DIR}")
+ 
+-IF(CMAKE_THREAD_LIBS_INIT)
+-  SET(HAVE_PTHREAD TRUE)
+-  SET(PTHREAD_FOUND TRUE)
++  # pthreadVSE pthreadGCE pthreadGC pthreadVC1 pthreadVC2 are comming from web
++  FIND_LIBRARY(PTHREAD_LIBRARY
++    NAMES pthread pthreadGC2 pthreadVSE pthreadGCE pthreadGC pthreadVC1 pthreadVC2
++    PATHS
++    "$ENV{PTHREAD_HOME}/lib"
++    "$ENV{PTHREAD_DIR}/lib"
++    /usr/lib
++    /usr/local/lib
++    /lib
++    "C:/MinGW/lib"
++    )
+ 
+-  MESSAGE(STATUS "Find PThreads: ${PTHREAD_FOUND}")
+-ENDIF(CMAKE_THREAD_LIBS_INIT)
++  #MESSAGE(STATUS "DBG PTHREAD_LIBRARY=${PTHREAD_LIBRARY}")
++
++  ## --------------------------------
++
++  IF(PTHREAD_LIBRARY)
++    SET(PTHREAD_LIBRARIES ${PTHREAD_LIBRARY})
++  ELSE(PTHREAD_LIBRARY)
++    #MESSAGE(SEND_ERROR "pthread library not found.")
++  ENDIF(PTHREAD_LIBRARY)
++
++  IF(NOT PTHREAD_INCLUDE_DIR)
++    #MESSAGE(SEND_ERROR "pthread include dir not found.")
++  ENDIF(NOT PTHREAD_INCLUDE_DIR)
++
++  IF(PTHREAD_LIBRARIES AND PTHREAD_INCLUDE_DIR)
++    SET(PTHREAD_INCLUDE_DIRS ${PTHREAD_INCLUDE_DIR})
++    SET(PTHREAD_FOUND TRUE)
++  ELSE(PTHREAD_LIBRARIES AND PTHREAD_INCLUDE_DIR)
++    SET(PTHREAD_FOUND FALSE)
++  ENDIF(PTHREAD_LIBRARIES AND PTHREAD_INCLUDE_DIR)
++
++  MARK_AS_ADVANCED(
++    PTHREAD_INCLUDE_DIR
++    PTHREAD_LIBRARY
++  )
++  #MESSAGE(STATUS "PTHREAD_FOUND : ${PTHREAD_FOUND}")
+diff --git a/tests/gdmem/Makemodule.am b/tests/gdmem/Makemodule.am
+index c46c03070..8dd46afd6 100644
+--- a/tests/gdmem/Makemodule.am
++++ b/tests/gdmem/Makemodule.am
+@@ -4,4 +4,5 @@ libgd_test_programs += \
+ endif
+ 
+ EXTRA_DIST += \
+-	gdmem/CMakeLists.txt
++	gdmem/CMakeLists.txt \
++	gdmem/coin.png
+diff --git a/tests/gdmem/malloc.c b/tests/gdmem/malloc.c
+index fd17d301e..51e6e911e 100644
+--- a/tests/gdmem/malloc.c
++++ b/tests/gdmem/malloc.c
+@@ -74,4 +74,4 @@ int main()
+ 	fclose(fp);
+ 
+ 	return gdNumFailures();
+-}
+\ No newline at end of file
++}
+
+From 4ab7711727a24688227c53d91ffd4d8696fcbac1 Mon Sep 17 00:00:00 2001
+From: Martin Reboredo <yakoyoku@gmail.com>
+Date: Thu, 8 Apr 2021 19:27:53 -0300
+Subject: [PATCH 3/7] Much more sensical names
+
+---
+ src/gd.h        | 20 ++++++++++----------
+ src/gdhelpers.c | 46 +++++++++++++++++++++++-----------------------
+ 2 files changed, 33 insertions(+), 33 deletions(-)
+
+diff --git a/src/gd.h b/src/gd.h
+index 5b4adde8f..8b4ab53fe 100644
+--- a/src/gd.h
++++ b/src/gd.h
+@@ -1698,16 +1698,16 @@ BGD_DECLARE(int) gdTransformAffineBoundingBox(gdRectPtr src, const double affine
+ /* resolution affects ttf font rendering, particularly hinting */
+ #define GD_RESOLUTION           96      /* pixels per inch */
+ 
+-typedef void *(*gdCallocf)(size_t nmemb, size_t size);
+-typedef void *(*gdMallocf)(size_t size);
+-typedef void *(*gdReallocf)(void *ptr, size_t size);
+-typedef void (*gdFreef)(void *ptr);
+-
+-BGD_DECLARE(void) gdSetMemoryCallocMethod(gdCallocf callocf);
+-BGD_DECLARE(void) gdSetMemoryMallocMethod(gdMallocf mallocf);
+-BGD_DECLARE(void) gdSetMemoryReallocMethod(gdReallocf reallocf);
+-BGD_DECLARE(void) gdSetMemoryFreeMethod(gdFreef freef);
+-BGD_DECLARE(void) gdSetMemoryAllocationMethods(gdCallocf callocf, gdMallocf mallocf, gdReallocf reallocf, gdFreef freef);
++typedef void *(*gdCallocMethod)(size_t nmemb, size_t size);
++typedef void *(*gdMallocMethod)(size_t size);
++typedef void *(*gdReallocMethod)(void *ptr, size_t size);
++typedef void (*gdFreeMethod)(void *ptr);
++
++BGD_DECLARE(void) gdSetMemoryCallocMethod(gdCallocMethod callocf);
++BGD_DECLARE(void) gdSetMemoryMallocMethod(gdMallocMethod mallocf);
++BGD_DECLARE(void) gdSetMemoryReallocMethod(gdReallocMethod reallocf);
++BGD_DECLARE(void) gdSetMemoryFreeMethod(gdFreeMethod freef);
++BGD_DECLARE(void) gdSetMemoryAllocationMethods(gdCallocMethod callocf, gdMallocMethod mallocf, gdReallocMethod reallocf, gdFreeMethod freef);
+ 
+ /* Version information functions */
+ BGD_DECLARE(int) gdMajorVersion(void);
+diff --git a/src/gdhelpers.c b/src/gdhelpers.c
+index 432e00512..0a50c7d11 100644
+--- a/src/gdhelpers.c
++++ b/src/gdhelpers.c
+@@ -14,10 +14,10 @@
+ 
+ #define SEP_TEST (separators[*((unsigned char *) s)])
+ 
+-static gdCallocf gdMemCallocf = calloc;
+-static gdMallocf gdMemMallocf = malloc;
+-static gdReallocf gdMemReallocf = realloc;
+-static gdFreef gdMemFreef = free;
++static gdCallocMethod gdMemoryCallocMethod = calloc;
++static gdMallocMethod gdMemoryMallocMethod = malloc;
++static gdReallocMethod gdMemoryReallocMethod = realloc;
++static gdFreeMethod gdMemoryFreeMethod = free;
+ 
+ char *
+ gd_strtok_r(char *s, const char *sep, char **state)
+@@ -71,19 +71,19 @@ gd_strtok_r(char *s, const char *sep, char **state)
+ 
+ void * gdCalloc (size_t nmemb, size_t size)
+ {
+-	return gdMemCallocf (nmemb, size);
++	return gdMemoryCallocMethod (nmemb, size);
+ }
+ 
+ void *
+ gdMalloc (size_t size)
+ {
+-	return gdMemMallocf (size);
++	return gdMemoryMallocMethod (size);
+ }
+ 
+ void *
+ gdRealloc (void *ptr, size_t size)
+ {
+-	return gdMemReallocf (ptr, size);
++	return gdMemoryReallocMethod (ptr, size);
+ }
+ 
+ void *
+@@ -117,7 +117,7 @@ gdReallocEx (void *ptr, size_t size)
+ */
+ BGD_DECLARE(void) gdFree (void *ptr)
+ {
+-	gdMemFreef (ptr);
++	gdMemoryFreeMethod (ptr);
+ }
+ 
+ /*
+@@ -138,10 +138,10 @@ BGD_DECLARE(void) gdFree (void *ptr)
+ 
+     Nothing.
+ */
+-BGD_DECLARE(void) gdSetMemoryCallocMethod(gdCallocf callocf)
++BGD_DECLARE(void) gdSetMemoryCallocMethod(gdCallocMethod callocf)
+ {
+ 	if (callocf != NULL)
+-		gdMemCallocf = callocf;
++		gdMemoryCallocMethod = callocf;
+ }
+ 
+ /*
+@@ -164,8 +164,8 @@ BGD_DECLARE(void) gdSetMemoryCallocMethod(gdCallocf callocf)
+   Example:
+     (start code)
+ 
+-	// ... set a custom malloc first before any operation ...
+-	gdSetMemoryMallocMethod(customMalloc);
++    // ... set a custom malloc first before any operation ...
++    gdSetMemoryMallocMethod(customMalloc);
+ 
+     gdImagePtr im;
+     FILE *in;
+@@ -176,10 +176,10 @@ BGD_DECLARE(void) gdSetMemoryCallocMethod(gdCallocf callocf)
+ 
+     (end code)
+ */
+-BGD_DECLARE(void) gdSetMemoryMallocMethod(gdMallocf mallocf)
++BGD_DECLARE(void) gdSetMemoryMallocMethod(gdMallocMethod mallocf)
+ {
+ 	if (mallocf != NULL)
+-		gdMemMallocf = mallocf;
++		gdMemoryMallocMethod = mallocf;
+ }
+ 
+ /*
+@@ -199,10 +199,10 @@ BGD_DECLARE(void) gdSetMemoryMallocMethod(gdMallocf mallocf)
+ 
+     Nothing.
+ */
+-BGD_DECLARE(void) gdSetMemoryReallocMethod(gdReallocf reallocf)
++BGD_DECLARE(void) gdSetMemoryReallocMethod(gdReallocMethod reallocf)
+ {
+ 	if (reallocf != NULL)
+-		gdMemReallocf = reallocf;
++		gdMemoryReallocMethod = reallocf;
+ }
+ 
+ /*
+@@ -222,10 +222,10 @@ BGD_DECLARE(void) gdSetMemoryReallocMethod(gdReallocf reallocf)
+ 
+     Nothing.
+ */
+-BGD_DECLARE(void) gdSetMemoryFreeMethod(gdFreef freef)
++BGD_DECLARE(void) gdSetMemoryFreeMethod(gdFreeMethod freef)
+ {
+ 	if (freef != NULL)
+-		gdMemFreef = freef;
++		gdMemoryFreeMethod = freef;
+ }
+ 
+ /*
+@@ -252,14 +252,14 @@ BGD_DECLARE(void) gdSetMemoryFreeMethod(gdFreef freef)
+ 
+     Nothing.
+ */
+-BGD_DECLARE(void) gdSetMemoryAllocationMethods(gdCallocf callocf, gdMallocf mallocf, gdReallocf reallocf, gdFreef freef)
++BGD_DECLARE(void) gdSetMemoryAllocationMethods(gdCallocMethod callocf, gdMallocMethod mallocf, gdReallocMethod reallocf, gdFreeMethod freef)
+ {
+ 	if (callocf != NULL)
+-		gdMemCallocf = callocf;
++		gdMemoryCallocMethod = callocf;
+ 	if (mallocf != NULL)
+-		gdMemMallocf = mallocf;
++		gdMemoryMallocMethod = mallocf;
+ 	if (reallocf != NULL)
+-		gdMemReallocf = reallocf;
++		gdMemoryReallocMethod = reallocf;
+ 	if (freef != NULL)
+-		gdMemFreef = freef;
++		gdMemoryFreeMethod = freef;
+ }
+
+From 04d933309d32f632288d2871da06684627d49923 Mon Sep 17 00:00:00 2001
+From: Martin Reboredo <yakoyoku@gmail.com>
+Date: Thu, 8 Apr 2021 19:27:53 -0300
+Subject: [PATCH 4/7] Much more sensical names
+
+---
+ src/gd.h        | 10 +++----
+ src/gdhelpers.c | 75 +++++++++++++++++++++++++------------------------
+ 2 files changed, 43 insertions(+), 42 deletions(-)
+
+diff --git a/src/gd.h b/src/gd.h
+index 8b4ab53fe..c275a3d24 100644
+--- a/src/gd.h
++++ b/src/gd.h
+@@ -1703,11 +1703,11 @@ typedef void *(*gdMallocMethod)(size_t size);
+ typedef void *(*gdReallocMethod)(void *ptr, size_t size);
+ typedef void (*gdFreeMethod)(void *ptr);
+ 
+-BGD_DECLARE(void) gdSetMemoryCallocMethod(gdCallocMethod callocf);
+-BGD_DECLARE(void) gdSetMemoryMallocMethod(gdMallocMethod mallocf);
+-BGD_DECLARE(void) gdSetMemoryReallocMethod(gdReallocMethod reallocf);
+-BGD_DECLARE(void) gdSetMemoryFreeMethod(gdFreeMethod freef);
+-BGD_DECLARE(void) gdSetMemoryAllocationMethods(gdCallocMethod callocf, gdMallocMethod mallocf, gdReallocMethod reallocf, gdFreeMethod freef);
++BGD_DECLARE(void) gdSetMemoryCallocMethod(gdCallocMethod calloc_method);
++BGD_DECLARE(void) gdSetMemoryMallocMethod(gdMallocMethod malloc_method);
++BGD_DECLARE(void) gdSetMemoryReallocMethod(gdReallocMethod realloc_method);
++BGD_DECLARE(void) gdSetMemoryFreeMethod(gdFreeMethod free_method);
++BGD_DECLARE(void) gdSetMemoryAllocationMethods(gdCallocMethod calloc_method, gdMallocMethod malloc_method, gdReallocMethod realloc_method, gdFreeMethod free_method);
+ 
+ /* Version information functions */
+ BGD_DECLARE(int) gdMajorVersion(void);
+diff --git a/src/gdhelpers.c b/src/gdhelpers.c
+index 0a50c7d11..c50c93d74 100644
+--- a/src/gdhelpers.c
++++ b/src/gdhelpers.c
+@@ -131,17 +131,17 @@ BGD_DECLARE(void) gdFree (void *ptr)
+ 
+   Parameters:
+ 
+-    callocf - Function pointer to the memory allocation method. If it is NULL,
+-              no operation is performed.
++    calloc_method - Function pointer to the memory allocation method. If it is
++                    NULL, no operation is performed.
+ 
+   Returns:
+ 
+     Nothing.
+ */
+-BGD_DECLARE(void) gdSetMemoryCallocMethod(gdCallocMethod callocf)
++BGD_DECLARE(void) gdSetMemoryCallocMethod(gdCallocMethod calloc_method)
+ {
+-	if (callocf != NULL)
+-		gdMemoryCallocMethod = callocf;
++	if (calloc_method != NULL)
++		gdMemoryCallocMethod = calloc_method;
+ }
+ 
+ /*
+@@ -154,8 +154,8 @@ BGD_DECLARE(void) gdSetMemoryCallocMethod(gdCallocMethod callocf)
+ 
+   Parameters:
+ 
+-    mallocf - Function pointer to the memory allocation method. If it is NULL,
+-              no operation is performed.
++    malloc_method - Function pointer to the memory allocation method. If it is
++                    NULL, no operation is performed.
+ 
+   Returns:
+ 
+@@ -176,10 +176,10 @@ BGD_DECLARE(void) gdSetMemoryCallocMethod(gdCallocMethod callocf)
+ 
+     (end code)
+ */
+-BGD_DECLARE(void) gdSetMemoryMallocMethod(gdMallocMethod mallocf)
++BGD_DECLARE(void) gdSetMemoryMallocMethod(gdMallocMethod malloc_method)
+ {
+-	if (mallocf != NULL)
+-		gdMemoryMallocMethod = mallocf;
++	if (malloc_method != NULL)
++		gdMemoryMallocMethod = malloc_method;
+ }
+ 
+ /*
+@@ -192,17 +192,17 @@ BGD_DECLARE(void) gdSetMemoryMallocMethod(gdMallocMethod mallocf)
+ 
+   Parameters:
+ 
+-    reallocf - Function pointer to the memory reallocation method. If it is
+-               NULL, no operation is performed.
++    realloc_method - Function pointer to the memory reallocation method. If it
++                     is NULL, no operation is performed.
+ 
+   Returns:
+ 
+     Nothing.
+ */
+-BGD_DECLARE(void) gdSetMemoryReallocMethod(gdReallocMethod reallocf)
++BGD_DECLARE(void) gdSetMemoryReallocMethod(gdReallocMethod realloc_method)
+ {
+-	if (reallocf != NULL)
+-		gdMemoryReallocMethod = reallocf;
++	if (realloc_method != NULL)
++		gdMemoryReallocMethod = realloc_method;
+ }
+ 
+ /*
+@@ -215,17 +215,17 @@ BGD_DECLARE(void) gdSetMemoryReallocMethod(gdReallocMethod reallocf)
+ 
+   Parameters:
+ 
+-    freef - Function pointer to the memory release method. If it is NULL, no
+-            operation is performed.
++    free_method - Function pointer to the memory release method. If it is NULL,
++                  no operation is performed.
+ 
+   Returns:
+ 
+     Nothing.
+ */
+-BGD_DECLARE(void) gdSetMemoryFreeMethod(gdFreeMethod freef)
++BGD_DECLARE(void) gdSetMemoryFreeMethod(gdFreeMethod free_method)
+ {
+-	if (freef != NULL)
+-		gdMemoryFreeMethod = freef;
++	if (free_method != NULL)
++		gdMemoryFreeMethod = free_method;
+ }
+ 
+ /*
+@@ -239,27 +239,28 @@ BGD_DECLARE(void) gdSetMemoryFreeMethod(gdFreeMethod freef)
+ 
+   Parameters:
+ 
+-    callocf - Function pointer to the memory allocation method, initialized
+-              with zeroes. If it is NULL, the assignation is not performed.
+-    mallocf - Function pointer to the memory allocation method. If it is NULL,
+-              the assignation is not performed.
+-    reallocf - Function pointer to the memory reallocation method. If it is
+-               NULL, the assignation is not performed.
+-    freef - Function pointer to the memory release method. If it is NULL, the
+-            assignation is not performed.
++    calloc_method - Function pointer to the memory allocation method,
++                    initialized with zeroes. If it is NULL, the assignation is
++                    not performed.
++    malloc_method - Function pointer to the memory allocation method. If it is
++                    NULL, the assignation is not performed.
++    realloc_method - Function pointer to the memory reallocation method. If it
++                     is NULL, the assignation is not performed.
++    free_method - Function pointer to the memory release method. If it is NULL,
++                  the assignation is not performed.
+ 
+   Returns:
+ 
+     Nothing.
+ */
+-BGD_DECLARE(void) gdSetMemoryAllocationMethods(gdCallocMethod callocf, gdMallocMethod mallocf, gdReallocMethod reallocf, gdFreeMethod freef)
++BGD_DECLARE(void) gdSetMemoryAllocationMethods(gdCallocMethod calloc_method, gdMallocMethod malloc_method, gdReallocMethod realloc_method, gdFreeMethod free_method)
+ {
+-	if (callocf != NULL)
+-		gdMemoryCallocMethod = callocf;
+-	if (mallocf != NULL)
+-		gdMemoryMallocMethod = mallocf;
+-	if (reallocf != NULL)
+-		gdMemoryReallocMethod = reallocf;
+-	if (freef != NULL)
+-		gdMemoryFreeMethod = freef;
++	if (calloc_method != NULL)
++		gdMemoryCallocMethod = calloc_method;
++	if (malloc_method != NULL)
++		gdMemoryMallocMethod = malloc_method;
++	if (realloc_method != NULL)
++		gdMemoryReallocMethod = realloc_method;
++	if (free_method != NULL)
++		gdMemoryFreeMethod = free_method;
+ }
+
+From a4e7bf75287cb8a2c3ffeadeef9e20e341404ab3 Mon Sep 17 00:00:00 2001
+From: Martin Reboredo <yakoyoku@gmail.com>
+Date: Sun, 18 Apr 2021 22:07:45 -0300
+Subject: [PATCH 5/7] Document missing types
+
+---
+ docs/naturaldocs/project/Menu.txt |  2 +-
+ src/gd.h                          | 19 +++++++++++++++++++
+ src/gdhelpers.c                   | 10 +++++-----
+ 3 files changed, 25 insertions(+), 6 deletions(-)
+
+diff --git a/docs/naturaldocs/project/Menu.txt b/docs/naturaldocs/project/Menu.txt
+index fdd859b37..463c2ce35 100644
+--- a/docs/naturaldocs/project/Menu.txt
++++ b/docs/naturaldocs/project/Menu.txt
+@@ -79,7 +79,7 @@ File: gd_io_dp.c  (gd_io_dp.c)
+ File: gd_ss.c  (gd_ss.c)
+ File: gd_version.c  (gd_version.c)
+ File: gdColorMapLookup  (gd_color_map.c)
+-File: gdFree  (gdhelpers.c)
++File: gdhelpers.c  (gdhelpers.c)
+ File: gdfx.c  (gdfx.c)
+ File: gdImageColorMatch  (gd_color_match.c)
+ File: gdImageNeuQuant  (gd_nnquant.c)
+diff --git a/src/gd.h b/src/gd.h
+index c275a3d24..02b856173 100644
+--- a/src/gd.h
++++ b/src/gd.h
+@@ -1698,6 +1698,25 @@ BGD_DECLARE(int) gdTransformAffineBoundingBox(gdRectPtr src, const double affine
+ /* resolution affects ttf font rendering, particularly hinting */
+ #define GD_RESOLUTION           96      /* pixels per inch */
+ 
++/*
++  Group: Types
++
++    typedef: gdCallocMethod
++
++    Memory allocation method (initialized with zeroes) function pointer type.
++
++    typedef: gdMallocMethod
++
++    Memory allocation method function pointer type.
++
++    typedef: gdReallocMethod
++
++    Memory reallocation method function pointer type.
++
++    typedef: gdFreeMethod
++
++    Memory release method function pointer type.
++*/
+ typedef void *(*gdCallocMethod)(size_t nmemb, size_t size);
+ typedef void *(*gdMallocMethod)(size_t size);
+ typedef void *(*gdReallocMethod)(void *ptr, size_t size);
+diff --git a/src/gdhelpers.c b/src/gdhelpers.c
+index c50c93d74..91b86c1dc 100644
+--- a/src/gdhelpers.c
++++ b/src/gdhelpers.c
+@@ -121,7 +121,7 @@ BGD_DECLARE(void) gdFree (void *ptr)
+ }
+ 
+ /*
+-  Function gdSetMemoryCallocMethod
++  Function: gdSetMemoryCallocMethod
+ 
+     <gdSetMemoryCallocMethod> sets the memory allocation (initialized with
+     zeroes) method used by GD.
+@@ -145,7 +145,7 @@ BGD_DECLARE(void) gdSetMemoryCallocMethod(gdCallocMethod calloc_method)
+ }
+ 
+ /*
+-  Function gdSetMemoryMallocMethod
++  Function: gdSetMemoryMallocMethod
+ 
+     <gdSetMemoryMallocMethod> sets the memory allocation method used by GD.
+ 
+@@ -183,7 +183,7 @@ BGD_DECLARE(void) gdSetMemoryMallocMethod(gdMallocMethod malloc_method)
+ }
+ 
+ /*
+-  Function gdSetMemoryReallocMethod
++  Function: gdSetMemoryReallocMethod
+ 
+     <gdSetMemoryReallocMethod> sets the memory allocation method used by GD.
+ 
+@@ -206,7 +206,7 @@ BGD_DECLARE(void) gdSetMemoryReallocMethod(gdReallocMethod realloc_method)
+ }
+ 
+ /*
+-  Function gdSetMemoryFreeMethod
++  Function: gdSetMemoryFreeMethod
+ 
+     <gdSetMemoryFreeMethod> sets the memory release method used by GD.
+ 
+@@ -229,7 +229,7 @@ BGD_DECLARE(void) gdSetMemoryFreeMethod(gdFreeMethod free_method)
+ }
+ 
+ /*
+-  Function gdSetMemoryAllocationMethods
++  Function: gdSetMemoryAllocationMethods
+ 
+     <gdSetMemoryAllocationMethods> sets the memory allocation methods used by
+     GD.
+
+From bfee8dfa665d58b03ef1ba72eae3a9075ec0f3c7 Mon Sep 17 00:00:00 2001
+From: Martin Reboredo <yakoyoku@gmail.com>
+Date: Mon, 19 Apr 2021 14:02:32 -0300
+Subject: [PATCH 6/7] Clear methods and testing reworked
+
+---
+ .gitignore                        |   1 +
+ docs/naturaldocs/project/Menu.txt |   2 +-
+ src/gd.h                          |   6 +-
+ src/gdhelpers.c                   | 112 ++++++++++++++++++++++++------
+ tests/gdmem/malloc.c              |  47 +++++++++----
+ 5 files changed, 131 insertions(+), 37 deletions(-)
+
+diff --git a/.gitignore b/.gitignore
+index 444784976..e6f60c66c 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -96,6 +96,7 @@ Testing
+ # Doc artifacts
+ /docs/naturaldocs/html/
+ /docs/naturaldocs/project/Data/
++/docs/naturaldocs/tmp/
+ 
+ # AppVeyor build artifacts.
+ gd-dotnet-bindings-generator
+diff --git a/docs/naturaldocs/project/Menu.txt b/docs/naturaldocs/project/Menu.txt
+index 463c2ce35..ec4178f5b 100644
+--- a/docs/naturaldocs/project/Menu.txt
++++ b/docs/naturaldocs/project/Menu.txt
+@@ -79,8 +79,8 @@ File: gd_io_dp.c  (gd_io_dp.c)
+ File: gd_ss.c  (gd_ss.c)
+ File: gd_version.c  (gd_version.c)
+ File: gdColorMapLookup  (gd_color_map.c)
+-File: gdhelpers.c  (gdhelpers.c)
+ File: gdfx.c  (gdfx.c)
++File: gdhelpers.c  (gdhelpers.c)
+ File: gdImageColorMatch  (gd_color_match.c)
+ File: gdImageNeuQuant  (gd_nnquant.c)
+ File: gdNewFileCtx  (gd_io_file.c)
+diff --git a/src/gd.h b/src/gd.h
+index 02b856173..2056f5315 100644
+--- a/src/gd.h
++++ b/src/gd.h
+@@ -1726,7 +1726,11 @@ BGD_DECLARE(void) gdSetMemoryCallocMethod(gdCallocMethod calloc_method);
+ BGD_DECLARE(void) gdSetMemoryMallocMethod(gdMallocMethod malloc_method);
+ BGD_DECLARE(void) gdSetMemoryReallocMethod(gdReallocMethod realloc_method);
+ BGD_DECLARE(void) gdSetMemoryFreeMethod(gdFreeMethod free_method);
+-BGD_DECLARE(void) gdSetMemoryAllocationMethods(gdCallocMethod calloc_method, gdMallocMethod malloc_method, gdReallocMethod realloc_method, gdFreeMethod free_method);
++
++BGD_DECLARE(void) gdClearMemoryCallocMethod();
++BGD_DECLARE(void) gdClearMemoryMallocMethod();
++BGD_DECLARE(void) gdClearMemoryReallocMethod();
++BGD_DECLARE(void) gdClearMemoryFreeMethod();
+ 
+ /* Version information functions */
+ BGD_DECLARE(int) gdMajorVersion(void);
+diff --git a/src/gdhelpers.c b/src/gdhelpers.c
+index 91b86c1dc..2bb45961f 100644
+--- a/src/gdhelpers.c
++++ b/src/gdhelpers.c
+@@ -137,6 +137,9 @@ BGD_DECLARE(void) gdFree (void *ptr)
+   Returns:
+ 
+     Nothing.
++
++  See also:
++    - <gdClearMemoryCallocMethod>
+ */
+ BGD_DECLARE(void) gdSetMemoryCallocMethod(gdCallocMethod calloc_method)
+ {
+@@ -161,6 +164,9 @@ BGD_DECLARE(void) gdSetMemoryCallocMethod(gdCallocMethod calloc_method)
+ 
+     Nothing.
+ 
++  See also:
++    - <gdClearMemoryMallocMethod>
++
+   Example:
+     (start code)
+ 
+@@ -198,6 +204,9 @@ BGD_DECLARE(void) gdSetMemoryMallocMethod(gdMallocMethod malloc_method)
+   Returns:
+ 
+     Nothing.
++
++  See also:
++    - <gdClearMemoryReallocMethod>
+ */
+ BGD_DECLARE(void) gdSetMemoryReallocMethod(gdReallocMethod realloc_method)
+ {
+@@ -229,38 +238,95 @@ BGD_DECLARE(void) gdSetMemoryFreeMethod(gdFreeMethod free_method)
+ }
+ 
+ /*
+-  Function: gdSetMemoryAllocationMethods
++  Function: gdClearMemoryCallocMethod
++
++    <gdClearMemoryCallocMethod> clears the memory allocation (initialized with
++    zeroes) method used by GD.
++
++    This function is not thread-safe and it should not be called during
++    operations.
++
++  Returns:
++
++    Nothing.
++
++  See also:
++    - <gdSetMemoryCallocMethod>
++*/
++BGD_DECLARE(void) gdClearMemoryCallocMethod()
++{
++	gdMemoryCallocMethod = calloc;
++}
++
++/*
++  Function: gdClearMemoryMallocMethod
++
++    <gdClearMemoryMallocMethod> clears the memory allocation method used by GD.
++
++    This function is not thread-safe and it should not be called during
++    operations.
++
++  Returns:
++
++    Nothing.
++
++  See also:
++    - <gdSetMemoryMallocMethod>
++
++  Example:
++    (start code)
++
++    gdSetMemoryMallocMethod(customMalloc);
++
++    // ... do the desired operations ...
++
++    // ... clear the custom malloc so it uses the default one ...
++    gdClearMemoryMallocMethod();
++
++    (end code)
++*/
++BGD_DECLARE(void) gdClearMemoryMallocMethod()
++{
++	gdMemoryMallocMethod = malloc;
++}
++
++/*
++  Function: gdClearMemoryReallocMethod
+ 
+-    <gdSetMemoryAllocationMethods> sets the memory allocation methods used by
++    <gdClearMemoryReallocMethod> clears the memory allocation method used by
+     GD.
+ 
+-    This function is not thread-safe. Should be called once and before any
+-    operation with the library.
++    This function is not thread-safe and it should not be called during
++    operations.
+ 
+-  Parameters:
++  Returns:
+ 
+-    calloc_method - Function pointer to the memory allocation method,
+-                    initialized with zeroes. If it is NULL, the assignation is
+-                    not performed.
+-    malloc_method - Function pointer to the memory allocation method. If it is
+-                    NULL, the assignation is not performed.
+-    realloc_method - Function pointer to the memory reallocation method. If it
+-                     is NULL, the assignation is not performed.
+-    free_method - Function pointer to the memory release method. If it is NULL,
+-                  the assignation is not performed.
++    Nothing.
++
++  See also:
++    - <gdSetMemoryReallocMethod>
++*/
++BGD_DECLARE(void) gdClearMemoryReallocMethod()
++{
++	gdMemoryReallocMethod = realloc;
++}
++
++/*
++  Function: gdClearMemoryFreeMethod
++
++    <gdSetMemClearFreeMethod> clears the memory release method used by GD.
++
++    This function is not thread-safe and it should not be called during
++    operations.
+ 
+   Returns:
+ 
+     Nothing.
++
++  See also:
++    - <gdSetMemoryFreeMethod>
+ */
+-BGD_DECLARE(void) gdSetMemoryAllocationMethods(gdCallocMethod calloc_method, gdMallocMethod malloc_method, gdReallocMethod realloc_method, gdFreeMethod free_method)
++BGD_DECLARE(void) gdClearMemoryFreeMethod()
+ {
+-	if (calloc_method != NULL)
+-		gdMemoryCallocMethod = calloc_method;
+-	if (malloc_method != NULL)
+-		gdMemoryMallocMethod = malloc_method;
+-	if (realloc_method != NULL)
+-		gdMemoryReallocMethod = realloc_method;
+-	if (free_method != NULL)
+-		gdMemoryFreeMethod = free_method;
++	gdMemoryFreeMethod = free;
+ }
+diff --git a/tests/gdmem/malloc.c b/tests/gdmem/malloc.c
+index 51e6e911e..8f42144bb 100644
+--- a/tests/gdmem/malloc.c
++++ b/tests/gdmem/malloc.c
+@@ -1,48 +1,59 @@
++/**
++ * Validation test that checks if the custom memory management methods are
++ * actually being set, called and cleared correctly.
++ */
++
+ #include "gd.h"
+ #include "gdtest.h"
+ 
+-void *testcalloc(size_t nmemb, size_t size)
++static int testedCalloc = GD_FALSE;
++static int testedMalloc = GD_FALSE;
++static int testedRealloc = GD_FALSE;
++static int testedFree = GD_FALSE;
++
++static void *testcalloc(size_t nmemb, size_t size)
+ {
+ 	char *ptr;
+ 
+ 	ptr = calloc(nmemb, size);
+ 
+-	for (size_t i = 0; i < size; i++)
+-		*(ptr + i) = 0;
++	testedCalloc = GD_TRUE;
+ 
+ 	return (void *)ptr;
+ }
+ 
+-void *testmalloc(size_t size)
++static void *testmalloc(size_t size)
+ {
+ 	char *ptr;
+ 
+ 	ptr = malloc(size);
+ 
+-	for (size_t i = 0; i < size; i++)
+-		*(ptr + i) = 0;
++	testedMalloc = GD_TRUE;
+ 
+ 	return (void *)ptr;
+ }
+ 
+-void *testrealloc(void *ptr, size_t size)
++static void *testrealloc(void *ptr, size_t size)
+ {
+ 	char *ret;
+ 
+ 	ret = realloc(ptr, size);
+ 
++	testedRealloc = GD_TRUE;
++
+ 	return (void *)ret;
+ }
+ 
+-void testfree(void *ptr)
++static void testfree(void *ptr)
+ {
+-	if (ptr != NULL)
+-		free(ptr);
++	free(ptr);
++
++	testedFree = GD_TRUE;
+ }
+ 
+ int main()
+ {
+-	gdImagePtr im1, im2;
++	gdImagePtr im1, im2, im3;
+ 	FILE *fp;
+ 	CuTestImageResult result = {0, 0};
+ 
+@@ -66,9 +77,21 @@ int main()
+ 	gdTestImageDiff(im1, im2, NULL, &result);
+ 	gdTestAssertMsg(result.pixels_changed == 0, "pixels changed: %d\n", result.pixels_changed);
+ 
++	im3 = gdImageCreatePaletteFromTrueColor(im2, GD_FALSE, 256);
++	if (gdTestAssert(im3 != NULL))
++		gdImageDestroy(im3);
++
++	gdTestAssertMsg(testedCalloc, "Custom calloc hasn't been called!");
++	gdTestAssertMsg(testedMalloc, "Custom malloc hasn't been called!");
++	gdTestAssertMsg(testedRealloc, "Custom realloc hasn't been called!");
++	gdTestAssertMsg(testedFree, "Custom free hasn't been called!");
++
+ 	gdImageDestroy(im2);
+ door2:
+-	gdSetMemoryFreeMethod(free);
++	gdClearMemoryCallocMethod();
++	gdClearMemoryMallocMethod();
++	gdClearMemoryReallocMethod();
++	gdClearMemoryFreeMethod();
+ 	gdImageDestroy(im1);
+ door1:
+ 	fclose(fp);
+
+From 49a1b7dc2448682c2c97b6d36cf2a4c17ddddd58 Mon Sep 17 00:00:00 2001
+From: Martin Reboredo <yakoyoku@gmail.com>
+Date: Tue, 24 Aug 2021 13:22:10 -0300
+Subject: [PATCH 7/7] Struct instead of lone function pointers
+
+---
+ src/gdhelpers.c        | 41 ++++++++++++++++++++++++-----------------
+ tests/gdmem/.gitignore |  1 +
+ 2 files changed, 25 insertions(+), 17 deletions(-)
+ create mode 100644 tests/gdmem/.gitignore
+
+diff --git a/src/gdhelpers.c b/src/gdhelpers.c
+index 2bb45961f..85d0f0626 100644
+--- a/src/gdhelpers.c
++++ b/src/gdhelpers.c
+@@ -10,15 +10,22 @@
+ #include <sys/types.h>
+ #include <ctype.h>
+ 
++static struct gdAllocHelpers_s {
++  gdCallocMethod gdMemoryCallocMethod;
++  gdMallocMethod gdMemoryMallocMethod;
++  gdReallocMethod gdMemoryReallocMethod;
++  gdFreeMethod gdMemoryFreeMethod;
++} gdAllocHelpers = {
++  calloc,
++  malloc,
++  realloc,
++  free,
++};
++
+ /* TBB: gd_strtok_r is not portable; provide an implementation */
+ 
+ #define SEP_TEST (separators[*((unsigned char *) s)])
+ 
+-static gdCallocMethod gdMemoryCallocMethod = calloc;
+-static gdMallocMethod gdMemoryMallocMethod = malloc;
+-static gdReallocMethod gdMemoryReallocMethod = realloc;
+-static gdFreeMethod gdMemoryFreeMethod = free;
+-
+ char *
+ gd_strtok_r(char *s, const char *sep, char **state)
+ {
+@@ -71,19 +78,19 @@ gd_strtok_r(char *s, const char *sep, char **state)
+ 
+ void * gdCalloc (size_t nmemb, size_t size)
+ {
+-	return gdMemoryCallocMethod (nmemb, size);
++	return gdAllocHelpers.gdMemoryCallocMethod (nmemb, size);
+ }
+ 
+ void *
+ gdMalloc (size_t size)
+ {
+-	return gdMemoryMallocMethod (size);
++	return gdAllocHelpers.gdMemoryMallocMethod (size);
+ }
+ 
+ void *
+ gdRealloc (void *ptr, size_t size)
+ {
+-	return gdMemoryReallocMethod (ptr, size);
++	return gdAllocHelpers.gdMemoryReallocMethod (ptr, size);
+ }
+ 
+ void *
+@@ -117,7 +124,7 @@ gdReallocEx (void *ptr, size_t size)
+ */
+ BGD_DECLARE(void) gdFree (void *ptr)
+ {
+-	gdMemoryFreeMethod (ptr);
++	gdAllocHelpers.gdMemoryFreeMethod (ptr);
+ }
+ 
+ /*
+@@ -144,7 +151,7 @@ BGD_DECLARE(void) gdFree (void *ptr)
+ BGD_DECLARE(void) gdSetMemoryCallocMethod(gdCallocMethod calloc_method)
+ {
+ 	if (calloc_method != NULL)
+-		gdMemoryCallocMethod = calloc_method;
++		gdAllocHelpers.gdMemoryCallocMethod = calloc_method;
+ }
+ 
+ /*
+@@ -185,7 +192,7 @@ BGD_DECLARE(void) gdSetMemoryCallocMethod(gdCallocMethod calloc_method)
+ BGD_DECLARE(void) gdSetMemoryMallocMethod(gdMallocMethod malloc_method)
+ {
+ 	if (malloc_method != NULL)
+-		gdMemoryMallocMethod = malloc_method;
++		gdAllocHelpers.gdMemoryMallocMethod = malloc_method;
+ }
+ 
+ /*
+@@ -211,7 +218,7 @@ BGD_DECLARE(void) gdSetMemoryMallocMethod(gdMallocMethod malloc_method)
+ BGD_DECLARE(void) gdSetMemoryReallocMethod(gdReallocMethod realloc_method)
+ {
+ 	if (realloc_method != NULL)
+-		gdMemoryReallocMethod = realloc_method;
++		gdAllocHelpers.gdMemoryReallocMethod = realloc_method;
+ }
+ 
+ /*
+@@ -234,7 +241,7 @@ BGD_DECLARE(void) gdSetMemoryReallocMethod(gdReallocMethod realloc_method)
+ BGD_DECLARE(void) gdSetMemoryFreeMethod(gdFreeMethod free_method)
+ {
+ 	if (free_method != NULL)
+-		gdMemoryFreeMethod = free_method;
++		gdAllocHelpers.gdMemoryFreeMethod = free_method;
+ }
+ 
+ /*
+@@ -255,7 +262,7 @@ BGD_DECLARE(void) gdSetMemoryFreeMethod(gdFreeMethod free_method)
+ */
+ BGD_DECLARE(void) gdClearMemoryCallocMethod()
+ {
+-	gdMemoryCallocMethod = calloc;
++	gdAllocHelpers.gdMemoryCallocMethod = calloc;
+ }
+ 
+ /*
+@@ -287,7 +294,7 @@ BGD_DECLARE(void) gdClearMemoryCallocMethod()
+ */
+ BGD_DECLARE(void) gdClearMemoryMallocMethod()
+ {
+-	gdMemoryMallocMethod = malloc;
++	gdAllocHelpers.gdMemoryMallocMethod = malloc;
+ }
+ 
+ /*
+@@ -308,7 +315,7 @@ BGD_DECLARE(void) gdClearMemoryMallocMethod()
+ */
+ BGD_DECLARE(void) gdClearMemoryReallocMethod()
+ {
+-	gdMemoryReallocMethod = realloc;
++	gdAllocHelpers.gdMemoryReallocMethod = realloc;
+ }
+ 
+ /*
+@@ -328,5 +335,5 @@ BGD_DECLARE(void) gdClearMemoryReallocMethod()
+ */
+ BGD_DECLARE(void) gdClearMemoryFreeMethod()
+ {
+-	gdMemoryFreeMethod = free;
++	gdAllocHelpers.gdMemoryFreeMethod = free;
+ }
+diff --git a/tests/gdmem/.gitignore b/tests/gdmem/.gitignore
+new file mode 100644
+index 000000000..fa0ed9bc6
+--- /dev/null
++++ b/tests/gdmem/.gitignore
+@@ -0,0 +1 @@
++/malloc
+\ No newline at end of file
