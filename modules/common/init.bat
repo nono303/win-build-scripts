@@ -70,11 +70,13 @@ if exist %PATH_SRC%\%1\. (
 :end
 REM https://stackoverflow.com/questions/9556676/batch-file-how-to-replace-equal-signs-and-a-string-variable
 REM https://stackoverflow.com/questions/26246151/setlocal-enabledelayedexpansion-causes-cd-and-pushd-to-not-persist
+	REM SCM_BRANCH: remove '(' & ')' that are interpreted in IF statement
 endlocal & ^
 cd %PATH_SRC%\%1& ^
 set SCM_COMORREV=%SCM_COMORREV%& ^
 set SCM_TAG=%SCM_TAG%& ^
-set SCM_BRANCH=%SCM_BRANCH%& ^
+set SCM_BRANCH=%SCM_BRANCH:(=%&
+set SCM_BRANCH=%SCM_BRANCH:)=%&^
 set SCM_COMORREV_DATE=%SCM_COMORREV_DATE%& ^
 set SCM_URL=%SCM_URL%
 if "%CUR_DEBUG%"=="1" (
