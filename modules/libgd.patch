@@ -1,19 +1,29 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 6b3e5b3b..b8656951 100644
+index 6b3e5b3b..2ec1431b 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -296,61 +296,4 @@ else (USE_EXT_GD)
- 	INCLUDE_DIRECTORIES(before ${FONTCONFIG_INCLUDE_DIR})
+@@ -26,6 +26,11 @@ OPTION(ENABLE_ASAN "Enable (gcc) ASAN support" 0)
+ OPTION(ENABLE_CPP "Enable CPP GD API" 1)
+ OPTION(VERBOSE_MAKEFILE "Enable CMAKE_VERBOSE_MAKEFILE" 0)
  
++OPTION(BUILD_TESTS "Build tests" 0)
++OPTION(BUILD_EXEMPLES "Build exemples" 0)
++OPTION(BUILD_DOCS "Build docs" 0)
++OPTION(BUILD_CPACK "Build CPACK" 0)
++
+ if (VERBOSE_MAKEFILE)
+ 	set(CMAKE_VERBOSE_MAKEFILE ON)
+ endif (VERBOSE_MAKEFILE)
+@@ -298,59 +303,64 @@ else (USE_EXT_GD)
  	add_subdirectory(src)
--endif (USE_EXT_GD)
--
+ endif (USE_EXT_GD)
+ 
 -add_subdirectory(tests)
 -add_subdirectory(examples)
 -add_subdirectory(docs)
 -
--add_custom_target(distclean ${GD_SOURCE_DIR}/cmake/distclean.sh)
--
+ add_custom_target(distclean ${GD_SOURCE_DIR}/cmake/distclean.sh)
+ 
 -SET(CPACK_PACKAGE_NAME "libgd")
 -SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "libGD, powerful and easy to use graphic library")
 -SET(CPACK_PACKAGE_VENDOR "https://www.libgd.org")
@@ -64,85 +74,75 @@ index 6b3e5b3b..b8656951 100644
 -)
 -install(FILES ${top_level_DOCFILES} DESTINATION ${DOC_DIR})
 -INCLUDE(CPack)
-+endif (USE_EXT_GD)
-\ No newline at end of file
-diff --git a/windows/Makefile.vc b/windows/Makefile.vc
-index dbec163f..1a0f9353 100644
---- a/windows/Makefile.vc
-+++ b/windows/Makefile.vc
-@@ -40,7 +40,7 @@ BUILD_DIR=$(WITH_BUILD)
- !MESSAGE library source:  $(LIBGD_SRC_DIR)
- 
- GD_DLL=libgd.dll
--GD_LIB=libgd_a.lib
-+GD_LIB=libgd_static.lib
- GD_CONFIG_H=$(LIBGD_SRC_DIR)\config.h
- 
- 
-@@ -99,7 +99,7 @@ LIB_OBJS= \
-   $(LIBGD_OBJ_DIR)\gd_webp.obj
- 
- LIBS=kernel32.lib ole32.lib user32.lib advapi32.lib shell32.lib ws2_32.lib Dnsapi.lib Gdi32.Lib
--LIBS_GD=libjpeg_a.lib freetype_a.lib libpng_a.lib libiconv_a.lib  zlib_a.lib libheif_a.lib libwebp_a.lib libxpm_a.lib libavif_a.lib libtiff.lib
-+LIBS_GD=jpeg.lib freetype.lib libpng16.lib libiconv.lib zlib.lib heif.lib webp.lib libxpm.lib avif.lib tiff.lib
- 
- PROG_EXES= \
- 	$(LIBGD_OBJ_DIR)\gdcmpgif.exe \
-@@ -116,11 +116,16 @@ PROG_OBJS=$(PROG_EXES:exe=obj)
- 
- INCLUDES=/Isrc /I$(WITH_DEVEL)\include -I$(WITH_DEVEL)\include\libpng16 -I$(WITH_DEVEL)\include\freetype -I$(WITH_DEVEL)\include\freetype2 /Itests /Itests\gdtest -I$(WITH_DEVEL)\include\
- 
--LDFLAGS=/nologo /nodefaultlib:libcmt /libpath:$(WITH_DEVEL)\lib /MACHINE:$(PLATFORM)
-+LDFLAGS=/nologo /nodefaultlib:libcmt /libpath:$(WITH_DEVEL)\lib /MACHINE:$(PLATFORM) /DEBUG /NOLOGO /LTCG /OPT:REF,ICF
- !IF $(DEBUG)
- LDFLAGS=$(LDFLAGS) /DEBUG
- !ENDIF
- 
-+LBFLAGS=/nologo /nodefaultlib:libcmt /libpath:$(WITH_DEVEL)\lib /MACHINE:$(PLATFORM)
-+!IF $(DEBUG)
-+LBFLAGS=$(LBFLAGS) /DEBUG
-+!ENDIF
++if(BUILD_TESTS)
++	add_subdirectory(tests)
++endif (BUILD_TESTS)
 +
- !IF $(DEBUG)
- CFLAGS=/nologo /Qvec-report:1 /MD /TC /Zi
- !ELSE
-@@ -244,7 +249,7 @@ $(TARGETDLL): $(LIB_OBJS)
-   @$(LD) /DLL /OUT:$@ $(LIB_OBJS) $(LIBS_GD) $(LIBS) $(LDFLAGS)
++if(BUILD_EXEMPLES)
++	add_subdirectory(examples)
++	INSTALL(FILES examples/arc.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/copyrotated.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/crop.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/flip.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/gif.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/nnquant.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/noIcon.pic DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/noIcon.sgi DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/noIcon.tga DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/noIconAlpha.tga DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/test_crop_threshold.png DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/tgaread.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/tiffread.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/windows.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++endif(BUILD_EXEMPLES)
++
++if(BUILD_DOCS)
++	add_subdirectory(docs)
++	INSTALL(FILES docs/INSTALL DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES docs/README.JPN DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES docs/README.CMAKE DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES docs/README.TESTING DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES docs/README.TXT DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++endif(BUILD_DOCS)
++
++if(BUILD_CPACK)
++	SET(CPACK_PACKAGE_NAME "libgd")
++	SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "libGD, powerful and easy to use graphic library")
++	SET(CPACK_PACKAGE_VENDOR "https://www.libgd.org")
++	SET(CPACK_PACKAGE_VERSION_MAJOR ${GDLIB_MAJOR})
++	SET(CPACK_PACKAGE_VERSION_MINOR ${GDLIB_MINOR})
++	SET(CPACK_PACKAGE_VERSION_PATCH ${GDLIB_REVISION}${GDLIB_EXTRA})
++
++	if(WIN32)
++		set(CPACK_GENERATOR ZIP)
++	else(WIN32)
++		set(CPACK_GENERATOR TGZ)
++	endif(WIN32)
++
++	set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/COPYING")
++
++	set(CPACK_SOURCE_GENERATOR TGZ)
++	set(CPACK_SOURCE_IGNORE_FILES
++	"~$"
++	"\\\\.swp$"
++	"\\\\.gitignore$"
++	"^${PROJECT_SOURCE_DIR}/debian/"
++	"^${PROJECT_SOURCE_DIR}/old/"
++	"^${PROJECT_SOURCE_DIR}/bld/"
++	)
++	install(FILES ${top_level_DOCFILES} DESTINATION ${DOC_DIR})
++	INCLUDE(CPack)
++endif(BUILD_CPACK)
+\ No newline at end of file
+diff --git a/src/config.h.cmake b/src/config.h.cmake
+index 05429428..a936a219 100644
+--- a/src/config.h.cmake
++++ b/src/config.h.cmake
+@@ -142,3 +142,7 @@
  
- $(TARGETLIB): $(LIB_OBJS)
--  @$(LB) /OUT:$@ $(LIB_OBJS) $(LDFLAGS)
-+  @$(LB) /OUT:$@ $(LIB_OBJS) $(LBFLAGS)
- 
- {$(LIBGD_SRC_DIR)\}.c{$(LIBGD_OBJ_DIR)\}.obj:
- 	$(CC) $(CFLAGS) /c /Fo"$@" /Fd$*.pdb $<
---- a/src/gdxpm.c
-+++ b/src/gdxpm.c
-@@ -39,9 +39,9 @@ BGD_DECLARE(gdImagePtr) gdImageCreateFromXpm(char *filename)
- /*
-   Function: gdImageCreateFromXpm
- 
--    <gdImageCreateFromXbm> is called to load images from XPM X Window
-+    <gdImageCreateFromXpm> is called to load images from XPM X Window
-     System color bitmap format files. This function is available only
--    if HAVE_XPM is selected in the Makefile and the Xpm library is
-+    if HAVE_LIBXPM is selected in the Makefile and the Xpm library is
-     linked with the application. Unlike most gd file functions, the
-     Xpm functions *require filenames*, not file
-     pointers. <gdImageCreateFromXpm> returns a <gdImagePtr> to the new
-diff --git a/src/gd_webp.c b/src/gd_webp.c
-index e9ad8023..fa0b7c6d 100644
---- a/src/gd_webp.c
-+++ b/src/gd_webp.c
-@@ -8,6 +8,10 @@
- #include "config.h"
- #endif /* HAVE_CONFIG_H */
- 
+ /* Version number of package */
+ #cmakedefine VERSION
++
 +#ifdef _MSC_VER
-+#include <BaseTsd.h>
-+typedef SSIZE_T ssize_t;
++#define ssize_t SSIZE_T
 +#endif
- 
- #include <stdio.h>
- #include <math.h>
-diff --git a/src/gdxpm.c b/src/gdxpm.c
-index 4ac84662..bd8c4d9e 100644

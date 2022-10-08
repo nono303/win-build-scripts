@@ -1,5 +1,7 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
- cd /D %PATH_SRC%\%1
+
+cd /D %PATH_SRC%\%1
+echo     # apply %1_pr692.patch
 git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\%1_pr692.patch
 
 REM missing libraqm, libfontconfig, libimagequant
@@ -29,6 +31,10 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DWEBP_INCLUDE_DIR=%PATH_INSTALL%\lib\include ^
 -DXPM_LIBRARY=%PATH_INSTALL%\lib\libxpm.lib ^
 -DXPM_XPM_INCLUDE_DIR=%PATH_INSTALL%\lib\include ^
+-DBUILD_TESTS=OFF ^
+-DBUILD_EXEMPLES=OFF ^
+-DBUILD_DOCS=OFF ^
+-DBUILD_CPACK=OFF ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
