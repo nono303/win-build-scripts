@@ -170,7 +170,7 @@
 				$description .= " commit:".pathenv("SCM_COMORREV");
 			if(pathenv("SCM_TAG"))
 				$description .= " tag:".pathenv("SCM_TAG");
-			if(pathenv("SCM_BRANCH") != "HEAD" && pathenv("SCM_BRANCH") != "")
+			if(!is_null(pathenv("SCM_BRANCH")) && pathenv("SCM_BRANCH") != "HEAD" && pathenv("SCM_BRANCH") != "")
 				$description .= " branch:".pathenv("SCM_BRANCH");
 			if(pathenv("SCM_COMORREV_DATE"))
 				$description .= " date:".pathenv("SCM_COMORREV_DATE");

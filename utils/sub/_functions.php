@@ -6,7 +6,9 @@
 	}
 
 	function pathenv($env){
-		return str_replace("\\","/",$_ENV[$env]);
+		if(array_key_exists($env,$_ENV))
+			return str_replace("\\","/",$_ENV[$env]);
+		return null;
 	}
 
 	function debug($msg){
