@@ -43,10 +43,10 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.4.0-p2.1 (14.34) | `.vsconfig`         |
+| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.4.0-p3 (14.34) | `.vsconfig`         |
 | [Cygwin](https://cygwin.com/install.html)                    | x86  | 3.3.6  | `cyg32.packagelist` |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.3.6          | `cyg64.packagelist` |
-| [Python](https://www.python.org/downloads/)                  | x64  | 3.10.7 |                     |
+| [Python](https://www.python.org/downloads/)                  | x64  | 3.10.8 |                     |
 | [Node.js](https://nodejs.org/en/download/current/) | x64 | 18.10.0 | |
 | [OpenJDK](https://jdk.java.net/18/)                      | x64  | 18.0.2.1 |                     |
 | [Strawberry Perl](https://strawberryperl.com/releases.html) | x64  | 5.32.1.1 |                     |
@@ -61,7 +61,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [CMake](https://cmake.org/download/) | x64 | 3.24.2 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | x64 | 1.11.1 | |
 | [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 0.63.3 | |
-| [NuGet](https://www.nuget.org/downloads) | x86 | 6.3.0 | |
+| [NuGet](https://www.nuget.org/downloads) | x86 | 6.3.1 | |
 
 ### [SOURCE VERSIONS](./SRC_VERSION.md)
 ### [CHANGELOG](./changelog.md)

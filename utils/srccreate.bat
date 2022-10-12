@@ -54,7 +54,7 @@ git checkout tags/v1.11.1
 cd /D ..
 git clone https://github.com/dcnieho/FreeGLUT.git freeglut
 cd /D freeglut
-git checkout tags/v3.4.0-rc1
+git checkout tags/v3.4.0
 cd /D ..
 git clone git://git.sv.nongnu.org/freetype/freetype2.git freetype2
 cd /D freetype2
@@ -78,7 +78,7 @@ git checkout tags/2.4.54
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout tags/release-72-rc
+git checkout cldr/2022-10-11
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -214,7 +214,7 @@ git checkout tags/2.3.10.2
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v2.0.9
+git checkout tags/v2.0.10
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -258,11 +258,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/openssl/openssl.git openssl
 cd /D openssl
-git checkout tags/openssl-3.0.5
+git checkout tags/openssl-3.0.6
 cd /D ..
 git clone https://github.com/quictls/openssl.git openssl-quic
 cd /D openssl-quic
-git checkout openssl-3.0.5+quic
+git checkout tags/openssl-3.0.6+quic1
 cd /D ..
 git clone https://github.com/jwilk-mirrors/pcre.git pcre
 cd /D pcre
@@ -292,7 +292,7 @@ git clone https://github.com/kjdev/php-ext-zstd.git php-ext-zstd
 cd /D php-ext-zstd
 git checkout master
 cd /D ..
-git clone https://github.com/ModelTech/php-geos php-geos
+git clone https://github.com/nono303/php-geos.git php-geos
 cd /D php-geos
 git checkout master
 cd /D ..

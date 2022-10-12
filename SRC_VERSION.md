@@ -11,13 +11,13 @@
 | [curl](https://github.com/curl/curl) | 7.85.0 |
 | [dav1d](https://code.videolan.org/videolan/dav1d.git) | 1.0.0 |
 | [dependencies](https://github.com/lucasg/Dependencies) | 1.11.1 |
-| [freeglut](https://github.com/dcnieho/FreeGLUT.git) | 3.4.0-rc1 |
+| [freeglut](https://github.com/dcnieho/FreeGLUT.git) | 3.4.0 |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.12.1 |
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 2.0.0 - b3ee8cc7 |
 | [geos](https://github.com/libgeos/geos) | 3.11.0 |
 | [giflib](https://github.com/gongjianbo/GifLib) | 5.2.1 - 59eb9d1 |
 | [httpd](https://github.com/apache/httpd) | 2.4.54 |
-| [icu](https://github.com/unicode-org/icu) | 72-rc |
+| [icu](https://github.com/unicode-org/icu) | cldr/2022-10-11 |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.3.0 |
 | [lerc](https://github.com/Esri/lerc.git) | 4.0.0 |
@@ -30,12 +30,12 @@
 | [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.18.0 |
 | [libgd](https://github.com/libgd/libgd) | 2.3.3 |
 | [libheif](https://github.com/strukturag/libheif) | 1.13.0 |
-| [libiconv](https://github.com/pffang/libiconv-for-Windows) | 1.17 - 3ecec21 |
+| [libiconv](https://github.com/pffang/libiconv-for-Windows) | 1.17 - 1353455 |
 | [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) | 2.1.4 |
 | [liblzma](https://github.com/ShiftMediaProject/liblzma) | 5.3.3-alpha |
 | [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.7.1 |
 | [libpng](https://sourceforge.net/p/libpng/code/ci/master/tree/) | 1.6.39 - 12222e6fb |
-| [libsodium](https://github.com/jedisct1/libsodium.git) | 1.0.18.0 - 3a99e1ec |
+| [libsodium](https://github.com/jedisct1/libsodium.git) | 1.0.18.0 - b4c5d37f |
 | [libssh2](https://github.com/libssh2/libssh2) | 1.10.0 |
 | [libtiff](https://gitlab.com/libtiff/libtiff) | 4.4.0 |
 | [libwepb](https://chromium.googlesource.com/webm/libwebp) | 1.2.4 |
@@ -51,7 +51,7 @@
 | [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.3.3 - r2713 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
 | [mod_fcgid](https://github.com/nono303/mod_fcgid) - _[upstream + src](https://github.com/pagespeed/mod_fcgid)_ | 2.3.10.2 |
-| [mod_h2](https://github.com/icing/mod_h2) | 2.0.9 |
+| [mod_h2](https://github.com/icing/mod_h2) | 2.0.10 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
 | [mod_md](https://github.com/icing/mod_md) | 2.4.19 |
@@ -62,8 +62,8 @@
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 0.7.1 |
 | [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 0.9.0 |
 | [nssm](https://github.com/puppetlabs/nssm) | 2.25 - a1c3260 |
-| [openssl](https://github.com/openssl/openssl) | 3.0.5 |
-| [openssl-quic](https://github.com/quictls/openssl/tree/openssl-3.0.5+quic) | 3.0.5 - 75e9408 |
+| [openssl](https://github.com/openssl/openssl) | 3.0.6 |
+| [openssl-quic](https://github.com/quictls/openssl/tree/openssl-3.0.6+quic) | 3.0.6 - f8ec310 |
 | [pcre](https://github.com/jwilk-mirrors/pcre) | 8.45 |
 | [pcre2](https://github.com/PhilipHazel/pcre2) | 10.40 |
 | [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | 8.0.1 - 96910ce |
