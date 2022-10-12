@@ -12,12 +12,9 @@ MSBuild.exe %PATH_SRC%\%1\%1.sln %MSBUILD_OPTS% ^
 /t:Clean,%1 ^
 /nowarn:C4311,C4117,C4267,C4141,C4090 ^
 /p:Configuration=%OUTDIR_CONF% ^
-/p:Platform="%archmsbuild%"
+/p:Platform="%ARCH%"
 
-set LIBDIR=lib
-if %CYGV% == 64 (set LIBDIR=lib64)
-
-xcopy /C /F /Y %PATH_SRC%\%1\%LIBDIR%\libiconv.lib %PATH_INSTALL%\lib\*
-for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\%LIBDIR%\libiconv.%%X %PATH_INSTALL%\bin\*)
+xcopy /C /F /Y %PATH_SRC%\%1\output\%archmsbuild%\%OUTDIR_CONF%\libiconv.lib %PATH_INSTALL%\lib\*
+for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\output\%archmsbuild%\%OUTDIR_CONF%\libiconv.%%X %PATH_INSTALL%\bin\*)
 xcopy /C /F /Y %PATH_SRC%\%1\include\iconv.h %PATH_INSTALL%\include\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libiconv.dll
