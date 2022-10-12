@@ -112,6 +112,8 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat libxslt NOLOG
 	:libheif
 	call %PATH_BATCH%\go.bat libheif NOLOG
+	:libgd
+	call %PATH_BATCH%\go.bat libgd NOLOG
 	:php
 	call %PATH_BATCH%\go.bat php NOLOG
 	if  "%2" == "phpanddeps" exit /B
