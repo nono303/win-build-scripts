@@ -7,6 +7,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DZLIB_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 -DZLIB_LIBRARY=%PATH_INSTALL:\=/%/lib/zlib.lib ^
 -DPNG_SHARED=ON ^
+-DPNG_EXECUTABLES=OFF ^
 -DPNG_STATIC=OFF ^
 -DPNG_TESTS=OFF ^
 -DPNG_FRAMEWORK=OFF ^
@@ -20,5 +21,5 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 sed -i 's/CMAKE_C_FLAGS \//CMAKE_C_FLAGS \/nologo \//g' %CYGPATH_BUILD%/%1/scripts/genout.cmake
 %NINJA% install
 
-for %%E in (pngfix.pdb png-fix-itxt.pdb libpng16.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%E %PATH_INSTALL%\bin\*)
-for %%X in (libpng16.dll png-fix-itxt.exe pngfix.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
+xcopy /C /F /Y %PATH_BUILD%\%1\libpng16.pdb %PATH_INSTALL%\bin\*
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libpng16.dll
