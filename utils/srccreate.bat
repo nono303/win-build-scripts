@@ -78,7 +78,7 @@ git checkout tags/2.4.54
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout cldr/2022-10-11
+git checkout tags/release-72-1
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -94,7 +94,7 @@ git checkout tags/v4.0.0
 cd /D ..
 git clone https://github.com/AOMediaCodec/libavif.git libavif
 cd /D libavif
-git checkout tags/v0.10.1
+git checkout tags/v0.11.1-rc1
 cd /D ..
 git clone https://github.com/ebiggers/libdeflate.git libdeflate
 cd /D libdeflate
@@ -114,7 +114,7 @@ git checkout tags/R_2_4_9
 cd /D ..
 git clone https://github.com/nono303/libffi.git libffi
 cd /D libffi
-git checkout tags/v3.4.3
+git checkout tags/v3.4.4
 cd /D ..
 git clone https://chromium.googlesource.com/codecs/libgav1 libgav1
 cd /D libgav1
@@ -214,7 +214,7 @@ git checkout tags/2.3.10.2
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v2.0.10
+git checkout tags/v2.0.11
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -250,7 +250,7 @@ git checkout tags/v0.7.1
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v0.9.0
+git checkout tags/v0.10.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -342,7 +342,7 @@ git checkout tags/3.1.5
 cd /D ..
 git clone https://github.com/madler/zlib.git zlib
 cd /D zlib
-git checkout tags/v1.2.12
+git checkout tags/v1.2.13
 cd /D ..
 git clone https://github.com/facebook/zstd.git zstd
 cd /D zstd
