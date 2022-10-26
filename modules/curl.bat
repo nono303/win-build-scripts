@@ -1,11 +1,14 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
 if %CURL_PATCH_WIN_OPENSSL% == 1 (
-	setlocal enabledelayedexpansion
-	set CURL_DESC=patched for openssl backend using Windows CA store
-	cd /D %PATH_SRC%\%1
-	git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\curl_ca-win.patch
-	cd /D %PATH_BUILD%\%1
+	if %ARG_KEEPSRC% == 0 (
+		setlocal enabledelayedexpansion
+		set CURL_DESC=patched for openssl backend using Windows CA store
+		cd /D %PATH_SRC%\%1
+		echo     # apply curl_ca-win.patch
+		git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\curl_ca-win.patch
+		cd /D %PATH_BUILD%\%1
+	)
 )
 if %CURL_PATCH_WIN_OPENSSL% == 1 (echo    ^>^>^> %CURL_DESC%)
 
