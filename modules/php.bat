@@ -2,7 +2,7 @@
 REM fix 'Could not determine '%PHP_SDK_VS%' directory' l.137 in phpsdk_setshell.bat
 set PHP_SDK_VC_DIR=%PATH_VS%\VC
 	REM ~~~~~~~~~~~~ current full build
-set PHP_FULLBUILD=8.1
+set PHP_FULLBUILD=8.2
 
 	REM ~~~~~~~~~~~~ TS - NTS 
 set PHP_BUILDTS=0
@@ -27,8 +27,6 @@ if exist %PATH_MODULES%\php%PHPVER%_php-src.patch (
 	if %ARG_KEEPSRC% == 0 (
 		echo     # apply php%PHPVER%_php-src.patch
 		git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php%PHPVER%_php-src.patch
-	REM ~~~~~~~~~~~~ ext/gd external [git diff -- ext/gd > /c/sdk/batch/modules/php-ext-gd.patch]
-		git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-ext-gd.patch
 	)
 )
 
@@ -44,13 +42,7 @@ call %PATH_MODULES_COMMON%\init.bat pecl-memcache
 FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\find -name 'memcache.c' -type f -exec dirname {} +`) do (set PECLMEMCACHECYGSRCDIR=%%F)
 FOR /F "tokens=* USEBACKQ" %%F in (`grep PHP_MEMCACHE_VERSION %CYGPATH_SRC%/pecl-memcache/%PECLMEMCACHECYGSRCDIR%/php_memcache.h ^| cut -d^'^"^' -f2`) do (set PECLMEMCACHEVERSION=%%F)
 sed -i -E 's/, PHP_MEMCACHE_VERSION/, "%PECLMEMCACHEVERSION% | branch: %SCM_BRANCH% | commit: %SCM_COMORREV% | date: %SCM_COMORREV_DATE% | https:\/\/github.com\/nono303\/PHP-memcache-dll"/g' %CYGPATH_SRC%/pecl-memcache/%PECLMEMCACHECYGSRCDIR%/memcache.c
-	REM VERSION PATCH
-if exist %PATH_MODULES%\php%PHPVER%_pecl-memcache.patch (
-	if %ARG_KEEPSRC% == 0 (
-		echo     # apply php%PHPVER%_pecl-memcache.patch
-		git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php%PHPVER%_pecl-memcache.patch
-	)
-)
+echo %PECLMEMCACHEVERSION% ^| branch: %SCM_BRANCH% ^| commit: %SCM_COMORREV% ^| date: %SCM_COMORREV_DATE%
 
 	REM ~~~~~~~~~~~~ pecl-text-xdiff : libxdiff version
 cd /D %PATH_SRC%\libxdiff
