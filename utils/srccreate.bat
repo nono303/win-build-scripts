@@ -42,7 +42,7 @@ git checkout tags/cares-1_18_1
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-7_85_0
+git checkout tags/curl-7_86_0
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -110,7 +110,7 @@ git checkout tags/release-2.1.12-stable
 cd /D ..
 git clone https://github.com/libexpat/libexpat.git libexpat
 cd /D libexpat
-git checkout tags/R_2_4_9
+git checkout tags/R_2_5_0
 cd /D ..
 git clone https://github.com/nono303/libffi.git libffi
 cd /D libffi
@@ -274,7 +274,7 @@ git checkout tags/pcre2-10.40
 cd /D ..
 git clone https://github.com/websupport-sk/pecl-memcache.git pecl-memcache
 cd /D pecl-memcache
-git checkout tags/8.0.1
+git checkout main
 cd /D ..
 git clone https://github.com/php/pecl-text-xdiff pecl-text-xdiff
 cd /D pecl-text-xdiff
@@ -302,7 +302,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.1.11
+git checkout tags/php-8.2.0RC5
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
@@ -338,7 +338,7 @@ svn update -r 36
 cd /D ..
 git clone https://github.com/xdebug/xdebug.git xdebug
 cd /D xdebug
-git checkout tags/3.1.5
+git checkout tags/3.2.0alpha1
 cd /D ..
 git clone https://github.com/madler/zlib.git zlib
 cd /D zlib

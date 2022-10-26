@@ -8,7 +8,7 @@
 | [brotli](https://github.com/google/brotli) | 1.0.9 |
 | [bzip2](https://gitlab.com/bzip2/bzip2.git) | 1.1.0 - 2d83939 |
 | [cares](https://github.com/c-ares/c-ares) | 1.18.1 |
-| [curl](https://github.com/curl/curl) | 7.85.0 |
+| [curl](https://github.com/curl/curl) | 7.86.0 |
 | [dav1d](https://code.videolan.org/videolan/dav1d.git) | 1.0.0 |
 | [dependencies](https://github.com/lucasg/Dependencies) | 1.11.1 |
 | [freeglut](https://github.com/dcnieho/FreeGLUT.git) | 3.4.0 |
@@ -25,7 +25,7 @@
 | [libdeflate](https://github.com/ebiggers/libdeflate.git) | 1.14 |
 | [libev](https://git.lighttpd.net/libev) | 4.33 - 5b75258 |
 | [libevent](https://github.com/libevent/libevent) | 2.1.12 |
-| [libexpat](https://github.com/libexpat/libexpat) | 2.4.9 |
+| [libexpat](https://github.com/libexpat/libexpat) | 2.5.0 |
 | [libffi](https://github.com/nono303/libffi) - _[upstream + src](https://github.com/libffi/libffi)_ | 3.4.4 |
 | [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.18.0 |
 | [libgd](https://github.com/libgd/libgd) | 2.3.3 |
@@ -66,14 +66,14 @@
 | [openssl-quic](https://github.com/quictls/openssl/tree/openssl-3.0.6+quic) | 3.0.6 - f8ec310 |
 | [pcre](https://github.com/jwilk-mirrors/pcre) | 8.45 |
 | [pcre2](https://github.com/PhilipHazel/pcre2) | 10.40 |
-| [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | 8.0.1 - 96910ce |
+| [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | 8.2 - 26c0f51 |
 | [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1 - 21857db |
 | [php-cgi-spawner](https://github.com/deemru/php-cgi-spawner) | 1.1.23 - 90197af |
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.13.1 |
 | [php-ext-zstd](https://github.com/kjdev/php-ext-zstd) | 0.11.0 - 4504e41 |
 | [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1.1 - a156cd1 |
 | [php-sdk](https://github.com/php/php-sdk-binary-tools) | 2.2.1-dev - 6ee0f95 |
-| [php-src](https://github.com/php/php-src) | 8.1.11 |
+| [php-src](https://github.com/php/php-src) | 8.2.0rc5 |
 | [proj](https://github.com/OSGeo/PROJ) | 9.1.0 |
 | [sdlna](https://github.com/nono303/simpleDLNA) - _[upstream + src](https://github.com/nmaier/simpleDLNA)_ | 1.0.3 - b67251f |
 | [serf](https://github.com/apache/serf.git) | 2.0.0 - 2f72c5c |
@@ -82,6 +82,6 @@
 | [tidy](https://github.com/htacg/tidy-html5) | 5.9.14 |
 | [verpatch](https://github.com/pavel-a/ddverpatch) | 1.0.15.1 - 3cc989e |
 | [wineditline](https://svn.code.sf.net/p/mingweditline/code) | 2.2 - 36 |
-| [xdebug](https://github.com/xdebug/xdebug) | 3.1.5 |
+| [xdebug](https://github.com/xdebug/xdebug) | 3.2.0alpha1 |
 | [zlib](https://github.com/madler/zlib) | 1.2.13 |
 | [zstd](https://github.com/facebook/zstd/tree/v1.5.2) | 1.5.2 |
