@@ -1,51 +1,39 @@
-From ec2d15967e2534cc9a95bdabad08d7b478793751 Mon Sep 17 00:00:00 2001
-From: nono303 <git@nono303.net>
-Date: Tue, 20 Sep 2022 13:49:26 +0200
-Subject: [PATCH] 8.1.0.84
- (https://github.com/websupport-sk/pecl-memcache/pull/84)
-
----
- src/memcache_binary_protocol.c | 2 +-
- src/memcache_pool.h            | 2 +-
- src/php_memcache.h             | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ src/memcache_binary_protocol.c | 3 +--
+ src/memcache_pool.h            | 4 ----
+ 2 files changed, 1 insertion(+), 6 deletions(-)
 
 diff --git a/src/memcache_binary_protocol.c b/src/memcache_binary_protocol.c
-index 707b351..60d828f 100644
+index 707b351..b0549f5 100644
 --- a/src/memcache_binary_protocol.c
 +++ b/src/memcache_binary_protocol.c
-@@ -26,7 +26,7 @@
+@@ -26,13 +26,12 @@
  #define MMC_DEBUG 0
  
  #ifdef PHP_WIN32
 -#include <win32/php_stdint.h>
-+#include <main/php_stdint.h> 
  #include <winsock2.h>
  #else
- #include <stdint.h>
+-#include <stdint.h>
+ #include <arpa/inet.h>
+ #include <netinet/in.h>
+ #endif
++#include <stdint.h>
+ #include "memcache_pool.h"
+ #include "ext/standard/php_smart_string.h"
+ 
 diff --git a/src/memcache_pool.h b/src/memcache_pool.h
-index cb3d086..402372f 100644
+index cb3d086..0659b3a 100644
 --- a/src/memcache_pool.h
 +++ b/src/memcache_pool.h
-@@ -35,7 +35,7 @@
+@@ -34,11 +34,7 @@
+ #include <sys/socket.h>
  #endif
  
- #ifdef PHP_WIN32
+-#ifdef PHP_WIN32
 -#include <win32/php_stdint.h>
-+#include <main/php_stdint.h> 
- #else
+-#else
  #include <stdint.h>
- #endif
-diff --git a/src/php_memcache.h b/src/php_memcache.h
-index 89fe2c4..0f78b11 100644
---- a/src/php_memcache.h
-+++ b/src/php_memcache.h
-@@ -67,7 +67,7 @@ PHP_FUNCTION(memcache_close);
- PHP_FUNCTION(memcache_flush);
- PHP_FUNCTION(memcache_set_sasl_auth_data);
+-#endif
+ #include <string.h>
  
--#define PHP_MEMCACHE_VERSION "8.1-dev"
-+#define PHP_MEMCACHE_VERSION "8.0.1"
- 
- #define MMC_DEFAULT_TIMEOUT 1				/* seconds */
- #define MMC_DEFAULT_RETRY 15 				/* retry failed server after x seconds */
+ #include "php.h"
