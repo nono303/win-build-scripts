@@ -1,6 +1,114 @@
 # changelog
 
 
+## 1.6.0 _(2022-10-26)_
+
+*  bump src version
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  https://github.com/ydb-platform/ydb/commit/239edf05410a4716215db2bf9a0027c05b5d8126
+`modules/curl.patch`
+*  fix typo
+`modules/phpsdk-config_make.bat`
+*  gd ext for php
+`modules/libgd.patch`
+`modules/php-ext-gd.patch`
+`modules/php.bat`
+*  1.7.0
+`modules/libmaxminddb.bat`
+*  update tools
+`README.md`
+*  bump srccreate.bat add libgd libheif
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  use libgd from latest src instead of php bundled - add libheif required by libgd - gd.c: add php info with ZLIB, TIFF, HEIF
+`modules/libgd.patch`
+`modules/libheif.bat`
+`modules/php-ext-gd.patch`
+*  brotli use lib instead of src
+`modules/php.bat`
+*  add libheif
+`modules/full.bat`
+`usage.txt`
+`utils/bininfo.bat`
+*  fix path for libmaxminddb.sh
+`modules/libmaxminddb.bat`
+*  bump tools & version
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  add libgd as external
+`modules/libgd.bat`
+`modules/libgd.patch`
+`modules/libgd_pr692.patch`
+*  SCM_BRANCH: remove '(' & ')' that are interpreted in IF statement
+`modules/common/init.bat`
+*  use external libgd - waiting https://github.com/php/php-src/issues/9671
+`modules/php-ext-gd.patch`
+*  clean patch
+`modules/libgd.bat`
+`modules/libgd.patch`
+*  do not apply specific patch if 'keepsrc' patch ext/gd to use external libgd
+`modules/php-ext-gd.patch`
+`modules/php.bat`
+*  disable-zstd on memcache build
+`modules/phpsdk-config_make.bat`
+*  add libgd
+`utils/bininfo.bat`
+*  clean dirty patch https://github.com/php/php-src/issues/9671 - ssize_t (gd_webp.c) https://github.com/libgd/libgd/issues/845 - proper option to disable in CMakeLists.txt: BUILD_TESTS, BUILD_EXEMPLES, BUILD_DOCS, BUILD_CPACK
+`modules/libgd.bat`
+`modules/libgd.patch`
+*  https://github.com/ModelTech/php-geos/pull/3
+`modules/php-geos.patch`
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  add libgd
+`modules/full.bat`
+`usage.txt`
+*  fix issue with SCM_BRANCH
+`modules/common/init.bat`
+`utils/sub/_functions.php`
+`utils/sub/version.php`
+*  update BUILD_PLATFORM params https://github.com/pffang/libiconv-for-Windows/commit/1353455a6c4e15c9db6865fd9c2bf7203b59c0ec
+`modules/libiconv.bat`
+*  disable build png exe
+`modules/libpng.bat`
+`utils/bininfo.bat`
+*  fix date format
+`modules/common/ymdhis.bat`
+*  add https://github.com/curl/curl/commit/468908160c958baed1c3239505e9f808ff41df5f.patch
+`modules/curl.patch`
+*  0.11.1
+`modules/libavif.bat`
+*  bump tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  bump to php8.2 - include php-ext-gd.patch into differencied php8.X_php-src.patch - disable php8.X_pecl-memcache.patch
+`modules/php-ext-gd.patch`
+`modules/php.bat`
+`modules/php8.0_php-src.patch`
+`modules/php8.1_php-src.patch`
+`modules/php8.2_pecl-memcache.patch`
+`modules/php8.2_php-src.patch`
+*  use stdint.h for all php version (instead of main/php_stdint.h or win32/php_stdint.h)
+`modules/pecl-memcache.patch`
+*  bump to 7.86.0 - apply curl_ca-win.patch only if not keepsrc - disable curl.patch as https://github.com/curl/curl/commit/468908160c958baed1c3239505e9f808ff41df5f and https://github.com/ydb-platform/ydb/commit/239edf05410a4716215db2bf9a0027c05b5d8126 merged into current version
+`modules/curl.bat`
+`modules/curl.patch`
+`modules/curl_ca-win.patch`
+*  add opts: EXPAT_ATTR_INFO=ON & EXPAT_LARGE_SIZE=ON
+`modules/libexpat.bat`
+*  fix useless pause
+`modules/common/ymdhis.bat`
+*  bump src & tools
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+
+
 ## 1.5.9 _(2022-09-23)_
 
 *  update nb geographiclib
@@ -62,6 +170,8 @@
 `README.md`
 `SRC_VERSION.md`
 `utils/srccreate.bat`
+*  1.5.9
+`changelog.md`
 
 
 ## 1.5.8 _(2022-07-31)_
