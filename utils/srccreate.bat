@@ -338,7 +338,7 @@ svn update -r 36
 cd /D ..
 git clone https://github.com/xdebug/xdebug.git xdebug
 cd /D xdebug
-git checkout tags/3.2.0alpha1
+git checkout tags/3.2.0RC1
 cd /D ..
 git clone https://github.com/madler/zlib.git zlib
 cd /D zlib

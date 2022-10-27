@@ -82,6 +82,6 @@
 | [tidy](https://github.com/htacg/tidy-html5) | 5.9.14 |
 | [verpatch](https://github.com/pavel-a/ddverpatch) | 1.0.15.1 - 3cc989e |
 | [wineditline](https://svn.code.sf.net/p/mingweditline/code) | 2.2 - 36 |
-| [xdebug](https://github.com/xdebug/xdebug) | 3.2.0alpha1 |
+| [xdebug](https://github.com/xdebug/xdebug) | 3.2.0rc1 |
 | [zlib](https://github.com/madler/zlib) | 1.2.13 |
 | [zstd](https://github.com/facebook/zstd/tree/v1.5.2) | 1.5.2 |
