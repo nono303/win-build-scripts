@@ -1,8 +1,8 @@
 diff --git "a/build/generator/gen_win_dependencies.py" "b/build/generator/gen_win_dependencies.py"
-index 03048c0fe4..1600925cb6 100644
+index 4b254c90d3..d0f4868e82 100644
 --- "a/build/generator/gen_win_dependencies.py"
 +++ "b/build/generator/gen_win_dependencies.py"
-@@ -1135,7 +1135,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
+@@ -1147,7 +1147,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
                                 stderr=subprocess.STDOUT).stdout
        line = outfp.read().decode('utf8')
        if line:
