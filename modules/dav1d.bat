@@ -1,7 +1,9 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
-REM -Denable_asm=true + --default-library=shared == KO
-meson ^
+	REM remove useless warning
+sed -i -E 's/(warning\(.Compiler)/# \1/g' %CYGPATH_SRC%/%1/meson.build
+
+meson setup ^
 --prefix %PATH_INSTALL% ^
 --buildtype debugoptimized ^
 --default-library=shared ^
