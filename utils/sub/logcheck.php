@@ -66,15 +66,14 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 		"conflicts " => [33,"str"],
 		"improve linker performance" => [33,"str"],
 		"ne peut trouver le fichier" => [36,"str"], //mpir
+		"Hunk #" => [33,"str"], // patch offset 
 	);
 	$remove = array(
 		// "CMake Warning at CMake" => [39, "str"],
-		"Daemon will be stopped at the end of the build" => [39, "str"],// gradle
-		"fvisibility=hidden" => [39, "str"],// dav1d
-		"Using unknown MSVC version" => [39, "str"],// php-src
-		// subversion java-hl
-		"warning: [serial]" => [39, "str"],
-		"warning: [removal]" => [39, "str"],
+		// "Daemon will be stopped at the end of the build" => [39, "str"],// gradle
+		// "Using unknown MSVC version" => [39, "str"],// php-src
+		"warning: [serial]" => [39, "str"],// subversion java-hl
+		"warning: [removal]" => [39, "str"],// subversion java-hl
 	);
 	//print_r($argv);
 	//exit();
