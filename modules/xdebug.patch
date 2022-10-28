@@ -1,10 +1,10 @@
 diff --git "a/src/tracing/tracing.h" "b/src/tracing/tracing.h"
-index be35b193..e38eb461 100644
+index b7f7fa8e..7276feee 100644
 --- "a/src/tracing/tracing.h"
 +++ "b/src/tracing/tracing.h"
 @@ -18,10 +18,7 @@
  
- #include "php.h"
+ #include "lib/php-header.h"
  
 -#pragma GCC diagnostic push
 -#pragma GCC diagnostic ignored "-Wdeclaration-after-statement"
