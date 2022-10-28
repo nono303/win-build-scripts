@@ -52,6 +52,7 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 		"^(sed:)" => [33,"reg"],
 		" fatal " => [31,"str"],
 		" error " => [31,"str"],
+		"error:" => [31,"str"],
 		"stop" => [31,"str"],
 		"err open" => [31,"str"], // version
 		"error while editing pdb path" => [33,"str"], // version
