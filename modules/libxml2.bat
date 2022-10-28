@@ -1,5 +1,15 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1
 
+sed -i 's/iconv.lib/libiconv\.lib/g'  %CYGPATH_SRC%/%1/win32/Makefile.msvc
+sed -i 's/LDFLAGS = \/nologo/LDFLAGS = \/nologo \/LTCG \/OPT:ICF,REF \/DEBUG/g'  %CYGPATH_SRC%/%1/win32/Makefile.msvc
+sed -i 's/ARFLAGS = \/nologo/ARFLAGS = \/nologo \/LTCG/g'  %CYGPATH_SRC%/%1/win32/Makefile.msvc
+sed -i 's/Z7/Zi/g'  %CYGPATH_SRC%/%1/win32/Makefile.msvc
+sed -i 's/rc -Fo/rc -nologo -Fo/g'  %CYGPATH_SRC%/%1/win32/Makefile.msvc
+sed -i 's/libxmladll/libxml2_a_dll/g'  %CYGPATH_SRC%/%1/win32/Makefile.msvc
+sed -i 's/libxmla/libxml2_a/g'  %CYGPATH_SRC%/%1/win32/Makefile.msvc
+	REM https://externals.io/message/25641
+REM sed -i -E 's/\/Fo(.)\(XML_INTDIR\)/\/D "LIBXML_STATIC_FOR_DLL" \/Fo\\1\(XML_INTDIR\)/g'  %CYGPATH_SRC%/%1/win32/Makefile.msvc
+
 cd /D win32
 for %%X in (libxml2_a_dll libxml) do (
 	cscript /nologo /e:jscript configure.js ^
@@ -10,9 +20,9 @@ for %%X in (libxml2_a_dll libxml) do (
 	html=yes ^
 	c14n=yes ^
 	catalog=yes ^
-	docb=yes ^
 	xpath=yes ^
 	xptr=yes ^
+	xptr_locs=yes ^
 	xinclude=yes ^
 	iconv=yes ^
 	icu=yes ^
@@ -20,8 +30,8 @@ for %%X in (libxml2_a_dll libxml) do (
 	zlib=yes ^
 	lzma=yes ^
 	xml_debug=yes ^
-	mem_debug=yes ^
-	run_debug=yes ^
+	mem_debug=no ^
+	run_debug=no ^
 	regexps=yes ^
 	modules=yes ^
 	tree=yes ^
@@ -38,7 +48,7 @@ for %%X in (libxml2_a_dll libxml) do (
 	schematron=yes ^
 	python=no ^
 	compiler=msvc ^
-	cruntime="/wd4090 /wd4723 /D_WINSOCK_DEPRECATED_NO_WARNINGS /Zf /GL /MD /MP%NUMBER_OF_PROCESSORS% %AVX% /Fd%%X.pdb" ^
+	cruntime="/wd4090 /wd4723 /wd4013 /D_WINSOCK_DEPRECATED_NO_WARNINGS /Zf /GL /MD /MP%NUMBER_OF_PROCESSORS% %AVX% /Fd%%X.pdb" ^
 	vcmanifest=yes ^
 	debug=yes ^
 	static=no ^
@@ -46,16 +56,7 @@ for %%X in (libxml2_a_dll libxml) do (
 	include=%PATH_INSTALL%\include ^
 	lib=%PATH_INSTALL%\lib
 
-	sed -i 's/iconv.lib/libiconv\.lib/g'  %CYGPATH_SRC%/%1/win32/Makefile
-	sed -i 's/LDFLAGS = \/nologo/LDFLAGS = \/nologo \/LTCG \/OPT:ICF,REF \/DEBUG/g'  %CYGPATH_SRC%/%1/win32/Makefile
-	sed -i 's/ARFLAGS = \/nologo/ARFLAGS = \/nologo \/LTCG/g'  %CYGPATH_SRC%/%1/win32/Makefile
-	sed -i 's/Z7/Zi/g'  %CYGPATH_SRC%/%1/win32/Makefile
-	sed -i 's/rc -Fo/rc -nologo -Fo/g'  %CYGPATH_SRC%/%1/win32/Makefile
-	sed -i 's/libxmladll/libxml2_a_dll/g'  %CYGPATH_SRC%/%1/win32/Makefile
-	sed -i 's/libxmla/libxml2_a/g'  %CYGPATH_SRC%/%1/win32/Makefile
-		REM https://externals.io/message/25641
-	REM sed -i -E 's/\/Fo(.)\(XML_INTDIR\)/\/D "LIBXML_STATIC_FOR_DLL" \/Fo\\1\(XML_INTDIR\)/g'  %CYGPATH_SRC%/%1/win32/Makefile
-	nmake %NMAKE_OPTS% /f Makefile %%X
+	nmake %NMAKE_OPTS% /f Makefile.msvc %%X
 )
 
 if not exist %PATH_INSTALL%\include\libxml2\libxml\. md %PATH_INSTALL%\include\libxml2\libxml\

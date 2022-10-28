@@ -40,7 +40,7 @@
 | [libtiff](https://gitlab.com/libtiff/libtiff) | 4.4.0 |
 | [libwepb](https://chromium.googlesource.com/webm/libwebp) | 1.2.4 |
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
-| [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.9.14 |
+| [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.10.3 |
 | [libxpm](https://github.com/nono303/libxpm.git) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.13 |
 | [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.37 - 096b5ff3 |
 | [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1848 - fe9ced6e |

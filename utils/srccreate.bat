@@ -170,7 +170,7 @@ git checkout tags/v0.23
 cd /D ..
 git clone https://gitlab.gnome.org/GNOME/libxml2.git libxml2
 cd /D libxml2
-git checkout tags/v2.9.14
+git checkout tags/v2.10.3
 cd /D ..
 git clone https://github.com/nono303/libxpm.git libxpm
 cd /D libxpm
