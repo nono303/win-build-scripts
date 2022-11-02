@@ -258,11 +258,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/openssl/openssl.git openssl
 cd /D openssl
-git checkout tags/openssl-3.0.6
+git checkout tags/openssl-3.0.7
 cd /D ..
 git clone https://github.com/quictls/openssl.git openssl-quic
 cd /D openssl-quic
-git checkout tags/openssl-3.0.6+quic1
+git checkout tags/openssl-3.0.7+quic1
 cd /D ..
 git clone https://github.com/jwilk-mirrors/pcre.git pcre
 cd /D pcre
@@ -286,7 +286,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/kjdev/php-ext-brotli.git php-ext-brotli
 cd /D php-ext-brotli
-git checkout tags/0.13.1
+git checkout master
 cd /D ..
 git clone https://github.com/kjdev/php-ext-zstd.git php-ext-zstd
 cd /D php-ext-zstd

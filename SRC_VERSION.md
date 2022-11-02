@@ -42,11 +42,11 @@
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
 | [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.10.3 |
 | [libxpm](https://github.com/nono303/libxpm.git) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.13 |
-| [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.37 - 096b5ff3 |
-| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1848 - fe9ced6e |
+| [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.37 - d994c613 |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1848 - 7ccf31d3 |
 | [libzip](https://github.com/nih-at/libzip) | 1.9.2 |
 | [lua](https://github.com/lua/lua) | 5.4.4 |
-| [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | 0.18.0 - f07b206 |
+| [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | 0.18.0 - cf4f3c1 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.17 |
 | [mobac](https://svn.code.sf.net/p/mobac/code) | 2.2.3.3 - r2713 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
@@ -62,14 +62,14 @@
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 0.7.1 |
 | [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 0.10.0 |
 | [nssm](https://github.com/puppetlabs/nssm) | 2.25 - a1c3260 |
-| [openssl](https://github.com/openssl/openssl) | 3.0.6 |
-| [openssl-quic](https://github.com/quictls/openssl/tree/openssl-3.0.6+quic) | 3.0.6 - f8ec310 |
+| [openssl](https://github.com/openssl/openssl) | 3.0.7 |
+| [openssl-quic](https://github.com/quictls/openssl/tree/openssl-3.0.7+quic) | 3.0.7 - 247bb4d |
 | [pcre](https://github.com/jwilk-mirrors/pcre) | 8.45 |
 | [pcre2](https://github.com/PhilipHazel/pcre2) | 10.40 |
 | [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | 8.2 - 26c0f51 |
-| [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1 - 21857db |
+| [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1 |
 | [php-cgi-spawner](https://github.com/deemru/php-cgi-spawner) | 1.1.23 - 90197af |
-| [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.13.1 |
+| [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.13.1 -  b95c2f9 |
 | [php-ext-zstd](https://github.com/kjdev/php-ext-zstd) | 0.11.0 - 4504e41 |
 | [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1.1 - a156cd1 |
 | [php-sdk](https://github.com/php/php-sdk-binary-tools) | 2.2.1-dev - 6ee0f95 |
