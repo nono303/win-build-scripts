@@ -260,7 +260,7 @@ git clone https://github.com/openssl/openssl.git openssl
 cd /D openssl
 git checkout tags/openssl-3.0.7
 cd /D ..
-git clone https://github.com/quictls/openssl.git openssl-quic
+git clone https://github.com/quictls/openssl/ openssl-quic
 cd /D openssl-quic
 git checkout tags/openssl-3.0.7+quic1
 cd /D ..
@@ -302,7 +302,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.2.0RC5
+git checkout tags/php-8.2.0RC6
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
