@@ -24,6 +24,8 @@
 							pathenv("PATH_SRC")."/".$argv[1]."/builds/msvc/resource.rc"],
 		"libpng"			=> ["/#define PNG_LIBPNG_VER_MAJOR *([0-9]+).*#define PNG_LIBPNG_VER_MINOR *([0-9]+).*#define PNG_LIBPNG_VER_RELEASE *([0-9]+).*/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/png.h"],
+		"libgd"				=> ["/#define GD_MAJOR_VERSION *([0-9]+).*#define GD_MINOR_VERSION *([0-9]+).*#define GD_RELEASE_VERSION *([0-9]+).*#define GD_EXTRA_VERSION *\"([^\"]+)\".*/s",
+							pathenv("PATH_SRC")."/".$argv[1]."/src/gd.h"],
 		"geographiclib"		=> ["/PROJECT_VERSION_MAJOR ([0-9]+).*PROJECT_VERSION_MINOR ([0-9]+).*PROJECT_VERSION_PATCH ([0-9]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/CMakeLists.txt"],
 		"libiconv"			=> ['/#define VERSION "([0-9\.]+)/s',
@@ -119,6 +121,8 @@
 			}
 			
 			if($tagok){
+				// '-dev' as 0
+				$ver_product = str_replace("-dev","0",$ver_product);
 				$ver_file = $ver_product;
 				// letter in version : openssl & jpeg
 				preg_match("/([a-zA-Z])$/",$ver_file,$matches);
