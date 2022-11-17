@@ -14,6 +14,8 @@
 	if(in_array($proot,["pecl-memcache","php-geos","pecl-text-xdiff","php-ext-brotli","xdebug","php-src"]))
 		$proot = "php";
 	$nogit = array(
+		"php-ext-brotli"		=> ["/#define BROTLI_EXT_VERSION \"([0-9\.]+)/s",
+							pathenv("PATH_SRC")."/".$argv[1]."/php_brotli.h"],
 		"php-ext-zstd"		=> ["/#define PHP_ZSTD_EXT_VERSION \"([0-9\.]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/php_zstd.h"],
 		"libxslt"			=> ["/MAJOR_VERSION\], \[([0-9]+).*MINOR_VERSION\], \[([0-9]+).*MICRO_VERSION\], \[([0-9]+)/s",
@@ -75,7 +77,7 @@
 			$tagok = true;
 			// git source overrided
 			if (is_array($nogit[$src])){
-				# echo "    ###".$nogit[$src][0].PHP_EOL;
+				$from = $nogit[$src][1];
 				preg_match($nogit[$src][0],file_get_contents($nogit[$src][1]),$matches);
 				$sep = "";
 				for($i = 1; $i < sizeof($matches); $i++){
@@ -85,8 +87,10 @@
 				if(pathenv("CUR_DEBUG") == 1)
 					echo "    # nogit version: ".$ver_product." [".$nogit[$src][1]."]".PHP_EOL;
 			} elseif (is_string($nogit[$src])){
+				$from = $nogit[$src];
 				$ver_product = $nogit[$src];
 			} elseif (is_dir($cur."/".$src."/.git")){
+				$from = "git";
 				$ver_product = pathenv("SCM_TAG");
 				// remove name
 				$ver_product = str_replace($src,"",$ver_product);
@@ -106,6 +110,9 @@
 					for($i = 4; $i < $sctex; $i++)
 						$ver_product .= $ctex[$i];
 				}
+				// alpha, beta etc without number
+				if(substr($ver_product, -1) == ".")
+					$ver_product .= "0";
 			} else {
 				echo str_pad($src,20)."NO TAG OR VERSION!".PHP_EOL;
 				$tagok = false;
@@ -120,8 +127,7 @@
 					// !! must add a - to be take in account for producton version (verpatch limitation ?)
 					$ver_product = preg_replace("/([a-zA-Z])$/","-".strtolower($matches[1]),$ver_product);
 				}
-				return ["file" => $ver_file ,"product" => $ver_product];
-				
+				return ["file" => $ver_file ,"product" => $ver_product,"from" => $from];
 			}
 	}
 	// print_r($argv);
@@ -184,7 +190,7 @@
 			if(pathenv("CUR_DEBUG") == 1){
 				echo $cmd.PHP_EOL;
 			} else {
-				echo "[version] '".$current["product"]."' ".$argv[2].PHP_EOL;
+				echo "[version] '".$current["product"]."' ".$argv[2]." (".str_replace("/","\\",$current["from"]).")".PHP_EOL;
 			}
 			passthru($cmd);
 		} else {
