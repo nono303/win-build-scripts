@@ -1,5 +1,9 @@
 @echo off
-IF not [%2] == [] GOTO %2
+IF not [%2] == [all] (
+	IF not [%2] == [] (
+		GOTO %2
+	)
+)
 call %PATH_BATCH%\go.bat clean NOLOG
 :httpdanddeps
 	:brotli
