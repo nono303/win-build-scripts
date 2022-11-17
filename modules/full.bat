@@ -46,6 +46,8 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat nghttp2 NOLOG
 	:libssh2
 	call %PATH_BATCH%\go.bat libssh2 NOLOG
+	:zstd
+	call %PATH_BATCH%\go.bat zstd NOLOG
 	:curl
 	call %PATH_BATCH%\go.bat curl NOLOG
 	:libexpat
@@ -64,8 +66,6 @@ call %PATH_BATCH%\go.bat clean NOLOG
 :phpanddeps
 	:wineditline
 	call %PATH_BATCH%\go.bat wineditline NOLOG
-	:zstd
-	call %PATH_BATCH%\go.bat zstd NOLOG
 	:libzip
 	call %PATH_BATCH%\go.bat libzip NOLOG
 	:libxpm
