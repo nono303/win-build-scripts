@@ -1,5 +1,6 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1
 
+	REM libxml2_a_dll MUST be used for PHP https://wiki.php.net/internals/windows/libs/libxml2
 sed -i 's/iconv.lib/libiconv\.lib/g'  %CYGPATH_SRC%/%1/win32/Makefile.msvc
 sed -i 's/LDFLAGS = \/nologo/LDFLAGS = \/nologo \/LTCG \/OPT:ICF,REF \/DEBUG/g'  %CYGPATH_SRC%/%1/win32/Makefile.msvc
 sed -i 's/ARFLAGS = \/nologo/ARFLAGS = \/nologo \/LTCG/g'  %CYGPATH_SRC%/%1/win32/Makefile.msvc
