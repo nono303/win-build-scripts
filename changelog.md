@@ -1,6 +1,89 @@
 # changelog
 
 
+## 1.6.1 _(2022-12-02)_
+
+*  remove useless warning & fix meson setup syntaxe
+`modules/dav1d.bat`
+*  fix offset
+`modules/subversion.patch`
+*  disable rsome removed add 'Hunk #' for patch offset issue
+`utils/sub/logcheck.php`
+*  bump src & tools
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  https://github.com/openssl/openssl/pull/18732 applied in 3.0.6
+`modules/openssl.patch`
+*  pushed in https://github.com/madler/zlib/commit/d0704a820186481da35d08f4b655881e1d32089f
+`modules/zlib.patch`
+*  add patch error
+`utils/sub/logcheck.php`
+*  fix patch for 3.2.x
+`modules/xdebug.patch`
+*  update dependencies & gradle for jdk 19
+`modules/mobac.patch`
+*  remove useless patch for 3.0.6 & NUL file issue
+`modules/openssl.bat`
+*  libxml 2.10.x
+`SRC_VERSION.md`
+`modules/libxml2.bat`
+`utils/srccreate.bat`
+*  gradle 7.6 & jdk 19
+`README.md`
+*  bump src & tools
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  add features: unicode IDN zstd add protocols: WS WSS
+`modules/curl.bat`
+*  bump tools & src msvc: 14.34 > 14.35
+`README.md`
+`SRC_VERSION.md`
+`env_sample.bat`
+`utils/srccreate.bat`
+`vs17.bat`
+*  add trace for origin of the version fix alpha, beta etc without number
+`utils/sub/version.php`
+*  ermove libcurl on target scm
+`modules/mod_md.bat`
+*  fix arg 'all' issue
+`modules/full.bat`
+*  1.14.0
+`modules/libheif.bat`
+*  waiting 1.15.0 https://github.com/strukturag/libheif/issues/712
+`modules/libheif.patch`
+*  fixed in 1849
+`modules/libyuv.patch`
+*  fix zstd required for curl
+`modules/full.bat`
+*  add https://gitlab.com/libtiff/libtiff/-/issues/487
+`modules/libtiff.patch`
+*  add libgd version from file (tag > master) fix -dev as 0
+`utils/sub/version.php`
+*  force LIBXML2_INCLUDE_DIR= & LIBXML2_LIBRARIES after issue with cmake 3.25.0 -- Found LibXml2: C:/sdk/softs/perl/c/lib/libxml2.a
+`modules/httpd.bat`
+*  2713 > 2722
+`modules/mobac.patch`
+*  note: https://wiki.php.net/internals/windows/libs/libxml2
+`modules/libxml2.bat`
+*  fix date format with cygwin bin
+`modules/common/ymdhis.bat`
+*  bump to gradle 7.6
+`modules/mobac.patch`
+*  junction for local .gradle to %userprofile%
+`modules/mapsforgesrv.bat`
+*  fix useless pause
+`modules/httpd.bat`
+*  refactor sqlite https://github.com/azadkuh/sqlite-amalgamation/pull/10
+`modules/sqlite.bat`
+`utils/sub/version.php`
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+
+
 ## 1.6.0 _(2022-10-26)_
 
 *  bump src version
@@ -107,6 +190,8 @@
 `README.md`
 `SRC_VERSION.md`
 `utils/srccreate.bat`
+*  1.6.0
+`changelog.md`
 
 
 ## 1.5.9 _(2022-09-23)_
