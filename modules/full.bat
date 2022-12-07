@@ -26,8 +26,6 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat icu NOLOG
 	:libxml2
 	call %PATH_BATCH%\go.bat libxml2 NOLOG
-	:pcre
-	call %PATH_BATCH%\go.bat pcre NOLOG
 	:pcre2
 	call %PATH_BATCH%\go.bat pcre2 NOLOG
 	:libevent

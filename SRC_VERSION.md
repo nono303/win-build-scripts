@@ -17,12 +17,12 @@
 | [geos](https://github.com/libgeos/geos) | 3.11.1 |
 | [giflib](https://github.com/gongjianbo/GifLib) | 5.2.1 - 59eb9d1 |
 | [httpd](https://github.com/apache/httpd) | 2.4.54 |
-| [icu](https://github.com/unicode-org/icu) | 72.1 |
+| [icu](https://github.com/unicode-org/icu) | 73.0.1 - cldr/2022-12-04 |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.3.0 |
 | [lerc](https://github.com/Esri/lerc.git) | 4.0.0 |
 | [libavif](https://github.com/AOMediaCodec/libavif.git) | 0.11.1 |
-| [libdeflate](https://github.com/ebiggers/libdeflate.git) | 1.14 |
+| [libdeflate](https://github.com/ebiggers/libdeflate.git) | 1.15 |
 | [libev](https://git.lighttpd.net/libev) | 4.33 - 5b75258 |
 | [libevent](https://github.com/libevent/libevent) | 2.1.12 |
 | [libexpat](https://github.com/libexpat/libexpat) | 2.5.0 |
@@ -43,7 +43,7 @@
 | [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.10.3 |
 | [libxpm](https://github.com/nono303/libxpm.git) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.14 |
 | [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.37 - d994c613 |
-| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1850 - c19943b4 |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1852 - 610e0cde |
 | [libzip](https://github.com/nih-at/libzip) | 1.9.2 |
 | [lua](https://github.com/lua/lua) | 5.4.4 |
 | [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | 0.18.1 - 403a08b |
@@ -55,7 +55,7 @@
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 |
 | [mod_md](https://github.com/icing/mod_md) | 2.4.20 |
-| [mod_qos](https://sourceforge.net/p/mod-qos/source/HEAD/tree/trunk/httpd_src/modules/qos/) | 11.72 r2654 |
+| [mod_qos](https://sourceforge.net/p/mod-qos/source/HEAD/tree/trunk/httpd_src/modules/qos/) | 11.73 r2670 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) - _[src](https://emptyhammock.com/media/downloads/wku_bt-2.01.zip)_ | 2.0.2 |
 | [mpir](https://github.com/nono303/mpir) - _[upstream](https://github.com/BrianGladman/mpir)_ - _[src](https://github.com/wbhart/mpir)_ | 3.0.0 - 498b7594 |
 | [nghttp2](https://github.com/nghttp2/nghttp2) | 1.51.0 |
@@ -64,8 +64,7 @@
 | [nssm](https://github.com/puppetlabs/nssm) | 2.25 - a1c3260 |
 | [openssl](https://github.com/openssl/openssl) | 3.0.7 |
 | [openssl-quic](https://github.com/quictls/openssl/tree/openssl-3.0.7+quic) | 3.0.7 - 247bb4d |
-| [pcre](https://github.com/jwilk-mirrors/pcre) | 8.45 |
-| [pcre2](https://github.com/PhilipHazel/pcre2) | 10.40 |
+| [pcre2](https://github.com/PCRE2Project/pcre2) | 10.41 |
 | [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | 8.2 - 26c0f51 |
 | [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1 |
 | [php-cgi-spawner](https://github.com/deemru/php-cgi-spawner) | 1.1.23 - 90197af |
@@ -73,7 +72,7 @@
 | [php-ext-zstd](https://github.com/kjdev/php-ext-zstd) | 0.12.0 |
 | [php-geos](https://github.com/ModelTech/php-geos) | 1.0.1.1 - a156cd1 |
 | [php-sdk](https://github.com/php/php-sdk-binary-tools) | 2.2.1-dev - 6ee0f95 |
-| [php-src](https://github.com/php/php-src) | 8.2.0rc7 |
+| [php-src](https://github.com/php/php-src) | 8.2.0 |
 | [proj](https://github.com/OSGeo/PROJ) | 9.1.1 |
 | [sdlna](https://github.com/nono303/simpleDLNA) - _[upstream + src](https://github.com/nmaier/simpleDLNA)_ | 1.0.3 - b67251f |
 | [serf](https://github.com/apache/serf.git) | 2.0.0 - 2f72c5c |

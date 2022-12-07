@@ -78,7 +78,7 @@ git checkout tags/2.4.54
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout tags/release-72-1
+git checkout cldr/2022-12-04
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -98,7 +98,7 @@ git checkout tags/v0.11.1-rc1
 cd /D ..
 git clone https://github.com/ebiggers/libdeflate.git libdeflate
 cd /D libdeflate
-git checkout tags/v1.14
+git checkout tags/v1.15
 cd /D ..
 git clone https://git.lighttpd.net/mirrors/libev.git libev
 cd /D libev
@@ -230,7 +230,7 @@ git checkout tags/v2.4.20
 cd /D ..
 svn co https://svn.code.sf.net/p/mod-qos/source/trunk/httpd_src/modules/qos mod_qos
 cd /D mod_qos
-svn update -r 2659
+svn update -r 2670
 cd /D ..
 git clone https://github.com/nono303/mod_whatkilledus mod_wku_bt
 cd /D mod_wku_bt
@@ -318,7 +318,7 @@ git checkout trunk
 cd /D ..
 git clone https://github.com/nono303/sqlite-amalgamation.git sqlite
 cd /D sqlite
-git checkout tags/3.40.0
+git checkout master
 cd /D ..
 git clone https://github.com/apache/subversion.git subversion
 cd /D subversion
