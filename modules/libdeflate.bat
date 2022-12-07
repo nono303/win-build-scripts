@@ -1,13 +1,22 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
-if not [%AVX%] == [] set AVXDEF=%AVX:/=\/%
-sed -i 's/\/MD \/O2/\/DWIN32 \/D_WINDOWS \/w \/DNDEBUG \/nologo \/O2 \/GL \/MD \/Zi \/w \/MP%NUMBER_OF_PROCESSORS% %AVXDEF% \/Fdlibdeflate.pdb \/FS/g' %CYGPATH_SRC%/%1/makefile.msc
-sed -i 's/LDFLAGS =/LDFLAGS =\/DEBUG\ \/NOLOGO \/LTCG \/OPT:REF,ICF/g' %CYGPATH_SRC%/%1/makefile.msc
-sed -i 's/AR = lib/AR = lib \/NOLOGO \/LTCG /g' %CYGPATH_SRC%/%1/makefile.msc
+cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
+-DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
+-DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
+-DLIBDEFLATE_BUILD_STATIC_LIB=0 ^
+-DLIBDEFLATE_BUILD_SHARED_LIB=1 ^
+-DLIBDEFLATE_COMPRESSION_SUPPORT=1 ^
+-DLIBDEFLATE_DECOMPRESSION_SUPPORT=1 ^
+-DLIBDEFLATE_ZLIB_SUPPORT=1 ^
+-DLIBDEFLATE_GZIP_SUPPORT=1 ^
+-DLIBDEFLATE_FREESTANDING=0 ^
+-DLIBDEFLATE_BUILD_GZIP=0 ^
+-DLIBDEFLATE_BUILD_TESTS=0 ^
+-DLIBDEFLATE_USE_SHARED_LIB=1 ^
+%PATH_SRC%\%1
 
-nmake %NMAKE_OPTS% /f Makefile.msc libdeflate.dll
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%NINJA% install
 
-for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\libdeflate.%%X %PATH_INSTALL%\bin\*)
-xcopy /C /F /Y %PATH_SRC%\%1\libdeflate.lib %PATH_INSTALL%\lib\*
-xcopy /C /F /Y %PATH_SRC%\%1\libdeflate.h %PATH_INSTALL%\include\*
-call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libdeflate.dll
+xcopy /C /F /Y %PATH_BUILD%\%1\deflate.pdb %PATH_INSTALL%\bin\*
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\deflate.dll

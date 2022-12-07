@@ -11,7 +11,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DJPEG_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 -DLIBLZMA_LIBRARIES=%PATH_INSTALL:\=/%/lib/liblzma.lib ^
 -DLIBLZMA_INCLUDE_DIRS=%PATH_INSTALL:\=/%/include ^
--DDeflate_LIBRARIES=%PATH_INSTALL:\=/%/lib/libdeflate.lib ^
+-DDeflate_LIBRARIES=%PATH_INSTALL:\=/%/lib/deflate.lib ^
 -DDeflate_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 -Dextra-warnings=OFF ^
 -Dfatal-warnings=OFF ^
