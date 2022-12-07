@@ -75,6 +75,7 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 		// "Using unknown MSVC version" => [39, "str"],// php-src
 		"warning: [serial]" => [39, "str"],// subversion java-hl
 		"warning: [removal]" => [39, "str"],// subversion java-hl
+		"HEAD is now" => [39, "str"], // git log
 	);
 	//print_r($argv);
 	//exit();
