@@ -1,12 +1,12 @@
-diff --git a/icu4c/source/data/BUILDRULES.py b/icu4c/source/data/BUILDRULES.py
-index 899cba25b4..4345561206 100644
---- a/icu4c/source/data/BUILDRULES.py
-+++ b/icu4c/source/data/BUILDRULES.py
-@@ -184,7 +184,7 @@ def generate_brkitr_brk(config, io, common_vars):
+diff --git "a/icu4c/source/data/BUILDRULES.py" "b/icu4c/source/data/BUILDRULES.py"
+index 2608cb0227..20a8b4a8ae 100644
+--- "a/icu4c/source/data/BUILDRULES.py"
++++ "b/icu4c/source/data/BUILDRULES.py"
+@@ -185,7 +185,7 @@ def generate_brkitr_brk(config, io, common_vars):
              category = "brkitr_rules",
              dep_targets =
                  [DepTarget("cnvalias"),
--                    DepTarget("ulayout"), DepTarget("uemoji"), DepTarget("lstm_res")],
+-                    DepTarget("ulayout"), DepTarget("uemoji"), DepTarget("lstm_res"), DepTarget("adaboost_res")],
 +                    DepTarget("ulayout"), DepTarget("uemoji")],
              input_files = input_files,
              output_files = output_files,
