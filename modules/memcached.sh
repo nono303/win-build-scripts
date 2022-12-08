@@ -19,19 +19,19 @@ CFCOM="-Wno-char-subscripts -O3 -s"
 # STD
 ./configure --cache-file=$ARCH_PRF.configure.cache --disable-dependency-tracking --enable-silent-rules${machine} --disable-dtrace --disable-sasl --disable-docs --disable-coverage --prefix=$1/release/$ARCH_PRF/ $ARCH_PARAMS
 #   SSE2
-make clean && make CFLAGS+=' -Wno-char-subscripts -O3 -s -msse2 '
+make -j$(nproc) clean && make -j$(nproc) CFLAGS+=' -Wno-char-subscripts -O3 -s -msse2 '
 cp --verbose -rf $1/memcached.exe $3/$ARCH_PRF/memcached.exe
 #   AVX
-make clean && make CFLAGS+=' -Wno-char-subscripts -O3 -s -march=sandybridge '
+make -j$(nproc) clean && make -j$(nproc) CFLAGS+=' -Wno-char-subscripts -O3 -s -march=sandybridge '
 cp --verbose -rf $1/memcached.exe $3/$ARCH_PRF/memcached-avx.exe 
 
 # TLS
 ./configure --cache-file=$ARCH_PRF.configure.cache --disable-dependency-tracking --enable-silent-rules${machine} --disable-dtrace --disable-sasl --disable-docs --disable-coverage --prefix=$1/release/$ARCH_PRF/ $ARCH_PARAMS --enable-tls
 #   SSE2
-make clean && make CFLAGS+=' -Wno-char-subscripts -O3 -s -msse2 '
+make -j$(nproc) clean && make -j$(nproc) CFLAGS+=' -Wno-char-subscripts -O3 -s -msse2 '
 cp --verbose -rf $1/memcached.exe $3/$ARCH_PRF/memcached-tls.exe
 #   AVX
-make clean && make CFLAGS+=' -Wno-char-subscripts -O3 -s -march=sandybridge '
+make -j$(nproc) clean && make -j$(nproc) CFLAGS+=' -Wno-char-subscripts -O3 -s -march=sandybridge '
 cp --verbose -rf $1/memcached.exe $3/$ARCH_PRF/memcached-avx-tls.exe
 
 cp --verbose -rf /bin/cygcrypto-1.1.dll $3/$ARCH_PRF/
