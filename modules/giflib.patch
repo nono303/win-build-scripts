@@ -53,7 +53,7 @@ index d90783c..17ab740 100644
  	(void)free((void *)dup);
  
 diff --git a/5.2.1/source/gif_lib.h b/5.2.1/source/gif_lib.h
-index f8feb3c..4af82a3 100644
+index f8feb3c..b386959 100644
 --- a/5.2.1/source/gif_lib.h
 +++ b/5.2.1/source/gif_lib.h
 @@ -9,8 +9,18 @@ SPDX-License-Identifier: MIT
@@ -76,6 +76,36 @@ index f8feb3c..4af82a3 100644
  #endif /* __cplusplus */
  
  #define GIFLIB_MAJOR 5
+@@ -178,11 +188,11 @@ int EGifPutCodeNext(GifFileType *GifFile,
+ ******************************************************************************/
+ 
+ /* Main entry points */
+-GifFileType *DGifOpenFileName(const char *GifFileName, int *Error);
+-GifFileType *DGifOpenFileHandle(int GifFileHandle, int *Error);
+-int DGifSlurp(GifFileType * GifFile);
++extern LIBRARY_API GifFileType *DGifOpenFileName(const char *GifFileName, int *Error);
++extern LIBRARY_API GifFileType *DGifOpenFileHandle(int GifFileHandle, int *Error);
++extern LIBRARY_API int DGifSlurp(GifFileType * GifFile);
+ GifFileType *DGifOpen(void *userPtr, InputFunc readFunc, int *Error);    /* new one (TVT) */
+-    int DGifCloseFile(GifFileType * GifFile, int *ErrorCode);
++extern LIBRARY_API int DGifCloseFile(GifFileType * GifFile, int *ErrorCode);
+ 
+ #define D_GIF_SUCCEEDED          0
+ #define D_GIF_ERR_OPEN_FAILED    101    /* And DGif possible errors. */
+@@ -204,11 +214,11 @@ int DGifGetScreenDesc(GifFileType *GifFile);
+ int DGifGetRecordType(GifFileType *GifFile, GifRecordType *GifType);
+ int DGifGetImageHeader(GifFileType *GifFile);
+ int DGifGetImageDesc(GifFileType *GifFile);
+-int DGifGetLine(GifFileType *GifFile, GifPixelType *GifLine, int GifLineLen);
++extern LIBRARY_API int DGifGetLine(GifFileType *GifFile, GifPixelType *GifLine, int GifLineLen);
+ int DGifGetPixel(GifFileType *GifFile, GifPixelType GifPixel);
+ int DGifGetExtension(GifFileType *GifFile, int *GifExtCode,
+                      GifByteType **GifExtension);
+-int DGifGetExtensionNext(GifFileType *GifFile, GifByteType **GifExtension);
++extern LIBRARY_API int DGifGetExtensionNext(GifFileType *GifFile, GifByteType **GifExtension);
+ int DGifGetCode(GifFileType *GifFile, int *GifCodeSize,
+                 GifByteType **GifCodeBlock);
+ int DGifGetCodeNext(GifFileType *GifFile, GifByteType **GifCodeBlock);
 @@ -227,7 +237,7 @@ int GifQuantizeBuffer(unsigned int Width, unsigned int Height,
  /******************************************************************************
   Error handling and reporting.
@@ -123,6 +153,15 @@ index f8feb3c..4af82a3 100644
  
  /******************************************************************************
   5.x functions for GIF89 graphics control blocks
+@@ -271,7 +281,7 @@ int DGifExtensionToGCB(const size_t GifExtensionLength,
+ size_t EGifGCBToExtension(const GraphicsControlBlock *GCB,
+ 		       GifByteType *GifExtension);
+ 
+-int DGifSavedExtensionToGCB(GifFileType *GifFile, 
++extern LIBRARY_API int DGifSavedExtensionToGCB(GifFileType *GifFile, 
+ 			    int ImageIndex, 
+ 			    GraphicsControlBlock *GCB);
+ int EGifGCBToSavedExtension(const GraphicsControlBlock *GCB, 
 @@ -284,21 +294,21 @@ int EGifGCBToSavedExtension(const GraphicsControlBlock *GCB,
  
  #define GIF_FONT_WIDTH  8
