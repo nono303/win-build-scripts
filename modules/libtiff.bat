@@ -5,6 +5,12 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
 -DCMAKE_DISABLE_FIND_PACKAGE_PkgConfig=ON ^
 -DBUILD_SHARED_LIBS=ON ^
+-Dtiff-tools=OFF ^
+-Dtiff-tests=OFF ^
+-Dtiff-contrib=OFF ^
+-Dtiff-docs=OFF ^
+-Dtiff-deprecated=OFF ^
+-Dtiff-install=ON ^
 -DZLIB_LIBRARY=%PATH_INSTALL:\=/%/lib/zlib.lib ^
 -DZLIB_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 -DJPEG_LIBRARY=%PATH_INSTALL:\=/%/lib/jpeg.lib ^
@@ -13,6 +19,8 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DLIBLZMA_INCLUDE_DIRS=%PATH_INSTALL:\=/%/include ^
 -DDeflate_LIBRARIES=%PATH_INSTALL:\=/%/lib/deflate.lib ^
 -DDeflate_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
+-DWebP_LIBRARY_RELEASE=%PATH_INSTALL:\=/%/lib/libwebp.lib ^
+-DWebP_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 -Dextra-warnings=OFF ^
 -Dfatal-warnings=OFF ^
 -Dld-version-script=OFF ^
@@ -44,5 +52,5 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% install
 
-for %%X in (tiff.dll tiffmedian.exe tiffset.exe tiffsplit.exe tiffdump.exe tiffinfo.exe tiffcp.exe tiffcrop.exe tiffdither.exe tiff2rgba.exe tiffcmp.exe tiff2pdf.exe tiff2ps.exe fax2tiff.exe raw2tiff.exe fax2ps.exe ppm2tiff.exe pal2rgb.exe tiff2bw.exe tiffgt.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
-for %%D in (libtiff\tiff.pdb tools\fax2ps.pdb tools\fax2tiff.pdb tools\pal2rgb.pdb tools\ppm2tiff.pdb tools\raw2tiff.pdb tools\tiff2bw.pdb tools\tiff2pdf.pdb tools\tiff2ps.pdb tools\tiff2rgba.pdb tools\tiffcmp.pdb tools\tiffcp.pdb tools\tiffcrop.pdb tools\tiffdither.pdb tools\tiffdump.pdb tools\tiffinfo.pdb tools\tiffmedian.pdb tools\tiffset.pdb tools\tiffsplit.pdb tools\tiffgt.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%D %PATH_INSTALL%\bin\*)
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\tiff.dll
+xcopy /C /F /Y %PATH_BUILD%\%1\libtiff\tiff.pdb %PATH_INSTALL%\bin\*
