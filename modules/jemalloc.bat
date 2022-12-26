@@ -1,15 +1,16 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1
 
 %PATH_BIN_CYGWIN%\sh.exe -c "CC=cl ./autogen.sh"
-
-%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/msvc/projects/vc2017/jemalloc/" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
+set JEMALLOC_VCVER=vc2017
+%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/msvc/projects/%JEMALLOC_VCVER%/jemalloc/" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
 	REM https://github.com/jemalloc/jemalloc/issues/1099
-sed -i 's/^<PreprocessorDefinitions^>_REENTRANT/^<PreprocessorDefinitions^>JEMALLOC_NO_PRIVATE_NAMESPACE;_REENTRANT/g' %CYGPATH_SRC%/%1/msvc/projects/vc2017/jemalloc/jemalloc.vcxproj
-sed -i 's/^<PreprocessorDefinitions^>JEMALLOC_DEBUG/^<PreprocessorDefinitions^>JEMALLOC_NO_PRIVATE_NAMESPACE;JEMALLOC_DEBUG/g' %CYGPATH_SRC%/%1/msvc/projects/vc2017/jemalloc/jemalloc.vcxproj
-
+if %ARCH% == x86 (
+	sed -i 's/^<PreprocessorDefinitions^>_REENTRANT/^<PreprocessorDefinitions^>JEMALLOC_NO_PRIVATE_NAMESPACE;_REENTRANT/g' %CYGPATH_SRC%/%1/msvc/projects/%JEMALLOC_VCVER%/jemalloc/jemalloc.vcxproj
+	sed -i 's/^<PreprocessorDefinitions^>JEMALLOC_DEBUG/^<PreprocessorDefinitions^>JEMALLOC_NO_PRIVATE_NAMESPACE;JEMALLOC_DEBUG/g' %CYGPATH_SRC%/%1/msvc/projects/%JEMALLOC_VCVER%/jemalloc/jemalloc.vcxproj
+)
 set OUTDIR_CONF=Release
 
-MSBuild.exe msvc\jemalloc_vc2017.sln %MSBUILD_OPTS% ^
+MSBuild.exe msvc\jemalloc_%JEMALLOC_VCVER%.sln %MSBUILD_OPTS% ^
 /t:Clean,jemalloc ^
 /nowarn:C4028 ^
 /p:Configuration=%OUTDIR_CONF% ^
