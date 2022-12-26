@@ -14,6 +14,10 @@
 	if(in_array($proot,["pecl-memcache","php-geos","pecl-text-xdiff","php-ext-brotli","xdebug","php-src"]))
 		$proot = "php";
 	$nogit = array(
+		"yajl"			=> ["/SET \(YAJL_MAJOR ([0-9]+).*SET \(YAJL_MINOR ([0-9]+).*SET \(YAJL_MICRO ([0-9]+)/s",
+							pathenv("PATH_SRC")."/".$argv[1]."/CMakeLists.txt"],
+		"mod_security"		=> ["/MODSEC_VERSION_MAJOR *\"([0-9]+).*MODSEC_VERSION_MINOR *\"([0-9]+).*MODSEC_VERSION_MAINT *\"([0-9]+)/s",
+							pathenv("PATH_SRC")."/".$argv[1]."/apache2/msc_release.h"],
 		"sqlite"			=> ["/#define SQLITE_VERSION +\"([0-9\.]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/sqlite3.h"],
 		"php-ext-brotli"	=> ["/#define BROTLI_EXT_VERSION \"([0-9\.]+)/s",

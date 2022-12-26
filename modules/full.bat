@@ -60,6 +60,10 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat lua NOLOG
 	:httpd
 	call %PATH_BATCH%\go.bat httpd NOLOG
+	:yajl
+	call %PATH_BATCH%\go.bat yajl NOLOG
+	:mod_security
+	call %PATH_BATCH%\go.bat mod_security NOLOG
 	if  "%2" == "httpdanddeps" exit /B
 :phpanddeps
 	:wineditline

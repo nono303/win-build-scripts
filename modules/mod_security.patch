@@ -1,0 +1,98 @@
+diff --git a/apache2/Makefile.win b/apache2/Makefile.win
+index ed4bfc9e..b613b444 100644
+--- a/apache2/Makefile.win
++++ b/apache2/Makefile.win
+@@ -1,18 +1,18 @@
+ ###########################################################################
+ #
+-# Usage:   NMAKE -f Makefile.win APACHE={httpd installion dir}  PCRE={pcre dir} LIBXML2={LibXML2 dir} [   LUA={Lua dir} ]
++# Usage:   NMAKE -f Makefile.win APACHE={httpd installion dir}  PCRE2={pcre2 dir} LIBXML2={LibXML2 dir} [   LUA={Lua dir} ]
+ #
+-!IF "$(APACHE)" == "" || "$(PCRE)" == "" || "$(LIBXML2)" == "" || "$(CURL)" == ""
+-!ERROR NMAKE arguments: APACHE=dir PCRE=dir LIBXML2=dir CURL=dir are required to build mod_security2 for Windows
++!IF "$(APACHE)" == "" || "$(PCRE2)" == "" || "$(LIBXML2)" == "" || "$(CURL)" == ""
++!ERROR NMAKE arguments: APACHE=dir PCRE2=dir LIBXML2=dir CURL=dir are required to build mod_security2 for Windows
+ !ENDIF
+ 
+ # Linking libraries
+ LIBS = $(APACHE)\lib\libhttpd.lib \
+        $(APACHE)\lib\libapr-1.lib \
+        $(APACHE)\lib\libaprutil-1.lib \
+-       $(PCRE)\pcre.lib \
++       $(PCRE2)\pcre2-8.lib \
+        $(CURL)\libcurl.lib \
+-       $(LIBXML2)\win32\bin.msvc\libxml2.lib \
++       $(LIBXML2)\libxml2.lib \
+        Ws2_32.lib \
+        "iphlpapi.lib"
+ 
+@@ -28,31 +28,26 @@ CC = CL
+ 
+ MT = mt
+ 
+-DEFS = /nologo /O2 /LD /W3 /wd4244 /wd4018 -DWIN32 -DWINNT -Dinline=APR_INLINE -D$(VERSION)
++DEFS = /nologo /DWIN32 /DWINNT /Dinline=APR_INLINE /DWITH_PCRE2=1 /D_WINDOWS /w /Zf /Zi /FS /O2 /GL /MD /DNDEBUG
+ 
+ DLL = mod_security2.so
+ 
+-INCLUDES = -I. -I.. \
+-           -I$(CURL)\include -I$(CURL) \
+-           -I$(PCRE)\include -I$(PCRE) \
+-           -I$(LIBXML2)\include \
+-           -I$(APACHE)\include
++INCLUDES = -I. -I.. 
++
+ 
+ # Enables support for SecRemoteRules and external resources.
+ DEFS=$(DEFS) -DWITH_CURL -DWITH_REMOTE_RULES
+ 
+ # Lua is optional
+ !IF "$(LUA)" != ""
+-LIBS = $(LIBS) $(LUA)\lua5.1.lib
++LIBS = $(LIBS) $(LUA)\liblua.lib
+ DEFS=$(DEFS) -DWITH_LUA
+-INCLUDES = $(INCLUDES) -I$(LUA)\include -I$(LUA) \
+ !ENDIF
+ 
+ # Yajl/Json is optional
+ !IF "$(YAJL)" != ""
+-LIBS = $(LIBS) $(YAJL)\lib\yajl.lib
+-DEFS=$(DEFS) -DWITH_YAJL
+-INCLUDES = $(INCLUDES) -I$(YAJL)\include -I$(YAJL) \
++LIBS = $(LIBS) $(YAJL)\yajl.lib
++DEFS=$(DEFS) -DWITH_YAJL -DYAJL_SHARED
+ !ENDIF
+ 
+ CFLAGS= -MD $(INCLUDES) $(DEFS)
+diff --git a/apache2/msc_lua.c b/apache2/msc_lua.c
+index 51be1745..855b8d1c 100644
+--- a/apache2/msc_lua.c
++++ b/apache2/msc_lua.c
+@@ -429,12 +429,12 @@ int lua_execute(msc_script *script, char *param, modsec_rec *msr, msre_rule *rul
+ #else
+ 
+     /* Create new state. */
+-#if LUA_VERSION_NUM == 502 || LUA_VERSION_NUM == 503 || LUA_VERSION_NUM == 501
++#if LUA_VERSION_NUM == 502 || LUA_VERSION_NUM == 503 || LUA_VERSION_NUM == 501 || LUA_VERSION_NUM == 504
+     L = luaL_newstate();
+ #elif LUA_VERSION_NUM == 500
+     L = lua_open();
+ #else
+-#error We are only tested under Lua 5.0, 5.1, 5.2, or 5.3.
++#error We are only tested under Lua 5.0, 5.1, 5.2, 5.3 or 5.4
+ #endif
+     luaL_openlibs(L);
+ 
+@@ -459,10 +459,10 @@ int lua_execute(msc_script *script, char *param, modsec_rec *msr, msre_rule *rul
+     /* Register functions. */
+ #if LUA_VERSION_NUM == 500 || LUA_VERSION_NUM == 501
+     luaL_register(L, "m", mylib);
+-#elif LUA_VERSION_NUM == 502 || LUA_VERSION_NUM == 503
++#elif LUA_VERSION_NUM == 502 || LUA_VERSION_NUM == 503 || LUA_VERSION_NUM == 504
+     luaL_setfuncs(L, mylib, 0);
+ #else
+-#error We are only tested under Lua 5.0, 5.1, 5.2, or 5.3.
++#error We are only tested under Lua 5.0, 5.1, 5.2, 5.3 or 5.4
+ #endif
+ 
+     lua_setglobal(L, "m");

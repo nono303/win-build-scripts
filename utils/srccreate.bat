@@ -42,7 +42,7 @@ git checkout tags/cares-1_18_1
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-7_86_0
+git checkout tags/curl-7_87_0
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -138,7 +138,7 @@ git checkout tags/2.1.4
 cd /D ..
 git clone https://git.tukaani.org/xz.git liblzma
 cd /D liblzma
-git checkout tags/v5.3.5beta
+git checkout tags/v5.4.0
 cd /D ..
 git clone https://github.com/maxmind/libmaxminddb.git libmaxminddb
 cd /D libmaxminddb
@@ -146,7 +146,7 @@ git checkout tags/1.7.1
 cd /D ..
 git clone git://git.code.sf.net/p/libpng/code libpng
 cd /D libpng
-git checkout tags/v1.6.39
+git checkout libpng16
 cd /D ..
 git clone https://github.com/jedisct1/libsodium.git libsodium
 cd /D libsodium
@@ -158,11 +158,11 @@ git checkout tags/libssh2-1.10.0
 cd /D ..
 git clone https://gitlab.com/libtiff/libtiff libtiff
 cd /D libtiff
-git checkout tags/v4.4.0rc1
+git checkout tags/v4.5.0rc3
 cd /D ..
 git clone https://chromium.googlesource.com/webm/libwebp libwebp
 cd /D libwebp
-git checkout tags/v1.2.4
+git checkout tags/v1.3.0-rc1
 cd /D ..
 git clone https://github.com/opencor/libxdiff libxdiff
 cd /D libxdiff
@@ -176,7 +176,7 @@ git clone https://github.com/nono303/libxpm.git libxpm
 cd /D libxpm
 git checkout tags/libxpm-3.5.14
 cd /D ..
-git clone https://gitlab.gnome.org/GNOME/libxslt libxslt
+git clone https://gitlab.gnome.org/GNOME/libxslt.git/ libxslt
 cd /D libxslt
 git checkout master
 cd /D ..
@@ -230,7 +230,11 @@ git checkout tags/v2.4.20
 cd /D ..
 svn co https://svn.code.sf.net/p/mod-qos/source/trunk/httpd_src/modules/qos mod_qos
 cd /D mod_qos
-svn update -r 2670
+svn update -r 2679
+cd /D ..
+git clone https://github.com/SpiderLabs/ModSecurity mod_security
+cd /D mod_security
+git checkout v2/master
 cd /D ..
 git clone https://github.com/nono303/mod_whatkilledus mod_wku_bt
 cd /D mod_wku_bt
@@ -246,11 +250,11 @@ git checkout tags/v1.51.0
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3
-git checkout tags/v0.7.1
+git checkout tags/v0.8.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v0.11.0
+git checkout tags/v0.12.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -264,13 +268,9 @@ git clone https://github.com/quictls/openssl/ openssl-quic
 cd /D openssl-quic
 git checkout tags/openssl-3.0.7+quic1
 cd /D ..
-git clone https://github.com/jwilk-mirrors/pcre.git pcre
-cd /D pcre
-git checkout tags/pcre-8.45
-cd /D ..
-git clone https://github.com/PhilipHazel/pcre2.git pcre2
+git clone https://github.com/PCRE2Project/pcre2.git pcre2
 cd /D pcre2
-git checkout tags/pcre2-10.40
+git checkout tags/pcre2-10.42
 cd /D ..
 git clone https://github.com/websupport-sk/pecl-memcache.git pecl-memcache
 cd /D pecl-memcache
@@ -302,7 +302,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.2.0RC7
+git checkout tags/php-8.2.0
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
@@ -338,7 +338,11 @@ svn update -r 36
 cd /D ..
 git clone https://github.com/xdebug/xdebug.git xdebug
 cd /D xdebug
-git checkout tags/3.2.0RC2
+git checkout tags/3.2.0
+cd /D ..
+git clone https://github.com/lloyd/yajl.git yajl
+cd /D yajl
+git checkout master
 cd /D ..
 git clone https://github.com/madler/zlib.git zlib
 cd /D zlib
@@ -346,5 +350,5 @@ git checkout tags/v1.2.13
 cd /D ..
 git clone https://github.com/facebook/zstd.git zstd
 cd /D zstd
-git checkout tags/v1.5.2
+git checkout tags/v1.5.2-kernel
 cd /D ..
