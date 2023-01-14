@@ -3,6 +3,10 @@
 REM -DSQLITE_ENABLE_COLUMN_METADATA=1 -DSQLITE_OMIT_DECLTYPE=0 
 	REM https://github.com/storesafe/cordova-sqlite-storage/issues/906
 	REM PHP: sqlite_statement.obj : error LNK2001: unresolved external symbol sqlite3_column_table_name / sqlite3_column_decltype
+REM -DICU_ROOT=%PATH_INSTALL% ^
+REM	without KO	"C:\Windows Kits\10\Lib\10.0.22621.0\um\x64\icuuc.lib"  "C:\Windows Kits\10\Lib\10.0.22621.0\um\x64\icuin.Lib"
+REM	with OK		C:\sdk\release\vs17_x64-avx\lib\icuuc.lib  C:\sdk\release\vs17_x64-avx\lib\icuin.lib
+REM		warn	Policy CMP0074 is not set
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
