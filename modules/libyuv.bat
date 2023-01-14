@@ -20,18 +20,14 @@ for %%Y in (cmake_install.cmake build.ninja) do (sed -i 's/ yuv\.lib/ libyuv\.li
 	REM !install : CMake Error at cmake_install.cmake:36 (file):  file INSTALL cannot find "C:/sdk/build/vs17_x64-avx/libyuv/yuvconvert": No
 %NINJA%
 
+if not exist %PATH_INSTALL%\include\editline\. mkdir %PATH_INSTALL%\include\libyuv
+xcopy /C /F /Y %PATH_SRC%\%1\include\libyuv.h %PATH_INSTALL%\include\*
+xcopy /C /F /Y %PATH_SRC%\%1\include\libyuv\*.h %PATH_INSTALL%\include\libyuv\*
 
 xcopy /C /F /Y %PATH_BUILD%\%1\libyuv.lib %PATH_INSTALL%\lib\*
-for %%X in (CMakeFiles\yuv_static.dir\yuv_static.pdb yuv_static.lib) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\lib\*)
+for %%X in (CMakeFiles\yuv_static.dir\yuv_static.pdb yuv_static.lib) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\%DIR_LIB_UNUSED%\*)
 for %%X in (libyuv.dll yuvconvert.exe) do (
 	xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*
 	xcopy /C /F /Y %PATH_BUILD%\%1\%%~nX.pdb %PATH_INSTALL%\bin\*
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X
 )
-if not exist %PATH_INSTALL%\include\editline\. mkdir %PATH_INSTALL%\include\libyuv
-xcopy /C /F /Y %PATH_SRC%\%1\include\libyuv.h %PATH_INSTALL%\include\*
-xcopy /C /F /Y %PATH_SRC%\%1\include\libyuv\*.h %PATH_INSTALL%\include\libyuv\*
-move /Y %PATH_INSTALL%\lib\*_static.* %PATH_INSTALL%\%DIR_LIB_UNUSED%
-
-	REM fix 'C:\sdk\release\vs17_x64-avx\include\libyuv/scale.h(224): warning C4115: 'libyuv': named type definition in parentheses' for libavif
-sed -i 's/libyuv::FilterMode/FilterMode/g' %PATH_INSTALL%/include/libyuv/scale.h
