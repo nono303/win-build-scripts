@@ -1,0 +1,13 @@
+diff --git "a/config.w32" "b/config.w32"
+index 17922bf..c54c9ed 100644
+--- "a/config.w32"
++++ "b/config.w32"
+@@ -1,7 +1,7 @@
+ ARG_ENABLE("zstd", "zstd support", "yes");
+ 
+ if (PHP_ZSTD != "no") {
+-  if (CHECK_HEADER_ADD_INCLUDE("ext/apcu/apc_serializer.h", "CFLAGS_ZSTD", PHP_DIR + "\\include")) {
++  if (CHECK_HEADER_ADD_INCLUDE("ext/apcu/apc_serializer.h", "CFLAGS_ZSTD", PHP_ZSTD)) {
+     AC_DEFINE("HAVE_APCU_SUPPORT", 1, "APCu support");
+   }
+ 
