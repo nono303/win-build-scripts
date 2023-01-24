@@ -1,31 +1,37 @@
-Index: gradle/wrapper/gradle-wrapper.properties
+Index: build.gradle
 ===================================================================
---- gradle/wrapper/gradle-wrapper.properties	(revision 2722)
-+++ gradle/wrapper/gradle-wrapper.properties	(working copy)
-@@ -1,5 +1,5 @@
- distributionBase=GRADLE_USER_HOME
- distributionPath=wrapper/dists
--distributionUrl=https\://services.gradle.org/distributions/gradle-7.5.1-bin.zip
-+distributionUrl=https\://services.gradle.org/distributions/gradle-7.6-bin.zip
- zipStoreBase=GRADLE_USER_HOME
- zipStorePath=wrapper/dists
+--- build.gradle	(revision 2730)
++++ build.gradle	(working copy)
+@@ -4,9 +4,9 @@
+ 
+ plugins {
+     id 'distribution'
+-    id "at.bxm.svntools" version "2.2.1"
+-    id 'org.gradle.crypto.checksum' version '1.1.0'
+-    id 'com.diffplug.spotless' version '6.8.0'
++    id "at.bxm.svntools" version "3.1"
++    id 'org.gradle.crypto.checksum' version '1.4.0'
++    id 'com.diffplug.spotless' version '6.13.0'
+ }
+ 
+ group 'mobac.sourceforge.io'
 Index: mobac/build.gradle
 ===================================================================
---- mobac/build.gradle	(revision 2722)
+--- mobac/build.gradle	(revision 2730)
 +++ mobac/build.gradle	(working copy)
 @@ -1,11 +1,12 @@
  plugins {
      id 'java-library'
 -    id 'edu.sc.seis.launch4j' version '2.5.2'
-+    id 'edu.sc.seis.launch4j' version '2.5.3'
++    id 'edu.sc.seis.launch4j' version '2.5.4'
  }
  
  dependencies {
 -    def mapsforgeVersion = '0.18.0'
 -    // def mapsforgeVersion = 'master-SNAPSHOT'
 +    def mapsforgeVersion    = '0.18.0'
-+    def slf4jVersion        = '2.0.3'
-+    def junitJupiterVersion = '5.9.1'
++    def slf4jVersion        = '2.0.6'
++    def junitJupiterVersion = '5.9.2'
  
      implementation "org.mapsforge:mapsforge-core:${mapsforgeVersion}"
      implementation "org.mapsforge:mapsforge-map:${mapsforgeVersion}"
@@ -54,18 +60,18 @@ Index: mobac/build.gradle
 -    testImplementation 'junit:junit:4.13.2'
 -    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
 -    testImplementation 'javax.servlet:servlet-api:2.5'
-+    api "org.beanshell:bsh:2.0b5"
++    api "org.apache-extras.beanshell:bsh:2.0b6"
 +    api "commons-codec:commons-codec:1.15"
 +    api "commons-io:commons-io:2.11.0"
 +    api "org.apache.commons:commons-lang3:3.12.0"
 +    api "org.apache.commons:commons-text:1.10.0"
 +    api "com.github.kerner1000:javapng:2.1.2"
-+    api "org.xerial:sqlite-jdbc:3.39.3.0"
++    api "org.xerial:sqlite-jdbc:3.40.0.0"
 +    api "com.sleepycat:je:18.3.12"
 +    api "org.glassfish.jaxb:jaxb-runtime:4.0.1"
 +    api "org.slf4j:slf4j-api:${slf4jVersion}"
-+    implementation "com.twelvemonkeys.imageio:imageio-webp:3.9.3"
-+    implementation "ch.qos.logback:logback-classic:1.4.4"
++    implementation "com.twelvemonkeys.imageio:imageio-webp:3.9.4"
++    implementation "ch.qos.logback:logback-classic:1.4.5"
 +    implementation "org.slf4j:jul-to-slf4j:${slf4jVersion}"
 +    implementation "net.sf.jtidy:jtidy:r938"
 +    implementation "com.itextpdf:itextpdf:5.5.13.3"
@@ -74,7 +80,7 @@ Index: mobac/build.gradle
 +    testImplementation "org.jboss.resteasy:tjws:4.0.0.Beta5"
 +    testImplementation "junit:junit:4.13.2"
 +    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}"
-+    testImplementation "javax.servlet:javax.servlet-api:4.0.1"
++    testImplementation "jakarta.servlet:jakarta.servlet-api:6.0.0"
  
 -    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 +    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}"
@@ -83,7 +89,7 @@ Index: mobac/build.gradle
      doLast {
 Index: mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(revision 2722)
+--- mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(revision 2730)
 +++ mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(working copy)
 @@ -34,15 +34,10 @@
  	static {
@@ -105,7 +111,7 @@ Index: mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java
  	}
 Index: mobac/src/main/java/mobac/gui/MainGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2722)
+--- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2730)
 +++ mobac/src/main/java/mobac/gui/MainGUI.java	(working copy)
 @@ -151,7 +151,7 @@
  
@@ -126,7 +132,7 @@ Index: mobac/src/main/java/mobac/gui/MainGUI.java
  		leftPanelContent.add(mapSourcePanel, gbc_eol);
 Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2722)
+--- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2730)
 +++ mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(working copy)
 @@ -43,7 +43,7 @@
  		JScrollPane mapSourceTreeScrollPane = new JScrollPane(mapSourceTree, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -139,7 +145,7 @@ Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
  	}
 Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2722)
+--- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2730)
 +++ mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(working copy)
 @@ -95,7 +95,7 @@
  
@@ -152,7 +158,7 @@ Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
  	private final Settings settings = Settings.getInstance();
 Index: mobac/src/main/java/mobac/program/AtlasThread.java
 ===================================================================
---- mobac/src/main/java/mobac/program/AtlasThread.java	(revision 2722)
+--- mobac/src/main/java/mobac/program/AtlasThread.java	(revision 2730)
 +++ mobac/src/main/java/mobac/program/AtlasThread.java	(working copy)
 @@ -203,13 +203,13 @@
  			}
@@ -172,7 +178,7 @@ Index: mobac/src/main/java/mobac/program/AtlasThread.java
  		} catch (AtlasTestException e) {
 Index: mobac/src/main/java/mobac/program/download/MobacTrustManager.java
 ===================================================================
---- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2722)
+--- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2730)
 +++ mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(working copy)
 @@ -128,7 +128,7 @@
  			defaultTrustManager.checkServerTrusted(chain, authType);
