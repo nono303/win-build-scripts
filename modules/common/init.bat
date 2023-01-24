@@ -20,6 +20,7 @@ if "%CUR_DEBUG%"=="1" (
 setlocal enabledelayedexpansion
 if exist %PATH_SRC%\%1\. (
 	cd %PATH_SRC%\%1
+	echo.
 	echo ^> %PATH_SRC%\%1
 	if exist %PATH_SRC%\%1\.git\. (
 		FOR /F "tokens=* USEBACKQ" %%F in (`git rev-parse --short HEAD`) do (set SCM_COMORREV=%%F)
@@ -90,4 +91,3 @@ if /I "%~2"=="cmake" (
 	mkdir %PATH_BUILD%\%1
 	cd /D %PATH_BUILD%\%1
 )
-echo.
