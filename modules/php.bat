@@ -33,6 +33,9 @@ if exist %PATH_MODULES%\php%PHPVER%_php-src.patch (
 	REM ~~~~~~~~~~~~ php-geos
 call %PATH_MODULES_COMMON%\init.bat php-geos
 
+	REM ~~~~~~~~~~~~ php-ext-zstd
+call %PATH_MODULES_COMMON%\init.bat php-ext-zstd
+
 	REM ~~~~~~~~~~~~ php-proj
 call %PATH_MODULES_COMMON%\init.bat php-proj
 
