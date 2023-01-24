@@ -1,6 +1,103 @@
 # changelog
 
 
+## 1.6.2 _(2023-01-24)_
+
+*  73.x
+`modules/icu.patch`
+*  delfate 1.15
+`modules/libdeflate.bat`
+`modules/libtiff.bat`
+*  remove git HEAD log if contains checked words
+`utils/sub/logcheck.php`
+*  remove pcre as is not anymore requested for mod_qos (using pcre2 since 11.73)
+`SRC_VERSION.md`
+`modules/full.bat`
+`utils/bininfo.bat`
+`utils/srccreate.bat`
+*  remove pcre as is not anymore requested for mod_qos (using pcre2 since 11.73)
+`SRC_VERSION.md`
+`modules/full.bat`
+`modules/pcre.bat`
+`utils/bininfo.bat`
+`utils/srccreate.bat`
+*  make parallel '-j$(nproc)'
+`modules/memcached.sh`
+`modules/memcached_event-2.0.sh`
+*  fix libwebp lib export missing: DGifSavedExtensionToGCB, DGifSlurp, DGifCloseFile, DGifOpenFileHandle, DGifOpenFileName, DGifGetExtensionNext, DGifGetLine
+`modules/giflib.patch`
+*  remove libtiff tools
+`utils/bininfo.bat`
+*  force ZSTD_BUILD_SHARED=ON
+`modules/zstd.bat`
+*  libwepb 1.2.x > 1.3.x
+`modules/libgd.bat`
+`modules/libtiff.bat`
+`modules/libwebp.bat`
+`modules/phpsdk-local.bat`
+`utils/bininfo.bat`
+*  set CURL_DISABLE_OPENSSL_AUTO_LOAD_CONFIG=OFF
+`modules/curl.bat`
+*  improve jemalloc
+`modules/jemalloc.bat`
+*  add CMake options
+`modules/nghttp2.bat`
+`modules/ngtcp2.bat`
+*  add yajl & mod_security
+`SRC_VERSION.md`
+`modules/full.bat`
+`modules/mod_security.bat`
+`modules/mod_security.patch`
+`modules/yajl.bat`
+`modules/yajl.patch`
+`utils/bininfo.bat`
+`utils/srccreate.bat`
+`utils/sub/version.php`
+*  export configs
+`config/.vsconfig`
+`config/cyg32.packagelist`
+`config/cyg64.packagelist`
+`config/python.pip`
+*  7.87.0
+`modules/curl_ca-win.patch`
+*  fix yajl_static path issue
+`modules/yajl.bat`
+*  1.14.2
+`modules/libheif.bat`
+`modules/libheif.patch`
+*  libffi version from file
+`utils/sub/version.php`
+*  REM for ICU_ROOT
+`modules/sqlite.bat`
+*  update CMake option for 9.1.1
+`modules/proj.bat`
+*  only build x64
+`modules/memcached.bat`
+*  Simply copy remove useless patch
+`modules/libyuv.bat`
+*  2.4.55rc1
+`modules/httpd.patch`
+*  set all cmake options
+`modules/libgav1.bat`
+*  add php-proj
+`modules/php.bat`
+`modules/phpsdk-config_make.bat`
+*  https://github.com/kjdev/php-ext-zstd/issues/51
+`modules/php-ext-zstd.patch`
+*  echo new line at beginning (and not at end)
+`modules/common/init.bat`
+*  2722 > 2730: update dependencies
+`modules/mobac.patch`
+*  init.bat php-ext-zstd
+`modules/php.bat`
+*  version for php-proj
+`utils/sub/version.php`
+*  1.6.2
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+
+
 ## 1.6.1 _(2022-12-02)_
 
 *  remove useless warning & fix meson setup syntaxe
@@ -82,6 +179,8 @@
 `README.md`
 `SRC_VERSION.md`
 `utils/srccreate.bat`
+*  1.6.1
+`changelog.md`
 
 
 ## 1.6.0 _(2022-10-26)_
