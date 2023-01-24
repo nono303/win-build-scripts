@@ -81,8 +81,8 @@ set PHP_COMMON_CONFIGURE=^
 	--without-uncritical-warn-choke ^
 	--with-toolset=vs ^
 	--with-cygwin=%PATH_BIN_CYGWIN% ^
-	--with-extra-includes=%PATH_INSTALL_OSSL%\include;%PATH_INSTALL%\include ^
-	--with-extra-libs=%PATH_INSTALL_OSSL%\lib;%PATH_INSTALL%\lib ^
+	--with-extra-includes=%PATH_INSTALL_OSSL%\include;%PATH_INSTALL%\include;%PATH_INSTALL%\_proj\include ^
+	--with-extra-libs=%PATH_INSTALL_OSSL%\lib;%PATH_INSTALL%\lib;%PATH_INSTALL%\_proj\lib ^ ^
 	--with-mp=%NUMBER_OF_PROCESSORS%
 REM known bug for --with-ffi if php != 8.1 || 7.4
 REM [%PHPVER% != %PHP_FULLBUILD%]: add --disable-zlib ^ if not memcache
@@ -135,6 +135,7 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--with-gmp=shared ^
 	--enable-zstd=shared ^
 	--with-libxml=shared ^
+	--with-proj=shared ^
 	%ZTS% ^
 	%phpveropts% ^
 	%phparchopts%
@@ -214,6 +215,8 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	call do_php %PATH_UTILS%\sub\version.php php-ext-zstd %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_zstd.dll "php:%PHPVER% build:%TSNTS%"
 	call %PATH_MODULES_COMMON%\init.bat php-geos varonly
 	call do_php %PATH_UTILS%\sub\version.php php-geos %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_geos.dll "php:%PHPVER% build:%TSNTS%"
+	call %PATH_MODULES_COMMON%\init.bat php-proj varonly
+	call do_php %PATH_UTILS%\sub\version.php php-proj %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_proj.dll "php:%PHPVER% build:%TSNTS%"
 	call %PATH_MODULES_COMMON%\init.bat xdebug varonly
 	call do_php %PATH_UTILS%\sub\version.php xdebug %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_xdebug.dll "php:%PHPVER% build:%TSNTS%"
 )
