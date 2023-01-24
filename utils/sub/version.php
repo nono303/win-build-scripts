@@ -14,6 +14,8 @@
 	if(in_array($proot,["pecl-memcache","php-geos","pecl-text-xdiff","php-ext-brotli","xdebug","php-src"]))
 		$proot = "php";
 	$nogit = array(
+		"php-proj"			=> ['/PHP_PROJ_VERSION "([0-9\.]+)/s',
+							pathenv("PATH_SRC")."/".$argv[1]."/src/php_proj.h"],
 		"libffi"			=> ["/\[libffi\],\[([0-9\.]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/configure.ac"],
 		"yajl"			=> ["/SET \(YAJL_MAJOR ([0-9]+).*SET \(YAJL_MINOR ([0-9]+).*SET \(YAJL_MICRO ([0-9]+)/s",
