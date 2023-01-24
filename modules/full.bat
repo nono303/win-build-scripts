@@ -120,6 +120,8 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat libheif NOLOG
 	:libgd
 	call %PATH_BATCH%\go.bat libgd NOLOG
+	:proj
+	call %PATH_BATCH%\go.bat proj NOLOG
 	:php
 	call %PATH_BATCH%\go.bat php NOLOG
 	if  "%2" == "phpanddeps" exit /B
@@ -129,12 +131,8 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	:subversion
 	call %PATH_BATCH%\go.bat subversion NOLOG
 	if  "%2" == "subversionanddeps" exit /B
-:projgeolibanddeps
-	:proj
-	call %PATH_BATCH%\go.bat proj NOLOG
-	:geographiclib
-	call %PATH_BATCH%\go.bat geographiclib NOLOG
-	if  "%2" == "projgeolibanddeps" exit /B
+:geographiclib
+call %PATH_BATCH%\go.bat geographiclib NOLOG
 :nssm
 call %PATH_BATCH%\go.bat nssm NOLOG
 :php-cgi-spawner
