@@ -120,10 +120,10 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat libheif NOLOG
 	:libgd
 	call %PATH_BATCH%\go.bat libgd NOLOG
-	:libgeotiff
-	call %PATH_BATCH%\go.bat libgeotiff NOLOG
 	:proj
 	call %PATH_BATCH%\go.bat proj NOLOG
+	:libgeotiff
+	call %PATH_BATCH%\go.bat libgeotiff NOLOG
 	:gdal
 	call %PATH_BATCH%\go.bat gdal NOLOG
 	:php
