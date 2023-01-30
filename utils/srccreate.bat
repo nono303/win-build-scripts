@@ -60,6 +60,10 @@ git clone git://git.sv.nongnu.org/freetype/freetype2.git freetype2
 cd /D freetype2
 git checkout tags/VER-2-12-1
 cd /D ..
+git clone https://github.com/OSGeo/gdal gdal
+cd /D gdal
+git checkout tags/v3.6.2RC1
+cd /D ..
 git clone https://git.code.sf.net/p/geographiclib/code geographiclib
 cd /D geographiclib
 git checkout main
@@ -123,6 +127,10 @@ cd /D ..
 git clone https://github.com/libgd/libgd.git libgd
 cd /D libgd
 git checkout master
+cd /D ..
+git clone https://github.com/OSGeo/libgeotiff libgeotiff
+cd /D libgeotiff
+git checkout tags/1.7.1rc2
 cd /D ..
 git clone https://github.com/strukturag/libheif.git libheif
 cd /D libheif
@@ -296,9 +304,9 @@ git clone https://github.com/nono303/php-geos.git php-geos
 cd /D php-geos
 git checkout master
 cd /D ..
-git clone https://github.com/nono303/php-proj.git php-proj
+git clone https://github.com/swen100/phpng-proj.git php-proj
 cd /D php-proj
-git checkout proj6+
+git checkout master
 cd /D ..
 git clone https://github.com/php/php-sdk-binary-tools.git php-sdk
 cd /D php-sdk
