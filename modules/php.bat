@@ -30,18 +30,6 @@ if exist %PATH_MODULES%\php%PHPVER%_php-src.patch (
 	)
 )
 
-	REM ~~~~~~~~~~~~ php-geos
-call %PATH_MODULES_COMMON%\init.bat php-geos
-
-	REM ~~~~~~~~~~~~ php-ext-zstd
-call %PATH_MODULES_COMMON%\init.bat php-ext-zstd
-
-	REM ~~~~~~~~~~~~ php-proj
-call %PATH_MODULES_COMMON%\init.bat php-proj
-
-	REM ~~~~~~~~~~~~ xdebug
-call %PATH_MODULES_COMMON%\init.bat xdebug
-
 	REM ~~~~~~~~~~~~ pecl-memcache
 call %PATH_MODULES_COMMON%\init.bat pecl-memcache
 	REM revision & version for pecl_memcache in phpinfo()
@@ -62,8 +50,10 @@ call %PATH_MODULES_COMMON%\init.bat php-ext-brotli
 call %PATH_MODULES_COMMON%\init.bat brotli varonly
 sed -i 's/AC_DEFINE/AC_DEFINE\("BROTLI_LIB_VERSION", "%SCM_TAG:~1%", "system library version"\);AC_DEFINE/g' %CYGPATH_SRC%/php-ext-brotli/config.w32
 
-	REM ~~~~~~~~~~~~ php-sdk
-call %PATH_MODULES_COMMON%\init.bat php-sdk
+	REM ~~~~~~~~~~~~ other PECL init
+for %%E in (php-geos php-ext-zstd php-proj php-gdal xdebug php-sdk) do (
+	call %PATH_MODULES_COMMON%\init.bat %%E
+)
 
 set PHP_SRC_DIR=%PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\php-src
 set PHP_BUILD_DIR=%PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\build
