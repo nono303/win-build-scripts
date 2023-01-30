@@ -53,7 +53,7 @@ index d90783c..17ab740 100644
  	(void)free((void *)dup);
  
 diff --git a/5.2.1/source/gif_lib.h b/5.2.1/source/gif_lib.h
-index f8feb3c..b386959 100644
+index f8feb3c..c909afe 100644
 --- a/5.2.1/source/gif_lib.h
 +++ b/5.2.1/source/gif_lib.h
 @@ -9,8 +9,18 @@ SPDX-License-Identifier: MIT
@@ -76,6 +76,50 @@ index f8feb3c..b386959 100644
  #endif /* __cplusplus */
  
  #define GIFLIB_MAJOR 5
+@@ -128,10 +138,10 @@ typedef struct GraphicsControlBlock {
+ GifFileType *EGifOpenFileName(const char *GifFileName,
+                               const bool GifTestExistence, int *Error);
+ GifFileType *EGifOpenFileHandle(const int GifFileHandle, int *Error);
+-GifFileType *EGifOpen(void *userPtr, OutputFunc writeFunc, int *Error);
++extern LIBRARY_API GifFileType *EGifOpen(void *userPtr, OutputFunc writeFunc, int *Error);
+ int EGifSpew(GifFileType * GifFile);
+ const char *EGifGetGifVersion(GifFileType *GifFile); /* new in 5.x */
+-int EGifCloseFile(GifFileType *GifFile, int *ErrorCode);
++extern LIBRARY_API int EGifCloseFile(GifFileType *GifFile, int *ErrorCode);
+ 
+ #define E_GIF_SUCCEEDED          0
+ #define E_GIF_ERR_OPEN_FAILED    1    /* And EGif possible errors. */
+@@ -146,18 +156,18 @@ int EGifCloseFile(GifFileType *GifFile, int *ErrorCode);
+ #define E_GIF_ERR_NOT_WRITEABLE  10
+ 
+ /* These are legacy.  You probably do not want to call them directly */
+-int EGifPutScreenDesc(GifFileType *GifFile,
++extern LIBRARY_API int EGifPutScreenDesc(GifFileType *GifFile,
+                       const int GifWidth, const int GifHeight, 
+ 		      const int GifColorRes,
+                       const int GifBackGround,
+                       const ColorMapObject *GifColorMap);
+-int EGifPutImageDesc(GifFileType *GifFile, 
++extern LIBRARY_API int EGifPutImageDesc(GifFileType *GifFile, 
+ 		     const int GifLeft, const int GifTop,
+                      const int GifWidth, const int GifHeight, 
+ 		     const bool GifInterlace,
+                      const ColorMapObject *GifColorMap);
+ void EGifSetGifVersion(GifFileType *GifFile, const bool gif89);
+-int EGifPutLine(GifFileType *GifFile, GifPixelType *GifLine,
++extern LIBRARY_API int EGifPutLine(GifFileType *GifFile, GifPixelType *GifLine,
+                 int GifLineLen);
+ int EGifPutPixel(GifFileType *GifFile, const GifPixelType GifPixel);
+ int EGifPutComment(GifFileType *GifFile, const char *GifComment);
+@@ -165,7 +175,7 @@ int EGifPutExtensionLeader(GifFileType *GifFile, const int GifExtCode);
+ int EGifPutExtensionBlock(GifFileType *GifFile,
+                          const int GifExtLen, const void *GifExtension);
+ int EGifPutExtensionTrailer(GifFileType *GifFile);
+-int EGifPutExtension(GifFileType *GifFile, const int GifExtCode, 
++extern LIBRARY_API int EGifPutExtension(GifFileType *GifFile, const int GifExtCode, 
+ 		     const int GifExtLen,
+                      const void *GifExtension);
+ int EGifPutCode(GifFileType *GifFile, int GifCodeSize,
 @@ -178,11 +188,11 @@ int EGifPutCodeNext(GifFileType *GifFile,
  ******************************************************************************/
  
@@ -83,23 +127,30 @@ index f8feb3c..b386959 100644
 -GifFileType *DGifOpenFileName(const char *GifFileName, int *Error);
 -GifFileType *DGifOpenFileHandle(int GifFileHandle, int *Error);
 -int DGifSlurp(GifFileType * GifFile);
+-GifFileType *DGifOpen(void *userPtr, InputFunc readFunc, int *Error);    /* new one (TVT) */
+-    int DGifCloseFile(GifFileType * GifFile, int *ErrorCode);
 +extern LIBRARY_API GifFileType *DGifOpenFileName(const char *GifFileName, int *Error);
 +extern LIBRARY_API GifFileType *DGifOpenFileHandle(int GifFileHandle, int *Error);
 +extern LIBRARY_API int DGifSlurp(GifFileType * GifFile);
- GifFileType *DGifOpen(void *userPtr, InputFunc readFunc, int *Error);    /* new one (TVT) */
--    int DGifCloseFile(GifFileType * GifFile, int *ErrorCode);
++extern LIBRARY_API GifFileType *DGifOpen(void *userPtr, InputFunc readFunc, int *Error);    /* new one (TVT) */
 +extern LIBRARY_API int DGifCloseFile(GifFileType * GifFile, int *ErrorCode);
  
  #define D_GIF_SUCCEEDED          0
  #define D_GIF_ERR_OPEN_FAILED    101    /* And DGif possible errors. */
-@@ -204,11 +214,11 @@ int DGifGetScreenDesc(GifFileType *GifFile);
- int DGifGetRecordType(GifFileType *GifFile, GifRecordType *GifType);
+@@ -201,14 +211,14 @@ GifFileType *DGifOpen(void *userPtr, InputFunc readFunc, int *Error);    /* new
+ 
+ /* These are legacy.  You probably do not want to call them directly */
+ int DGifGetScreenDesc(GifFileType *GifFile);
+-int DGifGetRecordType(GifFileType *GifFile, GifRecordType *GifType);
++extern LIBRARY_API int DGifGetRecordType(GifFileType *GifFile, GifRecordType *GifType);
  int DGifGetImageHeader(GifFileType *GifFile);
- int DGifGetImageDesc(GifFileType *GifFile);
+-int DGifGetImageDesc(GifFileType *GifFile);
 -int DGifGetLine(GifFileType *GifFile, GifPixelType *GifLine, int GifLineLen);
++extern LIBRARY_API int DGifGetImageDesc(GifFileType *GifFile);
 +extern LIBRARY_API int DGifGetLine(GifFileType *GifFile, GifPixelType *GifLine, int GifLineLen);
  int DGifGetPixel(GifFileType *GifFile, GifPixelType GifPixel);
- int DGifGetExtension(GifFileType *GifFile, int *GifExtCode,
+-int DGifGetExtension(GifFileType *GifFile, int *GifExtCode,
++extern LIBRARY_API int DGifGetExtension(GifFileType *GifFile, int *GifExtCode,
                       GifByteType **GifExtension);
 -int DGifGetExtensionNext(GifFileType *GifFile, GifByteType **GifExtension);
 +extern LIBRARY_API int DGifGetExtensionNext(GifFileType *GifFile, GifByteType **GifExtension);
