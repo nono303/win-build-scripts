@@ -7,6 +7,8 @@ REM -DICU_ROOT=%PATH_INSTALL% ^
 REM	without KO	"C:\Windows Kits\10\Lib\10.0.22621.0\um\x64\icuuc.lib"  "C:\Windows Kits\10\Lib\10.0.22621.0\um\x64\icuin.Lib"
 REM	with OK		C:\sdk\release\vs17_x64-avx\lib\icuuc.lib  C:\sdk\release\vs17_x64-avx\lib\icuin.lib
 REM		warn	Policy CMP0074 is not set
+
+REM SQLITE_THREADSAFE=1 > gdal
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
@@ -31,7 +33,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DSQLITE_OMIT_DECLTYPE=0 ^
 -DSQLITE_OMIT_AUTOINIT=0 ^
 -DSQLITE_USE_URI=0 ^
--DSQLITE_THREADSAFE=0 ^
+-DSQLITE_THREADSAFE=1 ^
 -DSQLITE_WIN32_MALLOC=1 ^
 -DSQLITE_WIN32_HEAP_CREATE=1 ^
 %PATH_SRC%\%1
