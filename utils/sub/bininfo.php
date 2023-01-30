@@ -7,9 +7,8 @@
 	function sigcheck($dir,$file=""){
 		global $data;
 		$sigcmd = pathenv("BIN_SYGCHECK")." -a -c -e -r -nobanner ".$dir."/".$file;
-		debug($sigcmd);
 		$sig = execnono($sigcmd,NULL,$dir."/",NULL);
-		debug($sig);
+		debug("sigcheck() ".$sigcmd.": ".$sig);
 		$sig = explode("\n",$sig);
 		array_shift($sig);
 		foreach($sig as $v){
@@ -58,7 +57,7 @@
 		global $cur;
 		global $ext;
 		if(is_file($dir."/".$file) && in_array(pathinfo($dir."/".$file)["extension"],$ext)) {
-			debug($dir."/".$file);
+			debug("fileCheck(1) ".$dir."/".$file);
 			if($recurse) {
 				$data[$cur][00] = str_replace($dirbase,"",$dir)."/".$file;
 				} else {
@@ -90,9 +89,8 @@
 			$data[$cur][30] = "";
 			if(CHECK_AVX){
 				$obdcmd = pathenv("PATH_BIN_CYGWIN").'/sh.exe -c "objdump -M intel -d '.$dir."/".$file.' | ./opcode.sh -s AVX';
-				debug($obdcmd);
 				$obd  = execnono($obdcmd,NULL,SCRIPT_DIR,NULL);
-				debug($obd);
+				debug("fileCheck(2) ".$obdcmd.": ".$obd);
 				foreach(explode("\n",$obd) as $line){
 					if(!is_int(strpos($line,"--")) && $line){
 						$data[$cur][30] .= substr($line,28).PHP_EOL;
@@ -107,11 +105,9 @@
 			$data[$cur][70] = "\033[33mn/a\033[39m";
 			$data[$cur][80] = "\033[33mn/a\033[39m";
 			if(is_file($dir."/".$pdbfile)){
-				debug($dir."/".$pdbfile);
 				$chkmcmd = pathenv("BIN_CHKMATCH").' -c '.$dir."/".$file.' '.$dir."/".$pdbfile;
-				debug($chkmcmd);
 				$chkm = execnono($chkmcmd,NULL,SCRIPT_DIR,NULL);
-				debug($chkm);
+				debug("fileCheck(3) ".$chkmcmd.": ".$chkm);
 				preg_match("/Result: (.*)/",$chkm,$matches);
 				$data[$cur][70] = $pdbfile;
 				$pdbres = str_replace(")","",str_replace("Unmatched (reason: ","",$matches[1]));
@@ -124,9 +120,8 @@
 			}
 
 			$dbhcmd = "dumpbin /headers ".$dir."/".$file;
-			debug($dbhcmd);
 			$dbh = execnono($dbhcmd,NULL,$dir."/",NULL);
-			debug($dbh);
+			debug("fileCheck(4) ".$dbhcmd.": ".$dbh);
 
 			preg_match("/ ([^ ]+) linker version/",$dbh,$matches);
 			$data[$cur][40] = $matches[1];
