@@ -1,3 +1,14 @@
+diff --git a/bin/php/php.ini b/bin/php/php.ini
+index 5fc05c7..06306ea 100644
+--- a/bin/php/php.ini
++++ b/bin/php/php.ini
+@@ -8,5 +8,5 @@ extension=php_mysqli.dll
+ memory_limit=4G
+ 
+ error_reporting=-1
+-display_errors=1
++display_errors=0
+ display_startup_errors=1
 diff --git a/bin/phpsdk_setshell.bat b/bin/phpsdk_setshell.bat
 index f651a4e..6c291db 100644
 --- a/bin/phpsdk_setshell.bat
