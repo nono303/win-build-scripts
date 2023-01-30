@@ -6,7 +6,7 @@ if not exist %PHP_BUILD_DIR%. mklink /J %PHP_BUILD_DIR% %PATH_PHP_BUILD%
 cd /D %PHP_BUILD_DIR%
 call %PATH_BIN_CYGWIN%\rm.exe -rdf  *
 cd /D %PHP_SRC_DIR%
-call buildconf
+call buildconf.bat
 
 	REM ~~~~~~~~~~~~ Patch some lib name, accoring to self made SHARED deps
 
