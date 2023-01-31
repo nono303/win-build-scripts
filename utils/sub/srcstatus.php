@@ -54,7 +54,8 @@
 				if(REPO_FETCH){
 					execnono($cmd = "git fetch",NULL,$repo,NULL);
 					if(VERBOSE) echo $cmd.PHP_EOL;
-					execnono($cmd = "git fetch --tag",NULL,$repo,NULL);
+					// https://stackoverflow.com/a/58438257
+					execnono($cmd = "git fetch --tags --force",NULL,$repo,NULL);
 					if(VERBOSE) echo $cmd.PHP_EOL;
 				}
 				$commit = trim(execnono($cmd = "git rev-parse --short HEAD",NULL,$repo,NULL));
@@ -102,14 +103,13 @@
 					$logtags = execnono($cmd = 'git log --tags --simplify-by-decoration --author-date-order --pretty="format:%ai %d" | head -n '.NB_TAGS,NULL,$repo,NULL);
 					$ltd = secondsToNbDay(time() - ($strtime = strtotime(explode(" (",$logtags)[0])));
 				}
-				$status = explode("\t",execnono($cmd = "git rev-list --left-right --count ".$branch."...HEAD",NULL,$repo,NULL)) [0];
+				$status = explode("\t",execnono($cmd = "git rev-list --left-right --count ".$commit."...HEAD",NULL,$repo,NULL)) [0];
 				if(VERBOSE) echo $cmd.PHP_EOL;
 				if($status && $status != "0"){
 					$status = $status." commit(s) behind";
 				} else {
 					$status = "up to date";
 				}
-				if(VERBOSE) echo $cmd.PHP_EOL;
 				if(GIT_GC){
 					echo execnono($cmd = "git reflog expire --all --expire=now --expire-unreachable=now",NULL,$repo,NULL);
 					if(VERBOSE) echo $cmd.PHP_EOL;
