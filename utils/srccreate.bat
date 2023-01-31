@@ -8,10 +8,6 @@ IF /I "%AREYOUSURE%" NEQ "Y" exit /B
 echo on
 if not exist %PATH_SRC%\. mkdir %PATH_SRC%
 cd /D %PATH_SRC%
-git clone https://github.com/abseil/abseil-cpp.git abseil-cpp
-cd /D abseil-cpp
-git checkout tags/20220623.1
-cd /D ..
 git clone https://aomedia.googlesource.com/aom aom
 cd /D aom
 git checkout tags/v3.6.0-rc2
@@ -38,7 +34,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/c-ares/c-ares.git cares
 cd /D cares
-git checkout tags/cares-1_18_1
+git checkout tags/cares-1_19_0
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
@@ -122,7 +118,7 @@ git checkout master
 cd /D ..
 git clone https://chromium.googlesource.com/codecs/libgav1 libgav1
 cd /D libgav1
-git checkout tags/v0.18.0
+git checkout main
 cd /D ..
 git clone https://github.com/libgd/libgd.git libgd
 cd /D libgd
@@ -142,7 +138,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/libjpeg-turbo/libjpeg-turbo libjpeg-turbo
 cd /D libjpeg-turbo
-git checkout tags/2.1.4
+git checkout main
 cd /D ..
 git clone https://git.tukaani.org/xz.git liblzma
 cd /D liblzma
@@ -222,7 +218,7 @@ git checkout tags/2.3.10.2
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v2.0.11
+git checkout tags/v2.0.12
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -262,7 +258,7 @@ git checkout tags/v0.8.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v0.12.1
+git checkout tags/v0.13.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -306,7 +302,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/swen100/phpng-proj.git php-proj
 cd /D php-proj
-git checkout master
+git checkout tags/v3.0.3
 cd /D ..
 git clone https://github.com/php/php-sdk-binary-tools.git php-sdk
 cd /D php-sdk
