@@ -112,7 +112,6 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--with-xdebug=shared ^
 	--with-xdebug-compression ^
 	--with-xdiff=shared ^
-	--enable-memcache=shared ^
 	--with-geos=shared ^
 	--with-ffi=shared ^
 	--with-sodium=shared ^
@@ -136,7 +135,8 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--enable-zstd=shared ^
 	--with-libxml=shared ^
 	--with-proj=shared ^
-	--with-gdal=shared ^
+	--with-ogr=shared ^
+	--enable-memcache=shared ^
 	%ZTS% ^
 	%phpveropts% ^
 	%phparchopts%
@@ -218,8 +218,8 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	call do_php %PATH_UTILS%\sub\version.php php-geos %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_geos.dll "php:%PHPVER% build:%TSNTS%"
 	call %PATH_MODULES_COMMON%\init.bat php-proj varonly
 	call do_php %PATH_UTILS%\sub\version.php php-proj %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_proj.dll "php:%PHPVER% build:%TSNTS%"
-	call %PATH_MODULES_COMMON%\init.bat php-gdal varonly
-	call do_php %PATH_UTILS%\sub\version.php php-gdal %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_gdal.dll "php:%PHPVER% build:%TSNTS%"
+	call %PATH_MODULES_COMMON%\init.bat php-ogr varonly
+	call do_php %PATH_UTILS%\sub\version.php php-ogr %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_ogr.dll "php:%PHPVER% build:%TSNTS%"
 	call %PATH_MODULES_COMMON%\init.bat xdebug varonly
 	call do_php %PATH_UTILS%\sub\version.php xdebug %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_xdebug.dll "php:%PHPVER% build:%TSNTS%"
 )
