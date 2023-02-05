@@ -42,15 +42,6 @@ for /f "tokens=*" %%G in ('dir %PATH_BUILD%\%1\bin\*.pdb /b') do  (xcopy /C /F /
 xcopy /C /F /Y %PATH_BUILD%\%1\lib\*.lib %PATH_INSTALL%\_%1\lib\*
 
 if %LOCAL_COPY% == 1 if %LOCAL_COPY_AVXECHO% == %AVXECHO%  if %LOCAL_COPY_MSVC_VER% == %MSVC_VER% ( 
-	if exist %LOCAL_PATH_PROJ%\bin\. rmdir /S /Q %LOCAL_PATH_PROJ%\bin
-	mkdir %LOCAL_PATH_PROJ%\bin
 	xcopy /C /F /Y %PATH_INSTALL%\_%1\bin\*.* %LOCAL_PATH_PROJ%\bin\*
-	cd /D %LOCAL_PATH_PROJ%\share
-	FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\find . -mindepth 1 ! -type l`) do (
-		setlocal enabledelayedexpansion
-		set FN=%%F
-		DEL /Q /F %LOCAL_PATH_PROJ%\share\!FN:~2!
-		endlocal
-	)
 	xcopy /C /F /Y %PATH_INSTALL%\_%1\share\proj\*.* %LOCAL_PATH_PROJ%\share\*
 )
