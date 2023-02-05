@@ -51,7 +51,7 @@ call %PATH_MODULES_COMMON%\init.bat brotli varonly
 sed -i 's/AC_DEFINE/AC_DEFINE\("BROTLI_LIB_VERSION", "%SCM_TAG:~1%", "system library version"\);AC_DEFINE/g' %CYGPATH_SRC%/php-ext-brotli/config.w32
 
 	REM ~~~~~~~~~~~~ other PECL init
-for %%E in (php-geos php-ext-zstd php-proj php-gdal xdebug php-sdk) do (
+for %%E in (php-geos php-ext-zstd php-proj php-ogr xdebug php-sdk) do (
 	call %PATH_MODULES_COMMON%\init.bat %%E
 )
 
