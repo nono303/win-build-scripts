@@ -40,7 +40,6 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -Dlzma=ON ^
 -Dzstd=ON ^
 -Dwebp=ON ^
--Djpeg12=OFF ^
 -Dcxx=OFF ^
 -Dstrip-chopping=ON ^
 -Ddefer-strile-load=OFF ^
