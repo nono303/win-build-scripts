@@ -22,4 +22,5 @@ sed -i 's/CMAKE_C_FLAGS \//CMAKE_C_FLAGS \/nologo \//g' %CYGPATH_BUILD%/%1/scrip
 %NINJA% install
 
 xcopy /C /F /Y %PATH_BUILD%\%1\libpng16.pdb %PATH_INSTALL%\bin\*
+move /Y %PATH_INSTALL%\lib\%1 %PATH_INSTALL%\lib\cmake\%1
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libpng16.dll
