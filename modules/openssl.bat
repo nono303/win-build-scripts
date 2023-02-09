@@ -6,11 +6,14 @@ mkdir %PATH_INSTALL_OSSL%
 call %PATH_MODULES_COMMON%\init.bat %OPENSSL_SCM%
 	REM https://wiki.openssl.org/index.php/Compilation_and_Installation
 	REM no-deprecated / -DOPENSSL_NO_DEPRECATED_3_0 (https://github.com/openssl/openssl/pull/13866) : failed for libssh2 / apr
+
+	REM !! --with-zlib-lib require the full path or name in PATH of zlib DLL without dll extension !!
 perl Configure %perlbuild% ^
 shared no-unit-test no-external-tests no-ssl3 no-weak-ssl-ciphers no-tests zlib zlib-dynamic enable-tls1_3 ^
 -threads ^
 --prefix=%PATH_INSTALL_OSSL% ^
 --with-zlib-include=%PATH_INSTALL:\=/%/include ^
+--with-zlib-lib=zlib ^
 --openssldir=%PATH_INSTALL_OSSL%\conf ^
 -DOPENSSL_USE_IPV6=1 ^
 -DOPENSSL_NO_HEARTBEATS ^
