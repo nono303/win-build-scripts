@@ -68,6 +68,7 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 		"improve linker performance" => [33,"str"],
 		"ne peut trouver le fichier" => [36,"str"], //mpir
 		"Hunk #" => [33,"str"], // patch offset 
+		"pas reconnu en tant que commande interne" => [33,"str"],
 	);
 	$remove = array(
 		// "CMake Warning at CMake" => [39, "str"],
