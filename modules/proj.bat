@@ -40,8 +40,3 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\_%1\bin\*.* /b') do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\_%1\bin\%%G)
 for /f "tokens=*" %%G in ('dir %PATH_BUILD%\%1\bin\*.pdb /b') do  (xcopy /C /F /Y %PATH_BUILD%\%1\bin\%%G %PATH_INSTALL%\_%1\bin\*)
 xcopy /C /F /Y %PATH_BUILD%\%1\lib\*.lib %PATH_INSTALL%\_%1\lib\*
-
-if %LOCAL_COPY% == 1 if %LOCAL_COPY_AVXECHO% == %AVXECHO%  if %LOCAL_COPY_MSVC_VER% == %MSVC_VER% ( 
-	xcopy /C /F /Y %PATH_INSTALL%\_%1\bin\*.* %LOCAL_PATH_PROJ%\bin\*
-	xcopy /C /F /Y %PATH_INSTALL%\_%1\share\proj\*.* %LOCAL_PATH_PROJ%\share\*
-)

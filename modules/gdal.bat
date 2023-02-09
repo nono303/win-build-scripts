@@ -154,7 +154,9 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% install
 
-for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\_%1\bin\*.* /b') do  (
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\_%1\bin\gdal.dll
+xcopy /C /F /Y %PATH_BUILD%\%1\gdal.pdb %PATH_INSTALL%\_%1\bin\*
+for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\_%1\bin\*.exe/b') do  (
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\_%1\bin\%%G
 	xcopy /C /F /Y %PATH_BUILD%\%1\apps\%%~nG.pdb %PATH_INSTALL%\_%1\bin\*
 )
@@ -164,12 +166,3 @@ for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\_%1\bin\gdalplugins\*.dll /b') do 
 	xcopy /C /F /Y %PATH_BUILD%\%1\gdalplugins\%%~nG.pdb %PATH_INSTALL%\_%1\bin\gdalplugins\*
 )
 xcopy /C /F /Y %PATH_BUILD%\%1\gdal.pdb %PATH_INSTALL%\_%1\bin\*
-
-if %LOCAL_COPY% == 1 if %LOCAL_COPY_AVXECHO% == %AVXECHO%  if %LOCAL_COPY_MSVC_VER% == %MSVC_VER% (
-	if exist %LOCAL_PATH_GDAL%\bin\. rmdir /S /Q %LOCAL_PATH_GDAL%\bin
-	mkdir %LOCAL_PATH_GDAL%\bin
-	xcopy /C /F /Y %PATH_INSTALL%\_%1\bin\*.* %LOCAL_PATH_GDAL%\bin\*
-	if exist %LOCAL_PATH_GDAL%\share\. rmdir /S /Q %LOCAL_PATH_GDAL%\share
-	mkdir %LOCAL_PATH_GDAL%\share
-	xcopy /C /F /Y %PATH_INSTALL%\_%1\share\gdal\*.* %LOCAL_PATH_GDAL%\share\*
-)
