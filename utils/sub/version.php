@@ -129,6 +129,8 @@
 						$ver_product .= $ctex[$i];
 				}
 				// alpha, beta etc without number
+				echo "'".$ver_product,"'".PHP_EOL;
+				$ver_product = str_replace("..",".0.",$ver_product);
 				if(substr($ver_product, -1) == ".")
 					$ver_product .= "0";
 			} else {
