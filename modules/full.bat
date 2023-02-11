@@ -124,6 +124,8 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat proj NOLOG
 	:libgeotiff
 	call %PATH_BATCH%\go.bat libgeotiff NOLOG
+	:qhull
+	call %PATH_BATCH%\go.bat qhull NOLOG
 	:gdal
 	call %PATH_BATCH%\go.bat gdal NOLOG
 	:php
