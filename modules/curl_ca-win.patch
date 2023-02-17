@@ -1,8 +1,8 @@
 diff --git "a/lib/url.c" "b/lib/url.c"
-index 3ab63a068..1763096de 100644
+index e8f2d12b8..f6bf6e784 100644
 --- "a/lib/url.c"
 +++ "b/lib/url.c"
-@@ -606,6 +606,14 @@ CURLcode Curl_init_userdefined(struct Curl_easy *data)
+@@ -612,6 +612,14 @@ CURLcode Curl_init_userdefined(struct Curl_easy *data)
      result = Curl_setstropt(&set->str[STRING_SSL_CAPATH_PROXY], CURL_CA_PATH);
      if(result)
        return result;
