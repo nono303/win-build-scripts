@@ -191,7 +191,7 @@
 
 	global $col;
 	$col = array (
-		0 => array("name" =>	"filename",		"pad" => 28),
+		0 => array("name" =>	"filename",		"pad" => 42),
 		5 => array("name" =>	"date",			"pad" => 18),
 		10 => array("name" =>	"x",			"pad" => 4),
 		20 => array("name" =>	"link",			"pad" => 6),
@@ -205,7 +205,7 @@
 		85 => array("name" =>	"©   ",	"pad" => 4),
 		88 => array("name" =>	"product",		"pad" => 38),
 			110 => array("name" =>	"company",		"pad" => -1),
-		120 => array("name" =>	"description",	"pad" => 130),
+		120 => array("name" =>	"description",	"pad" => 0), // 0 = last
 			150 => array("name" =>	"originalname",	"pad" => -1),
 			160 => array("name" =>	"internalname",	"pad" => -1),
 			170 => array("name" =>	"copyright",	"pad" => -1),
@@ -215,8 +215,6 @@
 	);
 	if(!CHECK_AVX) 
 		$col[30]["pad"] = -1;
-	if(RECURSE)
-		$col[0]["pad"] = 35;
 
 	global $data;
 	$data = array();
