@@ -28,7 +28,7 @@ set PATH_RELEASE=%PATH_SDK_ROOT%\release
 set DIR_LIB_UNUSED=lib_unused
 set PATH_RELEASE_SVN=D:\github\NONO_subversion
 	REM cygwin format
-set PATH_RELEASE_MEMCACHED=/cygdrive/d/github/NONO_memcached/libevent-2.1
+set PATH_RELEASE_MEMCACHED=/cygdrive/d/github/NONO_memcached
 	REM copy for github : unset to disable
 set PATH_GITHUB_PHPMEMCACHE=D:\github\NONO_PHP-memcache-dll
 set PATH_GITHUB_MODMD=D:\github\NONO_mod_md
