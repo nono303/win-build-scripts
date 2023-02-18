@@ -14,6 +14,8 @@
 	if(in_array($proot,["pecl-memcache","php-geos","pecl-text-xdiff","php-ext-brotli","xdebug","php-src"]))
 		$proot = "php";
 	$nogit = array(
+		"python"			=> ["/#define PY_VERSION +\"([0-9\.]+)/s",
+							pathenv("PATH_SRC")."/".$argv[1]."/Include/patchlevel.h"],
 		"libjpeg-turbo"		=> ["/set\(VERSION ([0-9\.]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/CMakeLists.txt"],
 		"libgav1"			=> ["/LIBGAV1_MAJOR_VERSION *([0-9]+).*LIBGAV1_MINOR_VERSION *([0-9]+).*LIBGAV1_PATCH_VERSION *([0-9]+)/s",
@@ -148,6 +150,10 @@
 					// !! must add a - to be take in account for producton version (verpatch limitation ?)
 					$ver_product = preg_replace("/([a-zA-Z])$/","-".strtolower($matches[1]),$ver_product);
 				}
+				// force x.x.x.x
+				if (($nbdot = substr_count($ver_file, '.')) < 3)
+					for($i = $nbdot; $i < 3; $i++)
+						$ver_file = $ver_file.".0";
 				return ["file" => $ver_file ,"product" => $ver_product,"from" => $from];
 			}
 	}
@@ -166,7 +172,10 @@
 	} elseif(sizeof($argv) >= 3){
 		if(is_dir($cur = pathenv("PATH_SRC"))."/".$argv[1]){
 			$current = getVersion($cur,$argv[1]);
-
+			if($argv[2] == "veronly"){
+				echo $current["file"];
+				exit(1);
+			}
 			if(pathenv("ARCH")){
 				$arch = pathenv("ARCH");
 			}elseif(pathenv("PHP_SDK_ARCH")){
