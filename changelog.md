@@ -1,8 +1,87 @@
 # changelog
 
 
+## 1.7.0 _(2023-02-18)_
+
+*  build python (standalone)
+`SRC_VERSION.md`
+`env_sample.bat`
+`modules/python.bat`
+`utils/srccreate.bat`
+*  upgrade tools
+`README.md`
+*  add param & option usage for version
+`usage.txt`
+*  add python force version["file"] to be on format x.x.x.x add option veronly
+`utils/sub/version.php`
+*  set version for all build (not only libevent 2.1) changing PATH_RELEASE_MEMCACHED
+`env_sample.bat`
+`modules/memcached.bat`
+*  curl 7.88
+`modules/curl_ca-win.patch`
+*  fix useless space
+`modules/libheif.bat`
+*  bump dependencies & gradle
+`modules/mobac.patch`
+*  https://github.com/kjdev/php-ext-zstd/commit/4315756d71f9701b51084ea6e89bd3122ed47883
+`modules/php-ext-zstd.patch`
+*  fix tmp shortcut
+`modules/qhull.bat`
+*  fix padding
+`utils/sub/bininfo.php`
+*  fix useless echo
+`utils/sub/version.php`
+*  1.52.0
+`modules/nghttp2.bat`
+*  add php-ogr (standalone)
+`modules/php-ogr.bat`
+*  add qhull for gdal
+`modules/full.bat`
+`modules/gdal.bat`
+`modules/qhull.bat`
+`utils/bininfo.bat`
+*  fix '..' > '.0.'
+`utils/sub/version.php`
+*  FT_ENABLE_ERROR_STRINGS=OFF
+`modules/freetype2.bat`
+*  add 'pas reconnu en tant que commande interne"
+`utils/sub/logcheck.php`
+*  omit static lib
+`modules/libgav1.bat`
+*  fixes https://github.com/OSGeo/gdal/issues/7183
+`modules/gdal.patch`
+*  test OFF & copy include bz_version.h (python build required)
+`modules/bzip2.bat`
+*  remove local copy
+`env_sample.bat`
+`modules/gdal.bat`
+`modules/proj.bat`
+*  fix --with-zlib-lib
+`modules/openssl.bat`
+*  php-gdal > php-ogr
+`modules/php.bat`
+`utils/sub/version.php`
+*  simplify local copy
+`modules/proj.bat`
+*  php-gdal > php-ogr
+`modules/phpsdk-config_make.bat`
+*  libjpeg 2.1.90 with native 12bits support
+`modules/libtiff.bat`
+*  move cmake dir to good path
+`modules/libpng.bat`
+*  2.1.90
+`modules/libjpeg-turbo.bat`
+*  rollback
+`modules/libjpeg-turbo.bat`
+
+
 ## 1.6.3 _(2023-01-31)_
 
+*  1.6.3
+`README.md`
+`SRC_VERSION.md`
+`changelog.md`
+`utils/srccreate.bat`
 *  add libjpeg-turbo & libgav1 (move from tag to HEAD)
 `utils/sub/version.php`
 *  add --force for 'git fetch --tag' 'git rev-list --left-right --count' from current commit (and not current branch which was confusing) remove duplicate debug message
