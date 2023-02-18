@@ -104,7 +104,12 @@ Usage: go command [options]
 	recurse:  check subdir
 	ext:[ex1,ex2...]: by default, bininfo check *.exe *.dll *.so. you can override (extend or restric) these extensions with a comma separated list (without space) of extension to be checked. ex. ext:exe,dll
 	nb:[int]: number of file that must be present (and not only checked) in path param. can't be used with a file in param or recurse option
-  * version: output and write csv file in %PATH_LOG% of current normalized version of each module present in %PATH_SRC%
+  * version: 
+      no param: output and write csv file in %PATH_LOG% of current normalized version of each module present in %PATH_SRC%  
+      > param: module name to get version
+      > option: EXCLUSIVE - ONLY IF PARAM MODULE IS PRESENT
+        veronly:   return the module version in format x.x.x.x
+	<binfile>: write version information (verpatch) into the specified full path <binfile>
   * configexport: export cygwin and MSVS config to %PATH_BATCH%\config. 
                   import .vsconfg for MSVS 
 		  use setup.exe -P `awk 'NR==1{printf \$1}{printf ",%s", \$1}' cyg_XX_.packagelist` for cygwin (where _XX_ is 32 or 64...)
