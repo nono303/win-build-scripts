@@ -10,7 +10,7 @@ if not exist %PATH_SRC%\. mkdir %PATH_SRC%
 cd /D %PATH_SRC%
 git clone https://aomedia.googlesource.com/aom aom
 cd /D aom
-git checkout tags/v3.6.0-rc2
+git checkout tags/v3.6.0
 cd /D ..
 git clone https://github.com/apache/apr.git apr
 cd /D apr
@@ -38,7 +38,7 @@ git checkout tags/cares-1_19_0
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-7_87_0
+git checkout tags/curl-7_88_0
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -54,7 +54,7 @@ git checkout tags/v3.4.0
 cd /D ..
 git clone git://git.sv.nongnu.org/freetype/freetype2.git freetype2
 cd /D freetype2
-git checkout tags/VER-2-12-1
+git checkout tags/VER-2-13-0
 cd /D ..
 git clone https://github.com/OSGeo/gdal gdal
 cd /D gdal
@@ -78,7 +78,7 @@ git checkout tags/2.4.55
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout cldr/2022-12-04
+git checkout cldr/2023-02-02
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -130,7 +130,7 @@ git checkout tags/1.7.1rc2
 cd /D ..
 git clone https://github.com/strukturag/libheif.git libheif
 cd /D libheif
-git checkout tags/v1.14.2
+git checkout tags/v1.15.1
 cd /D ..
 git clone https://github.com/pffang/libiconv-for-Windows.git libiconv
 cd /D libiconv
@@ -138,7 +138,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/libjpeg-turbo/libjpeg-turbo libjpeg-turbo
 cd /D libjpeg-turbo
-git checkout main
+git checkout tags/2.1.91
 cd /D ..
 git clone https://git.tukaani.org/xz.git liblzma
 cd /D liblzma
@@ -218,7 +218,7 @@ git checkout tags/2.3.10.2
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v2.0.12
+git checkout tags/v2.0.13
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -250,7 +250,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/nghttp2/nghttp2.git nghttp2
 cd /D nghttp2
-git checkout tags/v1.51.0
+git checkout tags/v1.52.0
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3
@@ -258,7 +258,7 @@ git checkout tags/v0.8.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v0.13.0
+git checkout tags/v0.13.1
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -266,11 +266,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/openssl/openssl.git openssl
 cd /D openssl
-git checkout tags/openssl-3.0.7
+git checkout tags/openssl-3.0.8
 cd /D ..
 git clone https://github.com/quictls/openssl/ openssl-quic
 cd /D openssl-quic
-git checkout tags/openssl-3.0.7+quic1
+git checkout tags/openssl-3.0.8-quic1
 cd /D ..
 git clone https://github.com/PCRE2Project/pcre2.git pcre2
 cd /D pcre2
@@ -294,10 +294,14 @@ git checkout master
 cd /D ..
 git clone https://github.com/kjdev/php-ext-zstd.git php-ext-zstd
 cd /D php-ext-zstd
-git checkout tags/0.12.1
+git checkout master
 cd /D ..
 git clone https://github.com/nono303/php-geos.git php-geos
 cd /D php-geos
+git checkout master
+cd /D ..
+git clone https://github.com/nono303/php-ogr php-ogr
+cd /D php-ogr
 git checkout master
 cd /D ..
 git clone https://github.com/swen100/phpng-proj.git php-proj
@@ -310,11 +314,19 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.2.1
+git checkout tags/php-8.2.3
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
 git checkout tags/9.1.1
+cd /D ..
+git clone https://github.com/nono303/cpython.git python
+cd /D python
+git checkout 3.8-shared
+cd /D ..
+git clone https://github.com/qhull/qhull qhull
+cd /D qhull
+git checkout tags/v8.1-alpha3
 cd /D ..
 git clone https://github.com/nono303/simpleDLNA.git sdlna
 cd /D sdlna
@@ -358,5 +370,5 @@ git checkout tags/v1.2.13
 cd /D ..
 git clone https://github.com/facebook/zstd.git zstd
 cd /D zstd
-git checkout tags/v1.5.2-kernel
+git checkout tags/v1.5.4
 cd /D ..
