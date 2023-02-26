@@ -5,8 +5,8 @@ sed -i -E 's/(warning\(.Compiler)/# \1/g' %CYGPATH_SRC%/%1/meson.build
 
 meson setup ^
 --prefix %PATH_INSTALL% ^
---buildtype debugoptimized ^
---default-library=shared ^
+-Dbuildtype=debugoptimized ^
+-Ddefault_library=shared ^
 -Dbitdepths=8 ^
 -Denable_asm=true ^
 -Denable_tools=true ^
@@ -18,6 +18,8 @@ meson setup ^
 -Dfuzzing_engine=none ^
 -Dstack_alignment=0 ^
 -Dxxhash_muxer=auto ^
+-Dtrim_dsp=true ^
+-Db_lto=true ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/meson.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
