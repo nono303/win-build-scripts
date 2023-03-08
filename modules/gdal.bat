@@ -16,7 +16,7 @@ REM -DGDAL_USE_PNG_INTERNAL=OFF ^
 REM -DGDAL_USE_QHULL_INTERNAL=ON ^
 REM -DGDAL_USE_TIFF_INTERNAL=OFF ^
 REM -DGDAL_USE_ZLIB_INTERNAL=OFF ^
-REM https://gdal.org/development/building_from_source.html
+	REM https://gdal.org/development/building_from_source.html
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL%\_%1 ^
 -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
