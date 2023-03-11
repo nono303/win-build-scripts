@@ -34,9 +34,7 @@ cd /D C:\sdk\phpmaster\vs17\x64\php-src
 /O2 ^
 /GL ^
 /Zf ^
-/Gw ^
 /Gy ^
-/Zc:inline ^
 /FS ^
 /D PHP_ICONV_PREFIX=C:/sdk/release/vs17_x64-avx ^
 /D NDebug ^
