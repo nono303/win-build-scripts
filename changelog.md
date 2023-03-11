@@ -1,8 +1,44 @@
 # changelog
 
 
+## 1.7.1 _(2023-03-11)_
+
+*  upgrade tools
+`README.md`
+*  add mod_security-sdbm-util
+`SRC_VERSION.md`
+`modules/full.bat`
+`modules/mod_security-sdbm-util.bat`
+`utils/bininfo.bat`
+`utils/srccreate.bat`
+*  fix sigcheck calls
+`utils/sub/bininfo.php`
+*  build 32 & 64 for libevent 2.1
+`modules/memcached.bat`
+*  Includes dir patched in Makefile.win
+`modules/mod_security.bat`
+`modules/mod_security.patch`
+*  remove duplicate cflags
+`modules/php-ogr.bat`
+*  gradle gradle-8.0.1 > gradle-8.0.2
+`modules/mobac.patch`
+*  v3.6.3RC1
+`modules/gdal.bat`
+`modules/gdal.patch`
+*  9.1.1 > 9.2.0
+`modules/proj.bat`
+*  gradle-8.0 > gradle-8.0.1
+`modules/mobac.patch`
+*  1.0.0 > 1.1.0
+`modules/dav1d.bat`
+*  vcvars_ver=14.35 > 14.36
+`vs17.bat`
+
+
 ## 1.7.0 _(2023-02-18)_
 
+*  1.7.0
+`changelog.md`
 *  build python (standalone)
 `SRC_VERSION.md`
 `env_sample.bat`
