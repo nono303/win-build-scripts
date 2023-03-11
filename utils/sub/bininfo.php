@@ -36,27 +36,27 @@
 
 	function check($dirbase,$dir,$recurse=false){
 		if(is_dir($dir)){
-			$ressig = sigcheck($dir);
 			foreach(scandir($dir) as $file){
 				if(is_dir($dir."/".$file) && $file != "." && $file != ".." && $recurse){
 					check($dirbase, $dir."/".$file,$recurse);
 				} elseif (is_file($dir."/".$file)) {
-					fileCheck($file,$dirbase,$dir,$recurse,$ressig);
+					fileCheck($file,$dirbase,$dir,$recurse);
 				}
 			}
 		} elseif (is_file($dir)) {
 			$file = basename($dir);
 			$dir = str_replace("/".$file,"",$dir);
-			fileCheck($file,$dir,$dir,$recurse,sigcheck($dir,$file));
+			fileCheck($file,$dir,$dir,$recurse);
 		}
 	}
 
-	function fileCheck($file,$dirbase,$dir,$recurse,$ressig){
+	function fileCheck($file,$dirbase,$dir,$recurse,){
 		global $col;
 		global $data;
 		global $cur;
 		global $ext;
 		if(is_file($dir."/".$file) && in_array(pathinfo($dir."/".$file)["extension"],$ext)) {
+			$ressig = sigcheck($dir,$file);
 			debug("fileCheck(1) ".$dir."/".$file);
 			if($recurse) {
 				$data[$cur][00] = str_replace($dirbase,"",$dir)."/".$file;
