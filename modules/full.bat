@@ -64,6 +64,8 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat yajl NOLOG
 	:mod_security
 	call %PATH_BATCH%\go.bat mod_security NOLOG
+	:modsec-sdbm-util
+	call %PATH_BATCH%\go.bat modsec-sdbm-util NOLOG
 	if  "%2" == "httpdanddeps" exit /B
 :phpanddeps
 	:wineditline
