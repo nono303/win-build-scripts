@@ -1,5 +1,5 @@
 diff --git a/apache2/Makefile.win b/apache2/Makefile.win
-index ed4bfc9e..b613b444 100644
+index ed4bfc9e..dbb133f9 100644
 --- a/apache2/Makefile.win
 +++ b/apache2/Makefile.win
 @@ -1,18 +1,18 @@
@@ -19,14 +19,30 @@ index ed4bfc9e..b613b444 100644
         $(APACHE)\lib\libapr-1.lib \
         $(APACHE)\lib\libaprutil-1.lib \
 -       $(PCRE)\pcre.lib \
-+       $(PCRE2)\pcre2-8.lib \
-        $(CURL)\libcurl.lib \
+-       $(CURL)\libcurl.lib \
 -       $(LIBXML2)\win32\bin.msvc\libxml2.lib \
-+       $(LIBXML2)\libxml2.lib \
++       $(PCRE2)\lib\pcre2-8.lib \
++       $(CURL)\lib\libcurl.lib \
++       $(LIBXML2)\lib\libxml2.lib \
         Ws2_32.lib \
         "iphlpapi.lib"
  
-@@ -28,31 +28,26 @@ CC = CL
+@@ -20,39 +20,40 @@ LIBS = $(APACHE)\lib\libhttpd.lib \
+ ###########################################################################
+ 
+ 
+-!IF "$(IIS_BUILD)" == "yes"
+-DEFS=$(DEFS) -DVERSION_IIS
+-!ENDIF
++!IF "$(IIS_BUILD)" == "yes"
++
++DEFS=$(DEFS) -DVERSION_IIS
++
++!ENDIF
++
++
+ 
+ CC = CL
  
  MT = mt
  
@@ -40,7 +56,7 @@ index ed4bfc9e..b613b444 100644
 -           -I$(PCRE)\include -I$(PCRE) \
 -           -I$(LIBXML2)\include \
 -           -I$(APACHE)\include
-+INCLUDES = -I. -I.. 
++INCLUDES = -I. -I.. -I$(APACHE)\include -I$(PCRE2)\include -I$(CURL)\include -I$(LIBXML2)\include\libxml2 -I$(LIBXML2)\include
 +
  
  # Enables support for SecRemoteRules and external resources.
@@ -49,17 +65,18 @@ index ed4bfc9e..b613b444 100644
  # Lua is optional
  !IF "$(LUA)" != ""
 -LIBS = $(LIBS) $(LUA)\lua5.1.lib
-+LIBS = $(LIBS) $(LUA)\liblua.lib
++LIBS = $(LIBS) $(LUA)\lib\liblua.lib
++INCLUDES = $(INCLUDES) -I$(LUA)\include
  DEFS=$(DEFS) -DWITH_LUA
 -INCLUDES = $(INCLUDES) -I$(LUA)\include -I$(LUA) \
  !ENDIF
  
  # Yajl/Json is optional
  !IF "$(YAJL)" != ""
--LIBS = $(LIBS) $(YAJL)\lib\yajl.lib
+ LIBS = $(LIBS) $(YAJL)\lib\yajl.lib
 -DEFS=$(DEFS) -DWITH_YAJL
 -INCLUDES = $(INCLUDES) -I$(YAJL)\include -I$(YAJL) \
-+LIBS = $(LIBS) $(YAJL)\yajl.lib
++INCLUDES = $(INCLUDES) -I$(YAJL)\include
 +DEFS=$(DEFS) -DWITH_YAJL -DYAJL_SHARED
  !ENDIF
  
