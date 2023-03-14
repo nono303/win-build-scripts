@@ -25,6 +25,7 @@ base-files
 bash
 bind-utils
 binutils
+bison
 bzip2
 ca-certificates
 chere
@@ -67,6 +68,7 @@ libbind9_161
 libblkid1
 libbrotlicommon1
 libbrotlidec1
+libbsd0
 libbz2_1
 libcares2
 libcbor
@@ -88,6 +90,7 @@ libexpat1
 libfam0
 libfdisk1
 libffi6
+libffi8
 libfido2
 libgc1
 libgc2
@@ -143,6 +146,7 @@ liblwres161
 liblz4_1
 liblzma5
 libmaxminddb0
+libmd0
 libmetalink3
 libmpc3
 libmpfr4
@@ -170,6 +174,7 @@ libproxy1
 libpsl5
 libquadmath0
 libreadline7
+libretls26
 libsasl2_3
 libsigsegv2
 libsmartcols1
@@ -187,14 +192,15 @@ libusb0
 libuuid-devel
 libuuid1
 libxml2
+libxslt
 libzstd1
 login
 m4
 make
 man-db
 mintty
-nc
 ncurses
+netcat
 openssh
 openssl
 p11-kit
