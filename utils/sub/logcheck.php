@@ -48,35 +48,37 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 39 	Foreground Default 	Applies only the foreground portion of the defaults (see 0)
 */
 	$search = array(
-		"(Warning[: ])" => [33,"reg"],
-		"^(sed:)" => [33,"reg"],
+// Red
 		" fatal " => [31,"str"],
 		" error " => [31,"str"],
 		"error:" => [31,"str"],
 		"stop" => [31,"str"],
 		"err open" => [31,"str"], // version
+// Yellow
+		"(Warning[: ])" => [33,"reg"],
+		"warning" => [33,"reg"],
+		"^(sed:)" => [33,"reg"],
 		"error while editing pdb path" => [33,"str"], // version
 		"Update file checksum failed, the file may be damaged" => [33,"str"], // version
 		"syntaxe " => [33,"str"],
 		"inattendu" => [33,"str"],
 		"impossible" => [33,"str"],
 		"incorrecte" => [33,"str"],
-		"non valide" => [36,"str"],
-		"introuvable" => [36,"str"],
 		"rejected" => [33,"str"],
 		"conflicts " => [33,"str"],
 		"improve linker performance" => [33,"str"],
-		"ne peut trouver le fichier" => [36,"str"], //mpir
 		"Hunk #" => [33,"str"], // patch offset 
 		"pas reconnu en tant que commande interne" => [33,"str"],
+// Cyan
+		"ne peut trouver le fichier" => [36,"str"], //mpir
+		"non valide" => [36,"str"],
+		"introuvable" => [36,"str"],
+		"unknow" => [36,"str"],
 	);
 	$remove = array(
-		// "CMake Warning at CMake" => [39, "str"],
-		// "Daemon will be stopped at the end of the build" => [39, "str"],// gradle
-		// "Using unknown MSVC version" => [39, "str"],// php-src
-		"warning: [serial]" => [39, "str"],// subversion java-hl
-		"warning: [removal]" => [39, "str"],// subversion java-hl
-		"HEAD is now" => [39, "str"], // git log
+		"warning: [serial]" => [39, "str"],		// subversion java-hl
+		"warning: [removal]" => [39, "str"],	// subversion java-hl
+		"HEAD is now" => [39, "str"],			// git log
 	);
 	//print_r($argv);
 	//exit();
