@@ -29,6 +29,9 @@ Usage: go command [options]
       * apr
       * lua
       * httpd
+      * yajl
+      * mod_security
+      * mod_security-sdbm-util
     * [phpanddeps]
       * wineditline
       * zstd
@@ -71,6 +74,7 @@ Usage: go command [options]
   * memcached
   * mobac
   * sdlna
+  * sdnspi-mysql
   * verpatch
 - build full:
     no param:    build ALL modules in the order listed above
