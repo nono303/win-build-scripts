@@ -1,7 +1,7 @@
 | src | version |
 | ---- | ---- |
 | [aom](https://aomedia.googlesource.com/aom) | 3.6.0 |
-| [apr](https://github.com/apache/apr) | 1.8.0-dev - 744a05d8b |
+| [apr](https://github.com/apache/apr) | 1.8.0-dev - 60956ac9f |
 | [apr-iconv](https://github.com/apache/apr-iconv) | 1.2.2 |
 | [apr-util](https://github.com/apache/apr-util) | 1.7.0-dev - fb3feebd |
 | [brotli](https://github.com/google/brotli) | 1.0.9 |
@@ -12,12 +12,12 @@
 | [dependencies](https://github.com/lucasg/Dependencies) | 1.11.1 |
 | [freeglut](https://github.com/dcnieho/FreeGLUT.git) | 3.4.0 |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.13.0 |
-| [gdal](https://github.com/OSGeo/gdal) | 3.6.3rc1 |
+| [gdal](https://github.com/OSGeo/gdal) | 3.6.3 |
 | [geographiclib](https://git.code.sf.net/p/geographiclib/code) | 2.0.0 - b3ee8cc7 |
 | [geos](https://github.com/libgeos/geos) | 3.11.1 |
 | [giflib](https://github.com/gongjianbo/GifLib) | 5.2.1 - 59eb9d1 |
 | [httpd](https://github.com/apache/httpd) | 2.4.56 |
-| [icu](https://github.com/unicode-org/icu) | 73.0.1 - cldr/2023-02-21 |
+| [icu](https://github.com/unicode-org/icu) | 73.0.1 - cldr/2023-03-13 |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.3.0 |
 | [lerc](https://github.com/Esri/lerc.git) | 4.0.0 |
@@ -36,7 +36,7 @@
 | [liblzma](https://github.com/ShiftMediaProject/liblzma) | 5.4.1 |
 | [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.7.1.2 |
 | [libpng](https://sourceforge.net/p/libpng/code/ci/master/tree/) | 1.6.40 - efc96c9d5 |
-| [libsodium](https://github.com/jedisct1/libsodium.git) | 1.0.18.0 - da1be5bf |
+| [libsodium](https://github.com/jedisct1/libsodium.git) | 1.0.18.0 - 66a68f09 |
 | [libssh2](https://github.com/libssh2/libssh2) | 1.10.0 |
 | [libtiff](https://gitlab.com/libtiff/libtiff) | 4.5.0 |
 | [libwepb](https://chromium.googlesource.com/webm/libwebp) | 1.3.0 |
