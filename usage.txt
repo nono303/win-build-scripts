@@ -71,6 +71,7 @@ Usage: go command [options]
     * php-cgi-spawner
     * dependencies
   * mapsforgesrv
+  * tzdataservice
   * memcached
   * mobac
   * sdlna
