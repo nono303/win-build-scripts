@@ -96,6 +96,8 @@ C:\Windows\System32\WindowsPowerShell\v1.0\;
 cd /D %PATH_BATCH%
 
 REM ########################## BUILD OPTION
+	REM https://services.gradle.org/distributions/
+set GRADLEVER=8.1.1
 	REM see dir in %PATH_ROOTWKIT%\Lib
 set WKITVER=10.0.22621.0
 	REM .NET installed SDK
