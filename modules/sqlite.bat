@@ -42,3 +42,5 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 %NINJA% install
 
 for %%Y in (sqlite3.exe libsqlite3.dll) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%Y)
+	REM for GDAL
+if not exist %PATH_INSTALL%\include\sqlite3ext.h mklink /h %PATH_INSTALL%\include\sqlite3ext.h %PATH_INSTALL%\include\sqlite3\sqlite3ext.h
