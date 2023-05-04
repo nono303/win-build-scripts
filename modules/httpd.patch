@@ -1,7 +1,7 @@
-diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
-index 2a59e234d7..e8418a3552 100644
---- "a/CMakeLists.txt"
-+++ "b/CMakeLists.txt"
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 2a59e234d7..c9bcaabcda 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -15,6 +15,10 @@
  #
  # Read README.cmake before using this.
@@ -330,10 +330,10 @@ index 2a59e234d7..e8418a3552 100644
  ###########  CONFIGURATION FILES ###########
  # Set up variables used in the .conf file templates
 diff --git a/modules/proxy/mod_proxy_fcgi.c b/modules/proxy/mod_proxy_fcgi.c
-index 3382b9bfd5..d22dff315f 100644
+index 831bd15ae9..aef08296df 100644
 --- a/modules/proxy/mod_proxy_fcgi.c
 +++ b/modules/proxy/mod_proxy_fcgi.c
-@@ -366,6 +366,10 @@ static apr_status_t send_environment(proxy_conn_rec *conn, request_rec *r,
+@@ -381,6 +381,10 @@ static apr_status_t send_environment(proxy_conn_rec *conn, request_rec *r,
  
          if (newfname) {
              newfname = ap_strchr(newfname, '/');
@@ -362,10 +362,10 @@ index 7da7aa2ca2..78d9d92a71 100644
  
  /* WARNING: Win32 binds http_main.c dynamically to the server. Please place
   *          extern functions and global data in another appropriate module.
-diff --git "a/support/ab.c" "b/support/ab.c"
-index ee3420d389..47b936a68e 100644
---- "a/support/ab.c"
-+++ "b/support/ab.c"
+diff --git a/support/ab.c b/support/ab.c
+index 3a3ffbfb61..ea74c3f8a1 100644
+--- a/support/ab.c
++++ b/support/ab.c
 @@ -184,7 +184,7 @@ typedef STACK_OF(X509) X509_STACK_TYPE;
   * by the OpenSSL library build to another CRT used by the ab.exe build.
   * This became especially problematic with Visual Studio 2015.
