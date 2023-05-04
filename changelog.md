@@ -1,8 +1,66 @@
 # changelog
 
 
+## 1.7.2 _(2023-05-04)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  https://github.com/websupport-sk/pecl-memcache/pull/110 merged
+`modules/pecl-memcache.patch`
+*  fix for php-ext-zstd 0.12.3 add libxpm nghttp2 curl
+`utils/sub/version.php`
+*  gdal 3.7.0
+`utils/bininfo.bat`
+*  For gdal: mklink \include\sqlite3ext.h < \include\sqlite3\sqlite3ext.h
+`modules/sqlite.bat`
+*  commit 2899841
+`modules/serf.patch`
+*  copy deps SQLite.Interop.dll
+`modules/sdlna.bat`
+*  2741
+`modules/mobac.patch`
+*  gradlew wrapper --gradle-version %GRADLEVER%
+`modules/mapsforgesrv.bat`
+`modules/mobac.bat`
+*  1.16.1
+`modules/libheif.bat`
+*  2.4.57
+`modules/httpd.patch`
+*  3.11.2
+`modules/geos.bat`
+*  3.7.0 : cmake + GDAL_USE_ARCHIVE - duplicate
+`modules/gdal.bat`
+`modules/gdal.patch`
+*  add GRADLEVER
+`env_sample.bat`
+*  update export configs
+`config/.vsconfig`
+`config/python.pip`
+*  add tzdataservice
+`modules/tzdataservice.bat`
+`usage.txt`
+*  upgrade src
+`SRC_VERSION.md`
+*  add sdnspi-mysql.bat
+`modules/sdnspi-mysql.bat`
+*  fix mod_security-sdbm-util and add missing modules
+`modules/full.bat`
+`usage.txt`
+*  update config export
+`config/cyg64.packagelist`
+`config/python.pip`
+*  fix & clean
+`modules/sdlna.bat`
+*  sort search array by color display
+`utils/sub/logcheck.php`
+
+
 ## 1.7.1 _(2023-03-11)_
 
+*  1.7.1
+`changelog.md`
 *  upgrade tools
 `README.md`
 *  add mod_security-sdbm-util
