@@ -14,6 +14,8 @@
 	if(in_array($proot,["pecl-memcache","php-geos","pecl-text-xdiff","php-ext-brotli","xdebug","php-src"]))
 		$proot = "php";
 	$nogit = array(
+		"libxml2"			=> ["/#define LIBXML_DOTTED_VERSION +\"([0-9\.]+)/s",
+							pathenv("PATH_SRC")."/".$argv[1]."/win32/rcVersion.h"],
 		"python"			=> ["/#define PY_VERSION +\"([0-9\.]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/Include/patchlevel.h"],
 		"curl"				=> ["/#define LIBCURL_VERSION \"([0-9\.]+)/s",

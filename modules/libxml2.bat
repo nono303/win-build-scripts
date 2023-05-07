@@ -32,7 +32,6 @@ for %%X in (libxml2_a_dll libxml) do (
 	lzma=yes ^
 	xml_debug=yes ^
 	mem_debug=no ^
-	run_debug=no ^
 	regexps=yes ^
 	modules=yes ^
 	tree=yes ^
