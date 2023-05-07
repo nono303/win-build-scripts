@@ -5,6 +5,8 @@ REM https://docs.microsoft.com/fr-fr/cpp/build/reference/arch-x64
 	REM https://en.wikipedia.org/wiki/List_of_Intel_CPU_microarchitectures
 set AVXMPIR=pentium4-sse2
 if %1 == 1 (
+		REM aom
+	set SSE42AVX=ON
 	set AVXECHO=avx
 	set AVX=/arch:AVX
 	set AVXB=-avx
@@ -15,6 +17,8 @@ if %1 == 1 (
 	echo ~~-~~  AVX ~~-~~
 )
 if %1 == 0 (
+		REM aom
+	set SSE42AVX=OFF
 	set AVXECHO=sse2
 	set AVX=
 	set AVXB=
