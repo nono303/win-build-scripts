@@ -1,6 +1,11 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1
 
-	REM libxml2_a_dll MUST be used for PHP https://wiki.php.net/internals/windows/libs/libxml2
+	REM for PHP 
+	REM - libxml2_a_dll MUST be used 
+	REM   - https://wiki.php.net/internals/windows/libs/libxml2
+	REM   - https://gist.github.com/auroraeosrose/3452993 (support libxml PHP extension shared and against shared dll on windows)
+	REM - legacy MUST be yes
+
 sed -i 's/iconv.lib/libiconv\.lib/g'  %CYGPATH_SRC%/%1/win32/Makefile.msvc
 sed -i 's/LDFLAGS = \/nologo/LDFLAGS = \/nologo \/LTCG \/OPT:ICF,REF \/DEBUG/g'  %CYGPATH_SRC%/%1/win32/Makefile.msvc
 sed -i 's/ARFLAGS = \/nologo/ARFLAGS = \/nologo \/LTCG/g'  %CYGPATH_SRC%/%1/win32/Makefile.msvc
