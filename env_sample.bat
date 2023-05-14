@@ -32,6 +32,7 @@ set PATH_RELEASE_MEMCACHED=/cygdrive/d/github/NONO_memcached
 	REM copy for github : unset to disable
 set PATH_GITHUB_PHPMEMCACHE=D:\github\NONO_PHP-memcache-dll
 set PATH_GITHUB_MODMD=D:\github\NONO_mod_md
+set PATH_GITHUB_MODFCGID=C:\sdk\src\mod_fcgid\bin
 	REM JDK root (gradle & java for mobac, java_hl for subversion)
 set JAVA_HOME=%PATH_SOFTS%\openjdk
 set GRADLE_USER_HOME=%PATH_SOFTS%\gradle

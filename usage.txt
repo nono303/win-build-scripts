@@ -77,6 +77,9 @@ Usage: go command [options]
   * sdlna
   * sdnspi-mysql
   * verpatch
+ + standalone httpd module
+  * mod_md
+  * mod_fcgid
 - build full:
     no param:    build ALL modules in the order listed above
     _xx_anddeps: build ONLY _xx_ and all submodule required for _xx_ {httpdanddeps, phpanddeps, subversionanddeps, projgeolibanddeps}
