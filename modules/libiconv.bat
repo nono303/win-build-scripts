@@ -10,7 +10,7 @@ if not exist %PATH_SRC%\%1\. mklink /J %PATH_SRC%\%1 %PATH_SRC%\%1\MSVC16
 
 MSBuild.exe %PATH_SRC%\%1\%1.sln %MSBUILD_OPTS% ^
 /t:Clean,%1 ^
-/nowarn:C4311,C4117,C4267,C4141,C4090 ^
+/nowarn:C4311;C4117;C4267;C4141;C4090 ^
 /p:Configuration=%OUTDIR_CONF% ^
 /p:Platform="%ARCH%"
 

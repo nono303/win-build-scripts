@@ -53,7 +53,7 @@ for %%X in (libxml2_a_dll libxml) do (
 	schematron=yes ^
 	python=no ^
 	compiler=msvc ^
-	cruntime="/wd4090 /wd4723 /wd4013 /D_WINSOCK_DEPRECATED_NO_WARNINGS /Zf /GL /MD /MP%NUMBER_OF_PROCESSORS% %AVX% /Fd%%X.pdb" ^
+	cruntime="/wd4018 /wd4090 /wd4723 /wd4013 /D_WINSOCK_DEPRECATED_NO_WARNINGS /Zf /GL /MD /MP%NUMBER_OF_PROCESSORS% %AVX% /Fd%%X.pdb" ^
 	vcmanifest=yes ^
 	debug=yes ^
 	static=no ^

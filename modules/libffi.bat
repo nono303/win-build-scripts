@@ -6,7 +6,7 @@ set VCDIR=msvc_build
 if %ARCH% == x86 (sed -i 's/X86_WIN64/X86_WIN32/g' %CYGPATH_SRC%/%1/msvc_build/include/ffi.h)
 
 MSBuild.exe %PATH_SRC%\%1\%VCDIR%\Ffi_staticLib.sln %MSBUILD_OPTS% ^
-/nowarn:C4018,C4102,C4013,C4267 ^
+/nowarn:C4018;C4102;C4013;C4267 ^
 /p:Configuration=dynamic-Release ^
 /p:Platform="%archmsbuild%"
 

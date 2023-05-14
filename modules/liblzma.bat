@@ -7,7 +7,7 @@ set OUTDIR_CONF=Release
 
 MSBuild.exe %PATH_SRC%\%1\%VCDIR%\xz_win.sln %MSBUILD_OPTS% ^
 /t:Clean,liblzma_dll:Rebuild ^
-/nowarn:C4267,C4996,C4028,C4133 ^
+/nowarn:C4267;C4996;C4028;C4133 ^
 /p:Configuration=%OUTDIR_CONF% ^
 /p:Platform="%archmsbuild%" ^
 /p:ZLibSrcDir=%PATH_SRC%\zlib ^
