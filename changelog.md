@@ -1,8 +1,54 @@
 # changelog
 
 
+## 1.7.3 _(2023-05-14)_
+
+*  1.7.3
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  fix copy paste from mod_md use version from fcgid_conf.h add bininfo cmd for github
+`modules/mod_fcgid.bat`
+`utils/sub/version.php`
+*  fix mo_md depends libcrypto on x86 add bininfo cmd for github
+`modules/mod_md.bat`
+*  fix nowarn
+`modules/libffi.bat`
+`modules/libiconv.bat`
+`modules/liblzma.bat`
+`modules/libmaxminddb.bat`
+`modules/libxml2.bat`
+*  https://github.com/curl/curl/commit/10998e3b89be65e2bf9d9666bd9a1734c186ec0a
+`modules/curl.bat`
+`modules/curl_ca-win.patch`
+*  add mod_fcgid standalone update usage.txt with mod_md & mod_fcgid standalone
+`env_sample.bat`
+`modules/mod_fcgid.bat`
+`modules/mod_md.bat`
+`usage.txt`
+*  disable warning in icu: coll_tree
+`utils/sub/logcheck.php`
+*  comment about lib usage for PHP
+`modules/libxml2.bat`
+*  https://github.com/sqlite/sqlite/pull/10
+`modules/sqlite.bat`
+`modules/sqlite.patch`
+*  libxml2 - >=2.11: update configure option - version:  git > LIBXML_DOTTED_VERSION
+`modules/libxml2.bat`
+`utils/sub/version.php`
+*  aom 3.6.1: update cmake option use global var SSE42AVX (avx.bat)
+`avx.bat`
+`modules/aom.bat`
+*  1867: TEST > UNIT_TEST
+`modules/libyuv.bat`
+*  typo
+`modules/libgd.bat`
+
+
 ## 1.7.2 _(2023-05-04)_
 
+*  1.7.2
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`

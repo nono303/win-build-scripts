@@ -43,11 +43,11 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.6.0-p6 (14.36) | `.vsconfig`         |
+| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.6.0-p7 (14.36) | `.vsconfig`         |
 | [Cygwin](https://cygwin.com/install.html)                    | x86  | 3.3.6 | `cyg32.packagelist` |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.4.6   | `cyg64.packagelist` |
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.11.3 |                     |
-| [Node.js](https://nodejs.org/en/download/current/) | x64 | 20.0.0 | |
+| [Node.js](https://nodejs.org/en/download/current/) | x64 | 20.1.0 | |
 | [OpenJDK](https://jdk.java.net/20/)                   | x64  | 20.0.1 |                     |
 | [Strawberry Perl](https://strawberryperl.com/releases.html) | x64  | 5.32.1.1 |                     |
 | [NASM](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.16.02rc1 |                     |
