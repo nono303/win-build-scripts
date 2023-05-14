@@ -79,6 +79,7 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 		"warning: [serial]" => [39, "str"],		// subversion java-hl
 		"warning: [removal]" => [39, "str"],	// subversion java-hl
 		"HEAD is now" => [39, "str"],			// git log
+		"coll_tree" => [39, "str"],				// warning : Category not found: coll_tree [C:\sdk\src\icu\icu4c\source\data\makedata.vcxproj]
 	);
 	//print_r($argv);
 	//exit();
