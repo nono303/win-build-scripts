@@ -17,7 +17,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 
 if not "%PATH_GITHUB_MODFCGID%"=="" (
 	for %%X in (so pdb lib) do (xcopy /C /F /Y %PATH_BUILD%\%1\%1.%%X %PATH_GITHUB_MODFCGID%\%MSVC_DEPS%\%ARCH%%AVXB%\*)
-	call do_php %PATH_UTILS%\sub\version.php mod_md %PATH_GITHUB_MODFCGID%\%MSVC_DEPS%\%ARCH%%AVXB%\%1.so "httpd:%HTTPD_VERSION%"
+	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_GITHUB_MODFCGID%\%MSVC_DEPS%\%ARCH%%AVXB%\%1.so "httpd:%HTTPD_VERSION%"
 )
 
-call do_php %PATH_UTILS%\sub\bininfo.php %PATH_GITHUB_MODFCGID% recurse checkavx
+echo ^>^>^> go bininfo %PATH_GITHUB_MODFCGID% recurse checkavx ^> %PATH_GITHUB_MODFCGID%\bininfo.txt

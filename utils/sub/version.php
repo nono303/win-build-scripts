@@ -9,11 +9,13 @@
 		$letterpos[$letter] = $pos++;
 	$argv[1] = strtolower($argv[1]);
 	$proot = $argv[1];
-	if(in_array($proot,["mod_maxminddb","mod_fcgid","mod_h2","mod_md","mod_wku_bt","mod_h264_streaming"]))
+	if(in_array($proot,["mod_maxminddb","mod_fcgid","mod_h2","mod_md","mod_wku_bt","mod_h264_streaming","mod_qos","mod_security"]))
 		$proot = "httpd";
 	if(in_array($proot,["pecl-memcache","php-geos","pecl-text-xdiff","php-ext-brotli","xdebug","php-src"]))
 		$proot = "php";
 	$nogit = array(
+		"mod_fcgid"			=> ["/#define MODFCGID_VERSION_MAJOR *([0-9]+).*#define MODFCGID_VERSION_MINOR *([0-9]+).*#define MODFCGID_VERSION_SUBVER *([0-9]+).*#define MODFCGID_VERSION_DEV *([0-9]+)/s",
+							pathenv("PATH_SRC")."/".$argv[1]."/modules/fcgid/fcgid_conf.h"],
 		"libxml2"			=> ["/#define LIBXML_DOTTED_VERSION +\"([0-9\.]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/win32/rcVersion.h"],
 		"python"			=> ["/#define PY_VERSION +\"([0-9\.]+)/s",
