@@ -1,39 +1,39 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1
 call cl /w /MD /Zi /O2 /GL /MD /Zi /MP16 %AVX% /DNDEBUG /c /DLUA_BUILD_AS_DLL /Fdliblua.pdb /FS ^
-lutf8lib.c ^
-lvm.c ^
-lzio.c ^
-lundump.c ^
-ltests.c ^
-ltm.c ^
-lua.c ^
-lstrlib.c ^
-ltable.c ^
-ltablib.c ^
-lstate.c ^
-lstring.c ^
-loslib.c ^
-lparser.c ^
-loadlib.c ^
-lobject.c ^
-lopcodes.c ^
-lmathlib.c ^
-lmem.c ^
-linit.c ^
-liolib.c ^
-llex.c ^
-ldump.c ^
-lfunc.c ^
-lgc.c ^
-ldblib.c ^
-ldebug.c ^
-ldo.c ^
+lapi.c ^
+lauxlib.c ^
+lbaselib.c ^
 lcode.c ^
 lcorolib.c ^
 lctype.c ^
-lapi.c ^
-lauxlib.c ^
-lbaselib.c
+ldblib.c ^
+ldebug.c ^
+ldo.c ^
+ldump.c ^
+lfunc.c ^
+lgc.c ^
+linit.c ^
+liolib.c ^
+llex.c ^
+lmathlib.c ^
+lmem.c ^
+loadlib.c ^
+lobject.c ^
+lopcodes.c ^
+loslib.c ^
+lparser.c ^
+lstate.c ^
+lstring.c ^
+lstrlib.c ^
+ltable.c ^
+ltablib.c ^
+ltests.c ^
+ltm.c ^
+lua.c ^
+lundump.c ^
+lutf8lib.c ^
+lvm.c ^
+lzio.c
 
 ren lua.obj lua.o
 
