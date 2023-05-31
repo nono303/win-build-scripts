@@ -14,6 +14,8 @@
 	if(in_array($proot,["pecl-memcache","php-geos","pecl-text-xdiff","php-ext-brotli","xdebug","php-src"]))
 		$proot = "php";
 	$nogit = array(
+		"libssh2"			=> ["/#define LIBSSH2_VERSION_MAJOR *([0-9]+).*#define LIBSSH2_VERSION_MINOR *([0-9]+).*#define LIBSSH2_VERSION_PATCH *([0-9]+)/s",
+							pathenv("PATH_SRC")."/".$argv[1]."/include/libssh2.h"],
 		"mod_fcgid"			=> ["/#define MODFCGID_VERSION_MAJOR *([0-9]+).*#define MODFCGID_VERSION_MINOR *([0-9]+).*#define MODFCGID_VERSION_SUBVER *([0-9]+).*#define MODFCGID_VERSION_DEV *([0-9]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/modules/fcgid/fcgid_conf.h"],
 		"libxml2"			=> ["/#define LIBXML_DOTTED_VERSION +\"([0-9\.]+)/s",

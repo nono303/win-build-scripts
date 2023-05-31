@@ -1,22 +1,42 @@
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index e6c95c8..32678c8 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -78,9 +78,9 @@ if(NOT LIBSSH2_VERSION OR
+diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
+index 1cdc524..325024b 100644
+--- "a/CMakeLists.txt"
++++ "b/CMakeLists.txt"
+@@ -88,11 +88,11 @@ if(NOT LIBSSH2_VERSION OR
  endif()
  
  include(GNUInstallDirs)
 -install(
--  FILES docs/AUTHORS COPYING docs/HACKING README RELEASE-NOTES NEWS
+-  FILES
+-    COPYING NEWS README RELEASE-NOTES
+-    docs/AUTHORS docs/BINDINGS.md docs/HACKING.md
 -  DESTINATION ${CMAKE_INSTALL_DOCDIR})
 +# install(
-+#  FILES docs/AUTHORS COPYING docs/HACKING README RELEASE-NOTES NEWS
++#   FILES
++#     COPYING NEWS README RELEASE-NOTES
++#     docs/AUTHORS docs/BINDINGS.md docs/HACKING.md
 +#  DESTINATION ${CMAKE_INSTALL_DOCDIR})
  
  include(max_warnings)
- include(FeatureSummary)
-@@ -106,7 +106,7 @@ if(LINT)
-   add_dependencies(libssh2 lint)
+ 
+@@ -315,6 +315,7 @@ if(CRYPTO_BACKEND STREQUAL "OpenSSL" OR NOT CRYPTO_BACKEND)
+         NAMES crypto.dll
+           libcrypto-1_1.dll libcrypto-1_1-x64.dll
+           libcrypto-3.dll libcrypto-3-x64.dll
++	  libcrypto-81_3.dll libcrypto-81_3-x64.dll
+         HINTS ${_OPENSSL_ROOT_HINTS} PATHS ${_OPENSSL_ROOT_PATHS}
+         PATH_SUFFIXES bin NO_DEFAULT_PATH)
+       if(DLL_LIBCRYPTO)
+@@ -328,6 +329,7 @@ if(CRYPTO_BACKEND STREQUAL "OpenSSL" OR NOT CRYPTO_BACKEND)
+         NAMES ssl.dll
+           libssl-1_1.dll libssl-1_1-x64.dll
+           libssl-3.dll libssl-3-x64.dll
++	  libssl-81_3.dll libssl-81_3-x64.dll
+         HINTS ${_OPENSSL_ROOT_HINTS} PATHS ${_OPENSSL_ROOT_PATHS}
+         PATH_SUFFIXES bin NO_DEFAULT_PATH)
+       if(DLL_LIBSSL)
+@@ -459,7 +461,7 @@ if(LINT)
+   endif()
  endif()
  
 -add_subdirectory(docs)
@@ -24,31 +44,3 @@ index e6c95c8..32678c8 100644
  
  feature_summary(WHAT ALL)
  
-diff --git a/include/libssh2.h b/include/libssh2.h
-index f17b502..b245bbc 100644
---- a/include/libssh2.h
-+++ b/include/libssh2.h
-@@ -46,12 +46,12 @@
-    to make the BANNER define (used by src/session.c) be a valid SSH
-    banner. Release versions have no appended strings and may of course not
-    have dashes either. */
--#define LIBSSH2_VERSION                             "1.9.0_DEV"
-+#define LIBSSH2_VERSION                             "1.10.0"
- 
- /* The numeric version number is also available "in parts" by using these
-    defines: */
- #define LIBSSH2_VERSION_MAJOR                       1
--#define LIBSSH2_VERSION_MINOR                       9
-+#define LIBSSH2_VERSION_MINOR                       10
- #define LIBSSH2_VERSION_PATCH                       0
- 
- /* This is the numeric version of the libssh2 version number, meant for easier
-@@ -69,7 +69,7 @@
-    and it is always a greater number in a more recent release. It makes
-    comparisons with greater than and less than work.
- */
--#define LIBSSH2_VERSION_NUM                         0x010900
-+#define LIBSSH2_VERSION_NUM                         0x011000
- 
- /*
-  * This is the date and time when the full source package was created. The
