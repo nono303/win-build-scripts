@@ -16,6 +16,7 @@ meson setup ^
 -Dlogging=true ^
 -Dtestdata_tests=false ^
 -Dfuzzing_engine=none ^
+-Dfuzzer_ldflags=none ^
 -Dstack_alignment=0 ^
 -Dxxhash_muxer=auto ^
 -Dtrim_dsp=true ^
