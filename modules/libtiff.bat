@@ -41,11 +41,14 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -Dzstd=ON ^
 -Dwebp=ON ^
 -Dcxx=OFF ^
+-Dlerc=ON ^
 -Dstrip-chopping=ON ^
 -Ddefer-strile-load=OFF ^
 -Dchunky-strip-read=OFF ^
 -Dextrasample-as-alpha=ON ^
 -Dcheck-ycbcr-subsampling=ON ^
+-Dtiff-opengl=ON ^
+-Dwin32-io=ON ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
