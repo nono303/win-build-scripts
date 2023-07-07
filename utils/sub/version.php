@@ -205,14 +205,14 @@
 				$rpdb = "";
 				preg_match("/(libevent-[0-9]\.[0-9])/",$argv[2],$matches);
 				$libevent = str_replace("-",":",$matches[1]);
-				$gccver = end(explode(" ",explode("\n",shell_exec("gcc --version"))[0]));
+				//$gccver = end(explode(" ",explode("\n",shell_exec("gcc --version"))[0]));
 				if(is_int(strpos($argv[2],"\\x86\\")))
 					$arch = "x86";
 				if(is_int(strpos($argv[2],"\\x64\\")))
 					$arch = "x64";
 				if(is_int(strpos($argv[2],"-avx")))
 					$avx = "-avx";
-				$description = "arch:".$arch.$avx." gcc:".$gccver." ".$libevent;
+				$description = "arch:".$arch.$avx." "./*"gcc:".$gccver." ".*/$libevent;
 			} elseif($argv[3] != ""){
 				$descadd = " ".$argv[3];
 			}
