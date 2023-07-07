@@ -1,7 +1,7 @@
 * disable debug
 * define __CYGWIN__
 diff --git a/Makefile.am b/Makefile.am
-index 9b17bc7..ba0ff1e 100644
+index 4208331..1a1ba88 100644
 --- a/Makefile.am
 +++ b/Makefile.am
 @@ -1,6 +1,6 @@
@@ -13,10 +13,10 @@ index 9b17bc7..ba0ff1e 100644
  BUILT_SOURCES=
  
 diff --git a/configure.ac b/configure.ac
-index be2b460..b278788 100644
+index d94f6fb..c087f8a 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -808,5 +808,8 @@ then
+@@ -864,5 +864,8 @@ then
    CFLAGS="$CFLAGS -errfmt=error -errwarn -errshort=tags"
  fi
  
