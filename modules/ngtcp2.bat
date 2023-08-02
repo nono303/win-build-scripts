@@ -19,12 +19,13 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DOPENSSL_INCLUDE_DIR=%PATH_INSTALL_OSSL%\include ^
 -DENABLE_STATIC_LIB=OFF ^
 -DENABLE_SHARED_LIB=ON ^
+-DCMAKE_DISABLE_FIND_PACKAGE_CUnit=1 ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% lib/install crypto/install
 
-for %%X in (lib\ngtcp2.pdb crypto\openssl\ngtcp2_crypto_openssl.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*)
-for %%X in (ngtcp2 ngtcp2_crypto_openssl) do (
+for %%X in (lib\ngtcp2.pdb crypto\quictls\ngtcp2_crypto_quictls.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*)
+for %%X in (ngtcp2 ngtcp2_crypto_quictls) do (
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X.dll
 )
