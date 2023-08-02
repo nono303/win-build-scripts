@@ -1,11 +1,94 @@
 # changelog
 
 
+## 1.7.4 _(2023-08-02)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  GRADLEVER 8.2 > 8.2.1
+`.gradle-wrapper.properties/fit2gpx_gradle-wrapper.properties`
+`.gradle-wrapper.properties/mapsforgesrc_gradle-wrapper.properties`
+`.gradle-wrapper.properties/tzdataservice_gradle-wrapper.properties`
+`env_sample.bat`
+*  update geographiclib 2.3 nbbin
+`utils/bininfo.bat`
+*  bump 73 > 74
+`modules/icu.patch`
+*  remove duplicate
+`modules/geographiclib.bat`
+*  fix ngtcp2_crypto_openssl > ngtcp2_crypto_quictls
+`modules/curl.bat`
+*  upgrade edu.sc.seis.launch4j 2.5.4 > 3.0.3
+`modules/mobac.patch`
+*  CMAKE_DISABLE_FIND_PACKAGE_CUnit bump openssl > quicktls
+`modules/ngtcp2.bat`
+*  CMAKE_DISABLE_FIND_PACKAGE CUnit & Systemd DISABLE_HPACK_TOOLS Fix LIBNGTCP2_CRYPTO
+`modules/nghttp2.bat`
+*  CMAKE_DISABLE_FIND_PACKAGE_CUnit
+`modules/nghttp3.bat`
+*  update tools and src
+`README.md`
+`utils/srccreate.bat`
+*  1874
+`modules/libyuv.patch`
+*  disable gcc version for memcached
+`utils/sub/version.php`
+*  bump to gradle 8.2
+`env_sample.bat`
+`modules/mobac.patch`
+*  typo
+`modules/mapsforgesrv.bat`
+`modules/mobac.bat`
+`modules/tzdataservice.bat`
+*  v4.5.1
+`modules/libtiff.bat`
+`modules/libtiff.patch`
+*  v1.10.0 disable tools building
+`modules/libzip.bat`
+`utils/bininfo.bat`
+*  remove duplicate cmake option
+`modules/libgeotiff.bat`
+*  fix offset for 1.6.21
+`modules/memcached.patch`
+*  add fit2gpx
+`SRC_VERSION.md`
+`modules/fit2gpx.bat`
+`usage.txt`
+*  disable FIND_PACKAGE NO_MODULE QUIET (forced)
+`modules/libgeotiff.patch`
+*  3.11 > 3.12
+`modules/geos.bat`
+*  dav1d: 1.2.0 > 1.2.1
+`modules/dav1d.bat`
+*  tidy: 5.9.14 > 5.9.20
+`modules/tidy.bat`
+`modules/tidy.patch`
+`utils/sub/version.php`
+*  libevent: 2.1 > 2.2
+`modules/libevent.bat`
+*  curl: 8.0 > 8.1
+`modules/curl_ca-win.patch`
+*  sqlite: 3.41 > 3.42
+`modules/sqlite.bat`
+`modules/sqlite.patch`
+*  libssh2 1.10 > 1.11
+`modules/libssh2.bat`
+`modules/libssh2.patch`
+`utils/sub/version.php`
+*  bump MSVC 14.37 (17.7)
+`vs17.bat`
+*  v5.4.6
+`modules/lua.bat`
+
+
 ## 1.7.3 _(2023-05-14)_
 
 *  1.7.3
 `README.md`
 `SRC_VERSION.md`
+`changelog.md`
 `utils/srccreate.bat`
 *  fix copy paste from mod_md use version from fcgid_conf.h add bininfo cmd for github
 `modules/mod_fcgid.bat`
