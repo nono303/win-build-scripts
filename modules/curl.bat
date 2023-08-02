@@ -24,7 +24,7 @@ if %QUIC_BUILD% == 1 (
 		-DUSE_QUICHE=OFF ^
 		-DUSE_MSH3=OFF ^
 		-DNGTCP2_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
-		-DNGTCP2_LIBRARY=%PATH_INSTALL:\=/%/lib/ngtcp2_crypto_openssl.lib;%PATH_INSTALL:\=/%/lib/ngtcp2.lib ^
+		-DNGTCP2_LIBRARY=%PATH_INSTALL:\=/%/lib/ngtcp2_crypto_quictls.lib;%PATH_INSTALL:\=/%/lib/ngtcp2.lib ^
 		-DNGHTTP3_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 		-DNGHTTP3_LIBRARY=%PATH_INSTALL:\=/%/lib/nghttp3.lib
 )
