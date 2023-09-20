@@ -3,9 +3,10 @@
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
--DCMAKE_DISABLE_FIND_PACKAGE_PkgConfig=ON ^
+-DCMAKE_DISABLE_FIND_PACKAGE_JBIG=ON ^
 -DBUILD_SHARED_LIBS=ON ^
 -Dtiff-tools=OFF ^
+-Dtiff-tools-unsupported=OFF ^
 -Dtiff-tests=OFF ^
 -Dtiff-contrib=OFF ^
 -Dtiff-docs=OFF ^
@@ -47,7 +48,6 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -Dchunky-strip-read=OFF ^
 -Dextrasample-as-alpha=ON ^
 -Dcheck-ycbcr-subsampling=ON ^
--Dtiff-opengl=ON ^
 -Dwin32-io=ON ^
 %PATH_SRC%\%1
 
