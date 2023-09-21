@@ -1,8 +1,60 @@
 # changelog
 
 
+## 1.7.5 _(2023-09-21)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  remove unused target disable C4113 warn (test)
+`modules/icu.bat`
+*  fixed in 1875 - 3aae5c7f
+`modules/libyuv.patch`
+*  +CMAKE_DISABLE_FIND_PACKAGE_SDL=ON
+`modules/libwebp.bat`
+*  +tiff-tools-unsupported=OFF +CMAKE_DISABLE_FIND_PACKAGE_JBIG=ON -CMAKE_DISABLE_FIND_PACKAGE_PkgConfig=ON -tiff-opengl=ON
+`modules/libtiff.bat`
+*  allow libgd > 0.8.2
+`modules/libgd.patch`
+*  AVIF_BUILD_APPS: ON > OFF +AVIF_ENABLE_EXPERIMENTAL_YCGCO_R=ON +AVIF_LOCAL_AVM=OFF remove duplicate copy of pdb
+`modules/libavif.bat`
+*  update src for mod_h2 2.0.24
+`modules/httpd.patch`
+*  don't build x86 only update x64 version & bininfo
+`modules/memcached.bat`
+*  +BUILD_EXAMPLES=OFF
+`modules/proj.bat`
+*  disable build of avifenc.exe & avifdec.exe
+`utils/bininfo.bat`
+*  cmake options - 3.7.2 - skip findind unused lib - fix CMAKE_PREFIX_PATH (expat, geotiff, geos, zstd)
+`modules/gdal.bat`
+*  install \lib\pkgconfig\dav1d.pc for gdal
+`modules/dav1d.bat`
+*  vcvars_ver: 14.37 > 14.38
+`vs17.bat`
+*  fix symlink for gradle-wrapper
+`.gradle-wrapper.properties/mapsforgesrv-mapsforgesrv_gradle-wrapper.properties.properties`
+`.gradle-wrapper.properties/mapsforgesrv_gradle-wrapper.properties`
+*  8.3.0
+`modules/curl.bat`
+`modules/curl_ca-win.patch`
+*  1.1.0
+`modules/brotli.bat`
+*  3.7.0 msbuild > ninja fix https://aomedia-review.googlesource.com/q/I36a4db36fb67237e94f1db3b0042ce219446e559 fix ninja: error: build.ninja:288: multiple rules generate aom.lib [-w dupbuild=err]
+`modules/aom.bat`
+`modules/aom.patch`
+*  bump to gradle 8.3
+`env_sample.bat`
+`modules/mobac.patch`
+*  bump to gradle 8.3
+`env_sample.bat`
+
+
 ## 1.7.4 _(2023-08-02)_
 
+*  1.7.4
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
