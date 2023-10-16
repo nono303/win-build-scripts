@@ -9,7 +9,7 @@ meson setup ^
 -Ddefault_library=shared ^
 -Dbitdepths=8 ^
 -Denable_asm=true ^
--Denable_tools=true ^
+-Denable_tools=false ^
 -Denable_examples=false ^
 -Denable_tests=false ^
 -Denable_docs=false ^
