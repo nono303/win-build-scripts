@@ -1,0 +1,186 @@
+From fd1b829368c3a365663c0c25c25e7b30837f5f61 Mon Sep 17 00:00:00 2001
+From: willson-chen <willson.chenwx@gmail.com>
+Date: Fri, 27 Sep 2019 17:35:31 +0800
+Subject: [PATCH 1/4] implementation of mkstemp in src/webpng.c under win
+
+use _mktemp_s and _open to implement mkstemp in src/webpng.c under win
+---
+ src/webpng.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/src/webpng.c b/src/webpng.c
+index b376253de..38e004fb5 100644
+--- a/src/webpng.c
++++ b/src/webpng.c
+@@ -11,6 +11,11 @@
+ #ifdef HAVE_UNISTD_H
+ #include <unistd.h>
+ #endif
++#ifdef WIN32
++#include <errno.h>
++#include <fcntl.h>
++#include <sys/stat.h>
++#endif
+ 
+ #ifdef __clang__
+ /* Workaround broken clang behavior: https://llvm.org/bugs/show_bug.cgi?id=20144 */
+@@ -264,7 +269,14 @@ main(int argc, char **argv)
+ 		memcpy(tmpfile, infile, filelen);
+ 		strcpy(tmpfile + filelen, ".XXXXXX");
+ 
++#ifdef WIN32
++		if (_mktemp_s(tmpfile, strlen(tmpfile) + 1) == EINVAL)
++			err("could not get a tempfile name");
++		outfd = _open(tmpfile, _O_CREAT | _O_EXCL | _O_RDWR | _O_BINARY,
++				_S_IREAD | _S_IWRITE);
++#else
+ 		outfd = mkstemp(tmpfile);
++#endif
+ 		if (outfd == -1)
+ 			err("could not open %s", tmpfile);
+ 
+
+From e40eb236a4cd32c33209c36e4e864391b1ae9b04 Mon Sep 17 00:00:00 2001
+From: willson-chen <willson.chenwx@gmail.com>
+Date: Sun, 29 Sep 2019 20:25:04 +0800
+Subject: [PATCH 2/4] Impletemented mkstemp under windows platform for MSVC
+
+---
+ src/CMakeLists.txt |  2 +-
+ src/mkstemp.c      | 21 +++++++++++++++++++++
+ src/webpng.c       | 12 ------------
+ 3 files changed, 22 insertions(+), 13 deletions(-)
+ create mode 100644 src/mkstemp.c
+
+diff --git a/src/mkstemp.c b/src/mkstemp.c
+new file mode 100644
+index 000000000..505c169e5
+--- /dev/null
++++ b/src/mkstemp.c
+@@ -0,0 +1,21 @@
++#include <io.h>
++#include <errno.h>
++#include <fcntl.h>
++#include <sys/stat.h>
++
++/*
++ * mkstemp --
++ *  Generate a unique temporary filename from template, create and open the
++ *    file, and return an open file descriptor for the file.
++ *  A return value of -1 indicates an error while errno is set.
++ */
++int
++mkstemp(char *template)
++{
++	if (template == NULL)
++		return -1;
++	if (_mktemp_s(template, strlen(template) + 1) == EINVAL)
++		return -1;
++	return _open(template, _O_CREAT | _O_EXCL | _O_RDWR | _O_BINARY,
++			_S_IREAD | _S_IWREITE);
++}
+diff --git a/src/webpng.c b/src/webpng.c
+index 38e004fb5..b376253de 100644
+--- a/src/webpng.c
++++ b/src/webpng.c
+@@ -11,11 +11,6 @@
+ #ifdef HAVE_UNISTD_H
+ #include <unistd.h>
+ #endif
+-#ifdef WIN32
+-#include <errno.h>
+-#include <fcntl.h>
+-#include <sys/stat.h>
+-#endif
+ 
+ #ifdef __clang__
+ /* Workaround broken clang behavior: https://llvm.org/bugs/show_bug.cgi?id=20144 */
+@@ -269,14 +264,7 @@ main(int argc, char **argv)
+ 		memcpy(tmpfile, infile, filelen);
+ 		strcpy(tmpfile + filelen, ".XXXXXX");
+ 
+-#ifdef WIN32
+-		if (_mktemp_s(tmpfile, strlen(tmpfile) + 1) == EINVAL)
+-			err("could not get a tempfile name");
+-		outfd = _open(tmpfile, _O_CREAT | _O_EXCL | _O_RDWR | _O_BINARY,
+-				_S_IREAD | _S_IWRITE);
+-#else
+ 		outfd = mkstemp(tmpfile);
+-#endif
+ 		if (outfd == -1)
+ 			err("could not open %s", tmpfile);
+ 
+
+From 91cf19ce8417847ca9b090a76682bb92adf75b1d Mon Sep 17 00:00:00 2001
+From: willson-chen <willson.chenwx@gmail.com>
+Date: Sun, 29 Sep 2019 20:40:06 +0800
+Subject: [PATCH 3/4] fixed typo
+
+---
+ src/mkstemp.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/mkstemp.c b/src/mkstemp.c
+index 505c169e5..74dee7133 100644
+--- a/src/mkstemp.c
++++ b/src/mkstemp.c
+@@ -17,5 +17,5 @@ mkstemp(char *template)
+ 	if (_mktemp_s(template, strlen(template) + 1) == EINVAL)
+ 		return -1;
+ 	return _open(template, _O_CREAT | _O_EXCL | _O_RDWR | _O_BINARY,
+-			_S_IREAD | _S_IWREITE);
++			_S_IREAD | _S_IWRITE);
+ }
+
+From ffc181cf6df14e5f1a95c4a989b4ccae02846e89 Mon Sep 17 00:00:00 2001
+From: willson-chen <willson.chenwx@gmail.com>
+Date: Fri, 25 Oct 2019 15:06:27 +0800
+Subject: [PATCH 4/4] Close 2 warnings while compiling under win.
+
+- src/mkstemp.c: add `#include <string.h>` for strlen.
+- src/webpng.c: add mkstemp declaration under win.
+---
+ src/mkstemp.c | 1 +
+ src/webpng.c  | 4 ++++
+ 2 files changed, 5 insertions(+)
+
+diff --git a/src/mkstemp.c b/src/mkstemp.c
+index 74dee7133..ff711016c 100644
+--- a/src/mkstemp.c
++++ b/src/mkstemp.c
+@@ -2,6 +2,7 @@
+ #include <errno.h>
+ #include <fcntl.h>
+ #include <sys/stat.h>
++#include <string.h>
+ 
+ /*
+  * mkstemp --
+diff --git a/src/webpng.c b/src/webpng.c
+index b376253de..9e3762c80 100644
+--- a/src/webpng.c
++++ b/src/webpng.c
+@@ -12,6 +12,10 @@
+ #include <unistd.h>
+ #endif
+ 
++#ifdef _WIN32
++extern int mkstemp(char *template);
++#endif
++
+ #ifdef __clang__
+ /* Workaround broken clang behavior: https://llvm.org/bugs/show_bug.cgi?id=20144 */
+ #undef strcmp
+diff --git "a/src/CMakeLists.txt" "b/src/CMakeLists.txt"
+index 1069c4f7..7f3b60e5 100644
+--- "a/src/CMakeLists.txt"
++++ "b/src/CMakeLists.txt"
+@@ -55,7 +55,7 @@ SET (GD_PROGRAMS_LIB_SRC_FILES)
+ 
+ if(MSVC)
+ 	set(GD_PROGRAMS_LIB_SRC_FILES ${GD_PROGRAMS_LIB_SRC_FILES}
+-		getopt.c
++		getopt.c mkstemp.c
+ 	)
+ endif(MSVC)
+ 
