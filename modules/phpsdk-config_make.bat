@@ -59,6 +59,11 @@ if %PHPVER% == 8.2 (
 			--with-php-build=%PATH_INSTALL%
 	set native-intrinsics=1
 )
+if %PHPVER% == 8.3 (
+	set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
+			--with-php-build=%PATH_INSTALL%
+	set native-intrinsics=1
+)
 
 set PHP_COMMON_CONFIGURE=^
 	--disable-cli-win32 ^
