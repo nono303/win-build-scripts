@@ -29,10 +29,10 @@ index 1ad7e370cc..9cc9de2a2c 100644
  	};
  	int i;
 diff --git "a/ext/iconv/iconv.c" "b/ext/iconv/iconv.c"
-index c0286de7bb..e98c63c9bd 100644
+index 9d7905c9a9..36dabfdc69 100644
 --- "a/ext/iconv/iconv.c"
 +++ "b/ext/iconv/iconv.c"
-@@ -61,7 +61,7 @@ char *get_iconv_version(void) {
+@@ -69,7 +69,7 @@ char *get_iconv_version(void) {
  
  #ifdef HAVE_LIBICONV
  	static char buf[16];
