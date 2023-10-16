@@ -9,7 +9,7 @@ if not exist %PATH_SRC%\%1\%OUTDIR_CONF%\. mklink /J %PATH_SRC%\%1\%OUTDIR_CONF%
 python gen-make.py ^
 --release ^
 -t vcproj ^
---vsnet-version=2017 ^
+--vsnet-version=2022 ^
 --with-jdk=%JAVA_HOME% ^
 --with-serf=%PATH_INSTALL%\include ^
 --with-sqlite=%PATH_SRC%\sqlite ^
