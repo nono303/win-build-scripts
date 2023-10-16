@@ -1,68 +1,44 @@
 Index: build.gradle
 ===================================================================
---- build.gradle	(revision 2744)
+--- build.gradle	(revision 2759)
 +++ build.gradle	(working copy)
-@@ -4,9 +4,10 @@
- 
- plugins {
+@@ -6,7 +6,7 @@
      id 'distribution'
--    id "at.bxm.svntools" version "2.2.1"
--    id 'org.gradle.crypto.checksum' version '1.1.0'
--    id 'com.diffplug.spotless' version '6.8.0'
-+    id "at.bxm.svntools" version "3.1"
-+    id 'org.gradle.crypto.checksum' version '1.4.0'
-+    id 'com.diffplug.spotless' version '6.20.0'
-+    id 'nebula.lint' version "18.1.0"
+     id 'at.bxm.svntools' version '3.1'
+     id 'org.gradle.crypto.checksum' version '1.4.0'
+-    id 'com.diffplug.spotless' version '6.21.0'
++    id 'com.diffplug.spotless' version '6.22.0'
  }
  
  group 'mobac.sourceforge.io'
-@@ -16,12 +17,11 @@
- 
- allprojects {
-     repositories {
--        mavenCentral()
+@@ -19,9 +19,8 @@
+         mavenCentral()
          maven {
              // required for javax.media:jai-core:1.1.3 and com.sun.media:jai-codec:1.1.3
 -            url "https://repository.jboss.org/maven2"
 +            url "https://repo.osgeo.org/repository/release"
          }
 -
-+        mavenCentral()
          // maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
      }
      ext {
 Index: gradle/wrapper/gradle-wrapper.properties
 ===================================================================
---- gradle/wrapper/gradle-wrapper.properties	(revision 2744)
+--- gradle/wrapper/gradle-wrapper.properties	(revision 2759)
 +++ gradle/wrapper/gradle-wrapper.properties	(working copy)
-@@ -1,5 +1,7 @@
+@@ -1,6 +1,6 @@
  distributionBase=GRADLE_USER_HOME
  distributionPath=wrapper/dists
--distributionUrl=https\://services.gradle.org/distributions/gradle-7.6-bin.zip
-+distributionUrl=https\://services.gradle.org/distributions/gradle-8.3-bin.zip
-+networkTimeout=10000
-+validateDistributionUrl=true
+-distributionUrl=https\://services.gradle.org/distributions/gradle-8.3-bin.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-8.4-bin.zip
+ networkTimeout=10000
+ validateDistributionUrl=true
  zipStoreBase=GRADLE_USER_HOME
- zipStorePath=wrapper/dists
 Index: mobac/build.gradle
 ===================================================================
---- mobac/build.gradle	(revision 2744)
+--- mobac/build.gradle	(revision 2759)
 +++ mobac/build.gradle	(working copy)
-@@ -1,11 +1,10 @@
- plugins {
-     id 'java-library'
--    id 'edu.sc.seis.launch4j' version '2.5.4'
-+    id 'edu.sc.seis.launch4j' version '3.0.3'
- }
- 
- dependencies {
--    def mapsforgeVersion = '0.18.0'
--    // def mapsforgeVersion = 'master-SNAPSHOT'
-+    def mapsforgeVersion = '+'
- 
-     implementation "org.mapsforge:mapsforge-core:${mapsforgeVersion}"
-     implementation "org.mapsforge:mapsforge-map:${mapsforgeVersion}"
-@@ -12,29 +11,29 @@
+@@ -12,29 +12,29 @@
      implementation "org.mapsforge:mapsforge-map-awt:${mapsforgeVersion}"
      implementation "org.mapsforge:mapsforge-map-reader:${mapsforgeVersion}"
      implementation "org.mapsforge:mapsforge-themes:${mapsforgeVersion}"
@@ -72,7 +48,7 @@ Index: mobac/build.gradle
 -    api 'org.apache.commons:commons-lang3:3.12.0'
 -    api 'org.apache.commons:commons-text:1.9'
 -    api 'com.github.kerner1000:javapng:2.1.2'
--    api 'org.xerial:sqlite-jdbc:3.34.0'
+-    api 'org.xerial:sqlite-jdbc:3.43.0.0'
 -    api 'com.sleepycat:je:5.0.73'
 -    api 'org.glassfish.jaxb:jaxb-runtime:3.0.2'
 -    api 'org.slf4j:slf4j-api:1.7.36'
@@ -114,32 +90,9 @@ Index: mobac/build.gradle
  }
  processResources {
      doLast {
-@@ -91,14 +90,16 @@
-     icon = "${projectDir}/launch4j/mobac.ico"
-     downloadUrl = "https://mobac.sourceforge.io/OpenJDK/"
-     jreMinVersion = '1.11.0'
--    jreRuntimeBits = "64"
--    dontWrapJar = "true"
-+    requires64Bit = true
-+    dontWrapJar = true
-     libraryDir = ""
-     copyConfigurable = [] //["${project.buildDir}/libs/Mobile_Atlas_Creator.jar"]
--    jar = "Mobile_Atlas_Creator.jar"
-+    // jar = "Mobile_Atlas_Creator.jar"
-     outfile = "Mobile Atlas Creator.exe"
- }
- 
- test {
-     useJUnitPlatform()
--}
-\ No newline at end of file
-+}
-+
-+// gradleLint.rules = ['all-dependency']
-\ No newline at end of file
 Index: mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(revision 2744)
+--- mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(revision 2759)
 +++ mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(working copy)
 @@ -34,15 +34,10 @@
  	static {
@@ -161,7 +114,7 @@ Index: mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java
  	}
 Index: mobac/src/main/java/mobac/gui/MainGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2744)
+--- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2759)
 +++ mobac/src/main/java/mobac/gui/MainGUI.java	(working copy)
 @@ -151,7 +151,7 @@
  
@@ -182,7 +135,7 @@ Index: mobac/src/main/java/mobac/gui/MainGUI.java
  		leftPanelContent.add(mapSourcePanel, gbc_eol);
 Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2744)
+--- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2759)
 +++ mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(working copy)
 @@ -43,7 +43,7 @@
  		JScrollPane mapSourceTreeScrollPane = new JScrollPane(mapSourceTree, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -195,7 +148,7 @@ Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
  	}
 Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2744)
+--- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2759)
 +++ mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(working copy)
 @@ -95,7 +95,7 @@
  
@@ -208,7 +161,7 @@ Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
  	private final Settings settings = Settings.getInstance();
 Index: mobac/src/main/java/mobac/program/AtlasThread.java
 ===================================================================
---- mobac/src/main/java/mobac/program/AtlasThread.java	(revision 2744)
+--- mobac/src/main/java/mobac/program/AtlasThread.java	(revision 2759)
 +++ mobac/src/main/java/mobac/program/AtlasThread.java	(working copy)
 @@ -203,13 +203,13 @@
  			}
@@ -228,7 +181,7 @@ Index: mobac/src/main/java/mobac/program/AtlasThread.java
  		} catch (AtlasTestException e) {
 Index: mobac/src/main/java/mobac/program/download/MobacTrustManager.java
 ===================================================================
---- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2744)
+--- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2759)
 +++ mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(working copy)
 @@ -128,7 +128,7 @@
  			defaultTrustManager.checkServerTrusted(chain, authType);
