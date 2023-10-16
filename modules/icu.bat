@@ -19,7 +19,7 @@ sed -i 's/NXCOMPAT/NXCOMPAT \/OPT:REF,ICF \/DEBUG/g' %CYGPATH_SRC%/%1/icu4c/sour
 	REM 	derb,genbrk,genccode,gencfu,gencmn,gencnval,gendict,gennorm2,genrb,gensprep,icuinfo,icupkg,makeconv,uconv
 MSBuild.exe %PATH_SRC%\%1\%VCDIR%\allinone.sln %MSBUILD_OPTS% ^
 /t:common,date,i18n,icuexportdata,io,makedata,pkgdata,stubdata ^
-/nowarn:C4805;C4804;C4018;C4116;C4267;C4312;C4146;MSB8028,C4113 ^
+/nowarn:C4805;C4804;C4018;C4116;C4267;C4312;C4146;MSB8028,C4113,C4101 ^
 /p:Configuration=%OUTDIR_CONF% ^
 /p:Platform=%archmsbuild% ^
 /p:SkipUWP=true
