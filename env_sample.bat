@@ -98,7 +98,7 @@ cd /D %PATH_BATCH%
 
 REM ########################## BUILD OPTION
 	REM https://services.gradle.org/distributions/
-set GRADLEVER=8.3
+set GRADLEVER=8.4
 	REM see dir in %PATH_ROOTWKIT%\Lib
 set WKITVER=10.0.22621.0
 	REM .NET installed SDK
@@ -161,6 +161,7 @@ set LOCAL_PATH_MOBAC=C:\PROGRA~2\mobac
 set LOCAL_PATH_MOBAC2=F:\logiciels\_Carto
 set LOCAL_PATH_PYTHON=B:\serveur\python3
 set LOCAL_PATH_GEOGRAPHICLIB=B:\serveur\_gis\geographiclib
+set LOCAL_PATH_FIT2GPX=B:\bin
 REM only for PROJ & GEOGRAPHICLIB
 set LOCAL_COPY_AVXECHO=avx
 set LOCAL_COPY_MSVC_VER=17
