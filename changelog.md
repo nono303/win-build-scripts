@@ -1,8 +1,52 @@
 # changelog
 
 
+## 1.7.6 _(2023-10-16)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  1.17 WITH_EXAMPLES: OFF > ON (heif-thumbnailer.exe heif-enc.exe heif-convert.exe heif-info.exe) + DISABLE_FIND_PACKAGE_Doxygen + XXX_PLUGIN=OFF + WITH_LIBSHARPYUV=ON + WITH_JPEG_DECODER=ON & WITH_JPEG_ENCODER=ON
+`modules/libheif.bat`
+`utils/bininfo.bat`
+*  typo
+`modules/ngtcp2.bat`
+*  prepare for 8.3
+`modules/php8.3_php-src.patch`
+`modules/phpsdk-config_make.bat`
+*  LOCAL_COPY for fit2gpx gradle: 8.3 > 8.4
+`env_sample.bat`
+`modules/fit2gpx.bat`
+*  8.4.0: CURL_USE_OPENLDAP removed
+`modules/curl.bat`
+*  fix include version for subversion that require 3 digits
+`modules/zlib.bat`
+*  compile from trunk set compiler 2017 > 2022
+`modules/subversion.bat`
+`modules/subversion.patch`
+`utils/sub/version.php`
+*  patch with PR 514 787 851
+`modules/libgd.bat`
+`modules/libgd_pr514.patch`
+`modules/libgd_pr787.patch`
+`modules/libgd_pr851.patch`
+*  disable tools
+`modules/dav1d.bat`
+*  r2759
+`modules/mobac.patch`
+*  nowarn C4101
+`modules/icu.bat`
+*  8.2.11: fix offset for /ext/iconv/iconv.c
+`modules/php8.2_php-src.patch`
+*  comment for x86 deprecated
+`modules/memcached_event-2.0.sh`
+
+
 ## 1.7.5 _(2023-09-21)_
 
+*  1.7.5
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
