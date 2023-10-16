@@ -34,15 +34,15 @@ git checkout master
 cd /D ..
 git clone https://github.com/c-ares/c-ares.git cares
 cd /D cares
-git checkout tags/cares-1_19_1
+git checkout tags/cares-1_20_1
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-8_3_0
+git checkout tags/curl-8_4_0
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
-git checkout tags/1.2.1
+git checkout tags/1.3.0
 cd /D ..
 git clone https://github.com/lucasg/Dependencies.git dependencies
 cd /D dependencies
@@ -82,7 +82,7 @@ git checkout tags/2.4.57
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout cldr/2023-09-13
+git checkout tags/release-74-rc
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -134,7 +134,7 @@ git checkout tags/1.7.1rc2
 cd /D ..
 git clone https://github.com/strukturag/libheif.git libheif
 cd /D libheif
-git checkout tags/v1.16.2
+git checkout tags/v1.17.0
 cd /D ..
 git clone https://github.com/pffang/libiconv-for-Windows.git libiconv
 cd /D libiconv
@@ -210,7 +210,7 @@ git checkout tags/1.6.21
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2745
+svn update -r 2763
 cd /D ..
 git clone https://github.com/JBlond/mod_bikeshed.git mod_bikeshed
 cd /D mod_bikeshed
@@ -258,15 +258,15 @@ git checkout master
 cd /D ..
 git clone https://github.com/nghttp2/nghttp2.git nghttp2
 cd /D nghttp2
-git checkout tags/v1.56.0
+git checkout tags/v1.57.0
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3
-git checkout tags/v0.15.0
+git checkout tags/v1.0.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v0.19.1
+git checkout tags/v1.0.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -274,11 +274,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/openssl/openssl openssl
 cd /D openssl
-git checkout tags/openssl-3.1.2
+git checkout tags/openssl-3.1.3
 cd /D ..
-git clone https://github.com/quictls/openssl openssl-quic
+git clone https://github.com/quictls/openssl.git openssl-quic
 cd /D openssl-quic
-git checkout tags/openssl-3.1.2-quic1
+git checkout openssl-3.1.3+quic
 cd /D ..
 git clone https://github.com/PCRE2Project/pcre2.git pcre2
 cd /D pcre2
@@ -322,7 +322,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.2.10
+git checkout tags/php-8.2.11
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
@@ -350,11 +350,11 @@ git checkout trunk
 cd /D ..
 git clone https://github.com/rhuijben/sqlite-amalgamation sqlite
 cd /D sqlite
-git checkout tags/3.43.1
+git checkout tags/3.43.2
 cd /D ..
 git clone https://github.com/apache/subversion.git subversion
 cd /D subversion
-git checkout tags/1.14.2
+git checkout trunk
 cd /D ..
 git clone https://github.com/htacg/tidy-html5 tidy
 cd /D tidy
