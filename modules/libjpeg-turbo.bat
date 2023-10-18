@@ -5,7 +5,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
 -DENABLE_SHARED=1 ^
 -DENABLE_STATIC=0 ^
--DREQUIRE_SIMD=0 ^
+-DREQUIRE_SIMD=1 ^
 -DWITH_ARITH_DEC=1 ^
 -DWITH_ARITH_ENC=1 ^
 -DWITH_JAVA=0 ^
@@ -16,10 +16,14 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DWITH_FUZZ=0 ^
 -DWITH_CRT_DLL=0 ^
 -DFORCE_INLINE=1 ^
+-DNEON_INTRINSICS=0 ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 for %%Y in (cmake_install.cmake build.ninja) do (sed -i 's/-static\./_static\./g' %CYGPATH_BUILD%/%1/%%Y)
+REM fix unexistant option -nologo for nasm
+sed -i 's/ -nologo//g' %CYGPATH_BUILD%/%1/build.ninja
+
 for %%X in (dll pdb) do (
 	for %%Y in (sharedlib/cmake_install.cmake build.ninja) do (sed -i 's/jpeg8\.%%X/jpeg\.%%X/g' %CYGPATH_BUILD%/%1/%%Y)
 )
