@@ -1,5 +1,5 @@
 diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
-index 2a59e234d7..64ddbf083b 100644
+index 7b30547d39..13221a9f9e 100644
 --- "a/CMakeLists.txt"
 +++ "b/CMakeLists.txt"
 @@ -15,6 +15,10 @@
@@ -22,17 +22,7 @@ index 2a59e234d7..64ddbf083b 100644
  FIND_PACKAGE(OpenSSL)
  FIND_PACKAGE(ZLIB)
  FIND_PACKAGE(CURL)
-@@ -58,6 +62,9 @@ ELSEIF(EXISTS "${CMAKE_INSTALL_PREFIX}/lib/pcred.lib")
- ELSE()
-   SET(default_pcre_libraries ${CMAKE_INSTALL_PREFIX}/lib/pcre.lib)
- ENDIF()
-+IF(EXISTS "${CMAKE_INSTALL_PREFIX}/lib/pcre.lib")
-+  SET(PCRE_QOS_LIBRARIES ${CMAKE_INSTALL_PREFIX}/lib/pcre.lib)
-+ENDIF()
- 
- IF(EXISTS "${CMAKE_INSTALL_PREFIX}/lib/nghttp2d.lib")
-   SET(default_nghttp2_libraries "${CMAKE_INSTALL_PREFIX}/lib/nghttp2d.lib")
-@@ -232,7 +239,7 @@ MESSAGE(STATUS "")
+@@ -242,7 +246,7 @@ MESSAGE(STATUS "")
  MESSAGE(STATUS "Summary of feature detection:")
  MESSAGE(STATUS "")
  MESSAGE(STATUS "LIBXML2_FOUND ............ : ${LIBXML2_FOUND}")
@@ -41,7 +31,7 @@ index 2a59e234d7..64ddbf083b 100644
  MESSAGE(STATUS "NGHTTP2_FOUND ............ : ${NGHTTP2_FOUND}")
  MESSAGE(STATUS "OPENSSL_FOUND ............ : ${OPENSSL_FOUND}")
  MESSAGE(STATUS "ZLIB_FOUND ............... : ${ZLIB_FOUND}")
-@@ -292,7 +299,7 @@ SET(MODULE_LIST
+@@ -302,7 +306,7 @@ SET(MODULE_LIST
    "modules/cache/mod_cache_socache+I+shared object caching module"
    "modules/cache/mod_file_cache+I+File cache"
    "modules/cache/mod_socache_dbm+I+dbm small object cache provider"
@@ -50,7 +40,7 @@ index 2a59e234d7..64ddbf083b 100644
    "modules/cache/mod_socache_memcache+I+memcache small object cache provider"
    "modules/cache/mod_socache_shmcb+I+ shmcb small object cache provider"
    "modules/cache/mod_socache_redis+I+redis small object cache provider"
-@@ -333,14 +340,14 @@ SET(MODULE_LIST
+@@ -343,14 +347,14 @@ SET(MODULE_LIST
    "modules/generators/mod_info+I+server information"
    "modules/generators/mod_status+I+process/thread monitoring"
    "modules/http/mod_mime+A+mapping of file-extension to MIME.  Disabling this module is normally not recommended."
@@ -67,7 +57,7 @@ index 2a59e234d7..64ddbf083b 100644
    "modules/mappers/mod_actions+I+Action triggering on requests"
    "modules/mappers/mod_alias+A+mapping of requests to different filesystem parts"
    "modules/mappers/mod_dir+A+directory request handling"
-@@ -376,7 +383,7 @@ SET(MODULE_LIST
+@@ -386,7 +390,7 @@ SET(MODULE_LIST
    "modules/proxy/mod_proxy_hcheck+I+Apache proxy health check module.  Requires and is enabled by --enable-proxy."
    "modules/proxy/mod_proxy_scgi+I+Apache proxy SCGI module.  Requires and is enabled by --enable-proxy."
    "modules/proxy/mod_proxy_wstunnel+I+Apache proxy Websocket Tunnel module.  Requires and is enabled by --enable-proxy."
@@ -76,7 +66,7 @@ index 2a59e234d7..64ddbf083b 100644
    "modules/session/mod_session+I+session module"
    "modules/session/mod_session_cookie+I+session cookie module"
    "modules/session/mod_session_crypto+i+session crypto module"
-@@ -389,6 +396,14 @@ SET(MODULE_LIST
+@@ -399,6 +403,14 @@ SET(MODULE_LIST
    "modules/test/mod_optional_fn_import+O+example optional function importer"
    "modules/test/mod_optional_hook_export+O+example optional hook exporter"
    "modules/test/mod_optional_hook_import+O+example optional hook importer"
@@ -91,19 +81,20 @@ index 2a59e234d7..64ddbf083b 100644
  )
  
  # Track which modules actually built have APIs to link against.
-@@ -443,15 +458,25 @@ SET(mod_http2_extra_defines          ssize_t=long)
+@@ -453,16 +465,25 @@ SET(mod_http2_extra_defines          ssize_t=long)
  SET(mod_http2_extra_includes         ${NGHTTP2_INCLUDE_DIR})
  SET(mod_http2_extra_libs             ${NGHTTP2_LIBRARIES})
  SET(mod_http2_extra_sources
--   modules/http2/h2_bucket_beam.c     modules/http2/h2_bucket_eos.c
--   modules/http2/h2_c1.c              modules/http2/h2_c1_io.c
--   modules/http2/h2_c2.c              modules/http2/h2_c2_filter.c
--   modules/http2/h2_config.c          modules/http2/h2_conn_ctx.c
--   modules/http2/h2_mplx.c            modules/http2/h2_headers.c
--   modules/http2/h2_protocol.c        modules/http2/h2_push.c
--   modules/http2/h2_request.c         modules/http2/h2_session.c
--   modules/http2/h2_stream.c          modules/http2/h2_switch.c
--   modules/http2/h2_util.c            modules/http2/h2_workers.c
+-  modules/http2/h2_bucket_beam.c     modules/http2/h2_bucket_eos.c
+-  modules/http2/h2_c1.c              modules/http2/h2_c1_io.c
+-  modules/http2/h2_c2.c              modules/http2/h2_c2_filter.c
+-  modules/http2/h2_config.c          modules/http2/h2_conn_ctx.c
+-  modules/http2/h2_mplx.c            modules/http2/h2_headers.c
+-  modules/http2/h2_protocol.c        modules/http2/h2_push.c
+-  modules/http2/h2_request.c         modules/http2/h2_session.c
+-  modules/http2/h2_stream.c          modules/http2/h2_switch.c
+-  modules/http2/h2_util.c            modules/http2/h2_workers.c
+-  modules/http2/h2_ws.c
 +  ${mod_http2_src}/h2_bucket_beam.c
 +  ${mod_http2_src}/h2_bucket_eos.c
 +  ${mod_http2_src}/h2_c1.c
@@ -126,7 +117,7 @@ index 2a59e234d7..64ddbf083b 100644
  )
  SET(mod_ldap_extra_defines           LDAP_DECLARE_EXPORT)
  SET(mod_ldap_extra_libs              wldap32)
-@@ -468,25 +493,44 @@ SET(mod_lua_extra_sources
+@@ -479,25 +500,43 @@ SET(mod_lua_extra_sources
    modules/lua/lua_passwd.c           modules/lua/lua_request.c
    modules/lua/lua_vmprep.c           modules/lua/lua_dbd.c
  )
@@ -182,11 +173,10 @@ index 2a59e234d7..64ddbf083b 100644
 +  ${mod_md_src}/mod_md_ocsp.c
 +  ${mod_md_src}/mod_md_os.c
 +  ${mod_md_src}/mod_md_status.c
-+  
  )
  SET(mod_optional_hook_export_extra_defines AP_DECLARE_EXPORT) # bogus reuse of core API prefix
  SET(mod_proxy_extra_defines          PROXY_DECLARE_EXPORT)
-@@ -516,7 +560,8 @@ SET(mod_proxy_http2_extra_defines          ssize_t=long)
+@@ -527,7 +566,8 @@ SET(mod_proxy_http2_extra_defines          ssize_t=long)
  SET(mod_proxy_http2_extra_includes         ${NGHTTP2_INCLUDE_DIR})
  SET(mod_proxy_http2_extra_libs             ${NGHTTP2_LIBRARIES} mod_proxy)
  SET(mod_proxy_http2_extra_sources
@@ -196,7 +186,7 @@ index 2a59e234d7..64ddbf083b 100644
  )
  SET(mod_ratelimit_extra_defines      AP_RL_DECLARE_EXPORT)
  SET(mod_sed_extra_sources
-@@ -555,6 +600,55 @@ IF(LIBXML2_FOUND)
+@@ -566,6 +606,55 @@ IF(LIBXML2_FOUND)
    SET(mod_xml2enc_extra_libs         "${LIBXML2_LIBRARIES};${LIBXML2_ICONV_LIBRARIES}")
  ENDIF()
  SET(mod_watchdog_extra_defines       AP_WD_DECLARE_EXPORT)
@@ -245,14 +235,14 @@ index 2a59e234d7..64ddbf083b 100644
 +)
 +SET(mod_qos_requires                  OPENSSL_FOUND)
 +SET(mod_qos_extra_includes            ${OPENSSL_INCLUDE_DIR})
-+SET(mod_qos_extra_libs                ${OPENSSL_LIBRARIES} ${PCRE_QOS_LIBRARIES})
++SET(mod_qos_extra_libs                ${OPENSSL_LIBRARIES})
 +SET(mod_qos_sources
 +../mod_qos/mod_qos.c
 +)
  
  SET(MODULE_PATHS)
  FOREACH (modinfo ${MODULE_LIST})
-@@ -614,7 +708,7 @@ ELSE()
+@@ -625,7 +714,7 @@ ELSE()
  ENDIF()
  
  # for easy reference from .dll/.so builds
@@ -261,7 +251,7 @@ index 2a59e234d7..64ddbf083b 100644
  
  ADD_EXECUTABLE(gen_test_char server/gen_test_char.c)
  GET_TARGET_PROPERTY(GEN_TEST_CHAR_EXE gen_test_char LOCATION)
-@@ -700,8 +794,8 @@ SET(HTTPD_INCLUDE_DIRECTORIES
+@@ -711,8 +800,8 @@ SET(HTTPD_INCLUDE_DIRECTORIES
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/dav/main
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/filters
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators
@@ -272,7 +262,7 @@ index 2a59e234d7..64ddbf083b 100644
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/proxy
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/session
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl
-@@ -709,6 +803,11 @@ SET(HTTPD_INCLUDE_DIRECTORIES
+@@ -720,6 +809,11 @@ SET(HTTPD_INCLUDE_DIRECTORIES
    ${CMAKE_CURRENT_SOURCE_DIR}/server/mpm/winnt
    ${APR_INCLUDE_DIR}
    ${PCRE_INCLUDE_DIR}
@@ -284,7 +274,7 @@ index 2a59e234d7..64ddbf083b 100644
  )
  
  # The .h files we install from outside the main include directory
-@@ -726,7 +825,7 @@ SET(other_installed_h
+@@ -737,7 +831,7 @@ SET(other_installed_h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/filters/mod_xml2enc.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators/mod_cgi.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators/mod_status.h
@@ -293,7 +283,7 @@ index 2a59e234d7..64ddbf083b 100644
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/loggers/mod_log_config.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/mappers/mod_rewrite.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/proxy/mod_proxy.h
-@@ -823,7 +922,7 @@ FOREACH (mod ${MODULE_PATHS})
+@@ -834,7 +928,7 @@ FOREACH (mod ${MODULE_PATHS})
      SET(mod_extra_libs "${mod_name}_extra_libs")
      SET_TARGET_PROPERTIES(${mod_name} PROPERTIES
        SUFFIX .so
@@ -302,7 +292,7 @@ index 2a59e234d7..64ddbf083b 100644
      )
      TARGET_LINK_LIBRARIES(${mod_name} ${${mod_extra_libs}} libhttpd ${EXTRA_LIBS} ${APR_LIBRARIES} ${HTTPD_SYSTEM_LIBS})
      DEFINE_WITH_BLANKS(define_long_name "LONG_NAME" "${mod_name} for Apache HTTP Server")
-@@ -849,7 +948,7 @@ ENDFOREACH()
+@@ -860,7 +954,7 @@ ENDFOREACH()
  ###########   HTTPD LIBRARIES   ############
  ADD_LIBRARY(libhttpd SHARED ${LIBHTTPD_SOURCES} build/win32/httpd.rc)
  SET_TARGET_PROPERTIES(libhttpd PROPERTIES
@@ -311,7 +301,7 @@ index 2a59e234d7..64ddbf083b 100644
  )
  SET(install_targets ${install_targets} libhttpd)
  SET(install_bin_pdb ${install_bin_pdb} $<TARGET_PDB_FILE:libhttpd>)
-@@ -904,12 +1003,12 @@ ENDIF()
+@@ -915,12 +1009,12 @@ ENDIF()
  GET_PROPERTY(tmp_includes TARGET ab PROPERTY INCLUDE_DIRECTORIES)
  
  # getting duplicate manifest error with ApacheMonitor
