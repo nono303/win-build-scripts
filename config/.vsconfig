@@ -17,6 +17,6 @@
     "Microsoft.VisualStudio.Component.VC.v141.x86.x64",
     "Microsoft.VisualStudio.Workload.NativeDesktop",
     "Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64",
-    "Microsoft.VisualStudio.Component.VC.14.36.17.6.ATL"
+    "Microsoft.VisualStudio.Component.VC.ATL"
   ]
 }

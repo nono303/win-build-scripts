@@ -183,9 +183,12 @@ libssh2_1
 libssl-devel
 libssl1.0
 libssl1.1
+libssl3
 libssp0
 libstdc++6
 libtasn1_6
+libtool
+libuchardet0
 libunistring2
 libunistring5
 libusb0
@@ -209,9 +212,8 @@ patch
 perl
 perl-Class-Inspector
 perl-File-ShareDir
+perl-JSON-PP
 perl-Scalar-List-Utils
-perl-Test-Harness
-perl-Unicode-Normalize
 perl_autorebase
 perl_base
 pkg-config
@@ -245,4 +247,5 @@ windows-default-manifest
 xz
 zip
 zlib0
+zsh
 zstd
