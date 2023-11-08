@@ -14,6 +14,8 @@
 	if(in_array($proot,["pecl-memcache","php-geos","pecl-text-xdiff","php-ext-brotli","xdebug","php-src"]))
 		$proot = "php";
 	$nogit = array(
+		"mod_maxminddb"		=> ["/\[mod_maxminddb\], ?\[([0-9\.]+)/s",
+							pathenv("PATH_SRC")."/".$argv[1]."/configure.ac"],
 		"subversion"		=> ["/#define SVN_VER_MAJOR *([0-9]+).*#define SVN_VER_MINOR *([0-9]+).*#define SVN_VER_PATCH *([0-9]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/subversion/include/svn_version.h"],
 		"tidy"				=> ["/([0-9]{1,3}\.[0-9]+\.[0-9]+)/s",

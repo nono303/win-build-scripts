@@ -1,40 +1,14 @@
-diff --git "a/src/mod_maxminddb.c" "b/src/mod_maxminddb.c"
-index 3876381..a547c84 100644
---- "a/src/mod_maxminddb.c"
-+++ "b/src/mod_maxminddb.c"
-@@ -22,7 +22,7 @@
- #include <ap_config.h>
- #include <apr_hash.h>
- #include <apr_strings.h>
--#include <arpa/inet.h>
+diff --git a/src/mod_maxminddb.c b/src/mod_maxminddb.c
+index 0b733ec..3c631c6 100644
+--- a/src/mod_maxminddb.c
++++ b/src/mod_maxminddb.c
+@@ -35,6 +35,9 @@
+ #if APR_HAVE_SYS_SOCKET_H
+ #include <sys/socket.h>
+ #endif
++#if APR_HAVE_WINSOCK2_H
 +#include <winsock2.h>
- #include <httpd.h>
- // Must come after httpd.h.
- #include <http_config.h>
-@@ -30,7 +30,6 @@
- #include <http_protocol.h>
- #include <inttypes.h>
- #include <maxminddb.h>
--#include <sys/socket.h>
++#endif
  #include <sys/types.h>
  
  #ifdef APLOG_USE_MODULE
-@@ -302,7 +301,8 @@ static apr_status_t cleanup_database(void *mmdb) {
-     MMDB_close((MMDB_s *)mmdb);
-     return APR_SUCCESS;
- }
--
-+// l.317 https://github.com/maxmind/mod_maxminddb/issues/84 - https://docs.microsoft.com/fr-fr/cpp/error-messages/compiler-errors-1/compiler-error-c2057?view=vs-2019
-+#define max_path_segments 80
- static const char *set_maxminddb_env(cmd_parms *cmd,
-                                      void *dir_config,
-                                      const char *env,
-@@ -311,7 +311,7 @@ static const char *set_maxminddb_env(cmd_parms *cmd,
- 
-     INFO(cmd->server, "set_maxminddb_env (server) %s %s", env, path);
- 
--    const int max_path_segments = 80;
-+    // const int max_path_segments = 80;
-     char *path_segments[max_path_segments + 1];
- 
-     char *tokenized_path = apr_pstrdup(cmd->pool, path);
