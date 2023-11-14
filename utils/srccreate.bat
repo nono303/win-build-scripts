@@ -34,7 +34,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/c-ares/c-ares.git cares
 cd /D cares
-git checkout tags/cares-1_20_1
+git checkout tags/cares-1_21_0
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
@@ -50,7 +50,7 @@ git checkout tags/v1.11.1
 cd /D ..
 git clone https://github.com/nono303/fit2gpx.git fit2gpx
 cd /D fit2gpx
-git checkout master
+git checkout tags/0.1.21
 cd /D ..
 git clone https://github.com/dcnieho/FreeGLUT.git freeglut
 cd /D freeglut
@@ -62,7 +62,7 @@ git checkout tags/VER-2-13-2
 cd /D ..
 git clone https://github.com/OSGeo/gdal gdal
 cd /D gdal
-git checkout tags/v3.7.2RC1
+git checkout tags/v3.8.0RC2
 cd /D ..
 git clone https://github.com/geographiclib/geographiclib.git geographiclib
 cd /D geographiclib
@@ -70,7 +70,7 @@ git checkout tags/r2.3
 cd /D ..
 git clone https://github.com/libgeos/geos geos
 cd /D geos
-git checkout tags/3.12.0
+git checkout tags/3.12.1
 cd /D ..
 git clone https://github.com/gongjianbo/GifLib giflib
 cd /D giflib
@@ -78,11 +78,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
-git checkout tags/2.4.57
+git checkout tags/2.4.58
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout tags/release-74-rc
+git checkout tags/release-74-1
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -94,7 +94,7 @@ git checkout tags/5.3.0
 cd /D ..
 git clone https://github.com/Esri/lerc.git lerc
 cd /D lerc
-git checkout tags/v4.0.0
+git checkout tags/js_v4.0.4
 cd /D ..
 git clone https://github.com/AOMediaCodec/libavif.git libavif
 cd /D libavif
@@ -122,7 +122,7 @@ git checkout master
 cd /D ..
 git clone https://chromium.googlesource.com/codecs/libgav1 libgav1
 cd /D libgav1
-git checkout main
+git checkout tags/v0.19.0
 cd /D ..
 git clone https://github.com/libgd/libgd.git libgd
 cd /D libgd
@@ -134,7 +134,7 @@ git checkout tags/1.7.1rc2
 cd /D ..
 git clone https://github.com/strukturag/libheif.git libheif
 cd /D libheif
-git checkout tags/v1.17.0
+git checkout tags/v1.17.3
 cd /D ..
 git clone https://github.com/pffang/libiconv-for-Windows.git libiconv
 cd /D libiconv
@@ -142,15 +142,15 @@ git checkout master
 cd /D ..
 git clone https://github.com/libjpeg-turbo/libjpeg-turbo libjpeg-turbo
 cd /D libjpeg-turbo
-git checkout tags/3.0.0
+git checkout tags/3.0.1
 cd /D ..
 git clone https://git.tukaani.org/xz.git liblzma
 cd /D liblzma
-git checkout tags/v5.4.4
+git checkout tags/v5.4.5
 cd /D ..
 git clone https://github.com/maxmind/libmaxminddb.git libmaxminddb
 cd /D libmaxminddb
-git checkout tags/1.7.1
+git checkout tags/1.8.0
 cd /D ..
 git clone git://git.code.sf.net/p/libpng/code libpng
 cd /D libpng
@@ -206,7 +206,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
-git checkout tags/1.6.21
+git checkout tags/1.6.22
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
@@ -218,11 +218,11 @@ git checkout tags/1.0.0
 cd /D ..
 git clone https://github.com/nono303/mod_fcgid.git mod_fcgid
 cd /D mod_fcgid
-git checkout master
+git checkout tags/2.3.10.4
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v2.0.24
+git checkout tags/v2.0.25
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -230,11 +230,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/maxmind/mod_maxminddb.git mod_maxminddb
 cd /D mod_maxminddb
-git checkout tags/1.2.0
+git checkout main
 cd /D ..
 git clone https://github.com/icing/mod_md mod_md
 cd /D mod_md
-git checkout tags/v2.4.24
+git checkout tags/v2.4.25
 cd /D ..
 svn co https://svn.code.sf.net/p/mod-qos/source/trunk/httpd_src/modules/qos mod_qos
 cd /D mod_qos
@@ -258,7 +258,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/nghttp2/nghttp2.git nghttp2
 cd /D nghttp2
-git checkout tags/v1.57.0
+git checkout tags/v1.58.0
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3
@@ -266,7 +266,7 @@ git checkout tags/v1.0.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v1.0.0
+git checkout tags/v1.0.1
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -274,11 +274,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/openssl/openssl openssl
 cd /D openssl
-git checkout tags/openssl-3.1.3
+git checkout tags/openssl-3.1.4
 cd /D ..
-git clone https://github.com/quictls/openssl.git openssl-quic
+git clone https://github.com/quictls/openssl openssl-quic
 cd /D openssl-quic
-git checkout openssl-3.1.3+quic
+git checkout tags/openssl-3.1.4-quic1
 cd /D ..
 git clone https://github.com/PCRE2Project/pcre2.git pcre2
 cd /D pcre2
@@ -322,15 +322,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.2.11
+git checkout tags/php-8.2.12
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
 git checkout tags/9.3.0
-cd /D ..
-git clone https://github.com/nono303/cpython.git python
-cd /D python
-git checkout 3.8-shared
 cd /D ..
 git clone https://github.com/qhull/qhull qhull
 cd /D qhull
@@ -342,7 +338,7 @@ git checkout tags/1.3.1
 cd /D ..
 git clone https://github.com/nono303/sdnspi-MySQL.git sdnspi-mysql
 cd /D sdnspi-mysql
-git checkout master
+git checkout tags/9.2.0.0
 cd /D ..
 git clone https://github.com/apache/serf.git serf
 cd /D serf
@@ -350,7 +346,7 @@ git checkout trunk
 cd /D ..
 git clone https://github.com/rhuijben/sqlite-amalgamation sqlite
 cd /D sqlite
-git checkout tags/3.43.2
+git checkout tags/3.44.0
 cd /D ..
 git clone https://github.com/apache/subversion.git subversion
 cd /D subversion
@@ -374,7 +370,7 @@ svn update -r 36
 cd /D ..
 git clone https://github.com/xdebug/xdebug.git xdebug
 cd /D xdebug
-git checkout tags/3.3.0alpha2
+git checkout tags/3.3.0alpha3
 cd /D ..
 git clone https://github.com/lloyd/yajl.git yajl
 cd /D yajl
