@@ -1,8 +1,55 @@
 # changelog
 
 
+## 1.8.0 _(2023-11-14)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  improve cygwin description
+`utils/sub/version.php`
+*  add sslh - Thx to @lerenardo https://github.com/yrutschle/sslh/issues/196#issuecomment-1692805639
+`env_sample.bat`
+`modules/libconfig.patch`
+`modules/libconfig.sh`
+`modules/sslh.bat`
+`modules/sslh.sh`
+*  rewrite & simplify
+`modules/memcached.bat`
+`modules/memcached.patch`
+`modules/memcached.sh`
+`modules/memcached_event-2.0.sh`
+*  https://github.com/maxmind/mod_maxminddb/pull/112
+`modules/mod_maxminddb.patch`
+*  tag 1.2.0 > main
+`modules/mod_maxminddb.patch`
+`utils/sub/version.php`
+*  3.7.3
+`modules/gdal.bat`
+*  useless build (https://github.com/adang1345/PythonWindows/)
+`modules/python.bat`
+*  rm useless
+`utils/info.md`
+*  update config
+`config/.vsconfig`
+`config/cyg64.packagelist`
+`config/python.pip`
+*  fix opcode_update-list.sh update opcode.list
+`utils/sub/opcode.list`
+`utils/sub/opcode_update-list.sh`
+*  exclude all javahl warnings
+`utils/sub/logcheck.php`
+*  fix nasm error on x86 bump to 3.0.1
+`modules/libjpeg-turbo.bat`
+*  clean unused pcre for qos bump to 2.4.58
+`modules/httpd.patch`
+
+
 ## 1.7.6 _(2023-10-16)_
 
+*  1.7.6
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
