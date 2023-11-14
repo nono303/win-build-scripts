@@ -3,7 +3,7 @@ set SSLH_TARGET_ARCH=64
 FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_GITHUB_SSLH%`) do (set CYGPATH_GITHUB_SSLH=%%F)
 
 call %PATH_MODULES_COMMON%\init.bat libconfig
-REM call %PATH_ROOT_CYGWIN%%SSLH_TARGET_ARCH%\bin\bash --login -c '%CYGPATH_MODULES%/libconfig.sh %CYGPATH_SRC%/libconfig %CYGPATH_MODULES% %CYGPATH_GITHUB_SSLH%'
+call %PATH_ROOT_CYGWIN%%SSLH_TARGET_ARCH%\bin\bash --login -c '%CYGPATH_MODULES%/libconfig.sh %CYGPATH_SRC%/libconfig %CYGPATH_MODULES% %CYGPATH_GITHUB_SSLH%'
 call do_php %PATH_UTILS%\sub\version.php libconfig %PATH_GITHUB_SSLH%\x%SSLH_TARGET_ARCH%\cygconfig-11.dll libconfig
 set LIBCONFIG_VER=%SCM_TAG%
 
