@@ -202,23 +202,23 @@
 			$description .= "arch:".$arch.pathenv("AVXB")." vcver:".pathenv("vcvars_ver")."[".pathenv("MSVC_DEPS")."]";
 
 			$rpdb = " /rpdb";
-			$descadd = "";
-			if($argv[3] == "norpdb"){
+			if($argv[3]){
 				$rpdb = "";
-			} elseif($argv[3] == "memcached"){
-				$rpdb = "";
-				preg_match("/(libevent-[0-9]\.[0-9])/",$argv[2],$matches);
-				$libevent = str_replace("-",":",$matches[1]);
-				//$gccver = end(explode(" ",explode("\n",shell_exec("gcc --version"))[0]));
-				if(is_int(strpos($argv[2],"\\x86\\")))
-					$arch = "x86";
-				if(is_int(strpos($argv[2],"\\x64\\")))
-					$arch = "x64";
-				if(is_int(strpos($argv[2],"-avx")))
-					$avx = "-avx";
-				$description = "arch:".$arch.$avx." "./*"gcc:".$gccver." ".*/$libevent;
-			} elseif($argv[3] != ""){
-				$descadd = " ".$argv[3];
+				if($argv[3] == "memcached"){
+					preg_match("/(libevent-[0-9]\.[0-9])/",$argv[2],$matches);
+					$matches[1] ? $libdep = " ".str_replace("-",":",$matches[1]) : $libdep = "";
+				} elseif($argv[3] != "libconfig" && $argv[3] != "norpdb"){
+					$libdep = " ".$argv[3];
+				}
+				if($argv[3] != "norpdb"){
+					if(is_int(strpos($argv[2],"\\x86\\")))
+						$arch = "x86";
+					if(is_int(strpos($argv[2],"\\x64\\")))
+						$arch = "x64";
+					is_int(strpos($argv[2],"-avx")) ? $avx = "-avx " : $avx = " ";
+					$gccver = end(explode(" ",explode("\n",shell_exec("gcc --version"))[0]));
+					$description = "arch:".$arch.$avx."gcc:".$gccver.$libdep;
+				}
 			}
 			if(pathenv("SCM_COMORREV"))
 				$description .= " commit:".pathenv("SCM_COMORREV");
@@ -228,8 +228,6 @@
 				$description .= " branch:".pathenv("SCM_BRANCH");
 			if(pathenv("SCM_COMORREV_DATE"))
 				$description .= " date:".pathenv("SCM_COMORREV_DATE");
-			if($descadd)
-				$description .= $descadd;
 			$pname = basename($argv[2],".".pathinfo($argv[2], PATHINFO_EXTENSION));
 			if($pname != $proot)
 				$pname = $proot.":".$pname;
