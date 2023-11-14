@@ -8,15 +8,33 @@ index 4208331..1a1ba88 100644
  bin_PROGRAMS = memcached
  pkginclude_HEADERS = protocol_binary.h xxhash.h
 -noinst_PROGRAMS = memcached-debug sizes testapp timedrun
-+# noinst_PROGRAMS = memcached-debug sizes testapp timedrun
++noinst_PROGRAMS =
  
  BUILT_SOURCES=
  
 diff --git a/configure.ac b/configure.ac
-index d94f6fb..c087f8a 100644
+index e1d0c32..334fdaa 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -864,5 +864,8 @@ then
+@@ -5,7 +5,7 @@ AC_INIT([memcached], [VERSION_NUMBER], [memcached@googlegroups.com])
+ AC_CANONICAL_HOST
+ AC_CONFIG_SRCDIR([memcached.c])
+ AM_INIT_AUTOMAKE([foreign])
+-AM_CONFIG_HEADER([config.h])
++AC_CONFIG_HEADERS([config.h])
+ 
+ AC_PROG_CC
+ 
+@@ -90,7 +90,7 @@ dnl assembling crc instructions without this
+ AS_IF(test "$CLANG" = "yes",[CFLAGS="$CFLAGS -Wno-language-extension-token"])
+ 
+ if test "$ICC" = "no"; then
+-   AC_PROG_CC_C99
++   AC_PROG_CC
+ fi
+ 
+ AM_PROG_CC_C_O
+@@ -872,5 +872,8 @@ then
    CFLAGS="$CFLAGS -errfmt=error -errwarn -errshort=tags"
  fi
  
