@@ -1,8 +1,19 @@
 # changelog
 
 
+## 1.8.1 _(2023-11-15)_
+
+*  add sslh to usage & srccreate.bat
+`usage.txt`
+`utils/srccreate.bat`
+*  fix build libconfig in comment
+`modules/sslh.bat`
+
+
 ## 1.8.0 _(2023-11-14)_
 
+*  1.8.0
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
