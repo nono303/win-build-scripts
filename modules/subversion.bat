@@ -1,4 +1,6 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1
+@echo off 
+call %PATH_BATCH%\go.bat serf
+call %PATH_MODULES_COMMON%\init.bat %1
 
 	REM ~~~~~~~~~~~~ Create Outdir
 set OUTDIR_CONF=Release

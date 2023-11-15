@@ -133,20 +133,12 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	:php
 	call %PATH_BATCH%\go.bat php NOLOG
 	if  "%2" == "phpanddeps" exit /B
-:subversionanddeps
-	:serf
-	call %PATH_BATCH%\go.bat serf NOLOG
-	:subversion
-	call %PATH_BATCH%\go.bat subversion NOLOG
-	if  "%2" == "subversionanddeps" exit /B
-:geographiclib
-call %PATH_BATCH%\go.bat geographiclib NOLOG
+:serf
+call %PATH_BATCH%\go.bat serf NOLOG
 :nssm
 call %PATH_BATCH%\go.bat nssm NOLOG
 :php-cgi-spawner
 call %PATH_BATCH%\go.bat php-cgi-spawner NOLOG
-:dependencies
-call %PATH_BATCH%\go.bat dependencies NOLOG
 	REM only for build ALL
 IF [%2] == [] (
 	call %PATH_BATCH%\go.bat bininfo checkavx
