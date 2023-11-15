@@ -1,5 +1,5 @@
 @echo off
-set vcvars_ver=14.38
+set vcvars_ver=14.39
 set PTFTS=143
 set MSVC_VER=17
 set MSVC_DEPS=vs%MSVC_VER%

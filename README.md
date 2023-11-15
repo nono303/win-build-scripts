@@ -43,11 +43,11 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.8.0-p7 (14.38) | `.vsconfig`         |
+| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.9.0-p1 (14.39) | `.vsconfig`         |
 | [Cygwin](https://cygwin.com/install.html)                    | x86  | 3.3.6 | `cyg32.packagelist` |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.4.9 | `cyg64.packagelist` |
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.12.0 |                     |
-| [Node.js](https://nodejs.org/en/download/current/) | x64 | 21.1.0 | |
+| [Node.js](https://nodejs.org/en/download/current/) | x64 | 21.2.0 | |
 | [OpenJDK](https://jdk.java.net/21/)                  | x64  | 21.0.1 |                     |
 | [Strawberry Perl](https://github.com/StrawberryPerl/Perl-Dist-Strawberry/releases) | x64  | 5.38.0.2 |                     |
 | [NASM](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.16.02rc5 |                     |
@@ -60,8 +60,8 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [Gradle](https://services.gradle.org/distributions/) | [java] | 8.4 | |
 | [CMake](https://cmake.org/download/) | x64 | 3.27.7 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | x64 | 1.11.1 | |
-| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 1.3.0rc2 | |
-| [NuGet](https://www.nuget.org/downloads) | x86 | 6.7.0 | |
+| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 1.3.0rc3 | |
+| [NuGet](https://www.nuget.org/downloads) | x86 | 6.8.0 | |
 
 ### [SOURCE VERSIONS](./SRC_VERSION.md)
 ### [CHANGELOG](./changelog.md)
