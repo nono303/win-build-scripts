@@ -74,6 +74,7 @@ Usage: go command [options]
   * tzdataservice
   * fit2gpx
   * memcached
+  * sslh
   * mobac
   * sdlna
   * sdnspi-mysql

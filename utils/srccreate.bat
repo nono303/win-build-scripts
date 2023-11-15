@@ -34,7 +34,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/c-ares/c-ares.git cares
 cd /D cares
-git checkout tags/cares-1_21_0
+git checkout tags/cares-1_22_0
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
@@ -99,6 +99,10 @@ cd /D ..
 git clone https://github.com/AOMediaCodec/libavif.git libavif
 cd /D libavif
 git checkout tags/v1.0.1
+cd /D ..
+git clone https://github.com/hyperrealm/libconfig.git libconfig
+cd /D libconfig
+git checkout tags/v1.7.3
 cd /D ..
 git clone https://github.com/ebiggers/libdeflate.git libdeflate
 cd /D libdeflate
@@ -347,6 +351,10 @@ cd /D ..
 git clone https://github.com/rhuijben/sqlite-amalgamation sqlite
 cd /D sqlite
 git checkout tags/3.44.0
+cd /D ..
+git clone https://github.com/yrutschle/sslh.git sslh
+cd /D sslh
+git checkout tags/v2.0.1
 cd /D ..
 git clone https://github.com/apache/subversion.git subversion
 cd /D subversion
