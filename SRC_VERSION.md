@@ -6,7 +6,7 @@
 | [apr-util](https://github.com/apache/apr-util) | 1.7.0-dev - a1702a71 |
 | [brotli](https://github.com/google/brotli) | 1.1.0 |
 | [bzip2](https://gitlab.com/bzip2/bzip2.git) | 1.1.0 - 66c46b8 |
-| [cares](https://github.com/c-ares/c-ares) | 1.21.0 |
+| [cares](https://github.com/c-ares/c-ares) | 1.22.0 |
 | [curl](https://github.com/curl/curl) | 8.4.0 |
 | [dav1d](https://code.videolan.org/videolan/dav1d.git) | 1.3.0 |
 | [dependencies](https://github.com/lucasg/Dependencies) | 1.11.1 |
@@ -28,7 +28,7 @@
 | [libev](https://git.lighttpd.net/libev) | 4.33 - 26fa899 |
 | [libevent](https://github.com/libevent/libevent) | 2.2.1-alpha |
 | [libexpat](https://github.com/libexpat/libexpat) | 2.5.0 |
-| [libffi](https://github.com/nono303/libffi) - _[upstream + src](https://github.com/libffi/libffi)_ | 3.4.4 - b9fd1f1 |
+| [libffi](https://github.com/nono303/libffi) - _[upstream + src](https://github.com/libffi/libffi)_ | 3.4.4 - 60db339 |
 | [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.19.0 - 5cf722e |
 | [libgd](https://github.com/libgd/libgd) | 2.4.0 - 0d75136b |
 | [libgeotiff](https://github.com/OSGeo/libgeotiff) | 1.7.1 |
@@ -44,7 +44,7 @@
 | [libwepb](https://chromium.googlesource.com/webm/libwebp) | 1.3.2 |
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
 | [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.11.5 |
-| [libxpm](https://github.com/nono303/libxpm.git) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.16 -  64480d3 |
+| [libxpm](https://github.com/nono303/libxpm.git) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.17 -  e74a9e7 |
 | [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.38 - fe9da133 |
 | [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1880 - fb6341d3 |
 | [libzip](https://github.com/nih-at/libzip) | 1.10.1 |
@@ -61,7 +61,7 @@
 | [mod_qos](https://sourceforge.net/p/mod-qos/source/HEAD/tree/trunk/httpd_src/modules/qos/) | 11.74 r2706 (2712) |
 | [mod_security](https://github.com/SpiderLabs/ModSecurity) | 2.9.7 |
 | [mod_security-sdbm-util](https://github.com/nono303/modsec-sdbm-util) - _[upstream + src](https://github.com/SpiderLabs/modsec-sdbm-util)_ | 1.1.0 |
-| [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) - _[src](https://emptyhammock.com/media/downloads/wku_bt-2.01.zip)_ | 2.0.2 |
+| [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) - _[src1](https://emptyhammock.com/media/downloads/wku_bt-2.01.zip)_- _[src2](https://github.com/nono303/mod_whatkilledus)_ | 2.0.2 - d1ec56b |
 | [mpir](https://github.com/nono303/mpir) - _[upstream](https://github.com/BrianGladman/mpir)_ - _[src](https://github.com/wbhart/mpir)_ | 3.0.0 - 6e8bb8c |
 | [nghttp2](https://github.com/nghttp2/nghttp2) | 1.58.0 |
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 1.0.0 |
