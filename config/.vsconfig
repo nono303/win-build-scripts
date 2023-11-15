@@ -18,5 +18,6 @@
     "Microsoft.VisualStudio.Workload.NativeDesktop",
     "Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64",
     "Microsoft.VisualStudio.Component.VC.ATL"
-  ]
+  ],
+  "extensions": []
 }

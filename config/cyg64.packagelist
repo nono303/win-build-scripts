@@ -84,6 +84,8 @@ libdns1105
 libdns1106
 libdns169
 libedit0
+libev-devel
+libev4
 libevent-devel
 libevent2.1_7
 libexpat1
@@ -162,6 +164,10 @@ libopenldap2_5_0
 libopts25
 libp11-kit0
 libpcre1
+libpcre2-devel
+libpcre2-posix3
+libpcre2_16_0
+libpcre2_32_0
 libpcre2_8_0
 libpipeline1
 libpkgconf3
