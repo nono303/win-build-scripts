@@ -25,7 +25,7 @@
 		"mod_fcgid"			=> ["/#define MODFCGID_VERSION_MAJOR *([0-9]+).*#define MODFCGID_VERSION_MINOR *([0-9]+).*#define MODFCGID_VERSION_SUBVER *([0-9]+).*#define MODFCGID_VERSION_DEV *([0-9]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/modules/fcgid/fcgid_conf.h"],
 		"libxml2"			=> ["/#define LIBXML_DOTTED_VERSION +\"([0-9\.]+)/s",
-							pathenv("PATH_SRC")."/".$argv[1]."/win32/rcVersion.h"],
+							pathenv("PATH_INSTALL")."/include/libxml2/libxml/xmlversion.h"],
 		"python"			=> ["/#define PY_VERSION +\"([0-9\.]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/Include/patchlevel.h"],
 		"curl"				=> ["/#define LIBCURL_VERSION \"([0-9\.]+)/s",
