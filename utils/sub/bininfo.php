@@ -7,6 +7,7 @@
 	function sigcheck($dir,$file=""){
 		global $data;
 		$sigcmd = pathenv("BIN_SYGCHECK")." -a -c -e -r -nobanner ".$dir."/".$file;
+		if(DEBUG) echo "###".$sigcmd.PHP_EOL;
 		$sig = execnono($sigcmd,NULL,$dir."/",NULL);
 		debug("sigcheck() ".$sigcmd.": ".$sig);
 		$sig = explode("\n",$sig);
@@ -89,6 +90,7 @@
 			$data[$cur][30] = "";
 			if(CHECK_AVX){
 				$obdcmd = pathenv("PATH_BIN_CYGWIN").'/sh.exe -c "objdump -M intel -d '.$dir."/".$file.' | ./opcode.sh -s AVX';
+				if(DEBUG) echo "###".$obdcmd.PHP_EOL;
 				$obd  = execnono($obdcmd,NULL,SCRIPT_DIR,NULL);
 				debug("fileCheck(2) ".$obdcmd.": ".$obd);
 				foreach(explode("\n",$obd) as $line){
@@ -106,6 +108,7 @@
 			$data[$cur][80] = "\033[33mn/a\033[39m";
 			if(is_file($dir."/".$pdbfile)){
 				$chkmcmd = pathenv("BIN_CHKMATCH").' -c '.$dir."/".$file.' '.$dir."/".$pdbfile;
+				if(DEBUG) echo "###".$chkmcmd.PHP_EOL;
 				$chkm = execnono($chkmcmd,NULL,SCRIPT_DIR,NULL);
 				debug("fileCheck(3) ".$chkmcmd.": ".$chkm);
 				preg_match("/Result: (.*)/",$chkm,$matches);
@@ -120,6 +123,7 @@
 			}
 
 			$dbhcmd = "dumpbin /headers ".$dir."/".$file;
+			if(DEBUG) echo "###".$dbhcmd.PHP_EOL;
 			$dbh = execnono($dbhcmd,NULL,$dir."/",NULL);
 			debug("fileCheck(4) ".$dbhcmd.": ".$dbh);
 
@@ -203,7 +207,7 @@
 			70 => array("name" =>	"pdb",			"pad" => -1),
 		80 => array("name" =>	"pdb",	"pad" => 4),
 		85 => array("name" =>	"©   ",	"pad" => 4),
-		88 => array("name" =>	"product",		"pad" => 38),
+		88 => array("name" =>	"product",		"pad" => 40),
 			110 => array("name" =>	"company",		"pad" => -1),
 		120 => array("name" =>	"description",	"pad" => 0), // 0 = last
 			150 => array("name" =>	"originalname",	"pad" => -1),
