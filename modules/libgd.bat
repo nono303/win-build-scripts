@@ -5,7 +5,7 @@ REM https://github.com/libgd/libgd/pull/514 implementation of mkstemp in src/web
 REM https://github.com/libgd/libgd/pull/692 Application-supplied memory allocators
 REM https://github.com/libgd/libgd/pull/787 Improve image crop performance
 REM https://github.com/libgd/libgd/pull/851 Use libwebp pc module instead of libs
-for %%X in (514 692 787 851) do (
+for %%X in (514 692 851) do (
 	echo     # apply %1_pr%%X.patch
 	git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\%1_pr%%X.patch
 )
