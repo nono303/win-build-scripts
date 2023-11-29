@@ -1,0 +1,298 @@
+# https://github.com/php/php-src/issues/12762
+diff --git "a/Zend/zend_call_stack.c" "b/Zend/zend_call_stack.c"
+index 06ee521911..0ac230a0bd 100644
+--- "a/Zend/zend_call_stack.c"
++++ "b/Zend/zend_call_stack.c"
+@@ -376,7 +376,19 @@ static bool zend_call_stack_get_win32(zend_call_stack *stack)
+ 	 *                v  Lower addresses   v
+ 	 */
+ 
+-	GetCurrentThreadStackLimits(&low_limit, &high_limit);
++	typedef void (WINAPI* FuncT)(PULONG_PTR , PULONG_PTR);
++	HINSTANCE hDLL = LoadLibrary("Kernel32.dll");
++	FuncT GetCurrentThreadStackLimits = (FuncT) GetProcAddress((HMODULE)hDLL, "GetCurrentThreadStackLimits");
++	if (GetCurrentThreadStackLimits) {
++		GetCurrentThreadStackLimits(&low_limit, &high_limit);
++	} else {
++		NT_TIB* tib = (NT_TIB*)NtCurrentTeb();
++		high_limit = (ULONG_PTR)tib->StackBase;
++		MEMORY_BASIC_INFORMATION mbi;
++		if (VirtualQuery(tib->StackLimit, &mbi, sizeof(mbi))) {
++			low_limit = (ULONG_PTR)mbi.AllocationBase;
++		}
++	}
+ 
+ 	result_size = VirtualQuery((void*)low_limit,
+ 			&uncommitted_region, sizeof(uncommitted_region));
+diff --git "a/main/network.c" "b/main/network.c"
+index 1ad7e370cc..9cc9de2a2c 100644
+--- "a/main/network.c"
++++ "b/main/network.c"
+@@ -104,7 +104,7 @@ static const char *php_gai_strerror(int code)
+ 		int code;
+ 		const char *msg;
+ 	} values[] = {
+-#  ifdef EAI_ADDRFAMILY
++#  ifdef EAI_ADDRFAMILY /* Not available in MSVC */
+ 		{EAI_ADDRFAMILY, "Address family for hostname not supported"},
+ #  endif
+ 		{EAI_AGAIN, "Temporary failure in name resolution"},
+@@ -112,13 +112,15 @@ static const char *php_gai_strerror(int code)
+ 		{EAI_FAIL, "Non-recoverable failure in name resolution"},
+ 		{EAI_FAMILY, "ai_family not supported"},
+ 		{EAI_MEMORY, "Memory allocation failure"},
+-#  ifdef EAI_NODATA
++#  ifdef EAI_NODATA /* Not available in MSVC */
+ 		{EAI_NODATA, "No address associated with hostname"},
+ #  endif
+ 		{EAI_NONAME, "Name or service not known"},
+ 		{EAI_SERVICE, "Servname not supported for ai_socktype"},
+ 		{EAI_SOCKTYPE, "ai_socktype not supported"},
++#  ifdef EAI_SYSTEM /* Not available in MSVC */
+ 		{EAI_SYSTEM, "System error"},
++#  endif
+ 		{0, NULL}
+ 	};
+ 	int i;
+diff --git "a/ext/iconv/iconv.c" "b/ext/iconv/iconv.c"
+index 9d7905c9a9..36dabfdc69 100644
+--- "a/ext/iconv/iconv.c"
++++ "b/ext/iconv/iconv.c"
+@@ -69,7 +69,7 @@ char *get_iconv_version(void) {
+ 
+ #ifdef HAVE_LIBICONV
+ 	static char buf[16];
+-	snprintf(buf, sizeof(buf), "%d.%d", _libiconv_version >> 8, _libiconv_version & 0xff);
++	snprintf(buf, sizeof(buf), "%d.%d", _LIBICONV_VERSION >> 8, _LIBICONV_VERSION & 0xff);
+ 	version = buf;
+ #elif HAVE_GLIBC_ICONV
+ 	version = (char *) gnu_get_libc_version();
+
+diff --git "a/ext/phar/config.w32" "b/ext/phar/config.w32"
+index c68ba08f2c..241f3eeddb 100644
+--- "a/ext/phar/config.w32"
++++ "b/ext/phar/config.w32"
+@@ -13,10 +13,10 @@ if (PHP_PHAR != "no") {
+ 		ADD_FLAG("CFLAGS_PHAR", "/D COMPILE_DL_PHAR ");
+ 	}
+ 	if (PHP_PHAR_NATIVE_SSL != "no") {
+-		if (CHECK_LIB("libeay32st.lib", "phar")) {
++		if (CHECK_LIB("libcrypto.lib", "phar")) {
+ 			/* We don't really need GDI for this, but there's no
+ 			way to avoid linking it in the static openssl build */
+-			ADD_FLAG("LIBS_PHAR", "libeay32st.lib gdi32.lib");
++			ADD_FLAG("LIBS_PHAR", "libcrypto.lib gdi32.lib");
+ 			if (PHP_DEBUG == "no") {
+ 				/* Silence irrelevant-to-us warning in release builds */
+ 				ADD_FLAG("LDFLAGS_PHAR", "/IGNORE:4089 ");
+diff --git "a/ext/gmp/gmp.c" "b/ext/gmp/gmp.c"
+index 29974c6386..28d304e072 100644
+--- "a/ext/gmp/gmp.c"
++++ "b/ext/gmp/gmp.c"
+@@ -36,10 +36,10 @@
+ #define GMP_ROUND_PLUSINF   1
+ #define GMP_ROUND_MINUSINF  2
+ 
+-#ifdef mpir_version
+-#define GMP_MPIR_VERSION_STRING ((char *) mpir_version)
++#ifdef _MSC_MPIR_VERSION
++#define GMP_MPIR_VERSION_STRING ((char *) _MSC_MPIR_VERSION)
+ #endif
+-#define GMP_VERSION_STRING ((char *) gmp_version)
++#define GMP_VERSION_STRING ((char *) GMP_VERSION)
+ 
+ #define GMP_MSW_FIRST     (1 << 0)
+ #define GMP_LSW_FIRST     (1 << 1)
+@@ -568,10 +568,10 @@ ZEND_MODULE_INFO_D(gmp)
+ {
+ 	php_info_print_table_start();
+ 	php_info_print_table_row(2, "gmp support", "enabled");
+-#ifdef mpir_version
+-	php_info_print_table_row(2, "MPIR version", mpir_version);
++#ifdef _MSC_MPIR_VERSION
++	php_info_print_table_row(2, "MPIR version", _MSC_MPIR_VERSION);
+ #else
+-	php_info_print_table_row(2, "GMP version", gmp_version);
++	php_info_print_table_row(2, "GMP version", GMP_VERSION);
+ #endif
+ 	php_info_print_table_end();
+ }
+diff --git "a/ext/libxml/config.w32" "b/ext/libxml/config.w32"
+index b11c57bc44..7f15920f29 100644
+--- "a/ext/libxml/config.w32"
++++ "b/ext/libxml/config.w32"
+@@ -3,8 +3,10 @@
+ ARG_WITH("libxml", "LibXML support", "yes");
+ 
+ if (PHP_LIBXML == "yes") {
+-	if (CHECK_LIB("libxml2_a_dll.lib;libxml2_a.lib", "libxml") &&
+-			CHECK_LIB("libiconv_a.lib;iconv_a.lib;libiconv.lib;iconv.lib", "libxml") &&
++	if (CHECK_LIB("libxml2_a_dll.lib", "libxml") &&
++	    CHECK_LIB("libiconv.lib", "libxml") &&
++	    CHECK_LIB("liblzma.lib", "libxml") &&
++	    CHECK_LIB("icuuc.lib", "libxml") &&
+ 			CHECK_HEADER_ADD_INCLUDE("libxml/parser.h", "CFLAGS_LIBXML", PHP_PHP_BUILD + "\\include\\libxml2") &&
+ 			CHECK_HEADER_ADD_INCLUDE("libxml/tree.h", "CFLAGS_LIBXML", PHP_PHP_BUILD + "\\include\\libxml2") &&
+ 			ADD_EXTENSION_DEP('libxml', 'iconv')) {
+diff --git "a/ext/gd/config.w32" "b/ext/gd/config.w32"
+index 09b09df95d..1424cf6671 100644
+--- "a/ext/gd/config.w32"
++++ "b/ext/gd/config.w32"
+@@ -1,81 +1,46 @@
+ // vim:ft=javascript
+ 
+-ARG_WITH("gd", "Bundled GD support", "yes,shared");
+-ARG_WITH("libwebp", "webp support", "yes");
+-ARG_WITH("libavif", "avif support", "yes");
++ARG_WITH("gd", "GD support", "yes,shared");
+ 
+ if (PHP_GD != "no") {
+ 	if (
+-		CHECK_LIB("libjpeg_a.lib;libjpeg.lib", "gd", PHP_GD) &&
+-		CHECK_LIB("freetype_a.lib;freetype.lib", "gd", PHP_GD) &&
+-		CHECK_HEADER_ADD_INCLUDE("ft2build.h", "CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include\\freetype2;" + PHP_PHP_BUILD + "\\include\\freetype") &&
+-		CHECK_LIB("libpng_a.lib;libpng.lib", "gd", PHP_GD) &&
+-		CHECK_HEADER_ADD_INCLUDE("gd.h", "CFLAGS_GD", PHP_GD + ";ext\\gd\\libgd") &&
+-		(CHECK_HEADER_ADD_INCLUDE("png.h", "CFLAGS_GD", PHP_GD +  ";" + PHP_PHP_BUILD + "\\include\\libpng16") ||
+-		CHECK_HEADER_ADD_INCLUDE("png.h", "CFLAGS_GD", PHP_GD +  ";" + PHP_PHP_BUILD + "\\include\\libpng15") ||
+-		CHECK_HEADER_ADD_INCLUDE("png.h", "CFLAGS_GD", PHP_GD +  ";" + PHP_PHP_BUILD + "\\include\\libpng12")) &&
+-		(CHECK_LIB("libiconv_a.lib;libiconv.lib", "gd", PHP_GD) || CHECK_LIB("iconv_a.lib;iconv.lib", "gd", PHP_GD)) &&
+-		 CHECK_HEADER_ADD_INCLUDE("iconv.h", "CFLAGS_GD", PHP_GD) &&
+-		(((PHP_ZLIB=="no") && (CHECK_LIB("zlib_a.lib;zlib.lib", "gd", PHP_GD) )) ||
+-			(PHP_ZLIB_SHARED && CHECK_LIB("zlib.lib", "gd", PHP_GD)) || (PHP_ZLIB == "yes" && (!PHP_ZLIB_SHARED))) &&
+-		CHECK_LIB("libXpm_a.lib", "gd", PHP_GD) &&
+-		CHECK_HEADER_ADD_INCLUDE("xpm.h", "CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include\\X11")
+-		) {
+-
+-		if (PHP_LIBWEBP != "no") {
+-			if ((CHECK_LIB("libwebp_a.lib", "gd", PHP_GD) || CHECK_LIB("libwebp.lib", "gd", PHP_GD)) &&
+-				CHECK_HEADER_ADD_INCLUDE("decode.h", "CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include\\webp") &&
+-				CHECK_HEADER_ADD_INCLUDE("encode.h", "CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include\\webp")) {
+-				AC_DEFINE("HAVE_LIBWEBP", 1, "WebP support");
+-				AC_DEFINE("HAVE_GD_WEBP", 1, "WebP support");
+-			} else {
+-				WARNING("libwebp not enabled; libraries and headers not found");
+-			}
+-		}
+-		if (PHP_LIBAVIF != "no") {
+-			if (CHECK_LIB("avif_a.lib", "gd", PHP_GD) &&
+-				CHECK_LIB("aom_a.lib", "gd", PHP_GD) &&
+-				CHECK_HEADER_ADD_INCLUDE("avif.h", "CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include\\avif")) {
+-				ADD_FLAG("CFLAGS_GD", "/D HAVE_LIBAVIF /D HAVE_GD_AVIF");
+-			} else if (CHECK_LIB("avif.lib", "gd", PHP_GD) &&
+-				CHECK_HEADER_ADD_INCLUDE("avif.h", "CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include\\avif")) {
+-				ADD_FLAG("CFLAGS_GD", "/D HAVE_LIBAVIF /D HAVE_GD_AVIF");
+-			} else {
+-				WARNING("libavif not enabled; libraries and headers not found");
+-			}
+-		}
+-		CHECK_LIB("User32.lib", "gd", PHP_GD);
+-		CHECK_LIB("Gdi32.lib", "gd", PHP_GD);
++		CHECK_HEADER_ADD_INCLUDE("gd.h",		"CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include") &&
++		CHECK_HEADER_ADD_INCLUDE("gdfontg.h",		"CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include") &&
++		CHECK_HEADER_ADD_INCLUDE("gdfontl.h",		"CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include") &&
++		CHECK_HEADER_ADD_INCLUDE("gdfontmb.h",		"CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include") &&
++		CHECK_HEADER_ADD_INCLUDE("gdfonts.h",		"CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include") &&
++		CHECK_HEADER_ADD_INCLUDE("gdfontt.h",		"CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include") &&
++		CHECK_HEADER_ADD_INCLUDE("gd_errors.h",		"CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include") &&
+ 
++		CHECK_LIB("user32.lib",	"gd", PHP_GD) &&
++		CHECK_LIB("Gdi32.Lib",	"gd", PHP_GD) &&
++		CHECK_LIB("libgd.lib",	"gd", PHP_GD)
++	) {
+ 		EXTENSION("gd", "gd.c", null, "-Iext/gd/libgd");
+-		ADD_SOURCES("ext/gd/libgd", "gd2copypal.c gd.c \
+-			gdcache.c gdfontg.c gdfontl.c gdfontmb.c gdfonts.c gdfontt.c \
+-			gdft.c gd_gd2.c gd_gd.c gd_gif_in.c gd_gif_out.c gdhelpers.c gd_io.c gd_io_dp.c \
+-			gd_io_file.c gd_io_ss.c gd_jpeg.c gdkanji.c gd_png.c gd_ss.c \
+-			gdtables.c gd_topal.c gd_wbmp.c gdxpm.c wbmp.c gd_xbm.c gd_security.c gd_transform.c \
+-			gd_filter.c gd_pixelate.c gd_rotate.c gd_color_match.c gd_webp.c gd_avif.c \
+-			gd_crop.c gd_interpolation.c gd_matrix.c gd_bmp.c gd_tga.c", "gd");
+-		AC_DEFINE('HAVE_LIBGD', 1, 'GD support');
+-		AC_DEFINE('HAVE_GD_BUNDLED', 1, "Bundled GD");
+-		AC_DEFINE('HAVE_GD_PNG', 1, "PNG support");
+-		AC_DEFINE('HAVE_GD_BMP', 1, "BMP support");
+-		AC_DEFINE('HAVE_GD_TGA', 1, "TGA support");
+-		AC_DEFINE('HAVE_LIBPNG', 1, "PNG support");
+-		AC_DEFINE('HAVE_LIBJPEG', 1, "JPEG support");
+-		AC_DEFINE('HAVE_GD_JPG', 1, "JPEG support");
+-		AC_DEFINE('HAVE_XPM', 1, "XPM support");
+-		AC_DEFINE('HAVE_GD_XPM', 1, "XPM support");
+-		AC_DEFINE('HAVE_LIBFREETYPE', 1, "Freetype support");
+-		AC_DEFINE('HAVE_GD_FREETYPE', 1, "Freetype support");
+-		ADD_FLAG("CFLAGS_GD", " \
+-/D PHP_GD_EXPORTS=1 \
+-/D HAVE_GD_GET_INTERPOLATION \
+-		");
++
++		AC_DEFINE('HAVE_LIBGD',			1,	"GD support");
++		AC_DEFINE('PHP_GD_EXPORTS',		1,	"dllexport");
++		AC_DEFINE('HAVE_GD_PNG',		1,	"PNG support");
++		AC_DEFINE('HAVE_GD_AVIF',		1,	"AVIF support");
++		AC_DEFINE('HAVE_GD_WEBP',		1,	"WEBP support");
++		AC_DEFINE('HAVE_GD_JPG',		1,	"JPG support");
++		AC_DEFINE('HAVE_GD_XPM',		1,	"XPM support");
++		AC_DEFINE('HAVE_GD_BMP',		1,	"BMP support");
++		AC_DEFINE('HAVE_GD_TGA',		1,	"TGA support");
++		AC_DEFINE('HAVE_GD_FREETYPE',		1,	"FREETYPE support");
++		AC_DEFINE('HAVE_GD_LIBVERSION',		1,	"VERSION support");
++		AC_DEFINE('HAVE_GD_GET_INTERPOLATION',	1,	"INTERPOLATION support");
++
++		AC_DEFINE('HAVE_GD_HEIF',		1,	"HEIF support");
++		AC_DEFINE('HAVE_GD_ZLIB',		1,	"ZLIB support");
++		AC_DEFINE('HAVE_GD_TIFF',		1,	"TIFF support");
++		AC_DEFINE("HAVE_GD_ICONV",		1,	"ICONV support");
++
+ 		if (ICC_TOOLSET) {
+ 			ADD_FLAG("LDFLAGS_GD", "/nodefaultlib:libcmt");
+ 		}
+ 
+-		PHP_INSTALL_HEADERS("", "ext/gd ext/gd/libgd" );
++		PHP_INSTALL_HEADERS("", "ext/gd" );
+ 	} else {
+ 		WARNING("gd not enabled; libraries and headers not found");
+ 	}
+diff --git "a/ext/gd/gd.c" "b/ext/gd/gd.c"
+index 1d8b3a0a1d..a84349217a 100644
+--- "a/ext/gd/gd.c"
++++ "b/ext/gd/gd.c"
+@@ -101,7 +101,19 @@ static void php_imagettftext_common(INTERNAL_FUNCTION_PARAMETERS, int);
+ 
+ /* as it is not really public, duplicate declaration here to avoid
+    pointless warnings */
+-int overflow2(int a, int b);
++int overflow2(int a, int b)
++{
++
++	if(a <= 0 || b <= 0) {
++		php_error_docref(NULL, E_WARNING, "One parameter to a memory allocation multiplication is negative or zero, failing operation gracefully\n");
++		return 1;
++	}
++	if(a > INT_MAX / b) {
++		php_error_docref(NULL, E_WARNING, "Product of memory allocation multiplication would exceed INT_MAX, failing operation gracefully\n");
++		return 1;
++	}
++	return 0;
++}
+ 
+ static void php_image_filter_negate(INTERNAL_FUNCTION_PARAMETERS);
+ static void php_image_filter_grayscale(INTERNAL_FUNCTION_PARAMETERS);
+@@ -458,6 +470,18 @@ PHP_MINFO_FUNCTION(gd)
+ #endif
+ #ifdef HAVE_GD_TGA
+ 	php_info_print_table_row(2, "TGA Read Support", "enabled");
++#endif
++#ifdef HAVE_GD_ZLIB
++	php_info_print_table_row(2, "ZLIB Support", "enabled - not implemented");
++#endif
++#ifdef HAVE_GD_TIFF
++	php_info_print_table_row(2, "TIFF Support", "enabled - not implemented");
++#endif
++#ifdef HAVE_GD_HEIF
++	php_info_print_table_row(2, "HEIF Support", "enabled - not implemented");
++#endif
++#ifdef HAVE_GD_ICONV
++	php_info_print_table_row(2, "ICONV Support", "enabled - not implemented");
+ #endif
+ 	php_info_print_table_end();
+ 	DISPLAY_INI_ENTRIES();
