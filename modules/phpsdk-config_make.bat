@@ -231,7 +231,7 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	REM php_memcache for github
 if %AVXECHO% == sse2 (set AVXPATH=) else (set AVXPATH=\avx)
 call %PATH_MODULES_COMMON%\init.bat pecl-memcache varonly
-call do_php %PATH_UTILS%\sub\version.php pecl-memcache %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcache.dll "php:%PHPVER% build:%TSNTS%"
+call do_php %PATH_UTILS%\sub\version.php pecl-memcache %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcache.dll "php-src:%PHPVER% build:%TSNTS%"
 if not "%PATH_GITHUB_PHPMEMCACHE%"=="" (
 	for %%A in (pdb dll) do (
 		xcopy /C /F /Y %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcache.%%A %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXPATH%\php-%PHPVER%.x_memcache.%%A*
