@@ -1,8 +1,56 @@
 # changelog
 
 
+## 1.8.2 _(2023-11-29)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  https://github.com/libgd/libgd/pull/787 merged https://github.com/libgd/libgd/commit/d500229d7a4016f054cc689dfab0ab1177709731
+`modules/libgd.bat`
+`modules/libgd_pr787.patch`
+*  php: 8.2 > 8.3
+`modules/php.bat`
+*  typo version
+`modules/phpsdk-config_make.bat`
+*  fix use of win32/php_stdint.h if MSC_VER < 1910
+`modules/pecl-memcache.patch`
+*  add debug shell cmd
+`utils/sub/bininfo.php`
+*  fix $argv[3] (cygwin)
+`utils/sub/version.php`
+*  74.1: update nowarn
+`modules/icu.bat`
+*  https://github.com/php/php-src/issues/12762
+`modules/php8.3_php-src.patch`
+*  enable check for only build with 'full'
+`utils/bininfo.bat`
+*  -php8.3 patch (unused)
+`modules/php8.3_php-src.patch`
+*  fix libxml2 version file
+`utils/sub/version.php`
+*  fetch upstream & merge to github.com/nono303 repos
+`SRC_VERSION.md`
+*  update configexport
+`config/.vsconfig`
+`config/cyg64.packagelist`
+`config/python.pip`
+*  as not released in /bin, remove from full: - subversion (and force serf build in subversion.bat) - geographiclib - dependencies update and fix usage.txt
+`modules/full.bat`
+`modules/subversion.bat`
+`usage.txt`
+*  gdal 3.8
+`utils/bininfo.bat`
+*  vcvars_ver: 14.38 > 14.39
+`README.md`
+`vs17.bat`
+
+
 ## 1.8.1 _(2023-11-15)_
 
+*  1.8.1
+`changelog.md`
 *  add sslh to usage & srccreate.bat
 `usage.txt`
 `utils/srccreate.bat`
