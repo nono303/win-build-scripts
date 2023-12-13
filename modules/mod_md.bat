@@ -5,8 +5,7 @@ if not exist %PATH_INSTALL_OSSL%\lib\libssl.lib (
 	@echo on
 	echo ###########################
 	echo # %PATH_INSTALL_OSSL%\lib\libssl.lib not found
-	echo # building openssl
-	echo ###########################
+	echo ^>^>^> building openssl
 	@echo off
 	call go openssl
 )
