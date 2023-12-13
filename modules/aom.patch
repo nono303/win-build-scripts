@@ -1,7 +1,7 @@
-diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
-index 8f459f39c4..4d9af581e9 100644
---- "a/CMakeLists.txt"
-+++ "b/CMakeLists.txt"
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index c97ccd11de..1323d4560c 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -286,12 +286,12 @@ add_library(aom ${target_objs_aom} $<TARGET_OBJECTS:aom_rtcd>)
  
  if(BUILD_SHARED_LIBS)
@@ -9,9 +9,9 @@ index 8f459f39c4..4d9af581e9 100644
 -  set_target_properties(aom_static PROPERTIES OUTPUT_NAME aom)
 +  set_target_properties(aom_static PROPERTIES OUTPUT_NAME aom_static)
    if(MSVC OR (WIN32 AND NOT MINGW))
-     # Fix race condition on the export library file between the two versions.
-     # Affects MSVC in all three flavors (stock, Clang/CL, LLVM-- the latter sets
-     # MSVC and MINGW both to FALSE).
+     # Fix race condition between the import library and the static library.
+     # Affects MSVC in all three flavors (stock, clang-cl, LLVM -- the latter
+     # sets MSVC and MINGW both to FALSE).
 -    set_target_properties(aom PROPERTIES ARCHIVE_OUTPUT_NAME "aom_dll")
 +    set_target_properties(aom PROPERTIES ARCHIVE_OUTPUT_NAME aom)
    endif()
