@@ -1,63 +1,16 @@
 diff --git "a/libgeotiff/CMakeLists.txt" "b/libgeotiff/CMakeLists.txt"
-index 001df67..35697bd 100644
+index 001df67..4ad328b 100644
 --- "a/libgeotiff/CMakeLists.txt"
 +++ "b/libgeotiff/CMakeLists.txt"
-@@ -115,10 +115,10 @@ INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/libxtiff)
- # TIFF support - required, default=ON
- SET(WITH_TIFF TRUE CACHE BOOL "Choose if TIFF support should be built")
+@@ -12,7 +12,7 @@ SET(GEOTIFF_LIBRARY_TARGET geotiff_library)
  
--FIND_PACKAGE(PROJ NO_MODULE QUIET)
--if (NOT PROJ_FOUND)
-+# FIND_PACKAGE(PROJ NO_MODULE QUIET)
-+# if (NOT PROJ_FOUND)
-     FIND_PACKAGE(PROJ)
--endif ()
-+# endif ()
+ ##############################################################################
+ # CMake settings
+-CMAKE_MINIMUM_REQUIRED(VERSION 3.0.0)
++CMAKE_MINIMUM_REQUIRED(VERSION 3.12.0)
  
- IF(PROJ_FOUND)
-     INCLUDE_DIRECTORIES(${PROJ_INCLUDE_DIR})
-@@ -130,10 +130,10 @@ ENDIF()
- SET(WITH_ZLIB FALSE CACHE BOOL "Choose if zlib support should be built")
+ SET(CMAKE_COLOR_MAKEFILE ON)
  
- IF(WITH_ZLIB)
--    FIND_PACKAGE(ZLIB NO_MODULE QUIET)
--    if (NOT ZLIB_FOUND)
-+    # FIND_PACKAGE(ZLIB NO_MODULE QUIET)
-+    # if (NOT ZLIB_FOUND)
-       FIND_PACKAGE(ZLIB)
--    endif ()
-+    # endif ()
- 
-     IF(ZLIB_FOUND)
-         SET(HAVE_ZIP 1)
-@@ -146,10 +146,10 @@ ENDIF()
- SET(WITH_JPEG FALSE CACHE BOOL "Choose if JPEG support should be built")
- 
- IF(WITH_JPEG)
--    FIND_PACKAGE(JPEG NO_MODULE QUIET)
--    if (NOT JPEG_FOUND)
-+    # FIND_PACKAGE(JPEG NO_MODULE QUIET)
-+    # if (NOT JPEG_FOUND)
-       FIND_PACKAGE(JPEG)
--    endif ()
-+    # endif ()
- 
-     IF(JPEG_FOUND)
-         SET(HAVE_JPEG 1)
-@@ -159,10 +159,10 @@ IF(WITH_JPEG)
- ENDIF()
- 
- IF(WITH_TIFF)
--    FIND_PACKAGE(TIFF NO_MODULE QUIET)
--    if (NOT TIFF_FOUND)
-+    # FIND_PACKAGE(TIFF NO_MODULE QUIET)
-+    # if (NOT TIFF_FOUND)
-       FIND_PACKAGE(TIFF REQUIRED)
--    endif ()
-+    # endif ()
- 
-     IF(TIFF_FOUND)
-         # Confirm required API is available
 @@ -308,7 +308,7 @@ ADD_LIBRARY(${GEOTIFF_LIBRARY_TARGET}
      ${GEOTIFF_LIB_SOURCES} ${XTIFF_SOURCES})
  
