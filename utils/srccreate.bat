@@ -10,7 +10,7 @@ if not exist %PATH_SRC%\. mkdir %PATH_SRC%
 cd /D %PATH_SRC%
 git clone https://aomedia.googlesource.com/aom aom
 cd /D aom
-git checkout tags/v3.7.1-rc1
+git checkout tags/v3.8.0-rc1
 cd /D ..
 git clone https://github.com/apache/apr.git apr
 cd /D apr
@@ -34,11 +34,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/c-ares/c-ares.git cares
 cd /D cares
-git checkout tags/cares-1_22_1
+git checkout tags/cares-1_23_0
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-8_4_0
+git checkout tags/curl-8_5_0
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -50,7 +50,7 @@ git checkout tags/v1.11.1
 cd /D ..
 git clone https://github.com/nono303/fit2gpx.git fit2gpx
 cd /D fit2gpx
-git checkout tags/0.1.21
+git checkout master
 cd /D ..
 git clone https://github.com/dcnieho/FreeGLUT.git freeglut
 cd /D freeglut
@@ -82,7 +82,7 @@ git checkout tags/2.4.58
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout tags/release-74-1
+git checkout tags/release-74-2
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -98,7 +98,7 @@ git checkout tags/js_v4.0.4
 cd /D ..
 git clone https://github.com/AOMediaCodec/libavif.git libavif
 cd /D libavif
-git checkout tags/v1.0.2
+git checkout tags/v1.0.3
 cd /D ..
 git clone https://github.com/hyperrealm/libconfig.git libconfig
 cd /D libconfig
@@ -330,7 +330,7 @@ git checkout tags/php-8.3.0
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
-git checkout tags/9.3.0
+git checkout tags/9.3.1
 cd /D ..
 git clone https://github.com/qhull/qhull qhull
 cd /D qhull
@@ -358,7 +358,7 @@ git checkout tags/v2.0.1
 cd /D ..
 git clone https://github.com/apache/subversion.git subversion
 cd /D subversion
-git checkout trunk
+git checkout tags/1.14.3
 cd /D ..
 git clone https://github.com/htacg/tidy-html5 tidy
 cd /D tidy
@@ -378,7 +378,7 @@ svn update -r 36
 cd /D ..
 git clone https://github.com/xdebug/xdebug.git xdebug
 cd /D xdebug
-git checkout tags/3.3.0alpha3
+git checkout tags/3.3.1
 cd /D ..
 git clone https://github.com/lloyd/yajl.git yajl
 cd /D yajl
