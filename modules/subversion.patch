@@ -1,8 +1,119 @@
-diff --git "a/build/generator/gen_win_dependencies.py" "b/build/generator/gen_win_dependencies.py"
-index 4b254c90d3..d0f4868e82 100644
---- "a/build/generator/gen_win_dependencies.py"
-+++ "b/build/generator/gen_win_dependencies.py"
-@@ -1168,7 +1168,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
+diff --git a/build/generator/gen_win.py b/build/generator/gen_win.py
+index 7565a9a7e8..85867a0c4b 100644
+--- a/build/generator/gen_win.py
++++ b/build/generator/gen_win.py
+@@ -574,7 +574,7 @@ class WinGeneratorBase(gen_win_dependencies.GenDependenciesBase):
+     # This section parses those dependencies and adds them to the dependency list
+     # for this target.
+     if name.startswith('javahl') or name == 'libsvnjavahl':
+-      for dep in re.findall('\$\(([^\)]*)_DEPS\)', target.add_deps):
++      for dep in re.findall(r'\$\(([^\)]*)_DEPS\)', target.add_deps):
+         dep = dep.replace('_', '-')
+         depends.extend(self.sections[dep].get_targets())
+ 
+@@ -728,7 +728,7 @@ class WinGeneratorBase(gen_win_dependencies.GenDependenciesBase):
+ 
+     for dep in self.get_win_depends(target, FILTER_EXTERNALLIBS):
+       if dep.external_lib:
+-        for elib in re.findall('\$\(SVN_([^\)]*)_LIBS\)', dep.external_lib):
++        for elib in re.findall(r'\$\(SVN_([^)]*)_LIBS\)', dep.external_lib):
+           external_lib = elib.lower()
+ 
+         if external_lib in self._libraries:
+@@ -758,7 +758,7 @@ class WinGeneratorBase(gen_win_dependencies.GenDependenciesBase):
+ 
+     for dep in self.get_win_depends(target, FILTER_EXTERNALLIBS):
+       if dep.external_lib:
+-        for elib in re.findall('\$\(SVN_([^\)]*)_LIBS\)', dep.external_lib):
++        for elib in re.findall(r'\$\(SVN_([^)]*)_LIBS\)', dep.external_lib):
+           external_lib = elib.lower()
+ 
+         if external_lib in self._libraries:
+@@ -833,7 +833,7 @@ class WinGeneratorBase(gen_win_dependencies.GenDependenciesBase):
+ 
+     for dep in self.get_win_depends(target, FILTER_LIBS):
+       if dep.external_lib:
+-        for elib in re.findall('\$\(SVN_([^\)]*)_LIBS\)', dep.external_lib):
++        for elib in re.findall(r'\$\(SVN_([^)]*)_LIBS\)', dep.external_lib):
+           external_lib = elib.lower()
+ 
+           if external_lib not in self._libraries:
+@@ -887,7 +887,7 @@ class WinGeneratorBase(gen_win_dependencies.GenDependenciesBase):
+       nondeplibs.extend(dep.msvc_libs)
+ 
+       if dep.external_lib:
+-        for elib in re.findall('\$\(SVN_([^\)]*)_LIBS\)', dep.external_lib):
++        for elib in re.findall(r'\$\(SVN_([^)]*)_LIBS\)', dep.external_lib):
+ 
+           external_lib = elib.lower()
+ 
+@@ -938,7 +938,7 @@ class WinGeneratorBase(gen_win_dependencies.GenDependenciesBase):
+ 
+     for dep in self.get_win_depends(target, FILTER_EXTERNALLIBS):
+       if dep.external_lib:
+-        for elib in re.findall('\$\(SVN_([^\)]*)_LIBS\)', dep.external_lib):
++        for elib in re.findall(r'\$\(SVN_([^)]*)_LIBS\)', dep.external_lib):
+           external_lib = elib.lower()
+ 
+         if external_lib in self._libraries:
+diff --git a/build/generator/gen_win_dependencies.py b/build/generator/gen_win_dependencies.py
+index 18e4e430a0..58aa249f70 100644
+--- a/build/generator/gen_win_dependencies.py
++++ b/build/generator/gen_win_dependencies.py
+@@ -230,22 +230,22 @@ class GenDependenciesBase(gen_base.GeneratorBase):
+       elif opt == '-D':
+         self.cpp_defines.append(val)
+       elif opt == '--vsnet-version':
+-        if val == '2002' or re.match('^7(\.\d+)?$', val):
++        if val == '2002' or re.match(r'^7(\.\d+)?$', val):
+           self.vs_version = '2002'
+           self.sln_version = '7.00'
+           self.vcproj_version = '7.00'
+           self.vcproj_extension = '.vcproj'
+-        elif val == '2003' or re.match('^8(\.\d+)?$', val):
++        elif val == '2003' or re.match(r'^8(\.\d+)?$', val):
+           self.vs_version = '2003'
+           self.sln_version = '8.00'
+           self.vcproj_version = '7.10'
+           self.vcproj_extension = '.vcproj'
+-        elif val == '2005' or re.match('^9(\.\d+)?$', val):
++        elif val == '2005' or re.match(r'^9(\.\d+)?$', val):
+           self.vs_version = '2005'
+           self.sln_version = '9.00'
+           self.vcproj_version = '8.00'
+           self.vcproj_extension = '.vcproj'
+-        elif val == '2008' or re.match('^10(\.\d+)?$', val):
++        elif val == '2008' or re.match(r'^10(\.\d+)?$', val):
+           self.vs_version = '2008'
+           self.sln_version = '10.00'
+           self.vcproj_version = '9.00'
+@@ -280,14 +280,14 @@ class GenDependenciesBase(gen_base.GeneratorBase):
+           self.sln_version = '12.00'
+           self.vcproj_version = '14.2'
+           self.vcproj_extension = '.vcxproj'
+-        elif re.match('^20\d+$', val):
++        elif re.match(r'^20\d+$', val):
+           print('WARNING: Unknown VS.NET version "%s",'
+                 ' assuming VS2012. Your VS can probably upgrade')
+           self.vs_version = '2012'
+           self.sln_version = '12.00'
+           self.vcproj_version = '11.0'
+           self.vcproj_extension = '.vcxproj'
+-        elif re.match('^1\d+$', val):
++        elif re.match(r'^1\d+$', val):
+           self.vs_version = val
+           self.sln_version = '12.00'
+           self.vcproj_version = val + '.0'
+@@ -593,7 +593,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
+     # to the more common 'libexpat.lib'
+     libname = 'libexpat.lib'
+     if not os.path.exists(os.path.join(lib_dir, 'libexpat.lib')):
+-      libname = 'xml.lib'
++        libname = 'xml.lib'
+ 
+     version = (major, minor, patch)
+     xml_version = '%d.%d.%d' % version
+@@ -1153,7 +1153,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
                                 stderr=subprocess.STDOUT).stdout
        line = outfp.read().decode('utf8')
        if line:
@@ -10,4 +121,62 @@ index 4b254c90d3..d0f4868e82 100644
 +        vermatch = re.search(r'(([0-9]+((\.[0-9]+)+)?)(_[._0-9]+)?)', line, re.M)
        else:
          vermatch = None
+ 
+@@ -1479,7 +1479,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
+     dll_name = None
+     defines = []
+ 
+-    lib_name = 'sqlite3.lib'
++    lib_name = 'libsqlite3.lib'
+ 
+     if os.path.isfile(os.path.join(sqlite_base, 'include/sqlite3.h')):
+       # Standard layout
+@@ -1487,18 +1487,18 @@ class GenDependenciesBase(gen_base.GeneratorBase):
+       lib_dir = os.path.join(sqlite_base, 'lib')
+ 
+       # We assume a static library, but let's support shared in this case
+-      if os.path.isfile(os.path.join(sqlite_base, 'bin/sqlite3.dll')):
++      if os.path.isfile(os.path.join(sqlite_base, 'bin/libsqlite3.dll')):
+         dll_dir = os.path.join(sqlite_base, 'bin')
+-        dll_name = 'sqlite3.dll'
++        dll_name = 'libsqlite3.dll'
+     elif os.path.isfile(os.path.join(sqlite_base, 'inc/sqlite3.h')):
+       # Standard layout
+       inc_dir = os.path.join(sqlite_base, 'inc')
+       lib_dir = os.path.join(sqlite_base, 'lib')
+ 
+       # We assume a static library, but let's support shared in this case
+-      if os.path.isfile(os.path.join(sqlite_base, 'bin/sqlite3.dll')):
++      if os.path.isfile(os.path.join(sqlite_base, 'bin/libsqlite3.dll')):
+         dll_dir = os.path.join(sqlite_base, 'bin')
+-        dll_name = 'sqlite3.dll'
++        dll_name = 'libsqlite3.dll'
+     elif (os.path.isfile(os.path.join(sqlite_base, 'sqlite3.h'))
+           and os.path.isfile(os.path.join(sqlite_base, 'sqlite3.c'))):
+       # Amalgamation
+diff --git a/build/generator/swig/__init__.py b/build/generator/swig/__init__.py
+index 000524ea81..361a400975 100644
+--- a/build/generator/swig/__init__.py
++++ b/build/generator/swig/__init__.py
+@@ -72,7 +72,7 @@ class Generator:
+ 
+     if not self._swigVersion:
+       swig_version = subprocess.check_output([self.swig_path, "-version"]).decode('utf8')
+-      m = re.search("Version (\d+).(\d+).(\d+)", swig_version)
++      m = re.search(r"Version (\d+).(\d+).(\d+)", swig_version)
+       if m:
+         self._swigVersion = tuple(map(int, m.groups()))
+       else:
+diff --git a/build/transform_sql.py b/build/transform_sql.py
+index 18091f21ea..73e09400da 100755
+--- a/build/transform_sql.py
++++ b/build/transform_sql.py
+@@ -50,7 +50,7 @@ class Processor(object):
+ 
+   # a few SQL comments that act as directives for this transform system
+   re_format = re.compile('-- *format: *([0-9]+)')
+-  re_statement = re.compile('-- *STMT_([A-Z_0-9]+)( +\(([^\)]*)\))?')
++  re_statement = re.compile(r'-- *STMT_([A-Z_0-9]+)( +\(([^)]*)\))?')
+   re_include = re.compile('-- *include: *([-a-z]+)')
+   re_define = re.compile('-- *define: *([A-Z_0-9]+)')
  
