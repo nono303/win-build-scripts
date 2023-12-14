@@ -1,8 +1,57 @@
 # changelog
 
 
+## 1.8.3 _(2023-12-14)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  https://gitlab.kitware.com/cmake/cmake/-/issues/25485#note_1458341
+`modules/libgeotiff.patch`
+*  fix  - sqlite: build with shared lib  - python 3.12 regexp  - force quic 0  - serf lib naming for tests improve  - typo  - test launch command  - nowarn  - clean folder release
+`modules/subversion.bat`
+`modules/subversion.patch`
+*  add 'svn' param to build specific and light release for subversion  - sqlite3: -ICU deps, -SHELL  - httpd: -MODULES, only zlib & openssl
+`modules/httpd.bat`
+`modules/sqlite.bat`
+*  add USE_SEH
+`modules/sqlite.patch`
+*  add subversion-deps.bat (cf. https://github.com/nono303/win-build-scripts/issues/2#issuecomment-1855537078)
+`modules/subversion-deps.bat`
+`usage.txt`
+*  fix: mod_maxminddb_extra_libsonly if MAXMIND_LIBRARIES passed in args all extras modules: i > O (optional)
+`modules/httpd.patch`
+*  fix on KEEPSRC: disable vcxproj.sh & sed
+`modules/icu.bat`
+*  gradle: 8.4 > 8.5
+`modules/mobac.patch`
+*  remove false 'showWarning' on ICU
+`utils/sub/logcheck.php`
+*  fix associtaed modules for php & httpd.bat return product version on stdout if only one arg (nothing patched)
+`utils/sub/version.php`
+*  SVN paths: vs16 > vs17
+`env_sample.bat`
+*  rename patch
+`modules/php-src_8.0.patch`
+`modules/php-src_8.1.patch`
+`modules/php-src_8.2.patch`
+`modules/php-src_8.3.patch`
+`modules/php.bat`
+*  gradle: 8.4 > 8.5
+`env_sample.bat`
+*  v3.8.0
+`modules/aom.patch`
+*  typo
+`modules/mod_md.bat`
+*  8.5.0
+`modules/curl_ca-win.patch`
+
+
 ## 1.8.2 _(2023-11-29)_
 
+*  1.8.2
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
