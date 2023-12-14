@@ -9,9 +9,9 @@
 		$letterpos[$letter] = $pos++;
 	$argv[1] = strtolower($argv[1]);
 	$proot = $argv[1];
-	if(in_array($proot,["mod_maxminddb","mod_fcgid","mod_h2","mod_md","mod_wku_bt","mod_h264_streaming","mod_qos","mod_security"]))
+	if(in_array($proot,["mod_bikeshed","mod_maxminddb","mod_fcgid","mod_h2","mod_md","mod_wku_bt","mod_h264_streaming","mod_qos","mod_security"]))
 		$proot = "httpd";
-	if(in_array($proot,["pecl-memcache","php-geos","pecl-text-xdiff","php-ext-brotli","xdebug","php-src"]))
+	if(in_array($proot,["pecl-memcache","php-geos","php-ogr","php-proj","pecl-text-xdiff","php-ext-brotli","php-ext-zstd","xdebug","php-src"]))
 		$proot = "php";
 	$nogit = array(
 		"mod_maxminddb"		=> ["/\[mod_maxminddb\], ?\[([0-9\.]+)/s",
@@ -187,6 +187,8 @@
 			}
 		}
 		// file_put_contents(dirname(__FILE__) . '/../../SRC_VERSION.md',$md);
+	} elseif(sizeof($argv) == 2){
+		echo getVersion($cur,$argv[1])["product"];
 	} elseif(sizeof($argv) >= 3){
 		if(is_dir($cur = pathenv("PATH_SRC"))."/".$argv[1]){
 			$current = getVersion($cur,$argv[1]);
