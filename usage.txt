@@ -69,6 +69,7 @@ Usage: go command [options]
     * nssm
     * php-cgi-spawner
   * geographiclib
+  * subversion-deps
   * subversion
   * dependencies
   * memcached
