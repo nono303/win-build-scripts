@@ -1,13 +1,13 @@
 Index: build.gradle
 ===================================================================
---- build.gradle	(revision 2759)
+--- build.gradle	(revision 2767)
 +++ build.gradle	(working copy)
 @@ -6,7 +6,7 @@
      id 'distribution'
      id 'at.bxm.svntools' version '3.1'
      id 'org.gradle.crypto.checksum' version '1.4.0'
 -    id 'com.diffplug.spotless' version '6.21.0'
-+    id 'com.diffplug.spotless' version '6.22.0'
++    id 'com.diffplug.spotless' version '6.23.1'
  }
  
  group 'mobac.sourceforge.io'
@@ -22,21 +22,64 @@ Index: build.gradle
          // maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
      }
      ext {
+Index: gradle/wrapper/gradle-wrapper.jar
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
 Index: gradle/wrapper/gradle-wrapper.properties
 ===================================================================
---- gradle/wrapper/gradle-wrapper.properties	(revision 2759)
+--- gradle/wrapper/gradle-wrapper.properties	(revision 2767)
 +++ gradle/wrapper/gradle-wrapper.properties	(working copy)
 @@ -1,6 +1,6 @@
  distributionBase=GRADLE_USER_HOME
  distributionPath=wrapper/dists
 -distributionUrl=https\://services.gradle.org/distributions/gradle-8.3-bin.zip
-+distributionUrl=https\://services.gradle.org/distributions/gradle-8.4-bin.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-8.5-bin.zip
  networkTimeout=10000
  validateDistributionUrl=true
  zipStoreBase=GRADLE_USER_HOME
+Index: gradlew
+===================================================================
+--- gradlew	(revision 2767)
++++ gradlew	(working copy)
+@@ -145,7 +145,7 @@
+     case $MAX_FD in #(
+       max*)
+         # In POSIX sh, ulimit -H is undefined. That's why the result is checked to see if it worked.
+-        # shellcheck disable=SC3045
++        # shellcheck disable=SC2039,SC3045
+         MAX_FD=$( ulimit -H -n ) ||
+             warn "Could not query maximum file descriptor limit"
+     esac
+@@ -153,7 +153,7 @@
+       '' | soft) :;; #(
+       *)
+         # In POSIX sh, ulimit -n is undefined. That's why the result is checked to see if it worked.
+-        # shellcheck disable=SC3045
++        # shellcheck disable=SC2039,SC3045
+         ulimit -n "$MAX_FD" ||
+             warn "Could not set maximum file descriptor limit to $MAX_FD"
+     esac
+@@ -202,11 +202,11 @@
+ # Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+ DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
+ 
+-# Collect all arguments for the java command;
+-#   * $DEFAULT_JVM_OPTS, $JAVA_OPTS, and $GRADLE_OPTS can contain fragments of
+-#     shell script including quotes and variable substitutions, so put them in
+-#     double quotes to make sure that they get re-expanded; and
+-#   * put everything else in single quotes, so that it's not re-expanded.
++# Collect all arguments for the java command:
++#   * DEFAULT_JVM_OPTS, JAVA_OPTS, JAVA_OPTS, and optsEnvironmentVar are not allowed to contain shell fragments,
++#     and any embedded shellness will be escaped.
++#   * For example: A user cannot expect ${Hostname} to be expanded, as it is an environment variable and will be
++#     treated as '${Hostname}' itself on the command line.
+ 
+ set -- \
+         "-Dorg.gradle.appname=$APP_BASE_NAME" \
 Index: mobac/build.gradle
 ===================================================================
---- mobac/build.gradle	(revision 2759)
+--- mobac/build.gradle	(revision 2767)
 +++ mobac/build.gradle	(working copy)
 @@ -12,29 +12,29 @@
      implementation "org.mapsforge:mapsforge-map-awt:${mapsforgeVersion}"
@@ -92,7 +135,7 @@ Index: mobac/build.gradle
      doLast {
 Index: mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(revision 2759)
+--- mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(revision 2767)
 +++ mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(working copy)
 @@ -34,15 +34,10 @@
  	static {
@@ -114,7 +157,7 @@ Index: mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java
  	}
 Index: mobac/src/main/java/mobac/gui/MainGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2759)
+--- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2767)
 +++ mobac/src/main/java/mobac/gui/MainGUI.java	(working copy)
 @@ -151,7 +151,7 @@
  
@@ -135,7 +178,7 @@ Index: mobac/src/main/java/mobac/gui/MainGUI.java
  		leftPanelContent.add(mapSourcePanel, gbc_eol);
 Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2759)
+--- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2767)
 +++ mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(working copy)
 @@ -43,7 +43,7 @@
  		JScrollPane mapSourceTreeScrollPane = new JScrollPane(mapSourceTree, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -148,7 +191,7 @@ Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
  	}
 Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2759)
+--- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2767)
 +++ mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(working copy)
 @@ -95,7 +95,7 @@
  
@@ -161,7 +204,7 @@ Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
  	private final Settings settings = Settings.getInstance();
 Index: mobac/src/main/java/mobac/program/AtlasThread.java
 ===================================================================
---- mobac/src/main/java/mobac/program/AtlasThread.java	(revision 2759)
+--- mobac/src/main/java/mobac/program/AtlasThread.java	(revision 2767)
 +++ mobac/src/main/java/mobac/program/AtlasThread.java	(working copy)
 @@ -203,13 +203,13 @@
  			}
@@ -181,7 +224,7 @@ Index: mobac/src/main/java/mobac/program/AtlasThread.java
  		} catch (AtlasTestException e) {
 Index: mobac/src/main/java/mobac/program/download/MobacTrustManager.java
 ===================================================================
---- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2759)
+--- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2767)
 +++ mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(working copy)
 @@ -128,7 +128,7 @@
  			defaultTrustManager.checkServerTrusted(chain, authType);
