@@ -23,10 +23,10 @@ set PHPVER=%SCM_TAG:~4,3%
 if exist %PATH_SRC%\php-src\openssl\. rmdir /S /Q %PATH_SRC%\php-src\openssl
 mklink /J %PATH_SRC%\php-src\openssl %PATH_SRC%\%OPENSSL_SCM%\ms
 	REM VERSION PATCH
-if exist %PATH_MODULES%\php%PHPVER%_php-src.patch (
+if exist %PATH_MODULES%\php-src_%PHPVER%.patch (
 	if %ARG_KEEPSRC% == 0 (
-		echo     # apply php%PHPVER%_php-src.patch
-		git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php%PHPVER%_php-src.patch
+		echo     # apply php-src_%PHPVER%.patch
+		git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-src_%PHPVER%.patch
 	)
 )
 
