@@ -1,5 +1,5 @@
 diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
-index 7b30547d39..13221a9f9e 100644
+index 7b30547d39..46a2ab003d 100644
 --- "a/CMakeLists.txt"
 +++ "b/CMakeLists.txt"
 @@ -15,6 +15,10 @@
@@ -70,14 +70,14 @@ index 7b30547d39..13221a9f9e 100644
    "modules/test/mod_optional_fn_import+O+example optional function importer"
    "modules/test/mod_optional_hook_export+O+example optional hook exporter"
    "modules/test/mod_optional_hook_import+O+example optional hook importer"
-+  "../mod_maxminddb/src/mod_maxminddb+i+MaxMind DB Apache Module"
-+  "../mod_fcgid/modules/fcgid/mod_fcgid+i+FastCGI implementation for Apache HTTP"
-+  "../mod_h264_streaming/mod_h264_streaming+i+H264 Streaming Module"
-+  "../mod_wku_bt/mod_whatkilledus+i+mod_whatkilledus"
-+  "../mod_wku_bt/mod_crash+i+FastCGI mod_crash"
-+  "../mod_wku_bt/mod_backtrace+i+mod_backtrace"
-+  "../mod_bikeshed/mod_bikeshed+i+mod_bikeshed"
-+  "../mod_qos/mod_qos+i+mod_qos"
++  "../mod_maxminddb/src/mod_maxminddb+O+MaxMind DB Apache Module"
++  "../mod_fcgid/modules/fcgid/mod_fcgid+O+FastCGI implementation for Apache HTTP"
++  "../mod_h264_streaming/mod_h264_streaming+O+H264 Streaming Module"
++  "../mod_wku_bt/mod_whatkilledus+O+mod_whatkilledus"
++  "../mod_wku_bt/mod_crash+O+FastCGI mod_crash"
++  "../mod_wku_bt/mod_backtrace+O+mod_backtrace"
++  "../mod_bikeshed/mod_bikeshed+O+mod_bikeshed"
++  "../mod_qos/mod_qos+O+mod_qos"
  )
  
  # Track which modules actually built have APIs to link against.
@@ -186,7 +186,7 @@ index 7b30547d39..13221a9f9e 100644
  )
  SET(mod_ratelimit_extra_defines      AP_RL_DECLARE_EXPORT)
  SET(mod_sed_extra_sources
-@@ -566,6 +606,55 @@ IF(LIBXML2_FOUND)
+@@ -566,6 +606,57 @@ IF(LIBXML2_FOUND)
    SET(mod_xml2enc_extra_libs         "${LIBXML2_LIBRARIES};${LIBXML2_ICONV_LIBRARIES}")
  ENDIF()
  SET(mod_watchdog_extra_defines       AP_WD_DECLARE_EXPORT)
@@ -216,7 +216,9 @@ index 7b30547d39..13221a9f9e 100644
 +../mod_h264_streaming/moov.c
 +#../mod_h264_streaming/main.c
 +)
-+SET(mod_maxminddb_extra_libs			${MAXMIND_LIBRARIES})
++if(MAXMIND_LIBRARIES)
++  SET(mod_maxminddb_extra_libs			${MAXMIND_LIBRARIES})
++ENDIF()
 +SET(mod_whatkilledus_extra_libs			"dbghelp.lib")
 +SET(mod_whatkilledus_extra_sources
 +../mod_wku_bt/mod_whatkilledus.c
@@ -242,7 +244,7 @@ index 7b30547d39..13221a9f9e 100644
  
  SET(MODULE_PATHS)
  FOREACH (modinfo ${MODULE_LIST})
-@@ -625,7 +714,7 @@ ELSE()
+@@ -625,7 +716,7 @@ ELSE()
  ENDIF()
  
  # for easy reference from .dll/.so builds
@@ -251,7 +253,7 @@ index 7b30547d39..13221a9f9e 100644
  
  ADD_EXECUTABLE(gen_test_char server/gen_test_char.c)
  GET_TARGET_PROPERTY(GEN_TEST_CHAR_EXE gen_test_char LOCATION)
-@@ -711,8 +800,8 @@ SET(HTTPD_INCLUDE_DIRECTORIES
+@@ -711,8 +802,8 @@ SET(HTTPD_INCLUDE_DIRECTORIES
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/dav/main
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/filters
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators
@@ -262,7 +264,7 @@ index 7b30547d39..13221a9f9e 100644
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/proxy
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/session
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl
-@@ -720,6 +809,11 @@ SET(HTTPD_INCLUDE_DIRECTORIES
+@@ -720,6 +811,11 @@ SET(HTTPD_INCLUDE_DIRECTORIES
    ${CMAKE_CURRENT_SOURCE_DIR}/server/mpm/winnt
    ${APR_INCLUDE_DIR}
    ${PCRE_INCLUDE_DIR}
@@ -274,7 +276,7 @@ index 7b30547d39..13221a9f9e 100644
  )
  
  # The .h files we install from outside the main include directory
-@@ -737,7 +831,7 @@ SET(other_installed_h
+@@ -737,7 +833,7 @@ SET(other_installed_h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/filters/mod_xml2enc.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators/mod_cgi.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators/mod_status.h
@@ -283,7 +285,7 @@ index 7b30547d39..13221a9f9e 100644
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/loggers/mod_log_config.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/mappers/mod_rewrite.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/proxy/mod_proxy.h
-@@ -834,7 +928,7 @@ FOREACH (mod ${MODULE_PATHS})
+@@ -834,7 +930,7 @@ FOREACH (mod ${MODULE_PATHS})
      SET(mod_extra_libs "${mod_name}_extra_libs")
      SET_TARGET_PROPERTIES(${mod_name} PROPERTIES
        SUFFIX .so
@@ -292,7 +294,7 @@ index 7b30547d39..13221a9f9e 100644
      )
      TARGET_LINK_LIBRARIES(${mod_name} ${${mod_extra_libs}} libhttpd ${EXTRA_LIBS} ${APR_LIBRARIES} ${HTTPD_SYSTEM_LIBS})
      DEFINE_WITH_BLANKS(define_long_name "LONG_NAME" "${mod_name} for Apache HTTP Server")
-@@ -860,7 +954,7 @@ ENDFOREACH()
+@@ -860,7 +956,7 @@ ENDFOREACH()
  ###########   HTTPD LIBRARIES   ############
  ADD_LIBRARY(libhttpd SHARED ${LIBHTTPD_SOURCES} build/win32/httpd.rc)
  SET_TARGET_PROPERTIES(libhttpd PROPERTIES
@@ -301,7 +303,7 @@ index 7b30547d39..13221a9f9e 100644
  )
  SET(install_targets ${install_targets} libhttpd)
  SET(install_bin_pdb ${install_bin_pdb} $<TARGET_PDB_FILE:libhttpd>)
-@@ -915,12 +1009,12 @@ ENDIF()
+@@ -915,12 +1011,12 @@ ENDIF()
  GET_PROPERTY(tmp_includes TARGET ab PROPERTY INCLUDE_DIRECTORIES)
  
  # getting duplicate manifest error with ApacheMonitor
