@@ -160,7 +160,6 @@ REM copy MOBAC, PROJ & GEOGRAPHICLIB release to LOCAL_PATH_XXX if LOCAL_COPY=1 &
 set LOCAL_COPY=1
 set LOCAL_PATH_MOBAC=C:\PROGRA~2\mobac
 set LOCAL_PATH_MOBAC2=F:\logiciels\_Carto
-set LOCAL_PATH_PYTHON=B:\serveur\python3
 set LOCAL_PATH_GEOGRAPHICLIB=B:\serveur\_gis\geographiclib
 set LOCAL_PATH_FIT2GPX=B:\bin
 REM only for PROJ & GEOGRAPHICLIB
