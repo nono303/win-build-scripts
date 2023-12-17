@@ -1,2 +1,2 @@
 @echo off
-do_php C:\sdk\batch\utils\sub\version.php
+do_php %PATH_UTILS%\sub\version.php

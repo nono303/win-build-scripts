@@ -7,7 +7,7 @@ REM +icuio         # Stream and I/O Library
 REM -icule         # Layout library
 REM -iculx         # Paragraph Layout library
 
-FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\grep 'U_ICU_VERSION_SHORT' /cygdrive/c/sdk/src/icu/icu4c/source/common/unicode/uvernum.h ^| %PATH_BIN_CYGWIN%\tr -dc '0-9'`) do (set ICUV=%%F)
+FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\grep 'U_ICU_VERSION_SHORT' %CYGPATH_SRC%/%1/icu4c/source/common/unicode/uvernum.h ^| %PATH_BIN_CYGWIN%\tr -dc '0-9'`) do (set ICUV=%%F)
 set VCDIR=icu4c\source\allinone
 set OUTDIR_CONF=Release
 

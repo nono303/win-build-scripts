@@ -48,7 +48,7 @@ REM \/DBUILDING_H264_STREAMING : http://h264.code-shop.com/trac#H264StreamingMod
 sed -i 's/DBIN_NAME=mod_h264_streaming.so/DBIN_NAME=mod_h264_streaming.so -DBUILDING_H264_STREAMING/g' %CYGPATH_BUILD%/%1/build.ninja
 	REM http://mod-qos.sourceforge.net/#statusviewer
 sed -i 's/DBIN_NAME=mod_qos.so/DBIN_NAME=mod_qos.so -DQS_NO_STATUS_HOOK/g' %CYGPATH_BUILD%/%1/build.ninja
-REM C:\sdk\src\httpd\support\win32\ApacheMonitor.rc(21) : warning RC4005: 'LONG_NAME' : redefinition
+REM /support/win32/ApacheMonitor.rc(21) : warning RC4005: 'LONG_NAME' : redefinition
 sed -i 's/-DLONG_NAME=ApacheMonitor //g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
 
