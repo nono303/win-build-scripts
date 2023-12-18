@@ -6,14 +6,14 @@
 | [apr-util](https://github.com/apache/apr-util) | 1.7.0-dev - a1702a71 |
 | [brotli](https://github.com/google/brotli) | 1.1.0 |
 | [bzip2](https://gitlab.com/bzip2/bzip2.git) | 1.1.0 - 66c46b8 |
-| [cares](https://github.com/c-ares/c-ares) | 1.23.0 |
+| [cares](https://github.com/c-ares/c-ares) | 1.24.0 |
 | [curl](https://github.com/curl/curl) | 8.5.0 |
 | [dav1d](https://code.videolan.org/videolan/dav1d.git) | 1.3.0 |
 | [dependencies](https://github.com/lucasg/Dependencies) | 1.11.1 |
 | [fit2gpx](https://github.com/nono303/fit2gpx) - [*upstream + src*](https://github.com/MaksVasilev/fit2gpx) | 0.1.21 - 39548b1 |
 | [freeglut](https://github.com/dcnieho/FreeGLUT.git) | 3.4.0 |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.13.2 |
-| [gdal](https://github.com/OSGeo/gdal) | 3.8.1rc3 |
+| [gdal](https://github.com/OSGeo/gdal) | 3.8.2rc1 |
 | [geographiclib](https://github.com/geographiclib/geographiclib/tree/release) | 2.3 |
 | [geos](https://github.com/libgeos/geos) | 3.12.1 |
 | [giflib](https://github.com/gongjianbo/GifLib) | 5.2.1 - 59eb9d1 |
@@ -43,7 +43,7 @@
 | [libtiff](https://gitlab.com/libtiff/libtiff) | 4.6.0 |
 | [libwepb](https://chromium.googlesource.com/webm/libwebp) | 1.3.2 |
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
-| [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) :warning:php / httpd / gdal ko 2.12.x | 2.11.6 |
+| [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.12.3 |
 | [libxpm](https://github.com/nono303/libxpm.git) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.17 |
 | [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.39 - c5c66dfb |
 | [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1882 - 7da8059c |
@@ -56,7 +56,7 @@
 | [mod_fcgid](https://github.com/nono303/mod_fcgid) - _[upstream + src](https://github.com/pagespeed/mod_fcgid)_ | 2.3.10.4 - a6bcd41 |
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.25 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
-| [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 - fbc86e3 |
+| [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 - 4031876 |
 | [mod_md](https://github.com/icing/mod_md) | 2.4.25 |
 | [mod_qos](https://sourceforge.net/p/mod-qos/source/HEAD/tree/trunk/httpd_src/modules/qos/) | 11.74 r2706 (2712) |
 | [mod_security](https://github.com/SpiderLabs/ModSecurity) | 2.9.7 |

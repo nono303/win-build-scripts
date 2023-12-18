@@ -34,7 +34,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/c-ares/c-ares.git cares
 cd /D cares
-git checkout tags/cares-1_23_0
+git checkout tags/cares-1_24_0
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
@@ -62,7 +62,7 @@ git checkout tags/VER-2-13-2
 cd /D ..
 git clone https://github.com/OSGeo/gdal gdal
 cd /D gdal
-git checkout tags/v3.8.1RC3
+git checkout tags/v3.8.2RC1
 cd /D ..
 git clone https://github.com/geographiclib/geographiclib.git geographiclib
 cd /D geographiclib
@@ -182,7 +182,7 @@ git checkout tags/v0.23
 cd /D ..
 git clone https://gitlab.gnome.org/GNOME/libxml2.git libxml2
 cd /D libxml2
-git checkout tags/v2.11.6
+git checkout tags/v2.12.3
 cd /D ..
 git clone https://github.com/nono303/libxpm.git libxpm
 cd /D libxpm

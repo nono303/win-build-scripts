@@ -43,13 +43,13 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.9.0-p1.1 (14.39) | `.vsconfig`         |
+| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.9.0-p2 (14.39) | `.vsconfig`         |
 | [Cygwin](https://cygwin.com/install.html)                    | x86  | 3.3.6 | `cyg32.packagelist` |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.4.10 | `cyg64.packagelist` |
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.12.1 |                     |
 | [OpenJDK](https://jdk.java.net/21/)                  | x64  | 21.0.1 |                     |
 | [Strawberry Perl](https://github.com/StrawberryPerl/Perl-Dist-Strawberry/releases) | x64  | 5.38.2.2 |                     |
-| [NASM](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.16.02rc5 |                     |
+| [NASM](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.16.02rc6 |                     |
 | [YASM](https://yasm.tortall.net/Download.html) | x64 | 1.3.0 | |
 | [Git](https://git-scm.com/download/win)                      | x64  | 2.43.0 |                     |
 | verpatch                                                     | x64  | 1.0.15.1       |                     |
@@ -57,7 +57,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.90       |                     |
 | [ChkMatch](https://web.archive.org/web/20210205095232/https://www.debuginfo.com/tools/chkmatch.html) | x86 | 1.0.3          |                     |
 | [Gradle](https://services.gradle.org/distributions/) | [java] | 8.5 | |
-| [CMake](https://cmake.org/download/) | x64 | 3.28.0 | |
+| [CMake](https://cmake.org/download/) | x64 | 3.28.1 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | x64 | 1.11.1 | |
 | [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 1.3.0 | |
 | [NuGet](https://www.nuget.org/downloads) | x86 | 6.8.0 | |
