@@ -1,8 +1,39 @@
 # changelog
 
 
+## 1.8.4 _(2023-12-18)_
+
+*  1.8.4
+`changelog.md`
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  remove useless sed patch & LIBXML2_INCLUDE_DIR +%PATH_INSTALL%\include
+`modules/libxslt.bat`
+*  fix LIBXML2_INCLUDE_DIR (was on %PATH_SOFTS%/c/include/libxml/xmlversion.h)
+`modules/nghttp2.bat`
+*  move to CMake build
+`modules/libxml2.bat`
+`modules/libxml2.patch`
+`utils/bininfo.bat`
+*  typo
+`utils/libcheck.bat`
+*  https://github.com/apache/httpd/pull/393
+`modules/httpd.patch`
+*  remove unused LOCAL_PATH_PYTHON
+`env_sample.bat`
+*  fix hardcoded path
+`modules/httpd.bat`
+`modules/icu.bat`
+`upgrade_pip.bat`
+`utils/version.bat`
+
+
 ## 1.8.3 _(2023-12-14)_
 
+*  1.8.3
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
