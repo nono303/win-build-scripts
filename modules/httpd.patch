@@ -21,21 +21,31 @@ index 34f8e8ee090..0d3d13c1239 100644
          if (HAVE_ENCODING(ctx->xml2enc)) {
              ap_log_rerror(APLOG_MARK, APLOG_INFO, 0, r, APLOGNO(01432)
 diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
-index 7b30547d39..46a2ab003d 100644
+index 7b30547d39..0a01d8d199 100644
 --- "a/CMakeLists.txt"
 +++ "b/CMakeLists.txt"
-@@ -15,6 +15,10 @@
+@@ -15,15 +15,27 @@
  #
  # Read README.cmake before using this.
  
++CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
++
+ PROJECT(HTTPD C)
+ 
+-CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 +# SET(mod_md_src "modules/md")
 +SET(mod_md_src "../mod_md/src")
 +# SET(mod_http2_src "modules/http2")
 +SET(mod_http2_src "../mod_h2/mod_http2")
- PROJECT(HTTPD C)
++
++# https://discourse.cmake.org/t/how-to-distinguish-windows-architecture/5104
++if (CMAKE_SIZEOF_VOID_P EQUAL 4)
++    SET(diag_bits 32)
++ELSEIF(CMAKE_SIZEOF_VOID_P EQUAL 8)
++    SET(diag_bits 64)
++endif()
  
- CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
-@@ -23,7 +27,7 @@ INCLUDE(CheckSymbolExists)
+ INCLUDE(CheckSymbolExists)
  INCLUDE(CheckCSourceCompiles)
  
  FIND_PACKAGE(LibXml2)
@@ -44,7 +54,28 @@ index 7b30547d39..46a2ab003d 100644
  FIND_PACKAGE(OpenSSL)
  FIND_PACKAGE(ZLIB)
  FIND_PACKAGE(CURL)
-@@ -242,7 +246,7 @@ MESSAGE(STATUS "")
+@@ -132,15 +144,15 @@ MACRO(DEFINE_WITH_BLANKS output_definition input_symbol input_value)
+ ENDMACRO()
+ 
+ MACRO(GET_MOD_ENABLE_RANK macro_modname macro_mod_enable_val macro_output_rank)
+-  IF(${macro_mod_enable_val} STREQUAL "O")
++  IF(${macro_mod_enable_val} STREQUAL O)
+     SET(${macro_output_rank} 0)
+-  ELSEIF(${macro_mod_enable_val} STREQUAL "i")
++  ELSEIF(${macro_mod_enable_val} STREQUAL i)
+     SET(${macro_output_rank} 1)
+-  ELSEIF(${macro_mod_enable_val} STREQUAL "I")
++  ELSEIF(${macro_mod_enable_val} STREQUAL I)
+     SET(${macro_output_rank} 2)
+-  ELSEIF(${macro_mod_enable_val} STREQUAL "a")
++  ELSEIF(${macro_mod_enable_val} STREQUAL a)
+     SET(${macro_output_rank} 3)
+-  ELSEIF(${macro_mod_enable_val} STREQUAL "A")
++  ELSEIF(${macro_mod_enable_val} STREQUAL A)
+     SET(${macro_output_rank} 4)
+   ELSE()
+     MESSAGE(FATAL_ERROR "Unexpected enablement value \"${macro_mod_enable_val}\" for ${macro_modname}")
+@@ -242,7 +254,7 @@ MESSAGE(STATUS "")
  MESSAGE(STATUS "Summary of feature detection:")
  MESSAGE(STATUS "")
  MESSAGE(STATUS "LIBXML2_FOUND ............ : ${LIBXML2_FOUND}")
@@ -53,7 +84,7 @@ index 7b30547d39..46a2ab003d 100644
  MESSAGE(STATUS "NGHTTP2_FOUND ............ : ${NGHTTP2_FOUND}")
  MESSAGE(STATUS "OPENSSL_FOUND ............ : ${OPENSSL_FOUND}")
  MESSAGE(STATUS "ZLIB_FOUND ............... : ${ZLIB_FOUND}")
-@@ -302,7 +306,7 @@ SET(MODULE_LIST
+@@ -302,7 +314,7 @@ SET(MODULE_LIST
    "modules/cache/mod_cache_socache+I+shared object caching module"
    "modules/cache/mod_file_cache+I+File cache"
    "modules/cache/mod_socache_dbm+I+dbm small object cache provider"
@@ -62,7 +93,7 @@ index 7b30547d39..46a2ab003d 100644
    "modules/cache/mod_socache_memcache+I+memcache small object cache provider"
    "modules/cache/mod_socache_shmcb+I+ shmcb small object cache provider"
    "modules/cache/mod_socache_redis+I+redis small object cache provider"
-@@ -343,14 +347,14 @@ SET(MODULE_LIST
+@@ -343,14 +355,14 @@ SET(MODULE_LIST
    "modules/generators/mod_info+I+server information"
    "modules/generators/mod_status+I+process/thread monitoring"
    "modules/http/mod_mime+A+mapping of file-extension to MIME.  Disabling this module is normally not recommended."
@@ -79,7 +110,7 @@ index 7b30547d39..46a2ab003d 100644
    "modules/mappers/mod_actions+I+Action triggering on requests"
    "modules/mappers/mod_alias+A+mapping of requests to different filesystem parts"
    "modules/mappers/mod_dir+A+directory request handling"
-@@ -386,7 +390,7 @@ SET(MODULE_LIST
+@@ -386,7 +398,7 @@ SET(MODULE_LIST
    "modules/proxy/mod_proxy_hcheck+I+Apache proxy health check module.  Requires and is enabled by --enable-proxy."
    "modules/proxy/mod_proxy_scgi+I+Apache proxy SCGI module.  Requires and is enabled by --enable-proxy."
    "modules/proxy/mod_proxy_wstunnel+I+Apache proxy Websocket Tunnel module.  Requires and is enabled by --enable-proxy."
@@ -88,7 +119,7 @@ index 7b30547d39..46a2ab003d 100644
    "modules/session/mod_session+I+session module"
    "modules/session/mod_session_cookie+I+session cookie module"
    "modules/session/mod_session_crypto+i+session crypto module"
-@@ -399,6 +403,14 @@ SET(MODULE_LIST
+@@ -399,6 +411,14 @@ SET(MODULE_LIST
    "modules/test/mod_optional_fn_import+O+example optional function importer"
    "modules/test/mod_optional_hook_export+O+example optional hook exporter"
    "modules/test/mod_optional_hook_import+O+example optional hook importer"
@@ -103,7 +134,7 @@ index 7b30547d39..46a2ab003d 100644
  )
  
  # Track which modules actually built have APIs to link against.
-@@ -453,16 +465,25 @@ SET(mod_http2_extra_defines          ssize_t=long)
+@@ -453,16 +473,25 @@ SET(mod_http2_extra_defines          ssize_t=long)
  SET(mod_http2_extra_includes         ${NGHTTP2_INCLUDE_DIR})
  SET(mod_http2_extra_libs             ${NGHTTP2_LIBRARIES})
  SET(mod_http2_extra_sources
@@ -139,7 +170,7 @@ index 7b30547d39..46a2ab003d 100644
  )
  SET(mod_ldap_extra_defines           LDAP_DECLARE_EXPORT)
  SET(mod_ldap_extra_libs              wldap32)
-@@ -479,25 +500,43 @@ SET(mod_lua_extra_sources
+@@ -479,25 +508,43 @@ SET(mod_lua_extra_sources
    modules/lua/lua_passwd.c           modules/lua/lua_request.c
    modules/lua/lua_vmprep.c           modules/lua/lua_dbd.c
  )
@@ -198,17 +229,7 @@ index 7b30547d39..46a2ab003d 100644
  )
  SET(mod_optional_hook_export_extra_defines AP_DECLARE_EXPORT) # bogus reuse of core API prefix
  SET(mod_proxy_extra_defines          PROXY_DECLARE_EXPORT)
-@@ -527,7 +566,8 @@ SET(mod_proxy_http2_extra_defines          ssize_t=long)
- SET(mod_proxy_http2_extra_includes         ${NGHTTP2_INCLUDE_DIR})
- SET(mod_proxy_http2_extra_libs             ${NGHTTP2_LIBRARIES} mod_proxy)
- SET(mod_proxy_http2_extra_sources
--  modules/http2/h2_proxy_session.c   modules/http2/h2_proxy_util.c
-+  ${mod_http2_src}/h2_proxy_session.c
-+  ${mod_http2_src}/h2_proxy_util.c
- )
- SET(mod_ratelimit_extra_defines      AP_RL_DECLARE_EXPORT)
- SET(mod_sed_extra_sources
-@@ -566,6 +606,57 @@ IF(LIBXML2_FOUND)
+@@ -566,6 +613,50 @@ IF(LIBXML2_FOUND)
    SET(mod_xml2enc_extra_libs         "${LIBXML2_LIBRARIES};${LIBXML2_ICONV_LIBRARIES}")
  ENDIF()
  SET(mod_watchdog_extra_defines       AP_WD_DECLARE_EXPORT)
@@ -228,6 +249,7 @@ index 7b30547d39..46a2ab003d 100644
 +../mod_fcgid/modules/fcgid/fcgid_protocol.c
 +../mod_fcgid/modules/fcgid/fcgid_spawn_ctl.c
 +)
++SET(mod_h264_streaming_extra_defines BUILDING_H264_STREAMING)
 +SET(mod_h264_streaming_extra_sources
 +../mod_h264_streaming/mp4_io.c
 +../mod_h264_streaming/output_mp4.c
@@ -239,42 +261,43 @@ index 7b30547d39..46a2ab003d 100644
 +#../mod_h264_streaming/main.c
 +)
 +if(MAXMIND_LIBRARIES)
-+  SET(mod_maxminddb_extra_libs			${MAXMIND_LIBRARIES})
++  SET(mod_maxminddb_extra_libs       ${MAXMIND_LIBRARIES})
 +ENDIF()
-+SET(mod_whatkilledus_extra_libs			"dbghelp.lib")
++SET(mod_whatkilledus_extra_defines   DIAG_BITS_${diag_bits})
++SET(mod_whatkilledus_extra_libs      "dbghelp.lib")
 +SET(mod_whatkilledus_extra_sources
-+../mod_wku_bt/mod_whatkilledus.c
-+../mod_wku_bt/diag.c		
++../mod_wku_bt/diag.c          
 +)
-+SET(mod_backtrace_extra_libs			"dbghelp.lib")
++SET(mod_backtrace_extra_defines      DIAG_BITS_${diag_bits})
++SET(mod_backtrace_extra_libs         "dbghelp.lib")
 +SET(mod_backtrace_extra_sources
-+../mod_wku_bt/mod_backtrace.c
-+../mod_wku_bt/diag.c		
++../mod_wku_bt/diag.c          
 +)
-+SET(mod_crash_extra_sources
-+../mod_wku_bt/mod_crash.c
-+)
-+SET(mod_bikeshed_sources
-+../mod_bikeshed/mod_bikeshed.c
-+)
-+SET(mod_qos_requires                  OPENSSL_FOUND)
-+SET(mod_qos_extra_includes            ${OPENSSL_INCLUDE_DIR})
-+SET(mod_qos_extra_libs                ${OPENSSL_LIBRARIES})
-+SET(mod_qos_sources
-+../mod_qos/mod_qos.c
-+)
++SET(mod_qos_requires                 OPENSSL_FOUND)
++SET(mod_qos_extra_defines            QS_NO_STATUS_HOOK)
++SET(mod_qos_extra_includes           ${OPENSSL_INCLUDE_DIR})
++SET(mod_qos_extra_libs               ${OPENSSL_LIBRARIES})
  
  SET(MODULE_PATHS)
  FOREACH (modinfo ${MODULE_LIST})
-@@ -625,7 +716,7 @@ ELSE()
+@@ -625,14 +716,14 @@ ELSE()
  ENDIF()
  
  # for easy reference from .dll/.so builds
 -CONFIGURE_FILE(os/win32/BaseAddr.ref ${PROJECT_BINARY_DIR}/ COPYONLY)
 +# CONFIGURE_FILE(os/win32/BaseAddr.ref ${PROJECT_BINARY_DIR}/ COPYONLY)
  
++# https://lists.apache.org/thread/w4k1gmcynjw3l5z88mq1mfgd7g097s0f
  ADD_EXECUTABLE(gen_test_char server/gen_test_char.c)
- GET_TARGET_PROPERTY(GEN_TEST_CHAR_EXE gen_test_char LOCATION)
+-GET_TARGET_PROPERTY(GEN_TEST_CHAR_EXE gen_test_char LOCATION)
+ ADD_CUSTOM_COMMAND(
+   COMMENT "Generating character tables, test_char.h, for current locale"
+   DEPENDS gen_test_char
+-  COMMAND ${GEN_TEST_CHAR_EXE} > ${PROJECT_BINARY_DIR}/test_char.h
++  COMMAND "$<TARGET_FILE:gen_test_char>" > ${PROJECT_BINARY_DIR}/test_char.h
+   OUTPUT ${PROJECT_BINARY_DIR}/test_char.h
+ )
+ ADD_CUSTOM_TARGET(
 @@ -711,8 +802,8 @@ SET(HTTPD_INCLUDE_DIRECTORIES
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/dav/main
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/filters
