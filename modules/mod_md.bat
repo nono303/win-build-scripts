@@ -1,14 +1,12 @@
 @echo off
 	REM ensure openssl native is set & build
 call quic 0
-if not exist %PATH_INSTALL_OSSL%\lib\libssl.lib (
-	@echo on
-	echo ###########################
-	echo # %PATH_INSTALL_OSSL%\lib\libssl.lib not found
-	echo ^>^>^> building openssl
-	@echo off
-	call go openssl
-)
+if not exist %PATH_INSTALL_OSSL%\lib\libssl.lib (call go openssl NOLOG)
+if not exist %PATH_INSTALL%\lib\zlib.lib (call go zlib NOLOG)
+if not exist %PATH_INSTALL%\lib\libcurl.lib (call go curl mod_md NOLOG)
+if not exist %PATH_INSTALL%\lib\jansson.lib (call go jansson NOLOG)
+if not exist %PATH_INSTALL%\lib\libapr-1.dll (call go apr NOLOG)
+if not exist %PATH_INSTALL%\lib\libhttpd.dll (call go httpd svn NOLOG)
 
 call %PATH_MODULES_COMMON%\init.bat httpd varonly
 set HTTPD_VERSION=%SCM_TAG%
