@@ -29,8 +29,6 @@ if "%2"=="svn" (
 	-DJANSSON_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 	-DJANSSON_LIBRARIES=%PATH_INSTALL:\=/%/lib/jansson.lib ^
 	-DMAXMIND_LIBRARIES=%PATH_INSTALL%/lib/maxminddb.lib ^
-	-DCURL_LIBRARY=%PATH_INSTALL:\=/%/lib/libcurl.lib ^
-	-DCURL_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 	%PATH_SRC%\%1
 )
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
