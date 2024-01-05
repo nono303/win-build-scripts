@@ -26,6 +26,8 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat icu NOLOG
 	:libxml2
 	call %PATH_BATCH%\go.bat libxml2 NOLOG
+	:wineditline
+	call %PATH_BATCH%\go.bat wineditline NOLOG
 	:pcre2
 	call %PATH_BATCH%\go.bat pcre2 NOLOG
 	:libevent
@@ -68,8 +70,6 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat mod_security-sdbm-util NOLOG
 	if  "%2" == "httpdanddeps" exit /B
 :phpanddeps
-	:wineditline
-	call %PATH_BATCH%\go.bat wineditline NOLOG
 	:libzip
 	call %PATH_BATCH%\go.bat libzip NOLOG
 	:libxpm
