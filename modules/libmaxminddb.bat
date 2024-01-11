@@ -16,5 +16,6 @@ MSBuild.exe %PATH_BUILD%\%1\%VCDIR%\maxminddb.sln %MSBUILD_OPTS% ^
 
 xcopy /C /F /Y %PATH_BUILD%\%1\%CMAKE_BUILD_TYPE%\maxminddb.lib %PATH_INSTALL%\lib\*
 for %%X in (pdb dll) do (xcopy /C /F /Y  %PATH_BUILD%\%1\%CMAKE_BUILD_TYPE%\maxminddb.%%X %PATH_INSTALL%\bin\*)
-for %%X in (maxminddb.h maxminddb_config.h) do (xcopy /C /F /Y  %PATH_SRC%\%1\include\%%X %PATH_INSTALL%\include\*)
+xcopy /C /F /Y  %PATH_SRC%\%1\include\maxminddb.h %PATH_INSTALL%\include\*
+xcopy /C /F /Y  %PATH_BUILD%\%1\generated\maxminddb_config.h %PATH_INSTALL%\include\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\maxminddb.dll
