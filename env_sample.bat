@@ -44,8 +44,8 @@ set PATH_BIN_GIT=C:\PROGRA~1\Git\bin
 set PATH_BIN_CMAKE=%PATH_SOFTS%\cmake\bin
 set PATH_BIN_PYTHON=%PATH_SOFTS%\python3;%PATH_SOFTS%\python3\Scripts
 set PATH_BIN_CYGWIN=%PATH_ROOT_CYGWIN%%CYGV%\bin
+set PATH_BIN_GO=%PATH_SOFTS%\go\bin
 set PATH_BIN_NASM=%PATH_SOFTS%\nasm
-set PATH_BIN_NODE=%PATH_SOFTS%\nodejs
 set PATH_BIN_PERL=%PATH_SOFTS%\perl\perl\bin
 set PATH_BIN_PERL_SITE=%PATH_SOFTS%\perl\perl\site\bin
 	REM svn for mobac https://github.com/nono303/win-svn
@@ -79,7 +79,7 @@ set PATH_WIN=%PATH_SOFTS%;^
 %PATH_BIN_GIT%;^
 %PATH_BIN_CMAKE%;^
 %PATH_BIN_NASM%;^
-%PATH_BIN_NODE%;^
+%PATH_BIN_GO%;^
 %PATH_BIN_PERL%;^
 %PATH_BIN_PERL_SITE%;^
 %PATH_BIN_CYGWIN%;^
