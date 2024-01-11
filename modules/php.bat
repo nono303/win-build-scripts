@@ -51,7 +51,7 @@ call %PATH_MODULES_COMMON%\init.bat brotli varonly
 sed -i 's/AC_DEFINE/AC_DEFINE\("BROTLI_LIB_VERSION", "%SCM_TAG:~1%", "system library version"\);AC_DEFINE/g' %CYGPATH_SRC%/php-ext-brotli/config.w32
 
 	REM ~~~~~~~~~~~~ other PECL init
-for %%E in (php-geos php-ext-zstd php-proj php-ogr xdebug php-sdk) do (
+for %%E in (pecl-datetime-timezonedb php-geos php-ext-zstd php-proj php-ogr xdebug php-sdk pecl-system-sync) do (
 	call %PATH_MODULES_COMMON%\init.bat %%E
 )
 
@@ -62,7 +62,7 @@ if not exist %PATH_SRC%\php-sdk\phpmaster\. mklink /J %PATH_SRC%\php-sdk\phpmast
 	REM create directory structure
 if not exist %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\php-src\. mklink /J %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\php-src %PATH_SRC%\php-src
 if not exist %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\pecl\. mkdir %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\pecl
-for %%E in (pecl-memcache pecl-text-xdiff php-ext-brotli xdebug php-geos php-ext-zstd) do (
+for %%E in (pecl-datetime-timezonedb pecl-memcache pecl-text-xdiff php-ext-brotli php-ext-zstd php-geos php-ogr php-proj xdebug) do (
 	if not exist %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\pecl\%%E\. mklink /J %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\pecl\%%E %PATH_SRC%\%%E
 )
 if exist %PATH_PHP_SDK%\phpsdk-local.bat del /Q /F %PATH_PHP_SDK%\phpsdk-local.bat

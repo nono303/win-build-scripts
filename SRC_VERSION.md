@@ -3,17 +3,17 @@
 | [aom](https://aomedia.googlesource.com/aom) | 3.8.0rc1 |
 | [apr](https://github.com/apache/apr) | 1.8.0-dev - 80cc9675f |
 | [apr-iconv](https://github.com/apache/apr-iconv) | 1.2.2 |
-| [apr-util](https://github.com/apache/apr-util) | 1.7.0-dev - a1702a71 |
+| [apr-util](https://github.com/apache/apr-util) | 1.7.0-dev - 2f382f89 |
 | [brotli](https://github.com/google/brotli) | 1.1.0 |
 | [bzip2](https://gitlab.com/bzip2/bzip2.git) | 1.1.0 - 66c46b8 |
-| [cares](https://github.com/c-ares/c-ares) | 1.24.0 |
+| [cares](https://github.com/c-ares/c-ares) | 1.25.0 |
 | [curl](https://github.com/curl/curl) | 8.5.0 |
 | [dav1d](https://code.videolan.org/videolan/dav1d.git) | 1.3.0 |
 | [dependencies](https://github.com/lucasg/Dependencies) | 1.11.1 |
 | [fit2gpx](https://github.com/nono303/fit2gpx) - [*upstream + src*](https://github.com/MaksVasilev/fit2gpx) | 0.1.21 - 39548b1 |
 | [freeglut](https://github.com/dcnieho/FreeGLUT.git) | 3.4.0 |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.13.2 |
-| [gdal](https://github.com/OSGeo/gdal) | 3.8.2rc1 |
+| [gdal](https://github.com/OSGeo/gdal) | 3.8.3 |
 | [geographiclib](https://github.com/geographiclib/geographiclib/tree/release) | 2.3 |
 | [geos](https://github.com/libgeos/geos) | 3.12.1 |
 | [giflib](https://github.com/gongjianbo/GifLib) | 5.2.1 - 59eb9d1 |
@@ -28,36 +28,36 @@
 | [libev](https://git.lighttpd.net/libev) | 4.33 - 26fa899 |
 | [libevent](https://github.com/libevent/libevent) | 2.2.1-alpha |
 | [libexpat](https://github.com/libexpat/libexpat) | 2.5.0 |
-| [libffi](https://github.com/nono303/libffi) - _[upstream + src](https://github.com/libffi/libffi)_ | 3.4.4 - 60db339 |
+| [libffi](https://github.com/nono303/libffi) - _[upstream + src](https://github.com/libffi/libffi)_ | 3.4.4 - 1a0ea3f |
 | [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.19.0 - 5cf722e |
 | [libgd](https://github.com/libgd/libgd) | 2.4.0 - 58d25665 |
 | [libgeotiff](https://github.com/OSGeo/libgeotiff) | 1.7.1 |
-| [libheif](https://github.com/strukturag/libheif) | 1.17.5 |
+| [libheif](https://github.com/strukturag/libheif) | 1.17.6 |
 | [libiconv](https://github.com/pffang/libiconv-for-Windows) | 1.17 - 1353455 |
 | [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) | 3.0.1 |
 | [liblzma](https://github.com/ShiftMediaProject/liblzma) | 5.4.5 |
-| [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.7.1.2 |
+| [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.9.1 |
 | [libpng](https://sourceforge.net/p/libpng/code/ci/master/tree/) | 1.6.40 - f135775ad |
-| [libsodium](https://github.com/jedisct1/libsodium.git) | 1.0.20.0 - 93a6e797 |
+| [libsodium](https://github.com/jedisct1/libsodium.git) | 1.0.21.0 - b39a9072 |
 | [libssh2](https://github.com/libssh2/libssh2) | 1.11.0 |
 | [libtiff](https://gitlab.com/libtiff/libtiff) | 4.6.0 |
 | [libwepb](https://chromium.googlesource.com/webm/libwebp) | 1.3.2 |
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
 | [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.12.3 |
 | [libxpm](https://github.com/nono303/libxpm.git) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.17 |
-| [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.39 - c5c66dfb |
-| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1882 - 7da8059c |
+| [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.39 - a11bb0ff |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1883 - af6ac826 |
 | [libzip](https://github.com/nih-at/libzip) | 1.10.1 |
 | [lua](https://github.com/lua/lua) | 5.4.6 |
 | [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | 0.20.0 - 7192cfc |
-| [memcached](https://github.com/memcached/memcached) | 1.6.22 |
+| [memcached](https://github.com/memcached/memcached) | 1.6.23 |
 | [mobac](https://svn.code.sf.net/p/mobac/code) | 2.3.3 - r2767 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
 | [mod_fcgid](https://github.com/nono303/mod_fcgid) - _[upstream + src](https://github.com/pagespeed/mod_fcgid)_ | 2.3.10.4 - a6bcd41 |
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.25 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 - 4031876 |
-| [mod_md](https://github.com/icing/mod_md) | 2.4.25 |
+| [mod_md](https://github.com/icing/mod_md) | 2.4.26 |
 | [mod_qos](https://sourceforge.net/p/mod-qos/source/HEAD/tree/trunk/httpd_src/modules/qos/) | 11.74 r2706 (2712) |
 | [mod_security](https://github.com/SpiderLabs/ModSecurity) | 2.9.7 |
 | [mod_security-sdbm-util](https://github.com/nono303/modsec-sdbm-util) - _[upstream + src](https://github.com/SpiderLabs/modsec-sdbm-util)_ | 1.1.0 |
@@ -69,8 +69,10 @@
 | [nssm](https://github.com/puppetlabs/nssm) | 2.25 - a1c3260 |
 | [openssl](https://github.com/openssl/openssl)                | 3.1.4            |
 | [openssl-quic](https://github.com/quictls/openssl/tree/openssl-3.1.4+quic) | 3.1.4 |
-| [pcre2](https://github.com/PCRE2Project/pcre2) | 10.42 |
+| [pcre2](https://github.com/PCRE2Project/pcre2) | 10.43rc1 |
+| [pecl-datetime-timezonedb](https://github.com/php/pecl-datetime-timezonedb) | 2023.4 |
 | [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | 8.2 - 972b554 |
+| [pecl-system-sync](https://github.com/php/pecl-system-sync) | 1.1.3 |
 | [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1 |
 | [php-cgi-spawner](https://github.com/deemru/php-cgi-spawner) | 1.1.23 - 90197af |
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.14.2 -  58c0c92 |
@@ -79,7 +81,7 @@
 | [php-ogr](https://github.com/nono303/php-ogr) - *[upstream + src](https://github.com/dvzgeo/php_ogr)* | 1.7.0 - 91dd6cc |
 | [php-proj](https://github.com/swen100/phpng-proj) | 3.0.3 |
 | [php-sdk](https://github.com/php/php-sdk-binary-tools) | 2.2.1-dev - abe66fd |
-| [php-src](https://github.com/php/php-src) | 8.3.0 |
+| [php-src](https://github.com/php/php-src) | 8.3.1 |
 | [proj](https://github.com/OSGeo/PROJ) | 9.3.1 |
 | [python](https://github.com/nono303/cpython) - _[upstream + src](https://github.com/python/cpython/tree/3.8)_ | 3.8.16 - 0813455d42 |
 | [qhull](https://github.com/qhull/qhull) | 8.1-alpha3 |

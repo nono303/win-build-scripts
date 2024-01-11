@@ -34,7 +34,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/c-ares/c-ares.git cares
 cd /D cares
-git checkout tags/cares-1_24_0
+git checkout tags/cares-1_25_0
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
@@ -62,7 +62,7 @@ git checkout tags/VER-2-13-2
 cd /D ..
 git clone https://github.com/OSGeo/gdal gdal
 cd /D gdal
-git checkout tags/v3.8.2RC1
+git checkout tags/v3.8.3RC3
 cd /D ..
 git clone https://github.com/geographiclib/geographiclib.git geographiclib
 cd /D geographiclib
@@ -138,7 +138,7 @@ git checkout tags/1.7.1rc2
 cd /D ..
 git clone https://github.com/strukturag/libheif.git libheif
 cd /D libheif
-git checkout tags/v1.17.5
+git checkout tags/v1.17.6
 cd /D ..
 git clone https://github.com/pffang/libiconv-for-Windows.git libiconv
 cd /D libiconv
@@ -154,7 +154,7 @@ git checkout tags/v5.4.5
 cd /D ..
 git clone https://github.com/maxmind/libmaxminddb.git libmaxminddb
 cd /D libmaxminddb
-git checkout tags/1.8.0
+git checkout tags/1.9.1
 cd /D ..
 git clone git://git.code.sf.net/p/libpng/code libpng
 cd /D libpng
@@ -210,11 +210,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
-git checkout tags/1.6.22
+git checkout tags/1.6.23
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2767
+svn update -r 2768
 cd /D ..
 git clone https://github.com/JBlond/mod_bikeshed.git mod_bikeshed
 cd /D mod_bikeshed
@@ -238,7 +238,7 @@ git checkout main
 cd /D ..
 git clone https://github.com/icing/mod_md mod_md
 cd /D mod_md
-git checkout tags/v2.4.25
+git checkout tags/v2.4.26
 cd /D ..
 svn co https://svn.code.sf.net/p/mod-qos/source/trunk/httpd_src/modules/qos mod_qos
 cd /D mod_qos
@@ -286,11 +286,19 @@ git checkout tags/openssl-3.1.4-quic1
 cd /D ..
 git clone https://github.com/PCRE2Project/pcre2.git pcre2
 cd /D pcre2
-git checkout tags/pcre2-10.42
+git checkout tags/pcre2-10.43-RC1
+cd /D ..
+git clone https://github.com/php/pecl-datetime-timezonedb.git pecl-datetime-timezonedb
+cd /D pecl-datetime-timezonedb
+git checkout tags/RELEASE_2023_4
 cd /D ..
 git clone https://github.com/websupport-sk/pecl-memcache.git pecl-memcache
 cd /D pecl-memcache
 git checkout main
+cd /D ..
+git clone https://github.com/php/pecl-system-sync pecl-system-sync
+cd /D pecl-system-sync
+git checkout master
 cd /D ..
 git clone https://github.com/php/pecl-text-xdiff pecl-text-xdiff
 cd /D pecl-text-xdiff
@@ -326,7 +334,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.3.0
+git checkout tags/php-8.3.1
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj

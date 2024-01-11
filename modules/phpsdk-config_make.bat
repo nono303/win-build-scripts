@@ -142,6 +142,8 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--with-proj=shared ^
 	--with-ogr=shared ^
 	--enable-memcache=shared ^
+	--enable-timezonedb=shared ^
+	--enable-sync=shared ^
 	%ZTS% ^
 	%phpveropts% ^
 	%phparchopts%
@@ -227,6 +229,10 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	call do_php %PATH_UTILS%\sub\version.php php-ogr %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_ogr.dll "php:%PHPVER% build:%TSNTS%"
 	call %PATH_MODULES_COMMON%\init.bat xdebug varonly
 	call do_php %PATH_UTILS%\sub\version.php xdebug %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_xdebug.dll "php:%PHPVER% build:%TSNTS%"
+	call %PATH_MODULES_COMMON%\init.bat pecl-datetime-timezonedb varonly
+	call do_php %PATH_UTILS%\sub\version.php pecl-datetime-timezonedb %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_timezonedb.dll "php:%PHPVER% build:%TSNTS%"
+	call %PATH_MODULES_COMMON%\init.bat pecl-system-sync varonly
+	call do_php %PATH_UTILS%\sub\version.php pecl-system-sync %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_sync.dll "php:%PHPVER% build:%TSNTS%"
 )
 	REM php_memcache for github
 if %AVXECHO% == sse2 (set AVXPATH=) else (set AVXPATH=\avx)
