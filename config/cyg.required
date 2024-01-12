@@ -1,0 +1,16 @@
+## memcached
+- libevent-devel            2.1.12-1
+    - libevent-devel            2.0.22-1
+- libevent2.1_7             2.1.12-1
+    - libevent2.0_5             2.0.22-1
+- libssl-devel              1.1.1w-1
+- libssl1.1                 1.1.1w-1
+## sslh
+- libtool                   2.4.7-1
+- gcc-g++                   11.4.0-1
+- libev-devel               4.33-1
+- libev4                    4.33-1
+- libpcre2-devel            10.42-1
+- libpcre2-posix3           10.42-1
+- libpcre2_16_0             10.42-1
+- libpcre2_32_0             10.42-1
