@@ -1,7 +1,9 @@
 @echo off
 
-set LIB=%LIB%;%PATH_INSTALL%\lib;%PATH_INSTALL_OSSL%\lib
-set INCLUDE=%INCLUDE%;%PATH_INSTALL%\include;%PATH_INSTALL%\include\sqlite3;%PATH_INSTALL_OSSL%\include
+set ORI_LIB=%LIB%
+set ORI_INCLUDE=%INCLUDE%
+set LIB=%LIB%;%PATH_INSTALL%\lib;%PATH_INSTALL_OSSL%\lib;%PATH_MYSQL%\lib
+set INCLUDE=%INCLUDE%;%PATH_INSTALL%\include;%PATH_INSTALL%\include\sqlite3;%PATH_INSTALL_OSSL%\include;%PATH_MYSQL%\include
 set SSLCRP=libcrypto
 set SSLLIB=libssl
 
@@ -20,15 +22,18 @@ ARCH="%archmsbuild% Release" ^
 APU_PATH=%PATH_SRC%\apr-util ^
 API_PATH=%PATH_SRC%\apr-iconv ^
 APR_PATH=%PATH_SRC%\apr ^
-DBD_LIST="sqlite3" ^
+DBD_LIST="sqlite3 mysql" ^
 XML_PARSER="libexpat" ^
 CRYPTO_LIST="openssl" ^
 PREFIX=%PATH_INSTALL% ^
 SystemRoot=%SystemRoot% ^
 buildall install
 
+set LIB=%ORI_LIB%
+set INCLUDE=%ORI_INCLUDE%
+
 REM pdb & lib are not build in same folder according to ARCH...
-for %%D in (apr\apr-1.pdb apr-util\aprutil-1.pdb apr-iconv\apriconv-1.pdb apr-iconv\apriconv-1.lib apr-util\crypto\apr_crypto_openssl-1.lib apr-util\dbd\apr_dbd_odbc-1.lib apr-util\dbd\apr_dbd_sqlite3-1.lib apr-util\ldap\apr_ldap-1.lib apr-iconv\libapriconv-1.lib) do (
+for %%D in (apr\apr-1.pdb apr-util\aprutil-1.pdb apr-iconv\apriconv-1.pdb apr-iconv\apriconv-1.lib apr-util\crypto\apr_crypto_openssl-1.lib apr-util\dbd\apr_dbd_odbc-1.lib apr-util\dbd\apr_dbd_sqlite3-1.lib apr-util\dbd\apr_dbd_mysql-1.lib apr-util\ldap\apr_ldap-1.lib apr-iconv\libapriconv-1.lib) do (
 	for /F "delims=" %%I in ('dir /a:-D /s /b %PATH_SRC%\%%D') do (xcopy /C /F /Y %%I %PATH_INSTALL%\lib\*)
 )
 
@@ -41,7 +46,7 @@ call %PATH_MODULES_COMMON%\init.bat apr varonly
 call do_php %PATH_UTILS%\sub\version.php apr %PATH_INSTALL%\bin\libapr-1.dll
 
 call %PATH_MODULES_COMMON%\init.bat apr-util varonly
-for %%D in (libaprutil-1 apr_ldap-1 apr_dbd_odbc-1 apr_dbd_sqlite3-1 apr_crypto_openssl-1) do (
+for %%D in (libaprutil-1 apr_ldap-1 apr_dbd_odbc-1 apr_dbd_sqlite3-1 apr_dbd_mysql-1 apr_crypto_openssl-1) do (
 	call do_php %PATH_UTILS%\sub\version.php apr-util %PATH_INSTALL%\bin\%%D.dll
 )
 
