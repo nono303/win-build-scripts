@@ -1,3 +1,34 @@
+https://www.apachelounge.com/viewtopic.php?p=42414#42414
+diff --git "a/dbd/apr_dbd_mysql.c" "b/dbd/apr_dbd_mysql.c"
+index d3e938c3..26d46b5c 100644
+--- "a/dbd/apr_dbd_mysql.c"
++++ "b/dbd/apr_dbd_mysql.c"
+@@ -50,6 +50,15 @@
+ 
+ #include "apr_dbd_internal.h"
+ 
++/* https://www.apachelounge.com/viewtopic.php?p=42414#42414
++* MySQL 8.0 replaces my_bool with C99 bool. Earlier versions of MySQL had
++* a typedef to char. Gem users reported failures on big endian systems when
++* using C99 bool types with older MySQLs due to mismatched behavior. */
++#ifndef HAVE_TYPE_MY_BOOL
++#include <stdbool.h>
++typedef bool my_bool;
++#endif
++
+ /* default maximum field size 1 MB */
+ #define FIELDSIZE 1048575
+ 
+@@ -1262,7 +1271,8 @@ static apr_status_t thread_end(void *data)
+ 
+ static void dbd_mysql_init(apr_pool_t *pool)
+ {
+-#if MYSQL_VERSION_ID < 100000
++/* https://www.apachelounge.com/viewtopic.php?p=42414#42414 */
++#if MYSQL_VERSION_ID < 80020
+     my_init();
+ #endif
+     mysql_thread_init();
 https://bz.apache.org/bugzilla/show_bug.cgi?id=63413
 diff --git a/aprutil.dep b/aprutil.dep
 index 53098d81..ce08eb9d 100644
