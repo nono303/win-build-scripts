@@ -7,7 +7,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DZLIB_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 -DZLIB_LIBRARY=%PATH_INSTALL:\=/%/lib/zlib.lib ^
 -DPNG_SHARED=ON ^
--DPNG_EXECUTABLES=OFF ^
+-DPNG_TOOLS=OFF ^
 -DPNG_STATIC=OFF ^
 -DPNG_TESTS=OFF ^
 -DPNG_FRAMEWORK=OFF ^
@@ -18,7 +18,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 	REM cl nologo for genout
-sed -i 's/CMAKE_C_FLAGS \//CMAKE_C_FLAGS \/nologo \//g' %CYGPATH_BUILD%/%1/scripts/genout.cmake
+sed -i 's/CMAKE_C_FLAGS \//CMAKE_C_FLAGS \/nologo \//g' %CYGPATH_BUILD%/%1/genout.cmake
 %NINJA% install
 
 xcopy /C /F /Y %PATH_BUILD%\%1\libpng16.pdb %PATH_INSTALL%\bin\*
