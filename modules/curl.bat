@@ -3,7 +3,7 @@
 if %CURL_PATCH_WIN_OPENSSL% == 1 (
 	if %ARG_KEEPSRC% == 0 (
 		setlocal enabledelayedexpansion
-		set CURL_DESC=patched for openssl backend using Windows CA store
+		set CURL_DESC=openssl using Windows CA store patch
 		cd /D %PATH_SRC%\%1
 		echo     # apply curl_ca-win.patch
 		git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\curl_ca-win.patch
@@ -16,10 +16,12 @@ if %CURL_PATCH_WIN_OPENSSL% == 1 (
 for /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\date -u`) do (set LIBCURL_TIMESTAMP=%%F)
 sed -i 's/\[unreleased\]/%LIBCURL_TIMESTAMP%/g' %CYGPATH_SRC%/%1/include/curl/curlver.h
 
-	REM HTTP3
-set QUIC=
+	REM HTTP3 with openssl only - https://github.com/curl/curl/pull/12807
+set QUIC=-DCURL_USE_SCHANNEL=ON
 if %QUIC_BUILD% == 1 (
-	set QUIC=-DUSE_NGTCP2=ON ^
+	set QUIC=^
+		-DCURL_USE_SCHANNEL=OFF ^
+		-DUSE_NGTCP2=ON ^
 		-DUSE_NGHTTP3=ON ^
 		-DUSE_QUICHE=OFF ^
 		-DUSE_MSH3=OFF ^
@@ -33,6 +35,7 @@ if %QUIC_BUILD% == 1 (
 set CURLCMAKEBUILD=
 if "%2"=="mod_md" (
 	set CURLCMAKEBUILD=^
+	-DCURL_USE_SCHANNEL=OFF ^
 	-DCURL_BROTLI=OFF ^
 	-DENABLE_ARES=OFF ^
 	-DUSE_NGHTTP2=OFF ^
@@ -70,6 +73,9 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DBUILD_STATIC_LIBS=OFF ^
 -DBUILD_STATIC_CURL=OFF ^
 -DBUILD_TESTING=OFF ^
+-DCURL_DISABLE_INSTALL=OFF ^
+-DBUILD_LIBCURL_DOCS=OFF ^
+-DENABLE_CURL_MANUAL=OFF ^
 -DPICKY_COMPILER=OFF ^
 -DCURL_HIDDEN_SYMBOLS=ON ^
 -DCURL_WERROR=OFF ^
@@ -83,7 +89,6 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCURL_USE_LIBSSH=OFF ^
 -DCURL_USE_MBEDTLS=OFF ^
 -DCURL_USE_OPENSSL=ON ^
--DCURL_USE_SCHANNEL=ON ^
 -DCURL_USE_SECTRANSP=OFF ^
 -DCURL_USE_WOLFSSL=OFF ^
 -DCURL_USE_GNUTLS=OFF ^
@@ -93,7 +98,6 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DENABLE_CURLDEBUG=OFF ^
 -DENABLE_DEBUG=OFF ^
 -DENABLE_IPV6=ON ^
--DENABLE_MANUAL=OFF ^
 -DENABLE_THREADED_RESOLVER=ON ^
 -DENABLE_UNIX_SOCKETS=ON ^
 -DENABLE_WEBSOCKETS=ON ^
