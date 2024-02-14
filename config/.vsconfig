@@ -9,7 +9,7 @@
     "Microsoft.VisualStudio.Component.TextTemplating",
     "Microsoft.Net.Component.4.8.TargetingPack",
     "Microsoft.VisualStudio.Component.VC.CoreIde",
-    "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
+    "Microsoft.VisualStudio.Component.VC.14.39.17.9.x86.x64",
     "Microsoft.VisualStudio.Component.VC.Redist.14.Latest",
     "Microsoft.VisualStudio.ComponentGroup.NativeDesktop.Core",
     "Microsoft.VisualStudio.ComponentGroup.WebToolsExtensions.CMake",
@@ -17,7 +17,7 @@
     "Microsoft.VisualStudio.Component.VC.v141.x86.x64",
     "Microsoft.VisualStudio.Workload.NativeDesktop",
     "Microsoft.VisualStudio.Component.VC.14.29.16.11.x86.x64",
-    "Microsoft.VisualStudio.Component.VC.ATL"
+    "Microsoft.VisualStudio.Component.VC.14.39.17.9.ATL"
   ],
   "extensions": []
 }
