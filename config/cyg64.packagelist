@@ -212,6 +212,7 @@ w32api-runtime
 wget
 which
 windows-default-manifest
+xxd
 xz
 zlib0
 zsh
