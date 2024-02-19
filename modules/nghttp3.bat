@@ -1,5 +1,9 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
+for %%X in (sfparse.c sfparse.h) do (
+	if not exist %PATH_SRC%\%1\lib\sfparse\%%X mklink /h %PATH_SRC%\%1\lib\sfparse\%%X %PATH_SRC%\nghttp2\lib\%%X
+)
+
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
@@ -10,7 +14,6 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DENABLE_STATIC_LIB=OFF ^
 -DENABLE_SHARED_LIB=ON ^
 -DENABLE_STATIC_CRT=OFF ^
--DCMAKE_DISABLE_FIND_PACKAGE_CUnit=1 ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
