@@ -1,0 +1,59 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index a38523dc..dd0b16bc 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -131,8 +131,8 @@ find_package(Libev 4.11)
+ find_package(Libnghttp3 1.0.0)
+ find_package(Libbrotlienc 1.0.9)
+ find_package(Libbrotlidec 1.0.9)
+-enable_testing()
+-add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND})
++# enable_testing()
++# add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND})
+ 
+ # OpenSSL (required for libngtcp2_crypto_quictls,
+ # libngtcp2_crypto_picotls and examples)
+@@ -340,10 +340,10 @@ set(PKGDATADIR "${CMAKE_INSTALL_FULL_DATADIR}/${CMAKE_PROJECT_NAME}")
+ install(FILES README.rst DESTINATION "${CMAKE_INSTALL_DOCDIR}")
+ 
+ add_subdirectory(lib)
+-add_subdirectory(tests)
++# add_subdirectory(tests)
+ add_subdirectory(crypto)
+-add_subdirectory(third-party)
+-add_subdirectory(examples)
++# add_subdirectory(third-party)
++# add_subdirectory(examples)
+ 
+ 
+ string(TOUPPER "${CMAKE_BUILD_TYPE}" _build_type)
+diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
+index 18b4cd39..52f415d7 100644
+--- a/lib/CMakeLists.txt
++++ b/lib/CMakeLists.txt
+@@ -91,16 +91,16 @@ if(ENABLE_SHARED_LIB)
+ endif()
+ 
+ # Static library (for unittests because of symbol visibility)
+-add_library(ngtcp2_static STATIC ${ngtcp2_SOURCES})
+-set_target_properties(ngtcp2_static PROPERTIES
+-  COMPILE_FLAGS "${WARNCFLAGS}"
+-  VERSION ${LT_VERSION} SOVERSION ${LT_SOVERSION}
+-  ARCHIVE_OUTPUT_NAME ngtcp2${STATIC_LIB_SUFFIX}
+-  C_VISIBILITY_PRESET hidden
+-)
+-target_compile_definitions(ngtcp2_static PUBLIC "-DNGTCP2_STATICLIB")
+-target_include_directories(ngtcp2_static PUBLIC ${ngtcp2_INCLUDE_DIRS})
+ if(ENABLE_STATIC_LIB)
++  add_library(ngtcp2_static STATIC ${ngtcp2_SOURCES})
++  set_target_properties(ngtcp2_static PROPERTIES
++    COMPILE_FLAGS "${WARNCFLAGS}"
++    VERSION ${LT_VERSION} SOVERSION ${LT_SOVERSION}
++    ARCHIVE_OUTPUT_NAME ngtcp2${STATIC_LIB_SUFFIX}
++    C_VISIBILITY_PRESET hidden
++  )
++  target_compile_definitions(ngtcp2_static PUBLIC "-DNGTCP2_STATICLIB")
++  target_include_directories(ngtcp2_static PUBLIC ${ngtcp2_INCLUDE_DIRS})
+   install(TARGETS ngtcp2_static
+     DESTINATION "${CMAKE_INSTALL_LIBDIR}")
+ endif()
