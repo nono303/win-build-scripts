@@ -1,21 +1,19 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
-set VCDIR=windows\vs2019
-set OUTDIR_CONF=Release
+cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
+-DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
+-DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
+-DBUILD_SHARED_LIBS=ON ^
+-DENABLE_SMALL=OFF ^
+-DMICROLZMA_ENCODER=ON ^
+-DMICROLZMA_DECODER=ON ^
+-DLZIP_DECODER=ON ^
+-DALLOW_CLMUL_CRC=ON ^
+-DALLOW_ARM64_CRC32=OFF ^
+%PATH_SRC%\%1
 
-%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/%VCDIR:\=/%" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%NINJA% install
 
-MSBuild.exe %PATH_SRC%\%1\%VCDIR%\xz_win.sln %MSBUILD_OPTS% ^
-/t:Clean,liblzma_dll:Rebuild ^
-/nowarn:C4267;C4996;C4028;C4133 ^
-/p:Configuration=%OUTDIR_CONF% ^
-/p:Platform="%archmsbuild%" ^
-/p:ZLibSrcDir=%PATH_SRC%\zlib ^
-/p:ZLibLib=%PATH_INSTALL%\lib\zlib.lib
-
-for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\%VCDIR%\%OUTDIR_CONF%\%archmsbuild%\liblzma_dll\liblzma.%%X %PATH_INSTALL%\bin\*)
-xcopy /C /F /Y %PATH_SRC%\%1\%VCDIR%\%OUTDIR_CONF%\%archmsbuild%\liblzma_dll\liblzma.lib %PATH_INSTALL%\lib\*
-xcopy /C /F /Y %PATH_SRC%\%1\src\liblzma\api\lzma.h %PATH_INSTALL%\include\*
-if not exist %PATH_SRC%\%1\src\liblzma\api\lzma\. mkdir %PATH_SRC%\%1\src\liblzma\api\lzma
-xcopy /C /F /Y %PATH_SRC%\%1\src\liblzma\api\lzma\*.h %PATH_INSTALL%\include\lzma\*
-call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\liblzma.dll
+for %%X in (liblzma.pdb xz.pdb xzdec.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*)
+for %%X in (liblzma.dll xz.exe xzdec.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
