@@ -48,7 +48,6 @@ Usage: go command [options]
       * tidy
       * libxdiff
       * freetype2
-      * libffi
       * aom
       * libgav1
       * dav1d

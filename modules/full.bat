@@ -98,8 +98,6 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat libxdiff NOLOG
 	:freetype2
 	call %PATH_BATCH%\go.bat freetype2 NOLOG
-	:libffi
-	call %PATH_BATCH%\go.bat libffi NOLOG
 	:aom
 	call %PATH_BATCH%\go.bat aom NOLOG
 	:libgav1

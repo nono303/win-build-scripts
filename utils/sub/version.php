@@ -42,8 +42,6 @@
 							pathenv("PATH_SRC")."/".$argv[1]."/php_ogr.h"],
 		"php-proj"			=> ['/PHP_PROJ_VERSION "([0-9\.]+)/s',
 							pathenv("PATH_SRC")."/".$argv[1]."/src/php_proj.h"],
-		"libffi"			=> ["/\[libffi\],\[([0-9\.]+)/s",
-							pathenv("PATH_SRC")."/".$argv[1]."/configure.ac"],
 		"libxpm"			=> ["/\[libXpm\], *\[([0-9\.]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/configure.ac"],
 		"yajl"				=> ["/SET \(YAJL_MAJOR ([0-9]+).*SET \(YAJL_MINOR ([0-9]+).*SET \(YAJL_MICRO ([0-9]+)/s",

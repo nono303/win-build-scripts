@@ -89,7 +89,6 @@ set PHP_COMMON_CONFIGURE=^
 	--with-extra-includes=%PATH_INSTALL_OSSL%\include;%PATH_INSTALL%\include;%PATH_INSTALL%\_proj\include;%PATH_INSTALL%\_gdal\include ^
 	--with-extra-libs=%PATH_INSTALL_OSSL%\lib;%PATH_INSTALL%\lib;%PATH_INSTALL%\_proj\lib;%PATH_INSTALL%\_gdal\lib ^
 	--with-mp=%NUMBER_OF_PROCESSORS%
-REM known bug for --with-ffi if php != 8.1 || 7.4
 REM [%PHPVER% != %PHP_FULLBUILD%]: add --disable-zlib ^ if not memcache
 if %PHPVER% == %PHP_FULLBUILD% (
 	set FINAL_CONFIGURE=%PHP_COMMON_CONFIGURE% ^
@@ -118,7 +117,6 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--with-xdebug-compression ^
 	--with-xdiff=shared ^
 	--with-geos=shared ^
-	--with-ffi=shared ^
 	--with-sodium=shared ^
 	--with-xml=shared ^
 	--enable-xmlreader=shared ^
@@ -212,7 +210,7 @@ for %%A in (exe dll) do (
 )
 if %PHPVER% == %PHP_FULLBUILD% (
 	call %PATH_MODULES_COMMON%\init.bat php-src varonly
-	for %%X in (php-cgi.exe php.exe php8.dll php_curl.dll php_fileinfo.dll php_gd.dll php_intl.dll php_opcache.dll php_openssl.dll php_tidy.dll php_bcmath.dll php_bz2.dll php_calendar.dll php_com_dotnet.dll php_ctype.dll php_dom.dll php_exif.dll php_ffi.dll php_ftp.dll php_iconv.dll php_mysqli.dll php_pdo_mysql.dll php_pdo_sqlite.dll php_readline.dll php_simplexml.dll php_soap.dll php_sockets.dll php_sodium.dll php_sqlite3.dll php_xml.dll php_xmlreader.dll php_xmlwriter.dll php_zip.dll php_zlib.dll php_xsl.dll php_mbstring.dll php_gmp.dll) do (
+	for %%X in (php-cgi.exe php.exe php8.dll php_curl.dll php_fileinfo.dll php_gd.dll php_intl.dll php_opcache.dll php_openssl.dll php_tidy.dll php_bcmath.dll php_bz2.dll php_calendar.dll php_com_dotnet.dll php_ctype.dll php_dom.dll php_exif.dll php_ftp.dll php_iconv.dll php_mysqli.dll php_pdo_mysql.dll php_pdo_sqlite.dll php_readline.dll php_simplexml.dll php_soap.dll php_sockets.dll php_sodium.dll php_sqlite3.dll php_xml.dll php_xmlreader.dll php_xmlwriter.dll php_zip.dll php_zlib.dll php_xsl.dll php_mbstring.dll php_gmp.dll) do (
 		call do_php %PATH_UTILS%\sub\version.php php-src %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\%%X "build:%TSNTS%"
 	)
 	call %PATH_MODULES_COMMON%\init.bat pecl-text-xdiff varonly
