@@ -18,5 +18,5 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% install
 
-for %%X in (liblzma.pdb xz.pdb xzdec.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*)
-for %%X in (liblzma.dll xz.exe xzdec.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
+for %%X in (lzmadec.pdb lzmainfo.pdb liblzma.pdb xz.pdb xzdec.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*)
+for %%X in (lzmadec.exe lzmainfo.exe liblzma.dll xz.exe xzdec.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
