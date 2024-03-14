@@ -1,6 +1,6 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1
 
-set VCDIR=builds\msvc\vs2019
+set VCDIR=builds\msvc\vs2022
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/%VCDIR%" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
 
 MSBuild.exe %PATH_SRC%\%1\%VCDIR%\libsodium.sln %MSBUILD_OPTS% ^
