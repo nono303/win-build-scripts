@@ -14,6 +14,8 @@
 	if(in_array($proot,["pecl-memcache","php-geos","php-ogr","php-proj","pecl-text-xdiff","php-ext-brotli","php-ext-zstd","xdebug","php-src"]))
 		$proot = "php";
 	$nogit = array(
+		"dependencies"	=> ["/AssemblyVersion\(\"([0-9\.]+)\"/s",
+							pathenv("PATH_SRC")."/".$argv[1]."/DependenciesGui/Properties/AssemblyInfo.cs"],
 		"pecl-system-sync"	=> ["/PHP_SYNC_VERSION +\"([0-9\.]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/php_sync.h"],
 		"mod_maxminddb"		=> ["/\[mod_maxminddb\], ?\[([0-9\.]+)/s",
