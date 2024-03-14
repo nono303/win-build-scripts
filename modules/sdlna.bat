@@ -9,5 +9,5 @@ MSBuild.exe sdlna.sln %MSBUILD_OPTS% ^
 /p:RestorePackagesConfig=true
 
 xcopy /C /F /Y %PATH_SRC%\%1\assets\nono\ico.ico %PATH_SRC%\%1\build\*
-xcopy /C /F /Y %PATH_SRC%\%1\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.117.0\build\net46\x64\SQLite.Interop.dll %PATH_SRC%\%1\build\*
+xcopy /C /F /Y %PATH_SRC%\%1\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\x64\SQLite.Interop.dll %PATH_SRC%\%1\build\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_SRC%\%1\build\sdlna.exe
