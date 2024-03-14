@@ -68,6 +68,7 @@ libbind9_161
 libblkid1
 libbrotlicommon1
 libbrotlidec1
+libbrotlienc1
 libbsd0
 libbz2_1
 libcares2
@@ -104,6 +105,7 @@ libgssapi_krb5_2
 libguile2.2_1
 libguile3.0_1
 libhogweed4
+libhogweed6
 libiconv2
 libidn12
 libidn2_0
@@ -129,6 +131,7 @@ libmpc3
 libmpfr6
 libncursesw10
 libnettle6
+libnettle8
 libnghttp2_14
 libntlm0
 libopenldap2
