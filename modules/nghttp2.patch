@@ -1,0 +1,67 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 58ae48c7..54435d8e 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -167,8 +167,8 @@ endif()
+ # XXX shouldn't ${CMAKE_DL_LIBS} be appended to OPENSSL_LIBRARIES instead of
+ # APP_LIBRARIES if it is really specific to OpenSSL?
+ 
+-enable_testing()
+-add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND})
++# enable_testing()
++# add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND})
+ 
+ # openssl (for src)
+ include(CheckSymbolExists)
+@@ -431,10 +431,10 @@ add_subdirectory(lib)
+ #add_subdirectory(lib/includes)
+ add_subdirectory(third-party)
+ add_subdirectory(src)
+-add_subdirectory(examples)
+-add_subdirectory(tests)
++#add_subdirectory(examples)
++#add_subdirectory(tests)
+ #add_subdirectory(tests/testdata)
+-add_subdirectory(integration-tests)
++#add_subdirectory(integration-tests)
+ if(ENABLE_DOC)
+   add_subdirectory(doc)
+ endif()
+diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
+index 211c8e43..b9ca3043 100644
+--- a/lib/CMakeLists.txt
++++ b/lib/CMakeLists.txt
+@@ -66,21 +66,21 @@ if(BUILD_SHARED_LIBS)
+ endif()
+ 
+ # Static library (for unittests because of symbol visibility)
+-add_library(${STATIC_LIB} STATIC ${NGHTTP2_SOURCES})
++# add_library(${STATIC_LIB} STATIC ${NGHTTP2_SOURCES})
+ 
+-set_target_properties(${STATIC_LIB} PROPERTIES
+-  COMPILE_FLAGS "${WARNCFLAGS}"
+-  VERSION ${LT_VERSION} SOVERSION ${LT_SOVERSION}
+-  ARCHIVE_OUTPUT_NAME nghttp2${STATIC_LIB_SUFFIX}
+-)
++# set_target_properties(${STATIC_LIB} PROPERTIES
++#   COMPILE_FLAGS "${WARNCFLAGS}"
++#   VERSION ${LT_VERSION} SOVERSION ${LT_SOVERSION}
++#   ARCHIVE_OUTPUT_NAME nghttp2${STATIC_LIB_SUFFIX}
++# )
+ 
+-target_include_directories(${STATIC_LIB} INTERFACE
+-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/includes>
+-  $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/includes>
+-  $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+-)
++# target_include_directories(${STATIC_LIB} INTERFACE
++#   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/includes>
++#   $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/includes>
++#   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
++# )
+ 
+-target_compile_definitions(${STATIC_LIB} PUBLIC "-DNGHTTP2_STATICLIB")
++# target_compile_definitions(${STATIC_LIB} PUBLIC "-DNGHTTP2_STATICLIB")
+ 
+ if(BUILD_STATIC_LIBS)
+   install(TARGETS ${STATIC_LIB} EXPORT ${EXPORT_SET})
