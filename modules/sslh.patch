@@ -1,0 +1,14 @@
+diff --git "a/common.h" "b/common.h"
+index c8399e1..14d5d79 100644
+--- "a/common.h"
++++ "b/common.h"
+@@ -5,6 +5,9 @@
+  * enough for the macros to adapt (http://support.microsoft.com/kb/111855)
+  */
+ #ifdef __CYGWIN__
++#ifdef FD_SETSIZE
++#undef  FD_SETSIZE
++#endif
+ #define FD_SETSIZE 4096
+ #endif
+ 
