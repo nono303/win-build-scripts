@@ -1,6 +1,135 @@
 # changelog
 
 
+## 1.8.5 _(2024-03-15)_
+
+*  update tools -Go
+`README.md`
+*  update src Dependencies: lucasg > nono303 -libffi
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  rewrite execnono to have stderr
+`utils/sub/_functions.php`
+*  AVX count: use dumpbin if objdump failed
+`utils/sub/bininfo.php`
+*  +DEBUG disable rpdb for cygwin build force AVX for sslh, libconfig
+`utils/sub/version.php`
+*  fix configure for sslh AVX build (sandybridge)
+`modules/libconfig.sh`
+`modules/sslh.sh`
+*  https://github.com/yrutschle/sslh/issues/427#issuecomment-1999074422
+`modules/sslh.patch`
+*  vs2019 > vs2022
+`modules/libsodium.bat`
+*  +lzmadec.exe lzmainfo.exe
+`modules/liblzma.bat`
+`utils/bininfo.bat`
+*  typo
+`modules/common/ninja.sh`
+*  fix cl & link flags
+`modules/aom.bat`
+*  upgrade deps
+`modules/sdlna.bat`
+*  +dependencies
+`utils/sub/version.php`
+*  update cygwin & python
+`config/cyg64.packagelist`
+`config/python.pip`
+*  1.60.0
+`modules/nghttp2.bat`
+`modules/nghttp2.patch`
+*  2770
+`modules/mobac.patch`
+*  5.6.0
+`modules/liblzma.bat`
+*  1.6.43
+`modules/libpng.bat`
+*  MSBuild > CMake
+`modules/liblzma.bat`
+`modules/liblzma.patch`
+*  fix cmake test & deps issue version 1.2.0
+`modules/nghttp3.bat`
+`modules/nghttp3.patch`
+*  fix cmake test issue version 1.3.0
+`modules/ngtcp2.bat`
+`modules/ngtcp2.patch`
+*  remove libffi
+`modules/full.bat`
+`modules/libffi.bat`
+`modules/phpsdk-config_make.bat`
+`usage.txt`
+`utils/bininfo.bat`
+`utils/sub/version.php`
+*  add xxd
+`config/cyg64.packagelist`
+*  upgrade pip
+`config/python.pip`
+*  fix VCTools (latest) to 14.39 in VS17.40
+`config/.vsconfig`
+*  gradle: 8.5 > 8.6
+`env_sample.bat`
+`modules/mobac.patch`
+*  c65a7c05
+`modules/libxslt.bat`
+*  8.6.0
+`modules/curl.bat`
+`modules/curl_ca-win.patch`
+*  GDAL_USE_MYSQL: OFF > ON
+`modules/gdal.bat`
+*  1.3.1
+`modules/zlib.bat`
+*  1.6.41
+`modules/libpng.bat`
+*  remove cmake useless option for 'NOT ENABLE_LIB_ONLY'
+`modules/nghttp2.bat`
+*  create apr_dbd_mysql https://www.apachelounge.com/viewtopic.php?p=42414#42414
+`env_sample.bat`
+`modules/apr-util.patch`
+`modules/apr.bat`
+`utils/bininfo.bat`
+*  create apr_dbd_mysql https://www.apachelounge.com/viewtopic.php?p=42414#42414
+`env_sample.bat`
+`modules/apr-util.patch`
+`modules/apr.bat`
+*  update config for python.pip add config for cyg.required
+`config/cyg.required`
+`config/python.pip`
+*  add pecl-datetime-timezonedb & pecl-system-sync
+`SRC_VERSION.md`
+`modules/php.bat`
+`modules/phpsdk-config_make.bat`
+`utils/bininfo.bat`
+`utils/srccreate.bat`
+`utils/sub/version.php`
+*  cmake find_package curl as module (previously fixed)
+`modules/gdal.bat`
+*  1.9.1
+`modules/libmaxminddb.bat`
+*  comment for cygwin packages with version
+`utils/configexport.bat`
+*  clean unused packages
+`config/cyg64.packagelist`
+*  add go
+`README.md`
+`env_sample.bat`
+*  cmake find curl with module (fixed)
+`modules/httpd.bat`
+*  +curl-config
+`utils/bininfo.bat`
+*  check and build prereq
+`modules/mod_md.bat`
+*  fix cmake find +mod_md param for a light build
+`modules/curl.bat`
+`modules/curl.patch`
+*  pcre2 10.43 : winediline required
+`modules/full.bat`
+`modules/pcre2.bat`
+*  Refactor httpd build: - remove mt.exe -manifest %PATH_MODULES%\httpd.exe.manifest - factorize CMAKE_HTTPD_COMMON - cmake  - define diag_bits (mod_whatkilledus)  - transform dirty cflags sed to cmake extra_defines (mod_h264_streaming, mod_whatkilledus, mod_backtrace, mod_qos)  - CMAKE_MINIMUM_REQUIRED: 2.8 > 3.5   - CMAKE_MINIMUM_REQUIRED in first   - GET_MOD_ENABLE_RANK: fix quotes   - GEN_TEST_CHAR_EXE: https://lists.apache.org/thread/w4k1gmcynjw3l5z88mq1mfgd7g097s0f   - remove useless extra_sources for external modules
+`modules/httpd.bat`
+`modules/httpd.exe.manifest`
+`modules/httpd.patch`
+
+
 ## 1.8.4 _(2023-12-18)_
 
 *  1.8.4
