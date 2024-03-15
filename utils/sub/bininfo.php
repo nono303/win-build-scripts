@@ -90,8 +90,17 @@
 			$data[$cur][30] = "";
 			if(CHECK_AVX){
 				$obdcmd = pathenv("PATH_BIN_CYGWIN").'/sh.exe -c "objdump -M intel -d '.$dir."/".$file.' | ./opcode.sh -s AVX';
-				if(DEBUG) echo "###".$obdcmd.PHP_EOL;
-				$obd  = execnono($obdcmd,NULL,SCRIPT_DIR,NULL);
+				if(DEBUG) 
+					echo "###".$obdcmd.PHP_EOL;
+				$stderr = null;
+				$obd  = execnono($obdcmd,NULL,SCRIPT_DIR,NULL,$stderr);
+				if($stderr){
+					// dumpbin fix issue with 'BFD: __FILE__: bad string table size X' but is really slow
+					$obdcmd = pathenv("PATH_BIN_CYGWIN").'/sh.exe -c "dumpbin /disasm '.$dir."/".$file.' | ./opcode.sh -s AVX';
+					if(DEBUG) 
+						echo "###".$obdcmd.PHP_EOL;
+					$obd  = execnono($obdcmd,NULL,SCRIPT_DIR,NULL);
+				}
 				debug("fileCheck(2) ".$obdcmd.": ".$obd);
 				foreach(explode("\n",$obd) as $line){
 					if(!is_int(strpos($line,"--")) && $line){
