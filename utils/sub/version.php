@@ -1,5 +1,6 @@
 <?php
 	include( dirname(__FILE__) . '/_functions.php');
+	define("DEBUG",false);
 
 	global $letterpos;
 	global $nogit;
@@ -218,11 +219,14 @@
 				}
 				// cygwin
 				if(in_array($argv[1],["memcached","sslh","libconfig"])){
+					$rpdb = "";
 					if(is_int(strpos($argv[2],"\\x86\\")))
 						$arch = "x86";
 					if(is_int(strpos($argv[2],"\\x64\\")))
 						$arch = "x64";
-					is_int(strpos($argv[2],"-avx")) ? $avx = "-avx " : $avx = " ";
+					is_int(strpos($argv[2],"-avx")) || in_array($argv[1],["sslh","libconfig"])
+						? $avx = "-avx " : 
+						$avx = " ";
 					$gccver = end(explode(" ",explode("\n",shell_exec("gcc --version"))[0]));
 					$description = "arch:".$arch.$avx."gcc:".$gccver.$libdep;
 				} 
@@ -240,7 +244,7 @@
 				$pname = $proot.":".$pname;
 
 			$cmd = pathenv("BIN_VERPATCH")." ".$argv[2]." \"".$current["file"]."\" /va".$rpdb." /high /pv \"".$current["product"]."\" /s description \"".$description."\" /s product \"".$pname."\" /s LegalTrademarks \"".pathenv("SCM_URL")."\" /s LegalCopyright \"https://github.com/nono303/win-build-scripts\"";
-			if(pathenv("CUR_DEBUG") == 1){
+			if(DEBUG || pathenv("CUR_DEBUG") == 1){
 				echo $cmd.PHP_EOL;
 			} else {
 				echo "[version] '".$current["product"]."' ".$argv[2]." (".str_replace("/","\\",$current["from"]).")".PHP_EOL;
