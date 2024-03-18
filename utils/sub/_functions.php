@@ -45,7 +45,7 @@
 			}
 			$out = stream_get_contents($pipes[1]);
 			fclose($pipes[1]);
-			$stderr = stream_get_contents($pipes[2]);
+			$stderr = trim(stream_get_contents($pipes[2]));
 			fclose($pipes[2]);
 			// It is important that you close any pipes before calling
 			// proc_close in order to avoid a deadlock

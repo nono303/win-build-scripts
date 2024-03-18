@@ -52,7 +52,7 @@
 				$gitclean = execnono($cmd = "git clean -fdx",NULL,$repo,NULL);
 				if(VERBOSE) echo $cmd.PHP_EOL;
 				if(REPO_FETCH){
-					execnono($cmd = "git fetch",NULL,$repo,NULL);
+					execnono($cmd = "git fetch 2>&1",NULL,$repo,NULL);
 					if(VERBOSE) echo $cmd.PHP_EOL;
 					// https://stackoverflow.com/a/58438257
 					execnono($cmd = "git fetch --tags --force",NULL,$repo,NULL);
