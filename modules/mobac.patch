@@ -1,6 +1,6 @@
 Index: build.gradle
 ===================================================================
---- build.gradle	(revision 2768)
+--- build.gradle	(revision 2770)
 +++ build.gradle	(working copy)
 @@ -6,7 +6,7 @@
      id 'distribution'
@@ -28,7 +28,7 @@ Cannot display: file marked as a binary type.
 svn:mime-type = application/octet-stream
 Index: gradle/wrapper/gradle-wrapper.properties
 ===================================================================
---- gradle/wrapper/gradle-wrapper.properties	(revision 2768)
+--- gradle/wrapper/gradle-wrapper.properties	(revision 2770)
 +++ gradle/wrapper/gradle-wrapper.properties	(working copy)
 @@ -1,6 +1,6 @@
  distributionBase=GRADLE_USER_HOME
@@ -40,7 +40,7 @@ Index: gradle/wrapper/gradle-wrapper.properties
  zipStoreBase=GRADLE_USER_HOME
 Index: gradlew
 ===================================================================
---- gradlew	(revision 2768)
+--- gradlew	(revision 2770)
 +++ gradlew	(working copy)
 @@ -145,7 +145,7 @@
      case $MAX_FD in #(
@@ -79,7 +79,7 @@ Index: gradlew
          "-Dorg.gradle.appname=$APP_BASE_NAME" \
 Index: gradlew.bat
 ===================================================================
---- gradlew.bat	(revision 2768)
+--- gradlew.bat	(revision 2770)
 +++ gradlew.bat	(working copy)
 @@ -43,11 +43,11 @@
  %JAVA_EXE% -version >NUL 2>&1
@@ -117,8 +117,17 @@ Index: gradlew.bat
  
 Index: mobac/build.gradle
 ===================================================================
---- mobac/build.gradle	(revision 2768)
+--- mobac/build.gradle	(revision 2770)
 +++ mobac/build.gradle	(working copy)
+@@ -4,7 +4,7 @@
+ }
+ 
+ dependencies {
+-    def mapsforgeVersion = '0.20.0'
++    def mapsforgeVersion = '0.21.0'
+     // def mapsforgeVersion = 'master-SNAPSHOT'
+ 
+     implementation "org.mapsforge:mapsforge-core:${mapsforgeVersion}"
 @@ -12,29 +12,29 @@
      implementation "org.mapsforge:mapsforge-map-awt:${mapsforgeVersion}"
      implementation "org.mapsforge:mapsforge-map-reader:${mapsforgeVersion}"
@@ -173,7 +182,7 @@ Index: mobac/build.gradle
      doLast {
 Index: mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(revision 2768)
+--- mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(revision 2770)
 +++ mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(working copy)
 @@ -34,15 +34,10 @@
  	static {
@@ -195,7 +204,7 @@ Index: mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java
  	}
 Index: mobac/src/main/java/mobac/gui/MainGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2768)
+--- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2770)
 +++ mobac/src/main/java/mobac/gui/MainGUI.java	(working copy)
 @@ -151,7 +151,7 @@
  
@@ -216,7 +225,7 @@ Index: mobac/src/main/java/mobac/gui/MainGUI.java
  		leftPanelContent.add(mapSourcePanel, gbc_eol);
 Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2768)
+--- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2770)
 +++ mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(working copy)
 @@ -43,7 +43,7 @@
  		JScrollPane mapSourceTreeScrollPane = new JScrollPane(mapSourceTree, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -229,7 +238,7 @@ Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
  	}
 Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2768)
+--- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2770)
 +++ mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(working copy)
 @@ -95,7 +95,7 @@
  
@@ -242,7 +251,7 @@ Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
  	private final Settings settings = Settings.getInstance();
 Index: mobac/src/main/java/mobac/program/AtlasThread.java
 ===================================================================
---- mobac/src/main/java/mobac/program/AtlasThread.java	(revision 2768)
+--- mobac/src/main/java/mobac/program/AtlasThread.java	(revision 2770)
 +++ mobac/src/main/java/mobac/program/AtlasThread.java	(working copy)
 @@ -203,13 +203,13 @@
  			}
@@ -262,7 +271,7 @@ Index: mobac/src/main/java/mobac/program/AtlasThread.java
  		} catch (AtlasTestException e) {
 Index: mobac/src/main/java/mobac/program/download/MobacTrustManager.java
 ===================================================================
---- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2768)
+--- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2770)
 +++ mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(working copy)
 @@ -128,7 +128,7 @@
  			defaultTrustManager.checkServerTrusted(chain, authType);
