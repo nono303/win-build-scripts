@@ -1,34 +1,66 @@
 @echo off
-
-REM https://docs.microsoft.com/fr-fr/cpp/build/reference/arch-x64
-
-	REM https://en.wikipedia.org/wiki/List_of_Intel_CPU_microarchitectures
-set AVXMPIR=pentium4-sse2
-if %1 == 1 (
+REM GCC		https://gcc.gnu.org/onlinedocs/gcc/x86-Options.html
+REM cl		https://docs.microsoft.com/fr-fr/cpp/build/reference/arch-x64 !! must be upper case
+REM MSBuild	https://stackoverflow.com/a/64886471
+REM https://en.wikipedia.org/wiki/List_of_Intel_CPU_microarchitectures
+REM PHP: sse,sse2,sse3,ssse3,sse4.1,sse4.2,avx,avx2. SSE and SSE2 are enabled by default.
+if %1 == 2 (
+	set AVXECHO=avx2
+	set AVXB=-avx2
+	set AVX=/arch:AVX2
+		REM mod_security / modsec-sdbm-util
+	set AVX_SED=  \/arch:AVX2
 		REM aom
-	set SSE42AVX=ON
+	set AVX_ON=ON
+	set AVX2_ON=ON
+		REM php
+	set intrinsics=,sse3,ssse3,sse4.1,sse4.2,avx,avx2
+		REM MSBuild
+	set AVX_MSBUILD="<EnableEnhancedInstructionSet>AdvancedVectorExtensions2<\/EnableEnhancedInstructionSet>\r\n"
+		REM libconfig.sh / memcached.sh / sslh.sh
+	set AVX_GCC=skylake
+		REM MPIR (used in phpsdk-local)
+	set AVX_MPIR=skylake-avx
+)
+if %1 == 1 (
 	set AVXECHO=avx
-	set AVX=/arch:AVX
 	set AVXB=-avx
-	set AVXVCX="<EnableEnhancedInstructionSet>AdvancedVectorExtensions<\/EnableEnhancedInstructionSet>\r\n"
+	set AVX=/arch:AVX
+		REM mod_security / modsec-sdbm-util
+	set AVX_SED=  \/arch:AVX
+		REM aom
+	set AVX_ON=ON
+	set AVX2_ON=OFF
 		REM php
 	set intrinsics=,sse3,ssse3,sse4.1,sse4.2,avx
-	if %archmsbuild% == x64 (set AVXMPIR=sandybridge)
-	echo ~~-~~  AVX ~~-~~
+		REM MSBuild
+	set AVX_MSBUILD="<EnableEnhancedInstructionSet>AdvancedVectorExtensions<\/EnableEnhancedInstructionSet>\r\n"
+		REM libconfig.sh / memcached.sh / sslh.sh
+	set AVX_GCC=sandybridge
+		REM MPIR (used in phpsdk-local)
+	set AVX_MPIR=sandybridge
 )
 if %1 == 0 (
-		REM aom
-	set SSE42AVX=OFF
 	set AVXECHO=sse2
-	set AVX=
 	set AVXB=
-		REM https://github.com/XhmikosR/notepad2-mod/issues/111
-	set AVXVCX="<EnableEnhancedInstructionSet>NotSet<\/EnableEnhancedInstructionSet>\r\n"
+	set AVX=
+		REM mod_security / modsec-sdbm-util
+	set AVX_SED=
+		REM aom
+	set AVX_ON=OFF
+	set AVX2_ON=OFF
 		REM php
 	set intrinsics=
-	if %archmsbuild% == x64 (set AVXMPIR=core2-penryn)
-	echo ~~-~~ SSE2 ~~-~~
+		REM MSBuild - https://github.com/XhmikosR/notepad2-mod/issues/111
+	set AVX_MSBUILD="<EnableEnhancedInstructionSet>NotSet<\/EnableEnhancedInstructionSet>\r\n"
+		REM libconfig.sh / memcached.sh / sslh.sh
+	set AVX_GCC=core2
+		REM MPIR (used in phpsdk-local)
+	set AVX_MPIR=core2-penryn	
 )
+	REM MPIR same cpu arch for all x86
+if %archmsbuild% == Win32 (set AVX_MPIR=pentium4-sse2)
+echo ~~-~~ %AVXECHO% ~~-~~
 
 set PATH_BUILD=%PATH_BUILDROOT%\%MSVC_DEPS%_%ARCH%%AVXB%
 for /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_BUILD%`) do (set CYGPATH_BUILD=%%F)
