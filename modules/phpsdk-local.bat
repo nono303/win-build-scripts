@@ -13,7 +13,7 @@ call buildconf.bat
 	REM edit
 sed -i 's/edit_a.lib;edit.lib/edit.lib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM gmp - shared
-sed -i 's/mpir_a.lib/mpir_%AVXMPIR%.lib/g' %CYGPATH_SRC%/php-src/configure.js
+sed -i 's/mpir_a.lib/mpir_%AVX_MPIR%.lib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM libiconv - shared with patch ext/iconv/iconv.c : _libiconv_version > _LIBICONV_VERSION
 sed -i 's/libiconv_a.lib/libiconv.lib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM lzma
