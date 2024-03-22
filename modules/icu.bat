@@ -12,7 +12,7 @@ set VCDIR=icu4c\source\allinone
 set OUTDIR_CONF=Release
 
 if %ARG_KEEPSRC% == 0 (
-	%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/icu4c" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
+	%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/icu4c" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
 		REM icudtXX.pdb
 	sed -i 's/NXCOMPAT/NXCOMPAT \/OPT:REF,ICF \/DEBUG/g' %CYGPATH_SRC%/%1/icu4c/source/tools/pkgdata/pkgdata.cpp
 )

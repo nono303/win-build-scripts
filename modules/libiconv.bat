@@ -6,7 +6,7 @@ REM https://www.codeproject.com/Articles/302012/How-to-Build-libiconv-with-Micro
 set OUTDIR_CONF=Release
 
 if not exist %PATH_SRC%\%1\. mklink /J %PATH_SRC%\%1 %PATH_SRC%\%1\MSVC16
-%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/" %AVXVCX% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
+%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
 
 MSBuild.exe %PATH_SRC%\%1\%1.sln %MSBUILD_OPTS% ^
 /t:Clean,%1 ^
