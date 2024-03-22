@@ -29,7 +29,7 @@ for /f "tokens=*" %%G in ('dir %PATH_BUILD%\%1\bin\*.pdb /b') do  (xcopy /C /F /
 for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\_%1\bin\*.exe /b') do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\_%1\bin\%%G)
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\_%1\bin\GeographicLib.dll
 
-if %LOCAL_COPY% == 1 if %LOCAL_COPY_AVXECHO% == %AVXECHO%  if %LOCAL_COPY_MSVC_VER% == %MSVC_VER% ( 
+if %LOCAL_COPY% == 1 if %LOCAL_COPY_AVX_ECHO% == %AVXECHO%  if %LOCAL_COPY_MSVC_VER% == %MSVC_VER% ( 
 	if exist %LOCAL_PATH_GEOGRAPHICLIB%\bin\. rmdir /S /Q %LOCAL_PATH_GEOGRAPHICLIB%\bin 
 	mkdir %LOCAL_PATH_GEOGRAPHICLIB%\bin
 	xcopy /C /F /Y %PATH_INSTALL%\_%1\bin\*.* %LOCAL_PATH_GEOGRAPHICLIB%\bin\*
