@@ -1,7 +1,6 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 
 
-if %AVXECHO% == sse2 (set AVXSED=) else (set AVXSED= \/arch:AVX)
-sed -i 's/DNDEBUG/DNDEBUG \/MP%NUMBER_OF_PROCESSORS%%AVXSED%/g' %CYGPATH_SRC%/%1/Makefile.win
+sed -i 's/DNDEBUG/DNDEBUG \/MP%NUMBER_OF_PROCESSORS%%AVX_SED%/g' %CYGPATH_SRC%/%1/Makefile.win
 NMAKE %NMAKE_OPTS% -f Makefile.win ^
 	APR=%PATH_INSTALL% ^
 	APRUTIL=%PATH_INSTALL% ^
