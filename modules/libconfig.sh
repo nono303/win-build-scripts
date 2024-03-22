@@ -6,6 +6,6 @@ autoreconf -fi -I /usr/share/aclocal
 make -j$(nproc) uninstall
 make -j$(nproc) clean
 # --debug=a
-make -j$(nproc) CFLAGS+='-w -O3 -s -march=sandybridge'
-cp --verbose -rf $1/lib/.libs/cygconfig-11.dll $3/x64/cygconfig-11.dll
+set -x
+make -j$(nproc) CFLAGS+=" -w -O3 -s -march=${3} "
 make -j$(nproc) install

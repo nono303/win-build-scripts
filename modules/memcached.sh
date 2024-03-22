@@ -19,21 +19,17 @@ case "${3}" in
     *-2.0)   EVENT_VER=2-0-5;;
 esac
 
-# https://gcc.gnu.org/onlinedocs/gcc/x86-Options.html
+set -x
 	# STD
 ./configure --cache-file=$ARCH_PRF.configure.cache --disable-dependency-tracking --enable-silent-rules${machine} --disable-dtrace --disable-sasl --disable-docs --disable-coverage --prefix=$1/release/$ARCH_PRF/ $ARCH_PARAMS
-#   SSE2
-make -j$(nproc) clean && make -j$(nproc) CFLAGS+=' -Wno-char-subscripts -O3 -s -msse2 '			&& cp --verbose -rf $1/memcached.exe $3/$ARCH_PRF/memcached.exe
-
-#   AVX
-make -j$(nproc) clean && make -j$(nproc) CFLAGS+=' -Wno-char-subscripts -O3 -s -march=sandybridge '	&& cp --verbose -rf $1/memcached.exe $3/$ARCH_PRF/memcached-avx.exe 
-
+make -j$(nproc) clean
+make -j$(nproc) CFLAGS+=" -w -O3 -s -march=${5} "
+cp --verbose -rf $1/memcached.exe $3/$ARCH_PRF/memcached$4.exe 
 	# TLS
 ./configure --cache-file=$ARCH_PRF.configure.cache --disable-dependency-tracking --enable-silent-rules${machine} --disable-dtrace --disable-sasl --disable-docs --disable-coverage --prefix=$1/release/$ARCH_PRF/ $ARCH_PARAMS --enable-tls
-#   SSE2
-make -j$(nproc) clean && make -j$(nproc) CFLAGS+=' -Wno-char-subscripts -O3 -s -msse2 '			&& cp --verbose -rf $1/memcached.exe $3/$ARCH_PRF/memcached-tls.exe
-#   AVX
-make -j$(nproc) clean && make -j$(nproc) CFLAGS+=' -Wno-char-subscripts -O3 -s -march=sandybridge '	&& cp --verbose -rf $1/memcached.exe $3/$ARCH_PRF/memcached-avx-tls.exe
+make -j$(nproc) clean 
+make -j$(nproc) CFLAGS+=" -w -O3 -s -march=${5} "
+cp --verbose -rf $1/memcached.exe $3/$ARCH_PRF/memcached$4-tls.exe
 
 for i in cygcrypto-1.1.dll cygevent_core-$EVENT_VER.dll cygevent_extra-$EVENT_VER.dll cygevent_openssl-$EVENT_VER.dll cygevent_pthreads-$EVENT_VER.dll cygevent-$EVENT_VER.dll cygssl-1.1.dll cygwin1.dll cygz.dll
 do
