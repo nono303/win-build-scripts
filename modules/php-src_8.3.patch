@@ -1,29 +1,3 @@
-# https://github.com/php/php-src/issues/12762
-diff --git "a/Zend/zend_call_stack.c" "b/Zend/zend_call_stack.c"
-index 06ee521911..0ac230a0bd 100644
---- "a/Zend/zend_call_stack.c"
-+++ "b/Zend/zend_call_stack.c"
-@@ -376,7 +376,19 @@ static bool zend_call_stack_get_win32(zend_call_stack *stack)
- 	 *                v  Lower addresses   v
- 	 */
- 
--	GetCurrentThreadStackLimits(&low_limit, &high_limit);
-+	typedef void (WINAPI* FuncT)(PULONG_PTR , PULONG_PTR);
-+	HINSTANCE hDLL = LoadLibrary("Kernel32.dll");
-+	FuncT GetCurrentThreadStackLimits = (FuncT) GetProcAddress((HMODULE)hDLL, "GetCurrentThreadStackLimits");
-+	if (GetCurrentThreadStackLimits) {
-+		GetCurrentThreadStackLimits(&low_limit, &high_limit);
-+	} else {
-+		NT_TIB* tib = (NT_TIB*)NtCurrentTeb();
-+		high_limit = (ULONG_PTR)tib->StackBase;
-+		MEMORY_BASIC_INFORMATION mbi;
-+		if (VirtualQuery(tib->StackLimit, &mbi, sizeof(mbi))) {
-+			low_limit = (ULONG_PTR)mbi.AllocationBase;
-+		}
-+	}
- 
- 	result_size = VirtualQuery((void*)low_limit,
- 			&uncommitted_region, sizeof(uncommitted_region));
 diff --git "a/main/network.c" "b/main/network.c"
 index 1ad7e370cc..9cc9de2a2c 100644
 --- "a/main/network.c"
