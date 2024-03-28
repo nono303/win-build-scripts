@@ -15,6 +15,21 @@ if %ARG_KEEPSRC% == 0 (
 	%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/icu4c" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
 		REM icudtXX.pdb
 	sed -i 's/NXCOMPAT/NXCOMPAT \/OPT:REF,ICF \/DEBUG/g' %CYGPATH_SRC%/%1/icu4c/source/tools/pkgdata/pkgdata.cpp
+		REM avx2 compiler error - https://unicode-org.atlassian.net/browse/ICU-22715
+		REM	 C:\sdk\src\icu\icu4c\source\test\intltest\usettest.cpp(3606): fatal error C1001: Internal compiler error. [C:\sdk\src\icu\icu4c\source\test\intltest\intltest.vcxproj]
+		REM	   (compiler file 'D:\a\_work\1\s\src\vctools\Compiler\Utc\src\p2\main.c', line 239)
+		REM	    To work around this problem, try simplifying or changing the program near the locations listed above.
+		REM	   If possible please provide a repro here: https://developercommunity.visualstudio.com 
+		REM	   Please choose the Technical Support command on the Visual C++ 
+		REM	    Help menu, or open the Technical Support help file for more information
+		REM	     link!InvokeCompilerPass()+0x146797
+		REM	     link!InvokeCompilerPass()+0x146797
+		REM	     link!CloseTypeServerPDB()+0x23338e
+		REM	     link!CloseTypeServerPDB()+0xf0eaa
+		REM	     link!InvokeCompilerPassW()+0xd318
+		REM	     link!InvokeCompilerPassW()+0xc989
+		REM	     link!InvokeCompilerPassW()+0xdc19
+	sed -i 's/AdvancedVectorExtensions2/AdvancedVectorExtensions/g' %CYGPATH_SRC%/%1/icu4c/source/test/intltest/intltest.vcxproj
 )
 
 	REM	https://unicode-org.github.io/icu/userguide/icu4c/build.html#skipping-the-uwp-projects-on-the-command-line
