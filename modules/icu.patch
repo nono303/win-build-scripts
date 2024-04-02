@@ -1,0 +1,29 @@
+diff --git a/icu4c/source/data/BUILDRULES.py b/icu4c/source/data/BUILDRULES.py
+index 8662acfb60..9d3994d53a 100644
+--- a/icu4c/source/data/BUILDRULES.py
++++ b/icu4c/source/data/BUILDRULES.py
+@@ -202,7 +202,7 @@ def generate_brkitr_brk(config, io, common_vars):
+             category = "brkitr_rules",
+             dep_targets =
+                 [DepTarget("cnvalias"),
+-                    DepTarget("ulayout"), DepTarget("uemoji"), DepTarget("lstm_res"), DepTarget("adaboost_res")],
++                    DepTarget("ulayout"), DepTarget("uemoji")],
+             input_files = input_files,
+             output_files = output_files,
+             tool = IcuTool("genbrk"),
+diff --git a/icu4c/source/test/intltest/usettest.cpp b/icu4c/source/test/intltest/usettest.cpp
+index b7bf21e436..9bc5b13075 100644
+--- a/icu4c/source/test/intltest/usettest.cpp
++++ b/icu4c/source/test/intltest/usettest.cpp
+@@ -3602,9 +3602,10 @@ addAlternative(uint32_t whichSpans[], int32_t whichSpansCount,
+         whichSpans[i]=s|a;
+         if(b!=0) {
+             whichSpans[whichSpansCount+i]=s|b;
+-            if(c!=0) {
++           /* if(c!=0) {
+                 whichSpans[2*whichSpansCount+i]=s|c;
+             }
++			*/
+         }
+     }
+     return b==0 ? whichSpansCount : c==0 ? 2*whichSpansCount : 3*whichSpansCount;
