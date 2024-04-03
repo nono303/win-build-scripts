@@ -1,29 +1,7 @@
-From bd2c4e466e0949f6f770bbb2569ce5ae9b3965c0 Mon Sep 17 00:00:00 2001
-From: ttachi <tachihara@hotmail.com>
-Date: Fri, 17 Nov 2023 22:24:45 +0900
-Subject: [PATCH] mod_xml2enc: remove dependency on xmlstring header
-
----
- modules/filters/mod_xml2enc.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/modules/filters/mod_xml2enc.c b/modules/filters/mod_xml2enc.c
-index 34f8e8ee090..0d3d13c1239 100644
---- a/modules/filters/mod_xml2enc.c
-+++ b/modules/filters/mod_xml2enc.c
-@@ -209,7 +209,7 @@ static void sniff_encoding(request_rec* r, xml2ctx* ctx)
-   
-     /* to sniff, first we look for BOM */
-     if (ctx->xml2enc == XML_CHAR_ENCODING_NONE) {
--        ctx->xml2enc = xmlDetectCharEncoding((const xmlChar*)ctx->buf,
-+        ctx->xml2enc = xmlDetectCharEncoding((const unsigned char*)ctx->buf,
-                                              ctx->bytes); 
-         if (HAVE_ENCODING(ctx->xml2enc)) {
-             ap_log_rerror(APLOG_MARK, APLOG_INFO, 0, r, APLOGNO(01432)
-diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
+diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 7b30547d39..0a6f0e8b58 100644
---- "a/CMakeLists.txt"
-+++ "b/CMakeLists.txt"
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -15,15 +15,28 @@
  #
  # Read README.cmake before using this.
@@ -389,7 +367,7 @@ index 7b30547d39..0a6f0e8b58 100644
  ###########  CONFIGURATION FILES ###########
  # Set up variables used in the .conf file templates
 diff --git a/modules/proxy/mod_proxy_fcgi.c b/modules/proxy/mod_proxy_fcgi.c
-index 831bd15ae9..aef08296df 100644
+index d420df6a77..aca014002a 100644
 --- a/modules/proxy/mod_proxy_fcgi.c
 +++ b/modules/proxy/mod_proxy_fcgi.c
 @@ -381,6 +381,10 @@ static apr_status_t send_environment(proxy_conn_rec *conn, request_rec *r,
@@ -404,7 +382,7 @@ index 831bd15ae9..aef08296df 100644
          }
      }
 diff --git a/server/main.c b/server/main.c
-index 7da7aa2ca2..78d9d92a71 100644
+index fb23f01d1d..7d42ec8128 100644
 --- a/server/main.c
 +++ b/server/main.c
 @@ -45,6 +45,13 @@
@@ -422,10 +400,10 @@ index 7da7aa2ca2..78d9d92a71 100644
  /* WARNING: Win32 binds http_main.c dynamically to the server. Please place
   *          extern functions and global data in another appropriate module.
 diff --git a/support/ab.c b/support/ab.c
-index 3a3ffbfb61..ea74c3f8a1 100644
+index 6709cd1db6..22e0f68afd 100644
 --- a/support/ab.c
 +++ b/support/ab.c
-@@ -184,7 +184,7 @@ typedef STACK_OF(X509) X509_STACK_TYPE;
+@@ -189,7 +189,7 @@ typedef STACK_OF(X509) X509_STACK_TYPE;
   * by the OpenSSL library build to another CRT used by the ab.exe build.
   * This became especially problematic with Visual Studio 2015.
   */
