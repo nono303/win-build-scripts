@@ -1,5 +1,5 @@
 diff --git a/apache2/Makefile.win b/apache2/Makefile.win
-index ed4bfc9e..dbb133f9 100644
+index ed4bfc9e..aa07ffd0 100644
 --- a/apache2/Makefile.win
 +++ b/apache2/Makefile.win
 @@ -1,18 +1,18 @@
@@ -47,17 +47,18 @@ index ed4bfc9e..dbb133f9 100644
  MT = mt
  
 -DEFS = /nologo /O2 /LD /W3 /wd4244 /wd4018 -DWIN32 -DWINNT -Dinline=APR_INLINE -D$(VERSION)
-+DEFS = /nologo /DWIN32 /DWINNT /Dinline=APR_INLINE /DWITH_PCRE2=1 /D_WINDOWS /w /Zf /Zi /FS /O2 /GL /MD /DNDEBUG
++DEFS = /nologo /DWIN32 /DWINNT /Dinline=APR_INLINE /DWITH_PCRE2=1 /D_WINDOWS /w /Zf /Zi /FS /O2 /GL /MD /DNDEBUG /MP16  /arch:AVX2
++
++DLL = mod_security2.dll
  
- DLL = mod_security2.so
+-DLL = mod_security2.so
++INCLUDES = -I. -I.. -I$(APACHE)\include -I$(PCRE2)\include -I$(CURL)\include -I$(LIBXML2)\include\libxml2 -I$(LIBXML2)\include
  
 -INCLUDES = -I. -I.. \
 -           -I$(CURL)\include -I$(CURL) \
 -           -I$(PCRE)\include -I$(PCRE) \
 -           -I$(LIBXML2)\include \
 -           -I$(APACHE)\include
-+INCLUDES = -I. -I.. -I$(APACHE)\include -I$(PCRE2)\include -I$(CURL)\include -I$(LIBXML2)\include\libxml2 -I$(LIBXML2)\include
-+
  
  # Enables support for SecRemoteRules and external resources.
  DEFS=$(DEFS) -DWITH_CURL -DWITH_REMOTE_RULES

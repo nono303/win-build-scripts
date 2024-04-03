@@ -1,4 +1,5 @@
 @echo off
+set mod_suffix=.dll
 	REM ~~~~~~~~~~~ external modules
 for %%M in (mod_maxminddb mod_fcgid mod_h2 mod_md mod_wku_bt mod_h264_streaming mod_qos) do (call %PATH_MODULES_COMMON%\init.bat %%M)
 
@@ -38,16 +39,16 @@ if "%2"=="svn" (
 del /Q /F "%PATH_INSTALL%\lib\*.exp"
 
 for %%X in (ab.exe abs.exe ApacheMonitor.exe htcacheclean.exe htdbm.exe htdigest.exe htpasswd.exe httpd.exe httxt2dbm.exe libhttpd.dll logresolve.exe rotatelogs.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
-for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\modules\*.so /b') do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\modules\%%G)
+for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\modules\*%mod_suffix% /b') do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\modules\%%G)
 
 	REM ~~~~~~~~~~~ external modules
 if NOT "%2"=="svn" (
 	for %%X in (mod_maxminddb mod_fcgid mod_h264_streaming mod_md mod_qos) do (
 		call %PATH_MODULES_COMMON%\init.bat %%X varonly
-		call do_php %PATH_UTILS%\sub\version.php %%X %PATH_INSTALL%\modules\%%X.so "httpd:%HTTPD_VERSION%"
+		call do_php %PATH_UTILS%\sub\version.php %%X %PATH_INSTALL%\modules\%%X%mod_suffix% "httpd:%HTTPD_VERSION%"
 	)
 	call %PATH_MODULES_COMMON%\init.bat mod_h2 varonly
-	for %%X in (mod_http2 mod_proxy_http2) do (call do_php %PATH_UTILS%\sub\version.php mod_h2 %PATH_INSTALL%\modules\%%X.so "httpd:%HTTPD_VERSION%")
+	for %%X in (mod_http2 mod_proxy_http2) do (call do_php %PATH_UTILS%\sub\version.php mod_h2 %PATH_INSTALL%\modules\%%X%mod_suffix% "httpd:%HTTPD_VERSION%")
 	call %PATH_MODULES_COMMON%\init.bat mod_wku_bt varonly
-	for %%X in (mod_backtrace mod_whatkilledus) do (call do_php %PATH_UTILS%\sub\version.php mod_wku_bt %PATH_INSTALL%\modules\%%X.so "httpd:%HTTPD_VERSION%")
+	for %%X in (mod_backtrace mod_whatkilledus) do (call do_php %PATH_UTILS%\sub\version.php mod_wku_bt %PATH_INSTALL%\modules\%%X%mod_suffix% "httpd:%HTTPD_VERSION%")
 )

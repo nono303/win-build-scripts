@@ -10,5 +10,5 @@ NMAKE %NMAKE_OPTS% -f Makefile.win ^
 	CURL=%PATH_INSTALL% ^
 	YAJL=%PATH_INSTALL% ^
 	dll
-for %%X in (so pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\apache2\mod_security2.%%X %PATH_INSTALL%\modules\*)
-call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\modules\mod_security2.so
+for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\apache2\mod_security2.%%X %PATH_INSTALL%\modules\*)
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\modules\mod_security2.dll
