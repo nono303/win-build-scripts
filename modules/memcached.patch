@@ -34,7 +34,7 @@ index e1d0c32..334fdaa 100644
  fi
  
  AM_PROG_CC_C_O
-@@ -872,5 +872,8 @@ then
+@@ -873,5 +873,8 @@ then
    CFLAGS="$CFLAGS -errfmt=error -errwarn -errshort=tags"
  fi
  
