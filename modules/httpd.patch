@@ -15,7 +15,7 @@ index 7b30547d39..0a6f0e8b58 100644
 +SET(mod_md_src "../mod_md/src")
 +# SET(mod_http2_src "modules/http2")
 +SET(mod_http2_src "../mod_h2/mod_http2")
-+SET(mod_suffix ".dll")
++SET(mod_suffix ".so")
 +
 +# https://discourse.cmake.org/t/how-to-distinguish-windows-architecture/5104
 +if (CMAKE_SIZEOF_VOID_P EQUAL 4)

@@ -1,5 +1,5 @@
 @echo off
-set mod_suffix=.dll
+set mod_suffix=.so
 	REM ~~~~~~~~~~~ external modules
 for %%M in (mod_maxminddb mod_fcgid mod_h2 mod_md mod_wku_bt mod_h264_streaming mod_qos) do (call %PATH_MODULES_COMMON%\init.bat %%M)
 
