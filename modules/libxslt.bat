@@ -12,11 +12,12 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DLIBXSLT_WITH_TESTS=OFF ^
 -DLIBXSLT_WITH_THREADS=ON ^
 -DLIBXSLT_WITH_XSLT_DEBUG=ON ^
--DLIBXML2_INCLUDE_DIR=%PATH_INSTALL%\include\libxml2 ^
--DLIBXML2_LIBRARY=%PATH_INSTALL%\lib\libxml2.lib ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+REM dirty fix bad usage of IMPORTED_LOCATION_RELWITHDEBINFO instead of IMPORTED_IMPLIB_RELWITHDEBINFO
+	REM "C:\sdk\release\vs17_x64-avx2\lib\cmake\libxml2-2.12.5\libxml2-export-relwithdebinfo.cmake"(12,55)
+sed -i 's/bin\\\libxml2.dll/lib\\\libxml2.lib/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
 
 xcopy /C /F /Y %PATH_BUILD%\%1\xsltproc.pdb %PATH_INSTALL%\bin\*
