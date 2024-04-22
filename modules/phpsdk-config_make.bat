@@ -183,7 +183,7 @@ sed -i 's/ARFLAGS=\/nologo/ARFLAGS=\/nologo \/LTCG/g' %CYGPATH_SRC%/php-src/Make
 	REM LDFLAGS (libcmt.lib : freetype2)
 sed -i -E 's/incremental:no/incremental:no \/LTCG \/NODEFAULTLIB:libcmt.lib/g' %CYGPATH_SRC%/php-src/Makefile
 	REM CFLAGS
-sed -i 's/\/Ox/\/O2 \/GL \/Zf \/Gw \/Gy \/Zc:inline \/FS \/D PHP_ICONV_PREFIX=%PATH_INSTALL:\=\/%/g' %CYGPATH_SRC%/php-src/Makefile
+sed -i 's/\/Ox/\/std:c++latest \/O2 \/GL \/Zf \/Gw \/Gy \/Zc:inline \/FS \/D PHP_ICONV_PREFIX=%PATH_INSTALL:\=\/%/g' %CYGPATH_SRC%/php-src/Makefile
 	REM no warn
 sed -i 's/d4996//g' %CYGPATH_SRC%/php-src/Makefile
 	REM fix for iconv shared : LINK : fatal error LNK1181: cannot open input file 'php_iconv.lib'
