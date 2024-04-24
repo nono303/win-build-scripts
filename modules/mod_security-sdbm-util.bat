@@ -1,6 +1,7 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 
 
-sed -i 's/DNDEBUG/DNDEBUG \/MP%NUMBER_OF_PROCESSORS%%AVX_SED%/g' %CYGPATH_SRC%/%1/Makefile.win
+	REM cl /nologo /DWIN32 /DWINNT /D_WINDOWS /w /Zf /Zi /FS /O2 /GL /MD /DNDEBUG /std:clatest /Gw /Gy /Zc:inline /arch:AVX2 
+sed -i 's/DNDEBUG/DNDEBUG \/std:clatest \/Gw \/Gy \/Zc:inline%AVX_SED%/g' %CYGPATH_SRC%/%1/Makefile.win
 NMAKE %NMAKE_OPTS% -f Makefile.win ^
 	APR=%PATH_INSTALL% ^
 	APRUTIL=%PATH_INSTALL% ^
