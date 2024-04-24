@@ -2,7 +2,7 @@ Index: src/editline/readline.h
 ===================================================================
 --- src/editline/readline.h	(revision 36)
 +++ src/editline/readline.h	(working copy)
-@@ -39,6 +39,16 @@
+@@ -39,6 +39,15 @@
  #ifndef _READLINE_H_
  #define _READLINE_H_
  
@@ -12,14 +12,12 @@ Index: src/editline/readline.h
 +#    else
 +#        define LIBRARY_API __declspec(dllimport)
 +#    endif
-+#elif
-+#    define LIBRARY_API
 +#endif
 +
  #include <windows.h>
  
  /*
-@@ -105,17 +115,17 @@
+@@ -105,17 +114,17 @@
  /*
  extern variables
  */
