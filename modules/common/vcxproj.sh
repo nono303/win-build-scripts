@@ -1,4 +1,6 @@
 link="<EnableCOMDATFolding>true<\/EnableCOMDATFolding><OptimizeReferences>true<\/OptimizeReferences>"
+# nssm jemalloc
+[[ $7 != nostd ]] && std="<LanguageStandard>stdcpplatest<\/LanguageStandard><LanguageStandard_C>stdc17<\/LanguageStandard_C>"
 for i in `/usr/bin/find $1 -type f -name "*.vcxproj" -o -name "*.config" -o -name "*.csproj" -o -name "*.props" 2>/dev/null` 
 do
   # MSVC
@@ -10,7 +12,7 @@ do
   sed -i -E 's/NETFramework,Version=[^"]+/NETFramework,Version=v'$6'/g' $i
   # C CXX Flags
   sed -i -E 's/<Optimization>[^<]+/<Optimization>MaxSpeed/g' $i
-  sed -i 's/<\/ClCompile>/<Optimization>MaxSpeed<\/Optimization><WholeProgramOptimization>true<\/WholeProgramOptimization><MultiProcessorCompilation>true<\/MultiProcessorCompilation><FunctionLevelLinking>true<\/FunctionLevelLinking>'$2'<\/ClCompile>/g' $i
+  sed -i 's/<\/ClCompile>/<Optimization>MaxSpeed<\/Optimization><WholeProgramOptimization>true<\/WholeProgramOptimization><MultiProcessorCompilation>true<\/MultiProcessorCompilation><FunctionLevelLinking>true<\/FunctionLevelLinking>'$std$2'<\/ClCompile>/g' $i
   # LINK Flags
   sed -i -E 's/ *<.?LinkIncremental.*//g' $i
   sed -i 's/<\/Link>/'$link'<LinkTimeCodeGeneration>UseLinkTimeCodeGeneration<\/LinkTimeCodeGeneration><\/Link>/g' $i

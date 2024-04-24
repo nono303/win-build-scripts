@@ -1,5 +1,5 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1
-%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
+%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER% nostd
 
 	REM * branch master	e8211e9	10 Apr 2020	2.25 in readme.md	2.24 in ChangeLog.txt	no tag
 	REM   branch 2.x	4951a78	13 Apr 2020	2.22 in readme.md	2.24 in ChangeLog.txt	tag 2.25.0
