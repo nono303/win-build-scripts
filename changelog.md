@@ -1,8 +1,169 @@
 # changelog
 
 
+## 1.9.0 _(2024-04-24)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  +C_STD_VER -CMAKE_TGT_VS (unused)
+`env_sample.bat`
+*  clean duplicate cflags
+`modules/phpsdk-config_make.bat`
+*  builder: msbuild > ninja (fixing /GL issue)
+`modules/libmaxminddb.bat`
+*  remove default /std
+`modules/common/ninja.sh`
+*  +nocxx for init cmake
+`modules/jansson.bat`
+*  fix & clean cflags
+`modules/apr.sh`
+`modules/mod_security-sdbm-util.bat`
+`modules/mod_security.bat`
+`modules/openssl.bat`
+`modules/php-cgi-spawner.bat`
+*  fix error C2059: syntax error: '#' for /std:clatest
+`modules/mod_security.patch`
+*  cd: +/nologo /std:clatest
+`modules/lua.bat`
+*  fix prerequisite lib test
+`modules/mod_md.bat`
+*  +nostd for vcxproj.sh
+`modules/common/vcxproj.sh`
+`modules/jemalloc.bat`
+`modules/nssm.bat`
+*  fix error C2xxx fo /std:c++latest
+`modules/gdal.bat`
+`modules/libheif.bat`
+*  +nocxx for init cmake
+`modules/brotli.bat`
+`modules/bzip2.bat`
+`modules/cares.bat`
+`modules/common/init.bat`
+`modules/curl.bat`
+`modules/freeglut.bat`
+`modules/freetype2.bat`
+`modules/httpd.bat`
+`modules/libavif.bat`
+`modules/libdeflate.bat`
+`modules/libevent.bat`
+`modules/libexpat.bat`
+`modules/libjpeg-turbo.bat`
+`modules/liblzma.bat`
+`modules/libpng.bat`
+`modules/libssh2.bat`
+`modules/libwebp.bat`
+`modules/libxml2.bat`
+`modules/libxslt.bat`
+`modules/libzip.bat`
+`modules/mod_fcgid.bat`
+`modules/pcre2.bat`
+`modules/serf.bat`
+`modules/sqlite.bat`
+`modules/yajl.bat`
+`modules/zlib.bat`
+*  fix fatal error C1017: invalid integer constant expression
+`modules/wineditline.patch`
+*  3.9.0
+`modules/gdal.patch`
+*  75.1
+`modules/icu.bat`
+`modules/icu.patch`
+*  Dirty fix: bad usage of IMPORTED_LOCATION_RELWITHDEBINFO instead of IMPORTED_IMPLIB_RELWITHDEBINFO in C:\sdk\release\vs17_x64-avx2\lib\cmake\libxml2-2.12.5\libxml2-export-relwithdebinfo.cmake"(12,55)
+`modules/libxslt.bat`
+*  disable copy static
+`modules/libyuv.bat`
+*  fix ext\intl\common\common_date.cpp: /include/unicode/localpointer.h(561): 'auto' in non-type template parameters requires at least '/std:c++17'
+`modules/phpsdk-config_make.bat`
+*  sslh from file
+`utils/sub/version.php`
+*  fix avx order params (sse2 issue)
+`modules/memcached.bat`
+`modules/memcached.patch`
+*  1.6.24 > 1.6.26
+`modules/memcached.sh`
+*  mod_suffix: .dll > .so
+`modules/httpd.bat`
+`modules/httpd.patch`
+`modules/mod_security.bat`
+`modules/mod_security.patch`
+*  v1.61.0
+`modules/nghttp2.patch`
+*  1.4.0
+`modules/libwebp.bat`
+*  2.4.59
+`modules/httpd.patch`
+*  mod_suffix: .so > .dll
+`modules/httpd.bat`
+`modules/httpd.patch`
+`modules/mod_security.bat`
+`modules/mod_security.patch`
+*  https://unicode-org.atlassian.net/browse/ICU-22715
+`modules/icu.patch`
+*  1.5.6 https://github.com/facebook/zstd/issues/3999
+`modules/zstd.bat`
+`modules/zstd.patch`
+*  https://unicode-org.atlassian.net/browse/ICU-22715
+`modules/icu.bat`
+`modules/icu.patch`
+*  gradle: 8.6 > 8.7
+`modules/mobac.patch`
+*  disable patch for windows 7 EOL https://github.com/php/php-src/issues/12762
+`modules/php-src_8.3.patch`
+*  vcvars_ver: 14.39 > 14.40
+`vs17.bat`
+*  8.6.0 > 8.7.1
+`modules/curl_ca-win.patch`
+*  GRADLEVER: 8.6 > 8.7
+`env_sample.bat`
+*  refactor arch AVXB +avx2
+`avx.bat`
+`usage.txt`
+*  build only with current avx setting
+`modules/libconfig.sh`
+`modules/memcached.bat`
+`modules/memcached.sh`
+`modules/sslh.bat`
+`modules/sslh.sh`
+*  SSE42AVX > AVX_ON +AVX2_ON
+`modules/aom.bat`
+*  AVXMPIR > AVX_MPIR
+`modules/mpir.bat`
+`modules/phpsdk-local.bat`
+*  AVXVCX > AVX_MSBUILD
+`modules/verpatch.bat`
+*  LOCAL_COPY_AVXECHO > LOCAL_COPY_AVX_ECHO: avx > avx2
+`env_sample.bat`
+`modules/geographiclib.bat`
+*  AVXVCX > AVX_MSBUILD
+`modules/dependencies.bat`
+`modules/icu.bat`
+`modules/jemalloc.bat`
+`modules/libiconv.bat`
+`modules/libmaxminddb.bat`
+`modules/libsodium.bat`
+`modules/libxpm.bat`
+`modules/nssm.bat`
+`modules/subversion.bat`
+*  AVXSED > AVX_SED in avx.bat
+`modules/mod_security-sdbm-util.bat`
+`modules/mod_security.bat`
+*  https://github.com/yrutschle/sslh/commit/b94060ad7616b1820a48c471e42ca1e8eaed8fc4
+`modules/sslh.patch`
+*  execnono(): trim stderr fix git fetch: 2>&1
+`utils/sub/_functions.php`
+`utils/sub/srcstatus.php`
+*  1.4.0
+`modules/ngtcp2.patch`
+*  mapsforge: 0.20 > 0.21
+`modules/mobac.patch`
+
+
 ## 1.8.5 _(2024-03-15)_
 
+*  1.8.5
+`changelog.md`
 *  update tools -Go
 `README.md`
 *  update src Dependencies: lucasg > nono303 -libffi
