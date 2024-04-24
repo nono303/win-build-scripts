@@ -15,3 +15,5 @@ sed -i -E 's/[\/-]W[0-4]/\/w/g' $2/build.ninja
 sed -i 's/ \/O2 \/Ob1/ \/Gw \/Gy \/Zc:inline \/O2 \/Zf \/Zi \/FS \/GL \/MP'$3' '$avx' \/w/gI' $2/build.ninja
 # found		/DWIN32 /D_WINDOWS /W4 /MD /Zi /ZF /O2 /Ob1 /DNDEBUG
 # result	/DWIN32 /D_WINDOWS /w /MD /Gw /Gy /Zc:inline /O2 /Zf /Zi /FS /GL /MD /MP16 /arch:AVX /DNDEBUG
+# remove default std
+sed -i -E 's/ ?.std:c\+\+[1-2][0-9]//g' $2/build.ninja
