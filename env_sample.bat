@@ -108,6 +108,8 @@ set WKITVER=10.0.22621.0
 set DOTNETVER=4.8
 	REM Current MSVC full version (accordinf to vc15 vs16 vs17...)
 FOR /F "tokens=* USEBACKQ" %%F in (`dir /b %PATH_VS%\VC\Tools\MSVC ^| grep %vcvars_ver%`) do (set VCTOOLSVER=%%F)
+	REM https://learn.microsoft.com/fr-fr/cpp/build/reference/std-specify-language-standard-version
+set C_STD_VER=latest
 
 set NMAKE_OPTS_DBG=/NOLOGO
 set NMAKE_OPTS_REL=/S %NMAKE_OPTS_DBG%
@@ -131,9 +133,8 @@ set MSBUILD_OPTS_REL=%MSBUILD_OPTS_COM% ^
 	/v:m
 
 set CMAKE_OPTS_DBG=
-set CMAKE_OPTS_REL=-Wno-dev
+set CMAKE_OPTS_REL=-Wno-dev 
 set CMAKE_BUILD_TYPE=RelWithDebInfo
-set CMAKE_TGT_VS="Visual Studio 17 2022"
 set CMAKE_TGT_NINJA="Ninja"
 
 	REM for updating *.rc
