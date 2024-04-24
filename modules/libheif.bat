@@ -46,6 +46,8 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+	REM error C2664
+sed -i 's/c++latest/c++latest \/Zc:strictStrings-/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
 
 for %%X in (examples\heif-thumbnailer.pdb examples\heif-enc.pdb examples\heif-convert.pdb examples\heif-info.pdb libheif\heif.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*)

@@ -195,6 +195,8 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+	REM error C2445
+sed -i 's/c++latest/c++latest \/Zc:ternary-/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
 
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\_%1\bin\gdal.dll
