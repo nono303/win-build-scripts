@@ -1,3 +1,26 @@
+diff --git "a/apache2/mod_security2.c" "b/apache2/mod_security2.c"
+index 7786543a..9141b6a4 100644
+--- "a/apache2/mod_security2.c"
++++ "b/apache2/mod_security2.c"
+@@ -125,13 +125,13 @@ static void version(apr_pool_t *mp) {
+     pcre_loaded_vrs = pcre_version();
+ #endif
+ 
+-    ap_log_error(APLOG_MARK, APLOG_NOTICE, 0, NULL,
++    
+ #ifdef WITH_PCRE2
+-            "ModSecurity: PCRE2 compiled version=\"%s\"; "
++            ap_log_error(APLOG_MARK, APLOG_NOTICE, 0, NULL,"ModSecurity: PCRE2 compiled version=\"%s\"; loaded version=\"%s\"", pcre_vrs, pcre_loaded_vrs);
+ #else
+-            "ModSecurity: PCRE compiled version=\"%s\"; "
++            ap_log_error(APLOG_MARK, APLOG_NOTICE, 0, NULL,"ModSecurity: PCRE compiled version=\"%s\"; loaded version=\"%s\"", pcre_vrs, pcre_loaded_vrs);
+ #endif
+-            "loaded version=\"%s\"", pcre_vrs, pcre_loaded_vrs);
++            
+ 
+     if (strstr(pcre_loaded_vrs,pcre_vrs) == NULL)    {
+         ap_log_error(APLOG_MARK, APLOG_WARNING, 0, NULL, "ModSecurity: Loaded PCRE do not match with compiled!");
+
 diff --git a/apache2/Makefile.win b/apache2/Makefile.win
 index ed4bfc9e..dbb133f9 100644
 --- a/apache2/Makefile.win
