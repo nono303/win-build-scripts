@@ -3,7 +3,7 @@ set mod_suffix=.so
 	REM ~~~~~~~~~~~ external modules
 for %%M in (mod_maxminddb mod_fcgid mod_h2 mod_md mod_wku_bt mod_h264_streaming mod_qos) do (call %PATH_MODULES_COMMON%\init.bat %%M)
 
-call %PATH_MODULES_COMMON%\init.bat %1 cmake
+call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
 set HTTPD_VERSION=%SCM_TAG%
 set CMAKE_HTTPD_COMMON=%CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 	-DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^

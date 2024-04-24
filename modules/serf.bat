@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
 
 if %ARCH% == x64 (set SERF64=-DSERF_WIN64=ON )
 	REM unimplemented: -DGSSAPI=%PATH_INSTALL%\ -DBROTLI=%PATH_INSTALL%\ -DLIBDIR=%PATH_INSTALL%\lib\ 

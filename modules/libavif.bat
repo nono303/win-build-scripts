@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
 
 REM AVIF_CODEC_AOM - requires CMake, NASM
 REM AVIF_CODEC_DAV1D - requires Meson, Ninja, NASM

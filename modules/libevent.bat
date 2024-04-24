@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
 
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DBUILD_SHARED_LIBS=ON ^

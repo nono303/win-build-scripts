@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
 
 if %CURL_PATCH_WIN_OPENSSL% == 1 (
 	if %ARG_KEEPSRC% == 0 (

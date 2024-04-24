@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
 
 REM	SQLITE_ENABLE_COLUMN_METADATA=ON	SQLITE_OMIT_DECLTYPE=OFF 
 REM		https://github.com/storesafe/cordova-sqlite-storage/issues/906
