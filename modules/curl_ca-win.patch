@@ -1,19 +1,20 @@
+https://www.apachelounge.com/viewtopic.php?p=39884
 diff --git "a/lib/url.c" "b/lib/url.c"
-index 224b9f3e2..aeb164d0b 100644
+index fc3a4356e..519f144b3 100644
 --- "a/lib/url.c"
 +++ "b/lib/url.c"
-@@ -443,6 +443,14 @@ CURLcode Curl_init_userdefined(struct Curl_easy *data)
-     result = Curl_setstropt(&set->str[STRING_SSL_CAPATH_PROXY], CURL_CA_PATH);
+@@ -455,6 +455,14 @@ CURLcode Curl_init_userdefined(struct Curl_easy *data)
      if(result)
        return result;
-+#endif
+ #endif
 +#if defined(USE_WIN32_CRYPTO)
 +    /* Mandate Windows CA store to be used */
 +    if(!set->ssl.primary.CAfile && !set->ssl.primary.CApath) {
 +      /* User and environment did not specify any CA file or path.
 +       */
 +      set->ssl.native_ca_store = TRUE;
-+    }
++    } 
++#endif
  #endif
    }
  
