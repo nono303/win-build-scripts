@@ -219,19 +219,31 @@
 					$libdep = " ".$argv[3];
 					$description .= " ".$argv[3];
 				}
-				// cygwin
+				/* cygwin
+					[1] => libconfig
+					[2] => D:\github\NONO_sslh\x64\avx2\cygconfig-11.dll
+					[3] => libconfig
+				---					   
+					[1] => sslh
+					[2] => D:\github\NONO_sslh\x64\avx2\echosrv.exe
+					[3] => libconfig:v1.7.3
+				---							   
+					[1] => memcached
+					[2] => D:\github\NONO_memcached\libevent-2.1\x64\memcached-avx-tls.exe
+					[3] => memcached
+				***
+					[4] => 	x%TARGET_ARCH% 
+					[5] => 	%AVXECHO%
+				*/
 				if(in_array($argv[1],["memcached","sslh","libconfig"])){
 					$rpdb = "";
-					if(is_int(strpos($argv[2],"\\x86\\")))
-						$arch = "x86";
-					if(is_int(strpos($argv[2],"\\x64\\")))
-						$arch = "x64";
-					is_int(strpos($argv[2],"-avx")) || in_array($argv[1],["sslh","libconfig"])
-						? $avx = "-avx " : 
-						$avx = " ";
+					$arch = $argv[4];
+					$avx = $argv[5];
 					$gccver = end(explode(" ",explode("\n",shell_exec("gcc --version"))[0]));
-					$description = "arch:".$arch.$avx."gcc:".$gccver.$libdep;
-				} 
+					$description = 
+						"arch:".$arch."-".$avx." ".
+						"gcc:".$gccver.$libdep;
+				}
 			}
 			if(pathenv("SCM_COMORREV"))
 				$description .= " commit:".pathenv("SCM_COMORREV");
