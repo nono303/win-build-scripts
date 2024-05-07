@@ -18,10 +18,10 @@ index f651a4e..6c291db 100644
  )
  if 15 gtr %PHP_SDK_VS_NUM% (
 -	set PHP_SDK_VS_SHELL_CMD="!PHP_SDK_VC_DIR!\vcvarsall.bat" !VCVARSALL_ARCH_NAME!
-+	set PHP_SDK_VS_SHELL_CMD="!PHP_SDK_VC_DIR!\vcvarsall.bat" !VCVARSALL_ARCH_NAME! %WKITVER% -vcvars_ver=%vcvars_ver%
++	set PHP_SDK_VS_SHELL_CMD="!PHP_SDK_VC_DIR!\VsDevCmd.bat" -arch=!VCVARSALL_ARCH_NAME! -vcvars_ver=%vcvars_ver% -winsdk=%WKITVER% -no_logo
  ) else (
 -	set PHP_SDK_VS_SHELL_CMD="!PHP_SDK_VC_DIR!\Auxiliary\Build\vcvarsall.bat" !VCVARSALL_ARCH_NAME!
-+	set PHP_SDK_VS_SHELL_CMD="!PHP_SDK_VC_DIR!\Auxiliary\Build\vcvarsall.bat" !VCVARSALL_ARCH_NAME! %WKITVER% -vcvars_ver=%vcvars_ver%
++	set PHP_SDK_VS_SHELL_CMD="!PHP_SDK_VC_DIR!\VsDevCmd.bat" -arch=!VCVARSALL_ARCH_NAME! -vcvars_ver=%vcvars_ver% -winsdk=%WKITVER% -no_logo
  )
  set VCVARSALL_ARCH_NAME=
  

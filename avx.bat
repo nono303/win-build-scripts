@@ -1,5 +1,5 @@
 @echo off
-REM GCC		https://gcc.gnu.org/onlinedocs/gcc/x86-Options.html
+REM GCC		https://gcc.gnu.org/onlinedocs/gcc/x86-Options.html / https://gcc.gnu.org/onlinedocs/gcc/x86-Windows-Options.html
 REM cl		https://docs.microsoft.com/fr-fr/cpp/build/reference/arch-x64 !! must be upper case
 REM MSBuild	https://stackoverflow.com/a/64886471
 REM https://en.wikipedia.org/wiki/List_of_Intel_CPU_microarchitectures
@@ -58,8 +58,6 @@ if %1 == 0 (
 		REM MPIR (used in phpsdk-local)
 	set AVX_MPIR=core2-penryn	
 )
-	REM MPIR same cpu arch for all x86
-if %archmsbuild% == Win32 (set AVX_MPIR=pentium4-sse2)
 echo ~~-~~ %AVXECHO% ~~-~~
 
 set PATH_BUILD=%PATH_BUILDROOT%\%MSVC_DEPS%_%ARCH%%AVXB%
@@ -73,7 +71,6 @@ set __VSCMD_ARG_NO_LOGO=1
 set VSCMD_SKIP_SENDTELEMETRY=1
 	REM https://github.com/microsoft/vcpkg/blob/master/docs/users/config-environment.md
 set VCPKG_KEEP_ENV_VARS=VSCMD_SKIP_SENDTELEMETRY
-
-call %PATH_VS%\VC\Auxiliary\Build\vcvarsall.bat %ARCH% %WKITVER% -vcvars_ver=%vcvars_ver%
+call %PATH_VS%\Common7\Tools\VsDevCmd.bat -arch=%ARCH% -vcvars_ver=%vcvars_ver% -winsdk=%WKITVER% -no_logo
 call quic.bat %QUIC_BUILD%
 @echo off

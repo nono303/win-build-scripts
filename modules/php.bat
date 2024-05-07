@@ -1,6 +1,6 @@
 @echo off
 REM fix 'Could not determine '%PHP_SDK_VS%' directory' l.137 in phpsdk_setshell.bat
-set PHP_SDK_VC_DIR=%PATH_VS%\VC
+set PHP_SDK_VC_DIR=%PATH_VS%\Common7\Tools
 	REM ~~~~~~~~~~~~ current full build
 set PHP_FULLBUILD=8.3
 
