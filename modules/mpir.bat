@@ -13,13 +13,13 @@ if exist %PATH_SRC%\%1\%MPIROUT%\%MPIRDIR%-%archmsbuild%_%OUTDIR_CONF%_%AVX_MPIR
 	REM 32. skylake_avx	(x64)	AVX2
 	REM 29. sandybridge	(x64)	AVX
 	REM 20. core2_penryn	(x64)	SSE2
-	REM 12. pentium4_sse2	(win32)
-call python %PATH_SRC%\%1\%VCDIR%\mpir_config.py 22 29,20,12,32
+call python %PATH_SRC%\%1\%VCDIR%\mpir_config.py 22 29,20,32
 
 	REM clean build dir
 if exist %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%AVX_MPIR:-=_%\%archmsbuild%\. rmdir /S /Q %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%AVX_MPIR:-=_%\%archmsbuild%
 
 MSBuild.exe %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%AVX_MPIR:-=_%\dll_mpir_%AVX_MPIR:-=_%.vcxproj %MSBUILD_OPTS% ^
+/p:VCToolsInstallDir=%VCToolsInstallDir% ^
 /p:Configuration=%OUTDIR_CONF% ^
 /p:Platform=%archmsbuild%
 echo on
