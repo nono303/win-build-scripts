@@ -72,6 +72,7 @@ libbrotlienc1
 libbsd0
 libbz2_1
 libcares2
+libcharset1
 libcom_err2
 libcrypt2
 libcurl4
@@ -106,9 +107,11 @@ libguile2.2_1
 libguile3.0_1
 libhogweed4
 libhogweed6
+libiconv-devel
 libiconv2
 libidn12
 libidn2_0
+libintl-devel
 libintl8
 libirs161
 libisc1100
@@ -145,7 +148,9 @@ libpcre2_16_0
 libpcre2_32_0
 libpcre2_8_0
 libpipeline1
+libpkgconf3
 libpkgconf4
+libpkgconf5
 libpopt-common
 libpopt0
 libpsl5
@@ -156,7 +161,6 @@ libsasl2_3
 libsmartcols1
 libssh2_1
 libssl-devel
-libssl1.0
 libssl1.1
 libssl3
 libstdc++6

@@ -38,7 +38,7 @@ git checkout tags/cares-1_28_1
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-8_6_0
+git checkout master
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -62,7 +62,7 @@ git checkout tags/VER-2-13-2
 cd /D ..
 git clone https://github.com/OSGeo/gdal gdal
 cd /D gdal
-git checkout tags/v3.9.0beta1
+git checkout tags/v3.9.0beta2
 cd /D ..
 git clone https://github.com/geographiclib/geographiclib.git geographiclib
 cd /D geographiclib
@@ -82,7 +82,7 @@ git checkout tags/2.4.59
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout tags/release-75-1
+git checkout icu4x/2024-05-03/75.x
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -202,7 +202,7 @@ git checkout tags/v5.4.6
 cd /D ..
 git clone https://github.com/nono303/mapsforgesrv.git mapsforgesrv
 cd /D mapsforgesrv
-git checkout master
+git checkout tags/v0.21.1_for_java11
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached

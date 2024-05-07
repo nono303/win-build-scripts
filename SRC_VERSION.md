@@ -7,18 +7,18 @@
 | [brotli](https://github.com/google/brotli) | 1.1.0 |
 | [bzip2](https://gitlab.com/bzip2/bzip2.git) | 1.1.0 - 66c46b8 |
 | [cares](https://github.com/c-ares/c-ares) | 1.28.1 |
-| [curl](https://github.com/curl/curl) | 8.7.1 |
+| [curl](https://github.com/curl/curl) | :warning: ​8.8.0-dev - 63a07a723 |
 | [dav1d](https://code.videolan.org/videolan/dav1d.git) | 1.4.0 |
 | [dependencies](https://github.com/nono303/Dependencies) + [*upstream + src*](https://github.com/lucasg/Dependencies) | 1.11.1 - 7a88d18 |
-| [fit2gpx](https://github.com/nono303/fit2gpx) - [*upstream + src*](https://github.com/MaksVasilev/fit2gpx) | 0.1.21 - 2bfc20d |
+| [fit2gpx](https://github.com/nono303/fit2gpx) - [*upstream + src*](https://github.com/MaksVasilev/fit2gpx) | 0.1.21 - 19fd915 |
 | [freeglut](https://github.com/dcnieho/FreeGLUT.git) | 3.4.0 |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.13.2 |
-| [gdal](https://github.com/OSGeo/gdal) | 3.9.0b1 |
+| [gdal](https://github.com/OSGeo/gdal) | 3.9.0b2 |
 | [geographiclib](https://github.com/geographiclib/geographiclib/tree/release) | 2.3 |
 | [geos](https://github.com/libgeos/geos) | 3.12.1 |
 | [giflib](https://github.com/gongjianbo/GifLib) | 5.2.1 - 59eb9d1 |
 | [httpd](https://github.com/apache/httpd) | 2.4.59 |
-| [icu](https://github.com/unicode-org/icu) | 75.1 - release-75-1 |
+| [icu](https://github.com/unicode-org/icu) | 75.1 - icu4x/2024-05-03/75.x |
 | [jansson](https://github.com/akheron/jansson) | 2.14 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.3.0 |
 | [lerc](https://github.com/Esri/lerc.git) | 4.0.4 |
@@ -37,7 +37,7 @@
 | [liblzma](https://github.com/ShiftMediaProject/liblzma) | 5.6.1 |
 | [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.9.1 |
 | [libpng](https://sourceforge.net/p/libpng/code/ci/master/tree/) | 1.6.43 |
-| [libsodium](https://github.com/jedisct1/libsodium.git) | 1.0.21.0 - 74781400 |
+| [libsodium](https://github.com/jedisct1/libsodium.git) | 1.0.21.0 - 11378162 |
 | [libssh2](https://github.com/libssh2/libssh2) | 1.11.0 |
 | [libtiff](https://gitlab.com/libtiff/libtiff) | 4.6.0 |
 | [libwepb](https://chromium.googlesource.com/webm/libwebp) | 1.4.0 |
@@ -48,11 +48,11 @@
 | [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1888 - 9d660a0f |
 | [libzip](https://github.com/nih-at/libzip) | 1.10.1 |
 | [lua](https://github.com/lua/lua) | 5.4.6 |
-| [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | 0.21.0 - b93cb64 |
-| [memcached](https://github.com/memcached/memcached) | 1.6.26 |
-| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.3.3 - r2770 |
+| [mapsforgesrv](https://github.com/nono303/mapsforgesrv.git) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | 0.21.1 - 51d8198 |
+| [memcached](https://github.com/memcached/memcached) | 1.6.27 |
+| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.3.3 - r2771 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
-| [mod_fcgid](https://github.com/nono303/mod_fcgid) - _[upstream + src](https://github.com/pagespeed/mod_fcgid)_ | 2.3.10.4 - a6bcd41 |
+| [mod_fcgid](https://github.com/nono303/mod_fcgid) - _[upstream + src](https://github.com/pagespeed/mod_fcgid)_ | 2.3.10.4 - 60d5847 |
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.27 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.2.0 - 4031876 |
@@ -91,7 +91,7 @@
 | [sslh](https://github.com/yrutschle/sslh) | 2.1.1 - de7351f |
 | [subversion](https://github.com/apache/subversion) | 1.14.3 |
 | [tidy](https://github.com/htacg/tidy-html5) | 5.9.20 - d08ddc2 |
-| [tzdataservice](https://github.com/nono303/tzdataservice) - _[upstream + src](https://github.com/skaringa/tzdataservice)_ | 2.0 - 98a0440 |
+| [tzdataservice](https://github.com/nono303/tzdataservice) - _[upstream + src](https://github.com/skaringa/tzdataservice)_ | 2.0 - 314fb0c |
 | [verpatch](https://github.com/pavel-a/ddverpatch) | 1.0.15.1 - 3cc989e |
 | [wineditline](https://svn.code.sf.net/p/mingweditline/code) | 2.2 - 36 |
 | [xdebug](https://github.com/xdebug/xdebug) | 3.3.2 |
