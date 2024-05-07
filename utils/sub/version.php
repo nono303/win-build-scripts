@@ -239,7 +239,8 @@
 					$rpdb = "";
 					$arch = $argv[4];
 					$avx = $argv[5];
-					$gccver = end(explode(" ",explode("\n",shell_exec("gcc --version"))[0]));
+					preg_match("/ ([0-9\.]+) /",shell_exec("gcc --version"),$matches);
+					$gccver = $matches[1];
 					$description = 
 						"arch:".$arch."-".$avx." ".
 						"gcc:".$gccver.$libdep;
