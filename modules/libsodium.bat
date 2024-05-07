@@ -5,6 +5,7 @@ set VCDIR=builds\msvc\vs2022
 
 MSBuild.exe %PATH_SRC%\%1\%VCDIR%\libsodium.sln %MSBUILD_OPTS% ^
 /nowarn:C4197 ^
+/p:VCToolsInstallDir=%VCToolsInstallDir% ^
 /p:Configuration=DynRelease ^
 /p:Platform=%archmsbuild%
 
