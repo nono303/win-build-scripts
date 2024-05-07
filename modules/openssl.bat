@@ -26,9 +26,6 @@ sed -i 's/\/W3 \/wd4090 \/nologo \/O2 -threads +/\/nologo /g' %CYGPATH_SRC%/%OPE
 sed -i 's/\/nologo \/debug -L/\/nologo \/debug /g' %CYGPATH_SRC%/%OPENSSL_SCM%/makefile
 sed -i 's/ARFLAGS= \/nologo/ARFLAGS= \/nologo \/LTCG/g' %CYGPATH_SRC%/%OPENSSL_SCM%/makefile
 
-if %ARCH% == x64 (set sslarch=-x64)
-if %ARCH% == x86 (set sslarch=)
-
 	REM install_sw > no docs
 nmake %NMAKE_OPTS% install_sw
 
@@ -42,7 +39,7 @@ for %%M in (engines-%OPENSSL_SUF% ossl-modules) do (
 	rmdir /S /Q %PATH_INSTALL_OSSL%\lib\%%M
 )
 
-for %%M in (libcrypto-%OPENSSL_SUF%%sslarch%.dll libssl-%OPENSSL_SUF%%sslarch%.dll openssl.exe) do (
+for %%M in (libcrypto-%OPENSSL_SUF%-x64.dll libssl-%OPENSSL_SUF%-x64.dll openssl.exe) do (
 	call do_php %PATH_UTILS%\sub\version.php %OPENSSL_SCM% %PATH_INSTALL_OSSL%\bin\%%M
 )
 DEL /Q /F %PATH_INSTALL_OSSL%\bin\c_rehash.pl

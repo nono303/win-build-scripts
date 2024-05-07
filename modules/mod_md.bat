@@ -32,8 +32,5 @@ if not "%PATH_GITHUB_MODMD%"=="" (
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_GITHUB_MODMD%\%MSVC_DEPS%\%ARCH%%AVXB%\%1.so "httpd:%HTTPD_VERSION%"
 )
 FOR /F "tokens=* USEBACKQ" %%F in (`dumpbin /DEPENDENTS %PATH_GITHUB_MODMD%\%MSVC_DEPS%\%ARCH%%AVXB%\%1.so ^| grep crypto`) do (set MD_CRYPTO=%%F)
-
-if ARCH==x64 (if not %MD_CRYPTO%==libcrypto-3-x64.dll (echo !! ERROR mo_md depends on '%MD_CRYPTO%'))
-if ARCH==x86 (if not %MD_CRYPTO%==libcrypto-3.dll     (echo !! ERROR mo_md depends on '%MD_CRYPTO%'))
-
+if not %MD_CRYPTO%==libcrypto-3-x64.dll (echo !! ERROR mo_md depends on '%MD_CRYPTO%')
 echo ^>^>^> go bininfo %PATH_GITHUB_MODMD% recurse checkavx ^> %PATH_GITHUB_MODMD%\bininfo.txt

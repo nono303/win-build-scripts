@@ -143,14 +143,6 @@
 			if(is_int(strpos($dbh,"(LTCG)")))
 				$data[$cur][20] = "ltcg";
 
-			// preg_match("/ ([^ ]+)\.pdb/",$dbh,$matches);
-			// $pdbdumpbin = $matches[1].".pdb";
-			// $data[$cur][10] = "!Na";
-			// if(is_int(strpos($dbh,"machine (x86)")))
-			// 	$data[$cur][10]="x86";
-			// if(is_int(strpos($dbh,"machine (x64)")))
-			// 	$data[$cur][10]="x64";
-
 			ksort($data[$cur],SORT_NUMERIC);
 			foreach($data[$cur] as $k => $v)
 				if($col[$k]["pad"] != -1) {

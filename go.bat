@@ -68,16 +68,14 @@ if "%BCMD%"=="" (
 	REM ~~~~~~~~~~~~ RUN
 echo %ymdhis% ####### BEGIN %BAFF% '%1' %MSVC_DEPS% %ARCH% %AVXECHO% ###########################
 if %ARG_ALL% == 1 (
-	for %%V in (vs17 vs16 vc15) do (
-		for %%X in (x64 x86) do (
-			for %%A in (1 0) do (
-				setlocal
-				call %PATH_BATCH%\%%V.bat
-				call %PATH_BATCH%\%%X.bat
-				call %PATH_BATCH%\avx.bat %%A
-				call %BCMD% 2>&1 | tee -a %LOGNAME%
-				endlocal
-			)
+	for %%V in (vs17 vs16) do (
+		for %%A in (2 1 0) do (
+			setlocal
+			call %PATH_BATCH%\%%V.bat
+			call %PATH_BATCH%\x64.bat
+			call %PATH_BATCH%\avx.bat %%A
+			call %BCMD% 2>&1 | tee -a %LOGNAME%
+			endlocal
 		)
 	)
 	call dos2unix -f %LOGNAME%

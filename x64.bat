@@ -4,7 +4,6 @@ set serfbuild=x86_64
 set perlbuild=VC-WIN64A
 set archmsbuild=x64
 set outmsbuild=x64\Release
-set CYGV=64
 echo ~~-~~  x64 ~~-~~
 if exist .\env.bat (
 	call .\env.bat

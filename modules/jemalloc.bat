@@ -3,11 +3,6 @@
 %PATH_BIN_CYGWIN%\sh.exe -c "CC=cl ./autogen.sh"
 set JEMALLOC_VCVER=vc2017
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/msvc/projects/%JEMALLOC_VCVER%/jemalloc/" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER% nostd
-	REM https://github.com/jemalloc/jemalloc/issues/1099
-if %ARCH% == x86 (
-	sed -i 's/^<PreprocessorDefinitions^>_REENTRANT/^<PreprocessorDefinitions^>JEMALLOC_NO_PRIVATE_NAMESPACE;_REENTRANT/g' %CYGPATH_SRC%/%1/msvc/projects/%JEMALLOC_VCVER%/jemalloc/jemalloc.vcxproj
-	sed -i 's/^<PreprocessorDefinitions^>JEMALLOC_DEBUG/^<PreprocessorDefinitions^>JEMALLOC_NO_PRIVATE_NAMESPACE;JEMALLOC_DEBUG/g' %CYGPATH_SRC%/%1/msvc/projects/%JEMALLOC_VCVER%/jemalloc/jemalloc.vcxproj
-)
 set OUTDIR_CONF=Release
 
 MSBuild.exe msvc\jemalloc_%JEMALLOC_VCVER%.sln %MSBUILD_OPTS% ^

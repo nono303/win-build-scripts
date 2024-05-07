@@ -21,7 +21,6 @@ set PATH_PHP_SDK=%PATH_SRC%\php-sdk
 REM for junction on ramdrive
 set PATH_PHP_BUILD=R:\sdkbuild\php
 set PATH_SOFTS=%PATH_SDK_ROOT%\softs
-set PATH_ROOT_CYGWIN=%PATH_SOFTS%\cyg
 
 REM ########################## RELEASE PATH
 set PATH_RELEASE=%PATH_SDK_ROOT%\release
@@ -45,7 +44,7 @@ set PATH_MYSQL=B:\serveur\mysql
 set PATH_BIN_GIT=C:\PROGRA~1\Git\bin
 set PATH_BIN_CMAKE=%PATH_SOFTS%\cmake\bin
 set PATH_BIN_PYTHON=%PATH_SOFTS%\python3;%PATH_SOFTS%\python3\Scripts
-set PATH_BIN_CYGWIN=%PATH_ROOT_CYGWIN%%CYGV%\bin
+set PATH_BIN_CYGWIN=%PATH_SOFTS%\cyg64\bin
 set PATH_BIN_GO=%PATH_SOFTS%\go\bin
 set PATH_BIN_NASM=%PATH_SOFTS%\nasm
 set PATH_BIN_PERL=%PATH_SOFTS%\perl\perl\bin
@@ -101,12 +100,12 @@ cd /D %PATH_BATCH%
 
 REM ########################## BUILD OPTION
 	REM https://services.gradle.org/distributions/
-set GRADLEVER=8.7
+set GRADLEVER=8.8-rc-1
 	REM see dir in %PATH_ROOTWKIT%\Lib
 set WKITVER=10.0.22621.0
 	REM .NET installed SDK
 set DOTNETVER=4.8
-	REM Current MSVC full version (accordinf to vc15 vs16 vs17...)
+	REM Current MSVC full version (accordinf to vs16 vs17...)
 FOR /F "tokens=* USEBACKQ" %%F in (`dir /b %PATH_VS%\VC\Tools\MSVC ^| grep %vcvars_ver%`) do (set VCTOOLSVER=%%F)
 	REM https://learn.microsoft.com/fr-fr/cpp/build/reference/std-specify-language-standard-version
 set C_STD_VER=latest
@@ -114,6 +113,7 @@ set C_STD_VER=latest
 set NMAKE_OPTS_DBG=/NOLOGO
 set NMAKE_OPTS_REL=/S %NMAKE_OPTS_DBG%
 
+	REM https://learn.microsoft.com/fr-fr/visualstudio/msbuild/msbuild-command-line-reference?view=vs-2022
 set MSBUILD_OPTS_COM=/nologo ^
 	/nr:false ^
 	/m:%NUMBER_OF_PROCESSORS% ^
@@ -132,7 +132,7 @@ set MSBUILD_OPTS_REL=%MSBUILD_OPTS_COM% ^
 	/nowarn:MSB8012;C4244 ^
 	/v:m
 
-set CMAKE_OPTS_DBG=
+set CMAKE_OPTS_DBG=-LAH -DCMAKE_FIND_DEBUG_MODE=1
 set CMAKE_OPTS_REL=-Wno-dev 
 set CMAKE_BUILD_TYPE=RelWithDebInfo
 set CMAKE_TGT_NINJA="Ninja"
@@ -150,8 +150,8 @@ set CURL_PATCH_WIN_OPENSSL=1
 REM ########################## INIT PATH
 if not exist %PATH_LOGS%\. mkdir %PATH_LOGS%
 if not exist %PATH_BUILDROOT%\. mkdir %PATH_BUILDROOT%
-for %%X in (vc15 vs16 vs17) do (
-	for %%Y in (x86 x64 x86-avx x64-avx) do (
+for %%X in (vs16 vs17) do (
+	for %%Y in (x64 x64-avx x64-avx2) do (
 		if not exist %PATH_RELEASE%\%%X_%%Y\. mkdir %PATH_RELEASE%\%%X_%%Y
 		if not exist %PATH_BUILDROOT%\%%X_%%Y\. mkdir %PATH_BUILDROOT%\%%X_%%Y
 	)
