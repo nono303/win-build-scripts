@@ -9,7 +9,6 @@ set ARG_NOLOG=0
 set ARG_DEBUG=0
 set ARG_ALL=0
 set ARG_KEEPSRC=0
-	REM setlocal enabledelayedexpansion
 set argCount=0
 for %%x in (%*) do (
    set /A argCount+=1
