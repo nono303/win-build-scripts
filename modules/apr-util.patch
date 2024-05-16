@@ -1,8 +1,216 @@
-https://www.apachelounge.com/viewtopic.php?p=42414#42414
-diff --git "a/dbd/apr_dbd_mysql.c" "b/dbd/apr_dbd_mysql.c"
-index d3e938c3..26d46b5c 100644
---- "a/dbd/apr_dbd_mysql.c"
-+++ "b/dbd/apr_dbd_mysql.c"
+ CMakeLists.txt        | 50 +++++++++++++++++++++++++++++++
+ cmake/FindMySQL.cmake | 83 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ dbd/apr_dbd_mysql.c   | 12 +++++++-
+ include/apu.hwc       |  2 +-
+ 4 files changed, 145 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 6c3b6a5a..0ad34ddf 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -19,9 +19,12 @@ PROJECT(APR-Util C)
+ 
+ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+ 
++set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
++
+ FIND_PACKAGE(EXPAT)
+ FIND_PACKAGE(LibXml2)
+ FIND_PACKAGE(OpenSSL)
++FIND_PACKAGE(Iconv)
+ 
+ IF(NOT EXPAT_FOUND AND NOT LIBXML2_FOUND)
+   MESSAGE(FATAL_ERROR "Either Expat or LibXml2 is required, but neither was found")
+@@ -37,6 +40,8 @@ ENDIF()
+ 
+ OPTION(APU_HAVE_CRYPTO      "Crypto support"                            OFF)
+ OPTION(APU_HAVE_ODBC        "Build ODBC DBD driver"                     ON)
++OPTION(APU_HAVE_SQLITE3     "Build SQlite3 DBD driver"                  ON)
++OPTION(APU_HAVE_MySQL       "Build MySQL DBD driver"                    ON)
+ OPTION(APR_HAS_LDAP         "LDAP support"                              ON)
+ OPTION(INSTALL_PDB          "Install .pdb files (if generated)"         ON)
+ OPTION(APR_BUILD_TESTAPR    "Build the test suite"                      OFF)
+@@ -74,6 +79,7 @@ ENDIF()
+ 
+ SET(apu_have_crypto_10 0)
+ SET(apu_have_apr_iconv_10 0) # not yet implemented
++SET(apu_have_iconv_10 0)
+ SET(apr_has_ldap_10 0)
+ SET(apu_use_libxml2_10 0)
+ SET(apu_use_expat_10 0)
+@@ -97,6 +103,11 @@ IF(APR_HAS_LDAP)
+   SET(LDAP_LIBRARIES wldap32)
+ ENDIF()
+ 
++IF(Iconv_FOUND)
++  SET(apu_have_iconv_10 1)
++  SET(APU_HAVE_ICONV ON)
++ENDIF()
++
+ CONFIGURE_FILE(include/apu.hwc
+               ${PROJECT_BINARY_DIR}/apu.h)
+ CONFIGURE_FILE(include/apr_ldap.hwc
+@@ -120,6 +131,10 @@ ELSE()
+   SET(XMLLIB_LIBRARIES   "${LIBXML2_LIBRARIES};${LIBXML2_ICONV_LIBRARIES}")
+ ENDIF()
+ 
++IF(APU_HAVE_ICONV)
++  SET(XMLLIB_INCLUDE_DIR "${XMLLIB_INCLUDE_DIR};${Iconv_INCLUDE_DIRS}")
++  SET(XMLLIB_LIBRARIES   "${XMLLIB_LIBRARIES};${Iconv_LIBRARIES}")
++ENDIF()
+ 
+ # Generated .h files are stored in PROJECT_BINARY_DIR, not the
+ # source tree.
+@@ -276,6 +291,11 @@ SET(install_targets ${install_targets} aprutil-1)
+ TARGET_LINK_LIBRARIES(aprutil-1 ${APR_LIBRARIES} ${XMLLIB_LIBRARIES})
+ SET_TARGET_PROPERTIES(aprutil-1 PROPERTIES COMPILE_DEFINITIONS "APU_DECLARE_STATIC;APR_DECLARE_STATIC;APU_DSO_MODULE_BUILD;XML_STATIC")
+ 
++IF(APU_HAVE_ICONV)
++  SET_TARGET_PROPERTIES(aprutil-1 PROPERTIES COMPILE_FLAGS "-DHAVE_ICONV_H")
++  SET_TARGET_PROPERTIES(libaprutil-1 PROPERTIES COMPILE_FLAGS "-DHAVE_ICONV_H")
++ENDIF()
++
+ IF(APU_HAVE_CRYPTO)
+   IF(NOT OPENSSL_FOUND)
+     MESSAGE(FATAL_ERROR "Only OpenSSL-based crypto is currently implemented in the cmake build")
+@@ -300,6 +320,33 @@ IF(APU_HAVE_ODBC)
+   SET_TARGET_PROPERTIES(apr_dbd_odbc-1 PROPERTIES COMPILE_FLAGS "-DAPR_DECLARE_IMPORT -DAPU_DECLARE_IMPORT -DDLL_NAME=apr_dbd_odbc")
+ ENDIF()
+ 
++IF(APU_HAVE_SQLITE3)
++  FIND_PACKAGE(SQLite3)
++  ADD_LIBRARY(apr_dbd_sqlite3-1 SHARED dbd/apr_dbd_sqlite3.c libaprutil.rc)
++  SET(install_targets ${install_targets} apr_dbd_sqlite3-1)
++  SET(install_bin_pdb ${install_bin_pdb} ${PROJECT_BINARY_DIR}/apr_dbd_sqlite3-1.pdb)
++  SET(dbd_drivers ${dbd_drivers} sqlite3)
++  TARGET_LINK_LIBRARIES(apr_dbd_sqlite3-1 libaprutil-1 ${APR_LIBRARIES} ${SQLite3_LIBRARIES})
++  SET_PROPERTY(TARGET apr_dbd_sqlite3-1 APPEND PROPERTY LINK_FLAGS /export:apr_dbd_sqlite3_driver)
++  SET_TARGET_PROPERTIES(apr_dbd_sqlite3-1 PROPERTIES COMPILE_DEFINITIONS "APU_HAVE_SQLITE3;HAVE_SQL_H;APU_DECLARE_IMPORT;APR_DECLARE_IMPORT;APU_DSO_MODULE_BUILD;WINNT")
++  SET_TARGET_PROPERTIES(apr_dbd_sqlite3-1 PROPERTIES COMPILE_FLAGS "-DAPR_DECLARE_IMPORT -DAPU_DECLARE_IMPORT -DDLL_NAME=apr_dbd_sqlite3")
++  SET_TARGET_PROPERTIES(apr_dbd_sqlite3-1 PROPERTIES INCLUDE_DIRECTORIES "${APR_INCLUDE_DIRECTORIES};${SQLite3_INCLUDE_DIRS}")
++ENDIF()
++
++IF(APU_HAVE_MYSQL)
++  FIND_PACKAGE(MySQL)
++  ADD_LIBRARY(apr_dbd_mysql-1 SHARED dbd/apr_dbd_mysql.c libaprutil.rc)
++  SET(install_targets ${install_targets} apr_dbd_mysql-1)
++  SET(install_bin_pdb ${install_bin_pdb} ${PROJECT_BINARY_DIR}/apr_dbd_mysql-1.pdb)
++  SET(dbd_drivers ${dbd_drivers} mysql)
++  TARGET_LINK_LIBRARIES(apr_dbd_mysql-1 libaprutil-1 ${APR_LIBRARIES} ${MYSQL_LIBRARY})
++  SET_PROPERTY(TARGET apr_dbd_mysql-1 APPEND PROPERTY LINK_FLAGS /export:apr_dbd_mysql_driver)
++  SET_TARGET_PROPERTIES(apr_dbd_mysql-1 PROPERTIES COMPILE_DEFINITIONS "APU_HAVE_MYSQL;HAVE_SQL_H;APU_DECLARE_IMPORT;APR_DECLARE_IMPORT;APU_DSO_MODULE_BUILD;WINNT")
++  SET_TARGET_PROPERTIES(apr_dbd_mysql-1 PROPERTIES COMPILE_FLAGS "-DAPR_DECLARE_IMPORT -DAPU_DECLARE_IMPORT -DDLL_NAME=apr_dbd_mysql")
++  SET_TARGET_PROPERTIES(apr_dbd_mysql-1 PROPERTIES INCLUDE_DIRECTORIES "${APR_INCLUDE_DIRECTORIES};${MYSQL_INCLUDE_DIR}")
++
++ENDIF()
++
+ IF(APR_HAS_LDAP)
+   ADD_LIBRARY(apr_ldap-1 SHARED ldap/apr_ldap_init.c ldap/apr_ldap_option.c 
+               ldap/apr_ldap_rebind.c libaprutil.rc)
+@@ -387,7 +434,10 @@ MESSAGE(STATUS "  C compiler ...................... : ${CMAKE_C_COMPILER}")
+ MESSAGE(STATUS "  APR include directory ........... : ${APR_INCLUDE_DIR}")
+ MESSAGE(STATUS "  APR libraries ................... : ${APR_LIBRARIES}")
+ MESSAGE(STATUS "  DBD ODBC driver ................. : ${APU_HAVE_ODBC}")
++MESSAGE(STATUS "  DBD SQlite3 driver .............. : ${APU_HAVE_SQLITE3}")
++MESSAGE(STATUS "  DBD MySQL driver ................ : ${APU_HAVE_MYSQL}")
+ MESSAGE(STATUS "  APU_HAVE_CRYPTO ................. : ${APU_HAVE_CRYPTO}")
++MESSAGE(STATUS "  APU_HAVE_ICONV .................. : ${APU_HAVE_ICONV}")
+ MESSAGE(STATUS "  APR_HAS_LDAP .................... : ${APR_HAS_LDAP}")
+ MESSAGE(STATUS "  Use Expat ....................... : ${APU_USE_EXPAT}")
+ MESSAGE(STATUS "  Use LibXml2 ..................... : ${APU_USE_LIBXML2}")
+diff --git a/cmake/FindMySQL.cmake b/cmake/FindMySQL.cmake
+new file mode 100644
+index 00000000..99d1c61e
+--- /dev/null
++++ b/cmake/FindMySQL.cmake
+@@ -0,0 +1,83 @@
++# Distributed under the OSI-approved BSD 3-Clause License.  See accompanying
++# file COPYING-CMAKE-SCRIPTS or https://cmake.org/licensing for details.
++
++#.rst
++# Get from http://www.cmake.org/Wiki/CMakeUserFindMySQL
++# - Find mysqlclient
++# Find the native MySQL includes and library
++#
++#  MYSQL_INCLUDE_DIRS- where to find mysql.h, etc.
++#  MYSQL_LIBRARIES   - List of libraries when using MySQL.
++#  MYSQL_FOUND       - True if MySQL found.
++
++find_path(MYSQL_INCLUDE_DIR
++          NAMES mysql.h
++          PATH_SUFFIXES mysql
++          DOC "MySQL Client library includes")
++
++if( MYSQL_INCLUDE_DIR AND EXISTS "${MYSQL_INCLUDE_DIR}/mysql_version.h" )
++    file( STRINGS "${MYSQL_INCLUDE_DIR}/mysql_version.h"
++          MYSQL_VERSION_H REGEX "^#define[ \t]+MYSQL_SERVER_VERSION[ \t]+\"[^\"]+\".*$" )
++    string( REGEX REPLACE
++            "^.*MYSQL_SERVER_VERSION[ \t]+\"([^\"]+)\".*$" "\\1" MYSQL_VERSION_STRING
++            "${MYSQL_VERSION_H}" )
++endif()
++
++find_library(MYSQL_LIBRARY NAMES mysqlclient mysqlclient_r)
++
++if( NOT CMAKE_C_COMPILER_LOADED )
++    message(AUTHOR_WARNING "C language not enabled: Skipping detection of extra link libraries.")
++elseif( MYSQL_INCLUDE_DIR AND MYSQL_LIBRARY )
++    # On Conda, mysqlclient is a static lib that requires explicit linking to zlib and zstd
++    function(check_mysql_test_program_links)
++        include(CheckCSourceCompiles)
++        include(CMakePushCheckState)
++        cmake_push_check_state(RESET)
++        set(CMAKE_REQUIRED_QUIET "yes")
++        set(CMAKE_REQUIRED_INCLUDES ${MYSQL_INCLUDE_DIR})
++        set(CMAKE_REQUIRED_LIBRARIES ${MYSQL_LIBRARY})
++        check_c_source_compiles("#include <mysql.h>\n; int main () {mysql_library_end (); return 0;}" MYSQL_TEST_PROGRAM_LINKS)
++        cmake_pop_check_state()
++    endfunction()
++
++    check_mysql_test_program_links()
++    if(NOT MYSQL_TEST_PROGRAM_LINKS)
++       find_library(_MYSQL_ZLIB_LIBRARY NAMES zlib)
++       find_library(_MYSQL_ZSTD_LIBRARY NAMES zstd)
++       if(_MYSQL_ZLIB_LIBRARY AND _MYSQL_ZSTD_LIBRARY)
++            function(check_mysql_test_program_links_with_zlib_and_zstd)
++                include(CheckCSourceCompiles)
++                include(CMakePushCheckState)
++                cmake_push_check_state(RESET)
++                set(CMAKE_REQUIRED_QUIET "yes")
++                set(CMAKE_REQUIRED_INCLUDES ${MYSQL_INCLUDE_DIR})
++                set(CMAKE_REQUIRED_LIBRARIES ${MYSQL_LIBRARY} ${_MYSQL_ZSTD_LIBRARY} ${_MYSQL_ZLIB_LIBRARY})
++                check_c_source_compiles("#include <mysql.h>\n;int main () {mysql_library_end (); return 0;}" MYSQL_TEST_PROGRAM_LINKS_WITH_ZLIB_AND_ZSTD)
++                cmake_pop_check_state()
++            endfunction()
++
++            check_mysql_test_program_links_with_zlib_and_zstd()
++            if(MYSQL_TEST_PROGRAM_LINKS_WITH_ZLIB_AND_ZSTD)
++              set(MYSQL_ZSTD_LIBRARY ${_MYSQL_ZSTD_LIBRARY})
++              set(MYSQL_ZLIB_LIBRARY ${_MYSQL_ZLIB_LIBRARY})
++            endif()
++       endif()
++    endif()
++endif()
++
++include(FindPackageHandleStandardArgs)
++find_package_handle_standard_args(MySQL
++                                  FOUND_VAR MYSQL_FOUND
++                                  REQUIRED_VARS MYSQL_LIBRARY MYSQL_INCLUDE_DIR
++                                  VERSION_VAR MYSQL_VERSION_STRING)
++include(FeatureSummary)
++set_package_properties(MYSQL PROPERTIES
++                       DESCRIPTION "MySQL Client library"
++                       URL "https://dev.mysql.com/downloads/c-api/"
++                       )
++
++mark_as_advanced(MYSQL_LIBRARY MYSQL_INCLUDE_DIR)
++
++set(MYSQL_LIBRARIES ${MYSQL_LIBRARY} ${MYSQL_ZSTD_LIBRARY} ${MYSQL_ZLIB_LIBRARY})
++set(MYSQL_INCLUDE_DIRS ${MYSQL_INCLUDE_DIR})
++
+diff --git a/dbd/apr_dbd_mysql.c b/dbd/apr_dbd_mysql.c
+index d3e938c3..3bd19d54 100644
+--- a/dbd/apr_dbd_mysql.c
++++ b/dbd/apr_dbd_mysql.c
 @@ -50,6 +50,15 @@
  
  #include "apr_dbd_internal.h"
@@ -29,307 +237,16 @@ index d3e938c3..26d46b5c 100644
      my_init();
  #endif
      mysql_thread_init();
-https://bz.apache.org/bugzilla/show_bug.cgi?id=63413
-diff --git a/aprutil.dep b/aprutil.dep
-index 53098d81..ce08eb9d 100644
---- a/aprutil.dep
-+++ b/aprutil.dep
-@@ -377,6 +377,12 @@
- 	".\include\apr_xml.h"\
- 	".\include\apu.h"\
- 	".\include\private\apu_config.h"\
-+
-+
-+.\xml\apr_xml_expat.c : \
-+	".\include\apr_xml.h"\
-+	".\include\apu.h"\
-+	".\include\private\apu_config.h"\
- 	
- 
- !IF  "$(CFG)" == "aprutil - Win32 Release"
-diff --git a/aprutil.mak b/aprutil.mak
-index 4ec4ec7d..cef988a1 100644
---- a/aprutil.mak
-+++ b/aprutil.mak
-@@ -103,6 +103,7 @@ CLEAN :
- 	-@erase "$(INTDIR)\apr_thread_pool.obj"
- 	-@erase "$(INTDIR)\apr_uri.obj"
- 	-@erase "$(INTDIR)\apr_xml.obj"
-+	-@erase "$(INTDIR)\apr_xml_expat.obj"
- 	-@erase "$(INTDIR)\aprutil-1.idb"
- 	-@erase "$(INTDIR)\aprutil-1.pdb"
- 	-@erase "$(INTDIR)\apu_dso.obj"
-@@ -218,6 +219,7 @@ LIB32_OBJS= \
- 	"$(INTDIR)\apr_uri.obj" \
- 	"$(INTDIR)\xlate.obj" \
- 	"$(INTDIR)\apr_xml.obj" \
-+	"$(INTDIR)\apr_xml_expat.obj" \
- 	"..\apr-iconv\LibR\apriconv-1.lib"
- 
- "$(OUTDIR)\aprutil-1.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
-@@ -295,6 +297,7 @@ CLEAN :
- 	-@erase "$(INTDIR)\apr_thread_pool.obj"
- 	-@erase "$(INTDIR)\apr_uri.obj"
- 	-@erase "$(INTDIR)\apr_xml.obj"
-+	-@erase "$(INTDIR)\apr_xml_expat.obj"
- 	-@erase "$(INTDIR)\aprutil-1.idb"
- 	-@erase "$(INTDIR)\aprutil-1.pdb"
- 	-@erase "$(INTDIR)\apu_dso.obj"
-@@ -415,6 +418,7 @@ LIB32_OBJS= \
- 	"$(INTDIR)\apr_uri.obj" \
- 	"$(INTDIR)\xlate.obj" \
- 	"$(INTDIR)\apr_xml.obj" \
-+	"$(INTDIR)\apr_xml_expat.obj" \
- 	"..\apr-iconv\LibD\apriconv-1.lib"
- 
- "$(OUTDIR)\aprutil-1.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
-@@ -492,6 +496,7 @@ CLEAN :
- 	-@erase "$(INTDIR)\apr_thread_pool.obj"
- 	-@erase "$(INTDIR)\apr_uri.obj"
- 	-@erase "$(INTDIR)\apr_xml.obj"
-+	-@erase "$(INTDIR)\apr_xml_expat.obj"
- 	-@erase "$(INTDIR)\aprutil-1.idb"
- 	-@erase "$(INTDIR)\aprutil-1.pdb"
- 	-@erase "$(INTDIR)\apu_dso.obj"
-@@ -612,6 +617,7 @@ LIB32_OBJS= \
- 	"$(INTDIR)\apr_uri.obj" \
- 	"$(INTDIR)\xlate.obj" \
- 	"$(INTDIR)\apr_xml.obj" \
-+	"$(INTDIR)\apr_xml_expat.obj" \
- 	"..\apr-iconv\x64\LibR\apriconv-1.lib"
- 
- "$(OUTDIR)\aprutil-1.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
-@@ -689,6 +695,7 @@ CLEAN :
- 	-@erase "$(INTDIR)\apr_thread_pool.obj"
- 	-@erase "$(INTDIR)\apr_uri.obj"
- 	-@erase "$(INTDIR)\apr_xml.obj"
-+	-@erase "$(INTDIR)\apr_xml_expat.obj"
- 	-@erase "$(INTDIR)\aprutil-1.idb"
- 	-@erase "$(INTDIR)\aprutil-1.pdb"
- 	-@erase "$(INTDIR)\apu_dso.obj"
-@@ -809,6 +816,7 @@ LIB32_OBJS= \
- 	"$(INTDIR)\apr_uri.obj" \
- 	"$(INTDIR)\xlate.obj" \
- 	"$(INTDIR)\apr_xml.obj" \
-+	"$(INTDIR)\apr_xml_expat.obj" \
- 	"..\apr-iconv\x64\LibD\apriconv-1.lib"
- 
- "$(OUTDIR)\aprutil-1.lib" : "$(OUTDIR)" $(DEF_FILE) $(LIB32_OBJS)
-@@ -1171,6 +1179,12 @@ SOURCE=.\xml\apr_xml.c
- 	$(CPP) $(CPP_PROJ) $(SOURCE)
- 
- 
-+SOURCE=.\xml\apr_xml_expat.c
-+
-+"$(INTDIR)\apr_xml_expat.obj" : $(SOURCE) "$(INTDIR)" ".\include\private\apu_config.h" ".\include\apu.h"
-+	$(CPP) $(CPP_PROJ) $(SOURCE)
-+
-+
- SOURCE=.\include\apr_ldap.hw
- 
- !IF  "$(CFG)" == "aprutil - Win32 Release"
-diff --git a/libaprutil.dep b/libaprutil.dep
-index 6ff8a746..766eddaa 100644
---- a/libaprutil.dep
-+++ b/libaprutil.dep
-@@ -281,6 +281,12 @@
- 	".\include\apr_xml.h"\
- 	".\include\apu.h"\
- 	".\include\private\apu_config.h"\
-+
-+
-+.\xml\apr_xml_expat.c : \
-+	".\include\apr_xml.h"\
-+	".\include\apu.h"\
-+	".\include\private\apu_config.h"\
- 	
- 
- !IF  "$(CFG)" == "libaprutil - Win32 Release"
-diff --git a/libaprutil.mak b/libaprutil.mak
-index f00d14ae..e6e68b80 100644
---- a/libaprutil.mak
-+++ b/libaprutil.mak
-@@ -93,6 +93,7 @@ CLEAN :
- 	-@erase "$(INTDIR)\apr_thread_pool.obj"
- 	-@erase "$(INTDIR)\apr_uri.obj"
- 	-@erase "$(INTDIR)\apr_xml.obj"
-+	-@erase "$(INTDIR)\apr_xml_expat.obj"
- 	-@erase "$(INTDIR)\apu_dso.obj"
- 	-@erase "$(INTDIR)\apu_version.obj"
- 	-@erase "$(INTDIR)\crypt_blowfish.obj"
-@@ -205,6 +206,7 @@ LINK32_OBJS= \
- 	"$(INTDIR)\apr_uri.obj" \
- 	"$(INTDIR)\xlate.obj" \
- 	"$(INTDIR)\apr_xml.obj" \
-+	"$(INTDIR)\apr_xml_expat.obj" \
- 	"$(INTDIR)\libaprutil.res" \
- 	"..\apr\Release\libapr-1.lib" \
- 	"..\apr-iconv\Release\libapriconv-1.lib"
-@@ -287,6 +289,7 @@ CLEAN :
- 	-@erase "$(INTDIR)\apr_thread_pool.obj"
- 	-@erase "$(INTDIR)\apr_uri.obj"
- 	-@erase "$(INTDIR)\apr_xml.obj"
-+	-@erase "$(INTDIR)\apr_xml_expat.obj"
- 	-@erase "$(INTDIR)\apu_dso.obj"
- 	-@erase "$(INTDIR)\apu_version.obj"
- 	-@erase "$(INTDIR)\crypt_blowfish.obj"
-@@ -403,6 +406,7 @@ LINK32_OBJS= \
- 	"$(INTDIR)\apr_uri.obj" \
- 	"$(INTDIR)\xlate.obj" \
- 	"$(INTDIR)\apr_xml.obj" \
-+	"$(INTDIR)\apr_xml_expat.obj" \
- 	"$(INTDIR)\libaprutil.res" \
- 	"..\apr\Debug\libapr-1.lib" \
- 	"..\apr-iconv\Debug\libapriconv-1.lib"
-@@ -485,6 +489,7 @@ CLEAN :
- 	-@erase "$(INTDIR)\apr_thread_pool.obj"
- 	-@erase "$(INTDIR)\apr_uri.obj"
- 	-@erase "$(INTDIR)\apr_xml.obj"
-+	-@erase "$(INTDIR)\apr_xml_expat.obj"
- 	-@erase "$(INTDIR)\apu_dso.obj"
- 	-@erase "$(INTDIR)\apu_version.obj"
- 	-@erase "$(INTDIR)\crypt_blowfish.obj"
-@@ -601,6 +606,7 @@ LINK32_OBJS= \
- 	"$(INTDIR)\apr_uri.obj" \
- 	"$(INTDIR)\xlate.obj" \
- 	"$(INTDIR)\apr_xml.obj" \
-+	"$(INTDIR)\apr_xml_expat.obj" \
- 	"$(INTDIR)\libaprutil.res" \
- 	"..\apr\x64\Release\libapr-1.lib" \
- 	"..\apr-iconv\x64\Release\libapriconv-1.lib"
-@@ -683,6 +689,7 @@ CLEAN :
- 	-@erase "$(INTDIR)\apr_thread_pool.obj"
- 	-@erase "$(INTDIR)\apr_uri.obj"
- 	-@erase "$(INTDIR)\apr_xml.obj"
-+	-@erase "$(INTDIR)\apr_xml_expat.obj"
- 	-@erase "$(INTDIR)\apu_dso.obj"
- 	-@erase "$(INTDIR)\apu_version.obj"
- 	-@erase "$(INTDIR)\crypt_blowfish.obj"
-@@ -799,6 +806,7 @@ LINK32_OBJS= \
- 	"$(INTDIR)\apr_uri.obj" \
- 	"$(INTDIR)\xlate.obj" \
- 	"$(INTDIR)\apr_xml.obj" \
-+	"$(INTDIR)\apr_xml_expat.obj" \
- 	"$(INTDIR)\libaprutil.res" \
- 	"..\apr\x64\Debug\libapr-1.lib" \
- 	"..\apr-iconv\x64\Debug\libapriconv-1.lib"
-@@ -1121,6 +1129,12 @@ SOURCE=.\xml\apr_xml.c
- 	$(CPP) $(CPP_PROJ) $(SOURCE)
- 
- 
-+SOURCE=.\xml\apr_xml_expat.c
-+
-+"$(INTDIR)\apr_xml_expat.obj" : $(SOURCE) "$(INTDIR)" ".\include\private\apu_config.h" ".\include\apu.h"
-+	$(CPP) $(CPP_PROJ) $(SOURCE)
-+
-+
- SOURCE=.\include\apr_ldap.hw
- 
- !IF  "$(CFG)" == "libaprutil - Win32 Release"
-diff --git "a/Makefile.win" "b/Makefile.win"
-index 454b4fec..e6d9fc30 100644
---- "a/Makefile.win"
-+++ "b/Makefile.win"
-@@ -337,48 +337,44 @@ checkall: checkapr checkapu
- 
- 
- install:
--	echo Y >.y
--	echo A >.A
-+	REM echo on
- 	@if NOT EXIST "$(PREFIX)\." mkdir "$(PREFIX)"
- 	@if NOT EXIST "$(PREFIX)\bin\." mkdir "$(PREFIX)\bin"
- 	@if NOT EXIST "$(PREFIX)\bin\iconv\." mkdir "$(PREFIX)\bin\iconv"
- 	@if NOT EXIST "$(PREFIX)\include\." mkdir "$(PREFIX)\include"
- 	@if NOT EXIST "$(PREFIX)\lib\." mkdir "$(PREFIX)\lib"
--	copy CHANGES "$(PREFIX)\CHANGES.txt" <.y
--	copy LICENSE "$(PREFIX)\LICENSE.txt" <.y
--	copy NOTICE  "$(PREFIX)\NOTICE.txt"  <.y
--	xcopy $(APR_PATH)\include\*.h		"$(PREFIX)\include\" /d < .a
--	xcopy $(APU_PATH)\include\*.h		"$(PREFIX)\include\" /d < .a
--	copy $(APR_PATH)\$(LIBSOSPATH)\apr-1.lib	"$(PREFIX)\lib\" <.y
--	copy $(APR_PATH)\$(LIBSOSPATH)\apr-1.pdb	"$(PREFIX)\lib\" <.y
--	copy $(APU_PATH)\$(LIBSPATH)\aprutil-1.lib	"$(PREFIX)\lib\" <.y
--	copy $(APU_PATH)\$(LIBSPATH)\aprutil-1.pdb	"$(PREFIX)\lib\" <.y
--	copy $(APR_PATH)\$(ARCHOSPATH)\libapr-1.lib	"$(PREFIX)\lib\" <.y
--	copy $(APR_PATH)\$(ARCHOSPATH)\libapr-1.exp	"$(PREFIX)\lib\" <.y
--	copy $(APU_PATH)\$(ARCHPATH)\libaprutil-1.lib	"$(PREFIX)\lib\" <.y
--	copy $(APU_PATH)\$(ARCHPATH)\libaprutil-1.exp	"$(PREFIX)\lib\" <.y
--	copy $(APR_PATH)\$(ARCHOSPATH)\libapr-1.dll	"$(PREFIX)\bin\" <.y
--	copy $(APR_PATH)\$(ARCHOSPATH)\libapr-1.pdb	"$(PREFIX)\bin\" <.y
--	copy $(API_PATH)\$(ARCHPATH)\libapriconv-1.dll	"$(PREFIX)\bin\" <.y
--	copy $(API_PATH)\$(ARCHPATH)\libapriconv-1.pdb	"$(PREFIX)\bin\" <.y
--	copy $(APU_PATH)\$(ARCHPATH)\libaprutil-1.dll	"$(PREFIX)\bin\" <.y
--	copy $(APU_PATH)\$(ARCHPATH)\libaprutil-1.pdb	"$(PREFIX)\bin\" <.y
--	copy $(APU_PATH)\ldap\$(ARCHPATH)\apr_ldap-1.dll "$(PREFIX)\bin\" <.y
--	copy $(APU_PATH)\ldap\$(ARCHPATH)\apr_ldap-1.pdb "$(PREFIX)\bin\" <.y
-+	REM copy /Y CHANGES "$(PREFIX)\CHANGES.txt"
-+	REM copy /Y LICENSE "$(PREFIX)\LICENSE.txt"
-+	REM copy /Y NOTICE  "$(PREFIX)\NOTICE.txt" 
-+	xcopy /C /F /Y $(APR_PATH)\include\*.h		"$(PREFIX)\include\"
-+	xcopy /C /F /Y $(APU_PATH)\include\*.h		"$(PREFIX)\include\"
-+	xcopy /C /F /Y $(APR_PATH)\$(LIBSOSPATH)\apr-1.lib	"$(PREFIX)\lib\"
-+	REM xcopy /C /F /Y $(APR_PATH)\$(LIBSOSPATH)\apr-1.pdb	"$(PREFIX)\lib\"
-+	xcopy /C /F /Y $(APU_PATH)\$(LIBSPATH)\aprutil-1.lib	"$(PREFIX)\lib\"
-+	REM xcopy /C /F /Y $(APU_PATH)\$(LIBSPATH)\aprutil-1.pdb	"$(PREFIX)\lib\"
-+	xcopy /C /F /Y $(APR_PATH)\$(ARCHOSPATH)\libapr-1.lib	"$(PREFIX)\lib\"
-+	REM xcopy /C /F /Y $(APR_PATH)\$(ARCHOSPATH)\libapr-1.exp	"$(PREFIX)\lib\"
-+	xcopy /C /F /Y $(APU_PATH)\$(ARCHPATH)\libaprutil-1.lib	"$(PREFIX)\lib\"
-+	REM xcopy /C /F /Y $(APU_PATH)\$(ARCHPATH)\libaprutil-1.exp	"$(PREFIX)\lib\"
-+	xcopy /C /F /Y $(APR_PATH)\$(ARCHOSPATH)\libapr-1.dll	"$(PREFIX)\bin\"
-+	xcopy /C /F /Y $(APR_PATH)\$(ARCHOSPATH)\libapr-1.pdb	"$(PREFIX)\bin\"
-+	xcopy /C /F /Y $(API_PATH)\$(ARCHPATH)\libapriconv-1.dll	"$(PREFIX)\bin\"
-+	xcopy /C /F /Y $(API_PATH)\$(ARCHPATH)\libapriconv-1.pdb	"$(PREFIX)\bin\"
-+	xcopy /C /F /Y $(APU_PATH)\$(ARCHPATH)\libaprutil-1.dll	"$(PREFIX)\bin\"
-+	xcopy /C /F /Y $(APU_PATH)\$(ARCHPATH)\libaprutil-1.pdb	"$(PREFIX)\bin\"
-+	xcopy /C /F /Y $(APU_PATH)\ldap\$(ARCHPATH)\apr_ldap-1.dll "$(PREFIX)\bin\"
-+	xcopy /C /F /Y $(APU_PATH)\ldap\$(ARCHPATH)\apr_ldap-1.pdb "$(PREFIX)\bin\"
- 	for %d in (odbc $(DBD_LIST)) do ( \
--	  copy $(APU_PATH)\dbd\$(ARCHPATH)\apr_dbd_%d-1.dll "$(PREFIX)\bin\" <.y && \
--	  copy $(APU_PATH)\dbd\$(ARCHPATH)\apr_dbd_%d-1.pdb "$(PREFIX)\bin\" <.y \
-+	  xcopy /C /F /Y $(APU_PATH)\dbd\$(ARCHPATH)\apr_dbd_%d-1.dll "$(PREFIX)\bin\" && \
-+	  xcopy /C /F /Y $(APU_PATH)\dbd\$(ARCHPATH)\apr_dbd_%d-1.pdb "$(PREFIX)\bin\" \
- 	)
- 	for %d in ($(DBM_LIST) x) do if not %d == x ( \
--	  copy $(APU_PATH)\dbm\$(ARCHPATH)\apr_dbm_%d-1.dll "$(PREFIX)\bin\" <.y && \
--	  copy $(APU_PATH)\dbm\$(ARCHPATH)\apr_dbm_%d-1.pdb "$(PREFIX)\bin\" <.y \
-+	  xcopy /C /F /Y $(APU_PATH)\dbm\$(ARCHPATH)\apr_dbm_%d-1.dll "$(PREFIX)\bin\" && \
-+	  xcopy /C /F /Y $(APU_PATH)\dbm\$(ARCHPATH)\apr_dbm_%d-1.pdb "$(PREFIX)\bin\" \
- 	)
- 	for %d in ($(CRYPTO_LIST) x) do if not %d == x ( \
--	  copy $(APU_PATH)\crypto\$(ARCHPATH)\apr_crypto_%d-1.dll "$(PREFIX)\bin\" <.y && \
--	  copy $(APU_PATH)\crypto\$(ARCHPATH)\apr_crypto_%d-1.pdb "$(PREFIX)\bin\" <.y \
-+	  xcopy /C /F /Y $(APU_PATH)\crypto\$(ARCHPATH)\apr_crypto_%d-1.dll "$(PREFIX)\bin\" && \
-+	  xcopy /C /F /Y $(APU_PATH)\crypto\$(ARCHPATH)\apr_crypto_%d-1.pdb "$(PREFIX)\bin\" \
- 	)
--	xcopy $(API_PATH)\$(ARCHPATH)\iconv\*.so  "$(PREFIX)\bin\iconv\" /d < .a
--	xcopy $(API_PATH)\$(ARCHPATH)\iconv\*.pdb "$(PREFIX)\bin\iconv\" /d < .a
--	del .y
--	del .a
--
-+	xcopy /C /F /Y $(API_PATH)\$(ARCHPATH)\iconv\*.so  "$(PREFIX)\bin\iconv\"
-+	xcopy /C /F /Y $(API_PATH)\$(ARCHPATH)\iconv\*.pdb "$(PREFIX)\bin\iconv\"
-diff --git "a/include/apu.hw" "b/include/apu.hw"
-index 21fbedff..52898a05 100644
---- "a/include/apu.hw"
-+++ "b/include/apu.hw"
-@@ -124,16 +124,16 @@
- #ifndef APU_DSO_MODULE_BUILD
- #define APU_HAVE_PGSQL          0
- #define APU_HAVE_MYSQL          0
--#define APU_HAVE_SQLITE3        0
-+#define APU_HAVE_SQLITE3        1
- #define APU_HAVE_SQLITE2        0
- #define APU_HAVE_ORACLE         0
- #define APU_HAVE_ODBC           1
+diff --git a/include/apu.hwc b/include/apu.hwc
+index fe13b66b..937e0542 100644
+--- a/include/apu.hwc
++++ b/include/apu.hwc
+@@ -138,7 +138,7 @@
  #endif
  
--#define APU_HAVE_CRYPTO         0
-+#define APU_HAVE_CRYPTO         1
+ #define APU_HAVE_APR_ICONV      @apu_have_apr_iconv_10@
+-#define APU_HAVE_ICONV          0
++#define APU_HAVE_ICONV          @apu_have_iconv_10@
+ #define APR_HAS_XLATE           (APU_HAVE_APR_ICONV || APU_HAVE_ICONV)
  
- #ifndef APU_DSO_MODULE_BUILD
--#define APU_HAVE_OPENSSL        0
-+#define APU_HAVE_OPENSSL        1
- #define APU_HAVE_NSS            0
- #define APU_HAVE_COMMONCRYPTO   0
- #endif
+ #define APU_USE_EXPAT           @apu_use_expat_10@

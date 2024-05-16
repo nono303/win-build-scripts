@@ -58,6 +58,8 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat sqlite NOLOG
 	:apr
 	call %PATH_BATCH%\go.bat apr NOLOG
+	:apr-util
+	call %PATH_BATCH%\go.bat apr-util NOLOG
 	:lua
 	call %PATH_BATCH%\go.bat lua NOLOG
 	:httpd

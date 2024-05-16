@@ -16,10 +16,6 @@ git clone https://github.com/apache/apr.git apr
 cd /D apr
 git checkout 1.8.x
 cd /D ..
-git clone https://github.com/apache/apr-iconv apr-iconv
-cd /D apr-iconv
-git checkout tags/1.2.2
-cd /D ..
 git clone https://github.com/apache/apr-util.git apr-util
 cd /D apr-util
 git checkout 1.7.x
@@ -62,7 +58,7 @@ git checkout tags/VER-2-13-2
 cd /D ..
 git clone https://github.com/OSGeo/gdal gdal
 cd /D gdal
-git checkout tags/v3.9.0beta2
+git checkout tags/v3.9.0RC2
 cd /D ..
 git clone https://github.com/geographiclib/geographiclib.git geographiclib
 cd /D geographiclib
@@ -142,7 +138,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/libjpeg-turbo/libjpeg-turbo libjpeg-turbo
 cd /D libjpeg-turbo
-git checkout tags/3.0.2
+git checkout tags/3.0.3
 cd /D ..
 git clone https://git.tukaani.org/xz.git liblzma
 cd /D liblzma
@@ -178,7 +174,7 @@ git checkout tags/v0.23
 cd /D ..
 git clone https://gitlab.gnome.org/GNOME/libxml2.git libxml2
 cd /D libxml2
-git checkout tags/v2.12.5
+git checkout tags/v2.12.7
 cd /D ..
 git clone https://github.com/nono303/libxpm.git libxpm
 cd /D libxpm
@@ -206,7 +202,7 @@ git checkout tags/v0.21.1_for_java11
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
-git checkout tags/1.6.26
+git checkout tags/1.6.27
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
@@ -238,7 +234,7 @@ git checkout tags/v2.4.26
 cd /D ..
 svn co https://svn.code.sf.net/p/mod-qos/source/trunk/httpd_src/modules/qos mod_qos
 cd /D mod_qos
-svn update -r 2717
+svn update -r 2718
 cd /D ..
 git clone https://github.com/SpiderLabs/ModSecurity mod_security
 cd /D mod_security
@@ -258,15 +254,15 @@ git checkout master
 cd /D ..
 git clone https://github.com/nghttp2/nghttp2.git nghttp2
 cd /D nghttp2
-git checkout tags/v1.61.0
+git checkout tags/v1.62.0
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3
-git checkout tags/v1.2.0
+git checkout tags/v1.3.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v1.4.0
+git checkout tags/v1.5.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -330,7 +326,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.3.6
+git checkout tags/php-8.3.7
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj

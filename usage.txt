@@ -28,6 +28,7 @@ Usage: go command [options]
       * libmaxminddb
       * sqlite
       * apr
+      * apr-util
       * lua
       * httpd
       * yajl
