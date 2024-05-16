@@ -56,7 +56,7 @@ if %1 == 0 (
 		REM libconfig.sh / memcached.sh / sslh.sh
 	set AVX_GCC=core2
 		REM MPIR (used in phpsdk-local)
-	set AVX_MPIR=core2-penryn	
+	set AVX_MPIR=core2-penryn
 )
 echo ~~-~~ %AVXECHO% ~~-~~
 
