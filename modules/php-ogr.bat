@@ -2,51 +2,44 @@
 cd /D C:\sdk\phpmaster\vs17\x64\php-src 
 
 "cl.exe" ^
-/EHsc ^
-/DHAVE_OGR_SRS_API_H=1 ^
-/D ZEND_COMPILE_DL_EXT=1 ^
-/D COMPILE_DL_OGR ^
-/D OGR_EXPORTS=1 ^
 /nologo ^
+/D_MBCS ^
+/D_USE_MATH_DEFINES ^
+/D_WINDOWS ^
+/DCOMPILE_DL_OGR ^
+/DFD_SETSIZE=2048 ^
+/DHAVE_OGR_SRS_API_H=1 ^
+/DNDEBUG ^
+/DOGR_EXPORTS=1 ^
+/DPHP_WIN32=1 ^
+/DWIN32 ^
+/DWINDOWS=1 ^
+/DZEND_COMPILE_DL_EXT=1 ^
+/DZEND_DEBUG=0 ^
+/DZEND_WIN32=1 ^
 /I . ^
 /I main ^
 /I Zend ^
 /I TSRM ^
-/I ext ^
-/D _WINDOWS ^
-/D WINDOWS=1 ^
-/D ZEND_WIN32=1 ^
-/D PHP_WIN32=1 ^
-/D WIN32 ^
-/D _MBCS ^
-/D _USE_MATH_DEFINES ^
-/FD ^
-/w ^
-/Zc:inline ^
-/Gw ^
-/Zc:__cplusplus ^
+/I "%PATH_INSTALL%\_gdal\include" ^
 /d2FuncCache1 ^
-/Zc:wchar_t ^
-/MP16 ^
-/Zi ^
+/EHsc ^
+/FD ^
+/FS ^
+/GL ^
+/Gw ^
+/Gy ^
 /LD ^
 /MD ^
+/MP%NUMBER_OF_PROCESSORS% ^
 /O2 ^
-/GL ^
+/w ^
+/Zc:__cplusplus ^
+/Zc:inline ^
+/Zc:wchar_t ^
 /Zf ^
-/Gy ^
-/FS ^
-/D PHP_ICONV_PREFIX=C:/sdk/release/vs17_x64-avx ^
-/D NDebug ^
-/D NDEBUG ^
-/GF ^
-/D ZEND_DEBUG=0 ^
-/I "C:\sdk\release\vs17_x64-avx\include" ^
-/I "C:\sdk\release\vs17_x64-avx\_openssl\openssl-quic\include" ^
-/I "C:\sdk\release\vs17_x64-avx\_proj\include" ^
-/I "C:\sdk\release\vs17_x64-avx\_gdal\include" ^
-/D FD_SETSIZE=2048 ^
-/arch:AVX ^
+/Zi ^
+%AVX% ^
 /FoC:\sdk\src\php-sdk\phpmaster\vs17\x64\build\Release\pecl\php-ogr\ ^
 /FpC:\sdk\src\php-sdk\phpmaster\vs17\x64\build\Release\pecl\php-ogr\ ^
 /FRC:\sdk\src\php-sdk\phpmaster\vs17\x64\build\Release\pecl\php-ogr\ ^
@@ -62,13 +55,9 @@ C:\sdk\src\gdal\apps\gdallocationinfo.cpp
 /d2:-AllowCompatibleILVersions ^
 /Incremental:no ^
 /LTCG ^
-/NODEFAULTLIB:libcmt.lib ^
 /debug ^
 /opt:ref,icf ^
-/libpath:"C:\sdk\release\vs17_x64-avx\lib" ^
-/libpath:"C:\sdk\release\vs17_x64-avx\_openssl\openssl-quic\lib" ^
-/libpath:"C:\sdk\release\vs17_x64-avx\_proj\lib" ^
-/libpath:"C:\sdk\release\vs17_x64-avx\_gdal\lib"
+/libpath:"%PATH_INSTALL%\_gdal\lib"
 
 "link.exe" C:\sdk\src\php-sdk\phpmaster\vs17\x64\build\Release\pecl\php-ogr\gdallocationinfo.obj gdal.lib kernel32.lib ole32.lib user32.lib advapi32.lib shell32.lib ws2_32.lib Dnsapi.lib psapi.lib bcrypt.lib  ^
 /out:"S:\telecharger\gdallocationinfo.exe" ^
@@ -76,12 +65,8 @@ C:\sdk\src\gdal\apps\gdallocationinfo.cpp
 /d2:-AllowCompatibleILVersions ^
 /Incremental:no ^
 /LTCG ^
-/NODEFAULTLIB:libcmt.lib ^
 /debug ^
 /opt:ref,icf ^
-/libpath:"C:\sdk\release\vs17_x64-avx\lib" ^
-/libpath:"C:\sdk\release\vs17_x64-avx\_openssl\openssl-quic\lib" ^
-/libpath:"C:\sdk\release\vs17_x64-avx\_proj\lib" ^
-/libpath:"C:\sdk\release\vs17_x64-avx\_gdal\lib"
+/libpath:"%PATH_INSTALL%\_gdal\lib"
 
 xcopy /C /F /Y "C:\Program Files\php\php_ogr.dll" B:\serveur\php\*
