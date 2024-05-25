@@ -1,27 +1,16 @@
-diff --git a/bin/php/php.ini b/bin/php/php.ini
-index 5fc05c7..06306ea 100644
---- a/bin/php/php.ini
-+++ b/bin/php/php.ini
-@@ -8,5 +8,5 @@ extension=php_mysqli.dll
- memory_limit=4G
- 
- error_reporting=-1
--display_errors=1
-+display_errors=0
- display_startup_errors=1
+ bin/phpsdk_setshell.bat | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
 diff --git a/bin/phpsdk_setshell.bat b/bin/phpsdk_setshell.bat
-index f651a4e..6c291db 100644
+index 8c41734..0dcb846 100644
 --- a/bin/phpsdk_setshell.bat
 +++ b/bin/phpsdk_setshell.bat
-@@ -199,9 +199,9 @@ if "%HOST_ARCH_NAME%"=="%TARGET_ARCH_NAME%" (
- 	set VCVARSALL_ARCH_NAME=%HOST_ARCH_NAME%_%TARGET_ARCH_NAME%
- )
- if 15 gtr %PHP_SDK_VS_NUM% (
--	set PHP_SDK_VS_SHELL_CMD="!PHP_SDK_VC_DIR!\vcvarsall.bat" !VCVARSALL_ARCH_NAME!
-+	set PHP_SDK_VS_SHELL_CMD="!PHP_SDK_VC_DIR!\VsDevCmd.bat" -arch=!VCVARSALL_ARCH_NAME! -vcvars_ver=%vcvars_ver% -winsdk=%WKITVER% -no_logo
+@@ -211,7 +211,7 @@ if 15 gtr %PHP_SDK_VS_NUM% (
+     )
  ) else (
--	set PHP_SDK_VS_SHELL_CMD="!PHP_SDK_VC_DIR!\Auxiliary\Build\vcvarsall.bat" !VCVARSALL_ARCH_NAME!
-+	set PHP_SDK_VS_SHELL_CMD="!PHP_SDK_VC_DIR!\VsDevCmd.bat" -arch=!VCVARSALL_ARCH_NAME! -vcvars_ver=%vcvars_ver% -winsdk=%WKITVER% -no_logo
- )
- set VCVARSALL_ARCH_NAME=
- 
+     if NOT "%TOOLSET%"=="" (
+-        set PHP_SDK_VS_SHELL_CMD="!PHP_SDK_VC_DIR!\Auxiliary\Build\vcvarsall.bat" !VCVARSALL_ARCH_NAME! -vcvars_ver=%TOOLSET%
++        set PHP_SDK_VS_SHELL_CMD="!PHP_SDK_VC_DIR!\VsDevCmd.bat" -arch=!VCVARSALL_ARCH_NAME! -vcvars_ver=%TOOLSET% -winsdk=%WKITVER% -no_logo
+     ) else (
+         set PHP_SDK_VS_SHELL_CMD="!PHP_SDK_VC_DIR!\Auxiliary\Build\vcvarsall.bat" !VCVARSALL_ARCH_NAME!
+     )
