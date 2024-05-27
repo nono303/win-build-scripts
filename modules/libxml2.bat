@@ -1,14 +1,13 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
 
-	REM for PHP 
-	REM - libxml2_a_dll MUST be used 
+	REM for PHP
+	REM - libxml2_a_dll MUST be used
 	REM   - https://wiki.php.net/internals/windows/libs/libxml2
 	REM   - https://gist.github.com/auroraeosrose/3452993 (support libxml PHP extension shared and against shared dll on windows)
 	REM - legacy MUST be yes
 for %%X in (OFF ON) do (
 	cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 	-DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
-	-DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
 	-DBUILD_SHARED_LIBS=%%X ^
 	-DBUILD_STATIC_FOR_DLL=ON ^
 	-DLIBXML2_WITH_C14N=ON ^
@@ -49,7 +48,7 @@ for %%X in (OFF ON) do (
 
 	%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 	%NINJA% install
-	
+
 	if %%X == OFF (xcopy /C /F /Y %PATH_BUILD%\%1\libxml2_a_dll.pdb %PATH_INSTALL%\lib\*)
 )
 

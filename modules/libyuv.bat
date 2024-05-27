@@ -5,7 +5,6 @@ sed -i 's/ly_lib_name} )/ly_lib_name}_static \)/g' %CYGPATH_SRC%/%1/CMakeLists.t
 
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
--DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
 -DBUILD_SHARED_LIBS=1 ^
 -DUNIT_TEST=0 ^
 %PATH_SRC%\%1

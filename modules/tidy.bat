@@ -1,5 +1,4 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
-
 	REM static rename
 sed -i 's/${LIB_NAME}s/${LIB_NAME}_a/g' %CYGPATH_SRC%/%1/CMakeLists.txt
 sed -i 's/tidy-static/tidy_a/g' %CYGPATH_SRC%/%1/CMakeLists.txt
@@ -8,7 +7,6 @@ sed -i 's/OUTPUT_NAME ${LIB_NAME} /OUTPUT_NAME lib${LIB_NAME} /g' %CYGPATH_SRC%/
 
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
--DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
 -DBUILD_SHARED_LIB=ON ^
 -DTIDY_CONSOLE_SHARED=ON ^
 -DBUILD_TAB2SPACE=OFF ^
@@ -24,7 +22,6 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DADD_SYSTEM_RUNTIMES=OFF ^
 -DENABLE_CONFIG_FILES=ON ^
 %PATH_SRC%\%1
-
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 sed -i 's/tidy_a\.pdb/tidy_static\.pdb/g' %CYGPATH_BUILD%/%1/build.ninja

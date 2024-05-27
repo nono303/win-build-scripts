@@ -2,7 +2,6 @@
 
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
--DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
 -DCMAKE_DISABLE_FIND_PACKAGE_JBIG=ON ^
 -DBUILD_SHARED_LIBS=ON ^
 -Dtiff-tools=OFF ^
@@ -12,16 +11,6 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -Dtiff-docs=OFF ^
 -Dtiff-deprecated=OFF ^
 -Dtiff-install=ON ^
--DZLIB_LIBRARY=%PATH_INSTALL:\=/%/lib/zlib.lib ^
--DZLIB_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
--DJPEG_LIBRARY=%PATH_INSTALL:\=/%/lib/jpeg.lib ^
--DJPEG_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
--DLIBLZMA_LIBRARIES=%PATH_INSTALL:\=/%/lib/liblzma.lib ^
--DLIBLZMA_INCLUDE_DIRS=%PATH_INSTALL:\=/%/include ^
--DDeflate_LIBRARIES=%PATH_INSTALL:\=/%/lib/deflate.lib ^
--DDeflate_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
--DWebP_LIBRARY_RELEASE=%PATH_INSTALL:\=/%/lib/libwebp.lib ^
--DWebP_INCLUDE_DIR=%PATH_INSTALL:\=/%/include ^
 -Dextra-warnings=OFF ^
 -Dfatal-warnings=OFF ^
 -Dld-version-script=OFF ^

@@ -14,7 +14,6 @@ cd /D %PATH_BUILD%\%1
 REM missing libraqm, libfontconfig, libimagequant
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
--DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
 -DENABLE_GD_FORMATS=ON ^
 -DENABLE_PNG=ON ^
 -DENABLE_LIQ=OFF ^
@@ -33,10 +32,6 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DVERBOSE_MAKEFILE=ON ^
 -DBUILD_SHARED_LIBS=ON ^
 -DBUILD_STATIC_LIBS=OFF ^
--DWEBP_LIBRARY=%PATH_INSTALL%\lib\libwebp.lib ^
--DWEBP_INCLUDE_DIR=%PATH_INSTALL%\lib\include ^
--DXPM_LIBRARY=%PATH_INSTALL%\lib\libxpm.lib ^
--DXPM_XPM_INCLUDE_DIR=%PATH_INSTALL%\lib\include ^
 -DBUILD_TEST=OFF ^
 -DBUILD_EXEMPLES=OFF ^
 -DBUILD_DOCS=OFF ^
@@ -50,5 +45,3 @@ for %%Y in (cmake_install.cmake build.ninja) do (sed -i 's/-static\./_static\./g
 for %%X in (bdftogd gd2copypal.exe gd2togif.exe gd2topng.exe gdcmpgif.exe gdparttopng.exe gdtopng.exe giftogd2.exe pngtogd.exe pngtogd2.exe) do (DEL /Q /F %PATH_INSTALL%\bin\%%X)
 xcopy /C /F /Y %PATH_BUILD%\%1\Bin\libgd.pdb %PATH_INSTALL%\bin\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libgd.dll
-
-exit /B

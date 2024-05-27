@@ -1,6 +1,6 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
 
-REM	SQLITE_ENABLE_COLUMN_METADATA=ON	SQLITE_OMIT_DECLTYPE=OFF 
+REM	SQLITE_ENABLE_COLUMN_METADATA=ON	SQLITE_OMIT_DECLTYPE=OFF
 REM		https://github.com/storesafe/cordova-sqlite-storage/issues/906
 REM		PHP: sqlite_statement.obj : error LNK2001: unresolved external symbol sqlite3_column_table_name / sqlite3_column_decltype
 REM	SQLITE_THREADSAFE=ON	> gdal
@@ -20,7 +20,6 @@ if "%2"=="svn" (
 
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
--DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE% ^
 -DSHAREDLIB_PREFIX=lib ^
 -DENABLE_SHARED=ON ^
 -DENABLE_STATIC=OFF ^
@@ -49,7 +48,8 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DWIN32_MALLOC=ON ^
 -DWIN32_HEAP_CREATE=ON ^
 -DBUILD_WITH_XPSDK=OFF ^
-%SQLITEICU% %PATH_SRC%\%1
+%SQLITEICU% ^
+%PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% install
