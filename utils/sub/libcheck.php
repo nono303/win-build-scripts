@@ -25,7 +25,7 @@
 						$liblist = array_diff($liblist,[$lib]);
 						$echres = "";
 						foreach($tabresultat as $pdbordll){
-							if(in_array($pdbordll,$pdbordlllist[$k]) || in_array($pdbordll,$pdbordllused[$k])){
+							if(($pdbordlllist[$k] && in_array($pdbordll,$pdbordlllist[$k])) || ($pdbordllused[$k] && in_array($pdbordll,$pdbordllused[$k]))){
 								if(explode(".",$pdbordll)[0] == explode(".",$lib)[0]){
 									$echres .= str_pad("\033[92m".$pdbordll."\033[39m",PAD);
 								} else {
