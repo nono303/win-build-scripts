@@ -1,9 +1,9 @@
- libgeotiff/CMakeLists.txt       | 240 ++++++++++++++++++++++------------------
+ libgeotiff/CMakeLists.txt       | 243 +++++++++++++++++++++-------------------
  libgeotiff/cmake/FindPROJ.cmake | 135 ++++++++++++++--------
- 2 files changed, 221 insertions(+), 154 deletions(-)
+ 2 files changed, 221 insertions(+), 157 deletions(-)
 
 diff --git a/libgeotiff/CMakeLists.txt b/libgeotiff/CMakeLists.txt
-index 4862f86..ab7adc3 100644
+index 4862f86..e7062ba 100644
 --- a/libgeotiff/CMakeLists.txt
 +++ b/libgeotiff/CMakeLists.txt
 @@ -5,7 +5,7 @@
@@ -58,7 +58,7 @@ index 4862f86..ab7adc3 100644
  
  # Check required standard headers
  INCLUDE(CheckIncludeFiles)
-@@ -108,90 +84,31 @@ CHECK_INCLUDE_FILES(strings.h GEOTIFF_HAVE_STRINGS_H)
+@@ -108,90 +84,28 @@ CHECK_INCLUDE_FILES(strings.h GEOTIFF_HAVE_STRINGS_H)
  ###############################################################################
  # User-defined build settings
  
@@ -75,20 +75,20 @@ index 4862f86..ab7adc3 100644
  
  # TIFF support - required, default=ON
 -SET(WITH_TIFF TRUE CACHE BOOL "Choose if TIFF support should be built")
-+option(WITH_TIFF "Choose if TIFF support should be built" ON)
- 
- FIND_PACKAGE(PROJ NO_MODULE QUIET)
- if (NOT PROJ_FOUND)
+-
+-FIND_PACKAGE(PROJ NO_MODULE QUIET)
+-if (NOT PROJ_FOUND)
 -    FIND_PACKAGE(PROJ)
-+  FIND_PACKAGE(PROJ REQUIRED)
- endif ()
+-endif ()
++option(WITH_TIFF "Choose if TIFF support should be built" ON)
  
 -IF(PROJ_FOUND)
 -    INCLUDE_DIRECTORIES(${PROJ_INCLUDE_DIR})
 -ELSE()
 -    MESSAGE(FATAL_ERROR "Failed to detect PROJ >= 6")
 -ENDIF()
--
++FIND_PACKAGE(PROJ REQUIRED)
+ 
  # Zlib support - optional, default=OFF
 -SET(WITH_ZLIB FALSE CACHE BOOL "Choose if zlib support should be built")
 -
@@ -157,7 +157,7 @@ index 4862f86..ab7adc3 100644
  IF (NOT WITH_TOWGS84)
     SET(GEO_NORMALIZE_DISABLE_TOWGS84 1)
  endif()
-@@ -244,21 +161,20 @@ SET(GEOTIFF_MAN_PAGES
+@@ -244,21 +158,20 @@ SET(GEOTIFF_MAN_PAGES
  #    ${PROJECT_BINARY_DIR}/geotiff_version.h
  
  # Install doc files
@@ -185,7 +185,7 @@ index 4862f86..ab7adc3 100644
  
  ###############################################################################
  # Build libgeotiff library
-@@ -290,8 +206,68 @@ endif ()
+@@ -290,8 +203,68 @@ endif ()
  ADD_LIBRARY(${GEOTIFF_LIBRARY_TARGET}
      ${GEOTIFF_LIB_SOURCES} ${XTIFF_SOURCES})
  
@@ -255,7 +255,7 @@ index 4862f86..ab7adc3 100644
  ENDIF(WIN32 AND MSVC)
  
  # Unix, linux:
-@@ -310,8 +286,31 @@ if(UNIX)
+@@ -310,8 +283,31 @@ if(UNIX)
     endif()
  endif()
  
@@ -289,7 +289,7 @@ index 4862f86..ab7adc3 100644
  
  set(CONFIG_PUBLIC_DEPENDENCIES "")
  set(CONFIG_PRIVATE_DEPENDENCIES "")
-@@ -324,15 +323,22 @@ target_link_libraries(${GEOTIFF_LIBRARY_TARGET} PUBLIC
+@@ -324,15 +320,22 @@ target_link_libraries(${GEOTIFF_LIBRARY_TARGET} PUBLIC
  
  if(TARGET PROJ::proj)
      set(PROJ_LIBRARIES PROJ::proj)
@@ -318,7 +318,7 @@ index 4862f86..ab7adc3 100644
  
  INSTALL( TARGETS ${GEOTIFF_LIBRARY_TARGET}
       EXPORT depends
-@@ -340,6 +346,7 @@ INSTALL( TARGETS ${GEOTIFF_LIBRARY_TARGET}
+@@ -340,6 +343,7 @@ INSTALL( TARGETS ${GEOTIFF_LIBRARY_TARGET}
       LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
       PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
       ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR} )
@@ -326,7 +326,7 @@ index 4862f86..ab7adc3 100644
  
  # Install libgeotiff.pc
  set(prefix "${CMAKE_INSTALL_PREFIX}")
-@@ -375,3 +382,16 @@ IF(WITH_UTILITIES)
+@@ -375,3 +379,16 @@ IF(WITH_UTILITIES)
  ENDIF()
  
  ADD_SUBDIRECTORY(cmake)
