@@ -1,8 +1,162 @@
 # changelog
 
 
+## 1.10.0 _(2024-05-28)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  improve & factorize cmake find*
+`modules/aom.bat`
+`modules/apr-util.bat`
+`modules/apr.bat`
+`modules/brotli.bat`
+`modules/bzip2.bat`
+`modules/cares.bat`
+`modules/common/init.bat`
+`modules/curl.bat`
+`modules/freeglut.bat`
+`modules/freetype2.bat`
+`modules/gdal.bat`
+`modules/geographiclib.bat`
+`modules/geos.bat`
+`modules/giflib.bat`
+`modules/httpd.bat`
+`modules/jansson.bat`
+`modules/lerc.bat`
+`modules/libavif.bat`
+`modules/libdeflate.bat`
+`modules/libev.bat`
+`modules/libevent.bat`
+`modules/libexpat.bat`
+`modules/libgav1.bat`
+`modules/libgd.bat`
+`modules/libgeotiff.bat`
+`modules/libheif.bat`
+`modules/libjpeg-turbo.bat`
+`modules/liblzma.bat`
+`modules/libpng.bat`
+`modules/libssh2.bat`
+`modules/libtiff.bat`
+`modules/libwebp.bat`
+`modules/libxdiff.bat`
+`modules/libxml2.bat`
+`modules/libxslt.bat`
+`modules/libyuv.bat`
+`modules/libzip.bat`
+`modules/mod_fcgid.bat`
+`modules/mod_md.bat`
+`modules/nghttp2.bat`
+`modules/nghttp3.bat`
+`modules/ngtcp2.bat`
+`modules/pcre2.bat`
+`modules/proj.bat`
+`modules/qhull.bat`
+`modules/serf.bat`
+`modules/sqlite.bat`
+`modules/tidy.bat`
+`modules/wineditline.bat`
+`modules/yajl.bat`
+`modules/zlib.bat`
+`modules/zstd.bat`
+*  fix FIND_PACKAGE(PROJ REQUIRED)
+`modules/libgeotiff.patch`
+*  fix null
+`utils/sub/libcheck.php`
+*  https://github.com/php/php-sdk-binary-tools/pull/15
+`modules/php-sdk.patch`
+`modules/php.bat`
+*  fix padding
+`utils/sub/srcstatus.php`
+*  clean
+`modules/php-ogr.bat`
+*  1.7.3 - https://github.com/OSGeo/libgeotiff/pull/115
+`modules/libgeotiff.bat`
+`modules/libgeotiff.patch`
+*  1.7.2
+`modules/libgeotiff.patch`
+*  8.8.0
+`modules/curl.patch`
+*  apr cmake build
+`SRC_VERSION.md`
+`modules/apr-util.bat`
+`modules/apr-util.patch`
+`modules/apr.bat`
+`modules/apr.sh`
+`modules/apr_once.sh`
+`modules/full.bat`
+`usage.txt`
+`utils/bininfo.bat`
+`utils/srccreate.bat`
+*  fix AVX_MPIR=core2-penryn & ext MPIRVCVER
+`avx.bat`
+`modules/mpir.bat`
+*  -useless comment
+`go.bat`
+*  fixed in nghttp2 1.62.0 / nghttp3 1.3.0 / ngtcp2 1.5.0
+`modules/nghttp2.patch`
+`modules/nghttp3.patch`
+`modules/ngtcp2.patch`
+*  update tools & src
+`SRC_VERSION.md`
+`config/cyg64.packagelist`
+`config/python.pip`
+`utils/srccreate.bat`
+*  remove deprecated vc15 & x86 build options
+`README.md`
+`config/.vsconfig`
+`config/cyg32.packagelist`
+`env_sample.bat`
+`go.bat`
+`modules/geographiclib.bat`
+`modules/jemalloc.bat`
+`modules/mod_md.bat`
+`modules/openssl.bat`
+`modules/subversion-deps.bat`
+`usage.txt`
+`utils/configexport.bat`
+`utils/sub/bininfo.php`
+`vc15.bat`
+`x64.bat`
+`x86.bat`
+*  vcvarsall.bat > VsDevCmd.bat (https://learn.microsoft.com/en-us/visualstudio/ide/reference/command-prompt-powershell?view=vs-2022#developer-command-prompt)
+`avx.bat`
+`modules/php-sdk.patch`
+`modules/php.bat`
+*  Fix GCC version
+`utils/sub/version.php`
+*  remove deprecated x86 build options add debug params for make with verbose option
+`modules/memcached.bat`
+*  Fix 'MSB8003: The VCToolsInstallDir property is not defined' with 14.40
+`modules/mpir.bat`
+*  Gradle 8.8
+`modules/mobac.patch`
+*  remove deprecated x86 build options add debug params for make with verbose option
+`modules/libconfig.sh`
+`modules/libsodium.bat`
+`modules/memcached.sh`
+`modules/sslh.bat`
+`modules/sslh.sh`
+*  +curl: mk-ca-bundle.pl
+`utils/bininfo.bat`
+*  +run-hidden.bat
+`modules/run-hidden.bat`
+`usage.txt`
+*  fix description for cygin builds
+`modules/memcached.bat`
+`modules/sslh.bat`
+`utils/sub/version.php`
+*  8.8.0
+`modules/curl.bat`
+`modules/curl.patch`
+`modules/curl_ca-win.patch`
+
+
 ## 1.9.0 _(2024-04-24)_
 
+*  1.9.0
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
