@@ -30,15 +30,15 @@ git checkout master
 cd /D ..
 git clone https://github.com/c-ares/c-ares.git cares
 cd /D cares
-git checkout tags/cares-1_28_1
+git checkout tags/cares-1_29_0
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout master
+git checkout tags/curl-8_8_0
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
-git checkout tags/1.4.0
+git checkout tags/1.4.2
 cd /D ..
 git clone https://github.com/nono303/Dependencies.git dependencies
 cd /D dependencies
@@ -78,7 +78,7 @@ git checkout tags/2.4.59
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout icu4x/2024-05-03/75.x
+git checkout icu4x/2024-05-16/75.x
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -126,7 +126,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/OSGeo/libgeotiff libgeotiff
 cd /D libgeotiff
-git checkout tags/1.7.1rc2
+git checkout tags/1.7.3
 cd /D ..
 git clone https://github.com/strukturag/libheif.git libheif
 cd /D libheif
@@ -198,7 +198,7 @@ git checkout tags/v5.4.6
 cd /D ..
 git clone https://github.com/nono303/mapsforgesrv.git mapsforgesrv
 cd /D mapsforgesrv
-git checkout tags/v0.21.1_for_java11
+git checkout styles
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
@@ -206,7 +206,7 @@ git checkout tags/1.6.27
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2771
+svn update -r 2778
 cd /D ..
 git clone https://github.com/JBlond/mod_bikeshed.git mod_bikeshed
 cd /D mod_bikeshed
@@ -254,7 +254,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/nghttp2/nghttp2.git nghttp2
 cd /D nghttp2
-git checkout tags/v1.62.0
+git checkout tags/v1.62.1
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3
@@ -350,11 +350,11 @@ git checkout trunk
 cd /D ..
 git clone https://github.com/rhuijben/sqlite-amalgamation sqlite
 cd /D sqlite
-git checkout tags/3.45.3
+git checkout tags/3.46.0
 cd /D ..
 git clone https://github.com/yrutschle/sslh.git sslh
 cd /D sslh
-git checkout master
+git checkout tags/v2.1.2
 cd /D ..
 git clone https://github.com/apache/subversion.git subversion
 cd /D subversion
