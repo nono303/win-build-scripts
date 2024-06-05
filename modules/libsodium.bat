@@ -3,10 +3,12 @@
 set VCDIR=builds\msvc\vs2022
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/%VCDIR%" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
 
+REM /p:Option-amd64asm=yes: nonstandard extension used: '__asm' keyword not supported on this architecture
 MSBuild.exe %PATH_SRC%\%1\%VCDIR%\libsodium.sln %MSBUILD_OPTS% ^
 /nowarn:C4197 ^
 /p:VCToolsInstallDir=%VCToolsInstallDir% ^
 /p:Configuration=DynRelease ^
+/p:Option-amd64asm=no ^
 /p:Platform=%archmsbuild%
 
 for /F "delims=" %%I in ('dir /a:-D /s /b %PATH_SRC%\%1\bin\libsodium.lib') do (xcopy /C /F /Y %%I %PATH_INSTALL%\lib\*)
