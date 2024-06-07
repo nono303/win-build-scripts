@@ -1,7 +1,7 @@
 @echo off
 REM ########################## QUIC enabled (nghttp2 & curl with nghttp3, ngtcp2 and patched openssl 3.X
 set QUIC_BUILD=%1
-IF "%~1" == "" (set QUIC_BUILD=1)
+IF "%~1" == "" (set QUIC_BUILD=0)
 if %QUIC_BUILD% == 1 (
 	set OPENSSL_SUF=81_3
 	set OPENSSL_SCM=openssl-quic
