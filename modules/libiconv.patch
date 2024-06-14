@@ -1,0 +1,20 @@
+ CMakeLists.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index bd2a9a4..9edb651 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -423,9 +423,9 @@ if(MSVC)
+ 	endif()
+ endif()
+ 
+-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libcharset/include/libcharset.h.inst DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${CMAKE_PROJECT_NAME} RENAME libcharset.h COMPONENT development)
+-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libcharset/include/localcharset.h.inst DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${CMAKE_PROJECT_NAME} RENAME localcharset.h COMPONENT development)
+-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/include/iconv.h.inst DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${CMAKE_PROJECT_NAME} RENAME iconv.h COMPONENT development)
++install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libcharset/include/libcharset.h.inst DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} RENAME libcharset.h COMPONENT development)
++install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libcharset/include/localcharset.h.inst DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} RENAME localcharset.h COMPONENT development)
++install(FILES ${CMAKE_CURRENT_BINARY_DIR}/include/iconv.h.inst DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} RENAME iconv.h COMPONENT development)
+ 
+ if(NOT CMAKE_VERSION VERSION_LESS 3.12)
+ 	install(

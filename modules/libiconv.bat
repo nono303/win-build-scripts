@@ -1,20 +1,24 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1
+@echo off
 
-REM https://bugs.php.net/bug.php?id=29362
-REM https://www.codeproject.com/Articles/302012/How-to-Build-libiconv-with-Microsoft-Visual-Studio
+if exist %PATH_INSTALL%\lib\cmake\gperf-3.1 rmdir /S /Q %PATH_INSTALL%\lib\cmake\gperf-3.1
+REM SRC
+call %PATH_MODULES_COMMON%\init.bat %1\%1
+REM cmake
+call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
 
-set OUTDIR_CONF=Release
+cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
+-DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
+-DBUILD_SHARED_LIBS=ON ^
+-DLIBICONV_BUILD_DOCUMENTATION=OFF ^
+-DLIBICONV_ENABLE_EXTRA=ON ^
+-DLIBICONV_ENABLE_NLS=OFF ^
+-DLIBICONV_ENABLE_RELOCATABLE=ON ^
+%PATH_SRC%\%1
 
-if not exist %PATH_SRC%\%1\. mklink /J %PATH_SRC%\%1 %PATH_SRC%\%1\MSVC16
-%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+	REM fix issue "subcommand failed"
+sed -i 's/\/GL //g' %CYGPATH_BUILD%/%1/build.ninja
+%NINJA% install
 
-MSBuild.exe %PATH_SRC%\%1\%1.sln %MSBUILD_OPTS% ^
-/t:Clean,%1 ^
-/nowarn:C4311;C4117;C4267;C4141;C4090 ^
-/p:Configuration=%OUTDIR_CONF% ^
-/p:Platform="%ARCH%"
-
-xcopy /C /F /Y %PATH_SRC%\%1\output\%archmsbuild%\%OUTDIR_CONF%\libiconv.lib %PATH_INSTALL%\lib\*
-for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\output\%archmsbuild%\%OUTDIR_CONF%\libiconv.%%X %PATH_INSTALL%\bin\*)
-xcopy /C /F /Y %PATH_SRC%\%1\include\iconv.h %PATH_INSTALL%\include\*
-call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libiconv.dll
+xcopy /C /F /Y %PATH_BUILD%\%1\gperf\gperf.pdb %PATH_INSTALL%\bin\*
+for %%X in (libcharset.dll libiconv.dll gperf.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
