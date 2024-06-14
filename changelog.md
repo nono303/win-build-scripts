@@ -1,8 +1,65 @@
 # changelog
 
 
+## 1.10.1 _(2024-06-14)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  https://github.com/OSGeo/libgeotiff/pull/123
+`modules/libgeotiff.bat`
+`modules/libgeotiff.patch`
+*  https://github.com/OSGeo/libgeotiff/commit/e00dcd652cd99e1ee81bd24a14b998cadab52c60
+`modules/libgeotiff.patch`
+*  https://github.com/OSGeo/libgeotiff/commit/cee338fac53d5f6702b605d7ae70e02bee272a22
+`modules/libgeotiff.bat`
+`modules/libgeotiff.patch`
+*  +libgeotiff https://github.com/OSGeo/libgeotiff/pull/120 fix libiconv for cmake build
+`utils/sub/version.php`
+*  add extra level folder
+`utils/sub/srcstatus.php`
+*  1.4.3
+`modules/dav1d.bat`
+*  1.10.0
+`modules/libmaxminddb.bat`
+*  cmake build (change scm) https://github.com/AiMiDi/libiconv_cmake/issues/5
+`modules/libiconv.bat`
+`modules/libiconv.patch`
+*  fix for libxml 2.13.0 https://github.com/php/php-src/issues/14563
+`modules/php-src_8.3.patch`
+*  2.13 +enable ICU
+`modules/libxml2.bat`
+`modules/libxml2.patch`
+*  1.30
+`modules/cares.bat`
+`modules/cares.patch`
+*  10.44
+`modules/pcre2.bat`
+`modules/pcre2.patch`
+*  not exist anymore
+`.gradle-wrapper.properties/mapsforgesrv-mapsforgesrv_gradle-wrapper.properties.properties`
+*  gradle 8.8
+`env_sample.bat`
+`modules/mobac.patch`
+*  disable quic by default
+`quic.bat`
+*  https://github.com/telemaxx/mapsforgesrv/pull/65
+`modules/mapsforgesrv.bat`
+*  +Option-amd64asm=no (nonstandard extension for MSVC)
+`modules/libsodium.bat`
+*  fix NBBIN for QUIC 0
+`utils/bininfo.bat`
+*  bump gradle
+`env_sample.bat`
+*  fix quote for avx 0
+`modules/memcached.bat`
+
+
 ## 1.10.0 _(2024-05-28)_
 
+*  1.10.0
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
