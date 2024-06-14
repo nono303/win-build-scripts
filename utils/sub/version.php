@@ -15,6 +15,8 @@
 	if(in_array($proot,["pecl-memcache","php-geos","php-ogr","php-proj","pecl-text-xdiff","php-ext-brotli","php-ext-zstd","xdebug","php-src"]))
 		$proot = "php";
 	$nogit = array(
+		"libgeotiff"		=> ["/#define LIBGEOTIFF_STRING_VERSION +\"([0-9\.]+)/s",
+							pathenv("PATH_INSTALL")."/include/geotiff.h"],
 		"sslh"				=> ["/define VERSION \"v([0-9\.]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/version.h"],
 		"dependencies"		=> ["/AssemblyVersion\(\"([0-9\.]+)\"/s",
@@ -69,8 +71,8 @@
 							pathenv("PATH_SRC")."/".$argv[1]."/src/gd.h"],
 		"geographiclib"		=> ["/PROJECT_VERSION_MAJOR ([0-9]+).*PROJECT_VERSION_MINOR ([0-9]+).*PROJECT_VERSION_PATCH ([0-9]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/CMakeLists.txt"],
-		"libiconv"			=> ['/#define VERSION "([0-9\.]+)/s',
-							pathenv("PATH_SRC")."/".$argv[1]."/libiconv/config.h"],
+		"libiconv"			=> ['/AC_INIT\(\[libiconv\], \[([0-9\.]+)/s',
+							pathenv("PATH_SRC")."/".$argv[1]."/libiconv/configure.ac"],
 		"libev"				=> ['/AC_INIT\(\[libev\], \[([0-9\.]+)/s',
 							pathenv("PATH_SRC")."/".$argv[1]."/configure.ac"],
 		"mod_qos"			=> ['/g_revision\[\] = "([0-9\.]+)/s',
