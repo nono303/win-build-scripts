@@ -270,3 +270,16 @@ index 1d8b3a0a1d..a84349217a 100644
  #endif
  	php_info_print_table_end();
  	DISPLAY_INI_ENTRIES();
+diff --git "a/ext/libxml/php_libxml2.def" "b/ext/libxml/php_libxml2.def"
+index 5980df8bf8..c4eac9761c 100644
+--- "a/ext/libxml/php_libxml2.def"
++++ "b/ext/libxml/php_libxml2.def"
+@@ -345,7 +345,7 @@ xmlElemDump
+ xmlEncodeEntities
+ xmlEncodeEntitiesReentrant
+ xmlEncodeSpecialChars
+-xmlErrMemory
++xmlCtxtErr
+ xmlFileClose
+ xmlFileMatch
+ xmlFileOpen
