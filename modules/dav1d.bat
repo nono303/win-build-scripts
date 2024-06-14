@@ -12,6 +12,7 @@ meson setup ^
 -Denable_tools=false ^
 -Denable_examples=false ^
 -Denable_tests=false ^
+-Denable_seek_stress=false ^
 -Denable_docs=false ^
 -Dlogging=true ^
 -Dtestdata_tests=false ^
@@ -21,6 +22,7 @@ meson setup ^
 -Dxxhash_muxer=auto ^
 -Dtrim_dsp=true ^
 -Db_lto=true ^
+-Dmacos_kperf=false ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/meson.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
