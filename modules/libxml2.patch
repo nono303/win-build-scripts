@@ -1,5 +1,8 @@
+ CMakeLists.txt | 25 +++++++++++++++++++++----
+ 1 file changed, 21 insertions(+), 4 deletions(-)
+
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 3a074da8..1e573bdd 100644
+index 723e2344..8fd1abc4 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -24,6 +24,7 @@ include(FindPkgConfig)
@@ -10,10 +13,10 @@ index 3a074da8..1e573bdd 100644
  set(LIBXML2_WITH_AUTOMATA ON)
  option(LIBXML2_WITH_C14N "Add the Canonicalization support" ON)
  option(LIBXML2_WITH_CATALOG "Add the Catalog support" ON)
-@@ -462,14 +463,25 @@ if(MSVC)
- 			PROPERTIES
- 			DEBUG_POSTFIX d
- 		)
+@@ -445,14 +446,25 @@ if(MSVC)
+             PROPERTIES
+             DEBUG_POSTFIX d
+         )
 +		
 +	elseif(BUILD_STATIC_FOR_DLL)
 +		set_target_properties(
@@ -25,24 +28,24 @@ index 3a074da8..1e573bdd 100644
 +			RELWITHDEBINFO_POSTFIX _a_dll
 +			COMPILE_PDB_NAME xml2_a_dll
 +		)
- 	else()
- 		set_target_properties(
- 			LibXml2
- 			PROPERTIES
--			DEBUG_POSTFIX sd
--			MINSIZEREL_POSTFIX s
--			RELEASE_POSTFIX s
--			RELWITHDEBINFO_POSTFIX s
+     else()
+         set_target_properties(
+             LibXml2
+             PROPERTIES
+-            DEBUG_POSTFIX sd
+-            MINSIZEREL_POSTFIX s
+-            RELEASE_POSTFIX s
+-            RELWITHDEBINFO_POSTFIX s
 +			DEBUG_POSTFIX _ad
 +			MINSIZEREL_POSTFIX _a
 +			RELEASE_POSTFIX _a
 +			RELWITHDEBINFO_POSTFIX _a
- 		)
- 	endif()
+         )
+     endif()
  endif()
-@@ -676,6 +688,11 @@ if(BUILD_SHARED_LIBS)
- 	set(XML_PC_PRIVATE ".private")
- 	set(XML_PC_LIBS_PRIVATE "
+@@ -659,6 +671,11 @@ if(BUILD_SHARED_LIBS)
+     set(XML_PC_PRIVATE ".private")
+     set(XML_PC_LIBS_PRIVATE "
  Libs.private:")
 +elseif(BUILD_STATIC_FOR_DLL)
 +	target_compile_definitions(LibXml2 PUBLIC LIBXML_STATIC_FOR_DLL)
@@ -50,5 +53,5 @@ index 3a074da8..1e573bdd 100644
 +	set(XML_CFLAGS "-DLIBXML_STATIC_FOR_DLL")
 +	set(XML_PRIVATE_LIBS_NO_SHARED "${XML_PRIVATE_LIBS}")
  else()
- 	target_compile_definitions(LibXml2 PUBLIC LIBXML_STATIC)
- 	set(XML_CFLAGS "-DLIBXML_STATIC")
+     target_compile_definitions(LibXml2 PUBLIC LIBXML_STATIC)
+     set(XML_CFLAGS "-DLIBXML_STATIC")
