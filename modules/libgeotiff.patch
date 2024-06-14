@@ -1,12 +1,8 @@
- libgeotiff/CMakeLists.txt | 90 ++++++++++++++++++-----------------------------
- libgeotiff/geotiff.h      |  1 +
- 2 files changed, 36 insertions(+), 55 deletions(-)
-
 diff --git a/libgeotiff/CMakeLists.txt b/libgeotiff/CMakeLists.txt
-index d2d1d87..8677d14 100644
+index 9d4404a..5a0e7b6 100644
 --- a/libgeotiff/CMakeLists.txt
 +++ b/libgeotiff/CMakeLists.txt
-@@ -91,16 +91,7 @@ if (MSVC)
+@@ -100,16 +100,7 @@ if (MSVC)
  endif (MSVC)
  
  ###############################################################################
@@ -24,7 +20,7 @@ index d2d1d87..8677d14 100644
  
  # Zlib support - optional, default=OFF
  option(WITH_ZLIB "Choose if zlib support should be built" OFF)
-@@ -126,7 +117,6 @@ INCLUDE_DIRECTORIES(BEFORE ${CMAKE_CURRENT_BINARY_DIR})
+@@ -135,7 +126,6 @@ INCLUDE_DIRECTORIES(BEFORE ${CMAKE_CURRENT_BINARY_DIR})
  
  MESSAGE(STATUS "Generating geo_config.h header - done")
  
@@ -32,7 +28,7 @@ index d2d1d87..8677d14 100644
  ###############################################################################
  # Installation settings
  
-@@ -213,55 +203,44 @@ set_property(TARGET ${GEOTIFF_LIBRARY_TARGET} PROPERTY C_STANDARD 99)
+@@ -220,55 +210,44 @@ set_property(TARGET ${GEOTIFF_LIBRARY_TARGET} PROPERTY C_STANDARD 99)
  set_property(TARGET ${GEOTIFF_LIBRARY_TARGET} PROPERTY POSITION_INDEPENDENT_CODE ON)
  set_property(TARGET ${GEOTIFF_LIBRARY_TARGET} PROPERTY OUTPUT_NAME ${GEOTIFF_LIB_NAME})
  
@@ -118,7 +114,7 @@ index d2d1d87..8677d14 100644
  ENDIF()
  
  TARGET_INCLUDE_DIRECTORIES(${GEOTIFF_LIBRARY_TARGET} PUBLIC
-@@ -397,8 +376,9 @@ Summary of build options:
+@@ -404,8 +383,9 @@ Summary of build options:
     Build man pages:          ${BUILD_MAN}
     Build doc files:          ${BUILD_DOC}
     Build GeoTIFF utilities:  ${WITH_UTILITIES}
@@ -131,15 +127,3 @@ index d2d1d87..8677d14 100644
 +   Build JPEG support:       ${WITH_JPEG} ${JPEG_VERSION}
     Build TOWGS84 support:    ${WITH_TOWGS84}
  ################################")
-diff --git a/libgeotiff/geotiff.h b/libgeotiff/geotiff.h
-index 75de593..9390b74 100644
---- a/libgeotiff/geotiff.h
-+++ b/libgeotiff/geotiff.h
-@@ -48,6 +48,7 @@
- 
- /* Library version */
- #define LIBGEOTIFF_VERSION 1740
-+#define LIBGEOTIFF_STRING_VERSION "1.7.4"
- 
- #include "geo_config.h"
- #include "geokeys.h"
