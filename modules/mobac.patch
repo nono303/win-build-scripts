@@ -1,6 +1,6 @@
 Index: build.gradle
 ===================================================================
---- build.gradle	(revision 2771)
+--- build.gradle	(revision 2781)
 +++ build.gradle	(working copy)
 @@ -6,7 +6,7 @@
      id 'distribution'
@@ -11,122 +11,9 @@ Index: build.gradle
  }
  
  group 'mobac.sourceforge.io'
-@@ -19,9 +19,8 @@
-         mavenCentral()
-         maven {
-             // required for javax.media:jai-core:1.1.3 and com.sun.media:jai-codec:1.1.3
--            url "https://repository.jboss.org/maven2"
-+            url "https://repo.osgeo.org/repository/release"
-         }
--
-         // maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-     }
-     ext {
-Index: gradle/wrapper/gradle-wrapper.jar
-===================================================================
-Cannot display: file marked as a binary type.
-svn:mime-type = application/octet-stream
-Index: gradle/wrapper/gradle-wrapper.properties
-===================================================================
---- gradle/wrapper/gradle-wrapper.properties	(revision 2771)
-+++ gradle/wrapper/gradle-wrapper.properties	(working copy)
-@@ -1,6 +1,6 @@
- distributionBase=GRADLE_USER_HOME
- distributionPath=wrapper/dists
--distributionUrl=https\://services.gradle.org/distributions/gradle-8.6-all.zip
-+distributionUrl=https\://services.gradle.org/distributions/gradle-8.8-bin.zip
- networkTimeout=10000
- validateDistributionUrl=true
- zipStoreBase=GRADLE_USER_HOME
-Index: gradlew
-===================================================================
---- gradlew	(revision 2771)
-+++ gradlew	(working copy)
-@@ -55,7 +55,7 @@
- #       Darwin, MinGW, and NonStop.
- #
- #   (3) This script is generated from the Groovy template
--#       https://github.com/gradle/gradle/blob/HEAD/subprojects/plugins/src/main/resources/org/gradle/api/internal/plugins/unixStartScript.txt
-+#       https://github.com/gradle/gradle/blob/HEAD/platforms/jvm/plugins-application/src/main/resources/org/gradle/api/internal/plugins/unixStartScript.txt
- #       within the Gradle project.
- #
- #       You can find Gradle at https://github.com/gradle/gradle/.
-@@ -145,7 +145,7 @@
-     case $MAX_FD in #(
-       max*)
-         # In POSIX sh, ulimit -H is undefined. That's why the result is checked to see if it worked.
--        # shellcheck disable=SC3045
-+        # shellcheck disable=SC2039,SC3045
-         MAX_FD=$( ulimit -H -n ) ||
-             warn "Could not query maximum file descriptor limit"
-     esac
-@@ -153,7 +153,7 @@
-       '' | soft) :;; #(
-       *)
-         # In POSIX sh, ulimit -n is undefined. That's why the result is checked to see if it worked.
--        # shellcheck disable=SC3045
-+        # shellcheck disable=SC2039,SC3045
-         ulimit -n "$MAX_FD" ||
-             warn "Could not set maximum file descriptor limit to $MAX_FD"
-     esac
-@@ -202,11 +202,11 @@
- # Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
- DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
- 
--# Collect all arguments for the java command;
--#   * $DEFAULT_JVM_OPTS, $JAVA_OPTS, and $GRADLE_OPTS can contain fragments of
--#     shell script including quotes and variable substitutions, so put them in
--#     double quotes to make sure that they get re-expanded; and
--#   * put everything else in single quotes, so that it's not re-expanded.
-+# Collect all arguments for the java command:
-+#   * DEFAULT_JVM_OPTS, JAVA_OPTS, JAVA_OPTS, and optsEnvironmentVar are not allowed to contain shell fragments,
-+#     and any embedded shellness will be escaped.
-+#   * For example: A user cannot expect ${Hostname} to be expanded, as it is an environment variable and will be
-+#     treated as '${Hostname}' itself on the command line.
- 
- set -- \
-         "-Dorg.gradle.appname=$APP_BASE_NAME" \
-Index: gradlew.bat
-===================================================================
---- gradlew.bat	(revision 2771)
-+++ gradlew.bat	(working copy)
-@@ -43,11 +43,11 @@
- %JAVA_EXE% -version >NUL 2>&1
- if %ERRORLEVEL% equ 0 goto execute
- 
--echo.
--echo ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
--echo.
--echo Please set the JAVA_HOME variable in your environment to match the
--echo location of your Java installation.
-+echo. 1>&2
-+echo ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH. 1>&2
-+echo. 1>&2
-+echo Please set the JAVA_HOME variable in your environment to match the 1>&2
-+echo location of your Java installation. 1>&2
- 
- goto fail
- 
-@@ -57,11 +57,11 @@
- 
- if exist "%JAVA_EXE%" goto execute
- 
--echo.
--echo ERROR: JAVA_HOME is set to an invalid directory: %JAVA_HOME%
--echo.
--echo Please set the JAVA_HOME variable in your environment to match the
--echo location of your Java installation.
-+echo. 1>&2
-+echo ERROR: JAVA_HOME is set to an invalid directory: %JAVA_HOME% 1>&2
-+echo. 1>&2
-+echo Please set the JAVA_HOME variable in your environment to match the 1>&2
-+echo location of your Java installation. 1>&2
- 
- goto fail
- 
 Index: mobac/build.gradle
 ===================================================================
---- mobac/build.gradle	(revision 2771)
+--- mobac/build.gradle	(revision 2781)
 +++ mobac/build.gradle	(working copy)
 @@ -4,7 +4,7 @@
  }
@@ -191,7 +78,7 @@ Index: mobac/build.gradle
      doLast {
 Index: mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(revision 2771)
+--- mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(revision 2781)
 +++ mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(working copy)
 @@ -34,15 +34,10 @@
  	static {
@@ -213,7 +100,7 @@ Index: mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java
  	}
 Index: mobac/src/main/java/mobac/gui/MainGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2771)
+--- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2781)
 +++ mobac/src/main/java/mobac/gui/MainGUI.java	(working copy)
 @@ -151,7 +151,7 @@
  
@@ -234,7 +121,7 @@ Index: mobac/src/main/java/mobac/gui/MainGUI.java
  		leftPanelContent.add(mapSourcePanel, gbc_eol);
 Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2771)
+--- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2781)
 +++ mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(working copy)
 @@ -43,7 +43,7 @@
  		JScrollPane mapSourceTreeScrollPane = new JScrollPane(mapSourceTree, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -247,7 +134,7 @@ Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
  	}
 Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2771)
+--- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2781)
 +++ mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(working copy)
 @@ -95,7 +95,7 @@
  
@@ -260,7 +147,7 @@ Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
  	private final Settings settings = Settings.getInstance();
 Index: mobac/src/main/java/mobac/program/AtlasThread.java
 ===================================================================
---- mobac/src/main/java/mobac/program/AtlasThread.java	(revision 2771)
+--- mobac/src/main/java/mobac/program/AtlasThread.java	(revision 2781)
 +++ mobac/src/main/java/mobac/program/AtlasThread.java	(working copy)
 @@ -203,13 +203,13 @@
  			}
@@ -280,7 +167,7 @@ Index: mobac/src/main/java/mobac/program/AtlasThread.java
  		} catch (AtlasTestException e) {
 Index: mobac/src/main/java/mobac/program/download/MobacTrustManager.java
 ===================================================================
---- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2771)
+--- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2781)
 +++ mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(working copy)
 @@ -128,7 +128,7 @@
  			defaultTrustManager.checkServerTrusted(chain, authType);
