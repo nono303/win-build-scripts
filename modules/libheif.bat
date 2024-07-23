@@ -4,7 +4,11 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DCMAKE_DISABLE_FIND_PACKAGE_Doxygen=1 ^
 -DBUILD_SHARED_LIBS=ON ^
+-DBUILD_TESTING=OFF ^
 -DENABLE_PLUGIN_LOADING=ON ^
+-DENABLE_COVERAGE=OFF ^
+-DENABLE_MULTITHREADING_SUPPORT=ON ^
+-DENABLE_PARALLEL_TILE_DECODING=ON ^
 -DWITH_LIBDE265=OFF ^
 -DWITH_X265=OFF ^
 -DWITH_X265_PLUGIN=OFF ^
@@ -23,23 +27,33 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DWITH_GDK_PIXBUF=ON ^
 -DWITH_REDUCED_VISIBILITY=OFF ^
 -DWITH_EXAMPLES=ON ^
--DBUILD_TESTING=OFF ^
 -DWITH_FUZZERS=OFF ^
--DWITH_DEFLATE_HEADER_COMPRESSION=ON ^
--DENABLE_MULTITHREADING_SUPPORT=ON ^
--DENABLE_PARALLEL_TILE_DECODING=ON ^
+-DWITH_HEADER_COMPRESSION=ON ^
 -DWITH_FFMPEG_DECODER=OFF ^
+-DWITH_FFMPEG_DECODER_PLUGIN=OFF ^
 -DWITH_JPEG_DECODER=ON ^
 -DWITH_JPEG_DECODER_PLUGIN=OFF ^
 -DWITH_JPEG_ENCODER=ON ^
 -DWITH_JPEG_ENCODER_PLUGIN=OFF ^
 -DWITH_KVAZAAR=OFF ^
+-DWITH_KVAZAAR_PLUGIN=OFF ^
 -DWITH_LIBDE265=OFF ^
 -DWITH_LIBDE265_PLUGIN=OFF ^
+-DWITH_OPENJPH_ENCODER=OFF ^
+-DWITH_OPENJPH_ENCODER_PLUGIN=ON ^
 -DWITH_OpenJPEG_DECODER=OFF ^
+-DWITH_OpenJPEG_DECODER_PLUGIN=OFF ^
 -DWITH_OpenJPEG_ENCODER=OFF ^
+-DWITH_OpenJPEG_ENCODER_PLUGIN=OFF ^
+-DWITH_UVG266=OFF ^
+-DWITH_UVG266_PLUGIN=OFF ^
+-DWITH_VVDEC=OFF ^
+-DWITH_VVDEC_PLUGIN=OFF ^
+-DWITH_VVENC=OFF ^
+-DWITH_VVENC_PLUGIN=OFF ^
 -DLIBSHARPYUV_INCLUDE_DIR=%PATH_INSTALL%\include\webp ^
 -DLIBSHARPYUV_LIBRARY=%PATH_INSTALL%\lib\libsharpyuv.lib ^
+-DTiff_DIR=%PATH_INSTALL% ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
@@ -47,6 +61,6 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 sed -i 's/c++latest/c++latest \/Zc:strictStrings-/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
 
-for %%X in (examples\heif-thumbnailer.pdb examples\heif-enc.pdb examples\heif-convert.pdb examples\heif-info.pdb libheif\heif.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*)
+for %%X in (examples\heif-thumbnailer.pdb examples\heif-enc.pdb examples\heif-dec.pdb examples\heif-info.pdb libheif\heif.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*)
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\heif.dll
-for %%X in (heif-thumbnailer.exe heif-enc.exe heif-convert.exe heif-info.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
+for %%X in (heif-thumbnailer.exe heif-enc.exe heif-dec.exe heif-info.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
