@@ -1,19 +1,13 @@
- CMakeLists.txt        | 50 +++++++++++++++++++++++++++++++
- cmake/FindMySQL.cmake | 83 +++++++++++++++++++++++++++++++++++++++++++++++++++
- dbd/apr_dbd_mysql.c   | 12 +++++++-
- include/apu.hwc       |  2 +-
- 4 files changed, 145 insertions(+), 2 deletions(-)
-
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 6c3b6a5a..0ad34ddf 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -19,9 +19,12 @@ PROJECT(APR-Util C)
- 
+diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
+index 1e5183b5..308f2843 100644
+--- "a/CMakeLists.txt"
++++ "b/CMakeLists.txt"
+@@ -20,10 +20,12 @@
  CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
  
-+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
-+
+ PROJECT(APR-Util C)
++set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
+ 
  FIND_PACKAGE(EXPAT)
  FIND_PACKAGE(LibXml2)
  FIND_PACKAGE(OpenSSL)
@@ -21,7 +15,7 @@ index 6c3b6a5a..0ad34ddf 100644
  
  IF(NOT EXPAT_FOUND AND NOT LIBXML2_FOUND)
    MESSAGE(FATAL_ERROR "Either Expat or LibXml2 is required, but neither was found")
-@@ -37,6 +40,8 @@ ENDIF()
+@@ -39,6 +41,8 @@ ENDIF()
  
  OPTION(APU_HAVE_CRYPTO      "Crypto support"                            OFF)
  OPTION(APU_HAVE_ODBC        "Build ODBC DBD driver"                     ON)
@@ -30,7 +24,7 @@ index 6c3b6a5a..0ad34ddf 100644
  OPTION(APR_HAS_LDAP         "LDAP support"                              ON)
  OPTION(INSTALL_PDB          "Install .pdb files (if generated)"         ON)
  OPTION(APR_BUILD_TESTAPR    "Build the test suite"                      OFF)
-@@ -74,6 +79,7 @@ ENDIF()
+@@ -76,6 +80,7 @@ ENDIF()
  
  SET(apu_have_crypto_10 0)
  SET(apu_have_apr_iconv_10 0) # not yet implemented
@@ -38,7 +32,7 @@ index 6c3b6a5a..0ad34ddf 100644
  SET(apr_has_ldap_10 0)
  SET(apu_use_libxml2_10 0)
  SET(apu_use_expat_10 0)
-@@ -97,6 +103,11 @@ IF(APR_HAS_LDAP)
+@@ -99,6 +104,11 @@ IF(APR_HAS_LDAP)
    SET(LDAP_LIBRARIES wldap32)
  ENDIF()
  
@@ -50,7 +44,7 @@ index 6c3b6a5a..0ad34ddf 100644
  CONFIGURE_FILE(include/apu.hwc
                ${PROJECT_BINARY_DIR}/apu.h)
  CONFIGURE_FILE(include/apr_ldap.hwc
-@@ -120,6 +131,10 @@ ELSE()
+@@ -122,6 +132,10 @@ ELSE()
    SET(XMLLIB_LIBRARIES   "${LIBXML2_LIBRARIES};${LIBXML2_ICONV_LIBRARIES}")
  ENDIF()
  
@@ -61,7 +55,7 @@ index 6c3b6a5a..0ad34ddf 100644
  
  # Generated .h files are stored in PROJECT_BINARY_DIR, not the
  # source tree.
-@@ -276,6 +291,11 @@ SET(install_targets ${install_targets} aprutil-1)
+@@ -278,6 +292,11 @@ SET(install_targets ${install_targets} aprutil-1)
  TARGET_LINK_LIBRARIES(aprutil-1 ${APR_LIBRARIES} ${XMLLIB_LIBRARIES})
  SET_TARGET_PROPERTIES(aprutil-1 PROPERTIES COMPILE_DEFINITIONS "APU_DECLARE_STATIC;APR_DECLARE_STATIC;APU_DSO_MODULE_BUILD;XML_STATIC")
  
@@ -73,7 +67,7 @@ index 6c3b6a5a..0ad34ddf 100644
  IF(APU_HAVE_CRYPTO)
    IF(NOT OPENSSL_FOUND)
      MESSAGE(FATAL_ERROR "Only OpenSSL-based crypto is currently implemented in the cmake build")
-@@ -300,6 +320,33 @@ IF(APU_HAVE_ODBC)
+@@ -302,6 +321,33 @@ IF(APU_HAVE_ODBC)
    SET_TARGET_PROPERTIES(apr_dbd_odbc-1 PROPERTIES COMPILE_FLAGS "-DAPR_DECLARE_IMPORT -DAPU_DECLARE_IMPORT -DDLL_NAME=apr_dbd_odbc")
  ENDIF()
  
@@ -107,7 +101,7 @@ index 6c3b6a5a..0ad34ddf 100644
  IF(APR_HAS_LDAP)
    ADD_LIBRARY(apr_ldap-1 SHARED ldap/apr_ldap_init.c ldap/apr_ldap_option.c 
                ldap/apr_ldap_rebind.c libaprutil.rc)
-@@ -387,7 +434,10 @@ MESSAGE(STATUS "  C compiler ...................... : ${CMAKE_C_COMPILER}")
+@@ -389,7 +435,10 @@ MESSAGE(STATUS "  C compiler ...................... : ${CMAKE_C_COMPILER}")
  MESSAGE(STATUS "  APR include directory ........... : ${APR_INCLUDE_DIR}")
  MESSAGE(STATUS "  APR libraries ................... : ${APR_LIBRARIES}")
  MESSAGE(STATUS "  DBD ODBC driver ................. : ${APU_HAVE_ODBC}")
