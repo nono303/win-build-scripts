@@ -64,3 +64,4 @@ sed -i 's/c++latest/c++latest \/Zc:strictStrings-/g' %CYGPATH_BUILD%/%1/build.ni
 for %%X in (examples\heif-thumbnailer.pdb examples\heif-enc.pdb examples\heif-dec.pdb examples\heif-info.pdb libheif\heif.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*)
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\heif.dll
 for %%X in (heif-thumbnailer.exe heif-enc.exe heif-dec.exe heif-info.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
+del /Q /F %PATH_INSTALL%\bin\heif-convert.exe
