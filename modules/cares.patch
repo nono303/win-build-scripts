@@ -1,8 +1,8 @@
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index cde5f3c..6fc60c8 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -720,7 +720,7 @@ ADD_SUBDIRECTORY (include)
+diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
+index 98624064..e87a7961 100644
+--- "a/CMakeLists.txt"
++++ "b/CMakeLists.txt"
+@@ -747,7 +747,7 @@ ADD_SUBDIRECTORY (include)
  ADD_SUBDIRECTORY (src)
  
  # Docs
