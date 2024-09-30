@@ -18,7 +18,11 @@ git checkout 1.8.x
 cd /D ..
 git clone https://github.com/apache/apr-util.git apr-util
 cd /D apr-util
-git checkout 1.7.x
+git checkout origin/1.7.x
+cd /D ..
+git clone https://github.com/apache/apr.git apr2
+cd /D apr2
+git checkout trunk
 cd /D ..
 git clone https://github.com/google/brotli.git brotli
 cd /D brotli
@@ -30,11 +34,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/c-ares/c-ares.git cares
 cd /D cares
-git checkout tags/v1.30.0
+git checkout tags/v1.32.3
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-8_8_0
+git checkout tags/curl-8_9_0
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -58,11 +62,11 @@ git checkout tags/VER-2-13-2
 cd /D ..
 git clone https://github.com/OSGeo/gdal gdal
 cd /D gdal
-git checkout tags/v3.9.0RC2
+git checkout tags/v3.9.1RC2
 cd /D ..
 git clone https://github.com/geographiclib/geographiclib.git geographiclib
 cd /D geographiclib
-git checkout tags/r2.3
+git checkout tags/r2.4
 cd /D ..
 git clone https://github.com/libgeos/geos geos
 cd /D geos
@@ -74,7 +78,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
-git checkout tags/2.4.59
+git checkout tags/2.4.62
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
@@ -94,7 +98,7 @@ git checkout tags/js_v4.0.4
 cd /D ..
 git clone https://github.com/AOMediaCodec/libavif.git libavif
 cd /D libavif
-git checkout tags/v1.0.4
+git checkout tags/v1.1.0
 cd /D ..
 git clone https://github.com/hyperrealm/libconfig.git libconfig
 cd /D libconfig
@@ -124,13 +128,13 @@ git clone https://github.com/libgd/libgd.git libgd
 cd /D libgd
 git checkout master
 cd /D ..
-git clone https://github.com/OSGeo/libgeotiff libgeotiff
+git clone https://github.com/nono303/libgeotiff.git libgeotiff
 cd /D libgeotiff
 git checkout master
 cd /D ..
 git clone https://github.com/strukturag/libheif.git libheif
 cd /D libheif
-git checkout tags/v1.17.6
+git checkout tags/v1.18.1
 cd /D ..
 git clone https://github.com/AiMiDi/libiconv_cmake.git libiconv
 cd /D libiconv
@@ -178,7 +182,7 @@ git checkout tags/v0.23
 cd /D ..
 git clone https://gitlab.gnome.org/GNOME/libxml2.git libxml2
 cd /D libxml2
-git checkout tags/v2.13.0
+git checkout tags/v2.13.2
 cd /D ..
 git clone https://github.com/nono303/libxpm.git libxpm
 cd /D libxpm
@@ -186,7 +190,7 @@ git checkout tags/libxpm-3.5.17
 cd /D ..
 git clone https://gitlab.gnome.org/GNOME/libxslt.git/ libxslt
 cd /D libxslt
-git checkout tags/v1.1.40
+git checkout tags/v1.1.42
 cd /D ..
 git clone https://chromium.googlesource.com/libyuv/libyuv libyuv
 cd /D libyuv
@@ -198,7 +202,7 @@ git checkout tags/v1.10.1
 cd /D ..
 git clone https://github.com/lua/lua lua
 cd /D lua
-git checkout tags/v5.4.6
+git checkout tags/v5.4.7
 cd /D ..
 git clone https://github.com/nono303/mapsforgesrv.git mapsforgesrv
 cd /D mapsforgesrv
@@ -206,11 +210,11 @@ git checkout styles
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
-git checkout tags/1.6.28
+git checkout tags/1.6.29
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
-svn update -r 2778
+svn update -r 2781
 cd /D ..
 git clone https://github.com/JBlond/mod_bikeshed.git mod_bikeshed
 cd /D mod_bikeshed
@@ -222,7 +226,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v2.0.27
+git checkout tags/v2.0.29
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -330,7 +334,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.3.8
+git checkout tags/php-8.3.9
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
@@ -338,7 +342,7 @@ git checkout tags/9.4.1
 cd /D ..
 git clone https://github.com/qhull/qhull qhull
 cd /D qhull
-git checkout tags/v8.1-alpha3
+git checkout tags/v8.1.alpha4
 cd /D ..
 git clone https://github.com/nono303/simpleDLNA.git sdlna
 cd /D sdlna
