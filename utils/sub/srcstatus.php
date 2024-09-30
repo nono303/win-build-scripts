@@ -51,7 +51,7 @@
 			if(VERBOSE) echo $cmd.PHP_EOL;
 			preg_match("/^\* \(HEAD detached at ([^\)]+)\)/",execnono($cmd = "git branch -a",NULL,$repo,NULL),$matches);
 			if(VERBOSE) echo $cmd.PHP_EOL;
-			if(is_int(strpos($matches[1],"/")))
+			if($matches[1] && is_int(strpos($matches[1],"/")))
 				$head = $matches[1];
 			$srccreate .= "git clone ".$upstream." ".$ele.PHP_EOL."cd /D ".$ele.PHP_EOL."git checkout ".$head.PHP_EOL."cd /D ..".PHP_EOL;
 			$gitclean = execnono($cmd = "git clean -fdx",NULL,$repo,NULL);
@@ -84,7 +84,9 @@
 					}
 				}
 			}
-			$branch = end(explode("/",$branch));
+			$branch ?
+				$branch = end(explode("/",$branch)) :
+				$branch = "";
 			if(is_int(strpos($branch,"no branch")))
 				$branch = "";
 			// head is branch
