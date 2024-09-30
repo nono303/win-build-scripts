@@ -35,6 +35,6 @@ for %%X in (turbojpeg jpeg) do (
 	del /S %PATH_BUILD%\%1\*.obj
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X.dll
 )
-for %%X in (%PATH_BUILD%\%1\jconfig.h %PATH_SRC%\%1\jerror.h %PATH_SRC%\%1\jmorecfg.h %PATH_SRC%\%1\jpeglib.h %PATH_SRC%\%1\turbojpeg.h) do (
+for %%X in (%PATH_BUILD%\%1\jconfig.h %PATH_SRC%\%1\src\jerror.h %PATH_SRC%\%1\src\jmorecfg.h %PATH_SRC%\%1\src\jpeglib.h %PATH_SRC%\%1\src\turbojpeg.h) do (
 	xcopy /C /F /Y %%X %PATH_INSTALL%\include\*
 )
