@@ -5,7 +5,7 @@ sed -i 's/DNDEBUG/DNDEBUG \/std:clatest \/Gw \/Gy \/Zc:inline%AVX_SED%/g' %CYGPA
 CD %PATH_SRC%\%1\apache2
 NMAKE %NMAKE_OPTS% -f Makefile.win ^
 	APACHE=%PATH_INSTALL% ^
-	PCRE2=%PATH_INSTALL% ^
+	PCRE=%PATH_INSTALL% ^
 	LIBXML2=%PATH_INSTALL% ^
 	LUA=%PATH_INSTALL% ^
 	CURL=%PATH_INSTALL% ^
