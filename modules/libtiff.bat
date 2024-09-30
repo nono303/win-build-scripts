@@ -5,12 +5,12 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_DISABLE_FIND_PACKAGE_JBIG=ON ^
 -DBUILD_SHARED_LIBS=ON ^
 -Dtiff-tools=OFF ^
--Dtiff-tools-unsupported=OFF ^
 -Dtiff-tests=OFF ^
--Dtiff-contrib=OFF ^
+-Dtiff-contrib=ON ^
 -Dtiff-docs=OFF ^
 -Dtiff-deprecated=OFF ^
 -Dtiff-install=ON ^
+-Dtiff-opengl=ON ^
 -Dextra-warnings=OFF ^
 -Dfatal-warnings=OFF ^
 -Dld-version-script=OFF ^
@@ -30,7 +30,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -Dlzma=ON ^
 -Dzstd=ON ^
 -Dwebp=ON ^
--Dcxx=OFF ^
+-Dcxx=ON ^
 -Dlerc=ON ^
 -Dstrip-chopping=ON ^
 -Ddefer-strile-load=OFF ^
