@@ -1,70 +1,46 @@
 echo phpsdk-config_make for %PHPVER%
 cd /D %PHP_SRC_DIR%
-	REM ################# PHP7 #################
-set PHP7_COMMON_CONFIGURE=^
-	--disable-crt-debug ^
-	--without-xmlrpc ^
-	--without-oci8 ^
-if %PHPVER% == 7.1 (
-	set phpveropts=	%PHP7_COMMON_CONFIGURE% ^
-			--without-wddx ^
-			--without-interbase ^
-			--disable-phpdbg-webhelper
-	set native-intrinsics=0
-)
-if %PHPVER% == 7.2 (
-	set phpveropts=	%PHP7_COMMON_CONFIGURE% ^
-			--without-wddx ^
-			--without-interbase ^
-			--enable-sanitizer ^
-			--disable-phpdbg-webhelper
-	set native-intrinsics=0
-)
-if %PHPVER% == 7.3 (
-	set phpveropts=	%PHP7_COMMON_CONFIGURE% ^
-			--enable-native-intrinsics=sse,sse2%intrinsics% ^
-			--without-wddx ^
-			--without-interbase ^
-			--enable-sanitizer ^
-			--disable-phpdbg-webhelper
-	set native-intrinsics=1
-)
-if %PHPVER% == 7.4 (
-	set phpveropts=	%PHP7_COMMON_CONFIGURE% ^
-			--enable-native-intrinsics=sse,sse2%intrinsics% ^
-			--with-mhash ^
-			--enable-sanitizer ^
-			--disable-phpdbg-webhelper
-	set native-intrinsics=1
-)
+
 REM ################# PHP8 #################
 set PHP8_COMMON_CONFIGURE=^
 	--enable-native-intrinsics=sse,sse2%intrinsics% ^
-	--with-mhash ^
 	--enable-sanitizer
 if %PHPVER% == 8.0 (
-	set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
-			--disable-phpdbg-webhelper ^
-			--without-oci8
-	set native-intrinsics=1
+set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
+	--disable-phpdbg-webhelper ^
+	--without-oci8 ^
+	--with-mhash=shared ^
+	--without-imap
+set native-intrinsics=1
 )
 if %PHPVER% == 8.1 (
-	set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
-			--with-php-build=%PATH_INSTALL% ^
-			--without-oci8
-	set native-intrinsics=1
+set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
+	--with-php-build=%PATH_INSTALL% ^
+	--without-oci8 ^			
+	--with-mhash=shared ^
+	--without-imap
+set native-intrinsics=1
 )
 if %PHPVER% == 8.2 (
-	set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
-			--with-php-build=%PATH_INSTALL%
-	set native-intrinsics=1
+set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
+	--with-php-build=%PATH_INSTALL% ^
+	--with-mhash=shared ^
+	--without-imap
+set native-intrinsics=1
 )
 if %PHPVER% == 8.3 (
-	set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
-			--with-php-build=%PATH_INSTALL%
-	set native-intrinsics=1
+set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
+	--with-php-build=%PATH_INSTALL% ^
+	--with-mhash=shared ^
+	--without-imap
+set native-intrinsics=1
 )
-
+if %PHPVER% == 8.4 (
+set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
+	--with-php-build=%PATH_INSTALL% ^
+	--with-openssl-argon2
+set native-intrinsics=1
+)
 set PHP_COMMON_CONFIGURE=^
 	--disable-cli-win32 ^
 	--disable-debug ^
@@ -79,7 +55,6 @@ set PHP_COMMON_CONFIGURE=^
 	--enable-object-out-dir=../build/ ^
 	--without-analyzer ^
 	--without-enchant ^
-	--without-imap ^
 	--without-snmp ^
 	--without-ldap ^
 	--without-pgsql ^
@@ -90,6 +65,9 @@ set PHP_COMMON_CONFIGURE=^
 	--with-extra-libs=%PATH_INSTALL_OSSL%\lib;%PATH_INSTALL%\lib;%PATH_INSTALL%\_proj\lib;%PATH_INSTALL%\_gdal\lib ^
 	--with-mp=%NUMBER_OF_PROCESSORS%
 REM [%PHPVER% != %PHP_FULLBUILD%]: add --disable-zlib ^ if not memcache
+REM !!! tmp !!!
+REM		--with-xdebug=shared ^
+REM		--with-xdebug-compression ^
 if %PHPVER% == %PHP_FULLBUILD% (
 	set FINAL_CONFIGURE=%PHP_COMMON_CONFIGURE% ^
 	--enable-mbstring=shared ^
@@ -129,7 +107,6 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--with-readline=shared ^
 	--enable-pdo=shared ^
 	--enable-calendar=shared ^
-	--with-mhash=shared ^
 	--enable-ctype=shared ^
 	--enable-bcmath=shared ^
 	--with-gd=shared ^
@@ -208,6 +185,9 @@ for %%A in (exe dll) do (
 		)
 	)
 )
+REM PHP lib
+xcopy /C /F /Y %PHP_BUILD_DIR%\php8.lib %PATH_INSTALL%\lib\*
+
 if %PHPVER% == %PHP_FULLBUILD% (
 	call %PATH_MODULES_COMMON%\init.bat php-src varonly
 	for %%X in (php-cgi.exe php.exe php8.dll php_curl.dll php_fileinfo.dll php_gd.dll php_intl.dll php_opcache.dll php_openssl.dll php_tidy.dll php_bcmath.dll php_bz2.dll php_calendar.dll php_com_dotnet.dll php_ctype.dll php_dom.dll php_exif.dll php_ftp.dll php_iconv.dll php_mysqli.dll php_pdo_mysql.dll php_pdo_sqlite.dll php_readline.dll php_simplexml.dll php_soap.dll php_sockets.dll php_sodium.dll php_sqlite3.dll php_xml.dll php_xmlreader.dll php_xmlwriter.dll php_zip.dll php_zlib.dll php_xsl.dll php_mbstring.dll php_gmp.dll) do (

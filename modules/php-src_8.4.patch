@@ -1,0 +1,243 @@
+diff --git a/ext/gd/config.w32 b/ext/gd/config.w32
+index 939755bf53..447e8b090e 100644
+--- a/ext/gd/config.w32
++++ b/ext/gd/config.w32
+@@ -1,82 +1,46 @@
+ // vim:ft=javascript
+ 
+-ARG_WITH("gd", "Bundled GD support", "yes,shared");
+-ARG_WITH("libwebp", "webp support", "yes");
+-ARG_WITH("libavif", "avif support", "yes");
++ARG_WITH("gd", "GD support", "yes,shared");
+ 
+ if (PHP_GD != "no") {
+ 	if (
+-		CHECK_LIB("libjpeg_a.lib;libjpeg.lib", "gd", PHP_GD) &&
+-		CHECK_LIB("freetype_a.lib;freetype.lib", "gd", PHP_GD) &&
+-		CHECK_HEADER_ADD_INCLUDE("ft2build.h", "CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include\\freetype2;" + PHP_PHP_BUILD + "\\include\\freetype") &&
+-		CHECK_LIB("libpng_a.lib;libpng.lib", "gd", PHP_GD) &&
+-		CHECK_HEADER_ADD_INCLUDE("gd.h", "CFLAGS_GD", PHP_GD + ";ext\\gd\\libgd") &&
+-		(CHECK_HEADER_ADD_INCLUDE("png.h", "CFLAGS_GD", PHP_GD +  ";" + PHP_PHP_BUILD + "\\include\\libpng16") ||
+-		CHECK_HEADER_ADD_INCLUDE("png.h", "CFLAGS_GD", PHP_GD +  ";" + PHP_PHP_BUILD + "\\include\\libpng15") ||
+-		CHECK_HEADER_ADD_INCLUDE("png.h", "CFLAGS_GD", PHP_GD +  ";" + PHP_PHP_BUILD + "\\include\\libpng12")) &&
+-		(CHECK_LIB("libiconv_a.lib;libiconv.lib", "gd", PHP_GD) || CHECK_LIB("iconv_a.lib;iconv.lib", "gd", PHP_GD)) &&
+-		 CHECK_HEADER_ADD_INCLUDE("iconv.h", "CFLAGS_GD", PHP_GD) &&
+-		(((PHP_ZLIB=="no") && (CHECK_LIB("zlib_a.lib;zlib.lib", "gd", PHP_GD) )) ||
+-			(PHP_ZLIB_SHARED && CHECK_LIB("zlib.lib", "gd", PHP_GD)) || (PHP_ZLIB == "yes" && (!PHP_ZLIB_SHARED)))
+-		) {
++		CHECK_HEADER_ADD_INCLUDE("gd.h",		"CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include") &&
++		CHECK_HEADER_ADD_INCLUDE("gdfontg.h",		"CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include") &&
++		CHECK_HEADER_ADD_INCLUDE("gdfontl.h",		"CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include") &&
++		CHECK_HEADER_ADD_INCLUDE("gdfontmb.h",		"CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include") &&
++		CHECK_HEADER_ADD_INCLUDE("gdfonts.h",		"CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include") &&
++		CHECK_HEADER_ADD_INCLUDE("gdfontt.h",		"CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include") &&
++		CHECK_HEADER_ADD_INCLUDE("gd_errors.h",		"CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include") &&
+ 
+-		if (CHECK_LIB("libXpm_a.lib", "gd", PHP_GD) &&
+-			CHECK_HEADER_ADD_INCLUDE("xpm.h", "CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include\\X11")
+-		) {
+-			AC_DEFINE('HAVE_XPM', 1, "Define to 1 if you have the xpm library.");
+-			AC_DEFINE('HAVE_GD_XPM', 1, "Define to 1 if gd extension has XPM support.");
+-		}
+-		if (PHP_LIBWEBP != "no") {
+-			if ((CHECK_LIB("libwebp_a.lib", "gd", PHP_GD) || CHECK_LIB("libwebp.lib", "gd", PHP_GD)) &&
+-				CHECK_HEADER_ADD_INCLUDE("decode.h", "CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include\\webp") &&
+-				CHECK_HEADER_ADD_INCLUDE("encode.h", "CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include\\webp")) {
+-				AC_DEFINE("HAVE_LIBWEBP", 1, "Define to 1 if you have the libwebp library.");
+-				AC_DEFINE("HAVE_GD_WEBP", 1, "Define to 1 if gd extension has WebP support.");
+-			} else {
+-				WARNING("libwebp not enabled; libraries and headers not found");
+-			}
+-		}
+-		if (PHP_LIBAVIF != "no") {
+-			if (CHECK_LIB("avif_a.lib", "gd", PHP_GD) &&
+-				CHECK_LIB("aom_a.lib", "gd", PHP_GD) &&
+-				CHECK_HEADER_ADD_INCLUDE("avif.h", "CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include\\avif")) {
+-				ADD_FLAG("CFLAGS_GD", "/D HAVE_LIBAVIF /D HAVE_GD_AVIF");
+-			} else if (CHECK_LIB("avif.lib", "gd", PHP_GD) &&
+-				CHECK_HEADER_ADD_INCLUDE("avif.h", "CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include\\avif")) {
+-				ADD_FLAG("CFLAGS_GD", "/D HAVE_LIBAVIF /D HAVE_GD_AVIF");
+-			} else {
+-				WARNING("libavif not enabled; libraries and headers not found");
+-			}
+-		}
+-		CHECK_LIB("User32.lib", "gd", PHP_GD);
+-		CHECK_LIB("Gdi32.lib", "gd", PHP_GD);
++		CHECK_LIB("user32.lib",	"gd", PHP_GD) &&
++		CHECK_LIB("Gdi32.Lib",	"gd", PHP_GD) &&
++		CHECK_LIB("libgd.lib",	"gd", PHP_GD)
++	) {
++		EXTENSION("gd", "gd.c gd_compat.c", null, "-Iext/gd/libgd");
++
++		AC_DEFINE('HAVE_LIBGD',			1,	"GD support");
++		AC_DEFINE('PHP_GD_EXPORTS',		1,	"dllexport");
++		AC_DEFINE('HAVE_GD_PNG',		1,	"PNG support");
++		AC_DEFINE('HAVE_GD_AVIF',		1,	"AVIF support");
++		AC_DEFINE('HAVE_GD_WEBP',		1,	"WEBP support");
++		AC_DEFINE('HAVE_GD_JPG',		1,	"JPG support");
++		AC_DEFINE('HAVE_GD_XPM',		1,	"XPM support");
++		AC_DEFINE('HAVE_GD_BMP',		1,	"BMP support");
++		AC_DEFINE('HAVE_GD_TGA',		1,	"TGA support");
++		AC_DEFINE('HAVE_GD_FREETYPE',		1,	"FREETYPE support");
++		AC_DEFINE('HAVE_GD_LIBVERSION',		1,	"VERSION support");
++		AC_DEFINE('HAVE_GD_GET_INTERPOLATION',	1,	"INTERPOLATION support");
++
++		AC_DEFINE('HAVE_GD_HEIF',		1,	"HEIF support");
++		AC_DEFINE('HAVE_GD_ZLIB',		1,	"ZLIB support");
++		AC_DEFINE('HAVE_GD_TIFF',		1,	"TIFF support");
++		AC_DEFINE("HAVE_GD_ICONV",		1,	"ICONV support");
+ 
+-		EXTENSION("gd", "gd.c", null, "-Iext/gd/libgd");
+-		ADD_SOURCES("ext/gd/libgd", "gd2copypal.c gd.c \
+-			gdcache.c gdfontg.c gdfontl.c gdfontmb.c gdfonts.c gdfontt.c \
+-			gdft.c gd_gd2.c gd_gd.c gd_gif_in.c gd_gif_out.c gdhelpers.c gd_io.c gd_io_dp.c \
+-			gd_io_file.c gd_io_ss.c gd_jpeg.c gdkanji.c gd_png.c gd_ss.c \
+-			gdtables.c gd_topal.c gd_wbmp.c gdxpm.c wbmp.c gd_xbm.c gd_security.c gd_transform.c \
+-			gd_filter.c gd_pixelate.c gd_rotate.c gd_color_match.c gd_webp.c gd_avif.c \
+-			gd_crop.c gd_interpolation.c gd_matrix.c gd_bmp.c gd_tga.c", "gd");
+-		AC_DEFINE('HAVE_GD_BUNDLED', 1, "Define to 1 if gd extension uses GD library bundled in PHP.");
+-		AC_DEFINE('HAVE_GD_PNG', 1, "Define to 1 if gd extension has PNG support.");
+-		AC_DEFINE('HAVE_GD_BMP', 1, "Define to 1 if gd extension has BMP support.");
+-		AC_DEFINE('HAVE_GD_TGA', 1, "Define to 1 if gd extension has TGA support.");
+-		AC_DEFINE('HAVE_LIBPNG', 1, "Define to 1 if you have the libpng library.");
+-		AC_DEFINE('HAVE_LIBJPEG', 1, "Define to 1 if you have the libjpeg library.");
+-		AC_DEFINE('HAVE_GD_JPG', 1, "Define to 1 if gd extension has JPEG support.");
+-		AC_DEFINE('HAVE_LIBFREETYPE', 1, "Define to 1 if you have the FreeType library.");
+-		AC_DEFINE('HAVE_GD_FREETYPE', 1, "Define to 1 if gd extension has FreeType support.");
+-		ADD_FLAG("CFLAGS_GD", " \
+-/D PHP_GD_EXPORTS=1 \
+-/D HAVE_GD_GET_INTERPOLATION \
+-		");
+ 		if (ICC_TOOLSET) {
+ 			ADD_FLAG("LDFLAGS_GD", "/nodefaultlib:libcmt");
+ 		}
+ 
+-		PHP_INSTALL_HEADERS("ext/gd", "php_gd.h libgd/");
++		PHP_INSTALL_HEADERS("", "ext/gd" );
+ 	} else {
+ 		WARNING("gd not enabled; libraries and headers not found");
+ 	}
+diff --git a/ext/gd/gd_compat.c b/ext/gd/gd_compat.c
+index 2b9e85eccf..39a23f70d9 100644
+--- a/ext/gd/gd_compat.c
++++ b/ext/gd/gd_compat.c
+@@ -1,9 +1,3 @@
+-#ifdef HAVE_CONFIG_H
+-#include <config.h>
+-#else
+-#include <php_config.h>
+-#endif
+-
+ #include "gd_compat.h"
+ #include "php.h"
+ 
+diff --git a/ext/gmp/gmp.c b/ext/gmp/gmp.c
+index 04bfafe869..3df64757e9 100644
+--- a/ext/gmp/gmp.c
++++ b/ext/gmp/gmp.c
+@@ -36,10 +36,10 @@
+ #define GMP_ROUND_PLUSINF   1
+ #define GMP_ROUND_MINUSINF  2
+ 
+-#ifdef mpir_version
+-#define GMP_MPIR_VERSION_STRING ((char *) mpir_version)
++#ifdef _MSC_MPIR_VERSION
++#define GMP_MPIR_VERSION_STRING ((char *) _MSC_MPIR_VERSION)
+ #endif
+-#define GMP_VERSION_STRING ((char *) gmp_version)
++#define GMP_VERSION_STRING ((char *) GMP_VERSION)
+ 
+ #define GMP_MSW_FIRST     (1 << 0)
+ #define GMP_LSW_FIRST     (1 << 1)
+@@ -572,10 +572,10 @@ ZEND_MODULE_INFO_D(gmp)
+ {
+ 	php_info_print_table_start();
+ 	php_info_print_table_row(2, "gmp support", "enabled");
+-#ifdef mpir_version
+-	php_info_print_table_row(2, "MPIR version", mpir_version);
++#ifdef _MSC_MPIR_VERSION
++	php_info_print_table_row(2, "MPIR version", _MSC_MPIR_VERSION);
+ #else
+-	php_info_print_table_row(2, "GMP version", gmp_version);
++	php_info_print_table_row(2, "GMP version", GMP_VERSION);
+ #endif
+ 	php_info_print_table_end();
+ }
+diff --git a/ext/iconv/iconv.c b/ext/iconv/iconv.c
+index 4241b7c288..f935db722b 100644
+--- a/ext/iconv/iconv.c
++++ b/ext/iconv/iconv.c
+@@ -68,7 +68,7 @@ static char *get_iconv_version(void) {
+ 
+ #ifdef HAVE_LIBICONV
+ 	static char buf[16];
+-	snprintf(buf, sizeof(buf), "%d.%d", _libiconv_version >> 8, _libiconv_version & 0xff);
++	snprintf(buf, sizeof(buf), "%d.%d", _LIBICONV_VERSION >> 8, _LIBICONV_VERSION & 0xff);
+ 	version = buf;
+ #elif defined(HAVE_GLIBC_ICONV)
+ 	version = (char *) gnu_get_libc_version();
+diff --git a/ext/intl/config.w32 b/ext/intl/config.w32
+index f3c3e2cffd..8de0e1eff0 100644
+--- a/ext/intl/config.w32
++++ b/ext/intl/config.w32
+@@ -126,7 +126,7 @@ if (PHP_INTL != "no") {
+ 			ADD_FLAG("LIBS_INTL", "iculx.lib");
+ 		}
+ 
+-		ADD_FLAG("CFLAGS_INTL", "/std:c++17 /EHsc /DUNISTR_FROM_CHAR_EXPLICIT=explicit /DUNISTR_FROM_STRING_EXPLICIT=explicit /DU_NO_DEFAULT_INCLUDE_UTF_HEADERS=1 /DU_HIDE_OBSOLETE_UTF_OLD_H=1");
++		ADD_FLAG("CFLAGS_INTL", "/EHsc /DUNISTR_FROM_CHAR_EXPLICIT=explicit /DUNISTR_FROM_STRING_EXPLICIT=explicit /DU_NO_DEFAULT_INCLUDE_UTF_HEADERS=1 /DU_HIDE_OBSOLETE_UTF_OLD_H=1");
+ 	} else {
+ 		WARNING("intl not enabled; libraries and/or headers not found");
+ 	}
+diff --git a/ext/libxml/config.w32 b/ext/libxml/config.w32
+index d836f0efcb..f54a69610a 100644
+--- a/ext/libxml/config.w32
++++ b/ext/libxml/config.w32
+@@ -3,8 +3,10 @@
+ ARG_WITH("libxml", "LibXML support", "yes");
+ 
+ if (PHP_LIBXML == "yes") {
+-	if (CHECK_LIB("libxml2_a_dll.lib;libxml2_a.lib", "libxml") &&
+-			CHECK_LIB("libiconv_a.lib;iconv_a.lib;libiconv.lib;iconv.lib", "libxml") &&
++	if (CHECK_LIB("libxml2_a_dll.lib", "libxml") &&
++	    CHECK_LIB("libiconv.lib", "libxml") &&
++	    CHECK_LIB("liblzma.lib", "libxml") &&
++	    CHECK_LIB("icuuc.lib", "libxml") &&
+ 			CHECK_HEADER_ADD_INCLUDE("libxml/parser.h", "CFLAGS_LIBXML", PHP_PHP_BUILD + "\\include\\libxml2") &&
+ 			CHECK_HEADER_ADD_INCLUDE("libxml/tree.h", "CFLAGS_LIBXML", PHP_PHP_BUILD + "\\include\\libxml2") &&
+ 			ADD_EXTENSION_DEP('libxml', 'iconv')) {
+diff --git a/ext/phar/config.w32 b/ext/phar/config.w32
+index 3f935eab23..82dc73c130 100644
+--- a/ext/phar/config.w32
++++ b/ext/phar/config.w32
+@@ -13,10 +13,10 @@ if (PHP_PHAR != "no") {
+ 		ADD_FLAG("CFLAGS_PHAR", "/D COMPILE_DL_PHAR ");
+ 	}
+ 	if (PHP_PHAR_NATIVE_SSL != "no") {
+-		if (CHECK_LIB("libeay32st.lib", "phar")) {
++		if (CHECK_LIB("libcrypto.lib", "phar")) {
+ 			/* We don't really need GDI for this, but there's no
+ 			way to avoid linking it in the static openssl build */
+-			ADD_FLAG("LIBS_PHAR", "libeay32st.lib gdi32.lib");
++			ADD_FLAG("LIBS_PHAR", "libcrypto.lib gdi32.lib");
+ 			if (PHP_DEBUG == "no") {
+ 				/* Silence irrelevant-to-us warning in release builds */
+ 				ADD_FLAG("LDFLAGS_PHAR", "/IGNORE:4089 ");
+diff --git a/win32/build/confutils.js b/win32/build/confutils.js
+index 2fba54c0b4..6f5ee45d6f 100644
+--- a/win32/build/confutils.js
++++ b/win32/build/confutils.js
+@@ -968,11 +968,11 @@ function GREP_HEADER(header_name, regex, path_to_check)
+ 
+ 		var p = search_paths(header_name, path_to_check, "INCLUDE");
+ 		if (typeof(p) == "string") {
+-			c = file_get_contents(p);
++			c = file_get_contents(p+ "\\" + header_name);
+ 		} else if (p == false) {
+ 			p = search_paths(header_name, PHP_EXTRA_INCLUDES, null);
+ 			if (typeof(p) == "string") {
+-				c = file_get_contents(p);
++				c = file_get_contents(p+ "\\" + header_name);
+ 			}
+ 		}
+ 		if (!c) {

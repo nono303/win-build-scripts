@@ -2,7 +2,7 @@
 REM fix 'Could not determine '%PHP_SDK_VS%' directory' l.137 in phpsdk_setshell.bat
 set PHP_SDK_VC_DIR=%PATH_VS%\Common7\Tools
 	REM ~~~~~~~~~~~~ current full build
-set PHP_FULLBUILD=8.3
+set PHP_FULLBUILD=8.4
 
 	REM ~~~~~~~~~~~~ TS - NTS 
 set PHP_BUILDTS=0
@@ -19,9 +19,9 @@ set INCLUDE=
 	REM ~~~~~~~~~~~~ php-src
 call %PATH_MODULES_COMMON%\init.bat php-src
 set PHPVER=%SCM_TAG:~4,3%
-	REM link openssl3 sources to module (applink.c)
-if exist %PATH_SRC%\php-src\openssl\. rmdir /S /Q %PATH_SRC%\php-src\openssl
-mklink /J %PATH_SRC%\php-src\openssl %PATH_SRC%\%OPENSSL_SCM%\ms
+	REM php < 8.4 : link openssl3 sources to module (applink.c)
+REM if exist %PATH_SRC%\php-src\openssl\. rmdir /S /Q %PATH_SRC%\php-src\openssl
+REM mklink /J %PATH_SRC%\php-src\openssl %PATH_SRC%\%OPENSSL_SCM%\ms
 	REM VERSION PATCH
 if exist %PATH_MODULES%\php-src_%PHPVER%.patch (
 	if %ARG_KEEPSRC% == 0 (
