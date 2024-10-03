@@ -20,6 +20,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DENABLE_NEON_DOTPROD=OFF ^
 -DENABLE_NEON_I8MM=OFF ^
 -DENABLE_VSX=OFF ^
+-DENABLE_ARM_CRC32=OFF ^
 -DENABLE_SVE=OFF ^
 -DENABLE_SVE2=OFF ^
 -DENABLE_MMX=ON ^
@@ -34,6 +35,8 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+REM >= 3.10 : FAILED: aom_av1_rc.dll aom_av1_rc.lib on link
+sed -i 's/\/GL //g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
 
 xcopy /C /F /Y  %PATH_BUILD%\%1\aom.pdb %PATH_INSTALL%\bin\*
