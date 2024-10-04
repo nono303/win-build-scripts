@@ -1,9 +1,6 @@
 @echo off
 REM fix 'Could not determine '%PHP_SDK_VS%' directory' l.137 in phpsdk_setshell.bat
 set PHP_SDK_VC_DIR=%PATH_VS%\Common7\Tools
-	REM ~~~~~~~~~~~~ current full build
-set PHP_FULLBUILD=8.4
-
 	REM ~~~~~~~~~~~~ TS - NTS 
 set PHP_BUILDTS=0
 set PHP_BUILDNTS=1
@@ -19,9 +16,24 @@ set INCLUDE=
 	REM ~~~~~~~~~~~~ php-src
 call %PATH_MODULES_COMMON%\init.bat php-src
 set PHPVER=%SCM_TAG:~4,3%
+
+	REM ~~~~~~~~~~~~ type of build : full / memcached / xdebug
+set PHP_BUILD_TYPE=%PHPVER%
+setlocal enabledelayedexpansion
+for %%x in (%*) do (
+   set /A argCount+=1
+   set "argVec[!argCount!]=%%~x"
+)
+for /L %%i in (2,1,%argCount%) do (
+	if /I "!argVec[%%i]!"=="XDEBUG"		set PHP_BUILD_TYPE=xdebug
+	if /I "!argVec[%%i]!"=="MEMCACHE"	set PHP_BUILD_TYPE=memcache
+)
 	REM php < 8.4 : link openssl3 sources to module (applink.c)
-REM if exist %PATH_SRC%\php-src\openssl\. rmdir /S /Q %PATH_SRC%\php-src\openssl
-REM mklink /J %PATH_SRC%\php-src\openssl %PATH_SRC%\%OPENSSL_SCM%\ms
+if %PHPVER% LSS 8.4 (
+	if exist %PATH_SRC%\php-src\openssl\. rmdir /S /Q %PATH_SRC%\php-src\openssl
+	mklink /J %PATH_SRC%\php-src\openssl %PATH_SRC%\%OPENSSL_SCM%\ms
+)
+
 	REM VERSION PATCH
 if exist %PATH_MODULES%\php-src_%PHPVER%.patch (
 	if %ARG_KEEPSRC% == 0 (
