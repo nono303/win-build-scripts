@@ -91,8 +91,6 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	--with-pdo-sqlite=shared ^
 	--with-sqlite3=shared ^
 	--with-tidy=shared ^
-	--with-xdebug=shared ^
-	--with-xdebug-compression ^
 	--with-xdiff=shared ^
 	--with-geos=shared ^
 	--with-sodium=shared ^
@@ -185,10 +183,9 @@ for %%A in (exe dll) do (
 		)
 	)
 )
-REM PHP lib
-xcopy /C /F /Y %PHP_BUILD_DIR%\php8.lib %PATH_INSTALL%\lib\*
 
 if %PHPVER% == %PHP_FULLBUILD% (
+	xcopy /C /F /Y %PHP_BUILD_DIR%\php8.lib %PATH_INSTALL%\lib\*
 	call %PATH_MODULES_COMMON%\init.bat php-src varonly
 	for %%X in (php-cgi.exe php.exe php8.dll php_curl.dll php_fileinfo.dll php_gd.dll php_intl.dll php_opcache.dll php_openssl.dll php_tidy.dll php_bcmath.dll php_bz2.dll php_calendar.dll php_com_dotnet.dll php_ctype.dll php_dom.dll php_exif.dll php_ftp.dll php_iconv.dll php_mysqli.dll php_pdo_mysql.dll php_pdo_sqlite.dll php_readline.dll php_simplexml.dll php_soap.dll php_sockets.dll php_sodium.dll php_sqlite3.dll php_xml.dll php_xmlreader.dll php_xmlwriter.dll php_zip.dll php_zlib.dll php_xsl.dll php_mbstring.dll php_gmp.dll) do (
 		call do_php %PATH_UTILS%\sub\version.php php-src %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\%%X "build:%TSNTS%"
@@ -205,15 +202,17 @@ if %PHPVER% == %PHP_FULLBUILD% (
 	call do_php %PATH_UTILS%\sub\version.php php-proj %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_proj.dll "php:%PHPVER% build:%TSNTS%"
 	call %PATH_MODULES_COMMON%\init.bat php-ogr varonly
 	call do_php %PATH_UTILS%\sub\version.php php-ogr %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_ogr.dll "php:%PHPVER% build:%TSNTS%"
-	call %PATH_MODULES_COMMON%\init.bat xdebug varonly
-	call do_php %PATH_UTILS%\sub\version.php xdebug %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_xdebug.dll "php:%PHPVER% build:%TSNTS%"
+	REM call %PATH_MODULES_COMMON%\init.bat xdebug varonly
+	REM call do_php %PATH_UTILS%\sub\version.php xdebug %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_xdebug.dll "php:%PHPVER% build:%TSNTS%"
 	call %PATH_MODULES_COMMON%\init.bat pecl-datetime-timezonedb varonly
 	call do_php %PATH_UTILS%\sub\version.php pecl-datetime-timezonedb %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_timezonedb.dll "php:%PHPVER% build:%TSNTS%"
 	call %PATH_MODULES_COMMON%\init.bat pecl-system-sync varonly
 	call do_php %PATH_UTILS%\sub\version.php pecl-system-sync %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_sync.dll "php:%PHPVER% build:%TSNTS%"
 )
 	REM php_memcache for github
-if %AVXECHO% == sse2 (set AVXPATH=) else (set AVXPATH=\avx)
+if %AVXECHO% == sse2 (set AVXPATH=) else (set AVXPATH=\%AVXB:-=%)
+if not exist %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXPATH%\. mkdir %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXPATH%
+
 call %PATH_MODULES_COMMON%\init.bat pecl-memcache varonly
 call do_php %PATH_UTILS%\sub\version.php pecl-memcache %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcache.dll "php-src:%PHPVER% build:%TSNTS%"
 if not "%PATH_GITHUB_PHPMEMCACHE%"=="" (
