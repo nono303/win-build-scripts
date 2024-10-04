@@ -1,8 +1,101 @@
 # changelog
 
 
+## 1.10.2 _(2024-10-04)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  add args for build type (memcache, xdebug) full without args  * fix specific post build actions for each scenario fix link openssl3 sources to module (applink.c) for php < 8.4
+`modules/php.bat`
+`modules/phpsdk-config_make.bat`
+*  3.4.0b1 https://github.com/xdebug/xdebug/pull/977#issuecomment-2394037465
+`modules/xdebug.patch`
+*  php 8.0, 8.1, 8.2 (discontinued)
+`modules/php-src_8.0.patch`
+`modules/php-src_8.1.patch`
+`modules/php-src_8.2.patch`
+*  fix avx path for php_memcache on github fix copy php8.lib only on full build disable (tmp) xdebug build
+`modules/phpsdk-config_make.bat`
+*  cl: +/Ob3 fix "remove default std" for C
+`modules/common/ninja.sh`
+*  php 8.4
+`modules/php-src_8.4.patch`
+`modules/php.bat`
+`modules/phpsdk-config_make.bat`
+*  https://github.com/nono303/mod_md archived
+`modules/mod_md.bat`
+*  fix >= 5.6.3 lib renamed lzma, revert to liblzma
+`modules/liblzma.bat`
+*  fix >= 3.10 : link aom_av1_rc failed with /GL
+`modules/aom.bat`
+*  1.33.1
+`modules/cares.patch`
+*  bump gradle 8.10.2
+`env_sample.bat`
+*  8.10.1
+`modules/curl.patch`
+`modules/curl_ca-win.patch`
+*  3.0.90
+`modules/libjpeg-turbo.bat`
+*  4.7.0
+`modules/libtiff.bat`
+*  bump gradle 8.10
+`modules/mobac.patch`
+*  2.9.8
+`modules/mod_security.bat`
+`modules/mod_security.patch`
+*  fix nocxx warning
+`modules/nghttp2.bat`
+*  main/network.c fixed in 8.3.12
+`modules/php-src_8.3.patch`
+*  fix branch null warning
+`utils/sub/srcstatus.php`
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  del legacy heif-convert https://github.com/strukturag/libheif/commit/bf3d5fafd82e8688171f3e643840107248faf41e
+`modules/libheif.bat`
+`utils/bininfo.bat`
+*  fixed in 1.1.1
+`modules/libavif.patch`
+*  fixed in 8.3.10
+`modules/php-src_8.3.patch`
+*  THREADCOUNT_LIST: +16, 20
+`modules/mobac.patch`
+*  1.32
+`modules/cares.bat`
+`modules/cares.patch`
+*  2.4
+`modules/geographiclib.bat`
+*  1.0.4
+`modules/libavif.bat`
+*  https://github.com/apache/apr-util/commit/85df5aeea0ab1a3b8b2ba7b66267c7530fa3c396
+`modules/apr-util.patch`
+*  fix LNK1181: cannot open input file 'dav1d.lib'
+`modules/libgd.bat`
+*  8.9.0
+`modules/curl.patch`
+*  gradle: 8.8 > 8.9
+`env_sample.bat`
+*  https://github.com/AOMediaCodec/libavif/commit/03acd65314fe29e6627cf4eab752819f6ee15d74
+`modules/libavif.patch`
+*  2781
+`modules/mobac.patch`
+*  1.18.1
+`modules/libheif.bat`
+*  3.9.1
+`modules/aom.bat`
+*  https://github.com/AiMiDi/libiconv_cmake/pull/7
+`modules/libiconv.patch`
+
+
 ## 1.10.1 _(2024-06-14)_
 
+*  1.10.1
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
