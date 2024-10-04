@@ -1,15 +1,19 @@
-diff --git "a/src/tracing/tracing.h" "b/src/tracing/tracing.h"
-index b7f7fa8e..7276feee 100644
---- "a/src/tracing/tracing.h"
-+++ "b/src/tracing/tracing.h"
-@@ -18,10 +18,7 @@
+ config.w32 | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/config.w32 b/config.w32
+index d0b82ff7..86449f96 100644
+--- a/config.w32
++++ b/config.w32
+@@ -18,9 +18,9 @@ if (PHP_XDEBUG != 'no') {
+ 	var files = "xdebug.c";
  
- #include "lib/php-header.h"
- 
--#pragma GCC diagnostic push
--#pragma GCC diagnostic ignored "-Wdeclaration-after-statement"
- #include "zend_generators.h"
--#pragma GCC diagnostic pop
- 
- typedef struct
- {
+ 	var XDEBUG_PHP_VERSION = 10000 * PHP_VERSION + 100 * PHP_MINOR_VERSION + PHP_RELEASE_VERSION;
+-	if (XDEBUG_PHP_VERSION < 80000) {
++	if (XDEBUG_PHP_VERSION < 800000) {
+ 		ERROR("not supported. Need a PHP version >= 8.0.0 and < 8.5.0 (found " + XDEBUG_PHP_VERSION + ")");
+-	} else if (XDEBUG_PHP_VERSION >= 80500) {
++	} else if (XDEBUG_PHP_VERSION >= 805000) {
+ 		ERROR("not supported. Need a PHP version >= 8.0.0 and < 8.5.0 (found " + XDEBUG_PHP_VERSION + ")");
+ 	} else {
+ 		MESSAGE("supported (" + XDEBUG_PHP_VERSION + ")");
