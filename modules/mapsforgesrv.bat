@@ -6,5 +6,7 @@ echo ^>^>^> gradlew wrapper --gradle-version %GRADLEVER%
 call gradlew wrapper --gradle-version %GRADLEVER%
 echo ^<^<^< gradlew wrapper --gradle-version %GRADLEVER%
 
-REM -Dorg.gradle.deprecation.trace=true 
+REM call gradlew --refresh-dependencies run
+
+REM -Dorg.gradle.deprecation.trace=true
 call gradlew -x test --warning-mode all --console=verbose --no-daemon --parallel --max-workers %NUMBER_OF_PROCESSORS% shadowJar test 2>&1
