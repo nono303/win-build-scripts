@@ -17,10 +17,12 @@ if "%CUR_DEBUG%"=="1" (
 	set MSBUILD_OPTS=%MSBUILD_OPTS_REL%
 	set NINJA=%BIN_NINJA%
 )
-if /I "%~3"=="nocxx"  (
-	set CMAKE_OPTS=%CMAKE_OPTS% -DCMAKE_C_FLAGS_INIT=/std:c%C_STD_VER%
-) else (
-	set CMAKE_OPTS=%CMAKE_OPTS% -DCMAKE_CXX_FLAGS_INIT=/std:c++%C_STD_VER% -DCMAKE_C_FLAGS_INIT=/std:c%C_STD_VER%
+if NOT "%C_STD_VER%"=="" (
+	if /I "%~3"=="nocxx"  (
+		set CMAKE_OPTS=%CMAKE_OPTS% -DCMAKE_C_FLAGS_INIT=/std:c%C_STD_VER%
+	) else (
+		set CMAKE_OPTS=%CMAKE_OPTS% -DCMAKE_CXX_FLAGS_INIT=/std:c++%C_STD_VER% -DCMAKE_C_FLAGS_INIT=/std:c%C_STD_VER%
+	)
 )
 REM	path for find
 set CMAKE_OPTS=%CMAKE_OPTS% ^

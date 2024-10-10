@@ -30,10 +30,9 @@ set PATH_RELEASE_SVN=D:\github\NONO_subversion
 set PATH_RELEASE_MEMCACHED=/cygdrive/d/github/NONO_memcached
 	REM copy for github : unset to disable
 set PATH_GITHUB_PHPMEMCACHE=D:\github\NONO_PHP-memcache-dll
-set PATH_GITHUB_MODMD=D:\github\NONO_mod_md
 set PATH_GITHUB_MODFCGID=C:\sdk\src\mod_fcgid\bin
 set PATH_GITHUB_SSLH=D:\github\NONO_sslh
-	REM JDK root (gradle & java for mobac, java_hl for subversion)
+	REM JDK root (gradle projects, java_hl for subversion)
 set JAVA_HOME=%PATH_SOFTS%\openjdk
 set GRADLE_USER_HOME=%PATH_SOFTS%\gradle
 
@@ -50,8 +49,8 @@ set PATH_BIN_NASM=%PATH_SOFTS%\nasm
 set PATH_BIN_PERL=%PATH_SOFTS%\perl\perl\bin
 set PATH_BIN_PERL_SITE=%PATH_SOFTS%\perl\perl\site\bin
 	REM svn for mobac https://github.com/nono303/win-svn
-set PATH_BIN_SVN=%PATH_RELEASE_SVN%\vs17\x64-avx
-set PATH_DEPS_SVN=%PATH_RELEASE_SVN%\vs17\x64-avx\deps
+set PATH_BIN_SVN=%PATH_RELEASE_SVN%\vs17\x64-avx2
+set PATH_DEPS_SVN=%PATH_RELEASE_SVN%\vs17\x64-avx2\deps
 	REM for version patch if not present at build - https://github.com/pavel-a/ddverpatch (old https://www.nuget.org/packages/verpatch/1.0.14 / https://www.codeproject.com/Articles/37133/Simple-Version-Resource-Tool-for-Windows)
 set BIN_VERPATCH=%PATH_SOFTS%\verpatch.exe
 	REM for testing matching pdb with exe and dll http://www.debuginfo.com/tools/chkmatch.html
@@ -107,8 +106,6 @@ set WKITVER=10.0.22621.0
 set DOTNETVER=4.8
 	REM Current MSVC full version (accordinf to vs16 vs17...)
 FOR /F "tokens=* USEBACKQ" %%F in (`dir /b %PATH_VS%\VC\Tools\MSVC ^| grep %vcvars_ver%`) do (set VCTOOLSVER=%%F)
-	REM https://learn.microsoft.com/fr-fr/cpp/build/reference/std-specify-language-standard-version
-set C_STD_VER=latest
 
 set NMAKE_OPTS_DBG=/NOLOGO
 set NMAKE_OPTS_REL=/S %NMAKE_OPTS_DBG%
