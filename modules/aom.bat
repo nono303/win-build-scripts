@@ -35,10 +35,11 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
-REM >= 3.10 : FAILED: aom_av1_rc.dll aom_av1_rc.lib on link
+	REM >= 3.10 : FAILED: aom_av1_rc.dll aom_av1_rc.lib on link
 sed -i 's/\/GL //g' %CYGPATH_BUILD%/%1/build.ninja
+
 %NINJA% install
 
 xcopy /C /F /Y  %PATH_BUILD%\%1\aom.pdb %PATH_INSTALL%\bin\*
-move /Y %PATH_INSTALL%\lib\*_static.* %PATH_INSTALL%\%DIR_LIB_UNUSED%
+del /Q /F %PATH_INSTALL%\lib\aom_static.lib
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\aom.dll
