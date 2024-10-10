@@ -69,6 +69,7 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 		"improve linker performance" => [33,"str"],
 		"Hunk #" => [33,"str"], // patch offset 
 		"pas reconnu en tant que commande interne" => [33,"str"],
+		"environment is too large" => [33,"str"],
 // Cyan
 		"ne peut trouver le fichier" => [36,"str"], //mpir
 		"non valide" => [36,"str"],
