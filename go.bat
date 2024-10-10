@@ -64,6 +64,9 @@ if "%BCMD%"=="" (
 	exit /B -1
 )
 
+	REM ~~~~~~~~~~~~ DEDUPLICATE ENV VAR
+for %%D in (path EXTERNAL_INCLUDE INCLUDE LIB) do (for /F "tokens=* USEBACKQ" %%F in (`call do_php %PATH_UTILS%\sub\deduplicate.php %%D`) do (set %%D=%%F))
+
 	REM ~~~~~~~~~~~~ RUN
 echo %ymdhis% ####### BEGIN %BAFF% '%1' %MSVC_DEPS% %ARCH% %AVXECHO% ###########################
 if %ARG_ALL% == 1 (

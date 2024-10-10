@@ -9,7 +9,4 @@ if exist .\env.bat (
 ) else (
 	call .\env_sample.bat
 )
-set PATH=%PATH_WIN%;%PATH_VS%\MSBuild\Current\Bin\amd64;
-set EXTERNAL_INCLUDE=
-set INCLUDE=
-set LIB=
+set PATH=%PATH_WIN%;%PATH_VS%\MSBuild\Current\Bin\amd64
