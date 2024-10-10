@@ -9,10 +9,6 @@ REM ********
 REM * INIT *
 REM ********
 
-	REM ~~~~~~~~~~~~ var
-set LIB=
-set INCLUDE=
-
 	REM ~~~~~~~~~~~~ php-src
 call %PATH_MODULES_COMMON%\init.bat php-src
 set PHPVER=%SCM_TAG:~4,3%
