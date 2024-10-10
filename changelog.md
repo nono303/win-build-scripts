@@ -1,8 +1,69 @@
 # changelog
 
 
+## 1.10.3 _(2024-10-10)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  unset dirty fix for LIB & INCLUDE as they are now deduplicated
+`modules/php.bat`
+*  +apr-2
+`modules/apr2.bat`
+`modules/apr2.patch`
+`utils/sub/version.php`
+*  php callback for deduplicate entries in ENV var
+`utils/sub/deduplicate.php`
+*  del aom_static.lib
+`modules/aom.bat`
+*  1.34.1
+`modules/cares.patch`
+*  fix php8.lib copy
+`modules/phpsdk-config_make.bat`
+*  use relative %PATH_INSTALL%\lib\php8.lib
+`modules/php-ogr.bat`
+*  clen fix for duplicate entries in ENV var
+`go.bat`
+`x64.bat`
+*  disable warn C4477
+`modules/icu.bat`
+*  8.4.0rc2
+`modules/php-src_8.4.patch`
+*  fix nostd
+`modules/dependencies.bat`
+*  subversion 1.14.4
+`modules/apr-util.bat`
+`modules/httpd.bat`
+`modules/pcre2.bat`
+`modules/subversion.bat`
+`modules/subversion.patch`
+`modules/subversionanddeps.bat`
+*  remove specific for mod_md build
+`modules/curl.bat`
+`usage.txt`
+*  move C_STD_VER from env_sample to vs1x (disable /std for vs16)
+`env_sample.bat`
+`modules/common/init.bat`
+`vs16.bat`
+`vs17.bat`
+*  reset env var EXTERNAL_INCLUDE, INCLUDE & LIB to avoid "environment is too large"
+`x64.bat`
+*  +cmd to force refresh deps
+`modules/mapsforgesrv.bat`
+*  look for "environment is too large"
+`utils/sub/logcheck.php`
+*  fixed WIN64
+`modules/serf.bat`
+`x64.bat`
+*  https://github.com/xdebug/xdebug/pull/977#issuecomment-2394493320
+`modules/xdebug.patch`
+
+
 ## 1.10.2 _(2024-10-04)_
 
+*  1.10.2
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
