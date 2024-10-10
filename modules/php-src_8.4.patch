@@ -223,21 +223,3 @@ index 3f935eab23..82dc73c130 100644
  			if (PHP_DEBUG == "no") {
  				/* Silence irrelevant-to-us warning in release builds */
  				ADD_FLAG("LDFLAGS_PHAR", "/IGNORE:4089 ");
-diff --git a/win32/build/confutils.js b/win32/build/confutils.js
-index 2fba54c0b4..6f5ee45d6f 100644
---- a/win32/build/confutils.js
-+++ b/win32/build/confutils.js
-@@ -968,11 +968,11 @@ function GREP_HEADER(header_name, regex, path_to_check)
- 
- 		var p = search_paths(header_name, path_to_check, "INCLUDE");
- 		if (typeof(p) == "string") {
--			c = file_get_contents(p);
-+			c = file_get_contents(p+ "\\" + header_name);
- 		} else if (p == false) {
- 			p = search_paths(header_name, PHP_EXTRA_INCLUDES, null);
- 			if (typeof(p) == "string") {
--				c = file_get_contents(p);
-+				c = file_get_contents(p+ "\\" + header_name);
- 			}
- 		}
- 		if (!c) {
