@@ -85,6 +85,8 @@
 							pathenv("PATH_SRC")."/".$argv[1]."/version.rc"],
 		"apr"				=> ["/#define APR_MAJOR_VERSION *([0-9]+).*#define APR_MINOR_VERSION *([0-9]+).*#define APR_PATCH_VERSION *([0-9]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/include/apr_version.h"],
+		"apr2"				=> ["/#define APR_MAJOR_VERSION *([0-9]+).*#define APR_MINOR_VERSION *([0-9]+).*#define APR_PATCH_VERSION *([0-9]+)/s",
+							pathenv("PATH_SRC")."/".$argv[1]."/include/apr_version.h"],
 		"apr-util"			=> ["/#define APU_MAJOR_VERSION *([0-9]+).*#define APU_MINOR_VERSION *([0-9]+).*#define APU_PATCH_VERSION *([0-9]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/include/apu_version.h"],
 		"openssl-quic"		=> ["/VERSION_NUMBER=([0-9\.]+)/",
