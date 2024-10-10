@@ -48,7 +48,7 @@ cd /D C:\sdk\phpmaster\vs17\x64\php-src
 ..\pecl\php-ogr\ogr.c ^
 C:\sdk\src\gdal\apps\gdallocationinfo.cpp
 
-"link.exe" C:\sdk\src\php-sdk\phpmaster\vs17\x64\build\Release\pecl\php-ogr\ogr.obj C:\sdk\src\php-sdk\phpmaster\vs17\x64\build\Release\php8.lib gdal.lib kernel32.lib ole32.lib user32.lib advapi32.lib shell32.lib ws2_32.lib Dnsapi.lib psapi.lib bcrypt.lib  ^
+"link.exe" C:\sdk\src\php-sdk\phpmaster\vs17\x64\build\Release\pecl\php-ogr\ogr.obj %PATH_INSTALL%\lib\php8.lib gdal.lib kernel32.lib ole32.lib user32.lib advapi32.lib shell32.lib ws2_32.lib Dnsapi.lib psapi.lib bcrypt.lib  ^
 /out:"C:\Program Files\php\php_ogr.dll" ^
 /dll ^
 /nologo ^
