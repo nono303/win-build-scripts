@@ -84,13 +84,12 @@ Usage: go command [options]
     * fit2gpx
     * mobac
  + standalone httpd module
-  * mod_md
   * mod_fcgid
  + standalone php module
   * php-ogr
 - build full:
     no param:    build ALL modules in the order listed above
-    _xx_anddeps: build ONLY _xx_ and all submodule required for _xx_ {httpdanddeps, phpanddeps, subversionanddeps, projgeolibanddeps}
+    _xx_anddeps: build ONLY _xx_ and all submodule required for _xx_ {httpdanddeps, phpanddeps, projgeolibanddeps}
     module :     build FROM module in the order listed above
 - build options:
     all:     build 'command' for all target combinations (vs16, vs17 / x64 / sse2, avx, avx2)
