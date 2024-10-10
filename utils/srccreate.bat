@@ -34,7 +34,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/c-ares/c-ares.git cares
 cd /D cares
-git checkout tags/v1.33.1
+git checkout tags/v1.34.1
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
@@ -62,7 +62,7 @@ git checkout tags/VER-2-13-3
 cd /D ..
 git clone https://github.com/OSGeo/gdal gdal
 cd /D gdal
-git checkout tags/v3.9.2RC2
+git checkout tags/v3.9.3RC1
 cd /D ..
 git clone https://github.com/geographiclib/geographiclib.git geographiclib
 cd /D geographiclib
@@ -106,7 +106,7 @@ git checkout tags/v1.7.3
 cd /D ..
 git clone https://github.com/ebiggers/libdeflate.git libdeflate
 cd /D libdeflate
-git checkout tags/v1.21
+git checkout tags/v1.22
 cd /D ..
 git clone https://git.lighttpd.net/mirrors/libev.git libev
 cd /D libev
@@ -212,10 +212,6 @@ git clone https://github.com/memcached/memcached memcached
 cd /D memcached
 git checkout tags/1.6.31
 cd /D ..
-git clone https://github.com/telemaxx/mapsforgesrv.git mfsrv
-cd /D mfsrv
-git checkout styles
-cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
 svn update -r 2782
@@ -270,11 +266,11 @@ git checkout tags/v1.63.0
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3
-git checkout tags/v1.5.0
+git checkout tags/v1.6.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v1.7.0
+git checkout tags/v1.8.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -338,7 +334,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.4.0RC1
+git checkout tags/php-8.4.0RC2
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
@@ -370,7 +366,7 @@ git checkout tags/v2.1.2
 cd /D ..
 git clone https://github.com/apache/subversion.git subversion
 cd /D subversion
-git checkout tags/1.14.3
+git checkout tags/1.14.4
 cd /D ..
 git clone https://github.com/htacg/tidy-html5 tidy
 cd /D tidy
@@ -390,7 +386,7 @@ svn update -r 36
 cd /D ..
 git clone https://github.com/xdebug/xdebug.git xdebug
 cd /D xdebug
-git checkout tags/3.4.0alpha1
+git checkout tags/3.4.0beta1
 cd /D ..
 git clone https://github.com/lloyd/yajl.git yajl
 cd /D yajl
