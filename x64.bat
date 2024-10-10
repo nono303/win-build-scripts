@@ -10,3 +10,6 @@ if exist .\env.bat (
 	call .\env_sample.bat
 )
 set PATH=%PATH_WIN%;%PATH_VS%\MSBuild\Current\Bin\amd64;
+set EXTERNAL_INCLUDE=
+set INCLUDE=
+set LIB=
