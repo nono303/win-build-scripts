@@ -32,6 +32,5 @@ for %%X in (dll pdb) do (xcopy /C /F /Y  %PATH_BUILD%\%1\src\dav1d.%%X %PATH_INS
 xcopy /C /F /Y  %PATH_BUILD%\%1\src\dav1d.lib %PATH_INSTALL%\lib\*
 if not exist %PATH_INSTALL%\include\dav1d\. mkdir %PATH_INSTALL%\include\dav1d
 xcopy /C /F /Y %PATH_SRC%\%1\include\dav1d\*.h %PATH_INSTALL%\include\dav1d\*
-xcopy /C /F /Y %PATH_BUILD%\%1\include\dav1d\version.h %PATH_INSTALL%\include\dav1d\*
 xcopy /C /F /Y %PATH_BUILD%\%1\meson-private\dav1d.pc %PATH_INSTALL%\lib\pkgconfig\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\dav1d.dll
