@@ -14,6 +14,7 @@ automake1.13
 automake1.14
 automake1.15
 automake1.16
+automake1.17
 automake1.4
 automake1.5
 automake1.6
@@ -50,7 +51,7 @@ gcc-core
 gcc-g++
 GeoIP-database
 getent
-gnupg
+gnupg2
 grep
 groff
 gsettings-desktop-schemas
@@ -76,6 +77,7 @@ libcharset1
 libcom_err2
 libcrypt2
 libcurl4
+libdb18.1
 libdb5.3
 libdns1106
 libedit0
@@ -122,6 +124,7 @@ libjson-c2
 libk5crypto3
 libkrb5_3
 libkrb5support0
+libksba8
 liblmdb0
 libltdl7
 liblwres161
@@ -136,6 +139,7 @@ libncursesw10
 libnettle6
 libnettle8
 libnghttp2_14
+libnpth0
 libntlm0
 libopenldap2
 libopenldap2_4_2
@@ -159,6 +163,7 @@ libreadline7
 libretls26
 libsasl2_3
 libsmartcols1
+libsqlite3_0
 libssh2_1
 libssl-devel
 libssl1.1
@@ -170,6 +175,7 @@ libuchardet0
 libunistring2
 libunistring5
 libusb0
+libusb1.0
 libuuid1
 libxml2
 libxslt
@@ -187,12 +193,14 @@ p11-kit
 p11-kit-trust
 patch
 perl
+perl-Archive-Zip
 perl-Class-Inspector
 perl-File-ShareDir
-perl-JSON-PP
 perl-Scalar-List-Utils
+perl-Win32-API
 perl_autorebase
 perl_base
+pinentry
 pkg-config
 pkgconf
 publicsuffix-list-dafsa

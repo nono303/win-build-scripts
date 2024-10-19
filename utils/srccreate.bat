@@ -34,7 +34,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/c-ares/c-ares.git cares
 cd /D cares
-git checkout tags/v1.34.1
+git checkout tags/v1.34.2
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
@@ -42,7 +42,7 @@ git checkout tags/curl-8_10_1
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
-git checkout tags/1.4.3
+git checkout tags/1.5.0
 cd /D ..
 git clone https://github.com/nono303/Dependencies.git dependencies
 cd /D dependencies
@@ -62,7 +62,7 @@ git checkout tags/VER-2-13-3
 cd /D ..
 git clone https://github.com/OSGeo/gdal gdal
 cd /D gdal
-git checkout tags/v3.9.3RC1
+git checkout tags/v3.10.0beta1
 cd /D ..
 git clone https://github.com/geographiclib/geographiclib.git geographiclib
 cd /D geographiclib
@@ -166,7 +166,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/libssh2/libssh2.git libssh2
 cd /D libssh2
-git checkout tags/libssh2-1.11.0
+git checkout tags/libssh2-1.11.1
 cd /D ..
 git clone https://gitlab.com/libtiff/libtiff.git/ libtiff
 cd /D libtiff
@@ -204,9 +204,9 @@ git clone https://github.com/lua/lua lua
 cd /D lua
 git checkout tags/v5.4.7
 cd /D ..
-git clone https://github.com/nono303/mapsforgesrv mapsforgesrv
+git clone  mapsforgesrv
 cd /D mapsforgesrv
-git checkout styles
+git checkout 0.22
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
@@ -270,7 +270,7 @@ git checkout tags/v1.6.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v1.8.0
+git checkout tags/v1.8.1
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm

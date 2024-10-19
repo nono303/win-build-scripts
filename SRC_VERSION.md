@@ -5,14 +5,14 @@
 | [apr-util](https://github.com/apache/apr-util) | 1.7.0-dev - 85df5aee |
 | [brotli](https://github.com/google/brotli) | 1.1.0 |
 | [bzip2](https://gitlab.com/bzip2/bzip2.git) | 1.1.0 - 66c46b8 |
-| [cares](https://github.com/c-ares/c-ares) | 1.34.1 |
+| [cares](https://github.com/c-ares/c-ares) | 1.34.2 |
 | [curl](https://github.com/curl/curl) | 8.10.1 |
-| [dav1d](https://code.videolan.org/videolan/dav1d.git) | 1.4.3 |
+| [dav1d](https://code.videolan.org/videolan/dav1d.git) | 1.5.0 |
 | [dependencies](https://github.com/nono303/Dependencies) + [*upstream + src*](https://github.com/lucasg/Dependencies) | 1.11.1 - bc29d77 |
 | [fit2gpx](https://github.com/nono303/fit2gpx) - [*upstream + src*](https://github.com/MaksVasilev/fit2gpx) | 0.1.21 - d8a0ade |
 | [freeglut](https://github.com/dcnieho/FreeGLUT.git) | 3.6.0 |
 | [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.13.3 |
-| [gdal](https://github.com/OSGeo/gdal) | 3.9.3rc1 |
+| [gdal](https://github.com/OSGeo/gdal) | 3.10.0beta1 |
 | [geographiclib](https://github.com/geographiclib/geographiclib/tree/release) | 2.4 |
 | [geos](https://github.com/libgeos/geos) | 3.13.0 |
 | [giflib](https://github.com/gongjianbo/GifLib) | 5.2.1 - 59eb9d1 |
@@ -28,7 +28,7 @@
 | [libevent](https://github.com/libevent/libevent) | 2.2.1-alpha |
 | [libexpat](https://github.com/libexpat/libexpat) | 2.6.3 |
 | [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.19.0 - 5cf722e |
-| [libgd](https://github.com/libgd/libgd) | 2.4.0 - 6e42ee80 |
+| [libgd](https://github.com/libgd/libgd) | 2.4.0 - c2867fd5 |
 | [libgeotiff](https://github.com/nono303/libgeotiff.git) + [*upstream + src*](https://github.com/OSGeo/libgeotiff) | 1.7.4 - 36e5a2b |
 | [libheif](https://github.com/strukturag/libheif) | 1.18.2 |
 | [libiconv](https://github.com/AiMiDi/libiconv_cmake) | efdd103 |
@@ -38,17 +38,17 @@
 | [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.11.0 |
 | [libpng](https://sourceforge.net/p/libpng/code/ci/master/tree/) | 1.6.44 |
 | [libsodium](https://github.com/jedisct1/libsodium.git) | 1.0.21.0 - b4ad7920 |
-| [libssh2](https://github.com/libssh2/libssh2) | 1.11.0 |
+| [libssh2](https://github.com/libssh2/libssh2) | 1.11.1 |
 | [libtiff](https://gitlab.com/libtiff/libtiff) | 4.7.0 |
 | [libwepb](https://chromium.googlesource.com/webm/libwebp) | 1.4.0 |
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
 | [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.13.4 |
 | [libxpm](https://github.com/nono303/libxpm.git) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.17 |
 | [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.42 |
-| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1897 - 364b7fa8 |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1897 - 6ac7c8f2 |
 | [libzip](https://github.com/nih-at/libzip) | 1.11.1 |
 | [lua](https://github.com/lua/lua) | 5.4.7 |
-| [mapsforgesrv](https://github.com/nono303/mapsforgesrv/tree/styles) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | :warning: styles - c4b369a |
+| [mapsforgesrv](https://github.com/nono303/mapsforgesrv/tree/styles) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv)_ | :warning: 0.22 - 1754135 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.29 |
 | [mobac](https://svn.code.sf.net/p/mobac/code) | 2.3.3 - r2782 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
@@ -64,7 +64,7 @@
 | [mpir](https://github.com/nono303/mpir) - _[upstream](https://github.com/BrianGladman/mpir)_ - _[src](https://github.com/wbhart/mpir)_ | 3.0.0 - 6e8bb8c |
 | [nghttp2](https://github.com/nghttp2/nghttp2) | 1.63.0 |
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 1.6.0 |
-| [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 1.8.0 |
+| [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 1.8.1 |
 | [nssm](https://github.com/puppetlabs/nssm) | 2.25 - a1c3260 |
 | [openssl](https://github.com/openssl/openssl)                | 3.3.2       |
 | [openssl-quic](https://github.com/quictls/openssl/tree/openssl-3.1.5+quic) | 3.3.0 |
@@ -79,8 +79,8 @@
 | [php-geos](https://github.com/nono303/php-geos) - *[fork](https://github.com/ModelTech/php-geos) - [upstream + src](https://git.osgeo.org/gitea/geos/php-geos/commits/branch/php8)* | 1.0.1.2 - 3eecc74 |
 | [php-ogr](https://github.com/nono303/php-ogr) - *[upstream + src](https://github.com/dvzgeo/php_ogr)* | 1.7.0 - 91dd6cc |
 | [php-proj](https://github.com/swen100/phpng-proj) | 3.0.3 |
-| [php-sdk](https://github.com/php/php-sdk-binary-tools) | 2.3.0 - f0b6aac |
-| [php-src](https://github.com/php/php-src) | 8.4.0rc2 |
+| [php-sdk](https://github.com/php/php-sdk-binary-tools) | 2.3.0 - 53d6289 |
+| [php-src](https://github.com/php/php-src) | :warning: 8.4.0rc1 |
 | [proj](https://github.com/OSGeo/PROJ) | 9.5.0 |
 | [python](https://github.com/nono303/cpython) - _[upstream + src](https://github.com/python/cpython/tree/3.8)_ | 3.8.16 - 0813455d42 |
 | [qhull](https://github.com/qhull/qhull) | 8.1-alpha4 |

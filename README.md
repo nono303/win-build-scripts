@@ -54,11 +54,11 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.12.0p2.1 (14.40, 14.29) | `.vsconfig`         |
+| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.12.0p3 (14.40, 14.29) | `.vsconfig`         |
 | :bookmark: [Microsoft Visual C++ Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170) | x64 & x86 | 14.40.33810 |  |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.5.4 | `cyg64.packagelist` |
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.12.7 |                     |
-| [OpenJDK](https://jdk.java.net/23/)                | x64  | 23 |                     |
+| [OpenJDK](https://jdk.java.net/23/)                | x64  | 23.0.1 |                     |
 | [Strawberry Perl](https://github.com/StrawberryPerl/Perl-Dist-Strawberry/releases) | x64  | 5.40.0.1 |                     |
 | [NASM](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.16.03 |                     |
 | [YASM](https://yasm.tortall.net/Download.html) _mpir_ | x64 | 1.3.0 | |
@@ -70,8 +70,8 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [Gradle](https://services.gradle.org/distributions/) | [java] | 8.10.2 | |
 | [CMake](https://cmake.org/download/) | x64 | 3.30.5 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | x64 | 1.12.1 | |
-| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 1.5.2 | |
-| [NuGet](https://www.nuget.org/downloads) | x86 | 6.11.0 | |
+| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 1.6.0rc2 | |
+| [NuGet](https://www.nuget.org/downloads) | x86 | 6.11.1 | |
 
 ### [SOURCE VERSIONS](./SRC_VERSION.md)
 ### [CHANGELOG](./changelog.md)
