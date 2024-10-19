@@ -1,8 +1,36 @@
 # changelog
 
 
+## 1.10.4 _(2024-10-19)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`config/.vsconfig`
+`config/cyg64.packagelist`
+`config/python.pip`
+`utils/srccreate.bat`
+*  1.5.0
+`modules/dav1d.bat`
+*  3.10
+`modules/gdal.bat`
+`modules/gdal.patch`
+*  1.11.1
+`modules/libssh2.patch`
+*  WKITVER: 10.0.22621.0 > 10.0.26100.0
+`env_sample.bat`
+`modules/sqlite.bat`
+*  https://www.apachelounge.com/viewtopic.php?p=43136#43136
+`modules/apr2.bat`
+`modules/apr2.patch`
+*  fix path deduplicate
+`go.bat`
+
+
 ## 1.10.3 _(2024-10-10)_
 
+*  1.10.3
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
