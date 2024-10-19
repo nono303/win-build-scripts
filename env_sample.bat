@@ -101,7 +101,7 @@ REM ########################## BUILD OPTION
 	REM https://services.gradle.org/distributions/
 set GRADLEVER=8.10.2
 	REM see dir in %PATH_ROOTWKIT%\Lib
-set WKITVER=10.0.22621.0
+set WKITVER=10.0.26100.0
 	REM .NET installed SDK
 set DOTNETVER=4.8
 	REM Current MSVC full version (accordinf to vs16 vs17...)
