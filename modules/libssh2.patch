@@ -1,7 +1,10 @@
-diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
-index 1cdc524..325024b 100644
---- "a/CMakeLists.txt"
-+++ "b/CMakeLists.txt"
+ CMakeLists.txt | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 6b51ac64..8be0c3d5 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -88,11 +88,11 @@ if(NOT LIBSSH2_VERSION OR
  endif()
  
@@ -15,27 +18,19 @@ index 1cdc524..325024b 100644
 +#   FILES
 +#     COPYING NEWS README RELEASE-NOTES
 +#     docs/AUTHORS docs/BINDINGS.md docs/HACKING.md
-+#  DESTINATION ${CMAKE_INSTALL_DOCDIR})
++#   DESTINATION ${CMAKE_INSTALL_DOCDIR})
  
- include(max_warnings)
+ include(PickyWarnings)
  
-@@ -315,6 +315,7 @@ if(CRYPTO_BACKEND STREQUAL "OpenSSL" OR NOT CRYPTO_BACKEND)
-         NAMES crypto.dll
-           libcrypto-1_1.dll libcrypto-1_1-x64.dll
-           libcrypto-3.dll libcrypto-3-x64.dll
-+	  libcrypto-81_3.dll libcrypto-81_3-x64.dll
+@@ -321,6 +321,7 @@ if(CRYPTO_BACKEND STREQUAL "OpenSSL" OR NOT CRYPTO_BACKEND)
+         NAMES "crypto.dll"
+           "libcrypto-1_1.dll" "libcrypto-1_1-x64.dll"
+           "libcrypto-3.dll" "libcrypto-3-x64.dll"
++          "libcrypto-81_3.dll" "libcrypto-81_3-x64.dll"
          HINTS ${_OPENSSL_ROOT_HINTS} PATHS ${_OPENSSL_ROOT_PATHS}
-         PATH_SUFFIXES bin NO_DEFAULT_PATH)
+         PATH_SUFFIXES "bin" NO_DEFAULT_PATH)
        if(DLL_LIBCRYPTO)
-@@ -328,6 +329,7 @@ if(CRYPTO_BACKEND STREQUAL "OpenSSL" OR NOT CRYPTO_BACKEND)
-         NAMES ssl.dll
-           libssl-1_1.dll libssl-1_1-x64.dll
-           libssl-3.dll libssl-3-x64.dll
-+	  libssl-81_3.dll libssl-81_3-x64.dll
-         HINTS ${_OPENSSL_ROOT_HINTS} PATHS ${_OPENSSL_ROOT_PATHS}
-         PATH_SUFFIXES bin NO_DEFAULT_PATH)
-       if(DLL_LIBSSL)
-@@ -459,7 +461,7 @@ if(LINT)
+@@ -466,7 +467,7 @@ if(LINT)
    endif()
  endif()
  
