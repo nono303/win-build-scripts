@@ -12,7 +12,7 @@ do
   sed -i -E 's/NETFramework,Version=[^"]+/NETFramework,Version=v'$6'/g' $i
   # C CXX Flags
   sed -i -E 's/<Optimization>[^<]+/<Optimization>MaxSpeed/g' $i
-  sed -i 's/<\/ClCompile>/<Optimization>MaxSpeed<\/Optimization><WholeProgramOptimization>true<\/WholeProgramOptimization><MultiProcessorCompilation>true<\/MultiProcessorCompilation><FunctionLevelLinking>true<\/FunctionLevelLinking>'$std$2'<\/ClCompile>/g' $i
+  sed -i 's/<\/ClCompile>/<Optimization>MaxSpeed<\/Optimization><WholeProgramOptimization>true<\/WholeProgramOptimization><MultiProcessorCompilation>true<\/MultiProcessorCompilation><FunctionLevelLinking>true<\/FunctionLevelLinking>'$std$2'<AdditionalOptions>\/Ob3 \/cgthreads8 %(AdditionalOptions)<\/AdditionalOptions><\/ClCompile>/g' $i
   # LINK Flags
   sed -i -E 's/ *<.?LinkIncremental.*//g' $i
   sed -i 's/<\/Link>/'$link'<LinkTimeCodeGeneration>UseLinkTimeCodeGeneration<\/LinkTimeCodeGeneration><\/Link>/g' $i

@@ -32,7 +32,9 @@ cd /D C:\sdk\phpmaster\vs17\x64\php-src
 /LD ^
 /MD ^
 /MP%NUMBER_OF_PROCESSORS% ^
+/cgthreads8 ^
 /O2 ^
+/Ob3 ^
 /w ^
 /Zc:__cplusplus ^
 /Zc:inline ^

@@ -10,6 +10,6 @@ sed -i 's/\/W3/\/w/g' $2/build.ninja
 # add quote for AVX - https://www.cyberciti.biz/faq/unix-linux-bash-script-check-if-variable-is-empty/
 [ ! -z "$avx" ] && avx="\"$avx\""
 # opti
-sed -i 's/ "\/Zi" / "\/Gw" "\/Gy" "\/Zc:inline" "\/O2" "\/Zf" "\/Zi" "\/FS" "\/GL" "\/MP'$3'" '$avx' "\/DWIN32" "\/D_WINDOWS" "\/DNDEBUG" /g' $2/build.ninja
+sed -i 's/ "\/Zi" / "\/Gw" "\/Gy" "\/Zc:inline" "\/O2" "\/Ob3" "\/Zf" "\/Zi" "\/FS" "\/GL" "\/MP'$3'" "\/cgthreads8" '$avx' "\/DWIN32" "\/D_WINDOWS" "\/DNDEBUG" /g' $2/build.ninja
 # found		"/MD" "/nologo" "/showIncludes" "/W3" "/O2" "/Zi"
-# result	"/MD" "/nologo" "/showIncludes" "/W3" "/Gw" "/Gy" "/Zc:inline" "/O2" "/Zf" "/Zi" "/FS" "/GL" "/MP16" "/arch:AVX" "/DWIN32" "/D_WINDOWS" "/DNDEBUG"
+# result	"/MD" "/nologo" "/showIncludes" "/W3" "/Gw" "/Gy" "/Zc:inline" "/O2" "/Ob3" "/Zf" "/Zi" "/FS" "/GL" "/MP16" "/cgthreads8" "/arch:AVX" "/DWIN32" "/D_WINDOWS" "/DNDEBUG"

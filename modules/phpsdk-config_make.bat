@@ -161,7 +161,7 @@ sed -i 's/ARFLAGS=\/nologo/ARFLAGS=\/nologo \/LTCG/g' %CYGPATH_SRC%/php-src/Make
 	REM LDFLAGS (libcmt.lib : freetype2)
 sed -i -E 's/incremental:no/incremental:no \/LTCG \/NODEFAULTLIB:libcmt.lib/g' %CYGPATH_SRC%/php-src/Makefile
 	REM CFLAGS
-sed -i 's/\/Ox/\/std:c++latest \/O2 \/GL \/Zf \/Gy \/FS \/D PHP_ICONV_PREFIX=%PATH_INSTALL:\=\/%/g' %CYGPATH_SRC%/php-src/Makefile
+sed -i 's/\/Ox/\/std:c++latest \/O2 \/Ob3 \/MP%NUMBER_OF_PROCESSORS% \/cgthreads8 \/GL \/Zf \/Gy \/FS \/D PHP_ICONV_PREFIX=%PATH_INSTALL:\=\/%/g' %CYGPATH_SRC%/php-src/Makefile
 	REM no warn
 sed -i 's/d4996//g' %CYGPATH_SRC%/php-src/Makefile
 	REM fix for iconv shared : LINK : fatal error LNK1181: cannot open input file 'php_iconv.lib'
@@ -172,7 +172,7 @@ REM sed -i 's/phpdbg_win.obj: /phpdbg_win.obj:: /g' %CYGPATH_SRC%/php-src/Makefi
 	REM after sed:
 REM LDFLAGS=/nologo /incremental:no /LTCG /NODEFAULTLIB:libcmt.lib /debug /opt:ref,icf
 REM ARFLAGS=/nologo /LTCG
-REM CFLAGS=/nologo /D _WINDOWS /D WINDOWS=1 /D ZEND_WIN32=1 /D PHP_WIN32=1 /D WIN32 /D _MBCS /D _USE_MATH_DEFINES /FD /w /Zc:inline /Gw /Zc:__cplusplus /d2FuncCache1 /Zc:wchar_t /MP16 /Zi /LD /MD /std:c++latest /O2 /GL /Zf /Gy /FS /D NDebug /D NDEBUG /GF /D ZEND_DEBUG=0 /D FD_SETSIZE=2048 /arch:AVX2 
+REM CFLAGS=/nologo /D _WINDOWS /D WINDOWS=1 /D ZEND_WIN32=1 /D PHP_WIN32=1 /D WIN32 /D _MBCS /D _USE_MATH_DEFINES /FD /w /Zc:inline /Gw /Zc:__cplusplus /d2FuncCache1 /Zc:wchar_t /MP16 /Zi /LD /MD /std:c++latest /O2 /Ob3 /MP16 /cgthreads8 /GL /Zf /Gy /FS /D NDebug /D NDEBUG /GF /D ZEND_DEBUG=0 /D FD_SETSIZE=2048 /arch:AVX2 
 
 nmake %NMAKE_OPTS%
 

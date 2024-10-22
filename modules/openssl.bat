@@ -17,8 +17,8 @@ shared no-unit-test no-external-tests no-ssl3 no-weak-ssl-ciphers no-tests zlib 
 --openssldir=%PATH_INSTALL_OSSL%\conf ^
 -DOPENSSL_USE_IPV6=1 ^
 -DOPENSSL_NO_HEARTBEATS ^
--L"/OPT:ICF,REF /LTCG " +"/w /O2 /GL /Gw /Zc:inline /Zf /FS /std:clatest %AVX%"
-	REM result: cl /Zs /Zi /Gs0 /GF /Gy /MD /nologo /w /O2 /GL /Gw /Zc:inline /Zf /FS /std:clatest /arch:AVX2 -D"NDEBUG"
+-L"/OPT:ICF,REF /LTCG " +"/w /O2 /Ob3 /GL /Gw /Zc:inline /Zf /FS /std:clatest /MP%NUMBER_OF_PROCESSORS% /cgthreads8 %AVX%"
+	REM result: cl /Zs /Zi /Gs0 /GF /Gy /MD /nologo /w /O2 /Ob3 /GL /Gw /Zc:inline /Zf /FS /std:clatest /MP16 /cgthreads8 /arch:AVX2 -D"NDEBUG"
 
 REM perl configdata.pm --dump
 
