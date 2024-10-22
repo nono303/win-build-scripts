@@ -1,7 +1,10 @@
-diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
-index b509ee5..2155a0a 100644
---- "a/CMakeLists.txt"
-+++ "b/CMakeLists.txt"
+ CMakeLists.txt | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 95f6afb..abdba1a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -38,6 +38,7 @@ option(OMIT_JSON                 "Omit JSON SQL functions"
  option(OMIT_AUTOINIT             "Omit automatic initialization"                  OFF)
  option(RECOMMENDED_OPTIONS       "Compile by SQLite3 recommended options"         ON)
@@ -21,7 +24,7 @@ index b509ee5..2155a0a 100644
  if(WIN32_MALLOC)
      if(WIN32)
          add_definitions(-DSQLITE_WIN32_MALLOC=1)
-@@ -425,7 +430,7 @@ else()
+@@ -420,7 +425,7 @@ else()
  endif()
  
  message(STATUS "Build shared library:                                 ${ENABLE_SHARED}")
@@ -30,7 +33,7 @@ index b509ee5..2155a0a 100644
  message(STATUS "Build static library:                                 ${ENABLE_STATIC}")
  message(STATUS "Build shell tool:                                     ${BUILD_SHELL}")
  message(STATUS "Statically link shell tool:                           ${ENABLE_STATIC_SHELL}")
-@@ -451,6 +456,7 @@ message(STATUS "Omit JSON SQL functions:                              ${OMIT_JSO
+@@ -446,6 +451,7 @@ message(STATUS "Omit JSON SQL functions:                              ${OMIT_JSO
  message(STATUS "Omit automatic initialization:                        ${OMIT_AUTOINIT}")
  message(STATUS "Compile by SQLite3 recommended options:               ${RECOMMENDED_OPTIONS}")
  message(STATUS "Enable the default URI filename processing:           ${USE_URI}")
@@ -38,7 +41,7 @@ index b509ee5..2155a0a 100644
  message(STATUS "Use Windows Heap API functions for memory allocation: ${WIN32_MALLOC}")
  message(STATUS "Force the Win32 native memory allocator:              ${WIN32_HEAP_CREATE}")
  message(STATUS "Build for old 32bit (WinXP/2003) targets:             ${BUILD_WITH_XPSDK}")
-@@ -489,7 +495,7 @@ if(ENABLE_SHARED)
+@@ -484,7 +490,7 @@ if(ENABLE_SHARED)
      target_link_libraries(sqlite3-shared ${SQLITE3_DEP_LIBRARIES})
      target_include_directories(sqlite3-shared PUBLIC ${CMAKE_INSTALL_PREFIX}/include)
      set_target_properties(sqlite3-shared PROPERTIES
