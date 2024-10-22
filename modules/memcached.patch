@@ -1,7 +1,11 @@
 * disable debug
 * define __CYGWIN__
+ Makefile.am  | 2 +-
+ configure.ac | 7 +++++--
+ 2 files changed, 6 insertions(+), 3 deletions(-)
+
 diff --git a/Makefile.am b/Makefile.am
-index 4208331..1a1ba88 100644
+index 5891b89..11e5b93 100644
 --- a/Makefile.am
 +++ b/Makefile.am
 @@ -1,6 +1,6 @@
@@ -13,7 +17,7 @@ index 4208331..1a1ba88 100644
  BUILT_SOURCES=
  
 diff --git a/configure.ac b/configure.ac
-index e1d0c32..334fdaa 100644
+index 6f2ef97..0451fd9 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -5,7 +5,7 @@ AC_INIT([memcached], [VERSION_NUMBER], [memcached@googlegroups.com])
@@ -34,7 +38,7 @@ index e1d0c32..334fdaa 100644
  fi
  
  AM_PROG_CC_C_O
-@@ -873,5 +873,8 @@ then
+@@ -885,5 +885,8 @@ then
    CFLAGS="$CFLAGS -errfmt=error -errwarn -errshort=tags"
  fi
  
