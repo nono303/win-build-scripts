@@ -143,7 +143,8 @@ set RC_COPYRIGHT=https://github.com/nono303/win-build-scripts
 	REM [0] native (with 'CURL_CA_BUNDLE C:\__path-to__\curl-ca-bundle.crt'):
 		REM *  CAfile: C:\__path-to__\curl-ca-bundle.crt
 set CURL_PATCH_WIN_OPENSSL=1
-
+set MTFLAGS=-nologo
+set RCFLAGS=/nologo
 REM ########################## INIT PATH
 if not exist %PATH_LOGS%\. mkdir %PATH_LOGS%
 if not exist %PATH_BUILDROOT%\. mkdir %PATH_BUILDROOT%
