@@ -7,10 +7,39 @@ Index: build.gradle
      id 'at.bxm.svntools' version '3.1'
      id 'org.gradle.crypto.checksum' version '1.4.0'
 -    id 'com.diffplug.spotless' version '6.21.0'
-+    id 'com.diffplug.spotless' version '7.0.0.BETA2'
++    id 'com.diffplug.spotless' version '7.0.0.BETA4'
  }
  
  group 'mobac.sourceforge.io'
+@@ -21,7 +21,10 @@
+             // required for javax.media:jai-core:1.1.3 and com.sun.media:jai-codec:1.1.3
+             url "https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/"
+         }
+-
++        maven {
++            // https://github.com/mapsforge/mapsforge/blob/master/docs/Integration.md 
++            url 'https://jitpack.io' 
++        }
+         // maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+     }
+     ext {
+@@ -32,9 +35,9 @@
+         options.incremental = true
+         options.fork = true
+         options.compilerArgs << '-Xlint:unchecked'
+-        options.deprecation = true
+-        sourceCompatibility = JavaVersion.VERSION_11
+-        targetCompatibility = JavaVersion.VERSION_11
++        options.deprecation = false
++        // sourceCompatibility = JavaVersion.VERSION_11
++        // targetCompatibility = JavaVersion.VERSION_11
+     }
+ }
+ 
+Index: gradle/wrapper/gradle-wrapper.jar
+===================================================================
+Cannot display: file marked as a binary type.
+svn:mime-type = application/octet-stream
 Index: gradle/wrapper/gradle-wrapper.properties
 ===================================================================
 --- gradle/wrapper/gradle-wrapper.properties	(revision 2782)
@@ -27,19 +56,19 @@ Index: mobac/build.gradle
 ===================================================================
 --- mobac/build.gradle	(revision 2782)
 +++ mobac/build.gradle	(working copy)
-@@ -4,7 +4,7 @@
+@@ -4,37 +4,37 @@
  }
  
  dependencies {
 -    def mapsforgeVersion = '0.20.0'
-+    def mapsforgeVersion = '0.21.0'
-     // def mapsforgeVersion = 'master-SNAPSHOT'
+-    // def mapsforgeVersion = 'master-SNAPSHOT'
++    def mapsforgeVersion = '+'
  
-     implementation "org.mapsforge:mapsforge-core:${mapsforgeVersion}"
-@@ -12,29 +12,29 @@
-     implementation "org.mapsforge:mapsforge-map-awt:${mapsforgeVersion}"
-     implementation "org.mapsforge:mapsforge-map-reader:${mapsforgeVersion}"
-     implementation "org.mapsforge:mapsforge-themes:${mapsforgeVersion}"
+-    implementation "org.mapsforge:mapsforge-core:${mapsforgeVersion}"
+-    implementation "org.mapsforge:mapsforge-map:${mapsforgeVersion}"
+-    implementation "org.mapsforge:mapsforge-map-awt:${mapsforgeVersion}"
+-    implementation "org.mapsforge:mapsforge-map-reader:${mapsforgeVersion}"
+-    implementation "org.mapsforge:mapsforge-themes:${mapsforgeVersion}"
 -    api 'org.apache-extras.beanshell:bsh:2.0b6'
 -    api 'commons-codec:commons-codec:1.15'
 -    api 'commons-io:commons-io:2.11.0'
@@ -61,6 +90,13 @@ Index: mobac/build.gradle
 -    testImplementation 'junit:junit:4.13.2'
 -    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
 -    testImplementation 'javax.servlet:servlet-api:2.5'
++    implementation "com.github.mapsforge.mapsforge:mapsforge-core:${mapsforgeVersion}"
++    implementation "com.github.mapsforge.mapsforge:mapsforge-map:${mapsforgeVersion}"
++    implementation "com.github.mapsforge.mapsforge:mapsforge-map-awt:${mapsforgeVersion}"
++    implementation "com.github.mapsforge.mapsforge:mapsforge-map-reader:${mapsforgeVersion}"
++    implementation "com.github.mapsforge.mapsforge:mapsforge-themes:${mapsforgeVersion}"
+ 
+-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 +    api 'org.apache-extras.beanshell:bsh:+'
 +    api 'commons-codec:commons-codec:+'
 +    api 'commons-io:commons-io:+'
@@ -82,8 +118,7 @@ Index: mobac/build.gradle
 +    testImplementation 'junit:junit:+'
 +    testImplementation 'org.junit.jupiter:junit-jupiter-api:+'
 +    testImplementation 'javax.servlet:servlet-api:+'
- 
--    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
++
 +    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:+'
  }
  processResources {
@@ -131,6 +166,19 @@ Index: mobac/src/main/java/mobac/gui/MainGUI.java
  
  		leftPanelContent = new JPanel(new GridBagLayout());
  		leftPanelContent.add(mapSourcePanel, gbc_eol);
+Index: mobac/src/main/java/mobac/gui/mapview/layer/MapAreaHighlightingLayer.java
+===================================================================
+--- mobac/src/main/java/mobac/gui/mapview/layer/MapAreaHighlightingLayer.java	(revision 2782)
++++ mobac/src/main/java/mobac/gui/mapview/layer/MapAreaHighlightingLayer.java	(working copy)
+@@ -157,7 +157,7 @@
+ 	}
+ 
+ 	@Override
+-	@SuppressWarnings("deprecation")
++	@SuppressWarnings("removal")
+ 	protected void finalize() throws Throwable {
+ 		unregisterTreeListener();
+ 		super.finalize();
 Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
 ===================================================================
 --- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2782)
@@ -157,6 +205,28 @@ Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
  
  	private static final long MBIT1 = 1000000 / 8;
  	private final Settings settings = Settings.getInstance();
+Index: mobac/src/main/java/mobac/mapsources/MapsforgeMapSource.java
+===================================================================
+--- mobac/src/main/java/mobac/mapsources/MapsforgeMapSource.java	(revision 2782)
++++ mobac/src/main/java/mobac/mapsources/MapsforgeMapSource.java	(working copy)
+@@ -48,7 +48,7 @@
+ import org.mapsforge.map.reader.MapFile;
+ import org.mapsforge.map.reader.header.MapFileException;
+ import org.mapsforge.map.rendertheme.ExternalRenderTheme;
+-import org.mapsforge.map.rendertheme.InternalRenderTheme;
++import org.mapsforge.map.rendertheme.internal.MapsforgeThemes;
+ import org.mapsforge.map.rendertheme.XmlRenderTheme;
+ import org.mapsforge.map.rendertheme.XmlRenderThemeMenuCallback;
+ import org.mapsforge.map.rendertheme.XmlRenderThemeStyleLayer;
+@@ -103,7 +103,7 @@
+ 	public MapsforgeMapSource(String mapFileName) {
+ 		mapFileList.add(new File(mapFileName));
+ 		displayModel = new DisplayModel();
+-		xmlRenderTheme = InternalRenderTheme.OSMARENDER;
++		xmlRenderTheme = MapsforgeThemes.OSMARENDER;
+ 	}
+ 
+ 	@Override
 Index: mobac/src/main/java/mobac/program/AtlasThread.java
 ===================================================================
 --- mobac/src/main/java/mobac/program/AtlasThread.java	(revision 2782)
