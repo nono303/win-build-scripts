@@ -2,6 +2,8 @@
 
 set VCDIR=builds\msvc\vs2022
 %PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/%VCDIR%" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
+	REM overriding '/Ob1' with '/Ob3'
+sed -i -E 's/.*OnlyExplicitInline.*//g' %CYGPATH_SRC%/%1/builds/msvc/properties/Release.props
 
 REM /p:Option-amd64asm=yes: nonstandard extension used: '__asm' keyword not supported on this architecture
 MSBuild.exe %PATH_SRC%\%1\%VCDIR%\libsodium.sln %MSBUILD_OPTS% ^
