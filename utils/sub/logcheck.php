@@ -34,27 +34,27 @@
 	}
 
 /*
-https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
+	https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
 
-30 	Foreground Black 	Applies non-bold/bright black to foreground
-31 	Foreground Red 		Applies non-bold/bright red to foreground
-32 	Foreground Green 	Applies non-bold/bright green to foreground
-33 	Foreground Yellow 	Applies non-bold/bright yellow to foreground
-34 	Foreground Blue 	Applies non-bold/bright blue to foreground
-35 	Foreground Magenta 	Applies non-bold/bright magenta to foreground
-36 	Foreground Cyan 	Applies non-bold/bright cyan to foreground
-37 	Foreground White 	Applies non-bold/bright white to foreground
-38 	Foreground Extended Applies extended color value to the foreground (see details below)
-39 	Foreground Default 	Applies only the foreground portion of the defaults (see 0)
+	30 	Foreground Black 	Applies non-bold/bright black to foreground
+	31 	Foreground Red 		Applies non-bold/bright red to foreground
+	32 	Foreground Green 	Applies non-bold/bright green to foreground
+	33 	Foreground Yellow 	Applies non-bold/bright yellow to foreground
+	34 	Foreground Blue 	Applies non-bold/bright blue to foreground
+	35 	Foreground Magenta 	Applies non-bold/bright magenta to foreground
+	36 	Foreground Cyan 	Applies non-bold/bright cyan to foreground
+	37 	Foreground White 	Applies non-bold/bright white to foreground
+	38 	Foreground Extended Applies extended color value to the foreground (see details below)
+	39 	Foreground Default 	Applies only the foreground portion of the defaults (see 0)
 */
 	$search = array(
-// Red
+/* Red */
 		" fatal " => [31,"str"],
 		" error " => [31,"str"],
 		"error:" => [31,"str"],
 		"stop" => [31,"str"],
 		"err open" => [31,"str"], // version
-// Yellow
+/* Yellow */
 		"(Warning[: ])" => [33,"reg"],
 		"warning" => [33,"reg"],
 		"^(sed:)" => [33,"reg"],
@@ -70,17 +70,17 @@ https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequen
 		"Hunk #" => [33,"str"], // patch offset 
 		"pas reconnu en tant que commande interne" => [33,"str"],
 		"environment is too large" => [33,"str"],
-// Cyan
+/* Cyan */
 		"ne peut trouver le fichier" => [36,"str"], //mpir
 		"non valide" => [36,"str"],
 		"introuvable" => [36,"str"],
 		"unknow" => [36,"str"],
 	);
 	$remove = array(
-		"javahl" => [39, "str"],		// subversion java-hl
-		"HEAD is now" => [39, "str"],	// git log
-		"coll_tree" => [39, "str"],		// warning : Category not found: coll_tree [C:\sdk\src\icu\icu4c\source\data\makedata.vcxproj]
-		"showWarning" => [39, "str"],	// icu
+		"javahl" => [39, "str"],			// subversion java-hl
+		"HEAD is now" => [39, "str"],		// git log
+		"unknown_element.c" => [39, "str"],	// php
+		"showWarning" => [39, "str"],		// icu		
 	);
 	//print_r($argv);
 	//exit();
