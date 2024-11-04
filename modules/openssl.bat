@@ -9,20 +9,38 @@ call %PATH_MODULES_COMMON%\init.bat %OPENSSL_SCM%
 
 	REM !! --with-zlib-lib require the full path or name in PATH of zlib DLL without dll extension !!
 perl Configure %perlbuild% ^
-shared no-unit-test no-external-tests no-ssl3 no-weak-ssl-ciphers no-tests zlib zlib-dynamic enable-tls1_3 ^
--threads ^
+shared ^
+no-tests ^
+no-unit-test ^
+no-external-tests ^
+no-ssl3 ^
+no-weak-ssl-ciphers ^
+no-docs ^
+zlib ^
+zlib-dynamic ^
+threads ^
 --prefix=%PATH_INSTALL_OSSL% ^
 --with-zlib-include=%PATH_INSTALL:\=/%/include ^
 --with-zlib-lib=zlib ^
+--with-brotli-include=%PATH_INSTALL:\=/%/include ^
+--with-brotli-lib=brotlicommon ^
+--with-zstd-include=%PATH_INSTALL:\=/%/include ^
+--with-zstd-lib=zstd ^
 --openssldir=%PATH_INSTALL_OSSL%\conf ^
 -DOPENSSL_USE_IPV6=1 ^
--DOPENSSL_NO_HEARTBEATS ^
+-DOPENSSL_NO_HEARTBEATS=1 ^
+-DMD5_ASM=1 ^
+-DSHA1_ASM=1 ^
+-DRMD160_ASM=1 ^
+-DSHA256_ASM=1 ^
+-DSHA512_ASM=1 ^
+-DAES_ASM=1 ^
 -L"/OPT:ICF,REF /LTCG " +"/w /O2 /Ob3 /GL /Gw /Zc:inline /Zf /FS /std:clatest /MP%NUMBER_OF_PROCESSORS% /cgthreads8 %AVX%"
 	REM result: cl /Zs /Zi /Gs0 /GF /Gy /MD /nologo /w /O2 /Ob3 /GL /Gw /Zc:inline /Zf /FS /std:clatest /MP16 /cgthreads8 /arch:AVX2 -D"NDEBUG"
 
 REM perl configdata.pm --dump
 
-sed -i 's/\/W3 \/wd4090 \/nologo \/O2 -threads +/\/nologo /g' %CYGPATH_SRC%/%OPENSSL_SCM%/makefile
+sed -i 's/\/W3 \/wd4090 \/nologo \/O2 +/\/nologo /g' %CYGPATH_SRC%/%OPENSSL_SCM%/makefile
 sed -i 's/\/nologo \/debug -L/\/nologo \/debug /g' %CYGPATH_SRC%/%OPENSSL_SCM%/makefile
 sed -i 's/ARFLAGS= \/nologo/ARFLAGS= \/nologo \/LTCG/g' %CYGPATH_SRC%/%OPENSSL_SCM%/makefile
 

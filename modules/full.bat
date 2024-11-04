@@ -14,6 +14,8 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat bzip2 NOLOG
 	:zlib
 	call %PATH_BATCH%\go.bat zlib NOLOG
+	:zstd
+	call %PATH_BATCH%\go.bat zstd NOLOG
 	:openssl
 	call %PATH_BATCH%\go.bat openssl NOLOG
 	:jemalloc
@@ -46,8 +48,6 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat nghttp2 NOLOG
 	:libssh2
 	call %PATH_BATCH%\go.bat libssh2 NOLOG
-	:zstd
-	call %PATH_BATCH%\go.bat zstd NOLOG
 	:curl
 	call %PATH_BATCH%\go.bat curl NOLOG
 	:libexpat

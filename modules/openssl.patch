@@ -1,0 +1,25 @@
+ Configure | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/Configure b/Configure
+index fff97bd6fc..36973b298e 100755
+--- a/Configure
++++ b/Configure
+@@ -574,8 +574,6 @@ my %deprecated_disablables = (
+ our %disabled = ( # "what"         => "comment"
+                   "fips"                => "default",
+                   "asan"                => "default",
+-                  "brotli"              => "default",
+-                  "brotli-dynamic"      => "default",
+                   "buildtest-c++"       => "default",
+                   "crypto-mdebug"       => "default",
+                   "crypto-mdebug-backtrace" => "default",
+@@ -603,8 +601,6 @@ our %disabled = ( # "what"         => "comment"
+                   "weak-ssl-ciphers"    => "default",
+                   "zlib"                => "default",
+                   "zlib-dynamic"        => "default",
+-                  "zstd"                => "default",
+-                  "zstd-dynamic"        => "default",
+                 );
+ 
+ # Note: => pair form used for aesthetics, not to truly make a hash table
