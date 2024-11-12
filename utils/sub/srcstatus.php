@@ -4,7 +4,7 @@
 	date_default_timezone_set("Europe/Paris");
 	define("NB_TAGS",8);
 
-	if(in_array("gitcg", $argv)){
+	if(in_array("gitgc", $argv)){
 		define("GIT_GC",true);
 		echo "gitcg: ON".PHP_EOL;
 	} else {
