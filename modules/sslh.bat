@@ -1,4 +1,5 @@
-@echo off&& call %PATH_MODULES_COMMON%\init.bat libconfig
+@echo off
+call %PATH_MODULES_COMMON%\init.bat libconfig
 call %PATH_BIN_CYGWIN%\bash --login -c '%CYGPATH_MODULES%/libconfig.sh %CYGPATH_SRC%/libconfig %CYGPATH_MODULES% %AVX_GCC% %CUR_DEBUG%'
 xcopy /C /F /Y %PATH_BIN_CYGWIN%\..\usr\local\bin\cygconfig-11.dll %PATH_GITHUB_SSLH%\%ARCH%\%AVXECHO%\cygconfig-11.dll*
 call do_php %PATH_UTILS%\sub\version.php libconfig %PATH_GITHUB_SSLH%\%ARCH%\%AVXECHO%\cygconfig-11.dll libconfig %ARCH% %AVXECHO%
