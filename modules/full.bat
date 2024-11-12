@@ -110,8 +110,6 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat libyuv NOLOG
 	:libavif
 	call %PATH_BATCH%\go.bat libavif NOLOG
-	:geos
-	call %PATH_BATCH%\go.bat geos NOLOG
 	:libsodium
 	call %PATH_BATCH%\go.bat libsodium NOLOG
 	:mpir
@@ -122,6 +120,8 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat libheif NOLOG
 	:libgd
 	call %PATH_BATCH%\go.bat libgd NOLOG
+	:geos
+	call %PATH_BATCH%\go.bat geos NOLOG
 	:proj
 	call %PATH_BATCH%\go.bat proj NOLOG
 	:libgeotiff
