@@ -17,7 +17,7 @@
 	$nogit = array(
 		"libgeotiff"		=> ["/#define LIBGEOTIFF_STRING_VERSION +\"([0-9\.]+)/s",
 							pathenv("PATH_INSTALL")."/include/geotiff.h"],
-		"sslh"				=> ["/define VERSION \"v([0-9\.]+)/s",
+		"sslh"				=> ["/define VERSION \"v([0-9\.]+)-([0-9]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/version.h"],
 		"dependencies"		=> ["/AssemblyVersion\(\"([0-9\.]+)\"/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/DependenciesGui/Properties/AssemblyInfo.cs"],
