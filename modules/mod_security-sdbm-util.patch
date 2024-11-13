@@ -1,0 +1,29 @@
+diff --git "a/modsec-sdbm-util.c" "b/modsec-sdbm-util.c"
+index 71af63f..3453018 100644
+--- "a/modsec-sdbm-util.c"
++++ "b/modsec-sdbm-util.c"
+@@ -111,7 +111,23 @@ int
+   return (optopt);                        /* dump back option letter */
+ }
+ 
+-#define strndup strdup
++// https://stackoverflow.com/a/41523510
++char *my_strndup(char *str, int chars)
++{
++    char *buffer;
++    int n;
++
++    buffer = (char *) malloc(chars +1);
++    if (buffer)
++    {
++        for (n = 0; ((n < chars) && (str[n] != 0)) ; n++) buffer[n] = str[n];
++        buffer[n] = 0;
++    }
++
++    return buffer;
++}
++
++#define strndup my_strndup
+ #define p  printf
+ #define v  if (verbose) printf
+ #endif
