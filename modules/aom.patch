@@ -1,5 +1,13 @@
+ CMakeLists.txt                                  | 4 ++--
+ build/cmake/dist.cmake                          | 2 +-
+ build/cmake/generate_aom_config_templates.cmake | 2 +-
+ build/cmake/generate_exports.cmake              | 2 +-
+ build/cmake/pkg_config.cmake                    | 2 +-
+ build/cmake/version.cmake                       | 2 +-
+ 6 files changed, 7 insertions(+), 7 deletions(-)
+
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index c97ccd11de..1323d4560c 100644
+index a95c312fe6..584a1d0e1e 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -286,12 +286,12 @@ add_library(aom ${target_objs_aom} $<TARGET_OBJECTS:aom_rtcd>)
@@ -17,3 +25,68 @@ index c97ccd11de..1323d4560c 100644
    endif()
  
    if(NOT MSVC)
+diff --git a/build/cmake/dist.cmake b/build/cmake/dist.cmake
+index 24db93e29d..4835da698f 100644
+--- a/build/cmake/dist.cmake
++++ b/build/cmake/dist.cmake
+@@ -8,7 +8,7 @@
+ # License 1.0 was not distributed with this source code in the PATENTS file, you
+ # can obtain it at www.aomedia.org/license/patent.
+ #
+-cmake_minimum_required(VERSION 3.5)
++cmake_minimum_required(VERSION 3.10)
+ 
+ # Converts spaces in $in_string to semicolons and writes the output to
+ # $out_string. In CMake's eyes this converts the input string to a list.
+diff --git a/build/cmake/generate_aom_config_templates.cmake b/build/cmake/generate_aom_config_templates.cmake
+index 743d007ddf..cf55652d96 100644
+--- a/build/cmake/generate_aom_config_templates.cmake
++++ b/build/cmake/generate_aom_config_templates.cmake
+@@ -8,7 +8,7 @@
+ # License 1.0 was not distributed with this source code in the PATENTS file, you
+ # can obtain it at www.aomedia.org/license/patent.
+ #
+-cmake_minimum_required(VERSION 3.5)
++cmake_minimum_required(VERSION 3.10)
+ 
+ string(TIMESTAMP year "%Y")
+ set(asm_file_header_block "\;
+diff --git a/build/cmake/generate_exports.cmake b/build/cmake/generate_exports.cmake
+index 10a6a8fbe6..de771b716f 100644
+--- a/build/cmake/generate_exports.cmake
++++ b/build/cmake/generate_exports.cmake
+@@ -8,7 +8,7 @@
+ # License 1.0 was not distributed with this source code in the PATENTS file, you
+ # can obtain it at www.aomedia.org/license/patent.
+ #
+-cmake_minimum_required(VERSION 3.5)
++cmake_minimum_required(VERSION 3.10)
+ 
+ # CMAKE_SHARED_LIBRARY_PREFIX can be empty
+ set(REQUIRED_ARGS "AOM_ROOT" "AOM_CONFIG_DIR" "AOM_TARGET_SYSTEM" "AOM_SYM_FILE"
+diff --git a/build/cmake/pkg_config.cmake b/build/cmake/pkg_config.cmake
+index 7fb94e7241..199e70f1f9 100644
+--- a/build/cmake/pkg_config.cmake
++++ b/build/cmake/pkg_config.cmake
+@@ -8,7 +8,7 @@
+ # License 1.0 was not distributed with this source code in the PATENTS file, you
+ # can obtain it at www.aomedia.org/license/patent.
+ #
+-cmake_minimum_required(VERSION 3.5)
++cmake_minimum_required(VERSION 3.10)
+ 
+ set(REQUIRED_ARGS "AOM_ROOT" "AOM_CONFIG_DIR" "CMAKE_INSTALL_PREFIX"
+                   "CMAKE_INSTALL_BINDIR" "CMAKE_INSTALL_INCLUDEDIR"
+diff --git a/build/cmake/version.cmake b/build/cmake/version.cmake
+index 24fbf9c337..09b17d5bab 100644
+--- a/build/cmake/version.cmake
++++ b/build/cmake/version.cmake
+@@ -8,7 +8,7 @@
+ # License 1.0 was not distributed with this source code in the PATENTS file, you
+ # can obtain it at www.aomedia.org/license/patent.
+ #
+-cmake_minimum_required(VERSION 3.5)
++cmake_minimum_required(VERSION 3.10)
+ 
+ set(REQUIRED_ARGS "AOM_ROOT" "AOM_CONFIG_DIR" "GIT_EXECUTABLE"
+                   "PERL_EXECUTABLE")
