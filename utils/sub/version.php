@@ -112,8 +112,8 @@
 							pathenv("PATH_SRC")."/".$argv[1]."/config.h"],
 		"serf"				=> ["/#define SERF_MAJOR_VERSION *([0-9]+).*#define SERF_MINOR_VERSION *([0-9]+).*#define SERF_PATCH_VERSION *([0-9]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/serf.h"],
-		"wineditline"		=> ["/WinEditLine_VERSION_MAJOR *([0-9]+).*WinEditLine_VERSION_MINOR *([0-9]+)/s",
-							pathenv("PATH_SRC")."/".$argv[1]."/CMakeLists.txt"],
+		"wineditline"		=> ["/RL_READLINE_VERSION *0x([0-9]{2})([0-9]{2})([0-9]{2})/s",
+							pathenv("PATH_SRC")."/".$argv[1]."/src/editline/readline.h"],
 	);
 
 	function getVersion($cur,$src){
@@ -128,7 +128,7 @@
 				preg_match($nogit[$src][0],file_get_contents($nogit[$src][1]),$matches);
 				$sep = "";
 				for($i = 1; $i < sizeof($matches); $i++){
-					$ver_product .= $sep.trim($matches[$i]);
+					$ver_product .= $sep.ltrim(trim($matches[$i]), '0');
 					$sep = ".";
 				}
 				if(pathenv("CUR_DEBUG") == 1)
