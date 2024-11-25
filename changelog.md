@@ -1,8 +1,88 @@
 # changelog
 
 
+## 1.10.5 _(2024-11-25)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`config/python.pip`
+`utils/srccreate.bat`
+*  8.4.1
+`modules/php-src_8.4.patch`
+*  fix wineditline removes leading 0
+`utils/sub/version.php`
+*  svn > git (2.2.6 > 2.2.8)
+`modules/wineditline.patch`
+*  r1919860
+`modules/httpd.patch`
+*  cmake_minimum_required: 3.5 > 3.10
+`modules/aom.patch`
+`modules/libiconv.patch`
+*  msvc: 14.40 > 14.42
+`config/.vsconfig`
+`modules/mod_security-sdbm-util.patch`
+`vs17.bat`
+*  upgrade gradle
+`env_sample.bat`
+`modules/mobac.patch`
+*  typo
+`utils/sub/srcstatus.php`
+*  add nb commit after tag for sslh
+`utils/sub/version.php`
+*  typo
+`modules/sslh.bat`
+*  geos just before proj
+`modules/full.bat`
+*  8.11.0
+`modules/curl.bat`
+`modules/curl_ca-win.patch`
+*  exclude: -coll_tree +unknown_element.c
+`utils/sub/logcheck.php`
+*  upgrade windows kits
+`modules/dependencies.patch`
+`modules/nssm.patch`
+*  v1.19
+`modules/libheif.bat`
+*  openssl: +brotli +zstd +x_ASM
+`modules/full.bat`
+`modules/openssl.bat`
+`modules/openssl.patch`
+*  +MTFLAGS & RCFLAGS
+`env_sample.bat`
+*  fix overriding '/Ob1' with '/Ob3'
+`modules/libsodium.bat`
+*  upgrade deps
+`modules/sdlna.bat`
+*  gradle  - upgrade plugins & deps  - use latest (0.22) mapsforge from jitpack.io javac  - disable xxCompatibility = JavaVersion.VERSION_11  - options.deprecation: true > false src  - fix @SuppressWarnings("deprecation") > @SuppressWarnings("removal")
+`modules/mobac.patch`
+*  CFLAG: +/cgthreads8 +/Ob3
+`modules/common/meson.sh`
+`modules/common/ninja.sh`
+`modules/common/vcxproj.sh`
+`modules/mod_security-sdbm-util.bat`
+`modules/mod_security.bat`
+`modules/openssl.bat`
+`modules/php-ogr.bat`
+`modules/phpsdk-config_make.bat`
+*  fix Configuration + nostd
+`modules/verpatch.bat`
+*  tiffxx + pdb > lib_unused
+`modules/libtiff.bat`
+*  3.47.0
+`modules/sqlite.patch`
+*  +mod_evasive
+`modules/httpd.bat`
+`modules/httpd.patch`
+`utils/bininfo.bat`
+*  1.6.32
+`modules/memcached.patch`
+
+
 ## 1.10.4 _(2024-10-19)_
 
+*  1.10.4
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
