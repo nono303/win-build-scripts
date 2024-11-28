@@ -139,14 +139,15 @@
 			} elseif (is_dir($cur."/".$src."/.git")){
 				$from = "git";
 				$ver_product = pathenv("SCM_TAG");
+				// echo "SCM_TAG: ".$ver_product.PHP_EOL;
 				// remove name
 				$ver_product = str_replace($src,"",$ver_product);
 				// remove other prefix
 				$ver_product = preg_replace("/^\D+([0-9])/","\\1",$ver_product);
 				// remove git commit suffix
 				$ver_product = preg_replace("/-.{8}$/","",$ver_product);
-				// remove other suffix
-				$ver_product = preg_replace("/-\D+$/","",$ver_product);
+				// remove other suffix (might end with a number ex. centos7)
+				$ver_product = preg_replace("/-\D+[0-9]?$/","",$ver_product);
 				// splitter as .
 				$ver_product = preg_replace("/[-_]/",".",$ver_product);
 				// alpha / beta as .
@@ -159,14 +160,16 @@
 				}
 				// alpha, beta etc without number
 				$ver_product = str_replace("..",".0.",$ver_product);
-				if(substr($ver_product, -1) == ".")
-					$ver_product .= "0";
 			} else {
 				echo str_pad($src,20)."NO TAG OR VERSION!".PHP_EOL;
 				$tagok = false;
 			}
 			
 			if($tagok){
+				if(str_ends_with($ver_product,"."))
+					$ver_product .= "0";
+				if(str_starts_with($ver_product,"."))
+					$ver_product = "0".$ver_product;
 				// '-dev' as 0
 				$ver_product = str_replace("-dev","0",$ver_product);
 				$ver_file = $ver_product;
