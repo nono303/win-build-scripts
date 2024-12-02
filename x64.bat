@@ -9,4 +9,4 @@ if exist .\env.bat (
 ) else (
 	call .\env_sample.bat
 )
-set PATH=%PATH_WIN%;%PATH_VS%\MSBuild\Current\Bin\amd64
+set PATH=%PATH_BATCH%;%PATH_WIN%;%PATH_VS%\MSBuild\Current\Bin\amd64
