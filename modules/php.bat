@@ -12,9 +12,11 @@ REM ********
 	REM ~~~~~~~~~~~~ php-src
 call %PATH_MODULES_COMMON%\init.bat php-src
 set PHPVER=%SCM_TAG:~4,3%
+set PHPVERFULL=%SCM_TAG:~4%
 
 	REM ~~~~~~~~~~~~ type of build : full / memcached / xdebug
 set PHP_BUILD_TYPE=%PHPVER%
+set PHP_XTRALIBS=
 setlocal enabledelayedexpansion
 for %%x in (%*) do (
    set /A argCount+=1
@@ -23,7 +25,18 @@ for %%x in (%*) do (
 for /L %%i in (2,1,%argCount%) do (
 	if /I "!argVec[%%i]!"=="XDEBUG"		set PHP_BUILD_TYPE=xdebug
 	if /I "!argVec[%%i]!"=="MEMCACHE"	set PHP_BUILD_TYPE=memcache
+	if /I "!argVec[%%i]!"=="BROTLI"		set PHP_BUILD_TYPE=brotli
 )
+
+	REM ~~~~~~~~~~~~ check prereq deps
+if !PHP_BUILD_TYPE! == memcache	(
+	if not exist %PATH_INSTALL%\lib\zlib.lib (call go.bat zlib NOLOG)
+)
+if %PHP_BUILD_TYPE% == brotli	(
+	if not exist %PATH_INSTALL%\lib_unused\libbrotlicommon.lib (call go.bat brotli static NOLOG)
+	set PHP_XTRALIBS=;%PATH_INSTALL%\lib_unused\
+)
+
 	REM php < 8.4 : link openssl3 sources to module (applink.c)
 if %PHPVER% LSS 8.4 (
 	if exist %PATH_SRC%\php-src\openssl\. rmdir /S /Q %PATH_SRC%\php-src\openssl

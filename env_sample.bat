@@ -30,6 +30,7 @@ set PATH_RELEASE_SVN=D:\github\NONO_subversion
 set PATH_RELEASE_MEMCACHED=/cygdrive/d/github/NONO_memcached
 	REM copy for github : unset to disable
 set PATH_GITHUB_PHPMEMCACHE=D:\github\NONO_PHP-memcache-dll
+set PATH_GITHUB_PHPBROTLI=S:\telecharger
 set PATH_GITHUB_MODFCGID=C:\sdk\src\mod_fcgid\bin
 set PATH_GITHUB_SSLH=D:\github\NONO_sslh
 	REM JDK root (gradle projects, java_hl for subversion)
