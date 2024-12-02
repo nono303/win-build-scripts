@@ -3,13 +3,12 @@ if /I "%1"=="HELP" (
 	type usage.txt
 	exit /B
 )
-setlocal enabledelayedexpansion
 	REM ~~~~~~~~~~~~ PARSING ARGS
+setlocal enabledelayedexpansion	
 set ARG_NOLOG=0
 set ARG_DEBUG=0
 set ARG_ALL=0
 set ARG_KEEPSRC=0
-set argCount=0
 for %%x in (%*) do (
    set /A argCount+=1
    set "argVec[!argCount!]=%%~x"
