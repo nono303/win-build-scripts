@@ -159,8 +159,10 @@ call configure %FINAL_CONFIGURE%
 
 	REM ARFLAGS
 sed -i 's/ARFLAGS=\/nologo/ARFLAGS=\/nologo \/LTCG/g' %CYGPATH_SRC%/php-src/Makefile
-	REM LDFLAGS (libcmt.lib : freetype2)
-sed -i -E 's/incremental:no/incremental:no \/LTCG \/NODEFAULTLIB:libcmt.lib/g' %CYGPATH_SRC%/php-src/Makefile
+	REM LDFLAGS 
+	REM	/NODEFAULTLIB:libcmt.lib	for freetype2
+	REM	/SAFESEH:NO			https://github.com/php/php-src/issues/15709#issuecomment-2522477075
+sed -i -E 's/incremental:no/incremental:no \/LTCG \/NODEFAULTLIB:libcmt.lib \/SAFESEH:NO/g' %CYGPATH_SRC%/php-src/Makefile
 	REM CFLAGS
 sed -i 's/\/Ox/\/std:c++latest \/O2 \/Ob3 \/MP%NUMBER_OF_PROCESSORS% \/cgthreads8 \/GL \/Zf \/Gy \/FS \/D PHP_ICONV_PREFIX=%PATH_INSTALL:\=\/%/g' %CYGPATH_SRC%/php-src/Makefile
 	REM no warn
@@ -171,7 +173,7 @@ sed -i -E 's/LIBS_LIBXML=(.*)php_iconv.lib(.*)/LIBS_LIBXML=\\1\\2/g' %CYGPATH_SR
 REM sed -i 's/phpdbg_win.obj: /phpdbg_win.obj:: /g' %CYGPATH_SRC%/php-src/Makefile
 
 	REM after sed:
-REM LDFLAGS=/nologo /incremental:no /LTCG /NODEFAULTLIB:libcmt.lib /debug /opt:ref,icf
+REM LDFLAGS=/nologo /incremental:no /LTCG /NODEFAULTLIB:libcmt.lib /SAFESEH:NO /debug /opt:ref,icf
 REM ARFLAGS=/nologo /LTCG
 REM CFLAGS=/nologo /D _WINDOWS /D WINDOWS=1 /D ZEND_WIN32=1 /D PHP_WIN32=1 /D WIN32 /D _MBCS /D _USE_MATH_DEFINES /FD /w /Zc:inline /Gw /Zc:__cplusplus /d2FuncCache1 /Zc:wchar_t /MP16 /Zi /LD /MD /std:c++latest /O2 /Ob3 /MP16 /cgthreads8 /GL /Zf /Gy /FS /D NDebug /D NDEBUG /GF /D ZEND_DEBUG=0 /D FD_SETSIZE=2048 /arch:AVX2 
 
