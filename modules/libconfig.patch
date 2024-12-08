@@ -1,57 +1,49 @@
+https://patch-diff.githubusercontent.com/raw/hyperrealm/libconfig/pull/249
+From 690342b9cbc8b39787a1501bd890d63ca63a003c Mon Sep 17 00:00:00 2001
+From: Rudi Heitbaum <rudi@heitbaum.com>
+Date: Thu, 5 Dec 2024 06:47:40 +0000
+Subject: [PATCH] Fix declarations to allow build with gcc 15
+
+---
+ lib/grammar.y | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/lib/grammar.y b/lib/grammar.y
+index f614fa7..b7d6989 100644
+--- a/lib/grammar.y
++++ b/lib/grammar.y
+@@ -40,8 +40,7 @@
+ #include "wincompat.h"
+ 
+ /* These declarations are provided to suppress compiler warnings. */
+-extern int libconfig_yylex();
+-extern int libconfig_yyget_lineno();
++extern int libconfig_yyget_lineno(void *);
+ 
+ #define YYMALLOC libconfig_malloc
+ 
+@@ -82,6 +81,11 @@ void libconfig_yyerror(void *scanner, struct parse_context *ctx,
+   char *sval;
+ }
+ 
++%{
++/* These declarations are provided to suppress compiler warnings. */
++extern int libconfig_yylex(YYSTYPE *, void *);
++%}
++
+ %token <ival> TOK_BOOLEAN TOK_INTEGER TOK_HEX
+ %token <llval> TOK_INTEGER64 TOK_HEX64
+ %token <fval> TOK_FLOAT
 diff --git "a/configure.ac" "b/configure.ac"
-index 6181ba5..d0688f9 100644
+index 86c3a38..7aadef1 100644
 --- "a/configure.ac"
 +++ "b/configure.ac"
-@@ -1,7 +1,6 @@
- dnl Process this file with autoconf to produce a configure script.
- 
--AC_INIT(libconfig, 1.7.3, hyperrealm@gmail.com, libconfig,
--	[https://hyperrealm.github.io/libconfig/])
-+AC_INIT([libconfig],[1.7.3],[hyperrealm@gmail.com],[libconfig],[https://hyperrealm.github.io/libconfig/])
- AC_CONFIG_AUX_DIR([aux-build])
- AC_CONFIG_MACRO_DIR([m4])
- AC_CANONICAL_TARGET
-@@ -16,7 +15,7 @@ sleep 3
- AC_DEFINE_UNQUOTED(TARGET, "${target}", [Configured target name.])
- 
- # Enable GNU extensions.
--AC_GNU_SOURCE
-+AC_USE_SYSTEM_EXTENSIONS
- 
- LT_INIT()
- 
-@@ -24,8 +23,7 @@ dnl Checks for programs.
- AC_PROG_CC
- AM_PROG_CC_C_O
- AC_PROG_CXX
--AC_LIBTOOL_WIN32_DLL
--AC_PROG_LIBTOOL
-+LT_INIT(win32-dll)
- 
- AM_PROG_LEX
- if test Z"$LEX" != Zflex; then
-@@ -75,7 +73,6 @@ fi;
+@@ -73,7 +73,7 @@ fi;
  
  
  dnl Checks for header files.
--AC_HEADER_STDC
+-AC_CHECK_INCLUDES_DEFAULT
++# AC_CHECK_INCLUDES_DEFAULT
+ 
  AC_CHECK_HEADERS(unistd.h stdint.h xlocale.h)
  
- dnl Checks for typedefs, structures, and compiler characteristics.
-@@ -146,8 +143,7 @@ AM_CONDITIONAL(GNU_WIN, test x$gnuwin = xyes)
- 
- dnl Checks for library functions.
- 
--AC_OUTPUT(
--	Makefile
-+AC_CONFIG_FILES([Makefile
- 	lib/Makefile
- 	lib/libconfig.pc
- 	lib/libconfig++.pc
-@@ -160,4 +156,5 @@ AC_OUTPUT(
- 	tinytest/Makefile
- 	tests/Makefile
- 	libconfig.spec
--	)
-+	])
-+AC_OUTPUT

@@ -8,8 +8,7 @@
 	$pos = 1;
 	foreach (range('a', 'z') as $letter)
 		$letterpos[$letter] = $pos++;
-	$argv[1] = strtolower($argv[1]);
-	$proot = $argv[1];
+	$proot = $argv[1] = strtolower($argv[1]);
 	if(in_array($proot,["mod_bikeshed","mod_maxminddb","mod_fcgid","mod_h2","mod_md","mod_wku_bt","mod_h264_streaming","mod_qos","mod_security"]))
 		$proot = "httpd";
 	if(in_array($proot,["pecl-memcache","php-geos","php-ogr","php-proj","pecl-text-xdiff","php-ext-brotli","php-ext-zstd","xdebug","php-src"]))
@@ -114,6 +113,8 @@
 							pathenv("PATH_SRC")."/".$argv[1]."/serf.h"],
 		"wineditline"		=> ["/RL_READLINE_VERSION *0x([0-9]{2})([0-9]{2})([0-9]{2})/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/src/editline/readline.h"],
+		"libconfig"		=> ["/AC_INIT\(\[libconfig\],\[([0-9\.]+)/s",
+							pathenv("PATH_SRC")."/".$argv[1]."/configure.ac"],
 	);
 
 	function getVersion($cur,$src){
