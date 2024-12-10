@@ -18,5 +18,9 @@ do
   sed -i 's/<\/Link>/'$link'<LinkTimeCodeGeneration>UseLinkTimeCodeGeneration<\/LinkTimeCodeGeneration><\/Link>/g' $i
   # LIB Flags
   sed -i 's/<\/Lib>/'$link'<LinkTimeCodeGeneration>true<\/LinkTimeCodeGeneration><\/Lib>/g' $i
+  # remove inlineExpansion (/Obx) as /Ob3 is not implemented
+  # https://learn.microsoft.com/en-us/dotnet/api/microsoft.visualstudio.vcprojectengine.inlineexpansionoption?view=visualstudiosdk-2022 
+  # https://learn.microsoft.com/en-us/cpp/build/reference/ob-inline-function-expansion?view=msvc-170
+  sed -i -E 's/ *<InlineFunctionExpansion>[^<]+<\/InlineFunctionExpansion>//g' $i
 done
 /usr/bin/find $1 -type f -name "*.props" -exec sed -i 's/<LinkTimeCodeGeneration>false<\/LinkTimeCodeGeneration>/'$link'<LinkTimeCodeGeneration>true<\/LinkTimeCodeGeneration><EnableCOMDATFolding>true<\/EnableCOMDATFolding><OptimizeReferences>true<\/OptimizeReferences>/g' {} \;
