@@ -98,7 +98,7 @@ git checkout tags/v1.1.1
 cd /D ..
 git clone https://github.com/hyperrealm/libconfig.git libconfig
 cd /D libconfig
-git checkout tags/v1.7.3
+git checkout master
 cd /D ..
 git clone https://github.com/ebiggers/libdeflate.git libdeflate
 cd /D libdeflate
@@ -202,11 +202,11 @@ git checkout tags/v5.4.7
 cd /D ..
 git clone  mapsforgesrv
 cd /D mapsforgesrv
-git checkout 0.22
+git checkout snapshot
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
-git checkout tags/1.6.32
+git checkout tags/1.6.33
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
@@ -238,7 +238,7 @@ git checkout main
 cd /D ..
 git clone https://github.com/icing/mod_md mod_md
 cd /D mod_md
-git checkout tags/v2.4.28
+git checkout tags/v2.4.29
 cd /D ..
 svn co https://svn.code.sf.net/p/mod-qos/source/trunk/httpd_src/modules/qos mod_qos
 cd /D mod_qos
@@ -270,7 +270,7 @@ git checkout tags/v1.6.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v1.9.0
+git checkout tags/v1.9.1
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -304,10 +304,6 @@ git clone https://github.com/php/pecl-text-xdiff pecl-text-xdiff
 cd /D pecl-text-xdiff
 git checkout tags/2.1.1
 cd /D ..
-git clone https://github.com/deemru/php-cgi-spawner.git php-cgi-spawner
-cd /D php-cgi-spawner
-git checkout master
-cd /D ..
 git clone https://github.com/kjdev/php-ext-brotli.git php-ext-brotli
 cd /D php-ext-brotli
 git checkout tags/0.15.2
@@ -334,11 +330,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.4.1
+git checkout tags/php-8.4.2RC1
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
-git checkout tags/9.5.0
+git checkout tags/9.5.1
 cd /D ..
 git clone https://github.com/qhull/qhull qhull
 cd /D qhull
@@ -358,7 +354,7 @@ git checkout trunk
 cd /D ..
 git clone https://github.com/rhuijben/sqlite-amalgamation sqlite
 cd /D sqlite
-git checkout tags/3.47.0
+git checkout tags/3.47.2
 cd /D ..
 git clone https://github.com/yrutschle/sslh.git sslh
 cd /D sslh
@@ -386,7 +382,7 @@ git checkout tags/wineditline-2.208
 cd /D ..
 git clone https://github.com/xdebug/xdebug.git xdebug
 cd /D xdebug
-git checkout tags/3.4.0beta1
+git checkout tags/3.4.0
 cd /D ..
 git clone https://github.com/lloyd/yajl.git yajl
 cd /D yajl

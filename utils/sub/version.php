@@ -90,7 +90,6 @@
 							pathenv("PATH_SRC")."/".$argv[1]."/include/apu_version.h"],
 		"openssl-quic"		=> ["/VERSION_NUMBER=([0-9\.]+)/",
 							pathenv("PATH_SRC")."/".$argv[1]."/makefile"],
-		"php-cgi-spawner"	=> "1.1.24",
 		"verpatch"			=> ["/set _ver=\"([^ ]+)/",
 							pathenv("PATH_SRC")."/".$argv[1]."/ver-self.cmd"],
 		"php-geos"			=> ["/PHP_GEOS_VERSION \"([0-9\.]+)/",

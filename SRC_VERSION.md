@@ -22,7 +22,7 @@
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.3.0 |
 | [lerc](https://github.com/Esri/lerc.git) | 4.0.4 |
 | [libavif](https://github.com/AOMediaCodec/libavif.git) | 1.1.1 |
-| [libconfig](https://github.com/hyperrealm/libconfig) | 1.7.3 |
+| [libconfig](https://github.com/hyperrealm/libconfig) | 1.7.4 - e6b9fd1 |
 | [libdeflate](https://github.com/ebiggers/libdeflate.git) | 1.22 |
 | [libev](https://git.lighttpd.net/libev) | 4.33 - 26fa899 |
 | [libevent](https://github.com/libevent/libevent) | 2.2.1-alpha |
@@ -37,7 +37,7 @@
 | [liblzma](https://github.com/ShiftMediaProject/liblzma) | 5.6.3 |
 | [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.11.0 |
 | [libpng](https://sourceforge.net/p/libpng/code/ci/master/tree/) | 1.6.44 |
-| [libsodium](https://github.com/jedisct1/libsodium.git) | 1.0.21.0 - 985ad65b |
+| [libsodium](https://github.com/jedisct1/libsodium.git) | 1.0.21.0 - bfa6ee63 |
 | [libssh2](https://github.com/libssh2/libssh2) | 1.11.1 |
 | [libtiff](https://gitlab.com/libtiff/libtiff) | 4.7.0 |
 | [libwepb](https://chromium.googlesource.com/webm/libwebp) | 1.4.0 |
@@ -48,8 +48,8 @@
 | [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1898 - 307b9512 |
 | [libzip](https://github.com/nih-at/libzip) | 1.11.2 |
 | [lua](https://github.com/lua/lua) | 5.4.7 |
-| [mapsforgesrv](https://github.com/nono303/mapsforgesrv/tree/snapshot) :warning: | 0.22 - 7132877 |
-| [memcached](https://github.com/memcached/memcached) | 1.6.32 |
+| [mapsforgesrv](https://github.com/nono303/mapsforgesrv/tree/snapshot) :warning: | 0.22 - 7ad42af |
+| [memcached](https://github.com/memcached/memcached) | 1.6.33 |
 | [mobac](https://svn.code.sf.net/p/mobac/code) | 2.3.3 - r2782 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
 | [mod_evasive](https://github.com/jvdmr/mod_evasive) | 2.3.0 |
@@ -65,7 +65,7 @@
 | [mpir](https://github.com/nono303/mpir) - _[upstream](https://github.com/BrianGladman/mpir)_ - _[src](https://github.com/wbhart/mpir)_ | 3.0.0 - 6e8bb8c |
 | [nghttp2](https://github.com/nghttp2/nghttp2) | 1.64.0 |
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 1.6.0 |
-| [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 1.9.0 |
+| [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 1.9.1 |
 | [nssm](https://github.com/puppetlabs/nssm) | 2.25 - a1c3260 |
 | [openssl](https://github.com/openssl/openssl)                | 3.4.0     |
 | [openssl-quic](https://github.com/quictls/openssl/tree/openssl-3.1.5+quic) | 3.3.0 |
@@ -74,26 +74,26 @@
 | [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | 8.2 - 972b554 |
 | [pecl-system-sync](https://github.com/php/pecl-system-sync) | 1.1.3 |
 | [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1 |
-| [php-cgi-spawner](https://github.com/deemru/php-cgi-spawner) | 1.1.23 - 90197af |
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.15.2 |
 | [php-ext-zstd](https://github.com/kjdev/php-ext-zstd) | 0.14.0 |
 | [php-geos](https://github.com/nono303/php-geos) - *[fork](https://github.com/ModelTech/php-geos) - [upstream + src](https://git.osgeo.org/gitea/geos/php-geos/commits/branch/php8)* | 1.0.1.2 - 3eecc74 |
 | [php-ogr](https://github.com/nono303/php-ogr) - *[upstream + src](https://github.com/dvzgeo/php_ogr)* | 1.7.0 - 91dd6cc |
 | [php-proj](https://github.com/swen100/phpng-proj) | 3.0.3 |
-| [php-sdk](https://github.com/php/php-sdk-binary-tools) | 2.3.0 - b3d87e1 |
-| [php-src](https://github.com/php/php-src) | 8.4.1 |
-| [proj](https://github.com/OSGeo/PROJ) | 9.5.0 |
+| [php-sdk](https://github.com/php/php-sdk-binary-tools) | 2.3.0 - 69e50fe |
+| [php-src](https://github.com/php/php-src) | 8.4.2rc1 |
+| [proj](https://github.com/OSGeo/PROJ) | 9.5.1 |
 | [python](https://github.com/nono303/cpython) - _[upstream + src](https://github.com/python/cpython/tree/3.8)_ | 3.8.16 - 0813455d42 |
 | [qhull](https://github.com/qhull/qhull) | 8.1-alpha4 |
 | [sdlna](https://github.com/nono303/simpleDLNA) - _[upstream + src](https://github.com/nmaier/simpleDLNA)_ | 1.3.3 - afeaf32 |
 | [sdnspi-mysql](https://github.com/nono303/sdnspi-MySQL.git) - _[upstream + src](https://github.com/jhsoftware/sdnspi-MySQL)_ | 9.2.0.0 - e569122 |
-| [sqlite](https://github.com/rhuijben/sqlite-amalgamation) - *[release](https://www.sqlite.org/changes.html)* | 3.47.0 |
-| [sslh](https://github.com/yrutschle/sslh) | 2.1.3.19 |
+| [sqlite](https://github.com/rhuijben/sqlite-amalgamation) - *[release](https://www.sqlite.org/changes.html)* | 3.47.2 |
+| [sslh](https://github.com/yrutschle/sslh) | 2.1.3.21 - 16ef412 |
+| [subversion](https://github.com/apache/subversion) | 1.14.5 |
 | [tidy](https://github.com/htacg/tidy-html5) | 5.9.20 - d08ddc2 |
 | [tzdataservice](https://github.com/nono303/tzdataservice) - _[upstream + src](https://github.com/skaringa/tzdataservice)_ | 2.0 - eaa95c4 |
 | [verpatch](https://github.com/pavel-a/ddverpatch) | 1.0.15.1 - 3cc989e |
 | [wineditline](https://github.com/ptosco/wineditline) | 2.2.8 - 7ac48fd |
-| [xdebug](https://github.com/xdebug/xdebug) | 3.4.0b1 |
+| [xdebug](https://github.com/xdebug/xdebug) | 3.4.0 |
 | [yajl](https://github.com/lloyd/yajl) | 2.1.1 - 5e3a785 |
 | [zlib](https://github.com/madler/zlib) | 1.3.1 |
 | [zstd](https://github.com/facebook/zstd/tree/v1.5.2) | 1.5.6 |

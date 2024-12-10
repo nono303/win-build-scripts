@@ -137,8 +137,6 @@ call %PATH_BATCH%\go.bat clean NOLOG
 call %PATH_BATCH%\go.bat serf NOLOG
 :nssm
 call %PATH_BATCH%\go.bat nssm NOLOG
-:php-cgi-spawner
-call %PATH_BATCH%\go.bat php-cgi-spawner NOLOG
 	REM only for build ALL
 IF [%2] == [] (
 	call %PATH_BATCH%\go.bat bininfo checkavx
