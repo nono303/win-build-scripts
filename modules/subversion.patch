@@ -1,11 +1,8 @@
- build/generator/gen_win_dependencies.py | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/build/generator/gen_win_dependencies.py b/build/generator/gen_win_dependencies.py
-index f4ee755271..04f69bc4c3 100644
---- a/build/generator/gen_win_dependencies.py
-+++ b/build/generator/gen_win_dependencies.py
-@@ -1153,7 +1153,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
+diff --git "a/build/generator/gen_win_dependencies.py" "b/build/generator/gen_win_dependencies.py"
+index 138c7fd21b..1bd3e8428b 100644
+--- "a/build/generator/gen_win_dependencies.py"
++++ "b/build/generator/gen_win_dependencies.py"
+@@ -1163,7 +1163,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
                                 stderr=subprocess.STDOUT).stdout
        line = outfp.read().decode('utf8')
        if line:
@@ -14,7 +11,7 @@ index f4ee755271..04f69bc4c3 100644
        else:
          vermatch = None
  
-@@ -1479,7 +1479,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
+@@ -1489,7 +1489,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
      dll_name = None
      defines = []
  
@@ -23,7 +20,7 @@ index f4ee755271..04f69bc4c3 100644
  
      if os.path.isfile(os.path.join(sqlite_base, 'include/sqlite3.h')):
        # Standard layout
-@@ -1487,18 +1487,18 @@ class GenDependenciesBase(gen_base.GeneratorBase):
+@@ -1497,18 +1497,18 @@ class GenDependenciesBase(gen_base.GeneratorBase):
        lib_dir = os.path.join(sqlite_base, 'lib')
  
        # We assume a static library, but let's support shared in this case
