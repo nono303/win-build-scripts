@@ -1,4 +1,4 @@
-@echo off 
+@echo off
 
 if exist %PATH_INSTALL_OSSL% rmdir /S /Q %PATH_INSTALL_OSSL%
 mkdir %PATH_INSTALL_OSSL%
@@ -6,6 +6,12 @@ mkdir %PATH_INSTALL_OSSL%
 call %PATH_MODULES_COMMON%\init.bat %OPENSSL_SCM%
 	REM https://wiki.openssl.org/index.php/Compilation_and_Installation
 	REM no-deprecated / -DOPENSSL_NO_DEPRECATED_3_0 (https://github.com/openssl/openssl/pull/13866) : failed for libssh2 / apr
+
+set CONFIGURE_OPENSSL=--with-brotli-include=%PATH_INSTALL:\=/%/include ^
+--with-brotli-lib=brotlicommon ^
+--with-zstd-include=%PATH_INSTALL:\=/%/include ^
+--with-zstd-lib=zstd
+if "%2"=="svn" (set CONFIGURE_OPENSSL=no-brotli no-zstd)
 
 	REM !! --with-zlib-lib require the full path or name in PATH of zlib DLL without dll extension !!
 perl Configure %perlbuild% ^
@@ -16,16 +22,12 @@ no-external-tests ^
 no-ssl3 ^
 no-weak-ssl-ciphers ^
 no-docs ^
-zlib ^
-zlib-dynamic ^
 threads ^
 --prefix=%PATH_INSTALL_OSSL% ^
+zlib ^
+zlib-dynamic ^
 --with-zlib-include=%PATH_INSTALL:\=/%/include ^
 --with-zlib-lib=zlib ^
---with-brotli-include=%PATH_INSTALL:\=/%/include ^
---with-brotli-lib=brotlicommon ^
---with-zstd-include=%PATH_INSTALL:\=/%/include ^
---with-zstd-lib=zstd ^
 --openssldir=%PATH_INSTALL_OSSL%\conf ^
 -DOPENSSL_USE_IPV6=1 ^
 -DOPENSSL_NO_HEARTBEATS=1 ^
@@ -35,6 +37,7 @@ threads ^
 -DSHA256_ASM=1 ^
 -DSHA512_ASM=1 ^
 -DAES_ASM=1 ^
+%CONFIGURE_OPENSSL% ^
 -L"/OPT:ICF,REF /LTCG " +"/w /O2 /Ob3 /GL /Gw /Zc:inline /Zf /FS /std:clatest /MP%NUMBER_OF_PROCESSORS% /cgthreads8 %AVX%"
 	REM result: cl /Zs /Zi /Gs0 /GF /Gy /MD /nologo /w /O2 /Ob3 /GL /Gw /Zc:inline /Zf /FS /std:clatest /MP16 /cgthreads8 /arch:AVX2 -D"NDEBUG"
 

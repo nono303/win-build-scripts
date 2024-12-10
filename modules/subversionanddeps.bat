@@ -5,7 +5,7 @@ call go clean
 call go zlib NOLOG
 call go pcre2 svn NOLOG
 call go libexpat NOLOG
-call go openssl NOLOG
+call go openssl svn NOLOG
 call go sqlite svn NOLOG
 call go apr NOLOG
 call go libiconv NOLOG
