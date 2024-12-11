@@ -13,6 +13,13 @@ set CONFIGURE_OPENSSL=--with-brotli-include=%PATH_INSTALL:\=/%/include ^
 --with-zstd-lib=zstd
 if "%2"=="svn" (set CONFIGURE_OPENSSL=no-brotli no-zstd)
 
+if NOT "%C_STD_VER%"=="" (
+	set __CNFC=/std:c%C_STD_VER%
+	set __CNFCXX=/std:c++%C_STD_VER%
+)
+set LDFLAGS=/nologo /debug /OPT:ICF,REF /LTCG 
+set CFLAGS=/nologo /w /Zi /Gs0 /GF /Gy /O2 /Ob3 /GL /Gw /Zc:inline /Zf /FS /MP%NUMBER_OF_PROCESSORS% /cgthreads8 %AVX% %__CNFC% 
+
 	REM !! --with-zlib-lib require the full path or name in PATH of zlib DLL without dll extension !!
 perl Configure %perlbuild% ^
 shared ^
@@ -37,18 +44,18 @@ zlib-dynamic ^
 -DSHA256_ASM=1 ^
 -DSHA512_ASM=1 ^
 -DAES_ASM=1 ^
-%CONFIGURE_OPENSSL% ^
--L"/OPT:ICF,REF /LTCG " +"/w /O2 /Ob3 /GL /Gw /Zc:inline /Zf /FS /std:clatest /MP%NUMBER_OF_PROCESSORS% /cgthreads8 %AVX%"
-	REM result: cl /Zs /Zi /Gs0 /GF /Gy /MD /nologo /w /O2 /Ob3 /GL /Gw /Zc:inline /Zf /FS /std:clatest /MP16 /cgthreads8 /arch:AVX2 -D"NDEBUG"
+%CONFIGURE_OPENSSL%
+
+	REM set ARFLAGS=/nologo /LTCG 'KO' must be change after configure by sed
+sed -i 's/ARFLAGS= \/nologo/ARFLAGS= \/nologo \/LTCG/g' %CYGPATH_SRC%/%OPENSSL_SCM%/makefile
 
 REM perl configdata.pm --dump
 
-sed -i 's/\/W3 \/wd4090 \/nologo \/O2 +/\/nologo /g' %CYGPATH_SRC%/%OPENSSL_SCM%/makefile
-sed -i 's/\/nologo \/debug -L/\/nologo \/debug /g' %CYGPATH_SRC%/%OPENSSL_SCM%/makefile
-sed -i 's/ARFLAGS= \/nologo/ARFLAGS= \/nologo \/LTCG/g' %CYGPATH_SRC%/%OPENSSL_SCM%/makefile
-
 	REM install_sw > no docs
 nmake %NMAKE_OPTS% install_sw
+
+set LDFLAGS=
+set CFLAGS=
 
  	REM move & version for engines - https://github.com/openssl/openssl/issues/7185
 for %%M in (engines-%OPENSSL_SUF% ossl-modules) do (
