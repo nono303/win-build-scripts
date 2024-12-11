@@ -28,4 +28,4 @@ for %%F in (libssl-%OPENSSL_SUF%-x64 libcrypto-%OPENSSL_SUF%-x64) do (
 	)
 )
 
-REM call go subversion NOLOG
+call go subversion NOLOG
