@@ -128,7 +128,9 @@
 				preg_match($nogit[$src][0],file_get_contents($nogit[$src][1]),$matches);
 				$sep = "";
 				for($i = 1; $i < sizeof($matches); $i++){
-					$ver_product .= $sep.ltrim(trim($matches[$i]), '0');
+					if(strlen($matches[$i] = trim($matches[$i])) > 1) 
+						$matches[$i] = ltrim($matches[$i],'0');
+					$ver_product .= $sep.$matches[$i];
 					$sep = ".";
 				}
 				if(pathenv("CUR_DEBUG") == 1)
