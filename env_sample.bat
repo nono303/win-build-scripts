@@ -100,7 +100,7 @@ cd /D %PATH_BATCH%
 
 REM ########################## BUILD OPTION
 	REM https://services.gradle.org/distributions/
-set GRADLEVER=8.11
+set GRADLEVER=8.11.1
 	REM see dir in %PATH_ROOTWKIT%\Lib
 set WKITVER=10.0.26100.0
 	REM .NET installed SDK
@@ -165,6 +165,7 @@ set LOCAL_PATH_MOBAC=C:\PROGRA~2\mobac
 set LOCAL_PATH_MOBAC2=F:\logiciels\_Carto
 set LOCAL_PATH_GEOGRAPHICLIB=B:\serveur\_gis\geographiclib
 set LOCAL_PATH_PHP=C:\PROGRA~1\php
+set LOCAL_PATH_CURLCA=C:\bin
 REM For PHP & GEOGRAPHICLIB copy only if LOCAL_COPY=1 && LOCAL_COPY_AVX_ECHO == AVXECHO && LOCAL_COPY_MSVC_VER == MSVC_VER
 set LOCAL_COPY_AVX_ECHO=avx2
 set LOCAL_COPY_MSVC_VER=17
