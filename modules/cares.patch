@@ -1,11 +1,8 @@
- CMakeLists.txt | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 39963f1e..df4cd485 100644
+index 139defd8..bcba352e 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -750,7 +750,7 @@ ADD_SUBDIRECTORY (include)
+@@ -753,7 +753,7 @@ ADD_SUBDIRECTORY (include)
  ADD_SUBDIRECTORY (src)
  
  # Docs
