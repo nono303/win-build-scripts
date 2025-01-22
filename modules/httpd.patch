@@ -1,16 +1,13 @@
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 7b30547d39..dcf7582ccf 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -15,15 +15,28 @@
- #
- # Read README.cmake before using this.
+diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
+index 9b38f699db..3cdf231765 100644
+--- "a/CMakeLists.txt"
++++ "b/CMakeLists.txt"
+@@ -17,13 +17,25 @@
  
-+CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
-+
  PROJECT(HTTPD C)
  
 -CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
++CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
 +# SET(mod_md_src "modules/md")
 +SET(mod_md_src "../mod_md/src")
 +# SET(mod_http2_src "modules/http2")
@@ -27,34 +24,14 @@ index 7b30547d39..dcf7582ccf 100644
  INCLUDE(CheckSymbolExists)
  INCLUDE(CheckCSourceCompiles)
  
- FIND_PACKAGE(LibXml2)
+-FIND_PACKAGE(LibXml2)
 -FIND_PACKAGE(Lua51)
++FIND_PACKAGE(LibXml2) 
 +FIND_PACKAGE(Lua)
  FIND_PACKAGE(OpenSSL)
  FIND_PACKAGE(ZLIB)
  FIND_PACKAGE(CURL)
-@@ -132,15 +145,15 @@ MACRO(DEFINE_WITH_BLANKS output_definition input_symbol input_value)
- ENDMACRO()
- 
- MACRO(GET_MOD_ENABLE_RANK macro_modname macro_mod_enable_val macro_output_rank)
--  IF(${macro_mod_enable_val} STREQUAL "O")
-+  IF(${macro_mod_enable_val} STREQUAL O)
-     SET(${macro_output_rank} 0)
--  ELSEIF(${macro_mod_enable_val} STREQUAL "i")
-+  ELSEIF(${macro_mod_enable_val} STREQUAL i)
-     SET(${macro_output_rank} 1)
--  ELSEIF(${macro_mod_enable_val} STREQUAL "I")
-+  ELSEIF(${macro_mod_enable_val} STREQUAL I)
-     SET(${macro_output_rank} 2)
--  ELSEIF(${macro_mod_enable_val} STREQUAL "a")
-+  ELSEIF(${macro_mod_enable_val} STREQUAL a)
-     SET(${macro_output_rank} 3)
--  ELSEIF(${macro_mod_enable_val} STREQUAL "A")
-+  ELSEIF(${macro_mod_enable_val} STREQUAL A)
-     SET(${macro_output_rank} 4)
-   ELSE()
-     MESSAGE(FATAL_ERROR "Unexpected enablement value \"${macro_mod_enable_val}\" for ${macro_modname}")
-@@ -242,7 +255,7 @@ MESSAGE(STATUS "")
+@@ -246,7 +258,7 @@ MESSAGE(STATUS "")
  MESSAGE(STATUS "Summary of feature detection:")
  MESSAGE(STATUS "")
  MESSAGE(STATUS "LIBXML2_FOUND ............ : ${LIBXML2_FOUND}")
@@ -63,7 +40,16 @@ index 7b30547d39..dcf7582ccf 100644
  MESSAGE(STATUS "NGHTTP2_FOUND ............ : ${NGHTTP2_FOUND}")
  MESSAGE(STATUS "OPENSSL_FOUND ............ : ${OPENSSL_FOUND}")
  MESSAGE(STATUS "ZLIB_FOUND ............... : ${ZLIB_FOUND}")
-@@ -302,7 +315,7 @@ SET(MODULE_LIST
+@@ -292,7 +304,7 @@ SET(MODULE_LIST
+   "modules/aaa/mod_authn_file+A+file-based authentication control"
+   "modules/aaa/mod_authn_socache+I+Cached authentication control"
+   "modules/aaa/mod_authnz_fcgi+I+FastCGI authorizer-based authentication and authorization"
+-  "modules/aaa/mod_authnz_ldap+i+LDAP based authentication"
++  "modules/aaa/mod_authnz_ldap+I+LDAP based authentication"
+   "modules/aaa/mod_authz_core+A+core authorization provider vector module"
+   "modules/aaa/mod_authz_dbd+I+SQL based authorization and Login/Session support"
+   "modules/aaa/mod_authz_dbm+I+DBM-based authorization control"
+@@ -306,7 +318,7 @@ SET(MODULE_LIST
    "modules/cache/mod_cache_socache+I+shared object caching module"
    "modules/cache/mod_file_cache+I+File cache"
    "modules/cache/mod_socache_dbm+I+dbm small object cache provider"
@@ -72,33 +58,69 @@ index 7b30547d39..dcf7582ccf 100644
    "modules/cache/mod_socache_memcache+I+memcache small object cache provider"
    "modules/cache/mod_socache_shmcb+I+ shmcb small object cache provider"
    "modules/cache/mod_socache_redis+I+redis small object cache provider"
-@@ -343,14 +356,14 @@ SET(MODULE_LIST
+@@ -325,36 +337,36 @@ SET(MODULE_LIST
+   "modules/examples/mod_case_filter_in+O+Example uppercase conversion input filter"
+   "modules/examples/mod_example_hooks+O+Example hook callback handler module"
+   "modules/examples/mod_example_ipc+O+Example of shared memory and mutex usage"
+-  "modules/filters/mod_brotli+i+Brotli compression support"
++  "modules/filters/mod_brotli+I+Brotli compression support"
+   "modules/filters/mod_buffer+I+Filter Buffering"
+-  "modules/filters/mod_charset_lite+i+character set translation"
++  "modules/filters/mod_charset_lite+I+character set translation"
+   "modules/filters/mod_data+O+RFC2397 data encoder"
+-  "modules/filters/mod_deflate+i+Deflate transfer encoding support"
++  "modules/filters/mod_deflate+I+Deflate transfer encoding support"
+   "modules/filters/mod_ext_filter+I+external filter module"
+   "modules/filters/mod_filter+A+Smart Filtering"
+   "modules/filters/mod_include+I+Server Side Includes"
+-  "modules/filters/mod_proxy_html+i+Fix HTML Links in a Reverse Proxy"
++  "modules/filters/mod_proxy_html+I+Fix HTML Links in a Reverse Proxy"
+   "modules/filters/mod_ratelimit+I+Output Bandwidth Limiting"
+   "modules/filters/mod_reflector+O+Reflect request through the output filter stack"
+   "modules/filters/mod_reqtimeout+A+Limit time waiting for request from client"
+   "modules/filters/mod_request+I+Request Body Filtering"
+   "modules/filters/mod_sed+I+filter request and/or response bodies through sed"
+   "modules/filters/mod_substitute+I+response content rewrite-like filtering"
+-  "modules/filters/mod_xml2enc+i+i18n support for markup filters"
++  "modules/filters/mod_xml2enc+I+i18n support for markup filters"
+   "modules/generators/mod_asis+I+as-is filetypes"
+   "modules/generators/mod_autoindex+A+directory listing"
+   "modules/generators/mod_cgi+I+CGI scripts"
    "modules/generators/mod_info+I+server information"
    "modules/generators/mod_status+I+process/thread monitoring"
    "modules/http/mod_mime+A+mapping of file-extension to MIME.  Disabling this module is normally not recommended."
 -  "modules/http2/mod_http2+i+HTTP/2 protocol support"
-+  "${mod_http2_src}/mod_http2+i+HTTP/2 protocol support"
-   "modules/ldap/mod_ldap+i+LDAP caching and connection pooling services"
+-  "modules/ldap/mod_ldap+i+LDAP caching and connection pooling services"
++  "${mod_http2_src}/mod_http2+I+HTTP/2 protocol support"
++  "modules/ldap/mod_ldap+I+LDAP caching and connection pooling services"
    "modules/loggers/mod_log_config+A+logging configuration.  You won't be able to log requests to the server without this module."
    "modules/loggers/mod_log_debug+I+configurable debug logging"
    "modules/loggers/mod_log_forensic+I+forensic logging"
    "modules/loggers/mod_logio+I+input and output logging"
-   "modules/lua/mod_lua+i+Apache Lua Framework"
+-  "modules/lua/mod_lua+i+Apache Lua Framework"
 -  "modules/md/mod_md+i+Apache Managed Domains (Certificates)"
-+  "${mod_md_src}/mod_md+i+Apache Managed Domains (Certificates)"
++  "modules/lua/mod_lua+I+Apache Lua Framework"
++  "${mod_md_src}/mod_md+I+Apache Managed Domains (Certificates)"
    "modules/mappers/mod_actions+I+Action triggering on requests"
    "modules/mappers/mod_alias+A+mapping of requests to different filesystem parts"
    "modules/mappers/mod_dir+A+directory request handling"
-@@ -386,7 +399,7 @@ SET(MODULE_LIST
+@@ -390,19 +402,28 @@ SET(MODULE_LIST
    "modules/proxy/mod_proxy_hcheck+I+Apache proxy health check module.  Requires and is enabled by --enable-proxy."
    "modules/proxy/mod_proxy_scgi+I+Apache proxy SCGI module.  Requires and is enabled by --enable-proxy."
    "modules/proxy/mod_proxy_wstunnel+I+Apache proxy Websocket Tunnel module.  Requires and is enabled by --enable-proxy."
 -  "modules/http2/mod_proxy_http2+i+Apache proxy HTTP/2 module.  Requires --enable-proxy."
-+  "${mod_http2_src}/mod_proxy_http2+i+Apache proxy HTTP/2 module.  Requires --enable-proxy."
++  "${mod_http2_src}/mod_proxy_http2+I+Apache proxy HTTP/2 module.  Requires --enable-proxy."
    "modules/session/mod_session+I+session module"
    "modules/session/mod_session_cookie+I+session cookie module"
-   "modules/session/mod_session_crypto+i+session crypto module"
-@@ -399,6 +412,15 @@ SET(MODULE_LIST
+-  "modules/session/mod_session_crypto+i+session crypto module"
++  "modules/session/mod_session_crypto+I+session crypto module"
+   "modules/session/mod_session_dbd+I+session dbd module"
+   "modules/slotmem/mod_slotmem_plain+I+slotmem provider that uses plain memory"
+   "modules/slotmem/mod_slotmem_shm+I+slotmem provider that uses shared memory"
+-  "modules/ssl/mod_ssl+i+SSL/TLS support"
++  "modules/ssl/mod_ssl+I+SSL/TLS support"
+   "modules/test/mod_dialup+O+rate limits static files to dialup modem speeds"
+   "modules/test/mod_optional_fn_export+O+example optional function exporter"
    "modules/test/mod_optional_fn_import+O+example optional function importer"
    "modules/test/mod_optional_hook_export+O+example optional hook exporter"
    "modules/test/mod_optional_hook_import+O+example optional hook importer"
@@ -114,7 +136,7 @@ index 7b30547d39..dcf7582ccf 100644
  )
  
  # Track which modules actually built have APIs to link against.
-@@ -453,16 +475,25 @@ SET(mod_http2_extra_defines          ssize_t=long)
+@@ -457,16 +478,25 @@ SET(mod_http2_extra_defines          ssize_t=long)
  SET(mod_http2_extra_includes         ${NGHTTP2_INCLUDE_DIR})
  SET(mod_http2_extra_libs             ${NGHTTP2_LIBRARIES})
  SET(mod_http2_extra_sources
@@ -150,7 +172,7 @@ index 7b30547d39..dcf7582ccf 100644
  )
  SET(mod_ldap_extra_defines           LDAP_DECLARE_EXPORT)
  SET(mod_ldap_extra_libs              wldap32)
-@@ -479,25 +510,43 @@ SET(mod_lua_extra_sources
+@@ -483,25 +513,43 @@ SET(mod_lua_extra_sources
    modules/lua/lua_passwd.c           modules/lua/lua_request.c
    modules/lua/lua_vmprep.c           modules/lua/lua_dbd.c
  )
@@ -209,7 +231,7 @@ index 7b30547d39..dcf7582ccf 100644
  )
  SET(mod_optional_hook_export_extra_defines AP_DECLARE_EXPORT) # bogus reuse of core API prefix
  SET(mod_proxy_extra_defines          PROXY_DECLARE_EXPORT)
-@@ -566,6 +615,50 @@ IF(LIBXML2_FOUND)
+@@ -570,6 +618,50 @@ IF(LIBXML2_FOUND)
    SET(mod_xml2enc_extra_libs         "${LIBXML2_LIBRARIES};${LIBXML2_ICONV_LIBRARIES}")
  ENDIF()
  SET(mod_watchdog_extra_defines       AP_WD_DECLARE_EXPORT)
@@ -260,7 +282,7 @@ index 7b30547d39..dcf7582ccf 100644
  
  SET(MODULE_PATHS)
  FOREACH (modinfo ${MODULE_LIST})
-@@ -625,14 +718,14 @@ ELSE()
+@@ -629,8 +721,9 @@ ELSE()
  ENDIF()
  
  # for easy reference from .dll/.so builds
@@ -269,16 +291,9 @@ index 7b30547d39..dcf7582ccf 100644
  
 +# https://lists.apache.org/thread/w4k1gmcynjw3l5z88mq1mfgd7g097s0f
  ADD_EXECUTABLE(gen_test_char server/gen_test_char.c)
--GET_TARGET_PROPERTY(GEN_TEST_CHAR_EXE gen_test_char LOCATION)
  ADD_CUSTOM_COMMAND(
    COMMENT "Generating character tables, test_char.h, for current locale"
-   DEPENDS gen_test_char
--  COMMAND ${GEN_TEST_CHAR_EXE} > ${PROJECT_BINARY_DIR}/test_char.h
-+  COMMAND "$<TARGET_FILE:gen_test_char>" > ${PROJECT_BINARY_DIR}/test_char.h
-   OUTPUT ${PROJECT_BINARY_DIR}/test_char.h
- )
- ADD_CUSTOM_TARGET(
-@@ -711,8 +804,8 @@ SET(HTTPD_INCLUDE_DIRECTORIES
+@@ -714,8 +807,8 @@ SET(HTTPD_INCLUDE_DIRECTORIES
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/dav/main
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/filters
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators
@@ -289,7 +304,7 @@ index 7b30547d39..dcf7582ccf 100644
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/proxy
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/session
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl
-@@ -720,6 +813,12 @@ SET(HTTPD_INCLUDE_DIRECTORIES
+@@ -723,6 +816,12 @@ SET(HTTPD_INCLUDE_DIRECTORIES
    ${CMAKE_CURRENT_SOURCE_DIR}/server/mpm/winnt
    ${APR_INCLUDE_DIR}
    ${PCRE_INCLUDE_DIR}
@@ -302,7 +317,7 @@ index 7b30547d39..dcf7582ccf 100644
  )
  
  # The .h files we install from outside the main include directory
-@@ -737,7 +836,7 @@ SET(other_installed_h
+@@ -740,7 +839,7 @@ SET(other_installed_h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/filters/mod_xml2enc.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators/mod_cgi.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators/mod_status.h
@@ -311,7 +326,7 @@ index 7b30547d39..dcf7582ccf 100644
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/loggers/mod_log_config.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/mappers/mod_rewrite.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/proxy/mod_proxy.h
-@@ -802,10 +901,10 @@ FOREACH (mod ${MODULE_PATHS})
+@@ -805,10 +904,10 @@ FOREACH (mod ${MODULE_PATHS})
    ELSE()
      # Handle whether or not the LoadModule is commented out.
      IF(${enable_mod_val} STREQUAL "A")
@@ -324,7 +339,7 @@ index 7b30547d39..dcf7582ccf 100644
        SET(mods_built_but_not_loaded ${mods_built_but_not_loaded} ${mod_name})
      ELSE()
        MESSAGE(FATAL_ERROR "${enable_mod} must be set to \"A\", \"I\", or \"O\" instead of \"${enable_mod_val}\"")
-@@ -833,12 +932,12 @@ FOREACH (mod ${MODULE_PATHS})
+@@ -836,12 +935,12 @@ FOREACH (mod ${MODULE_PATHS})
      ENDIF()
      SET(mod_extra_libs "${mod_name}_extra_libs")
      SET_TARGET_PROPERTIES(${mod_name} PROPERTIES
@@ -340,7 +355,7 @@ index 7b30547d39..dcf7582ccf 100644
  
      # Extra defines?
      SET(mod_extra_defines "${mod_name}_extra_defines")
-@@ -860,7 +959,7 @@ ENDFOREACH()
+@@ -863,7 +962,7 @@ ENDFOREACH()
  ###########   HTTPD LIBRARIES   ############
  ADD_LIBRARY(libhttpd SHARED ${LIBHTTPD_SOURCES} build/win32/httpd.rc)
  SET_TARGET_PROPERTIES(libhttpd PROPERTIES
@@ -349,7 +364,7 @@ index 7b30547d39..dcf7582ccf 100644
  )
  SET(install_targets ${install_targets} libhttpd)
  SET(install_bin_pdb ${install_bin_pdb} $<TARGET_PDB_FILE:libhttpd>)
-@@ -915,12 +1014,12 @@ ENDIF()
+@@ -918,12 +1017,12 @@ ENDIF()
  GET_PROPERTY(tmp_includes TARGET ab PROPERTY INCLUDE_DIRECTORIES)
  
  # getting duplicate manifest error with ApacheMonitor
@@ -368,21 +383,30 @@ index 7b30547d39..dcf7582ccf 100644
  
  ###########  CONFIGURATION FILES ###########
  # Set up variables used in the .conf file templates
-diff --git a/modules/proxy/mod_proxy_fcgi.c b/modules/proxy/mod_proxy_fcgi.c
-index d420df6a77..aca014002a 100644
---- a/modules/proxy/mod_proxy_fcgi.c
-+++ b/modules/proxy/mod_proxy_fcgi.c
-@@ -381,6 +381,10 @@ static apr_status_t send_environment(proxy_conn_rec *conn, request_rec *r,
+
+ ###########  CONFIGURATION FILES ###########
+ # Set up variables used in the .conf file templates
+###########  CONFIGURATION FILES ###########
+ # Set up variables used in the .conf file templates
+diff --git "a/modules/proxy/mod_proxy_fcgi.c" "b/modules/proxy/mod_proxy_fcgi.c"
+index 128cf1eac6..937265531d 100644
+--- "a/modules/proxy/mod_proxy_fcgi.c"
++++ "b/modules/proxy/mod_proxy_fcgi.c"
+@@ -427,7 +427,12 @@ static apr_status_t send_environment(proxy_conn_rec *conn, request_rec *r,
+         }
  
          if (newfname) {
-             newfname = ap_strchr(newfname, '/');
+-            r->filename = ap_strchr(newfname, '/');
++            newfname = ap_strchr(newfname, '/');
 +			// Windows
 +			if ((ap_strstr(newfname, ":/")) != NULL)
 +				memmove(newfname, newfname+1, strlen(newfname));
 +			ap_log_rerror(APLOG_MARK, APLOG_DEBUG, 0, r, APLOGNO(01078) "SCRIPT_FILENAME %s", newfname);
-             r->filename = newfname;
++            r->filename = newfname;
          }
      }
+ 
+
 diff --git a/server/main.c b/server/main.c
 index fb23f01d1d..7d42ec8128 100644
 --- a/server/main.c
@@ -436,41 +460,3 @@ index d4203bf926..053f77522e 100644
  IDD_DLGSERVICES DIALOGEX 0, 0, 350, 192
  STYLE DS_MODALFRAME | DS_SETFOREGROUND | WS_MINIMIZEBOX | WS_VISIBLE | 
 
-// https://github.com/apache/httpd/pull/473/commits/6d417a157282676f92f403f5e722528d95d4ab0f
-diff --git "a/modules/mappers/mod_rewrite.c" "b/modules/mappers/mod_rewrite.c"
-index f1c22e3235..a194434d95 100644
---- "a/modules/mappers/mod_rewrite.c"
-+++ "b/modules/mappers/mod_rewrite.c"
-@@ -4219,6 +4219,7 @@ static rule_return_type apply_rewrite_rule(rewriterule_entry *p,
-     char *newuri = NULL;
-     request_rec *r = ctx->r;
-     int is_proxyreq = 0;
-+    int prefix_added = 0;
- 
-     ctx->uri = r->filename;
- 
-@@ -4373,6 +4374,7 @@ static rule_return_type apply_rewrite_rule(rewriterule_entry *p,
-             rewritelog((r, 3, ctx->perdir, "add per-dir prefix: %s -> %s%s",
-                        newuri, ctx->perdir, newuri));
-             newuri = apr_pstrcat(r->pool, ctx->perdir, newuri, NULL);
-+            prefix_added = 1;
-         }
-         else if (!(p->flags & (RULEFLAG_PROXY | RULEFLAG_FORCEREDIRECT))) {
-             /* Not an absolute URI-path and the scheme (if any) is unknown,
-@@ -4386,6 +4388,7 @@ static rule_return_type apply_rewrite_rule(rewriterule_entry *p,
-                        newuri, newuri));
- 
-             newuri = apr_pstrcat(r->pool, "/", newuri, NULL);
-+            prefix_added = 1;
-         }
-     }
- 
-@@ -4466,7 +4469,7 @@ static rule_return_type apply_rewrite_rule(rewriterule_entry *p,
-         return RULE_RC_MATCH;
-     }
- 
--    if (!(p->flags & RULEFLAG_UNC)) {
-+    if (!((p->flags & RULEFLAG_UNC) || prefix_added)) {
-         /* merge leading slashes, unless they were literals in the sub */
-         if (!AP_IS_SLASH(p->output[0]) || !AP_IS_SLASH(p->output[1])) {
-             while (AP_IS_SLASH(r->filename[0]) &&
