@@ -295,7 +295,7 @@ diff --git a/tests/CMakeLists.txt b/tests/CMakeLists.txt
 index 25a19baf2..5f3d2e370 100644
 --- a/tests/CMakeLists.txt
 +++ b/tests/CMakeLists.txt
-@@ -79,6 +79,7 @@ if (BUILD_TEST)
+@@ -77,6 +77,7 @@ if (BUILD_TEST)
  		gdimagetruecolortopalette
  		gdinterpolatedscale
  		gdmatrix
@@ -303,18 +303,18 @@ index 25a19baf2..5f3d2e370 100644
  		gdnewfilectx
  		gdtest
  		gdtiled
-diff --git a/tests/Makefile.am b/tests/Makefile.am
-index 51177a6d0..b9e014964 100644
---- a/tests/Makefile.am
-+++ b/tests/Makefile.am
+diff --git "a/tests/Makefile.am" "b/tests/Makefile.am"
+index f6b6a721..cf9cb876 100644
+--- "a/tests/Makefile.am"
++++ "b/tests/Makefile.am"
 @@ -74,6 +74,7 @@ include gdimagestringup/Makemodule.am
  include gdimagestringup16/Makemodule.am
  include gdimagetruecolortopalette/Makemodule.am
  include gdinterpolatedscale/Makemodule.am
 +include gdmem/Makemodule.am
+ include gdmatrix/Makemodule.am
  include gdnewfilectx/Makemodule.am
  include gdtest/Makemodule.am
- include gdtiled/Makemodule.am
 diff --git a/tests/gdmem/CMakeLists.txt b/tests/gdmem/CMakeLists.txt
 new file mode 100644
 index 000000000..5b2e6c76f

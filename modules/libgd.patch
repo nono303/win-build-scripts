@@ -1,7 +1,7 @@
-diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
-index 0f488518..0a2a1a7e 100644
---- "a/CMakeLists.txt"
-+++ "b/CMakeLists.txt"
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 6d57d58b..420b7e59 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -26,6 +26,11 @@ OPTION(ENABLE_ASAN "Enable (gcc) ASAN support" 0)
  OPTION(ENABLE_CPP "Enable CPP GD API" 1)
  OPTION(VERBOSE_MAKEFILE "Enable CMAKE_VERBOSE_MAKEFILE" 0)
@@ -14,7 +14,7 @@ index 0f488518..0a2a1a7e 100644
  if (VERBOSE_MAKEFILE)
  	set(CMAKE_VERBOSE_MAKEFILE ON)
  endif (VERBOSE_MAKEFILE)
-@@ -142,7 +147,7 @@ else (USE_EXT_GD)
+@@ -156,7 +161,7 @@ else (USE_EXT_GD)
  	ENDIF (ENABLE_HEIF)
  
  	IF (ENABLE_AVIF)
@@ -23,7 +23,7 @@ index 0f488518..0a2a1a7e 100644
  		SET(HAVE_LIBAVIF 1)
  		SET(AVIF_LIBRARIES avif)
  		SET(AVIF_FOUND 1)
-@@ -298,59 +303,64 @@ else (USE_EXT_GD)
+@@ -312,59 +317,64 @@ else (USE_EXT_GD)
  	add_subdirectory(src)
  endif (USE_EXT_GD)
  
@@ -143,12 +143,11 @@ index 0f488518..0a2a1a7e 100644
 +	INCLUDE(CPack)
 +endif(BUILD_CPACK)
 \ No newline at end of file
-
 diff --git a/src/config.h.cmake b/src/config.h.cmake
-index 05429428..a936a219 100644
+index f6f54e2c..32853296 100644
 --- a/src/config.h.cmake
 +++ b/src/config.h.cmake
-@@ -142,3 +142,7 @@
+@@ -136,3 +136,7 @@
  
  /* Version number of package */
  #cmakedefine VERSION

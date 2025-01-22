@@ -12,7 +12,7 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 0f488518e..dca3fbe4c 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -203,6 +203,7 @@ else (USE_EXT_GD)
+@@ -217,6 +217,7 @@ else (USE_EXT_GD)
  	IF(WEBP_FOUND)
  		INCLUDE_DIRECTORIES(${WEBP_INCLUDE_DIR})
  		SET(HAVE_LIBWEBP 1)
@@ -24,7 +24,7 @@ diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
 index 1069c4f77..23c94fe85 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -125,7 +125,6 @@ endif()
+@@ -135,7 +135,6 @@ endif()
  SET(LIBS_PRIVATES
  	${ICONV_LIBRARIES}
  	${LIQ_LIBRARIES}
