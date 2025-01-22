@@ -1,8 +1,136 @@
 # changelog
 
 
+## 1.11.0 _(2025-01-22)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`env_sample.bat`
+`utils/srccreate.bat`
+*  CMAKE_UNITY_BUILD 3.10.1
+`modules/gdal.bat`
+*  fix 'APR_INLINE': redefinition; different storage class
+`modules/mod_security-sdbm-util.patch`
+`modules/mod_security.patch`
+*  https://github.com/php/php-src/issues/16449#issuecomment-2576656150
+`modules/phpsdk-config_make.bat`
+*  2.4.63
+`modules/httpd.patch`
+*  https://github.com/apache/serf/commit/d4dc7a996d1a2a34dc3aa504cf44c0658120d666
+`modules/serf.patch`
+*  8.4.3
+`modules/php-src_8.4.patch`
+*  typo
+`utils/sub/opcode.list`
+*  https://github.com/libgd/libgd/commit/66c20541101167089ff72183e695a7b3b763b697
+`modules/libgd.patch`
+`modules/libgd_pr514.patch`
+`modules/libgd_pr692.patch`
+`modules/libgd_pr851.patch`
+*  unused as ninja.sh remove /GL do the job
+`modules/libmaxminddb.sh`
+*  10.45
+`modules/pcre2.patch`
+*  CMAKE_UNITY_BUILD
+`modules/apr.bat`
+`modules/bzip2.bat`
+`modules/curl.bat`
+`modules/freetype2.bat`
+`modules/geographiclib.bat`
+`modules/giflib.bat`
+`modules/jansson.bat`
+`modules/lerc.bat`
+`modules/libdeflate.bat`
+`modules/libev.bat`
+`modules/libexpat.bat`
+`modules/libiconv.bat`
+`modules/libmaxminddb.bat`
+`modules/libssh2.bat`
+`modules/libtiff.bat`
+`modules/libxslt.bat`
+`modules/mod_fcgid.bat`
+`modules/pcre2.bat`
+`modules/proj.bat`
+`modules/qhull.bat`
+`modules/sqlite.bat`
+`modules/wineditline.bat`
+`modules/yajl.bat`
+*  https://github.com/hyperrealm/libconfig/commit/e6b9fd1eac1d4b5cdaeda9d5829b587859211518
+`modules/libconfig.patch`
+*  1.5.0
+`modules/libwebp.bat`
+*  1.23
+`modules/libdeflate.bat`
+*  1.34.4
+`modules/cares.patch`
+*  gradle: 8.11 > 8.11.1 local copy for curl-ca-bundle.crt
+`env_sample.bat`
+*  3.1.0
+`modules/libjpeg-turbo.bat`
+*  gradle: 8.11 > 8.11.1
+`modules/mobac.patch`
+*  rm bin/*config
+`modules/libxml2.bat`
+`modules/pcre2.bat`
+`utils/bininfo.bat`
+*  use mk-ca-bundle.pl
+`modules/curl.bat`
+*  fix & pretty flags
+`modules/openssl.bat`
+*  LOCAL_COPY for php
+`env_sample.bat`
+`modules/phpsdk-config_make.bat`
+*  8.11.1
+`modules/curl.bat`
+*  fix subversion build after deps
+`modules/subversionanddeps.bat`
+*  fix ltrim issue on 0
+`utils/sub/version.php`
+*  php-cgi-spawner removed
+`utils/bininfo.bat`
+*  openssl no-brotli no-zstd for subversion
+`modules/openssl.bat`
+`modules/subversionanddeps.bat`
+*  https://github.com/hyperrealm/libconfig/pull/249
+`modules/libconfig.patch`
+*  1.14.5
+`modules/subversion.patch`
+*  fix warning D9025: overriding '/Ob2' with '/Ob3'
+`modules/common/vcxproj.sh`
+*  -php-cgi-spawner
+`SRC_VERSION.md`
+`modules/full.bat`
+`modules/php-cgi-spawner.bat`
+`usage.txt`
+`utils/srccreate.bat`
+`utils/sub/version.php`
+*  https://github.com/php/php-src/issues/15709#issuecomment-2522477075
+`modules/phpsdk-config_make.bat`
+*  1.7.4
+`modules/libconfig.patch`
+`utils/sub/version.php`
+*  8.4.2
+`modules/php-src_8.4.patch`
+*  php-ext-brotli with static libbrotli https://github.com/kjdev/php-ext-brotli/issues/55#issuecomment-2509678078
+`env_sample.bat`
+`modules/brotli.bat`
+`modules/php.bat`
+`modules/phpsdk-config_make.bat`
+*  typo
+`go.bat`
+*  fix missing PATH_BATCH
+`x64.bat`
+*  3.4.0
+`modules/xdebug.patch`
+*  fix start & end with dot
+`utils/sub/version.php`
+
+
 ## 1.10.5 _(2024-11-25)_
 
+*  1.10.5
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
