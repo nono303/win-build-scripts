@@ -162,7 +162,7 @@ sed -i 's/ARFLAGS=\/nologo/ARFLAGS=\/nologo \/LTCG/g' %CYGPATH_SRC%/php-src/Make
 	REM LDFLAGS 
 	REM	/NODEFAULTLIB:libcmt.lib	for freetype2
 	REM	/SAFESEH:NO			https://github.com/php/php-src/issues/15709#issuecomment-2522477075
-sed -i -E 's/incremental:no/incremental:no \/LTCG \/NODEFAULTLIB:libcmt.lib \/SAFESEH:NO/g' %CYGPATH_SRC%/php-src/Makefile
+sed -i -E 's/incremental:no/incremental:no \/LTCG \/NODEFAULTLIB:libcmt.lib/g' %CYGPATH_SRC%/php-src/Makefile
 	REM CFLAGS
 sed -i 's/\/Ox/\/std:c++latest \/O2 \/Ob3 \/MP%NUMBER_OF_PROCESSORS% \/cgthreads8 \/GL \/Zf \/Gy \/FS \/D PHP_ICONV_PREFIX=%PATH_INSTALL:\=\/%/g' %CYGPATH_SRC%/php-src/Makefile
 	REM no warn
