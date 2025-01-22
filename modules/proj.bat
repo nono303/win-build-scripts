@@ -5,6 +5,7 @@ mkdir %PATH_INSTALL%\_%1
 
 REM https://proj.org/install.html#cmake-configure-options
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
+-DCMAKE_UNITY_BUILD=1 ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL%\_%1 ^
 -DCMAKE_INSTALL_MANDIR=%PATH_INSTALL%\_%1 ^
 -DBUILD_APPS=ON ^
