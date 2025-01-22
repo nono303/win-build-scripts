@@ -176,14 +176,14 @@ index 4241b7c288..f935db722b 100644
  	version = buf;
  #elif defined(HAVE_GLIBC_ICONV)
  	version = (char *) gnu_get_libc_version();
-diff --git a/ext/intl/config.w32 b/ext/intl/config.w32
-index f3c3e2cffd..8de0e1eff0 100644
---- a/ext/intl/config.w32
-+++ b/ext/intl/config.w32
-@@ -126,7 +126,7 @@ if (PHP_INTL != "no") {
- 			ADD_FLAG("LIBS_INTL", "iculx.lib");
- 		}
- 
+diff --git "a/ext/intl/config.w32" "b/ext/intl/config.w32"
+index 17b577327b..fac61e1a63 100644
+--- "a/ext/intl/config.w32"
++++ "b/ext/intl/config.w32"
+@@ -122,7 +122,7 @@ if (PHP_INTL != "no") {
+ 		/* Compat for ICU before 58.1.*/
+ 		CHECK_LIB("icule.lib", "intl", PHP_INTL);
+ 		CHECK_LIB("iculx.lib", "intl", PHP_INTL);
 -		ADD_FLAG("CFLAGS_INTL", "/std:c++17 /EHsc /DUNISTR_FROM_CHAR_EXPLICIT=explicit /DUNISTR_FROM_STRING_EXPLICIT=explicit /DU_NO_DEFAULT_INCLUDE_UTF_HEADERS=1 /DU_HIDE_OBSOLETE_UTF_OLD_H=1");
 +		ADD_FLAG("CFLAGS_INTL", "/EHsc /DUNISTR_FROM_CHAR_EXPLICIT=explicit /DUNISTR_FROM_STRING_EXPLICIT=explicit /DU_NO_DEFAULT_INCLUDE_UTF_HEADERS=1 /DU_HIDE_OBSOLETE_UTF_OLD_H=1");
  	} else {
