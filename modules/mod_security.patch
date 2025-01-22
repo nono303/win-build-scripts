@@ -33,7 +33,7 @@ index ed4bfc9e..d79a4e18 100644
  MT = mt
  
 -DEFS = /nologo /O2 /LD /W3 /wd4244 /wd4018 -DWIN32 -DWINNT -Dinline=APR_INLINE -D$(VERSION)
-+DEFS = /nologo /DWIN32 /DWINNT /Dinline=APR_INLINE /DWITH_PCRE2 /D$(VERSION) /D_WINDOWS /w /Zf /Zi /FS /O2 /GL /MD /DNDEBUG 
++DEFS = /nologo /DWIN32 /DWINNT /DWITH_PCRE2 /D$(VERSION) /D_WINDOWS /w /Zf /Zi /FS /O2 /GL /MD /DNDEBUG 
  
  DLL = mod_security2.so
  
@@ -77,3 +77,4 @@ index 1850191e..52ed7ac7 100644
  
      if (strstr(pcre_loaded_vrs,pcre_vrs) == NULL)    {
          ap_log_error(APLOG_MARK, APLOG_WARNING, 0, s, "ModSecurity: Loaded PCRE do not match with compiled!");
+

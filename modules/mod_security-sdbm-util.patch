@@ -1,7 +1,20 @@
-diff --git "a/modsec-sdbm-util.c" "b/modsec-sdbm-util.c"
+diff --git a/Makefile.win b/Makefile.win
+index e28db0a..7d3c85a 100644
+--- a/Makefile.win
++++ b/Makefile.win
+@@ -16,7 +16,7 @@ includes = -I$(APRUTIL)\include -I$(APR)\include
+ 
+ libs = $(APR)\lib\libapr-1.lib $(APRUTIL)\lib\libaprutil-1.lib
+ 
+-cflags= $(includes) /nologo /DWIN32 /DWINNT /D_WINDOWS /Dinline=APR_INLINE /w /Zf /Zi /FS /O2 /GL /MD /DNDEBUG
++cflags= $(includes) /nologo /DWIN32 /DWINNT /D_WINDOWS /w /Zf /Zi /FS /O2 /GL /MD /DNDEBUG
+ 
+ ldflags = /nologo /Incremental:no /LTCG /debug /opt:ref,icf 
+ 
+diff --git a/modsec-sdbm-util.c b/modsec-sdbm-util.c
 index 71af63f..3453018 100644
---- "a/modsec-sdbm-util.c"
-+++ "b/modsec-sdbm-util.c"
+--- a/modsec-sdbm-util.c
++++ b/modsec-sdbm-util.c
 @@ -111,7 +111,23 @@ int
    return (optopt);                        /* dump back option letter */
  }
