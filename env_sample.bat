@@ -100,7 +100,7 @@ cd /D %PATH_BATCH%
 
 REM ########################## BUILD OPTION
 	REM https://services.gradle.org/distributions/
-set GRADLEVER=8.11.1
+set GRADLEVER=8.12
 	REM see dir in %PATH_ROOTWKIT%\Lib
 set WKITVER=10.0.26100.0
 	REM .NET installed SDK
@@ -131,7 +131,7 @@ set MSBUILD_OPTS_REL=%MSBUILD_OPTS_COM% ^
 	/v:m
 
 set CMAKE_OPTS_DBG=-LAH -DCMAKE_FIND_DEBUG_MODE=1
-set CMAKE_OPTS_REL=-Wno-dev 
+set CMAKE_OPTS_REL=-Wno-dev
 set CMAKE_BUILD_TYPE=RelWithDebInfo
 set CMAKE_TGT_NINJA="Ninja"
 
