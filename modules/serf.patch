@@ -1,8 +1,8 @@
-diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
-index 6a66091..46be120 100644
---- "a/CMakeLists.txt"
-+++ "b/CMakeLists.txt"
-@@ -46,10 +46,10 @@ set(CMAKE_MODULE_PATH "${SERF_SOURCE_DIR}/build")
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 66ea098..12a1689 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -41,10 +41,10 @@ set(CMAKE_MODULE_PATH "${SERF_SOURCE_DIR}/build")
  include(SerfVersion)
  
  project("Serf" VERSION ${SERF_VERSION} LANGUAGES C)
