@@ -1,7 +1,7 @@
 #!/bin/bash
 # 2023-10-23_08-20-05
 
-# Willamette MMX instructions (SSE2 SIMD Integer Instructions)
+# Opcode_WILLAMETTE_Base
 Opcode_SSE2="${Opcode_SSE2} movd movdb movdw movdl movdq"
 Opcode_SSE2="${Opcode_SSE2} movdqa"
 Opcode_SSE2="${Opcode_SSE2} movdqu"
@@ -170,7 +170,7 @@ Opcode_KATMAI_Base="${Opcode_KATMAI_Base} prefetcht1 prefetcht1b prefetcht1w pre
 Opcode_KATMAI_Base="${Opcode_KATMAI_Base} prefetcht2 prefetcht2b prefetcht2w prefetcht2l prefetcht2q"
 Opcode_KATMAI_Base="${Opcode_KATMAI_Base} sfence"
 
-# Tejas New Instructions (SSSE3)
+# Opcode_SSSE3
 Opcode_Base="${Opcode_Base} pabsb pabsbb pabsbw pabsbl pabsbq"
 Opcode_Base="${Opcode_Base} pabsw pabswb pabsww pabswl pabswq"
 Opcode_Base="${Opcode_Base} pabsd pabsdb pabsdw pabsdl pabsdq"
