@@ -54,7 +54,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.13.0p2.1 (14.43, 14.29) | `.vsconfig`         |
+| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.13.0p4 (14.43, 14.29) | `.vsconfig`         |
 | :bookmark: [Microsoft Visual C++ Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170) | x64 & x86 | 14.42.34433             |  |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.5.5 | `cyg64.packagelist` |
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.12.8 |                     |

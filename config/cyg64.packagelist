@@ -63,6 +63,7 @@ ipc-utils
 less
 libargp
 libassuan0
+libassuan9
 libatomic1
 libattr1
 libbind9_161
@@ -125,6 +126,7 @@ libk5crypto3
 libkrb5_3
 libkrb5support0
 libksba8
+liblastlog2
 liblmdb0
 libltdl7
 liblwres161
