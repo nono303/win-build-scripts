@@ -69,6 +69,7 @@ REM [%PHPVER% != %PHP_BUILD_TYPE%]: add --disable-zlib ^ if not memcache
 if %PHP_BUILD_TYPE% == xdebug	(set PHP_PARTIAL_BUILD=--with-xdebug=shared --with-xdebug-compression --disable-zlib)
 if %PHP_BUILD_TYPE% == memcache	(set PHP_PARTIAL_BUILD=--enable-memcache=shared)
 if %PHP_BUILD_TYPE% == brotli	(set PHP_PARTIAL_BUILD=--enable-brotli=shared)
+if %PHP_BUILD_TYPE% == igbinary	(set PHP_PARTIAL_BUILD=--enable-igbinary=shared)
 
 if %PHPVER% == %PHP_BUILD_TYPE% (
 	set FINAL_CONFIGURE=%PHP_COMMON_CONFIGURE% ^
@@ -121,6 +122,7 @@ if %PHPVER% == %PHP_BUILD_TYPE% (
 	--with-xdebug-compression ^
 	--enable-timezonedb=shared ^
 	--enable-sync=shared ^
+	--enable-igbinary=shared ^
 	%ZTS% ^
 	%phpveropts% ^
 	%phparchopts%
@@ -219,10 +221,16 @@ if %PHPVER% == %PHP_BUILD_TYPE% (
 	call do_php %PATH_UTILS%\sub\version.php pecl-system-sync %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_sync.dll "php:%PHPVERFULL%-%TSNTS%"
 	call %PATH_MODULES_COMMON%\init.bat pecl-memcache varonly
 	call do_php %PATH_UTILS%\sub\version.php pecl-memcache %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcache.dll "php:%PHPVERFULL%-%TSNTS%"
+	call %PATH_MODULES_COMMON%\init.bat pecl-igbinary varonly
+	call do_php %PATH_UTILS%\sub\version.php pecl-igbinary %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_igbinary.dll "php:%PHPVERFULL%-%TSNTS%"
 )
 if %PHP_BUILD_TYPE% == xdebug	(
 	call %PATH_MODULES_COMMON%\init.bat xdebug varonly
 	call do_php %PATH_UTILS%\sub\version.php xdebug %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_xdebug.dll "php:%PHPVERFULL%-%TSNTS%"
+)
+if %PHP_BUILD_TYPE% == igbinary	(
+	call %PATH_MODULES_COMMON%\init.bat pecl-igbinary varonly
+	call do_php %PATH_UTILS%\sub\version.php pecl-igbinary %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_igbinary.dll "php:%PHPVERFULL%-%TSNTS%"
 )
 if %PHP_BUILD_TYPE% == memcache	(
 	if %AVXECHO% == sse2 (set AVXPATH=) else (set AVXPATH=\%AVXB:-=%)

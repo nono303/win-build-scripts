@@ -14,6 +14,8 @@
 	if(in_array($proot,["pecl-memcache","php-geos","php-ogr","php-proj","pecl-text-xdiff","php-ext-brotli","php-ext-zstd","xdebug","php-src"]))
 		$proot = "php";
 	$nogit = array(
+		"pecl-igbinary"		=> ["/#define PHP_IGBINARY_VERSION \"([^\"]+)/s",
+							pathenv("PATH_SRC")."/".$argv[1]."/src/php7/igbinary.h"],
 		"libgeotiff"		=> ["/#define LIBGEOTIFF_STRING_VERSION +\"([0-9\.]+)/s",
 							pathenv("PATH_INSTALL")."/include/geotiff.h"],
 		"sslh"				=> ["/define VERSION \"v([0-9\.]+)-([0-9]+)/s",
@@ -172,8 +174,8 @@
 					$ver_product .= "0";
 				if(str_starts_with($ver_product,"."))
 					$ver_product = "0".$ver_product;
-				// '-dev' as 0
-				$ver_product = str_replace("-dev","0",$ver_product);
+				if(str_ends_with($ver_product,"-dev"))
+					$ver_product = str_replace("-dev",".0",$ver_product);
 				$ver_file = $ver_product;
 				// letter in version : openssl & jpeg
 				preg_match("/([a-zA-Z])$/",$ver_file,$matches);

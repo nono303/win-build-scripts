@@ -1,0 +1,48 @@
+https://github.com/php/php-src/issues/12762#issuecomment-1831673405
+diff --git "a/Zend/zend_call_stack.c" "b/Zend/zend_call_stack.c"
+index ac12b8b7d8..be9ab4bd9e 100644
+--- "a/Zend/zend_call_stack.c"
++++ "b/Zend/zend_call_stack.c"
+@@ -23,6 +23,7 @@
+ #include "zend_portability.h"
+ #include "zend_call_stack.h"
+ #include <stdint.h>
++#include <time.h>
+ #ifdef ZEND_WIN32
+ # include <processthreadsapi.h>
+ # include <memoryapi.h>
+@@ -416,7 +417,33 @@ static bool zend_call_stack_get_win32(zend_call_stack *stack)
+ 	 *                v  Lower addresses   v
+ 	 */
+ 
+-	GetCurrentThreadStackLimits(&low_limit, &high_limit);
++	clock_t begin = clock();
++	typedef void (WINAPI* FuncT)(PULONG_PTR , PULONG_PTR);
++	HINSTANCE hDLL = LoadLibrary("Kernel32.dll");
++	FuncT GetCurrentThreadStackLimits = (FuncT) GetProcAddress((HMODULE)hDLL, "GetCurrentThreadStackLimits");
++	if (GetCurrentThreadStackLimits) {
++		GetCurrentThreadStackLimits(&low_limit, &high_limit);
++		ULONG_PTR tmp_low_limit, tmp_high_limit;
++		NT_TIB* tib = (NT_TIB*)NtCurrentTeb();
++		tmp_high_limit = (ULONG_PTR)tib->StackBase;
++		MEMORY_BASIC_INFORMATION mbi;
++		if (VirtualQuery(tib->StackLimit, &mbi, sizeof(mbi))) {
++			tmp_low_limit = (ULONG_PTR)mbi.AllocationBase;
++		}
++		fprintf(stderr, "GetCurrentThreadStackLimits (%lu =? %lu) (%lu =? %lu)\n",(uintptr_t)low_limit, (uintptr_t)tmp_low_limit,(uintptr_t)high_limit,(uintptr_t)tmp_high_limit);
++		fprintf(stderr, "GetCurrentThreadStackLimits %lu %lu\n",(uintptr_t)low_limit,(uintptr_t)high_limit);
++	} else {
++		NT_TIB* tib = (NT_TIB*)NtCurrentTeb();
++		high_limit = (ULONG_PTR)tib->StackBase;
++		MEMORY_BASIC_INFORMATION mbi;
++		if (VirtualQuery(tib->StackLimit, &mbi, sizeof(mbi))) {
++			low_limit = (ULONG_PTR)mbi.AllocationBase;
++		}
++		fprintf(stderr, "StackLimitStackBase %lu %lu\n",(uintptr_t)low_limit, (uintptr_t)high_limit);
++	}
++	clock_t end = clock();
++	unsigned long millis = (end -  begin) * 1000 / CLOCKS_PER_SEC;
++	fprintf(stderr, "time_spent %lu\n",millis);
+ 
+ 	result_size = VirtualQuery((void*)low_limit,
+ 			&uncommitted_region, sizeof(uncommitted_region));

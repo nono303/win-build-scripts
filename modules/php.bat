@@ -18,6 +18,7 @@ set PHPVERFULL=%SCM_TAG:~4%
 set PHP_BUILD_TYPE=%PHPVER%
 set PHP_XTRALIBS=
 setlocal enabledelayedexpansion
+set argCount=0
 for %%x in (%*) do (
    set /A argCount+=1
    set "argVec[!argCount!]=%%~x"
@@ -26,6 +27,14 @@ for /L %%i in (2,1,%argCount%) do (
 	if /I "!argVec[%%i]!"=="XDEBUG"		set PHP_BUILD_TYPE=xdebug
 	if /I "!argVec[%%i]!"=="MEMCACHE"	set PHP_BUILD_TYPE=memcache
 	if /I "!argVec[%%i]!"=="BROTLI"		set PHP_BUILD_TYPE=brotli
+	if /I "!argVec[%%i]!"=="WIN7" (
+		echo     # apply php-src_win7.patch
+		git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-src_win7.patch
+	)
+	if /I "!argVec[%%i]!"=="WIN7D" (
+		echo     # apply php-src_win7d.patch
+		git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-src_win7d.patch
+	)
 )
 
 	REM ~~~~~~~~~~~~ check prereq deps
@@ -72,7 +81,7 @@ call %PATH_MODULES_COMMON%\init.bat brotli varonly
 sed -i 's/AC_DEFINE/AC_DEFINE\("BROTLI_LIB_VERSION", "%SCM_TAG:~1%", "system library version"\);AC_DEFINE/g' %CYGPATH_SRC%/php-ext-brotli/config.w32
 
 	REM ~~~~~~~~~~~~ other PECL init
-for %%E in (pecl-datetime-timezonedb php-geos php-ext-zstd php-proj php-ogr xdebug php-sdk pecl-system-sync) do (
+for %%E in (php-sdk xdebug php-geos php-proj php-ogr php-ext-zstd pecl-datetime-timezonedb pecl-system-sync pecl-igbinary) do (
 	call %PATH_MODULES_COMMON%\init.bat %%E
 )
 
