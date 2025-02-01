@@ -5,13 +5,18 @@
 		REM libgav1_static.lib(internal_frame_buffer_list.cc.obj) : error LNK2001: unresolved external symbol __imp_Libgav1ComputeFrameBufferInfo
 sed -i -E 's/ ^&^& LIBGAV1_BUILDING_DLL//g' %CYGPATH_SRC%/%1/src/gav1/symbol_visibility.h
 
+set GAV1_AVX2=0
+if %AVXECHO%==avx2 (
+	set GAV1_AVX2=1
+)
+
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DBUILD_SHARED_LIBS=1 ^
 -DLIBGAV1_ENABLE_TESTS=0 ^
 -DLIBGAV1_ENABLE_EXAMPLES=0 ^
 -DLIBGAV1_ENABLE_OPTIMIZATIONS=1 ^
--DLIBGAV1_ENABLE_AVX2=0 ^
+-DLIBGAV1_ENABLE_AVX2=%GAV1_AVX2% ^
 -DLIBGAV1_ENABLE_NEON=0 ^
 -DLIBGAV1_ENABLE_SSE4_1=1 ^
 -DLIBGAV1_VERBOSE=0 ^
