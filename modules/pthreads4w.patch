@@ -1,0 +1,65 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index d749071..4c3366f 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -53,18 +53,16 @@ endif()
+ #################################
+ # Install Path                  #
+ #################################
+-if(DIST_ROOT)
+-    set(CMAKE_INSTALL_PREFIX "${DIST_ROOT}")
+-else()
+-    set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/PTHREADS-BUILT")
++if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
++    set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/PTHREADS-BUILT/${TARGET_ARCH}/${CMAKE_BUILD_TYPE}/")
+ endif()
+ message(STATUS "Install Path ${CMAKE_INSTALL_PREFIX}")
+ 
+ 
+-set(DLLDEST ${CMAKE_INSTALL_PREFIX}/${TARGET_ARCH}/${CMAKE_BUILD_TYPE}/bin)
+-set(LIBDEST ${CMAKE_INSTALL_PREFIX}/${TARGET_ARCH}/${CMAKE_BUILD_TYPE}/lib)
+-set(HDRDEST ${CMAKE_INSTALL_PREFIX}/${TARGET_ARCH}/${CMAKE_BUILD_TYPE}/include)
+-set(TESTDEST ${CMAKE_INSTALL_PREFIX}/${TARGET_ARCH}/${CMAKE_BUILD_TYPE}/test)
++set(DLLDEST ${CMAKE_INSTALL_PREFIX}/bin)
++set(LIBDEST ${CMAKE_INSTALL_PREFIX}/lib)
++set(HDRDEST ${CMAKE_INSTALL_PREFIX}/include)
++set(TESTDEST ${CMAKE_INSTALL_PREFIX}/test)
+ 
+ #################################
+ # Defs                          #
+@@ -109,9 +107,11 @@ macro(shared_lib type def)
+     endif()
+     if(${CMAKE_GENERATOR} MATCHES "Visual Studio")
+         install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_BUILD_TYPE}/${targ}${targ_suffix}.dll DESTINATION ${DLLDEST})
++        install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_BUILD_TYPE}/${targ}${targ_suffix}.pdb DESTINATION ${DLLDEST})
+         install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_BUILD_TYPE}/${targ}${targ_suffix}.lib DESTINATION ${LIBDEST})
+     else()
+         install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${targ}${targ_suffix}.dll DESTINATION ${DLLDEST})
++        install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${targ}${targ_suffix}.pdb DESTINATION ${DLLDEST})
+         install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${targ}${targ_suffix}.lib DESTINATION ${LIBDEST})
+     endif()
+ endmacro()
+@@ -131,13 +131,17 @@ macro(static_lib type def)
+     endif()
+ endmacro()
+ 
+-shared_lib ( VCE __PTW32_CLEANUP_CXX )
+-shared_lib ( VSE __PTW32_CLEANUP_SEH )
+-shared_lib ( VC  __PTW32_CLEANUP_C )
++if(BUILD_SHARED)
++    shared_lib ( VCE __PTW32_CLEANUP_CXX )
++    shared_lib ( VSE __PTW32_CLEANUP_SEH )
++    shared_lib ( VC  __PTW32_CLEANUP_C )
++endif()
+ 
+-static_lib ( VCE __PTW32_CLEANUP_CXX )
+-static_lib ( VSE __PTW32_CLEANUP_SEH )
+-static_lib ( VC  __PTW32_CLEANUP_C )
++if(BUILD_STATIC)
++    static_lib ( VCE __PTW32_CLEANUP_CXX )
++    static_lib ( VSE __PTW32_CLEANUP_SEH )
++    static_lib ( VC  __PTW32_CLEANUP_C )
++endif()
+ 
+ #################################
+ # Install                       #
