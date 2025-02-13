@@ -10,7 +10,7 @@ if not exist %PATH_SRC%\. mkdir %PATH_SRC%
 cd /D %PATH_SRC%
 git clone https://aomedia.googlesource.com/aom aom
 cd /D aom
-git checkout tags/v3.11.0
+git checkout tags/v3.12.0-rc1
 cd /D ..
 git clone https://github.com/apache/apr.git apr
 cd /D apr
@@ -74,7 +74,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
-git checkout tags/2.4.63-candidate
+git checkout tags/2.4.63
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
@@ -118,7 +118,7 @@ git checkout tags/R_2_6_4
 cd /D ..
 git clone https://chromium.googlesource.com/codecs/libgav1 libgav1
 cd /D libgav1
-git checkout tags/v0.19.0
+git checkout tags/v0.20.0
 cd /D ..
 git clone https://github.com/libgd/libgd.git libgd
 cd /D libgd
@@ -146,7 +146,7 @@ git checkout tags/3.1.0
 cd /D ..
 git clone https://git.tukaani.org/xz.git liblzma
 cd /D liblzma
-git checkout tags/v5.6.3
+git checkout tags/v5.7.1alpha
 cd /D ..
 git clone https://github.com/maxmind/libmaxminddb.git libmaxminddb
 cd /D libmaxminddb
@@ -154,7 +154,7 @@ git checkout tags/1.12.2
 cd /D ..
 git clone git://git.code.sf.net/p/libpng/code libpng
 cd /D libpng
-git checkout tags/v1.6.45
+git checkout tags/v1.6.46
 cd /D ..
 git clone https://github.com/jedisct1/libsodium.git libsodium
 cd /D libsodium
@@ -182,7 +182,7 @@ git checkout tags/v2.13.5
 cd /D ..
 git clone https://github.com/nono303/libxpm.git libxpm
 cd /D libxpm
-git checkout tags/libxpm-3.5.17
+git checkout master
 cd /D ..
 git clone https://gitlab.gnome.org/GNOME/libxslt.git/ libxslt
 cd /D libxslt
@@ -206,7 +206,7 @@ git checkout tasks
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
-git checkout tags/1.6.34
+git checkout tags/1.6.36
 cd /D ..
 svn co https://svn.code.sf.net/p/mobac/code/trunk/MOBAC mobac
 cd /D mobac
@@ -238,7 +238,7 @@ git checkout main
 cd /D ..
 git clone https://github.com/icing/mod_md mod_md
 cd /D mod_md
-git checkout tags/v2.4.31
+git checkout tags/v2.5.1
 cd /D ..
 svn co https://svn.code.sf.net/p/mod-qos/source/trunk/httpd_src/modules/qos mod_qos
 cd /D mod_qos
@@ -286,15 +286,23 @@ git checkout tags/openssl-3.3.0-quic1
 cd /D ..
 git clone https://github.com/PCRE2Project/pcre2.git pcre2
 cd /D pcre2
-git checkout tags/pcre2-10.45-RC1
+git checkout tags/pcre2-10.45
 cd /D ..
 git clone https://github.com/php/pecl-datetime-timezonedb.git pecl-datetime-timezonedb
 cd /D pecl-datetime-timezonedb
 git checkout tags/2025.1
 cd /D ..
+git clone https://github.com/igbinary/igbinary pecl-igbinary
+cd /D pecl-igbinary
+git checkout master
+cd /D ..
 git clone https://github.com/websupport-sk/pecl-memcache.git pecl-memcache
 cd /D pecl-memcache
 git checkout main
+cd /D ..
+git clone https://github.com/krakjoe/parallel.git pecl-parallel
+cd /D pecl-parallel
+git checkout tags/v1.2.6
 cd /D ..
 git clone https://github.com/php/pecl-system-sync pecl-system-sync
 cd /D pecl-system-sync
@@ -330,11 +338,15 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.4.3
+git checkout tags/php-8.4.4RC2
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
 git checkout tags/9.5.1
+cd /D ..
+git clone https://github.com/jwinarske/pthreads4w.git pthreads4w
+cd /D pthreads4w
+git checkout cmake
 cd /D ..
 git clone https://github.com/qhull/qhull qhull
 cd /D qhull
@@ -354,7 +366,7 @@ git checkout trunk
 cd /D ..
 git clone https://github.com/rhuijben/sqlite-amalgamation sqlite
 cd /D sqlite
-git checkout tags/3.48.0
+git checkout tags/3.49.0
 cd /D ..
 git clone https://github.com/yrutschle/sslh.git sslh
 cd /D sslh
