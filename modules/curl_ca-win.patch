@@ -1,9 +1,8 @@
-https://www.apachelounge.com/viewtopic.php?p=39884
 diff --git "a/lib/url.c" "b/lib/url.c"
-index fc3a4356e..519f144b3 100644
+index 0f3d1002b..a97c4f5b1 100644
 --- "a/lib/url.c"
 +++ "b/lib/url.c"
-@@ -454,6 +454,14 @@ CURLcode Curl_init_userdefined(struct Curl_easy *data)
+@@ -452,6 +452,14 @@ CURLcode Curl_init_userdefined(struct Curl_easy *data)
      if(result)
        return result;
  #endif
