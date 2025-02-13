@@ -1,8 +1,5 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
 
-if %ARG_KEEPSRC% == 0 (
-	git clone --depth 1 https://github.com/zherczeg/sljit.git %PATH_SRC%\%1\deps\sljit
-)
 if "%2"=="svn" (
 	set CMAKE_PCRE2=-DPCRE2_SUPPORT_LIBEDIT=OFF ^
 	-DPCRE2_SUPPORT_LIBBZ2=OFF
@@ -66,4 +63,4 @@ for %%X in (pcre2-8 pcre2-posix) do (
 )
 xcopy /C /F /Y %PATH_BUILD%\%1\pcre2grep.pdb %PATH_INSTALL%\bin\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\pcre2grep.exe
-del /Q /F %PATH_INSTALL%\bin\pcre2-config
+rm -fv %PATH_INSTALL%\bin\pcre2-config
