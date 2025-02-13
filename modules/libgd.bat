@@ -46,6 +46,6 @@ for %%Y in (cmake_install.cmake build.ninja) do (
 )
 %NINJA% install
 
-for %%X in (bdftogd gd2copypal.exe gd2togif.exe gd2topng.exe gdcmpgif.exe gdparttopng.exe gdtopng.exe giftogd2.exe pngtogd.exe pngtogd2.exe) do (DEL /Q /F %PATH_INSTALL%\bin\%%X)
+for %%X in (bdftogd gd2copypal.exe gd2togif.exe gd2topng.exe gdcmpgif.exe gdparttopng.exe gdtopng.exe giftogd2.exe pngtogd.exe pngtogd2.exe) do (rm -fv %PATH_INSTALL%\bin\%%X)
 xcopy /C /F /Y %PATH_BUILD%\%1\Bin\libgd.pdb %PATH_INSTALL%\bin\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libgd.dll

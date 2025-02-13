@@ -40,7 +40,7 @@ ren lua.obj lua.o
 link /NOLOGO /LTCG /OPT:REF,ICF /DEBUG /DLL /IMPLIB:liblua.lib	/OUT:liblua.dll *.obj
 link /NOLOGO /LTCG /OPT:REF,ICF /DEBUG				/OUT:lua.exe lua.o liblua.lib
 
-for %%X in (obj exp o) do (del /Q /F *.%%X)
+for %%X in (obj exp o) do (rm -fv *.%%X)
 
 for %%X in (liblua.dll lua.exe liblua.pdb lua.pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\%%X %PATH_INSTALL%\bin\*)
 xcopy /C /F /Y %PATH_SRC%\%1\liblua.lib %PATH_INSTALL%\lib\*

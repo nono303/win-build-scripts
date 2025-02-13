@@ -41,5 +41,5 @@ sed -i 's/\/GL //g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
 
 xcopy /C /F /Y  %PATH_BUILD%\%1\aom.pdb %PATH_INSTALL%\bin\*
-del /Q /F %PATH_INSTALL%\lib\aom_static.lib
+rm -fv %PATH_INSTALL%\lib\aom_static.lib
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\aom.dll

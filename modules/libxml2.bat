@@ -53,4 +53,4 @@ for %%X in (OFF ON) do (
 )
 
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libxml2.dll
-del /Q /F %PATH_INSTALL%\bin\xml2-config
+rm -fv %PATH_INSTALL%\bin\xml2-config

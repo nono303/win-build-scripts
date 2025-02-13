@@ -10,6 +10,6 @@ call gradlew --warning-mode all --no-daemon --console=verbose --parallel --max-w
 move /Y %PATH_SRC%\%1\build\libs\fit2gpx-all.jar %PATH_SRC%\%1\out\jar\fit2gpx.jar
 
 if %LOCAL_COPY% == 1 (
-	del /Q /F "%LOCAL_PATH_FIT2GPX%\fit2gpx.jar"
+	rm -fv "%LOCAL_PATH_FIT2GPX%\fit2gpx.jar"
 	xcopy /C /F /Y %PATH_SRC%\%1\out\jar\fit2gpx.jar %LOCAL_PATH_FIT2GPX%\*
 )

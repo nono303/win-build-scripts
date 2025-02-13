@@ -22,4 +22,4 @@ sed -i 's/bin\\\libxml2.dll/lib\\\libxml2.lib/g' %CYGPATH_BUILD%/%1/build.ninja
 
 xcopy /C /F /Y %PATH_BUILD%\%1\xsltproc.pdb %PATH_INSTALL%\bin\*
 for %%X in (libexslt.dll libxslt.dll xsltproc.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
-for %%X in (bin\xslt-config lib\xsltConf.sh) do (DEL /Q /F %PATH_INSTALL%\%%X)
+for %%X in (bin\xslt-config lib\xsltConf.sh) do (rm -fv %PATH_INSTALL%\%%X)

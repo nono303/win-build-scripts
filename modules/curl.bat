@@ -100,7 +100,6 @@ for %%Y in (libcurl-target.cmake lib\cmake_install.cmake build.ninja) do (sed -i
 
 %NINJA% install
 
-del /Q /F %PATH_INSTALL%\bin\curl-config
 xcopy /C /F /Y %PATH_BUILD%\%1\lib\libcurl.pdb %PATH_INSTALL%\bin\*
 xcopy /C /F /Y %PATH_BUILD%\%1\src\curl.pdb %PATH_INSTALL%\bin\*
 
@@ -109,5 +108,5 @@ for %%E in (libcurl.dll curl.exe) do (call do_php %PATH_UTILS%\sub\version.php %
 REM curl https://curl.se/ca/cacert.pem -o %PATH_INSTALL%\bin\curl-ca-bundle.crt
 cd /D %PATH_INSTALL%\bin
 call perl mk-ca-bundle.pl curl-ca-bundle.crt
-for %%E in (certdata.txt mk-ca-bundle.pl) do (del /Q /F %PATH_INSTALL%\bin\%%E)
+for %%E in (certdata.txt mk-ca-bundle.pl curl-config) do (rm -fv %PATH_INSTALL%\bin\%%E)
 if %LOCAL_COPY% == 1 if %LOCAL_COPY_AVX_ECHO% == %AVXECHO%  if %LOCAL_COPY_MSVC_VER% == %MSVC_VER% (xcopy /C /F /Y %PATH_INSTALL%\bin\curl-ca-bundle.crt %LOCAL_PATH_CURLCA%\*)

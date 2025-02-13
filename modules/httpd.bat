@@ -30,7 +30,7 @@ if "%2"=="svn" (
 %NINJA% install
 
 	REM delete unused exp in /lib
-del /Q /F "%PATH_INSTALL%\lib\*.exp"
+rm -fv "%PATH_INSTALL%\lib\*.exp"
 
 for %%X in (ab.exe abs.exe ApacheMonitor.exe htcacheclean.exe htdbm.exe htdigest.exe htpasswd.exe httpd.exe httxt2dbm.exe libhttpd.dll logresolve.exe rotatelogs.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
 for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\modules\*%mod_suffix% /b') do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\modules\%%G)

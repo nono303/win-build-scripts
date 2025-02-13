@@ -23,7 +23,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% install
 
-DEL /Q /F %PATH_INSTALL%\bin\event_rpcgen.py
+rm -fv %PATH_INSTALL%\bin\event_rpcgen.py
 for %%F in (event event_extra event_openssl event_core) do (
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\lib\%%F.dll
 	move /Y %PATH_INSTALL%\lib\%%F.dll %PATH_INSTALL%\bin

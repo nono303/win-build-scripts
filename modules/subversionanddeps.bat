@@ -15,7 +15,7 @@ call go httpd svn NOLOG
 
 set DEPS=\deps
 if not exist %PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\. mkdir %PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\
-del /Q /F "%PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\*.*"
+rm -fv "%PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\*.*"
 REM	apr_crypto_openssl-1 only seems required for tests
 for %%F in (libexpat libapr-1 libiconv libaprutil-1 libserf-2 zlib libsqlite3) do (
 	for %%X in (dll pdb) do (
