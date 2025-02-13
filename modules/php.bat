@@ -2,8 +2,8 @@
 REM fix 'Could not determine '%PHP_SDK_VS%' directory' l.137 in phpsdk_setshell.bat
 set PHP_SDK_VC_DIR=%PATH_VS%\Common7\Tools
 	REM ~~~~~~~~~~~~ TS - NTS 
-set PHP_BUILDTS=0
-set PHP_BUILDNTS=1
+set PHP_BUILDTS=1
+set PHP_BUILDNTS=0
 
 REM ********
 REM * INIT *
@@ -27,6 +27,8 @@ for /L %%i in (2,1,%argCount%) do (
 	if /I "!argVec[%%i]!"=="XDEBUG"		set PHP_BUILD_TYPE=xdebug
 	if /I "!argVec[%%i]!"=="MEMCACHE"	set PHP_BUILD_TYPE=memcache
 	if /I "!argVec[%%i]!"=="BROTLI"		set PHP_BUILD_TYPE=brotli
+	if /I "!argVec[%%i]!"=="IGBINARY"	set PHP_BUILD_TYPE=igbinary
+	if /I "!argVec[%%i]!"=="PARALLEL"	set PHP_BUILD_TYPE=parallel
 	if /I "!argVec[%%i]!"=="WIN7" (
 		echo     # apply php-src_win7.patch
 		git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-src_win7.patch
@@ -81,7 +83,7 @@ call %PATH_MODULES_COMMON%\init.bat brotli varonly
 sed -i 's/AC_DEFINE/AC_DEFINE\("BROTLI_LIB_VERSION", "%SCM_TAG:~1%", "system library version"\);AC_DEFINE/g' %CYGPATH_SRC%/php-ext-brotli/config.w32
 
 	REM ~~~~~~~~~~~~ other PECL init
-for %%E in (php-sdk xdebug php-geos php-proj php-ogr php-ext-zstd pecl-datetime-timezonedb pecl-system-sync pecl-igbinary) do (
+for %%E in (php-sdk xdebug php-geos php-proj php-ogr php-ext-zstd pecl-datetime-timezonedb pecl-system-sync pecl-igbinary pecl-parallel) do (
 	call %PATH_MODULES_COMMON%\init.bat %%E
 )
 

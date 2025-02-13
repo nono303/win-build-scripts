@@ -37,8 +37,7 @@ set native-intrinsics=1
 )
 if %PHPVER% == 8.4 (
 set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
-	--with-php-build=%PATH_INSTALL% ^
-	--with-openssl-argon2
+	--with-php-build=%PATH_INSTALL%
 set native-intrinsics=1
 )
 set PHP_COMMON_CONFIGURE=^
@@ -70,6 +69,7 @@ if %PHP_BUILD_TYPE% == xdebug	(set PHP_PARTIAL_BUILD=--with-xdebug=shared --with
 if %PHP_BUILD_TYPE% == memcache	(set PHP_PARTIAL_BUILD=--enable-memcache=shared)
 if %PHP_BUILD_TYPE% == brotli	(set PHP_PARTIAL_BUILD=--enable-brotli=shared)
 if %PHP_BUILD_TYPE% == igbinary	(set PHP_PARTIAL_BUILD=--enable-igbinary=shared)
+if %PHP_BUILD_TYPE% == parallel	(set PHP_PARTIAL_BUILD=--with-parallel=shared)
 
 if %PHPVER% == %PHP_BUILD_TYPE% (
 	set FINAL_CONFIGURE=%PHP_COMMON_CONFIGURE% ^
@@ -196,9 +196,9 @@ for %%A in (exe dll) do (
 )
 
 if %PHPVER% == %PHP_BUILD_TYPE% (
-	for /f "tokens=*" %%G in ('dir %PHP_BUILD_DIR%\php8.lib /s/b') do (xcopy /C /F /Y %%G %PATH_INSTALL%\lib\*)
+	for /f "tokens=*" %%G in ('dir %PHP_BUILD_DIR%\php8%TSLIBSUF%.lib /s/b') do (xcopy /C /F /Y %%G %PATH_INSTALL%\lib\*)
 	call %PATH_MODULES_COMMON%\init.bat php-src varonly
-	for %%X in (php-cgi.exe php.exe php8.dll php_curl.dll php_fileinfo.dll php_gd.dll php_intl.dll php_opcache.dll php_openssl.dll php_tidy.dll php_bcmath.dll php_bz2.dll php_calendar.dll php_com_dotnet.dll php_ctype.dll php_dom.dll php_exif.dll php_ftp.dll php_iconv.dll php_mysqli.dll php_pdo_mysql.dll php_pdo_sqlite.dll php_readline.dll php_simplexml.dll php_soap.dll php_sockets.dll php_sodium.dll php_sqlite3.dll php_xml.dll php_xmlreader.dll php_xmlwriter.dll php_zip.dll php_zlib.dll php_xsl.dll php_mbstring.dll php_gmp.dll) do (
+	for %%X in (php-cgi.exe php.exe php8%TSLIBSUF%.dll php_curl.dll php_fileinfo.dll php_gd.dll php_intl.dll php_opcache.dll php_openssl.dll php_tidy.dll php_bcmath.dll php_bz2.dll php_calendar.dll php_com_dotnet.dll php_ctype.dll php_dom.dll php_exif.dll php_ftp.dll php_iconv.dll php_mysqli.dll php_pdo_mysql.dll php_pdo_sqlite.dll php_readline.dll php_simplexml.dll php_soap.dll php_sockets.dll php_sodium.dll php_sqlite3.dll php_xml.dll php_xmlreader.dll php_xmlwriter.dll php_zip.dll php_zlib.dll php_xsl.dll php_mbstring.dll php_gmp.dll) do (
 		call do_php %PATH_UTILS%\sub\version.php php-src %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\%%X "build:%TSNTS%"
 	)
 	call %PATH_MODULES_COMMON%\init.bat pecl-text-xdiff varonly
@@ -223,6 +223,8 @@ if %PHPVER% == %PHP_BUILD_TYPE% (
 	call do_php %PATH_UTILS%\sub\version.php pecl-memcache %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcache.dll "php:%PHPVERFULL%-%TSNTS%"
 	call %PATH_MODULES_COMMON%\init.bat pecl-igbinary varonly
 	call do_php %PATH_UTILS%\sub\version.php pecl-igbinary %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_igbinary.dll "php:%PHPVERFULL%-%TSNTS%"
+	call %PATH_MODULES_COMMON%\init.bat pecl-parallel varonly
+	call do_php %PATH_UTILS%\sub\version.php pecl-parallel %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_parallel.dll "php:%PHPVERFULL%-%TSNTS%"
 )
 if %PHP_BUILD_TYPE% == xdebug	(
 	call %PATH_MODULES_COMMON%\init.bat xdebug varonly
@@ -231,6 +233,10 @@ if %PHP_BUILD_TYPE% == xdebug	(
 if %PHP_BUILD_TYPE% == igbinary	(
 	call %PATH_MODULES_COMMON%\init.bat pecl-igbinary varonly
 	call do_php %PATH_UTILS%\sub\version.php pecl-igbinary %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_igbinary.dll "php:%PHPVERFULL%-%TSNTS%"
+)
+if %PHP_BUILD_TYPE% == parallel	(
+	call %PATH_MODULES_COMMON%\init.bat pecl-parallel varonly
+	call do_php %PATH_UTILS%\sub\version.php pecl-parallel %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_parallel.dll "php:%PHPVERFULL%-%TSNTS%"
 )
 if %PHP_BUILD_TYPE% == memcache	(
 	if %AVXECHO% == sse2 (set AVXPATH=) else (set AVXPATH=\%AVXB:-=%)
