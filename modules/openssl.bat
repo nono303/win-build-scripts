@@ -3,6 +3,8 @@
 if exist %PATH_INSTALL_OSSL% rmdir /S /Q %PATH_INSTALL_OSSL%
 mkdir %PATH_INSTALL_OSSL%
 
+	REM warning: failed to remove NUL: Invalid argument
+if exist %PATH_SRC%\%1\NUL del /Q /F  /S /Q %PATH_BUILD%\%PATH_SRC%\%1\NUL
 call %PATH_MODULES_COMMON%\init.bat %OPENSSL_SCM%
 	REM https://wiki.openssl.org/index.php/Compilation_and_Installation
 	REM no-deprecated / -DOPENSSL_NO_DEPRECATED_3_0 (https://github.com/openssl/openssl/pull/13866) : failed for libssh2 / apr
