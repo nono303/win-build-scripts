@@ -66,7 +66,10 @@ if %PHP_BUILDNTS% == 1 (
 if %PHP_BUILDTS% == 1 (
 	REM ~~~~~~~~~~~~ make TS
 	echo *** ts  ***
-	set ZTS=--with-parallel=shared
+	set ZTS=
+	if %PHPVER% == 8.4 (
+		set ZTS=--with-parallel=shared
+	)
 	set TSLIBSUF=ts
 	set TSNTS=ts
 		REM unused
