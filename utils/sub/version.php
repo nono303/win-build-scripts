@@ -14,6 +14,10 @@
 	if(in_array($proot,["pecl-memcache","php-geos","php-ogr","php-proj","pecl-text-xdiff","php-ext-brotli","php-ext-zstd","xdebug","php-src"]))
 		$proot = "php";
 	$nogit = array(
+		"pthreads4w"		=> ["/#define  __PTW32_VERSION ([0-9+]),([0-9+]),([0-9+]),([0-9+])/s",
+							pathenv("PATH_SRC")."/".$argv[1]."/_ptw32.h"],
+		"pecl-parallel"		=> ["/# define PHP_PARALLEL_VERSION \"([^\"]+)/s",
+							pathenv("PATH_SRC")."/".$argv[1]."/php_parallel.h"],
 		"pecl-igbinary"		=> ["/#define PHP_IGBINARY_VERSION \"([^\"]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/src/php7/igbinary.h"],
 		"libgeotiff"		=> ["/#define LIBGEOTIFF_STRING_VERSION +\"([0-9\.]+)/s",

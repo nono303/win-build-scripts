@@ -4,6 +4,7 @@ Usage: go command [options]
   * full
     * clean
     * [httpdanddeps]
+      * pthreads4w
       * brotli
       * jansson
       * bzip2

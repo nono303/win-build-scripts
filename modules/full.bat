@@ -6,6 +6,8 @@ IF not [%2] == [all] (
 )
 call %PATH_BATCH%\go.bat clean NOLOG
 :httpdanddeps
+	:pthreads4w
+	call %PATH_BATCH%\go.bat pthreads4w NOLOG
 	:brotli
 	call %PATH_BATCH%\go.bat brotli NOLOG
 	:jansson
