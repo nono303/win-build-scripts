@@ -10,7 +10,7 @@ if not exist %PATH_SRC%\. mkdir %PATH_SRC%
 cd /D %PATH_SRC%
 git clone https://aomedia.googlesource.com/aom aom
 cd /D aom
-git checkout tags/v3.12.0-rc1
+git checkout tags/v3.12.0-rc2
 cd /D ..
 git clone https://github.com/apache/apr.git apr
 cd /D apr
@@ -34,7 +34,7 @@ git checkout tags/v1.34.4
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-8_11_1
+git checkout tags/curl-8_12_1
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -58,7 +58,7 @@ git checkout tags/VER-2-13-3
 cd /D ..
 git clone https://github.com/OSGeo/gdal gdal
 cd /D gdal
-git checkout tags/v3.10.1RC2
+git checkout tags/v3.10.2RC1
 cd /D ..
 git clone https://github.com/geographiclib/geographiclib.git geographiclib
 cd /D geographiclib
@@ -278,7 +278,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/openssl/openssl openssl
 cd /D openssl
-git checkout tags/openssl-3.4.0
+git checkout tags/openssl-3.4.1
 cd /D ..
 git clone https://github.com/quictls/openssl.git openssl-quic
 cd /D openssl-quic
@@ -338,7 +338,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.4.4RC2
+git checkout tags/php-8.4.4
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
