@@ -1,16 +1,8 @@
- CMakeLists.txt                                  | 4 ++--
- build/cmake/dist.cmake                          | 2 +-
- build/cmake/generate_aom_config_templates.cmake | 2 +-
- build/cmake/generate_exports.cmake              | 2 +-
- build/cmake/pkg_config.cmake                    | 2 +-
- build/cmake/version.cmake                       | 2 +-
- 6 files changed, 7 insertions(+), 7 deletions(-)
-
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index a95c312fe6..584a1d0e1e 100644
+index 1ac01d940d..1c6edb5110 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -286,12 +286,12 @@ add_library(aom ${target_objs_aom} $<TARGET_OBJECTS:aom_rtcd>)
+@@ -288,12 +288,12 @@ add_library(aom ${target_objs_aom} $<TARGET_OBJECTS:aom_rtcd>)
  
  if(BUILD_SHARED_LIBS)
    add_library(aom_static STATIC ${target_objs_aom} $<TARGET_OBJECTS:aom_rtcd>)
