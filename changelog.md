@@ -1,8 +1,85 @@
 # changelog
 
 
+## 1.11.1 _(2025-02-13)_
+
+*  with-parallel only for full build
+`modules/phpsdk-local.bat`
+*  update src
+`utils/srccreate.bat`
+*  del /Q /F > rm -fv (verbose)
+`modules/aom.bat`
+`modules/bzip2.bat`
+`modules/curl.bat`
+`modules/fit2gpx.bat`
+`modules/httpd.bat`
+`modules/libevent.bat`
+`modules/libgd.bat`
+`modules/libheif.bat`
+`modules/libxml2.bat`
+`modules/libxslt.bat`
+`modules/lua.bat`
+`modules/mobac.bat`
+`modules/openssl.bat`
+`modules/php.bat`
+`modules/subversion.bat`
+`modules/subversionanddeps.bat`
+`modules/yajl.bat`
+*  remove unnecessary git clone sljit
+`modules/pcre2.bat`
+*  8.12.1
+`modules/curl.patch`
+`modules/curl_ca-win.patch`
+*  +pthreads4w
+`utils/bininfo.bat`
+*  update tools & src vcvars_ver: 14.42 > 14.44
+`README.md`
+`SRC_VERSION.md`
+`config/.vsconfig`
+`config/python.pip`
+`utils/srccreate.bat`
+`vs17.bat`
+*  +pecl-parallel +pthreads4w
+`modules/full.bat`
+`usage.txt`
+`utils/sub/version.php`
+*  8.12
+`modules/curl.bat`
+`modules/curl_ca-win.patch`
+*  build TS as default (for parallel)   fix specific TSLIBSUF & ZTS for argon2 (NTS only) & parallel (TS only) +standalone for igbinary & parallel
+`modules/php.bat`
+`modules/phpsdk-config_make.bat`
+`modules/phpsdk-local.bat`
+*  3.12.0
+`modules/aom.patch`
+*  fix warning: failed to remove NUL: Invalid argument
+`modules/openssl.bat`
+*  add pthreads4w
+`modules/pthreads4w.bat`
+`modules/pthreads4w.patch`
+*  add pecl igbinary as default & standalone add params 'win7' & 'win7d' cf. https://github.com/php/php-src/issues/12762#issuecomment-1831673405
+`modules/php-src_win7.patch`
+`modules/php-src_win7d.patch`
+`modules/php.bat`
+`modules/phpsdk-config_make.bat`
+`utils/bininfo.bat`
+`utils/sub/version.php`
+*  add param 'nostd' for disabling /std:c%C_STD_VER% for C and C++
+`modules/common/init.bat`
+*  5.7.1
+`modules/liblzma.bat`
+*  fix ENABLE_AVX2
+`modules/libgav1.bat`
+*  configexport
+`README.md`
+`config/cyg64.packagelist`
+`config/python.pip`
+
+
 ## 1.11.0 _(2025-01-22)_
 
+*  1.11.0
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
