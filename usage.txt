@@ -66,6 +66,12 @@ Usage: go command [options]
       * qhull
       * gdal
       * php
+          + standalone shared module [arg]
+        * xdebug
+        * memcache
+        * brotli
+        * igbinary
+        * parallel
     * serf
     * nssm
   * geographiclib
@@ -85,8 +91,6 @@ Usage: go command [options]
     * mobac
  + standalone httpd module
   * mod_fcgid
- + standalone php module
-  * php-ogr
 - build full:
     no param:    build ALL modules in the order listed above
     _xx_anddeps: build ONLY _xx_ and all submodule required for _xx_ {httpdanddeps, phpanddeps, projgeolibanddeps}
