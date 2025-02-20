@@ -15,7 +15,7 @@ index 82be5212e5..14ac3ffca1 100644
  	} else {
  		WARNING("curl not enabled; libraries and headers not found");
 diff --git a/ext/curl/interface.c b/ext/curl/interface.c
-index 255fe98faf..ef2fc4eeb4 100644
+index 255fe98faf..7f4a72d10a 100644
 --- a/ext/curl/interface.c
 +++ b/ext/curl/interface.c
 @@ -253,72 +253,89 @@ PHP_MINFO_FUNCTION(curl)
@@ -88,7 +88,7 @@ index 255fe98faf..ef2fc4eeb4 100644
 -			if (feats[i].name) {
 -				php_info_print_table_row(2, feats[i].name, d->features & feats[i].bitmask ? "Yes" : "No");
 +	// Features
-+	if (d->age >= CURLVERSION_ELEVENTH && d->feature_names) {
++#if LIBCURL_VERSION_NUM >= 0x075700 /* Available since 7.87.0	CURLVERSION_ELEVENTH */
 +		n = 0;
 +		p = (char **) d->feature_names;
 +		while (*p != NULL) {
@@ -96,7 +96,7 @@ index 255fe98faf..ef2fc4eeb4 100644
 +				p++;
 +		}
 +		php_info_print_table_row(2, "Features", str);
-+	} else {
++#else
 +		/* To update on each new cURL release using src/main.c in cURL sources */
 +		/* make sure to sync this list with curl_version as well */
 +		if (d->features) {
@@ -161,13 +161,14 @@ index 255fe98faf..ef2fc4eeb4 100644
 +				}
  			}
  		}
- 	}
+-	}
++#endif
  
 +	// Protocols
  	n = 0;
  	p = (char **) d->protocols;
  	while (*p != NULL) {
-@@ -327,34 +344,55 @@ PHP_MINFO_FUNCTION(curl)
+@@ -327,35 +344,78 @@ PHP_MINFO_FUNCTION(curl)
  	}
  	php_info_print_table_row(2, "Protocols", str);
  
@@ -193,56 +194,73 @@ index 255fe98faf..ef2fc4eeb4 100644
  	}
 -
 -#if defined(CURLVERSION_SECOND) && CURLVERSION_NOW >= CURLVERSION_SECOND
--	if (d->ares) {
++#if LIBCURL_VERSION_NUM >= 0x070B01 /* Available since 7.11.1	CURLVERSION_SECOND */
+ 	if (d->ares) {
 -		php_info_print_table_row(2, "ZLib Version", d->ares);
-+	if (d->age >= CURLVERSION_SECOND && d->ares) {
 +		php_info_print_table_row(2, "c-ares Version", d->ares);
  	}
--#endif
+ #endif
 -
 -#if defined(CURLVERSION_THIRD) && CURLVERSION_NOW >= CURLVERSION_THIRD
--	if (d->libidn) {
++#if LIBCURL_VERSION_NUM >= 0x070C00 /* Available since 7.12.0	CURLVERSION_THIRD */
+ 	if (d->libidn) {
 -		php_info_print_table_row(2, "libIDN Version", d->libidn);
-+	if (d->age >= CURLVERSION_THIRD && d->libidn) {
 +		php_info_print_table_row(2, "Libidn Version", d->libidn);
  	}
--#endif
+ #endif
 -
--	if (d->iconv_ver_num) {
++#if LIBCURL_VERSION_NUM >= 0x071001 /* Available since 7.16.1	CURLVERSION_FOURTH */
+ 	if (d->iconv_ver_num) {
 -		php_info_print_table_row(2, "IconV Version", d->iconv_ver_num);
-+	if (d->age >= CURLVERSION_FOURTH && d->iconv_ver_num) {
 +		php_info_print_table_row(2, "Iconv Version", d->iconv_ver_num);
  	}
 -
--	if (d->libssh_version) {
++#endif
++#if LIBCURL_VERSION_NUM >= 0x071001 /* Available since 7.16.1	CURLVERSION_FOURTH */
+ 	if (d->libssh_version) {
 -		php_info_print_table_row(2, "libSSH Version", d->libssh_version);
-+	if (d->age >= CURLVERSION_FOURTH && d->libssh_version) {
 +		php_info_print_table_row(2, "Libssh Version", d->libssh_version);
 +	}
-+	if (d->age >= CURLVERSION_FIFTH && d->brotli_version) {
++#endif
++#if LIBCURL_VERSION_NUM >= 0x073900 /* Available since 7.57.0	CURLVERSION_FIFTH */
++	if (d->brotli_version) {
 +		php_info_print_table_row(2, "Brotli Version", d->brotli_version);
 +	}
-+	if (d->age >= CURLVERSION_SIXTH && d->nghttp2_version) {
++#endif
++#if LIBCURL_VERSION_NUM >= 0x074200 /* Available since 7.66.0	CURLVERSION_SIXTH */
++	if (d->nghttp2_version) {
 +		php_info_print_table_row(2, "Nghttp2 Version", d->nghttp2_version);
 +	}
-+	if (d->age >= CURLVERSION_SIXTH && d->quic_version) {
++#endif
++#if LIBCURL_VERSION_NUM >= 0x074200 /* Available since 7.66.0	CURLVERSION_SIXTH */
++	if (d->quic_version) {
 +		php_info_print_table_row(2, "QUIC Version", d->quic_version);
 +	}
-+	if (d->age >= CURLVERSION_EIGHTH && d->zstd_version) {
++#endif
++#if LIBCURL_VERSION_NUM >= 0x074800 /* Available since 7.72.0	CURLVERSION_EIGHTH */
++	if (d->zstd_version) {
 +		php_info_print_table_row(2, "Zstd Version", d->zstd_version);
 +	}
-+	if (d->age >= CURLVERSION_NINTH && d->hyper_version) {
++#endif
++#if LIBCURL_VERSION_NUM >= 0x074b00 /* Available since 7.75.0	CURLVERSION_NINTH */
++	if ( d->hyper_version) {
 +		php_info_print_table_row(2, "Hyper Version", d->hyper_version);
 +	}
-+	if (d->age >= CURLVERSION_TENTH && d->gsasl_version) {
++#endif
++#if LIBCURL_VERSION_NUM >= 0x074d00 /* Available since 7.77.0	CURLVERSION_TENTH */
++	if (d->gsasl_version) {
 +		php_info_print_table_row(2, "GNU SASL Version", d->gsasl_version);
-+	}
-+	if (d->age >= CURLVERSION_TWELFTH && d->rtmp_version) {
-+		php_info_print_table_row(2, "RTMP Version", d->rtmp_version);
  	}
++#endif
++#if LIBCURL_VERSION_NUM >= 0x080800 /* Available since 8.8.0	CURLVERSION_TWELFTH */
++	if (d->rtmp_version) {
++		php_info_print_table_row(2, "RTMP Version", d->rtmp_version);
++	}
++#endif
  
  	php_info_print_table_end();
-@@ -1006,104 +1044,151 @@ PHP_FUNCTION(curl_version)
+ 
+@@ -1006,104 +1066,173 @@ PHP_FUNCTION(curl_version)
  
  	array_init(return_value);
  
@@ -310,15 +328,15 @@ index 255fe98faf..ef2fc4eeb4 100644
 -				add_assoc_bool(&feature_list, feats[i].name, d->features & feats[i].bitmask ? true : false);
 +	zval feature_list;
 +	array_init(&feature_list);
-+	if (d->age >= CURLVERSION_ELEVENTH && d->feature_names) {
++#if LIBCURL_VERSION_NUM >= 0x075700 /* Available since 7.87.0	CURLVERSION_ELEVENTH */
 +		{
 +			char **p = (char **) d->feature_names;
 +			while (*p != NULL) {
 +				add_next_index_string(&feature_list, *p);
 +				p++;
-+			}
-+		}
-+	} else {
+ 			}
+ 		}
++#else
 +		{
 +			struct feat {
 +				const char *name;
@@ -378,18 +396,18 @@ index 255fe98faf..ef2fc4eeb4 100644
 +				if (feats[i].name) {
 +					add_assoc_bool(&feature_list, feats[i].name, d->features & feats[i].bitmask ? true : false);
 +				}
- 			}
- 		}
--
++			}
++		}
++#endif
++	CAAZ("feature_list", &feature_list);
+ 
 -		CAAZ("feature_list", &feature_list);
- 	}
+-	}
 -	CAAL("ssl_version_number", d->ssl_version_num);
 -	CAAS("version", d->version);
 -	CAAS("host", d->host);
 -	CAAS("ssl_version", d->ssl_version);
 -	CAAS("libz_version", d->libz_version);
-+	CAAZ("feature_list", &feature_list);
-+
  	/* Add an array of protocols */
  	{
  		char **p = (char **) d->protocols;
@@ -417,56 +435,93 @@ index 255fe98faf..ef2fc4eeb4 100644
 +			add_next_index_string (&ssl_backends, list[i]->name);
 +		CAAZ("ssl_backends", &ssl_backends);
 +	}
-+	zval feature_version;
-+	array_init(&feature_version);
++	zval features_version;
++	array_init(&features_version);
 +	if (d->ssl_version) {
-+		add_assoc_string (&feature_version, "ssl", d->ssl_version);
-+	}
-+	if (d->libz_version) {
-+		add_assoc_string (&feature_version, "libz", d->libz_version);
-+	}
-+	if (d->age >= CURLVERSION_SECOND && d->ares) {
-+		add_assoc_string (&feature_version, "ares", d->ares);
-+	}
-+	if (d->age >= CURLVERSION_THIRD && d->libidn) {
-+		add_assoc_string (&feature_version, "libidn", d->libidn);
-+	}
-+	if (d->age >= CURLVERSION_FOURTH && d->iconv_ver_num) {
-+		CAAL("version_iconv", d->iconv_ver_num);
-+	}
-+	if (d->age >= CURLVERSION_FOURTH && d->libssh_version) {
-+		add_assoc_string (&feature_version, "libssh", d->libssh_version);
-+	}
-+	if (d->age >= CURLVERSION_FIFTH && d->brotli_version) {
-+		add_assoc_string (&feature_version, "brotli", d->brotli_version);
-+	}
-+	if (d->age >= CURLVERSION_SIXTH && d->nghttp2_version) {
-+		add_assoc_string (&feature_version, "nghttp2", d->nghttp2_version);
-+	}
-+	if (d->age >= CURLVERSION_SIXTH && d->quic_version) {
-+		add_assoc_string (&feature_version, "quic", d->quic_version);
-+	}
-+	if (d->age >= CURLVERSION_EIGHTH && d->zstd_version) {
-+		add_assoc_string (&feature_version, "zstd", d->zstd_version);
++		add_assoc_string (&features_version, "ssl", d->ssl_version);
  	}
 -	if (d->age >= 2) {
 -		CAAS("libidn", d->libidn);
-+	if (d->age >= CURLVERSION_NINTH && d->hyper_version) {
-+		add_assoc_string (&feature_version, "hyper", d->hyper_version);
++	if (d->libz_version) {
++		add_assoc_string (&features_version, "libz", d->libz_version);
  	}
 -	if (d->age >= 3) {
 -		CAAL("iconv_ver_num", d->iconv_ver_num);
 -		CAAS("libssh_version", d->libssh_version);
-+	if (d->age >= CURLVERSION_TENTH && d->gsasl_version) {
-+		add_assoc_string (&feature_version, "gsasl", d->gsasl_version);
++#if LIBCURL_VERSION_NUM >= 0x070B01 /* Available since 7.11.1	CURLVERSION_SECOND */
++	if (d->ares) {
++		add_assoc_string (&features_version, "ares", d->ares);
  	}
 -	if (d->age >= 4) {
 -		CAAL("brotli_ver_num", d->brotli_ver_num);
 -		CAAS("brotli_version", d->brotli_version);
-+	if (d->age >= CURLVERSION_TWELFTH && d->rtmp_version) {
-+		add_assoc_string (&feature_version, "rtmp", d->rtmp_version);
++#endif
++#if LIBCURL_VERSION_NUM >= 0x070C00 /* Available since 7.12.0	CURLVERSION_THIRD */
++	if (d->libidn) {
++		add_assoc_string (&features_version, "libidn", d->libidn);
++	}
++#endif
++#if LIBCURL_VERSION_NUM >= 0x071001 /* Available since 7.16.1	CURLVERSION_FOURTH */
++	if (d->iconv_ver_num) {
++		add_assoc_long (&features_version, "iconv", d->iconv_ver_num);
++	}
++#endif
++#if LIBCURL_VERSION_NUM >= 0x071001 /* Available since 7.16.1	CURLVERSION_FOURTH */
++	if (d->libssh_version) {
++		add_assoc_string (&features_version, "libssh", d->libssh_version);
++	}
++#endif
++#if LIBCURL_VERSION_NUM >= 0x073900 /* Available since 7.57.0	CURLVERSION_FIFTH */
++	if (d->brotli_version) {
++		add_assoc_string (&features_version, "brotli", d->brotli_version);
++	}
++#endif
++#if LIBCURL_VERSION_NUM >= 0x074200 /* Available since 7.66.0	CURLVERSION_SIXTH */
++	if (d->nghttp2_version) {
++		add_assoc_string (&features_version, "nghttp2", d->nghttp2_version);
++	}
++#endif
++#if LIBCURL_VERSION_NUM >= 0x074200 /* Available since 7.66.0	CURLVERSION_SIXTH */
++	if (d->quic_version) {
++		add_assoc_string (&features_version, "quic", d->quic_version);
++	}
++#endif
++#if LIBCURL_VERSION_NUM >= 0x074800 /* Available since 7.72.0	CURLVERSION_EIGHTH */
++	if (d->zstd_version) {
++		add_assoc_string (&features_version, "zstd", d->zstd_version);
++	}
++#endif
++#if LIBCURL_VERSION_NUM >= 0x074b00 /* Available since 7.75.0	CURLVERSION_NINTH */
++	if (d->hyper_version) {
++		add_assoc_string (&features_version, "hyper", d->hyper_version);
++	}
++#endif
++#if LIBCURL_VERSION_NUM >= 0x074d00 /* Available since 7.77.0	CURLVERSION_TENTH */
++	if (d->gsasl_version) {
++		add_assoc_string (&features_version, "gsasl", d->gsasl_version);
++	}
++#endif
++#if LIBCURL_VERSION_NUM >= 0x080800 /* Available since 8.8.0	CURLVERSION_TWELFTH */
++	if (d->rtmp_version) {
++		add_assoc_string (&features_version, "rtmp", d->rtmp_version);
  	}
-+	CAAZ("feature_versions", &feature_version);
++#endif
++	CAAZ("features_version", &features_version);
  }
  /* }}} */
  
+@@ -3068,11 +3197,13 @@ PHP_FUNCTION(curl_upkeep)
+ 	ZEND_PARSE_PARAMETERS_END();
+ 
+ 	ch = Z_CURL_P(zid);
+-
++/*
+ 	error = curl_easy_upkeep(ch->cp);
+ 	SAVE_CURL_ERROR(ch, error);
+ 
+ 	RETURN_BOOL(error == CURLE_OK);
++	*/
++	RETURN_BOOL(CURLE_OK == CURLE_OK);
+ }
+ /*}}} */
+ #endif
