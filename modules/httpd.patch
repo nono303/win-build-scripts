@@ -1,7 +1,7 @@
-diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
-index 9b38f699db..3cdf231765 100644
---- "a/CMakeLists.txt"
-+++ "b/CMakeLists.txt"
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 9b38f699db..fa57e6d198 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -17,13 +17,25 @@
  
  PROJECT(HTTPD C)
@@ -104,7 +104,7 @@ index 9b38f699db..3cdf231765 100644
    "modules/mappers/mod_actions+I+Action triggering on requests"
    "modules/mappers/mod_alias+A+mapping of requests to different filesystem parts"
    "modules/mappers/mod_dir+A+directory request handling"
-@@ -390,19 +402,28 @@ SET(MODULE_LIST
+@@ -390,19 +402,29 @@ SET(MODULE_LIST
    "modules/proxy/mod_proxy_hcheck+I+Apache proxy health check module.  Requires and is enabled by --enable-proxy."
    "modules/proxy/mod_proxy_scgi+I+Apache proxy SCGI module.  Requires and is enabled by --enable-proxy."
    "modules/proxy/mod_proxy_wstunnel+I+Apache proxy Websocket Tunnel module.  Requires and is enabled by --enable-proxy."
@@ -133,10 +133,11 @@ index 9b38f699db..3cdf231765 100644
 +  "../mod_bikeshed/mod_bikeshed+O+mod_bikeshed"
 +  "../mod_qos/mod_qos+O+mod_qos"
 +  "../mod_evasive/mod_evasive+O+mod_evasive"
++  "../mod_zstd/mod_zstd+O+mod_zstd"
  )
  
  # Track which modules actually built have APIs to link against.
-@@ -457,16 +478,25 @@ SET(mod_http2_extra_defines          ssize_t=long)
+@@ -457,16 +479,25 @@ SET(mod_http2_extra_defines          ssize_t=long)
  SET(mod_http2_extra_includes         ${NGHTTP2_INCLUDE_DIR})
  SET(mod_http2_extra_libs             ${NGHTTP2_LIBRARIES})
  SET(mod_http2_extra_sources
@@ -172,7 +173,7 @@ index 9b38f699db..3cdf231765 100644
  )
  SET(mod_ldap_extra_defines           LDAP_DECLARE_EXPORT)
  SET(mod_ldap_extra_libs              wldap32)
-@@ -483,25 +513,43 @@ SET(mod_lua_extra_sources
+@@ -483,25 +514,43 @@ SET(mod_lua_extra_sources
    modules/lua/lua_passwd.c           modules/lua/lua_request.c
    modules/lua/lua_vmprep.c           modules/lua/lua_dbd.c
  )
@@ -231,7 +232,7 @@ index 9b38f699db..3cdf231765 100644
  )
  SET(mod_optional_hook_export_extra_defines AP_DECLARE_EXPORT) # bogus reuse of core API prefix
  SET(mod_proxy_extra_defines          PROXY_DECLARE_EXPORT)
-@@ -570,6 +618,50 @@ IF(LIBXML2_FOUND)
+@@ -570,6 +619,49 @@ IF(LIBXML2_FOUND)
    SET(mod_xml2enc_extra_libs         "${LIBXML2_LIBRARIES};${LIBXML2_ICONV_LIBRARIES}")
  ENDIF()
  SET(mod_watchdog_extra_defines       AP_WD_DECLARE_EXPORT)
@@ -262,9 +263,7 @@ index 9b38f699db..3cdf231765 100644
 +../mod_h264_streaming/moov.c
 +#../mod_h264_streaming/main.c
 +)
-+if(MAXMIND_LIBRARIES)
-+  SET(mod_maxminddb_extra_libs       ${MAXMIND_LIBRARIES})
-+ENDIF()
++SET(mod_maxminddb_extra_libs       ${MAXMIND_LIBRARIES})
 +SET(mod_whatkilledus_extra_defines   DIAG_BITS_${diag_bits})
 +SET(mod_whatkilledus_extra_libs      "dbghelp.lib")
 +SET(mod_whatkilledus_extra_sources
@@ -279,6 +278,7 @@ index 9b38f699db..3cdf231765 100644
 +SET(mod_qos_extra_defines            QS_NO_STATUS_HOOK)
 +SET(mod_qos_extra_includes           ${OPENSSL_INCLUDE_DIR})
 +SET(mod_qos_extra_libs               ${OPENSSL_LIBRARIES})
++SET(mod_zstd_extra_libs              ${ZSTD_LIBRARIES})
  
  SET(MODULE_PATHS)
  FOREACH (modinfo ${MODULE_LIST})
@@ -304,7 +304,7 @@ index 9b38f699db..3cdf231765 100644
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/proxy
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/session
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl
-@@ -723,6 +816,12 @@ SET(HTTPD_INCLUDE_DIRECTORIES
+@@ -723,6 +816,13 @@ SET(HTTPD_INCLUDE_DIRECTORIES
    ${CMAKE_CURRENT_SOURCE_DIR}/server/mpm/winnt
    ${APR_INCLUDE_DIR}
    ${PCRE_INCLUDE_DIR}
@@ -314,10 +314,11 @@ index 9b38f699db..3cdf231765 100644
 +  ${CMAKE_CURRENT_SOURCE_DIR}/../mod_bikeshed
 +  ${CMAKE_CURRENT_SOURCE_DIR}/../mod_qos
 +  ${CMAKE_CURRENT_SOURCE_DIR}/../mod_evasive
++  ${CMAKE_CURRENT_SOURCE_DIR}/../mod_zstd
  )
  
  # The .h files we install from outside the main include directory
-@@ -740,7 +839,7 @@ SET(other_installed_h
+@@ -740,7 +840,7 @@ SET(other_installed_h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/filters/mod_xml2enc.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators/mod_cgi.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators/mod_status.h
@@ -326,7 +327,7 @@ index 9b38f699db..3cdf231765 100644
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/loggers/mod_log_config.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/mappers/mod_rewrite.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/proxy/mod_proxy.h
-@@ -805,10 +904,10 @@ FOREACH (mod ${MODULE_PATHS})
+@@ -805,10 +905,10 @@ FOREACH (mod ${MODULE_PATHS})
    ELSE()
      # Handle whether or not the LoadModule is commented out.
      IF(${enable_mod_val} STREQUAL "A")
@@ -339,7 +340,7 @@ index 9b38f699db..3cdf231765 100644
        SET(mods_built_but_not_loaded ${mods_built_but_not_loaded} ${mod_name})
      ELSE()
        MESSAGE(FATAL_ERROR "${enable_mod} must be set to \"A\", \"I\", or \"O\" instead of \"${enable_mod_val}\"")
-@@ -836,12 +935,12 @@ FOREACH (mod ${MODULE_PATHS})
+@@ -836,12 +936,12 @@ FOREACH (mod ${MODULE_PATHS})
      ENDIF()
      SET(mod_extra_libs "${mod_name}_extra_libs")
      SET_TARGET_PROPERTIES(${mod_name} PROPERTIES
@@ -355,7 +356,7 @@ index 9b38f699db..3cdf231765 100644
  
      # Extra defines?
      SET(mod_extra_defines "${mod_name}_extra_defines")
-@@ -863,7 +962,7 @@ ENDFOREACH()
+@@ -863,7 +963,7 @@ ENDFOREACH()
  ###########   HTTPD LIBRARIES   ############
  ADD_LIBRARY(libhttpd SHARED ${LIBHTTPD_SOURCES} build/win32/httpd.rc)
  SET_TARGET_PROPERTIES(libhttpd PROPERTIES
@@ -364,7 +365,7 @@ index 9b38f699db..3cdf231765 100644
  )
  SET(install_targets ${install_targets} libhttpd)
  SET(install_bin_pdb ${install_bin_pdb} $<TARGET_PDB_FILE:libhttpd>)
-@@ -918,12 +1017,12 @@ ENDIF()
+@@ -918,12 +1018,12 @@ ENDIF()
  GET_PROPERTY(tmp_includes TARGET ab PROPERTY INCLUDE_DIRECTORIES)
  
  # getting duplicate manifest error with ApacheMonitor
@@ -383,15 +384,10 @@ index 9b38f699db..3cdf231765 100644
  
  ###########  CONFIGURATION FILES ###########
  # Set up variables used in the .conf file templates
-
- ###########  CONFIGURATION FILES ###########
- # Set up variables used in the .conf file templates
-###########  CONFIGURATION FILES ###########
- # Set up variables used in the .conf file templates
-diff --git "a/modules/proxy/mod_proxy_fcgi.c" "b/modules/proxy/mod_proxy_fcgi.c"
+diff --git a/modules/proxy/mod_proxy_fcgi.c b/modules/proxy/mod_proxy_fcgi.c
 index 128cf1eac6..937265531d 100644
---- "a/modules/proxy/mod_proxy_fcgi.c"
-+++ "b/modules/proxy/mod_proxy_fcgi.c"
+--- a/modules/proxy/mod_proxy_fcgi.c
++++ b/modules/proxy/mod_proxy_fcgi.c
 @@ -427,7 +427,12 @@ static apr_status_t send_environment(proxy_conn_rec *conn, request_rec *r,
          }
  
@@ -406,7 +402,6 @@ index 128cf1eac6..937265531d 100644
          }
      }
  
-
 diff --git a/server/main.c b/server/main.c
 index fb23f01d1d..7d42ec8128 100644
 --- a/server/main.c
@@ -426,7 +421,7 @@ index fb23f01d1d..7d42ec8128 100644
  /* WARNING: Win32 binds http_main.c dynamically to the server. Please place
   *          extern functions and global data in another appropriate module.
 diff --git a/support/ab.c b/support/ab.c
-index 6709cd1db6..22e0f68afd 100644
+index bee3812d9f..3093c75f9d 100644
 --- a/support/ab.c
 +++ b/support/ab.c
 @@ -189,7 +189,7 @@ typedef STACK_OF(X509) X509_STACK_TYPE;
@@ -459,4 +454,3 @@ index d4203bf926..053f77522e 100644
  
  IDD_DLGSERVICES DIALOGEX 0, 0, 350, 192
  STYLE DS_MODALFRAME | DS_SETFOREGROUND | WS_MINIMIZEBOX | WS_VISIBLE | 
-

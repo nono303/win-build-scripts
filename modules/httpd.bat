@@ -2,7 +2,7 @@
 set mod_suffix=.so
 	REM ~~~~~~~~~~~ external modules
 if NOT "%2"=="svn" (
-	for %%M in (mod_maxminddb mod_fcgid mod_h2 mod_md mod_wku_bt mod_h264_streaming mod_qos mod_evasive) do (call %PATH_MODULES_COMMON%\init.bat %%M)
+	for %%M in (mod_maxminddb mod_fcgid mod_h2 mod_md mod_wku_bt mod_h264_streaming mod_qos mod_evasive mod_zstd) do (call %PATH_MODULES_COMMON%\init.bat %%M)
 	if not exist %PATH_SRC%\mod_evasive\mod_evasive.c mklink /h %PATH_SRC%\mod_evasive\mod_evasive.c %PATH_SRC%\mod_evasive\mod_evasive24win.c
 )
 
@@ -23,6 +23,7 @@ if "%2"=="svn" (
 	-DLIBXML2_ICONV_INCLUDE_DIR=%PATH_INSTALL%/include ^
 	-DLIBXML2_ICONV_LIBRARIES=%PATH_INSTALL%/lib/libiconv.lib ^
 	-DMAXMIND_LIBRARIES=%PATH_INSTALL%/lib/maxminddb.lib ^
+	-DZSTD_LIBRARIES=%PATH_INSTALL%/lib/zstd.lib ^
 	%PATH_SRC%\%1
 )
 
@@ -37,7 +38,7 @@ for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\modules\*%mod_suffix% /b') do (cal
 
 	REM ~~~~~~~~~~~ external modules
 if NOT "%2"=="svn" (
-	for %%X in (mod_maxminddb mod_fcgid mod_h264_streaming mod_md mod_qos mod_evasive) do (
+	for %%X in (mod_maxminddb mod_fcgid mod_h264_streaming mod_md mod_qos mod_evasive mod_zstd) do (
 		call %PATH_MODULES_COMMON%\init.bat %%X varonly
 		call do_php %PATH_UTILS%\sub\version.php %%X %PATH_INSTALL%\modules\%%X%mod_suffix% "httpd:%HTTPD_VERSION%"
 	)
