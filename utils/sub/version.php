@@ -14,6 +14,8 @@
 	if(in_array($proot,["pecl-memcache","php-geos","php-ogr","php-proj","pecl-text-xdiff","php-ext-brotli","php-ext-zstd","xdebug","php-src"]))
 		$proot = "php";
 	$nogit = array(
+		"mod_zstd"			=> ["/#define MOD_ZSTD_VERSION \"([^\"]+)/s",
+							pathenv("PATH_SRC")."/".$argv[1]."/mod_zstd.c"],
 		"pthreads4w"		=> ["/#define  __PTW32_VERSION ([0-9+]),([0-9+]),([0-9+]),([0-9+])/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/_ptw32.h"],
 		"pecl-parallel"		=> ["/# define PHP_PARALLEL_VERSION \"([^\"]+)/s",
