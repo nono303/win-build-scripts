@@ -173,7 +173,7 @@
 	}
 	global $ext;
 	if($extarg){
-		$ext = explode(",",$extarg);
+		$ext = explode("-",$extarg);
 	} else {
 		$ext = ["exe","dll","so"];
 	}
