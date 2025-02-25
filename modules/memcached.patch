@@ -1,11 +1,5 @@
-* disable debug
-* define __CYGWIN__
- Makefile.am  | 2 +-
- configure.ac | 7 +++++--
- 2 files changed, 6 insertions(+), 3 deletions(-)
-
 diff --git a/Makefile.am b/Makefile.am
-index 5891b89..11e5b93 100644
+index 4603b80..0b4dc89 100644
 --- a/Makefile.am
 +++ b/Makefile.am
 @@ -1,6 +1,6 @@
@@ -17,14 +11,16 @@ index 5891b89..11e5b93 100644
  BUILT_SOURCES=
  
 diff --git a/configure.ac b/configure.ac
-index 6f2ef97..0451fd9 100644
+index 6f2ef97..784d518 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -5,7 +5,7 @@ AC_INIT([memcached], [VERSION_NUMBER], [memcached@googlegroups.com])
+@@ -4,8 +4,8 @@ m4_include([m4/c99-backport.m4])
+ AC_INIT([memcached], [VERSION_NUMBER], [memcached@googlegroups.com])
  AC_CANONICAL_HOST
  AC_CONFIG_SRCDIR([memcached.c])
- AM_INIT_AUTOMAKE([foreign])
+-AM_INIT_AUTOMAKE([foreign])
 -AM_CONFIG_HEADER([config.h])
++AM_INIT_AUTOMAKE([foreign subdir-objects])
 +AC_CONFIG_HEADERS([config.h])
  
  AC_PROG_CC
