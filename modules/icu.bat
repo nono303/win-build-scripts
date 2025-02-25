@@ -36,7 +36,7 @@ if %ARG_KEEPSRC% == 0 (
 	REM 	derb,genbrk,genccode,gencfu,gencmn,gencnval,gendict,gennorm2,genrb,gensprep,icuinfo,icupkg,makeconv,uconv
 MSBuild.exe %PATH_SRC%\%1\%VCDIR%\allinone.sln %MSBUILD_OPTS% ^
 /t:common,i18n,icuexportdata,io,makedata,pkgdata,stubdata ^
-/nowarn:C4101,C4113,C4116,C4244,C4267,C4312,C4805,MSB8028,C4996,C4146;C4477 ^
+/nowarn:C4101,C4113,C4116,C4244,C4267,C4312,C4805,MSB8028,C4996,C4146;C4477;C4251 ^
 /p:Configuration=%OUTDIR_CONF% ^
 /p:Platform=%archmsbuild% ^
 /p:SkipUWP=true
