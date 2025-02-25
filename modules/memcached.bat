@@ -8,4 +8,6 @@ for /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -m %PATH_RELEASE_M
 for %%X in (memcached%AVXB%.exe memcached%AVXB%-tls.exe) do (
 	call do_php %PATH_UTILS%\sub\version.php %1 %WINPATH_RELEASE_MEMCACHED%\libevent-%EVENT_VER%\%ARCH%\%%X memcached %ARCH% %AVXECHO%
 )
-call do_php %PATH_UTILS%\sub\bininfo.php %WINPATH_RELEASE_MEMCACHED%/libevent-%EVENT_VER%/%ARCH% null recurse checkavx updaterc ext:exe
+if %AVXECHO%==avx2 (
+	call go bininfo %WINPATH_RELEASE_MEMCACHED%/libevent-%EVENT_VER%/%ARCH% null recurse checkavx updaterc ext:exe
+)

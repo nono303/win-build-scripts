@@ -11,11 +11,11 @@ for %%A in (echosrv.exe sslh-ev.exe sslh-fork.exe sslh-select.exe) do (
 	xcopy /C /F /Y %PATH_SRC%\%1\%%A %PATH_GITHUB_SSLH%\%ARCH%\%AVXECHO%\%%A*
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_GITHUB_SSLH%\%ARCH%\%AVXECHO%\%%A libconfig:%LIBCONFIG_VER% %ARCH% %AVXECHO%
 )
-
-if not "%PATH_GITHUB_SSLH%"=="" (
-	for %%A in (cygwin1.dll cygev-4.dll cygpcre2-8-0.dll) do (
-		xcopy /C /F /Y %PATH_BIN_CYGWIN%\%%A %PATH_GITHUB_SSLH%\%ARCH%\%%A*
+if %AVXECHO%==avx2 (
+	if not "%PATH_GITHUB_SSLH%"=="" (
+		for %%A in (cygwin1.dll cygev-4.dll cygpcre2-8-0.dll cygwrap-0.dll) do (
+			xcopy /C /F /Y %PATH_BIN_CYGWIN%\%%A %PATH_GITHUB_SSLH%\%ARCH%\%%A*
+		)
 	)
+	call go bininfo %PATH_GITHUB_SSLH% null recurse checkavx updaterc ext:exe-dll
 )
-
-call do_php %PATH_UTILS%\sub\bininfo.php %PATH_GITHUB_SSLH% null recurse checkavx updaterc ext:exe,dll
