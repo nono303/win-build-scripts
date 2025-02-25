@@ -1,0 +1,50 @@
+diff --git a/echosrv.c b/echosrv.c
+index 4fa8e4e..b86462e 100644
+--- a/echosrv.c
++++ b/echosrv.c
+@@ -324,8 +324,8 @@ int start_listen_sockets(struct listen_endpoint *sockfd[])
+ int main(int argc, char *argv[])
+ {
+ 
+-   extern char *optarg;
+-   extern int optind;
++//   extern char *optarg;
++//   extern int optind;
+    int num_addr_listen;
+ 
+    struct listen_endpoint *listen_sockets;
+diff --git a/sslh-main.c b/sslh-main.c
+index 160d9fc..ac99b4e 100644
+--- a/sslh-main.c
++++ b/sslh-main.c
+@@ -43,6 +43,8 @@
+ #include <sys/capability.h>
+ #endif
+ 
++#include <getopt.h>
++
+ /* Constants for options that have no one-character shorthand */
+ #define OPT_ONTIMEOUT   257
+ 
+@@ -281,8 +283,8 @@ void close_std(void)
+ int main(int argc, char *argv[], char* envp[])
+ {
+ 
+-   extern char *optarg;
+-   extern int optind;
++//   extern char *optarg;
++//   extern int optind;
+    int res, num_addr_listen;
+    struct listen_endpoint *listen_sockets;
+ 
+diff --git a/version.h b/version.h
+index 2bfe6b1..0768109 100644
+--- a/version.h
++++ b/version.h
+@@ -1,5 +1,5 @@
+ #ifndef VERSION_H 
+ #define VERSION_H 
+ 
+-#define VERSION "v2.1.4-29-ge527b8e-dirty"
++#define VERSION "v2.1.4-35-g7a6673a-dirty"
+ #endif
