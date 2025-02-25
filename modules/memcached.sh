@@ -9,9 +9,7 @@ then
 fi
 
 cd $1
-git reset --hard
-git clean -fdx
-git apply --verbose `cygpath -m $2/memcached.patch`
+# ./vendor/fetch.sh
 ./version.sh
 autoupdate -f
 ./autogen.sh
