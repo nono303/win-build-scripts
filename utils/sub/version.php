@@ -15,7 +15,7 @@
 		$proot = "php";
 	$nogit = array(
 		"mod_zstd"			=> ["/#define MOD_ZSTD_VERSION \"([^\"]+)/s",
-							pathenv("PATH_SRC")."/".$argv[1]."/mod_zstd.c"],
+							pathenv("PATH_SRC")."/".$argv[1]."/mod_zstd.h"],
 		"pthreads4w"		=> ["/#define  __PTW32_VERSION ([0-9+]),([0-9+]),([0-9+]),([0-9+])/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/_ptw32.h"],
 		"pecl-parallel"		=> ["/# define PHP_PARALLEL_VERSION \"([^\"]+)/s",
