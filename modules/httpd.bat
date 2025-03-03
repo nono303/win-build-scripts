@@ -23,7 +23,7 @@ if "%2"=="svn" (
 	-DLIBXML2_ICONV_INCLUDE_DIR=%PATH_INSTALL%/include ^
 	-DLIBXML2_ICONV_LIBRARIES=%PATH_INSTALL%/lib/libiconv.lib ^
 	-DMAXMIND_LIBRARIES=%PATH_INSTALL%/lib/maxminddb.lib ^
-	-DZSTD_LIBRARIES=%PATH_INSTALL%/lib/zstd.lib ^
+	-DZSTD_LIBRARIES=%PATH_INSTALL%/lib/libzstd.lib ^
 	%PATH_SRC%\%1
 )
 

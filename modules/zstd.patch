@@ -11,3 +11,16 @@ index 13e8746f..7099ddec 100644
  #define APSTUDIO_READONLY_SYMBOLS
  #include "verrsrc.h"
  #undef APSTUDIO_READONLY_SYMBOLS
+diff --git a/build/cmake/lib/CMakeLists.txt b/build/cmake/lib/CMakeLists.txt
+index 4e902a1f..c9030496 100644
+--- a/build/cmake/lib/CMakeLists.txt
++++ b/build/cmake/lib/CMakeLists.txt
+@@ -204,7 +204,7 @@ if (ZSTD_BUILD_SHARED)
+     set_target_properties(
+             libzstd_shared
+             PROPERTIES
+-            OUTPUT_NAME zstd
++            OUTPUT_NAME libzstd
+             VERSION ${ZSTD_FULL_VERSION}
+             SOVERSION ${zstd_VERSION_MAJOR})
+             
