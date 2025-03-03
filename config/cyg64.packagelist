@@ -179,6 +179,8 @@ libunistring5
 libusb0
 libusb1.0
 libuuid1
+libwrap-devel
+libwrap0
 libxml2
 libxslt
 libzstd1
