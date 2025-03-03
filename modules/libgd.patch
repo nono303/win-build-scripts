@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 6d57d58b..420b7e59 100644
+index 6d57d58b..cd5b5c81 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -26,6 +26,11 @@ OPTION(ENABLE_ASAN "Enable (gcc) ASAN support" 0)
@@ -23,7 +23,16 @@ index 6d57d58b..420b7e59 100644
  		SET(HAVE_LIBAVIF 1)
  		SET(AVIF_LIBRARIES avif)
  		SET(AVIF_FOUND 1)
-@@ -312,59 +317,64 @@ else (USE_EXT_GD)
+@@ -285,7 +291,7 @@ else (USE_EXT_GD)
+ 
+ 	if (WIN32)
+ 		SET(GD_LIB libgd)
+-		ADD_DEFINITIONS( -DWIN32 -D_WIN32 -DMSWIN32 -DBGDWIN32 -DWINVER=0x0500  -D_WIN32_WINNT=0x0500 -D_WIN32_IE=0x0600)
++		ADD_DEFINITIONS( -DWIN32 -D_WIN32 -DMSWIN32 -DBGDWIN32 -DWINVER=0x0A00  -D_WIN32_WINNT=0x0A00 -D_WIN32_IE=0x0600)
+ 
+ 		if(NOT MINGW AND MSVC_VERSION GREATER 1399)
+ 			ADD_DEFINITIONS("/D_CRT_SECURE_NO_DEPRECATE")
+@@ -311,59 +317,64 @@ else (USE_EXT_GD)
  	add_subdirectory(src)
  endif (USE_EXT_GD)
  
