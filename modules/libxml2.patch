@@ -1,8 +1,5 @@
- CMakeLists.txt | 25 +++++++++++++++++++++----
- 1 file changed, 21 insertions(+), 4 deletions(-)
-
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 723e2344..8fd1abc4 100644
+index 2af1e6f6..9ff79170 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -24,6 +24,7 @@ include(FindPkgConfig)
@@ -13,7 +10,7 @@ index 723e2344..8fd1abc4 100644
  set(LIBXML2_WITH_AUTOMATA ON)
  option(LIBXML2_WITH_C14N "Add the Canonicalization support" ON)
  option(LIBXML2_WITH_CATALOG "Add the Catalog support" ON)
-@@ -445,14 +446,25 @@ if(MSVC)
+@@ -450,14 +451,25 @@ if(MSVC)
              PROPERTIES
              DEBUG_POSTFIX d
          )
@@ -43,7 +40,7 @@ index 723e2344..8fd1abc4 100644
          )
      endif()
  endif()
-@@ -659,6 +671,11 @@ if(BUILD_SHARED_LIBS)
+@@ -664,6 +676,11 @@ if(BUILD_SHARED_LIBS)
      set(XML_PC_PRIVATE ".private")
      set(XML_PC_LIBS_PRIVATE "
  Libs.private:")
