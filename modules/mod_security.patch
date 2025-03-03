@@ -1,5 +1,5 @@
 diff --git a/apache2/Makefile.win b/apache2/Makefile.win
-index ed4bfc9e..d79a4e18 100644
+index ed4bfc9e..d2b913e4 100644
 --- a/apache2/Makefile.win
 +++ b/apache2/Makefile.win
 @@ -10,40 +10,40 @@
@@ -33,7 +33,7 @@ index ed4bfc9e..d79a4e18 100644
  MT = mt
  
 -DEFS = /nologo /O2 /LD /W3 /wd4244 /wd4018 -DWIN32 -DWINNT -Dinline=APR_INLINE -D$(VERSION)
-+DEFS = /nologo /DWIN32 /DWINNT /DWITH_PCRE2 /D$(VERSION) /D_WINDOWS /w /Zf /Zi /FS /O2 /GL /MD /DNDEBUG 
++DEFS = /nologo /DWIN32 /DWINNT /DWITH_PCRE2 /D$(VERSION) /D_WINDOWS /w /Zf /Zi /FS /O2 /GL /MD /DNDEBUG /Ob3 /std:clatest /Gw /Gy /MP16 /cgthreads8 /Zc:inline  /arch:AVX2 /Ob3 /std:clatest /Gw /Gy /MP16 /cgthreads8 /Zc:inline  /arch:AVX 
  
  DLL = mod_security2.so
  
@@ -56,15 +56,14 @@ index ed4bfc9e..d79a4e18 100644
  INCLUDES = $(INCLUDES) -I$(LUA)\include -I$(LUA) \
  !ENDIF
 diff --git a/apache2/mod_security2.c b/apache2/mod_security2.c
-index 1850191e..52ed7ac7 100644
+index 1850191e..9a88fbf8 100644
 --- a/apache2/mod_security2.c
 +++ b/apache2/mod_security2.c
-@@ -125,13 +125,13 @@ static void version(apr_pool_t *mp, server_rec* s) {
+@@ -125,13 +125,11 @@ static void version(apr_pool_t *mp, server_rec* s) {
      pcre_loaded_vrs = pcre_version();
  #endif
  
 -    ap_log_error(APLOG_MARK, APLOG_NOTICE, 0, NULL,
-+    
  #ifdef WITH_PCRE2
 -            "ModSecurity: PCRE2 compiled version=\"%s\"; "
 +            ap_log_error(APLOG_MARK, APLOG_NOTICE, 0, NULL,"ModSecurity: PCRE2 compiled version=\"%s\"; loaded version=\"%s\"", pcre_vrs, pcre_loaded_vrs);
@@ -73,8 +72,6 @@ index 1850191e..52ed7ac7 100644
 +            ap_log_error(APLOG_MARK, APLOG_NOTICE, 0, NULL,"ModSecurity: PCRE compiled version=\"%s\"; loaded version=\"%s\"", pcre_vrs, pcre_loaded_vrs);
  #endif
 -            "loaded version=\"%s\"", pcre_vrs, pcre_loaded_vrs);
-+            
  
      if (strstr(pcre_loaded_vrs,pcre_vrs) == NULL)    {
          ap_log_error(APLOG_MARK, APLOG_WARNING, 0, s, "ModSecurity: Loaded PCRE do not match with compiled!");
-
