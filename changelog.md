@@ -1,8 +1,79 @@
 # changelog
 
 
+## 1.12.0 _(2025-03-03)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`config/python.pip`
+`utils/srccreate.bat`
+*  https://github.com/nono303/php-src/commit/8787e289b8fc8a1257d4d87addd6a775e0876b2a
+`modules/php.bat`
+`modules/php_curl.patch`
+*  GRADLEVER: 8.12 > 8.13
+`env_sample.bat`
+*  bin: +zstd.exe modules: +mod_zstd php: check ts 96
+`utils/bininfo.bat`
+*  add libwrap for sslh
+`config/cyg64.packagelist`
+*  2be005f3
+`modules/libgd.bat`
+`modules/libgd.patch`
+*  1.2.0
+`modules/libavif.bat`
+*  typo
+`modules/mod_security.patch`
+*  2.13.6
+`modules/libxml2.patch`
+*  release https://github.com/nono303/mod_zstd
+`modules/mod_zstd.bat`
+`modules/mod_zstd.patch`
+`utils/sub/version.php`
+*  rename shared: zstd > libzstd
+`modules/httpd.bat`
+`modules/zstd.bat`
+`modules/zstd.patch`
+*  +mod_zstd.bat
+`modules/mod_zstd.bat`
+*  improve github package
+`modules/memcached.bat`
+`modules/sslh.bat`
+*  77rc
+`modules/icu.bat`
+*  fix "At least a source file is in a subdirectory, but the 'subdir-objects'  option is disabled" AM_INIT_AUTOMAKE: +subdir-objects
+`modules/memcached.patch`
+*  fix arg ext: comma > dash (same arg)
+`usage.txt`
+`utils/sub/bininfo.php`
+*  fix duplicate git init
+`modules/memcached.sh`
+*  https://github.com/yrutschle/sslh/issues/489
+`modules/sslh.patch`
+*  +mod_zstd
+`utils/sub/version.php`
+*  https://github.com/php/php-src/pull/17848/commits/7278aae6770bdae699639182c4bc18174a1a4905
+`modules/php_curl.patch`
+*  https://github.com/foglede/mod_zstd/issues/4
+`modules/mod_zstd.patch`
+*  +mod_zstd
+`modules/httpd.bat`
+`modules/httpd.patch`
+*  https://github.com/php/php-src/pull/17848
+`modules/php_curl.patch`
+*  remove php-ogr.bat and update usage.txt for building some PHP standalone shared module as argument
+`modules/php-ogr.bat`
+`usage.txt`
+*  https://github.com/curl/curl/issues/16379
+`modules/curl.bat`
+*  ENABLE_THREADED_RESOLVER: ON > OFF (c-ares conflict for CURLOPT_DNS_SERVERS: CURLE_NOT_BUILT_IN)
+`modules/curl.bat`
+
+
 ## 1.11.1 _(2025-02-13)_
 
+*  1.11.1
+`changelog.md`
 *  with-parallel only for full build
 `modules/phpsdk-local.bat`
 *  update src
@@ -4429,6 +4500,2225 @@
 `modules/mod_fcgid.patch`
 *  standalone
 `modules/mod_fcgid.bat`
+
+
+## 1.0.0 _(2020-05-15)_
+
+*  clean old ref
+`.gitignore`
+*  Update README.md
+*  Update README.md
+*  correct version
+`modules/lua.bat`
+*  add version
+`modules/serf.bat`
+*  correct version between apr & apr-util
+`modules/apr.bat`
+*  correct cscript option & pdb
+`modules/libxml2.bat`
+*  update version & bininfo
+`modules/memcached.bat`
+*  patch libxpm & curl in configure.js
+`modules/phpsdk-local.bat`
+*  simplify curl linkage
+`modules/httpd.bat`
+`modules/php.bat`
+`modules/phpsdk-config_make.bat`
+*  curl with CMakeList (for brotli linkage)
+`modules/curl-sub.bat`
+`modules/curl.bat`
+`modules/curl.patch`
+*  change scm
+`modules/libpng.bat`
+`modules/libpng.sln`
+`modules/libpng.vcxproj`
+`modules/libxpm.bat`
+`modules/libxpm.zip`
+*  update version
+`modules/brotli.bat`
+`modules/bzip2.bat`
+`modules/cares.bat`
+`modules/jansson.bat`
+`modules/jemalloc.bat`
+`modules/jpeg.bat`
+`modules/libev.bat`
+`modules/libevent.bat`
+`modules/libexpat.bat`
+`modules/libxdiff.bat`
+`modules/openssl.bat`
+`modules/pcre.bat`
+`modules/sqlite.bat`
+`modules/tidy.bat`
+`modules/wineditline.bat`
+*  patch revision
+`modules/mobac.bat`
+`modules/mobac.patch`
+*  factorize php function
+`utils/sub/_functions.php`
+*  finalize srcstatus
+`utils/sub/srcstatus.php`
+*  finalize srccreate
+`utils/srccreate.bat`
+`utils/sub/srccreate.bat.in`
+*  finalize configexport
+`utils/configexport.bat`
+*  finalize bininfo
+`utils/bininfo.bat`
+`utils/sub/bininfo.php`
+*  finalize logcheck
+`utils/logcheck.bat`
+`utils/sub/logcheck.php`
+*  finalize curlperf
+`utils/curlperf.bat`
+`utils/sub/curlperf.php`
+`utils/sub/curlperf.txt`
+*  add usage for go help
+`usage.txt`
+*  finalize README.md
+`SRC_VERSION.md`
+*  rename
+`modules/verpatch.bat`
+`modules/verpatch.patch`
+*  add HELP for usage
+`go.bat`
+*  remove use of version.rc
+`modules/common/version.bat`
+`modules/common/version.rc`
+*  exclude git config
+`.gitignore`
+*  add BIN_VSINSTALLER & CYGPATH_UTILS
+`env_sample.bat`
+*  add cygwin & msvs config
+`config/.vsconfig`
+`config/cyg32.packagelist`
+`config/cyg64.packagelist`
+*  disable unused ext
+`utils/sub/php.ini`
+*  finalize version
+`utils/sub/version.php`
+`utils/version.bat`
+*  correct cl /c arg
+`modules/php-cgi-spawner.bat`
+*  always create csv
+`utils/sub/bininfo.php`
+*  remove System.out.println(conn.getRequestProperties()) in BeanShellHttpMapSource.java
+`modules/mobac.patch`
+*  out phpmaster of src
+`modules/php.bat`
+*  /NODEFAULTLIB:libcmt.lib
+`modules/freetype2.bat`
+`modules/phpsdk-config_make.bat`
+*  remove /Ob1 to keep /ob2, default with /o2
+`modules/common/flags.sh`
+*  build > go
+`modules/all.bat`
+*  rename build > go change param debug to verbose, avoiding confusion
+`go.bat`
+`modules/httpdanddeps.bat`
+`modules/phpanddeps.bat`
+`modules/subversionanddeps.bat`
+*  remove unused
+`modules/.unused/apr.dirty.bat`
+`modules/.unused/apr.patch`
+`modules/.unused/apr.sh`
+`modules/.unused/apr.sln.bat`
+`modules/.unused/boost.bat`
+`modules/.unused/libzmq.bat`
+`modules/.unused/libzmq.sh`
+`modules/.unused/pecl-database-mysql_xdevapi-protobuf.txt`
+`modules/.unused/pecl-database-mysql_xdevapi.patch`
+`modules/.unused/php-sdk-binary-tools_issues_62.patch`
+`modules/.unused/protobuf.bat`
+`modules/.unused/vcxproj_rename.sh`
+*  clean & simplify flags change (to be continued)
+`build.bat`
+`modules/apr.sh`
+`modules/bzip2.bat`
+`modules/common/flags.sh`
+`modules/curl.bat`
+`modules/httpd.bat`
+`modules/httpd_flags.sh`
+`modules/libxml2.patch`
+`modules/openssl.bat`
+`modules/php-cgi-spawner.bat`
+`modules/phpsdk-config_make.bat`
+`modules/zlib.bat`
+`modules/zlib.patch`
+*  add usefull info
+`utils/info.md`
+*  patch configure for jpeg lib name & freetype required lib remove init and enable verbose
+`modules/phpsdk-local.bat`
+*  change order for freetype2 requiring png
+`modules/phpanddeps.bat`
+*  ref. for EnableEnhancedInstructionSet NotSet
+`avx.bat`
+*  final review
+`modules/freetype2.bat`
+`modules/libxdiff.bat`
+`modules/lua.bat`
+`modules/tidy.bat`
+`modules/wineditline.bat`
+*  add recurse option and file as input (not only dir)
+`utils/sub/bininfo.php`
+*  add word to check
+`utils/sub/logcheck.php`
+*  final review
+`modules/jpeg.bat`
+*  final review
+`modules/libpng.bat`
+*  final review
+`modules/libxpm.bat`
+`modules/libxpm.sh`
+*  correct AVXVCX for AVX 0
+`avx.bat`
+*  add WindowsTargetPlatformVersion and PlatformToolset to msbuild option instead of vcxproj.sh
+`env_sample.bat`
+`modules/common/vcxproj.sh`
+*  https://github.com/jemalloc/jemalloc/issues/1099 in bat
+`modules/jemalloc.bat`
+`modules/jemalloc.sh`
+*  remove unused -W3 cflag
+`modules/sqlite.bat`
+*  echo current module and conf before checked lines
+`utils/sub/logcheck.php`
+*  disable warn C4028
+`modules/jemalloc.bat`
+*  disable C4018
+`modules/libiconv.bat`
+*  disable rename of libjpeg and patch configure.js in php
+`modules/.unused/vcxproj_rename.sh`
+`modules/jpeg.bat`
+`modules/jpeg.sh`
+*  change git source for nmake build (vcxproj was bugged)
+`modules/freetype.bat`
+`modules/freetype.sh`
+`modules/freetype2.bat`
+*  init src: sdk, php, pecl
+`modules/php.bat`
+*  add cls before list message
+`utils/logcheck.bat`
+*  remove unsed var CFLAGS
+`avx.bat`
+*  patch for use with vc15
+`modules/php-sdk.patch`
+*  final review
+`modules/php-cgi-spawner.bat`
+*  final review for standalone bin
+`modules/memcached.bat`
+`modules/memcached.patch`
+`modules/nssm.bat`
+`modules/nssm.patch`
+`modules/sdlna.bat`
+*  prettify and readable
+`modules/mobac.bat`
+*  final review
+`modules/ddverpatch.bat`
+*  * final check, clean, correct, prettify & readable for svn and dep
+`modules/serf.bat`
+`modules/subversion.bat`
+*  correct unwanted space
+`env_sample.bat`
+*  prettify
+`modules/libiconv.bat`
+*  prettify
+`modules/jemalloc.bat`
+*  trim svn url
+`utils/sub/srcstatus.php`
+*  add warning:
+`utils/sub/logcheck.php`
+*  patch managed in init
+`modules/mobac.bat`
+*  manage debug & patch in init
+`modules/common/init.bat`
+*  add init for log
+`modules/clean.bat`
+*  final check, clean, correct, prettify & readable for httpd and all deps
+`modules/apr.bat`
+`modules/apr_post.patch`
+`modules/brotli.bat`
+`modules/bzip2.bat`
+`modules/cares.bat`
+`modules/curl-sub.bat`
+`modules/curl.bat`
+`modules/httpd.bat`
+`modules/httpd.patch`
+`modules/httpd_flags.sh`
+`modules/jansson.bat`
+`modules/jemalloc.bat`
+`modules/libev.bat`
+`modules/libevent.bat`
+`modules/libexpat.bat`
+`modules/libiconv.bat`
+`modules/libmaxminddb.bat`
+`modules/libssh2.bat`
+`modules/libxml2.bat`
+`modules/lua.bat`
+`modules/mod_h264_streaming.patch`
+`modules/nghttp2.bat`
+`modules/openssl.bat`
+`modules/pcre.bat`
+`modules/sqlite.bat`
+`modules/zlib.bat`
+*  add space for if...
+`modules/phpsdk-config_make.bat`
+*  rename
+`utils/configexport.bat`
+*  nolog for logcheck tools
+`build.bat`
+*  reafactor MSBUILD_OPTS
+`env_sample.bat`
+*  get exe name with binenv function
+`utils/sub/bininfo.php`
+*  logcheck
+`utils/logcheck.bat`
+`utils/sub/logcheck.php`
+*  clean curlperf
+`utils/curlperf.bat`
+`utils/sub/curlperf.php`
+`utils/sub/curlperf.txt`
+`utils/test_curl.bat`
+*  add reference & detail on applink.c
+`modules/httpd.patch`
+*  finalize output ans csv file
+`utils/sub/srcstatus.php`
+*  ingore /config/* & /env.bat
+`.gitignore`
+`utils/config/.vsconfig`
+`utils/config/cyg32.packagelist`
+`utils/config/cyg64.packagelist`
+*  env > env_sample
+`env_sample.bat`
+`x64.bat`
+`x86.bat`
+*  refactor and add svn support
+`utils/src_status.bat`
+`utils/srcstatus.bat`
+`utils/sub/repostatus.php`
+`utils/sub/srcstatus.php`
+*  v1 for bininfo
+`utils/bin_info.bat`
+`utils/bininfo.bat`
+`utils/sub/bininfo.php`
+`utils/sub/opcode.php`
+*  add %PATH_SOFTS% comment for verpatch (use self-made from %PATH_SRC%\ddverpatch)
+`env.bat`
+*  remind TODO for dirty version
+`modules/jpeg.bat`
+*  add dirty version to binary et correct xcopy
+`modules/wineditline.bat`
+*  mobac patch for personal convenience ;)
+`modules/mobac.patch`
+*  move and add version to engines (lib > bin)
+`modules/openssl.bat`
+*  corrext xcopy issue patch curl.rc & libcurl.rc for incompatible copyright symbol
+`modules/curl-sub.bat`
+`modules/curl.bat`
+*  patch src after init
+`modules/mobac.bat`
+*  correct xcopy
+`modules/lua.bat`
+*  add version to binary
+`modules/libevent.bat`
+*  add: openssl/applink.c in server & ab ApacheMonitor.rc without manifest modules/proxy/mod_proxy_fcgi.c https://www.apachelounge.com/viewtopic.php?p=36336
+`modules/httpd.patch`
+*  remove copyright and set product to finename
+`modules/common/version.bat`
+*  add svn init
+`modules/common/init.bat`
+*  patch version for apr_dbd_odbc-1.dll (don't know why rc is empty...)
+`modules/apr.bat`
+*  add bininfo checkavx updaterc
+`modules/all.bat`
+*  build latest verpatch and patch it for apache uncompatible rc...
+`modules/ddverpatch.bat`
+`modules/ddverpatch.patch`
+*  will be autogenerated from repostatus.php
+`utils/src_generate.sh`
+*  pass all params to batch in /module or /utils
+`build.bat`
+*  call utils from build.bat
+`env.bat`
+`util.bat`
+*  single batch for all utils
+`util.bat`
+*  enable-debug-pack & copy pdb
+`modules/phpsdk-config_make.bat`
+*  tools => utils
+`tools/bin_info.bat`
+`tools/sub/opcode.php`
+`utils/bin_info.bat`
+`utils/config/.vsconfig`
+`utils/config/cyg32.packagelist`
+`utils/config/cyg64.packagelist`
+`utils/config_sav.bat`
+`utils/curl_perf.bat`
+`utils/info.md`
+`utils/src_generate.sh`
+`utils/src_status.bat`
+`utils/sub/opcode.list`
+`utils/sub/opcode.php`
+`utils/sub/opcode.sh`
+`utils/sub/opcode_update-list.sh`
+`utils/sub/php.ini`
+`utils/sub/repostatus.php`
+`utils/sub/test_curl.php`
+`utils/sub/test_curl.txt`
+`utils/test_curl.bat`
+*  keep zlib static name for pdb patch php configure for zlib static
+`modules/phpsdk-local.bat`
+`modules/zlib.bat`
+*  clean & var refactor
+`avx.bat`
+`build.bat`
+`env.bat`
+`modules/all.bat`
+`modules/common/init.bat`
+`modules/curl.bat`
+`modules/httpd.bat`
+`modules/httpdanddeps.bat`
+`modules/memcached.bat`
+`modules/php.bat`
+`modules/phpanddeps.bat`
+`modules/phpsdk-config_make.bat`
+`modules/phpsdk-local.bat`
+`modules/subversion.bat`
+`modules/subversionanddeps.bat`
+*  wineditline self made
+`modules/php-getdeps.php`
+`modules/phpsdk-local.bat`
+`modules/wineditline.bat`
+*  correct %CURL_VER%
+`modules/php.bat`
+*  patch for VS preview release and specific beta toolkit version
+`modules/.unused/php-sdk-binary-tools_issues_62.patch`
+*  patch LUA51 > LUA (for lua 5.3.x)
+`modules/httpd.patch`
+*  add some tools & info
+`tools/info.md`
+`tools/src_generate.sh`
+`tools/test_curl.bat`
+*  lower case... add call to version.bat
+`README.md`
+`build.bat`
+`modules/brotli.bat`
+`modules/bzip2.bat`
+`modules/cares.bat`
+`modules/common/init.bat`
+`modules/common/ymdhis.bat`
+`modules/freetype.bat`
+`modules/jansson.bat`
+`modules/jemalloc.bat`
+`modules/jpeg.bat`
+`modules/libev.bat`
+`modules/libexpat.bat`
+`modules/libpng.bat`
+`modules/libxdiff.bat`
+`modules/libxpm.bat`
+`modules/nssm.bat`
+`modules/pcre.bat`
+`modules/tidy.bat`
+*  add AVXECHO for build.bat
+`avx.bat`
+*  add * to xcopy disabling prompt file or folder...
+`modules/httpd.bat`
+*  disable mklink and add path for include : - /sqlite3 for PHP & APR - /libxml2 for PHP
+`modules/apr.bat`
+`modules/phpsdk-config_make.bat`
+`modules/phpsdk-local.bat`
+`modules/sqlite.bat`
+*  define CURL var
+`modules/php.bat`
+*  add BIN_PATH for Dependencies.exe & sigcheck.exe for bin_info.bat
+`env.bat`
+*  prettify & readable correct few syntax
+`modules/lua.bat`
+*  add param to build for disable duplicate logs
+`build.bat`
+`modules/httpdanddeps.bat`
+`modules/phpanddeps.bat`
+`modules/subversionanddeps.bat`
+*  rename
+`tools/config_sav.bat`
+`tools/curl_perf.bat`
+`tools/src_status.bat`
+*  clean /build & /release
+`modules/clean.bat`
+*  tool for checking bin released (version, date, pdb, avx, compiler...)
+`tools/bin_info.bat`
+`tools/sub/opcode.list`
+`tools/sub/opcode.php`
+`tools/sub/opcode.sh`
+`tools/sub/opcode_update-list.sh`
+*  tool testing curl perf between openssl & winssl
+`tools/sub/php.ini`
+`tools/sub/test_curl.php`
+`tools/sub/test_curl.txt`
+`tools/test_curl.bat`
+*  disable echo on
+`modules/common/init.bat`
+*  refresh available compiled deps list for php
+`modules/php-getdeps.php`
+*  copy include for PHP
+`modules/jpeg.bat`
+`modules/libxpm.bat`
+*  modules/git.* > tools/repostatus.*
+`modules/git.bat`
+`tools/repostatus.bat`
+`tools/sub/repostatus.php`
+*  copy curl.exe to %PATH_INSTALL%\bin for static curl use
+`modules/httpd.bat`
+*  prettify & xcopy for release
+`modules/subversion.bat`
+*  remove unwanted char ^^
+`modules/jemalloc.bat`
+`modules/libexpat.bat`
+*  fix %PATH_MODULES_COMMON%\version.bat
+`modules/lua.bat`
+*  echo on before building
+`modules/common/init.bat`
+*  prettiffy & readable curllib bugfix
+`modules/httpd.bat`
+*  patch libcrypto.lib path hardcoded in Makefile.win copy arch\win32 h files to %PATH_INSTALL%\include patch include/apu.hw hard copied to apu.h according to current configuration
+`modules/apr.bat`
+`modules/apr.patch`
+*  suppress all echo
+`modules/subversion.bat`
+*  add echo for BEGIN and END module build
+`build.bat`
+*  _
+`modules/.unused/apr.dirty.bat`
+*  suppress echo on
+`modules/common/init.bat`
+*  echo off
+`modules/common/version.bat`
+*  echo off
+`modules/common/ymdhis.bat`
+*  correct move problem by xcopy from build to release limit version build to httpd & php ones
+`modules/curl-sub.bat`
+`modules/curl.bat`
+*  prettify
+`modules/jemalloc.bat`
+*  mklink include sqlite from phpsdk-local.bat to sqlite.bat (req for PHP & APR)
+`modules/phpsdk-local.bat`
+`modules/sqlite.bat`
+*  disable txt copy at root...
+`modules/apr.patch`
+*  change git repo v2.24.103 > v2.24.103
+`modules/nssm.bat`
+`modules/nssm.patch`
+*  add BIN_CHKMATCH
+`env.bat`
+*  correct replace for vcxproj on SSE2 build
+`avx.bat`
+*  manage version with modules/common/version.bat
+`modules/brotli.bat`
+`modules/cares.bat`
+`modules/common/version.bat`
+`modules/jansson.bat`
+`modules/jemalloc.bat`
+`modules/libexpat.bat`
+`modules/libpng.bat`
+`modules/libxdiff.bat`
+`modules/lua.bat`
+`modules/pcre.bat`
+`modules/sqlite.bat`
+`modules/tidy.bat`
+*  patch for install target : no exit on missing pdb file & verbose
+`modules/apr.patch`
+*  add devenv BIN_PATH remove unused var (PHP boost mysql-xdevapi)
+`env.bat`
+*  add VAR for libbz2 target name
+`modules/bzip2.bat`
+*  set init sequence in main curl batch instead of curl-sub build all version
+`modules/curl.bat`
+*  move init sequence to main curl batch change copy & delete order to avoid copy problem (hard drive latency...)
+`modules/curl-sub.bat`
+*  change SRC var
+`modules/git.bat`
+*  change hardcoded SRC var by ENV var
+`modules/git.php`
+*  cares name change
+`modules/httpdanddeps.bat`
+*  prettify & readable move mklink for php in php batch
+`modules/libxml2.bat`
+*  prettify & readable
+`modules/nghttp2.bat`
+*  libev for official repo with herited (4.22) windows build patch
+`modules/libev.bat`
+`modules/libev.patch`
+`modules/libev.sh`
+*  php and req deps for build.bat
+`modules/phpanddeps.bat`
+*  refactor php build
+`modules/php-getdeps.php`
+`modules/php.bat`
+`modules/phpsdk-config_make.bat`
+`modules/phpsdk-local.bat`
+*  prettify & readable
+`modules/subversion.bat`
+*  rename from libjpeg and change for build.bat
+`modules/jpeg.bat`
+`modules/jpeg.sh`
+*  moved to .unused
+`modules/pecl-database-mysql_xdevapi.patch`
+*  nssm for build.bat
+`modules/nssm.bat`
+*  add unused lib batch
+`modules/.unused/apr.dirty.bat`
+`modules/.unused/apr.patch`
+`modules/.unused/apr.sh`
+`modules/.unused/apr.sln.bat`
+`modules/.unused/boost.bat`
+`modules/.unused/libzmq.bat`
+`modules/.unused/libzmq.sh`
+`modules/.unused/pecl-database-mysql_xdevapi-protobuf.txt`
+`modules/.unused/pecl-database-mysql_xdevapi.patch`
+`modules/.unused/protobuf.bat`
+*  change in *.win.mk & *.mak for use with makefile.win
+`modules/apr.sh`
+`tools/generate_config.bat`
+*  use Makefile.win for apr / apr-util & apr-iconv
+`modules/apr.bat`
+*  shell to rename lib dll exe pdb in vcxproj
+`modules/common/vcxproj_rename.sh`
+*  correct call .\env.bat
+`x86.bat`
+*  rename
+`modules/libjpeg-php.bat`
+`modules/libxdiff-php.bat`
+`modules/libxdiff.bat`
+`modules/tidy-php.bat`
+`modules/tidy.bat`
+*  rename
+`modules/cares.bat`
+*  var-path > env @root
+`env.bat`
+`x64.bat`
+`x86.bat`
+*  add version for missing one (exe dll) various little fix & improve prettify & readable
+`avx.bat`
+`modules/apr.bat`
+`modules/brotli.bat`
+`modules/bzip2.bat`
+`modules/c-ares.bat`
+`modules/common/var-path.bat`
+`modules/curl.bat`
+`modules/jansson.bat`
+`modules/jemalloc.bat`
+`modules/libev.bat`
+`modules/libexpat.bat`
+`modules/libpng.bat`
+`modules/lua.bat`
+`modules/pcre.bat`
+`modules/php.bat`
+`modules/phpsdk-local.bat`
+`modules/sqlite.bat`
+*  ready for build.bat
+`modules/freetype-php.bat`
+`modules/freetype.bat`
+`modules/freetype.sh`
+`modules/libpng-php.bat`
+`modules/libpng.bat`
+`modules/libxpm-php.bat`
+`modules/libxpm.bat`
+`modules/libxpm.sh`
+`modules/libxpm_version.h`
+*  unused
+`modules/protobuf-php.bat`
+*  add version.rc for versionning dll & exe
+`modules/common/version.rc`
+*  add LINK EnableCOMDATFolding & OptimizeReferences force CL MAxSpeed
+`modules/common/vcxproj.sh`
+*  create /build dir for each release type (for parallel build)
+`avx.bat`
+`modules/common/var-path.bat`
+*  simplify copy file patch LNK4197
+`modules/apr.bat`
+*  remove d4133
+`modules/apr.sh`
+*  echo on for build process
+`modules/common/init.bat`
+*  refactor PATH var-path update Windows kit version
+`modules/common/var-path.bat`
+*  PATH_HTTPD_SDK > PATH_BATCH
+`build.bat`
+*  disable all builds loop for only httpd & php needed
+`modules/curl.bat`
+*  correct hardcoded path
+`modules/httpd.bat`
+*  prettify & readable loop for include copy
+`modules/apr.bat`
+*  prettify & readable
+`modules/libexpat.bat`
+*  correct hardcoded path
+`avx.bat`
+*  correct hardcoded path
+`modules/jemalloc.bat`
+*  PATH_HTTPD_SDK > PATH_BATCH
+`modules/httpdanddeps.bat`
+`modules/phpsdk-config_make.bat`
+`modules/phpsdk-local.bat`
+`modules/subversionanddeps.bat`
+*  correct hardcoded path
+`modules/libevent.bat`
+*  correct hardcoded path
+`modules/memcached.bat`
+`modules/mobac.bat`
+*  correct hardcoded path
+`modules/nghttp2.bat`
+*  unset rmdir unused
+`modules/subversion.bat`
+*  MSVC_DEPS=vc%MSVC_VER%
+`vc15.bat`
+`vs16.bat`
+*  correct call to var-path.bat > relative
+`x64.bat`
+`x86.bat`
+*  pretty & readable
+`modules/common/var-path.bat`
+*  supress unused echo
+`modules/common/init.bat`
+*  add wd4311
+`modules/common/flags.sh`
+*  loop for build ALL
+`build.bat`
+*  disable /install mklink %PATH_INSTALL% > /release/__VER__
+`avx.bat`
+*  supress hardcoded path
+`modules/apr.bat`
+*  supress hard coded path
+`modules/httpd_flags.sh`
+*  curl > winssl_dll_deps-static pretty & readable
+`modules/dummy.bat`
+`modules/httpd.bat`
+*  update & add autogen
+`config/cyg32.packagelist`
+`config/cyg64.packagelist`
+*  patch bug 1099 x86
+`modules/jemalloc.bat`
+`modules/jemalloc.sh`
+*  unused
+`modules/sqlite-svn.sh`
+*  pretty & readable
+`modules/libssh2.bat`
+*  unused
+`modules/libzmq-php.bat`
+`modules/libzmq-php.sh`
+*  pretty & readable
+`modules/nghttp2.bat`
+`modules/openssl.bat`
+`modules/zlib.bat`
+*  mod_h264 & httpd patch instead of local git branch
+`modules/httpd.bat`
+`modules/httpd.patch`
+`modules/httpdanddeps.bat`
+`modules/mod_h264_streaming.patch`
+*  remove sqlite as it build on httpd
+`modules/phpsdk-local.bat`
+*  git apply with param %1
+`modules/curl.bat`
+`modules/libxml2.bat`
+`modules/zlib.bat`
+*  httpd for build.bat
+`modules/httpd.bat`
+`modules/httpd_flags.sh`
+`modules/httpd_flags_RelWithDebInfo.sh`
+`modules/httpd_flags_Release.sh`
+`modules/httpdanddeps.bat`
+*  apr for build.bat
+`modules/apr.bat`
+`modules/apr.sh`
+*  add wd XXXX add RC nologo remove W3
+`modules/common/flags.sh`
+*  lua for build.bat
+`modules/lua.bat`
+`modules/lua.sh`
+*  subversion for build.bat
+`modules/subversion-svn.bat`
+`modules/subversion.bat`
+`modules/subversionanddeps.bat`
+*  serf for build.bat
+`modules/serf-svn.bat`
+`modules/serf-svn.sh`
+`modules/serf.bat`
+*  included in httpd.bat
+`modules/mod_h264_streaming.bat`
+*  remove link libexpat > expat for APR
+`modules/libexpat.bat`
+*  remove link libbz2 => bzip2 for pcre
+`modules/bzip2.bat`
+*  add PATH_JDK
+`modules/common/var-path.bat`
+*  refactor apr for build.bat use & native source (without hand made sln...)
+`modules/apr.bat`
+*  use %1 param instead of hard-coded
+`modules/libexpat.bat`
+`modules/libmaxminddb.bat`
+*  add static build
+`modules/sqlite.bat`
+*  use %1 parma instead of curl
+`modules/apr.sh`
+`modules/curl.bat`
+*  correct build.bat call
+`modules/httpdanddeps.bat`
+`modules/subversionanddeps.bat`
+*  unused
+`modules/boost.bat.unused`
+`modules/libexpat.sh`
+`modules/libmaxminddb.sh`
+*  sdlna for buil.bat
+`modules/sdlna.bat`
+*  mobac for build.bat
+`modules/common/var-path.bat`
+`modules/mobac.bat`
+*  add zlib1 in deps
+`modules/subversion-svn.bat`
+*  memcached for build.bat
+`modules/memcached.bat`
+`modules/memcached.sh`
+*  extstore OK without patch >= 1.6.4
+`modules/memcached.patch`
+*  git apply patch > verbose
+`modules/curl.bat`
+`modules/httpd.bat`
+`modules/libxml2.bat`
+`modules/zlib.bat`
+*  correct git clean bug in loop
+`modules/curl-sub.bat`
+`modules/curl.bat`
+*  correct rmdir options
+`modules/common/var-path.bat`
+*  curl for build.bat
+`modules/c-ares.bat`
+*  curl for build.bat
+`modules/common/var-path.bat`
+`modules/curl-sub.bat`
+`modules/curl.bat`
+`modules/curl.patch`
+*  change flags add for static libs
+`modules/common/flags.sh`
+*  change for use in build.bat
+`modules/libssh2.bat`
+`modules/libssh2.sh`
+`modules/nghttp2.bat`
+`modules/nghttp2.sh`
+*  nghttp2 for build.bat
+`modules/common/var-path.bat`
+`modules/nghttp2.bat`
+*  / > \ init.bat
+`modules/brotli.bat`
+`modules/bzip2.bat`
+`modules/c-ares.bat`
+`modules/httpd.bat`
+`modules/jansson.bat`
+`modules/jemalloc.bat`
+`modules/libev.bat`
+`modules/libevent.bat`
+`modules/libiconv.bat`
+`modules/libxml2.bat`
+`modules/pcre.bat`
+`modules/zlib.bat`
+*  change order of deps buils
+`modules/httpdanddeps.bat`
+*  correct %CYGPATH_MODULES_COMMON%/
+`modules/brotli.bat`
+`modules/c-ares.bat`
+`modules/jansson.bat`
+`modules/libevent.bat`
+`modules/pcre.bat`
+*  add issue reference of patch
+`modules/httpd.bat`
+`modules/memcached.sh`
+*  chnage for build.bat use
+`modules/libev.bat`
+`modules/libev.sh`
+*  libevent for build.bat use
+`modules/libevent.bat`
+`modules/libevent.sh`
+*  enable pcre16 & pcre32
+`modules/pcre.bat`
+*  use with build.bat
+`modules/openssl.bat`
+*  pcre use with build.bat
+`modules/pcre.bat`
+`modules/pcre.sh`
+*  libxml2 for use with build.bat
+`modules/libxml2.bat`
+`modules/libxml2.patch`
+*  echo off internal IF
+`modules/common/init.bat`
+*  use vcxproj.sh in libiconv.bat
+`modules/libiconv.sh`
+*  patch mod_maxminddb in httpd.bat
+`modules/httpd.bat`
+`modules/mod_maxminddb.bat`
+*  correct flags.sh folder
+`modules/c-ares.bat`
+*  remove "v" char for toolset version
+`modules/common/vcxproj.sh`
+*  add cmake parameter to only create PATH_BUILD structure for cmake build
+`modules/common/init.bat`
+*  improve sed in loop
+`modules/common/flags.sh`
+*  correct flags.sh folder
+`modules/jansson.bat`
+*  revert to src build path
+`modules/jemalloc.bat`
+*  build.bat use
+`modules/libiconv.bat`
+*  build.bat use
+`modules/libxml2.bat`
+*  make patch for master branch on makefile
+`modules/bzip2.bat`
+*  correct flags.sh folder
+`modules/brotli.bat`
+*  zlib with build.bat
+`modules/zlib.bat`
+`modules/zlib.patch`
+*  unused
+`modules/jansson.sh`
+*  v1.0.8
+`modules/bzip2.bat`
+*  change vcxproj.sh exec path & params
+`modules/apr.bat`
+`modules/libiconv.bat`
+`modules/libmaxminddb.bat`
+`modules/subversion-svn.bat`
+*  combine all vcxproj change for all src
+`modules/common/vcxproj.sh`
+*  v4 > v5 use vcxproj.sh
+`modules/jemalloc.bat`
+*  refactor to use with build.bat
+`modules/zlib.bat`
+*  rename and use ENV var PATH_LOGS
+`modules/git.bat`
+*  rename
+`modules/git.php`
+*  merged to module/common/vcxproj.sh
+`modules/vcxproj2vc15.sh`
+*  add PATH_LOGS
+`modules/common/var-path.bat`
+*  echo off big if
+`build.bat`
+*  create install structure if not exist
+`avx.bat`
+*  add PTFTS (plateformtoolset) version
+`vc15.bat`
+`vs16.bat`
+*  xcommon > var-path
+`x64.bat`
+`x86.bat`
+*  correct fixed core by %NUMBER_OF_PROCESSORS%
+`avx.bat`
+`silent-httpd-build.bat`
+`silent-subversion-build.bat`
+*  modules_bat > modules
+`_all.bat`
+`build.bat`
+`config/.vsconfig`
+`config/cyg32.packagelist`
+`config/cyg64.packagelist`
+`httpd-build.bat`
+`modules/apr.bat`
+`modules/boost.bat.unused`
+`modules/brotli.bat`
+`modules/bzip2.bat`
+`modules/c-ares.bat`
+`modules/common/flags.sh`
+`modules/common/init.bat`
+`modules/common/var-path.bat`
+`modules/common/vcxproj.sh`
+`modules/common/ymdhis.bat`
+`modules/curl.bat`
+`modules/freetype-php.bat`
+`modules/git-fetch.php`
+`modules/git.bat`
+`modules/httpd.bat`
+`modules/httpd.exe.manifest`
+`modules/httpd_flags.sh`
+`modules/httpd_flags_RelWithDebInfo.sh`
+`modules/httpd_flags_Release.sh`
+`modules/httpdanddeps.bat`
+`modules/jansson.bat`
+`modules/jansson.sh`
+`modules/jemalloc.bat`
+`modules/libev.bat`
+`modules/libev.sh`
+`modules/libevent.bat`
+`modules/libevent.sh`
+`modules/libexpat.bat`
+`modules/libexpat.sh`
+`modules/libiconv.bat`
+`modules/libiconv.sh`
+`modules/libjpeg-php.bat`
+`modules/libmaxminddb.bat`
+`modules/libmaxminddb.sh`
+`modules/libpng-php.bat`
+`modules/libssh2.bat`
+`modules/libssh2.sh`
+`modules/libxdiff-php.bat`
+`modules/libxml2.bat`
+`modules/libxpm-php.bat`
+`modules/libzmq-php.bat`
+`modules/libzmq-php.sh`
+`modules/lua.bat`
+`modules/lua.sh`
+`modules/memcached.patch`
+`modules/memcached.sh`
+`modules/mod_h264_streaming.bat`
+`modules/mod_maxminddb.bat`
+`modules/mod_maxminddb.patch`
+`modules/nghttp2.bat`
+`modules/nghttp2.sh`
+`modules/openssl.bat`
+`modules/pcre.bat`
+`modules/pcre.sh`
+`modules/pecl-database-mysql_xdevapi.patch`
+`modules/php-getdeps.php`
+`modules/php.bat`
+`modules/phpsdk-config_make.bat`
+`modules/phpsdk-local.bat`
+`modules/protobuf-php.bat`
+`modules/serf-svn.bat`
+`modules/serf-svn.sh`
+`modules/sqlite-svn.sh`
+`modules/sqlite.bat`
+`modules/subversion-svn.bat`
+`modules/subversion-svn.sh`
+`modules/subversionanddeps.bat`
+`modules/tidy-php.bat`
+`modules/vcxproj2vc15.sh`
+`modules/zlib.bat`
+`modules_bat/brotli.bat`
+`modules_bat/brotli.sh`
+`modules_bat/c-ares.bat`
+`modules_bat/c-ares.sh`
+`modules_bat/jemalloc.bat`
+`silent-git-fetch.bat`
+`silent-php-build.bat`
+`subversion-build.bat`
+*  generate config export for VS & cygwin
+`config/generate_config.bat`
+*  correct LF
+`modules_bat/libiconv.sh`
+`modules_bat/vcxproj2vc15.sh`
+*  ready to merge
+`README.md`
+`xCommon.bat`
+*  correct cmake flags sed DIAG_BITS
+`modules_bat/httpd_flags.sh`
+*  v7
+`README.md`
+`modules_bat/apr.bat`
+`modules_bat/brotli.bat`
+`modules_bat/c-ares.bat`
+`modules_bat/freetype-php.bat`
+`modules_bat/httpd.bat`
+`modules_bat/jansson.bat`
+`modules_bat/jemalloc.bat`
+`modules_bat/libev.bat`
+`modules_bat/libevent.bat`
+`modules_bat/libexpat.bat`
+`modules_bat/libiconv.bat`
+`modules_bat/libjpeg-php.bat`
+`modules_bat/libmaxminddb.bat`
+`modules_bat/libpng-php.bat`
+`modules_bat/libssh2.bat`
+`modules_bat/libzmq-php.bat`
+`modules_bat/lua.bat`
+`modules_bat/nghttp2.bat`
+`modules_bat/pcre.bat`
+`modules_bat/serf-svn.bat`
+`modules_bat/sqlite.bat`
+`modules_bat/subversion-svn.bat`
+*  v6
+`avx.bat`
+`xCommon.bat`
+*  v5
+`modules_bat/libiconv.sh`
+`modules_bat/libmaxminddb.sh`
+`modules_bat/subversion-svn.sh`
+`modules_bat/vcxproj2vc15.sh`
+*  v4
+`xCommon.bat`
+*  v3
+`xCommon.bat`
+*  v2
+`x64.bat`
+`x86.bat`
+`xCommon.bat`
+*  v1
+`_all.bat`
+`avx.bat`
+`httpd-build.bat`
+`modules_bat/apr.bat`
+`modules_bat/brotli.bat`
+`modules_bat/bzip2.bat`
+`modules_bat/c-ares.bat`
+`modules_bat/curl.bat`
+`modules_bat/freetype-php.bat`
+`modules_bat/httpd.bat`
+`modules_bat/jansson.bat`
+`modules_bat/jemalloc.bat`
+`modules_bat/libev.bat`
+`modules_bat/libevent.bat`
+`modules_bat/libexpat.bat`
+`modules_bat/libiconv.bat`
+`modules_bat/libjpeg-php.bat`
+`modules_bat/libmaxminddb.bat`
+`modules_bat/libpng-php.bat`
+`modules_bat/libssh2.bat`
+`modules_bat/libxdiff-php.bat`
+`modules_bat/libxml2.bat`
+`modules_bat/libxpm-php.bat`
+`modules_bat/libzmq-php.bat`
+`modules_bat/lua.bat`
+`modules_bat/mod_h264_streaming.bat`
+`modules_bat/mod_maxminddb.bat`
+`modules_bat/nghttp2.bat`
+`modules_bat/openssl.bat`
+`modules_bat/pcre.bat`
+`modules_bat/protobuf-php.bat`
+`modules_bat/serf-svn.bat`
+`modules_bat/sqlite.bat`
+`modules_bat/subversion-svn.bat`
+`modules_bat/tidy-php.bat`
+`modules_bat/zlib.bat`
+`phpsdk-config_make.bat`
+`phpsdk-local.bat`
+`silent-git-fetch.bat`
+`silent-httpd-build.bat`
+`silent-php-build.bat`
+`silent-subversion-build.bat`
+`x64.bat`
+`x86.bat`
+`xCommon.bat`
+*  https://gist.github.com/erikvip/63b236078d4ff4163fd3
+`cyg32.packagelist`
+`cyg64.packagelist`
+*  vs16 >master LF
+`README.md`
+`modules_bat/subversion-svn.bat`
+`modules_bat/tidy-php.bat`
+`modules_bat/zlib.bat`
+`php-getdeps.php`
+`phpsdk-config_make.bat`
+`phpsdk-local.bat`
+`silent-httpd-build.bat`
+`silent-php-build.bat`
+`silent-subversion-build.bat`
+`vc15.bat`
+`vs16.bat`
+`x64.bat`
+`x86.bat`
+`xCommon.bat`
+`ymdhis.bat`
+*  remove exit... memcached
+`modules_bat/memcached.sh`
+*  finalize memcached install shell with - patch for external storage - patch for not build debug
+`modules_bat/memcached.patch`
+`modules_bat/memcached.sh`
+*  add avx & tls global refactor
+`modules_bat/memcached.sh`
+*  14.24 > 14.25
+`vs16.bat`
+*  bug correction for !vs16 list.txt are not named master but PHP_VER
+`php-getdeps.php`
+*  use ASM disable doc install upgrade option for 1.1.1e
+`modules_bat/openssl.bat`
+*  move memcached from src
+`modules_bat/memcached.sh`
+*  libxml2 update MP8 => MP%MTPROC%
+`modules_bat/bzip2.bat`
+`modules_bat/curl.bat`
+`modules_bat/libxml2.bat`
+`modules_bat/openssl.bat`
+`modules_bat/zlib.bat`
+*  patch msvs16 for mod_maxminddb
+`modules_bat/httpd.bat`
+`modules_bat/mod_maxminddb.bat`
+`modules_bat/mod_maxminddb.patch`
+*  refactor PHP batc for AVX inversion du ton var value in if
+`phpsdk-config_make.bat`
+`phpsdk-local.bat`
+*  remove boost & protobuf options in configure
+`phpsdk-config_make.bat`
+*  copy winssl libcurl to mod_md github
+`_all.bat`
+`modules_bat/httpd.bat`
+`xCommon.bat`
+*  update vsconfig PHPVER according to git tag
+`.vsconfig`
+`phpsdk-local.bat`
+*  php < 7.4 for memcache only
+`phpsdk-config_make.bat`
+*  disable protobuf & zmq
+`phpsdk-local.bat`
+*  libexpat
+`modules_bat/subversion-svn.bat`
+*  MTPROC
+`xCommon.bat`
+*  14.23 > 14.24
+`vs16.bat`
+*  AVXSED disable for 7.4 + formatting
+`phpsdk-config_make.bat`
+*  php 7.4 with sqlite
+`phpsdk-config_make.bat`
+`phpsdk-local.bat`
+*  sqlite rename
+`subversion-build.bat`
+*  sqlite self build
+`php-getdeps.php`
+*  sqlit rename for PHP
+`modules_bat/sqlite-svn.bat`
+`modules_bat/sqlite.bat`
+*  copy /lib pdb
+`modules_bat/nghttp2.bat`
+*  use sqlite3 from deps
+`php-getdeps.php`
+*  sed for natve tag build
+`modules_bat/nghttp2.bat`
+*  change src path
+`modules_bat/apr.bat`
+*  svn 1.13.0 expat 2.2.9 : expat => libexpat
+`modules_bat/libexpat.bat`
+`modules_bat/subversion-svn.bat`
+*  20191015
+`modules_bat/pecl-database-mysql_xdevapi.patch`
+`phpsdk-config_make.bat`
+*  add projectnamepdb export
+`modules_bat/libmaxminddb.bat`
+`modules_bat/libmaxminddb.sh`
+*  add gen_char flags correct rc flags
+`modules_bat/httpd_flags.sh`
+*  correct release with pdb value
+`modules_bat/httpd_flags_Release.sh`
+*  add GIT_GC
+`git-fetch.php`
+*  2.2.9
+`modules_bat/libexpat.bat`
+*  conform option to 2.2.8
+`modules_bat/libexpat.bat`
+*  correct protobuf path
+`phpsdk-config_make.bat`
+*  outdir => outdirphp
+`phpsdk-config_make.bat`
+*  outdir => outdirphp
+`phpsdk-local.bat`
+*  VS16.3 : 14.23
+`vs16.bat`
+*  same name as sln outdir since VS16.3 ^^
+`avx.bat`
+*  add AVX flage for php build != 7.3
+`phpsdk-config_make.bat`
+*  refactor and correct if batch bug for AVX
+`phpsdk-config_make.bat`
+`phpsdk-local.bat`
+*  disable mod_ssl copy for mod_md (unpatched since 2.4.40)
+`modules_bat/httpd.bat`
+*  add php vars
+`avx.bat`
+*  use curl from php-sdk deps
+`php-getdeps.php`
+*  VS 16.2.0 : 14.21 > 14.22
+`vs16.bat`
+*  disable ssh2 / ssl : does'nt work on mod_md & may crash php curl
+`modules_bat/curl.bat`
+*  add php 7.1
+`phpsdk-config_make.bat`
+*  BUILDTS & raz nonodeps
+`phpsdk-local.bat`
+*  remove space...
+`silent-git-fetch.bat`
+*  refactor for specified module
+`_all.bat`
+*  display serie
+`php-getdeps.php`
+*  static mklink 4_3_1 => 4_3_2
+`modules_bat/libzmq-php.bat`
+*  silent echo off
+`avx.bat`
+`vc15.bat`
+`vs16.bat`
+*  set PATH after xCommon with PATHORI
+`x64.bat`
+`x86.bat`
+*  bug fix PATH & INCLUDE variables for _all
+`xCommon.bat`
+*  bug fix copye dll & pdb
+`modules_bat/libssh2.bat`
+*  libiconv common for httpd & php without local branch
+`modules_bat/libiconv-php.bat`
+`modules_bat/libiconv.bat`
+`modules_bat/libiconv.sh`
+`phpsdk-local.bat`
+*  change link and var set location according to AVX
+`avx.bat`
+`xCommon.bat`
+*  echo off + log essential factorize AVX
+`avx.bat`
+`phpsdk-local.bat`
+`vc15.bat`
+`vs16.bat`
+`x64.bat`
+`x86.bat`
+`xCommon.bat`
+*  add !AVX
+`_all.bat`
+*  git reset & clean order
+`modules_bat/apr.bat`
+`modules_bat/bzip2.bat`
+`modules_bat/freetype-php.bat`
+`modules_bat/jemalloc.bat`
+`modules_bat/libiconv-php.bat`
+`modules_bat/libiconv.bat`
+`modules_bat/libjpeg-php.bat`
+`modules_bat/libmaxminddb.bat`
+`modules_bat/libpng-php.bat`
+`modules_bat/libxml2.bat`
+`modules_bat/subversion-svn.bat`
+`modules_bat/zlib.bat`
+*  flags optim
+`modules_bat/sqlite-svn.bat`
+*  updatedeps = 1
+`phpsdk-local.bat`
+*  pdb & ltcg for static
+`modules_bat/serf-svn.bat`
+`modules_bat/serf-svn.sh`
+*  vc15 patch zlib pdb name
+`_all.bat`
+`modules_bat/sqlite-svn.sh`
+`modules_bat/subversion-svn.bat`
+*  libssh2 for httpd (curl) instead of php
+`httpd-build.bat`
+`modules_bat/libssh2-php.bat`
+`modules_bat/libssh2.bat`
+`modules_bat/libssh2.sh`
+*  curl shared
+`phpsdk-config_make.bat`
+*  clean curl build
+`modules_bat/curl.bat`
+*  clean build of static & shared libs for curl
+`modules_bat/nghttp2.bat`
+`modules_bat/nghttp2.sh`
+*  refactor finish al php version
+`phpsdk-config_make.bat`
+*  phpsdk_deps => php-getdeps.php 2/2
+`phpsdk-local.bat`
+*  phpsdk_deps => php-getdeps.php 1/2
+`phpsdk-local.bat`
+*  git clean -fdx
+`modules_bat/apr.bat`
+`modules_bat/bzip2.bat`
+`modules_bat/curl.bat`
+`modules_bat/freetype-php.bat`
+`modules_bat/jemalloc.bat`
+`modules_bat/libiconv-php.bat`
+`modules_bat/libiconv.bat`
+`modules_bat/libjpeg-php.bat`
+`modules_bat/libmaxminddb.bat`
+`modules_bat/libpng-php.bat`
+`modules_bat/libxml2.bat`
+`modules_bat/zlib.bat`
+`php-getdeps.php`
+*  clean static with static & dll with dll
+`modules_bat/curl.bat`
+`modules_bat/zlib.bat`
+*  mklink for pcre & php (different name...)
+`modules_bat/bzip2.bat`
+*  build static for curl static
+`modules_bat/nghttp2.bat`
+*  force MSVC16 for vc15 & vs16
+`modules_bat/libiconv-php.bat`
+*  mklink include pour PHP
+`modules_bat/libxml2.bat`
+*  static pour curl static
+`modules_bat/c-ares.bat`
+*  static pour curl static
+`modules_bat/nghttp2.bat`
+`modules_bat/nghttp2.sh`
+*  php deps vc15
+`modules_bat/freetype-php.bat`
+`modules_bat/libiconv-php.bat`
+`modules_bat/libjpeg-php.bat`
+`modules_bat/libpng-php.bat`
+`modules_bat/libzmq-php.bat`
+`modules_bat/libzmq-php.sh`
+*  zmq ltcg & co
+`modules_bat/libzmq-php.sh`
+*  refactor for better deps usage
+`phpsdk-local.bat`
+*  add msvc version to log
+`silent-httpd-build.bat`
+`silent-php-build.bat`
+*  ltcg for Lib
+`vcxproj.sh`
+*  MSIL LTCG for Lib (ARFLAGS = -nologo -ltcg)
+`modules_bat/libmaxminddb.bat`
+`modules_bat/libssh2-php.sh`
+`modules_bat/libxml2.bat`
+`modules_bat/zlib.bat`
+*  factorise php build depending version
+`phpsdk-config_make-7.1.bat`
+`phpsdk-config_make-7.2.bat`
+`phpsdk-config_make.bat`
+*  ext outdir name for ssh2 build test
+`modules_bat/curl.bat`
+*  ext prefix forr curl / httpd testing build
+`modules_bat/libssh2-php.bat`
+*  improved for vc15
+`modules_bat/apr.bat`
+`modules_bat/c-ares.sh`
+`modules_bat/curl.bat`
+`modules_bat/libev.sh`
+`modules_bat/libevent.bat`
+`modules_bat/libiconv-php.bat`
+`modules_bat/libmaxminddb.bat`
+`modules_bat/libssh2-php.bat`
+`modules_bat/nghttp2.bat`
+`modules_bat/openssl.bat`
+`php-build.bat`
+`phpsdk-config_make-7.3.bat`
+`phpsdk-local.bat`
+*  add MSVC_VER
+`vc15.bat`
+*  add LTCG sur Lib
+`vcxproj.sh`
+*  version 14.21
+`vs16.bat`
+*  cmake ltcg
+`modules_bat/libevent.sh`
+`modules_bat/libssh2-php.sh`
+`modules_bat/nghttp2.sh`
+*  add vs16
+`.vsconfig`
+*  add LTCG for static
+`modules_bat/brotli.sh`
+*  initial commit
+`modules_bat/libzmq-php.bat`
+*  vcxproj2vc15
+`modules_bat/jemalloc.bat`
+*  vcxproj2vc15
+`modules_bat/vcxproj2vc15.sh`
+*  back to root bat
+`php-build.bat`
+*  remove MSVC_DEPS
+`xCommon.bat`
+*  disable gloabal VAR
+`MSVC_DEPS.bat`
+`vc15.bat`
+`vs16.bat`
+*  rename for cmd line launch accordinf to ARCH & MSVC_NAME
+`php-build.bat`
+`silent-php-build.bat`
+*  add path entries
+`xCommon.bat`
+*  add comment for sdk vs16 KO /NODEFAULTLIB:MSVCRTD.lib
+`phpsdk-config_make-7.3.bat`
+`phpsdk-local.bat`
+*  avx bug : force reset --hard
+`modules_bat/apr.bat`
+`modules_bat/jemalloc.bat`
+*  disable 4996 warning
+`modules_bat/brotli.sh`
+*  specific extflags for nghttp2
+`modules_bat/nghttp2.bat`
+`xCommon.bat`
+*  remove old move of dll (unused)
+`modules_bat/nghttp2.bat`
+*  deps build without AVX
+`phpsdk-local.bat`
+*  remove GL from EXTCFLAGS
+`xCommon.bat`
+*  add brotli
+`phpsdk-config_make-7.3.bat`
+*  remove pause
+`modules_bat/lua.bat`
+`modules_bat/pcre.bat`
+*  pcre : flags optimize + AVX contextuel
+`modules_bat/pcre.bat`
+`modules_bat/pcre.sh`
+*  lua : flags optimize + AVX contextuel
+`modules_bat/lua.bat`
+`modules_bat/lua.sh`
+*  libiconv & libxml2 : flag optimisation & AVX contextuel
+`modules_bat/libiconv.bat`
+`modules_bat/libxml2.bat`
+*  libev : flag optim + AVX contextuel
+`modules_bat/libev.bat`
+`modules_bat/libev.sh`
+*  correct flag sh path
+`modules_bat/jemalloc.bat`
+*  deprecated
+`src-version.xlsx`
+*  add $1 & $2
+`vcxproj.sh`
+*  vcxproj
+`vcxproj.sh`
+*  var AVX vcxproj
+`modules_bat/apr.bat`
+`modules_bat/jemalloc.bat`
+`modules_bat/subversion-svn.bat`
+`xCommon.bat`
+*  rename subversion sh
+`modules_bat/subversion-svn.sh`
+*  jansson : flags optimize + AVX contextuel
+`modules_bat/jansson.bat`
+`modules_bat/jansson.sh`
+*  curl bzip2 : flags optim + AVX contextuel
+`modules_bat/bzip2.bat`
+`modules_bat/curl.bat`
+*  suppress warning
+`modules_bat/c-ares.sh`
+*  casse
+`modules_bat/zlib.bat`
+*  add AVX contextuel
+`modules_bat/bzip2.bat`
+*  zlib : optim flags + AVX contextuel
+`modules_bat/zlib.bat`
+`xCommon.bat`
+*  c-ares : flags optim + avx contextuel
+`modules_bat/c-ares.bat`
+`modules_bat/c-ares.sh`
+*  rmdir build at end of release
+`phpsdk-config_make-7.1.bat`
+`phpsdk-config_make-7.2.bat`
+`phpsdk-config_make-7.3.bat`
+*  copy deps after LIB & REQ
+`phpsdk-local.bat`
+*  serf : improve flags and add contextual AVX
+`modules_bat/serf-svn.bat`
+`modules_bat/serf-svn.sh`
+*  improvbe flags & contextual AVX
+`modules_bat/libexpat.bat`
+`modules_bat/libexpat.sh`
+*  add AVXSED
+`xCommon.bat`
+*  add compiler option & AVX contextual brotli
+`modules_bat/brotli.bat`
+`modules_bat/brotli.sh`
+*  add compiler option and contextual AVX
+`modules_bat/apr.bat`
+*  sh refactor subversion
+`modules_bat/subversion-svn.bat`
+`modules_bat/subversion.sh`
+*  refactor sh httpd
+`modules_bat/httpd.bat`
+`modules_bat/httpd.exe.manifest`
+`modules_bat/httpd_flags.sh`
+`modules_bat/httpd_flags_RelWithDebInfo.sh`
+`modules_bat/httpd_flags_Release.sh`
+*  relative path for deps & depsnono (include & lib) delete build folder at start better than at the end...
+`phpsdk-config_make-7.1.bat`
+`phpsdk-config_make-7.2.bat`
+`phpsdk-config_make-7.3.bat`
+*  add jpeg disable autodeps
+`phpsdk-local.bat`
+*  correct include copy (X11...)
+`modules_bat/libxpm-php.bat`
+*  initial
+`modules_bat/libjpeg-php.bat`
+*  supression espace
+`modules_bat/bzip2.bat`
+*  AVX
+`xCommon.bat`
+*  copy deps to github folder refactor lib build order for folder creation
+`modules_bat/libpng-php.bat`
+`phpsdk-local.bat`
+`xCommon.bat`
+*  mklink X11\xpm.h
+`modules_bat/libxpm-php.bat`
+*  disable deps copy github
+`modules_bat/libxdiff-php.bat`
+*  include\iconv.h
+`modules_bat/libiconv-php.bat`
+*  MSVC_VER => MSVC_DEPS
+`modules_bat/httpd.bat`
+*  unused
+`modules_bat/boost.bat.unused`
+*  MSVCDEPS
+`phpsdk-config_make-7.1.bat`
+`phpsdk-config_make-7.2.bat`
+`phpsdk-config_make-7.3.bat`
+*  MSVC_DEPS
+`phpsdk-local.bat`
+*  MSVC_DEPS factor
+`MSVC_DEPS.bat`
+`silent-php-build.bat`
+`xCommon.bat`
+*  update windows kit 17763 => 18362 replace toolkit 141 (vc15) => 142 (vs16)
+`subversion_vcxproj.sh`
+*  add msbuild path
+`x64.bat`
+`x86.bat`
+*  set WKITVER 10.0.18362.0 set MSVC_DEPS according to MSVC_VER
+`xCommon.bat`
+*  msbuild in path remove all tests build
+`modules_bat/subversion-svn.bat`
+*  msbuild in path include h file @root
+`modules_bat/libxpm-php.bat`
+*  msbuild in path
+`modules_bat/libpng-php.bat`
+*  msbuild in path
+`modules_bat/libmaxminddb.bat`
+*  msbuild in path
+`modules_bat/libiconv.bat`
+*  msbuild in path
+`modules_bat/libiconv-php.bat`
+*  msbuild in path
+`modules_bat/jemalloc.bat`
+*  msbuild in path vc2017 => vc2019
+`modules_bat/freetype-php.bat`
+*  nmake VC=%MSVC_VER%
+`modules_bat/curl.bat`
+*  msbuild in path clean old REM
+`modules_bat/apr.bat`
+*  apr 1.7.0
+`modules_bat/apr.bat`
+*  sed -i 's/libeay32st/libcrypto/g' /cygdrive/c/src/php-src/ext/phar/config.w32 better than branch msvc15 7.2 & 7.1 : only memcached
+`phpsdk-config_make-7.1.bat`
+`phpsdk-config_make-7.2.bat`
+`phpsdk-config_make-7.3.bat`
+*  add SDKVER for 7.1 VC15 (sdk 7.2)
+`phpsdk-local.bat`
+*  use MSVC_VER
+`modules_bat/apr.bat`
+`modules_bat/curl.bat`
+`modules_bat/freetype-php.bat`
+`modules_bat/httpd.bat`
+`modules_bat/jemalloc.bat`
+`modules_bat/libiconv-php.bat`
+`modules_bat/libiconv.bat`
+`modules_bat/libmaxminddb.bat`
+`modules_bat/libpng-php.bat`
+`modules_bat/libxpm-php.bat`
+`modules_bat/subversion-svn.bat`
+`phpsdk-config_make-7.2.bat`
+`phpsdk-config_make-7.3.bat`
+`phpsdk-local.bat`
+`silent-php-build.bat`
+`xCommon.bat`
+*  disable copy patched openssl for svn
+`modules_bat/apr.bat`
+*  add dll build
+`modules_bat/freetype-php.bat`
+`modules_bat/libxpm-php.bat`
+*  option to build only deps
+`phpsdk-local.bat`
+*  don't copy apr-util patched openssl
+`modules_bat/libssh2-php.bat`
+`modules_bat/libssh2.bat`
+*  copy dll to github deps directory
+`modules_bat/libxdiff-php.bat`
+*  revert apr compile & install split according to common patch for httpd & subversion
+`httpd-build.bat`
+`modules_bat/apr.bat`
+`modules_bat/apr_compile.bat`
+`modules_bat/subversion-svn.bat`
+*  add avx on log filename
+`silent-httpd-build.bat`
+`silent-subversion-build.bat`
+*  cut apr in compile & install for subversion pathed version build
+`httpd-build.bat`
+`modules_bat/apr_compile.bat`
+`modules_bat/apr_install.bat`
+*  build & copie patched apr_crypto_openssl-1.dll build all tests
+`modules_bat/subversion-svn.bat`
+*  add zlib & openssl support
+`modules_bat/libssh2.bat`
+*  module name incorrect
+`phpsdk-local.bat`
+*  php_xdiff
+`modules_bat/libxdiff-php.bat`
+`phpsdk-config_make-7.2.bat`
+`phpsdk-config_make-7.3.bat`
+`phpsdk-local.bat`
+*  Windows Kit 17134 => 17763
+`subversion_vcxproj.sh`
+`xCommon.bat`
+*  copy build to d: github directory
+`modules_bat/subversion-svn.bat`
+*  -DBUILD_MT_RELEASE=ON doesn't exist anymore in 3.26
+`modules_bat/sqlite-svn.bat`
+*  GSSAPI BROTLI not implemented
+`modules_bat/serf-svn.bat`
+*  fix jemalloc cyg version 32 / 64
+`modules_bat/jemalloc.bat`
+*  php 7.3
+`phpsdk-local.bat`
+*  disable static & asio
+`modules_bat/nghttp2.bat`
+*  dont copy deps to mod_md github
+`modules_bat/httpd.bat`
+*  add static lib build
+`modules_bat/nghttp2.bat`
+*  deps mode static|| dll in var
+`modules_bat/boost.bat`
+`modules_bat/curl.bat`
+*  correct bug zlib dynamic
+`modules_bat/openssl.bat`
+*  variabilisation pour 7.2 & 7.3
+`phpsdk-config_make-7.2.bat`
+`phpsdk-config_make-7.3.bat`
+`phpsdk-local.bat`
+*  rename ssh2 => https &! php
+`modules_bat/libssh2.bat`
+*  copy mod_md in submodule httpd
+`httpd-build.bat`
+`modules_bat/httpd.bat`
+*  reconfigure correctly for VC-WIN64A (avoid issue https://github.com/nono303/mod_md/issues/3)
+`modules_bat/openssl.bat`
+*  correct bug x64 => %ARCH%
+`modules_bat/curl.bat`
+*  copy mod_md
+`httpd-build.bat`
+*  VC-WIN64A-masm => souci nommage dll sans -x64 https://www.apachelounge.com/viewtopic.php?p=37593#37593 https://github.com/nono303/mod_md/issues/3
+`x64.bat`
+*  SEDAVX => enable-native-intrinsics correct bug x64 lib & include depsnono
+`phpsdk-config_make.bat`
+*  7.2 => 7.3
+`phpsdk-local.bat`
+*  parse_context doesn't exist anymore
+`modules_bat/protobuf-php.bat`
+*  %PHPDEPS% + copy include
+`modules_bat/bzip2.bat`
+`modules_bat/curl.bat`
+`modules_bat/freetype-php.bat`
+`modules_bat/libiconv-php.bat`
+`modules_bat/libpng-php.bat`
+`phpsdk-config_make.bat`
+`phpsdk-local.bat`
+`xCommon.bat`
+*  %PHPDEPS%
+`modules_bat/libxpm-php.bat`
+*  %PHPDEPS%
+`modules_bat/protobuf-php.bat`
+*  force copy
+`modules_bat/subversion-svn.bat`
+*  CRLF
+`modules_bat/libssh2-php.bat`
+`modules_bat/tidy-php.bat`
+*  clean output add tag ls-remote
+`git-fetch.php`
+*  echo on one build dir cleaned on common
+`httpd-build.bat`
+`xCommon.bat`
+*  echo on one build dir cleaned on common
+`xCommon.bat`
+*  keep autogen for includes
+`modules_bat/jemalloc.bat`
+*  keep echo on
+`silent-git-fetch.bat`
+`silent-httpd-build.bat`
+`silent-php-build.bat`
+`silent-subversion-build.bat`
+*  add copy git to memcache dll
+`phpsdk-local.bat`
+*  correct bugs for buildall
+`phpsdk-config_make.bat`
+`phpsdk-local.bat`
+*  correct sed x86 / x64
+`modules_bat/openssl.bat`
+*  silent tee log
+`silent-git-fetch.bat`
+`silent-httpd-build.bat`
+`silent-subversion-build.bat`
+*  NMAKE_OPTS disable /B
+`xCommon.bat`
+*  change log path don't clean php72sdk
+`git-fetch.php`
+*  copy required include not in build
+`modules_bat/protobuf-php.bat`
+*  correct build dir for x86
+`modules_bat/jemalloc.bat`
+`silent-php-build.bat`
+*  build all var + protobuf deps
+`modules_bat/protobuf-php.bat`
+`phpsdk-local.bat`
+*  mysqlx api
+`phpsdk-config_make.bat`
+*  fetch before status & tag log
+`git-fetch.php`
+*  create bin lib include in c:\httpd-sdk\install\ (jemalloc bug)
+`httpd-build.bat`
+*  delete and don't move exp file
+`modules_bat/jemalloc.bat`
+*  remove pause for silent build
+`modules_bat/subversion-svn.bat`
+*  add sqlite (ommited)
+`subversion-build.bat`
+*  global NMAKE_OPTS
+`modules_bat/brotli.bat`
+`modules_bat/bzip2.bat`
+`modules_bat/c-ares.bat`
+`modules_bat/curl.bat`
+`modules_bat/httpd.bat`
+`modules_bat/jansson.bat`
+`modules_bat/libev.bat`
+`modules_bat/libevent.bat`
+`modules_bat/libexpat.bat`
+`modules_bat/libxml2.bat`
+`modules_bat/lua.bat`
+`modules_bat/nghttp2.bat`
+`modules_bat/pcre.bat`
+`modules_bat/serf-svn.bat`
+`modules_bat/sqlite-svn.bat`
+`modules_bat/zlib.bat`
+`phpsdk-config_make.bat`
+`xCommon.bat`
+*  optimisation build: x64 masm & CFLAGS + LDFLAGS
+`modules_bat/openssl.bat`
+`x64.bat`
+*  php => do_php
+`silent-git-fetch.bat`
+*  add c-ares & libev for nghttp2
+`httpd-build.bat`
+`modules_bat/c-ares.bat`
+`modules_bat/libev.bat`
+*  add extra performance CFLags & sed for LTCG
+`modules_bat/nghttp2.bat`
+*  add openssl src dir to extra include
+`modules_bat/httpd.bat`
+*  add php to path
+`xCommon.bat`
+*  active autogen (since git clean...)
+`modules_bat/jemalloc.bat`
+*  refactor svn & deps build
+`modules_bat/serf-svn.bat`
+`modules_bat/sqlite-svn.bat`
+`modules_bat/subversion-svn.bat`
+`subversion-build.bat`
+*  bat2php
+`git-fetch.bat`
+`git-fetch.php`
+*  ydmhis.bat
+`silent-git-fetch.bat`
+`silent-httpd-build.bat`
+`silent-subversion-build.bat`
+`ymdhis.bat`
+*  httpd 2.4.36 mod_h2 1.11.3 php 7.2.11
+`src-version.xlsx`
+*  add avx build & install dir for httpd
+`xCommon.bat`
+*  subversion => module php => build all type for arch
+`phpsdk-local.bat`
+`subversion-build.bat`
+*  mod_h2 1.11.1
+`modules_bat/serf-svn.bat`
+`modules_bat/sqlite-svn.bat`
+`modules_bat/subversion-svn.bat`
+`phpsdk-config_make.bat`
+`src-version.xlsx`
+*  zlib with ASM support https://stackoverflow.com/questions/29505121/cmake-zlib-build-on-windows
+`modules_bat/zlib.bat`
+`x64.bat`
+`x86.bat`
+*  nghhtp2 1.34 svn 1.10.3
+`src-version.xlsx`
+*  20180930
+`src-version.xlsx`
+*  outdir name for avx few enhancement
+`phpsdk-local.bat`
+*  openssl 1.1.1
+`src-version.xlsx`
+*  zlib on msvc15
+`src-version.xlsx`
+*  2018-09-11
+`modules_bat/apr.bat`
+`modules_bat/brotli.bat`
+`modules_bat/bzip2.bat`
+`modules_bat/curl.bat`
+`modules_bat/freetype-php.bat`
+`modules_bat/httpd.bat`
+`modules_bat/jansson.bat`
+`modules_bat/jemalloc.bat`
+`modules_bat/libevent.bat`
+`modules_bat/libexpat.bat`
+`modules_bat/libiconv-php.bat`
+`modules_bat/libiconv.bat`
+`modules_bat/libmaxminddb.bat`
+`modules_bat/libpng-php.bat`
+`modules_bat/libxml2.bat`
+`modules_bat/libxpm-php.bat`
+`modules_bat/lua.bat`
+`modules_bat/mod_h264_streaming.bat`
+`modules_bat/nghttp2.bat`
+`modules_bat/openssl.bat`
+`modules_bat/pcre.bat`
+`modules_bat/zlib.bat`
+`src-version.xlsx`
+`x64.bat`
+`x86.bat`
+`xCommon.bat`
+*  Add README.md
+*  update pcre git repo fix old stuff for jemalloc
+`modules_bat/jemalloc.bat`
+`src-version.xlsx`
+*  few corrections: - xCommon full PATH - path in DOS8.3 - AVX bugfix
+`x64.bat`
+`x86.bat`
+`xCommon.bat`
+*  correct bug avx
+`modules_bat/httpd.bat`
+*  php builds deps => modules
+`modules_bat/freetype-php.bat`
+`modules_bat/libiconv-php.bat`
+`modules_bat/libpng-php.bat`
+`modules_bat/libxpm-php.bat`
+`php_deps-build.bat`
+`phpsdk-local.bat`
+*  decoupage httpd-build en sous modules
+`httpd-build.bat`
+`modules_bat/apr.bat`
+`modules_bat/brotli.bat`
+`modules_bat/bzip2.bat`
+`modules_bat/curl.bat`
+`modules_bat/httpd.bat`
+`modules_bat/jansson.bat`
+`modules_bat/jemalloc.bat`
+`modules_bat/libevent.bat`
+`modules_bat/libexpat.bat`
+`modules_bat/libiconv.bat`
+`modules_bat/libmaxminddb.bat`
+`modules_bat/libxml2.bat`
+`modules_bat/lua.bat`
+`modules_bat/mod_h264_streaming.bat`
+`modules_bat/nghttp2.bat`
+`modules_bat/openssl.bat`
+`modules_bat/pcre.bat`
+`modules_bat/zlib.bat`
+*  add modules_bat
+`xCommon.bat`
+*  fact x86 & x64 commons to xCommon.bat ext AVX on xCommon (php & httpd)
+`httpd-build.bat`
+`phpsdk-local.bat`
+`x64.bat`
+`x86.bat`
+`xCommon.bat`
+*  php-sdk-2.1.8
+`src-version.xlsx`
+*  enable intl
+`phpsdk-local.bat`
+*  remove no-tests option for opensssl 1.1.0i (unsupported)
+`httpd-build.bat`
+`php_deps-build.bat`
+*  php 7.2.9 openssl 1.1.0i memcached 1.5.10 libexpat 2.2.6
+`src-version.xlsx`
+*  mod_md 1.1.16
+`src-version.xlsx`
+*  move extracompile flags from sh to cmake opt add /arch:AVX for httpd xdebug 2.6.1
+`httpd-build.bat`
+`httpd_flags_RelWithDebInfo.sh`
+`src-version.xlsx`
+*  clean & fix for 1.10.2
+`subversion-build.bat`
+`subversion_vcxproj.sh`
+*  0724
+`src-version.xlsx`
+*  set with default parameters
+`php_deps-build.bat`
+`phpsdk-local.bat`
+*  add "C:\src\mod_wku_bt"
+`git-fetch.bat`
+*  externalize AVX
+`phpsdk-local.bat`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2655 f19f5125-b473-6040-a4d2-80918b615817
+`httpd-build.bat`
+`php_deps-build.bat`
+*  add freetype libpng libxpm change libiconv
+`src-version.xlsx`
+*  change python path order
+`x64.bat`
+`x86.bat`
+*  add freetype libpng libxpm
+`git-fetch.bat`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2650 f19f5125-b473-6040-a4d2-80918b615817
+`php_deps-build.bat`
+`phpsdk-local.bat`
+*  correction bug libiconv path et arch
+`httpd-build.bat`
+*  silent LOGNAME var TS var LTCG
+`phpsdk-local.bat`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2647 f19f5125-b473-6040-a4d2-80918b615817
+`src-version.xlsx`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2629 f19f5125-b473-6040-a4d2-80918b615817
+`src-version.xlsx`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2628 f19f5125-b473-6040-a4d2-80918b615817
+`phpsdk-local.bat`
+*  libiconv -MT => std
+`httpd-build.bat`
+*  curl 7.60
+`src-version.xlsx`
+*  libiconv 1.14 => 1.15
+`src-version.xlsx`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2619 f19f5125-b473-6040-a4d2-80918b615817
+`subversion_vcxproj.sh`
+*  result to local insatll dir
+`subversion-build.bat`
+*  libiconv 1.14 => 1.15
+`httpd-build.bat`
+*  windows kit 10.0.16299.0 10.0.17134.0
+`phpsdk-local.bat`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2558 f19f5125-b473-6040-a4d2-80918b615817
+`git-fetch.bat`
+*  refactor
+`httpd-build.bat`
+`phpsdk-local.bat`
+`silent-build.bat`
+`silent-git-fetch.bat`
+`silent-httpd-build.bat`
+`silent-subversion-build.bat`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2555 f19f5125-b473-6040-a4d2-80918b615817
+`apr_vcx/apr.vcxproj`
+`apr_vcx/apr_crypto_nss.vcxproj`
+`apr_vcx/apr_crypto_openssl.vcxproj`
+`apr_vcx/apr_dbd_mysql.vcxproj`
+`apr_vcx/apr_dbd_odbc.vcxproj`
+`apr_vcx/apr_dbd_oracle.vcxproj`
+`apr_vcx/apr_dbd_pgsql.vcxproj`
+`apr_vcx/apr_dbd_sqlite2.vcxproj`
+`apr_vcx/apr_dbd_sqlite3.vcxproj`
+`apr_vcx/apr_dbm_db.vcxproj`
+`apr_vcx/apr_dbm_gdbm.vcxproj`
+`apr_vcx/apr_ldap.vcxproj`
+`apr_vcx/aprapp.vcxproj`
+`apr_vcx/apriconv.vcxproj`
+`apr_vcx/aprutil.vcxproj`
+`apr_vcx/libapr.vcxproj`
+`apr_vcx/libaprapp.vcxproj`
+`apr_vcx/libapriconv.vcxproj`
+`apr_vcx/libapriconv_ccs_modules.vcxproj`
+`apr_vcx/libapriconv_ces_modules.vcxproj`
+`apr_vcx/libaprutil.vcxproj`
+`apr_vcx/preaprapp.vcxproj`
+`apr_vcx/preapriconv.vcxproj`
+`apr_vcx/preaprutil.vcxproj`
+`apr_vcx/prelibaprapp.vcxproj`
+`build.bat`
+`git-fetch.bat`
+`patch/apr-iconv.patch`
+`patch/bzip2.patch`
+`patch/httpd.patch`
+`patch/jemalloc.patch`
+`patch/libxml2.patch`
+`patch/lua.patch`
+`patch/mod_h264.patch`
+`patch/mod_maxminddb.patch`
+`patch/nghttp2.patch`
+`patch/openssl.patch`
+`silent-build.bat`
+`src-version.xlsx`
+`svn-build.bat`
+`x64.bat`
+`x86.bat`
+*  x86 & x64 OK
+`apr_vcx/apr_crypto_nss.vcxproj`
+`apr_vcx/apr_crypto_openssl.vcxproj`
+`apr_vcx/apr_dbd_mysql.vcxproj`
+`apr_vcx/apr_dbd_odbc.vcxproj`
+`apr_vcx/apr_dbd_oracle.vcxproj`
+`apr_vcx/apr_dbd_pgsql.vcxproj`
+`apr_vcx/apr_dbd_sqlite2.vcxproj`
+`apr_vcx/apr_dbd_sqlite3.vcxproj`
+`apr_vcx/apr_dbm_db.vcxproj`
+`apr_vcx/apr_dbm_gdbm.vcxproj`
+`apr_vcx/apr_ldap.vcxproj`
+`apr_vcx/libapr.vcxproj`
+`apr_vcx/libapriconv.vcxproj`
+`apr_vcx/libaprutil.vcxproj`
+*  x86 OK
+`apr_vcx/apr.vcxproj`
+`apr_vcx/apr_crypto_nss.vcxproj`
+`apr_vcx/apr_crypto_openssl.vcxproj`
+`apr_vcx/apr_dbd_mysql.vcxproj`
+`apr_vcx/apr_dbd_odbc.vcxproj`
+`apr_vcx/apr_dbd_oracle.vcxproj`
+`apr_vcx/apr_dbd_pgsql.vcxproj`
+`apr_vcx/apr_dbd_sqlite2.vcxproj`
+`apr_vcx/apr_dbd_sqlite3.vcxproj`
+`apr_vcx/apr_dbm_db.vcxproj`
+`apr_vcx/apr_dbm_gdbm.vcxproj`
+`apr_vcx/apr_ldap.vcxproj`
+`apr_vcx/aprapp.vcxproj`
+`apr_vcx/apriconv.vcxproj`
+`apr_vcx/aprutil.vcxproj`
+`apr_vcx/libapr.vcxproj`
+`apr_vcx/libaprapp.vcxproj`
+`apr_vcx/libapriconv.vcxproj`
+`apr_vcx/libaprutil.vcxproj`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2529 f19f5125-b473-6040-a4d2-80918b615817
+`apr_vcx/apr.vcxproj`
+`apr_vcx/aprapp.vcxproj`
+`apr_vcx/libapr.vcxproj`
+`apr_vcx/libaprapp.vcxproj`
+`apr_vcx/preaprapp.vcxproj`
+`apr_vcx/prelibaprapp.vcxproj`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2528 f19f5125-b473-6040-a4d2-80918b615817
+`apr_vcx/apriconv.vcxproj`
+`apr_vcx/libapriconv.vcxproj`
+`apr_vcx/libapriconv_ccs_modules.vcxproj`
+`apr_vcx/libapriconv_ces_modules.vcxproj`
+`apr_vcx/preapriconv.vcxproj`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2527 f19f5125-b473-6040-a4d2-80918b615817
+`apr_vcx/apr_crypto_nss.vcxproj`
+`apr_vcx/apr_crypto_openssl.vcxproj`
+`apr_vcx/apr_dbd_mysql.vcxproj`
+`apr_vcx/apr_dbd_odbc.vcxproj`
+`apr_vcx/apr_dbd_oracle.vcxproj`
+`apr_vcx/apr_dbd_pgsql.vcxproj`
+`apr_vcx/apr_dbd_sqlite2.vcxproj`
+`apr_vcx/apr_dbd_sqlite3.vcxproj`
+`apr_vcx/apr_dbm_db.vcxproj`
+`apr_vcx/apr_dbm_gdbm.vcxproj`
+`apr_vcx/apr_ldap.vcxproj`
+`apr_vcx/aprutil.vcxproj`
+`apr_vcx/libaprutil.vcxproj`
+`apr_vcx/preaprutil.vcxproj`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2522 f19f5125-b473-6040-a4d2-80918b615817
+`git-fetch.bat`
+`svn-build.bat`
+*  add subversion build
+`git-fetch.bat`
+`subversion_vcxproj.sh`
+`svn-build.bat`
+`x64.bat`
+`x86.bat`
+*  openssl 1.1.0h
+`patch/openssl.patch`
+*  add maxming & subversion
+`git-fetch.bat`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2485 f19f5125-b473-6040-a4d2-80918b615817
+`build.bat`
+`httpd_flags.sh`
+`httpd_flags_RelWithDebInfo.sh`
+`httpd_flags_Release.sh`
+`patch/apr-iconv.patch`
+`patch/httpd.patch`
+`patch/libxml2.patch`
+`patch/mod_maxminddb.patch`
+`tmp.bat`
+*  patch myopen for utf-8
+`patch/mod_h264.patch`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2475 f19f5125-b473-6040-a4d2-80918b615817
+`build.bat`
+`fixBaseAddrs.pl`
+`patch/httpd.patch`
+`patch/mod_h264.patch`
+`tmp.bat`
+*  refactor
+`build.bat`
+`git-fetch.2018-02-19-15-36-13.log`
+`git-fetch.bat`
+`patch/apr-iconv.patch`
+`patch/bzip2.patch`
+`patch/httpd.patch`
+`patch/jemalloc.patch`
+`patch/libxml2.patch`
+`patch/lua.patch`
+`patch/nghttp2.patch`
+`patch/openssl.patch`
+`tmp.bat`
+`version.csv`
+*  remove link /base (32bits)
+`2.4.x-mod_md.patch/apr-iconv.patch`
+*  add git to path
+`x64.bat`
+`x86.bat`
+*  apr refactor cmakefile => sln
+`build.bat`
+*  diff with git --diff
+`2.4.x-mod_md.patch/bzip2.patch`
+`2.4.x-mod_md.patch/httpd.ApacheMonitor.rc.patch`
+`2.4.x-mod_md.patch/httpd.main.c.patch`
+`2.4.x-mod_md.patch/httpd.mod_proxy_fcgi.c.patch`
+`2.4.x-mod_md.patch/httpd.patch`
+`2.4.x-mod_md.patch/httpd.ssl_engine_init.c.patch`
+`2.4.x-mod_md.patch/jemalloc.patch`
+`2.4.x-mod_md.patch/libxml2.patch`
+`2.4.x-mod_md.patch/lua.patch`
+`2.4.x-mod_md.patch/nghttp2.patch`
+`2.4.x-mod_md.patch/openssl.patch`
+*  2.4.30
+`2.4.x-mod_md.patch/httpd.ApacheMonitor.rc.patch`
+`2.4.x-mod_md.patch/httpd.CMakelists.txt.patch`
+`2.4.x-mod_md.patch/httpd.main.c.patch`
+`2.4.x-mod_md.patch/httpd.mod_proxy_fcgi.c.patch`
+`git-fetch.2018-02-19-15-36-13.log`
+`git-fetch.bat`
+`silent-git-fetch.bat`
+`version.csv`
+*  curl with winssl
+`build.bat`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2329 f19f5125-b473-6040-a4d2-80918b615817
+`2.4.x-mod_md.patch/bzip2-1.0.6.makefile.msc.patch`
+`2.4.x-mod_md.patch/httpd.ApacheMonitor.rc.patch`
+`2.4.x-mod_md.patch/httpd.CMakelists.txt.patch`
+`2.4.x-mod_md.patch/httpd.main.c.patch`
+`2.4.x-mod_md.patch/jemalloc-cmake.msvc.projects.patch`
+`2.4.x-mod_md.patch/libxml2.win32_Makefile.msvc.patch`
+`2.4.x-mod_md.patch/lua.CMakeLists.txt`
+`2.4.x-mod_md.patch/nghttp2.FindLibevent.cmake.patch`
+`2.4.x-mod_md.patch/openssl.windows-makefile.tmpl.patch`
+`build.bat`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2328 f19f5125-b473-6040-a4d2-80918b615817
+`2.4.x-mod_md.patch/bzip2-1.0.6.makefile.msc.patch`
+`2.4.x-mod_md.patch/libxml2.win32_Makefile.msvc.patch`
+`build.bat`
+`build_silent.bat`
+`git-fetch.bat`
+`silent-build.bat`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2327 f19f5125-b473-6040-a4d2-80918b615817
+`2.4.x-mod_md.patch/mod_proxy_fcgi.c.patch`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2314 f19f5125-b473-6040-a4d2-80918b615817
+`CMakelists.txt.patch`
+`build.bat`
+`httpd_flags.sh`
+`main.c.patch`
+`x64.bat`
+`x86.bat`
+*  20180109
+`git-fetch.bat`
+`version.csv`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2304 f19f5125-b473-6040-a4d2-80918b615817
+`build.bat`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2284 f19f5125-b473-6040-a4d2-80918b615817
+`2.4.x-mod_md.patch/httpd.ApacheMonitor.rc.patch`
+`2.4.x-mod_md.patch/httpd.CMakelists.txt.patch`
+`2.4.x-mod_md.patch/httpd.main.c.patch`
+`2.4.x-mod_md.patch/httpd.ssl_engine_init.c.patch`
+`2.4.x-mod_md.patch/nghttp2.FindLibevent.cmake.patch`
+`2.4.x-mod_md.patch/openssl.windows-makefile.tmpl.patch`
+`build.bat`
+`build_silent.bat`
+`httpd_flags_RelWithDebInfo.sh`
+`httpd_flags_Release.sh`
+`version.csv`
+`x64.bat`
+`x86.bat`
+*  mod_md 1.1.8 + httpd-md
+`2.4.x-mod_md.patch/CMakelists.txt.patch`
+`2.4.x-mod_md.patch/main.c.patch`
+`build.bat`
+`version.csv`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2246 f19f5125-b473-6040-a4d2-80918b615817
+`2.4.x-mod_md.patch/ApacheMonitor.rc.patch`
+`2.4.x-mod_md.patch/CMakelists.txt.patch`
+`2.4.x-mod_md.patch/main.c.patch`
+`build.bat`
+`fixBaseAddrs.pl`
+*  factorisation commandes x86 & x64
+`x64.bat`
+`x86.bat`
+*  git-svn-id: https://svn.nono303.net/build/msvc/httpd@2220 f19f5125-b473-6040-a4d2-80918b615817
+*  initial
+`CMakelists.txt.patch`
+`build.bat`
+`httpd.exe.manifest`
+`httpd_flags.sh`
+`main.c.patch`
+`version.csv`
+`x64.bat`
+`x86.bat`
 
 
 
