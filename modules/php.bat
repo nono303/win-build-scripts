@@ -11,6 +11,8 @@ REM ********
 
 	REM ~~~~~~~~~~~~ php-src
 call %PATH_MODULES_COMMON%\init.bat php-src
+echo     # apply php_curl.patch
+git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php_curl.patch
 set PHPVER=%SCM_TAG:~4,3%
 set PHPVERFULL=%SCM_TAG:~4%
 
