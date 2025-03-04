@@ -5,10 +5,6 @@ set MOD_ZSTD_RELEASE=%MSVC_DEPS%_%ARCH%%AVXB%
 if not exist %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\. mkdir %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%
 if NOT "%C_STD_VER%"=="" (set __CNFC=/std:c%C_STD_VER%)
 
-REM call go zstd nolog
-REM xcopy /C /F /Y %PATH_INSTALL%\bin\zstd.pdb %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\*
-REM xcopy /C /F /Y %PATH_INSTALL%\bin\zstd.dll %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\*
-
 call %PATH_MODULES_COMMON%\init.bat httpd varonly
 set HTTPD_VERSION=%SCM_TAG%
 call %PATH_MODULES_COMMON%\init.bat %1 varonly
@@ -38,14 +34,10 @@ C:\sdk\release\vs17_x64-avx2\lib\libaprutil-1.lib
 
 call do_php %PATH_UTILS%\sub\version.php %1 %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.so "httpd:%HTTPD_VERSION%"
 
-if exist %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%.zip rm -fv %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%.zip
-rm -fv %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.exp
-rm -fv %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.lib
-%BIN_SEVENZ% a -tzip -y -ba -bso1 %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%.zip %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\*.*
-
-if %MOD_ZSTD_RELEASE%==vs17_x64-avx2 (
-	xcopy /C /F /Y %PATH_INSTALL%\bin\libzstd.dll F:\telecharger\*
-	xcopy /C /F /Y %PATH_INSTALL%\bin\libzstd.pdb F:\telecharger\*
-	xcopy /C /F /Y %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.so F:\telecharger\*
-	xcopy /C /F /Y %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.pdb F:\telecharger\*
-)
+REM if exist %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%.zip rm -fv %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%.zip
+REM rm -fv %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.exp
+REM rm -fv %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.lib
+REM call go zstd nolog
+REM xcopy /C /F /Y %PATH_INSTALL%\bin\libzstd.pdb %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\*
+REM xcopy /C /F /Y %PATH_INSTALL%\bin\libzstd.dll %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\*
+REM %BIN_SEVENZ% a -tzip -y -ba -bso1 %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%.zip %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\*.*
