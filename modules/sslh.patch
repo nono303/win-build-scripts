@@ -37,14 +37,3 @@ index 160d9fc..ac99b4e 100644
     int res, num_addr_listen;
     struct listen_endpoint *listen_sockets;
  
-diff --git a/version.h b/version.h
-index 2bfe6b1..0768109 100644
---- a/version.h
-+++ b/version.h
-@@ -1,5 +1,5 @@
- #ifndef VERSION_H 
- #define VERSION_H 
- 
--#define VERSION "v2.1.4-29-ge527b8e-dirty"
-+#define VERSION "v2.1.4-35-g7a6673a-dirty"
- #endif
