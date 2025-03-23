@@ -1,13 +1,26 @@
 @echo off
-set MOD_ZSTD_PATH=%PATH_SRC%\%1
-set MOD_ZSTD_RELEASE=%MSVC_DEPS%_%ARCH%%AVXB%
 
+set MOD_ZSTD_PATH=%PATH_SRC%\%1
+set J8_TEST=no
+
+setlocal enabledelayedexpansion
+set argCount=0
+for %%x in (%*) do (
+   set /A argCount+=1
+   set "argVec[!argCount!]=%%~x"
+)
+for /L %%i in (2,1,%argCount%) do (
+	if /I "!argVec[%%i]!"=="j8"		set J8_TEST=yes
+	if /I "!argVec[%%i]!"=="cstream"	set MOD_ZSTD_BRANCH=.cstream
+)
+
+set MOD_ZSTD_RELEASE=%MSVC_DEPS%_%ARCH%%AVXB%
 if not exist %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\. mkdir %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%
 if NOT "%C_STD_VER%"=="" (set __CNFC=/std:c%C_STD_VER%)
 
 call %PATH_MODULES_COMMON%\init.bat httpd varonly
 set HTTPD_VERSION=%SCM_TAG%
-call %PATH_MODULES_COMMON%\init.bat %1 varonly
+call %PATH_MODULES_COMMON%\init.bat %1%MOD_ZSTD_BRANCH% varonly
 
 cl.exe /nologo ^
 -IC:\sdk\release\vs17_x64-avx2\include ^
@@ -32,12 +45,19 @@ C:\sdk\release\vs17_x64-avx2\lib\libhttpd.lib ^
 C:\sdk\release\vs17_x64-avx2\lib\libapr-1.lib ^
 C:\sdk\release\vs17_x64-avx2\lib\libaprutil-1.lib
 
+rm -fv %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.exp
+rm -fv %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.lib
 call do_php %PATH_UTILS%\sub\version.php %1 %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.so "httpd:%HTTPD_VERSION%"
 
-REM if exist %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%.zip rm -fv %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%.zip
-REM rm -fv %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.exp
-REM rm -fv %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.lib
-REM call go zstd nolog
-REM xcopy /C /F /Y %PATH_INSTALL%\bin\libzstd.pdb %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\*
-REM xcopy /C /F /Y %PATH_INSTALL%\bin\libzstd.dll %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\*
-REM %BIN_SEVENZ% a -tzip -y -ba -bso1 %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%.zip %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\*.*
+if "%J8_TEST%"=="yes" (
+	call C:\bin\wscc_sysinternals\pskill httpd
+	rm -fv S:/httpd/modules/mod_zstd.*
+	xcopy /C /F /Y %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.* S:\httpd\modules\*
+	net start Apache2.4
+) else (
+	if exist %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%.zip rm -fv %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%.zip
+	REM call go zstd nolog
+	xcopy /C /F /Y %PATH_INSTALL%\bin\libzstd.pdb %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\*
+	xcopy /C /F /Y %PATH_INSTALL%\bin\libzstd.dll %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\*
+	%BIN_SEVENZ% a -tzip -y -ba -bso1 %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%.zip %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\*.*
+)
