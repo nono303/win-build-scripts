@@ -1,29 +1,51 @@
 Index: build.gradle
 ===================================================================
---- build.gradle	(revision 2782)
+--- build.gradle	(revision 2792)
 +++ build.gradle	(working copy)
-@@ -6,7 +6,7 @@
+@@ -4,13 +4,16 @@
+ 
+ plugins {
      id 'distribution'
++    // https://plugins.gradle.org/plugin/at.bxm.svntools
      id 'at.bxm.svntools' version '3.1'
++    // https://plugins.gradle.org/plugin/org.gradle.crypto.checksum
      id 'org.gradle.crypto.checksum' version '1.4.0'
 -    id 'com.diffplug.spotless' version '6.21.0'
-+    id 'com.diffplug.spotless' version '7.0.0.BETA4'
++    // https://mvnrepository.com/artifact/com.diffplug.spotless/spotless-plugin-gradle
++    id 'com.diffplug.spotless' version '7.0.2'
  }
  
- group 'mobac.sourceforge.io'
-@@ -21,7 +21,10 @@
-             // required for javax.media:jai-core:1.1.3 and com.sun.media:jai-codec:1.1.3
-             url "https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/"
-         }
+-group 'mobac.sourceforge.io'
+-version '2.3.3'
++group = 'mobac.sourceforge.io'
++version = '2.3.3'
+ 
+ println("SVN revision $svntools.info.revisionNumber")
+ 
+@@ -17,15 +20,16 @@
+ allprojects {
+     repositories {
+         mavenCentral()
+-        maven {
+-            // required for javax.media:jai-core:1.1.3 and com.sun.media:jai-codec:1.1.3
+-            url "https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/"
+-        }
 -
-+        maven {
-+            // https://github.com/mapsforge/mapsforge/blob/master/docs/Integration.md 
-+            url 'https://jitpack.io' 
-+        }
-         // maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+-        // maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
++	// required for javax.media:jai-core:1.1.3 and com.sun.media:jai-codec:1.1.3
++        maven {url = "https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/"}
++        // https://github.com/mapsforge/mapsforge/blob/master/docs/Integration.md
++	maven {url = 'https://jitpack.io'}
++	// https://github.com/mapsforge/mapsforge/blob/master/docs/Integration.md
++	maven {url = 'https://jitpack.io'}
      }
      ext {
-@@ -32,9 +35,9 @@
+         svnRevision = "$svntools.info.revisionNumber"
++	projectVersion = project.rootProject.version.toString()
+     }
+     tasks.withType(JavaCompile) {
+         options.encoding = 'UTF-8'
+@@ -32,9 +36,9 @@
          options.incremental = true
          options.fork = true
          options.compilerArgs << '-Xlint:unchecked'
@@ -42,33 +64,61 @@ Cannot display: file marked as a binary type.
 svn:mime-type = application/octet-stream
 Index: gradle/wrapper/gradle-wrapper.properties
 ===================================================================
---- gradle/wrapper/gradle-wrapper.properties	(revision 2782)
+--- gradle/wrapper/gradle-wrapper.properties	(revision 2792)
 +++ gradle/wrapper/gradle-wrapper.properties	(working copy)
 @@ -1,6 +1,6 @@
  distributionBase=GRADLE_USER_HOME
  distributionPath=wrapper/dists
 -distributionUrl=https\://services.gradle.org/distributions/gradle-8.9-bin.zip
-+distributionUrl=https\://services.gradle.org/distributions/gradle-8.11.1-bin.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-8.13-bin.zip
  networkTimeout=10000
  validateDistributionUrl=true
  zipStoreBase=GRADLE_USER_HOME
+Index: gradlew
+===================================================================
+--- gradlew	(revision 2792)
++++ gradlew	(working copy)
+@@ -86,8 +86,7 @@
+ # shellcheck disable=SC2034
+ APP_BASE_NAME=${0##*/}
+ # Discard cd standard output in case $CDPATH is set (https://github.com/gradle/gradle/issues/25036)
+-APP_HOME=$( cd -P "${APP_HOME:-./}" > /dev/null && printf '%s
+-' "$PWD" ) || exit
++APP_HOME=$( cd -P "${APP_HOME:-./}" > /dev/null && printf '%s\n' "$PWD" ) || exit
+ 
+ # Use the maximum available, or set MAX_FD != -1 to use that value.
+ MAX_FD=maximum
+@@ -206,7 +205,7 @@
+ DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
+ 
+ # Collect all arguments for the java command:
+-#   * DEFAULT_JVM_OPTS, JAVA_OPTS, JAVA_OPTS, and optsEnvironmentVar are not allowed to contain shell fragments,
++#   * DEFAULT_JVM_OPTS, JAVA_OPTS, and optsEnvironmentVar are not allowed to contain shell fragments,
+ #     and any embedded shellness will be escaped.
+ #   * For example: A user cannot expect ${Hostname} to be expanded, as it is an environment variable and will be
+ #     treated as '${Hostname}' itself on the command line.
 Index: mobac/build.gradle
 ===================================================================
---- mobac/build.gradle	(revision 2782)
+--- mobac/build.gradle	(revision 2792)
 +++ mobac/build.gradle	(working copy)
-@@ -4,37 +4,37 @@
+@@ -1,11 +1,11 @@
+ plugins {
+     id 'java-library'
++    // https://plugins.gradle.org/plugin/edu.sc.seis.launch4j
+     id 'edu.sc.seis.launch4j' version '3.0.6'
  }
  
  dependencies {
 -    def mapsforgeVersion = '0.20.0'
 -    // def mapsforgeVersion = 'master-SNAPSHOT'
-+    def mapsforgeVersion = '+'
++    def mapsforgeVersion = '0.24.1'
  
--    implementation "org.mapsforge:mapsforge-core:${mapsforgeVersion}"
--    implementation "org.mapsforge:mapsforge-map:${mapsforgeVersion}"
--    implementation "org.mapsforge:mapsforge-map-awt:${mapsforgeVersion}"
--    implementation "org.mapsforge:mapsforge-map-reader:${mapsforgeVersion}"
--    implementation "org.mapsforge:mapsforge-themes:${mapsforgeVersion}"
+     implementation "org.mapsforge:mapsforge-core:${mapsforgeVersion}"
+     implementation "org.mapsforge:mapsforge-map:${mapsforgeVersion}"
+@@ -12,29 +12,30 @@
+     implementation "org.mapsforge:mapsforge-map-awt:${mapsforgeVersion}"
+     implementation "org.mapsforge:mapsforge-map-reader:${mapsforgeVersion}"
+     implementation "org.mapsforge:mapsforge-themes:${mapsforgeVersion}"
 -    api 'org.apache-extras.beanshell:bsh:2.0b6'
 -    api 'commons-codec:commons-codec:1.15'
 -    api 'commons-io:commons-io:2.11.0'
@@ -90,11 +140,6 @@ Index: mobac/build.gradle
 -    testImplementation 'junit:junit:4.13.2'
 -    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
 -    testImplementation 'javax.servlet:servlet-api:2.5'
-+    implementation "com.github.mapsforge.mapsforge:mapsforge-core:${mapsforgeVersion}"
-+    implementation "com.github.mapsforge.mapsforge:mapsforge-map:${mapsforgeVersion}"
-+    implementation "com.github.mapsforge.mapsforge:mapsforge-map-awt:${mapsforgeVersion}"
-+    implementation "com.github.mapsforge.mapsforge:mapsforge-map-reader:${mapsforgeVersion}"
-+    implementation "com.github.mapsforge.mapsforge:mapsforge-themes:${mapsforgeVersion}"
  
 -    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 +    api 'org.apache-extras.beanshell:bsh:+'
@@ -123,9 +168,40 @@ Index: mobac/build.gradle
  }
  processResources {
      doLast {
+@@ -42,7 +43,7 @@
+         targetDir.mkdirs()
+         def props = new Properties()
+         props.setProperty("mobac.revision", "$svnRevision")
+-        props.setProperty("mobac.version", project.rootProject.version.toString())
++        props.setProperty("mobac.version", "$projectVersion")
+         new File(targetDir, "mobac-rev.properties").withWriter { props.store(it, null) }
+     }
+ }
+@@ -80,7 +81,7 @@
+     exclude("org/sqlite/native/Linux-Musl/**")
+     exclude("org/sqlite/native/Linux-Android/**")
+     exclude("org/sqlite/native/FreeBSD/**")
+-    duplicatesStrategy DuplicatesStrategy.EXCLUDE
++    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+ }
+ 
+ launch4j {
+Index: tilestore-util/build.gradle
+===================================================================
+--- tilestore-util/build.gradle	(revision 2792)
++++ tilestore-util/build.gradle	(working copy)
+@@ -26,7 +26,7 @@
+     exclude("module-info.class")
+     exclude("META-INF/*")
+     exclude("META-INF/maven/*")
+-    duplicatesStrategy DuplicatesStrategy.EXCLUDE
++    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+ }
+ 
+ task distArchive(type: Zip, dependsOn: ['jar']) {
 Index: mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(revision 2782)
+--- mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(revision 2792)
 +++ mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(working copy)
 @@ -34,15 +34,10 @@
  	static {
@@ -147,7 +223,7 @@ Index: mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java
  	}
 Index: mobac/src/main/java/mobac/gui/MainGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2782)
+--- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2792)
 +++ mobac/src/main/java/mobac/gui/MainGUI.java	(working copy)
 @@ -151,7 +151,7 @@
  
@@ -166,22 +242,9 @@ Index: mobac/src/main/java/mobac/gui/MainGUI.java
  
  		leftPanelContent = new JPanel(new GridBagLayout());
  		leftPanelContent.add(mapSourcePanel, gbc_eol);
-Index: mobac/src/main/java/mobac/gui/mapview/layer/MapAreaHighlightingLayer.java
-===================================================================
---- mobac/src/main/java/mobac/gui/mapview/layer/MapAreaHighlightingLayer.java	(revision 2782)
-+++ mobac/src/main/java/mobac/gui/mapview/layer/MapAreaHighlightingLayer.java	(working copy)
-@@ -157,7 +157,7 @@
- 	}
- 
- 	@Override
--	@SuppressWarnings("deprecation")
-+	@SuppressWarnings("removal")
- 	protected void finalize() throws Throwable {
- 		unregisterTreeListener();
- 		super.finalize();
 Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2782)
+--- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2792)
 +++ mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(working copy)
 @@ -43,7 +43,7 @@
  		JScrollPane mapSourceTreeScrollPane = new JScrollPane(mapSourceTree, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -194,7 +257,7 @@ Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
  	}
 Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2782)
+--- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2792)
 +++ mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(working copy)
 @@ -95,7 +95,7 @@
  
@@ -207,7 +270,7 @@ Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
  	private final Settings settings = Settings.getInstance();
 Index: mobac/src/main/java/mobac/mapsources/MapsforgeMapSource.java
 ===================================================================
---- mobac/src/main/java/mobac/mapsources/MapsforgeMapSource.java	(revision 2782)
+--- mobac/src/main/java/mobac/mapsources/MapsforgeMapSource.java	(revision 2792)
 +++ mobac/src/main/java/mobac/mapsources/MapsforgeMapSource.java	(working copy)
 @@ -48,7 +48,7 @@
  import org.mapsforge.map.reader.MapFile;
@@ -229,7 +292,7 @@ Index: mobac/src/main/java/mobac/mapsources/MapsforgeMapSource.java
  	@Override
 Index: mobac/src/main/java/mobac/program/AtlasThread.java
 ===================================================================
---- mobac/src/main/java/mobac/program/AtlasThread.java	(revision 2782)
+--- mobac/src/main/java/mobac/program/AtlasThread.java	(revision 2792)
 +++ mobac/src/main/java/mobac/program/AtlasThread.java	(working copy)
 @@ -203,13 +203,13 @@
  			}
@@ -249,9 +312,9 @@ Index: mobac/src/main/java/mobac/program/AtlasThread.java
  		} catch (AtlasTestException e) {
 Index: mobac/src/main/java/mobac/program/download/MobacTrustManager.java
 ===================================================================
---- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2782)
+--- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2792)
 +++ mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(working copy)
-@@ -128,7 +128,7 @@
+@@ -129,7 +129,7 @@
  			defaultTrustManager.checkServerTrusted(chain, authType);
  		} catch (CertificateException e) {
  			X509Certificate cert = chain[0]; // get the leaf certificate
@@ -260,7 +323,7 @@ Index: mobac/src/main/java/mobac/program/download/MobacTrustManager.java
  			synchronized (this) {
  				String pubKeySha256Hash = getPublicKeySha256Hash(cert);
  				if (isCertificateTrusted(pubKeySha256Hash)) {
-@@ -137,10 +137,10 @@
+@@ -138,10 +138,10 @@
  				// TODO: Add GUI for manually adding this certificate as trusted.
  				String message = "Untrusted certificate encountered: publicKeyHash=\"" + pubKeySha256Hash
  						+ "\"; certificate issued for " + cert.getSubjectX500Principal();
