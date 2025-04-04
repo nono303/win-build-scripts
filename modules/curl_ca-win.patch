@@ -1,8 +1,11 @@
-diff --git "a/lib/url.c" "b/lib/url.c"
-index 516ee08a1..43862a86d 100644
---- "a/lib/url.c"
-+++ "b/lib/url.c"
-@@ -448,6 +448,14 @@ CURLcode Curl_init_userdefined(struct Curl_easy *data)
+ lib/url.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/lib/url.c b/lib/url.c
+index 2125a97af..b03f6c24b 100644
+--- a/lib/url.c
++++ b/lib/url.c
+@@ -449,6 +449,14 @@ CURLcode Curl_init_userdefined(struct Curl_easy *data)
      if(result)
        return result;
  #endif
