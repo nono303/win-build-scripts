@@ -1,7 +1,7 @@
 @echo off
 REM fix 'Could not determine '%PHP_SDK_VS%' directory' l.137 in phpsdk_setshell.bat
 set PHP_SDK_VC_DIR=%PATH_VS%\Common7\Tools
-	REM ~~~~~~~~~~~~ TS - NTS 
+	REM ~~~~~~~~~~~~ TS - NTS
 set PHP_BUILDTS=1
 set PHP_BUILDNTS=0
 
@@ -11,10 +11,16 @@ REM ********
 
 	REM ~~~~~~~~~~~~ php-src
 call %PATH_MODULES_COMMON%\init.bat php-src
-echo     # apply php_curl.patch
-git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php_curl.patch
 set PHPVER=%SCM_TAG:~4,3%
 set PHPVERFULL=%SCM_TAG:~4%
+
+	REM ~~~~~~~~~~~~ tmp patch
+echo     # apply php-src_pr17848.patch
+git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-src_pr17848.patch
+echo     # apply php-src_libxml2.14.patch
+git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-src_libxml2.14.patch
+
+exit /B
 
 	REM ~~~~~~~~~~~~ type of build : full / memcached / xdebug
 set PHP_BUILD_TYPE=%PHPVER%
@@ -92,7 +98,7 @@ for %%E in (php-sdk xdebug php-geos php-proj php-ogr php-ext-zstd pecl-datetime-
 set PHP_SRC_DIR=%PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\php-src
 set PHP_BUILD_DIR=%PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\build
 	REM other way only first time 'phpsdk_buildtree phpmaster'
-if not exist %PATH_SRC%\php-sdk\phpmaster\. mklink /J %PATH_SRC%\php-sdk\phpmaster %PATH_SDK_ROOT%\phpmaster 
+if not exist %PATH_SRC%\php-sdk\phpmaster\. mklink /J %PATH_SRC%\php-sdk\phpmaster %PATH_SDK_ROOT%\phpmaster
 	REM create directory structure
 if not exist %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\php-src\. mklink /J %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\php-src %PATH_SRC%\php-src
 if not exist %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\pecl\. mkdir %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\pecl
