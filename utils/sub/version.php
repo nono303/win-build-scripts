@@ -14,6 +14,8 @@
 	if(in_array($proot,["pecl-memcache","php-geos","php-ogr","php-proj","pecl-text-xdiff","php-ext-brotli","php-ext-zstd","xdebug","php-src"]))
 		$proot = "php";
 	$nogit = array(
+		"pcre2"				=> ["/#define VERSION \"([^\"]+)/s",
+							pathenv("PATH_SRC")."/".$argv[1]."/src/config.h.generic"],
 		"mod_zstd"			=> ["/#define MOD_ZSTD_VERSION \"([^\"]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/mod_zstd.h"],
 		"pthreads4w"		=> ["/#define  __PTW32_VERSION ([0-9+]),([0-9+]),([0-9+]),([0-9+])/s",
@@ -180,8 +182,8 @@
 					$ver_product .= "0";
 				if(str_starts_with($ver_product,"."))
 					$ver_product = "0".$ver_product;
-				if(str_ends_with($ver_product,"-dev"))
-					$ver_product = str_replace("-dev",".0",$ver_product);
+				if(str_ends_with($ver_product,"-dev") || str_ends_with($ver_product,"-DEV"))
+					$ver_product = substr($ver_product, 0, -4).".0";
 				$ver_file = $ver_product;
 				// letter in version : openssl & jpeg
 				preg_match("/([a-zA-Z])$/",$ver_file,$matches);

@@ -1,8 +1,8 @@
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 9e916174..6381aa5e 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -1281,10 +1281,10 @@ file(
+diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
+index 2d2e854a..77e71e43 100644
+--- "a/CMakeLists.txt"
++++ "b/CMakeLists.txt"
+@@ -1387,10 +1387,10 @@ file(
  file(GLOB man1 ${PROJECT_SOURCE_DIR}/doc/*.1)
  file(GLOB man3 ${PROJECT_SOURCE_DIR}/doc/*.3)
  
