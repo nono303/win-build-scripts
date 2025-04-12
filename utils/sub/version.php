@@ -26,7 +26,7 @@
 							pathenv("PATH_SRC")."/".$argv[1]."/src/php7/igbinary.h"],
 		"libgeotiff"		=> ["/#define LIBGEOTIFF_STRING_VERSION +\"([0-9\.]+)/s",
 							pathenv("PATH_INSTALL")."/include/geotiff.h"],
-		"sslh"				=> ["/define VERSION \"v([0-9\.]+)-([0-9]+)/s",
+		"sslh"				=> ["/#define VERSION \"v([0-9\.]+)-([^\"]+)/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/version.h"],
 		"dependencies"		=> ["/AssemblyVersion\(\"([0-9\.]+)\"/s",
 							pathenv("PATH_SRC")."/".$argv[1]."/DependenciesGui/Properties/AssemblyInfo.cs"],
@@ -176,13 +176,15 @@
 				echo str_pad($src,20)."NO TAG OR VERSION!".PHP_EOL;
 				$tagok = false;
 			}
-			
+
 			if($tagok){
 				if(str_ends_with($ver_product,"."))
 					$ver_product .= "0";
 				if(str_starts_with($ver_product,"."))
 					$ver_product = "0".$ver_product;
-				if(str_ends_with($ver_product,"-dev") || str_ends_with($ver_product,"-DEV"))
+				if(str_ends_with($ver_product,"dirty")) // sslh
+					$ver_product = substr($ver_product, 0, -5)."0";
+				if(str_ends_with($ver_product,"-dev") || str_ends_with($ver_product,"-DEV")) // crl
 					$ver_product = substr($ver_product, 0, -4).".0";
 				$ver_file = $ver_product;
 				// letter in version : openssl & jpeg
