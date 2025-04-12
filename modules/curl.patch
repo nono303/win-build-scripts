@@ -1,0 +1,13 @@
+diff --git a/scripts/mk-ca-bundle.pl b/scripts/mk-ca-bundle.pl
+index 8e8afb4dd..f21546c27 100755
+--- a/scripts/mk-ca-bundle.pl
++++ b/scripts/mk-ca-bundle.pl
+@@ -318,7 +318,7 @@ if(!$opt_n) {
+         report "Get certdata with curl!";
+         my $proto = !$opt_k ? "--proto =https" : "";
+         my $quiet = $opt_q ? "-s" : "";
+-        my @out = `curl -w %{response_code} $proto $quiet -o "$txt" "$url"`;
++        my @out = `curl -L -w %{response_code} $proto $quiet -o "$txt" "$url"`;
+         if(!$? && @out && $out[0] == 200) {
+           $fetched = 1;
+           report "Downloaded $txt";
