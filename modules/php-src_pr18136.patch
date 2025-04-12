@@ -1,0 +1,42 @@
+diff --git a/ext/opcache/jit/ir/ir_ra.c b/ext/opcache/jit/ir/ir_ra.c
+index 0c0e8dec3b4..fa8f639c0c3 100644
+--- a/ext/opcache/jit/ir/ir_ra.c
++++ b/ext/opcache/jit/ir/ir_ra.c
+@@ -4097,7 +4097,7 @@ static void assign_regs(ir_ctx *ctx)
+ 		if (IR_REGSET_DIFFERENCE(IR_REGSET_INTERSECTION(used_regs, IR_REGSET_PRESERVED),
+ 			ctx->used_preserved_regs)) {
+ 			// TODO: Preserved reg and fixed frame conflict ???
+-			// IR_ASSERT(0 && "Preserved reg and fixed frame conflict");
++			IR_ASSERT(0 && "Preserved reg and fixed frame conflict");
+ 		}
+ 	} else {
+ 		ctx->used_preserved_regs = IR_REGSET_UNION((ir_regset)ctx->fixed_save_regset,
+diff --git a/ext/opcache/jit/zend_jit_ir.c b/ext/opcache/jit/zend_jit_ir.c
+index 4d006c19d34..ff0abd8e1a0 100644
+--- a/ext/opcache/jit/zend_jit_ir.c
++++ b/ext/opcache/jit/zend_jit_ir.c
+@@ -33,12 +33,10 @@
+ # define ZREG_IP             15 /* IR_REG_R15 */
+ # define ZREG_FIRST_FPR      16
+ # if defined(_WIN64)
+-#  define IR_REGSET_PRESERVED ((1<<3) | (1<<5) | (1<<6) | (1<<7) | (1<<12) | (1<<13) | (1<<14) | (1<<15))
+-/*
++//#  define IR_REGSET_PRESERVED ((1<<3) | (1<<5) | (1<<6) | (1<<7) | (1<<12) | (1<<13) | (1<<14) | (1<<15))
+ #  define IR_REGSET_PRESERVED ((1<<3) | (1<<5) | (1<<6) | (1<<7) | (1<<12) | (1<<13) | (1<<14) | (1<<15) | \
+                                (1<<(16+6)) | (1<<(16+7)) | (1<<(16+8)) | (1<<(16+9)) | (1<<(16+10)) | \
+                                (1<<(16+11)) | (1<<(16+12)) | (1<<(16+13)) | (1<<(16+14)) | (1<<(16+15)))
+-*/
+ #  define IR_SHADOW_ARGS     32
+ # else
+ #  define IR_REGSET_PRESERVED ((1<<3) | (1<<5) | (1<<12) | (1<<13) | (1<<14) | (1<<15)) /* all preserved registers */
+@@ -2696,7 +2694,8 @@ static void zend_jit_init_ctx(zend_jit_ctx *jit, uint32_t flags)
+ 			jit->ctx.flags |= IR_USE_FRAME_POINTER;
+ 			jit->ctx.fixed_stack_frame_size = sizeof(void*) * 16; /* 10 saved registers and 6 spill slots (8 bytes) */
+ #elif defined(_WIN64)
+-			jit->ctx.fixed_stack_frame_size = sizeof(void*) * 11; /* 8 saved registers and 3 spill slots (8 bytes) */
++//			jit->ctx.fixed_stack_frame_size = sizeof(void*) * 11; /* 8 saved registers and 3 spill slots (8 bytes) */
++			jit->ctx.fixed_stack_frame_size = sizeof(void*) * 21; /* 18 saved registers and 3 spill slots (8 bytes) */
+ #elif defined(IR_TARGET_X86_64)
+ 			jit->ctx.fixed_stack_frame_size = sizeof(void*) * 9;  /* 6 saved registers and 3 spill slots (8 bytes) */
+ #else /* IR_TARGET_x86 */
+ 
