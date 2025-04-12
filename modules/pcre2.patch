@@ -1,8 +1,8 @@
 diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
-index 2d2e854a..77e71e43 100644
+index 194e6714..4d654580 100644
 --- "a/CMakeLists.txt"
 +++ "b/CMakeLists.txt"
-@@ -1387,10 +1387,10 @@ file(
+@@ -1415,10 +1415,10 @@ file(
  file(GLOB man1 ${PROJECT_SOURCE_DIR}/doc/*.1)
  file(GLOB man3 ${PROJECT_SOURCE_DIR}/doc/*.3)
  
@@ -16,4 +16,4 @@ index 2d2e854a..77e71e43 100644
 +# install(FILES ${html} DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/doc/pcre2/html)
  
  if(MSVC AND INSTALL_MSVC_PDB)
-   install(FILES ${DLL_PDB_FILES} DESTINATION bin CONFIGURATIONS RelWithDebInfo)
+   install(FILES ${DLL_PDB_FILES} DESTINATION ${CMAKE_INSTALL_BINDIR} CONFIGURATIONS RelWithDebInfo)
