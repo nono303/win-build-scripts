@@ -1,20 +1,23 @@
- Configure | 4 ----
- 1 file changed, 4 deletions(-)
-
 diff --git a/Configure b/Configure
-index fff97bd6fc..36973b298e 100755
+index 15054f9403..8ebcbd3dac 100755
 --- a/Configure
 +++ b/Configure
-@@ -574,8 +574,6 @@ my %deprecated_disablables = (
- our %disabled = ( # "what"         => "comment"
+@@ -587,14 +587,11 @@ our %disabled = ( # "what"         => "comment"
                    "fips"                => "default",
+                   "fips-jitter"         => "default",
                    "asan"                => "default",
 -                  "brotli"              => "default",
 -                  "brotli-dynamic"      => "default",
                    "buildtest-c++"       => "default",
                    "crypto-mdebug"       => "default",
                    "crypto-mdebug-backtrace" => "default",
-@@ -603,8 +601,6 @@ our %disabled = ( # "what"         => "comment"
+                   "demos"               => "default",
+                   "h3demo"              => "default",
+-                  "hqinterop"           => "default",
+                   "devcryptoeng"        => "default",
+                   "ec_nistp_64_gcc_128" => "default",
+                   "egd"                 => "default",
+@@ -618,8 +615,6 @@ our %disabled = ( # "what"         => "comment"
                    "weak-ssl-ciphers"    => "default",
                    "zlib"                => "default",
                    "zlib-dynamic"        => "default",
