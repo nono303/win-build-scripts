@@ -79,6 +79,7 @@ Usage: go command [options]
   * subversion
   * dependencies
   * memcached
+  * proxytunnel
   * sslh
   * sdlna
   * sdnspi-mysql
