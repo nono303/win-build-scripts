@@ -21,6 +21,8 @@ echo     # apply php-src_libxml2.14.patch
 git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-src_libxml2.14.patch
 echo     # apply php-src_pr18136.patch
 git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-src_pr18136.patch
+call do_php %PATH_SRC%\php-src\Zend\zend_vm_gen.php
+REM pause
 
 	REM ~~~~~~~~~~~~ type of build : full / memcached / xdebug
 set PHP_BUILD_TYPE=%PHPVER%
