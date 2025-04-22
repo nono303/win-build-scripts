@@ -1,0 +1,194 @@
+From 8a312f0238eace7b37044ded9ff323c37255eb69 Mon Sep 17 00:00:00 2001
+From: nielsdos <foo@example.com>
+Date: Mon, 14 Apr 2025 07:18:31 -0700
+Subject: [PATCH] Fix GH-18136: tracing JIT floating point register clobbering
+ on Windows and ARM64
+
+On win64, xmm6-xmm15 are preserved registers, but the prologues and
+epilogues of JITted code don't handle these. The issue occurs when
+calling into the JIT code again via an internal handler
+(like call_user_func). Therefore, we want to save/restore xmm registers
+upon entering/leaving execute_ex. Since MSVC x64 does not support inline
+assembly, we create an assembly wrapper around the real execute_ex
+function.
+The alternative is to always save/restore these xmm registers into the
+fixed call frame, but this causes unnecessary overhead.
+The same issue occurs for ARM64 platforms for floating point register
+8 to 15. However, there we can use inline asm to fix this.
+---
+ Zend/asm/save_xmm_x86_64_ms_masm.asm | 43 ++++++++++++++++++++++++++++
+ Zend/zend_vm_execute.h               |  9 ++++++
+ Zend/zend_vm_execute.skl             |  9 ++++++
+ ext/opcache/tests/jit/gh18136.phpt   | 35 ++++++++++++++++++++++
+ win32/build/config.w32               | 11 ++++++-
+ 5 files changed, 106 insertions(+), 1 deletion(-)
+ create mode 100644 Zend/asm/save_xmm_x86_64_ms_masm.asm
+ create mode 100644 ext/opcache/tests/jit/gh18136.phpt
+
+diff --git a/Zend/asm/save_xmm_x86_64_ms_masm.asm b/Zend/asm/save_xmm_x86_64_ms_masm.asm
+new file mode 100644
+index 0000000000000..1569d6bdb0e86
+--- /dev/null
++++ b/Zend/asm/save_xmm_x86_64_ms_masm.asm
+@@ -0,0 +1,43 @@
++.code
++
++; ZEND_API void execute_ex(zend_execute_data *ex)
++PUBLIC execute_ex
++
++EXTERN execute_ex_real:PROC
++
++; Assembly wrapper around the real execute_ex function, so that we can
++; save the preserved registers when re-entering the VM from JIT code.
++; See GH-18136.
++execute_ex PROC EXPORT FRAME
++    ; 10 floating points numbers
++    ; 32 bytes shadow space
++    ; 8 bytes to align after the return address
++    sub rsp, 8*10 + 32 + 8
++    .allocstack 8*10 + 32 + 8
++    .endprolog
++    movsd qword ptr [rsp + 32 + 8*0], xmm6
++    movsd qword ptr [rsp + 32 + 8*1], xmm7
++    movsd qword ptr [rsp + 32 + 8*2], xmm8
++    movsd qword ptr [rsp + 32 + 8*3], xmm9
++    movsd qword ptr [rsp + 32 + 8*4], xmm10
++    movsd qword ptr [rsp + 32 + 8*5], xmm11
++    movsd qword ptr [rsp + 32 + 8*6], xmm12
++    movsd qword ptr [rsp + 32 + 8*7], xmm13
++    movsd qword ptr [rsp + 32 + 8*8], xmm14
++    movsd qword ptr [rsp + 32 + 8*9], xmm15
++    call execute_ex_real
++    movsd xmm6, qword ptr [rsp + 32 + 8*0]
++    movsd xmm7, qword ptr [rsp + 32 + 8*1]
++    movsd xmm8, qword ptr [rsp + 32 + 8*2]
++    movsd xmm9, qword ptr [rsp + 32 + 8*3]
++    movsd xmm10, qword ptr [rsp + 32 + 8*4]
++    movsd xmm11, qword ptr [rsp + 32 + 8*5]
++    movsd xmm12, qword ptr [rsp + 32 + 8*6]
++    movsd xmm13, qword ptr [rsp + 32 + 8*7]
++    movsd xmm14, qword ptr [rsp + 32 + 8*8]
++    movsd xmm15, qword ptr [rsp + 32 + 8*9]
++    add rsp, 8*10 + 32 + 8
++    ret
++execute_ex ENDP
++
++END
+diff --git a/Zend/zend_vm_execute.h b/Zend/zend_vm_execute.h
+index 5270fc841cd8d..dadc57d13f278 100644
+--- a/Zend/zend_vm_execute.h
++++ b/Zend/zend_vm_execute.h
+@@ -55037,10 +55037,19 @@ static ZEND_OPCODE_HANDLER_RET ZEND_FASTCALL ZEND_NULL_HANDLER(ZEND_OPCODE_HANDL
+ # pragma GCC optimize("no-gcse")
+ # pragma GCC optimize("no-ivopts")
+ #endif
++#ifdef _WIN64
++/* See save_xmm_x86_64_ms_masm.asm */
++void execute_ex_real(zend_execute_data *ex)
++#else
+ ZEND_API void execute_ex(zend_execute_data *ex)
++#endif
+ {
+ 	DCL_OPLINE
+ 
++#if defined(__GNUC__) && defined(__aarch64__)
++	__asm__ __volatile__ (""::: "v8","v9","v10","v11","v12","v13","v14","v15");
++#endif
++
+ #if defined(ZEND_VM_IP_GLOBAL_REG) || defined(ZEND_VM_FP_GLOBAL_REG)
+ 	struct {
+ #ifdef ZEND_VM_HYBRID_JIT_RED_ZONE_SIZE
+diff --git a/Zend/zend_vm_execute.skl b/Zend/zend_vm_execute.skl
+index 717d4ffd3e8af..5b4799cd67c2a 100644
+--- a/Zend/zend_vm_execute.skl
++++ b/Zend/zend_vm_execute.skl
+@@ -5,10 +5,19 @@
+ # pragma GCC optimize("no-gcse")
+ # pragma GCC optimize("no-ivopts")
+ #endif
++#ifdef _WIN64
++/* See save_xmm_x86_64_ms_masm.asm */
++void {%EXECUTOR_NAME%}_ex_real(zend_execute_data *ex)
++#else
+ ZEND_API void {%EXECUTOR_NAME%}_ex(zend_execute_data *ex)
++#endif
+ {
+ 	DCL_OPLINE
+ 
++#if defined(__GNUC__) && defined(__aarch64__)
++	__asm__ __volatile__ (""::: "v8","v9","v10","v11","v12","v13","v14","v15");
++#endif
++
+ 	{%HELPER_VARS%}
+ 
+ 	{%INTERNAL_LABELS%}
+diff --git a/ext/opcache/tests/jit/gh18136.phpt b/ext/opcache/tests/jit/gh18136.phpt
+new file mode 100644
+index 0000000000000..e1993440003e5
+--- /dev/null
++++ b/ext/opcache/tests/jit/gh18136.phpt
+@@ -0,0 +1,35 @@
++--TEST--
++GH-18136 (tracing JIT floating point register clobbering on Windows and ARM64)
++--EXTENSIONS--
++opcache
++--INI--
++opcache.jit=tracing
++opcache.jit_buffer_size=64M
++opcache.jit_hot_func=4
++opcache.jit_hot_loop=4
++--FILE--
++<?php
++namespace Foo;
++
++function diff($point1, $point2)
++{
++	$a = deg2rad($point1); // Prefixing these with \ also makes the issue go away
++	$b = deg2rad($point2);
++	return $a - $b;
++}
++
++function getRawDistance()
++{
++	$distance = 0;
++	for ($p = 0; $p < 200; $p++) {
++		// Needs to be a namespaced call_user_func call to reproduce the issue (i.e. adding \ at front makes the issue go away)
++		$distance += call_user_func('Foo\diff', 0, $p);
++	}
++
++	return $distance;
++}
++
++var_dump(getRawDistance());
++?>
++--EXPECT--
++float(-347.3205211468715)
+diff --git a/win32/build/config.w32 b/win32/build/config.w32
+index 043f18b275b9d..7180e841ebc48 100644
+--- a/win32/build/config.w32
++++ b/win32/build/config.w32
+@@ -267,7 +267,11 @@ if (TARGET_ARCH == 'arm64') {
+ 	DEFINE('FIBER_ASM_FLAGS', '/DBOOST_CONTEXT_EXPORT=EXPORT /nologo /c /Fo');
+ }
+ 
+-ADD_FLAG('ASM_OBJS', '$(BUILD_DIR)\\Zend\\jump_' + FIBER_ASM_ABI + '.obj $(BUILD_DIR)\\Zend\\make_' + FIBER_ASM_ABI + '.obj');
++var all_asm_objs = '$(BUILD_DIR)\\Zend\\jump_' + FIBER_ASM_ABI + '.obj $(BUILD_DIR)\\Zend\\make_' + FIBER_ASM_ABI + '.obj';
++if (TARGET_ARCH == 'x64') {
++	all_asm_objs += ' $(BUILD_DIR)\\Zend\\save_xmm_x86_64_ms_masm.obj';
++}
++ADD_FLAG('ASM_OBJS', all_asm_objs);
+ 
+ MFO.WriteLine('$(BUILD_DIR)\\Zend\\jump_' + FIBER_ASM_ABI + '.obj: Zend\\asm\\jump_' + FIBER_ASM_ABI + '.asm');
+ MFO.WriteLine('\t$(PHP_ASSEMBLER) $(FIBER_ASM_FLAGS) $(BUILD_DIR)\\Zend\\jump_$(FIBER_ASM_ABI).obj Zend\\asm\\jump_$(FIBER_ASM_ABI).asm');
+@@ -275,6 +279,11 @@ MFO.WriteLine('\t$(PHP_ASSEMBLER) $(FIBER_ASM_FLAGS) $(BUILD_DIR)\\Zend\\jump_$(
+ MFO.WriteLine('$(BUILD_DIR)\\Zend\\make_' + FIBER_ASM_ABI + '.obj: Zend\\asm\\make_' + FIBER_ASM_ABI + '.asm');
+ MFO.WriteLine('\t$(PHP_ASSEMBLER) $(FIBER_ASM_FLAGS) $(BUILD_DIR)\\Zend\\make_$(FIBER_ASM_ABI).obj Zend\\asm\\make_$(FIBER_ASM_ABI).asm');
+ 
++if (TARGET_ARCH == 'x64') {
++	MFO.WriteLine('$(BUILD_DIR)\\Zend\\save_xmm_x86_64_ms_masm.obj: Zend\\asm\\save_xmm_x86_64_ms_masm.asm');
++	MFO.WriteLine('\t$(PHP_ASSEMBLER) $(FIBER_ASM_FLAGS) $(BUILD_DIR)\\Zend\\save_xmm_x86_64_ms_masm.obj Zend\\asm\\save_xmm_x86_64_ms_masm.asm');
++}
++
+ ADD_FLAG("CFLAGS_BD_ZEND", "/D ZEND_ENABLE_STATIC_TSRMLS_CACHE=1");
+ if (VS_TOOLSET && VCVERS >= 1914) {
+ 	ADD_FLAG("CFLAGS_BD_ZEND", "/d2FuncCache1");
