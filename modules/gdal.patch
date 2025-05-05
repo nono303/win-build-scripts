@@ -1,26 +1,13 @@
- cmake/helpers/CheckDependentLibraries.cmake | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/cmake/helpers/CheckDependentLibraries.cmake b/cmake/helpers/CheckDependentLibraries.cmake
-index 830ecef9a4..58bbdd5f75 100644
---- a/cmake/helpers/CheckDependentLibraries.cmake
-+++ b/cmake/helpers/CheckDependentLibraries.cmake
-@@ -68,12 +68,12 @@ int main(){
-     return 1;
- }")
-       check_cxx_source_runs("${ICONV_HAS_EXTRA_CHARSETS_CODE}" ICONV_HAS_EXTRA_CHARSETS)
--      if (NOT ICONV_HAS_EXTRA_CHARSETS)
--          message(WARNING "ICONV is available but some character sets used by "
--                          "some drivers are not available. "
--                          "You may need to install an extra package "
--                          "(e.g. 'glibc-gconv-extra' on Fedora)")
--      endif()
-+#      if (NOT ICONV_HAS_EXTRA_CHARSETS)
-+#          message(WARNING "ICONV is available but some character sets used by "
-+#                          "some drivers are not available. "
-+#                          "You may need to install an extra package "
-+#                          "(e.g. 'glibc-gconv-extra' on Fedora)")
-+#      endif()
-   endif()
+diff --git "a/gdal.cmake" "b/gdal.cmake"
+index 00102cc70d..eee1fdc606 100644
+--- "a/gdal.cmake"
++++ "b/gdal.cmake"
+@@ -162,7 +162,7 @@ endfunction (gdal_add_private_link_libraries)
+ add_library(${GDAL_LIB_TARGET_NAME} gcore/gdal.h)
  
-   unset(ICONV_CONST_TEST_CODE)
+ set(GDAL_LIB_OUTPUT_NAME
+-    "gdal"
++    "libgdal"
+     CACHE STRING "Name of the GDAL library")
+ # If a shared lib renaming has been set in ConfigUser.cmake
+ set_target_properties(${GDAL_LIB_TARGET_NAME} PROPERTIES OUTPUT_NAME ${GDAL_LIB_OUTPUT_NAME})

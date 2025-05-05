@@ -173,8 +173,8 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 sed -i 's/c++latest/c++latest \/Zc:ternary-/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
 
-call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\_%1\bin\gdal.dll
-xcopy /C /F /Y %PATH_BUILD%\%1\gdal.pdb %PATH_INSTALL%\_%1\bin\*
+xcopy /C /F /Y %PATH_BUILD%\%1\libgdal.pdb %PATH_INSTALL%\_%1\bin\*
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\_%1\bin\libgdal.dll
 for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\_%1\bin\*.exe/b') do  (
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\_%1\bin\%%G
 	xcopy /C /F /Y %PATH_BUILD%\%1\apps\%%~nG.pdb %PATH_INSTALL%\_%1\bin\*
@@ -184,4 +184,3 @@ for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\_%1\bin\gdalplugins\*.dll /b') do 
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\_%1\bin\gdalplugins\%%G
 	xcopy /C /F /Y %PATH_BUILD%\%1\gdalplugins\%%~nG.pdb %PATH_INSTALL%\_%1\bin\gdalplugins\*
 )
-xcopy /C /F /Y %PATH_BUILD%\%1\gdal.pdb %PATH_INSTALL%\_%1\bin\*
