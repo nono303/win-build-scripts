@@ -12,7 +12,7 @@ Index: build.gradle
      id 'org.gradle.crypto.checksum' version '1.4.0'
 -    id 'com.diffplug.spotless' version '6.21.0'
 +    // https://mvnrepository.com/artifact/com.diffplug.spotless/spotless-plugin-gradle
-+    id 'com.diffplug.spotless' version '7.0.2'
++    id 'com.diffplug.spotless' version '7.0.3'
  }
  
 -group 'mobac.sourceforge.io'
@@ -70,7 +70,7 @@ Index: gradle/wrapper/gradle-wrapper.properties
  distributionBase=GRADLE_USER_HOME
  distributionPath=wrapper/dists
 -distributionUrl=https\://services.gradle.org/distributions/gradle-8.9-bin.zip
-+distributionUrl=https\://services.gradle.org/distributions/gradle-8.13-bin.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-8.14-bin.zip
  networkTimeout=10000
  validateDistributionUrl=true
  zipStoreBase=GRADLE_USER_HOME
@@ -88,6 +88,15 @@ Index: gradlew
  
  # Use the maximum available, or set MAX_FD != -1 to use that value.
  MAX_FD=maximum
+@@ -115,7 +114,7 @@
+   NONSTOP* )        nonstop=true ;;
+ esac
+ 
+-CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
++CLASSPATH="\\\"\\\""
+ 
+ 
+ # Determine the Java command to use to start the JVM.
 @@ -206,7 +205,7 @@
  DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
  
@@ -97,6 +106,33 @@ Index: gradlew
  #     and any embedded shellness will be escaped.
  #   * For example: A user cannot expect ${Hostname} to be expanded, as it is an environment variable and will be
  #     treated as '${Hostname}' itself on the command line.
+@@ -214,7 +213,7 @@
+ set -- \
+         "-Dorg.gradle.appname=$APP_BASE_NAME" \
+         -classpath "$CLASSPATH" \
+-        org.gradle.wrapper.GradleWrapperMain \
++        -jar "$APP_HOME/gradle/wrapper/gradle-wrapper.jar" \
+         "$@"
+ 
+ # Stop when "xargs" is not available.
+Index: gradlew.bat
+===================================================================
+--- gradlew.bat	(revision 2792)
++++ gradlew.bat	(working copy)
+@@ -70,11 +70,11 @@
+ :execute
+ @rem Setup the command line
+ 
+-set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
++set CLASSPATH=
+ 
+ 
+ @rem Execute Gradle
+-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %*
++"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" -jar "%APP_HOME%\gradle\wrapper\gradle-wrapper.jar" %*
+ 
+ :end
+ @rem End local scope for the variables with windows NT shell
 Index: mobac/build.gradle
 ===================================================================
 --- mobac/build.gradle	(revision 2792)
@@ -111,7 +147,7 @@ Index: mobac/build.gradle
  dependencies {
 -    def mapsforgeVersion = '0.20.0'
 -    // def mapsforgeVersion = 'master-SNAPSHOT'
-+    def mapsforgeVersion = '0.24.1'
++    def mapsforgeVersion = '0.25.0'
  
      implementation "org.mapsforge:mapsforge-core:${mapsforgeVersion}"
      implementation "org.mapsforge:mapsforge-map:${mapsforgeVersion}"
@@ -186,19 +222,6 @@ Index: mobac/build.gradle
  }
  
  launch4j {
-Index: tilestore-util/build.gradle
-===================================================================
---- tilestore-util/build.gradle	(revision 2792)
-+++ tilestore-util/build.gradle	(working copy)
-@@ -26,7 +26,7 @@
-     exclude("module-info.class")
-     exclude("META-INF/*")
-     exclude("META-INF/maven/*")
--    duplicatesStrategy DuplicatesStrategy.EXCLUDE
-+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
- }
- 
- task distArchive(type: Zip, dependsOn: ['jar']) {
 Index: mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java
 ===================================================================
 --- mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(revision 2792)
@@ -335,3 +358,16 @@ Index: mobac/src/main/java/mobac/program/download/MobacTrustManager.java
 +	} 
  	private boolean isCertificateTrusted(String pubKeySha256Hash) {
  		if (additionalTrustedPublicKeys != null) {
+Index: tilestore-util/build.gradle
+===================================================================
+--- tilestore-util/build.gradle	(revision 2792)
++++ tilestore-util/build.gradle	(working copy)
+@@ -26,7 +26,7 @@
+     exclude("module-info.class")
+     exclude("META-INF/*")
+     exclude("META-INF/maven/*")
+-    duplicatesStrategy DuplicatesStrategy.EXCLUDE
++    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+ }
+ 
+ task distArchive(type: Zip, dependsOn: ['jar']) {
