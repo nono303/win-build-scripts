@@ -65,7 +65,6 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DENABLE_CURLDEBUG=OFF ^
 -DENABLE_DEBUG=OFF ^
 -DENABLE_IPV6=ON ^
--DENABLE_THREADED_RESOLVER=OFF ^
 -DENABLE_UNIX_SOCKETS=ON ^
 -DUSE_WIN32_IDN=ON ^
 -DUSE_APPLE_IDN=OFF ^
@@ -78,6 +77,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DUSE_ECH=OFF ^
 -DCURL_BROTLI=ON ^
 -DENABLE_ARES=ON ^
+	-DENABLE_THREADED_RESOLVER=OFF ^
 -DUSE_NGHTTP2=ON ^
 -DCURL_USE_LIBSSH2=ON ^
 -DCURL_ZSTD=ON ^
@@ -107,6 +107,6 @@ for %%E in (libcurl.dll curl.exe) do (call do_php %PATH_UTILS%\sub\version.php %
 
 REM curl https://curl.se/ca/cacert.pem -o %PATH_INSTALL%\bin\curl-ca-bundle.crt
 cd /D %PATH_INSTALL%\bin
-call perl mk-ca-bundle.pl curl-ca-bundle.crt
-for %%E in (certdata.txt mk-ca-bundle.pl curl-config) do (rm -fv %PATH_INSTALL%\bin\%%E)
+call perl %PATH_SRC%\%1\scripts\mk-ca-bundle.pl curl-ca-bundle.crt
+for %%E in (certdata.txt curl-config) do (rm -fv %PATH_INSTALL%\bin\%%E)
 if %LOCAL_COPY% == 1 if %LOCAL_COPY_AVX_ECHO% == %AVXECHO%  if %LOCAL_COPY_MSVC_VER% == %MSVC_VER% (xcopy /C /F /Y %PATH_INSTALL%\bin\curl-ca-bundle.crt %LOCAL_PATH_CURLCA%\*)
