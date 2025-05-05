@@ -108,5 +108,5 @@ for %%E in (libcurl.dll curl.exe) do (call do_php %PATH_UTILS%\sub\version.php %
 REM curl https://curl.se/ca/cacert.pem -o %PATH_INSTALL%\bin\curl-ca-bundle.crt
 cd /D %PATH_INSTALL%\bin
 call perl %PATH_SRC%\%1\scripts\mk-ca-bundle.pl curl-ca-bundle.crt
-for %%E in (certdata.txt curl-config) do (rm -fv %PATH_INSTALL%\bin\%%E)
+for %%E in (certdata.txt curl-config wcurl) do (rm -fv %PATH_INSTALL%\bin\%%E)
 if %LOCAL_COPY% == 1 if %LOCAL_COPY_AVX_ECHO% == %AVXECHO%  if %LOCAL_COPY_MSVC_VER% == %MSVC_VER% (xcopy /C /F /Y %PATH_INSTALL%\bin\curl-ca-bundle.crt %LOCAL_PATH_CURLCA%\*)
