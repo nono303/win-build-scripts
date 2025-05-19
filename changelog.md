@@ -1,8 +1,132 @@
 # changelog
 
 
+## 1.13.0 _(2025-05-19)_
+
+*  update tools & src + proxytunnel - sdnspi-mysql, openssl-quic
+`README.md`
+`SRC_VERSION.md`
+`config/cyg64.packagelist`
+`config/python.pip`
+`usage.txt`
+`utils/srccreate.bat`
+*  fix pdb test display result
+`utils/sub/bininfo.php`
+*  fix error with unexisting remove CodeAnalysisRuleSet
+`modules/common/vcxproj.sh`
+*  8.14
+`modules/curl_ca-win.patch`
+*  fix project-cache-dir symlink issue with gradle 8.14
+`env_sample.bat`
+`modules/fit2gpx.bat`
+`modules/mapsforgesrv.bat`
+`modules/mobac.bat`
+`modules/tzdataservice.bat`
+*  fix issue with svn binary diff
+`modules/mobac.patch`
+`modules/mobac_gradle-wrapper.jar`
+*  moved to https://github.com/himeshsameera/Dependencies
+`modules/dependencies.patch`
+*  remove duplicate cmake opt
+`modules/libavif.bat`
+*  fix same pdb for gdal.exe & gdal.dll (reanmed to libgdal.dll) in /bin
+`modules/gdal.bat`
+`modules/gdal.patch`
+`utils/bininfo.bat`
+*  -warn C4715
+`modules/icu.bat`
+*  8.14
+`modules/curl.bat`
+*  GRADLEVER: 8.13 > 8.14
+`env_sample.bat`
+*  1.8
+`modules/libconfig.patch`
+*  upgrade gradle & plugins
+`modules/mobac.patch`
+*  1.6.48
+`modules/libpng.bat`
+*  8.14
+`modules/curl.bat`
+`modules/curl.patch`
+`modules/curl_ca-win.patch`
+*  8.4.7
+`modules/php-src_pr18352.patch`
+`modules/php.bat`
+*  https://github.com/icing/mod_h2/issues/277#issuecomment-2425961501
+`modules/mod_h2.patch`
+*  issue 18136 > https://github.com/php/php-src/pull/18352.patch
+`modules/php-src_pr18136.patch`
+`modules/php-src_pr18352.patch`
+`modules/php.bat`
+*  3.11
+`modules/gdal.bat`
+*  2.14.2
+`modules/libxml2.patch`
+*  https://github.com/proxytunnel/proxytunnel/issues/96#issuecomment-2810258543
+`modules/proxytunnel.patch`
+*  https://github.com/php/php-src/issues/18136#issuecomment-2801875557
+`modules/php-src_pr18136.patch`
+`modules/php.bat`
+*  +proxytunnel
+`modules/proxytunnel.bat`
+`modules/proxytunnel.patch`
+`usage.txt`
+*  1.34.5
+`modules/cares.patch`
+*  fix sslh preg
+`utils/sub/version.php`
+*  +php-src_pr18136.patch
+`modules/php-src_pr18136.patch`
+`modules/php.bat`
+*  10.46
+`modules/pcre2.bat`
+`modules/pcre2.patch`
+*  fix 302 on mk-ca-bundle.pl
+`modules/curl.patch`
+*  3.12.1
+`modules/aom.bat`
+`modules/aom.patch`
+*  3.5.0 +enable-hqinterop fix libzstd refactor CFLAGS CXXFLAGS LDFLAGS
+`modules/openssl.bat`
+`modules/openssl.patch`
+*  pcre2 10.46-dev
+`modules/pcre2.patch`
+`utils/sub/version.php`
+*  libxml2 2.14.1
+`modules/libxml2.bat`
+`modules/libxml2.patch`
+`modules/php-src_libxml2.14.patch`
+`modules/php-src_pr17848.patch`
+`modules/php.bat`
+*  8.13.0
+`modules/curl_ca-win.patch`
+*  remove useless sed & path concerning IMPORT_LIB_SUFFIX
+`modules/curl.bat`
+`modules/curl.patch`
+*  2792
+`modules/mobac.patch`
+*  2.7.0
+`modules/libexpat.bat`
+*  2.14.1
+`modules/jansson.bat`
+*  fix bininfo
+`modules/memcached.bat`
+*  V1
+`modules/mod_zstd.bat`
+*  9.6.0
+`modules/proj.bat`
+*  fix patch
+`modules/sslh.patch`
+*  remove test copy
+`modules/mod_zstd.bat`
+*  1.19.7
+`modules/libheif.bat`
+
+
 ## 1.12.0 _(2025-03-03)_
 
+*  1.12.0
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
