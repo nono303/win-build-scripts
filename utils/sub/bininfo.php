@@ -122,8 +122,9 @@
 				debug("fileCheck(3) ".$chkmcmd.": ".$chkm);
 				preg_match("/Result: (.*)/",$chkm,$matches);
 				$data[$cur][70] = $pdbfile;
-				$pdbres = str_replace(")","",str_replace("Unmatched (reason: ","",$matches[1]));
-				$data[$cur][80] = $pdbres;
+				$data[$cur][80] = $matches[1] ?
+					str_replace(")","",str_replace("Unmatched (reason: ","",$matches[1])) :
+					"KO";
 				if($data[$cur][80] != "Matched"){
 					$data[$cur][80] = "\033[31m".$data[$cur][80]."\033[39m";
 				} else {
