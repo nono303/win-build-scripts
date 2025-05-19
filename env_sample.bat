@@ -11,15 +11,14 @@ REM ########################## GLOBAL PATH
 set PATH_SDK_ROOT=C:\sdk
 set PATH_BATCH=%PATH_SDK_ROOT%\batch
 set PATH_BUILDROOT=%PATH_SDK_ROOT%\build
-
+	set PATH_PHP_BUILD=%PATH_BUILDROOT%\php
+	set PATH_GRADLE_BUILD=%PATH_BUILDROOT%\gradle
 set PATH_MODULES=%PATH_BATCH%\modules
 set PATH_MODULES_COMMON=%PATH_MODULES%\common
 set PATH_UTILS=%PATH_BATCH%\utils
 set PATH_LOGS=%PATH_SDK_ROOT%\logs
 set PATH_SRC=%PATH_SDK_ROOT%\src
 set PATH_PHP_SDK=%PATH_SRC%\php-sdk
-REM for junction on ramdrive
-set PATH_PHP_BUILD=R:\sdkbuild\php
 set PATH_SOFTS=%PATH_SDK_ROOT%\softs
 
 REM ########################## RELEASE PATH
