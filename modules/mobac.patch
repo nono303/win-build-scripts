@@ -58,10 +58,6 @@ Index: build.gradle
      }
  }
  
-Index: gradle/wrapper/gradle-wrapper.jar
-===================================================================
-Cannot display: file marked as a binary type.
-svn:mime-type = application/octet-stream
 Index: gradle/wrapper/gradle-wrapper.properties
 ===================================================================
 --- gradle/wrapper/gradle-wrapper.properties	(revision 2792)
