@@ -1,8 +1,8 @@
 diff --git a/lib/url.c b/lib/url.c
-index 41c714ae5..90945adae 100644
+index aac9c2e84..17d10bee4 100644
 --- a/lib/url.c
 +++ b/lib/url.c
-@@ -448,6 +448,14 @@ CURLcode Curl_init_userdefined(struct Curl_easy *data)
+@@ -449,6 +449,14 @@ CURLcode Curl_init_userdefined(struct Curl_easy *data)
      if(result)
        return result;
  #endif
