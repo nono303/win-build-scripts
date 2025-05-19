@@ -7,17 +7,19 @@
 - **PHP** and most of its deps
 - other cool stuff
   - geographiclib
-  - dependencies
-  - memcached
-  - sslh
-  - sdlna
-  - sdnspi-mysql
-  - verpatch
-  - run-hidden
-  - mapsforgesrv
-  - tzdataservice
-  - fit2gpx
-  - mobac
+    * dependencies
+    * sdlna
+    * verpatch
+    * run-hidden
+    * *cygwin*
+      * memcached
+      * proxytunnel
+      * sslh
+    * *Java*
+      * mapsforgesrv
+      * tzdataservice
+      * fit2gpx
+      * mobac
 
 This tool-chain is the result of... many years of “evolution” ^^
 
@@ -54,24 +56,24 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.14.0p1.1 (14.44, 14.29) | `.vsconfig`         |
-| :bookmark: [Microsoft Visual C++ Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170) | x64 & x86 | 14.44.34823 |  |
-| [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.5.7 | `cyg64.packagelist` |
-| [Python](https://www.python.org/downloads/)                  | x64  | 3.12.9 |                     |
-| [OpenJDK](https://jdk.java.net/23/)                | x64  | 23.0.2 |                     |
-| [Strawberry Perl](https://github.com/StrawberryPerl/Perl-Dist-Strawberry/releases) | x64  | 5.40.1.1 |                     |
+| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.14.0p7 (14.44, 14.29) | `.vsconfig`         |
+| :bookmark: [Microsoft Visual C++ Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170) | x64 & x86 | 14.44.35112 |  |
+| [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.6.1 | `cyg64.packagelist` |
+| [Python](https://www.python.org/downloads/)                  | x64  | 3.12.10 |                     |
+| [OpenJDK](https://jdk.java.net/23/)                | x64  | 24.0.1 |                     |
+| [Strawberry Perl](https://github.com/StrawberryPerl/Perl-Dist-Strawberry/releases) | x64  | 5.40.2.1 |                     |
 | [NASM](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.16.03 |                     |
-| [YASM](https://yasm.tortall.net/Download.html) _mpir_ | x64 | 1.3.0 | |
-| [Git](https://git-scm.com/download/win)                      | x64  | 2.48.1 |                     |
+| [YASM](https://github.com/yasm/yasm) _mpir_ | x64 | 1.3.0 | |
+| [Git](https://git-scm.com/download/win)                      | x64  | 2.49.0 |                     |
 | verpatch                                                     | x64  | 1.0.15.1       |                     |
 | [7z](https://www.7-zip.org/download.html)                    | x64  | 24.09 |                     |
 | [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.90       |                     |
 | [ChkMatch](https://web.archive.org/web/20210205095232/https://www.debuginfo.com/tools/chkmatch.html) | x86 | 1.0.3          |                     |
-| [Gradle](https://services.gradle.org/distributions/) | [java] | 8.13 | |
-| [CMake](https://cmake.org/download/) | x64 | 3.31.6 | |
+| [Gradle](https://services.gradle.org/distributions/) | [java] | 8.14 | |
+| [CMake](https://cmake.org/download/) | x64 | 3.31.7 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | x64 | 1.12.1 | |
-| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 1.7.0 | |
-| [NuGet](https://www.nuget.org/downloads) | x86 | 6.13.2 | |
+| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 1.8.0 | |
+| [NuGet](https://www.nuget.org/downloads) | x86 | 6.14 | |
 
 ### [SOURCE VERSIONS](./SRC_VERSION.md)
 ### [CHANGELOG](./changelog.md)

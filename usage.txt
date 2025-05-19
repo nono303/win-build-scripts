@@ -74,17 +74,17 @@ Usage: go command [options]
         * parallel
     * serf
     * nssm
-  * geographiclib
   * subversion-deps
   * subversion
+  * geographiclib
   * dependencies
-  * memcached
-  * proxytunnel
-  * sslh
   * sdlna
-  * sdnspi-mysql
   * verpatch
   * run-hidden
+  * {cygwin}
+    * memcached
+    * proxytunnel
+    * sslh
   * {java}
     * mapsforgesrv
     * tzdataservice

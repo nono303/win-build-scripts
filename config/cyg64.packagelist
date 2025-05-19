@@ -15,12 +15,6 @@ automake1.14
 automake1.15
 automake1.16
 automake1.17
-automake1.4
-automake1.5
-automake1.6
-automake1.7
-automake1.8
-automake1.9
 base-cygwin
 base-files
 bash
@@ -29,7 +23,6 @@ binutils
 bison
 bzip2
 ca-certificates
-chere
 coreutils
 crypto-policies
 csih
@@ -157,6 +150,7 @@ libpipeline1
 libpkgconf3
 libpkgconf4
 libpkgconf5
+libpkgconf6
 libpopt-common
 libpopt0
 libpsl5
@@ -176,7 +170,6 @@ libtool
 libuchardet0
 libunistring2
 libunistring5
-libusb0
 libusb1.0
 libuuid1
 libwrap-devel
@@ -210,10 +203,6 @@ pkgconf
 publicsuffix-list-dafsa
 python-pip-wheel
 python-setuptools-wheel
-python2
-python27
-python27-pip
-python27-setuptools
 rebase
 run
 sed
