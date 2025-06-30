@@ -1,5 +1,10 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
+REM /third-party/urlparse
+cd /D %PATH_SRC%\%1
+git submodule update --remote --merge
+cd /D %PATH_BUILD%\%1
+
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DENABLE_WERROR=OFF ^
