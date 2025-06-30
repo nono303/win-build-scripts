@@ -1,0 +1,13 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 6c5add63..5480643a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -34,7 +34,7 @@ include(CMakePackageConfigHelpers)
+ include(GNUInstallDirs)
+ 
+ if(NOT TARGET LibXml2)
+-	find_package(LibXml2 CONFIG REQUIRED)
++	find_package(LibXml2 REQUIRED)
+ endif()
+ 
+ option(BUILD_SHARED_LIBS "Build shared libraries" ON)
