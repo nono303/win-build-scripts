@@ -1,8 +1,8 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 66ea098..12a1689 100644
+index f812e01..0abf061 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -41,10 +41,10 @@ set(CMAKE_MODULE_PATH "${SERF_SOURCE_DIR}/build")
+@@ -43,10 +43,10 @@ set(CMAKE_MODULE_PATH "${SERF_SOURCE_DIR}/build")
  include(SerfVersion)
  
  project("Serf" VERSION ${SERF_VERSION} LANGUAGES C)
@@ -11,9 +11,9 @@ index 66ea098..12a1689 100644
 -        "Some features are not supported and the build "
 -        "has not been tested on many supported platforms.")
 +# message(WARNING
-+#        "Serf's CMake build is considered EXPERIMENTAL. "
-+#        "Some features are not supported and the build "
-+#        "has not been tested on many supported platforms.")
- 
++#         "Serf's CMake build is considered EXPERIMENTAL. "
++#         "Some features are not supported and the build "
++#         "has not been tested on many supported platforms.")
  
  # Build options
+ option(DEBUG "Enable debugging info and strict compile warnings" OFF)
