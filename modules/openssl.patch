@@ -1,8 +1,8 @@
 diff --git a/Configure b/Configure
-index 15054f9403..8ebcbd3dac 100755
+index 499585438a..6b705f5d89 100755
 --- a/Configure
 +++ b/Configure
-@@ -587,14 +587,11 @@ our %disabled = ( # "what"         => "comment"
+@@ -588,14 +588,11 @@ our %disabled = ( # "what"         => "comment"
                    "fips"                => "default",
                    "fips-jitter"         => "default",
                    "asan"                => "default",
@@ -17,7 +17,7 @@ index 15054f9403..8ebcbd3dac 100755
                    "devcryptoeng"        => "default",
                    "ec_nistp_64_gcc_128" => "default",
                    "egd"                 => "default",
-@@ -618,8 +615,6 @@ our %disabled = ( # "what"         => "comment"
+@@ -619,8 +616,6 @@ our %disabled = ( # "what"         => "comment"
                    "weak-ssl-ciphers"    => "default",
                    "zlib"                => "default",
                    "zlib-dynamic"        => "default",
