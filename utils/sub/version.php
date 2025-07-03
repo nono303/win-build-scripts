@@ -135,6 +135,9 @@
 		$ver_product = "";
 			$ver_file = "";
 			$tagok = true;
+			// git tag
+			if (is_dir(PATH_SRC."/".$src."/.git"))
+				$scm_tag = execnono($cmd = "git tag --points-at HEAD",NULL,realpath(PATH_SRC."/".$src),NULL);
 			// git source overrided
 			if (is_array($nogit[$src])){
 				$from = $nogit[$src][1];
@@ -153,8 +156,7 @@
 				$ver_product = $nogit[$src];
 			} elseif (is_dir(PATH_SRC."/".$src."/.git")){
 				$from = "git";
-				$ver_product = pathenv("SCM_TAG") ?: execnono($cmd = "git tag --points-at HEAD",NULL,realpath(PATH_SRC."/".$src),NULL);
-				// echo "SCM_TAG: ".$ver_product.PHP_EOL;
+				$ver_product = $scm_tag;
 				// remove name
 				$ver_product = str_replace($src,"",$ver_product);
 				// remove other prefix
@@ -272,8 +274,8 @@
 			}
 			if(pathenv("SCM_COMORREV"))
 				$description .= " commit:".pathenv("SCM_COMORREV");
-			if(pathenv("SCM_TAG"))
-				$description .= " tag:".pathenv("SCM_TAG");
+			if($scm_tag)
+				$description .= " tag:".$scm_tag;
 			if(!is_null(pathenv("SCM_BRANCH")) && pathenv("SCM_BRANCH") != "HEAD" && pathenv("SCM_BRANCH") != "")
 				$description .= " branch:".pathenv("SCM_BRANCH");
 			if(pathenv("SCM_COMORREV_DATE"))
