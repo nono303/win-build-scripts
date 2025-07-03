@@ -86,8 +86,8 @@ sed -i 's/libxdiff_version)/"%LIB_VERSION:~1%")/g' %CYGPATH_SRC%/pecl-text-xdiff
 
 	REM ~~~~~~~~~~~~ php-ext-brotli : brotli version
 call %PATH_MODULES_COMMON%\init.bat php-ext-brotli
-call %PATH_MODULES_COMMON%\init.bat brotli varonly
-sed -i 's/AC_DEFINE/AC_DEFINE\("BROTLI_LIB_VERSION", "%SCM_TAG:~1%", "system library version"\);AC_DEFINE/g' %CYGPATH_SRC%/php-ext-brotli/config.w32
+FOR /F "tokens=* USEBACKQ" %%F in (`do_php %PATH_UTILS%\sub\version.php brotli`) do (set BROTLI_VERSION=%%F)
+sed -i 's/AC_DEFINE/AC_DEFINE\("BROTLI_LIB_VERSION", "%BROTLI_VERSION%", "system library version"\);AC_DEFINE/g' %CYGPATH_SRC%/php-ext-brotli/config.w32
 
 	REM ~~~~~~~~~~~~ other PECL init
 for %%E in (php-sdk xdebug php-geos php-proj php-ogr php-ext-zstd pecl-datetime-timezonedb pecl-system-sync pecl-igbinary pecl-parallel) do (
