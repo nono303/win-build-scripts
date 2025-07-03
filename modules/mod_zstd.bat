@@ -18,13 +18,13 @@ set MOD_ZSTD_RELEASE=%MSVC_DEPS%_%ARCH%%AVXB%
 if not exist %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\. mkdir %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%
 if NOT "%C_STD_VER%"=="" (set __CNFC=/std:c%C_STD_VER%)
 
-call %PATH_MODULES_COMMON%\init.bat httpd varonly
-set HTTPD_VERSION=%SCM_TAG%
+FOR /F "tokens=* USEBACKQ" %%F in (`do_php %PATH_UTILS%\sub\version.php zstd`) do (set ZSTD_VERSION=%%F)
+FOR /F "tokens=* USEBACKQ" %%F in (`do_php %PATH_UTILS%\sub\version.php httpd`) do (set HTTPD_VERSION=%%F)
+
 call %PATH_MODULES_COMMON%\init.bat %1%MOD_ZSTD_BRANCH% varonly
 
 cl.exe /nologo ^
 -IC:\sdk\release\vs17_x64-avx2\include ^
-/std:clatest ^
 /DWIN32 /DNDEBUG /D_WINDOWS ^
 /w /MD /Zi /Gw /Gy /Zc:inline /O2 /Ob3 /Zf /FS /GL /MP16 /cgthreads8 ^
 %AVX% %__CNFC% ^
@@ -47,7 +47,7 @@ C:\sdk\release\vs17_x64-avx2\lib\libaprutil-1.lib
 
 rm -fv %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.exp
 rm -fv %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.lib
-call do_php %PATH_UTILS%\sub\version.php %1 %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.so "httpd:%HTTPD_VERSION%"
+call do_php %PATH_UTILS%\sub\version.php %1 %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.so "httpd:%HTTPD_VERSION% libzstd:%ZSTD_VERSION%"
 
 if "%J8_TEST%"=="yes" (
 	call C:\bin\wscc_sysinternals\pskill httpd
