@@ -1,12 +1,9 @@
 @echo off
 
-call %PATH_MODULES_COMMON%\init.bat httpd varonly
-set HTTPD_VERSION=%SCM_TAG%
-
-set ARG_KEEPSRC=1
 call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
 
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
+-DCMAKE_POLICY_VERSION_MINIMUM=3.5 ^
 -DCMAKE_UNITY_BUILD=1 ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DINSTALL_PDB=1 ^
@@ -15,6 +12,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA%
 
+FOR /F "tokens=* USEBACKQ" %%F in (`do_php %PATH_UTILS%\sub\version.php httpd`) do (set HTTPD_VERSION=%%F)
 if not "%PATH_GITHUB_MODFCGID%"=="" (
 	for %%X in (so pdb lib) do (xcopy /C /F /Y %PATH_BUILD%\%1\%1.%%X %PATH_GITHUB_MODFCGID%\%MSVC_DEPS%\%ARCH%%AVXB%\*)
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_GITHUB_MODFCGID%\%MSVC_DEPS%\%ARCH%%AVXB%\%1.so "httpd:%HTTPD_VERSION%"
