@@ -38,7 +38,7 @@ for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\modules\*%mod_suffix% /b') do (cal
 
 	REM ~~~~~~~~~~~ external modules
 if NOT "%2"=="svn" (
-	for %%X in (mod_maxminddb mod_fcgid mod_h264_streaming mod_md mod_qos mod_evasive mod_zstd) do (
+	for %%X in (mod_maxminddb mod_fcgid mod_h264_streaming mod_md mod_qos mod_evasive mod_zstd mod_bikeshed) do (
 		call %PATH_MODULES_COMMON%\init.bat %%X varonly
 		call do_php %PATH_UTILS%\sub\version.php %%X %PATH_INSTALL%\modules\%%X%mod_suffix% "httpd:%HTTPD_VERSION%"
 	)
