@@ -4,6 +4,7 @@ set "SCM_TAG="
 set "SCM_BRANCH="
 set "SCM_COMORREV_DATE="
 set "SCM_URL="
+set "GET_VERSION="
 if "%CUR_DEBUG%"=="1" (
 	echo on
 	set CMAKE_OPTS=%CMAKE_OPTS_DBG%
@@ -21,13 +22,13 @@ if /I NOT "%~3"=="nostd"  (
 	if NOT "%C_STD_VER%"=="" (
 		if /I "%~3"=="nocxx"  (
 			set CMAKE_OPTS=%CMAKE_OPTS% -DCMAKE_C_FLAGS_INIT=/std:c%C_STD_VER%
-			echo ### disabling /std:c%C_STD_VER% for C++
+			echo ## disabling /std:c%C_STD_VER% for C++
 		) else (
 			set CMAKE_OPTS=%CMAKE_OPTS% -DCMAKE_CXX_FLAGS_INIT=/std:c++%C_STD_VER% -DCMAKE_C_FLAGS_INIT=/std:c%C_STD_VER%
 		)
 	)
 ) else (
-	echo ### disabling /std:c%C_STD_VER% for C and C++
+	echo ## disabling /std:c%C_STD_VER% for C and C++
 )
 REM	path for find
 set CMAKE_OPTS=%CMAKE_OPTS% ^
@@ -42,25 +43,25 @@ set CMAKE_OPTS=%CMAKE_OPTS% ^
 setlocal enabledelayedexpansion
 if exist %PATH_SRC%\%1\. (
 	cd %PATH_SRC%\%1
-	echo.
-	echo ^> %PATH_SRC%\%1
+	echo ** [init] %*
+	FOR /F "tokens=* USEBACKQ" %%F in (`do_php %PATH_UTILS%\sub\version.php %1`) do (set GET_VERSION=%%F)
 	if exist %PATH_SRC%\%1\.git\. (
 		FOR /F "tokens=* USEBACKQ" %%F in (`git rev-parse --short HEAD`) do (set SCM_COMORREV=%%F)
-		for /F "tokens=* USEBACKQ" %%F in (`git tag --points-at HEAD`) do (set SCM_TAG=%%F)
+		FOR /F "tokens=* USEBACKQ" %%F in (`git tag --points-at HEAD`) do (set SCM_TAG=%%F)
 		FOR /F "tokens=* USEBACKQ" %%F in (`git branch --show-current`) do (set SCM_BRANCH=%%F)
 		FOR /F "tokens=* USEBACKQ" %%F in (`git show -s --format^=%%cd --date=short !SCM_COMORREV!`) do (set SCM_COMORREV_DATE=%%F)
 		FOR /F "tokens=* USEBACKQ" %%F in (`git config --get remote.origin.url`) do (set SCM_URL=%%F)
 		if /I "%~2"=="varonly" (goto end)
-		echo     # %1 git commit:!SCM_COMORREV!
+		echo    git commit:!SCM_COMORREV!
 		if %ARG_KEEPSRC% == 0 (
 			git reset --hard
 			git clean -fdx
 			if exist %PATH_MODULES%\%1.patch (
-				echo     # apply %1.patch
+				echo    # apply %1.patch
 				git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\%1.patch
 			)
 			if exist %PATH_MODULES%\%1.!SCM_COMORREV!.patch (
-				echo     # apply %1.!SCM_COMORREV!.patch
+				echo    # apply %1.!SCM_COMORREV!.patch
 				git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\%1.!SCM_COMORREV!.patch
 			)
 		)
@@ -73,22 +74,21 @@ if exist %PATH_SRC%\%1\. (
 		FOR /F "tokens=* USEBACKQ" %%F in (`svn info ^| grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}'`) do (set SCM_COMORREV_DATE=%%F)
 		FOR /F "tokens=* USEBACKQ" %%F in (`svn info ^| grep 'Repository Root' ^| grep -oE 'http.*'`) do (set SCM_URL=%%F)
 		if /I "%~2"=="varonly" (goto end)
-		echo     # %1 svn revision:!SCM_COMORREV!
+		echo    svn revision:!SCM_COMORREV!
 		if %ARG_KEEPSRC% == 0 (
 			svn revert . -R
 			REM --remove-ignored
 			svn cleanup . --remove-unversioned
 			if exist %PATH_MODULES%\%1.patch (
-				echo     # apply %1.patch
+				echo    # apply %1.patch
 				svn patch %PATH_MODULES%\%1.patch .
 			)
 			if exist %PATH_MODULES%\%1.!SCM_COMORREV!.patch (
-				echo     # apply %1.!SCM_COMORREV!.patch
+				echo    # apply %1.!SCM_COMORREV!.patch
 				svn patch %PATH_MODULES%\%1.!SCM_COMORREV!.patch .
 			)
 		)
 	)
-	
 )
 :end
 REM https://stackoverflow.com/questions/9556676/batch-file-how-to-replace-equal-signs-and-a-string-variable
@@ -100,13 +100,15 @@ set SCM_COMORREV=%SCM_COMORREV%& ^
 set SCM_TAG=%SCM_TAG%& ^
 set SCM_BRANCH=%SCM_BRANCH%& ^
 set SCM_COMORREV_DATE=%SCM_COMORREV_DATE%& ^
-set SCM_URL=%SCM_URL%
+set SCM_URL=%SCM_URL%& ^
+set GET_VERSION=%GET_VERSION%
 if "%CUR_DEBUG%"=="1" (
 	echo SCM_COMORREV:%SCM_COMORREV%
 	echo SCM_TAG:%SCM_TAG%
 	echo SCM_BRANCH:%SCM_BRANCH%
 	echo SCM_COMORREV_DATE:%SCM_COMORREV_DATE%
 	echo SCM_URL:%SCM_URL%
+	echo GET_VERSION:%GET_VERSION%
 )
 if /I "%~2"=="cmake" (
 	if exist %PATH_BUILD%\%1\. rmdir /S /Q %PATH_BUILD%\%1
