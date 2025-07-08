@@ -137,7 +137,7 @@
 			$tagok = true;
 			// git tag
 			if (is_dir(PATH_SRC."/".$src."/.git"))
-				$scm_tag = execnono($cmd = "git tag --points-at HEAD",NULL,realpath(PATH_SRC."/".$src),NULL);
+				$scm_tag = trim(explode("\n",execnono($cmd = "git tag --points-at HEAD",NULL,realpath(PATH_SRC."/".$src),NULL))[0]);
 			// git source overrided
 			if (is_array($nogit[$src])){
 				$from = $nogit[$src][1];
