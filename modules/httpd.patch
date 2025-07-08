@@ -1,7 +1,7 @@
-diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
+diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 170076bdd4..2bdebbb576 100644
---- "a/CMakeLists.txt"
-+++ "b/CMakeLists.txt"
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -17,14 +17,26 @@
  
  PROJECT(HTTPD C)
@@ -404,6 +404,32 @@ index 128cf1eac6..937265531d 100644
 +            r->filename = newfname;
          }
      }
+ 
+diff --git a/modules/proxy/proxy_util.c b/modules/proxy/proxy_util.c
+index 00fedb1adf..51de35e8e2 100644
+--- a/modules/proxy/proxy_util.c
++++ b/modules/proxy/proxy_util.c
+@@ -1672,13 +1672,14 @@ static void connection_cleanup(void *theconn)
+          */
+         ap_proxy_ssl_engine(conn->connection, worker->section_config, 1);
+     }
+-
+-    if (worker->s->hmax && worker->cp->res) {
+-        conn->inreslist = 1;
+-        apr_reslist_release(worker->cp->res, (void *)conn);
+-    }
+-    else {
+-        worker->cp->conn = conn;
++    if(worker->cp) {
++        if (worker->s->hmax && worker->cp->res) {
++            conn->inreslist = 1;
++            apr_reslist_release(worker->cp->res, (void *)conn);
++        }
++        else {
++            worker->cp->conn = conn;
++        }
+     }
+ }
  
 diff --git a/server/main.c b/server/main.c
 index fb23f01d1d..7d42ec8128 100644
