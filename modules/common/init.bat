@@ -1,4 +1,6 @@
 @echo off
+echo ** [init] %*
+
 set "SCM_COMORREV="
 set "SCM_TAG="
 set "SCM_BRANCH="
@@ -22,13 +24,13 @@ if /I NOT "%~3"=="nostd"  (
 	if NOT "%C_STD_VER%"=="" (
 		if /I "%~3"=="nocxx"  (
 			set CMAKE_OPTS=%CMAKE_OPTS% -DCMAKE_C_FLAGS_INIT=/std:c%C_STD_VER%
-			echo ## disabling /std:c%C_STD_VER% for C++
+			echo    # disabling /std:c%C_STD_VER% for C++
 		) else (
 			set CMAKE_OPTS=%CMAKE_OPTS% -DCMAKE_CXX_FLAGS_INIT=/std:c++%C_STD_VER% -DCMAKE_C_FLAGS_INIT=/std:c%C_STD_VER%
 		)
 	)
 ) else (
-	echo ## disabling /std:c%C_STD_VER% for C and C++
+	echo    # disabling /std:c%C_STD_VER% for C and C++
 )
 REM	path for find
 set CMAKE_OPTS=%CMAKE_OPTS% ^
@@ -43,7 +45,6 @@ set CMAKE_OPTS=%CMAKE_OPTS% ^
 setlocal enabledelayedexpansion
 if exist %PATH_SRC%\%1\. (
 	cd %PATH_SRC%\%1
-	echo ** [init] %*
 	FOR /F "tokens=* USEBACKQ" %%F in (`do_php %PATH_UTILS%\sub\version.php %1`) do (set GET_VERSION=%%F)
 	if exist %PATH_SRC%\%1\.git\. (
 		FOR /F "tokens=* USEBACKQ" %%F in (`git rev-parse --short HEAD`) do (set SCM_COMORREV=%%F)
@@ -52,16 +53,21 @@ if exist %PATH_SRC%\%1\. (
 		FOR /F "tokens=* USEBACKQ" %%F in (`git show -s --format^=%%cd --date=short !SCM_COMORREV!`) do (set SCM_COMORREV_DATE=%%F)
 		FOR /F "tokens=* USEBACKQ" %%F in (`git config --get remote.origin.url`) do (set SCM_URL=%%F)
 		if /I "%~2"=="varonly" (goto end)
-		echo    git commit:!SCM_COMORREV!
+		if "!SCM_TAG!"=="" (
+			echo    git commit:!SCM_COMORREV!
+		) else (
+			echo    git tag:!SCM_TAG!
+		)
+		
 		if %ARG_KEEPSRC% == 0 (
-			git reset --hard
-			git clean -fdx
+			call git reset --hard > NUL
+			call git clean -fdx > NUL
 			if exist %PATH_MODULES%\%1.patch (
-				echo    # apply %1.patch
+				echo    ^> apply %1.patch
 				git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\%1.patch
 			)
 			if exist %PATH_MODULES%\%1.!SCM_COMORREV!.patch (
-				echo    # apply %1.!SCM_COMORREV!.patch
+				echo    ^> apply %1.!SCM_COMORREV!.patch
 				git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\%1.!SCM_COMORREV!.patch
 			)
 		)
@@ -80,17 +86,18 @@ if exist %PATH_SRC%\%1\. (
 			REM --remove-ignored
 			svn cleanup . --remove-unversioned
 			if exist %PATH_MODULES%\%1.patch (
-				echo    # apply %1.patch
+				echo    ^> apply %1.patch
 				svn patch %PATH_MODULES%\%1.patch .
 			)
 			if exist %PATH_MODULES%\%1.!SCM_COMORREV!.patch (
-				echo    # apply %1.!SCM_COMORREV!.patch
+				echo    ^> apply %1.!SCM_COMORREV!.patch
 				svn patch %PATH_MODULES%\%1.!SCM_COMORREV!.patch .
 			)
 		)
 	)
 )
 :end
+
 REM https://stackoverflow.com/questions/9556676/batch-file-how-to-replace-equal-signs-and-a-string-variable
 REM https://stackoverflow.com/questions/26246151/setlocal-enabledelayedexpansion-causes-cd-and-pushd-to-not-persist
 	REM SCM_BRANCH: remove '(' & ')' that are interpreted in IF statement
