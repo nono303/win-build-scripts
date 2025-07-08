@@ -1,8 +1,8 @@
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 9b38f699db..fa57e6d198 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -17,13 +17,25 @@
+diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
+index 170076bdd4..2bdebbb576 100644
+--- "a/CMakeLists.txt"
++++ "b/CMakeLists.txt"
+@@ -17,14 +17,26 @@
  
  PROJECT(HTTPD C)
  
@@ -23,6 +23,7 @@ index 9b38f699db..fa57e6d198 100644
  
  INCLUDE(CheckSymbolExists)
  INCLUDE(CheckCSourceCompiles)
+ INCLUDE("build/build-modules-c.cmake")
  
 -FIND_PACKAGE(LibXml2)
 -FIND_PACKAGE(Lua51)
@@ -31,7 +32,7 @@ index 9b38f699db..fa57e6d198 100644
  FIND_PACKAGE(OpenSSL)
  FIND_PACKAGE(ZLIB)
  FIND_PACKAGE(CURL)
-@@ -246,7 +258,7 @@ MESSAGE(STATUS "")
+@@ -247,7 +259,7 @@ MESSAGE(STATUS "")
  MESSAGE(STATUS "Summary of feature detection:")
  MESSAGE(STATUS "")
  MESSAGE(STATUS "LIBXML2_FOUND ............ : ${LIBXML2_FOUND}")
@@ -40,7 +41,7 @@ index 9b38f699db..fa57e6d198 100644
  MESSAGE(STATUS "NGHTTP2_FOUND ............ : ${NGHTTP2_FOUND}")
  MESSAGE(STATUS "OPENSSL_FOUND ............ : ${OPENSSL_FOUND}")
  MESSAGE(STATUS "ZLIB_FOUND ............... : ${ZLIB_FOUND}")
-@@ -292,7 +304,7 @@ SET(MODULE_LIST
+@@ -293,7 +305,7 @@ SET(MODULE_LIST
    "modules/aaa/mod_authn_file+A+file-based authentication control"
    "modules/aaa/mod_authn_socache+I+Cached authentication control"
    "modules/aaa/mod_authnz_fcgi+I+FastCGI authorizer-based authentication and authorization"
@@ -49,7 +50,7 @@ index 9b38f699db..fa57e6d198 100644
    "modules/aaa/mod_authz_core+A+core authorization provider vector module"
    "modules/aaa/mod_authz_dbd+I+SQL based authorization and Login/Session support"
    "modules/aaa/mod_authz_dbm+I+DBM-based authorization control"
-@@ -306,7 +318,7 @@ SET(MODULE_LIST
+@@ -307,7 +319,7 @@ SET(MODULE_LIST
    "modules/cache/mod_cache_socache+I+shared object caching module"
    "modules/cache/mod_file_cache+I+File cache"
    "modules/cache/mod_socache_dbm+I+dbm small object cache provider"
@@ -58,7 +59,7 @@ index 9b38f699db..fa57e6d198 100644
    "modules/cache/mod_socache_memcache+I+memcache small object cache provider"
    "modules/cache/mod_socache_shmcb+I+ shmcb small object cache provider"
    "modules/cache/mod_socache_redis+I+redis small object cache provider"
-@@ -325,36 +337,36 @@ SET(MODULE_LIST
+@@ -326,36 +338,36 @@ SET(MODULE_LIST
    "modules/examples/mod_case_filter_in+O+Example uppercase conversion input filter"
    "modules/examples/mod_example_hooks+O+Example hook callback handler module"
    "modules/examples/mod_example_ipc+O+Example of shared memory and mutex usage"
@@ -104,7 +105,7 @@ index 9b38f699db..fa57e6d198 100644
    "modules/mappers/mod_actions+I+Action triggering on requests"
    "modules/mappers/mod_alias+A+mapping of requests to different filesystem parts"
    "modules/mappers/mod_dir+A+directory request handling"
-@@ -390,19 +402,29 @@ SET(MODULE_LIST
+@@ -391,19 +403,29 @@ SET(MODULE_LIST
    "modules/proxy/mod_proxy_hcheck+I+Apache proxy health check module.  Requires and is enabled by --enable-proxy."
    "modules/proxy/mod_proxy_scgi+I+Apache proxy SCGI module.  Requires and is enabled by --enable-proxy."
    "modules/proxy/mod_proxy_wstunnel+I+Apache proxy Websocket Tunnel module.  Requires and is enabled by --enable-proxy."
@@ -137,7 +138,7 @@ index 9b38f699db..fa57e6d198 100644
  )
  
  # Track which modules actually built have APIs to link against.
-@@ -457,16 +479,25 @@ SET(mod_http2_extra_defines          ssize_t=long)
+@@ -458,16 +480,25 @@ SET(mod_http2_extra_defines          ssize_t=long)
  SET(mod_http2_extra_includes         ${NGHTTP2_INCLUDE_DIR})
  SET(mod_http2_extra_libs             ${NGHTTP2_LIBRARIES})
  SET(mod_http2_extra_sources
@@ -173,7 +174,7 @@ index 9b38f699db..fa57e6d198 100644
  )
  SET(mod_ldap_extra_defines           LDAP_DECLARE_EXPORT)
  SET(mod_ldap_extra_libs              wldap32)
-@@ -483,25 +514,43 @@ SET(mod_lua_extra_sources
+@@ -484,25 +515,43 @@ SET(mod_lua_extra_sources
    modules/lua/lua_passwd.c           modules/lua/lua_request.c
    modules/lua/lua_vmprep.c           modules/lua/lua_dbd.c
  )
@@ -232,7 +233,7 @@ index 9b38f699db..fa57e6d198 100644
  )
  SET(mod_optional_hook_export_extra_defines AP_DECLARE_EXPORT) # bogus reuse of core API prefix
  SET(mod_proxy_extra_defines          PROXY_DECLARE_EXPORT)
-@@ -570,6 +619,49 @@ IF(LIBXML2_FOUND)
+@@ -571,6 +620,49 @@ IF(LIBXML2_FOUND)
    SET(mod_xml2enc_extra_libs         "${LIBXML2_LIBRARIES};${LIBXML2_ICONV_LIBRARIES}")
  ENDIF()
  SET(mod_watchdog_extra_defines       AP_WD_DECLARE_EXPORT)
@@ -282,8 +283,8 @@ index 9b38f699db..fa57e6d198 100644
  
  SET(MODULE_PATHS)
  FOREACH (modinfo ${MODULE_LIST})
-@@ -629,8 +721,9 @@ ELSE()
- ENDIF()
+@@ -624,8 +716,9 @@ ENDFOREACH()
+ generate_builtin_modules_c("${PROJECT_BINARY_DIR}/modules.c" "${builtin_module_shortnames}")
  
  # for easy reference from .dll/.so builds
 -CONFIGURE_FILE(os/win32/BaseAddr.ref ${PROJECT_BINARY_DIR}/ COPYONLY)
@@ -293,7 +294,7 @@ index 9b38f699db..fa57e6d198 100644
  ADD_EXECUTABLE(gen_test_char server/gen_test_char.c)
  ADD_CUSTOM_COMMAND(
    COMMENT "Generating character tables, test_char.h, for current locale"
-@@ -714,8 +807,8 @@ SET(HTTPD_INCLUDE_DIRECTORIES
+@@ -709,8 +802,8 @@ SET(HTTPD_INCLUDE_DIRECTORIES
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/dav/main
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/filters
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators
@@ -304,7 +305,7 @@ index 9b38f699db..fa57e6d198 100644
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/proxy
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/session
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl
-@@ -723,6 +816,13 @@ SET(HTTPD_INCLUDE_DIRECTORIES
+@@ -718,6 +811,13 @@ SET(HTTPD_INCLUDE_DIRECTORIES
    ${CMAKE_CURRENT_SOURCE_DIR}/server/mpm/winnt
    ${APR_INCLUDE_DIR}
    ${PCRE_INCLUDE_DIR}
@@ -318,7 +319,7 @@ index 9b38f699db..fa57e6d198 100644
  )
  
  # The .h files we install from outside the main include directory
-@@ -740,7 +840,7 @@ SET(other_installed_h
+@@ -735,7 +835,7 @@ SET(other_installed_h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/filters/mod_xml2enc.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators/mod_cgi.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators/mod_status.h
@@ -327,7 +328,7 @@ index 9b38f699db..fa57e6d198 100644
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/loggers/mod_log_config.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/mappers/mod_rewrite.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/proxy/mod_proxy.h
-@@ -805,10 +905,10 @@ FOREACH (mod ${MODULE_PATHS})
+@@ -800,10 +900,10 @@ FOREACH (mod ${MODULE_PATHS})
    ELSE()
      # Handle whether or not the LoadModule is commented out.
      IF(${enable_mod_val} STREQUAL "A")
@@ -340,13 +341,14 @@ index 9b38f699db..fa57e6d198 100644
        SET(mods_built_but_not_loaded ${mods_built_but_not_loaded} ${mod_name})
      ELSE()
        MESSAGE(FATAL_ERROR "${enable_mod} must be set to \"A\", \"I\", or \"O\" instead of \"${enable_mod_val}\"")
-@@ -836,12 +936,12 @@ FOREACH (mod ${MODULE_PATHS})
+@@ -831,12 +931,13 @@ FOREACH (mod ${MODULE_PATHS})
      ENDIF()
      SET(mod_extra_libs "${mod_name}_extra_libs")
      SET_TARGET_PROPERTIES(${mod_name} PROPERTIES
 -      SUFFIX .so
 -      LINK_FLAGS /base:@${PROJECT_BINARY_DIR}/BaseAddr.ref,${mod_name}.so
 +      SUFFIX ${mod_suffix}
++      # LINK_FLAGS /base:@${PROJECT_BINARY_DIR}/BaseAddr.ref,${mod_name}.so
 +      LINK_FLAGS /dynamicbase 
      )
      TARGET_LINK_LIBRARIES(${mod_name} ${${mod_extra_libs}} libhttpd ${EXTRA_LIBS} ${APR_LIBRARIES} ${HTTPD_SYSTEM_LIBS})
@@ -356,16 +358,17 @@ index 9b38f699db..fa57e6d198 100644
  
      # Extra defines?
      SET(mod_extra_defines "${mod_name}_extra_defines")
-@@ -863,7 +963,7 @@ ENDFOREACH()
+@@ -858,7 +959,8 @@ ENDFOREACH()
  ###########   HTTPD LIBRARIES   ############
  ADD_LIBRARY(libhttpd SHARED ${LIBHTTPD_SOURCES} build/win32/httpd.rc)
  SET_TARGET_PROPERTIES(libhttpd PROPERTIES
 -  LINK_FLAGS /base:@${PROJECT_BINARY_DIR}/BaseAddr.ref,libhttpd.dll
++  # LINK_FLAGS /base:@${PROJECT_BINARY_DIR}/BaseAddr.ref,libhttpd.dll
 +  LINK_FLAGS /dynamicbase 
  )
  SET(install_targets ${install_targets} libhttpd)
  SET(install_bin_pdb ${install_bin_pdb} $<TARGET_PDB_FILE:libhttpd>)
-@@ -918,12 +1018,12 @@ ENDIF()
+@@ -913,12 +1015,12 @@ ENDIF()
  GET_PROPERTY(tmp_includes TARGET ab PROPERTY INCLUDE_DIRECTORIES)
  
  # getting duplicate manifest error with ApacheMonitor
