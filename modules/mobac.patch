@@ -2,7 +2,7 @@ Index: build.gradle
 ===================================================================
 --- build.gradle	(revision 2793)
 +++ build.gradle	(working copy)
-@@ -4,13 +4,16 @@
+@@ -4,28 +4,32 @@
  
  plugins {
      id 'distribution'
@@ -20,9 +20,9 @@ Index: build.gradle
 +group = 'mobac.sourceforge.io'
 +version = '2.3.3'
  
- println("SVN revision $svntools.info.revisionNumber")
+-println("SVN revision $svntools.info.revisionNumber")
++// println("SVN revision $svntools.info.revisionNumber")
  
-@@ -17,15 +20,16 @@
  allprojects {
      repositories {
          mavenCentral()
@@ -56,6 +56,22 @@ Index: build.gradle
 +        // sourceCompatibility = JavaVersion.VERSION_11
 +        // targetCompatibility = JavaVersion.VERSION_11
      }
+ }
+ 
+@@ -125,13 +129,13 @@
+         var p = it.toPath()
+         var dest = updDir.resolve(it.getName())
+         Files.copy(p, dest, StandardCopyOption.REPLACE_EXISTING)
+-        println(dest)
++        // println(dest)
+ 
+         var bytes = Files.readAllBytes(dest)
+         var md5 = MessageDigest.getInstance("MD5").digest(bytes).encodeHex().toString()
+         writer.append(String.format("%s %s\n", md5, it.name))
+     }
+-    println(writer.toString())
++    // println(writer.toString())
+     Files.writeString(updDir.resolve("mappacks-md5.txt"), writer.toString())
  }
  
 Index: gradle/wrapper/gradle-wrapper.properties
@@ -209,7 +225,7 @@ Index: mobac/build.gradle
  }
  processResources {
      doLast {
-@@ -42,7 +43,7 @@
+@@ -42,12 +43,12 @@
          targetDir.mkdirs()
          def props = new Properties()
          props.setProperty("mobac.revision", "$svnRevision")
@@ -218,6 +234,12 @@ Index: mobac/build.gradle
          new File(targetDir, "mobac-rev.properties").withWriter { props.store(it, null) }
      }
  }
+ jar {
+-    println("SVN revision $svnRevision")
++    // println("SVN revision $svnRevision")
+ 
+     manifest {
+         attributes 'Main-Class': 'mobac.StartMOBAC'
 @@ -80,7 +81,7 @@
      exclude("org/sqlite/native/Linux-Musl/**")
      exclude("org/sqlite/native/Linux-Android/**")
