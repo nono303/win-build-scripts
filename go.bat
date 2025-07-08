@@ -50,7 +50,7 @@ set BCMD=
 set BAFF=
 if exist %PATH_MODULES%\%1.bat (
 	set BCMD=%PATH_MODULES%\%1.bat %*
-	set BAFF=BUILD MODULE
+	set BAFF=BUILD
 )
 if exist %PATH_UTILS%\%1.bat (
 	set BCMD=%PATH_UTILS%\%1.bat %*
@@ -67,7 +67,8 @@ if "%BCMD%"=="" (
 for %%D in (EXTERNAL_INCLUDE INCLUDE LIB) do (for /F "tokens=* USEBACKQ" %%F in (`call do_php %PATH_UTILS%\sub\deduplicate.php %%D`) do (set %%D=%%F))
 
 	REM ~~~~~~~~~~~~ RUN
-echo %ymdhis% ####### BEGIN %BAFF% '%1' %MSVC_DEPS% %ARCH% %AVXECHO% ###########################
+echo ####### BEGIN %BAFF% %1 %MSVC_DEPS% %ARCH% %AVXECHO% [%ymdhis%] #######
+set STARTTIME=%TIME%
 if %ARG_ALL% == 1 (
 	for %%V in (vs17 vs16) do (
 		for %%A in (2 1 0) do (
@@ -79,16 +80,17 @@ if %ARG_ALL% == 1 (
 			endlocal
 		)
 	)
-	call dos2unix -f %LOGNAME%
+	call dos2unix -q -f %LOGNAME%
 ) else (
 	
 	if %ARG_NOLOG% == 1 (
 		call %BCMD% 2>&1
 	) else (
 		call %BCMD% 2>&1 | tee %LOGNAME%
-		call dos2unix -f %LOGNAME%
+		call dos2unix -q -f %LOGNAME%
 	)
 )
-call %PATH_MODULES_COMMON%\ymdhis.bat
-echo %ymdhis% #######  END  %BAFF% '%1' %MSVC_DEPS% %ARCH% %AVXECHO% ###########################
+set ENDTIME=%TIME%
+set /A DURATION=10 * ((((%ENDTIME:~0,2%-100)*360000 + (1%ENDTIME:~3,2%-100)*6000 + (1%ENDTIME:~6,2%-100)*100 + (1%ENDTIME:~9,2%-100))-((%STARTTIME:~0,2%-100)*360000 + (1%STARTTIME:~3,2%-100)*6000 + (1%STARTTIME:~6,2%-100)*100 + (1%STARTTIME:~9,2%-100))))
+echo ####### END %BAFF% %1 %MSVC_DEPS% %ARCH% %AVXECHO% [%DURATION%] #######
 cd /D %PATH_BATCH%
