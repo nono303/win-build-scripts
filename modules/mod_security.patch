@@ -34,7 +34,7 @@ index ed4bfc9e..e961e80c 100644
  MT = mt
  
 -DEFS = /nologo /O2 /LD /W3 /wd4244 /wd4018 -DWIN32 -DWINNT -Dinline=APR_INLINE -D$(VERSION)
-+DEFS = /nologo /DWIN32 /DWINNT /DWITH_PCRE2 /D$(VERSION) /D_WINDOWS /w /Zf /Zi /FS /O2 /GL /MD /DNDEBUG /Ob3 /std:clatest /Gw /Gy /MP16 /cgthreads8 /Zc:inline  /arch:AVX2 /Ob3 /std:clatest /Gw /Gy /MP16 /cgthreads8 /Zc:inline
++DEFS = /nologo /DWIN32 /DWINNT /D$(VERSION) /D_WINDOWS /DWITH_PCRE_JIT /w /Zf /Zi /FS /O2 /GL /MD /DNDEBUG /Ob3
  
  DLL = mod_security2.so
  
