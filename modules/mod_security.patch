@@ -1,5 +1,5 @@
 diff --git a/apache2/Makefile.win b/apache2/Makefile.win
-index ed4bfc9e..e961e80c 100644
+index ed4bfc9e..089f3b25 100644
 --- a/apache2/Makefile.win
 +++ b/apache2/Makefile.win
 @@ -10,9 +10,9 @@
@@ -15,7 +15,7 @@ index ed4bfc9e..e961e80c 100644
         Ws2_32.lib \
         "iphlpapi.lib"
  
-@@ -20,30 +20,34 @@ LIBS = $(APACHE)\lib\libhttpd.lib \
+@@ -20,30 +20,30 @@ LIBS = $(APACHE)\lib\libhttpd.lib \
  ###########################################################################
  
  
@@ -23,11 +23,8 @@ index ed4bfc9e..e961e80c 100644
 -DEFS=$(DEFS) -DVERSION_IIS
 -!ENDIF
 +!IF "$(IIS_BUILD)" == "yes"
-+
 +DEFS=$(DEFS) -DVERSION_IIS
-+
 +!ENDIF
-+
  
  CC = CL
  
@@ -47,7 +44,6 @@ index ed4bfc9e..e961e80c 100644
  
 -# Enables support for SecRemoteRules and external resources.
 +# Enables support for SecRemoteRules and external resources.
-+
  DEFS=$(DEFS) -DWITH_CURL -DWITH_REMOTE_RULES
  
  # Lua is optional
@@ -103,3 +99,25 @@ index 0dcb6b3e..36c896cb 100644
                  "%s configured.", MODSEC_MODULE_NAME_FULL);
  
          version(mp, s);
+diff --git a/apache2/msc_pcre.h b/apache2/msc_pcre.h
+index e693236e..ab5e4cba 100644
+--- a/apache2/msc_pcre.h
++++ b/apache2/msc_pcre.h
+@@ -24,7 +24,7 @@ typedef struct msc_regex_t msc_regex_t;
+ #include "pcre.h"
+ #endif
+ 
+-#ifndef WITH_PCRE2
++// #ifndef WITH_PCRE2
+ 
+ #ifndef PCRE_ERROR_MATCHLIMIT
+ /* Define for compile, but not valid in this version of PCRE. */
+@@ -36,7 +36,7 @@ typedef struct msc_regex_t msc_regex_t;
+ #define PCRE_ERROR_RECURSIONLIMIT (-21)
+ #endif /* PCRE_ERROR_RECURSIONLIMIT */
+ 
+-#endif
++// #endif
+ 
+ #include "apr_general.h"
+ #include "modsecurity.h"
