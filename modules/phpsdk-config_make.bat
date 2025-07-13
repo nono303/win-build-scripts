@@ -70,6 +70,7 @@ if %PHP_BUILD_TYPE% == memcache	(set PHP_PARTIAL_BUILD=--enable-memcache=shared)
 if %PHP_BUILD_TYPE% == brotli	(set PHP_PARTIAL_BUILD=--enable-brotli=shared)
 if %PHP_BUILD_TYPE% == igbinary	(set PHP_PARTIAL_BUILD=--enable-igbinary=shared)
 if %PHP_BUILD_TYPE% == parallel	(set PHP_PARTIAL_BUILD=--with-parallel=shared)
+if %PHP_BUILD_TYPE% == ffi	(set PHP_PARTIAL_BUILD=--with-ffi=shared)
 
 if %PHPVER% == %PHP_BUILD_TYPE% (
 	set FINAL_CONFIGURE=%PHP_COMMON_CONFIGURE% ^
@@ -123,6 +124,8 @@ if %PHPVER% == %PHP_BUILD_TYPE% (
 	--enable-timezonedb=shared ^
 	--enable-sync=shared ^
 	--enable-igbinary=shared ^
+	--with-parallel=shared ^
+	--with-ffi=shared ^
 	%ZTS% ^
 	%phpveropts% ^
 	%phparchopts%

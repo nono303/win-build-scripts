@@ -122,6 +122,8 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat libheif NOLOG
 	:libgd
 	call %PATH_BATCH%\go.bat libgd NOLOG
+	:libffi
+	call %PATH_BATCH%\go.bat libffi NOLOG
 	:geos
 	call %PATH_BATCH%\go.bat geos NOLOG
 	:proj

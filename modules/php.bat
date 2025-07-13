@@ -36,6 +36,7 @@ for /L %%i in (2,1,%argCount%) do (
 	if /I "!argVec[%%i]!"=="BROTLI"		set PHP_BUILD_TYPE=brotli
 	if /I "!argVec[%%i]!"=="IGBINARY"	set PHP_BUILD_TYPE=igbinary
 	if /I "!argVec[%%i]!"=="PARALLEL"	set PHP_BUILD_TYPE=parallel
+	if /I "!argVec[%%i]!"=="FFI"		set PHP_BUILD_TYPE=ffi
 	if /I "!argVec[%%i]!"=="WIN7" (
 		echo     # apply php-src_win7.patch
 		git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-src_win7.patch
