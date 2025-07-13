@@ -1,8 +1,100 @@
 # changelog
 
 
+## 1.14.0 _(2025-07-13)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  add libffi and enable php_ffi
+`modules/full.bat`
+`modules/libffi.bat`
+`modules/libffi.patch`
+`modules/libffi.sh`
+`modules/php.bat`
+`modules/phpsdk-config_make.bat`
+`usage.txt`
+`utils/bininfo.bat`
+`utils/sub/version.php`
+*  https://github.com/owasp-modsecurity/ModSecurity/issues/2893#issuecomment-3066608664
+`modules/mod_security.patch`
+*  remove dynamic DEFS fix WITH_PCRE2 https://github.com/owasp-modsecurity/ModSecurity/issues/2893#issuecomment-3065618986
+`modules/mod_security.patch`
+*  https://github.com/icing/mod_h2/issues/277#issuecomment-3048931035
+`modules/httpd.patch`
+*  fix version from git with multi-line tag
+`utils/sub/version.php`
+*  gradlew dependencyInsight
+`modules/fit2gpx.bat`
+`modules/mapsforgesrv.bat`
+`modules/mobac.bat`
+`modules/tzdataservice.bat`
+*  comment all println
+`modules/mobac.patch`
+*  display runtime dependencies remove /out (deliver jar via github release)
+`modules/fit2gpx.bat`
+*  typo  improve [init]
+`modules/common/init.bat`
+*  typo:  + module duration  dos2unix quiet
+`go.bat`
+*  2.4.64
+`modules/httpd.patch`
+*  +GET_VERSION improve output
+`modules/common/init.bat`
+*  force 'git tag --points-at HEAD' instead of pathenv("SCM_TAG")
+`utils/sub/version.php`
+*  HTTPD_VERSION : init varonly > version.php + ZSTD_VERSION fix /std:clatest for vs16
+`modules/mod_zstd.bat`
+*  fix version for mod_bikeshed
+`modules/httpd.bat`
+*  BROTLI_VERSION : init varonly > version.php
+`modules/php.bat`
+*  + CMAKE_POLICY_VERSION_MINIMUM=3.5 for cmake 4.x HTTPD_VERSION : init varonly > version.php
+`modules/mod_fcgid.bat`
+*  3.5.1
+`modules/openssl.patch`
+*  const PATH_SRC = pathenv("PATH_SRC")  - remove useless param update sub module list for php & httpd +brotli as nogit fix getVersion() if SCM_TAG is not present
+`utils/sub/version.php`
+*  1.6.49
+`modules/libpng.bat`
+*  2.9.10
+`modules/mod_security.patch`
+*  bf50eeef
+`modules/pcre2.bat`
+`modules/pcre2.patch`
+*  8.15
+`modules/curl.bat`
+`modules/curl_ca-win.patch`
+*  + "git submodule update --remote --merge" for /third-party/urlparse
+`modules/ngtcp2.bat`
+*  1719c58
+`modules/serf.patch`
+*  find_package(LibXml2 CONFIG REQUIRED) > find_package(LibXml2 REQUIRED) to fix "The link interface of target "LibXml2::LibXml2" contains: Iconv::Iconv but the target was not found"
+`modules/libxslt.patch`
+*  + CMAKE_POLICY_VERSION_MINIMUM=3.5 for cmake 4.x
+`modules/apr-util.bat`
+`modules/apr.bat`
+`modules/freeglut.bat`
+`modules/jansson.bat`
+`modules/libev.bat`
+`modules/libevent.bat`
+`modules/libiconv.bat`
+`modules/libxdiff.bat`
+`modules/qhull.bat`
+`modules/tidy.bat`
+`modules/wineditline.bat`
+`modules/yajl.bat`
+*  upgrade gradle 8.14 > 9.0.0rc1
+`env_sample.bat`
+`modules/mobac.patch`
+`modules/mobac_gradle-wrapper.jar`
+
+
 ## 1.13.0 _(2025-05-19)_
 
+*  1.13.0
+`changelog.md`
 *  update tools & src + proxytunnel - sdnspi-mysql, openssl-quic
 `README.md`
 `SRC_VERSION.md`
