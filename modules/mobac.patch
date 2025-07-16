@@ -385,6 +385,20 @@ Index: mobac/src/main/java/mobac/program/download/MobacTrustManager.java
 +	} 
  	private boolean isCertificateTrusted(String pubKeySha256Hash) {
  		if (additionalTrustedPublicKeys != null) {
+Index: mobac/src/main/java/mobac/program/download/TileDownLoader.java
+===================================================================
+--- mobac/src/main/java/mobac/program/download/TileDownLoader.java	(revision 2793)
++++ mobac/src/main/java/mobac/program/download/TileDownLoader.java	(working copy)
+@@ -44,7 +44,8 @@
+ 		if (defaultReadTimeout == null) {
+ 			System.setProperty("sun.net.client.defaultReadTimeout", "15000");
+ 		}
+-		System.setProperty("http.maxConnections", "20");
++		System.setProperty("http.keepalive", "true");
++       System.setProperty("http.maxConnections", "128");
+ 
+ 		// Disable restricted headers: By default some headers can't be set
+ 		// see https://stackoverflow.com/questions/8335501
 Index: tilestore-util/build.gradle
 ===================================================================
 --- tilestore-util/build.gradle	(revision 2793)
