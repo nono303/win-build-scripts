@@ -1,5 +1,5 @@
 diff --git a/ext/curl/interface.c b/ext/curl/interface.c
-index 255fe98faf..819bf6902f 100644
+index 965e4971267..90421f9b2c5 100644
 --- a/ext/curl/interface.c
 +++ b/ext/curl/interface.c
 @@ -253,72 +253,89 @@ PHP_MINFO_FUNCTION(curl)
@@ -244,7 +244,7 @@ index 255fe98faf..819bf6902f 100644
  
  	php_info_print_table_end();
  
-@@ -1006,104 +1066,173 @@ PHP_FUNCTION(curl_version)
+@@ -1007,104 +1067,173 @@ PHP_FUNCTION(curl_version)
  
  	array_init(return_value);
  
