@@ -15,6 +15,8 @@
 	if(in_array($proot,["pecl-datetime-timezonedb","pecl-igbinary","pecl-memcache","pecl-parallel","pecl-system-sync","pecl-text-xdiff","php-ext-brotli","php-ext-zstd","php-geos","php-ogr","php-proj","php-src"]))
 		$proot = "php";
 	$nogit = array(
+		"proxytunnel"		=> ["/#define VERSION \"([^\"]+)/s",
+							PATH_SRC."/".$argv[1]."/config.h"],
 		"libffi"			=> ["/#define PACKAGE_VERSION \"([^\"]+)/s",
 							PATH_SRC."/".$argv[1]."/fficonfig.h"],
 		"brotli"			=> ["/#define BROTLI_VERSION_MAJOR *([0-9]+).*#define BROTLI_VERSION_MINOR *([0-9]+).*#define BROTLI_VERSION_PATCH *([0-9]+)/s",
