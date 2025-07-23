@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index d749071..4c3366f 100644
+index 4e794ff..66c83c7 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -53,18 +53,16 @@ endif()
@@ -9,7 +9,7 @@ index d749071..4c3366f 100644
 -if(DIST_ROOT)
 -    set(CMAKE_INSTALL_PREFIX "${DIST_ROOT}")
 -else()
--    set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/PTHREADS-BUILT")
+-    set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/PTHREADS-BUILT")
 +if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 +    set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/PTHREADS-BUILT/${TARGET_ARCH}/${CMAKE_BUILD_TYPE}/")
  endif()
@@ -30,13 +30,13 @@ index d749071..4c3366f 100644
 @@ -109,9 +107,11 @@ macro(shared_lib type def)
      endif()
      if(${CMAKE_GENERATOR} MATCHES "Visual Studio")
-         install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_BUILD_TYPE}/${targ}${targ_suffix}.dll DESTINATION ${DLLDEST})
-+        install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_BUILD_TYPE}/${targ}${targ_suffix}.pdb DESTINATION ${DLLDEST})
-         install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_BUILD_TYPE}/${targ}${targ_suffix}.lib DESTINATION ${LIBDEST})
+         install(FILES ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/${targ}${targ_suffix}.dll DESTINATION ${DLLDEST})
++        install(FILES ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/${targ}${targ_suffix}.pdb DESTINATION ${DLLDEST})
+         install(FILES ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/${targ}${targ_suffix}.lib DESTINATION ${LIBDEST})
      else()
-         install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${targ}${targ_suffix}.dll DESTINATION ${DLLDEST})
-+        install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${targ}${targ_suffix}.pdb DESTINATION ${DLLDEST})
-         install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${targ}${targ_suffix}.lib DESTINATION ${LIBDEST})
+         install(FILES ${CMAKE_BINARY_DIR}/${targ}${targ_suffix}.dll DESTINATION ${DLLDEST})
++        install(FILES ${CMAKE_BINARY_DIR}/${targ}${targ_suffix}.pdb DESTINATION ${DLLDEST})
+         install(FILES ${CMAKE_BINARY_DIR}/${targ}${targ_suffix}.lib DESTINATION ${LIBDEST})
      endif()
  endmacro()
 @@ -131,13 +131,17 @@ macro(static_lib type def)
