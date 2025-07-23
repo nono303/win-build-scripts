@@ -13,7 +13,6 @@ REM ********
 call %PATH_MODULES_COMMON%\init.bat php-src
 set PHPVER=%SCM_TAG:~4,3%
 set PHPVERFULL=%SCM_TAG:~4%
-
 	REM ~~~~~~~~~~~~ tmp patch
 echo     # apply php-src_pr17848.patch
 git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-src_pr17848.patch
@@ -56,12 +55,6 @@ if %PHP_BUILD_TYPE% == brotli	(
 	set PHP_XTRALIBS=;%PATH_INSTALL%\lib_unused\
 )
 
-	REM php < 8.4 : link openssl3 sources to module (applink.c)
-if %PHPVER% LSS 8.4 (
-	if exist %PATH_SRC%\php-src\openssl\. rmdir /S /Q %PATH_SRC%\php-src\openssl
-	mklink /J %PATH_SRC%\php-src\openssl %PATH_SRC%\%OPENSSL_SCM%\ms
-)
-
 	REM VERSION PATCH
 if exist %PATH_MODULES%\php-src_%PHPVER%.patch (
 	if %ARG_KEEPSRC% == 0 (
@@ -69,7 +62,6 @@ if exist %PATH_MODULES%\php-src_%PHPVER%.patch (
 		git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-src_%PHPVER%.patch
 	)
 )
-
 	REM ~~~~~~~~~~~~ pecl-memcache
 call %PATH_MODULES_COMMON%\init.bat pecl-memcache
 	REM revision & version for pecl_memcache in phpinfo()

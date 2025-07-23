@@ -52,11 +52,7 @@ call configure --help > %PATH_LOGS%\configure_%PHPVER%.txt
 if %PHP_BUILDNTS% == 1 (
 	REM ~~~~~~~~~~~~ make NTS
 	echo *** nts  ***
-	set ZTS=--disable-zts
-	if %PHPVER% == 8.4 (
-		set ZTS=%ZTS% --with-openssl-argon2
-	)
-	--with-openssl-argon2
+	set ZTS=--disable-zts --with-openssl-argon2
 	set TSLIBSUF=
 	set TSNTS=nts
 		REM unused
@@ -66,10 +62,7 @@ if %PHP_BUILDNTS% == 1 (
 if %PHP_BUILDTS% == 1 (
 	REM ~~~~~~~~~~~~ make TS
 	echo *** ts  ***
-	set ZTS=
-	if %PHPVER% == 8.4 (
-		set ZTS=--with-parallel=shared
-	)
+	set ZTS=--with-parallel=shared
 	set TSLIBSUF=ts
 	set TSNTS=ts
 		REM unused

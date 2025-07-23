@@ -4,41 +4,14 @@ cd /D %PHP_SRC_DIR%
 REM ################# PHP8 #################
 set PHP8_COMMON_CONFIGURE=^
 	--enable-native-intrinsics=sse,sse2%intrinsics% ^
-	--enable-sanitizer
-if %PHPVER% == 8.0 (
-set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
-	--disable-phpdbg-webhelper ^
-	--without-oci8 ^
-	--with-mhash=shared ^
-	--without-imap
-set native-intrinsics=1
-)
-if %PHPVER% == 8.1 (
-set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
 	--with-php-build=%PATH_INSTALL% ^
-	--without-oci8 ^			
-	--with-mhash=shared ^
-	--without-imap
-set native-intrinsics=1
-)
-if %PHPVER% == 8.2 (
-set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
-	--with-php-build=%PATH_INSTALL% ^
-	--with-mhash=shared ^
-	--without-imap
-set native-intrinsics=1
-)
-if %PHPVER% == 8.3 (
-set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
-	--with-php-build=%PATH_INSTALL% ^
-	--with-mhash=shared ^
-	--without-imap
-set native-intrinsics=1
-)
+	--with-verbosity=2
 if %PHPVER% == 8.4 (
-set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
-	--with-php-build=%PATH_INSTALL%
-set native-intrinsics=1
+	set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
+		--without-uncritical-warn-choke
+)
+if %PHPVER% == 8.5 (
+	set phpveropts=	%PHP8_COMMON_CONFIGURE%	
 )
 set PHP_COMMON_CONFIGURE=^
 	--disable-cli-win32 ^
@@ -57,7 +30,6 @@ set PHP_COMMON_CONFIGURE=^
 	--without-snmp ^
 	--without-ldap ^
 	--without-pgsql ^
-	--without-uncritical-warn-choke ^
 	--with-toolset=vs ^
 	--with-cygwin=%PATH_BIN_CYGWIN% ^
 	--with-extra-includes=%PATH_INSTALL_OSSL%\include;%PATH_INSTALL%\include;%PATH_INSTALL%\_proj\include;%PATH_INSTALL%\_gdal\include ^
@@ -124,7 +96,6 @@ if %PHPVER% == %PHP_BUILD_TYPE% (
 	--enable-timezonedb=shared ^
 	--enable-sync=shared ^
 	--enable-igbinary=shared ^
-	--with-parallel=shared ^
 	--with-ffi=shared ^
 	%ZTS% ^
 	%phpveropts% ^
