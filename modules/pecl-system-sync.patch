@@ -1,0 +1,28 @@
+https://github.com/php/pecl-system-sync/commit/b2251ec9fdf0af1c898ec8e0b0b03099c9f246af.patch
+From b2251ec9fdf0af1c898ec8e0b0b03099c9f246af Mon Sep 17 00:00:00 2001
+From: Remi Collet <remi@remirepo.net>
+Date: Thu, 17 Jul 2025 15:49:40 +0200
+Subject: [PATCH] copy zend_exception_get_default for 8.5
+
+---
+ sync.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/sync.c b/sync.c
+index f235088..52aa4be 100644
+--- a/sync.c
++++ b/sync.c
+@@ -42,6 +42,13 @@
+ #define TSRMLS_FETCH()
+ #endif
+ 
++#if PHP_VERSION_ID >= 80500
++static zend_class_entry *zend_exception_get_default(void)
++{
++	return zend_ce_exception;
++}
++#endif
++
+ /* {{{ sync_module_entry
+  */
+ zend_module_entry sync_module_entry = {
