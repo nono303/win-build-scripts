@@ -20,6 +20,7 @@ perl Configure %perlbuild% ^
 --prefix=%PATH_INSTALL_OSSL% ^
 --openssldir=%PATH_INSTALL_OSSL%\conf ^
 shared ^
+no-asan ^
 no-tests ^
 no-unit-test ^
 no-external-tests ^
