@@ -15,6 +15,8 @@
 	if(in_array($proot,["pecl-datetime-timezonedb","pecl-igbinary","pecl-memcache","pecl-parallel","pecl-system-sync","pecl-text-xdiff","php-ext-brotli","php-ext-zstd","php-geos","php-ogr","php-proj","php-src"]))
 		$proot = "php";
 	$nogit = array(
+		"php-src"			=> ['/#define PHP_VERSION "([^\"]+)/s',
+							PATH_SRC."/".$argv[1]."/main/php_version.h"],
 		"proxytunnel"		=> ["/#define VERSION \"([^\"]+)/s",
 							PATH_SRC."/".$argv[1]."/config.h"],
 		"libffi"			=> ["/#define PACKAGE_VERSION \"([^\"]+)/s",
@@ -287,14 +289,17 @@
 			$pname = basename($argv[2],".".pathinfo($argv[2], PATHINFO_EXTENSION));
 			if($pname != $proot)
 				$pname = $proot.":".$pname;
-
-			$cmd = pathenv("BIN_VERPATCH")." ".$argv[2]." \"".$current["file"]."\" /va".$rpdb." /high /pv \"".$current["product"]."\" /s description \"".$description."\" /s product \"".$pname."\" /s LegalTrademarks \"".pathenv("SCM_URL")."\" /s LegalCopyright \"https://github.com/nono303/win-build-scripts\"";
-			if(DEBUG || pathenv("CUR_DEBUG") == 1){
-				echo $cmd.PHP_EOL;
+			if(is_file($argv[2])){
+				$cmd = pathenv("BIN_VERPATCH")." ".$argv[2]." \"".$current["file"]."\" /va".$rpdb." /high /pv \"".$current["product"]."\" /s description \"".$description."\" /s product \"".$pname."\" /s LegalTrademarks \"".pathenv("SCM_URL")."\" /s LegalCopyright \"https://github.com/nono303/win-build-scripts\"";
+				if(DEBUG || pathenv("CUR_DEBUG") == 1){
+					echo $cmd.PHP_EOL;
+				} else {
+					echo "[version] '".$current["product"]."' ".$argv[2]." (".str_replace("/","\\",$current["from"]).")".PHP_EOL;
+				}
+				passthru($cmd);
 			} else {
-				echo "[version] '".$current["product"]."' ".$argv[2]." (".str_replace("/","\\",$current["from"]).")".PHP_EOL;
+				echo "[version] ERROR: ".$argv[2]." doesn't exist".PHP_EOL;
 			}
-			passthru($cmd);
 		} else {
 			echo "version.php '".$argv[1]."' '".$argv[2]."': '".PATH_SRC."/".$argv[1]."' doesn't exist";
 			exit(-1);
