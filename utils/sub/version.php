@@ -25,7 +25,7 @@
 							PATH_SRC."/".$argv[1]."/src/config.h.generic"],
 		"mod_zstd"			=> ["/#define MOD_ZSTD_VERSION \"([^\"]+)/s",
 							PATH_SRC."/".$argv[1]."/mod_zstd.h"],
-		"pthreads4w"		=> ["/#define  __PTW32_VERSION ([0-9+]),([0-9+]),([0-9+]),([0-9+])/s",
+		"pthread-win32"		=> ["/#define  PTW32_VERSION ([0-9+]),([0-9+]),([0-9+]),([0-9+])/s",
 							PATH_SRC."/".$argv[1]."/_ptw32.h"],
 		"pecl-parallel"		=> ["/# define PHP_PARALLEL_VERSION \"([^\"]+)/s",
 							PATH_SRC."/".$argv[1]."/php_parallel.h"],
