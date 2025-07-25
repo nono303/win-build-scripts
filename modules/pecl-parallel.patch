@@ -1,0 +1,12 @@
+diff --git a/php_parallel.c b/php_parallel.c
+index 0849f30..81c2b02 100644
+--- a/php_parallel.c
++++ b/php_parallel.c
+@@ -73,6 +73,7 @@ PHP_MINFO_FUNCTION(parallel)
+ 	php_info_print_table_start();
+ 	php_info_print_table_header(2, "parallel support", "enabled");
+ 	php_info_print_table_row(2, "parallel version", PHP_PARALLEL_VERSION);
++	php_info_print_table_row(2, "pthread version", PTW32_VERSION_STRING);
+ 	php_info_print_table_end();
+ }
+ /* }}} */
