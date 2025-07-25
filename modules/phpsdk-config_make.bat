@@ -162,7 +162,7 @@ for %%A in (exe dll) do (
 	for /f "tokens=*" %%G in ('dir %PHP_BUILD_DIR%\php*.%%A /s/b') do (
 		for %%E in (%%A pdb) do (
 			xcopy /C /F /Y %%~pG%%~nG.%%E %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\*
-			if %LOCAL_COPY% == 1 if %LOCAL_COPY_AVX_ECHO% == %AVXECHO%  if %LOCAL_COPY_MSVC_VER% == %MSVC_VER% (
+			if %LOCAL_COPY% == 1 if %LOCAL_COPY_AVX_ECHO% == %AVXECHO%  if %LOCAL_COPY_MSVC_VER% == %MSVC_VER% if %PHPVER% == %PHP_BUILD_TYPE% (
 				xcopy /C /F /Y %%~pG%%~nG.%%E %LOCAL_PATH_PHP%\*
 			)
 		)
