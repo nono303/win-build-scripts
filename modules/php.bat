@@ -11,8 +11,9 @@ REM ********
 
 	REM ~~~~~~~~~~~~ php-src
 call %PATH_MODULES_COMMON%\init.bat php-src
-set PHPVER=%SCM_TAG:~4,3%
-set PHPVERFULL=%SCM_TAG:~4%
+set PHPVER=%GET_VERSION:~0,3%
+set PHPVERFULL=%GET_VERSION%
+
 	REM ~~~~~~~~~~~~ tmp patch
 echo     # apply php-src_pr17848.patch
 git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-src_pr17848.patch
