@@ -172,7 +172,7 @@ for %%A in (exe dll) do (
 if %PHPVER% == %PHP_BUILD_TYPE% (
 	for /f "tokens=*" %%G in ('dir %PHP_BUILD_DIR%\php8%TSLIBSUF%.lib /s/b') do (xcopy /C /F /Y %%G %PATH_INSTALL%\lib\*)
 	call %PATH_MODULES_COMMON%\init.bat php-src varonly
-	for %%X in (php-cgi.exe php.exe php8%TSLIBSUF%.dll php_curl.dll php_fileinfo.dll php_gd.dll php_intl.dll php_opcache.dll php_openssl.dll php_tidy.dll php_bcmath.dll php_bz2.dll php_calendar.dll php_com_dotnet.dll php_ctype.dll php_dom.dll php_exif.dll php_ftp.dll php_iconv.dll php_mysqli.dll php_pdo_mysql.dll php_pdo_sqlite.dll php_readline.dll php_simplexml.dll php_soap.dll php_sockets.dll php_sodium.dll php_sqlite3.dll php_xml.dll php_xmlreader.dll php_xmlwriter.dll php_zip.dll php_zlib.dll php_xsl.dll php_mbstring.dll php_gmp.dll php-ffi) do (
+	for %%X in (php-cgi.exe php.exe php8%TSLIBSUF%.dll php_curl.dll php_fileinfo.dll php_gd.dll php_intl.dll php_opcache.dll php_openssl.dll php_tidy.dll php_bcmath.dll php_bz2.dll php_calendar.dll php_com_dotnet.dll php_ctype.dll php_dom.dll php_exif.dll php_ftp.dll php_iconv.dll php_mysqli.dll php_pdo_mysql.dll php_pdo_sqlite.dll php_readline.dll php_simplexml.dll php_soap.dll php_sockets.dll php_sodium.dll php_sqlite3.dll php_xml.dll php_xmlreader.dll php_xmlwriter.dll php_zip.dll php_zlib.dll php_xsl.dll php_mbstring.dll php_gmp.dll php_ffi) do (
 		call do_php %PATH_UTILS%\sub\version.php php-src %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\%%X "build:%TSNTS%"
 	)
 	call %PATH_MODULES_COMMON%\init.bat pecl-text-xdiff varonly
