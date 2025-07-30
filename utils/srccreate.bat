@@ -34,7 +34,7 @@ git checkout tags/v1.34.5
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/rc-8_15_0-3
+git checkout tags/curl-8_15_0
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -66,7 +66,7 @@ git checkout tags/r2.5
 cd /D ..
 git clone https://github.com/libgeos/geos geos
 cd /D geos
-git checkout tags/3.13.1
+git checkout tags/3.14.0beta1
 cd /D ..
 git clone https://github.com/gongjianbo/GifLib giflib
 cd /D giflib
@@ -74,7 +74,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
-git checkout tags/2.4.64
+git checkout tags/2.4.65
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
@@ -274,11 +274,11 @@ git checkout tags/v1.66.0
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3
-git checkout tags/v1.10.1
+git checkout tags/v1.11.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v1.13.0
+git checkout tags/v1.14.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -306,7 +306,7 @@ git checkout main
 cd /D ..
 git clone https://github.com/krakjoe/parallel.git pecl-parallel
 cd /D pecl-parallel
-git checkout tags/v1.2.7
+git checkout tags/v1.2.8
 cd /D ..
 git clone https://github.com/php/pecl-system-sync pecl-system-sync
 cd /D pecl-system-sync
@@ -342,7 +342,7 @@ git checkout tags/php-sdk-2.4.0
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.4.10
+git checkout master
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
@@ -350,11 +350,15 @@ git checkout tags/9.6.2RC1
 cd /D ..
 git clone https://github.com/proxytunnel/proxytunnel.git proxytunnel
 cd /D proxytunnel
-git checkout tags/v1.12.3
+git checkout master
 cd /D ..
-git clone https://github.com/jwinarske/pthreads4w.git pthreads4w
+git clone https://github.com/GerHobbelt/pthread-win32.git pthread-win32
+cd /D pthread-win32
+git checkout master
+cd /D ..
+git clone https://git.code.sf.net/p/pthreads4w/code pthreads4w
 cd /D pthreads4w
-git checkout cmake
+git checkout master
 cd /D ..
 git clone https://github.com/qhull/qhull qhull
 cd /D qhull
@@ -370,7 +374,7 @@ git checkout trunk
 cd /D ..
 git clone https://github.com/rhuijben/sqlite-amalgamation sqlite
 cd /D sqlite
-git checkout tags/3.50.2
+git checkout tags/3.50.3
 cd /D ..
 git clone https://github.com/yrutschle/sslh.git sslh
 cd /D sslh
@@ -398,7 +402,7 @@ git checkout tags/wineditline-2.208
 cd /D ..
 git clone https://github.com/xdebug/xdebug.git xdebug
 cd /D xdebug
-git checkout tags/3.4.4
+git checkout tags/3.4.5
 cd /D ..
 git clone https://github.com/lloyd/yajl.git yajl
 cd /D yajl
