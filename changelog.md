@@ -1,8 +1,63 @@
 # changelog
 
 
+## 1.14.1 _(2025-07-30)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  fix php_ffi version
+`modules/phpsdk-config_make.bat`
+*  https://github.com/icing/mod_md/pull/389
+`modules/httpd.patch`
+*  8.15.0
+`modules/curl.bat`
+*  +php_src fix: check if file exist before calling verpatch
+`utils/sub/version.php`
+*  fix build without git tag
+`modules/php.bat`
+*  local copy only for full build
+`modules/phpsdk-config_make.bat`
+*  +pthread version in phpinfo
+`modules/pecl-parallel.patch`
+*  pthreads4w > pthread-win32
+`modules/full.bat`
+`usage.txt`
+`utils/sub/version.php`
+*  6c65db1
+`modules/serf.patch`
+*  disable address sanitizer
+`modules/openssl.bat`
+*  move https://github.com/jwinarske/pthreads4w to updated https://github.com/GerHobbelt/pthread-win32
+`modules/pthread-win32.bat`
+`modules/pthread-win32.patch`
+`modules/pthreads4w.patch`
+*  remove  * build for php < 8.4 (configure & link openssl3 applink.c sources to module)  * useless var native-intrinsics add  * php 8.5 configure:  * + --with-verbosity=2  * - --enable-sanitizer (https://stackoverflow.com/questions/67854212/msvc-address-sanitizer-any-reason-to-use-it-in-release-builds)  * --with-parallel=shared wrongly duplicated in phpsdk-config_make.bat (set in phpsdk-local.bat for TS only)
+`modules/php-src_8.5.patch`
+`modules/php.bat`
+`modules/phpsdk-config_make.bat`
+`modules/phpsdk-local.bat`
+*  php 8.5 https://github.com/php/pecl-system-sync/commit/b2251ec9fdf0af1c898ec8e0b0b03099c9f246af.patch
+`modules/pecl-system-sync.patch`
+*  move to original repo: https://github.com/jwinarske/pthreads4w > https://git.code.sf.net/p/pthreads4w/code
+`modules/pthreads4w.bat`
+`modules/pthreads4w.patch`
+*  proxytunnel from master (fixed https://github.com/proxytunnel/proxytunnel/commit/b4ddf94b4568b4d9a54b8893e8dbf11fb1f00177)
+`modules/proxytunnel.patch`
+`utils/sub/version.php`
+*  8.4.11
+`modules/php-src_pr17848.patch`
+*  fix php_ffi version
+`modules/phpsdk-config_make.bat`
+*  http.maxConnections: 20 > 128 +http.keepalive: true
+`modules/mobac.patch`
+
+
 ## 1.14.0 _(2025-07-13)_
 
+*  1.14.0
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
