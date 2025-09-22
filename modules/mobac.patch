@@ -1,8 +1,8 @@
 Index: build.gradle
 ===================================================================
---- build.gradle	(revision 2793)
+--- build.gradle	(revision 2797)
 +++ build.gradle	(working copy)
-@@ -4,28 +4,32 @@
+@@ -4,34 +4,38 @@
  
  plugins {
      id 'distribution'
@@ -12,7 +12,7 @@ Index: build.gradle
      id 'org.gradle.crypto.checksum' version '1.4.0'
 -    id 'com.diffplug.spotless' version '6.21.0'
 +    // https://mvnrepository.com/artifact/com.diffplug.spotless/spotless-plugin-gradle
-+    id 'com.diffplug.spotless' version '7.0.4'
++    id 'com.diffplug.spotless' version '7.2.1'
  }
  
 -group 'mobac.sourceforge.io'
@@ -26,18 +26,22 @@ Index: build.gradle
  allprojects {
      repositories {
          mavenCentral()
--        maven {
--            // required for javax.media:jai-core:1.1.3 and com.sun.media:jai-codec:1.1.3
+         maven {
+-            url 'https://jitpack.io'
++            url = 'https://jitpack.io'
+             content { includeGroupByRegex "com\\.github\\..*" }
+         }
+         maven {
+             // required for javax.media:jai-core:1.1.3 and com.sun.media:jai-codec:1.1.3
 -            url "https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/"
 -        }
--
--        // maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-+	// required for javax.media:jai-core:1.1.3 and com.sun.media:jai-codec:1.1.3
-+        maven {url = "https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/"}
-+        // https://github.com/mapsforge/mapsforge/blob/master/docs/Integration.md
-+	maven {url = 'https://jitpack.io'}
-+	// https://github.com/mapsforge/mapsforge/blob/master/docs/Integration.md
-+	maven {url = 'https://jitpack.io'}
++            url = "https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/"
++    }
+         maven {
+             // beanshell bsh 3 unless there is a stable release
+-            url "https://oss.sonatype.org/content/repositories/snapshots/"
++            url = "https://oss.sonatype.org/content/repositories/snapshots/"
+         }
      }
      ext {
          svnRevision = "$svntools.info.revisionNumber"
@@ -45,7 +49,7 @@ Index: build.gradle
      }
      tasks.withType(JavaCompile) {
          options.encoding = 'UTF-8'
-@@ -32,9 +36,9 @@
+@@ -38,9 +42,9 @@
          options.incremental = true
          options.fork = true
          options.compilerArgs << '-Xlint:unchecked'
@@ -58,7 +62,7 @@ Index: build.gradle
      }
  }
  
-@@ -125,13 +129,13 @@
+@@ -131,13 +135,13 @@
          var p = it.toPath()
          var dest = updDir.resolve(it.getName())
          Files.copy(p, dest, StandardCopyOption.REPLACE_EXISTING)
@@ -76,19 +80,19 @@ Index: build.gradle
  
 Index: gradle/wrapper/gradle-wrapper.properties
 ===================================================================
---- gradle/wrapper/gradle-wrapper.properties	(revision 2793)
+--- gradle/wrapper/gradle-wrapper.properties	(revision 2797)
 +++ gradle/wrapper/gradle-wrapper.properties	(working copy)
 @@ -1,6 +1,6 @@
  distributionBase=GRADLE_USER_HOME
  distributionPath=wrapper/dists
 -distributionUrl=https\://services.gradle.org/distributions/gradle-8.9-bin.zip
-+distributionUrl=https\://services.gradle.org/distributions/gradle-9.0.0-rc-1-bin.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-9.1.0-bin.zip
  networkTimeout=10000
  validateDistributionUrl=true
  zipStoreBase=GRADLE_USER_HOME
 Index: gradlew
 ===================================================================
---- gradlew	(revision 2793)
+--- gradlew	(revision 2797)
 +++ gradlew	(working copy)
 @@ -1,7 +1,7 @@
  #!/bin/sh
@@ -138,7 +142,7 @@ Index: gradlew
  # Stop when "xargs" is not available.
 Index: gradlew.bat
 ===================================================================
---- gradlew.bat	(revision 2793)
+--- gradlew.bat	(revision 2797)
 +++ gradlew.bat	(working copy)
 @@ -70,11 +70,11 @@
  :execute
@@ -156,39 +160,39 @@ Index: gradlew.bat
  @rem End local scope for the variables with windows NT shell
 Index: mobac/build.gradle
 ===================================================================
---- mobac/build.gradle	(revision 2793)
+--- mobac/build.gradle	(revision 2797)
 +++ mobac/build.gradle	(working copy)
 @@ -1,11 +1,11 @@
  plugins {
      id 'java-library'
 -    id 'edu.sc.seis.launch4j' version '3.0.6'
 +    // https://plugins.gradle.org/plugin/edu.sc.seis.launch4j
-+    id 'edu.sc.seis.launch4j' version '3.0.7'
++    id 'edu.sc.seis.launch4j' version '4.0.0'
  }
  
  dependencies {
--    def mapsforgeVersion = '0.20.0'
+-    def mapsforgeVersion = '0.26.1'
 -    // def mapsforgeVersion = 'master-SNAPSHOT'
-+    def mapsforgeVersion = '0.25.0'
++    def mapsforgeVersion = '+'
  
-     implementation "org.mapsforge:mapsforge-core:${mapsforgeVersion}"
-     implementation "org.mapsforge:mapsforge-map:${mapsforgeVersion}"
+     implementation "com.github.mapsforge.mapsforge:mapsforge-core:${mapsforgeVersion}"
+     implementation "com.github.mapsforge.mapsforge:mapsforge-map:${mapsforgeVersion}"
 @@ -12,29 +12,30 @@
-     implementation "org.mapsforge:mapsforge-map-awt:${mapsforgeVersion}"
-     implementation "org.mapsforge:mapsforge-map-reader:${mapsforgeVersion}"
-     implementation "org.mapsforge:mapsforge-themes:${mapsforgeVersion}"
--    api 'org.apache-extras.beanshell:bsh:2.0b6'
+     implementation "com.github.mapsforge.mapsforge:mapsforge-map-awt:${mapsforgeVersion}"
+     implementation "com.github.mapsforge.mapsforge:mapsforge-map-reader:${mapsforgeVersion}"
+     implementation "com.github.mapsforge.mapsforge:mapsforge-themes:${mapsforgeVersion}"
+-    api 'org.beanshell:bsh:3.0.0-SNAPSHOT'
 -    api 'commons-codec:commons-codec:1.15'
--    api 'commons-io:commons-io:2.11.0'
--    api 'org.apache.commons:commons-lang3:3.12.0'
--    api 'org.apache.commons:commons-text:1.9'
+-    api 'commons-io:commons-io:2.14.0'
+-    api 'org.apache.commons:commons-lang3:3.18.0'
+-    api 'org.apache.commons:commons-text:1.10.0'
 -    api 'com.github.kerner1000:javapng:2.1.2'
 -    api 'org.xerial:sqlite-jdbc:3.43.0.0'
 -    api 'com.sleepycat:je:5.0.73'
 -    api 'org.glassfish.jaxb:jaxb-runtime:3.0.2'
 -    api 'org.slf4j:slf4j-api:1.7.36'
 -    implementation 'com.twelvemonkeys.imageio:imageio-webp:3.9.4'
--    implementation 'ch.qos.logback:logback-classic:1.2.11'
+-    implementation 'ch.qos.logback:logback-classic:1.3.15'
 -    implementation 'org.slf4j:jul-to-slf4j:1.7.36'
 -    implementation 'net.sf.jtidy:jtidy:r938'
 -    implementation 'com.itextpdf:itextpdf:5.1.3'
@@ -252,12 +256,12 @@ Index: mobac/build.gradle
  launch4j {
 Index: mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(revision 2793)
+--- mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(revision 2797)
 +++ mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(working copy)
 @@ -34,15 +34,10 @@
  	static {
  		// Sizes from 1024 to 32768
- 		MAP_SIZE_VALUES = new Vector<Integer>(11);
+ 		MAP_SIZE_VALUES = new Vector<>(11);
 -		MAP_SIZE_VALUES.addElement(128000);
 +		MAP_SIZE_VALUES.addElement(DEFAULT = 4194303);;
  		MAP_SIZE_VALUES.addElement(1048575);
@@ -272,9 +276,26 @@ Index: mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java
  		MAP_SIZE_VALUES.addElement(2048);
  		MAP_SIZE_VALUES.addElement(1024);
  	}
+Index: mobac/src/main/java/mobac/gui/dialogs/Help.java
+===================================================================
+--- mobac/src/main/java/mobac/gui/dialogs/Help.java	(revision 2797)
++++ mobac/src/main/java/mobac/gui/dialogs/Help.java	(working copy)
+@@ -44,10 +44,11 @@
+ 		JLabel text = new JLabel();
+ 		JButton closeButton = new JButton(I18nUtils.localizedStringForKey("Close"));
+ 		closeButton.setDefaultCapable(true);
+-		closeButton.addActionListener(() -> {
++		/*closeButton.addActionListener(() -> {
+ 			setVisible(false);
+ 			dispose();
+ 		});
++		*/
+ 
+ 		try (InputStream in = I18nUtils.getI18nResourceAsStream("resources/text/help_dialog", "html")) {
+ 			byte[] buf = in.readAllBytes();
 Index: mobac/src/main/java/mobac/gui/MainGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2793)
+--- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2797)
 +++ mobac/src/main/java/mobac/gui/MainGUI.java	(working copy)
 @@ -151,7 +151,7 @@
  
@@ -282,10 +303,10 @@ Index: mobac/src/main/java/mobac/gui/MainGUI.java
  
 -	public static final int LEFT_PANEL_MIN_SIZE = 254;
 +	public static final int LEFT_PANEL_MIN_SIZE = 270;
- 	public static final ArrayList<Image> MOBAC_ICONS = new ArrayList<Image>(3);
+ 	public static final ArrayList<Image> MOBAC_ICONS = new ArrayList<>(3);
  	private static final long serialVersionUID = 1L;
  	private static final int LEFT_PANEL_MARGIN = 2;
-@@ -725,6 +725,7 @@
+@@ -712,6 +712,7 @@
  		addLayers.addActionListener(AddMapLayer.INSTANCE);
  		atlasContentPanel.addContent(new JLabel(I18nUtils.localizedStringForKey("lp_atlas_name_label_title")), gbc_std);
  		atlasContentPanel.addContent(atlasNameTextField, gbc_eol.fill(GBC.HORIZONTAL));
@@ -295,7 +316,7 @@ Index: mobac/src/main/java/mobac/gui/MainGUI.java
  		leftPanelContent.add(mapSourcePanel, gbc_eol);
 Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2793)
+--- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2797)
 +++ mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(working copy)
 @@ -43,7 +43,7 @@
  		JScrollPane mapSourceTreeScrollPane = new JScrollPane(mapSourceTree, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -308,9 +329,9 @@ Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
  	}
 Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2793)
+--- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2797)
 +++ mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(working copy)
-@@ -95,7 +95,7 @@
+@@ -94,7 +94,7 @@
  
  	private static final Logger LOG = LoggerFactory.getLogger(SettingsGUI.class);
  
@@ -319,33 +340,20 @@ Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
  
  	private static final long MBIT1 = 1000000 / 8;
  	private final Settings settings = Settings.getInstance();
-Index: mobac/src/main/java/mobac/mapsources/MapsforgeMapSource.java
-===================================================================
---- mobac/src/main/java/mobac/mapsources/MapsforgeMapSource.java	(revision 2793)
-+++ mobac/src/main/java/mobac/mapsources/MapsforgeMapSource.java	(working copy)
-@@ -48,7 +48,7 @@
- import org.mapsforge.map.reader.MapFile;
- import org.mapsforge.map.reader.header.MapFileException;
- import org.mapsforge.map.rendertheme.ExternalRenderTheme;
--import org.mapsforge.map.rendertheme.InternalRenderTheme;
-+import org.mapsforge.map.rendertheme.internal.MapsforgeThemes;
- import org.mapsforge.map.rendertheme.XmlRenderTheme;
- import org.mapsforge.map.rendertheme.XmlRenderThemeMenuCallback;
- import org.mapsforge.map.rendertheme.XmlRenderThemeStyleLayer;
-@@ -103,7 +103,7 @@
- 	public MapsforgeMapSource(String mapFileName) {
- 		mapFileList.add(new File(mapFileName));
- 		displayModel = new DisplayModel();
--		xmlRenderTheme = InternalRenderTheme.OSMARENDER;
-+		xmlRenderTheme = MapsforgeThemes.OSMARENDER;
- 	}
- 
- 	@Override
+@@ -772,7 +772,7 @@
+ 			// information
+ 			if (tabbedPane.getSelectedComponent() == tileStoreTab) {
+ 				// if ("Tile store".equals(tabbedPane.getSelectedComponent().getName())) {
+-				tabbedPane.removeChangeListener(this);
++				// tabbedPane.removeChangeListener(this);
+ 				tileStoreTab.updateTileStoreInfoPanelAsync(null);
+ 			}
+ 		});
 Index: mobac/src/main/java/mobac/program/AtlasThread.java
 ===================================================================
---- mobac/src/main/java/mobac/program/AtlasThread.java	(revision 2793)
+--- mobac/src/main/java/mobac/program/AtlasThread.java	(revision 2797)
 +++ mobac/src/main/java/mobac/program/AtlasThread.java	(working copy)
-@@ -203,13 +203,13 @@
+@@ -199,13 +199,13 @@
  			}
  		}
  
@@ -363,7 +371,7 @@ Index: mobac/src/main/java/mobac/program/AtlasThread.java
  		} catch (AtlasTestException e) {
 Index: mobac/src/main/java/mobac/program/download/MobacTrustManager.java
 ===================================================================
---- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2793)
+--- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2797)
 +++ mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(working copy)
 @@ -129,7 +129,7 @@
  			defaultTrustManager.checkServerTrusted(chain, authType);
@@ -388,7 +396,7 @@ Index: mobac/src/main/java/mobac/program/download/MobacTrustManager.java
  		if (additionalTrustedPublicKeys != null) {
 Index: mobac/src/main/java/mobac/program/download/TileDownLoader.java
 ===================================================================
---- mobac/src/main/java/mobac/program/download/TileDownLoader.java	(revision 2793)
+--- mobac/src/main/java/mobac/program/download/TileDownLoader.java	(revision 2797)
 +++ mobac/src/main/java/mobac/program/download/TileDownLoader.java	(working copy)
 @@ -44,7 +44,8 @@
  		if (defaultReadTimeout == null) {
@@ -402,7 +410,7 @@ Index: mobac/src/main/java/mobac/program/download/TileDownLoader.java
  		// see https://stackoverflow.com/questions/8335501
 Index: tilestore-util/build.gradle
 ===================================================================
---- tilestore-util/build.gradle	(revision 2793)
+--- tilestore-util/build.gradle	(revision 2797)
 +++ tilestore-util/build.gradle	(working copy)
 @@ -26,7 +26,7 @@
      exclude("module-info.class")
