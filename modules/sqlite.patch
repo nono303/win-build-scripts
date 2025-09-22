@@ -1,10 +1,7 @@
- CMakeLists.txt | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
-
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 95f6afb..abdba1a 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
+diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
+index eaefb26..43b3346 100644
+--- "a/CMakeLists.txt"
++++ "b/CMakeLists.txt"
 @@ -38,6 +38,7 @@ option(OMIT_JSON                 "Omit JSON SQL functions"
  option(OMIT_AUTOINIT             "Omit automatic initialization"                  OFF)
  option(RECOMMENDED_OPTIONS       "Compile by SQLite3 recommended options"         ON)
@@ -13,7 +10,28 @@ index 95f6afb..abdba1a 100644
  if(WIN32)
      option(WIN32_MALLOC              "Use Windows Heap API functions for memory allocation" OFF)
      option(WIN32_HEAP_CREATE         "Force the Win32 native memory allocator"              OFF)
-@@ -352,6 +353,10 @@ if(USE_URI)
+@@ -247,16 +248,13 @@ if(ENABLE_MATH)
+ endif()
+ 
+ # Check zlib
+-check_include_file(zlib.h HAVE_ZLIB_H)
+-if(HAVE_ZLIB_H)
++find_package(ZLIB)
++if(ZLIB_FOUND)
+     add_definitions(-DHAVE_ZLIB_H=1)
+-    find_package(ZLIB)
+-    if(ZLIB_FOUND)
+-        add_definitions(-DSQLITE_HAVE_ZLIB=1)
++    add_definitions(-DSQLITE_HAVE_ZLIB=1)
+     set(HAVE_ZLIB ON CACHE BOOL "Use zlib" FORCE)
+-    else()
++else()
+     set(HAVE_ZLIB OFF CACHE BOOL "Use zlib" FORCE)
+-    endif()
+ endif()
+ 
+ # Check icu
+@@ -352,6 +350,10 @@ if(USE_URI)
      add_definitions(-DSQLITE_USE_URI=1)
  endif()
  
@@ -24,7 +42,7 @@ index 95f6afb..abdba1a 100644
  if(WIN32_MALLOC)
      if(WIN32)
          add_definitions(-DSQLITE_WIN32_MALLOC=1)
-@@ -420,7 +425,7 @@ else()
+@@ -420,7 +422,7 @@ else()
  endif()
  
  message(STATUS "Build shared library:                                 ${ENABLE_SHARED}")
@@ -33,7 +51,7 @@ index 95f6afb..abdba1a 100644
  message(STATUS "Build static library:                                 ${ENABLE_STATIC}")
  message(STATUS "Build shell tool:                                     ${BUILD_SHELL}")
  message(STATUS "Statically link shell tool:                           ${ENABLE_STATIC_SHELL}")
-@@ -446,6 +451,7 @@ message(STATUS "Omit JSON SQL functions:                              ${OMIT_JSO
+@@ -446,6 +448,7 @@ message(STATUS "Omit JSON SQL functions:                              ${OMIT_JSO
  message(STATUS "Omit automatic initialization:                        ${OMIT_AUTOINIT}")
  message(STATUS "Compile by SQLite3 recommended options:               ${RECOMMENDED_OPTIONS}")
  message(STATUS "Enable the default URI filename processing:           ${USE_URI}")
@@ -41,7 +59,7 @@ index 95f6afb..abdba1a 100644
  message(STATUS "Use Windows Heap API functions for memory allocation: ${WIN32_MALLOC}")
  message(STATUS "Force the Win32 native memory allocator:              ${WIN32_HEAP_CREATE}")
  message(STATUS "Build for old 32bit (WinXP/2003) targets:             ${BUILD_WITH_XPSDK}")
-@@ -484,7 +490,7 @@ if(ENABLE_SHARED)
+@@ -484,7 +487,7 @@ if(ENABLE_SHARED)
      target_link_libraries(sqlite3-shared ${SQLITE3_DEP_LIBRARIES})
      target_include_directories(sqlite3-shared PUBLIC ${CMAKE_INSTALL_PREFIX}/include)
      set_target_properties(sqlite3-shared PROPERTIES
