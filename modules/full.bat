@@ -40,12 +40,12 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat libev NOLOG
 	:cares
 	call %PATH_BATCH%\go.bat cares NOLOG
-	if %QUIC_BUILD% == 1 (
+	REM if %QUIC_BUILD% == 1 (
 		:nghttp3
 		call %PATH_BATCH%\go.bat nghttp3 NOLOG
 		:ngtcp2
 		call %PATH_BATCH%\go.bat ngtcp2 NOLOG
-	)
+	REM )
 	:nghttp2
 	call %PATH_BATCH%\go.bat nghttp2 NOLOG
 	:libssh2
