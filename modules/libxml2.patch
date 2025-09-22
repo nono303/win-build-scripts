@@ -1,8 +1,8 @@
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index e136f216..8463bfb1 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -431,15 +431,25 @@ if(MSVC)
+diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
+index 116c77dd..d2cff670 100644
+--- "a/CMakeLists.txt"
++++ "b/CMakeLists.txt"
+@@ -408,15 +408,25 @@ if(MSVC)
              LibXml2
              PROPERTIES
              DEBUG_POSTFIX d
@@ -32,7 +32,7 @@ index e136f216..8463bfb1 100644
          )
      endif()
  endif()
-@@ -640,6 +650,11 @@ if(BUILD_SHARED_LIBS)
+@@ -670,6 +680,11 @@ if(BUILD_SHARED_LIBS)
      set(XML_PC_PRIVATE ".private")
      set(XML_PC_LIBS_PRIVATE "
  Libs.private:")
