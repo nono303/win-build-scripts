@@ -8,7 +8,7 @@ echo ^<^<^< gradlew --project-cache-dir %PATH_GRADLE_BUILD% wrapper --gradle-ver
 REM call gradlew --project-cache-dir %PATH_GRADLE_BUILD% --refresh-dependencies run
 REM call gradlew --project-cache-dir %PATH_GRADLE_BUILD% -q dependencies --configuration runtimeClasspath
 echo.
-call gradlew --project-cache-dir %PATH_GRADLE_BUILD% -q dependencyInsight --dependency org.mapsforge:mapsforge-core --single-path --configuration runtimeClasspath | head -1
+call gradlew --project-cache-dir %PATH_GRADLE_BUILD% -q dependencyInsight --dependency com.github.mapsforge.mapsforge:mapsforge-core --single-path --configuration runtimeClasspath | head -1
 call gradlew --project-cache-dir %PATH_GRADLE_BUILD% -q dependencyInsight --dependency org.eclipse.jetty.http2:http2-server --single-path --configuration runtimeClasspath | head -1
 echo.
 
