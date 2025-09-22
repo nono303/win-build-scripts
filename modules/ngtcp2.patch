@@ -1,0 +1,20 @@
+diff --git a/crypto/CMakeLists.txt b/crypto/CMakeLists.txt
+index 5e428fa8..b8d3041e 100644
+--- a/crypto/CMakeLists.txt
++++ b/crypto/CMakeLists.txt
+@@ -28,13 +28,13 @@ endif()
+ if(HAVE_QUICTLS)
+   add_subdirectory(quictls)
+ elseif(ENABLE_OPENSSL)
+-  message(WARNING "libngtcp2_crypto_quictls library is disabled due to lack of good quictls")
++#  message(WARNING "libngtcp2_crypto_quictls library is disabled due to lack of good quictls")
+ endif()
+ 
+ if(HAVE_LIBRESSL)
+   add_subdirectory(quictls)
+ elseif(ENABLE_OPENSSL)
+-  message(WARNING "libngtcp2_crypto_libressl library is disabled due to lack of good LibreSSL")
++#  message(WARNING "libngtcp2_crypto_libressl library is disabled due to lack of good LibreSSL")
+ endif()
+ 
+ if(HAVE_GNUTLS)
