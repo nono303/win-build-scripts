@@ -1,11 +1,11 @@
 diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
-index 50b426189a..d3bdee29b2 100644
+index d0cea9168c..1d2d7bf64d 100644
 --- "a/CMakeLists.txt"
 +++ "b/CMakeLists.txt"
-@@ -284,12 +284,12 @@ add_library(aom ${target_objs_aom} $<TARGET_OBJECTS:aom_rtcd>)
- 
+@@ -328,12 +328,12 @@ target_include_directories(aom PUBLIC $<INSTALL_INTERFACE:include>)
  if(BUILD_SHARED_LIBS)
    add_library(aom_static STATIC ${target_objs_aom} $<TARGET_OBJECTS:aom_rtcd>)
+   target_include_directories(aom_static PUBLIC $<INSTALL_INTERFACE:include>)
 -  set_target_properties(aom_static PROPERTIES OUTPUT_NAME aom)
 +  set_target_properties(aom_static PROPERTIES OUTPUT_NAME aom_static)
    if(MSVC OR (WIN32 AND NOT MINGW))
