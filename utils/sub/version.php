@@ -197,6 +197,7 @@
 					$ver_product = substr($ver_product, 0, -5)."0";
 				if(str_ends_with($ver_product,"-dev") || str_ends_with($ver_product,"-DEV")) // crl
 					$ver_product = substr($ver_product, 0, -4).".0";
+				$ver_product = str_replace("..",".",$ver_product); // ex '.-dev' > '..0'
 				$ver_file = $ver_product;
 				// letter in version : openssl & jpeg
 				preg_match("/([a-zA-Z])$/",$ver_file,$matches);
