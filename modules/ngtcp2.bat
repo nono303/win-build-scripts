@@ -9,6 +9,8 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DENABLE_WERROR=OFF ^
 -DENABLE_DEBUG=OFF ^
+-DBUILD_TESTING=OFF ^
+-DENABLE_LIB_ONLY=ON ^
 -DENABLE_ASAN=OFF ^
 -DENABLE_GNUTLS=OFF ^
 -DENABLE_OPENSSL=ON ^
@@ -23,5 +25,5 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% lib/install crypto/install
 
-for %%X in (lib\ngtcp2.pdb crypto\quictls\ngtcp2_crypto_quictls.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*)
-for %%X in (ngtcp2 ngtcp2_crypto_quictls) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X.dll)
+for %%X in (lib\ngtcp2.pdb crypto\ossl\ngtcp2_crypto_ossl.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*)
+for %%X in (ngtcp2 ngtcp2_crypto_ossl) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X.dll)
