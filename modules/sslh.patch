@@ -1,39 +1,34 @@
-diff --git a/echosrv.c b/echosrv.c
-index 4fa8e4e..b86462e 100644
---- a/echosrv.c
-+++ b/echosrv.c
-@@ -324,8 +324,8 @@ int start_listen_sockets(struct listen_endpoint *sockfd[])
- int main(int argc, char *argv[])
- {
- 
--   extern char *optarg;
--   extern int optind;
-+//   extern char *optarg;
-+//   extern int optind;
-    int num_addr_listen;
- 
-    struct listen_endpoint *listen_sockets;
-diff --git a/sslh-main.c b/sslh-main.c
-index 160d9fc..ac99b4e 100644
---- a/sslh-main.c
-+++ b/sslh-main.c
-@@ -43,6 +43,8 @@
- #include <sys/capability.h>
+diff --git a/common.c b/common.c
+index bc086e5..82dd173 100644
+--- a/common.c
++++ b/common.c
+@@ -25,12 +25,6 @@
+ #include <sys/prctl.h>
  #endif
  
-+#include <getopt.h>
+-/* Added to make the code compilable under CYGWIN
+- * */
+-#ifndef SA_NOCLDWAIT
+-#define SA_NOCLDWAIT 0
+-#endif
+-
+ /* Make use of systemd socket activation
+  * */
+ #ifdef SYSTEMD
+diff --git a/common.h b/common.h
+index e56bd1e..80766c5 100644
+--- a/common.h
++++ b/common.h
+@@ -84,6 +84,12 @@
+ #define TCP_FASTOPEN_CONNECT 30 /* Attempt FastOpen with connect.  */
+ #endif
+ 
++/* Added to make the code compilable under CYGWIN
++ * */
++#ifndef SA_NOCLDWAIT
++#define SA_NOCLDWAIT 0
++#endif
 +
- /* Constants for options that have no one-character shorthand */
- #define OPT_ONTIMEOUT   257
- 
-@@ -281,8 +283,8 @@ void close_std(void)
- int main(int argc, char *argv[], char* envp[])
- {
- 
--   extern char *optarg;
--   extern int optind;
-+//   extern char *optarg;
-+//   extern int optind;
-    int res, num_addr_listen;
-    struct listen_endpoint *listen_sockets;
- 
+ enum connection_state {
+     ST_PROBING=1,    /* Waiting for timeout to find where to forward */
+     ST_SHOVELING   /* Connexion is established */
