@@ -1,8 +1,8 @@
-diff --git a/src/memcache.c b/src/memcache.c
-index c43e48f..10ad68b 100644
---- a/src/memcache.c
-+++ b/src/memcache.c
-@@ -872,14 +872,25 @@ static void php_mmc_store(INTERNAL_FUNCTION_PARAMETERS, int op) /* {{{ */
+diff --git "a/src/memcache.c" "b/src/memcache.c"
+index 524ca47..b541d99 100644
+--- "a/src/memcache.c"
++++ "b/src/memcache.c"
+@@ -901,14 +901,25 @@ static void php_mmc_store(INTERNAL_FUNCTION_PARAMETERS, int op) /* {{{ */
  	zend_long flags = 0, exptime = 0, cas = 0;
  
  	if (mmc_object == NULL) {
@@ -34,7 +34,7 @@ index c43e48f..10ad68b 100644
  	}
  
  	if (!mmc_get_pool(mmc_object, &pool) || !pool->num_servers) {
-@@ -1021,28 +1032,42 @@ static void php_mmc_numeric(INTERNAL_FUNCTION_PARAMETERS, int deleted, int inver
+@@ -1050,28 +1061,42 @@ static void php_mmc_numeric(INTERNAL_FUNCTION_PARAMETERS, int deleted, int inver
  
  	if (mmc_object == NULL) {
  		if (deleted) {
@@ -89,7 +89,7 @@ index c43e48f..10ad68b 100644
  
  			defval_used = ZEND_NUM_ARGS() >= 3;
  		}
-@@ -1327,9 +1352,12 @@ static void php_mmc_connect(INTERNAL_FUNCTION_PARAMETERS, zend_bool persistent)
+@@ -1356,9 +1381,12 @@ static void php_mmc_connect(INTERNAL_FUNCTION_PARAMETERS, zend_bool persistent)
  	double timeout = MMC_DEFAULT_TIMEOUT;
  	zend_bool null_port;
  
@@ -105,7 +105,7 @@ index c43e48f..10ad68b 100644
  
  	/* initialize pool and object if need be */
  	if (!mmc_object) {
-@@ -1586,10 +1614,16 @@ PHP_NAMED_FUNCTION(zif_memcache_pool_connect)
+@@ -1615,10 +1643,16 @@ PHP_NAMED_FUNCTION(zif_memcache_pool_connect)
  
  	MEMCACHE_G(key_prefix)=get_key_prefix();
  
@@ -126,7 +126,7 @@ index c43e48f..10ad68b 100644
  
  	mmc = php_mmc_pool_addserver(mmc_object, host, host_len, tcp_port, udp_port, weight, persistent, timeout, retry_interval, 1, NULL);
  	if (mmc == NULL) {
-@@ -1648,10 +1682,17 @@ PHP_NAMED_FUNCTION(zif_memcache_pool_addserver)
+@@ -1677,10 +1711,17 @@ PHP_NAMED_FUNCTION(zif_memcache_pool_addserver)
  
  	MEMCACHE_G(key_prefix)=get_key_prefix();
  
@@ -148,7 +148,7 @@ index c43e48f..10ad68b 100644
  
  	mmc = php_mmc_pool_addserver(mmc_object, host, host_len, tcp_port, udp_port, weight, persistent, timeout, retry_interval, status, NULL);
  	if (mmc == NULL) {
-@@ -1676,9 +1717,9 @@ PHP_NAMED_FUNCTION(zif_memcache_pool_findserver)
+@@ -1705,9 +1746,9 @@ PHP_NAMED_FUNCTION(zif_memcache_pool_findserver)
  	unsigned int key_len;
  	zend_string *hostname;
  
@@ -161,7 +161,7 @@ index c43e48f..10ad68b 100644
  
  	if (!mmc_get_pool(mmc_object, &pool) || !pool->num_servers) {
  		RETURN_FALSE;
-@@ -1712,16 +1753,31 @@ PHP_FUNCTION(memcache_add_server)
+@@ -1741,16 +1782,31 @@ PHP_FUNCTION(memcache_add_server)
  	MEMCACHE_G(key_prefix)=get_key_prefix();
  
  	if (mmc_object) {
@@ -201,7 +201,7 @@ index c43e48f..10ad68b 100644
  	}
  
  	if (failure_callback != NULL && Z_TYPE_P(failure_callback) != IS_NULL) {
-@@ -1759,16 +1815,27 @@ PHP_FUNCTION(memcache_set_server_params)
+@@ -1788,16 +1844,27 @@ PHP_FUNCTION(memcache_set_server_params)
  	char *host;
  
  	if (mmc_object) {
@@ -237,7 +237,7 @@ index c43e48f..10ad68b 100644
  	}
  
  	if (!mmc_get_pool(mmc_object, &pool)) {
-@@ -1836,16 +1903,15 @@ PHP_FUNCTION(memcache_set_failure_callback)
+@@ -1865,16 +1932,15 @@ PHP_FUNCTION(memcache_set_failure_callback)
  	mmc_pool_t *pool;
  
  	if (mmc_object) {
@@ -261,7 +261,7 @@ index c43e48f..10ad68b 100644
  	}
  
  	if (!mmc_get_pool(mmc_object, &pool)) {
-@@ -1883,14 +1949,19 @@ PHP_FUNCTION(memcache_get_server_status)
+@@ -1912,14 +1978,19 @@ PHP_FUNCTION(memcache_get_server_status)
  	char *host;
  
  	if (mmc_object) {
@@ -287,7 +287,7 @@ index c43e48f..10ad68b 100644
  	}
  
  	if (!mmc_get_pool(mmc_object, &pool)) {
-@@ -1945,9 +2016,9 @@ PHP_FUNCTION(memcache_get_version)
+@@ -1974,9 +2045,9 @@ PHP_FUNCTION(memcache_get_version)
  	mmc_request_t *request;
  
  	if (mmc_object == NULL) {
@@ -300,7 +300,7 @@ index c43e48f..10ad68b 100644
  	}
  
  	if (!mmc_get_pool(mmc_object, &pool) || !pool->num_servers) {
-@@ -2115,14 +2186,21 @@ PHP_FUNCTION(memcache_get)
+@@ -2144,14 +2215,21 @@ PHP_FUNCTION(memcache_get)
  	void *value_handler_param[3], *failover_handler_param[2];
  
  	if (mmc_object == NULL) {
@@ -328,7 +328,7 @@ index c43e48f..10ad68b 100644
  	}
  
  	if (!mmc_get_pool(mmc_object, &pool) || !pool->num_servers) {
-@@ -2250,14 +2328,21 @@ PHP_FUNCTION(memcache_get_stats)
+@@ -2279,14 +2357,21 @@ PHP_FUNCTION(memcache_get_stats)
  	mmc_request_t *request;
  
  	if (mmc_object == NULL) {
@@ -356,7 +356,7 @@ index c43e48f..10ad68b 100644
  	}
  
  	if (!mmc_get_pool(mmc_object, &pool) || !pool->num_servers) {
-@@ -2308,14 +2393,21 @@ PHP_FUNCTION(memcache_get_extended_stats)
+@@ -2337,14 +2422,21 @@ PHP_FUNCTION(memcache_get_extended_stats)
  	mmc_request_t *request;
  
  	if (mmc_object == NULL) {
@@ -384,7 +384,7 @@ index c43e48f..10ad68b 100644
  	}
  
  	if (!mmc_get_pool(mmc_object, &pool) || !pool->num_servers) {
-@@ -2365,14 +2457,19 @@ PHP_FUNCTION(memcache_set_compress_threshold)
+@@ -2394,14 +2486,19 @@ PHP_FUNCTION(memcache_set_compress_threshold)
  	double min_savings = MMC_DEFAULT_SAVINGS;
  
  	if (mmc_object == NULL) {
@@ -410,7 +410,7 @@ index c43e48f..10ad68b 100644
  	}
  
  	if (!mmc_get_pool(mmc_object, &pool)) {
-@@ -2432,9 +2529,9 @@ PHP_FUNCTION(memcache_close)
+@@ -2461,9 +2558,9 @@ PHP_FUNCTION(memcache_close)
  	zval *mmc_object = getThis();
  
  	if (mmc_object == NULL) {
@@ -423,7 +423,7 @@ index c43e48f..10ad68b 100644
  	}
  
  	if (!mmc_get_pool(mmc_object, &pool)) {
-@@ -2479,14 +2576,17 @@ PHP_FUNCTION(memcache_flush)
+@@ -2508,14 +2605,17 @@ PHP_FUNCTION(memcache_flush)
  	zend_long delay = 0;
  
  	if (mmc_object == NULL) {
@@ -447,7 +447,7 @@ index c43e48f..10ad68b 100644
  	}
  
  	if (!mmc_get_pool(mmc_object, &pool)) {
-@@ -2524,13 +2624,16 @@ PHP_FUNCTION(memcache_set_sasl_auth_data)
+@@ -2553,13 +2653,16 @@ PHP_FUNCTION(memcache_set_sasl_auth_data)
  	size_t password_length;
  
  	if (mmc_object == NULL) {
