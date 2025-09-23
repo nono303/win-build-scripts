@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 6532829..c827424 100644
+index 3c07789..531ba44 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -44,10 +44,10 @@ set(CMAKE_MODULE_PATH "${SERF_SOURCE_DIR}/build")
@@ -15,5 +15,15 @@ index 6532829..c827424 100644
 +#         "Some features are not supported and the build "
 +#         "has not been tested on many supported platforms.")
  
- # Build options
- option(DEBUG "Enable debugging info and strict compile warnings" OFF)
+ # Optional dependency options
+ option(USE_BROTLI "Use the Brotli decoding library if available" ON)
+@@ -252,8 +252,7 @@ find_package(APR REQUIRED)
+ find_package(APRUtil REQUIRED)
+ 
+ 
+-SerfFindPkgConfig(OpenSSL_SSL OPENSSL_ROOT_DIR libssl OpenSSL::SSL)
+-SerfFindPkgConfig(OpenSSL_Crypto OPENSSL_ROOT_DIR libcrypto OpenSSL::Crypto)
++find_package(OpenSSL REQUIRED)
+ if(NOT (OpenSSL_SSL_FOUND AND OpenSSL_Crypto_FOUND))
+   find_package(OpenSSL REQUIRED)
+   if(OpenSSL_FOUND)
