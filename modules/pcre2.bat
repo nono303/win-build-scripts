@@ -1,5 +1,8 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
 
+echo   ** [deps] sljit pull 
+echo git -C %PATH_SRC:\=/%/%1/deps/sljit pull 2>&1
+
 if "%2"=="svn" (
 	set CMAKE_PCRE2=-DPCRE2_SUPPORT_LIBEDIT=OFF ^
 	-DPCRE2_SUPPORT_LIBBZ2=OFF
