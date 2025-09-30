@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
 
 REM /third-party/urlparse
 cd /D %PATH_SRC%\%1

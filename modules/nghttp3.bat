@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
 
 for %%X in (sfparse.c sfparse.h) do (
 	if not exist %PATH_SRC%\%1\lib\sfparse\%%X mklink /h %PATH_SRC%\%1\lib\sfparse\%%X %PATH_SRC%\nghttp2\lib\%%X
