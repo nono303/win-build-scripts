@@ -118,10 +118,16 @@
 				$status = "up to date";
 			}
 			if(GIT_GC){
-				echo execnono($cmd = "git reflog expire --all --expire=now --expire-unreachable=now",NULL,$repo,NULL);
+				echo "\t↓".execnono($cmd = "git reflog expire --all --expire=now --expire-unreachable=now",NULL,$repo,NULL).PHP_EOL;
 				if(VERBOSE) echo $cmd.PHP_EOL;
-				echo execnono($cmd = "git gc --prune=now --aggressive",NULL,$repo,NULL);
+				echo "\t↓".execnono($cmd = "git gc --prune=now --aggressive",NULL,$repo,NULL).PHP_EOL;
 				if(VERBOSE) echo $cmd.PHP_EOL;
+				foreach(explode("\n",execnono($cmd = "git branch",NULL,$repo,NULL)) as $lb){
+					if(!str_starts_with($lb,"*")){
+						echo "\t↓".execnono($cmd = "git branch -d ".$lb,NULL,$repo,NULL).PHP_EOL;
+						if(VERBOSE) echo $cmd.PHP_EOL;
+					}
+				}
 			}
 		} elseif(is_dir($repo."/.svn")){
 			$type = "svn";
