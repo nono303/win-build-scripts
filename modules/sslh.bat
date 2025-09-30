@@ -2,8 +2,8 @@
 call %PATH_MODULES_COMMON%\init.bat libconfig
 SET LIBCONFIG_NAME=cygconfig-15
 call %PATH_BIN_CYGWIN%\bash --login -c '%CYGPATH_MODULES%/libconfig.sh %CYGPATH_SRC%/libconfig %CYGPATH_MODULES% %AVX_GCC% %CUR_DEBUG%'
-xcopy /C /F /Y %PATH_BIN_CYGWIN%\..\usr\local\bin\%LIBCONFIG_NAME%.dll %PATH_GITHUB_SSLH%\%ARCH%\%AVXECHO%\%LIBCONFIG_NAME%.dll*
-call do_php %PATH_UTILS%\sub\version.php libconfig %PATH_GITHUB_SSLH%\%ARCH%\%AVXECHO%\%LIBCONFIG_NAME%.dll libconfig %ARCH% %AVXECHO%
+xcopy /C /F /Y %PATH_BIN_CYGWIN%\..\usr\local\bin\%LIBCONFIG_NAME%.dll %PATH_GITHUB_SSLH%\%ARCH%\%AVXECHO%\cygconfig-11.dll*
+call do_php %PATH_UTILS%\sub\version.php libconfig %PATH_GITHUB_SSLH%\%ARCH%\%AVXECHO%\cygconfig-11.dll libconfig %ARCH% %AVXECHO%
 set LIBCONFIG_VER=%SCM_TAG%
 
 call %PATH_MODULES_COMMON%\init.bat %1
