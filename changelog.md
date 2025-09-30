@@ -1,8 +1,104 @@
 # changelog
 
 
+## 1.14.2 _(2025-09-30)_
+
+*  update src
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  r2798
+`modules/mobac.bat`
+`modules/mobac.patch`
+*  f2df5593 * fix duplicate cmake option APU_USE_EXPAT & APU_USE_LIBXML2 * APU_DSO_BUILD: ON > OFF * disable static build
+`modules/apr-util.bat`
+`modules/apr-util.patch`
+`utils/bininfo.bat`
+*  disable static build
+`modules/apr.bat`
+*  simply & improve view in row of tags, branch & revision
+`utils/sub/srcstatus.php`
+*  pull deps before build
+`modules/pcre2.bat`
+*  update src
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  fix param passing to php
+`utils/version.bat`
+*  remove unused local git branch on gitgc
+`utils/sub/srcstatus.php`
+*  upgrade tools
+`README.md`
+`config/cyg64.packagelist`
+`config/python.pip`
+*  https://github.com/php/php-src/pull/18660
+`modules/phpsdk-config_make.bat`
+*  fix sed for BROTLI_LIB_VERSION
+`modules/php.bat`
+*  fix runtime dependency name
+`modules/sslh.bat`
+*  +nocxx
+`modules/nghttp3.bat`
+`modules/ngtcp2.bat`
+*  https://github.com/apache/serf/commit/fc79b45ddbfc1276a75487510684200b0d362e3a SerfFindPkgConfig(OpenSSL...) don't work: rollback to find_package(OpenSSL REQUIRED) ``` CMake Error in CMakeLists.txt:   Imported target "PkgConfig::OPENSSL_SSL" includes non-existent path     "/usr/include"   in its INTERFACE_INCLUDE_DIRECTORIES.  Possible reasons include:   * The path was deleted, renamed, or moved to another location.   * An install or uninstall procedure did not complete successfully.   * The installation package was faulty and references files it does not   provide. ```
+`modules/serf.bat`
+`modules/serf.patch`
+*  extract var SET LIBCONFIG_NAME
+`modules/sslh.bat`
+*  2.3.0 https://github.com/yrutschle/sslh/issues/506
+`modules/sslh.patch`
+*  QUIC_BUILD or not: same number of built files
+`utils/bininfo.bat`
+*  8.16.0
+`modules/curl_ca-win.patch`
+*  always build nghttp3 & ngtcp2 (with ossl support)
+`modules/full.bat`
+*  fix php_ffi versioning
+`modules/phpsdk-config_make.bat`
+*  1.15.1 fix built dll: quictls > ossl
+`modules/ngtcp2.bat`
+*  https://github.com/websupport-sk/pecl-memcache/commit/ac8e8c521a18aae14c8f2859694536ead304ce97
+`modules/pecl-memcache.patch`
+*  2.0.35
+`modules/mod_h2.patch`
+*  disable check_include_file(zlib.h) before find_package(ZLIB)
+`modules/sqlite.patch`
+*  fix double dotted version
+`utils/sub/version.php`
+*  4.7.1
+`modules/libtiff.bat`
+*  3.13.1
+`modules/aom.patch`
+*  9.7.0
+`modules/proj.bat`
+*  1.11.0
+`modules/nghttp3.bat`
+*  nghttp2
+`modules/nghttp2.bat`
+*  2.15.0
+`modules/libxml2.bat`
+`modules/libxml2.patch`
+*  10.47
+`modules/pcre2.patch`
+*  2797
+`modules/mobac.patch`
+*  GRADLEVER: 9.0 > 9.1
+`env_sample.bat`
+*  org.mapsforge > com.github.mapsforge.mapsforge
+`modules/mapsforgesrv.bat`
+`modules/mobac.bat`
+*  disable warning message
+`modules/ngtcp2.patch`
+*  upgrade gradle & deps
+`env_sample.bat`
+`modules/mobac.patch`
+*  fix Can't exec "git": Permission denied at version.pl
+`modules/memcached.bat`
+
+
 ## 1.14.1 _(2025-07-30)_
 
+*  1.14.1
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
