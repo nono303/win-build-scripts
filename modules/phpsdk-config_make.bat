@@ -8,6 +8,7 @@ set PHP8_COMMON_CONFIGURE=^
 	--with-verbosity=2
 if %PHPVER% == 8.4 (
 	set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
+		--enable-opcache=shared ^
 		--without-uncritical-warn-choke
 )
 if %PHPVER% == 8.5 (
@@ -54,7 +55,6 @@ if %PHPVER% == %PHP_BUILD_TYPE% (
 	--enable-fileinfo=shared ^
 	--enable-ftp=shared ^
 	--enable-intl=shared ^
-	--enable-opcache=shared ^
 	--enable-pdo=shared ^
 	--enable-soap=shared ^
 	--enable-sockets=shared ^
