@@ -15,6 +15,7 @@ automake1.14
 automake1.15
 automake1.16
 automake1.17
+automake1.18
 base-cygwin
 base-files
 bash
@@ -151,11 +152,13 @@ libpkgconf3
 libpkgconf4
 libpkgconf5
 libpkgconf6
+libpkgconf7
 libpopt-common
 libpopt0
 libpsl5
 libquadmath0
 libreadline7
+libreadline8
 libretls26
 libsasl2_3
 libsmartcols1
