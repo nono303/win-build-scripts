@@ -1,117 +1,66 @@
 diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
-index 1e5183b5..308f2843 100644
+index ed04f4c..95b35ec 100644
 --- "a/CMakeLists.txt"
 +++ "b/CMakeLists.txt"
-@@ -20,10 +20,12 @@
- CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+@@ -20,6 +20,7 @@
+ CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
  
  PROJECT(APR-Util C)
 +set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
  
- FIND_PACKAGE(EXPAT)
- FIND_PACKAGE(LibXml2)
- FIND_PACKAGE(OpenSSL)
-+FIND_PACKAGE(Iconv)
+ INCLUDE(CMakeDependentOption)
  
- IF(NOT EXPAT_FOUND AND NOT LIBXML2_FOUND)
-   MESSAGE(FATAL_ERROR "Either Expat or LibXml2 is required, but neither was found")
-@@ -39,6 +41,8 @@ ENDIF()
- 
- OPTION(APU_HAVE_CRYPTO      "Crypto support"                            OFF)
+@@ -41,6 +42,7 @@ option(APU_HAVE_ICONV       "Xlate support"                             OFF)
  OPTION(APU_HAVE_ODBC        "Build ODBC DBD driver"                     ON)
-+OPTION(APU_HAVE_SQLITE3     "Build SQlite3 DBD driver"                  ON)
-+OPTION(APU_HAVE_MySQL       "Build MySQL DBD driver"                    ON)
- OPTION(APR_HAS_LDAP         "LDAP support"                              ON)
+ OPTION(APU_HAVE_SQLITE3     "Build SQLite3 DBD driver"                  OFF)
+ OPTION(APU_HAVE_PGSQL       "Build PostgreSQL DBD driver"               OFF)
++OPTION(APU_HAVE_MYSQL       "Build MySQL DBD driver"                    ON)
+ OPTION(APR_HAS_LDAP         "LDAP support"                              OFF)
  OPTION(INSTALL_PDB          "Install .pdb files (if generated)"         ON)
- OPTION(APR_BUILD_TESTAPR    "Build the test suite"                      OFF)
-@@ -76,6 +80,7 @@ ENDIF()
- 
- SET(apu_have_crypto_10 0)
- SET(apu_have_apr_iconv_10 0) # not yet implemented
-+SET(apu_have_iconv_10 0)
- SET(apr_has_ldap_10 0)
- SET(apu_use_libxml2_10 0)
- SET(apu_use_expat_10 0)
-@@ -99,6 +104,11 @@ IF(APR_HAS_LDAP)
-   SET(LDAP_LIBRARIES wldap32)
+ OPTION(APU_BUILD_TEST       "Build the test suite"                      OFF)
+@@ -86,6 +88,10 @@ IF(APU_HAVE_PGSQL)
+   FIND_PACKAGE(PostgreSQL REQUIRED)
  ENDIF()
  
-+IF(Iconv_FOUND)
-+  SET(apu_have_iconv_10 1)
-+  SET(APU_HAVE_ICONV ON)
-+ENDIF()
-+
- CONFIGURE_FILE(include/apu.hwc
-               ${PROJECT_BINARY_DIR}/apu.h)
- CONFIGURE_FILE(include/apr_ldap.hwc
-@@ -122,6 +132,10 @@ ELSE()
-   SET(XMLLIB_LIBRARIES   "${LIBXML2_LIBRARIES};${LIBXML2_ICONV_LIBRARIES}")
- ENDIF()
- 
-+IF(APU_HAVE_ICONV)
-+  SET(XMLLIB_INCLUDE_DIR "${XMLLIB_INCLUDE_DIR};${Iconv_INCLUDE_DIRS}")
-+  SET(XMLLIB_LIBRARIES   "${XMLLIB_LIBRARIES};${Iconv_LIBRARIES}")
-+ENDIF()
- 
- # Generated .h files are stored in PROJECT_BINARY_DIR, not the
- # source tree.
-@@ -278,6 +292,11 @@ SET(install_targets ${install_targets} aprutil-1)
- TARGET_LINK_LIBRARIES(aprutil-1 ${APR_LIBRARIES} ${XMLLIB_LIBRARIES})
- SET_TARGET_PROPERTIES(aprutil-1 PROPERTIES COMPILE_DEFINITIONS "APU_DECLARE_STATIC;APR_DECLARE_STATIC;APU_DSO_MODULE_BUILD;XML_STATIC")
- 
-+IF(APU_HAVE_ICONV)
-+  SET_TARGET_PROPERTIES(aprutil-1 PROPERTIES COMPILE_FLAGS "-DHAVE_ICONV_H")
-+  SET_TARGET_PROPERTIES(libaprutil-1 PROPERTIES COMPILE_FLAGS "-DHAVE_ICONV_H")
-+ENDIF()
-+
- IF(APU_HAVE_CRYPTO)
-   IF(NOT OPENSSL_FOUND)
-     MESSAGE(FATAL_ERROR "Only OpenSSL-based crypto is currently implemented in the cmake build")
-@@ -302,6 +321,33 @@ IF(APU_HAVE_ODBC)
-   SET_TARGET_PROPERTIES(apr_dbd_odbc-1 PROPERTIES COMPILE_FLAGS "-DAPR_DECLARE_IMPORT -DAPU_DECLARE_IMPORT -DDLL_NAME=apr_dbd_odbc")
- ENDIF()
- 
-+IF(APU_HAVE_SQLITE3)
-+  FIND_PACKAGE(SQLite3)
-+  ADD_LIBRARY(apr_dbd_sqlite3-1 SHARED dbd/apr_dbd_sqlite3.c libaprutil.rc)
-+  SET(install_targets ${install_targets} apr_dbd_sqlite3-1)
-+  SET(install_bin_pdb ${install_bin_pdb} ${PROJECT_BINARY_DIR}/apr_dbd_sqlite3-1.pdb)
-+  SET(dbd_drivers ${dbd_drivers} sqlite3)
-+  TARGET_LINK_LIBRARIES(apr_dbd_sqlite3-1 libaprutil-1 ${APR_LIBRARIES} ${SQLite3_LIBRARIES})
-+  SET_PROPERTY(TARGET apr_dbd_sqlite3-1 APPEND PROPERTY LINK_FLAGS /export:apr_dbd_sqlite3_driver)
-+  SET_TARGET_PROPERTIES(apr_dbd_sqlite3-1 PROPERTIES COMPILE_DEFINITIONS "APU_HAVE_SQLITE3;HAVE_SQL_H;APU_DECLARE_IMPORT;APR_DECLARE_IMPORT;APU_DSO_MODULE_BUILD;WINNT")
-+  SET_TARGET_PROPERTIES(apr_dbd_sqlite3-1 PROPERTIES COMPILE_FLAGS "-DAPR_DECLARE_IMPORT -DAPU_DECLARE_IMPORT -DDLL_NAME=apr_dbd_sqlite3")
-+  SET_TARGET_PROPERTIES(apr_dbd_sqlite3-1 PROPERTIES INCLUDE_DIRECTORIES "${APR_INCLUDE_DIRECTORIES};${SQLite3_INCLUDE_DIRS}")
-+ENDIF()
-+
 +IF(APU_HAVE_MYSQL)
 +  FIND_PACKAGE(MySQL)
-+  ADD_LIBRARY(apr_dbd_mysql-1 SHARED dbd/apr_dbd_mysql.c libaprutil.rc)
-+  SET(install_targets ${install_targets} apr_dbd_mysql-1)
-+  SET(install_bin_pdb ${install_bin_pdb} ${PROJECT_BINARY_DIR}/apr_dbd_mysql-1.pdb)
-+  SET(dbd_drivers ${dbd_drivers} mysql)
-+  TARGET_LINK_LIBRARIES(apr_dbd_mysql-1 libaprutil-1 ${APR_LIBRARIES} ${MYSQL_LIBRARY})
-+  SET_PROPERTY(TARGET apr_dbd_mysql-1 APPEND PROPERTY LINK_FLAGS /export:apr_dbd_mysql_driver)
-+  SET_TARGET_PROPERTIES(apr_dbd_mysql-1 PROPERTIES COMPILE_DEFINITIONS "APU_HAVE_MYSQL;HAVE_SQL_H;APU_DECLARE_IMPORT;APR_DECLARE_IMPORT;APU_DSO_MODULE_BUILD;WINNT")
-+  SET_TARGET_PROPERTIES(apr_dbd_mysql-1 PROPERTIES COMPILE_FLAGS "-DAPR_DECLARE_IMPORT -DAPU_DECLARE_IMPORT -DDLL_NAME=apr_dbd_mysql")
-+  SET_TARGET_PROPERTIES(apr_dbd_mysql-1 PROPERTIES INCLUDE_DIRECTORIES "${APR_INCLUDE_DIRECTORIES};${MYSQL_INCLUDE_DIR}")
-+
 +ENDIF()
 +
- IF(APR_HAS_LDAP)
-   ADD_LIBRARY(apr_ldap-1 SHARED ldap/apr_ldap_init.c ldap/apr_ldap_option.c 
-               ldap/apr_ldap_rebind.c libaprutil.rc)
-@@ -389,7 +435,10 @@ MESSAGE(STATUS "  C compiler ...................... : ${CMAKE_C_COMPILER}")
- MESSAGE(STATUS "  APR include directory ........... : ${APR_INCLUDE_DIR}")
- MESSAGE(STATUS "  APR libraries ................... : ${APR_LIBRARIES}")
+ # create 1-or-0 representation of feature tests for apu.h
+ 
+ SET(apu_have_apr_iconv_10 0) # not yet implemented
+@@ -152,6 +158,7 @@ SET(APR_PUBLIC_HEADERS_STATIC
+   include/apr_ldap_option.h
+   include/apr_ldap_rebind.h
+   include/apr_ldap_url.h
++  include/apr_ldap_common.h
+   include/apr_md4.h
+   include/apr_md5.h
+   include/apr_memcache.h
+@@ -350,6 +357,14 @@ IF(APU_HAVE_PGSQL)
+   ADD_COMPILE_DEFINITIONS(HAVE_LIBPQ_FE_H)
+ ENDIF()
+ 
++IF(APU_HAVE_MYSQL)
++  LIST(APPEND dbd_drivers mysql)
++
++  ADD_APU_MODULE(apr_dbd_mysql-1 "apr_dbd_mysql"
++                 "dbd/apr_dbd_mysql.c"
++                 ${MYSQL_LIBRARY})
++ENDIF()
++
+ ADD_LIBRARY(libaprutil-1 ${APR_SOURCES} ${APU_EXTRA_SOURCES} ${APR_PUBLIC_HEADERS_GENERATED})
+ LIST(APPEND install_targets libaprutil-1)
+ TARGET_LINK_LIBRARIES(libaprutil-1
+@@ -471,6 +486,7 @@ MESSAGE(STATUS "  C compiler ...................... : ${CMAKE_C_COMPILER}")
  MESSAGE(STATUS "  DBD ODBC driver ................. : ${APU_HAVE_ODBC}")
-+MESSAGE(STATUS "  DBD SQlite3 driver .............. : ${APU_HAVE_SQLITE3}")
-+MESSAGE(STATUS "  DBD MySQL driver ................ : ${APU_HAVE_MYSQL}")
+ MESSAGE(STATUS "  DBD SQLite3 driver .............. : ${APU_HAVE_SQLITE3}")
+ MESSAGE(STATUS "  DBD PostgreSQL .................. : ${APU_HAVE_PGSQL}")
++MESSAGE(STATUS "  DBD MySQL ....................... : ${APU_HAVE_MYSQL}")
  MESSAGE(STATUS "  APU_HAVE_CRYPTO ................. : ${APU_HAVE_CRYPTO}")
-+MESSAGE(STATUS "  APU_HAVE_ICONV .................. : ${APU_HAVE_ICONV}")
+ MESSAGE(STATUS "  APU_HAVE_ICONV .................. : ${APU_HAVE_ICONV}")
  MESSAGE(STATUS "  APR_HAS_LDAP .................... : ${APR_HAS_LDAP}")
- MESSAGE(STATUS "  Use Expat ....................... : ${APU_USE_EXPAT}")
- MESSAGE(STATUS "  Use LibXml2 ..................... : ${APU_USE_LIBXML2}")
+
 diff --git a/cmake/FindMySQL.cmake b/cmake/FindMySQL.cmake
 new file mode 100644
 index 00000000..99d1c61e
@@ -201,46 +150,3 @@ index 00000000..99d1c61e
 +set(MYSQL_LIBRARIES ${MYSQL_LIBRARY} ${MYSQL_ZSTD_LIBRARY} ${MYSQL_ZLIB_LIBRARY})
 +set(MYSQL_INCLUDE_DIRS ${MYSQL_INCLUDE_DIR})
 +
-diff --git a/dbd/apr_dbd_mysql.c b/dbd/apr_dbd_mysql.c
-index d3e938c3..3bd19d54 100644
---- a/dbd/apr_dbd_mysql.c
-+++ b/dbd/apr_dbd_mysql.c
-@@ -50,6 +50,15 @@
- 
- #include "apr_dbd_internal.h"
- 
-+/* https://www.apachelounge.com/viewtopic.php?p=42414#42414
-+* MySQL 8.0 replaces my_bool with C99 bool. Earlier versions of MySQL had
-+* a typedef to char. Gem users reported failures on big endian systems when
-+* using C99 bool types with older MySQLs due to mismatched behavior. */
-+#ifndef HAVE_TYPE_MY_BOOL
-+#include <stdbool.h>
-+typedef bool my_bool;
-+#endif
-+
- /* default maximum field size 1 MB */
- #define FIELDSIZE 1048575
- 
-@@ -1262,7 +1271,8 @@ static apr_status_t thread_end(void *data)
- 
- static void dbd_mysql_init(apr_pool_t *pool)
- {
--#if MYSQL_VERSION_ID < 100000
-+/* https://www.apachelounge.com/viewtopic.php?p=42414#42414 */
-+#if MYSQL_VERSION_ID < 80020
-     my_init();
- #endif
-     mysql_thread_init();
-diff --git a/include/apu.hwc b/include/apu.hwc
-index fe13b66b..937e0542 100644
---- a/include/apu.hwc
-+++ b/include/apu.hwc
-@@ -138,7 +138,7 @@
- #endif
- 
- #define APU_HAVE_APR_ICONV      @apu_have_apr_iconv_10@
--#define APU_HAVE_ICONV          0
-+#define APU_HAVE_ICONV          @apu_have_iconv_10@
- #define APR_HAS_XLATE           (APU_HAVE_APR_ICONV || APU_HAVE_ICONV)
- 
- #define APU_USE_EXPAT           @apu_use_expat_10@
