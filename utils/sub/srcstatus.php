@@ -166,7 +166,7 @@
 			}
 			$head = "revision/".$head;
 		}
-		echo str_pad($type,4).str_pad($ele,26).str_pad($head,26).str_pad($status,10," ")."  ".str_pad($branch,20).PHP_EOL;
+		echo str_pad($type,4).str_pad($ele,26).str_pad(str_replace(["tags/","branch/","revision/"],["\t\tt ","b ","\t\t\t\tr "],$head),26).PHP_EOL;//.str_pad($status,10," ")."  ".str_pad($branch,20).PHP_EOL;
 		file_put_contents($argv[1],'"'.$ele.'";"'.$type.'";"'.$upstream.'";"'.$head.'";"'.$status.'";"'.$branch.'";"'.$logtags.'";"'.$ltd.'"'.PHP_EOL,FILE_APPEND);
 		$ele = "";
 		$upstream = "";
