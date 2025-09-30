@@ -11,6 +11,7 @@ REM call gradlew --project-cache-dir %PATH_GRADLE_BUILD% --refresh-dependencies 
 REM call gradlew --project-cache-dir %PATH_GRADLE_BUILD% -q dependencies --configuration runtimeClasspath
 echo.
 call gradlew --project-cache-dir %PATH_GRADLE_BUILD% -q mobac:dependencyInsight --dependency com.github.mapsforge.mapsforge:mapsforge-core --single-path --configuration runtimeClasspath | head -1
+call gradlew --project-cache-dir %PATH_GRADLE_BUILD% -q mobac:dependencyInsight --dependency org.apache-extras.beanshell:bsh --single-path --configuration runtimeClasspath | head -1
 echo.
 
 call gradlew --project-cache-dir %PATH_GRADLE_BUILD% --warning-mode all --console=verbose --no-daemon --parallel --max-workers %NUMBER_OF_PROCESSORS% mobac:jar 2>&1

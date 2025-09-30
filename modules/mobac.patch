@@ -1,8 +1,8 @@
 Index: build.gradle
 ===================================================================
---- build.gradle	(revision 2797)
+--- build.gradle	(revision 2798)
 +++ build.gradle	(working copy)
-@@ -4,34 +4,38 @@
+@@ -4,26 +4,29 @@
  
  plugins {
      id 'distribution'
@@ -12,7 +12,7 @@ Index: build.gradle
      id 'org.gradle.crypto.checksum' version '1.4.0'
 -    id 'com.diffplug.spotless' version '6.21.0'
 +    // https://mvnrepository.com/artifact/com.diffplug.spotless/spotless-plugin-gradle
-+    id 'com.diffplug.spotless' version '7.2.1'
++    id 'com.diffplug.spotless' version '8.0.0'
  }
  
 -group 'mobac.sourceforge.io'
@@ -34,18 +34,15 @@ Index: build.gradle
          maven {
              // required for javax.media:jai-core:1.1.3 and com.sun.media:jai-codec:1.1.3
 -            url "https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/"
--        }
 +            url = "https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/"
-+    }
-         maven {
-             // beanshell bsh 3 unless there is a stable release
--            url "https://oss.sonatype.org/content/repositories/snapshots/"
-+            url = "https://oss.sonatype.org/content/repositories/snapshots/"
          }
+         // For locally compiled beanshell/bsh3 project:
+         // git clone https://github.com/beanshell/beanshell
+@@ -32,6 +35,7 @@
      }
      ext {
          svnRevision = "$svntools.info.revisionNumber"
-+	projectVersion = project.rootProject.version.toString()
++        projectVersion = project.rootProject.version.toString()
      }
      tasks.withType(JavaCompile) {
          options.encoding = 'UTF-8'
@@ -80,7 +77,7 @@ Index: build.gradle
  
 Index: gradle/wrapper/gradle-wrapper.properties
 ===================================================================
---- gradle/wrapper/gradle-wrapper.properties	(revision 2797)
+--- gradle/wrapper/gradle-wrapper.properties	(revision 2798)
 +++ gradle/wrapper/gradle-wrapper.properties	(working copy)
 @@ -1,6 +1,6 @@
  distributionBase=GRADLE_USER_HOME
@@ -92,7 +89,7 @@ Index: gradle/wrapper/gradle-wrapper.properties
  zipStoreBase=GRADLE_USER_HOME
 Index: gradlew
 ===================================================================
---- gradlew	(revision 2797)
+--- gradlew	(revision 2798)
 +++ gradlew	(working copy)
 @@ -1,7 +1,7 @@
  #!/bin/sh
@@ -142,7 +139,7 @@ Index: gradlew
  # Stop when "xargs" is not available.
 Index: gradlew.bat
 ===================================================================
---- gradlew.bat	(revision 2797)
+--- gradlew.bat	(revision 2798)
 +++ gradlew.bat	(working copy)
 @@ -70,11 +70,11 @@
  :execute
@@ -160,7 +157,7 @@ Index: gradlew.bat
  @rem End local scope for the variables with windows NT shell
 Index: mobac/build.gradle
 ===================================================================
---- mobac/build.gradle	(revision 2797)
+--- mobac/build.gradle	(revision 2798)
 +++ mobac/build.gradle	(working copy)
 @@ -1,11 +1,11 @@
  plugins {
@@ -256,7 +253,7 @@ Index: mobac/build.gradle
  launch4j {
 Index: mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(revision 2797)
+--- mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(revision 2798)
 +++ mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(working copy)
 @@ -34,15 +34,10 @@
  	static {
@@ -276,26 +273,9 @@ Index: mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java
  		MAP_SIZE_VALUES.addElement(2048);
  		MAP_SIZE_VALUES.addElement(1024);
  	}
-Index: mobac/src/main/java/mobac/gui/dialogs/Help.java
-===================================================================
---- mobac/src/main/java/mobac/gui/dialogs/Help.java	(revision 2797)
-+++ mobac/src/main/java/mobac/gui/dialogs/Help.java	(working copy)
-@@ -44,10 +44,11 @@
- 		JLabel text = new JLabel();
- 		JButton closeButton = new JButton(I18nUtils.localizedStringForKey("Close"));
- 		closeButton.setDefaultCapable(true);
--		closeButton.addActionListener(() -> {
-+		/*closeButton.addActionListener(() -> {
- 			setVisible(false);
- 			dispose();
- 		});
-+		*/
- 
- 		try (InputStream in = I18nUtils.getI18nResourceAsStream("resources/text/help_dialog", "html")) {
- 			byte[] buf = in.readAllBytes();
 Index: mobac/src/main/java/mobac/gui/MainGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2797)
+--- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2798)
 +++ mobac/src/main/java/mobac/gui/MainGUI.java	(working copy)
 @@ -151,7 +151,7 @@
  
@@ -316,7 +296,7 @@ Index: mobac/src/main/java/mobac/gui/MainGUI.java
  		leftPanelContent.add(mapSourcePanel, gbc_eol);
 Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2797)
+--- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2798)
 +++ mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(working copy)
 @@ -43,7 +43,7 @@
  		JScrollPane mapSourceTreeScrollPane = new JScrollPane(mapSourceTree, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -329,9 +309,9 @@ Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
  	}
 Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
 ===================================================================
---- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2797)
+--- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2798)
 +++ mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(working copy)
-@@ -94,7 +94,7 @@
+@@ -95,7 +95,7 @@
  
  	private static final Logger LOG = LoggerFactory.getLogger(SettingsGUI.class);
  
@@ -340,18 +320,9 @@ Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
  
  	private static final long MBIT1 = 1000000 / 8;
  	private final Settings settings = Settings.getInstance();
-@@ -772,7 +772,7 @@
- 			// information
- 			if (tabbedPane.getSelectedComponent() == tileStoreTab) {
- 				// if ("Tile store".equals(tabbedPane.getSelectedComponent().getName())) {
--				tabbedPane.removeChangeListener(this);
-+				// tabbedPane.removeChangeListener(this);
- 				tileStoreTab.updateTileStoreInfoPanelAsync(null);
- 			}
- 		});
 Index: mobac/src/main/java/mobac/program/AtlasThread.java
 ===================================================================
---- mobac/src/main/java/mobac/program/AtlasThread.java	(revision 2797)
+--- mobac/src/main/java/mobac/program/AtlasThread.java	(revision 2798)
 +++ mobac/src/main/java/mobac/program/AtlasThread.java	(working copy)
 @@ -199,13 +199,13 @@
  			}
@@ -371,7 +342,7 @@ Index: mobac/src/main/java/mobac/program/AtlasThread.java
  		} catch (AtlasTestException e) {
 Index: mobac/src/main/java/mobac/program/download/MobacTrustManager.java
 ===================================================================
---- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2797)
+--- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2798)
 +++ mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(working copy)
 @@ -129,7 +129,7 @@
  			defaultTrustManager.checkServerTrusted(chain, authType);
@@ -382,7 +353,7 @@ Index: mobac/src/main/java/mobac/program/download/MobacTrustManager.java
  			synchronized (this) {
  				String pubKeySha256Hash = getPublicKeySha256Hash(cert);
  				if (isCertificateTrusted(pubKeySha256Hash)) {
-@@ -138,10 +138,10 @@
+@@ -138,7 +138,7 @@
  				// TODO: Add GUI for manually adding this certificate as trusted.
  				String message = "Untrusted certificate encountered: publicKeyHash=\"" + pubKeySha256Hash
  						+ "\"; certificate issued for " + cert.getSubjectX500Principal();
@@ -390,13 +361,10 @@ Index: mobac/src/main/java/mobac/program/download/MobacTrustManager.java
 +				log.debug(message);
  			}
  		}
--	}
-+	} 
- 	private boolean isCertificateTrusted(String pubKeySha256Hash) {
- 		if (additionalTrustedPublicKeys != null) {
+ 	}
 Index: mobac/src/main/java/mobac/program/download/TileDownLoader.java
 ===================================================================
---- mobac/src/main/java/mobac/program/download/TileDownLoader.java	(revision 2797)
+--- mobac/src/main/java/mobac/program/download/TileDownLoader.java	(revision 2798)
 +++ mobac/src/main/java/mobac/program/download/TileDownLoader.java	(working copy)
 @@ -44,7 +44,8 @@
  		if (defaultReadTimeout == null) {
@@ -410,7 +378,7 @@ Index: mobac/src/main/java/mobac/program/download/TileDownLoader.java
  		// see https://stackoverflow.com/questions/8335501
 Index: tilestore-util/build.gradle
 ===================================================================
---- tilestore-util/build.gradle	(revision 2797)
+--- tilestore-util/build.gradle	(revision 2798)
 +++ tilestore-util/build.gradle	(working copy)
 @@ -26,7 +26,7 @@
      exclude("module-info.class")
