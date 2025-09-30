@@ -2,8 +2,8 @@
 | ---- | ---- |
 | [aom](https://aomedia.googlesource.com/aom) | 3.13.1 |
 | [apr](https://github.com/apache/apr) | 1.7.7 - 94dfd0c05 |
-| [apr-util](https://github.com/apache/apr-util) | 1.7.0-dev - 85df5aee |
-| [brotli](https://github.com/google/brotli) | 1.1.1-rc0 |
+| [apr-util](https://github.com/apache/apr-util) | 1.7.0-dev - f2df5593 |
+| [brotli](https://github.com/google/brotli) | 1.1.0 - 1f6ab76 |
 | [bzip2](https://gitlab.com/bzip2/bzip2.git) | 1.1.0 - 66c46b8 |
 | [cares](https://github.com/c-ares/c-ares) | 1.34.5 |
 | [curl](https://github.com/curl/curl) | 8.16.0 |
@@ -11,7 +11,7 @@
 | [dependencies](https://github.com/himeshsameera/Dependencies) | 2.2.0 - a8e3d45 |
 | [fit2gpx](https://github.com/nono303/fit2gpx) - [*upstream + src*](https://github.com/MaksVasilev/fit2gpx) | 0.1.23 - aae7b6c |
 | [freeglut](https://github.com/dcnieho/FreeGLUT.git) | 3.6.0 |
-| [freetype2](https://git.savannah.nongnu.org/git/freetype/freetype2.git/) | 2.14.1 |
+| [freetype2](https://gitlab.freedesktop.org/freetype/freetype) | 2.14.1 |
 | [gdal](https://github.com/OSGeo/gdal) | 3.11.4 |
 | [geographiclib](https://github.com/geographiclib/geographiclib/tree/release) | 2.5.2 |
 | [geos](https://github.com/libgeos/geos) | 3.14.0 |
@@ -30,10 +30,10 @@
 | [libffi](https://github.com/libffi/libffi) | 3.5.2 - 2835f72 |
 | [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.20.0 |
 | [libgd](https://github.com/libgd/libgd) | 2.4.0 - abaaa9fa |
-| [libgeotiff](https://github.com/nono303/libgeotiff.git) + [*upstream + src*](https://github.com/OSGeo/libgeotiff) | 1.7.4 - 05c3808 |
+| [libgeotiff](https://github.com/nono303/libgeotiff.git) + [*upstream + src*](https://github.com/OSGeo/libgeotiff) | 1.7.4 - 231ca71 |
 | [libheif](https://github.com/strukturag/libheif) | 1.20.2 |
 | [libiconv](https://github.com/AiMiDi/libiconv_cmake) | efdd103 |
-| [libiconv\libiconv](https://github.com/AiMiDi/libiconv) | 1.17 - ed5f51f |
+| [libiconv](https://github.com/AiMiDi/libiconv) | 1.17 - ed5f51f |
 | [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) | 3.1.2 |
 | [liblzma](https://github.com/ShiftMediaProject/liblzma) | 5.8.1 |
 | [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.12.2 |
@@ -51,7 +51,7 @@
 | [lua](https://github.com/lua/lua) | 5.4.8 |
 | [mapsforgesrv](https://github.com/nono303/mapsforgesrv/tree/tasks) - _[upstream + src](https://github.com/telemaxx/mapsforgesrv/tree/tasks)_ | 0.26.1.0 - 746c15e |
 | [memcached](https://github.com/memcached/memcached) | 1.6.39 |
-| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.3.3 - r2793 |
+| [mobac](https://svn.code.sf.net/p/mobac/code) | 2.3.3 - r2798 |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
 | [mod_evasive](https://github.com/jvdmr/mod_evasive) | 2.4.0 |
 | [mod_fcgid](https://github.com/nono303/mod_fcgid) - _[upstream + src](https://github.com/pagespeed/mod_fcgid)_ | 2.3.10.5 |
@@ -59,7 +59,7 @@
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.3.0 - 03c8171 |
 | [mod_md](https://github.com/icing/mod_md) | 2.6.2 |
-| [mod_qos](https://sourceforge.net/p/mod-qos/source/HEAD/tree/trunk/httpd_src/modules/qos/) | 11.76 r2718 |
+| [mod_qos](https://sourceforge.net/p/mod-qos/source/HEAD/tree/trunk/httpd_src/modules/qos/) | 11.76 r2724 |
 | [mod_security](https://github.com/SpiderLabs/ModSecurity) | 2.9.12 |
 | [mod_security-sdbm-util](https://github.com/nono303/modsec-sdbm-util) - _[upstream + src](https://github.com/SpiderLabs/modsec-sdbm-util)_ | 1.1.0 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) - _[src1](https://emptyhammock.com/media/downloads/wku_bt-2.01.zip)_- _[src2](https://github.com/nono303/mod_whatkilledus)_ | 2.0.2 - d1ec56b |
@@ -69,7 +69,7 @@
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 1.12.0 |
 | [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 1.16.0 |
 | [nssm](https://github.com/puppetlabs/nssm) | 2.25 - e627816 |
-| [openssl](https://github.com/openssl/openssl) | 3.5.3 |
+| [openssl](https://github.com/openssl/openssl) | 3.5.4 |
 | [pcre2](https://github.com/PCRE2Project/pcre2) | 10.47-dev - b0cea02e |
 | [pecl-datetime-timezonedb](https://github.com/php/pecl-datetime-timezonedb) | 2025.2.2 |
 | [pecl-igbinary](https://github.com/igbinary/igbinary) | 3.2.17-dev - 8f8b717 |

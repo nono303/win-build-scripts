@@ -18,11 +18,11 @@ git checkout 1.7.x
 cd /D ..
 git clone https://github.com/apache/apr-util.git apr-util
 cd /D apr-util
-git checkout remotes/origin/1.7.x~173
+git checkout 1.7.x
 cd /D ..
 git clone https://github.com/google/brotli.git brotli
 cd /D brotli
-git checkout go/brotli/v1.1.1-rc0
+git checkout master
 cd /D ..
 git clone https://gitlab.com/bzip2/bzip2.git bzip2
 cd /D bzip2
@@ -52,8 +52,12 @@ git clone https://github.com/dcnieho/FreeGLUT.git freeglut
 cd /D freeglut
 git checkout tags/v3.6.0
 cd /D ..
-git clone git://git.sv.nongnu.org/freetype/freetype2.git freetype2
+git clone https://gitlab.freedesktop.org/freetype/freetype.git freetype2
 cd /D freetype2
+git checkout tags/VER-2-14-1
+cd /D ..
+git clone https://gitlab.freedesktop.org/freetype/freetype.git freetype2.old
+cd /D freetype2.old
 git checkout tags/VER-2-13-3
 cd /D ..
 git clone https://github.com/OSGeo/gdal gdal
@@ -78,7 +82,7 @@ git checkout tags/2.4.65
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout icu4x/2025-05-21/77.x
+git checkout tags/icu4x/2025-05-21/77.x
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
