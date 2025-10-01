@@ -1,7 +1,5 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
 
-REM call call %PATH_BIN_CYGWIN%\bash --login -c '%CYGPATH_MODULES%/%1.sh %CYGPATH_SRC%/%1'
-
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DBUILD_SHARED_LIBS=ON ^
