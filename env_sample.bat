@@ -37,7 +37,7 @@ set JAVA_HOME=%PATH_SOFTS%\openjdk
 set GRADLE_USER_HOME=%PATH_SOFTS%\gradle
 
 REM ########################## BIN PATH
-set PATH_VS=%PATH_SOFTS%\vs22\Community
+set PATH_VS=%PATH_SOFTS%\msvs\vs18
 	REM mysql root with /lib & /include (apr)
 set PATH_MYSQL=B:\serveur\mysql
 set PATH_BIN_GIT=C:\PROGRA~1\Git\bin
@@ -100,11 +100,11 @@ cd /D %PATH_BATCH%
 REM ########################## BUILD OPTION
 	REM https://services.gradle.org/distributions/
 set GRADLEVER=9.1.0
-	REM see dir in %PATH_ROOTWKIT%\Lib
+	REM see dir in C:\Windows Kits\10\Lib
 set WKITVER=10.0.26100.0
 	REM .NET installed SDK
 set DOTNETVER=4.8
-	REM Current MSVC full version (accordinf to vs16 vs17...)
+	REM Current MSVC full version (accordinf to vs17 vs18...)
 FOR /F "tokens=* USEBACKQ" %%F in (`dir /b %PATH_VS%\VC\Tools\MSVC ^| grep %vcvars_ver%`) do (set VCTOOLSVER=%%F)
 
 set NMAKE_OPTS_DBG=/NOLOGO
@@ -148,7 +148,7 @@ set RCFLAGS=/nologo
 REM ########################## INIT PATH
 if not exist %PATH_LOGS%\. mkdir %PATH_LOGS%
 if not exist %PATH_BUILDROOT%\. mkdir %PATH_BUILDROOT%
-for %%X in (vs16 vs17) do (
+for %%X in (vs17 vs18) do (
 	for %%Y in (x64 x64-avx x64-avx2) do (
 		if not exist %PATH_RELEASE%\%%X_%%Y\. mkdir %PATH_RELEASE%\%%X_%%Y
 		if not exist %PATH_BUILDROOT%\%%X_%%Y\. mkdir %PATH_BUILDROOT%\%%X_%%Y

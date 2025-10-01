@@ -70,7 +70,7 @@ for %%D in (EXTERNAL_INCLUDE INCLUDE LIB) do (for /F "tokens=* USEBACKQ" %%F in 
 echo ####### BEGIN %BAFF% %1 %MSVC_DEPS% %ARCH% %AVXECHO% [%ymdhis%] #######
 set STARTTIME=%TIME%
 if %ARG_ALL% == 1 (
-	for %%V in (vs17 vs16) do (
+	for %%V in (vs17 vs18) do (
 		for %%A in (2 1 0) do (
 			setlocal
 			call %PATH_BATCH%\%%V.bat

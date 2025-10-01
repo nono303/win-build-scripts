@@ -38,7 +38,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 3. launch simple command prompt in check-outed directory
 
 4. init
-   1. **Choose your toolset version:** `vs16.bat` _(v142)_ or `vs17.bat` _(v143)_
+   1. **Choose your toolset version:** `vs17.bat` _(v142)_ or `vs18.bat` _(v143)_
 
    2. **Choose your architecture:** `x64.bat`
 
@@ -46,7 +46,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
    3. **Disable or Enable QUIC (HTTP3) support:** `quic.bat 0` or `quic.bat 1` 
 
-      shortcut example: `C:\Windows\System32\cmd.exe /k vs16 && x64 && avx 1 && quic 1`
+      shortcut example for classic usage: `C:\Windows\System32\cmd.exe /k vs18 && x64 && avx 2 && quic 0`
 
    4. `go srccreate` to clone and checkout all src
    
@@ -56,7 +56,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 17.14.16p1 (14.44, 14.29) | `.vsconfig`         |
+| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 18.0.0 (14.50, 14.44) | `.vsconfig`         |
 | :bookmark: [Microsoft Visual C++ Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170) | x64 & x86 | 14.44.35211 |  |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.7.0 | `cyg64.packagelist` |
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.13.7 |                     |
