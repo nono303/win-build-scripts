@@ -16,5 +16,5 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% install
 
-xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\libaprapp-1.dir\libaprapp-1.pdb %PATH_INSTALL%\_%1\lib\*
+xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\libaprapp-1.dir\libaprapp-1.pdb %PATH_INSTALL%\lib\*
 call do_php %PATH_UTILS%\sub\version.php apr %PATH_INSTALL%\bin\libapr-1.dll
