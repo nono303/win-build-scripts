@@ -1,0 +1,25 @@
+diff --git a/Dependencies/Dependencies.csproj b/Dependencies/Dependencies.csproj
+index 41f3288..24202b4 100644
+--- a/Dependencies/Dependencies.csproj
++++ b/Dependencies/Dependencies.csproj
+@@ -97,7 +97,7 @@
+       <HintPath>..\packages\NDesk.Options.0.2.1\lib\NDesk.Options.dll</HintPath>
+     </Reference>
+     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+-      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
++      <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+     </Reference>
+     <Reference Include="System" />
+     <Reference Include="System.Core" />
+diff --git a/Dependencies/packages.config b/Dependencies/packages.config
+index 42bfcfd..dc93f6e 100644
+--- a/Dependencies/packages.config
++++ b/Dependencies/packages.config
+@@ -2,5 +2,5 @@
+ <packages>
+   <package id="Mono.Cecil" version="0.11.6" targetFramework="net461" />
+   <package id="NDesk.Options" version="0.2.1" targetFramework="net461" />
+-  <package id="Newtonsoft.Json" version="13.0.3" targetFramework="net461" />
++  <package id="Newtonsoft.Json" version="13.0.4" targetFramework="net461" />
+ </packages>
+\ No newline at end of file
