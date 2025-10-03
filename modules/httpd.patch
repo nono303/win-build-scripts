@@ -1,7 +1,7 @@
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 170076bdd4..0c8eb7e673 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
+diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
+index 170076bdd4..9789b5d84d 100644
+--- "a/CMakeLists.txt"
++++ "b/CMakeLists.txt"
 @@ -17,14 +17,26 @@
  
  PROJECT(HTTPD C)
@@ -64,7 +64,7 @@ index 170076bdd4..0c8eb7e673 100644
    "modules/examples/mod_example_hooks+O+Example hook callback handler module"
    "modules/examples/mod_example_ipc+O+Example of shared memory and mutex usage"
 -  "modules/filters/mod_brotli+i+Brotli compression support"
-+  "modules/filters/mod_brotli+I+Brotli compression support"
++  "modules/filters/mod_brotli+O+Brotli compression support"
    "modules/filters/mod_buffer+I+Filter Buffering"
 -  "modules/filters/mod_charset_lite+i+character set translation"
 +  "modules/filters/mod_charset_lite+I+character set translation"
@@ -75,7 +75,7 @@ index 170076bdd4..0c8eb7e673 100644
    "modules/filters/mod_filter+A+Smart Filtering"
    "modules/filters/mod_include+I+Server Side Includes"
 -  "modules/filters/mod_proxy_html+i+Fix HTML Links in a Reverse Proxy"
-+  "modules/filters/mod_proxy_html+I+Fix HTML Links in a Reverse Proxy"
++  "modules/filters/mod_proxy_html+O+Fix HTML Links in a Reverse Proxy"
    "modules/filters/mod_ratelimit+I+Output Bandwidth Limiting"
    "modules/filters/mod_reflector+O+Reflect request through the output filter stack"
    "modules/filters/mod_reqtimeout+A+Limit time waiting for request from client"
@@ -83,7 +83,7 @@ index 170076bdd4..0c8eb7e673 100644
    "modules/filters/mod_sed+I+filter request and/or response bodies through sed"
    "modules/filters/mod_substitute+I+response content rewrite-like filtering"
 -  "modules/filters/mod_xml2enc+i+i18n support for markup filters"
-+  "modules/filters/mod_xml2enc+I+i18n support for markup filters"
++  "modules/filters/mod_xml2enc+O+i18n support for markup filters"
    "modules/generators/mod_asis+I+as-is filetypes"
    "modules/generators/mod_autoindex+A+directory listing"
    "modules/generators/mod_cgi+I+CGI scripts"
@@ -92,7 +92,7 @@ index 170076bdd4..0c8eb7e673 100644
    "modules/http/mod_mime+A+mapping of file-extension to MIME.  Disabling this module is normally not recommended."
 -  "modules/http2/mod_http2+i+HTTP/2 protocol support"
 -  "modules/ldap/mod_ldap+i+LDAP caching and connection pooling services"
-+  "${mod_http2_src}/mod_http2+I+HTTP/2 protocol support"
++  "${mod_http2_src}/mod_http2+O+HTTP/2 protocol support"
 +  "modules/ldap/mod_ldap+I+LDAP caching and connection pooling services"
    "modules/loggers/mod_log_config+A+logging configuration.  You won't be able to log requests to the server without this module."
    "modules/loggers/mod_log_debug+I+configurable debug logging"
@@ -100,8 +100,8 @@ index 170076bdd4..0c8eb7e673 100644
    "modules/loggers/mod_logio+I+input and output logging"
 -  "modules/lua/mod_lua+i+Apache Lua Framework"
 -  "modules/md/mod_md+i+Apache Managed Domains (Certificates)"
-+  "modules/lua/mod_lua+I+Apache Lua Framework"
-+  "${mod_md_src}/mod_md+I+Apache Managed Domains (Certificates)"
++  "modules/lua/mod_lua+O+Apache Lua Framework"
++  "${mod_md_src}/mod_md+O+Apache Managed Domains (Certificates)"
    "modules/mappers/mod_actions+I+Action triggering on requests"
    "modules/mappers/mod_alias+A+mapping of requests to different filesystem parts"
    "modules/mappers/mod_dir+A+directory request handling"
@@ -110,7 +110,7 @@ index 170076bdd4..0c8eb7e673 100644
    "modules/proxy/mod_proxy_scgi+I+Apache proxy SCGI module.  Requires and is enabled by --enable-proxy."
    "modules/proxy/mod_proxy_wstunnel+I+Apache proxy Websocket Tunnel module.  Requires and is enabled by --enable-proxy."
 -  "modules/http2/mod_proxy_http2+i+Apache proxy HTTP/2 module.  Requires --enable-proxy."
-+  "${mod_http2_src}/mod_proxy_http2+I+Apache proxy HTTP/2 module.  Requires --enable-proxy."
++  "${mod_http2_src}/mod_proxy_http2+O+Apache proxy HTTP/2 module.  Requires --enable-proxy."
    "modules/session/mod_session+I+session module"
    "modules/session/mod_session_cookie+I+session cookie module"
 -  "modules/session/mod_session_crypto+i+session crypto module"
