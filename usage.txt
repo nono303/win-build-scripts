@@ -75,7 +75,7 @@ Usage: go command [options]
         * parallel
     * serf
     * nssm
-  * subversion-deps
+  * subversionanddeps
   * subversion
   * geographiclib
   * dependencies
