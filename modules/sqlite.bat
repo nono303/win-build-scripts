@@ -8,7 +8,7 @@ REM	USE_SEH=ON		> subversion
 REM		error C4013: sqlite3PagerWalSystemErrno: undefined;
 REM	ICU_ROOT=%PATH_INSTALL%
 REM		without	KO	"C:\Windows Kits\10\Lib\10.x.xxxxx.x\um\x64\icuuc.lib"	"C:\Windows Kits\10\Lib\10.x.xxxxx.x\um\x64\icuin.Lib"
-REM		with	OK	"C:\sdk\release\vs17_x64-avx\lib\icuuc.lib"		"C:\sdk\release\vs17_x64-avx\lib\icuin.lib"
+REM		with	OK	"C:\sdk\release\...\lib\icuuc.lib"		"C:\sdk\release\...\lib\icuin.lib"
 REM			warn	Policy CMP0074 is not set
 
 set SQLITEICU=-DBUILD_SHELL=ON -DENABLE_ICU=ON -DICU_ROOT=%PATH_INSTALL%

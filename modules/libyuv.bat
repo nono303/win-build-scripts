@@ -16,7 +16,7 @@ sed -i 's/LINK_LIBRARIES = kernel32.lib/LINK_LIBRARIES = kernel32.lib %PATH_INST
 sed -i 's/DWIN32/DWIN32 \/DLIBYUV_BUILDING_SHARED_LIBRARY=1/g' %CYGPATH_BUILD%/%1/build.ninja
 	REM accord imp lib to dll name
 for %%Y in (cmake_install.cmake build.ninja) do (sed -i 's/ yuv\.lib/ libyuv\.lib/g' %CYGPATH_BUILD%/%1/%%Y)
-	REM !install : CMake Error at cmake_install.cmake:36 (file):  file INSTALL cannot find "C:/sdk/build/vs17_x64-avx/libyuv/yuvconvert": No
+	REM !install : CMake Error at cmake_install.cmake:36 (file):  file INSTALL cannot find "C:/sdk/build/.../libyuv/yuvconvert": No
 %NINJA%
 
 if not exist %PATH_INSTALL%\include\editline\. mkdir %PATH_INSTALL%\include\libyuv

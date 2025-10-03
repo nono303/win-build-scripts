@@ -24,7 +24,7 @@ FOR /F "tokens=* USEBACKQ" %%F in (`do_php %PATH_UTILS%\sub\version.php httpd`) 
 call %PATH_MODULES_COMMON%\init.bat %1%MOD_ZSTD_BRANCH% varonly
 
 cl.exe /nologo ^
--IC:\sdk\release\vs17_x64-avx2\include ^
+-IC:\sdk\release\vs18_x64-avx2\include ^
 /DWIN32 /DNDEBUG /D_WINDOWS ^
 /w /MD /Zi /Gw /Gy /Zc:inline /O2 /Ob3 /Zf /FS /GL /MP16 /cgthreads8 ^
 %AVX% %__CNFC% ^
@@ -40,10 +40,10 @@ link.exe /NOLOGO ^
 /implib:%MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.lib ^
 /pdb:%MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.pdb ^
 /dll /machine:x64 /DEBUG /LTCG /OPT:REF,ICF ^
-C:\sdk\release\vs17_x64-avx2\lib\libzstd.lib ^
-C:\sdk\release\vs17_x64-avx2\lib\libhttpd.lib ^
-C:\sdk\release\vs17_x64-avx2\lib\libapr-1.lib ^
-C:\sdk\release\vs17_x64-avx2\lib\libaprutil-1.lib
+C:\sdk\release\vs18_x64-avx2\lib\libzstd.lib ^
+C:\sdk\release\vs18_x64-avx2\lib\libhttpd.lib ^
+C:\sdk\release\vs18_x64-avx2\lib\libapr-1.lib ^
+C:\sdk\release\vs18_x64-avx2\lib\libaprutil-1.lib
 
 rm -fv %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.exp
 rm -fv %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.lib
