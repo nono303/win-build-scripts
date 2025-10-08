@@ -1,0 +1,21 @@
+diff --git a/src/lib/maps/maps.c b/src/lib/maps/maps.c
+index 560dff7e..59081221 100644
+--- a/src/lib/maps/maps.c
++++ b/src/lib/maps/maps.c
+@@ -16,6 +16,7 @@
+ #include <stddef.h>
+ #include <stdlib.h>
+ 
++#include "main/php_version.h"
+ #if PHP_VERSION_ID >= 80500
+ # include "php_glob.h"
+ # define xdebug_glob php_glob
+@@ -85,7 +86,7 @@ static void scan_directory(const char *dir)
+ 		case 0: /* No error */
+ 			break;
+ 
+-		case GLOB_NOMATCH:
++		case PHP_GLOB_NOMATCH:
+ 			xdebug_log_ex(XLOG_CHAN_PATHMAP, XLOG_DEBUG, "NOMATCH", "No map files found with pattern '%s'", scan_dir);
+ 			xdfree(scan_dir);
+ 
