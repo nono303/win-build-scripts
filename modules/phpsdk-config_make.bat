@@ -145,8 +145,6 @@ sed -i 's/\/Ox/\/std:c++latest \/O2 \/Ob3 \/MP%NUMBER_OF_PROCESSORS% \/cgthreads
 sed -i 's/d4996//g' %CYGPATH_SRC%/php-src/Makefile
 	REM fix for iconv shared : LINK : fatal error LNK1181: cannot open input file 'php_iconv.lib'
 sed -i -E 's/LIBS_LIBXML=(.*)php_iconv.lib(.*)/LIBS_LIBXML=\\1\\2/g' %CYGPATH_SRC%/php-src/Makefile
-	REM PHP 7.X 'warning U4004: too many rules' - https://docs.microsoft.com/en-us/cpp/error-messages/tool-errors/nmake-warning-u4004
-REM sed -i 's/phpdbg_win.obj: /phpdbg_win.obj:: /g' %CYGPATH_SRC%/php-src/Makefile
 
 	REM after sed:
 REM LDFLAGS=/nologo /incremental:no /LTCG /NODEFAULTLIB:libcmt.lib /SAFESEH:NO /debug /opt:ref,icf
