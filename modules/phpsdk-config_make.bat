@@ -45,6 +45,28 @@ if %PHP_BUILD_TYPE% == igbinary	(set PHP_PARTIAL_BUILD=--enable-igbinary=shared)
 if %PHP_BUILD_TYPE% == parallel	(set PHP_PARTIAL_BUILD=--with-parallel=shared)
 if %PHP_BUILD_TYPE% == ffi	(set PHP_PARTIAL_BUILD=--with-ffi=shared)
 
+if %PHP_BUILD_TYPE% == win7 (
+	set FINAL_CONFIGURE=^
+	--enable-debug-pack ^
+	--enable-fd-setsize=2048 ^
+	--enable-object-out-dir=../build/ ^
+	--with-toolset=vs ^
+	--with-cygwin=%PATH_BIN_CYGWIN% ^
+	--with-extra-includes=%PATH_INSTALL%\include\libxml2;%PATH_INSTALL%\include ^
+	--with-extra-libs=%PATH_INSTALL%\lib ^
+	--with-mp=%NUMBER_OF_PROCESSORS% ^
+	--without-gd ^
+	--without-geos ^
+	--without-readline ^
+	--disable-zip ^
+	--disable-brotli ^
+	--disable-zstd ^
+	--with-iconv=%PATH_INSTALL% ^
+	--with-iconv=shared ^
+	--with-libxml=shared ^
+	%ZTS% ^
+	%phparchopts%
+) else (
 if %PHPVER% == %PHP_BUILD_TYPE% (
 	set FINAL_CONFIGURE=%PHP_COMMON_CONFIGURE% ^
 	--enable-mbstring=shared ^
@@ -61,6 +83,7 @@ if %PHPVER% == %PHP_BUILD_TYPE% (
 	--with-bz2=shared ^
 	--with-curl=shared ^
 	--with-iconv=%PATH_INSTALL% ^
+	--with-iconv=shared ^
 	--with-mysqli=shared ^
 	--with-openssl=shared ^
 	--with-pdo-mysql=shared ^
@@ -75,7 +98,6 @@ if %PHPVER% == %PHP_BUILD_TYPE% (
 	--enable-xmlwriter=shared ^
 	--with-simplexml=shared ^
 	--with-dom=shared ^
-	--with-iconv=shared ^
 	--enable-zip=shared ^
 	--enable-zlib=shared ^
 	--with-readline=shared ^
@@ -121,7 +143,6 @@ if %PHPVER% == %PHP_BUILD_TYPE% (
 	--disable-xmlwriter ^
 	--disable-xmlreader ^
 	--disable-zip ^
-	--enable-embed ^
 	--without-geos ^
 	--without-readline ^
 	--disable-zstd ^
@@ -129,6 +150,7 @@ if %PHPVER% == %PHP_BUILD_TYPE% (
 	%ZTS% ^
 	%phpveropts% ^
 	%phparchopts%
+)
 )
 echo configure %FINAL_CONFIGURE:	=%
 call configure %FINAL_CONFIGURE%
@@ -197,6 +219,13 @@ if %PHPVER% == %PHP_BUILD_TYPE% (
 	call do_php %PATH_UTILS%\sub\version.php pecl-igbinary %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_igbinary.dll "php:%PHPVERFULL%-%TSNTS%"
 	call %PATH_MODULES_COMMON%\init.bat pecl-parallel varonly
 	call do_php %PATH_UTILS%\sub\version.php pecl-parallel %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_parallel.dll "php:%PHPVERFULL%-%TSNTS%"
+)
+if %PHP_BUILD_TYPE% == win7	(
+	call %PATH_MODULES_COMMON%\init.bat php-src varonly
+	for %%X in (php-cgi.exe php.exe php8%TSLIBSUF%.dll php_iconv.dll php_opcache.dll) do (
+		call do_php %PATH_UTILS%\sub\version.php php-src %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\%%X "build:%TSNTS%"
+	)
+	REM TODO nmake test
 )
 if %PHP_BUILD_TYPE% == xdebug	(
 	call %PATH_MODULES_COMMON%\init.bat xdebug varonly
