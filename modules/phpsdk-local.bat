@@ -14,7 +14,7 @@ call buildconf.bat
 sed -i 's/edit_a.lib;edit.lib/edit.lib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM gmp - shared
 sed -i 's/mpir_a.lib/mpir_%AVX_MPIR%.lib/g' %CYGPATH_SRC%/php-src/configure.js
-	REM libiconv - shared with patch ext/iconv/iconv.c : _libiconv_version > _LIBICONV_VERSION
+	REM libiconv - must be shared with patch ext/iconv/iconv.c : _libiconv_version > _LIBICONV_VERSION
 sed -i 's/libiconv_a.lib/libiconv.lib/g' %CYGPATH_SRC%/php-src/configure.js
 	REM lzma
 sed -i 's/liblzma_a/liblzma/g' %CYGPATH_SRC%/php-src/configure.js
@@ -52,7 +52,8 @@ call configure --help > %PATH_LOGS%\configure_%PHPVER%.txt
 if %PHP_BUILDNTS% == 1 (
 	REM ~~~~~~~~~~~~ make NTS
 	echo *** nts  ***
-	set ZTS=--disable-zts --with-openssl-argon2
+	set ZTS=--disable-zts
+	if %PHPVER% == %PHP_BUILD_TYPE% (set ZTS=--disable-zts --with-openssl-argon2)
 	set TSLIBSUF=
 	set TSNTS=nts
 		REM unused
@@ -62,7 +63,8 @@ if %PHP_BUILDNTS% == 1 (
 if %PHP_BUILDTS% == 1 (
 	REM ~~~~~~~~~~~~ make TS
 	echo *** ts  ***
-	set ZTS=--with-parallel=shared
+	set ZTS=
+	if %PHPVER% == %PHP_BUILD_TYPE% (set ZTS=--with-parallel=shared)
 	set TSLIBSUF=ts
 	set TSNTS=ts
 		REM unused
