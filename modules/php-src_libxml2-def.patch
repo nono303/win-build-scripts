@@ -1,0 +1,1131 @@
+diff --git "a/ext/libxml/php_libxml2.def" "b/ext/libxml/php_libxml2.def"
+index 06c05f188e8..34087e2e8df 100644
+--- "a/ext/libxml/php_libxml2.def"
++++ "b/ext/libxml/php_libxml2.def"
+@@ -1,89 +1,47 @@
+ EXPORTS
+-__htmlDefaultSAXHandler
+-__oldXMLWDcompatibility
+-__xmlBufferAllocScheme
+-__xmlDefaultBufferSize
+-__xmlDefaultSAXHandler
+-__xmlDefaultSAXLocator
++DllMain
+ __xmlDeregisterNodeDefaultValue
+ __xmlDoValidityCheckingDefaultValue
+-xmlFree DATA
+ __xmlGenericError
+ __xmlGenericErrorContext
+ __xmlGetWarningsDefaultValue
+ __xmlIndentTreeOutput
+-xmlIsBaseCharGroup DATA
+-xmlIsCharGroup DATA
+-xmlIsCombiningGroup DATA
+-xmlIsDigitGroup DATA
+-xmlIsExtenderGroup DATA
+-xmlIsIdeographicGroup DATA
+-xmlIsPubidChar_tab DATA
+ __xmlKeepBlanksDefaultValue
+-xmlLastError DATA
++__xmlLastError
+ __xmlLineNumbersDefaultValue
+ __xmlLoadExtDtdDefaultValue
+-xmlMalloc DATA
+-xmlMallocAtomic DATA
+-xmlMemStrdup DATA
+-xmlOutputBufferCreateFilenameValue DATA
+-__xmlParserDebugEntities
+-xmlParserInputBufferCreateFilenameValue DATA
+-xmlParserMaxDepth DATA
+-__xmlParserVersion
++__xmlOutputBufferCreateFilename
++__xmlOutputBufferCreateFilenameValue
++__xmlParserInputBufferCreateFilename
++__xmlParserInputBufferCreateFilenameValue
+ __xmlPedanticParserDefaultValue
+-xmlRealloc DATA
+ __xmlRegisterNodeDefaultValue
+ __xmlSaveNoEmptyTags
+-xmlStringComment DATA
+-xmlStringText DATA
+-xmlStringTextNoenc DATA
+-xmlStructuredError DATA
++__xmlStructuredError
++__xmlStructuredErrorContext
+ __xmlSubstituteEntitiesDefaultValue
+ __xmlTreeIndentString
+-xmlXPathNAN DATA
+-xmlXPathNINF DATA
+-xmlXPathPINF DATA
+-UTF8ToHtml
+-UTF8Toisolat1
+-attribute
+-attributeDecl
+-cdataBlock
+-characters
+-checkNamespace
+-comment
+-elementDecl
+-endDocument
+-endElement
+-entityDecl
+-externalSubset
+-getColumnNumber
+-getEntity
+-getLineNumber
+-getNamespace
+-getParameterEntity
+-getPublicId
+-getSystemId
+-globalNamespace
+-hasExternalSubset
+-hasInternalSubset
+ htmlAttrAllowed
+ htmlAutoCloseTag
+ htmlCreateFileParserCtxt
+ htmlCreateMemoryParserCtxt
+ htmlCreatePushParserCtxt
++htmlCtxtParseDocument
+ htmlCtxtReadDoc
+ htmlCtxtReadFd
+ htmlCtxtReadFile
+ htmlCtxtReadIO
+ htmlCtxtReadMemory
+ htmlCtxtReset
++htmlCtxtSetOptions
+ htmlCtxtUseOptions
++htmlDefaultSAXHandler
+ htmlDefaultSAXHandlerInit
+ htmlDocContentDumpFormatOutput
+ htmlDocContentDumpOutput
+ htmlDocDump
+ htmlDocDumpMemory
++htmlDocDumpMemoryFormat
+ htmlElementAllowedHere
+ htmlElementStatusHere
+ htmlEncodeEntities
+@@ -98,6 +56,8 @@ htmlIsBooleanAttr
+ htmlIsScriptAttribute
+ htmlNewDoc
+ htmlNewDocNoDtD
++htmlNewParserCtxt
++htmlNewSAXParserCtxt
+ htmlNodeDump
+ htmlNodeDumpFile
+ htmlNodeDumpFileFormat
+@@ -123,31 +83,12 @@ htmlSaveFileEnc
+ htmlSaveFileFormat
+ htmlSetMetaEncoding
+ htmlTagLookup
+-ignorableWhitespace
+-initGenericErrorDefaultFunc
+-inithtmlDefaultSAXHandler
+-initxmlDefaultSAXHandler
+-inputPop
+-inputPush
+-internalSubset
+-isStandalone
+-isolat1ToUTF8
+-namePop
+-namePush
+-namespaceDecl
+-nodePop
+-nodePush
+-notationDecl
+-processingInstruction
+-reference
+-resolveEntity
+-setDocumentLocator
+-setNamespace
+-startDocument
+-startElement
+-unparsedEntityDecl
+-valuePop
+-valuePush
++htmlUTF8ToHtml
++xlinkGetDefaultDetect
++xlinkGetDefaultHandler
++xlinkIsLink
++xlinkSetDefaultDetect
++xlinkSetDefaultHandler
+ xmlACatalogAdd
+ xmlACatalogDump
+ xmlACatalogRemove
+@@ -162,7 +103,9 @@ xmlAddDocEntity
+ xmlAddDtdEntity
+ xmlAddElementDecl
+ xmlAddEncodingAlias
++xmlAddEntity
+ xmlAddID
++xmlAddIDSafe
+ xmlAddNextSibling
+ xmlAddNotationDecl
+ xmlAddPrevSibling
+@@ -181,13 +124,19 @@ xmlAutomataNewCountedTrans
+ xmlAutomataNewCounter
+ xmlAutomataNewCounterTrans
+ xmlAutomataNewEpsilon
++xmlAutomataNewNegTrans
+ xmlAutomataNewOnceTrans
+ xmlAutomataNewOnceTrans2
+ xmlAutomataNewState
+ xmlAutomataNewTransition
+ xmlAutomataNewTransition2
+ xmlAutomataSetFinalState
+-xmlBoolToText
++xmlBufContent
++xmlBufEnd
++xmlBufGetNodeContent
++xmlBufNodeDump
++xmlBufShrink
++xmlBufUse
+ xmlBufferAdd
+ xmlBufferAddHead
+ xmlBufferCCat
+@@ -196,6 +145,7 @@ xmlBufferContent
+ xmlBufferCreate
+ xmlBufferCreateSize
+ xmlBufferCreateStatic
++xmlBufferDetach
+ xmlBufferDump
+ xmlBufferEmpty
+ xmlBufferFree
+@@ -209,7 +159,9 @@ xmlBufferWriteChar
+ xmlBufferWriteQuotedString
+ xmlBuildQName
+ xmlBuildRelativeURI
++xmlBuildRelativeURISafe
+ xmlBuildURI
++xmlBuildURISafe
+ xmlByteConsumed
+ xmlC14NDocDumpMemory
+ xmlC14NDocSave
+@@ -239,6 +191,7 @@ xmlCatalogSetDefaults
+ xmlCharEncCloseFunc
+ xmlCharEncFirstLine
+ xmlCharEncInFunc
++xmlCharEncNewCustomHandler
+ xmlCharEncOutFunc
+ xmlCharInRange
+ xmlCharStrdup
+@@ -246,8 +199,10 @@ xmlCharStrndup
+ xmlCheckFilename
+ xmlCheckHTTPInput
+ xmlCheckLanguageID
++xmlCheckThreadLocalStorage
+ xmlCheckUTF8
+ xmlCheckVersion
++xmlChildElementCount
+ xmlCleanupCharEncodingHandlers
+ xmlCleanupEncodingAliases
+ xmlCleanupGlobals
+@@ -255,7 +210,6 @@ xmlCleanupInputCallbacks
+ xmlCleanupMemory
+ xmlCleanupOutputCallbacks
+ xmlCleanupParser
+-xmlCleanupPredefinedEntities
+ xmlCleanupThreads
+ xmlClearNodeInfoSeq
+ xmlClearParserCtxt
+@@ -264,6 +218,7 @@ xmlCopyAttributeTable
+ xmlCopyChar
+ xmlCopyCharMultiByte
+ xmlCopyDoc
++xmlCopyDocElementContent
+ xmlCopyDtd
+ xmlCopyElementContent
+ xmlCopyElementTable
+@@ -277,6 +232,7 @@ xmlCopyNodeList
+ xmlCopyNotationTable
+ xmlCopyProp
+ xmlCopyPropList
++xmlCreateCharEncodingHandler
+ xmlCreateDocParserCtxt
+ xmlCreateEntitiesTable
+ xmlCreateEntityParserCtxt
+@@ -288,7 +244,32 @@ xmlCreateMemoryParserCtxt
+ xmlCreatePushParserCtxt
+ xmlCreateURI
+ xmlCreateURLParserCtxt
++xmlCtxtErrMemory
++xmlCtxtGetCatalogs
++xmlCtxtGetDeclaredEncoding
++xmlCtxtGetDict
++xmlCtxtGetDocTypeDecl
++xmlCtxtGetDocument
++xmlCtxtGetInputPosition
++xmlCtxtGetInputWindow
+ xmlCtxtGetLastError
++xmlCtxtGetNode
++xmlCtxtGetOptions
++xmlCtxtGetPrivate
++xmlCtxtGetSaxHandler
++xmlCtxtGetStandalone
++xmlCtxtGetStatus
++xmlCtxtGetUserData
++xmlCtxtGetValidCtxt
++xmlCtxtGetVersion
++xmlCtxtIsHtml
++xmlCtxtIsInSubset
++xmlCtxtIsStopped
++xmlCtxtParseContent
++xmlCtxtParseDocument
++xmlCtxtParseDtd
++xmlCtxtPopInput
++xmlCtxtPushInput
+ xmlCtxtReadDoc
+ xmlCtxtReadFd
+ xmlCtxtReadFile
+@@ -297,8 +278,25 @@ xmlCtxtReadMemory
+ xmlCtxtReset
+ xmlCtxtResetLastError
+ xmlCtxtResetPush
++xmlCtxtSetCatalogs
++xmlCtxtSetCharEncConvImpl
++xmlCtxtSetDict
++xmlCtxtSetErrorHandler
++xmlCtxtSetMaxAmplification
++xmlCtxtSetOptions
++xmlCtxtSetPrivate
++xmlCtxtSetResourceLoader
++xmlCtxtSetSaxHandler
+ xmlCtxtUseOptions
++xmlCtxtValidateDocument
++xmlCtxtValidateDtd
+ xmlCurrentChar
++xmlDOMWrapAdoptNode
++xmlDOMWrapCloneNode
++xmlDOMWrapFreeCtxt
++xmlDOMWrapNewCtxt
++xmlDOMWrapReconcileNamespaces
++xmlDOMWrapRemoveNode
+ xmlDebugCheckDocument
+ xmlDebugDumpAttr
+ xmlDebugDumpAttrList
+@@ -310,18 +308,23 @@ xmlDebugDumpNode
+ xmlDebugDumpNodeList
+ xmlDebugDumpOneNode
+ xmlDebugDumpString
+-xmlDecodeEntities
++xmlDefaultSAXHandler
+ xmlDefaultSAXHandlerInit
++xmlDefaultSAXLocator
+ xmlDelEncodingAlias
+ xmlDeregisterNodeDefault
+ xmlDetectCharEncoding
++xmlDictCleanup
+ xmlDictCreate
+ xmlDictCreateSub
++xmlDictExists
+ xmlDictFree
++xmlDictGetUsage
+ xmlDictLookup
+ xmlDictOwns
+ xmlDictQLookup
+ xmlDictReference
++xmlDictSetLimit
+ xmlDictSize
+ xmlDocCopyNode
+ xmlDocCopyNodeList
+@@ -342,7 +345,6 @@ xmlDumpEntityDecl
+ xmlDumpNotationDecl
+ xmlDumpNotationTable
+ xmlElemDump
+-xmlEncodeEntities
+ xmlEncodeEntitiesReentrant
+ xmlEncodeSpecialChars
+ xmlFileClose
+@@ -350,14 +352,19 @@ xmlFileMatch
+ xmlFileOpen
+ xmlFileRead
+ xmlFindCharEncodingHandler
++xmlFirstElementChild
++xmlFormatError
++xmlFree
+ xmlFreeAttributeTable
+ xmlFreeAutomata
+ xmlFreeCatalog
+ xmlFreeDoc
++xmlFreeDocElementContent
+ xmlFreeDtd
+ xmlFreeElementContent
+ xmlFreeElementTable
+ xmlFreeEntitiesTable
++xmlFreeEntity
+ xmlFreeEnumeration
+ xmlFreeIDTable
+ xmlFreeInputStream
+@@ -375,6 +382,7 @@ xmlFreeProp
+ xmlFreePropList
+ xmlFreeRMutex
+ xmlFreeRefTable
++xmlFreeStreamCtxt
+ xmlFreeTextReader
+ xmlFreeTextWriter
+ xmlFreeURI
+@@ -395,9 +403,6 @@ xmlGetDtdQAttrDesc
+ xmlGetDtdQElementDesc
+ xmlGetEncodingAlias
+ xmlGetExternalEntityLoader
+-xmlGetFeature
+-xmlGetFeaturesList
+-xmlGetGlobalState
+ xmlGetID
+ xmlGetIntSubset
+ xmlGetLastChild
+@@ -406,21 +411,27 @@ xmlGetLineNo
+ xmlGetNoNsProp
+ xmlGetNodePath
+ xmlGetNsList
++xmlGetNsListSafe
+ xmlGetNsProp
+ xmlGetParameterEntity
+ xmlGetPredefinedEntity
+ xmlGetProp
+ xmlGetRefs
+-xmlGetThreadId
+ xmlGetUTF8Char
+-xmlHandleEntity
++xmlHasFeature
+ xmlHasNsProp
+ xmlHasProp
++xmlHashAdd
++xmlHashAdd2
++xmlHashAdd3
+ xmlHashAddEntry
+ xmlHashAddEntry2
+ xmlHashAddEntry3
+ xmlHashCopy
++xmlHashCopySafe
+ xmlHashCreate
++xmlHashCreateDict
++xmlHashDefaultDeallocator
+ xmlHashFree
+ xmlHashLookup
+ xmlHashLookup2
+@@ -439,10 +450,6 @@ xmlHashSize
+ xmlHashUpdateEntry
+ xmlHashUpdateEntry2
+ xmlHashUpdateEntry3
+-xmlIOFTPClose
+-xmlIOFTPMatch
+-xmlIOFTPOpen
+-xmlIOFTPRead
+ xmlIOHTTPClose
+ xmlIOHTTPMatch
+ xmlIOHTTPOpen
+@@ -457,24 +464,32 @@ xmlInitParser
+ xmlInitParserCtxt
+ xmlInitThreads
+ xmlInitializeCatalog
+-xmlInitializeGlobalState
+-xmlInitializePredefinedEntities
++xmlInitializeDict
++xmlInputSetEncodingHandler
+ xmlIsBaseChar
++xmlIsBaseCharGroup
+ xmlIsBlank
+ xmlIsBlankNode
+ xmlIsChar
++xmlIsCharGroup
+ xmlIsCombining
++xmlIsCombiningGroup
+ xmlIsDigit
++xmlIsDigitGroup
+ xmlIsExtender
++xmlIsExtenderGroup
+ xmlIsID
+ xmlIsIdeographic
++xmlIsIdeographicGroup
+ xmlIsLetter
+-xmlIsMainThread
+ xmlIsMixedElement
+ xmlIsPubidChar
++xmlIsPubidChar_tab
+ xmlIsRef
+ xmlIsXHTML
++xmlIsolat1ToUTF8
+ xmlKeepBlanksDefault
++xmlLastElementChild
+ xmlLineNumbersDefault
+ xmlLinkGetData
+ xmlListAppend
+@@ -508,18 +523,22 @@ xmlLoadCatalogs
+ xmlLoadExternalEntity
+ xmlLoadSGMLSuperCatalog
+ xmlLockLibrary
+-xmlLsCountNode
+-xmlLsOneNode
++xmlLookupCharEncodingHandler
++xmlMalloc
++xmlMallocAtomic
+ xmlMallocAtomicLoc
+ xmlMallocLoc
+ xmlMemBlocks
+ xmlMemDisplay
++xmlMemDisplayLast
+ xmlMemFree
+ xmlMemGet
+ xmlMemMalloc
+ xmlMemRealloc
+ xmlMemSetup
+ xmlMemShow
++xmlMemSize
++xmlMemStrdup
+ xmlMemStrdupLoc
+ xmlMemUsed
+ xmlMemoryDump
+@@ -530,31 +549,6 @@ xmlModuleOpen
+ xmlModuleSymbol
+ xmlMutexLock
+ xmlMutexUnlock
+-xmlNamespaceParseNCName
+-xmlNamespaceParseNSDef
+-xmlNamespaceParseQName
+-xmlNanoFTPCheckResponse
+-xmlNanoFTPCleanup
+-xmlNanoFTPClose
+-xmlNanoFTPCloseConnection
+-xmlNanoFTPConnect
+-xmlNanoFTPConnectTo
+-xmlNanoFTPCwd
+-xmlNanoFTPDele
+-xmlNanoFTPFreeCtxt
+-xmlNanoFTPGet
+-xmlNanoFTPGetConnection
+-xmlNanoFTPGetResponse
+-xmlNanoFTPGetSocket
+-xmlNanoFTPInit
+-xmlNanoFTPList
+-xmlNanoFTPNewCtxt
+-xmlNanoFTPOpen
+-xmlNanoFTPProxy
+-xmlNanoFTPQuit
+-xmlNanoFTPRead
+-xmlNanoFTPScanProxy
+-xmlNanoFTPUpdateURL
+ xmlNanoHTTPAuthHeader
+ xmlNanoHTTPCleanup
+ xmlNanoHTTPClose
+@@ -581,6 +575,7 @@ xmlNewChild
+ xmlNewComment
+ xmlNewDoc
+ xmlNewDocComment
++xmlNewDocElementContent
+ xmlNewDocFragment
+ xmlNewDocNode
+ xmlNewDocNodeEatName
+@@ -591,10 +586,15 @@ xmlNewDocText
+ xmlNewDocTextLen
+ xmlNewDtd
+ xmlNewElementContent
++xmlNewEntity
+ xmlNewEntityInputStream
+-xmlNewGlobalNs
+ xmlNewIOInputStream
++xmlNewInputFromFd
+ xmlNewInputFromFile
++xmlNewInputFromIO
++xmlNewInputFromMemory
++xmlNewInputFromString
++xmlNewInputFromUrl
+ xmlNewInputStream
+ xmlNewMutex
+ xmlNewNode
+@@ -607,6 +607,7 @@ xmlNewParserCtxt
+ xmlNewProp
+ xmlNewRMutex
+ xmlNewReference
++xmlNewSAXParserCtxt
+ xmlNewStringInputStream
+ xmlNewText
+ xmlNewTextChild
+@@ -621,13 +622,16 @@ xmlNewTextWriterPushParser
+ xmlNewTextWriterTree
+ xmlNewValidCtxt
+ xmlNextChar
++xmlNextElementSibling
+ xmlNoNetExternalEntityLoader
+ xmlNodeAddContent
+ xmlNodeAddContentLen
+ xmlNodeBufGetContent
+ xmlNodeDump
+ xmlNodeDumpOutput
++xmlNodeGetAttrValue
+ xmlNodeGetBase
++xmlNodeGetBaseSafe
+ xmlNodeGetContent
+ xmlNodeGetLang
+ xmlNodeGetSpacePreserve
+@@ -642,13 +646,17 @@ xmlNodeSetName
+ xmlNodeSetSpacePreserve
+ xmlNormalizeURIPath
+ xmlNormalizeWindowsPath
++xmlOpenCharEncodingHandler
+ xmlOutputBufferClose
++xmlOutputBufferCreateBuffer
+ xmlOutputBufferCreateFd
+ xmlOutputBufferCreateFile
+ xmlOutputBufferCreateFilename
+ xmlOutputBufferCreateFilenameDefault
+ xmlOutputBufferCreateIO
+ xmlOutputBufferFlush
++xmlOutputBufferGetContent
++xmlOutputBufferGetSize
+ xmlOutputBufferWrite
+ xmlOutputBufferWriteEscape
+ xmlOutputBufferWriteString
+@@ -696,7 +704,6 @@ xmlParseMarkupDecl
+ xmlParseMemory
+ xmlParseMisc
+ xmlParseName
+-xmlParseNamespace
+ xmlParseNmtoken
+ xmlParseNotationDecl
+ xmlParseNotationType
+@@ -704,14 +711,15 @@ xmlParsePEReference
+ xmlParsePI
+ xmlParsePITarget
+ xmlParsePubidLiteral
+-xmlParseQuotedString
+ xmlParseReference
+ xmlParseSDDecl
+ xmlParseStartTag
+ xmlParseSystemLiteral
+ xmlParseTextDecl
+ xmlParseURI
++xmlParseURIRaw
+ xmlParseURIReference
++xmlParseURISafe
+ xmlParseVersionInfo
+ xmlParseVersionNum
+ xmlParseXMLDecl
+@@ -721,7 +729,6 @@ xmlParserFindNodeInfo
+ xmlParserFindNodeInfoIndex
+ xmlParserGetDirectory
+ xmlParserHandlePEReference
+-xmlParserHandleReference
+ xmlParserInputBufferCreateFd
+ xmlParserInputBufferCreateFile
+ xmlParserInputBufferCreateFilename
+@@ -739,12 +746,22 @@ xmlParserPrintFileContext
+ xmlParserPrintFileInfo
+ xmlParserValidityError
+ xmlParserValidityWarning
++xmlParserVersion
+ xmlParserWarning
++xmlPathToURI
++xmlPatternCompileSafe
++xmlPatternFromRoot
++xmlPatternGetStreamCtxt
+ xmlPatternMatch
++xmlPatternMaxDepth
++xmlPatternMinDepth
++xmlPatternStreamable
+ xmlPatterncompile
+ xmlPedanticParserDefault
+ xmlPopInput
+ xmlPopInputCallbacks
++xmlPopOutputCallbacks
++xmlPreviousElementSibling
+ xmlPrintURI
+ xmlPushInput
+ xmlRMutexLock
+@@ -766,11 +783,14 @@ xmlReaderNewIO
+ xmlReaderNewMemory
+ xmlReaderNewWalker
+ xmlReaderWalker
++xmlRealloc
+ xmlReallocLoc
+ xmlReconciliateNs
+ xmlRecoverDoc
+ xmlRecoverFile
+ xmlRecoverMemory
++xmlRegExecErrInfo
++xmlRegExecNextValues
+ xmlRegExecPushString
+ xmlRegExecPushString2
+ xmlRegFreeExecCtxt
+@@ -787,6 +807,7 @@ xmlRegisterHTTPPostCallbacks
+ xmlRegisterInputCallbacks
+ xmlRegisterNodeDefault
+ xmlRegisterOutputCallbacks
++xmlRelaxNGCleanupTypes
+ xmlRelaxNGDump
+ xmlRelaxNGDumpTree
+ xmlRelaxNGFree
+@@ -801,7 +822,11 @@ xmlRelaxNGNewParserCtxt
+ xmlRelaxNGNewValidCtxt
+ xmlRelaxNGParse
+ xmlRelaxNGSetParserErrors
++xmlRelaxNGSetParserStructuredErrors
++xmlRelaxNGSetResourceLoader
+ xmlRelaxNGSetValidErrors
++xmlRelaxNGSetValidStructuredErrors
++xmlRelaxNGValidCtxtClearErrors
+ xmlRelaxNGValidateDoc
+ xmlRelaxNGValidateFullElement
+ xmlRelaxNGValidatePopElement
+@@ -862,22 +887,26 @@ xmlSaveDoc
+ xmlSaveFile
+ xmlSaveFileEnc
+ xmlSaveFileTo
++xmlSaveFinish
+ xmlSaveFlush
+ xmlSaveFormatFile
+ xmlSaveFormatFileEnc
+ xmlSaveFormatFileTo
+ xmlSaveSetAttrEscape
+ xmlSaveSetEscape
++xmlSaveSetIndentString
++xmlSaveToBuffer
+ xmlSaveToFd
+ xmlSaveToFilename
+ xmlSaveToIO
+ xmlSaveTree
+ xmlSaveUri
+-xmlScanName
+ xmlSchemaCheckFacet
+ xmlSchemaCleanupTypes
+ xmlSchemaCollapseString
+ xmlSchemaCompareValues
++xmlSchemaCompareValuesWhtsp
++xmlSchemaCopyValue
+ xmlSchemaDump
+ xmlSchemaFree
+ xmlSchemaFreeFacet
+@@ -888,39 +917,70 @@ xmlSchemaFreeValue
+ xmlSchemaFreeWildcard
+ xmlSchemaGetBuiltInListSimpleTypeItemType
+ xmlSchemaGetBuiltInType
++xmlSchemaGetCanonValue
++xmlSchemaGetCanonValueWhtsp
+ xmlSchemaGetFacetValueAsULong
+ xmlSchemaGetParserErrors
+ xmlSchemaGetPredefinedType
++xmlSchemaGetValType
+ xmlSchemaGetValidErrors
+ xmlSchemaInitTypes
+ xmlSchemaIsBuiltInTypeFacet
++xmlSchemaIsValid
+ xmlSchemaNewDocParserCtxt
+ xmlSchemaNewFacet
+ xmlSchemaNewMemParserCtxt
++xmlSchemaNewNOTATIONValue
+ xmlSchemaNewParserCtxt
++xmlSchemaNewQNameValue
++xmlSchemaNewStringValue
+ xmlSchemaNewValidCtxt
+ xmlSchemaParse
++xmlSchemaSAXPlug
++xmlSchemaSAXUnplug
+ xmlSchemaSetParserErrors
++xmlSchemaSetParserStructuredErrors
++xmlSchemaSetResourceLoader
+ xmlSchemaSetValidErrors
+ xmlSchemaSetValidOptions
++xmlSchemaSetValidStructuredErrors
+ xmlSchemaValPredefTypeNode
+ xmlSchemaValPredefTypeNodeNoNorm
+ xmlSchemaValidCtxtGetOptions
++xmlSchemaValidCtxtGetParserCtxt
+ xmlSchemaValidateDoc
+ xmlSchemaValidateFacet
++xmlSchemaValidateFacetWhtsp
++xmlSchemaValidateFile
+ xmlSchemaValidateLengthFacet
++xmlSchemaValidateLengthFacetWhtsp
+ xmlSchemaValidateListSimpleTypeFacet
+ xmlSchemaValidateOneElement
+ xmlSchemaValidatePredefinedType
++xmlSchemaValidateSetFilename
++xmlSchemaValidateSetLocator
+ xmlSchemaValidateStream
++xmlSchemaValueAppend
++xmlSchemaValueGetAsBoolean
++xmlSchemaValueGetAsString
++xmlSchemaValueGetNext
++xmlSchemaWhiteSpaceReplace
++xmlSchematronFree
++xmlSchematronFreeParserCtxt
++xmlSchematronFreeValidCtxt
++xmlSchematronNewDocParserCtxt
++xmlSchematronNewMemParserCtxt
++xmlSchematronNewParserCtxt
++xmlSchematronNewValidCtxt
++xmlSchematronParse
++xmlSchematronSetValidStructuredErrors
++xmlSchematronValidateDoc
+ xmlSearchNs
+ xmlSearchNsByHref
+ xmlSetBufferAllocationScheme
+ xmlSetCompressMode
+ xmlSetDocCompressMode
+-xmlSetEntityReferenceFunc
+ xmlSetExternalEntityLoader
+-xmlSetFeature
+ xmlSetGenericErrorFunc
+ xmlSetListDoc
+ xmlSetNs
+@@ -929,20 +989,6 @@ xmlSetProp
+ xmlSetStructuredErrorFunc
+ xmlSetTreeDoc
+ xmlSetupParserForBuffer
+-xmlShell
+-xmlShellBase
+-xmlShellCat
+-xmlShellDir
+-xmlShellDu
+-xmlShellList
+-xmlShellLoad
+-xmlShellPrintNode
+-xmlShellPrintXPathError
+-xmlShellPrintXPathResult
+-xmlShellPwd
+-xmlShellSave
+-xmlShellValidate
+-xmlShellWrite
+ xmlSkipBlankChars
+ xmlSnprintfElementContent
+ xmlSplitQName
+@@ -960,11 +1006,19 @@ xmlStrcat
+ xmlStrchr
+ xmlStrcmp
+ xmlStrdup
++xmlStreamPop
++xmlStreamPush
++xmlStreamPushAttr
++xmlStreamPushNode
++xmlStreamWantsAnyNode
++xmlStringComment
+ xmlStringCurrentChar
+ xmlStringDecodeEntities
+ xmlStringGetNodeList
+ xmlStringLenDecodeEntities
+ xmlStringLenGetNodeList
++xmlStringText
++xmlStringTextNoenc
+ xmlStrlen
+ xmlStrncasecmp
+ xmlStrncat
+@@ -975,12 +1029,14 @@ xmlStrstr
+ xmlStrsub
+ xmlSubstituteEntitiesDefault
+ xmlSwitchEncoding
++xmlSwitchEncodingName
+ xmlSwitchInputEncoding
+ xmlSwitchToEncoding
+ xmlTextConcat
+ xmlTextMerge
+ xmlTextReaderAttributeCount
+ xmlTextReaderBaseUri
++xmlTextReaderByteConsumed
+ xmlTextReaderClose
+ xmlTextReaderConstBaseUri
+ xmlTextReaderConstEncoding
+@@ -1000,6 +1056,9 @@ xmlTextReaderGetAttribute
+ xmlTextReaderGetAttributeNo
+ xmlTextReaderGetAttributeNs
+ xmlTextReaderGetErrorHandler
++xmlTextReaderGetLastError
++xmlTextReaderGetParserColumnNumber
++xmlTextReaderGetParserLineNumber
+ xmlTextReaderGetParserProp
+ xmlTextReaderGetRemainder
+ xmlTextReaderHasAttributes
+@@ -1036,14 +1095,20 @@ xmlTextReaderReadState
+ xmlTextReaderReadString
+ xmlTextReaderRelaxNGSetSchema
+ xmlTextReaderRelaxNGValidate
++xmlTextReaderRelaxNGValidateCtxt
+ xmlTextReaderSchemaValidate
++xmlTextReaderSchemaValidateCtxt
+ xmlTextReaderSetErrorHandler
++xmlTextReaderSetMaxAmplification
+ xmlTextReaderSetParserProp
++xmlTextReaderSetResourceLoader
++xmlTextReaderSetSchema
+ xmlTextReaderSetStructuredErrorHandler
+ xmlTextReaderSetup
+ xmlTextReaderStandalone
+ xmlTextReaderValue
+ xmlTextReaderXmlLang
++xmlTextWriterClose
+ xmlTextWriterEndAttribute
+ xmlTextWriterEndCDATA
+ xmlTextWriterEndComment
+@@ -1058,6 +1123,7 @@ xmlTextWriterFlush
+ xmlTextWriterFullEndElement
+ xmlTextWriterSetIndent
+ xmlTextWriterSetIndentString
++xmlTextWriterSetQuoteChar
+ xmlTextWriterStartAttribute
+ xmlTextWriterStartAttributeNS
+ xmlTextWriterStartCDATA
+@@ -1116,8 +1182,6 @@ xmlTextWriterWriteVFormatElementNS
+ xmlTextWriterWriteVFormatPI
+ xmlTextWriterWriteVFormatRaw
+ xmlTextWriterWriteVFormatString
+-xmlThrDefBufferAllocScheme
+-xmlThrDefDefaultBufferSize
+ xmlThrDefDeregisterNodeDefault
+ xmlThrDefDoValidityCheckingDefaultValue
+ xmlThrDefGetWarningsDefaultValue
+@@ -1126,7 +1190,6 @@ xmlThrDefKeepBlanksDefaultValue
+ xmlThrDefLineNumbersDefaultValue
+ xmlThrDefLoadExtDtdDefaultValue
+ xmlThrDefOutputBufferCreateFilenameDefault
+-xmlThrDefParserDebugEntities
+ xmlThrDefParserInputBufferCreateFilenameDefault
+ xmlThrDefPedanticParserDefaultValue
+ xmlThrDefRegisterNodeDefault
+@@ -1135,172 +1198,6 @@ xmlThrDefSetGenericErrorFunc
+ xmlThrDefSetStructuredErrorFunc
+ xmlThrDefSubstituteEntitiesDefaultValue
+ xmlThrDefTreeIndentString
+-xmlUCSIsAegeanNumbers
+-xmlUCSIsAlphabeticPresentationForms
+-xmlUCSIsArabic
+-xmlUCSIsArabicPresentationFormsA
+-xmlUCSIsArabicPresentationFormsB
+-xmlUCSIsArmenian
+-xmlUCSIsArrows
+-xmlUCSIsBasicLatin
+-xmlUCSIsBengali
+-xmlUCSIsBlock
+-xmlUCSIsBlockElements
+-xmlUCSIsBopomofo
+-xmlUCSIsBopomofoExtended
+-xmlUCSIsBoxDrawing
+-xmlUCSIsBraillePatterns
+-xmlUCSIsBuhid
+-xmlUCSIsByzantineMusicalSymbols
+-xmlUCSIsCJKCompatibility
+-xmlUCSIsCJKCompatibilityForms
+-xmlUCSIsCJKCompatibilityIdeographs
+-xmlUCSIsCJKCompatibilityIdeographsSupplement
+-xmlUCSIsCJKRadicalsSupplement
+-xmlUCSIsCJKSymbolsandPunctuation
+-xmlUCSIsCJKUnifiedIdeographs
+-xmlUCSIsCJKUnifiedIdeographsExtensionA
+-xmlUCSIsCJKUnifiedIdeographsExtensionB
+-xmlUCSIsCat
+-xmlUCSIsCatC
+-xmlUCSIsCatCc
+-xmlUCSIsCatCf
+-xmlUCSIsCatCo
+-xmlUCSIsCatCs
+-xmlUCSIsCatL
+-xmlUCSIsCatLl
+-xmlUCSIsCatLm
+-xmlUCSIsCatLo
+-xmlUCSIsCatLt
+-xmlUCSIsCatLu
+-xmlUCSIsCatM
+-xmlUCSIsCatMc
+-xmlUCSIsCatMe
+-xmlUCSIsCatMn
+-xmlUCSIsCatN
+-xmlUCSIsCatNd
+-xmlUCSIsCatNl
+-xmlUCSIsCatNo
+-xmlUCSIsCatP
+-xmlUCSIsCatPc
+-xmlUCSIsCatPd
+-xmlUCSIsCatPe
+-xmlUCSIsCatPf
+-xmlUCSIsCatPi
+-xmlUCSIsCatPo
+-xmlUCSIsCatPs
+-xmlUCSIsCatS
+-xmlUCSIsCatSc
+-xmlUCSIsCatSk
+-xmlUCSIsCatSm
+-xmlUCSIsCatSo
+-xmlUCSIsCatZ
+-xmlUCSIsCatZl
+-xmlUCSIsCatZp
+-xmlUCSIsCatZs
+-xmlUCSIsCherokee
+-xmlUCSIsCombiningDiacriticalMarks
+-xmlUCSIsCombiningDiacriticalMarksforSymbols
+-xmlUCSIsCombiningHalfMarks
+-xmlUCSIsCombiningMarksforSymbols
+-xmlUCSIsControlPictures
+-xmlUCSIsCurrencySymbols
+-xmlUCSIsCypriotSyllabary
+-xmlUCSIsCyrillic
+-xmlUCSIsCyrillicSupplement
+-xmlUCSIsDeseret
+-xmlUCSIsDevanagari
+-xmlUCSIsDingbats
+-xmlUCSIsEnclosedAlphanumerics
+-xmlUCSIsEnclosedCJKLettersandMonths
+-xmlUCSIsEthiopic
+-xmlUCSIsGeneralPunctuation
+-xmlUCSIsGeometricShapes
+-xmlUCSIsGeorgian
+-xmlUCSIsGothic
+-xmlUCSIsGreek
+-xmlUCSIsGreekExtended
+-xmlUCSIsGreekandCoptic
+-xmlUCSIsGujarati
+-xmlUCSIsGurmukhi
+-xmlUCSIsHalfwidthandFullwidthForms
+-xmlUCSIsHangulCompatibilityJamo
+-xmlUCSIsHangulJamo
+-xmlUCSIsHangulSyllables
+-xmlUCSIsHanunoo
+-xmlUCSIsHebrew
+-xmlUCSIsHighPrivateUseSurrogates
+-xmlUCSIsHighSurrogates
+-xmlUCSIsHiragana
+-xmlUCSIsIPAExtensions
+-xmlUCSIsIdeographicDescriptionCharacters
+-xmlUCSIsKanbun
+-xmlUCSIsKangxiRadicals
+-xmlUCSIsKannada
+-xmlUCSIsKatakana
+-xmlUCSIsKatakanaPhoneticExtensions
+-xmlUCSIsKhmer
+-xmlUCSIsKhmerSymbols
+-xmlUCSIsLao
+-xmlUCSIsLatin1Supplement
+-xmlUCSIsLatinExtendedA
+-xmlUCSIsLatinExtendedAdditional
+-xmlUCSIsLatinExtendedB
+-xmlUCSIsLetterlikeSymbols
+-xmlUCSIsLimbu
+-xmlUCSIsLinearBIdeograms
+-xmlUCSIsLinearBSyllabary
+-xmlUCSIsLowSurrogates
+-xmlUCSIsMalayalam
+-xmlUCSIsMathematicalAlphanumericSymbols
+-xmlUCSIsMathematicalOperators
+-xmlUCSIsMiscellaneousMathematicalSymbolsA
+-xmlUCSIsMiscellaneousMathematicalSymbolsB
+-xmlUCSIsMiscellaneousSymbols
+-xmlUCSIsMiscellaneousSymbolsandArrows
+-xmlUCSIsMiscellaneousTechnical
+-xmlUCSIsMongolian
+-xmlUCSIsMusicalSymbols
+-xmlUCSIsMyanmar
+-xmlUCSIsNumberForms
+-xmlUCSIsOgham
+-xmlUCSIsOldItalic
+-xmlUCSIsOpticalCharacterRecognition
+-xmlUCSIsOriya
+-xmlUCSIsOsmanya
+-xmlUCSIsPhoneticExtensions
+-xmlUCSIsPrivateUse
+-xmlUCSIsPrivateUseArea
+-xmlUCSIsRunic
+-xmlUCSIsShavian
+-xmlUCSIsSinhala
+-xmlUCSIsSmallFormVariants
+-xmlUCSIsSpacingModifierLetters
+-xmlUCSIsSpecials
+-xmlUCSIsSuperscriptsandSubscripts
+-xmlUCSIsSupplementalArrowsA
+-xmlUCSIsSupplementalArrowsB
+-xmlUCSIsSupplementalMathematicalOperators
+-xmlUCSIsSupplementaryPrivateUseAreaA
+-xmlUCSIsSupplementaryPrivateUseAreaB
+-xmlUCSIsSyriac
+-xmlUCSIsTagalog
+-xmlUCSIsTagbanwa
+-xmlUCSIsTags
+-xmlUCSIsTaiLe
+-xmlUCSIsTaiXuanJingSymbols
+-xmlUCSIsTamil
+-xmlUCSIsTelugu
+-xmlUCSIsThaana
+-xmlUCSIsThai
+-xmlUCSIsTibetan
+-xmlUCSIsUgaritic
+-xmlUCSIsUnifiedCanadianAboriginalSyllabics
+-xmlUCSIsVariationSelectors
+-xmlUCSIsVariationSelectorsSupplement
+-xmlUCSIsYiRadicals
+-xmlUCSIsYiSyllables
+-xmlUCSIsYijingHexagramSymbols
+ xmlURIEscape
+ xmlURIEscapeStr
+ xmlURIUnescapeString
+@@ -1312,6 +1209,7 @@ xmlUTF8Strndup
+ xmlUTF8Strpos
+ xmlUTF8Strsize
+ xmlUTF8Strsub
++xmlUTF8ToIsolat1
+ xmlUnlinkNode
+ xmlUnlockLibrary
+ xmlUnsetNsProp
+@@ -1347,13 +1245,18 @@ xmlValidatePushElement
+ xmlValidateQName
+ xmlValidateRoot
+ xmlXIncludeFreeContext
++xmlXIncludeGetLastError
+ xmlXIncludeNewContext
+ xmlXIncludeProcess
+ xmlXIncludeProcessFlags
++xmlXIncludeProcessFlagsData
+ xmlXIncludeProcessNode
+ xmlXIncludeProcessTree
+ xmlXIncludeProcessTreeFlags
++xmlXIncludeProcessTreeFlagsData
++xmlXIncludeSetErrorHandler
+ xmlXIncludeSetFlags
++xmlXIncludeSetResourceLoader
+ xmlXPathAddValues
+ xmlXPathBooleanFunction
+ xmlXPathCastBooleanToNumber
+@@ -1421,6 +1324,8 @@ xmlXPathLeadingSorted
+ xmlXPathLocalNameFunction
+ xmlXPathModValues
+ xmlXPathMultValues
++xmlXPathNAN
++xmlXPathNINF
+ xmlXPathNamespaceURIFunction
+ xmlXPathNewBoolean
+ xmlXPathNewCString
+@@ -1444,6 +1349,7 @@ xmlXPathNextParent
+ xmlXPathNextPreceding
+ xmlXPathNextPrecedingSibling
+ xmlXPathNextSelf
++xmlXPathNodeEval
+ xmlXPathNodeLeading
+ xmlXPathNodeLeadingSorted
+ xmlXPathNodeSetAdd
+@@ -1465,6 +1371,7 @@ xmlXPathNsLookup
+ xmlXPathNumberFunction
+ xmlXPathObjectCopy
+ xmlXPathOrderDocElems
++xmlXPathPINF
+ xmlXPathParseNCName
+ xmlXPathParseName
+ xmlXPathPopBoolean
+@@ -1486,6 +1393,8 @@ xmlXPathRegisteredNsCleanup
+ xmlXPathRegisteredVariablesCleanup
+ xmlXPathRoot
+ xmlXPathRoundFunction
++xmlXPathSetContextNode
++xmlXPathSetErrorHandler
+ xmlXPathStartsWithFunction
+ xmlXPathStringEvalNumber
+ xmlXPathStringFunction
+@@ -1500,6 +1409,8 @@ xmlXPathTrailingSorted
+ xmlXPathTranslateFunction
+ xmlXPathTrueFunction
+ xmlXPathValueFlipSign
++xmlXPathValuePop
++xmlXPathValuePush
+ xmlXPathVariableLookup
+ xmlXPathVariableLookupNS
+ xmlXPathWrapCString
+@@ -1509,6 +1420,3 @@ xmlXPathWrapString
+ xmlXPatherror
+ xmlXPtrEval
+ xmlXPtrNewContext
+-xmlBufContent
+-xmlBufUse
+-xmlBufferDetach
