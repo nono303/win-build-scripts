@@ -14,11 +14,6 @@ call %PATH_MODULES_COMMON%\init.bat php-src
 set PHPVER=%GET_VERSION:~0,3%
 set PHPVERFULL=%GET_VERSION%
 
-	REM ~~~~~~~~~~~~ tmp patch
-echo     # apply php-src_pr17848.patch
-git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-src_pr17848.patch
-echo     # apply php-src_libxml2.14.patch
-git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-src_libxml2.14.patch
 call do_php %PATH_SRC%\php-src\Zend\zend_vm_gen.php
 
 	REM ~~~~~~~~~~~~ type of build : full / memcached / xdebug
@@ -38,12 +33,9 @@ for /L %%i in (2,1,%argCount%) do (
 	if /I "!argVec[%%i]!"=="PARALLEL"	set PHP_BUILD_TYPE=parallel
 	if /I "!argVec[%%i]!"=="FFI"		set PHP_BUILD_TYPE=ffi
 	if /I "!argVec[%%i]!"=="WIN7" (
+		set PHP_BUILD_TYPE=win7
 		echo     # apply php-src_win7.patch
 		git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-src_win7.patch
-	)
-	if /I "!argVec[%%i]!"=="WIN7D" (
-		echo     # apply php-src_win7d.patch
-		git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-src_win7d.patch
 	)
 )
 
@@ -56,12 +48,17 @@ if %PHP_BUILD_TYPE% == brotli	(
 	set PHP_XTRALIBS=;%PATH_INSTALL%\lib_unused\
 )
 
-	REM VERSION PATCH
+	REM ~~~~~~~~~~~~ PHP-SRC VERSION PATCH
 if exist %PATH_MODULES%\php-src_%PHPVER%.patch (
 	if %ARG_KEEPSRC% == 0 (
 		echo     # apply php-src_%PHPVER%.patch
 		git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\php-src_%PHPVER%.patch
 	)
+)
+	REM ~~~~~~~~~~~~ PHP-SRC TMP PATCH
+for %%P in (php-src_pr17848 php-src_libxml2-def php-src_8.5_20110) do (
+	echo     # apply %%P.patch
+	git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\%%P.patch
 )
 	REM ~~~~~~~~~~~~ pecl-memcache
 call %PATH_MODULES_COMMON%\init.bat pecl-memcache
