@@ -1,8 +1,8 @@
-diff --git a/Zend/zend_call_stack.c b/Zend/zend_call_stack.c
-index ac12b8b7d87..32edffdb6ee 100644
---- a/Zend/zend_call_stack.c
-+++ b/Zend/zend_call_stack.c
-@@ -416,7 +416,12 @@ static bool zend_call_stack_get_win32(zend_call_stack *stack)
+diff --git "a/Zend/zend_call_stack.c" "b/Zend/zend_call_stack.c"
+index ed86ecc74a2..ed3c58a471e 100644
+--- "a/Zend/zend_call_stack.c"
++++ "b/Zend/zend_call_stack.c"
+@@ -415,7 +415,12 @@ static bool zend_call_stack_get_win32(zend_call_stack *stack)
  	 *                v  Lower addresses   v
  	 */
  
