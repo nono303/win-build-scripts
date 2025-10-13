@@ -1,0 +1,29 @@
+From 7c99c3110a004fbf654904fbc0737aa7d944859b Mon Sep 17 00:00:00 2001
+From: "Christoph M. Becker" <cmbecker69@gmx.de>
+Date: Sat, 18 Jan 2025 14:13:49 +0100
+Subject: [PATCH] Fix #867: Support libavif 1.0 in CMake build
+
+libavif applies the `SameMajorVersion` policy, so libavif 1.x.y is not
+considered to be compatible with 0.x.y.  To still be able to require at
+least libavif 0.8.2, we first look for any libavif 1.x.y, and only if
+that could not be found, we apply the old `find_package()` command.
+---
+ CMakeLists.txt | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 6d57d58be..7f82c4d6d 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -156,7 +156,10 @@ else (USE_EXT_GD)
+ 	ENDIF (ENABLE_HEIF)
+ 
+ 	IF (ENABLE_AVIF)
+-		FIND_PACKAGE(libavif 0.8.2 REQUIRED CONFIG)
++		FIND_PACKAGE(libavif 1 QUIET CONFIG)
++		if (NOT libavif_FOUND)
++			FIND_PACKAGE(libavif 0.8.2 REQUIRED CONFIG)
++		endif()
+ 		SET(HAVE_LIBAVIF 1)
+ 		SET(AVIF_LIBRARIES avif)
+ 		SET(AVIF_FOUND 1)
