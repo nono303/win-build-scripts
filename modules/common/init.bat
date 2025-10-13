@@ -54,7 +54,7 @@ if exist %PATH_SRC%\%1\. (
 		FOR /F "tokens=* USEBACKQ" %%F in (`git config --get remote.origin.url`) do (set SCM_URL=%%F)
 		if /I "%~2"=="varonly" (goto end)
 		if "!SCM_TAG!"=="" (
-			echo    git commit:!SCM_COMORREV!
+			echo    git branch:!SCM_BRANCH! commit:!SCM_COMORREV!
 		) else (
 			echo    git tag:!SCM_TAG!
 		)
@@ -62,14 +62,8 @@ if exist %PATH_SRC%\%1\. (
 		if %ARG_KEEPSRC% == 0 (
 			call git reset --hard > NUL
 			call git clean -fdx > NUL
-			if exist %PATH_MODULES%\%1.patch (
-				echo    ^> apply %1.patch
-				git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\%1.patch
-			)
-			if exist %PATH_MODULES%\%1.!SCM_COMORREV!.patch (
-				echo    ^> apply %1.!SCM_COMORREV!.patch
-				git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\%1.!SCM_COMORREV!.patch
-			)
+			if exist %PATH_PATCHES%\%1.patch (call %PATH_UTILS%\gitapply %PATH_PATCHES%\%1.patch)
+			if exist %PATH_PATCHES%\%1.!SCM_COMORREV!.patch (call %PATH_UTILS%\gitapply %PATH_PATCHES%\%1.!SCM_COMORREV!.patch)
 		)
 	)
 	if exist %PATH_SRC%\%1\.svn\. (
