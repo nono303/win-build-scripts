@@ -1,8 +1,8 @@
-diff --git "a/ext/pcre/config.w32" "b/ext/pcre/config.w32"
-index 7c09456b896..84371f4a97b 100644
---- "a/ext/pcre/config.w32"
-+++ "b/ext/pcre/config.w32"
-@@ -1,18 +1,45 @@
+diff --git a/ext/pcre/config.w32 b/ext/pcre/config.w32
+index 7c09456b896..862f063744e 100644
+--- a/ext/pcre/config.w32
++++ b/ext/pcre/config.w32
+@@ -1,18 +1,47 @@
  // vim:ft=javascript
  
 -EXTENSION("pcre", "php_pcre.c", false /* never shared */,
@@ -19,19 +19,21 @@ index 7c09456b896..84371f4a97b 100644
 -PHP_INSTALL_HEADERS("ext/pcre", "php_pcre.h pcre2lib/");
 -ADD_FLAG("CFLAGS_PCRE", " /D HAVE_CONFIG_H /D HAVE_MEMMOVE");
 +if (PHP_EXTERNAL_PCRE != "no") {
-+	PCRE2_EXTLIB_NAME=CHECK_LIB("pcre2-8.lib;pcre2-16.lib", "pcre").replace(/^.*[\\/]/, '')
-+	PCRE2_CODE_UNIT_WIDTH=PCRE2_EXTLIB_NAME.match(/pcre2-(\d+)\.lib/)[1]
++	PCRE2_EXTLIB_NAME=CHECK_LIB("pcre2-8.lib;pcre2-16.lib;pcre2-32.lib", "pcre").replace(/^.*[\\/]/, '')
++	PCRE2_CUW=parseInt(PCRE2_EXTLIB_NAME.match(/pcre2-(\d+)\.lib/)[1])
 +	if (PCRE2_EXTLIB_NAME) {
 +		EXTENSION("pcre", "php_pcre.c", false /* never shared */, "-DZEND_ENABLE_STATIC_TSRMLS_CACHE=1");
++		MESSAGE("* Use external library " + PCRE2_EXTLIB_NAME + " for " + PCRE2_CUW + " bits support");
 +		PHP_PCRE="yes";
-+		MESSAGE("* Use external library " + PCRE2_EXTLIB_NAME + " for " + PCRE2_CODE_UNIT_WIDTH + " bits support");
++		
++		ADD_DEF_FILE("ext\\pcre\\ext_pcre.def");
  
 -ARG_WITH("pcre-jit", "Enable PCRE JIT support", "yes");
 -if (PHP_PCRE_JIT != "no") {
 -	AC_DEFINE('HAVE_PCRE_JIT_SUPPORT', 1, 'Define to 1 if PCRE JIT is enabled and supported.');
 -}
 +		AC_DEFINE('HAVE_PCRE', 1, 'Define to 1 if PHP uses external PCRE library.');
-+		AC_DEFINE('PCRE2_CODE_UNIT_WIDTH', PCRE2_CODE_UNIT_WIDTH, 'Number of bits in non-UTF mode for PCRE library.');
++		AC_DEFINE('PCRE2_CODE_UNIT_WIDTH', PCRE2_CUW, 'Number of bits in non-UTF mode for PCRE library.');
 +		AC_DEFINE("PCRE2_STATIC", 0, "Define to 1 if PCRE library is built statically.");
 +		
 +		PHP_INSTALL_HEADERS("ext/pcre", "php_pcre.h");
