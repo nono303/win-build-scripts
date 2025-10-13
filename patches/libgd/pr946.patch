@@ -15,7 +15,7 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 6d57d58be..7f82c4d6d 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -156,7 +156,10 @@ else (USE_EXT_GD)
+@@ -162,7 +162,10 @@ else (USE_EXT_GD)
  	ENDIF (ENABLE_HEIF)
  
  	IF (ENABLE_AVIF)

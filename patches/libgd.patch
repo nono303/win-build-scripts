@@ -1,20 +1,30 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 6d57d58b..cd5b5c81 100644
+index 6d57d58b..2c3bdeb1 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -26,6 +26,11 @@ OPTION(ENABLE_ASAN "Enable (gcc) ASAN support" 0)
+@@ -26,13 +26,19 @@ OPTION(ENABLE_ASAN "Enable (gcc) ASAN support" 0)
  OPTION(ENABLE_CPP "Enable CPP GD API" 1)
  OPTION(VERBOSE_MAKEFILE "Enable CMAKE_VERBOSE_MAKEFILE" 0)
  
 +OPTION(BUILD_TESTS "Build tests" 0)
 +OPTION(BUILD_EXEMPLES "Build exemples" 0)
++OPTION(BUILD_PROGRAMS "Build programs" 0)
 +OPTION(BUILD_DOCS "Build docs" 0)
 +OPTION(BUILD_CPACK "Build CPACK" 0)
 +
  if (VERBOSE_MAKEFILE)
  	set(CMAKE_VERBOSE_MAKEFILE ON)
  endif (VERBOSE_MAKEFILE)
-@@ -285,7 +291,7 @@ else (USE_EXT_GD)
+ 
+-if (BUILD_TEST)
++if (BUILD_TESTS)
+ 	ENABLE_TESTING()
+-endif(BUILD_TEST)
++endif(BUILD_TESTS)
+ 
+ # if you would like to pass C flags to the compiler, then just
+ # - specify -DCMAKE_C_FLAGS=... on invocation of cmake, or
+@@ -286,7 +292,7 @@ else (USE_EXT_GD)
  
  	if (WIN32)
  		SET(GD_LIB libgd)
@@ -23,7 +33,7 @@ index 6d57d58b..cd5b5c81 100644
  
  		if(NOT MINGW AND MSVC_VERSION GREATER 1399)
  			ADD_DEFINITIONS("/D_CRT_SECURE_NO_DEPRECATE")
-@@ -311,59 +317,64 @@ else (USE_EXT_GD)
+@@ -312,59 +318,64 @@ else (USE_EXT_GD)
  	add_subdirectory(src)
  endif (USE_EXT_GD)
  
@@ -143,15 +153,117 @@ index 6d57d58b..cd5b5c81 100644
 +	INCLUDE(CPack)
 +endif(BUILD_CPACK)
 \ No newline at end of file
-diff --git a/src/config.h.cmake b/src/config.h.cmake
-index f6f54e2c..32853296 100644
---- a/src/config.h.cmake
-+++ b/src/config.h.cmake
-@@ -136,3 +136,7 @@
+diff --git "a/src/CMakeLists.txt" "b/src/CMakeLists.txt"
+index e24dc014..a4eba7d1 100644
+--- "a/src/CMakeLists.txt"
++++ "b/src/CMakeLists.txt"
+@@ -56,13 +56,14 @@ if(ENABLE_CPP)
+ endif(ENABLE_CPP)
  
- /* Version number of package */
- #cmakedefine VERSION
+ # Static library just for utility programs.
+-SET (GD_PROGRAMS_LIB_SRC_FILES)
+-
+-if(MSVC)
+-	set(GD_PROGRAMS_LIB_SRC_FILES ${GD_PROGRAMS_LIB_SRC_FILES}
+-		getopt.c
+-	)
+-endif(MSVC)
++if (BUILD_PROGRAMS)
++	SET (GD_PROGRAMS_LIB_SRC_FILES)
++	if(MSVC)
++		set(GD_PROGRAMS_LIB_SRC_FILES ${GD_PROGRAMS_LIB_SRC_FILES}
++			getopt.c
++		)
++	endif(MSVC)
++endif(BUILD_PROGRAMS)
+ 
+ include(GNUInstallDirs)
+ 
+@@ -83,9 +84,11 @@ if (BUILD_STATIC_LIBS)
+ 	endif()
+ endif()
+ 
+-if (NOT "${GD_PROGRAMS_LIB_SRC_FILES}" STREQUAL "")
+-	add_library(gd_programs_lib STATIC ${GD_PROGRAMS_LIB_SRC_FILES})
+-endif()
++if (BUILD_PROGRAMS)
++	if (NOT "${GD_PROGRAMS_LIB_SRC_FILES}" STREQUAL "")
++		add_library(gd_programs_lib STATIC ${GD_PROGRAMS_LIB_SRC_FILES})
++	endif()
++endif(BUILD_PROGRAMS)
+ 
+ if (WIN32 AND NOT MINGW AND NOT MSYS)
+   #	SET_TARGET_PROPERTIES(${GD_LIB} PROPERTIES LINK_FLAGS "/NODEFAULTLIB:msvcrt.lib")
+@@ -160,20 +163,23 @@ if (ZLIB_FOUND)
+ 	set(GD_PROGRAMS ${GD_PROGRAMS} gd2copypal gd2togif giftogd2)
+ endif()
+ 
+-foreach(program ${GD_PROGRAMS})
+-    add_executable(${program} ${program}.c)
+-
+-    if (BUILD_SHARED_LIBS)
+-        target_link_libraries(${program} ${GD_LIB})
+-    else()
+-        target_link_libraries(${program} ${GD_LIB_STATIC})
+-    endif()
+-	if (NOT "${GD_PROGRAMS_LIB_SRC_FILES}" STREQUAL "")
+-		target_link_libraries(${program} gd_programs_lib)
+-	endif()
+-endforeach(program)
+-
+-set(GD_INSTALL_TARGETS ${GD_PROGRAMS})
++if (BUILD_PROGRAMS)
++	foreach(program ${GD_PROGRAMS})
++	    add_executable(${program} ${program}.c)
 +
++	    if (BUILD_SHARED_LIBS)
++		target_link_libraries(${program} ${GD_LIB})
++	    else()
++		target_link_libraries(${program} ${GD_LIB_STATIC})
++	    endif()
++		if (NOT "${GD_PROGRAMS_LIB_SRC_FILES}" STREQUAL "")
++			target_link_libraries(${program} gd_programs_lib)
++		endif()
++	endforeach(program)
++
++	set(GD_INSTALL_TARGETS ${GD_PROGRAMS})
++	install(PROGRAMS bdftogd DESTINATION bin)
++endif()
+ if (BUILD_SHARED_LIBS)
+ 	set(GD_INSTALL_TARGETS ${GD_INSTALL_TARGETS} ${GD_LIB})
+ endif()
+@@ -185,7 +191,6 @@ install(TARGETS ${GD_INSTALL_TARGETS}
+         RUNTIME DESTINATION bin
+         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+-install(PROGRAMS bdftogd DESTINATION bin)
+ install(FILES
+ 	gd.h
+ 	gd_color_map.h
+
+diff --git a/src/gdhelpers.h b/src/gdhelpers.h
+index 9b187af7..a6a2ad54 100644
+--- a/src/gdhelpers.h
++++ b/src/gdhelpers.h
+@@ -5,12 +5,16 @@
+ extern "C" {
+ #endif
+ 
+-	/* sys/types.h is needed for size_t on Sparc-SunOS-4.1 */
+-#ifndef _WIN32_WCE
+-#include <sys/types.h>
 +#ifdef _MSC_VER
-+#define ssize_t SSIZE_T
-+#endif
++  #include <stdint.h>
+ #else
+-#include <stdlib.h>
+-#endif /* _WIN32_WCE */
++  /* sys/types.h is needed for size_t on Sparc-SunOS-4.1 */
++  #ifndef _WIN32_WCE
++    #include <sys/types.h>
++  #else
++    #include <stdlib.h>
++  #endif /* _WIN32_WCE */
++#endif /* _WIN32 */
+ 
+ 	/* TBB: strtok_r is not universal; provide an implementation of it. */
+ 

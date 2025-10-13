@@ -11,9 +11,9 @@ diff --git a/src/gdhelpers.h b/src/gdhelpers.h
 index 9b187af7f..1b0b91870 100644
 --- a/src/gdhelpers.h
 +++ b/src/gdhelpers.h
-@@ -12,6 +12,24 @@ extern "C" {
- #include <stdlib.h>
- #endif /* _WIN32_WCE */
+@@ -16,6 +16,24 @@ extern "C" {
+   #endif /* _WIN32_WCE */
+ #endif /* _WIN32 */
  
 +#if defined(_WIN32) || defined(CYGWIN) || defined(_WIN32_WCE)
 +# ifdef __GNUC__

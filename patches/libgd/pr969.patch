@@ -11,7 +11,7 @@ diff --git a/src/gd.c b/src/gd.c
 index 768fd2065..930a9496a 100644
 --- a/src/gd.c
 +++ b/src/gd.c
-@@ -1183,12 +1183,16 @@ BGD_DECLARE(int) gdImageColorReplaceCallback (gdImagePtr im, gdCallbackImageColo
+@@ -1193,12 +1193,16 @@ BGD_DECLARE(int) gdImageColorReplaceCallback (gdImagePtr im, gdCallbackImageColo
  static int
  clip_1d (int *x0, int *y0, int *x1, int *y1, int mindim, int maxdim)
  {
@@ -30,7 +30,7 @@ index 768fd2065..930a9496a 100644
  		/* adjust x0 to be on the left boundary (ie to be zero), and y0 to match */
  		*y0 -= (int)(m * (*x0 - mindim));
  		*x0 = mindim;
-@@ -1204,7 +1208,11 @@ clip_1d (int *x0, int *y0, int *x1, int *y1, int mindim, int maxdim)
+@@ -1214,7 +1218,11 @@ clip_1d (int *x0, int *y0, int *x1, int *y1, int mindim, int maxdim)
  		complement of above */
  		if (*x1 > maxdim)		/* as is the end, so the line misses the window */
  			return 0;
@@ -43,7 +43,7 @@ index 768fd2065..930a9496a 100644
  		*y0 += (int)(m * (maxdim - *x0));	/* adjust so point is on the right
  							   boundary */
  		*x0 = maxdim;
-@@ -1218,14 +1226,22 @@ clip_1d (int *x0, int *y0, int *x1, int *y1, int mindim, int maxdim)
+@@ -1228,14 +1236,22 @@ clip_1d (int *x0, int *y0, int *x1, int *y1, int mindim, int maxdim)
  	/* the final case - the start of the line is inside the window */
  	if (*x1 > maxdim) {
  		/* other end is outside to the right */

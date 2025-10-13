@@ -567,7 +567,7 @@ diff --git a/src/gd_interpolation.c b/src/gd_interpolation.c
 index 5c0a25092..910205fa9 100644
 --- a/src/gd_interpolation.c
 +++ b/src/gd_interpolation.c
-@@ -1894,7 +1894,7 @@ BGD_DECLARE(gdImagePtr) gdImageRotateInterpolated(const gdImagePtr src, const fl
+@@ -1873,7 +1873,7 @@ BGD_DECLARE(gdImagePtr) gdImageRotateInterpolated(const gdImagePtr src, const fl
   * Group: Affine Transformation
   **/
  
@@ -889,9 +889,9 @@ diff --git a/src/gdhelpers.h b/src/gdhelpers.h
 index 9b187af7f..d5ab2094d 100644
 --- a/src/gdhelpers.h
 +++ b/src/gdhelpers.h
-@@ -12,27 +12,27 @@ extern "C" {
- #include <stdlib.h>
- #endif /* _WIN32_WCE */
+@@ -16,27 +16,27 @@ extern "C" {
+   #endif /* _WIN32_WCE */
+ #endif /* _WIN32 */
  
 -	/* TBB: strtok_r is not universal; provide an implementation of it. */
 +/* TBB: strtok_r is not universal; provide an implementation of it. */

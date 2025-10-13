@@ -20,7 +20,7 @@ diff --git a/src/gd.c b/src/gd.c
 index 768fd2065..0a0968d37 100644
 --- a/src/gd.c
 +++ b/src/gd.c
-@@ -2214,6 +2214,9 @@ BGD_DECLARE(void) gdImageEllipse(gdImagePtr im, int mx, int my, int w, int h, in
+@@ -2230,6 +2230,9 @@ BGD_DECLARE(void) gdImageEllipse(gdImagePtr im, int mx, int my, int w, int h, in
  	bq = b * b;
  	dx = aq << 1;
  	dy = bq << 1;
@@ -30,7 +30,7 @@ index 768fd2065..0a0968d37 100644
  	r  = a * bq;
  	rx = r << 1;
  	ry = 0;
-@@ -2266,6 +2269,9 @@ BGD_DECLARE(void) gdImageFilledEllipse (gdImagePtr im, int mx, int my, int w, in
+@@ -2285,6 +2285,9 @@ BGD_DECLARE(void) gdImageFilledEllipse (gdImagePtr im, int mx, int my, int w, in
  	bq = b * b;
  	dx = aq << 1;
  	dy = bq << 1;
@@ -157,7 +157,7 @@ diff --git a/src/gd.c b/src/gd.c
 index 0a0968d37..f4125cb4d 100644
 --- a/src/gd.c
 +++ b/src/gd.c
-@@ -2214,7 +2214,7 @@ BGD_DECLARE(void) gdImageEllipse(gdImagePtr im, int mx, int my, int w, int h, in
+@@ -2230,7 +2230,7 @@ BGD_DECLARE(void) gdImageEllipse(gdImagePtr im, int mx, int my, int w, int h, in
  	bq = b * b;
  	dx = aq << 1;
  	dy = bq << 1;
@@ -166,7 +166,7 @@ index 0a0968d37..f4125cb4d 100644
  		return;
  	}
  	r  = a * bq;
-@@ -2269,7 +2269,7 @@ BGD_DECLARE(void) gdImageFilledEllipse (gdImagePtr im, int mx, int my, int w, in
+@@ -2285,7 +2285,7 @@ BGD_DECLARE(void) gdImageFilledEllipse (gdImagePtr im, int mx, int my, int w, in
  	bq = b * b;
  	dx = aq << 1;
  	dy = bq << 1;
@@ -208,7 +208,7 @@ diff --git a/src/gdhelpers.h b/src/gdhelpers.h
 index 9b187af7f..a9afa69bc 100644
 --- a/src/gdhelpers.h
 +++ b/src/gdhelpers.h
-@@ -34,6 +34,9 @@ void *gdReallocEx (void *ptr, size_t size);
+@@ -56,6 +56,9 @@ void *gdReallocEx (void *ptr, size_t size);
  
  int overflow2(int a, int b);
  
@@ -218,3 +218,4 @@ index 9b187af7f..a9afa69bc 100644
  	/* 2.0.16: portable mutex support for thread safety. */
  #if defined(CPP_SHARP)
  # define gdMutexDeclare(x)
+ 

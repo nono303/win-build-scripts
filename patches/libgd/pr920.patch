@@ -33,7 +33,7 @@ diff --git a/src/gd.c b/src/gd.c
 index 768fd2065..14193c078 100644
 --- a/src/gd.c
 +++ b/src/gd.c
-@@ -1299,6 +1299,9 @@ BGD_DECLARE(void) gdImageSetPixel (gdImagePtr im, int x, int y, int color)
+@@ -1309,6 +1309,9 @@ BGD_DECLARE(void) gdImageSetPixel (gdImagePtr im, int x, int y, int color)
  					case gdEffectMultiply :
  						im->tpixels[y][x] = gdLayerMultiply(im->tpixels[y][x], color);
  						break;
@@ -43,7 +43,7 @@ index 768fd2065..14193c078 100644
  				}
  			} else {
  				im->pixels[y][x] = color;
-@@ -4070,6 +4073,7 @@ BGD_DECLARE(int) gdImageCompare (gdImagePtr im1, gdImagePtr im2)
+@@ -4084,6 +4084,7 @@ BGD_DECLARE(int) gdImageCompare (gdImagePtr im1, gdImagePtr im2)
   *   - <gdImageAlphaBlending>
   *   - <gdLayerOverlay>
   *   - <gdLayerMultiply>
@@ -51,7 +51,7 @@ index 768fd2065..14193c078 100644
   */
  BGD_DECLARE(int) gdAlphaBlend (int dst, int src)
  {
-@@ -4131,6 +4135,7 @@ static int gdAlphaOverlayColor (int src, int dst, int max );
+@@ -4131,6 +4146,7 @@ static int gdAlphaOverlayColor (int src, int dst, int max );
   *   - <gdImageAlphaBlending>
   *   - <gdAlphaBlend>
   *   - <gdLayerMultiply>
@@ -59,7 +59,7 @@ index 768fd2065..14193c078 100644
   */
  BGD_DECLARE(int) gdLayerOverlay (int dst, int src)
  {
-@@ -4170,6 +4175,7 @@ static int gdAlphaOverlayColor (int src, int dst, int max )
+@@ -4170,6 +4186,7 @@ static int gdAlphaOverlayColor (int src, int dst, int max )
   *   - <gdImageAlphaBlending>
   *   - <gdAlphaBlend>
   *   - <gdLayerOverlay>
@@ -67,7 +67,7 @@ index 768fd2065..14193c078 100644
   */
  BGD_DECLARE(int) gdLayerMultiply (int dst, int src)
  {
-@@ -4193,6 +4199,45 @@ BGD_DECLARE(int) gdLayerMultiply (int dst, int src)
+@@ -4193,6 +4210,45 @@ BGD_DECLARE(int) gdLayerMultiply (int dst, int src)
  		);
  }
  
@@ -221,7 +221,7 @@ diff --git a/src/gd.c b/src/gd.c
 index 14193c078..2d3f3a8e9 100644
 --- a/src/gd.c
 +++ b/src/gd.c
-@@ -4217,7 +4217,7 @@ BGD_DECLARE(int) gdLayerMultiply (int dst, int src)
+@@ -4228,7 +4228,7 @@ BGD_DECLARE(int) gdLayerMultiply (int dst, int src)
  BGD_DECLARE(int) gdLayerDiff (int dst, int src)
  {
  	int r1,b1,g1,a1,r2,b2,g2,a2;

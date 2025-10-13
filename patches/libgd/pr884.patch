@@ -56,7 +56,7 @@ index 768fd2065..e46cd8422 100644
  	gdFree (im);
  }
  
-@@ -2907,6 +2918,7 @@ BGD_DECLARE(gdImagePtr) gdImageClone (gdImagePtr src) {
+@@ -2907,6 +2917,7 @@ BGD_DECLARE(gdImagePtr) gdImageClone (gdImagePtr src) {
  
  	dst->interpolation_id = src->interpolation_id;
  	dst->interpolation    = src->interpolation;

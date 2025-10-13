@@ -12,7 +12,7 @@ diff --git a/src/gd_png.c b/src/gd_png.c
 index 43054f2b7..ec0818b86 100644
 --- a/src/gd_png.c
 +++ b/src/gd_png.c
-@@ -782,7 +782,7 @@ static int _gdImagePngCtxEx(gdImagePtr im, gdIOCtx * outfile, int level)
+@@ -779,7 +779,7 @@ static int _gdImagePngCtxEx(gdImagePtr im, gdIOCtx * outfile, int level)
  	png_color palette[gdMaxColors];
  	png_structp png_ptr;
  	png_infop info_ptr;
@@ -21,7 +21,7 @@ index 43054f2b7..ec0818b86 100644
  	volatile int transparent = im->transparent;
  	volatile int remap = FALSE;
  #ifdef PNG_SETJMP_SUPPORTED
-@@ -1058,7 +1058,6 @@ static int _gdImagePngCtxEx(gdImagePtr im, gdIOCtx * outfile, int level)
+@@ -1055,7 +1055,6 @@ static int _gdImagePngCtxEx(gdImagePtr im, gdIOCtx * outfile, int level)
  		gdFree (row_pointers);
  	} else {
  		if (remap) {
@@ -29,7 +29,7 @@ index 43054f2b7..ec0818b86 100644
  			if (overflow2(sizeof (png_bytep), height)) {
  				ret = 1;
  				goto bail;
-@@ -1084,12 +1083,11 @@ static int _gdImagePngCtxEx(gdImagePtr im, gdIOCtx * outfile, int level)
+@@ -1080,12 +1080,11 @@ static int _gdImagePngCtxEx(gdImagePtr im, gdIOCtx * outfile, int level)
  			}
  
  			png_write_image (png_ptr, row_pointers);
