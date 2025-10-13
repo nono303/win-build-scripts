@@ -1,5 +1,5 @@
 diff --git a/ext/iconv/iconv.c b/ext/iconv/iconv.c
-index 157ee41a11a..0eb3da3a74a 100644
+index 2b19b1e3c78..76960eeb29a 100644
 --- a/ext/iconv/iconv.c
 +++ b/ext/iconv/iconv.c
 @@ -68,7 +68,7 @@ static const char *get_iconv_version(void) {
@@ -11,3 +11,13 @@ index 157ee41a11a..0eb3da3a74a 100644
  	version = buf;
  #elif defined(HAVE_GLIBC_ICONV)
  	version = gnu_get_libc_version();
+diff --git a/ext/iconv/php_iconv.def b/ext/iconv/php_iconv.def
+index 2f77aa4c79e..59285fbba49 100644
+--- a/ext/iconv/php_iconv.def
++++ b/ext/iconv/php_iconv.def
+@@ -1,5 +1,4 @@
+ EXPORTS
+-_libiconv_version
+ libiconv_close
+ libiconv
+ libiconv_open

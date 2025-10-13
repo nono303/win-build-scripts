@@ -10,4 +10,14 @@ index 4241b7c288..f935db722b 100644
 +	snprintf(buf, sizeof(buf), "%d.%d", _LIBICONV_VERSION >> 8, _LIBICONV_VERSION & 0xff);
  	version = buf;
  #elif defined(HAVE_GLIBC_ICONV)
- 	version = (char *) gnu_get_libc_version();
+ 	version = gnu_get_libc_version();
+diff --git a/ext/iconv/php_iconv.def b/ext/iconv/php_iconv.def
+index 2f77aa4c79e..59285fbba49 100644
+--- a/ext/iconv/php_iconv.def
++++ b/ext/iconv/php_iconv.def
+@@ -1,5 +1,4 @@
+ EXPORTS
+-_libiconv_version
+ libiconv_close
+ libiconv
+ libiconv_open
