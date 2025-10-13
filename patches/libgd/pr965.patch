@@ -1,0 +1,111 @@
+From 37b3e8341cb31afa77a35db66d600a16a46c8c10 Mon Sep 17 00:00:00 2001
+From: David Carlier <devnexen@gmail.com>
+Date: Tue, 2 Sep 2025 18:28:51 +0100
+Subject: [PATCH] gdImageConvolution(): UBSAN when elements of matrix are set
+ with -INF.
+
+ref: https://github.com/php/php-src/issues/19666
+---
+ src/gd_filter.c                         | 19 +++++++++++++++
+ tests/gdimageconvolution/CMakeLists.txt |  1 +
+ tests/gdimageconvolution/Makemodule.am  |  3 ++-
+ tests/gdimageconvolution/gh965.c        | 31 +++++++++++++++++++++++++
+ 4 files changed, 53 insertions(+), 1 deletion(-)
+ create mode 100644 tests/gdimageconvolution/gh965.c
+
+diff --git a/src/gd_filter.c b/src/gd_filter.c
+index 23bc564c0..25d0cb32c 100644
+--- a/src/gd_filter.c
++++ b/src/gd_filter.c
+@@ -10,6 +10,7 @@
+ #include "gd.h"
+ #include "gdhelpers.h"
+ #include "gd_intern.h"
++#include "gd_errors.h"
+ 
+ #ifdef _WIN32
+ # include <windows.h>
+@@ -556,6 +557,24 @@ BGD_DECLARE(int) gdImageConvolution(gdImagePtr src, float filter[3][3], float fi
+ 			new_g = (new_g > 255.0f)? 255.0f : ((new_g < 0.0f)? 0.0f:new_g);
+ 			new_b = (new_b > 255.0f)? 255.0f : ((new_b < 0.0f)? 0.0f:new_b);
+ 
++			if (isnan(new_r) || new_r == INFINITY) {
++				gd_error("Matrix: invalid top-left filter");
++				gdImageDestroy(srcback);
++				return 0;
++			}
++
++			if (isnan(new_g) || new_g == INFINITY) {
++				gd_error("Matrix: invalid center filter");
++				gdImageDestroy(srcback);
++				return 0;
++			}
++
++			if (isnan(new_b) || new_b == INFINITY) {
++				gd_error("Matrix: invalid bottom-right filter");
++				gdImageDestroy(srcback);
++				return 0;
++			}
++
+ 			new_pxl = gdImageColorAllocateAlpha(src, (int)new_r, (int)new_g, (int)new_b, new_a);
+ 			if (new_pxl == -1) {
+ 				new_pxl = gdImageColorClosestAlpha(src, (int)new_r, (int)new_g, (int)new_b, new_a);
+diff --git a/tests/gdimageconvolution/CMakeLists.txt b/tests/gdimageconvolution/CMakeLists.txt
+index dc1fc51ce..c5cb2c44f 100644
+--- a/tests/gdimageconvolution/CMakeLists.txt
++++ b/tests/gdimageconvolution/CMakeLists.txt
+@@ -1,4 +1,5 @@
+ LIST(APPEND TESTS_FILES bug00369)
++LIST(APPEND TESTS_FILES gh965)
+ 
+ IF(PNG_FOUND)
+ LIST(APPEND TESTS_FILES
+diff --git a/tests/gdimageconvolution/Makemodule.am b/tests/gdimageconvolution/Makemodule.am
+index df5249d45..f48608859 100644
+--- a/tests/gdimageconvolution/Makemodule.am
++++ b/tests/gdimageconvolution/Makemodule.am
+@@ -1,5 +1,6 @@
+ libgd_test_programs += \
+-	gdimageconvolution/bug00369
++	gdimageconvolution/bug00369 \
++	gdimageconvolution/gh965
+ 
+ if HAVE_LIBPNG
+ libgd_test_programs += \
+diff --git a/tests/gdimageconvolution/gh965.c b/tests/gdimageconvolution/gh965.c
+new file mode 100644
+index 000000000..7180b0d05
+--- /dev/null
++++ b/tests/gdimageconvolution/gh965.c
+@@ -0,0 +1,31 @@
++#include "gd.h"
++#include "gdtest.h"
++#include <math.h>
++
++int main()
++{
++	gdImagePtr im;
++	float matrix[3][3] = {
++		{1.0, 2.0, 1.0},
++		{2.0, 4.0, 2.0},
++		{1.0, 2.0, -INFINITY}
++	};
++
++	im = gdImageCreateTrueColor(100, 30);
++
++	int r = gdImageConvolution(im, matrix, 16, 0);
++	gdImageDestroy(im);
++	gdTestAssertMsg(r == 0, "GD Warning: Matrix: invalid top-left filter");
++	float matrix2[3][3] = {
++		{1.0, 2.0, 1.0},
++		{2.0, 4.0, 2.0},
++		{1.0, 2.0, INFINITY}
++	};
++	im = gdImageCreateTrueColor(100, 30);
++	r = gdImageConvolution(im, matrix2, 16, 0);
++	gdImageDestroy(im);
++	gdTestAssertMsg(r == 0, "GD Warning: Matrix: invalid top-left filter");
++
++	return 0;
++}
++

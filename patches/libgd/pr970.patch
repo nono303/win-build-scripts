@@ -1,0 +1,22 @@
+From f27de39ebe5c48125c785ffc7d70fdd21f037c8e Mon Sep 17 00:00:00 2001
+From: David Carlier <devnexen@gmail.com>
+Date: Thu, 25 Sep 2025 12:45:35 +0100
+Subject: [PATCH] gdkanji do_convert() helper fix memory leak on error path.
+
+---
+ src/gdkanji.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/gdkanji.c b/src/gdkanji.c
+index c670d9864..eead38df0 100644
+--- a/src/gdkanji.c
++++ b/src/gdkanji.c
+@@ -364,6 +364,8 @@ do_convert (unsigned char **to_p, const unsigned char **from_p, const char *code
+ 
+ 			gd_error ("something happen");
+ 		ustrcpy (to, from);
++		if (iconv_close (cd) != 0)
++			gd_error ("iconv_close() error");
+ 		return;
+ 	}
+ 

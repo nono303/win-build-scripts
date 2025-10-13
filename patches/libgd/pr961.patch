@@ -1,0 +1,28 @@
+From 9ed34f7d4fd02c62ac8b70dc7bba6b7b3d53f095 Mon Sep 17 00:00:00 2001
+From: Peter Kokot <peterkokot@gmail.com>
+Date: Sun, 13 Jul 2025 22:25:06 +0200
+Subject: [PATCH] Remove unused HAVE_LIBTTF
+
+The ttf library isn't used anymore and this macro isn't defined.
+---
+ src/gdcache.c | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/src/gdcache.c b/src/gdcache.c
+index 3aad153dc..24cc871c6 100644
+--- a/src/gdcache.c
++++ b/src/gdcache.c
+@@ -5,13 +5,9 @@
+ #include "gd.h"
+ #include "gdhelpers.h"
+ 
+-#ifdef HAVE_LIBTTF
+-#	define NEED_CACHE 1
+-#else
+ #ifdef HAVE_LIBFREETYPE
+ #	define NEED_CACHE 1
+ #endif
+-#endif
+ 
+ #ifdef NEED_CACHE
+ 

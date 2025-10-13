@@ -1,0 +1,936 @@
+From fb618d2a8cf692f6dfaef2cd629b6a6e43e0fcb3 Mon Sep 17 00:00:00 2001
+From: Giovanni Giacobbi <giovanni@giacobbi.net>
+Date: Sun, 9 Jun 2024 11:53:36 +0200
+Subject: [PATCH] Various coding style fixes (no functional changes)
+
+---
+ src/gd.c               | 117 ++++++++++++++++++++---------------------
+ src/gd.h               |  83 +++++++++++++++--------------
+ src/gd_color_match.c   |   1 +
+ src/gd_crop.c          |   4 +-
+ src/gd_filter.c        |  12 ++---
+ src/gd_interpolation.c |   2 +-
+ src/gd_io.h            |  18 +++----
+ src/gd_jpeg.c          |  16 +++---
+ src/gd_matrix.c        |   2 +-
+ src/gd_png.c           |   3 --
+ src/gd_tga.c           |   5 +-
+ src/gd_wbmp.c          |  10 ++--
+ src/gd_webp.c          |   5 +-
+ src/gd_xbm.c           |   2 +-
+ src/gdfontg.h          |   3 +-
+ src/gdfontl.c          |   3 +-
+ src/gdfontmb.c         |   3 +-
+ src/gdfontmb.h         |   3 +-
+ src/gdfonts.c          |   3 +-
+ src/gdhelpers.h        |  34 ++++++------
+ 20 files changed, 158 insertions(+), 171 deletions(-)
+
+diff --git a/src/gd.c b/src/gd.c
+index b05d15be0..c6c1b757a 100644
+--- a/src/gd.c
++++ b/src/gd.c
+@@ -295,7 +295,7 @@ BGD_DECLARE(gdImagePtr) gdImageCreateTrueColor (int sx, int sy)
+ 		return NULL;
+ 	}
+ 	if (overflow2(sizeof (int *), sy)) {
+-		return 0;
++		return NULL;
+ 	}
+ 	if (overflow2(sizeof(int), sx)) {
+ 		return NULL;
+@@ -305,7 +305,7 @@ BGD_DECLARE(gdImagePtr) gdImageCreateTrueColor (int sx, int sy)
+ 	if (!im) {
+ 		return 0;
+ 	}
+-	memset (im, 0, sizeof (gdImage));
++	memset(im, 0, sizeof(gdImage));
+ 
+ 	im->tpixels = (int **) gdMalloc (sizeof (int *) * sy);
+ 	if (!im->tpixels) {
+@@ -533,7 +533,6 @@ RGB_to_HWB (RGBType RGB, HWBType * HWB)
+ 	f = (R == w) ? G - B : ((G == w) ? B - R : R - G);
+ 	i = (R == w) ? 3 : ((G == w) ? 5 : 1);
+ 	RETURN_HWB (i - f / (v - w), w, b);
+-
+ }
+ 
+ static float
+@@ -631,7 +630,7 @@ BGD_DECLARE(int) gdImageColorClosestHWB (gdImagePtr im, int r, int g, int b)
+ 	if (im->trueColor) {
+ 		return gdTrueColor (r, g, b);
+ 	}
+-	for (i = 0; (i < (im->colorsTotal)); i++) {
++	for (i = 0; i < im->colorsTotal; i++) {
+ 		float dist;
+ 		if (im->open[i]) {
+ 			continue;
+@@ -700,7 +699,7 @@ BGD_DECLARE(int) gdImageColorExactAlpha (gdImagePtr im, int r, int g, int b, int
+ 	if (im->trueColor) {
+ 		return gdTrueColorAlpha (r, g, b, a);
+ 	}
+-	for (i = 0; (i < (im->colorsTotal)); i++) {
++	for (i = 0; i < im->colorsTotal; i++) {
+ 		if (im->open[i]) {
+ 			continue;
+ 		}
+@@ -764,7 +763,7 @@ BGD_DECLARE(int) gdImageColorAllocateAlpha (gdImagePtr im, int r, int g, int b,
+ 	if (im->trueColor) {
+ 		return gdTrueColorAlpha (r, g, b, a);
+ 	}
+-	for (i = 0; (i < (im->colorsTotal)); i++) {
++	for (i = 0; i < im->colorsTotal; i++) {
+ 		if (im->open[i]) {
+ 			ct = i;
+ 			break;
+@@ -943,10 +942,10 @@ BGD_DECLARE(void) gdImagePaletteCopy (gdImagePtr to, gdImagePtr from)
+ 
+ 	for (i = 0; i < 256; i++) {
+ 		xlate[i] = -1;
+-	};
++	}
+ 
+-	for (y = 0; y < (to->sy); y++) {
+-		for (x = 0; x < (to->sx); x++) {
++	for (y = 0; y < to->sy; y++) {
++		for (x = 0; x < to->sx; x++) {
+ 			/* Optimization: no gdImageGetPixel */
+ 			p = to->pixels[y][x];
+ 			if (xlate[p] == -1) {
+@@ -958,11 +957,11 @@ BGD_DECLARE(void) gdImagePaletteCopy (gdImagePtr to, gdImagePtr from)
+ 				/*printf("Mapping %d (%d, %d, %d, %d) to %d (%d, %d, %d, %d)\n", */
+ 				/*      p,  to->red[p], to->green[p], to->blue[p], to->alpha[p], */
+ 				/*      xlate[p], from->red[xlate[p]], from->green[xlate[p]], from->blue[xlate[p]], from->alpha[xlate[p]]); */
+-			};
++			}
+ 			/* Optimization: no gdImageSetPixel */
+ 			to->pixels[y][x] = xlate[p];
+-		};
+-	};
++		}
++	}
+ 
+ 	for (i = 0; (i < (from->colorsTotal)); i++) {
+ 		/*printf("Copying color %d (%d, %d, %d, %d)\n", i, from->red[i], from->blue[i], from->green[i], from->alpha[i]); */
+@@ -971,11 +970,11 @@ BGD_DECLARE(void) gdImagePaletteCopy (gdImagePtr to, gdImagePtr from)
+ 		to->green[i] = from->green[i];
+ 		to->alpha[i] = from->alpha[i];
+ 		to->open[i] = 0;
+-	};
++	}
+ 
+-	for (i = from->colorsTotal; (i < to->colorsTotal); i++) {
++	for (i = from->colorsTotal; i < to->colorsTotal; i++) {
+ 		to->open[i] = 1;
+-	};
++	}
+ 
+ 	to->colorsTotal = from->colorsTotal;
+ 
+@@ -1254,7 +1253,7 @@ BGD_DECLARE(void) gdImageSetPixel (gdImagePtr im, int x, int y, int color)
+ 		} else {
+ 			p = im->style[im->stylePos++];
+ 		}
+-		if (p != (gdTransparent)) {
++		if (p != gdTransparent) {
+ 			gdImageSetPixel (im, x, y, p);
+ 		}
+ 		im->stylePos = im->stylePos % im->styleLength;
+@@ -1419,14 +1418,10 @@ gdImageTileApply (gdImagePtr im, int x, int y)
+ 				   on a palette destination. */
+ 				gdImageSetPixel (im, x, y,
+ 				                 gdImageColorResolveAlpha (im,
+-				                         gdTrueColorGetRed
+-				                         (p),
+-				                         gdTrueColorGetGreen
+-				                         (p),
+-				                         gdTrueColorGetBlue
+-				                         (p),
+-				                         gdTrueColorGetAlpha
+-				                         (p)));
++				                         gdTrueColorGetRed(p),
++				                         gdTrueColorGetGreen(p),
++				                         gdTrueColorGetBlue(p),
++				                         gdTrueColorGetAlpha(p)));
+ 			} else {
+ 				gdImageSetPixel (im, x, y, im->tileColorMap[p]);
+ 			}
+@@ -1621,8 +1616,9 @@ BGD_DECLARE(void) gdImageLine (gdImagePtr im, int x1, int y1, int x2, int y2, in
+ 
+ 		/* Set up line thickness */
+ 		wstart = y - wid / 2;
+-		for (w = wstart; w < wstart + wid; w++)
++		for (w = wstart; w < wstart + wid; w++) {
+ 			gdImageSetPixel (im, x, w, color);
++		}
+ 
+ 		if (((y2 - y1) * ydirflag) > 0) {
+ 			while (x < xend) {
+@@ -1634,8 +1630,9 @@ BGD_DECLARE(void) gdImageLine (gdImagePtr im, int x1, int y1, int x2, int y2, in
+ 					d += incr2;
+ 				}
+ 				wstart = y - wid / 2;
+-				for (w = wstart; w < wstart + wid; w++)
++				for (w = wstart; w < wstart + wid; w++) {
+ 					gdImageSetPixel (im, x, w, color);
++				}
+ 			}
+ 		} else {
+ 			while (x < xend) {
+@@ -1647,8 +1644,9 @@ BGD_DECLARE(void) gdImageLine (gdImagePtr im, int x1, int y1, int x2, int y2, in
+ 					d += incr2;
+ 				}
+ 				wstart = y - wid / 2;
+-				for (w = wstart; w < wstart + wid; w++)
++				for (w = wstart; w < wstart + wid; w++) {
+ 					gdImageSetPixel (im, x, w, color);
++				}
+ 			}
+ 		}
+ 	} else {
+@@ -1661,8 +1659,9 @@ BGD_DECLARE(void) gdImageLine (gdImagePtr im, int x1, int y1, int x2, int y2, in
+ 		} else {
+ 			wid = 1;
+ 		}
+-		if (wid == 0)
++		if (wid == 0) {
+ 			wid = 1;
++		}
+ 
+ 		d = 2 * dx - dy;
+ 		incr1 = 2 * dx;
+@@ -1681,8 +1680,9 @@ BGD_DECLARE(void) gdImageLine (gdImagePtr im, int x1, int y1, int x2, int y2, in
+ 
+ 		/* Set up line thickness */
+ 		wstart = x - wid / 2;
+-		for (w = wstart; w < wstart + wid; w++)
++		for (w = wstart; w < wstart + wid; w++) {
+ 			gdImageSetPixel (im, w, y, color);
++		}
+ 
+ 		if (((x2 - x1) * xdirflag) > 0) {
+ 			while (y < yend) {
+@@ -1694,8 +1694,9 @@ BGD_DECLARE(void) gdImageLine (gdImagePtr im, int x1, int y1, int x2, int y2, in
+ 					d += incr2;
+ 				}
+ 				wstart = x - wid / 2;
+-				for (w = wstart; w < wstart + wid; w++)
++				for (w = wstart; w < wstart + wid; w++) {
+ 					gdImageSetPixel (im, w, y, color);
++				}
+ 			}
+ 		} else {
+ 			while (y < yend) {
+@@ -1707,13 +1708,14 @@ BGD_DECLARE(void) gdImageLine (gdImagePtr im, int x1, int y1, int x2, int y2, in
+ 					d += incr2;
+ 				}
+ 				wstart = x - wid / 2;
+-				for (w = wstart; w < wstart + wid; w++)
++				for (w = wstart; w < wstart + wid; w++) {
+ 					gdImageSetPixel (im, w, y, color);
++				}
+ 			}
+ 		}
+ 	}
+-
+ }
++
+ static void dashedSet (gdImagePtr im, int x, int y, int color,
+ 					   int *onP, int *dashStepP, int wid, int vert);
+ 
+@@ -2201,13 +2203,13 @@ BGD_DECLARE(void) gdImageEllipse(gdImagePtr im, int mx, int my, int w, int h, in
+ 	int x=0,mx1=0,mx2=0,my1=0,my2=0;
+ 	int64_t aq,bq,dx,dy,r,rx,ry,a,b;
+ 
+-	a=w>>1;
+-	b=h>>1;
+-	gdImageSetPixel(im,mx+a, my, c);
+-	gdImageSetPixel(im,mx-a, my, c);
+-	mx1 = mx-a;
++	a = w >> 1;
++	b = h >> 1;
++	gdImageSetPixel(im, mx + a, my, c);
++	gdImageSetPixel(im, mx - a, my, c);
++	mx1 = mx - a;
+ 	my1 = my;
+-	mx2 = mx+a;
++	mx2 = mx + a;
+ 	my2 = my;
+ 
+ 	aq = a * a;
+@@ -2222,15 +2224,15 @@ BGD_DECLARE(void) gdImageEllipse(gdImagePtr im, int mx, int my, int w, int h, in
+ 		if (r > 0) {
+ 			my1++;
+ 			my2--;
+-			ry +=dx;
+-			r  -=ry;
++			ry += dx;
++			r -= ry;
+ 		}
+ 		if (r <= 0) {
+ 			x--;
+ 			mx1++;
+ 			mx2--;
+-			rx -=dy;
+-			r  +=rx;
++			rx -= dy;
++			r += rx;
+ 		}
+ 		gdImageSetPixel(im,mx1, my1, c);
+ 		gdImageSetPixel(im,mx1, my2, c);
+@@ -2250,16 +2252,16 @@ BGD_DECLARE(void) gdImageFilledEllipse (gdImagePtr im, int mx, int my, int w, in
+ 	int i;
+ 	int old_y2;
+ 
+-	a=w>>1;
+-	b=h>>1;
++	a = w >> 1;
++	b = h >> 1;
+ 
+-	for (x = mx-a; x <= mx+a; x++) {
++	for (x = mx - a; x <= mx + a; x++) {
+ 		gdImageSetPixel(im, x, my, c);
+ 	}
+ 
+-	mx1 = mx-a;
++	mx1 = mx - a;
+ 	my1 = my;
+-	mx2 = mx+a;
++	mx2 = mx + a;
+ 	my2 = my;
+ 
+ 	aq = a * a;
+@@ -2275,21 +2277,20 @@ BGD_DECLARE(void) gdImageFilledEllipse (gdImagePtr im, int mx, int my, int w, in
+ 		if (r > 0) {
+ 			my1++;
+ 			my2--;
+-			ry +=dx;
+-			r  -=ry;
++			ry += dx;
++			r -= ry;
+ 		}
+ 		if (r <= 0) {
+ 			x--;
+ 			mx1++;
+ 			mx2--;
+-			rx -=dy;
+-			r  +=rx;
++			rx -= dy;
++			r += rx;
+ 		}
+-
+-		if(old_y2!=my2) {
+-			for(i=mx1; i<=mx2; i++) {
+-				gdImageSetPixel(im,i,my2,c);
+-				gdImageSetPixel(im,i,my1,c);
++		if (old_y2 != my2) {
++			for (i = mx1; i <= mx2; i++) {
++				gdImageSetPixel(im, i, my2, c);
++				gdImageSetPixel(im, i, my1, c);
+ 			}
+ 		}
+ 		old_y2 = my2;
+@@ -2482,9 +2483,7 @@ BGD_DECLARE(void) gdImageFill(gdImagePtr im, int x, int y, int nc)
+ 		return;
+ 	}
+ 
+-	/* Do not use the 4 neighbors implementation with
+-	* small images
+-	*/
++	/* Do not use the 4 neighbors implementation with small images */
+ 	if (im->sx < 4) {
+ 		int ix = x, iy = y, c;
+ 		do {
+diff --git a/src/gd.h b/src/gd.h
+index b03323889..2295fc4e8 100644
+--- a/src/gd.h
++++ b/src/gd.h
+@@ -299,9 +299,9 @@ enum gdPaletteQuantizationMethod {
+  *  GD_POWER			 - Power
+  *  GD_QUADRATIC		 - Quadratic
+  *  GD_SINC				 - Sinc
+- *  GD_TRIANGLE       - Triangle
++ *  GD_TRIANGLE			 - Triangle
+  *  GD_WEIGHTED4		 - 4 pixels weighted bilinear interpolation
+- *  GD_LINEAR            - bilinear interpolation
++ *  GD_LINEAR			 - bilinear interpolation
+  *
+  * See also:
+  *  - <gdImageSetInterpolationMethod>
+@@ -331,14 +331,14 @@ typedef enum {
+ 	GD_TRIANGLE,
+ 	GD_WEIGHTED4,
+ 	GD_LINEAR,
+-   GD_LANCZOS3,
+-   GD_LANCZOS8,
+-   GD_BLACKMAN_BESSEL,
+-   GD_BLACKMAN_SINC,
+-   GD_QUADRATIC_BSPLINE,
+-   GD_CUBIC_SPLINE,
+-   GD_COSINE,
+-   GD_WELSH,
++	GD_LANCZOS3,
++	GD_LANCZOS8,
++	GD_BLACKMAN_BESSEL,
++	GD_BLACKMAN_SINC,
++	GD_QUADRATIC_BSPLINE,
++	GD_CUBIC_SPLINE,
++	GD_COSINE,
++	GD_WELSH,
+ 	GD_METHOD_COUNT = 30
+ } gdInterpolationMethod;
+ 
+@@ -476,14 +476,14 @@ typedef struct gdImageStruct {
+ 	   part of the structure can be safely changed in new releases. */
+ 
+ 	/* 2.0.12: anti-aliased globals. 2.0.26: just a few vestiges after
+-	  switching to the fast, memory-cheap implementation from PHP-gd. */
++	   switching to the fast, memory-cheap implementation from PHP-gd. */
+ 	int AA;
+ 	int AA_color;
+ 	int AA_dont_blend;
+ 
+ 	/* 2.0.12: simple clipping rectangle. These values
+-	  must be checked for safety when set; please use
+-	  gdImageSetClip */
++	   must be checked for safety when set; please use
++	   gdImageSetClip */
+ 	int cx1;
+ 	int cy1;
+ 	int cx2;
+@@ -655,7 +655,7 @@ BGD_DECLARE(gdImagePtr) gdImageCreateTrueColor (int sx, int sy);
+    nature of the file being loaded. Truecolor PNG
+    stays truecolor; palette PNG stays palette-based;
+    JPEG is always truecolor. */
+-BGD_DECLARE(gdImagePtr) gdImageCreateFromPng (FILE * fd);
++BGD_DECLARE(gdImagePtr) gdImageCreateFromPng (FILE *fd);
+ BGD_DECLARE(gdImagePtr) gdImageCreateFromPngCtx(gdIOCtxPtr in);
+ BGD_DECLARE(gdImagePtr) gdImageCreateFromPngPtr (int size, void *data);
+ 
+@@ -847,32 +847,32 @@ BGD_DECLARE(char *) gdImageStringFT (gdImagePtr im, int *brect, int fg, const ch
+ /* 2.0.5: provides an extensible way to pass additional parameters.
+    Thanks to Wez Furlong, sorry for the delay. */
+ typedef struct {
+-	int flags;		/* Logical OR of gdFTEX_ values */
+-	double linespacing;	/* fine tune line spacing for '\n' */
+-	int charmap;		/* TBB: 2.0.12: may be gdFTEX_Unicode,
+-				   gdFTEX_Shift_JIS, gdFTEX_Big5,
+-				   or gdFTEX_Adobe_Custom;
+-				   when not specified, maps are searched
+-				   for in the above order. */
++	int flags;               /* Logical OR of gdFTEX_ values */
++	double linespacing;      /* fine tune line spacing for '\n' */
++	int charmap;             /* TBB: 2.0.12: may be gdFTEX_Unicode,
++	                            gdFTEX_Shift_JIS, gdFTEX_Big5,
++	                            or gdFTEX_Adobe_Custom;
++	                            when not specified, maps are searched
++	                            for in the above order. */
+ 	int hdpi;                /* if (flags & gdFTEX_RESOLUTION) */
+-	int vdpi;		 /* if (flags & gdFTEX_RESOLUTION) */
++	int vdpi;                /* if (flags & gdFTEX_RESOLUTION) */
+ 	char *xshow;             /* if (flags & gdFTEX_XSHOW)
+-				    then, on return, xshow is a malloc'ed
+-				    string containing xshow position data for
+-				    the last string.
+-
+-				    NB. The caller is responsible for gdFree'ing
+-				    the xshow string.
+-				 */
+-	char *fontpath;	         /* if (flags & gdFTEX_RETURNFONTPATHNAME)
+-				    then, on return, fontpath is a malloc'ed
+-				    string containing the actual font file path name
+-				    used, which can be interesting when fontconfig
+-				    is in use.
+-
+-				    The caller is responsible for gdFree'ing the
+-				    fontpath string.
+-				 */
++	                            then, on return, xshow is a malloc'ed
++	                            string containing xshow position data for
++	                            the last string.
++
++	                            NB. The caller is responsible for gdFree'ing
++	                            the xshow string.
++	                            */
++	char *fontpath;          /* if (flags & gdFTEX_RETURNFONTPATHNAME)
++	                            then, on return, fontpath is a malloc'ed
++	                            string containing the actual font file path name
++	                            used, which can be interesting when fontconfig
++	                            is in use.
++
++	                            The caller is responsible for gdFree'ing the
++	                            fontpath string.
++	                            */
+ 
+ }
+ gdFTStringExtra, *gdFTStringExtraPtr;
+@@ -1043,7 +1043,7 @@ BGD_DECLARE(void) gdImageColorDeallocate (gdImagePtr im, int color);
+ */
+ 
+ BGD_DECLARE(gdImagePtr) gdImageCreatePaletteFromTrueColor (gdImagePtr im, int ditherFlag,
+-							   int colorsWanted);
++                                                           int colorsWanted);
+ 
+ BGD_DECLARE(int) gdImageTrueColorToPalette (gdImagePtr im, int ditherFlag,
+ 					    int colorsWanted);
+@@ -1200,7 +1200,6 @@ BGD_DECLARE(void *) gdImageGifAnimAddPtr(gdImagePtr im, int *size, int LocalCM,
+ BGD_DECLARE(void *) gdImageGifAnimEndPtr(int *size);
+ 
+ 
+-
+ /*
+   Group: Types
+ 
+@@ -1588,7 +1587,7 @@ BGD_DECLARE(gdIOCtxPtr) gdNewSSCtx(gdSourcePtr in, gdSinkPtr out);
+ BGD_DECLARE(void *) gdDPExtractData(gdIOCtxPtr ctx, int *size);
+ 
+ #define GD2_CHUNKSIZE           128
+-#define GD2_CHUNKSIZE_MIN	64
++#define GD2_CHUNKSIZE_MIN       64
+ #define GD2_CHUNKSIZE_MAX       4096
+ 
+ #define GD2_VERS                2
+@@ -1673,7 +1672,7 @@ BGD_DECLARE(int) gdTransformAffineBoundingBox(gdRectPtr src, const double affine
+  *
+  * Constants:
+  *   GD_CMP_IMAGE       - Actual image IS different
+- *   GD_CMP_NUM_COLORS  - Number of colors in pallette differ
++ *   GD_CMP_NUM_COLORS  - Number of colors in palette differ
+  *   GD_CMP_COLOR       - Image colors differ
+  *   GD_CMP_SIZE_X      - Image width differs
+  *   GD_CMP_SIZE_Y      - Image heights differ
+diff --git a/src/gd_color_match.c b/src/gd_color_match.c
+index f0194302e..a94a8415b 100644
+--- a/src/gd_color_match.c
++++ b/src/gd_color_match.c
+@@ -33,6 +33,7 @@ BGD_DECLARE(int) gdImageColorMatch (gdImagePtr im1, gdImagePtr im2)
+ 
+ 	buf = (unsigned long *)gdMalloc(sizeof(unsigned long) * 5 * gdMaxColors);
+ 	memset (buf, 0, sizeof(unsigned long) * 5 * gdMaxColors );
++
+ 	for (x=0; x < im1->sx; x++) {
+ 		for( y=0; y<im1->sy; y++ ) {
+ 			color = im2->pixels[y][x];
+diff --git a/src/gd_crop.c b/src/gd_crop.c
+index 42af35709..df4ac7831 100644
+--- a/src/gd_crop.c
++++ b/src/gd_crop.c
+@@ -31,8 +31,8 @@ static int gdGuessBackgroundColorFromCorners(gdImagePtr im, int *color);
+ 
+ /**
+  * Function: gdImageCrop
+- *
+- * Crop an image to a given rectangle
++ *  Crops the src image using the area defined by the <crop> rectangle.
++ *  The result is returned as a new image.
+  *
+  * Parameters:
+  *   src  - The image.
+diff --git a/src/gd_filter.c b/src/gd_filter.c
+index 23bc564c0..bfd70186a 100644
+--- a/src/gd_filter.c
++++ b/src/gd_filter.c
+@@ -44,7 +44,7 @@ BGD_DECLARE(int) gdImageScatter(gdImagePtr im, int sub, int plus)
+ {
+ 	gdScatter s;
+ 
+-	s.sub  = sub;
++	s.sub = sub;
+ 	s.plus = plus;
+ 	s.num_colors = 0;
+ 	s.seed = GD_SCATTER_SEED();
+@@ -570,7 +570,7 @@ BGD_DECLARE(int) gdImageConvolution(gdImagePtr src, float filter[3][3], float fi
+ /*
+ 	Function: gdImageSelectiveBlur
+  */
+-BGD_DECLARE(int) gdImageSelectiveBlur( gdImagePtr src)
++BGD_DECLARE(int) gdImageSelectiveBlur(gdImagePtr src)
+ {
+ 	int         x, y, i, j;
+ 	float       new_r, new_g, new_b;
+@@ -737,10 +737,10 @@ BGD_DECLARE(int) gdImageEdgeDetectQuick(gdImagePtr src)
+ BGD_DECLARE(int) gdImageGaussianBlur(gdImagePtr im)
+ {
+ 	float filter[3][3] = {
+-        {1.0, 2.0, 1.0},
+-        {2.0, 4.0, 2.0},
+-        {1.0, 2.0, 1.0}
+-    };
++		{1.0, 2.0, 1.0},
++		{2.0, 4.0, 2.0},
++		{1.0, 2.0, 1.0}
++	};
+ 
+ 	return gdImageConvolution(im, filter, 16, 0);
+ }
+diff --git a/src/gd_interpolation.c b/src/gd_interpolation.c
+index 5c0a25092..910205fa9 100644
+--- a/src/gd_interpolation.c
++++ b/src/gd_interpolation.c
+@@ -1894,7 +1894,7 @@ BGD_DECLARE(gdImagePtr) gdImageRotateInterpolated(const gdImagePtr src, const fl
+  * Group: Affine Transformation
+  **/
+ 
+- static void gdImageClipRectangle(gdImagePtr im, gdRectPtr r)
++static void gdImageClipRectangle(gdImagePtr im, gdRectPtr r)
+ {
+ 	int c1x, c1y, c2x, c2y;
+ 	int x1,y1;
+diff --git a/src/gd_io.h b/src/gd_io.h
+index f6bd4d6ea..db56186e7 100644
+--- a/src/gd_io.h
++++ b/src/gd_io.h
+@@ -55,15 +55,15 @@ extern "C" {
+ typedef struct gdIOCtx *gdIOCtxPtr;
+ 
+ typedef struct gdIOCtx {
+-    int (*getC)(gdIOCtxPtr);
+-    int (*getBuf)(gdIOCtxPtr, void *, int);
+-    void (*putC)(gdIOCtxPtr, int);
+-    int (*putBuf)(gdIOCtxPtr, const void *, int);
+-    /* seek must return 1 on SUCCESS, 0 on FAILURE. Unlike fseek! */
+-    int (*seek)(gdIOCtxPtr, const int);
+-    long (*tell)(gdIOCtxPtr);
+-    void (*gd_free)(gdIOCtxPtr);
+-    void *data;
++	int (*getC)(gdIOCtxPtr);
++	int (*getBuf)(gdIOCtxPtr, void *, int);
++	void (*putC)(gdIOCtxPtr, int);
++	int (*putBuf)(gdIOCtxPtr, const void *, int);
++	/* seek must return 1 on SUCCESS, 0 on FAILURE. Unlike fseek! */
++	int (*seek)(gdIOCtxPtr, const int);
++	long (*tell)(gdIOCtxPtr);
++	void (*gd_free)(gdIOCtxPtr);
++	void *data;
+ } gdIOCtx;
+ 
+ void gdPutC(const unsigned char c, gdIOCtxPtr ctx);
+diff --git a/src/gd_jpeg.c b/src/gd_jpeg.c
+index afdab5383..69e20e6bb 100644
+--- a/src/gd_jpeg.c
++++ b/src/gd_jpeg.c
+@@ -56,8 +56,7 @@ static const char *const GD_JPEG_VERSION = "1.0";
+ typedef struct _jmpbuf_wrapper {
+ 	jmp_buf jmpbuf;
+         int ignore_warning;
+-}
+-jmpbuf_wrapper;
++} jmpbuf_wrapper;
+ 
+ static void jpeg_emit_message(j_common_ptr jpeg_info, int level)
+ {
+@@ -293,9 +292,9 @@ static int _gdImageJpegCtx(gdImagePtr im, gdIOCtx *outfile, int quality)
+ 	cinfo.err = jpeg_std_error(&jerr);
+ 	cinfo.client_data = &jmpbufw;
+ 
+-	if(setjmp(jmpbufw.jmpbuf) != 0) {
++	if (setjmp(jmpbufw.jmpbuf) != 0) {
+ 		/* we're here courtesy of longjmp */
+-		if(row) {
++		if (row) {
+ 			gdFree(row);
+ 		}
+ 		return 1;
+@@ -317,7 +316,7 @@ static int _gdImageJpegCtx(gdImagePtr im, gdIOCtx *outfile, int quality)
+ 	cinfo.X_density = im->res_x;
+ 	cinfo.Y_density = im->res_y;
+ 
+-	if(quality >= 0) {
++	if (quality >= 0) {
+ 		jpeg_set_quality(&cinfo, quality, TRUE);
+ 		if (quality >= 90) {
+ 			cinfo.comp_info[0].h_samp_factor = 1;
+@@ -420,8 +419,6 @@ static int _gdImageJpegCtx(gdImagePtr im, gdIOCtx *outfile, int quality)
+ }
+ 
+ 
+-
+-
+ /*
+   Function: gdImageCreateFromJpeg
+ 
+@@ -830,7 +827,7 @@ BGD_DECLARE(gdImagePtr) gdImageCreateFromJpegCtxEx(gdIOCtx *infile, int ignore_w
+ 
+ static int CMYKToRGB(int c, int m, int y, int k, int inverted)
+ {
+-	if(inverted) {
++	if (inverted) {
+ 		c = 255 - c;
+ 		m = 255 - m;
+ 		y = 255 - y;
+@@ -883,6 +880,7 @@ static int CMYKToRGB(int c, int m, int y, int k, int inverted)
+  */
+ 
+ /* Expanded data source object for gdIOCtx input */
++
+ typedef struct {
+ 	struct jpeg_source_mgr pub;	/* public fields */
+ 	gdIOCtx *infile;			/* source stream */
+@@ -949,7 +947,7 @@ static void init_source(j_decompress_ptr cinfo)
+ 
+ static boolean fill_input_buffer(j_decompress_ptr cinfo)
+ {
+-	my_src_ptr src = (my_src_ptr)cinfo->src;
++	my_src_ptr src = (my_src_ptr) cinfo->src;
+ 	/* 2.0.12: signed size. Thanks to Geert Jansen */
+ 	/* 2.0.14: some platforms (mingw-msys) don't have ssize_t. Call
+ 	 * an int an int.
+diff --git a/src/gd_matrix.c b/src/gd_matrix.c
+index 7ee2e6f00..582b80b44 100644
+--- a/src/gd_matrix.c
++++ b/src/gd_matrix.c
+@@ -33,7 +33,7 @@
+  * x_new = xx * x + xy * y + x0;
+  * y_new = yx * x + yy * y + y0;
+  * (end code)
+-*/
++ */
+ 
+ /**
+  * Function: gdAffineApplyToPointF
+diff --git a/src/gd_png.c b/src/gd_png.c
+index 58c9682ab..823da6603 100644
+--- a/src/gd_png.c
++++ b/src/gd_png.c
+@@ -739,9 +739,6 @@ BGD_DECLARE(void) gdImagePngCtx (gdImagePtr im, gdIOCtx * outfile)
+ 	gdImagePngCtxEx (im, outfile, -1);
+ }
+ 
+-
+-
+-
+ /*
+   Function: gdImagePngCtxEx
+ 
+diff --git a/src/gd_tga.c b/src/gd_tga.c
+index 6b684479e..fb0474761 100644
+--- a/src/gd_tga.c
++++ b/src/gd_tga.c
+@@ -141,7 +141,7 @@ BGD_DECLARE(gdImagePtr) gdImageCreateFromTgaCtx(gdIOCtx* ctx)
+  *	Reads the header block from a binary TGA file populating the referenced TGA structure.
+  *	\param ctx Pointer to TGA binary file
+  *	\param tga Pointer to TGA structure
+- *	\return int 1 on sucess, -1 on failure
++ *	\return int 1 on success, -1 on failure
+  */
+ int read_header_tga(gdIOCtx *ctx, oTga *tga)
+ {
+@@ -190,7 +190,6 @@ int read_header_tga(gdIOCtx *ctx, oTga *tga)
+ 		if(tga->ident == NULL) {
+ 			return -1;
+ 		}
+-
+ 		
+ 		if (gdGetBuf(tga->ident, tga->identsize, ctx) != tga->identsize) {
+ 			gd_error("fail to read header ident");
+@@ -205,7 +204,7 @@ int read_header_tga(gdIOCtx *ctx, oTga *tga)
+  *	Reads the image data block from a binary TGA file populating the referenced TGA structure.
+  *	\param ctx Pointer to TGA binary file
+  *	\param tga Pointer to TGA structure
+- *	\return int 0 on sucess, -1 on failure
++ *	\return int 0 on success, -1 on failure
+  */
+ int read_image_tga( gdIOCtx *ctx, oTga *tga )
+ {
+diff --git a/src/gd_wbmp.c b/src/gd_wbmp.c
+index aaad56519..9c5533d92 100644
+--- a/src/gd_wbmp.c
++++ b/src/gd_wbmp.c
+@@ -76,7 +76,7 @@
+  */
+ static void gd_putout(int i, void *out)
+ {
+-	gdPutC(i, (gdIOCtx *)out);
++	gdPutC(i, (gdIOCtx *) out);
+ }
+ 
+ /* gd_getin
+@@ -85,7 +85,7 @@ static void gd_putout(int i, void *out)
+  */
+ static int gd_getin(void *in)
+ {
+-	return (gdGetC((gdIOCtx *)in));
++	return (gdGetC((gdIOCtx *) in));
+ }
+ 
+ static int _gdImageWBMPCtx(gdImagePtr image, int fg, gdIOCtx *out);
+@@ -171,9 +171,9 @@ BGD_DECLARE(gdImagePtr) gdImageCreateFromWBMPCtx(gdIOCtx *infile)
+ 
+ 	/* fill in image (in a wbmp 1 = white/ 0 = black) */
+ 	pos = 0;
+-	for(row = 0; row < wbmp->height; row++) {
+-		for(col = 0; col < wbmp->width; col++) {
+-			if(wbmp->bitmap[pos++] == WBMP_WHITE) {
++	for (row = 0; row < wbmp->height; row++) {
++		for (col = 0; col < wbmp->width; col++) {
++			if (wbmp->bitmap[pos++] == WBMP_WHITE) {
+ 				gdImageSetPixel(im, col, row, white);
+ 			} else {
+ 				gdImageSetPixel(im, col, row, black);
+diff --git a/src/gd_webp.c b/src/gd_webp.c
+index 50872c608..4eb925217 100644
+--- a/src/gd_webp.c
++++ b/src/gd_webp.c
+@@ -8,7 +8,6 @@
+ #include "config.h"
+ #endif /* HAVE_CONFIG_H */
+ 
+-
+ #include <stdio.h>
+ #include <math.h>
+ #include <string.h>
+@@ -73,7 +72,6 @@ BGD_DECLARE(gdImagePtr) gdImageCreateFromWebp (FILE * inFile)
+ 	return im;
+ }
+ 
+-
+ /*
+   Function: gdImageCreateFromWebpPtr
+ 
+@@ -105,12 +103,13 @@ BGD_DECLARE(gdImagePtr) gdImageCreateFromWebpCtx (gdIOCtx * infile)
+ 	int    width, height;
+ 	uint8_t   *filedata = NULL;
+ 	uint8_t    *argb = NULL;
+-	unsigned char   *read, *temp;
+ 	ssize_t size = 0, n;
+ 	gdImagePtr im;
+ 	int x, y;
+ 	uint8_t *p;
+ 
++	unsigned char   *read, *temp;
++
+ 	do {
+ 		temp = gdRealloc(filedata, size+GD_WEBP_ALLOC_STEP);
+ 		if (temp) {
+diff --git a/src/gd_xbm.c b/src/gd_xbm.c
+index 6fd64d07e..b081bd555 100644
+--- a/src/gd_xbm.c
++++ b/src/gd_xbm.c
+@@ -107,7 +107,7 @@ BGD_DECLARE(gdImagePtr) gdImageCreateFromXbm(FILE * fd)
+ 				max_bit = 32768;
+ 			}
+ 			if (max_bit) {
+-                bytes = (width + 7) / 8 * height;
++				bytes = (width + 7) / 8 * height;
+ 				if (!bytes) {
+ 					return 0;
+ 				}
+diff --git a/src/gdfontg.h b/src/gdfontg.h
+index 5d85812cf..525cb3d99 100644
+--- a/src/gdfontg.h
++++ b/src/gdfontg.h
+@@ -2,8 +2,7 @@
+ #define _GDFONTG_H_ 1
+ 
+ #ifdef __cplusplus
+-extern "C"
+-{
++extern "C" {
+ #endif
+ 
+ /*
+diff --git a/src/gdfontl.c b/src/gdfontl.c
+index f7ce27263..b61923ec1 100644
+--- a/src/gdfontl.c
++++ b/src/gdfontl.c
+@@ -4651,8 +4651,7 @@ BGD_EXPORT_DATA_PROT gdFontPtr gdFontLarge = &gdFontLargeRep;
+  *
+  * Returns the built-in large font.
+  */
+-BGD_DECLARE(gdFontPtr)
+-gdFontGetLarge (void)
++BGD_DECLARE(gdFontPtr) gdFontGetLarge(void)
+ {
+ 	return gdFontLarge;
+ }
+diff --git a/src/gdfontmb.c b/src/gdfontmb.c
+index ed0f1ace7..9b3f457f2 100644
+--- a/src/gdfontmb.c
++++ b/src/gdfontmb.c
+@@ -3881,8 +3881,7 @@ BGD_EXPORT_DATA_PROT gdFontPtr gdFontMediumBold = &gdFontMediumBoldRep;
+  *
+  * Returns the built-in medium bold font.
+  */
+-BGD_DECLARE(gdFontPtr)
+-gdFontGetMediumBold (void)
++BGD_DECLARE(gdFontPtr) gdFontGetMediumBold(void)
+ {
+ 	return gdFontMediumBold;
+ }
+diff --git a/src/gdfontmb.h b/src/gdfontmb.h
+index e6807db4e..5ce9b3766 100644
+--- a/src/gdfontmb.h
++++ b/src/gdfontmb.h
+@@ -2,8 +2,7 @@
+ #define _GDFONTMB_H_ 1
+ 
+ #ifdef __cplusplus
+-extern "C"
+-{
++extern "C" {
+ #endif
+ 
+ /*
+diff --git a/src/gdfonts.c b/src/gdfonts.c
+index 7bb957d94..36aeebe11 100644
+--- a/src/gdfonts.c
++++ b/src/gdfonts.c
+@@ -3881,8 +3881,7 @@ BGD_EXPORT_DATA_PROT gdFontPtr gdFontSmall = &gdFontSmallRep;
+  *
+  * Returns the built-in small font.
+  */
+-BGD_DECLARE(gdFontPtr)
+-gdFontGetSmall (void)
++BGD_DECLARE(gdFontPtr) gdFontGetSmall(void)
+ {
+ 	return gdFontSmall;
+ }
+diff --git a/src/gdhelpers.h b/src/gdhelpers.h
+index 9b187af7f..d5ab2094d 100644
+--- a/src/gdhelpers.h
++++ b/src/gdhelpers.h
+@@ -12,27 +12,27 @@ extern "C" {
+ #include <stdlib.h>
+ #endif /* _WIN32_WCE */
+ 
+-	/* TBB: strtok_r is not universal; provide an implementation of it. */
++/* TBB: strtok_r is not universal; provide an implementation of it. */
+ 
+-	char *gd_strtok_r(char *s, const char *sep, char **state);
++char *gd_strtok_r(char *s, const char *sep, char **state);
+ 
+-	/* These functions wrap memory management. gdFree is
+-		in gd.h, where callers can utilize it to correctly
+-		free memory allocated by these functions with the
+-		right version of free(). */
+-	void *gdCalloc(size_t nmemb, size_t size) BGD_MALLOC;
+-	void *gdMalloc(size_t size) BGD_MALLOC;
+-	void *gdRealloc (void *ptr, size_t size);
+-	/* The extended version of gdReallocEx will free *ptr if the
+-	 * realloc fails */
+-	void *gdReallocEx (void *ptr, size_t size);
++/* These functions wrap memory management. gdFree is
++	in gd.h, where callers can utilize it to correctly
++	free memory allocated by these functions with the
++	right version of free(). */
++void *gdCalloc(size_t nmemb, size_t size) BGD_MALLOC;
++void *gdMalloc(size_t size) BGD_MALLOC;
++void *gdRealloc (void *ptr, size_t size);
++/* The extended version of gdReallocEx will free *ptr if the
++ * realloc fails */
++void *gdReallocEx (void *ptr, size_t size);
+ 
+-	/* Returns nonzero if multiplying the two quantities will
+-		result in integer overflow. Also returns nonzero if
+-		either quantity is negative. By Phil Knirsch based on
+-		netpbm fixes by Alan Cox. */
++/* Returns nonzero if multiplying the two quantities will
++	result in integer overflow. Also returns nonzero if
++	either quantity is negative. By Phil Knirsch based on
++	netpbm fixes by Alan Cox. */
+ 
+-	int overflow2(int a, int b);
++int overflow2(int a, int b);
+ 
+ 	/* 2.0.16: portable mutex support for thread safety. */
+ #if defined(CPP_SHARP)

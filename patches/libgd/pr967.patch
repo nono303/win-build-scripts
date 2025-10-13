@@ -1,0 +1,220 @@
+From 52492ac666de124e7a53f9de2439c1b893b67f70 Mon Sep 17 00:00:00 2001
+From: David Carlier <devnexen@gmail.com>
+Date: Sun, 7 Sep 2025 07:25:51 +0100
+Subject: [PATCH 1/2] gdImageEllipse/gdImageFilledEllipse overflow fix.
+
+ref: https://github.com/php/php-src/issues/19739
+---
+ src/gd.c                                  |  6 ++++++
+ tests/gdimageellipse/CMakeLists.txt       |  1 +
+ tests/gdimageellipse/Makemodule.am        |  3 ++-
+ tests/gdimageellipse/gh967.c              | 19 +++++++++++++++++++
+ tests/gdimagefilledellipse/CMakeLists.txt |  1 +
+ tests/gdimagefilledellipse/Makemodule.am  |  3 ++-
+ tests/gdimagefilledellipse/gh967.c        | 19 +++++++++++++++++++
+ 7 files changed, 50 insertions(+), 2 deletions(-)
+ create mode 100644 tests/gdimageellipse/gh967.c
+ create mode 100644 tests/gdimagefilledellipse/gh967.c
+
+diff --git a/src/gd.c b/src/gd.c
+index 768fd2065..0a0968d37 100644
+--- a/src/gd.c
++++ b/src/gd.c
+@@ -2214,6 +2214,9 @@ BGD_DECLARE(void) gdImageEllipse(gdImagePtr im, int mx, int my, int w, int h, in
+ 	bq = b * b;
+ 	dx = aq << 1;
+ 	dy = bq << 1;
++	if (bq > 0 && a > INT64_MAX / bq) {
++		return;
++	}
+ 	r  = a * bq;
+ 	rx = r << 1;
+ 	ry = 0;
+@@ -2266,6 +2269,9 @@ BGD_DECLARE(void) gdImageFilledEllipse (gdImagePtr im, int mx, int my, int w, in
+ 	bq = b * b;
+ 	dx = aq << 1;
+ 	dy = bq << 1;
++	if (bq > 0 && a > INT64_MAX / bq) {
++		return;
++	}
+ 	r  = a * bq;
+ 	rx = r << 1;
+ 	ry = 0;
+diff --git a/tests/gdimageellipse/CMakeLists.txt b/tests/gdimageellipse/CMakeLists.txt
+index b7d79f2cd..30699af48 100644
+--- a/tests/gdimageellipse/CMakeLists.txt
++++ b/tests/gdimageellipse/CMakeLists.txt
+@@ -1,6 +1,7 @@
+ IF(PNG_FOUND)
+ LIST(APPEND TESTS_FILES
+ 	bug00169
++	gh967
+ )
+ ENDIF(PNG_FOUND)
+ 
+diff --git a/tests/gdimageellipse/Makemodule.am b/tests/gdimageellipse/Makemodule.am
+index 11d207902..ab6216271 100644
+--- a/tests/gdimageellipse/Makemodule.am
++++ b/tests/gdimageellipse/Makemodule.am
+@@ -1,6 +1,7 @@
+ if HAVE_LIBPNG
+ libgd_test_programs += \
+-	gdimageellipse/bug00169
++	gdimageellipse/bug00169 \
++	gdimageellipse/gh967
+ endif
+ 
+ EXTRA_DIST += \
+diff --git a/tests/gdimageellipse/gh967.c b/tests/gdimageellipse/gh967.c
+new file mode 100644
+index 000000000..913b2bf7b
+--- /dev/null
++++ b/tests/gdimageellipse/gh967.c
+@@ -0,0 +1,19 @@
++#include "gd.h"
++#include "gdtest.h"
++#include <limits.h>
++
++int main()
++{
++	gdImagePtr im;
++
++	im = gdImageCreateTrueColor(400,300);
++	if (im == NULL) {
++		gdTestErrorMsg("image creation failed.\n");
++		return 1;
++	}
++
++	gdImageEllipse(im, 64, 150, 300, ULONG_MAX, gdImageColorAllocate(im, 150, 255, 0));
++	gdImageDestroy(im);
++	return 0;
++}
++
+diff --git a/tests/gdimagefilledellipse/CMakeLists.txt b/tests/gdimagefilledellipse/CMakeLists.txt
+index 48286e4a5..0900a03da 100644
+--- a/tests/gdimagefilledellipse/CMakeLists.txt
++++ b/tests/gdimagefilledellipse/CMakeLists.txt
+@@ -4,6 +4,7 @@ LIST(APPEND TESTS_FILES
+ 	bug00169
+ 	bug00191
+ 	github_bug_00238
++	gh967
+ )
+ ENDIF(PNG_FOUND)
+ 
+diff --git a/tests/gdimagefilledellipse/Makemodule.am b/tests/gdimagefilledellipse/Makemodule.am
+index 0a8868689..c1e025c4b 100644
+--- a/tests/gdimagefilledellipse/Makemodule.am
++++ b/tests/gdimagefilledellipse/Makemodule.am
+@@ -3,7 +3,8 @@ libgd_test_programs += \
+ 	gdimagefilledellipse/bug00010 \
+ 	gdimagefilledellipse/bug00169 \
+ 	gdimagefilledellipse/bug00191 \
+-	gdimagefilledellipse/github_bug_00238
++	gdimagefilledellipse/github_bug_00238 \
++	gdimagefilledellipse/gh967
+ endif
+ 
+ EXTRA_DIST += \
+diff --git a/tests/gdimagefilledellipse/gh967.c b/tests/gdimagefilledellipse/gh967.c
+new file mode 100644
+index 000000000..32a19babd
+--- /dev/null
++++ b/tests/gdimagefilledellipse/gh967.c
+@@ -0,0 +1,19 @@
++#include "gd.h"
++#include "gdtest.h"
++#include <limits.h>
++
++int main()
++{
++	gdImagePtr im;
++
++	im = gdImageCreateTrueColor(400,300);
++	if (im == NULL) {
++		gdTestErrorMsg("image creation failed.\n");
++		return 1;
++	}
++
++	gdImageFilledEllipse(im, 64, 150, 300, ULONG_MAX, gdImageColorAllocate(im, 150, 255, 0));
++	gdImageDestroy(im);
++	return 0;
++}
++
+
+From 2bc44ae1865af240a6feb9e57433397ddb82c63c Mon Sep 17 00:00:00 2001
+From: David Carlier <devnexen@gmail.com>
+Date: Wed, 24 Sep 2025 06:16:21 +0100
+Subject: [PATCH 2/2] add new helper
+
+---
+ src/gd.c          |  4 ++--
+ src/gd_security.c | 14 ++++++++++++++
+ src/gdhelpers.h   |  3 +++
+ 3 files changed, 19 insertions(+), 2 deletions(-)
+
+diff --git a/src/gd.c b/src/gd.c
+index 0a0968d37..f4125cb4d 100644
+--- a/src/gd.c
++++ b/src/gd.c
+@@ -2214,7 +2214,7 @@ BGD_DECLARE(void) gdImageEllipse(gdImagePtr im, int mx, int my, int w, int h, in
+ 	bq = b * b;
+ 	dx = aq << 1;
+ 	dy = bq << 1;
+-	if (bq > 0 && a > INT64_MAX / bq) {
++	if (overflow2_64(a, bq)) {
+ 		return;
+ 	}
+ 	r  = a * bq;
+@@ -2269,7 +2269,7 @@ BGD_DECLARE(void) gdImageFilledEllipse (gdImagePtr im, int mx, int my, int w, in
+ 	bq = b * b;
+ 	dx = aq << 1;
+ 	dy = bq << 1;
+-	if (bq > 0 && a > INT64_MAX / bq) {
++	if (overflow2_64(a, bq)) {
+ 		return;
+ 	}
+ 	r  = a * bq;
+diff --git a/src/gd_security.c b/src/gd_security.c
+index 0051ebf45..0ce5cf578 100644
+--- a/src/gd_security.c
++++ b/src/gd_security.c
+@@ -14,6 +14,7 @@
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
++#include <stdint.h>
+ #include <limits.h>
+ #include "gd.h"
+ #include "gd_errors.h"
+@@ -30,3 +31,16 @@ int overflow2(int a, int b)
+ 	}
+ 	return 0;
+ }
++
++int overflow2_64(int64_t a, int64_t b)
++{
++	if(a <= 0 || b <= 0) {
++		gd_error_ex(GD_WARNING, "one parameter to a memory allocation multiplication is negative or zero, failing operation gracefully\n");
++		return 1;
++	}
++	if(a > INT64_MAX / b) {
++		gd_error_ex(GD_WARNING, "product of memory allocation multiplication would exceed INT64_MAX, failing operation gracefully\n");
++		return 1;
++	}
++	return 0;
++}
+diff --git a/src/gdhelpers.h b/src/gdhelpers.h
+index 9b187af7f..a9afa69bc 100644
+--- a/src/gdhelpers.h
++++ b/src/gdhelpers.h
+@@ -34,6 +34,9 @@ void *gdReallocEx (void *ptr, size_t size);
+ 
+ int overflow2(int a, int b);
+ 
++	/* Same as above but for the int64_t type */
++	int overflow2_64(int64_t a, int64_t b);
++
+ 	/* 2.0.16: portable mutex support for thread safety. */
+ #if defined(CPP_SHARP)
+ # define gdMutexDeclare(x)

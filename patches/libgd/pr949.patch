@@ -1,0 +1,25 @@
+From b2bc5a5152bd8f972caa0d2803a64d791b69639a Mon Sep 17 00:00:00 2001
+From: "Christoph M. Becker" <cmbecker69@gmx.de>
+Date: Sat, 18 Jan 2025 16:21:14 +0100
+Subject: [PATCH] Attempt to fix CID 530895
+
+If `gaussian_coeffs()` was called with a non-positve `radius`, bad
+things could happen, but we don't that; we add an `assert()` as safety
+net, and to enlighten static analyzers.
+---
+ src/gd_filter.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/gd_filter.c b/src/gd_filter.c
+index 23bc564c0..936058467 100644
+--- a/src/gd_filter.c
++++ b/src/gd_filter.c
+@@ -842,6 +842,8 @@ gaussian_coeffs(int radius, double sigmaArg) {
+     double sum = 0;
+     int x, n, count;
+ 
++    assert(radius >= 1);
++
+     count = 2*radius + 1;
+ 
+     result = gdMalloc(sizeof(double) * count);

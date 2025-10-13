@@ -1,0 +1,45 @@
+From 1c2a3bf9d46e0a7dd8601ce5e5fe3b4d456fd9b5 Mon Sep 17 00:00:00 2001
+From: ArtSin <artsin666@gmail.com>
+Date: Wed, 18 Jun 2025 21:42:51 +0400
+Subject: [PATCH] Fix memory leak in gd_png.c
+
+`test_png_bug00338` has a leak, because `row_pointers` in `_gdImagePngCtxEx` is clobbered by `setjmp`. Fix by making it `volatile`. Remove second `row_pointers` declaration in the function to free memory in all cases.
+---
+ src/gd_png.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/src/gd_png.c b/src/gd_png.c
+index 43054f2b7..ec0818b86 100644
+--- a/src/gd_png.c
++++ b/src/gd_png.c
+@@ -782,7 +782,7 @@ static int _gdImagePngCtxEx(gdImagePtr im, gdIOCtx * outfile, int level)
+ 	png_color palette[gdMaxColors];
+ 	png_structp png_ptr;
+ 	png_infop info_ptr;
+-	png_bytep *row_pointers = NULL;
++	png_bytep *volatile row_pointers = NULL;
+ 	volatile int transparent = im->transparent;
+ 	volatile int remap = FALSE;
+ #ifdef PNG_SETJMP_SUPPORTED
+@@ -1058,7 +1058,6 @@ static int _gdImagePngCtxEx(gdImagePtr im, gdIOCtx * outfile, int level)
+ 		gdFree (row_pointers);
+ 	} else {
+ 		if (remap) {
+-			png_bytep *row_pointers;
+ 			if (overflow2(sizeof (png_bytep), height)) {
+ 				ret = 1;
+ 				goto bail;
+@@ -1084,12 +1083,11 @@ static int _gdImagePngCtxEx(gdImagePtr im, gdIOCtx * outfile, int level)
+ 			}
+ 
+ 			png_write_image (png_ptr, row_pointers);
++			png_write_end (png_ptr, info_ptr);
+ 
+ 			for (j = 0; j < height; ++j)
+ 				gdFree (row_pointers[j]);
+ 			gdFree (row_pointers);
+-
+-			png_write_end (png_ptr, info_ptr);
+ 		} else {
+ 			png_write_image (png_ptr, im->pixels);
+ 			png_write_end (png_ptr, info_ptr);

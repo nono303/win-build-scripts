@@ -1,0 +1,25 @@
+From c07cf36c2a4eedb12f156a575aa41f24fd0e8d27 Mon Sep 17 00:00:00 2001
+From: "Christoph M. Becker" <cmbecker69@gmx.de>
+Date: Tue, 7 Jan 2025 22:54:38 +0100
+Subject: [PATCH] Link tests to static libgd if only that had been built
+
+Otherwise linking of the test will fail.  Cf.
+<https://github.com/libgd/libgd/blob/239cca97d5f511df7e0990b01c29292169974e87/src/CMakeLists.txt#L161-L165>.
+---
+ tests/gdtest/CMakeLists.txt | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/tests/gdtest/CMakeLists.txt b/tests/gdtest/CMakeLists.txt
+index ff9fd7da8..94a3d0e24 100644
+--- a/tests/gdtest/CMakeLists.txt
++++ b/tests/gdtest/CMakeLists.txt
+@@ -4,4 +4,8 @@ if(WIN32)
+ 	LIST(APPEND GDTEST_FILES readdir.c)
+ endif()
+ add_library(gdTest STATIC ${GDTEST_FILES})
+-target_link_libraries(gdTest ${GD_LIB})
++if (BUILD_SHARED_LIBS)
++	target_link_libraries(gdTest ${GD_LIB})
++else()
++	target_link_libraries(gdTest ${GD_LIB_STATIC})
++endif()

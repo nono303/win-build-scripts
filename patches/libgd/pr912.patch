@@ -1,0 +1,217 @@
+From 74ebc1bf5191abd64e417ac035caf4949d280360 Mon Sep 17 00:00:00 2001
+From: "Christoph M. Becker" <cmbecker69@gmx.de>
+Date: Tue, 24 Dec 2024 15:13:17 +0100
+Subject: [PATCH 1/2] Fix BMP header size
+
+The `bfSize` member of `BITMAPFILEHEADER` is supposed to store the size
+of the BMP[1], and as such needs to be equal to the file size (for BMPs
+stored as files).  Otherwise that may trip up readers; at least they
+may assume that the BMP is corrupted; e.g. ImageMagick warns about
+this.
+
+While for compressed BMP images we actually calculate the size as we
+go, for uncompressed BMP images we calculate the size in advance, but
+so far did not account for padding of the rows.
+
+We also fix the `biSizeImage` of the `BITMAPINFOHEADER`[2] accordingly.
+
+[1] <https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-bitmapfileheader>
+[2] <https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-bitmapinfoheader>
+---
+ src/gd_bmp.c             | 16 ++++++++--------
+ tests/bmp/CMakeLists.txt |  1 +
+ tests/bmp/Makemodule.am  |  3 ++-
+ tests/bmp/bmp_size.c     | 25 +++++++++++++++++++++++++
+ 4 files changed, 36 insertions(+), 9 deletions(-)
+ create mode 100644 tests/bmp/bmp_size.c
+
+diff --git a/src/gd_bmp.c b/src/gd_bmp.c
+index c67e45fdd..0e93f3774 100644
+--- a/src/gd_bmp.c
++++ b/src/gd_bmp.c
+@@ -192,8 +192,14 @@ static int _gdImageBmpCtx(gdImagePtr im, gdIOCtxPtr out, int compression)
+ 		}
+ 	}
+ 
++	/* The line must be divisible by 4, else its padded with NULLs */
++	padding = ((int)(im->trueColor ? 3 : 1) * im->sx) % 4;
++	if (padding) {
++		padding = 4 - padding;
++	}
++
+ 	/* bitmap header + info header + data */
+-	total_size = 14 + info_size + bitmap_size;
++	total_size = 14 + info_size + bitmap_size + padding * im->sy;
+ 
+ 	/* write bmp header info */
+ 	gdPutBuf("BM", 2, out);
+@@ -209,18 +215,12 @@ static int _gdImageBmpCtx(gdImagePtr im, gdIOCtxPtr out, int compression)
+ 	gdBMPPutWord(out, 1); /* colour planes */
+ 	gdBMPPutWord(out, (im->trueColor ? 24 : 8)); /* bit count */
+ 	gdBMPPutInt(out, (compression ? BMP_BI_RLE8 : BMP_BI_RGB)); /* compression */
+-	gdBMPPutInt(out, bitmap_size); /* image size */
++	gdBMPPutInt(out, bitmap_size + padding * im->sy); /* image size */
+ 	gdBMPPutInt(out, 0); /* H resolution */
+ 	gdBMPPutInt(out, 0); /* V ressolution */
+ 	gdBMPPutInt(out, im->colorsTotal); /* colours used */
+ 	gdBMPPutInt(out, 0); /* important colours */
+ 
+-	/* The line must be divisible by 4, else its padded with NULLs */
+-	padding = ((int)(im->trueColor ? 3 : 1) * im->sx) % 4;
+-	if (padding) {
+-		padding = 4 - padding;
+-	}
+-
+ 	/* 8-bit colours */
+ 	if (!im->trueColor) {
+ 		for(i = 0; i< im->colorsTotal; ++i) {
+diff --git a/tests/bmp/CMakeLists.txt b/tests/bmp/CMakeLists.txt
+index 0cc1d067b..849adbae3 100644
+--- a/tests/bmp/CMakeLists.txt
++++ b/tests/bmp/CMakeLists.txt
+@@ -4,6 +4,7 @@ LIST(APPEND TESTS_FILES
+ 	bug00450
+ 	bmp_im2im
+ 	bug00276
++	bmp_size
+ )
+ 
+ ADD_GD_TESTS()
+diff --git a/tests/bmp/Makemodule.am b/tests/bmp/Makemodule.am
+index e7908f34c..657d39cc8 100644
+--- a/tests/bmp/Makemodule.am
++++ b/tests/bmp/Makemodule.am
+@@ -3,7 +3,8 @@ libgd_test_programs += \
+ 	bmp/bug00275 \
+ 	bmp/bug00450 \
+ 	bmp/bmp_im2im \
+-	bmp/bug00276
++	bmp/bug00276 \
++	bmp/bmp_size
+ 
+ EXTRA_DIST += \
+ 	bmp/bug00450.bmp \
+diff --git a/tests/bmp/bmp_size.c b/tests/bmp/bmp_size.c
+new file mode 100644
+index 000000000..4d0c5a1de
+--- /dev/null
++++ b/tests/bmp/bmp_size.c
+@@ -0,0 +1,25 @@
++/*
++ * Test that the bfSize field of the bitmap header matches the actual file size.
++ */
++
++#include "gd.h"
++#include "gdtest.h"
++
++int main()
++{
++    gdImagePtr im;
++    unsigned char *data;
++    int size;
++    unsigned int bfSize;
++
++    im = gdImageCreate(19, 19);
++    gdImageColorAllocate(im, 0, 0, 0); // bg
++    data = gdImageBmpPtr(im, &size, 0);
++    gdTestAssert(data != NULL);
++    gdTestAssert(data[0] == 'B' && data[1] == 'M');
++    /* bfSize is a 32 bit unsigned int in little-endian representation */
++    bfSize = data[5] << 24 | data[4] << 16 | data[3] << 8 | data[2];
++    gdTestAssertMsg(bfSize == size, "expected %d, got %u", size, bfSize);
++    gdImageDestroy(im);
++    return gdNumFailures();
++}
+
+From 7f91c3ab38b8111226490487803dfaf6ed70aaec Mon Sep 17 00:00:00 2001
+From: "Christoph M. Becker" <cmbecker69@gmx.de>
+Date: Wed, 25 Dec 2024 14:38:00 +0100
+Subject: [PATCH 2/2] Fix size calculation
+
+We need to cater to compressed images, too.
+
+We also augment the test case to check the `biSizeImage` field, and
+also do the checks for compressed images.
+---
+ src/gd_bmp.c         |  4 ++--
+ tests/bmp/bmp_size.c | 34 ++++++++++++++++++++++++++++++----
+ 2 files changed, 32 insertions(+), 6 deletions(-)
+
+diff --git a/src/gd_bmp.c b/src/gd_bmp.c
+index 0e93f3774..22cdb2fb9 100644
+--- a/src/gd_bmp.c
++++ b/src/gd_bmp.c
+@@ -199,11 +199,11 @@ static int _gdImageBmpCtx(gdImagePtr im, gdIOCtxPtr out, int compression)
+ 	}
+ 
+ 	/* bitmap header + info header + data */
+-	total_size = 14 + info_size + bitmap_size + padding * im->sy;
++	total_size = 14 + info_size + bitmap_size;
+ 
+ 	/* write bmp header info */
+ 	gdPutBuf("BM", 2, out);
+-	gdBMPPutInt(out, total_size);
++	gdBMPPutInt(out, total_size + padding * im->sy);
+ 	gdBMPPutWord(out, 0);
+ 	gdBMPPutWord(out, 0);
+ 	gdBMPPutInt(out, 14 + info_size);
+diff --git a/tests/bmp/bmp_size.c b/tests/bmp/bmp_size.c
+index 4d0c5a1de..4babdcb86 100644
+--- a/tests/bmp/bmp_size.c
++++ b/tests/bmp/bmp_size.c
+@@ -1,25 +1,51 @@
+ /*
+- * Test that the bfSize field of the bitmap header matches the actual file size.
++ * Test that the bfSize and biSizeImage fields of the bitmap header
++ * match the actual file size.
++ * 
++ * bfSize and biSizeImage are 32 bit unsigned int in little-endian format.
+  */
+ 
+ #include "gd.h"
+ #include "gdtest.h"
+ 
++#define OFFSET_BF_SIZE 2
++#define OFFSET_BI_SIZE_IMAGE 34
++#define BIMAP_HEADER_SIZE 14
++#define INFO_HEADER_SIZE 40
++#define PALETTE_SIZE 4
++#define HEADER_SIZE (BIMAP_HEADER_SIZE + INFO_HEADER_SIZE + PALETTE_SIZE)
++
++unsigned int get_field(unsigned char *data, int offset)
++{
++    return data[offset + 3] << 24 | data[offset + 2] << 16 | data[offset + 1] << 8 | data[offset];
++}
++
+ int main()
+ {
+     gdImagePtr im;
+     unsigned char *data;
+     int size;
+-    unsigned int bfSize;
++    unsigned int bfSize, biSizeImage;
+ 
+     im = gdImageCreate(19, 19);
+     gdImageColorAllocate(im, 0, 0, 0); // bg
++
+     data = gdImageBmpPtr(im, &size, 0);
+     gdTestAssert(data != NULL);
+     gdTestAssert(data[0] == 'B' && data[1] == 'M');
+-    /* bfSize is a 32 bit unsigned int in little-endian representation */
+-    bfSize = data[5] << 24 | data[4] << 16 | data[3] << 8 | data[2];
++    bfSize = get_field(data, OFFSET_BF_SIZE);
+     gdTestAssertMsg(bfSize == size, "expected %d, got %u", size, bfSize);
++    biSizeImage = get_field(data, OFFSET_BI_SIZE_IMAGE);
++    gdTestAssertMsg(biSizeImage == size - HEADER_SIZE, "expected %d, got %u", size - HEADER_SIZE, biSizeImage);
++
++    data = gdImageBmpPtr(im, &size, 1);
++    gdTestAssert(data != NULL);
++    gdTestAssert(data[0] == 'B' && data[1] == 'M');
++    bfSize = get_field(data, OFFSET_BF_SIZE);
++    gdTestAssertMsg(bfSize == size, "expected %d, got %u", size, bfSize);
++    biSizeImage = get_field(data, OFFSET_BI_SIZE_IMAGE);
++    gdTestAssertMsg(biSizeImage == size - HEADER_SIZE, "expected %d, got %u", size - HEADER_SIZE, biSizeImage);
++
+     gdImageDestroy(im);
+     return gdNumFailures();
+ }

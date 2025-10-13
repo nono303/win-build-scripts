@@ -1,0 +1,232 @@
+From ad9d75e736b38a70aa175aa2199aae3880b9e992 Mon Sep 17 00:00:00 2001
+From: "Christoph M. Becker" <cmbecker69@gmx.de>
+Date: Wed, 1 Jan 2025 19:32:10 +0100
+Subject: [PATCH 1/2] Introduce gdLayerDiff() and gdEffectDiff
+
+`gdLayerDiff()` calculates the difference of two given colors; the
+difference of each RGBA channel is assigned to the result.  The
+operation is commutative.
+
+The difference of any color `c` and `0x00000000` is always `c` (no-op);
+the difference of `c` and `0x7fffffff` is the inverted color (negation).
+Neither of these are particularly relevant (note that the latter is
+similar to `gdImageNegate()` but also inverts the alpha channel).
+However, some interesting effects can be created by only setting some
+channels, and possibly not to the maximum values.
+
+As usual, `gdEffectDiff` can be set with `gdImageAlphaBlending()` so it
+is applied for each `gdImageSetPixel()` call.  A particular interesting
+use case is to use `imagecopy()` to create a diff of two images.  Black
+pixels indicate no difference; the "brighter" the pixels, the larger
+the difference.  The result is similar to `gdTestImageDiff()` in our
+test suite (although less sophisticated).
+---
+ src/gd.c                             | 45 ++++++++++++++++++++++++++++
+ src/gd.h                             |  4 +++
+ tests/gdimagesetpixel/CMakeLists.txt |  1 +
+ tests/gdimagesetpixel/Makemodule.am  |  3 +-
+ tests/gdimagesetpixel/gdeffectdiff.c | 33 ++++++++++++++++++++
+ 5 files changed, 85 insertions(+), 1 deletion(-)
+ create mode 100644 tests/gdimagesetpixel/gdeffectdiff.c
+
+diff --git a/src/gd.c b/src/gd.c
+index 768fd2065..14193c078 100644
+--- a/src/gd.c
++++ b/src/gd.c
+@@ -1299,6 +1299,9 @@ BGD_DECLARE(void) gdImageSetPixel (gdImagePtr im, int x, int y, int color)
+ 					case gdEffectMultiply :
+ 						im->tpixels[y][x] = gdLayerMultiply(im->tpixels[y][x], color);
+ 						break;
++					case gdEffectDiff :
++						im->tpixels[y][x] = gdLayerDiff(im->tpixels[y][x], color);
++						break;
+ 				}
+ 			} else {
+ 				im->pixels[y][x] = color;
+@@ -4070,6 +4073,7 @@ BGD_DECLARE(int) gdImageCompare (gdImagePtr im1, gdImagePtr im2)
+  *   - <gdImageAlphaBlending>
+  *   - <gdLayerOverlay>
+  *   - <gdLayerMultiply>
++ *   - <gdLayerDiff>
+  */
+ BGD_DECLARE(int) gdAlphaBlend (int dst, int src)
+ {
+@@ -4131,6 +4135,7 @@ static int gdAlphaOverlayColor (int src, int dst, int max );
+  *   - <gdImageAlphaBlending>
+  *   - <gdAlphaBlend>
+  *   - <gdLayerMultiply>
++ *   - <gdLayerDiff>
+  */
+ BGD_DECLARE(int) gdLayerOverlay (int dst, int src)
+ {
+@@ -4170,6 +4175,7 @@ static int gdAlphaOverlayColor (int src, int dst, int max )
+  *   - <gdImageAlphaBlending>
+  *   - <gdAlphaBlend>
+  *   - <gdLayerOverlay>
++ *   - <gdLayerDiff>
+  */
+ BGD_DECLARE(int) gdLayerMultiply (int dst, int src)
+ {
+@@ -4193,6 +4199,45 @@ BGD_DECLARE(int) gdLayerMultiply (int dst, int src)
+ 		);
+ }
+ 
++/**
++ * Function: gdLayerDiff
++ *
++ * Difference of two colors; commutative operation.
++ *
++ * Parameters:
++ *   dst - The first color.
++ *   src - The second color.
++ *
++ * See also:
++ *   - <gdImageAlphaBlending>
++ *   - <gdAlphaBlend>
++ *   - <gdLayerMultiply>
++ *   - <gdLayerOverlay>
++ */
++BGD_DECLARE(int) gdLayerDiff (int dst, int src)
++{
++	int r1,b1,g1,a1,r2,b2,g2,a2;
++	int diff_a,diff_r,diff_g,diff_b,diff;
++
++	a1 = gdTrueColorGetAlpha(dst);
++	a2 = gdTrueColorGetAlpha(src);
++	diff_a = abs(a1 - a2);
++
++	r1 = gdTrueColorGetRed(dst);
++	r2 = gdTrueColorGetRed(src);
++	diff_r = abs(r1 - r2);
++
++	g1 = gdTrueColorGetGreen(dst);
++	g2 = gdTrueColorGetGreen(src);
++	diff_g = abs(g1 - g2);
++
++	b1 = gdTrueColorGetBlue(dst);
++	b2 = gdTrueColorGetBlue(src);
++	diff_b = abs(b1 - b2);
++
++	return gdTrueColorAlpha(diff_r, diff_g, diff_b, diff_a);
++}
++
+ /**
+  *	Function: gdImageAlphaBlending
+  *
+diff --git a/src/gd.h b/src/gd.h
+index b03323889..943a49a2d 100644
+--- a/src/gd.h
++++ b/src/gd.h
+@@ -220,6 +220,8 @@ extern "C" {
+  *   gdEffectOverlay    - overlay pixels, see <gdLayerOverlay>
+  *   gdEffectMultiply   - overlay pixels with multiply effect, see
+  *                        <gdLayerMultiply>
++ *   gdEffectDiff       - replace pixels with their difference, see
++ *                        <gdLayerDiff>
+  *
+  * See also:
+  *   - <gdImageAlphaBlending>
+@@ -229,6 +231,7 @@ extern "C" {
+ #define gdEffectNormal 2
+ #define gdEffectOverlay 3
+ #define gdEffectMultiply 4
++#define gdEffectDiff 5
+ 
+ #define GD_TRUE 1
+ #define GD_FALSE 0
+@@ -246,6 +249,7 @@ extern "C" {
+ BGD_DECLARE(int) gdAlphaBlend (int dest, int src);
+ BGD_DECLARE(int) gdLayerOverlay (int dest, int src);
+ BGD_DECLARE(int) gdLayerMultiply (int dest, int src);
++BGD_DECLARE(int) gdLayerDiff (int dest, int src);
+ 
+ 
+ /**
+diff --git a/tests/gdimagesetpixel/CMakeLists.txt b/tests/gdimagesetpixel/CMakeLists.txt
+index 675bbfd4b..33c3b18fe 100644
+--- a/tests/gdimagesetpixel/CMakeLists.txt
++++ b/tests/gdimagesetpixel/CMakeLists.txt
+@@ -2,6 +2,7 @@ LIST(APPEND TESTS_FILES
+ 	bug00186
+ 	gdeffectoverlay
+ 	gdeffectmultiply
++	gdeffectdiff
+ )
+ 
+ IF(PNG_FOUND)
+diff --git a/tests/gdimagesetpixel/Makemodule.am b/tests/gdimagesetpixel/Makemodule.am
+index 1eb022453..75d5a4840 100644
+--- a/tests/gdimagesetpixel/Makemodule.am
++++ b/tests/gdimagesetpixel/Makemodule.am
+@@ -1,7 +1,8 @@
+ libgd_test_programs += \
+ 	gdimagesetpixel/bug00186 \
+ 	gdimagesetpixel/gdeffectmultiply \
+-	gdimagesetpixel/gdeffectoverlay
++	gdimagesetpixel/gdeffectoverlay \
++	gdimagesetpixel/gdeffectdiff
+ 
+ if HAVE_LIBPNG
+ libgd_test_programs += \
+diff --git a/tests/gdimagesetpixel/gdeffectdiff.c b/tests/gdimagesetpixel/gdeffectdiff.c
+new file mode 100644
+index 000000000..f00dcd13b
+--- /dev/null
++++ b/tests/gdimagesetpixel/gdeffectdiff.c
+@@ -0,0 +1,33 @@
++#include "gd.h"
++#include "gdtest.h"
++
++int main()
++{
++	gdImagePtr im;
++	int x, y, c;
++	int r=0;
++
++
++	im = gdImageCreateTrueColor(256, 256);
++	gdImageAlphaBlending( im, gdEffectReplace );
++	for (x=0; x<256; x++) {
++		for (y=0; y<256; y++) {
++			c = (y/2 << 24) + (x << 16) + (x << 8) + x;
++			gdImageSetPixel(im, x, y, c );
++		}
++	}
++	gdImageAlphaBlending( im, gdEffectDiff );
++	gdImageFilledRectangle(im, 0, 0, 255, 255, 0xff7f00);
++
++	if (gdTrueColorGetGreen(gdImageGetPixel(im, 0, 128)) != 0x7f) {
++		r = 1;
++	}
++	if (gdTrueColorGetGreen(gdImageGetPixel(im, 128, 128)) != 0x01) {
++		r = 1;
++	}
++	if (gdTrueColorGetGreen(gdImageGetPixel(im, 255, 128)) != 0x80) {
++		r = 1;
++	}
++	gdImageDestroy(im);
++	return r;
++}
+
+From 0f0b48fbf3f6ecff8a1621dfb0a09500f762093c Mon Sep 17 00:00:00 2001
+From: "Christoph M. Becker" <cmbecker69@gmx.de>
+Date: Wed, 1 Jan 2025 19:46:58 +0100
+Subject: [PATCH 2/2] remove unused variable
+
+---
+ src/gd.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/gd.c b/src/gd.c
+index 14193c078..2d3f3a8e9 100644
+--- a/src/gd.c
++++ b/src/gd.c
+@@ -4217,7 +4217,7 @@ BGD_DECLARE(int) gdLayerMultiply (int dst, int src)
+ BGD_DECLARE(int) gdLayerDiff (int dst, int src)
+ {
+ 	int r1,b1,g1,a1,r2,b2,g2,a2;
+-	int diff_a,diff_r,diff_g,diff_b,diff;
++	int diff_a,diff_r,diff_g,diff_b;
+ 
+ 	a1 = gdTrueColorGetAlpha(dst);
+ 	a2 = gdTrueColorGetAlpha(src);

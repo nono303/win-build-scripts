@@ -1,0 +1,89 @@
+From 98a56a6c5e749f5d5f3cdfa47e7abe96a4842bf6 Mon Sep 17 00:00:00 2001
+From: "Christoph M. Becker" <cmbecker69@gmx.de>
+Date: Sat, 28 Dec 2024 13:37:00 +0100
+Subject: [PATCH] Drop useless remapping of palette in gdImageNeuQuant()
+
+This code has been taken from pngnq.c[1] where it makes much sense,
+because the image is always output in PNG format.  For our case, it
+does not make sense, since the output format may be different, and we
+already have respective remapping code in gd_png.c.  Furthermore, this
+remapping may destroy the advantageous topological properties of the
+NeuQuant color quantization[2].
+
+And actually, that code wouldn't work as it's supposed to, since the
+alpha channel cannot be 255 for libgd, and as such the remapping just
+inverses the order of the palette entries.
+
+[1] <https://sourceforge.net/projects/pngnq/>
+[2] <https://web.archive.org/web/20070416070905/http://members.ozemail.com.au/~dekker/NeuQuant.pdf>, section 6
+---
+ src/gd_nnquant.c | 35 +++++++++--------------------------
+ 1 file changed, 9 insertions(+), 26 deletions(-)
+
+diff --git a/src/gd_nnquant.c b/src/gd_nnquant.c
+index 00a4459c5..f52e76126 100644
+--- a/src/gd_nnquant.c
++++ b/src/gd_nnquant.c
+@@ -497,8 +497,6 @@ BGD_DECLARE(gdImagePtr) gdImageNeuQuant(gdImagePtr im, const int max_color, int
+ 	const int newcolors = max_color;
+ 	const int verbose = 1;
+ 
+-	int bot_idx, top_idx; /* for remapping of indices */
+-	int remap[MAXNETSIZE];
+ 	int i,x;
+ 
+ 	unsigned char map[MAXNETSIZE][4];
+@@ -557,19 +555,6 @@ BGD_DECLARE(gdImagePtr) gdImageNeuQuant(gdImagePtr im, const int max_color, int
+ 	unbiasnet(nnq);
+ 	getcolormap(nnq, (unsigned char*)map);
+ 	inxbuild(nnq);
+-	/* remapping colormap to eliminate opaque tRNS-chunk entries... */
+-	for (top_idx = newcolors-1, bot_idx = x = 0;  x < newcolors;  ++x) {
+-		if (map[x][3] == 255) { /* maxval */
+-			remap[x] = top_idx--;
+-		} else {
+-			remap[x] = bot_idx++;
+-		}
+-	}
+-	if (bot_idx != top_idx + 1) {
+-		gd_error("  internal logic error: remapped bot_idx = %d, top_idx = %d\n",
+-			 bot_idx, top_idx);
+-		goto done;
+-	}
+ 
+ 	dst = gdImageCreate(gdImageSX(im), gdImageSY(im));
+ 	if (!dst) {
+@@ -577,11 +562,11 @@ BGD_DECLARE(gdImagePtr) gdImageNeuQuant(gdImagePtr im, const int max_color, int
+ 	}
+ 
+ 	for (x = 0; x < newcolors; ++x) {
+-		dst->red[remap[x]] = map[x][0];
+-		dst->green[remap[x]] = map[x][1];
+-		dst->blue[remap[x]] = map[x][2];
+-		dst->alpha[remap[x]] = map[x][3];
+-		dst->open[remap[x]] = 0;
++		dst->red[x] = map[x][0];
++		dst->green[x] = map[x][1];
++		dst->blue[x] = map[x][2];
++		dst->alpha[x] = map[x][3];
++		dst->open[x] = 0;
+ 		dst->colorsTotal++;
+ 	}
+ 
+@@ -593,12 +578,10 @@ BGD_DECLARE(gdImagePtr) gdImageNeuQuant(gdImagePtr im, const int max_color, int
+ 		/* Assign the new colors */
+ 		offset = row * gdImageSX(im) * 4;
+ 		for(i=0; i < gdImageSX(im); i++) {
+-			p[i] = remap[
+-			           inxsearch(nnq, rgba[i * 4 + offset + ALPHA],
+-			                     rgba[i * 4 + offset + BLUE],
+-			                     rgba[i * 4 + offset + GREEN],
+-			                     rgba[i * 4 + offset + RED])
+-			       ];
++			p[i] = inxsearch(nnq, rgba[i * 4 + offset + ALPHA],
++			                      rgba[i * 4 + offset + BLUE],
++			                      rgba[i * 4 + offset + GREEN],
++			                      rgba[i * 4 + offset + RED]);
+ 		}
+ 	}
+ 
