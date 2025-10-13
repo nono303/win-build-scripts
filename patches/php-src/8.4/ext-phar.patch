@@ -1,0 +1,17 @@
+diff --git a/ext/phar/config.w32 b/ext/phar/config.w32
+index 3f935eab23..82dc73c130 100644
+--- a/ext/phar/config.w32
++++ b/ext/phar/config.w32
+@@ -13,10 +13,10 @@ if (PHP_PHAR != "no") {
+ 		ADD_FLAG("CFLAGS_PHAR", "/D COMPILE_DL_PHAR ");
+ 	}
+ 	if (PHP_PHAR_NATIVE_SSL != "no") {
+-		if (CHECK_LIB("libeay32st.lib", "phar")) {
++		if (CHECK_LIB("libcrypto.lib", "phar")) {
+ 			/* We don't really need GDI for this, but there's no
+ 			way to avoid linking it in the static openssl build */
+-			ADD_FLAG("LIBS_PHAR", "libeay32st.lib gdi32.lib");
++			ADD_FLAG("LIBS_PHAR", "libcrypto.lib gdi32.lib");
+ 			if (PHP_DEBUG == "no") {
+ 				/* Silence irrelevant-to-us warning in release builds */
+ 				ADD_FLAG("LDFLAGS_PHAR", "/IGNORE:4089 ");

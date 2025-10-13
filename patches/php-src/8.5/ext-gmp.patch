@@ -1,0 +1,32 @@
+diff --git a/ext/gmp/gmp.c b/ext/gmp/gmp.c
+index 8cf20c90fc7..9003dfbffb5 100644
+--- a/ext/gmp/gmp.c
++++ b/ext/gmp/gmp.c
+@@ -40,10 +40,10 @@
+ #define GMP_ROUND_PLUSINF   1
+ #define GMP_ROUND_MINUSINF  2
+ 
+-#ifdef mpir_version
+-#define GMP_MPIR_VERSION_STRING ((char *) mpir_version)
++#ifdef _MSC_MPIR_VERSION
++#define GMP_MPIR_VERSION_STRING ((char *) _MSC_MPIR_VERSION)
+ #endif
+-#define GMP_VERSION_STRING ((char *) gmp_version)
++#define GMP_VERSION_STRING ((char *) GMP_VERSION)
+ 
+ #define GMP_MSW_FIRST     (1 << 0)
+ #define GMP_LSW_FIRST     (1 << 1)
+@@ -619,10 +619,10 @@ ZEND_MODULE_INFO_D(gmp)
+ {
+ 	php_info_print_table_start();
+ 	php_info_print_table_row(2, "gmp support", "enabled");
+-#ifdef mpir_version
+-	php_info_print_table_row(2, "MPIR version", mpir_version);
++#ifdef _MSC_MPIR_VERSION
++	php_info_print_table_row(2, "MPIR version", _MSC_MPIR_VERSION);
+ #else
+-	php_info_print_table_row(2, "GMP version", gmp_version);
++	php_info_print_table_row(2, "GMP version", GMP_VERSION);
+ #endif
+ 	php_info_print_table_end();
+ }

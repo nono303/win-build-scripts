@@ -1,0 +1,13 @@
+diff --git "a/ext/intl/config.w32" "b/ext/intl/config.w32"
+index fb3f0212729..c225af8180e 100644
+--- "a/ext/intl/config.w32"
++++ "b/ext/intl/config.w32"
+@@ -125,7 +125,7 @@ if (PHP_INTL != "no") {
+ 		/* Compat for ICU before 58.1.*/
+ 		CHECK_LIB("icule.lib", "intl", PHP_INTL);
+ 		CHECK_LIB("iculx.lib", "intl", PHP_INTL);
+-		ADD_FLAG("CFLAGS_INTL", "/std:c++17 /EHsc /DUNISTR_FROM_CHAR_EXPLICIT=explicit /DUNISTR_FROM_STRING_EXPLICIT=explicit /DU_NO_DEFAULT_INCLUDE_UTF_HEADERS=1 /DU_HIDE_OBSOLETE_UTF_OLD_H=1");
++		ADD_FLAG("CFLAGS_INTL", "/EHsc /DUNISTR_FROM_CHAR_EXPLICIT=explicit /DUNISTR_FROM_STRING_EXPLICIT=explicit /DU_NO_DEFAULT_INCLUDE_UTF_HEADERS=1 /DU_HIDE_OBSOLETE_UTF_OLD_H=1");
+ 	} else {
+ 		WARNING("intl not enabled; libraries and/or headers not found");
+ 	}

@@ -1,0 +1,13 @@
+diff --git a/ext/iconv/iconv.c b/ext/iconv/iconv.c
+index 157ee41a11a..0eb3da3a74a 100644
+--- a/ext/iconv/iconv.c
++++ b/ext/iconv/iconv.c
+@@ -68,7 +68,7 @@ static const char *get_iconv_version(void) {
+ 
+ #ifdef HAVE_LIBICONV
+ 	static char buf[16];
+-	snprintf(buf, sizeof(buf), "%d.%d", _libiconv_version >> 8, _libiconv_version & 0xff);
++	snprintf(buf, sizeof(buf), "%d.%d", _LIBICONV_VERSION >> 8, _LIBICONV_VERSION & 0xff);
+ 	version = buf;
+ #elif defined(HAVE_GLIBC_ICONV)
+ 	version = gnu_get_libc_version();

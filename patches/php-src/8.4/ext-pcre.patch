@@ -1,0 +1,65 @@
+diff --git "a/ext/pcre/config.w32" "b/ext/pcre/config.w32"
+index 7c09456b896..84371f4a97b 100644
+--- "a/ext/pcre/config.w32"
++++ "b/ext/pcre/config.w32"
+@@ -1,18 +1,45 @@
+ // vim:ft=javascript
+ 
+-EXTENSION("pcre", "php_pcre.c", false /* never shared */,
+-		"-Iext/pcre/pcre2lib -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1");
+-ADD_SOURCES("ext/pcre/pcre2lib", "pcre2_auto_possess.c pcre2_chartables.c pcre2_compile.c pcre2_config.c pcre2_context.c pcre2_chkdint.c pcre2_dfa_match.c pcre2_error.c pcre2_jit_compile.c pcre2_maketables.c pcre2_match.c pcre2_match_data.c pcre2_newline.c pcre2_ord2utf.c pcre2_pattern_info.c pcre2_serialize.c pcre2_string_utils.c pcre2_study.c pcre2_substitute.c  pcre2_substring.c pcre2_tables.c pcre2_ucd.c pcre2_valid_utf.c pcre2_xclass.c pcre2_find_bracket.c pcre2_convert.c pcre2_extuni.c pcre2_script_run.c", "pcre");
+-ADD_DEF_FILE("ext\\pcre\\php_pcre.def");
++ARG_WITH("external-pcre", "Use external library for PCRE support", "no");
++ARG_WITH("pcre-jit", "Enable PCRE JIT support", "yes");
+ 
+-AC_DEFINE('HAVE_BUNDLED_PCRE', 1, 'Define to 1 if PHP uses the bundled PCRE library.');
+-AC_DEFINE('PCRE2_CODE_UNIT_WIDTH', 8, 'Number of bits in non-UTF mode for PCRE library.');
+-AC_DEFINE("PCRE2_STATIC", 1, "Define to 1 if PCRE library is built statically.");
+-PHP_PCRE="yes";
+-PHP_INSTALL_HEADERS("ext/pcre", "php_pcre.h pcre2lib/");
+-ADD_FLAG("CFLAGS_PCRE", " /D HAVE_CONFIG_H /D HAVE_MEMMOVE");
++if (PHP_EXTERNAL_PCRE != "no") {
++	PCRE2_EXTLIB_NAME=CHECK_LIB("pcre2-8.lib;pcre2-16.lib", "pcre").replace(/^.*[\\/]/, '')
++	PCRE2_CODE_UNIT_WIDTH=PCRE2_EXTLIB_NAME.match(/pcre2-(\d+)\.lib/)[1]
++	if (PCRE2_EXTLIB_NAME) {
++		EXTENSION("pcre", "php_pcre.c", false /* never shared */, "-DZEND_ENABLE_STATIC_TSRMLS_CACHE=1");
++		PHP_PCRE="yes";
++		MESSAGE("* Use external library " + PCRE2_EXTLIB_NAME + " for " + PCRE2_CODE_UNIT_WIDTH + " bits support");
+ 
+-ARG_WITH("pcre-jit", "Enable PCRE JIT support", "yes");
+-if (PHP_PCRE_JIT != "no") {
+-	AC_DEFINE('HAVE_PCRE_JIT_SUPPORT', 1, 'Define to 1 if PCRE JIT is enabled and supported.');
+-}
++		AC_DEFINE('HAVE_PCRE', 1, 'Define to 1 if PHP uses external PCRE library.');
++		AC_DEFINE('PCRE2_CODE_UNIT_WIDTH', PCRE2_CODE_UNIT_WIDTH, 'Number of bits in non-UTF mode for PCRE library.');
++		AC_DEFINE("PCRE2_STATIC", 0, "Define to 1 if PCRE library is built statically.");
++		
++		PHP_INSTALL_HEADERS("ext/pcre", "php_pcre.h");
++		
++		if (PHP_PCRE_JIT != "no") {
++			if(GREP_HEADER("pcre2.h", "PCRE2_CONFIG_JIT +1")) {
++				MESSAGE("* JIT is enabled and supported in " + PCRE2_EXTLIB_NAME);
++				AC_DEFINE('HAVE_PCRE_JIT_SUPPORT', 1, 'Define to 1 if PCRE JIT is enabled and supported.');
++			} else {
++				MESSAGE("* JIT supported required but not found in " + PCRE2_EXTLIB_NAME);
++			}
++		}
++	}
++} else {
++	EXTENSION("pcre", "php_pcre.c", false /* never shared */, "/D ZEND_ENABLE_STATIC_TSRMLS_CACHE=1 /D HAVE_MEMMOVE=1 /D HAVE_CONFIG_H=1 /I ext/pcre/pcre2lib");
++	PHP_PCRE="yes";
++
++	ADD_SOURCES("ext/pcre/pcre2lib", "pcre2_auto_possess.c pcre2_chartables.c pcre2_compile.c pcre2_compile_class.c pcre2_config.c pcre2_context.c pcre2_chkdint.c pcre2_dfa_match.c pcre2_error.c pcre2_jit_compile.c pcre2_maketables.c pcre2_match.c pcre2_match_data.c pcre2_newline.c pcre2_ord2utf.c pcre2_pattern_info.c pcre2_serialize.c pcre2_string_utils.c pcre2_study.c pcre2_substitute.c  pcre2_substring.c pcre2_tables.c pcre2_ucd.c pcre2_valid_utf.c pcre2_xclass.c pcre2_find_bracket.c pcre2_convert.c pcre2_extuni.c pcre2_script_run.c", "pcre");
++	ADD_DEF_FILE("ext\\pcre\\php_pcre.def");
++	
++	AC_DEFINE('HAVE_BUNDLED_PCRE', 1, 'Define to 1 if PHP uses the bundled PCRE library.');
++	AC_DEFINE('PCRE2_CODE_UNIT_WIDTH', 8, 'Number of bits in non-UTF mode for PCRE library.');
++	AC_DEFINE("PCRE2_STATIC", 1, "Define to 1 if PCRE library is built statically.");
++	
++	PHP_INSTALL_HEADERS("ext/pcre", "php_pcre.h pcre2lib/");
++	
++	if (PHP_PCRE_JIT != "no") {
++		AC_DEFINE('HAVE_PCRE_JIT_SUPPORT', 1, 'Define to 1 if PCRE JIT is enabled and supported.');
++	}
++}
+\ No newline at end of file

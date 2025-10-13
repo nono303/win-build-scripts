@@ -1,0 +1,17 @@
+diff --git a/ext/libxml/config.w32 b/ext/libxml/config.w32
+index d836f0efcb..f54a69610a 100644
+--- a/ext/libxml/config.w32
++++ b/ext/libxml/config.w32
+@@ -3,8 +3,10 @@
+ ARG_WITH("libxml", "LibXML support", "yes");
+ 
+ if (PHP_LIBXML == "yes") {
+-	if (CHECK_LIB("libxml2_a_dll.lib;libxml2_a.lib", "libxml") &&
+-			CHECK_LIB("libiconv_a.lib;iconv_a.lib;libiconv.lib;iconv.lib", "libxml") &&
++	if (CHECK_LIB("libxml2_a_dll.lib", "libxml") &&
++	    CHECK_LIB("libiconv.lib", "libxml") &&
++	    CHECK_LIB("liblzma.lib", "libxml") &&
++	    CHECK_LIB("icuuc.lib", "libxml") &&
+ 			CHECK_HEADER_ADD_INCLUDE("libxml/parser.h", "CFLAGS_LIBXML", PHP_PHP_BUILD + "\\include\\libxml2") &&
+ 			CHECK_HEADER_ADD_INCLUDE("libxml/tree.h", "CFLAGS_LIBXML", PHP_PHP_BUILD + "\\include\\libxml2") &&
+ 			ADD_EXTENSION_DEP('libxml', 'iconv')) {
