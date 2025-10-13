@@ -1,14 +1,8 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
 cd /D %PATH_SRC%\%1
-REM https://github.com/libgd/libgd/pull/514 implementation of mkstemp in src/webpng.c under win
-REM https://github.com/libgd/libgd/pull/692 Application-supplied memory allocators
-REM https://github.com/libgd/libgd/pull/787 Improve image crop performance
-REM https://github.com/libgd/libgd/pull/851 Use libwebp pc module instead of libs
-for %%X in (514 692 851) do (
-	echo     # apply %1_pr%%X.patch
-	git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\%1_pr%%X.patch
-)
+REM https://github.com/libgd/libgd/pull/
+for /f "tokens=*" %%P in ('dir %PATH_PATCHES%\libgd\pr*.patch /s/b') do (call %PATH_UTILS%\gitapply %%P)
 cd /D %PATH_BUILD%\%1
 
 REM missing libraqm, libfontconfig, libimagequant

@@ -5,8 +5,7 @@ if %CURL_PATCH_WIN_OPENSSL% == 1 (
 		setlocal enabledelayedexpansion
 		set CURL_DESC=openssl using Windows CA store patch
 		cd /D %PATH_SRC%\%1
-		echo     # apply curl_ca-win.patch
-		git apply --verbose --ignore-space-change --ignore-whitespace %PATH_MODULES%\curl_ca-win.patch
+		call %PATH_UTILS%\gitapply %PATCHES_MODULES%\curl\ca-win.patch
 		cd /D %PATH_BUILD%\%1
 	)
 	echo    ^>^>^> !CURL_DESC!
