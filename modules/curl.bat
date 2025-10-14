@@ -75,10 +75,8 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -D_CURL_PREFILL=ON ^
 %PATH_SRC%\%1
 
-pause
 %NINJA%
 xcopy /C /F /Y %PATH_BUILD%\%1\lib\libcurl_static-mod_md.lib %PATH_INSTALL%\lib_unused\*
-exit /B
 
 REM CURL_USE_SCHANNEL - MultiSSL cannot be enabled with HTTP/3 and vice versa
 REM ENABLE_THREADED_RESOLVER must be OFF cf. https://github.com/curl/curl/issues/16379
@@ -88,6 +86,7 @@ REM	-- Enabled SSL backends: OpenSSL v3+
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_UNITY_BUILD=1 ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
+-DIMPORT_LIB_SUFFIX= ^
 -DBUILD_CURL_EXE=ON ^
 -DBUILD_SHARED_LIBS=ON ^
 -DBUILD_STATIC_LIBS=OFF ^
