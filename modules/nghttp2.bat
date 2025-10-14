@@ -1,15 +1,5 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
 
-sed -i 's/_EVENT_/EVENT__/g' %CYGPATH_SRC%/%1/cmake/FindLibevent.cmake
-	:: fix useless cmake warning when ENABLE_HTTP3=OFF and openssl doesn't support QUIC
-sed -i 's/WARNING "OpenSSL/"   OpenSSL/g' %CYGPATH_SRC%/%1/CMakeLists.txt
-
-if %QUIC_BUILD% == 1 (
-	set QUIC=-DENABLE_HTTP3=ON
-) else (
-	set QUIC=-DENABLE_HTTP3=OFF
-)
-
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DENABLE_LIB_ONLY=ON ^
@@ -31,7 +21,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DBUILD_SHARED_LIBS=YES ^
 -DCMAKE_DISABLE_FIND_PACKAGE_Systemd=1 ^
 -DWITH_WOLFSSL=OFF ^
-%QUIC% ^
+-DENABLE_HTTP3=ON ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
