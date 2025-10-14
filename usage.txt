@@ -19,8 +19,8 @@ Usage: go command [options]
       * libevent
       * libev
       * cares
-      * nghttp3 (if QUIC enabled)
-      * ngtcp2  (if QUIC enabled)
+      * nghttp3
+      * ngtcp2
       * nghttp2
       * libssh2
       * zstd

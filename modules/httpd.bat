@@ -8,11 +8,12 @@ if NOT "%2"=="svn" (
 
 call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
 set HTTPD_VERSION=%SCM_TAG%
+REM EXTRA_INCLUDES for patched /support/ab.c(192): include: 'ms/applink.c'
 set CMAKE_HTTPD_COMMON=%CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 	-DCMAKE_INSTALL_PREFIX=%PATH_INSTALL:\=/% ^
 	-DINSTALL_PDB=ON ^
 	-DINSTALL_MANUAL=OFF ^
-	-DEXTRA_INCLUDES=%PATH_SRC:\=/%/%OPENSSL_SCM%
+	-DEXTRA_INCLUDES=%PATH_SRC:\=/%/openssl
 if "%2"=="svn" (
 	cmake %CMAKE_HTTPD_COMMON% ^
 	-DENABLE_MODULES=O ^

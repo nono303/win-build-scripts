@@ -72,5 +72,4 @@ set VSCMD_SKIP_SENDTELEMETRY=1
 	REM https://github.com/microsoft/vcpkg/blob/master/docs/users/config-environment.md
 set VCPKG_KEEP_ENV_VARS=VSCMD_SKIP_SENDTELEMETRY
 call %PATH_VS%\Common7\Tools\VsDevCmd.bat -arch=%ARCH% -vcvars_ver=%vcvars_ver% -winsdk=%WKITVER% -no_logo
-call quic.bat %QUIC_BUILD%
 @echo off

@@ -1,3 +1,4 @@
+
 @echo off
 	REM force native openssl
 call quic 0
@@ -17,7 +18,7 @@ python gen-make.py ^
 --with-jdk=%JAVA_HOME% ^
 --with-serf=%PATH_INSTALL%\include ^
 --with-sqlite=%PATH_INSTALL% ^
---with-openssl=%PATH_INSTALL_OSSL% ^
+--with-openssl=%PATH_INSTALL% ^
 --with-apr=%PATH_INSTALL% ^
 --with-apr-iconv=%PATH_INSTALL% ^
 --with-apr_memcache=%PATH_INSTALL% ^
