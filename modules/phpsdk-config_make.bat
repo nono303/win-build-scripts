@@ -2,157 +2,144 @@ echo phpsdk-config_make for %PHPVER%
 cd /D %PHP_SRC_DIR%
 
 REM ################# PHP8 #################
-set PHP8_COMMON_CONFIGURE=^
-	--enable-native-intrinsics=sse,sse2%intrinsics% ^
-	--with-php-build=%PATH_INSTALL% ^
-	--with-verbosity=2
 if %PHPVER% == 8.4 (
-	set phpveropts=	%PHP8_COMMON_CONFIGURE% ^
-		--enable-opcache=shared ^
-		--without-uncritical-warn-choke
+	set SHARED_OPCACHE=php_opcache.dll
+	set CONFIGURE_VERSION=^
+	--enable-opcache=shared ^
+	--without-uncritical-warn-choke
+	set CONFIGURE_VERSION_DISABLED=^
+	--disable-opcache
 )
 if %PHPVER% == 8.5 (
-	set phpveropts=	%PHP8_COMMON_CONFIGURE%	
+	set SHARED_OPCACHE=
+	set CONFIGURE_VERSION=
+	set CONFIGURE_VERSION_DISABLED=
 )
-set PHP_COMMON_CONFIGURE=^
-	--disable-cli-win32 ^
-	--disable-debug ^
-	--disable-embed ^
-	--disable-ipv6 ^
-	--disable-phpdbg ^
-	--disable-phpdbgs ^
-	--disable-security-flags ^
-	--disable-test-ini ^
-	--enable-debug-pack ^
-	--enable-fd-setsize=2048 ^
-	--enable-object-out-dir=../build/ ^
-	--without-analyzer ^
-	--without-enchant ^
-	--without-snmp ^
-	--without-ldap ^
-	--without-pgsql ^
-	--with-toolset=vs ^
-	--with-cygwin=%PATH_BIN_CYGWIN% ^
-	--with-extra-includes=%PATH_INSTALL_OSSL%\include;%PATH_INSTALL%\include;%PATH_INSTALL%\_proj\include;%PATH_INSTALL%\_gdal\include ^
-	--with-extra-libs=%PATH_INSTALL_OSSL%\lib%PHP_XTRALIBS%;%PATH_INSTALL%\lib;%PATH_INSTALL%\_proj\lib;%PATH_INSTALL%\_gdal\lib ^
-	--with-mp=%NUMBER_OF_PROCESSORS%
-
-REM [%PHPVER% != %PHP_BUILD_TYPE%]: add --disable-zlib ^ if not memcache
-if %PHP_BUILD_TYPE% == xdebug	(set PHP_PARTIAL_BUILD=--with-xdebug=shared --with-xdebug-compression --disable-zlib)
-if %PHP_BUILD_TYPE% == memcache	(set PHP_PARTIAL_BUILD=--enable-memcache=shared)
-if %PHP_BUILD_TYPE% == brotli	(set PHP_PARTIAL_BUILD=--enable-brotli=shared)
-if %PHP_BUILD_TYPE% == igbinary	(set PHP_PARTIAL_BUILD=--enable-igbinary=shared)
-if %PHP_BUILD_TYPE% == parallel	(set PHP_PARTIAL_BUILD=--with-parallel=shared)
-if %PHP_BUILD_TYPE% == ffi	(set PHP_PARTIAL_BUILD=--with-ffi=shared)
-
-if %PHP_BUILD_TYPE% == win7 (
-	set FINAL_CONFIGURE=^
-	--enable-debug-pack ^
-	--enable-fd-setsize=2048 ^
-	--enable-object-out-dir=../build/ ^
-	--with-toolset=vs ^
-	--with-cygwin=%PATH_BIN_CYGWIN% ^
-	--with-extra-includes=%PATH_INSTALL%\include\libxml2;%PATH_INSTALL%\include ^
-	--with-extra-libs=%PATH_INSTALL%\lib ^
-	--with-mp=%NUMBER_OF_PROCESSORS% ^
-	--without-gd ^
+set CONFIGURE_WIN7_DISABLED=^
 	--without-geos ^
+	--disable-zstd ^
+	--without-gd ^
 	--without-readline ^
 	--disable-zip ^
+	--disable-com-dotnet ^
 	--disable-brotli ^
-	--disable-zstd ^
-	--with-iconv=%PATH_INSTALL% ^
-	--with-iconv=shared ^
-	--with-libxml=shared ^
-	%ZTS% ^
-	%phparchopts%
-) else (
-if %PHPVER% == %PHP_BUILD_TYPE% (
-	set FINAL_CONFIGURE=%PHP_COMMON_CONFIGURE% ^
-	--enable-mbstring=shared ^
-	--enable-phar-native-ssl ^
-	--enable-brotli=shared ^
-	--enable-com-dotnet=shared ^
-	--enable-exif=shared ^
-	--enable-fileinfo=shared ^
-	--enable-ftp=shared ^
-	--enable-intl=shared ^
-	--enable-pdo=shared ^
-	--enable-soap=shared ^
-	--enable-sockets=shared ^
-	--with-bz2=shared ^
-	--with-curl=shared ^
-	--with-iconv=%PATH_INSTALL% ^
-	--with-iconv=shared ^
-	--with-mysqli=shared ^
-	--with-openssl=shared ^
-	--with-pdo-mysql=shared ^
-	--with-pdo-sqlite=shared ^
-	--with-sqlite3=shared ^
-	--with-tidy=shared ^
-	--with-xdiff=shared ^
-	--with-geos=shared ^
-	--with-sodium=shared ^
-	--with-xml=shared ^
-	--enable-xmlreader=shared ^
-	--enable-xmlwriter=shared ^
-	--with-simplexml=shared ^
-	--with-dom=shared ^
-	--enable-zip=shared ^
-	--enable-zlib=shared ^
-	--with-readline=shared ^
-	--enable-pdo=shared ^
-	--enable-calendar=shared ^
-	--enable-ctype=shared ^
-	--enable-bcmath=shared ^
-	--with-gd=shared ^
-	--with-xsl=shared ^
-	--with-gmp=shared ^
-	--enable-zstd=shared ^
-	--with-libxml=shared ^
-	--with-proj=shared ^
-	--with-ogr=shared ^
-	--enable-memcache=shared ^
-	--with-xdebug=shared ^
-	--with-xdebug-compression ^
-	--enable-timezonedb=shared ^
-	--enable-sync=shared ^
-	--enable-igbinary=shared ^
-	--with-ffi=shared ^
-	%ZTS% ^
-	%phpveropts% ^
-	%phparchopts%
-) else (
-	set FINAL_CONFIGURE=%PHP_COMMON_CONFIGURE% ^
+	--disable-zlib
+set CONFIGURE_PARTIAL_DISABLED=^
+	%CONFIGURE_WIN7_DISABLED% ^
+	%CONFIGURE_VERSION_DISABLED% ^
 	--disable-bcmath ^
 	--disable-brotli ^
 	--disable-calendar ^
-	--disable-com-dotnet ^
 	--disable-ctype ^
 	--without-dom ^
 	--disable-filter ^
-	--without-gd ^
 	--without-iconv ^
 	--without-libxml ^
 	--without-mysqlnd ^
-	--disable-opcache ^
 	--disable-phar ^
 	--without-simplexml ^
 	--disable-tokenizer ^
 	--without-xml ^
 	--disable-xmlwriter ^
-	--disable-xmlreader ^
-	--disable-zip ^
-	--without-geos ^
-	--without-readline ^
-	--disable-zstd ^
-	%PHP_PARTIAL_BUILD% ^
+	--disable-xmlreader
+set CONFIGURE_COMMON_DISABLED=^
+	--without-analyzer ^
+	--without-enchant ^
+	--without-snmp ^
+	--without-ldap ^
+	--without-pgsql ^
+	--disable-embed ^
+	--disable-ipv6 ^
+	--disable-cli-win32
+set CONFIGURE_COMMON=^
+	--enable-native-intrinsics=sse,sse2%intrinsics% ^
+	--with-php-build=%PATH_INSTALL% ^
+	--with-verbosity=2 ^
+	--disable-debug ^
+	--disable-phpdbg ^
+	--disable-phpdbgs ^
+	--disable-security-flags ^
+	--enable-debug-pack ^
+	--enable-fd-setsize=2048 ^
+	--enable-object-out-dir=../build/ ^
+	--with-toolset=vs ^
+	--with-cygwin=%PATH_BIN_CYGWIN% ^
+	--with-extra-includes=%PATH_INSTALL%\include;%PATH_INSTALL%\_proj\include;%PATH_INSTALL%\_gdal\include ^
+	--with-extra-libs=%PHP_XTRALIBS%;%PATH_INSTALL%\lib;%PATH_INSTALL%\_proj\lib;%PATH_INSTALL%\_gdal\lib ^
+	--with-mp=%NUMBER_OF_PROCESSORS%
+REM [%PHPVER% != %PHP_BUILD_TYPE%]: add --disable-zlib ^ if not memcache
+if %PHP_BUILD_TYPE% == xdebug	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --with-xdebug=shared --with-xdebug-compression)
+if %PHP_BUILD_TYPE% == memcache	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --enable-memcache=shared --enable-zlib)
+if %PHP_BUILD_TYPE% == brotli	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --enable-brotli=shared)
+if %PHP_BUILD_TYPE% == igbinary	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --enable-igbinary=shared)
+if %PHP_BUILD_TYPE% == parallel	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --with-parallel=shared)
+if %PHP_BUILD_TYPE% == ffi	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --with-ffi=shared)
+if %PHP_BUILD_TYPE% == core	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED%)
+if %PHP_BUILD_TYPE% == win7	(set CONFIGURE_PARTIAL=%CONFIGURE_WIN7_DISABLED%)
+
+if %PHPVER% == %PHP_BUILD_TYPE% (set FINAL_CONFIGURE=^
+	%CONFIGURE_COMMON% ^
+	%CONFIGURE_COMMON_DISABLED% ^
+	%CONFIGURE_VERSION% ^
 	%ZTS% ^
-	%phpveropts% ^
-	%phparchopts%
+		--enable-mbstring=shared ^
+		--enable-phar-native-ssl ^
+		--enable-brotli=shared ^
+		--enable-com-dotnet=shared ^
+		--enable-exif=shared ^
+		--enable-fileinfo=shared ^
+		--enable-ftp=shared ^
+		--enable-intl=shared ^
+		--enable-pdo=shared ^
+		--enable-soap=shared ^
+		--enable-sockets=shared ^
+		--with-bz2=shared ^
+		--with-curl=shared ^
+		--with-iconv=shared ^
+		--with-mysqli=shared ^
+		--with-openssl=shared ^
+		--with-pdo-mysql=shared ^
+		--with-pdo-sqlite=shared ^
+		--with-sqlite3=shared ^
+		--with-tidy=shared ^
+		--with-xdiff=shared ^
+		--with-geos=shared ^
+		--with-sodium=shared ^
+		--with-xml=shared ^
+		--enable-xmlreader=shared ^
+		--enable-xmlwriter=shared ^
+		--with-simplexml=shared ^
+		--with-dom=shared ^
+		--enable-zip=shared ^
+		--enable-zlib=shared ^
+		--with-readline=shared ^
+		--enable-pdo=shared ^
+		--enable-calendar=shared ^
+		--enable-ctype=shared ^
+		--enable-bcmath=shared ^
+		--with-gd=shared ^
+		--with-xsl=shared ^
+		--with-gmp=shared ^
+		--enable-zstd=shared ^
+		--with-libxml=shared ^
+		--with-proj=shared ^
+		--with-ogr=shared ^
+		--enable-memcache=shared ^
+		--with-xdebug=shared ^
+		--with-xdebug-compression ^
+		--enable-timezonedb=shared ^
+		--enable-sync=shared ^
+		--enable-igbinary=shared ^
+		--with-ffi=shared ^
+		--with-external-pcre
+) else (set FINAL_CONFIGURE=^
+	%CONFIGURE_COMMON% ^
+	%CONFIGURE_PARTIAL% ^
+	%ZTS%
 )
-)
+
 echo configure %FINAL_CONFIGURE:	=%
+echo %FINAL_CONFIGURE% > %PATH_LOGS%\configure-call_%PHP_BUILD_TYPE%.txt
 call configure %FINAL_CONFIGURE%
 
 	REM ARFLAGS
@@ -192,7 +179,7 @@ for %%A in (exe dll) do (
 if %PHPVER% == %PHP_BUILD_TYPE% (
 	for /f "tokens=*" %%G in ('dir %PHP_BUILD_DIR%\php8%TSLIBSUF%.lib /s/b') do (xcopy /C /F /Y %%G %PATH_INSTALL%\lib\*)
 	call %PATH_MODULES_COMMON%\init.bat php-src varonly
-	for %%X in (php-cgi.exe php.exe php8%TSLIBSUF%.dll php_curl.dll php_fileinfo.dll php_gd.dll php_intl.dll php_opcache.dll php_openssl.dll php_tidy.dll php_bcmath.dll php_bz2.dll php_calendar.dll php_com_dotnet.dll php_ctype.dll php_dom.dll php_exif.dll php_ftp.dll php_iconv.dll php_mysqli.dll php_pdo_mysql.dll php_pdo_sqlite.dll php_readline.dll php_simplexml.dll php_soap.dll php_sockets.dll php_sodium.dll php_sqlite3.dll php_xml.dll php_xmlreader.dll php_xmlwriter.dll php_zip.dll php_zlib.dll php_xsl.dll php_mbstring.dll php_gmp.dll php_ffi.dll) do (
+	for %%X in (php-cgi.exe php.exe %SHARED_OPCACHE% php8%TSLIBSUF%.dll php_curl.dll php_fileinfo.dll php_gd.dll php_intl.dll php_openssl.dll php_tidy.dll php_bcmath.dll php_bz2.dll php_calendar.dll php_com_dotnet.dll php_ctype.dll php_dom.dll php_exif.dll php_ftp.dll php_iconv.dll php_mysqli.dll php_pdo_mysql.dll php_pdo_sqlite.dll php_readline.dll php_simplexml.dll php_soap.dll php_sockets.dll php_sodium.dll php_sqlite3.dll php_xml.dll php_xmlreader.dll php_xmlwriter.dll php_zip.dll php_zlib.dll php_xsl.dll php_mbstring.dll php_gmp.dll php_ffi.dll) do (
 		call do_php %PATH_UTILS%\sub\version.php php-src %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\%%X "build:%TSNTS%"
 	)
 	call %PATH_MODULES_COMMON%\init.bat pecl-text-xdiff varonly
@@ -222,8 +209,8 @@ if %PHPVER% == %PHP_BUILD_TYPE% (
 )
 if %PHP_BUILD_TYPE% == win7	(
 	call %PATH_MODULES_COMMON%\init.bat php-src varonly
-	for %%X in (php-cgi.exe php.exe php8%TSLIBSUF%.dll php_iconv.dll php_opcache.dll) do (
-		call do_php %PATH_UTILS%\sub\version.php php-src %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\%%X "build:%TSNTS%"
+	for %%X in (php-cgi.exe php.exe %SHARED_OPCACHE% php8%TSLIBSUF%.dll) do (
+		call do_php %PATH_UTILS%\sub\version.php php-src %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\%%X "Win7-patched build:%TSNTS%"
 	)
 	REM TODO nmake test
 )
