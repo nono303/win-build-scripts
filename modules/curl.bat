@@ -1,16 +1,5 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
 
-if %CURL_PATCH_WIN_OPENSSL% == 1 (
-	if %ARG_KEEPSRC% == 0 (
-		setlocal enabledelayedexpansion
-		set CURL_DESC=openssl using Windows CA store patch
-		cd /D %PATH_SRC%\%1
-		call %PATH_UTILS%\gitapply %PATCHES_MODULES%\curl\ca-win.patch
-		cd /D %PATH_BUILD%\%1
-	)
-	echo    ^>^>^> !CURL_DESC!
-)
-
 	REM set LIBCURL_TIMESTAMP
 for /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\date -u`) do (set LIBCURL_TIMESTAMP=%%F)
 sed -i 's/\[unreleased\]/%LIBCURL_TIMESTAMP%/g' %CYGPATH_SRC%/%1/include/curl/curlver.h
@@ -65,6 +54,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DENABLE_UNIX_SOCKETS=ON ^
 -DUSE_WIN32_IDN=ON ^
 -DUSE_APPLE_IDN=OFF ^
+-DUSE_APPLE_SECTRUST=OFF ^
 -DUSE_WIN32_LDAP=ON ^
 -DHAVE_LDAP_SSL=ON ^
 -DENABLE_UNICODE=ON ^
@@ -90,6 +80,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCURL_ZLIB=ON ^
 -DLIBCURL_OUTPUT_NAME=libcurl ^
 -DCURL_CLANG_TIDY=OFF ^
+-DCURL_CODE_COVERAGE=OFF ^
 -DUSE_SSLS_EXPORT=ON ^
 -D_CURL_PREFILL=ON ^
 %QUIC% ^
