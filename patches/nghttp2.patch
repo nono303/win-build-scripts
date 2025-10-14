@@ -1,0 +1,13 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 6e0a5236..775a8c0c 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -176,7 +176,7 @@ add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND})
+ # openssl (for src)
+ include(CheckSymbolExists)
+ set(HAVE_OPENSSL    ${OPENSSL_FOUND})
+-if(NOT ENABLE_LIB_ONLY AND OPENSSL_FOUND)
++if(OPENSSL_FOUND)
+   set(OPENSSL_INCLUDE_DIRS  ${OPENSSL_INCLUDE_DIR})
+   cmake_push_check_state()
+   set(CMAKE_REQUIRED_INCLUDES   "${OPENSSL_INCLUDE_DIR}")
