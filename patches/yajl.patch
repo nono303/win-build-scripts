@@ -1,3 +1,7 @@
+ CMakeLists.txt     | 19 -------------------
+ src/CMakeLists.txt |  9 ++++-----
+ 2 files changed, 4 insertions(+), 24 deletions(-)
+
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 471eee1..6b1b98a 100644
 --- a/CMakeLists.txt
@@ -39,7 +43,7 @@ index 471eee1..6b1b98a 100644
 -ADD_CUSTOM_TARGET(test-api ${CMAKE_CURRENT_SOURCE_DIR}/test/api/run_tests.sh
 -                  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/test/api)
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index 99cf9e9..919451d 100644
+index 99cf9e9..71a2d96 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
 @@ -35,7 +35,7 @@ SET (shareDir ${CMAKE_CURRENT_BINARY_DIR}/../${YAJL_DIST_NAME}/share/pkgconfig)
@@ -47,20 +51,21 @@ index 99cf9e9..919451d 100644
  SET(LIBRARY_OUTPUT_PATH ${libDir})
  
 -ADD_LIBRARY(yajl_s STATIC ${SRCS} ${HDRS} ${PUB_HDRS})
-+ADD_LIBRARY(yajl_static STATIC ${SRCS} ${HDRS} ${PUB_HDRS})
++# ADD_LIBRARY(yajl_static STATIC ${SRCS} ${HDRS} ${PUB_HDRS})
  
  ADD_LIBRARY(yajl SHARED ${SRCS} ${HDRS} ${PUB_HDRS})
  
-@@ -69,7 +69,7 @@ FOREACH (header ${PUB_HDRS})
+@@ -69,8 +69,7 @@ FOREACH (header ${PUB_HDRS})
  
    EXEC_PROGRAM(${CMAKE_COMMAND} ARGS -E copy_if_different ${header} ${incDir})
  
 -  ADD_CUSTOM_COMMAND(TARGET yajl_s POST_BUILD
-+  ADD_CUSTOM_COMMAND(TARGET yajl_static POST_BUILD
-       COMMAND ${CMAKE_COMMAND} -E copy_if_different ${header} ${incDir})
+-      COMMAND ${CMAKE_COMMAND} -E copy_if_different ${header} ${incDir})
++#  ADD_CUSTOM_COMMAND(TARGET yajl_static POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different ${header} ${incDir})
  ENDFOREACH (header ${PUB_HDRS})
  
-@@ -78,10 +78,10 @@ INCLUDE_DIRECTORIES(${incDir}/..)
+ INCLUDE_DIRECTORIES(${incDir}/..)
+@@ -78,10 +77,10 @@ INCLUDE_DIRECTORIES(${incDir}/..)
  # at build time you may specify the cmake variable LIB_SUFFIX to handle
  # 64-bit systems which use 'lib64'
  INSTALL(TARGETS yajl

@@ -1,0 +1,72 @@
+ CMakeLists.txt | 43 +++++++++++++++++++++++--------------------
+ 1 file changed, 23 insertions(+), 20 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index a01240e..c951d1a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -94,6 +94,7 @@ endif ()
+ set( LIB_TYPE STATIC )  # set default message
+ 
+ option( BUILD_SHARED_LIB "Set OFF to NOT build shared library"     ON  )
++option( BUILD_STATIC_LIB "Set OFF to NOT build static library"     OFF  )
+ 
+ # Issue #326 - Allow linkage choice of console app tidy
+ option( TIDY_CONSOLE_SHARED "Set ON to link with shared(DLL) lib." OFF )
+@@ -397,26 +398,28 @@ endif ()
+ # Static Library
+ #   The static library always builds.
+ #------------------------------------------------------------------------
+-set(name tidy-static)
+-add_library ( ${name} STATIC ${CFILES} ${HFILES} ${LIBHFILES} )
+-target_include_directories( ${name} PUBLIC "${PROJECT_SOURCE_DIR}/include")
+-if (WIN32)
+-    set_target_properties( ${name} PROPERTIES 
+-                           OUTPUT_NAME ${LIB_NAME}_static ) 
+-else ()
+-    set_target_properties( ${name} PROPERTIES 
+-                           OUTPUT_NAME ${LIB_NAME} )
+-
++if (BUILD_STATIC_LIB)
++    set(name tidy_a)
++    add_library ( ${name} STATIC ${CFILES} ${HFILES} ${LIBHFILES} )
++    target_include_directories( ${name} PUBLIC "${PROJECT_SOURCE_DIR}/include")
++    if (WIN32)
++        set_target_properties( ${name} PROPERTIES 
++                               OUTPUT_NAME ${LIB_NAME}_static ) 
++    else ()
++        set_target_properties( ${name} PROPERTIES 
++                               OUTPUT_NAME lib${LIB_NAME} )
++    
++    endif ()
++    if (NOT TIDY_CONSOLE_SHARED) # user wants default static linkage
++        list ( APPEND add_LIBS ${name} )
++    endif ()    
++    install(TARGETS ${name}
++            RUNTIME DESTINATION ${BIN_INSTALL_DIR}
++            ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
++            LIBRARY DESTINATION ${LIB_INSTALL_DIR}
++            )
++    install( FILES ${HFILES} DESTINATION ${INCLUDE_INSTALL_DIR} )
+ endif ()
+-if (NOT TIDY_CONSOLE_SHARED) # user wants default static linkage
+-    list ( APPEND add_LIBS ${name} )
+-endif ()    
+-install(TARGETS ${name}
+-        RUNTIME DESTINATION ${BIN_INSTALL_DIR}
+-        ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
+-        LIBRARY DESTINATION ${LIB_INSTALL_DIR}
+-        )
+-install( FILES ${HFILES} DESTINATION ${INCLUDE_INSTALL_DIR} )
+ 
+ #------------------------------------------------------------------------
+ # Dynamic Library
+@@ -430,7 +433,7 @@ if (BUILD_SHARED_LIB)
+     add_library ( ${name} SHARED ${CFILES} ${HFILES} ${LIBHFILES} )
+     target_include_directories( ${name} PUBLIC "${PROJECT_SOURCE_DIR}/include")
+     set_target_properties( ${name} PROPERTIES 
+-                                   OUTPUT_NAME ${LIB_NAME} )
++                                   OUTPUT_NAME lib${LIB_NAME} )
+     set_target_properties( ${name} PROPERTIES
+                                    VERSION   ${LIBTIDY_VERSION}
+                                    SOVERSION ${TIDY_SO_VERSION}
