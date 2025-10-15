@@ -1,7 +1,16 @@
-diff --git "a/src/memcache.c" "b/src/memcache.c"
-index 524ca47..b541d99 100644
---- "a/src/memcache.c"
-+++ "b/src/memcache.c"
+diff --git a/src/memcache.c b/src/memcache.c
+index 524ca47..e73aa75 100644
+--- a/src/memcache.c
++++ b/src/memcache.c
+@@ -26,7 +26,7 @@
+ #include "php.h"
+ #include "php_ini.h"
+ #include "ext/standard/info.h"
+-#include "ext/standard/php_string.h"
++#include "Zend/zend_smart_string.h"
+ #include "php_memcache.h"
+ 
+ /* True global resources - no need for thread safety here */
 @@ -901,14 +901,25 @@ static void php_mmc_store(INTERNAL_FUNCTION_PARAMETERS, int op) /* {{{ */
  	zend_long flags = 0, exptime = 0, cas = 0;
  
@@ -471,7 +480,7 @@ index 524ca47..b541d99 100644
  	if (user_length < 1 || password_length < 1) {
  		RETURN_FALSE;
 diff --git a/src/memcache_binary_protocol.c b/src/memcache_binary_protocol.c
-index b14093b..06b180a 100644
+index 77a93f9..38f32c9 100644
 --- a/src/memcache_binary_protocol.c
 +++ b/src/memcache_binary_protocol.c
 @@ -26,7 +26,7 @@
@@ -483,8 +492,20 @@ index b14093b..06b180a 100644
  #  include "win32/php_stdint.h"
  # else
  #  include <stdint.h>
+diff --git a/src/memcache_pool.c b/src/memcache_pool.c
+index bd1429c..767fcb2 100644
+--- a/src/memcache_pool.c
++++ b/src/memcache_pool.c
+@@ -35,7 +35,6 @@
+ #include "php_network.h"
+ #include "ext/standard/crc32.h"
+ #include "ext/standard/php_var.h"
+-#include "ext/standard/php_string.h"
+ #include "Zend/zend_smart_string.h"
+ #include "zend_smart_str.h"
+ #include "memcache_pool.h"
 diff --git a/src/memcache_pool.h b/src/memcache_pool.h
-index c37b6d5..b2b03c9 100644
+index 106bf4e..cbf1380 100644
 --- a/src/memcache_pool.h
 +++ b/src/memcache_pool.h
 @@ -35,7 +35,7 @@
@@ -496,3 +517,39 @@ index c37b6d5..b2b03c9 100644
  #  include "win32/php_stdint.h"
  # else
  #  include <stdint.h>
+diff --git a/src/memcache_session.c b/src/memcache_session.c
+index 55a6e82..970854f 100644
+--- a/src/memcache_session.c
++++ b/src/memcache_session.c
+@@ -29,7 +29,7 @@
+ #include "php_variables.h"
+ 
+ #include "SAPI.h"
+-#include "Zend/zend_smart_string.h"
++#include "memcache_pool.h"
+ #include "ext/standard/url.h"
+ #include "ext/session/php_session.h"
+ #ifdef PHP_WIN32
+From 0fa9b4a7f50bb31da7eb45ed3b3eba82f985f06c Mon Sep 17 00:00:00 2001
+From: Remi Collet <remi@remirepo.net>
+Date: Wed, 15 Oct 2025 09:56:40 +0200
+Subject: [PATCH] clean deprecated ini
+
+---
+ tests/pecl63142.phpt | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/tests/pecl63142.phpt b/tests/pecl63142.phpt
+index 5eef5f9..bea5697 100644
+--- a/tests/pecl63142.phpt
++++ b/tests/pecl63142.phpt
+@@ -2,9 +2,6 @@
+ PECL bug #63142 (memcache 3.0.7 segfaults with object (un)serialization)
+ --SKIPIF--
+ <?php include 'connect.inc'; ?>
+---INI--
+-;fix me later
+-report_memleaks=0
+ --FILE--
+ <?php
+ 
