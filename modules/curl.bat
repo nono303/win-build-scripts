@@ -4,7 +4,7 @@
 for /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\date -u`) do (set LIBCURL_TIMESTAMP=%%F)
 sed -i 's/\[unreleased\]/%LIBCURL_TIMESTAMP%/g' %CYGPATH_SRC%/%1/include/curl/curlver.h
 
-REM static build for mod_md with backend schannel only
+REM static build for mod_md with backend schannel only. 
 	REM disabled: LIBSSH2 ARES OPENSSL CURL_EXE SHARED_LIBS BROTLI
 		REM Protocols: -scp -sftp
 		REM Features: -AsynchDNS -brotli -HTTP3 -TLS-SRP
@@ -14,9 +14,9 @@ REM static build for mod_md with backend schannel only
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_UNITY_BUILD=1 ^
 -DBUILD_CURL_EXE=OFF ^
+-DBUILD_STATIC_CURL=OFF ^
 -DBUILD_SHARED_LIBS=OFF ^
 -DBUILD_STATIC_LIBS=ON ^
--DBUILD_STATIC_CURL=OFF ^
 -DBUILD_TESTING=OFF ^
 -DCURL_DISABLE_INSTALL=ON ^
 -DBUILD_LIBCURL_DOCS=OFF ^
@@ -68,15 +68,17 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCURL_USE_PKGCONFIG=OFF ^
 -DCURL_USE_RUSTLS=OFF ^
 -DCURL_ZLIB=ON ^
--DLIBCURL_OUTPUT_NAME=libcurl_static-mod_md ^
+-DLIBCURL_OUTPUT_NAME=%LIBCURL_STATIC_NAME% ^
 -DCURL_CLANG_TIDY=OFF ^
 -DCURL_CODE_COVERAGE=OFF ^
 -DUSE_SSLS_EXPORT=ON ^
 -D_CURL_PREFILL=ON ^
 %PATH_SRC%\%1
 
-%NINJA%
-xcopy /C /F /Y %PATH_BUILD%\%1\lib\libcurl_static-mod_md.lib %PATH_INSTALL%\lib_unused\*
+%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+sed -i -E 's/TARGET_COMPILE_PDB.*/TARGET_COMPILE_PDB = lib\\\\%LIBCURL_STATIC_NAME%\.pdb/g' %CYGPATH_BUILD%/%1/build.ninja
+%NINJA% %LIBCURL_STATIC_NAME%.lib
+for %%E in (lib pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\lib\%LIBCURL_STATIC_NAME%.%%E %PATH_INSTALL%\%DIR_LIB_STATIC%\*)
 
 REM CURL_USE_SCHANNEL - MultiSSL cannot be enabled with HTTP/3 and vice versa
 REM ENABLE_THREADED_RESOLVER must be OFF cf. https://github.com/curl/curl/issues/16379
