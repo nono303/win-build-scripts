@@ -24,7 +24,7 @@ set PATH_SOFTS=%PATH_SDK_ROOT%\softs
 
 REM ########################## RELEASE PATH
 set PATH_RELEASE=%PATH_SDK_ROOT%\release
-set DIR_LIB_UNUSED=lib_unused
+set DIR_LIB_STATIC=lib_static
 set PATH_RELEASE_SVN=D:\github\NONO_subversion
 	REM cygwin format
 set PATH_RELEASE_MEMCACHED=/cygdrive/d/github/NONO_memcached
@@ -139,6 +139,9 @@ set CMAKE_TGT_NINJA="Ninja"
 set RC_COPYRIGHT=https://github.com/nono303/win-build-scripts
 set MTFLAGS=-nologo
 set RCFLAGS=/nologo
+
+	REM for httpd mod_md build agains libcurl static with schannel (winssl)
+set LIBCURL_STATIC_NAME=libcurl-winssl_static
 REM ########################## INIT PATH
 if not exist %PATH_LOGS%\. mkdir %PATH_LOGS%
 if not exist %PATH_BUILDROOT%\. mkdir %PATH_BUILDROOT%

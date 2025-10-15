@@ -25,7 +25,7 @@ if "%2"=="svn" (
 	-DLIBXML2_ICONV_LIBRARIES=%PATH_INSTALL:\=/%/lib/libiconv.lib ^
 	-DMAXMIND_LIBRARIES=%PATH_INSTALL:\=/%/lib/maxminddb.lib ^
 	-DZSTD_LIBRARIES=%PATH_INSTALL:\=/%/lib/libzstd.lib ^
-	-DCURL_LIBRARIES=%PATH_INSTALL:\=/%/lib_unused/libcurl_static-mod_md.lib ^
+	-DCURL_LIBRARIES=%PATH_INSTALL:\=/%/%DIR_LIB_STATIC%/%LIBCURL_STATIC_NAME%.lib ^
 	%PATH_SRC%\%1
 )
 

@@ -26,7 +26,7 @@ if %BROTLI_SHARED% == ON (
 ) else (
 	REM C:\sdk\src\php-ext-brotli\config.w32
 	for %%X in (brotlicommon brotlidec brotlienc) do (
-		move /Y %PATH_INSTALL%\lib\%%X.lib %PATH_INSTALL%\lib_unused\%%X.lib
-		move /Y %PATH_BUILD%\%1\CMakeFiles\%%X.dir\%%X.pdb %PATH_INSTALL%\lib_unused\%%X.pdb
+		move /Y %PATH_INSTALL%\lib\%%X.lib %PATH_INSTALL%\%DIR_LIB_STATIC%\%%X.lib
+		move /Y %PATH_BUILD%\%1\CMakeFiles\%%X.dir\%%X.pdb %PATH_INSTALL%\%DIR_LIB_STATIC%\%%X.pdb
 	)
 )

@@ -4,4 +4,4 @@ for %%D in (%PATH_BUILD% %PATH_INSTALL%) do (
 	mkdir %%D
 )
 	REM iso avx.bat l.33
-for %%s in (lib bin include %DIR_LIB_UNUSED%) do (mkdir %PATH_INSTALL%\%%s)
+for %%s in (lib bin include %DIR_LIB_STATIC%) do (mkdir %PATH_INSTALL%\%%s)

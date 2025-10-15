@@ -43,8 +43,8 @@ if %PHP_BUILD_TYPE% == memcache	(
 	if not exist %PATH_INSTALL%\lib\zlib.lib (call go.bat zlib NOLOG)
 )
 if %PHP_BUILD_TYPE% == brotli	(
-	if not exist %PATH_INSTALL%\lib_unused\libbrotlicommon.lib (call go.bat brotli static NOLOG)
-	set PHP_XTRALIBS=;%PATH_INSTALL%\lib_unused\
+	if not exist %PATH_INSTALL%\%DIR_LIB_STATIC%\libbrotlicommon.lib (call go.bat brotli static NOLOG)
+	set PHP_XTRALIBS=;%PATH_INSTALL%\%DIR_LIB_STATIC%\
 )
 if %PHP_BUILD_TYPE% == win7	(
 	if not exist %PATH_INSTALL%\lib\zlib.lib (call go.bat zlib NOLOG)
