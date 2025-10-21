@@ -1,9 +1,15 @@
 @echo off
 	REM warning: failed to remove NUL: Invalid argument
 if exist %PATH_SRC%\%1\NUL rm -fv  /S /Q %PATH_BUILD%\%PATH_SRC%\%1\NUL
+
 call %PATH_MODULES_COMMON%\init.bat %1
 	REM https://wiki.openssl.org/index.php/Compilation_and_Installation
 	REM no-deprecated / -DOPENSSL_NO_DEPRECATED_3_0 (https://github.com/openssl/openssl/pull/13866) : failed for libssh2 / apr
+	
+if NOT "%C_STD_VER%"=="" (
+	set __CNFC=/std:c%C_STD_VER%
+	set __CNFCXX=/std:c++%C_STD_VER%
+)
 
 set CONFIGURE_OPENSSL=--with-brotli-include=%PATH_INSTALL:\=/%/include ^
 --with-brotli-lib=brotlicommon ^
@@ -29,41 +35,36 @@ zlib ^
 zlib-dynamic ^
 --with-zlib-include=%PATH_INSTALL:\=/%/include ^
 --with-zlib-lib=zlib ^
--DOPENSSL_USE_IPV6=1 ^
--DOPENSSL_NO_HEARTBEATS=1 ^
--DMD5_ASM=1 ^
--DSHA1_ASM=1 ^
--DRMD160_ASM=1 ^
--DSHA256_ASM=1 ^
--DSHA512_ASM=1 ^
--DAES_ASM=1 ^
+/Ob3 /GL /Gw /Zc:inline /Zf /FS /MP%NUMBER_OF_PROCESSORS% /cgthreads8 %__CNFCXX% %AVX% ^
 %CONFIGURE_OPENSSL%
-
-if NOT "%C_STD_VER%"=="" (
-	set __CNFC=\/std:c%C_STD_VER%
-	set __CNFCXX=\/std:c++%C_STD_VER%
-)
-sed -i 's/ARFLAGS= \/nologo/ARFLAGS= \/nologo \/LTCG/g' %CYGPATH_SRC%/%1/makefile
-sed -i 's/CFLAGS=\/W3 \/wd4090 \/nologo \/O2/CFLAGS=\/nologo \/DWIN32 \/D_WINDOWS \/w \/MD \/Zi \/Gs0 \/GF \/Gy \/O2 \/Ob3 \/GL \/Gw \/Zc:inline \/Zf \/FS \/MP%NUMBER_OF_PROCESSORS% \/cgthreads8 %__CNFC%%AVX_SED%/g' %CYGPATH_SRC%/%1/makefile
-sed -i 's/CNF_CFLAGS=\/Gs0 \/GF \/Gy \/MD/CNF_CFLAGS=/g' %CYGPATH_SRC%/%1/makefile
-sed -i 's/CNF_CXXFLAGS=/CNF_CXXFLAGS=\/nologo \/DWIN32 \/D_WINDOWS \/w \/MD \/Zi \/Gs0 \/GF \/Gy \/O2 \/Ob3 \/GL \/Gw \/Zc:inline \/Zf \/FS \/MP%NUMBER_OF_PROCESSORS% \/cgthreads8 %__CNFCXX%%AVX_SED%/g' %CYGPATH_SRC%/%1/makefile
-sed -i 's/LDFLAGS=\/nologo \/debug/LDFLAGS=\/nologo \/debug \/OPT:ICF,REF \/LTCG/g' %CYGPATH_SRC%/%1/makefile
 
 REM perl configdata.pm --dump
 
-	REM install_sw > no docs
-nmake %NMAKE_OPTS% install_sw
- 	REM move & version for engines - https://github.com/openssl/openssl/issues/7185
-for %%M in (engines-3 ossl-modules) do (
-	for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\lib\%%M\*.dll /b') do (
-		call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\lib\%%M\%%G
-	)
-	if not exist %PATH_INSTALL%\bin\%%M\. mkdir %PATH_INSTALL%\bin\%%M
-	move /y %PATH_INSTALL%\lib\%%M\*.* %PATH_INSTALL%\bin\%%M
-	rmdir /S /Q %PATH_INSTALL%\lib\%%M
-)
+jom %JOM_OPTS% build_modules build_programs install_dev
 
-for %%M in (libcrypto-3-x64.dll libssl-3-x64.dll openssl.exe) do (
-	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%M
+for %%i in (engines-3 ossl-modules) do (
+	if not exist %PATH_INSTALL%\bin\%%i\. mkdir %PATH_INSTALL%\bin\%%i
+	if not exist %PATH_INSTALL%\lib\%%i\. mkdir %PATH_INSTALL%\lib\%%i
 )
+for %%i in (\apps\openssl.exe) do (
+	xcopy /C /F /Y %PATH_SRC%\%1\%%i %PATH_INSTALL%\bin\*
+	xcopy /C /F /Y %PATH_SRC%\%1\%%~pi%%~ni.pdb %PATH_INSTALL%\bin\*
+)
+for %%i in (libcrypto libssl) do (
+	xcopy /C /F /Y %PATH_SRC%\%1\%%i-3-x64.dll %PATH_INSTALL%\bin\*
+	xcopy /C /F /Y %PATH_SRC%\%1\%%i-3-x64.pdb %PATH_INSTALL%\bin\*
+	xcopy /C /F /Y %PATH_SRC%\%1\%%i.lib %PATH_INSTALL%\lib\*
+)
+for %%i in (\engines\capi.dll \engines\dasync.dll \engines\loader_attic.dll \engines\padlock.dll) do (
+	xcopy /C /F /Y %PATH_SRC%\%1\%%i %PATH_INSTALL%\bin\engines-3\*
+	xcopy /C /F /Y %PATH_SRC%\%1\%%~pi%%~ni.pdb %PATH_INSTALL%\bin\engines-3\*
+	xcopy /C /F /Y %PATH_SRC%\%1\%%~pi%%~ni.lib %PATH_INSTALL%\lib\engines-3\*
+)
+for %%i in (\providers\legacy.dll) do (
+	xcopy /C /F /Y %PATH_SRC%\%1\%%i %PATH_INSTALL%\bin\ossl-modules\*
+	xcopy /C /F /Y %PATH_SRC%\%1\%%~pi%%~ni.pdb %PATH_INSTALL%\bin\ossl-modules\*
+	xcopy /C /F /Y %PATH_SRC%\%1\%%~pi%%~ni.lib %PATH_INSTALL%\lib\ossl-modules\*
+)
+for %%i in (engines-3\dasync.dll engines-3\capi.dll engines-3\loader_attic.dll engines-3\padlock.dll ossl-modules\legacy.dll libcrypto-3-x64.dll libssl-3-x64.dll openssl.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%i)
+
 rm -fv %PATH_INSTALL%\bin\c_rehash.pl

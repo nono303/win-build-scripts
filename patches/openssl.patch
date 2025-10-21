@@ -1,3 +1,30 @@
+diff --git a/Configurations/10-main.conf b/Configurations/10-main.conf
+index cba57b4127..de87a31abd 100644
+--- a/Configurations/10-main.conf
++++ b/Configurations/10-main.conf
+@@ -1523,10 +1523,10 @@ my %targets = (
+         template         => 1,
+         CC               => "cl",
+         CPP              => '$(CC) /EP /C',
+-        CFLAGS           => "/W3 /wd4090 /nologo",
++        CFLAGS           => "/w /nologo",
+         coutflag         => "/Fo",
+         LD               => "link",
+-        LDFLAGS          => "/nologo /debug",
++        LDFLAGS          => "/nologo /debug /OPT:ICF,REF /LTCG",
+         ldoutflag        => "/out:",
+         ldpostoutflag    => "",
+         ld_resp_delim    => "\n",
+@@ -1534,7 +1534,7 @@ my %targets = (
+         makedepcmd       => '$(CC) /Zs /showIncludes',
+         makedep_scheme   => 'VC',
+         AR               => "lib",
+-        ARFLAGS          => "/nologo",
++        ARFLAGS          => "/nologo /LTCG",
+         aroutflag        => "/out:",
+         ar_resp_delim    => "\n",
+         RC               => "rc",
+
 diff --git a/Configure b/Configure
 index 499585438a..6b705f5d89 100755
 --- a/Configure
