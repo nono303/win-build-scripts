@@ -138,8 +138,8 @@ if %PHPVER% == %PHP_BUILD_TYPE% (set FINAL_CONFIGURE=^
 	%ZTS%
 )
 
-echo configure %FINAL_CONFIGURE:	=%
-echo %FINAL_CONFIGURE% > %PATH_LOGS%\configure-call_%PHP_BUILD_TYPE%.txt
+echo configure %FINAL_CONFIGURE% | sed -e "s/[[:space:]]\+/ /g"
+echo %FINAL_CONFIGURE% | grep -o '\S\+' > %PATH_LOGS%\%PREFIXLOG%_%MSVC_DEPS%-%ARCH%%AVXB%_configure_%ymdhis%.log
 call configure %FINAL_CONFIGURE%
 
 	REM ARFLAGS
