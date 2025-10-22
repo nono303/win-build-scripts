@@ -1,8 +1,298 @@
 # changelog
 
 
+## 1.15.0 _(2025-10-22)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  fix typo
+`env_sample.bat`
+*  0a9450c6
+`modules/libsodium.bat`
+*  fix install headers files
+`modules/tidy.bat`
+`patches/tidy.patch`
+*  +md_util_exec for MDMessageCmd & MDNotifyCmd initialized at startup
+`patches/mod_md.patch`
+*  pretty log for configure
+`modules/phpsdk-config_make.bat`
+*  10.47
+`patches/pcre2.patch`
+*  3.12
+`modules/gdal.bat`
+*  refactor & clean for parallel build (5x faster)
+`modules/openssl.bat`
+`patches/openssl.patch`
+*  add JOM for openssl parallel build
+`README.md`
+`env_sample.bat`
+`modules/common/init.bat`
+*  https://github.com/libgd/libgd/commit/4fed668cc9bb953055a6cf1df5df0131e53bd96d
+`patches/libgd/pr970.patch`
+*  call ninja.sh use LIBCURL_STATIC_NAME fix name & copy pdb
+`modules/curl.bat`
+*  add LIBCURL_STATIC_NAME for curl & httpd fix hardcoded & rename DIR_LIB_UNUSED > DIR_LIB_STATIC
+`avx.bat`
+`env_sample.bat`
+`modules/brotli.bat`
+`modules/clean.bat`
+`modules/httpd.bat`
+`modules/php.bat`
+`utils/libcheck.bat`
+`utils/sub/libcheck.php`
+*  comment
+`modules/common/ninja.sh`
+*  https://github.com/websupport-sk/pecl-memcache/issues/119 https://github.com/websupport-sk/pecl-memcache/pull/120
+`patches/pecl-memcache.patch`
+*  disable unused static build
+`modules/tidy.bat`
+`modules/yajl.bat`
+`patches/tidy.patch`
+`patches/yajl.patch`
+*  * php 8.5 (-php_opcache) * PATH_INSTALL_OSSL >  PATH_INSTALL
+`utils/bininfo.bat`
+*  fix patch for ENABLE_LIB_ONLY=ON remove legacy QUIC build type
+`modules/nghttp2.bat`
+`patches/nghttp2.patch`
+*  remove legacy QUIC build type regarding OpenSSL version (patched or not) PATH_INSTALL_OSSL > PATH_INSTALL - OPENSSL_SCM & OPENSSL_SUF
+`README.md`
+`avx.bat`
+`modules/common/init.bat`
+`modules/full.bat`
+`modules/httpd.bat`
+`modules/libssh2.bat`
+`modules/openssl.bat`
+`modules/serf.bat`
+`modules/subversion.bat`
+`modules/subversionanddeps.bat`
+`quic.bat`
+`usage.txt`
+`utils/libcheck.bat`
+*  rollback missing IMPORT_LIB_SUFFIX
+`modules/curl.bat`
+*  global refactor * better vars for configure options according to build type   * log current configure for build type   * fix configure option (duplicate, non-sense...) * remove legacy QUIC var for OpenSSL * add SHARED_OPCACHE for shared dll removed in 8.5
+`modules/phpsdk-config_make.bat`
+*  fix nghttp3 eroro with ENABLE_LIB_ONLY
+`patches/nghttp2.patch`
+*  global refactor * use gitapply factorized by patch type (version, ext, pecl) + core build_type + improve dependencies check for win7 build type + generate def files for libxml2 & ext_pcre
+`modules/php.bat`
+*  build & use curl_static with only schannel (WinSSL) as backend https://github.com/icing/mod_md/issues/14 always (legacy QUIC 1) build libcurl with HTTP/3 + Openssl Only (MultiSSL cannot be enabled with HTTP/3 and vice versa)
+`modules/curl.bat`
+`modules/httpd.bat`
+`patches/httpd.patch`
+*  fix LOCAL_COPY_MSVC_VER: 17 > 18
+`env_sample.bat`
+*  8.17 https://github.com/curl/curl/pull/18703
+`env_sample.bat`
+`modules/curl.bat`
+`patches/curl/ca-win.patch`
+*  typo
+`utils/gitapply.bat`
+*  +OPTION(BUILD_PROGRAMS) fix: BUILD_TEST > BUILD_TESTS fix: #ifdef _MSC_VER: #define ssize_t SSIZE_T > #include <stdint.h> fix: patch offset
+`modules/libgd.bat`
+`patches/libgd.patch`
+`patches/libgd/pr514.patch`
+`patches/libgd/pr851.patch`
+`patches/libgd/pr883.patch`
+`patches/libgd/pr884.patch`
+`patches/libgd/pr895.patch`
+`patches/libgd/pr920.patch`
+`patches/libgd/pr946.patch`
+`patches/libgd/pr960.patch`
+`patches/libgd/pr967.patch`
+`patches/libgd/pr968.patch`
+`patches/libgd/pr969.patch`
+*  waiting PR as patch https://github.com/libgd/libgd/pulls
+`patches/libgd/pr852.skip`
+`patches/libgd/pr876.skip`
+`patches/libgd/pr877.skip`
+`patches/libgd/pr883.patch`
+`patches/libgd/pr884.patch`
+`patches/libgd/pr895.patch`
+`patches/libgd/pr906.skip`
+`patches/libgd/pr912.patch`
+`patches/libgd/pr913.ko`
+`patches/libgd/pr918.patch`
+`patches/libgd/pr920.patch`
+`patches/libgd/pr939.patch`
+`patches/libgd/pr940.skip`
+`patches/libgd/pr949.patch`
+`patches/libgd/pr960.patch`
+`patches/libgd/pr961.patch`
+`patches/libgd/pr965.patch`
+`patches/libgd/pr966.patch`
+`patches/libgd/pr967.patch`
+`patches/libgd/pr968.patch`
+`patches/libgd/pr969.patch`
+`patches/libgd/pr970.patch`
+*  https://github.com/libgd/libgd/pull/946
+`patches/libgd.patch`
+`patches/libgd/pr946.patch`
+*  use gitapply
+`modules/curl.bat`
+`modules/libgd.bat`
+`utils/gitapply.bat`
+*  use gitapply display branch if not on tag
+`modules/common/init.bat`
+*  fix from 8.5
+`patches/php-src/8.4/ext-iconv.patch`
+*  PHP_EXTERNAL_PCRE:  + pcre2-32.lib  + ext_pcre.def (generated in php.bat)  fix parseInt for PCRE2_CODE_UNIT_WIDTH
+`patches/php-src/8.4/ext-pcre.patch`
+`patches/php-src/8.5/ext-pcre.patch`
+*  + /nologo for minilua.exe & gen_ir_fold_hash.exe
+`patches/php-src/8.4/ext-opcache.patch`
+`patches/php-src/8.5/ext-opcache.patch`
+*  https://bugs.xdebug.org/view.php?id=2372
+`patches/php-src/8.5/pecl-xdebug.patch`
+*  for static ext build: fix error LNK2001: symbole externe non resolu _libiconv_version
+`patches/php-src/8.4/ext-iconv.patch`
+`patches/php-src/8.5/ext-iconv.patch`
+*  https://github.com/php/php-src/commit/f50942068da95af1a712f3a0fd784f96ffc77027
+`modules/php-src_libxml2-def.patch`
+*  explode patches by ext
+`patches/php-src/8.4/ext-gd.patch`
+`patches/php-src/8.4/ext-gmp.patch`
+`patches/php-src/8.4/ext-iconv.patch`
+`patches/php-src/8.4/ext-intl.patch`
+`patches/php-src/8.4/ext-libxml.patch`
+`patches/php-src/8.4/ext-pcre.patch`
+`patches/php-src/8.4/ext-phar.patch`
+`patches/php-src/8.4/pr17848.patch`
+`patches/php-src/8.4/win7.patch`
+`patches/php-src/8.5/ext-gd.patch`
+`patches/php-src/8.5/ext-gmp.patch`
+`patches/php-src/8.5/ext-iconv.patch`
+`patches/php-src/8.5/ext-intl.patch`
+`patches/php-src/8.5/ext-libxml.patch`
+`patches/php-src/8.5/ext-pcre.patch`
+`patches/php-src/8.5/ext-phar.patch`
+*  move patches: PATH_MODULES > PATH_PATCHES
+`env_sample.bat`
+`patches/aom.patch`
+`patches/apr-util.patch`
+`patches/cares.patch`
+`patches/curl/ca-win.patch`
+`patches/dependencies.patch`
+`patches/gdal.patch`
+`patches/giflib.patch`
+`patches/httpd.patch`
+`patches/icu.patch`
+`patches/libconfig.patch`
+`patches/libev.patch`
+`patches/libffi.patch`
+`patches/libgd.patch`
+`patches/libgd/pr514.patch`
+`patches/libgd/pr692.patch`
+`patches/libgd/pr851.patch`
+`patches/libiconv.patch`
+`patches/libssh2.patch`
+`patches/libtiff.patch`
+`patches/libxml2.patch`
+`patches/libxslt.patch`
+`patches/libzip.patch`
+`patches/memcached.patch`
+`patches/mobac.patch`
+`patches/mod_h2.patch`
+`patches/mod_h264_streaming.patch`
+`patches/mod_security-sdbm-util.patch`
+`patches/mod_security.patch`
+`patches/ngtcp2.patch`
+`patches/nssm.patch`
+`patches/openssl.patch`
+`patches/pcre2.patch`
+`patches/pecl-memcache.patch`
+`patches/pecl-parallel.patch`
+`patches/pecl-system-sync.patch`
+`patches/php-sdk.patch`
+`patches/php-src/8.5/pr17848.patch`
+`patches/php-src/8.5/win7.patch`
+`patches/pthread-win32.patch`
+`patches/serf.patch`
+`patches/sqlite.patch`
+`patches/sslh.patch`
+`patches/subversion.patch`
+`patches/verpatch.patch`
+`patches/wineditline.patch`
+`patches/xdebug.patch`
+`patches/yajl.patch`
+`patches/zstd.patch`
+*  add PHP_BUILD_TYPE=win7 remove conflicted --enable-embed on full build
+`modules/phpsdk-config_make.bat`
+*  remove Win7 debug apply tmp php-src patch after main one add PHP_BUILD_TYPE=win7
+`modules/php.bat`
+*  remove debug only Win7 upgrade patch for 8.4
+`modules/php-src_win7.patch`
+`modules/php-src_win7d.patch`
+*  fixed https://github.com/php/php-src/pull/20110
+`modules/php-src_8.5.patch`
+*  2662e1bb
+`modules/pcre2.patch`
+*  update nowarn
+`modules/icu.bat`
+*  update libxml 2.15.0
+`modules/php-src_libxml2-def.patch`
+*  fix NTS --with-openssl-argon2 & TS --with-parallel=shared only on full build
+`modules/phpsdk-local.bat`
+*  -cmake +14.4 ATL
+`config/.vsconfig`
+*  https://github.com/php/php-src/issues/20106
+`modules/php-src_8.5.patch`
+*  78.1
+`modules/icu.bat`
+*  1.2.0
+`modules/brotli.bat`
+*  clean useless old fix commented
+`modules/phpsdk-config_make.bat`
+*  https://bugs.xdebug.org/view.php?id=2372
+`modules/xdebug.patch`
+*  fix: subversion-deps > subversionanddeps
+`usage.txt`
+*  fix vs17 hardcoded references
+`modules/libxslt.bat`
+`modules/libyuv.bat`
+`modules/mod_zstd.bat`
+`modules/sqlite.bat`
+*  set modules optionnals for svn build
+`modules/httpd.patch`
+*  update PATH_XXX_SVN: vs17 > vs18
+`env_sample.bat`
+*  fix dest path for libaprapp-1.pdb
+`modules/apr.bat`
+*  upgrade deps
+`modules/dependencies.patch`
+*  https://github.com/libexpat/libexpat/issues/1070
+`modules/libexpat.patch`
+`modules/subversion.patch`
+*  https://github.com/libexpat/libexpat/issues/1070
+`modules/libexpat.patch`
+*  drop vs16 & add vs18 support
+`README.md`
+`config/.vsconfig`
+`env_sample.bat`
+`go.bat`
+`usage.txt`
+`utils/sub/php.ini`
+`vs16.bat`
+`vs18.bat`
+*  fix missing links for pecl ext when creating folder structure
+`modules/php.bat`
+*  fix missing pdb for libaprapp-1
+`modules/apr.bat`
+*  2.6
+`modules/geographiclib.bat`
+*  clean useless
+`modules/libffi.bat`
+`modules/libffi.sh`
+
+
 ## 1.14.2 _(2025-09-30)_
 
+*  1.14.2
+`changelog.md`
+*  b0cea02e
+`modules/pcre2.patch`
 *  update src
 `SRC_VERSION.md`
 `utils/srccreate.bat`
