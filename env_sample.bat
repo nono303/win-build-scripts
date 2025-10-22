@@ -111,7 +111,7 @@ FOR /F "tokens=* USEBACKQ" %%F in (`dir /b %PATH_VS%\VC\Tools\MSVC ^| grep %vcva
 set NMAKE_OPTS_DBG=/NOLOGO
 set NMAKE_OPTS_REL=/S %NMAKE_OPTS_DBG%
 set JOM_OPTS_DBG=/L /J %NUMBER_OF_PROCESSORS%
-set JOM_OPTS_REL=/S %NMAKE_OPTS_DBG%
+set JOM_OPTS_REL=/S %JOM_OPTS_DBG%
 
 	REM https://learn.microsoft.com/fr-fr/visualstudio/msbuild/msbuild-command-line-reference?view=vs-2022
 set MSBUILD_OPTS_COM=/nologo ^
