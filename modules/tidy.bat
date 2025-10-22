@@ -23,7 +23,6 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
-sed -i 's/tidy_a\.pdb/tidy_static\.pdb/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
 
 move /Y %PATH_INSTALL%\lib\libtidy.pdb %PATH_INSTALL%\bin\libtidy.pdb

@@ -1,8 +1,8 @@
- CMakeLists.txt | 43 +++++++++++++++++++++++--------------------
- 1 file changed, 23 insertions(+), 20 deletions(-)
+ CMakeLists.txt | 44 ++++++++++++++++++++++++--------------------
+ 1 file changed, 24 insertions(+), 20 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index a01240e..c951d1a 100644
+index a01240e..55b2be9 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -94,6 +94,7 @@ endif ()
@@ -70,3 +70,11 @@ index a01240e..c951d1a 100644
      set_target_properties( ${name} PROPERTIES
                                     VERSION   ${LIBTIDY_VERSION}
                                     SOVERSION ${TIDY_SO_VERSION}
+@@ -445,6 +448,7 @@ if (BUILD_SHARED_LIB)
+     if(MSVC)
+         install(FILES $<TARGET_PDB_FILE:tidy-share> DESTINATION ${LIB_INSTALL_DIR} OPTIONAL)
+     endif()
++    install( FILES ${HFILES} DESTINATION ${INCLUDE_INSTALL_DIR} )
+     if (TIDY_CONSOLE_SHARED) # user wants shared/dll linkage
+         list ( APPEND add_LIBS ${name} )
+     endif ()    
