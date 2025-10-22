@@ -7,7 +7,7 @@ sed -i -E 's/.*OnlyExplicitInline.*//g' %CYGPATH_SRC%/%1/builds/msvc/properties/
 
 REM /p:Option-amd64asm=yes: nonstandard extension used: '__asm' keyword not supported on this architecture
 MSBuild.exe %PATH_SRC%\%1\%VCDIR%\libsodium.sln %MSBUILD_OPTS% ^
-/nowarn:C4197 ^
+/nowarn:C4101 ^
 /p:VCToolsInstallDir=%VCToolsInstallDir% ^
 /p:Configuration=DynRelease ^
 /p:Option-amd64asm=no ^
