@@ -54,8 +54,8 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2022 Community](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&rel=16) |      | 18.0.0 [11111.177] (14.50, 14.44) | `.vsconfig`         |
-| :bookmark: [Microsoft Visual C++ Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170) | x64 & x86 | 14.44.35615 |  |
+| [Visual Studio 2026 Insiders](https://aka.ms/vs/18/insiders/vs_Community.exe) |      | 18.0.0 [11111.177] (14.50, 14.44) | `.vsconfig`         |
+| :bookmark: [Microsoft Visual C++ Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170) | x64 & x86 | 14.50.35615 |  |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.7.0 | `cyg64.packagelist` |
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.13.9 |                     |
 | [OpenJDK](https://jdk.java.net/25/)              | x64  | 25.0.0 |                     |
@@ -68,7 +68,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.90       |                     |
 | [ChkMatch](https://web.archive.org/web/20210205095232/https://www.debuginfo.com/tools/chkmatch.html) | x86 | 1.0.3          |                     |
 | [Gradle](https://services.gradle.org/distributions/) | [java] | 9.1.0 | |
-| [CMake](https://cmake.org/download/) | x64 | 4.2.0-rc1 | |
+| [CMake](https://cmake.org/download/) | x64 | 4.1.2 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | x64 | 1.13.1 | |
 | [JOM](https://download.qt.io/official_releases/jom/) | x64 | 1.1.4 | |
 | [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 1.9.1 | |

@@ -22,7 +22,7 @@ git checkout 1.7.x
 cd /D ..
 git clone https://github.com/google/brotli.git brotli
 cd /D brotli
-git checkout master
+git checkout tags/v1.2.0rc2
 cd /D ..
 git clone https://gitlab.com/bzip2/bzip2.git bzip2
 cd /D bzip2
@@ -34,7 +34,7 @@ git checkout tags/v1.34.5
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-8_16_0
+git checkout tags/rc-8_17_0-1
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -62,11 +62,11 @@ git checkout tags/VER-2-13-3
 cd /D ..
 git clone https://github.com/OSGeo/gdal gdal
 cd /D gdal
-git checkout tags/v3.11.4RC1
+git checkout tags/v3.12.0beta1
 cd /D ..
 git clone https://github.com/geographiclib/geographiclib.git geographiclib
 cd /D geographiclib
-git checkout tags/r2.5.2
+git checkout tags/r2.6
 cd /D ..
 git clone https://github.com/libgeos/geos geos
 cd /D geos
@@ -82,7 +82,7 @@ git checkout tags/2.4.65
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout tags/icu4x/2025-05-21/77.x
+git checkout tags/release-78.1rc2
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -186,7 +186,7 @@ git checkout tags/v0.23
 cd /D ..
 git clone https://gitlab.gnome.org/GNOME/libxml2.git libxml2
 cd /D libxml2
-git checkout tags/v2.15.0
+git checkout tags/v2.15.1
 cd /D ..
 git clone https://github.com/nono303/libxpm.git libxpm
 cd /D libxpm
@@ -230,7 +230,7 @@ git checkout tags/2.4.0
 cd /D ..
 git clone https://github.com/nono303/mod_fcgid.git mod_fcgid
 cd /D mod_fcgid
-git checkout tags/2.3.10.5
+git checkout tags/2.3.10.6
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
@@ -246,7 +246,7 @@ git checkout main
 cd /D ..
 git clone https://github.com/icing/mod_md mod_md
 cd /D mod_md
-git checkout tags/v2.6.2
+git checkout tags/2.6.4
 cd /D ..
 svn co https://svn.code.sf.net/p/mod-qos/source/trunk/httpd_src/modules/qos mod_qos
 cd /D mod_qos
@@ -282,7 +282,7 @@ git checkout tags/v1.12.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v1.16.0
+git checkout tags/v1.17.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -290,11 +290,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/openssl/openssl openssl
 cd /D openssl
-git checkout tags/openssl-3.5.3
+git checkout tags/openssl-3.5.4
 cd /D ..
 git clone https://github.com/PCRE2Project/pcre2.git pcre2
 cd /D pcre2
-git checkout master
+git checkout tags/pcre2-10.47
 cd /D ..
 git clone https://github.com/php/pecl-datetime-timezonedb.git pecl-datetime-timezonedb
 cd /D pecl-datetime-timezonedb
@@ -346,7 +346,7 @@ git checkout tags/php-sdk-2.5.0
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.4.13
+git checkout PHP-8.5
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
@@ -360,17 +360,13 @@ git clone https://github.com/GerHobbelt/pthread-win32.git pthread-win32
 cd /D pthread-win32
 git checkout master
 cd /D ..
-git clone https://git.code.sf.net/p/pthreads4w/code pthreads4w
-cd /D pthreads4w
-git checkout master
-cd /D ..
 git clone https://github.com/qhull/qhull qhull
 cd /D qhull
 git checkout tags/v8.1-alpha6
 cd /D ..
 git clone https://github.com/nono303/simpleDLNA.git sdlna
 cd /D sdlna
-git checkout master
+git checkout tags/1.3.4
 cd /D ..
 git clone https://github.com/apache/serf.git serf
 cd /D serf
@@ -406,7 +402,7 @@ git checkout tags/wineditline-2.208
 cd /D ..
 git clone https://github.com/xdebug/xdebug.git xdebug
 cd /D xdebug
-git checkout tags/3.4.5
+git checkout tags/3.5.0alpha2
 cd /D ..
 git clone https://github.com/lloyd/yajl.git yajl
 cd /D yajl
