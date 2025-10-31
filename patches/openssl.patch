@@ -1,8 +1,8 @@
 diff --git a/Configurations/10-main.conf b/Configurations/10-main.conf
-index cba57b4127..de87a31abd 100644
+index 7e9396868a..66af9be268 100644
 --- a/Configurations/10-main.conf
 +++ b/Configurations/10-main.conf
-@@ -1523,10 +1523,10 @@ my %targets = (
+@@ -1524,10 +1524,10 @@ my %targets = (
          template         => 1,
          CC               => "cl",
          CPP              => '$(CC) /EP /C',
@@ -15,7 +15,7 @@ index cba57b4127..de87a31abd 100644
          ldoutflag        => "/out:",
          ldpostoutflag    => "",
          ld_resp_delim    => "\n",
-@@ -1534,7 +1534,7 @@ my %targets = (
+@@ -1535,7 +1535,7 @@ my %targets = (
          makedepcmd       => '$(CC) /Zs /showIncludes',
          makedep_scheme   => 'VC',
          AR               => "lib",
@@ -24,12 +24,11 @@ index cba57b4127..de87a31abd 100644
          aroutflag        => "/out:",
          ar_resp_delim    => "\n",
          RC               => "rc",
-
 diff --git a/Configure b/Configure
-index 499585438a..6b705f5d89 100755
+index 6cc03bf2fe..d9db0a7c28 100755
 --- a/Configure
 +++ b/Configure
-@@ -588,14 +588,11 @@ our %disabled = ( # "what"         => "comment"
+@@ -590,15 +590,12 @@ our %disabled = ( # "what"         => "comment"
                    "fips"                => "default",
                    "fips-jitter"         => "default",
                    "asan"                => "default",
@@ -37,6 +36,7 @@ index 499585438a..6b705f5d89 100755
 -                  "brotli-dynamic"      => "default",
                    "buildtest-c++"       => "default",
                    "crypto-mdebug"       => "default",
+                   "allocfail-tests"     => "default",
                    "crypto-mdebug-backtrace" => "default",
                    "demos"               => "default",
                    "h3demo"              => "default",
@@ -44,10 +44,12 @@ index 499585438a..6b705f5d89 100755
                    "devcryptoeng"        => "default",
                    "ec_nistp_64_gcc_128" => "default",
                    "egd"                 => "default",
-@@ -619,8 +616,6 @@ our %disabled = ( # "what"         => "comment"
+@@ -621,10 +618,6 @@ our %disabled = ( # "what"         => "comment"
+                   "ubsan"               => "default",
+                   "unit-test"           => "default",
                    "weak-ssl-ciphers"    => "default",
-                   "zlib"                => "default",
-                   "zlib-dynamic"        => "default",
+-                  "zlib"                => "default",
+-                  "zlib-dynamic"        => "default",
 -                  "zstd"                => "default",
 -                  "zstd-dynamic"        => "default",
                  );

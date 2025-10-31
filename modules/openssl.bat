@@ -38,9 +38,8 @@ zlib-dynamic ^
 /Ob3 /GL /Gw /Zc:inline /Zf /FS /MP%NUMBER_OF_PROCESSORS% /cgthreads8 %__CNFCXX% %AVX% ^
 %CONFIGURE_OPENSSL%
 
-REM perl configdata.pm --dump
-
 jom %JOM_OPTS% build_modules build_programs install_dev
+REM install_modules install_programs install_engines cause 'Trying to rename makefile-21040 -> makefile: Permission denied'
 
 for %%i in (engines-3 ossl-modules) do (
 	if not exist %PATH_INSTALL%\bin\%%i\. mkdir %PATH_INSTALL%\bin\%%i
