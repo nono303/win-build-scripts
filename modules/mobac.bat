@@ -1,7 +1,7 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1
 if exist %PATH_SRC%\%1\mobac\build\. rmdir /S /Q %PATH_SRC%\%1\mobac\build
 
-xcopy /C /F /Y %PATH_MODULES%\mobac_gradle-wrapper.jar %PATH_SRC%\%1\gradle\wrapper\gradle-wrapper.jar
+xcopy /C /F /Y %PATH_PATCHES%\mobac_gradle-wrapper.jar %PATH_SRC%\%1\gradle\wrapper\gradle-wrapper.jar
 
 REM echo ^>^>^> gradlew --project-cache-dir %PATH_GRADLE_BUILD% wrapper --gradle-version %GRADLEVER%
 REM call gradlew --project-cache-dir %PATH_GRADLE_BUILD% wrapper --gradle-version %GRADLEVER%
