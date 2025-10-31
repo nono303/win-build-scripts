@@ -81,13 +81,13 @@ if exist %PATH_SRC%\%1\. (
 			svn revert . -R
 			REM --remove-ignored
 			svn cleanup . --remove-unversioned
-			if exist %PATH_MODULES%\%1.patch (
+			if exist %PATH_PATCHES%\%1.patch (
 				echo    ^> apply %1.patch
-				svn patch %PATH_MODULES%\%1.patch .
+				svn patch %PATH_PATCHES%\%1.patch .
 			)
-			if exist %PATH_MODULES%\%1.!SCM_COMORREV!.patch (
+			if exist %PATH_PATCHES%\%1.!SCM_COMORREV!.patch (
 				echo    ^> apply %1.!SCM_COMORREV!.patch
-				svn patch %PATH_MODULES%\%1.!SCM_COMORREV!.patch .
+				svn patch %PATH_PATCHES%\%1.!SCM_COMORREV!.patch .
 			)
 		)
 	)
