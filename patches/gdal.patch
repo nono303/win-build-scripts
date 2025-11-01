@@ -1,8 +1,8 @@
-diff --git "a/gdal.cmake" "b/gdal.cmake"
-index 00102cc70d..eee1fdc606 100644
---- "a/gdal.cmake"
-+++ "b/gdal.cmake"
-@@ -162,7 +162,7 @@ endfunction (gdal_add_private_link_libraries)
+diff --git a/gdal.cmake b/gdal.cmake
+index 1fbaf19de6..b885f36b31 100644
+--- a/gdal.cmake
++++ b/gdal.cmake
+@@ -214,7 +214,7 @@ endfunction (gdal_add_private_link_libraries)
  add_library(${GDAL_LIB_TARGET_NAME} gcore/gdal.h)
  
  set(GDAL_LIB_OUTPUT_NAME
