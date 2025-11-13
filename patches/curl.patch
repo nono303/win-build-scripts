@@ -1,0 +1,22 @@
+https://www.apachelounge.com/viewtopic.php?p=43799#43799
+diff --git a/lib/url.c b/lib/url.c
+index f0fe7d3d41..4ce9d10c26 100644
+--- a/lib/url.c
++++ b/lib/url.c
+@@ -434,6 +434,16 @@ void Curl_init_userdefined(struct Curl_easy *data)
+   set->socks5_gssapi_nec = FALSE;
+ #endif
+ 
++#if defined(USE_WIN32_CRYPTO)
++  if(Curl_ssl_backend() != CURLSSLBACKEND_SCHANNEL) {
++    /* Mandate Windows CA store to be used */
++    if(!set->ssl.primary.CAfile && !set->ssl.primary.CApath) {
++      /* User and environment did not specify any CA file or path. */
++      set->ssl.native_ca_store = TRUE;
++    }
++  }
++#endif
++
+   /* set default minimum TLS version */
+ #ifdef USE_SSL
+   Curl_setopt_SSLVERSION(data, CURLOPT_SSLVERSION, CURL_SSLVERSION_DEFAULT);
