@@ -113,22 +113,23 @@ set NMAKE_OPTS_REL=/S %NMAKE_OPTS_DBG%
 set JOM_OPTS_DBG=/L /J %NUMBER_OF_PROCESSORS%
 set JOM_OPTS_REL=/S %JOM_OPTS_DBG%
 
-	REM https://learn.microsoft.com/fr-fr/visualstudio/msbuild/msbuild-command-line-reference?view=vs-2022
+	REM https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild-command-line-reference?view=visualstudio&viewFallbackFrom=vs-2026
 set MSBUILD_OPTS_COM=/nologo ^
 	/nr:false ^
 	/m:%NUMBER_OF_PROCESSORS% ^
 	/p:Turbo=true ^
 	/p:CL_MPCount=%NUMBER_OF_PROCESSORS% ^
+	/m:%NUMBER_OF_PROCESSORS% ^
 	/p:RunCodeAnalysis=false ^
 	/p:DebugType=None ^
 	/p:DebugSymbols=true ^
 	/p:WindowsTargetPlatformVersion=%WKITVER% ^
 	/p:PlatformToolset=v%PTFTS%
 set MSBUILD_OPTS_DBG=%MSBUILD_OPTS_COM% ^
-	/clp:EnableMPLogging;Summary;ShowCommandLine ^
+	/clp:ForceConsoleColor;EnableMPLogging;Summary;ShowCommandLine ^
 	/v:d
 set MSBUILD_OPTS_REL=%MSBUILD_OPTS_COM% ^
-	/clp:EnableMPLogging;NoSummary;NoItemAndPropertyList ^
+	/clp:ForceConsoleColor;EnableMPLogging;NoSummary;NoItemAndPropertyList ^
 	/nowarn:MSB8012;C4244 ^
 	/v:m
 

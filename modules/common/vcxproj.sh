@@ -1,6 +1,6 @@
 link="<EnableCOMDATFolding>true<\/EnableCOMDATFolding><OptimizeReferences>true<\/OptimizeReferences>"
 # nssm jemalloc
-[[ $7 != nostd ]] && std="<LanguageStandard>stdcpplatest<\/LanguageStandard><LanguageStandard_C>stdc17<\/LanguageStandard_C>"
+[[ $7 != nostd ]] && std="<LanguageStandard>stdcpplatest<\/LanguageStandard><LanguageStandard_C>stdclatest<\/LanguageStandard_C>"
 for i in `/usr/bin/find $1 -type f -name "*.vcxproj" -o -name "*.config" -o -name "*.csproj" -o -name "*.props" 2>/dev/null` 
 do
   # MSVC
