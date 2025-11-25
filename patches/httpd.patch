@@ -1,7 +1,7 @@
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 170076bdd4..77e20ae2e2 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
+diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
+index 170076bdd4..c553b7abe6 100644
+--- "a/CMakeLists.txt"
++++ "b/CMakeLists.txt"
 @@ -17,14 +17,26 @@
  
  PROJECT(HTTPD C)
@@ -138,6 +138,24 @@ index 170076bdd4..77e20ae2e2 100644
  )
  
  # Track which modules actually built have APIs to link against.
+@@ -422,7 +444,7 @@ SET(mod_cache_extra_defines          CACHE_DECLARE_EXPORT)
+ SET(mod_cache_extra_sources
+   modules/cache/cache_storage.c      modules/cache/cache_util.c
+ )
+-SET(mod_cache_install_lib 1)
++# SET(mod_cache_install_lib 1)
+ SET(mod_cache_disk_extra_libs        mod_cache)
+ SET(mod_cache_socache_extra_libs     mod_cache)
+ SET(mod_charset_lite_requires        APR_HAS_XLATE)
+@@ -432,7 +454,7 @@ SET(mod_dav_extra_sources
+   modules/dav/main/std_liveprop.c    modules/dav/main/providers.c
+   modules/dav/main/util.c            modules/dav/main/util_lock.c
+ )
+-SET(mod_dav_install_lib 1)
++# SET(mod_dav_install_lib 1)
+ SET(mod_dav_fs_extra_sources
+   modules/dav/fs/dbm.c               modules/dav/fs/lock.c
+   modules/dav/fs/repos.c
 @@ -458,16 +480,25 @@ SET(mod_http2_extra_defines          ssize_t=long)
  SET(mod_http2_extra_includes         ${NGHTTP2_INCLUDE_DIR})
  SET(mod_http2_extra_libs             ${NGHTTP2_LIBRARIES})
@@ -174,7 +192,7 @@ index 170076bdd4..77e20ae2e2 100644
  )
  SET(mod_ldap_extra_defines           LDAP_DECLARE_EXPORT)
  SET(mod_ldap_extra_libs              wldap32)
-@@ -484,25 +515,43 @@ SET(mod_lua_extra_sources
+@@ -484,30 +515,48 @@ SET(mod_lua_extra_sources
    modules/lua/lua_passwd.c           modules/lua/lua_request.c
    modules/lua/lua_vmprep.c           modules/lua/lua_dbd.c
  )
@@ -234,7 +252,30 @@ index 170076bdd4..77e20ae2e2 100644
  )
  SET(mod_optional_hook_export_extra_defines AP_DECLARE_EXPORT) # bogus reuse of core API prefix
  SET(mod_proxy_extra_defines          PROXY_DECLARE_EXPORT)
-@@ -571,6 +620,49 @@ IF(LIBXML2_FOUND)
+ SET(mod_proxy_extra_sources          modules/proxy/proxy_util.c)
+-SET(mod_proxy_install_lib 1)
++# SET(mod_proxy_install_lib 1)
+ SET(mod_proxy_ajp_extra_sources
+   modules/proxy/ajp_header.c         modules/proxy/ajp_link.c
+   modules/proxy/ajp_msg.c            modules/proxy/ajp_utils.c
+@@ -541,7 +590,7 @@ SET(mod_sed_extra_sources
+ )
+ SET(mod_serf_requires                AN_UNIMPLEMENTED_SUPPORT_LIBRARY_REQUIREMENT)
+ SET(mod_session_extra_defines        SESSION_DECLARE_EXPORT)
+-SET(mod_session_install_lib 1)
++# SET(mod_session_install_lib 1)
+ SET(mod_session_cookie_extra_libs    mod_session)
+ SET(mod_session_crypto_requires      APU_HAVE_CRYPTO)
+ SET(mod_session_crypto_extra_libs    mod_session)
+@@ -564,13 +613,56 @@ SET(mod_ssl_extra_sources
+   modules/ssl/ssl_util_ssl.c         modules/ssl/ssl_util_stapling.c
+ )
+ SET(mod_status_extra_defines         STATUS_DECLARE_EXPORT)
+-SET(mod_watchdog_install_lib 1)
++# SET(mod_watchdog_install_lib 1)
+ SET(mod_xml2enc_requires             LIBXML2_FOUND)
+ IF(LIBXML2_FOUND)
+   SET(mod_xml2enc_extra_includes     "${LIBXML2_INCLUDE_DIR};${LIBXML2_ICONV_INCLUDE_DIR}")
    SET(mod_xml2enc_extra_libs         "${LIBXML2_LIBRARIES};${LIBXML2_ICONV_LIBRARIES}")
  ENDIF()
  SET(mod_watchdog_extra_defines       AP_WD_DECLARE_EXPORT)
