@@ -48,7 +48,7 @@ for %%X in (OFF ON) do (
 	%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 	%NINJA% install
 
-	if %%X == OFF (xcopy /C /F /Y %PATH_BUILD%\%1\libxml2_a_dll.pdb %PATH_INSTALL%\lib\*)
+	if %%X == OFF (xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\LibXml2.dir\libxml2_a_dll.pdb %PATH_INSTALL%\lib\*)
 )
 
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libxml2.dll
