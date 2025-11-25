@@ -31,7 +31,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -Dlzma=ON ^
 -Dzstd=ON ^
 -Dwebp=ON ^
--Dtiff-cxx=ON ^
+-Dtiff-cxx=OFF ^
 -Dtiff-static=OFF ^
 -Dlerc=ON ^
 -Dstrip-chopping=ON ^
@@ -47,4 +47,3 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\tiff.dll
 xcopy /C /F /Y %PATH_BUILD%\%1\libtiff\tiff.pdb %PATH_INSTALL%\bin\*
-xcopy /C /F /Y %PATH_BUILD%\%1\libtiff\CMakeFiles\tiffxx.dir\tiffxx.pdb %PATH_INSTALL%\lib\*
