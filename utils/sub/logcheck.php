@@ -70,6 +70,7 @@
 		"Hunk #" => [33,"str"], // patch offset 
 		"pas reconnu en tant que commande interne" => [33,"str"],
 		"environment is too large" => [33,"str"],
+		"Could NOT find" => [33,"str"],
 /* Cyan */
 		"ne peut trouver le fichier" => [36,"str"], //mpir
 		"non valide" => [36,"str"],
@@ -77,10 +78,13 @@
 		"unknow" => [36,"str"],
 	);
 	$remove = array(
-		"javahl" => [39, "str"],			// subversion java-hl
-		"HEAD is now" => [39, "str"],		// git log
-		"unknown_element.c" => [39, "str"],	// php
-		"showWarning" => [39, "str"],		// icu		
+		"javahl" => [39, "str"],					// subversion java-hl
+		"unknown_element.c" => [39, "str"],			// php
+		"Using unknown MSVC version" => [39, "str"],// php
+		"showWarning" => [39, "str"],				// icu
+		"Could NOT find JSONC" => [39, "str"],		// gdal	
+		"Could NOT find OpenCAD" => [39, "str"],	// gdal
+		"Could NOT find TIFF" => [39, "str"],		// libwebp first pass	
 	);
 	//print_r($argv);
 	//exit();
