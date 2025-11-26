@@ -1,27 +1,16 @@
-@echo off
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1
 
-if exist %PATH_INSTALL%\lib\cmake\gperf-3.1 rmdir /S /Q %PATH_INSTALL%\lib\cmake\gperf-3.1
-REM SRC
-call %PATH_MODULES_COMMON%\init.bat %1\%1
-REM cmake
-call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
+if %ARG_KEEPSRC% == 0 (call do_php %PATH_MODULES_COMMON%/msbuild.php "%PATH_SRC%/%1/build-VS2022/libiconv;%PATH_SRC%/%1/build-VS2022/_props" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%)
 
-cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
--DCMAKE_POLICY_VERSION_MINIMUM=3.5 ^
--DCMAKE_UNITY_BUILD=1 ^
--DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
--DBUILD_SHARED_LIBS=ON ^
--DLIBICONV_BUILD_DOCUMENTATION=OFF ^
--DLIBICONV_ENABLE_EXTRA=ON ^
--DLIBICONV_ENABLE_NLS=OFF ^
--DLIBICONV_ENABLE_RELOCATABLE=ON ^
--DCMAKE_DISABLE_FIND_PACKAGE_Gperf=1 ^
-%PATH_SRC%\%1
+set OUTDIR_CONF=Release
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
-	REM fix issue "subcommand failed"
-sed -i 's/\/GL //g' %CYGPATH_BUILD%/%1/build.ninja
-%NINJA% install
+MSBuild.exe build-VS2022/libiconv/libiconv.vcxproj %MSBUILD_OPTS% ^
+/t:Clean,Build ^
+/nowarn:C4311;C4267;C4090;C4311 ^
+/p:Configuration=%OUTDIR_CONF% ^
+/p:Platform="%archmsbuild%"
 
-xcopy /C /F /Y %PATH_BUILD%\%1\gperf\gperf.pdb %PATH_INSTALL%\bin\*
-for %%X in (libcharset.dll libiconv.dll gperf.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_SRC%\%1\build-VS2022\libiconv\%outmsbuild%\%1.dll
+for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\build-VS2022\libiconv\%outmsbuild%\%1.%%X %PATH_INSTALL%\bin\*)
+xcopy /C /F /Y %PATH_SRC%\%1\build-VS2022\libiconv\%outmsbuild%\%1.lib %PATH_INSTALL%\lib\*
+xcopy /C /F /Y %PATH_SRC%\%1\include\iconv.h %PATH_INSTALL%\include\*
