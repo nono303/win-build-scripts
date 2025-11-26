@@ -1,9 +1,4 @@
-
-@echo off
-	REM force native openssl
-call quic 0
-
-call %PATH_MODULES_COMMON%\init.bat %1
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1
 
 	REM ~~~~~~~~~~~~ Create Outdir
 set OUTDIR_CONF=Release
@@ -26,7 +21,7 @@ python gen-make.py ^
 --with-zlib=%PATH_INSTALL% ^
 --with-httpd=%PATH_INSTALL%
 
-%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/build/win32/vcnet-vcproj/" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER% nostd
+if %ARG_KEEPSRC% == 0 (call do_php %PATH_MODULES_COMMON%/msbuild.php "%PATH_SRC%/%1/build/win32/vcnet-vcproj/" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER% nostd)
 	REM ~~~~~~~~~~~~ fix serf lib name
 for %%V in (conflict-data-test pristine-store-test client-test db-test wc-test entries-compat-test op-depth-test filesize-test conflicts-test libsvn_ra_dll) do (
 	sed -i 's/serf-2\.lib/libserf-2\.lib/g'  %CYGPATH_SRC%/%1/build/win32/vcnet-vcproj/%%V.vcxproj

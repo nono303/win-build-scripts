@@ -12,7 +12,7 @@ set VCDIR=icu4c\source\allinone
 set OUTDIR_CONF=Release
 
 if %ARG_KEEPSRC% == 0 (
-	%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/icu4c" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
+	call do_php %PATH_MODULES_COMMON%/msbuild.php "%PATH_SRC%/%1/icu4c" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
 		REM icudtXX.pdb
 	sed -i 's/NXCOMPAT/NXCOMPAT \/OPT:REF,ICF \/DEBUG/g' %CYGPATH_SRC%/%1/icu4c/source/tools/pkgdata/pkgdata.cpp
 		REM avx2 compiler error - https://unicode-org.atlassian.net/browse/ICU-22715
@@ -36,7 +36,7 @@ if %ARG_KEEPSRC% == 0 (
 	REM 	derb,genbrk,genccode,gencfu,gencmn,gencnval,gendict,gennorm2,genrb,gensprep,icuinfo,icupkg,makeconv,uconv
 MSBuild.exe %PATH_SRC%\%1\%VCDIR%\allinone.sln %MSBUILD_OPTS% ^
 /t:common,i18n,icuexportdata,io,makedata,pkgdata,stubdata ^
-/nowarn:C4275,C4101,C4805,C4477,C4267,C4251,C4312,STL4005,C4068,C4715,C4996,MSB8028 ^
+/nowarn:C4275;C4101;C4805;C4477;C4267;C4251;C4312;STL4005;C4068;C4715;C4996;MSB8028 ^
 /p:Configuration=%OUTDIR_CONF% ^
 /p:Platform=%archmsbuild% ^
 /p:SkipUWP=true

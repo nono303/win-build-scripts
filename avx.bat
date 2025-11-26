@@ -16,7 +16,7 @@ if %1 == 2 (
 		REM php
 	set intrinsics=,sse3,ssse3,sse4.1,sse4.2,avx,avx2
 		REM MSBuild
-	set AVX_MSBUILD="<EnableEnhancedInstructionSet>AdvancedVectorExtensions2<\/EnableEnhancedInstructionSet>\r\n"
+	set AVX_MSBUILD=AdvancedVectorExtensions2
 		REM libconfig.sh / memcached.sh / sslh.sh
 	set AVX_GCC=skylake
 		REM MPIR (used in phpsdk-local)
@@ -34,7 +34,7 @@ if %1 == 1 (
 		REM php
 	set intrinsics=,sse3,ssse3,sse4.1,sse4.2,avx
 		REM MSBuild
-	set AVX_MSBUILD="<EnableEnhancedInstructionSet>AdvancedVectorExtensions<\/EnableEnhancedInstructionSet>\r\n"
+	set AVX_MSBUILD=AdvancedVectorExtensions
 		REM libconfig.sh / memcached.sh / sslh.sh
 	set AVX_GCC=sandybridge
 		REM MPIR (used in phpsdk-local)
@@ -52,7 +52,7 @@ if %1 == 0 (
 		REM php
 	set intrinsics=
 		REM MSBuild - https://github.com/XhmikosR/notepad2-mod/issues/111
-	set AVX_MSBUILD="<EnableEnhancedInstructionSet>NotSet<\/EnableEnhancedInstructionSet>\r\n"
+	set AVX_MSBUILD=NotSet
 		REM libconfig.sh / memcached.sh / sslh.sh
 	set AVX_GCC=core2
 		REM MPIR (used in phpsdk-local)

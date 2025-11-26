@@ -2,7 +2,7 @@
 
 %PATH_BIN_CYGWIN%\sh.exe -c "CC=cl ./autogen.sh"
 set JEMALLOC_VCVER=vc2017
-%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/msvc/projects/%JEMALLOC_VCVER%/jemalloc/" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER% nostd
+if %ARG_KEEPSRC% == 0 (call do_php %PATH_MODULES_COMMON%/msbuild.php "%PATH_SRC%/%1/msvc/projects/%JEMALLOC_VCVER%/jemalloc/" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER% nostd)
 set OUTDIR_CONF=Release
 
 MSBuild.exe msvc\jemalloc_%JEMALLOC_VCVER%.sln %MSBUILD_OPTS% ^

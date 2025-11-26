@@ -3,7 +3,8 @@
 set VCDIR=windows\nono
 set OUTDIR_CONF=DLL Release
 
-%PATH_BIN_CYGWIN%\bash %PATH_MODULES_COMMON%/vcxproj.sh "%CYGPATH_SRC%/%1/%VCDIR:\=/%" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
+	REM already done. launch only once for bebase from upstream (/VS17)
+REM call do_php %PATH_MODULES_COMMON%/msbuild.php "%PATH_SRC%/%1/%VCDIR:\=/%" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
 
 MSBuild.exe %PATH_SRC%\%1\%VCDIR%\libxpm.sln %MSBUILD_OPTS% ^
 /t:Clean,libxpm ^
