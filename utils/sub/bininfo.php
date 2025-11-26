@@ -146,7 +146,7 @@
 
 			ksort($data[$cur],SORT_NUMERIC);
 			foreach($data[$cur] as $k => $v)
-				if($col[$k]["pad"] != -1) {
+				if($v && $col[$k]["pad"] != -1) {
 					if(is_int(strpos($v,"\033"))) {
 						echo str_pad($v,$col[$k]["pad"]+10," ");
 					} else {
