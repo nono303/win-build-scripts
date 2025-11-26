@@ -147,15 +147,6 @@ index 170076bdd4..c553b7abe6 100644
  SET(mod_cache_disk_extra_libs        mod_cache)
  SET(mod_cache_socache_extra_libs     mod_cache)
  SET(mod_charset_lite_requires        APR_HAS_XLATE)
-@@ -432,7 +454,7 @@ SET(mod_dav_extra_sources
-   modules/dav/main/std_liveprop.c    modules/dav/main/providers.c
-   modules/dav/main/util.c            modules/dav/main/util_lock.c
- )
--SET(mod_dav_install_lib 1)
-+# SET(mod_dav_install_lib 1)
- SET(mod_dav_fs_extra_sources
-   modules/dav/fs/dbm.c               modules/dav/fs/lock.c
-   modules/dav/fs/repos.c
 @@ -458,16 +480,25 @@ SET(mod_http2_extra_defines          ssize_t=long)
  SET(mod_http2_extra_includes         ${NGHTTP2_INCLUDE_DIR})
  SET(mod_http2_extra_libs             ${NGHTTP2_LIBRARIES})
