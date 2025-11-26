@@ -1,6 +1,5 @@
 @echo off
-	REM force native openssl
-call quic 0
+
 call go clean
 call go zlib NOLOG
 call go pcre2 svn NOLOG
@@ -10,7 +9,7 @@ call go sqlite svn NOLOG
 call go apr NOLOG
 call go libiconv NOLOG
 call go apr-util svn NOLOG
-call go serf NOLOG
+call go serf svn NOLOG
 call go httpd svn NOLOG
 
 set DEPS=\deps
