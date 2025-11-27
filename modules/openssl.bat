@@ -11,11 +11,14 @@ if NOT "%C_STD_VER%"=="" (
 	set __CNFCXX=/std:c++%C_STD_VER%
 )
 
-set CONFIGURE_OPENSSL=--with-brotli-include=%PATH_INSTALL:\=/%/include ^
---with-brotli-lib=brotlicommon ^
---with-zstd-include=%PATH_INSTALL:\=/%/include ^
---with-zstd-lib=libzstd
-if "%2"=="svn" (set CONFIGURE_OPENSSL=no-brotli no-zstd)
+if "%2"=="svn" (
+	set CONFIGURE_OPENSSL=no-brotli no-zstd
+) else (
+	set CONFIGURE_OPENSSL=--with-brotli-include=%PATH_INSTALL:\=/%/include ^
+	--with-brotli-lib=brotlicommon ^
+	--with-zstd-include=%PATH_INSTALL:\=/%/include ^
+	--with-zstd-lib=libzstd
+)
 
 	REM !! --with-zlib-lib require the full path or name in PATH of zlib DLL without dll extension !!
 perl Configure %perlbuild% ^
