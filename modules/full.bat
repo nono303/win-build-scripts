@@ -135,10 +135,6 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	:php
 	call %PATH_BATCH%\go.bat php NOLOG
 	if  "%2" == "phpanddeps" exit /B
-:serf
-call %PATH_BATCH%\go.bat serf NOLOG
-:nssm
-call %PATH_BATCH%\go.bat nssm NOLOG
 	REM only for build ALL
 IF [%2] == [] (
 	call %PATH_BATCH%\go.bat bininfo checkavx
