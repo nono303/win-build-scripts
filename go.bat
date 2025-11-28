@@ -14,14 +14,15 @@ for %%x in (%*) do (
    set "argVec[!argCount!]=%%~x"
 )
 for /L %%i in (2,1,%argCount%) do (
-	if /I "!argVec[%%i]!"=="ALL"   set ARG_ALL=1
-	if /I "!argVec[%%i]!"=="NOLOG" set ARG_NOLOG=1
+	if /I "!argVec[%%i]!"=="ALL"     set ARG_ALL=1
+	if /I "!argVec[%%i]!"=="NOLOG"   set ARG_NOLOG=1
 	if /I "!argVec[%%i]!"=="VERBOSE" set ARG_DEBUG=1
 	if /I "!argVec[%%i]!"=="KEEPSRC" set ARG_KEEPSRC=1
+	if /I "!argVec[%%i]!"=="SVN"     set ARG_SVN=1
 )
 	REM ~~~~~~~~~~~~ VERBOSE
 set CUR_DEBUG=0
-if %ARG_DEBUG% == 1 (
+if "%ARG_DEBUG%" == "1" (
 	set CUR_DEBUG=1
 ) else (
 	if %DEBUG_BUILD% == 1 (
@@ -68,6 +69,10 @@ for %%D in (EXTERNAL_INCLUDE INCLUDE LIB) do (for /F "tokens=* USEBACKQ" %%F in 
 
 	REM ~~~~~~~~~~~~ RUN
 echo ####### BEGIN %BAFF% %1 %MSVC_DEPS% %ARCH% %AVXECHO% [%ymdhis%] #######
+if "%ARG_SVN%" == "1" (
+	set PATH_INSTALL_SAV=%PATH_INSTALL%
+	set PATH_INSTALL=%PATH_INSTALL%.svn
+)
 set STARTTIME=%TIME%
 if %ARG_ALL% == 1 (
 	for %%V in (vs17 vs18) do (
@@ -92,5 +97,8 @@ if %ARG_ALL% == 1 (
 )
 set ENDTIME=%TIME%
 set /A DURATION=10 * ((((%ENDTIME:~0,2%-100)*360000 + (1%ENDTIME:~3,2%-100)*6000 + (1%ENDTIME:~6,2%-100)*100 + (1%ENDTIME:~9,2%-100))-((%STARTTIME:~0,2%-100)*360000 + (1%STARTTIME:~3,2%-100)*6000 + (1%STARTTIME:~6,2%-100)*100 + (1%STARTTIME:~9,2%-100))))
+if "%ARG_SVN%" == "1" (
+	set PATH_INSTALL=%PATH_INSTALL_SAV%
+)
 echo ####### END %BAFF% %1 %MSVC_DEPS% %ARCH% %AVXECHO% [%DURATION%] #######
 cd /D %PATH_BATCH%
