@@ -1,0 +1,15 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 6532829..78cb649 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -44,10 +44,6 @@ set(CMAKE_MODULE_PATH "${SERF_SOURCE_DIR}/build")
+ include(SerfVersion)
+ 
+ project("Serf" VERSION ${SERF_VERSION} LANGUAGES C)
+-message(WARNING
+-        "Serf's CMake build is considered EXPERIMENTAL. "
+-        "Some features are not supported and the build "
+-        "has not been tested on many supported platforms.")
+ 
+ # Build options
+ option(DEBUG "Enable debugging info and strict compile warnings" OFF)
