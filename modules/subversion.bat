@@ -9,9 +9,10 @@ if not exist %PATH_SRC%\%1\%OUTDIR_CONF%\. mklink /J %PATH_SRC%\%1\%OUTDIR_CONF%
 python gen-make.py ^
 --release ^
 -t vcproj ^
---vsnet-version=2019 ^
+--vsnet-version=2022 ^
 --with-jdk=%JAVA_HOME% ^
 --with-serf=%PATH_INSTALL%\include ^
+--with-shared-serf ^
 --with-sqlite=%PATH_INSTALL% ^
 --with-openssl=%PATH_INSTALL% ^
 --with-apr=%PATH_INSTALL% ^
@@ -23,18 +24,17 @@ python gen-make.py ^
 
 if %ARG_KEEPSRC% == 0 (call do_php %PATH_MODULES_COMMON%/msbuild.php "%PATH_SRC%/%1/build/win32/vcnet-vcproj/" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER% nostd)
 	REM ~~~~~~~~~~~~ fix serf lib name
-for %%V in (conflict-data-test pristine-store-test client-test db-test wc-test entries-compat-test op-depth-test filesize-test conflicts-test libsvn_ra_dll) do (
-	sed -i 's/serf-2\.lib/libserf-2\.lib/g'  %CYGPATH_SRC%/%1/build/win32/vcnet-vcproj/%%V.vcxproj
-)
+REM sed -i 's/serf-2\.lib/libserf-2\.lib/g'  %CYGPATH_SRC%/%1/build/win32/vcnet-vcproj/libsvn_ra_serf_dll.vcxproj
+
 	REM ~~~~~~~~~~~~ fix javac nowarn
 for %%V in (javahl-callback-java javahl-compat-java javahl-compat-tests javahl-java javahl-remote-java javahl-tests javahl-types-java javahl-util-java) do (
-	sed -i 's/-Xlint -Xlint:-options -Xlint:-deprecation -Xlint:-dep-ann -Xlint:-rawtypes/-nowarn -Xlint:all/g'  %CYGPATH_SRC%/%1/build/win32/vcnet-vcproj/%%V.vcxproj
+	sed -i 's/-Xlint -Xlint:-options -Xlint:-deprecation -Xlint:-dep-ann -Xlint:-rawtypes/-nowarn -Xlint:all/g' %CYGPATH_SRC%/%1/build/win32/vcnet-vcproj/%%V.vcxproj
 )
 
 	REM ~~~~~~~~~~~~ Make (;__ALL_TESTS__)
 MSBuild.exe subversion_vcnet.sln %MSBUILD_OPTS% ^
 /t:Clean;__ALL__:Rebuild;__JAVAHL__:Rebuild ^
-/nowarn:C4018;C4132;C4146;C4152;C4189;C4245;C4267;C4312;C4334;C4389;C4702;C4703;C4996;LNK4087;MSB8065 ^
+/nowarn:LNK4087;MSB8065 ^
 /p:Configuration=%OUTDIR_CONF% ^
 /p:Platform=%archmsbuild%
 

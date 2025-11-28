@@ -1,34 +1,8 @@
-diff --git "a/build/generator/gen_win_dependencies.py" "b/build/generator/gen_win_dependencies.py"
-index 138c7fd21b..86c4287e45 100644
---- "a/build/generator/gen_win_dependencies.py"
-+++ "b/build/generator/gen_win_dependencies.py"
-@@ -580,13 +580,13 @@ class GenDependenciesBase(gen_base.GeneratorBase):
- 
-     txt = open(version_file_path).read()
- 
--    vermatch = re.search(r'^\s*#define\s+XML_MAJOR_VERSION\s+(\d+)', txt, re.M)
-+    vermatch = re.search(r'^\s*#\s*define\s+XML_MAJOR_VERSION\s+(\d+)', txt, re.M)
-     major = int(vermatch.group(1))
- 
--    vermatch = re.search(r'^\s*#define\s+XML_MINOR_VERSION\s+(\d+)', txt, re.M)
-+    vermatch = re.search(r'^\s*#\s*define\s+XML_MINOR_VERSION\s+(\d+)', txt, re.M)
-     minor = int(vermatch.group(1))
- 
--    vermatch = re.search(r'^\s*#define\s+XML_MICRO_VERSION\s+(\d+)', txt, re.M)
-+    vermatch = re.search(r'^\s*#\s*define\s+XML_MICRO_VERSION\s+(\d+)', txt, re.M)
-     patch = int(vermatch.group(1))
- 
-     # apr-Util 0.9-1.4 compiled expat to 'xml.lib', but apr-util 1.5 switched
-@@ -1163,7 +1163,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
-                                stderr=subprocess.STDOUT).stdout
-       line = outfp.read().decode('utf8')
-       if line:
--        vermatch = re.search(r'(([0-9]+(\.[0-9]+)+)(_[._0-9]+)?)', line, re.M)
-+        vermatch = re.search(r'(([0-9]+(\.[0-9]+)*)(_[._0-9]+)?)', line, re.M)
-       else:
-         vermatch = None
- 
-@@ -1489,7 +1489,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
+diff --git a/build/generator/gen_win_dependencies.py b/build/generator/gen_win_dependencies.py
+index bafc78887a..e8d71353ca 100644
+--- a/build/generator/gen_win_dependencies.py
++++ b/build/generator/gen_win_dependencies.py
+@@ -1519,7 +1519,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
      dll_name = None
      defines = []
  
@@ -37,26 +11,3 @@ index 138c7fd21b..86c4287e45 100644
  
      if os.path.isfile(os.path.join(sqlite_base, 'include/sqlite3.h')):
        # Standard layout
-@@ -1497,18 +1497,18 @@ class GenDependenciesBase(gen_base.GeneratorBase):
-       lib_dir = os.path.join(sqlite_base, 'lib')
- 
-       # We assume a static library, but let's support shared in this case
--      if os.path.isfile(os.path.join(sqlite_base, 'bin/sqlite3.dll')):
-+      if os.path.isfile(os.path.join(sqlite_base, 'bin/libsqlite3.dll')):
-         dll_dir = os.path.join(sqlite_base, 'bin')
--        dll_name = 'sqlite3.dll'
-+        dll_name = 'libsqlite3.dll'
-     elif os.path.isfile(os.path.join(sqlite_base, 'inc/sqlite3.h')):
-       # Standard layout
-       inc_dir = os.path.join(sqlite_base, 'inc')
-       lib_dir = os.path.join(sqlite_base, 'lib')
- 
-       # We assume a static library, but let's support shared in this case
--      if os.path.isfile(os.path.join(sqlite_base, 'bin/sqlite3.dll')):
-+      if os.path.isfile(os.path.join(sqlite_base, 'bin/libsqlite3.dll')):
-         dll_dir = os.path.join(sqlite_base, 'bin')
--        dll_name = 'sqlite3.dll'
-+        dll_name = 'libsqlite3.dll'
-     elif (os.path.isfile(os.path.join(sqlite_base, 'sqlite3.h'))
-           and os.path.isfile(os.path.join(sqlite_base, 'sqlite3.c'))):
-       # Amalgamation
