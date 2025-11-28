@@ -1,7 +1,7 @@
-diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
-index 170076bdd4..c553b7abe6 100644
---- "a/CMakeLists.txt"
-+++ "b/CMakeLists.txt"
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 170076bdd4..d4fd0a94bf 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -17,14 +17,26 @@
  
  PROJECT(HTTPD C)
@@ -143,10 +143,19 @@ index 170076bdd4..c553b7abe6 100644
    modules/cache/cache_storage.c      modules/cache/cache_util.c
  )
 -SET(mod_cache_install_lib 1)
-+# SET(mod_cache_install_lib 1)
++SET(mod_cache_install_lib 0)
  SET(mod_cache_disk_extra_libs        mod_cache)
  SET(mod_cache_socache_extra_libs     mod_cache)
  SET(mod_charset_lite_requires        APR_HAS_XLATE)
+@@ -432,7 +454,7 @@ SET(mod_dav_extra_sources
+   modules/dav/main/std_liveprop.c    modules/dav/main/providers.c
+   modules/dav/main/util.c            modules/dav/main/util_lock.c
+ )
+-SET(mod_dav_install_lib 1)
++SET(mod_dav_install_lib 0)
+ SET(mod_dav_fs_extra_sources
+   modules/dav/fs/dbm.c               modules/dav/fs/lock.c
+   modules/dav/fs/repos.c
 @@ -458,16 +480,25 @@ SET(mod_http2_extra_defines          ssize_t=long)
  SET(mod_http2_extra_includes         ${NGHTTP2_INCLUDE_DIR})
  SET(mod_http2_extra_libs             ${NGHTTP2_LIBRARIES})
@@ -245,7 +254,7 @@ index 170076bdd4..c553b7abe6 100644
  SET(mod_proxy_extra_defines          PROXY_DECLARE_EXPORT)
  SET(mod_proxy_extra_sources          modules/proxy/proxy_util.c)
 -SET(mod_proxy_install_lib 1)
-+# SET(mod_proxy_install_lib 1)
++SET(mod_proxy_install_lib 0)
  SET(mod_proxy_ajp_extra_sources
    modules/proxy/ajp_header.c         modules/proxy/ajp_link.c
    modules/proxy/ajp_msg.c            modules/proxy/ajp_utils.c
@@ -254,7 +263,7 @@ index 170076bdd4..c553b7abe6 100644
  SET(mod_serf_requires                AN_UNIMPLEMENTED_SUPPORT_LIBRARY_REQUIREMENT)
  SET(mod_session_extra_defines        SESSION_DECLARE_EXPORT)
 -SET(mod_session_install_lib 1)
-+# SET(mod_session_install_lib 1)
++SET(mod_session_install_lib 0)
  SET(mod_session_cookie_extra_libs    mod_session)
  SET(mod_session_crypto_requires      APU_HAVE_CRYPTO)
  SET(mod_session_crypto_extra_libs    mod_session)
@@ -263,7 +272,7 @@ index 170076bdd4..c553b7abe6 100644
  )
  SET(mod_status_extra_defines         STATUS_DECLARE_EXPORT)
 -SET(mod_watchdog_install_lib 1)
-+# SET(mod_watchdog_install_lib 1)
++SET(mod_watchdog_install_lib 0)
  SET(mod_xml2enc_requires             LIBXML2_FOUND)
  IF(LIBXML2_FOUND)
    SET(mod_xml2enc_extra_includes     "${LIBXML2_INCLUDE_DIR};${LIBXML2_ICONV_INCLUDE_DIR}")
