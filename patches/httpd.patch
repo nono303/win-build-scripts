@@ -217,7 +217,7 @@ index 170076bdd4..d4fd0a94bf 100644
 -  modules/md/md_ocsp.c               modules/md/md_util.c               
 -  modules/md/mod_md_config.c         modules/md/mod_md_drive.c
 -  modules/md/mod_md_os.c             modules/md/mod_md_status.c
--  modules/md/mod_md_ocsp.c           modules/md/md_tailscale.c
+-  modules/md/mod_md_ocsp.c
 +  ${mod_md_src}/md_acme.c
 +  ${mod_md_src}/md_acme_acct.c
 +  ${mod_md_src}/md_acme_authz.c
