@@ -1,15 +1,14 @@
 avx=$(echo $1| sed 's#/#\\/#g')
+
 # LINK FLAGS (dll exe)
-sed -i -E 's/release" "\/nologo/OPT:REF,ICF/g' $2/build.ninja
+sed -i -E 's/command = "link"/command = "link" \/NOLOGO \/LTCG \/OPT:REF,ICF/g' $2/build.ninja
+
 # LINK FLAGS (lib)
-sed -i -E 's/LINK_ARGS =/LINK_ARGS = "\/LTCG"/g' $2/build.ninja
+sed -i -E 's/command = "lib"/command = "lib" \/NOLOGO \/LTCG/g' $2/build.ninja
+
 # C & C++ FLAGS
-# warn
+sed -i -E 's/command = "cl"/command = "cl" \/Gw \/Gy \/Zc:inline \/O2 \/Ob3 \/Zf \/Zi \/FS \/GL \/MD \/MP'$3' \/cgthreads8 '$avx' \/DNDEBUG/g' $2/build.ninja
+  # remove
 sed -i -E 's/ "-wd[0-9]{4}"//g' $2/build.ninja
-sed -i 's/\/W3/\/w/g' $2/build.ninja
-# add quote for AVX - https://www.cyberciti.biz/faq/unix-linux-bash-script-check-if-variable-is-empty/
-[ ! -z "$avx" ] && avx="\"$avx\""
-# opti
-sed -i 's/ "\/Zi" / "\/Gw" "\/Gy" "\/Zc:inline" "\/O2" "\/Ob3" "\/Zf" "\/Zi" "\/FS" "\/GL" "\/MP'$3'" "\/cgthreads8" '$avx' "\/DWIN32" "\/D_WINDOWS" "\/DNDEBUG" /g' $2/build.ninja
-# found		"/MD" "/nologo" "/showIncludes" "/W3" "/O2" "/Zi"
-# result	"/MD" "/nologo" "/showIncludes" "/W3" "/Gw" "/Gy" "/Zc:inline" "/O2" "/Ob3" "/Zf" "/Zi" "/FS" "/GL" "/MP16" "/cgthreads8" "/arch:AVX" "/DWIN32" "/D_WINDOWS" "/DNDEBUG"
+sed -i 's/"\/W3"/"\/w"/g' $2/build.ninja
+sed -i 's/"\/Z7" //g' $2/build.ninja
