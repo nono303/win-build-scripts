@@ -1,9 +1,8 @@
-https://www.apachelounge.com/viewtopic.php?p=43799#43799
-diff --git a/lib/url.c b/lib/url.c
-index f0fe7d3d41..4ce9d10c26 100644
---- a/lib/url.c
-+++ b/lib/url.c
-@@ -434,6 +434,16 @@ void Curl_init_userdefined(struct Curl_easy *data)
+diff --git "a/lib/url.c" "b/lib/url.c"
+index 0643ceea7f..e68ac5fc14 100644
+--- "a/lib/url.c"
++++ "b/lib/url.c"
+@@ -418,6 +418,16 @@ void Curl_init_userdefined(struct Curl_easy *data)
    set->socks5_gssapi_nec = FALSE;
  #endif
  
