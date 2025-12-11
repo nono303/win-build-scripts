@@ -1,7 +1,7 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1
 if exist %PATH_SRC%\%1\mobac\build\. rmdir /S /Q %PATH_SRC%\%1\mobac\build
 
-xcopy /C /F /Y %PATH_PATCHES%\mobac_gradle-wrapper.jar %PATH_SRC%\%1\gradle\wrapper\gradle-wrapper.jar
+xcopy /C /F /Y %PATH_PATCHES%\mobac_gradle-wrapper.jar %PATH_SRC%\%1\gradle\wrapper\gradle-wrapper.jar*
 
 REM echo ^>^>^> gradlew --project-cache-dir %PATH_GRADLE_BUILD% wrapper --gradle-version %GRADLEVER%
 REM call gradlew --project-cache-dir %PATH_GRADLE_BUILD% wrapper --gradle-version %GRADLEVER%
@@ -11,17 +11,19 @@ REM call gradlew --project-cache-dir %PATH_GRADLE_BUILD% --refresh-dependencies 
 REM call gradlew --project-cache-dir %PATH_GRADLE_BUILD% -q dependencies --configuration runtimeClasspath
 echo.
 call gradlew --project-cache-dir %PATH_GRADLE_BUILD% -q mobac:dependencyInsight --dependency com.github.mapsforge.mapsforge:mapsforge-core --single-path --configuration runtimeClasspath | head -1
-call gradlew --project-cache-dir %PATH_GRADLE_BUILD% -q mobac:dependencyInsight --dependency org.apache-extras.beanshell:bsh --single-path --configuration runtimeClasspath | head -1
+call gradlew --project-cache-dir %PATH_GRADLE_BUILD% -q mobac:dependencyInsight --dependency org.beanshell:bsh --single-path --configuration runtimeClasspath | head -1
+call gradlew --project-cache-dir %PATH_GRADLE_BUILD% -q mobac:dependencyInsight --dependency org.apache.httpcomponents.client5 --single-path --configuration runtimeClasspath | head -1
 echo.
 
-call gradlew --project-cache-dir %PATH_GRADLE_BUILD% --warning-mode all --console=verbose --no-daemon --parallel --max-workers %NUMBER_OF_PROCESSORS% mobac:jar 2>&1
+call gradlew --project-cache-dir %PATH_GRADLE_BUILD% --warning-mode all --console=verbose --parallel --max-workers %NUMBER_OF_PROCESSORS% mobac:jar 2>&1
 
-FOR /F "tokens=* USEBACKQ" %%F in (`svn info --show-item revision`) do (set SCM_COMORREV=%%F)
+REM FOR /F "tokens=* USEBACKQ" %%F in (`svn info --show-item revision`) do (set SCM_COMORREV=%%F)
 move /Y %PATH_SRC%\%1\mobac\build\libs\Mobile_Atlas_Creator.jar %PATH_SRC%\%1\Mobile_Atlas_Creator_%SCM_COMORREV%.jar
 
 if %LOCAL_COPY% == 1 (
-	rm -fv "%LOCAL_PATH_MOBAC%\Mobile_Atlas_Creator*.jar"
+echo on
+	del %LOCAL_PATH_MOBAC%\Mobile_Atlas_Creator*.jar
 	xcopy /C /F /Y %PATH_SRC%\%1\Mobile_Atlas_Creator_%SCM_COMORREV%.jar %LOCAL_PATH_MOBAC%\*
-	rm -fv "%LOCAL_PATH_MOBAC2%\Mobile_Atlas_Creator*.jar"
+	del %LOCAL_PATH_MOBAC2%\Mobile_Atlas_Creator*.jar
 	xcopy /C /F /Y %PATH_SRC%\%1\Mobile_Atlas_Creator_%SCM_COMORREV%.jar %LOCAL_PATH_MOBAC2%\*
 )

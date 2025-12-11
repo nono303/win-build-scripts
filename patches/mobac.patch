@@ -1,391 +1,113 @@
-Index: build.gradle
-===================================================================
---- build.gradle	(revision 2798)
-+++ build.gradle	(working copy)
-@@ -4,26 +4,29 @@
- 
- plugins {
-     id 'distribution'
-+    // https://plugins.gradle.org/plugin/at.bxm.svntools
-     id 'at.bxm.svntools' version '3.1'
-+    // https://plugins.gradle.org/plugin/org.gradle.crypto.checksum
-     id 'org.gradle.crypto.checksum' version '1.4.0'
--    id 'com.diffplug.spotless' version '6.21.0'
-+    // https://mvnrepository.com/artifact/com.diffplug.spotless/spotless-plugin-gradle
-+    id 'com.diffplug.spotless' version '8.0.0'
- }
- 
--group 'mobac.sourceforge.io'
--version '2.3.3'
-+group = 'mobac.sourceforge.io'
-+version = '2.3.3'
- 
--println("SVN revision $svntools.info.revisionNumber")
-+// println("SVN revision $svntools.info.revisionNumber")
- 
- allprojects {
-     repositories {
-         mavenCentral()
-         maven {
--            url 'https://jitpack.io'
-+            url = 'https://jitpack.io'
-             content { includeGroupByRegex "com\\.github\\..*" }
-         }
-         maven {
-             // required for javax.media:jai-core:1.1.3 and com.sun.media:jai-codec:1.1.3
--            url "https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/"
-+            url = "https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/"
-         }
-         // For locally compiled beanshell/bsh3 project:
-         // git clone https://github.com/beanshell/beanshell
-@@ -32,6 +35,7 @@
-     }
-     ext {
-         svnRevision = "$svntools.info.revisionNumber"
-+        projectVersion = project.rootProject.version.toString()
-     }
-     tasks.withType(JavaCompile) {
-         options.encoding = 'UTF-8'
-@@ -38,9 +42,9 @@
-         options.incremental = true
-         options.fork = true
-         options.compilerArgs << '-Xlint:unchecked'
--        options.deprecation = true
--        sourceCompatibility = JavaVersion.VERSION_11
--        targetCompatibility = JavaVersion.VERSION_11
-+        options.deprecation = false
-+        // sourceCompatibility = JavaVersion.VERSION_11
-+        // targetCompatibility = JavaVersion.VERSION_11
-     }
- }
- 
-@@ -131,13 +135,13 @@
-         var p = it.toPath()
-         var dest = updDir.resolve(it.getName())
-         Files.copy(p, dest, StandardCopyOption.REPLACE_EXISTING)
--        println(dest)
-+        // println(dest)
- 
-         var bytes = Files.readAllBytes(dest)
-         var md5 = MessageDigest.getInstance("MD5").digest(bytes).encodeHex().toString()
-         writer.append(String.format("%s %s\n", md5, it.name))
-     }
--    println(writer.toString())
-+    // println(writer.toString())
-     Files.writeString(updDir.resolve("mappacks-md5.txt"), writer.toString())
- }
- 
-Index: gradle/wrapper/gradle-wrapper.properties
-===================================================================
---- gradle/wrapper/gradle-wrapper.properties	(revision 2798)
-+++ gradle/wrapper/gradle-wrapper.properties	(working copy)
-@@ -1,6 +1,6 @@
- distributionBase=GRADLE_USER_HOME
- distributionPath=wrapper/dists
--distributionUrl=https\://services.gradle.org/distributions/gradle-8.9-bin.zip
-+distributionUrl=https\://services.gradle.org/distributions/gradle-9.2.0-bin.zip
- networkTimeout=10000
- validateDistributionUrl=true
- zipStoreBase=GRADLE_USER_HOME
-Index: gradlew
-===================================================================
---- gradlew	(revision 2798)
-+++ gradlew	(working copy)
-@@ -1,7 +1,7 @@
- #!/bin/sh
- 
- #
--# Copyright © 2015-2021 the original authors.
-+# Copyright © 2015 the original authors.
- #
- # Licensed under the Apache License, Version 2.0 (the "License");
- # you may not use this file except in compliance with the License.
-@@ -86,8 +86,7 @@
- # shellcheck disable=SC2034
- APP_BASE_NAME=${0##*/}
- # Discard cd standard output in case $CDPATH is set (https://github.com/gradle/gradle/issues/25036)
--APP_HOME=$( cd -P "${APP_HOME:-./}" > /dev/null && printf '%s
--' "$PWD" ) || exit
-+APP_HOME=$( cd -P "${APP_HOME:-./}" > /dev/null && printf '%s\n' "$PWD" ) || exit
- 
- # Use the maximum available, or set MAX_FD != -1 to use that value.
- MAX_FD=maximum
-@@ -115,7 +114,7 @@
-   NONSTOP* )        nonstop=true ;;
- esac
- 
--CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
-+CLASSPATH="\\\"\\\""
- 
- 
- # Determine the Java command to use to start the JVM.
-@@ -206,7 +205,7 @@
- DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
- 
- # Collect all arguments for the java command:
--#   * DEFAULT_JVM_OPTS, JAVA_OPTS, JAVA_OPTS, and optsEnvironmentVar are not allowed to contain shell fragments,
-+#   * DEFAULT_JVM_OPTS, JAVA_OPTS, and optsEnvironmentVar are not allowed to contain shell fragments,
- #     and any embedded shellness will be escaped.
- #   * For example: A user cannot expect ${Hostname} to be expanded, as it is an environment variable and will be
- #     treated as '${Hostname}' itself on the command line.
-@@ -214,7 +213,7 @@
- set -- \
-         "-Dorg.gradle.appname=$APP_BASE_NAME" \
-         -classpath "$CLASSPATH" \
--        org.gradle.wrapper.GradleWrapperMain \
-+        -jar "$APP_HOME/gradle/wrapper/gradle-wrapper.jar" \
-         "$@"
- 
- # Stop when "xargs" is not available.
-Index: gradlew.bat
-===================================================================
---- gradlew.bat	(revision 2798)
-+++ gradlew.bat	(working copy)
-@@ -70,11 +70,11 @@
- :execute
- @rem Setup the command line
- 
--set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
-+set CLASSPATH=
- 
- 
- @rem Execute Gradle
--"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %*
-+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" -jar "%APP_HOME%\gradle\wrapper\gradle-wrapper.jar" %*
- 
- :end
- @rem End local scope for the variables with windows NT shell
-Index: mobac/build.gradle
-===================================================================
---- mobac/build.gradle	(revision 2798)
-+++ mobac/build.gradle	(working copy)
-@@ -1,11 +1,11 @@
- plugins {
-     id 'java-library'
--    id 'edu.sc.seis.launch4j' version '3.0.6'
-+    // https://plugins.gradle.org/plugin/edu.sc.seis.launch4j
-+    id 'edu.sc.seis.launch4j' version '4.0.0'
- }
- 
- dependencies {
--    def mapsforgeVersion = '0.26.1'
--    // def mapsforgeVersion = 'master-SNAPSHOT'
-+    def mapsforgeVersion = '+'
- 
-     implementation "com.github.mapsforge.mapsforge:mapsforge-core:${mapsforgeVersion}"
-     implementation "com.github.mapsforge.mapsforge:mapsforge-map:${mapsforgeVersion}"
-@@ -12,29 +12,30 @@
-     implementation "com.github.mapsforge.mapsforge:mapsforge-map-awt:${mapsforgeVersion}"
-     implementation "com.github.mapsforge.mapsforge:mapsforge-map-reader:${mapsforgeVersion}"
-     implementation "com.github.mapsforge.mapsforge:mapsforge-themes:${mapsforgeVersion}"
--    api 'org.beanshell:bsh:3.0.0-SNAPSHOT'
--    api 'commons-codec:commons-codec:1.15'
--    api 'commons-io:commons-io:2.14.0'
--    api 'org.apache.commons:commons-lang3:3.18.0'
--    api 'org.apache.commons:commons-text:1.10.0'
--    api 'com.github.kerner1000:javapng:2.1.2'
--    api 'org.xerial:sqlite-jdbc:3.43.0.0'
--    api 'com.sleepycat:je:5.0.73'
--    api 'org.glassfish.jaxb:jaxb-runtime:3.0.2'
--    api 'org.slf4j:slf4j-api:1.7.36'
--    implementation 'com.twelvemonkeys.imageio:imageio-webp:3.9.4'
--    implementation 'ch.qos.logback:logback-classic:1.3.15'
--    implementation 'org.slf4j:jul-to-slf4j:1.7.36'
--    implementation 'net.sf.jtidy:jtidy:r938'
--    implementation 'com.itextpdf:itextpdf:5.1.3'
--    implementation 'javax.media:jai-core:1.1.3'
--    implementation 'com.sun.media:jai-codec:1.1.3'
--    testImplementation 'org.jboss.resteasy:tjws:2.3.10.Final'
--    testImplementation 'junit:junit:4.13.2'
--    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
--    testImplementation 'javax.servlet:servlet-api:2.5'
- 
--    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
-+    api 'org.apache-extras.beanshell:bsh:+'
-+    api 'commons-codec:commons-codec:+'
-+    api 'commons-io:commons-io:+'
-+    api 'org.apache.commons:commons-lang3:+'
-+    api 'org.apache.commons:commons-text:+'
-+    api 'com.github.kerner1000:javapng:+'
-+    api 'org.xerial:sqlite-jdbc:+'
-+    api 'com.sleepycat:je:+'
-+    api 'org.glassfish.jaxb:jaxb-runtime:+'
-+    api 'org.slf4j:slf4j-api:+'
-+    implementation 'com.twelvemonkeys.imageio:imageio-webp:+'
-+    implementation 'ch.qos.logback:logback-classic:+'
-+    implementation 'org.slf4j:jul-to-slf4j:+'
-+    implementation 'net.sf.jtidy:jtidy:+'
-+    implementation 'com.itextpdf:itextpdf:+'
-+    implementation 'javax.media:jai-core:+'
-+    implementation 'com.sun.media:jai-codec:+'
-+    testImplementation 'org.jboss.resteasy:tjws:+'
-+    testImplementation 'junit:junit:+'
-+    testImplementation 'org.junit.jupiter:junit-jupiter-api:+'
-+    testImplementation 'javax.servlet:servlet-api:+'
-+
-+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:+'
- }
- processResources {
-     doLast {
-@@ -42,12 +43,12 @@
+ mobac/build.gradle                                 |  3 +-
+ mobac/src/main/java/mobac/program/ProgramInfo.java | 36 +++++++++++-----------
+ 2 files changed, 20 insertions(+), 19 deletions(-)
+
+diff --git a/mobac/build.gradle b/mobac/build.gradle
+index 0cd940a..2bb2674 100644
+--- a/mobac/build.gradle
++++ b/mobac/build.gradle
+@@ -43,7 +43,8 @@ processResources {
          targetDir.mkdirs()
          def props = new Properties()
-         props.setProperty("mobac.revision", "$svnRevision")
--        props.setProperty("mobac.version", project.rootProject.version.toString())
-+        props.setProperty("mobac.version", "$projectVersion")
+         props.setProperty("mobac.gitBranchName", "$gitBranchName")
+-        props.setProperty("mobac.gitHash", "$gitCommitHash")
++        props.setProperty("mobac.gitCommitHash", "$gitCommitHash")
++        props.setProperty("mobac.gitCommitTime", "$gitCommitTime")
+         props.setProperty("mobac.version", "$projectVersion")
          new File(targetDir, "mobac-rev.properties").withWriter { props.store(it, null) }
      }
- }
- jar {
--    println("SVN revision $svnRevision")
-+    // println("SVN revision $svnRevision")
+diff --git a/mobac/src/main/java/mobac/program/ProgramInfo.java b/mobac/src/main/java/mobac/program/ProgramInfo.java
+index 3c8c512..370075d 100644
+--- a/mobac/src/main/java/mobac/program/ProgramInfo.java
++++ b/mobac/src/main/java/mobac/program/ProgramInfo.java
+@@ -18,7 +18,6 @@
  
-     manifest {
-         attributes 'Main-Class': 'mobac.StartMOBAC'
-@@ -80,7 +81,7 @@
-     exclude("org/sqlite/native/Linux-Musl/**")
-     exclude("org/sqlite/native/Linux-Android/**")
-     exclude("org/sqlite/native/FreeBSD/**")
--    duplicatesStrategy DuplicatesStrategy.EXCLUDE
-+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
- }
+ import mobac.Main;
+ import mobac.utilities.GUIExceptionHandler;
+-import mobac.utilities.Utilities;
  
- launch4j {
-Index: mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java
-===================================================================
---- mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(revision 2798)
-+++ mobac/src/main/java/mobac/gui/components/JMapSizeCombo.java	(working copy)
-@@ -34,15 +34,10 @@
- 	static {
- 		// Sizes from 1024 to 32768
- 		MAP_SIZE_VALUES = new Vector<>(11);
--		MAP_SIZE_VALUES.addElement(128000);
-+		MAP_SIZE_VALUES.addElement(DEFAULT = 4194303);;
- 		MAP_SIZE_VALUES.addElement(1048575);
- 		MAP_SIZE_VALUES.addElement(65536);
--		MAP_SIZE_VALUES.addElement(DEFAULT = 32767);
--		MAP_SIZE_VALUES.addElement(30000);
--		MAP_SIZE_VALUES.addElement(25000);
--		MAP_SIZE_VALUES.addElement(20000);
--		MAP_SIZE_VALUES.addElement(15000);
--		MAP_SIZE_VALUES.addElement(10000);
-+		MAP_SIZE_VALUES.addElement(32767);
- 		MAP_SIZE_VALUES.addElement(2048);
- 		MAP_SIZE_VALUES.addElement(1024);
- 	}
-Index: mobac/src/main/java/mobac/gui/MainGUI.java
-===================================================================
---- mobac/src/main/java/mobac/gui/MainGUI.java	(revision 2798)
-+++ mobac/src/main/java/mobac/gui/MainGUI.java	(working copy)
-@@ -151,7 +151,7 @@
+ import java.io.InputStream;
+ import java.util.Properties;
+@@ -29,42 +28,37 @@ public class ProgramInfo {
+ 	public static String PROG_NAME_SHORT = "MOBAC";
  
- public class MainGUI extends JFrame implements MapEventListener {
+ 	private static String VERSION = "unknown";
+-	private static String SVN_REVISION = "unknown";
++    private static String GIT_BRANCH_NAME = "unknown";
++	private static String GIT_COMMIT_HASH;
++    private static String GIT_COMMIT_TIME;
+ 	private static String userAgent = "";
  
--	public static final int LEFT_PANEL_MIN_SIZE = 254;
-+	public static final int LEFT_PANEL_MIN_SIZE = 270;
- 	public static final ArrayList<Image> MOBAC_ICONS = new ArrayList<>(3);
- 	private static final long serialVersionUID = 1L;
- 	private static final int LEFT_PANEL_MARGIN = 2;
-@@ -712,6 +712,7 @@
- 		addLayers.addActionListener(AddMapLayer.INSTANCE);
- 		atlasContentPanel.addContent(new JLabel(I18nUtils.localizedStringForKey("lp_atlas_name_label_title")), gbc_std);
- 		atlasContentPanel.addContent(atlasNameTextField, gbc_eol.fill(GBC.HORIZONTAL));
-+		atlasContentPanel.setPreferredSize(new Dimension(100, 150));
+ 	/**
+ 	 * Show or hide the detailed revision info in the main windows title
+ 	 */
+-	private static boolean titleHideRevision = false;
++	private static boolean titleHideCommit = false;
  
- 		leftPanelContent = new JPanel(new GridBagLayout());
- 		leftPanelContent.add(mapSourcePanel, gbc_eol);
-Index: mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java
-===================================================================
---- mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(revision 2798)
-+++ mobac/src/main/java/mobac/gui/panels/JMapSourcesPanel.java	(working copy)
-@@ -43,7 +43,7 @@
- 		JScrollPane mapSourceTreeScrollPane = new JScrollPane(mapSourceTree, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
- 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+ 	public static void initialize() {
  
--		mapSourceTreeScrollPane.setPreferredSize(new Dimension(100, 200));
-+		mapSourceTreeScrollPane.setPreferredSize(new Dimension(100, 550));
- 		mapSourceTreeScrollPane.setAutoscrolls(true);
- 		addContent(mapSourceTreeScrollPane, GBC.eol().fill().insets(0, 1, 0, 0));
- 	}
-Index: mobac/src/main/java/mobac/gui/settings/SettingsGUI.java
-===================================================================
---- mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(revision 2798)
-+++ mobac/src/main/java/mobac/gui/settings/SettingsGUI.java	(working copy)
-@@ -95,7 +95,7 @@
- 
- 	private static final Logger LOG = LoggerFactory.getLogger(SettingsGUI.class);
- 
--	private static final Integer[] THREADCOUNT_LIST = {1, 2, 4, 6};
-+	private static final Integer[] THREADCOUNT_LIST = { 1, 2, 4, 6, 12, 16, 20, 24 };
- 
- 	private static final long MBIT1 = 1000000 / 8;
- 	private final Settings settings = Settings.getInstance();
-Index: mobac/src/main/java/mobac/program/AtlasThread.java
-===================================================================
---- mobac/src/main/java/mobac/program/AtlasThread.java	(revision 2798)
-+++ mobac/src/main/java/mobac/program/AtlasThread.java	(working copy)
-@@ -199,13 +199,13 @@
+ 		try (InputStream in = Main.class.getResourceAsStream("mobac.properties")) {
+ 			Properties props = new Properties();
+ 			props.load(in);
+-			titleHideRevision = Boolean.parseBoolean(props.getProperty("mobac.revision.hide", "false"));
++			titleHideCommit = Boolean.parseBoolean(props.getProperty("mobac.revision.hide", "false"));
+ 			System.getProperties().putAll(props);
+ 		} catch (Exception e) {
+ 			String msg = "Error reading mobac.properties";
+ 			GUIExceptionHandler.processFatalExceptionSimpleDialog(msg, e);
+ 		}
+ 		try (InputStream in = Main.class.getResourceAsStream("mobac-rev.properties")) {
+-			boolean versionSet = false;
+ 			if (in != null) {
+ 				Properties props = new Properties();
+ 				props.load(in);
+-				String rev = props.getProperty("mobac.revision");
+-				int svnRev = Utilities.parseSVNRevision(rev);
+-				if (svnRev > 0) {
+-					SVN_REVISION = Integer.toString(svnRev);
+-					versionSet = true;
+-				}
++                GIT_BRANCH_NAME = props.getProperty("mobac.gitBranchName", GIT_BRANCH_NAME);
++                GIT_COMMIT_HASH = props.getProperty("mobac.gitCommitHash");
++                GIT_COMMIT_TIME = props.getProperty("mobac.gitCommitTime");
++                GIT_BRANCH_NAME = props.getProperty("mobac.gitBranchName");
+ 				VERSION = props.getProperty("mobac.version", VERSION);
  			}
+-			if (!versionSet) {
+-				String rev = System.getProperty("mobac.revision.fallback");
+-				SVN_REVISION = Utilities.parseSVNRevision(rev) + " exported";
+-			}
+ 		} catch (Exception e) {
+ 			Logging.LOG.error("Error reading mobac-rev.properties", e);
  		}
- 
--		if (totalNrOfOnlineTiles > 500000) {
-+		/* if (totalNrOfOnlineTiles > 500000) {
- 			JOptionPane.showMessageDialog(null,
- 					String.format(I18nUtils.localizedStringForKey("msg_too_many_tiles_msg"), 500000,
- 							totalNrOfOnlineTiles),
- 					I18nUtils.localizedStringForKey("msg_too_many_tiles_title"), JOptionPane.ERROR_MESSAGE);
- 			return;
--		}
-+		} */
- 		try {
- 			atlasCreator.startAtlasCreation(atlas, customAtlasDir);
- 		} catch (AtlasTestException e) {
-Index: mobac/src/main/java/mobac/program/download/MobacTrustManager.java
-===================================================================
---- mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(revision 2798)
-+++ mobac/src/main/java/mobac/program/download/MobacTrustManager.java	(working copy)
-@@ -129,7 +129,7 @@
- 			defaultTrustManager.checkServerTrusted(chain, authType);
- 		} catch (CertificateException e) {
- 			X509Certificate cert = chain[0]; // get the leaf certificate
--			log.error("SSL error: {}", e.getMessage());
-+			log.debug("SSL error: {}", e.getMessage());
- 			synchronized (this) {
- 				String pubKeySha256Hash = getPublicKeySha256Hash(cert);
- 				if (isCertificateTrusted(pubKeySha256Hash)) {
-@@ -138,7 +138,7 @@
- 				// TODO: Add GUI for manually adding this certificate as trusted.
- 				String message = "Untrusted certificate encountered: publicKeyHash=\"" + pubKeySha256Hash
- 						+ "\"; certificate issued for " + cert.getSubjectX500Principal();
--				throw new CertificateException(message);
-+				log.debug(message);
- 			}
- 		}
+@@ -79,7 +73,10 @@ public static String getVersion() {
  	}
-Index: mobac/src/main/java/mobac/program/download/TileDownLoader.java
-===================================================================
---- mobac/src/main/java/mobac/program/download/TileDownLoader.java	(revision 2798)
-+++ mobac/src/main/java/mobac/program/download/TileDownLoader.java	(working copy)
-@@ -44,7 +44,8 @@
- 		if (defaultReadTimeout == null) {
- 			System.setProperty("sun.net.client.defaultReadTimeout", "15000");
+ 
+ 	public static String getRevisionStr() {
+-		return SVN_REVISION;
++		if (GIT_COMMIT_HASH == null) {
++            return GIT_BRANCH_NAME;
++        }
++        return String.format("%s (%s)", GIT_COMMIT_HASH, GIT_BRANCH_NAME);
+ 	}
+ 
+ 	public static String getVersionTitle() {
+@@ -99,8 +96,8 @@ public static String getVersionTitle() {
+ 
+ 	public static String getCompleteTitle() {
+ 		String title = getVersionTitle();
+-		if (!titleHideRevision) {
+-			title += " (" + SVN_REVISION + ")";
++		if (!titleHideCommit) {
++			title += " (" + GIT_COMMIT_HASH + ")";
  		}
--		System.setProperty("http.maxConnections", "20");
-+		System.setProperty("http.keepalive", "true");
-+        System.setProperty("http.maxConnections", "128");
+ 		return title;
+ 	}
+@@ -109,4 +106,7 @@ public static String getUserAgent() {
+ 		return userAgent;
+ 	}
  
- 		// Disable restricted headers: By default some headers can't be set
- 		// see https://stackoverflow.com/questions/8335501
-Index: tilestore-util/build.gradle
-===================================================================
---- tilestore-util/build.gradle	(revision 2798)
-+++ tilestore-util/build.gradle	(working copy)
-@@ -26,7 +26,7 @@
-     exclude("module-info.class")
-     exclude("META-INF/*")
-     exclude("META-INF/maven/*")
--    duplicatesStrategy DuplicatesStrategy.EXCLUDE
-+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
++    public static String getGitCommitTime() {
++        return GIT_COMMIT_TIME;
++    }
  }
- 
- task distArchive(type: Zip, dependsOn: ['jar']) {
