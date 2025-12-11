@@ -1,5 +1,6 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
 
+if "%ARG_CMOPTS%"=="1" (@echo on)
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
@@ -14,6 +15,8 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DFREEGLUT_BUILD_SHARED_LIBS=ON ^
 -DFREEGLUT_BUILD_STATIC_LIBS=OFF ^
 %PATH_SRC%\%1
+@echo off
+if "%ARG_CMOPTS%"=="1" (exit /B)
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 for %%C in (lib dll pdb) do (for %%X in (build.ninja cmake_install.cmake) do (sed -i 's/glut\.%%C/freeglut\.%%C/g' %CYGPATH_BUILD%/%1/%%X))

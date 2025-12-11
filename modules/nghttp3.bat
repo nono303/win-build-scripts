@@ -4,6 +4,7 @@ for %%X in (sfparse.c sfparse.h) do (
 	if not exist %PATH_SRC%\%1\lib\sfparse\%%X mklink /h %PATH_SRC%\%1\lib\sfparse\%%X %PATH_SRC%\nghttp2\lib\%%X
 )
 
+if "%ARG_CMOPTS%"=="1" (@echo on)
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DBUILD_TESTING=OFF ^
@@ -15,6 +16,8 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DENABLE_SHARED_LIB=ON ^
 -DENABLE_STATIC_CRT=OFF ^
 %PATH_SRC%\%1
+@echo off
+if "%ARG_CMOPTS%"=="1" (exit /B)
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% install

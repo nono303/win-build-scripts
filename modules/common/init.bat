@@ -43,6 +43,9 @@ set CMAKE_OPTS=%CMAKE_OPTS% ^
 -DCMAKE_FIND_USE_CMAKE_SYSTEM_PATH=OFF ^
 -DCMAKE_FIND_USE_INSTALL_PREFIX=OFF ^
 -DCMAKE_BUILD_TYPE=%CMAKE_BUILD_TYPE%
+if "%ARG_CMOPTS%"=="1" (
+	set CMAKE_OPTS=-LAH %CMAKE_OPTS%
+)
 
 setlocal enabledelayedexpansion
 if exist %PATH_SRC%\%1\. (
@@ -117,4 +120,9 @@ if /I "%~2"=="cmake" (
 	if exist %PATH_BUILD%\%1\. rmdir /S /Q %PATH_BUILD%\%1
 	mkdir %PATH_BUILD%\%1
 	cd /D %PATH_BUILD%\%1
+) else (
+	if "%ARG_CMOPTS%"=="1" (
+		echo ! cmopts arg not avaiable for non CMake projects
+		exit /B
+	)
 )

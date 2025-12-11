@@ -6,6 +6,7 @@ for /f "tokens=*" %%P in ('dir %PATH_PATCHES%\libgd\pr*.patch /s/b') do (call %P
 cd /D %PATH_BUILD%\%1
 
 REM missing libraqm, libfontconfig, libimagequant
+if "%ARG_CMOPTS%"=="1" (@echo on)
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DENABLE_GD_FORMATS=ON ^
@@ -32,6 +33,8 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DBUILD_DOCS=OFF ^
 -DBUILD_CPACK=OFF ^
 %PATH_SRC%\%1
+@echo off
+if "%ARG_CMOPTS%"=="1" (exit /B)
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 

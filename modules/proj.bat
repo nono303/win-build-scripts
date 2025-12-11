@@ -5,6 +5,7 @@ mkdir %PATH_INSTALL%\_%1
 
 REM https://proj.org/install.html#cmake-configure-options
 REM -DPROJ_OUTPUT_NAME=libproj ^
+if "%ARG_CMOPTS%"=="1" (@echo on)
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_UNITY_BUILD=1 ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL%\_%1 ^
@@ -34,6 +35,8 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DEMBED_PROJ_DATA_PATH=ON ^
 -DEXPORT_PDB=OFF ^
 %PATH_SRC%\%1
+@echo off
+if "%ARG_CMOPTS%"=="1" (exit /B)
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% install

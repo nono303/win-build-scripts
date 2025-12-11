@@ -5,20 +5,23 @@ if /I "%1"=="HELP" (
 )
 	REM ~~~~~~~~~~~~ PARSING ARGS
 setlocal enabledelayedexpansion	
+set ARG_ALL=0
 set ARG_NOLOG=0
 set ARG_DEBUG=0
-set ARG_ALL=0
 set ARG_KEEPSRC=0
+set ARG_SVN=0
+set ARG_CMOPTS=0
 for %%x in (%*) do (
-   set /A argCount+=1
-   set "argVec[!argCount!]=%%~x"
+	set /A argCount+=1
+	set "argVec[!argCount!]=%%~x"
 )
 for /L %%i in (2,1,%argCount%) do (
-	if /I "!argVec[%%i]!"=="ALL"     set ARG_ALL=1
-	if /I "!argVec[%%i]!"=="NOLOG"   set ARG_NOLOG=1
+	if /I "!argVec[%%i]!"=="ALL"	 set ARG_ALL=1
+	if /I "!argVec[%%i]!"=="NOLOG"	 set ARG_NOLOG=1
 	if /I "!argVec[%%i]!"=="VERBOSE" set ARG_DEBUG=1
 	if /I "!argVec[%%i]!"=="KEEPSRC" set ARG_KEEPSRC=1
-	if /I "!argVec[%%i]!"=="SVN"     set ARG_SVN=1
+	if /I "!argVec[%%i]!"=="SVN"	 set ARG_SVN=1
+	if /I "!argVec[%%i]!"=="CMOPTS"	 set ARG_CMOPTS=1
 )
 	REM ~~~~~~~~~~~~ VERBOSE
 set CUR_DEBUG=0
@@ -31,9 +34,12 @@ if "%ARG_DEBUG%" == "1" (
 )
 if %CUR_DEBUG% == 1 (
 	echo on
-	echo ARG_NOLOG: %ARG_NOLOG%
-	echo ARG_DEBUG: %ARG_DEBUG%
-	echo ARG_ALL:   %ARG_ALL%
+	echo ARG_ALL:     %ARG_ALL%
+	echo ARG_NOLOG:   %ARG_NOLOG%
+	echo ARG_DEBUG:   %ARG_DEBUG%
+	echo ARG_KEEPSRC: %ARG_KEEPSRC%
+	echo ARG_SVN:     %ARG_SVN%
+	echo ARG_CMOPTS:  %ARG_CMOPTS%
 )
 
 	REM ~~~~~~~~~~~~ LOGNAME
@@ -87,13 +93,15 @@ if %ARG_ALL% == 1 (
 	)
 	call dos2unix -q -f %LOGNAME%
 ) else (
-	
 	if %ARG_NOLOG% == 1 (
 		call %BCMD% 2>&1
 	) else (
 		call %BCMD% 2>&1 | tee %LOGNAME%
 		call dos2unix -q -f %LOGNAME%
 	)
+)
+if "%ARG_CMOPTS%"=="1" (
+	call do_php %PATH_UTILS%\sub\cmopts.php %1 %LOGNAME%
 )
 set ENDTIME=%TIME%
 set /A DURATION=10 * ((((%ENDTIME:~0,2%-100)*360000 + (1%ENDTIME:~3,2%-100)*6000 + (1%ENDTIME:~6,2%-100)*100 + (1%ENDTIME:~9,2%-100))-((%STARTTIME:~0,2%-100)*360000 + (1%STARTTIME:~3,2%-100)*6000 + (1%STARTTIME:~6,2%-100)*100 + (1%STARTTIME:~9,2%-100))))

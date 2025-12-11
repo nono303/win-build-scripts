@@ -3,6 +3,7 @@
 	REM fix internal libname
 sed -i 's/bz2-1/bz2/g' %PATH_SRC%/%1/libbz2.def
 
+if "%ARG_CMOPTS%"=="1" (@echo on)
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_UNITY_BUILD=1 ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
@@ -16,7 +17,10 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DENABLE_STATIC_LIB=OFF ^
 -DENABLE_SHARED_LIB=ON ^
 -DUSE_OLD_SONAME=FOO ^
+-DENABLE_STATIC_LIB_IS_PIC=OFF ^
 %PATH_SRC%\%1
+@echo off
+if "%ARG_CMOPTS%"=="1" (exit /B)
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% install

@@ -10,6 +10,7 @@ if %AVXECHO%==avx2 (
 	set GAV1_AVX2=1
 )
 
+if "%ARG_CMOPTS%"=="1" (@echo on)
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DBUILD_SHARED_LIBS=1 ^
@@ -23,6 +24,8 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DLIBGAV1_THREADPOOL_USE_STD_MUTEX=1 ^
 -DLIBGAV1_MAX_BITDEPTH=12 ^
 %PATH_SRC%\%1
+@echo off
+if "%ARG_CMOPTS%"=="1" (exit /B)
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 sed -i 's/= libgav1_shared/= libgav1/g' %CYGPATH_BUILD%/%1/build.ninja

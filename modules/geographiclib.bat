@@ -2,6 +2,7 @@
 
 if not exist %PATH_INSTALL%\_%1\. mkdir %PATH_INSTALL%\_%1
 
+if "%ARG_CMOPTS%"=="1" (@echo on)
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_UNITY_BUILD=1 ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL%\_%1 ^
@@ -15,6 +16,8 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DPACKAGE_DEBUG_LIBS=OFF ^
 -DGEOGRAPHICLIB_PRECISION=2 ^
 %PATH_SRC%\%1
+@echo off
+if "%ARG_CMOPTS%"=="1" (exit /B)
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 sed -i 's/GeographicLib-i/GeographicLib/g' %CYGPATH_BUILD%/%1/build.ninja

@@ -1,5 +1,6 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
 
+if "%ARG_CMOPTS%"=="1" (@echo on)
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DBUILD_SHARED_LIBS=ON ^
@@ -34,6 +35,8 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DENABLE_AVX=%AVX_ON% ^
 -DENABLE_AVX2=%AVX2_ON% ^
 %PATH_SRC%\%1
+@echo off
+if "%ARG_CMOPTS%"=="1" (exit /B)
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 	REM >= 3.10 : FAILED: aom_av1_rc.dll aom_av1_rc.lib on link

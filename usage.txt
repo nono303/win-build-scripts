@@ -101,7 +101,8 @@ Usage: go command [options]
     all:     build 'command' for all target combinations (vs17, vs18 / x64 / sse2, avx, avx2)
     nolog:   don't tee stderr & stdout to a logfile in %PATH_LOGS% (...and show console colors)
     verbose: disable all batch echo off and silent build option
-    keepsrc: don't clean, reset and potentially apply patch in src dir 
+    keepsrc: don't clean, reset and potentially apply patch in src dir
+    cmopts:  stdout and logfile in %PATH_LOGS%/cmopts of cmake options set, not set or unknonw for cmake projects
 ---------------------------
 - util command:
   * logcheck: check logfile(s) in to find 'strange' (warn, error, fatal...) loglines
