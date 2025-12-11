@@ -1,8 +1,8 @@
-diff --git "a/mod_http2/h2_mplx.c" "b/mod_http2/h2_mplx.c"
-index 470a14e..2441813 100644
---- "a/mod_http2/h2_mplx.c"
-+++ "b/mod_http2/h2_mplx.c"
-@@ -1239,10 +1239,17 @@ static apr_status_t mplx_pollset_poll(h2_mplx *m, apr_interval_time_t timeout,
+diff --git a/mod_http2/h2_mplx.c b/mod_http2/h2_mplx.c
+index 8053f60..9c310c1 100644
+--- a/mod_http2/h2_mplx.c
++++ b/mod_http2/h2_mplx.c
+@@ -1252,10 +1252,17 @@ static apr_status_t mplx_pollset_poll(h2_mplx *m, apr_interval_time_t timeout,
              H2_MPLX_LEAVE(m);
              rv = apr_pollset_poll(m->pollset, timeout >= 0? timeout : -1, &nresults, &results);
              H2_MPLX_ENTER_ALWAYS(m);
