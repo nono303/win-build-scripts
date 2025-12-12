@@ -20,6 +20,6 @@ if "%ARG_CMOPTS%"=="1" (exit /B)
 %NINJA% install
 
 REM static used for apr-util
-xcopy /C /F /Y %PATH_BUILD%\%1\CMakeFiles\libaprapp-1.dir\libaprapp-1.pdb %PATH_INSTALL%\lib\*
+xcopy /C /F /Y %PATH_BUILD%\%1\libaprapp-1.pdb %PATH_INSTALL%\lib\*
 
 call do_php %PATH_UTILS%\sub\version.php apr %PATH_INSTALL%\bin\libapr-1.dll
