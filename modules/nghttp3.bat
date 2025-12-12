@@ -7,7 +7,6 @@ for %%X in (sfparse.c sfparse.h) do (
 if "%ARG_CMOPTS%"=="1" (@echo on)
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
--DBUILD_TESTING=OFF ^
 -DENABLE_WERROR=OFF ^
 -DENABLE_DEBUG=OFF ^
 -DENABLE_ASAN=OFF ^
