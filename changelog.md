@@ -1,8 +1,291 @@
 # changelog
 
 
+## 1.15.1 _(2025-12-13)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  fix null & add disabled display of useless cmake opts
+`utils/sub/cmopts.php`
+*  disable program build
+`modules/libxslt.bat`
+`utils/bininfo.bat`
+*  add, remove, fix CMake opts
+`modules/cares.bat`
+`modules/curl.bat`
+`modules/freetype2.bat`
+`modules/libavif.bat`
+`modules/libevent.bat`
+`modules/libgd.bat`
+`modules/libheif.bat`
+`modules/libjpeg-turbo.bat`
+`modules/libpng.bat`
+`modules/libssh2.bat`
+`modules/libwebp.bat`
+`modules/libzip.bat`
+`modules/pcre2.bat`
+`modules/proj.bat`
+`modules/qhull.bat`
+`modules/serf.bat`
+`modules/sqlite.bat`
+*  fix CRLF
+`modules/aom.bat`
+`modules/apr-util.bat`
+`modules/apr.bat`
+`modules/brotli.bat`
+`modules/dav1d.bat`
+`modules/freeglut.bat`
+`modules/gdal.bat`
+`modules/geographiclib.bat`
+`modules/geos.bat`
+`modules/giflib.bat`
+`modules/httpd.bat`
+`modules/icu.bat`
+`modules/jansson.bat`
+`modules/jemalloc.bat`
+`modules/lerc.bat`
+`modules/libdeflate.bat`
+`modules/libev.bat`
+`modules/libexpat.bat`
+`modules/libffi.bat`
+`modules/libgav1.bat`
+`modules/libgeotiff.bat`
+`modules/libiconv.bat`
+`modules/liblzma.bat`
+`modules/libmaxminddb.bat`
+`modules/libsodium.bat`
+`modules/libtiff.bat`
+`modules/libxdiff.bat`
+`modules/libxml2.bat`
+`modules/libxpm.bat`
+`modules/libyuv.bat`
+`modules/mod_fcgid.bat`
+`modules/mpir.bat`
+`modules/openssl.bat`
+`modules/pthread-win32.bat`
+`modules/sslh.bat`
+`modules/verpatch.bat`
+`modules/wineditline.bat`
+`modules/yajl.bat`
+*  zstd: add LZMA & ZLIB support
+`modules/full.bat`
+`modules/zstd.bat`
+*  BUILD_TESTING only available for STATIC build
+`modules/nghttp2.bat`
+`modules/nghttp3.bat`
+`modules/ngtcp2.bat`
+*  add missing and remove useles CMakeopts
+`modules/aom.bat`
+`modules/cares.bat`
+`modules/curl.bat`
+`modules/freeglut.bat`
+`modules/freetype2.bat`
+`modules/gdal.bat`
+*  pdb path changed in CMake 4.2.1
+`modules/apr.bat`
+`modules/libxml2.bat`
+*  remove useless
+`config/vs2026.vssettings`
+`utils/cmakeopts.bat`
+*  1.34.6
+`patches/cares.patch`
+*  2.0.37
+`patches/mod_h2.patch`
+*  fix copy moved to ApacheCommon HttpClient
+`modules/mobac.bat`
+`patches/mobac.patch`
+*  +arg cmakeopts
+`go.bat`
+`modules/aom.bat`
+`modules/apr-util.bat`
+`modules/apr.bat`
+`modules/brotli.bat`
+`modules/bzip2.bat`
+`modules/cares.bat`
+`modules/common/init.bat`
+`modules/freeglut.bat`
+`modules/freetype2.bat`
+`modules/gdal.bat`
+`modules/geographiclib.bat`
+`modules/geos.bat`
+`modules/giflib.bat`
+`modules/jansson.bat`
+`modules/lerc.bat`
+`modules/libavif.bat`
+`modules/libdeflate.bat`
+`modules/libev.bat`
+`modules/libevent.bat`
+`modules/libexpat.bat`
+`modules/libffi.bat`
+`modules/libgav1.bat`
+`modules/libgd.bat`
+`modules/libgeotiff.bat`
+`modules/libheif.bat`
+`modules/libjpeg-turbo.bat`
+`modules/liblzma.bat`
+`modules/libmaxminddb.bat`
+`modules/libpng.bat`
+`modules/libssh2.bat`
+`modules/libtiff.bat`
+`modules/libwebp.bat`
+`modules/libxdiff.bat`
+`modules/libxslt.bat`
+`modules/libyuv.bat`
+`modules/libzip.bat`
+`modules/mod_fcgid.bat`
+`modules/nghttp2.bat`
+`modules/nghttp3.bat`
+`modules/ngtcp2.bat`
+`modules/pcre2.bat`
+`modules/proj.bat`
+`modules/pthread-win32.bat`
+`modules/qhull.bat`
+`modules/serf.bat`
+`modules/sqlite.bat`
+`modules/tidy.bat`
+`modules/wineditline.bat`
+`modules/yajl.bat`
+`modules/zlib.bat`
+`modules/zstd.bat`
+`usage.txt`
+`utils/cmakeopts.bat`
+`utils/sub/cmopts.php`
+*  improx flag fix
+`modules/common/meson.sh`
+*  8.18
+`modules/curl.bat`
+`patches/curl.patch`
+*  2.4.66
+`patches/httpd.patch`
+*  remove useless +Xlint:-removal +Cmake Build in comment (wait for SVN_ENABLE_JAVAHL)
+`modules/subversion.bat`
+*  - nssm serf
+`utils/bininfo.bat`
+*  clean implement %PATH_INSTALL%.svn
+`go.bat`
+`modules/subversionanddeps.bat`
+*  build to %PATH_INSTALL%.svn fix deps copy for openssl
+`modules/subversionanddeps.bat`
+*  1.15.0-dev
+`modules/subversion.bat`
+`patches/subversion.patch`
+*  SERF_LAST_GOOD https://github.com/apache/serf/commit/013f693de4c337b930d1c020a17d8daa574bbba3
+`modules/serf.bat`
+`patches/serf.013f693.patch`
+`patches/serf.patch.disable`
+*  -serf & nssm
+`modules/full.bat`
+*  mod_dav_install_lib only for svn build
+`modules/httpd.bat`
+`patches/httpd.patch`
+*  https://github.com/apache/serf/commit/9cf0878aafefa04df775d3e424f16ee07d423901 breaks svn fix version on https://github.com/apache/serf/commit/013f693de4c337b930d1c020a17d8daa574bbba3
+`modules/serf.bat`
+`patches/serf.patch.disable`
+*  fix alpha, beta & rc for all (+nogit, not only git)
+`utils/sub/version.php`
+*  typo
+`modules/openssl.bat`
+*  fix null
+`utils/sub/bininfo.php`
+*  +arg svn without brotli
+`modules/serf.bat`
+`modules/subversionanddeps.bat`
+*  sh > php
+`modules/verpatch.bat`
+*  install mod_dav lib (for subversion)
+`patches/httpd.patch`
+*  fix null
+`utils/sub/bininfo.php`
+*  -libiconv openssl-quic
+`utils/sub/version.php`
+*  cmake 1.17 > msbuild 1.18
+`modules/libiconv.bat`
+`patches/libiconv.patch`
+*  sh > php
+`avx.bat`
+`modules/common/msbuild.php`
+`modules/common/vcxproj.sh`
+`modules/dependencies.bat`
+`modules/icu.bat`
+`modules/jemalloc.bat`
+`modules/libsodium.bat`
+`modules/libxpm.bat`
+`modules/nssm.bat`
+`modules/subversion.bat`
+*  + \bin\engines-3 \bin\ossl-modules - gperf.exe libcharset.dll
+`utils/bininfo.bat`
+*  fix & clean before moving it to php
+`modules/common/vcxproj.sh`
+*  CMake 4.2: fix pdb path
+`modules/libxml2.bat`
+*  +CMAKE_DISABLE_FIND_PACKAGE_xxx
+`modules/libheif.bat`
+`modules/libiconv.bat`
+*  tiff-cxx: ON > OFF (unused)
+`modules/libtiff.bat`
+*  fix: delete unused exp in /lib
+`modules/httpd.bat`
+*  comment usage of libaprapp-1
+`modules/apr.bat`
+*  9b161dcc: +nowarn C4319
+`modules/libsodium.bat`
+*  +BUILD_TESTING=OFF
+`modules/nghttp2.bat`
+*  1.13.1
+`modules/nghttp3.bat`
+*  Visual Studio 18.0.x
+`config/.vsconfig`
+`config/vs2026.vssettings`
+`patches/php-sdk.patch`
+*  fix -pcre2_compile_class.c for >= 8.4.15
+`patches/php-src/8.4/ext-pcre.patch`
+*  search dll in /bin subdirs & /_php-ts
+`utils/sub/libcheck.php`
+*  -"Using unknown MSVC version" // php +"Could NOT find" // CMake except gdal & libwebp first pass
+`utils/sub/logcheck.php`
+*  comment install_lib for mod_cache, mod_dav, mod_proxy, mod_session, mod_watchdog
+`patches/httpd.patch`
+*  https://gist.github.com/nono303/be0f9b3f04da2ee921b938a0ab8f1e74 https://www.apachelounge.com/viewtopic.php?p=43821#43821
+`patches/php-src/8.5/win7.patch`
+*  fix COMPILE_PDB_NAME libaprapp-1
+`patches/apr.patch`
+*  3.8.0
+`modules/freeglut.bat`
+*  update msbuild opts
+`env_sample.bat`
+`modules/common/vcxproj.sh`
+*  remove log "Status engine is currently disabled"
+`patches/mod_security.patch`
+*  8.5.0-rc5
+`patches/php-src/8.5/ext-pcre.patch`
+*  https://www.apachelounge.com/viewtopic.php?p=43799#43799
+`patches/curl.patch`
+*  https://bugs.xdebug.org/view.php?id=2372#c7412
+`patches/php-src/8.5/pecl-xdebug.patch`
+*  3.12.0
+`patches/gdal.patch`
+*  fix svn patch: PATH_MODULES > PATH_PATCHES
+`modules/common/init.bat`
+*  3.6.0
+`modules/openssl.bat`
+`patches/openssl.patch`
+*  upgrade gradle
+`env_sample.bat`
+`modules/mobac.bat`
+*  https://github.com/xdebug/xdebug/pull/1040
+`patches/php-src/8.5/pecl-xdebug.patch`
+*  upgrade gradle
+`modules/mobac_gradle-wrapper.jar`
+`patches/mobac.patch`
+`patches/mobac_gradle-wrapper.jar`
+
+
 ## 1.15.0 _(2025-10-22)_
 
+*  1.15.0
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
