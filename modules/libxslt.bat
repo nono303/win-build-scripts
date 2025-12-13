@@ -13,6 +13,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DLIBXSLT_WITH_TESTS=OFF ^
 -DLIBXSLT_WITH_THREADS=ON ^
 -DLIBXSLT_WITH_XSLT_DEBUG=ON ^
+-DLIBXSLT_WITH_PROGRAMS=OFF ^
 %PATH_SRC%\%1
 @echo off
 if "%ARG_CMOPTS%"=="1" (exit /B)
@@ -23,6 +24,6 @@ REM dirty fix bad usage of IMPORTED_LOCATION_RELWITHDEBINFO instead of IMPORTED_
 sed -i 's/bin\\\libxml2.dll/lib\\\libxml2.lib/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
 
-xcopy /C /F /Y %PATH_BUILD%\%1\xsltproc.pdb %PATH_INSTALL%\bin\*
-for %%X in (libexslt.dll libxslt.dll xsltproc.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
+for %%X in (libexslt.dll libxslt.dll) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
 for %%X in (bin\xslt-config lib\xsltConf.sh) do (rm -fv %PATH_INSTALL%\%%X)
+echo.
