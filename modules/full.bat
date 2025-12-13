@@ -16,6 +16,8 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat bzip2 NOLOG
 	:zlib
 	call %PATH_BATCH%\go.bat zlib NOLOG
+	:liblzma
+	call %PATH_BATCH%\go.bat liblzma NOLOG
 	:zstd
 	call %PATH_BATCH%\go.bat zstd NOLOG
 	:openssl
@@ -24,8 +26,6 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat jemalloc NOLOG
 	:libiconv
 	call %PATH_BATCH%\go.bat libiconv NOLOG
-	:liblzma
-	call %PATH_BATCH%\go.bat liblzma NOLOG
 	:icu
 	call %PATH_BATCH%\go.bat icu NOLOG
 	:libxml2
