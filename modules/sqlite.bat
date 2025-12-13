@@ -11,7 +11,7 @@ REM		without	KO	"C:\Windows Kits\10\Lib\10.x.xxxxx.x\um\x64\icuuc.lib"	"C:\Windo
 REM		with	OK	"C:\sdk\release\...\lib\icuuc.lib"		"C:\sdk\release\...\lib\icuin.lib"
 REM			warn	Policy CMP0074 is not set
 
-set SQLITEICU=-DBUILD_SHELL=ON -DENABLE_ICU=ON -DICU_ROOT=%PATH_INSTALL%
+set SQLITEICU=-DBUILD_SHELL=ON -DENABLE_ICU=ON
 set SQLITEOUT=sqlite3.exe libsqlite3.dll
 if "%2"=="svn" (
 	set SQLITEICU=-DENABLE_ICU=OFF -DBUILD_SHELL=OFF
@@ -49,7 +49,6 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DUSE_SEH=ON ^
 -DWIN32_MALLOC=ON ^
 -DWIN32_HEAP_CREATE=ON ^
--DBUILD_WITH_XPSDK=OFF ^
 %SQLITEICU% ^
 %PATH_SRC%\%1
 @echo off

@@ -12,6 +12,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DPNG_FRAMEWORK=OFF ^
 -DPNG_HARDWARE_OPTIMIZATIONS=ON ^
 -Dld-version-script=OFF ^
+-DPNG_INTEL_SSE=on ^
 %PATH_SRC%\%1
 @echo off
 if "%ARG_CMOPTS%"=="1" (exit /B)
