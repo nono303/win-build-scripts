@@ -146,7 +146,7 @@
 				preg_match($nogit[$src][0],file_get_contents($nogit[$src][1]),$matches);
 				$sep = "";
 				for($i = 1; $i < sizeof($matches); $i++){
-					if(strlen($matches[$i] = trim($matches[$i])) > 1) 
+					if(strlen($matches[$i] = trim($matches[$i])) > 1)
 						$matches[$i] = ltrim($matches[$i],'0');
 					$ver_product .= $sep.$matches[$i];
 					$sep = ".";
@@ -189,8 +189,8 @@
 					$ver_product .= "0";
 				if(str_starts_with($ver_product,"."))
 					$ver_product = "0".$ver_product;
-				if(str_ends_with($ver_product,"dirty")) // sslh
-					$ver_product = substr($ver_product, 0, -5)."0";
+				if(str_contains($ver_product,"-gc")) // sslh
+					$ver_product = explode("-gc",$ver_product)[0];
 				if(str_ends_with($ver_product,"-dev") || str_ends_with($ver_product,"-DEV")) // crl
 					$ver_product = substr($ver_product, 0, -4).".0";
 				$ver_product = str_replace("..",".",$ver_product); // ex '.-dev' > '..0'
@@ -252,16 +252,16 @@
 					[1] => libconfig
 					[2] => D:\github\NONO_sslh\x64\avx2\cygconfig-11.dll
 					[3] => libconfig
-				---					   
+				---
 					[1] => sslh
 					[2] => D:\github\NONO_sslh\x64\avx2\echosrv.exe
 					[3] => libconfig:v1.7.3
-				---							   
+				---
 					[1] => memcached
 					[2] => D:\github\NONO_memcached\libevent-2.1\x64\memcached-avx-tls.exe
 					[3] => memcached
 				***
-					[4] => 	x%TARGET_ARCH% 
+					[4] => 	x%TARGET_ARCH%
 					[5] => 	%AVXECHO%
 				*/
 				if(in_array($argv[1],["memcached","sslh","libconfig"])){
@@ -270,7 +270,7 @@
 					$avx = $argv[5];
 					preg_match("/ ([0-9\.]+) /",shell_exec("gcc --version"),$matches);
 					$gccver = $matches[1];
-					$description = 
+					$description =
 						"arch:".$arch."-".$avx." ".
 						"gcc:".$gccver.$libdep;
 				}
@@ -302,7 +302,7 @@
 			exit(-1);
 		}
 	} else {
-		echo "Bad usage: 
+		echo "Bad usage:
 no params: export current version of all src modules to a csv file in %PATH_LOG%
 version.php [src_module] [file_to_patch] patch 'file_to_patch' with version of 'src_module'";
 exit(-1);
