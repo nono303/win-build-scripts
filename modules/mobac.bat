@@ -3,16 +3,16 @@ if exist %PATH_SRC%\%1\mobac\build\. rmdir /S /Q %PATH_SRC%\%1\mobac\build
 
 xcopy /C /F /Y %PATH_PATCHES%\mobac_gradle-wrapper.jar %PATH_SRC%\%1\gradle\wrapper\gradle-wrapper.jar*
 
-REM echo ^>^>^> gradlew --project-cache-dir %PATH_GRADLE_BUILD% wrapper --gradle-version %GRADLEVER%
-REM call gradlew --project-cache-dir %PATH_GRADLE_BUILD% wrapper --gradle-version %GRADLEVER%
-REM echo ^<^<^< gradlew --project-cache-dir %PATH_GRADLE_BUILD% wrapper --gradle-version %GRADLEVER%
+echo ^>^>^> gradlew --configuration-cache --project-cache-dir %PATH_GRADLE_BUILD% wrapper --gradle-version %GRADLEVER%
+call gradlew --configuration-cache --project-cache-dir %PATH_GRADLE_BUILD% wrapper --gradle-version %GRADLEVER%
+echo ^<^<^< gradlew --configuration-cache --project-cache-dir %PATH_GRADLE_BUILD% wrapper --gradle-version %GRADLEVER%
 
-REM call gradlew --project-cache-dir %PATH_GRADLE_BUILD% --refresh-dependencies run
-REM call gradlew --project-cache-dir %PATH_GRADLE_BUILD% -q dependencies --configuration runtimeClasspath
+REM call gradlew --configuration-cache --project-cache-dir %PATH_GRADLE_BUILD% --refresh-dependencies run
+REM call gradlew --configuration-cache --project-cache-dir %PATH_GRADLE_BUILD% -q dependencies --configuration runtimeClasspath
 echo.
-call gradlew --project-cache-dir %PATH_GRADLE_BUILD% -q mobac:dependencyInsight --dependency com.github.mapsforge.mapsforge:mapsforge-core --single-path --configuration runtimeClasspath | head -1
-call gradlew --project-cache-dir %PATH_GRADLE_BUILD% -q mobac:dependencyInsight --dependency org.beanshell:bsh --single-path --configuration runtimeClasspath | head -1
-call gradlew --project-cache-dir %PATH_GRADLE_BUILD% -q mobac:dependencyInsight --dependency org.apache.httpcomponents.client5 --single-path --configuration runtimeClasspath | head -1
+call gradlew --configuration-cache --project-cache-dir %PATH_GRADLE_BUILD% -q mobac:dependencyInsight --dependency com.github.mapsforge.mapsforge:mapsforge-core --single-path --configuration runtimeClasspath | head -1
+call gradlew --configuration-cache --project-cache-dir %PATH_GRADLE_BUILD% -q mobac:dependencyInsight --dependency org.beanshell:bsh --single-path --configuration runtimeClasspath | head -1
+call gradlew --configuration-cache --project-cache-dir %PATH_GRADLE_BUILD% -q mobac:dependencyInsight --dependency org.apache.httpcomponents.client5 --single-path --configuration runtimeClasspath | head -1
 echo.
 
 call gradlew --project-cache-dir %PATH_GRADLE_BUILD% --warning-mode all --console=verbose --parallel --max-workers %NUMBER_OF_PROCESSORS% mobac:jar 2>&1
