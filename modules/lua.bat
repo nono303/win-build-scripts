@@ -1,5 +1,21 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1
-call cl /nologo /std:clatest /w /MD /Zi /O2 /GL /MD /Zi /MP16 %AVX% /DNDEBUG /c /DLUA_BUILD_AS_DLL /Fdliblua.pdb /FS ^
+call cl /nologo /c /DLUA_BUILD_AS_DLL /Fdliblua.pdb ^
+/w ^
+/Gw ^
+/Gy ^
+/Zc:inline ^
+/O2 ^
+/Ob3 ^
+/Zf ^
+/Zi ^
+/FS ^
+/GL ^
+/MD ^
+/MP%NUMBER_OF_PROCESSORS% ^
+/cgthreads8 ^
+%AVX% ^
+/DNDEBUG ^
+/std:clatest ^
 lapi.c ^
 lauxlib.c ^
 lbaselib.c ^
