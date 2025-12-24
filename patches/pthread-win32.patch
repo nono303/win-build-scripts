@@ -1,5 +1,5 @@
 diff --git a/_ptw32.h b/_ptw32.h
-index 34ed4131..8b9939d9 100644
+index 34ed4131..78144e7c 100644
 --- a/_ptw32.h
 +++ b/_ptw32.h
 @@ -49,7 +49,7 @@
@@ -7,20 +7,28 @@ index 34ed4131..8b9939d9 100644
  #define  PTW32_VERION_BUILD 1
  #define  PTW32_VERSION 3,0,3,1
 -#define  PTW32_VERSION_STRING "3, 0, 3, 1\0"
-+#define  PTW32_VERSION_STRING "3.0.3.1\0"
++#define  PTW32_VERSION_STRING "3,0,3,1\0"
  
  // skip the rest when running this through the Microsoft Resource Compiler, which is a VERY brittle piece of machinery! -> RC2188 & RC1116 cryptic failures will be your part! 
  #ifndef RC_INVOKED
 diff --git a/sched.h b/sched.h
-index 4223aa21..4ac7fea4 100644
+index 4223aa21..2c538ff8 100644
 --- a/sched.h
 +++ b/sched.h
-@@ -54,7 +54,7 @@
+@@ -54,14 +54,8 @@
   * but note that we must do so cautiously, to avoid a typedef
   * conflict if MinGW's <sys/types.h> is also #included:
   */
 -#if ! defined __MINGW32__ || ! defined __have_typedef_pid_t
+-
+-# if defined __MINGW64__ || defined WIN64 || defined _WIN64
+-    typedef __int64 pid_t;
+-# else
+-    typedef int pid_t;
+-#endif
+-
 +#if ! defined __MINGW32__ && ! defined __have_typedef_pid_t && ! defined PHP_H
- 
- # if defined __MINGW64__ || defined WIN64 || defined _WIN64
-     typedef __int64 pid_t;
++  typedef int pid_t;
+ #if ! defined __GNUC__ || __GNUC__ < 4
+ /* GCC v4.0 and later, (as used by MinGW), allows us to repeat a
+  * typedef, provided every duplicate is consistent; only set this
