@@ -41,6 +41,8 @@ REM ########################## BIN PATH
 set PATH_VS=%PATH_SOFTS%\msvs\vs18
 	REM mysql root with /lib & /include (apr)
 set PATH_MYSQL=B:\serveur\mysql
+	REM ffmpeg root with /lib & /include (libheif)
+set PATH_FFMPEG=C:\PROGRA~1\ffmpeg
 set PATH_BIN_GIT=C:\PROGRA~1\Git\bin
 set PATH_BIN_CMAKE=%PATH_SOFTS%\cmake\bin
 set PATH_BIN_PYTHON=%PATH_SOFTS%\python3;%PATH_SOFTS%\python3\Scripts

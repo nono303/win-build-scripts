@@ -1,0 +1,10 @@
+diff --git a/cmake/modules/FindAOM.cmake b/cmake/modules/FindAOM.cmake
+index a357cf77..d9970168 100644
+--- a/cmake/modules/FindAOM.cmake
++++ b/cmake/modules/FindAOM.cmake
+@@ -1,4 +1,4 @@
+-find_package(AOM QUIET CONFIG)
++# find_package(AOM QUIET CONFIG)
+ 
+ if(TARGET AOM::aom)
+   if(NOT AOM_FIND_QUIETLY)
