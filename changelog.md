@@ -1,8 +1,44 @@
 # changelog
 
 
+## 1.15.2 _(2026-01-15)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  gradle 9.4.0-milestone-4
+`env_sample.bat`
+`patches/mobac_gradle-wrapper.jar`
+*  3.51.2
+`modules/sqlite.bat`
+*  8.18
+`patches/curl.patch`
+*  libheif 1.21: - build with FFmpeg - dirty patch to fix missing (useless) aom_static
+`env_sample.bat`
+`modules/libheif.bat`
+`patches/libheif.patch`
+*  gradle - upgarde - use --configuration-cache
+`env_sample.bat`
+`modules/fit2gpx.bat`
+`modules/mapsforgesrv.bat`
+`modules/mobac.bat`
+`modules/tzdataservice.bat`
+`patches/mobac_gradle-wrapper.jar`
+*  Lua: 5.4 > 5.5 https://gitlab.kitware.com/cmake/cmake/-/issues/27476
+`modules/lua.bat`
+`patches/mod_security.patch`
+*  fix 'redefinition; different basic types' when compiling pecl-parallel: 1.2.8 > 1.2.9 https://sourceforge.net/p/mingw-w64/mailman/mingw-w64-public/thread/0ede7d94-2a48-44b6-a5d7-02403d9e05df%40126.com/ ``` C:\sdk\phpmaster\vs18\x64\php-src\main\php.h(95): error C2371: 'pid_t': redefinition; different basic types (compiling source file ..\pecl\pecl-parallel\src\check.c) C:\sdk\release\vs18_x64-avx2\include\sched.h(60): note: see declaration of 'pid_t' (compiling source file ..\pecl\pecl-parallel\src\check.c) ```
+`patches/pthread-win32.patch`
+*  https://github.com/yrutschle/sslh/issues/506 fixed
+`patches/sslh.patch`
+`utils/sub/version.php`
+
+
 ## 1.15.1 _(2025-12-13)_
 
+*  1.15.1
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
