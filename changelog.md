@@ -1,8 +1,32 @@
 # changelog
 
 
+## 1.15.3 _(2026-02-07)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`config/cyg64.packagelist`
+`utils/srccreate.bat`
+*  gradle 9.4.0-m5
+`patches/mobac_gradle-wrapper.jar`
+*  typo
+`modules/common/msbuild.php`
+*  2.7.4
+`modules/libexpat.bat`
+*  VS2022 > VS2026 (fix hardcoded path)
+`modules/libiconv.bat`
+*  BUILD_PYTHON_BINDINGS: OFF > ON (require numpy & swig) * build & install python_wheel
+`config/python.pip`
+`modules/gdal.bat`
+*  extract PATH_SCRIPT_PYTHON from PATH_BIN_PYTHON for swig (gdal)
+`env_sample.bat`
+
+
 ## 1.15.2 _(2026-01-15)_
 
+*  1.15.2
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
