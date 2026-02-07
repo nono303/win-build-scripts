@@ -45,7 +45,8 @@ set PATH_MYSQL=B:\serveur\mysql
 set PATH_FFMPEG=C:\PROGRA~1\ffmpeg
 set PATH_BIN_GIT=C:\PROGRA~1\Git\bin
 set PATH_BIN_CMAKE=%PATH_SOFTS%\cmake\bin
-set PATH_BIN_PYTHON=%PATH_SOFTS%\python3;%PATH_SOFTS%\python3\Scripts
+set PATH_BIN_PYTHON=%PATH_SOFTS%\python3
+set PATH_SCRIPT_PYTHON=%PATH_BIN_PYTHON%\Scripts
 set PATH_BIN_CYGWIN=%PATH_SOFTS%\cyg64\bin
 set PATH_BIN_GO=%PATH_SOFTS%\go\bin
 set PATH_BIN_NASM=%PATH_SOFTS%\nasm
@@ -79,6 +80,7 @@ FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_UTILS%`) 
 REM ########################## set SYSTEM PATH
 set PATH_WIN=%PATH_SOFTS%;^
 %PATH_BIN_PYTHON%;^
+%PATH_SCRIPT_PYTHON%;^
 %PATH_BIN_GIT%;^
 %PATH_BIN_CMAKE%;^
 %PATH_BIN_NASM%;^
@@ -102,7 +104,7 @@ cd /D %PATH_BATCH%
 
 REM ########################## BUILD OPTION
 	REM https://services.gradle.org/distributions/
-set GRADLEVER=9.4.0-milestone-4
+set GRADLEVER=9.4.0-milestone-5
 	REM see dir in C:\Windows Kits\10\Lib
 set WKITVER=10.0.26100.0
 	REM .NET installed SDK
