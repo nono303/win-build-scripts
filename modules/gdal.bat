@@ -9,9 +9,10 @@ REM -DGDAL_USE_JPEG12_INTERNAL=ON ^
 REM -DGDAL_USE_QHULL_INTERNAL=ON ^
 REM -DGDAL_USE_JSONC_INTERNAL=ON ^
 REM -DGDAL_USE_OPENCAD_INTERNAL=ON ^
+REM -DGDAL_USE_PUBLICDECOMPWT=ON ^
+REM -DGDAL_USE_SHAPELIB_INTERNAL=ON ^
 	REM !! disable internal
 REM -DCMAKE_DISABLE_FIND_PACKAGE_JSONC=1 ^
-	REM !! disable internal
 REM -DCMAKE_DISABLE_FIND_PACKAGE_OpenCAD=1 ^
 	REM https://gdal.org/development/building_from_source.html
 if "%ARG_CMOPTS%"=="1" (@echo on)
@@ -23,7 +24,8 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DBUILD_CSHARP_BINDINGS=OFF ^
 -DBUILD_DOCS=OFF ^
 -DBUILD_JAVA_BINDINGS=OFF ^
--DBUILD_PYTHON_BINDINGS=OFF ^
+-DBUILD_PYTHON_BINDINGS=ON ^
+-DSWIG_EXECUTABLE=%PATH_SCRIPT_PYTHON%\swig.exe ^
 -DBUILD_SHARED_LIBS=ON ^
 -DBUILD_TESTING=OFF ^
 -DCLANG_TIDY_ENABLED=OFF ^
@@ -113,12 +115,10 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_DISABLE_FIND_PACKAGE_Podofo=1 ^
 -DCMAKE_DISABLE_FIND_PACKAGE_Poppler=1 ^
 -DCMAKE_DISABLE_FIND_PACKAGE_PostgreSQL=1 ^
--DCMAKE_DISABLE_FIND_PACKAGE_Python=1 ^
 -DCMAKE_DISABLE_FIND_PACKAGE_RASTERLITE2=1 ^
 -DCMAKE_DISABLE_FIND_PACKAGE_SFCGAL=1 ^
 -DCMAKE_DISABLE_FIND_PACKAGE_Shapelib=1 ^
 -DCMAKE_DISABLE_FIND_PACKAGE_SPATIALITE=1 ^
--DCMAKE_DISABLE_FIND_PACKAGE_SWIG=1 ^
 -DCMAKE_DISABLE_FIND_PACKAGE_TileDB=1 ^
 -DCMAKE_DISABLE_FIND_PACKAGE_XercesC=1 ^
 %PATH_SRC%\%1
@@ -126,7 +126,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 if "%ARG_CMOPTS%"=="1" (exit /B)
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
-%NINJA% install
+%NINJA% install python_wheel
 
 xcopy /C /F /Y %PATH_BUILD%\%1\libgdal.pdb %PATH_INSTALL%\_%1\bin\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\_%1\bin\libgdal.dll
@@ -139,3 +139,19 @@ for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\_%1\bin\gdalplugins\*.dll /b') do 
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\_%1\bin\gdalplugins\%%G
 	xcopy /C /F /Y %PATH_BUILD%\%1\gdalplugins\%%~nG.pdb %PATH_INSTALL%\_%1\bin\gdalplugins\*
 )
+REM PYTHON WHEEL
+	REM pip:	numpy swig
+	REM ninja:	python_wheel
+	REM test:	'from osgeo import gdal'
+	REM ENV:
+	REM 	USE_PATH_FOR_GDAL_PYTHON=YES
+	REM 	GDAL_DATA=%PATH_INSTALL%\_gdal\share\gdal
+	REM 	GDAL_DRIVER_PATH=%PATH_INSTALL%\_gdal\bin\gdalplugins
+	REM 	PROJ_LIB=%PATH_INSTALL%\_proj\share\proj
+	REM 	PROJ_DATA=%PATH_INSTALL%\_proj\share\proj
+	REM 	PROJ_NETWORK=OFF
+set GDAL_WHELL_PATH=%PATH_BUILD%\%1\swig\python\dist\
+for /f "tokens=*" %%G in ('dir %GDAL_WHELL_PATH%*.whl /b') do (set GDAL_WHELL_FILE=%%G)
+echo %GDAL_WHELL_FILE%
+xcopy /C /F /Y %GDAL_WHELL_PATH%%GDAL_WHELL_FILE% %PATH_INSTALL%\_%1\*
+call pip install --force-reinstall %PATH_INSTALL%\_%1\%GDAL_WHELL_FILE%
