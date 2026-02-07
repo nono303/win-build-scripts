@@ -22,11 +22,11 @@
     [6] => 4.8
     [7] => nostd
 */
-	$std = (array_key_exists(7,$argv) && $argv[7] == "nostd") ? "" : 
+	$std = (array_key_exists(7,$argv) && $argv[7] == "nostd") ? "" :
 		"<LanguageStandard>stdcpplatest</LanguageStandard><LanguageStandard_C>stdclatest</LanguageStandard_C>";
-	$link = 
+	$link =
 		"<EnableCOMDATFolding>true</EnableCOMDATFolding><OptimizeReferences>true</OptimizeReferences>";
-	
+
 	$removes = [
 		/* Task */		"CodeAnalysisRuleSet",
 		/* MSVC */		"VCToolsVersion",
