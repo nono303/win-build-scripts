@@ -58,7 +58,7 @@ git checkout tags/VER-2-14-1
 cd /D ..
 git clone https://github.com/OSGeo/gdal gdal
 cd /D gdal
-git checkout tags/v3.12.1RC1
+git checkout tags/v3.12.2RC1
 cd /D ..
 git clone https://github.com/geographiclib/geographiclib.git geographiclib
 cd /D geographiclib
@@ -82,7 +82,7 @@ git checkout tags/release-78.2
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
-git checkout tags/v2.14.1
+git checkout tags/v2.15.0
 cd /D ..
 git clone https://github.com/jemalloc/jemalloc.git jemalloc
 cd /D jemalloc
@@ -114,7 +114,7 @@ git checkout tags/release-2.2.1-alpha
 cd /D ..
 git clone https://github.com/libexpat/libexpat.git libexpat
 cd /D libexpat
-git checkout tags/R_2_7_3
+git checkout tags/R_2_7_4
 cd /D ..
 git clone https://github.com/libffi/libffi libffi
 cd /D libffi
@@ -134,11 +134,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/strukturag/libheif.git libheif
 cd /D libheif
-git checkout tags/v1.21.1
+git checkout tags/v1.21.2
 cd /D ..
 git clone https://github.com/kiyolee/libiconv-win-build.git libiconv
 cd /D libiconv
-git checkout tags/v1.18
+git checkout tags/v1.18-p1
 cd /D ..
 git clone https://github.com/libjpeg-turbo/libjpeg-turbo libjpeg-turbo
 cd /D libjpeg-turbo
@@ -154,7 +154,7 @@ git checkout tags/1.12.2
 cd /D ..
 git clone git://git.code.sf.net/p/libpng/code libpng
 cd /D libpng
-git checkout tags/v1.6.53
+git checkout tags/v1.6.54
 cd /D ..
 git clone https://github.com/jedisct1/libsodium.git libsodium
 cd /D libsodium
@@ -226,7 +226,7 @@ git checkout tags/2.3.10.6
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v2.0.37
+git checkout tags/v2.0.38
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -270,11 +270,11 @@ git checkout tags/v1.68.0
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3
-git checkout tags/v1.14.0
+git checkout tags/v1.15.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v1.19.0
+git checkout tags/v1.20.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -282,7 +282,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/openssl/openssl openssl
 cd /D openssl
-git checkout tags/openssl-3.6.0
+git checkout tags/openssl-3.6.1
 cd /D ..
 git clone https://github.com/PCRE2Project/pcre2.git pcre2
 cd /D pcre2
@@ -290,7 +290,7 @@ git checkout tags/pcre2-10.47
 cd /D ..
 git clone https://github.com/php/pecl-datetime-timezonedb.git pecl-datetime-timezonedb
 cd /D pecl-datetime-timezonedb
-git checkout tags/2025.2.2
+git checkout tags/2025.3
 cd /D ..
 git clone https://github.com/igbinary/igbinary pecl-igbinary
 cd /D pecl-igbinary
@@ -338,7 +338,7 @@ git checkout tags/php-sdk-2.6.0
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.5.2RC1
+git checkout tags/php-8.5.3RC1
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
@@ -394,7 +394,7 @@ git checkout tags/wineditline-2.208
 cd /D ..
 git clone https://github.com/xdebug/xdebug.git xdebug
 cd /D xdebug
-git checkout tags/3.5.0
+git checkout tags/3.5.1
 cd /D ..
 git clone https://github.com/lloyd/yajl.git yajl
 cd /D yajl

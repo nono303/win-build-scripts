@@ -45,6 +45,7 @@ gcc-core
 gcc-g++
 GeoIP-database
 getent
+gettext-locale-alias
 gnupg2
 grep
 groff
