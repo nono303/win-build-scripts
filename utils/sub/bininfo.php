@@ -4,15 +4,10 @@
 	define("SCRIPT_DIR",dirname(__FILE__));
 	define("DEBUG",false);
 
-	function twoBtoOneBStr($data) {
-		foreach($result = str_split($data) as $key => $value) if($key&1) unset($result[$key]);
-		return implode($result);
-	}
-
 	// "Path", "Verified", "Date", "Publisher", "Company", "Description", "Product", "Product Version", "File Version", "Machine Type", "Binary Version", "Original Name", "Internal Name", "Copyright", "Comments", "Entropy"
 	function sigcheck($dir,$file=""){
 		global $data;
-		$sig = explode("\n",twoBtoOneBStr(execnono($sigcmd = pathenv("BIN_SYGCHECK")." -a -ct -e -r -nobanner -accepteula ".$dir."/".$file,NULL,$dir."/",NULL)));
+		$sig = explode("\n",mb_convert_encoding(execnono($sigcmd = pathenv("BIN_SYGCHECK")." -a -ct -e -r -nobanner -accepteula ".$dir."/".$file,NULL,$dir."/",NULL), "UTF-8", "UTF-16LE"));
 		debug("sigcheck() ".$sigcmd.": ".$sig);
 		$ark = array_map('trim', explode("\t",array_shift($sig))); // cvs headers
 		foreach($sig as $line) {
@@ -62,7 +57,7 @@
 				substr($ressig[$file]["Description"],0,140)."..." :
 				$ressig[$file]["Description"];
 			$data[$cur][65] =	$ressig[$file]["File Version"];
-			$data[$cur][10] =	$ressig[$file]["Machine Type"];
+			$data[$cur][10] =	substr($ressig[$file]["Machine Type"],0,2);
 			$data[$cur][150] =	$ressig[$file]["Original Name"];
 			$data[$cur][160] =	$ressig[$file]["Internal Name"];
 			$data[$cur][170] =	$ressig[$file]["Copyright"];
