@@ -67,7 +67,7 @@
 		"rejected" => [33,"str"],
 		"conflicts " => [33,"str"],
 		"improve linker performance" => [33,"str"],
-		"Hunk #" => [33,"str"], // patch offset 
+		"Hunk #" => [33,"str"], // patch offset
 		"pas reconnu en tant que commande interne" => [33,"str"],
 		"environment is too large" => [33,"str"],
 		"Could NOT find" => [33,"str"],
@@ -78,20 +78,23 @@
 		"unknow" => [36,"str"],
 	);
 	$remove = array(
-		"javahl" => [39, "str"],					// subversion java-hl
-		"unknown_element.c" => [39, "str"],			// php
-		"Using unknown MSVC version" => [39, "str"],// php
-		"showWarning" => [39, "str"],				// icu
-		"Could NOT find JSONC" => [39, "str"],		// gdal	
-		"Could NOT find OpenCAD" => [39, "str"],	// gdal
-		"Could NOT find TIFF" => [39, "str"],		// libwebp first pass	
+		"javahl" => [39, "str"],						// subversion java-hl
+		"unknown_element.c" => [39, "str"],				// php
+		"Using unknown MSVC version" => [39, "str"],	// php
+		"showWarning" => [39, "str"],					// icu
+		"Could NOT find JSONC" => [39, "str"],			// gdal
+		"Could NOT find OpenCAD" => [39, "str"],		// gdal
+		"Could NOT find TIFF" => [39, "str"],			// libwebp first pass
+		"SetuptoolsWarning" => [39, "str"],				// gdal python wheel
+		"SetuptoolsDeprecationWarning" => [39, "str"],	// gdal python wheel
+		"STL4038" => [39, "str"],						// gdal https://stackoverflow.com/questions/77637963/namespace-std-has-no-member-variant
 	);
 	//print_r($argv);
 	//exit();
 	$dir = $argv[1];
 	if($argv[3] == "full"){
-		foreach (scandir($dir) as $file) 
-			if ($file != '.' && $file != '..' && is_file($dir."/".$file)) 
+		foreach (scandir($dir) as $file)
+			if ($file != '.' && $file != '..' && is_file($dir."/".$file))
 				checkLog($dir."/".$file,$search,$remove,true);
 	} elseif ($argv[3] == "last"){
 		$file = getLastModifiedFile($dir);
