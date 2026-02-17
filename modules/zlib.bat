@@ -3,21 +3,26 @@
 if "%ARG_CMOPTS%"=="1" (@echo on)
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
--DBUILD_SHARED_LIBS=ON ^
--DZLIB_BUILD_EXAMPLES=OFF ^
+-DZLIB_BUILD_ADA=OFF ^
+-DZLIB_BUILD_BLAST=OFF ^
+-DZLIB_BUILD_IOSTREAM3=OFF ^
+-DZLIB_BUILD_MINIZIP=OFF ^
+-DZLIB_BUILD_PUFF=OFF ^
+-DZLIB_BUILD_SHARED=ON ^
+-DZLIB_BUILD_STATIC=OFF ^
+-DZLIB_BUILD_TESTING=OFF ^
+-DZLIB_BUILD_TESTZLIB=OFF ^
+-DZLIB_BUILD_ZLIB1_DLL=OFF ^
+-DZLIB_INSTALL=ON ^
+-DZLIB_PREFIX=OFF ^
+-DZLIB_WITH_CRC32VX=OFF ^
+-DZLIB_WITH_GVMAT64=OFF ^
+-DZLIB_WITH_INFBACK9=OFF ^
 %PATH_SRC%\%1
 @echo off
 if "%ARG_CMOPTS%"=="1" (exit /B)
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%NINJA% install
 
-	REM change lib name
-for %%Y in (cmake_install.cmake build.ninja) do (sed -i 's/zlib1\.dll/zlib\.dll/g' %CYGPATH_BUILD%/%1/%%Y)
-%NINJA% zlib.dll
-
-for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\zlib.%%X %PATH_INSTALL%\bin\*)
-xcopy /C /F /Y %PATH_BUILD%\%1\zlib.lib %PATH_INSTALL%\lib\*
-call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\zlib.dll
-	REM fix for subversion
-sed -i 's/"1.3"/"1.3.0"/g' %CYGPATH_SRC%/%1/zlib.h
-for %%X in (%PATH_BUILD%\%1\zconf.h %PATH_SRC%\%1\zlib.h) do (xcopy /C /F /Y %%X %PATH_INSTALL%\include\*)
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\z.dll

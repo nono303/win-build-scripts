@@ -40,14 +40,14 @@ for /L %%i in (2,1,%argCount%) do (
 
 	REM ~~~~~~~~~~~~ check prereq deps
 if %PHP_BUILD_TYPE% == memcache	(
-	if not exist %PATH_INSTALL%\lib\zlib.lib (call go.bat zlib NOLOG)
+	if not exist %PATH_INSTALL%\lib\z.lib (call go.bat zlib NOLOG)
 )
 if %PHP_BUILD_TYPE% == brotli	(
 	if not exist %PATH_INSTALL%\%DIR_LIB_STATIC%\libbrotlicommon.lib (call go.bat brotli static NOLOG)
 	set PHP_XTRALIBS=;%PATH_INSTALL%\%DIR_LIB_STATIC%\
 )
 if %PHP_BUILD_TYPE% == win7	(
-	if not exist %PATH_INSTALL%\lib\zlib.lib (call go.bat zlib NOLOG)
+	if not exist %PATH_INSTALL%\lib\z.lib (call go.bat zlib NOLOG)
 	if not exist %PATH_INSTALL%\lib\liblzma.lib (call go.bat liblzma NOLOG)
 	if not exist %PATH_INSTALL%\lib\icudt.lib (call go.bat icu NOLOG)
 	if not exist %PATH_INSTALL%\lib\libiconv.lib (call go.bat libiconv NOLOG)

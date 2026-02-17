@@ -34,7 +34,7 @@ sed -i 's/libpng_a.lib;libpng.lib/libpng16.lib/g' %CYGPATH_SRC%/php-src/configur
 sed -i 's/libsqlite3_a/libsqlite3/g' %CYGPATH_SRC%/php-src/configure.js
 sed -i 's/sqlite3ext.h/sqlite3\/sqlite3ext.h/g' %CYGPATH_SRC%/php-src/configure.js
 	REM zlib
-sed -i 's/zlib_a/zlib/g' %CYGPATH_SRC%/php-src/configure.js
+sed -i 's/zlib_a/z/g' %CYGPATH_SRC%/php-src/configure.js
 	REM avif
 sed -i 's/avif.h/avif\/avif.h/g' %CYGPATH_SRC%/php-src/configure.js
 

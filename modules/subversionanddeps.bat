@@ -18,7 +18,7 @@ if not exist %PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\. mkdir %PATH_REL
 rm -fv "%PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\*.*"
 
 REM	apr_crypto_openssl-1 only seems required for tests
-for %%F in (libexpat libapr-1 libiconv libaprutil-1 libserf-2 zlib libsqlite3 libssl-3-x64 libcrypto-3-x64) do (
+for %%F in (libexpat libapr-1 libiconv libaprutil-1 libserf-2 z libsqlite3 libssl-3-x64 libcrypto-3-x64) do (
 	for %%X in (dll pdb) do (
 		xcopy /C /F /Y %PATH_INSTALL%\bin\%%F.%%X  %PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%\*
 	)
