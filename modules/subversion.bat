@@ -5,6 +5,10 @@ set OUTDIR_CONF=Release
 if not exist %PATH_SRC%\%1\%OUTDIR_CONF%-%ARCH%\. mkdir %PATH_SRC%\%1\%OUTDIR_CONF%-%ARCH%
 if not exist %PATH_SRC%\%1\%OUTDIR_CONF%\. mklink /J %PATH_SRC%\%1\%OUTDIR_CONF% %PATH_SRC%\%1\%OUTDIR_CONF%-%ARCH%
 
+	REM ~~~~~~~~~~~~ Fix Python bindings
+if not exist %PATH_SRC%\%1\%1\bindings\swig\proxy\. mkdir %PATH_SRC%\%1\%1\bindings\swig\proxy
+curl https://raw.githubusercontent.com/encukou/py3c/refs/heads/master/py3c.pc.in -o %PATH_BIN_PYTHON%/py3c.pc.in
+
 	REM ~~~~~~~~~~~~ Configure
 python gen-make.py ^
 --release ^
@@ -20,7 +24,8 @@ python gen-make.py ^
 --with-apr_memcache=%PATH_INSTALL% ^
 --with-apr-util=%PATH_INSTALL% ^
 --with-zlib=%PATH_INSTALL% ^
---with-httpd=%PATH_INSTALL%
+--with-httpd=%PATH_INSTALL% ^
+--with-py3c=%PATH_BIN_PYTHON%
 
 if %ARG_KEEPSRC% == 0 (call do_php %PATH_MODULES_COMMON%/msbuild.php "%PATH_SRC%/%1/build/win32/vcnet-vcproj/" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER% nostd)
 
