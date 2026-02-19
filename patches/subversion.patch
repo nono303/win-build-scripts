@@ -1,8 +1,28 @@
 diff --git a/build/generator/gen_win_dependencies.py b/build/generator/gen_win_dependencies.py
-index bafc78887a..e8d71353ca 100644
+index b31ef62a6d..321c85b9b2 100644
 --- a/build/generator/gen_win_dependencies.py
 +++ b/build/generator/gen_win_dependencies.py
-@@ -1519,7 +1519,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
+@@ -761,8 +761,8 @@ class GenDependenciesBase(gen_base.GeneratorBase):
+         # Visual Studio project file default: zlibstat.lib (static) and zlibwapi.lib (dll)
+         lib_name = 'zlibstat.lib'
+       else:
+-        # Standard makefile produces zlib.lib (static) and zdll.lib (dll)
+-        lib_name = 'zlib.lib'
++        # Standard makefile produces z.lib (static) and zdll.lib (dll)
++        lib_name = 'z.lib'
+       debug_lib_name = None
+     else:
+       # We have a source location
+@@ -1109,7 +1109,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
+ 
+     py3c_path = os.path.abspath(py3c_path)
+     inc_path = os.path.join(py3c_path, 'include')
+-    py3c_hdr_path = os.path.join(inc_path, 'py3c.h')
++    py3c_hdr_path = os.path.join(inc_path, 'py3c/py3c.h')
+ 
+     pc_path = os.path.join(py3c_path, 'py3c.pc.in')
+ 
+@@ -1520,7 +1520,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
      dll_name = None
      defines = []
  
