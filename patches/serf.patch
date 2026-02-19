@@ -1,0 +1,145 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 1f3f4e8..89a1234 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -44,10 +44,10 @@ set(CMAKE_MODULE_PATH "${SERF_SOURCE_DIR}/build")
+ include(SerfVersion)
+ 
+ project("Serf" VERSION ${SERF_VERSION} LANGUAGES C)
+-message(WARNING
+-        "Serf's CMake build is considered EXPERIMENTAL. "
+-        "Some features are not supported and the build "
+-        "has not been tested on many supported platforms.")
++# message(WARNING
++#         "Serf's CMake build is considered EXPERIMENTAL. "
++#         "Some features are not supported and the build "
++#         "has not been tested on many supported platforms.")
+ 
+ # Optional dependency options
+ option(USE_BROTLI "Use the Brotli decoding library if available" ON)
+@@ -89,8 +89,9 @@ if(NOT CMAKE_BUILD_TYPE)
+ endif()
+ 
+ include(GNUInstallDirs)
+-include(SerfFindPkgConfig)
++# include(SerfFindPkgConfig)
+ include(SerfPlatform)
++include(CheckSymbolExists)
+ 
+ # On the Mac: Use dependencies from Homebrew or MacPorts
+ if(USE_HOMEBREW OR USE_MACPORTS)
+@@ -251,28 +252,29 @@ endif(EXPAT)
+ # Find required dependencies
+ find_package(APR REQUIRED)
+ find_package(APRUtil REQUIRED)
++check_symbol_exists(APR_HAS_THREADS "${APR_INCLUDE_DIR}/apr.h" APR_HAS_THREADS)
+ 
+ 
+-SerfFindPkgConfig(OpenSSL_SSL OPENSSL_ROOT_DIR libssl OpenSSL::SSL)
+-SerfFindPkgConfig(OpenSSL_Crypto OPENSSL_ROOT_DIR libcrypto OpenSSL::Crypto)
+-if(NOT (OpenSSL_SSL_FOUND AND OpenSSL_Crypto_FOUND))
++# SerfFindPkgConfig(OpenSSL_SSL OPENSSL_ROOT_DIR libssl OpenSSL::SSL)
++# SerfFindPkgConfig(OpenSSL_Crypto OPENSSL_ROOT_DIR libcrypto OpenSSL::Crypto)
++# if(NOT (OpenSSL_SSL_FOUND AND OpenSSL_Crypto_FOUND))
+   find_package(OpenSSL REQUIRED)
+   if(OpenSSL_FOUND)
+     set(OPENSSL_PC_LIBS ${OPENSSL_LIBRARIES})
+-  endif()
+-else()
+-  set(OpenSSL_FOUND TRUE)
+-  set(OPENSSL_VERSION ${OPENSSL_SSL_VERSION})
++#   endif()
++# else()
++#   set(OpenSSL_FOUND TRUE)
++  set(OPENSSL_VERSION ${OpenSSL_VERSION})
+   set(OPENSSL_INCLUDE_DIR ${OPENSSL_SSL_INCLUDE_DIR})
+   set(OPENSSL_PC_REQUIRES ${OPENSSL_SSL_PC_REQUIRES} ${OPENSSL_CRYPTO_PC_REQUIRES})
+   set(OPENSSL_LIBRARIES ${OPENSSL_SSL_LIBRARY} ${OPENSSL_CRYPTO_LIBRARY})
+ endif()
+ 
+-SerfFindPkgConfig(ZLIB ZLIB_ROOT zlib ZLIB::ZLIB)
+-if(NOT ZLIB_FOUND)
++# SerfFindPkgConfig(ZLIB ZLIB_ROOT zlib ZLIB::ZLIB)
++# if(NOT ZLIB_FOUND)
+   find_package(ZLIB REQUIRED)
+   set(ZLIB_PC_LIBS ${ZLIB_LIBRARIES})
+-endif()
++# endif()
+ 
+ # We do not want or need OpenSSL's compatibility macros.
+ list(APPEND SERF_C_DEFINES "OPENSSL_NO_DEPRECATED")
+@@ -282,14 +284,14 @@ list(APPEND SERF_C_DEFINES "OPENSSL_NO_STDIO")
+ 
+ # Find optional dependencies
+ if(USE_BROTLI)
+-  SerfFindPkgConfig(Brotli_Decode Brotli_ROOT libbrotlidec Brotli::Decode)
+-  if(NOT Brotli_Decode_FOUND)
++  # SerfFindPkgConfig(Brotli_Decode Brotli_ROOT libbrotlidec Brotli::Decode)
++  # if(NOT Brotli_Decode_FOUND)
+     find_package(Brotli)
+     if(Brotli_FOUND)
+       set(BROTLI_PC_LIBS ${BROTLI_DECODE_LIBRARY})
+-    endif()
+-  else()
+-    set(Brotli_FOUND TRUE)
++ #    endif()
++ #  else()
++ #    set(Brotli_FOUND TRUE)
+     set(BROTLI_VERSION ${BROTLI_DECODE_VERSION})
+     set(BROTLI_INCLUDE_DIR ${BROTLI_DECODE_INCLUDE_DIR})
+     set(BROTLI_PC_REQUIRES ${BROTLI_DECODE_PC_REQUIRES})
+@@ -298,13 +300,13 @@ endif()
+ 
+ if(NOT SERF_WINDOWS)
+   if(USE_GSSAPI)
+-    SerfFindPkgConfig(GSSAPI GSSAPI_ROOT krb5-gssapi KRB5::GSSAPI)
+-    if(NOT GSSAPI_FOUND)
++    # SerfFindPkgConfig(GSSAPI GSSAPI_ROOT krb5-gssapi KRB5::GSSAPI)
++    # if(NOT GSSAPI_FOUND)
+       find_package(GSSAPI)
+       if(GSSAPI_FOUND)
+         set(GSSAPI_PC_LIBS ${GSSAPI_LIBRARIES})
+       endif()
+-    endif()
++    # endif()
+   endif()
+ else()
+   # We use SSPI on Windows and there's no Kerberos/GSSAPI port there.
+@@ -315,13 +317,13 @@ else()
+ endif()
+ 
+ if(USE_UNBOUND)
+-  SerfFindPkgConfig(Unbound Unbound_ROOT libunbound Unbound::Unbound)
+-  if(NOT Unbound_FOUND)
++  # SerfFindPkgConfig(Unbound Unbound_ROOT libunbound Unbound::Unbound)
++  # if(NOT Unbound_FOUND)
+     find_package(Unbound)
+     if(Unbound_FOUND)
+       set(UNBOUND_PC_LIBS "${UNBOUND_LIBRARY}")
+     endif()
+-  endif()
++  # endif()
+ endif()
+ 
+ # Calculate the set of private and public targets
+diff --git a/build/SerfPlatform.cmake b/build/SerfPlatform.cmake
+index e1ae60d..c7dbdb3 100644
+--- a/build/SerfPlatform.cmake
++++ b/build/SerfPlatform.cmake
+@@ -16,14 +16,13 @@
+ #   specific language governing permissions and limitations
+ #   under the License.
+ # ===================================================================
+-
+ if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+   set(SERF_WINDOWS TRUE)
+   set(SERF_ELF_TARGET FALSE)
+-  if(CMAKE_GENERATOR_PLATFORM MATCHES "(x64|ARM64|IA64)")
++  if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+     set(SERF_WIN64 TRUE)
+     set(SERF_PLATFORM "Windows (64-bit)")
+-  else()
++  elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
+     set(SERF_WIN32 TRUE)
+     set(SERF_PLATFORM "Windows (32-bit)")
+   endif()
