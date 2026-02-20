@@ -18,10 +18,7 @@ if %1 == 2 (
 		REM MSBuild
 	set AVX_MSBUILD=AdvancedVectorExtensions2
 		REM libconfig.sh / memcached.sh / sslh.sh
-	set AVX_GCC=skylake
-		REM MPIR (used in phpsdk-local)
-	set AVX_MPIR=skylake-avx
-)
+	set AVX_GCC=skylake)
 if %1 == 1 (
 	set AVXECHO=avx
 	set AVXB=-avx
@@ -37,8 +34,6 @@ if %1 == 1 (
 	set AVX_MSBUILD=AdvancedVectorExtensions
 		REM libconfig.sh / memcached.sh / sslh.sh
 	set AVX_GCC=sandybridge
-		REM MPIR (used in phpsdk-local)
-	set AVX_MPIR=sandybridge
 )
 if %1 == 0 (
 	set AVXECHO=sse2
@@ -55,8 +50,6 @@ if %1 == 0 (
 	set AVX_MSBUILD=NotSet
 		REM libconfig.sh / memcached.sh / sslh.sh
 	set AVX_GCC=core2
-		REM MPIR (used in phpsdk-local)
-	set AVX_MPIR=core2-penryn
 )
 echo ~~-~~ %AVXECHO% ~~-~~
 

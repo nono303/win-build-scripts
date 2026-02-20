@@ -1,28 +1,39 @@
-@echo off
-set ARG_KEEPSRC=1
-call %PATH_MODULES_COMMON%\init.bat %1
+REM /cygdrive/c/sdk/src/php-src/ext/gmp/config.w32:6   if (CHECK_LIB("mpir_a.lib", "gmp", PHP_GMP)
+@echo off && call %PATH_MODULES_COMMON%\init.bat %1
 
-set MPIRVCVER=22
+if %AVXECHO%==avx2 (
+	set MPIR_NAME=skylake-avx
+	set MPIR_CONFIG=32
+)
+if %AVXECHO%==avx (
+	set MPIR_NAME=sandybridge
+	set MPIR_CONFIG=29
+)
+if %AVXECHO%==sse2 (
+	set MPIR_NAME=core2-penryn
+	set MPIR_CONFIG=20
+)
+
+set MPIRVCVER=26
 set MPIRDIR=vs%MPIRVCVER%
 set OUTDIR_CONF=Release
 set MPIROUT=build
 set VCDIR=msvc
 
-	REM clean out dir
-if exist %PATH_SRC%\%1\%MPIROUT%\%MPIRDIR%-%archmsbuild%_%OUTDIR_CONF%_%AVX_MPIR%\. rmdir /S /Q %PATH_SRC%\%1\%MPIROUT%\%MPIRDIR%-%archmsbuild%_%OUTDIR_CONF%_%AVX_MPIR%
+set YASM_PATH=%PATH_SOFTS%
+set YASM_NAME=yasm-1.3.0-win64.exe
 
-	REM 32. skylake_avx	(x64)	AVX2
-	REM 29. sandybridge	(x64)	AVX
-	REM 20. core2_penryn	(x64)	SSE2
-call python %PATH_SRC%\%1\%VCDIR%\mpir_config.py %MPIRVCVER% 29,20,32
+call python %PATH_SRC%\%1\%VCDIR%\mpir_config.py %MPIRVCVER% %MPIR_CONFIG%
 
-	REM clean build dir
-if exist %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%AVX_MPIR:-=_%\%archmsbuild%\. rmdir /S /Q %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%AVX_MPIR:-=_%\%archmsbuild%
+mkdir %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%MPIR_NAME:-=_%\%archmsbuild%\%OUTDIR_CONF%\mpn
 
-MSBuild.exe %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%AVX_MPIR:-=_%\dll_mpir_%AVX_MPIR:-=_%.vcxproj %MSBUILD_OPTS% ^
-/p:VCToolsInstallDir=%VCToolsInstallDir% ^
+call do_php %PATH_MODULES_COMMON%/msbuild.php "%PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%MPIR_NAME:-=_%" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
+
+MSBuild.exe %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%MPIR_NAME:-=_%\dll_mpir_%MPIR_NAME:-=_%.vcxproj %MSBUILD_OPTS% ^
 /p:Configuration=%OUTDIR_CONF% ^
 /p:Platform=%archmsbuild%
-echo on
-for %%D in (bin lib include) do (xcopy /C /F /Y %PATH_SRC%\%1\%MPIROUT%\%MPIRDIR%-%archmsbuild%_%OUTDIR_CONF%_%AVX_MPIR%\%%D\*.* %PATH_INSTALL%\%%D\*)
-call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\mpir_%AVX_MPIR%.dll
+
+xcopy /C /F /Y %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%MPIR_NAME:-=_%\%archmsbuild%\%OUTDIR_CONF%\%1.lib %PATH_INSTALL%\lib\*
+for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%MPIR_NAME:-=_%\%archmsbuild%\%OUTDIR_CONF%\%1.%%X %PATH_INSTALL%\bin\*)
+for %%X in (config gmp-impl gmp-mparam gmp gmpxx longlong mpir mpirxx) do (xcopy /C /F /Y %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%MPIR_NAME:-=_%\%archmsbuild%\%OUTDIR_CONF%\%%X.h %PATH_INSTALL%\include\*)
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\mpir.dll
