@@ -1,8 +1,58 @@
 # changelog
 
 
+## 1.15.4 _(2026-02-20)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`config/.vsconfig`
+`config/python.pip`
+`env_sample.bat`
+`modules/common/msbuild.php`
+`utils/srccreate.bat`
+*  FORMAT_XML (false for better diff)
+`modules/common/msbuild.php`
+*  mpir vs26 build from upstream https://github.com/BrianGladman/mpir/issues/33
+`avx.bat`
+`modules/mpir.bat`
+`modules/phpsdk-local.bat`
+`patches/mpir.patch`
+*  fix cmake for build trunk latest * use find_package instead of SerfFindPkgConfig (openssl issue) * use CMAKE_SIZEOF_VOID_P instead of CMAKE_GENERATOR_PLATFORM to correctly define SERF_WIN64 & SERF_WIN32 * fix OPENSSL_VERSION (case issue with correct OpenSSL_VERSION) * fix APR_HAS_THREADS value adding check_symbol_exists(APR_HAS_THREADS "${APR_INCLUDE_DIR}/apr.h" APR_HAS_THREADS)
+`modules/serf.bat`
+`patches/serf.013f693.patch`
+`patches/serf.patch`
+*  fix py3c_hdr_path fix deps copy: %PATH_INSTALL% > %PATH_INSTALL%.svn upgrade zlib name in 1.3.2
+`modules/subversionanddeps.bat`
+`patches/subversion.patch`
+*  python bindings * fix swig folder "No such file or directory" * set py3c to PATH_BIN_PYTHON
+`modules/subversion.bat`
+*  PTW32_VERSION_STRING: comma > dot (for phpinfo)
+`patches/pthread-win32.patch`
+*  +mobac_gradle-wrapper.properties
+`.gradle-wrapper.properties/mobac_gradle-wrapper.properties`
+*  zlib 1.3.2
+`modules/php.bat`
+`modules/phpsdk-local.bat`
+`modules/subversionanddeps.bat`
+`modules/zlib.bat`
+*  +NativeDesktop
+`config/.vsconfig`
+*  https://github.com/curl/curl/issues/20575 8.19
+`modules/curl.bat`
+`patches/curl.patch`
+*  mb_convert_encoding for sigcheck https://github.com/MicrosoftDocs/sysinternals/issues/930 fix Machine Type without "-bit"
+`utils/sub/bininfo.php`
+*  fix sigcheck 2.91 2byte char encoded string exec sigcheck by folder (better perf than by file) global refator
+`utils/sub/bininfo.php`
+*  remove useless gdal warning
+`utils/sub/logcheck.php`
+
+
 ## 1.15.3 _(2026-02-07)_
 
+*  1.15.3
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`

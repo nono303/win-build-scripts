@@ -54,7 +54,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2026](https://aka.ms/vs/18/Stable/vs_community.exe) |      | 18.3.0 (14.50, 14.44) | `.vsconfig`         |
+| [Visual Studio 2026](https://aka.ms/vs/18/Stable/vs_community.exe) |      | 18.3.1 (14.50, 14.44) | `.vsconfig`         |
 | :bookmark: [Microsoft Visual C++ Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170) | x64 & x86 | 14.50.35719 |  |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.7.0 | `cyg64.packagelist` |
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.14.3 |                     |
@@ -68,7 +68,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.91     |                     |
 | [ChkMatch](https://web.archive.org/web/20210205095232/https://www.debuginfo.com/tools/chkmatch.html) | x86 | 1.0.3          |                     |
 | [Gradle](https://services.gradle.org/distributions/) | [java] | 9.4.0-rc1 | |
-| [CMake](https://cmake.org/download/) | x64 | 4.2.3 | |
+| [CMake](https://cmake.org/download/) | x64 | 4.3.0-rc1 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | x64 | 1.13.2 | |
 | [JOM](https://download.qt.io/official_releases/jom/) | x64 | 1.1.6 | |
 | [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 1.10.1 | |

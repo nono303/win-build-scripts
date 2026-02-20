@@ -139,7 +139,7 @@ if %PHPVER% == %PHP_BUILD_TYPE% (set FINAL_CONFIGURE=^
 )
 
 echo configure %FINAL_CONFIGURE% | sed -e "s/[[:space:]]\+/ /g"
-echo %FINAL_CONFIGURE% | grep -o '\S\+' > %PATH_LOGS%\%PREFIXLOG%_%MSVC_DEPS%-%ARCH%%AVXB%_configure_%ymdhis%.log
+echo %FINAL_CONFIGURE% | grep -o '\S\+' > %PATH_LOGS%\%PREFIXLOG%_%MSVC_DEPS%-%PHP_SDK_ARCH%%AVXB%_configure_%ymdhis%.log
 call configure %FINAL_CONFIGURE%
 
 	REM ARFLAGS
