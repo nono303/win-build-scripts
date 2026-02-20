@@ -1,7 +1,7 @@
 <?php
 	const FORMAT_XML = false;
 /*
-		enabled:  dependencies icu jemalloc libiconv libsodium nssm subversion verpatch
+		enabled:  dependencies icu jemalloc libiconv libsodium nssm subversion verpatch mpir
 		disabled: libxpm
 */
 	# https://stackoverflow.com/a/54325258

@@ -34,7 +34,7 @@ git checkout tags/v1.34.6
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-8_18_0
+git checkout tags/rc-8_19_0-1
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -154,7 +154,7 @@ git checkout tags/1.12.2
 cd /D ..
 git clone git://git.code.sf.net/p/libpng/code libpng
 cd /D libpng
-git checkout tags/v1.6.54
+git checkout tags/v1.6.55
 cd /D ..
 git clone https://github.com/jedisct1/libsodium.git libsodium
 cd /D libsodium
@@ -226,7 +226,7 @@ git checkout tags/2.3.10.6
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v2.0.38
+git checkout tags/v2.0.39
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -238,11 +238,11 @@ git checkout main
 cd /D ..
 git clone https://github.com/icing/mod_md mod_md
 cd /D mod_md
-git checkout tags/v2.6.7
+git checkout tags/v2.6.8
 cd /D ..
 svn co https://svn.code.sf.net/p/mod-qos/source/trunk/httpd_src/modules/qos mod_qos
 cd /D mod_qos
-svn update -r 2730
+svn update -r 2738
 cd /D ..
 git clone https://github.com/SpiderLabs/ModSecurity mod_security
 cd /D mod_security
@@ -260,7 +260,7 @@ git clone https://github.com/nono303/mod_zstd.git mod_zstd
 cd /D mod_zstd
 git checkout tags/1.0.3
 cd /D ..
-git clone https://github.com/nono303/mpir.git mpir
+git clone https://github.com/BrianGladman/mpir mpir
 cd /D mpir
 git checkout master
 cd /D ..
@@ -302,7 +302,7 @@ git checkout main
 cd /D ..
 git clone https://github.com/krakjoe/parallel.git pecl-parallel
 cd /D pecl-parallel
-git checkout tags/v1.2.10
+git checkout tags/v1.2.11
 cd /D ..
 git clone https://github.com/php/pecl-system-sync pecl-system-sync
 cd /D pecl-system-sync
@@ -338,7 +338,7 @@ git checkout tags/php-sdk-2.6.0
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.5.3RC1
+git checkout tags/php-8.5.3
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
@@ -362,7 +362,7 @@ git checkout tags/1.3.4
 cd /D ..
 git clone https://github.com/apache/serf.git serf
 cd /D serf
-git checkout remotes/origin/user-defined-authn~3
+git checkout trunk
 cd /D ..
 git clone https://github.com/rhuijben/sqlite-amalgamation sqlite
 cd /D sqlite
@@ -402,7 +402,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/madler/zlib.git zlib
 cd /D zlib
-git checkout tags/v1.3.1
+git checkout tags/v1.3.2
 cd /D ..
 git clone https://github.com/facebook/zstd.git zstd
 cd /D zstd

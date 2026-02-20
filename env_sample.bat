@@ -104,7 +104,7 @@ cd /D %PATH_BATCH%
 
 REM ########################## BUILD OPTION
 	REM https://services.gradle.org/distributions/
-set GRADLEVER=9.4.0-milestone-5
+set GRADLEVER=9.4.0-rc-1
 	REM see dir in C:\Windows Kits\10\Lib
 set WKITVER=10.0.26100.0
 	REM .NET installed SDK
