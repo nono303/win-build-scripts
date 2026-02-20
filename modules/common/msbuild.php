@@ -1,4 +1,5 @@
 <?php
+	const FORMAT_XML = false;
 /*
 		enabled:  dependencies icu jemalloc libiconv libsodium nssm subversion verpatch
 		disabled: libxpm
@@ -82,13 +83,15 @@
 		foreach($replaces as $from => $to)
 			$in = preg_replace("/".$from."/",$to,$in);
 		/* format */
-		$doc = new DOMDocument();
-		$doc->preserveWhiteSpace = false;
-		$doc->formatOutput = true;
-		if (@$doc->loadXML($in) === false)
-			throw new Exception(json_encode(libxml_get_last_error(), JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
-		$out = $doc->saveXML();
+		if(FORMAT_XML){
+			$doc = new DOMDocument();
+			$doc->preserveWhiteSpace = false;
+			$doc->formatOutput = true;
+			if (@$doc->loadXML($in) === false)
+				throw new Exception(json_encode(libxml_get_last_error(), JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
+			$in = $doc->saveXML();
+		}
 		/* write */
-		file_put_contents($file,$out);
+		file_put_contents($file,$in);
 	}
 ?>
