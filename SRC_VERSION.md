@@ -63,7 +63,7 @@
 | [mod_security-sdbm-util](https://github.com/nono303/modsec-sdbm-util) - _[upstream + src](https://github.com/SpiderLabs/modsec-sdbm-util)_ | 1.1.0 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) - _[src1](https://emptyhammock.com/media/downloads/wku_bt-2.01.zip)_- _[src2](https://github.com/nono303/mod_whatkilledus)_ | 2.0.2 - d1ec56b |
 | [mod_zstd](https://github.com/nono303/mod_zstd) | 1.0.3 |
-| [mpir](https://github.com/BrianGladman/mpir) | 3.0.0 - 541f99c2 |
+| [mpir](https://github.com/BrianGladman/mpir) | 3.0.0 - 82a66ee7 |
 | [nghttp2](https://github.com/nghttp2/nghttp2) | 1.68.0 |
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 1.15.0 |
 | [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 1.20.0 |
