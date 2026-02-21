@@ -17,21 +17,17 @@ if %AVXECHO%==sse2 (
 set MPIRVCVER=26
 set MPIRDIR=vs%MPIRVCVER%
 set OUTDIR_CONF=Release
-set MPIROUT=build
 set VCDIR=msvc
 
-set YASM_PATH=%PATH_SOFTS%
-set YASM_NAME=yasm-1.3.0-win64.exe
-
-call python %PATH_SRC%\%1\%VCDIR%\mpir_config.py %MPIRVCVER% %MPIR_CONFIG%
-
-mkdir %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%MPIR_NAME:-=_%\%archmsbuild%\%OUTDIR_CONF%\mpn
+call python %PATH_SRC%\%1\%VCDIR%\mpir_config.py %MPIRVCVER% %WKITVER% %MPIR_CONFIG%
 
 call do_php %PATH_MODULES_COMMON%/msbuild.php "%PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%MPIR_NAME:-=_%" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
 
 MSBuild.exe %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%MPIR_NAME:-=_%\dll_mpir_%MPIR_NAME:-=_%.vcxproj %MSBUILD_OPTS% ^
 /p:Configuration=%OUTDIR_CONF% ^
-/p:Platform=%archmsbuild%
+/p:Platform=%archmsbuild% ^
+/p:YASM_PATH="%PATH_SOFTS%" ^
+/p:YASM_NAME="yasm-1.3.0-win64.exe"
 
 xcopy /C /F /Y %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%MPIR_NAME:-=_%\%archmsbuild%\%OUTDIR_CONF%\%1.lib %PATH_INSTALL%\lib\*
 for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%MPIR_NAME:-=_%\%archmsbuild%\%OUTDIR_CONF%\%1.%%X %PATH_INSTALL%\bin\*)

@@ -1,84 +1,12 @@
-diff --git a/msvc/mpir_config.py b/msvc/mpir_config.py
-index ecdb8672..2dfa4f9e 100644
---- a/msvc/mpir_config.py
-+++ b/msvc/mpir_config.py
-@@ -53,7 +53,7 @@ write_f(join(build_root_dir, f'version_info{vs_version}.py'),
- from version_info import vs_info
- 
- if len(argv) > 2:
--  vs_info['windows_sdk'] = argv[2]
-+  n_list = [int(c) for c in argv[2].split(',')]
- 
- # for script debugging
- debug = False
-@@ -325,32 +325,32 @@ nd_32 = nd_gc + len(mpn_32)
- nd_nd = nd_32 + len(mpn_64)
- 
- # now ask user which builds they wish to generate
--
--while True:
--  cnt = 0
--  for v in sorted(mpn_gc):
--    cnt += 1
--    print('{0:2d}. {1:24s}        '.format(cnt, v.replace('\\', '_')))
--  for v in sorted(mpn_32):
--    cnt += 1
--    print('{0:2d}. {1:24s} (win32)'.format(cnt, v.replace('\\', '_')))
--  for v in sorted(mpn_64):
--    cnt += 1
--    print('{0:2d}. {1:24s}   (x64)'.format(cnt, v.replace('\\', '_')))
--  fs = 'Space separated list of builds (1..{0:d}, 0 to exit)? '
--  s = input(fs.format(cnt))
--  n_list = [int(c) for c in s.split()]
--  if 0 in n_list:
--    exit()
--  if any(n < 1 or n > nd_nd for n in n_list):
--    print('list contains invalid build numbers')
--    sleep(2)
--  else:
--    break
--
--# multiple builds must each have their own prebuilds
--if len(n_list) > 1:
--  add_prebuild = True
-+if not 'n_list' in globals():
-+  while True:
-+    cnt = 0
-+    for v in sorted(mpn_gc):
-+      cnt += 1
-+      print('{0:2d}. {1:24s}        '.format(cnt, v.replace('\\', '_')))
-+    for v in sorted(mpn_32):
-+      cnt += 1
-+      print('{0:2d}. {1:24s} (win32)'.format(cnt, v.replace('\\', '_')))
-+    for v in sorted(mpn_64):
-+      cnt += 1
-+      print('{0:2d}. {1:24s}   (x64)'.format(cnt, v.replace('\\', '_')))
-+    fs = 'Space separated list of builds (1..{0:d}, 0 to exit)? '
-+    s = input(fs.format(cnt))
-+    n_list = [int(c) for c in s.split()]
-+    if 0 in n_list:
-+      exit()
-+    if any(n < 1 or n > nd_nd for n in n_list):
-+      print('list contains invalid build numbers')
-+      sleep(2)
-+    else:
-+      break
-+  
-+  # multiple builds must each have their own prebuilds
-+  if len(n_list) > 1:
-+    add_prebuild = True
- 
- # now generate the requested builds
- 
 diff --git a/msvc/vsyasm.props b/msvc/vsyasm.props
-index 9d5c14fa..6f20095a 100644
+index 9d5c14fa..a8fba201 100644
 --- a/msvc/vsyasm.props
 +++ b/msvc/vsyasm.props
 @@ -11,6 +11,7 @@
    </PropertyGroup>
    <PropertyGroup>
      <YASM_PATH Condition= "'$(YASM_PATH)' == ''">C:\Program Files\yasm\</YASM_PATH>
-+	<YASM_NAME Condition= "'$(YASM_NAME)' == ''">yasm.exe</YASM_NAME>
++     <YASM_NAME Condition= "'$(YASM_NAME)' == ''">yasm.exe</YASM_NAME>
    </PropertyGroup>
    <ItemDefinitionGroup>
      <YASM>
@@ -87,7 +15,7 @@ index 9d5c14fa..6f20095a 100644
        <PreProc>0</PreProc>
        <Parser>0</Parser>
 -      <CommandLineTemplate>"$(YASM_PATH.TrimEnd('\'))"\vsyasm.exe -Xvc -f $(Platform) [AllOptions] [AdditionalOptions] [Inputs]</CommandLineTemplate>
-+      <CommandLineTemplate>$(YASM_PATH.TrimEnd('\'))\$(YASM_NAME) -Xvc -f $(Platform) [AllOptions] [AdditionalOptions] [Inputs]</CommandLineTemplate>
++      <CommandLineTemplate>"$(YASM_PATH.TrimEnd('\'))\$(YASM_NAME)" -Xvc -f $(Platform) [AllOptions] [AdditionalOptions] [Inputs]</CommandLineTemplate>
        <Outputs>%(ObjectFile)</Outputs>
        <ExecutionDescription>Assembling %(Filename)%(Extension) ==> $(IntDir)%(FileName).obj</ExecutionDescription>
        <ShowOnlyRuleProperties>false</ShowOnlyRuleProperties>
