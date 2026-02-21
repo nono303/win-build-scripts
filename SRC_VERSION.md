@@ -4,13 +4,13 @@
 | [apr](https://github.com/apache/apr) | 1.7.7 - d7a4f5be5 |
 | [apr-util](https://github.com/apache/apr-util) | 1.7.0-dev - c9a9a77c |
 | [brotli](https://github.com/google/brotli) | 1.2.0 |
-| [bzip2](https://gitlab.com/bzip2/bzip2.git) | 1.1.0 - 66c46b8 |
+| [bzip2](https://gitlab.com/bzip2/bzip2) | 1.1.0 - 66c46b8 |
 | [cares](https://github.com/c-ares/c-ares) | 1.34.6 |
 | [curl](https://github.com/curl/curl) | 8.19.0-rc1 |
-| [dav1d](https://code.videolan.org/videolan/dav1d.git) | 1.5.3 |
+| [dav1d](https://code.videolan.org/videolan/dav1d) | 1.5.3 |
 | [dependencies](https://github.com/himeshsameera/Dependencies) | 2.2.0 - c205928 |
 | [fit2gpx](https://github.com/nono303/fit2gpx) - [*upstream + src*](https://github.com/MaksVasilev/fit2gpx) | 0.1.24 - a541814 |
-| [freeglut](https://github.com/dcnieho/FreeGLUT.git) | 3.8.0 |
+| [freeglut](https://github.com/dcnieho/FreeGLUT) | 3.8.0 |
 | [freetype2](https://gitlab.freedesktop.org/freetype/freetype) | 2.14.1 |
 | [gdal](https://github.com/OSGeo/gdal) | 3.12.2 |
 | [geographiclib](https://github.com/geographiclib/geographiclib/tree/release) | 2.7 |
@@ -20,30 +20,30 @@
 | [icu](https://github.com/unicode-org/icu) | 78.2 |
 | [jansson](https://github.com/akheron/jansson) | 2.15.0 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.3.0 |
-| [lerc](https://github.com/Esri/lerc.git) | 4.0.4 |
-| [libavif](https://github.com/AOMediaCodec/libavif.git) | 1.3.0 |
+| [lerc](https://github.com/Esri/lerc) | 4.0.4 |
+| [libavif](https://github.com/AOMediaCodec/libavif) | 1.3.0 |
 | [libconfig](https://github.com/hyperrealm/libconfig) | 1.8.2 |
-| [libdeflate](https://github.com/ebiggers/libdeflate.git) | 1.25 |
+| [libdeflate](https://github.com/ebiggers/libdeflate) | 1.25 |
 | [libev](https://git.lighttpd.net/libev) | 4.33 - 26fa899 |
 | [libevent](https://github.com/libevent/libevent) | 2.2.1-alpha |
 | [libexpat](https://github.com/libexpat/libexpat) | 2.7.4 |
 | [libffi](https://github.com/libffi/libffi) | 3.5.1 - 2263d60 |
 | [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.20.0 |
 | [libgd](https://github.com/libgd/libgd) | 2.4.0 - 500995e4 |
-| [libgeotiff](https://github.com/nono303/libgeotiff.git) + [*upstream + src*](https://github.com/OSGeo/libgeotiff) | 1.7.4 - 231ca71 |
+| [libgeotiff](https://github.com/nono303/libgeotiff) + [*upstream + src*](https://github.com/OSGeo/libgeotiff) | 1.7.4 - 231ca71 |
 | [libheif](https://github.com/strukturag/libheif) | 1.21.2 |
 | [libiconv](https://github.com/kiyolee/libiconv-win-build) | 1.18-p1 |
 | [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) | 3.1.3 |
 | [liblzma](https://github.com/ShiftMediaProject/liblzma) | 5.8.2 |
 | [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.12.2 |
 | [libpng](https://sourceforge.net/p/libpng/code/ci/master/tree/) | 1.6.55 |
-| [libsodium](https://github.com/jedisct1/libsodium.git) | 1.0.21.0 - 3d9d8f50 |
+| [libsodium](https://github.com/jedisct1/libsodium) | 1.0.21.0 - 3d9d8f50 |
 | [libssh2](https://github.com/libssh2/libssh2) | 1.11.1 |
 | [libtiff](https://gitlab.com/libtiff/libtiff) | 4.7.1 |
-| [libwepb](https://chromium.googlesource.com/webm/libwebp) | 1.6.0 |
+| [libwebp](https://chromium.googlesource.com/webm/libwebp) | 1.6.0 |
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
-| [libxml2](https://gitlab.gnome.org/GNOME/libxml2.git) | 2.15.1 |
-| [libxpm](https://github.com/nono303/libxpm.git) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.17 - b150b7e |
+| [libxml2](https://gitlab.gnome.org/GNOME/libxml2) | 2.15.1 |
+| [libxpm](https://github.com/nono303/libxpm) - _[upstream](https://github.com/winlibs/libxpm)_ - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.17 - b150b7e |
 | [libxslt](https://gitlab.gnome.org/GNOME/libxslt) | 1.1.45 |
 | [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1922 - 6067afde |
 | [libzip](https://github.com/nih-at/libzip) | 1.11.4 |
@@ -63,7 +63,7 @@
 | [mod_security-sdbm-util](https://github.com/nono303/modsec-sdbm-util) - _[upstream + src](https://github.com/SpiderLabs/modsec-sdbm-util)_ | 1.1.0 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) - _[src1](https://emptyhammock.com/media/downloads/wku_bt-2.01.zip)_- _[src2](https://github.com/nono303/mod_whatkilledus)_ | 2.0.2 - d1ec56b |
 | [mod_zstd](https://github.com/nono303/mod_zstd) | 1.0.3 |
-| [mpir](https://github.com/BrianGladman/mpir) | 3.0.0 - 91c04f0 |
+| [mpir](https://github.com/BrianGladman/mpir) | 3.0.0 - 541f99c2 |
 | [nghttp2](https://github.com/nghttp2/nghttp2) | 1.68.0 |
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 1.15.0 |
 | [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 1.20.0 |
@@ -73,7 +73,7 @@
 | [pecl-datetime-timezonedb](https://github.com/php/pecl-datetime-timezonedb) | 2025.3 |
 | [pecl-igbinary](https://github.com/igbinary/igbinary) | 3.2.17-rc1 - edda710 |
 | [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | 8.2 - ac8e8c5 |
-| [pecl-parallel](https://github.com/krakjoe/parallel.git) | 1.2.11 |
+| [pecl-parallel](https://github.com/krakjoe/parallel) | 1.2.11 |
 | [pecl-system-sync](https://github.com/php/pecl-system-sync) | 1.1.3 |
 | [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1 |
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.18.3 - 4924acc |
@@ -89,7 +89,7 @@
 | [python](https://github.com/nono303/cpython) - _[upstream + src](https://github.com/python/cpython/tree/3.8)_ | 3.8.16 - 0813455d42 |
 | [qhull](https://github.com/qhull/qhull) | 8.1-alpha6 |
 | [sdlna](https://github.com/nono303/simpleDLNA) - _[upstream + src](https://github.com/nmaier/simpleDLNA)_ | 1.3.4 - cefd343 |
-| [serf](https://github.com/apache/serf.git) | 2.0.0 - 7e98c4d |
+| [serf](https://github.com/apache/serf) | 2.0.0 - 7e98c4d |
 | [sqlite](https://github.com/rhuijben/sqlite-amalgamation) - *[release](https://www.sqlite.org/changes.html)* | 3.51.2 |
 | [sslh](https://github.com/yrutschle/sslh) | 2.3.0.12 - e2d01a7 |
 | [subversion](https://github.com/apache/subversion) | 1.15.0 - 3f285e79c9 |
