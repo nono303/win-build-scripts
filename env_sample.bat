@@ -120,7 +120,6 @@ set JOM_OPTS_REL=/S %JOM_OPTS_DBG%
 	REM https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild-command-line-reference?view=visualstudio&viewFallbackFrom=vs-2026
 set MSBUILD_OPTS_COM=/nologo ^
 	/nr:false ^
-	/m:%NUMBER_OF_PROCESSORS% ^
 	/p:Turbo=true ^
 	/p:CL_MPCount=%NUMBER_OF_PROCESSORS% ^
 	/m:%NUMBER_OF_PROCESSORS% ^
