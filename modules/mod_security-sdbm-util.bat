@@ -1,7 +1,8 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1 
 
-	REM result: CL -MD /nologo /DWIN32 /DWINNT /D_WINDOWS /w /Zf /Zi /FS /O2 /GL /MD /DNDEBUG /Ob3 /std:clatest /Gw /Gy /MP16 /cgthreads8 /Zc:inline /arch:AVX2     
-sed -i 's/DNDEBUG/DNDEBUG \/Ob3 \/std:clatest \/Gw \/Gy \/MP%NUMBER_OF_PROCESSORS% \/cgthreads8 \/Zc:inline%AVX_SED%/g' %CYGPATH_SRC%/%1/Makefile.win
+sed -i 's/DNDEBUG/DNDEBUG \/w \/Gw \/Gy \/Zc:inline \/O2 \/Ob3 \/Zf \/Zi \/FS \/GL \/MD \/MP%NUMBER_OF_PROCESSORS% \/cgthreads8%AVX_SED% \/std:c%C_STD_VER%/g' %CYGPATH_SRC%/%1/Makefile.win
+sed -i 's/ldflags = \/nologo/ldflags =\/nologo \/machine:%ARCH% \/DEBUG \/NOLOGO \/LTCG \/OPT:REF,ICF \/CGTHREADS:8/g' %CYGPATH_SRC%/%1/Makefile.win
+
 NMAKE %NMAKE_OPTS% -f Makefile.win ^
 	APR=%PATH_INSTALL% ^
 	APRUTIL=%PATH_INSTALL% ^

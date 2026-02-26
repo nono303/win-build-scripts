@@ -1,16 +1,34 @@
 diff --git a/Makefile.win b/Makefile.win
-index e28db0a..7d3c85a 100644
+index e28db0a..8bc3797 100644
 --- a/Makefile.win
 +++ b/Makefile.win
-@@ -16,7 +16,7 @@ includes = -I$(APRUTIL)\include -I$(APR)\include
+@@ -16,13 +16,13 @@ includes = -I$(APRUTIL)\include -I$(APR)\include
  
  libs = $(APR)\lib\libapr-1.lib $(APRUTIL)\lib\libaprutil-1.lib
  
 -cflags= $(includes) /nologo /DWIN32 /DWINNT /D_WINDOWS /Dinline=APR_INLINE /w /Zf /Zi /FS /O2 /GL /MD /DNDEBUG
-+cflags= $(includes) /nologo /DWIN32 /DWINNT /D_WINDOWS /w /Zf /Zi /FS /O2 /GL /MD /DNDEBUG
++cflags= $(includes) /nologo /DWIN32 /DWINNT /D_WINDOWS /DNDEBUG
  
- ldflags = /nologo /Incremental:no /LTCG /debug /opt:ref,icf 
+-ldflags = /nologo /Incremental:no /LTCG /debug /opt:ref,icf 
++ldflags = /nologo
  
+ objs = modsec-sdbm-util.obj
+ 
+-exe = modsec-sdbm-util.exe
++exe = modsec-sdbm-util
+ 
+ ###########################################################################
+ 
+@@ -34,7 +34,7 @@ exe: $(exe)
+         $(cc) $(cflags) -c $< -Fo$@
+ 
+ $(exe): $(objs)
+-        $(link) $(ldflags) -out:$(exe) $(objs) $(libs)
++        $(link) $(ldflags) $(objs) /out:$(exe).exe /pdb:$(exe).pdb $(libs)
+ 
+ clean:
+         del $(objs) $(exe) *.exe *.pdb *.idb *.ilk *.exp *.res *.rc *.bin *.manifest
+
 diff --git a/modsec-sdbm-util.c b/modsec-sdbm-util.c
 index 71af63f..3453018 100644
 --- a/modsec-sdbm-util.c
