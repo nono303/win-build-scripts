@@ -25,8 +25,9 @@
 */
 	$std = (array_key_exists(7,$argv) && $argv[7] == "nostd") ? "" :
 		"<LanguageStandard>stdcpplatest</LanguageStandard><LanguageStandard_C>stdclatest</LanguageStandard_C>";
-	$link =
-		"<EnableCOMDATFolding>true</EnableCOMDATFolding><OptimizeReferences>true</OptimizeReferences>";
+	$linklib =
+		"<AdditionalOptions>/CGTHREADS:8 %(AdditionalOptions)</AdditionalOptions>
+		<TargetMachine>MachineX64</TargetMachine>";
 
 	$removes = [
 		/* Task */		"CodeAnalysisRuleSet",
@@ -43,25 +44,27 @@
 			"<TargetFrameworkVersion>[^<]+" => "<TargetFrameworkVersion>v".$argv[6],
 			"NETFramework,Version=[^\"]+" => "NETFramework,Version=v".$argv[6],
 		/* C CXX Flags */
-			"<\/ClCompile>" =>  $std."
-			  <EnableEnhancedInstructionSet>".$argv[2]."</EnableEnhancedInstructionSet>
-			  <Optimization>MaxSpeed</Optimization>
-			  <WarningLevel>TurnOffAllWarnings</WarningLevel>
-			  <WholeProgramOptimization>true</WholeProgramOptimization>
-			  <MultiProcessorCompilation>true</MultiProcessorCompilation>
-			  <FunctionLevelLinking>true</FunctionLevelLinking>
-			  <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+			"<\/ClCompile>" =>  $std.
+				"<EnableEnhancedInstructionSet>".$argv[2]."</EnableEnhancedInstructionSet>
+				<Optimization>MaxSpeed</Optimization>
+				<WarningLevel>TurnOffAllWarnings</WarningLevel>
+				<WholeProgramOptimization>true</WholeProgramOptimization>
+				<MultiProcessorCompilation>true</MultiProcessorCompilation>
+				<FunctionLevelLinking>true</FunctionLevelLinking>
+				<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
 			</ClCompile>",
 			"<RuntimeLibrary>[^<]+" => "<RuntimeLibrary>MultiThreadedDLL",
 			"<AdditionalOptions>" => "<AdditionalOptions>/Zc:inline /FS /Zf /Gw /Ob3 /cgthreads8 ",
 		/* Link */
-			"<\/Link>" => $link."
-			  <GenerateDebugInformation>true</GenerateDebugInformation>
-			  <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+			"<\/Link>" => $linklib.
+				"<LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+				<EnableCOMDATFolding>true</EnableCOMDATFolding>
+				<OptimizeReferences>true</OptimizeReferences>
+				<GenerateDebugInformation>true</GenerateDebugInformation>
 			</Link>",
 		/* Lib */
-			"<\/Lib>" => $link."
-			  <LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
+			"<\/Lib>" => $linklib.
+				"<LinkTimeCodeGeneration>true</LinkTimeCodeGeneration>
 			</Lib>",
 	];
 	/* files */
