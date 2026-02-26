@@ -8,7 +8,6 @@ call %PATH_MODULES_COMMON%\init.bat %1
 	
 if NOT "%C_STD_VER%"=="" (
 	set __CNFC=/std:c%C_STD_VER%
-	set __CNFCXX=/std:c++%C_STD_VER%
 )
 
 if "%2"=="svn" (
@@ -38,7 +37,7 @@ zlib ^
 zlib-dynamic ^
 --with-zlib-include=%PATH_INSTALL:\=/%/include ^
 --with-zlib-lib=zlib ^
-/Ob3 /GL /Gw /Zc:inline /Zf /FS /MP%NUMBER_OF_PROCESSORS% /cgthreads8 %__CNFCXX% %AVX% ^
+/DNDEBUG /Ob3 /GL /Gw /Zc:inline /Zf /FS /MP%NUMBER_OF_PROCESSORS% /cgthreads8 %__CNFC% %AVX% ^
 %CONFIGURE_OPENSSL%
 
 jom %JOM_OPTS% build_modules build_programs install_dev
