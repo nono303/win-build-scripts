@@ -50,5 +50,5 @@ if NOT "%2"=="svn" (
 	call %PATH_MODULES_COMMON%\init.bat mod_h2 varonly
 	for %%X in (mod_http2 mod_proxy_http2) do (call do_php %PATH_UTILS%\sub\version.php mod_h2 %PATH_INSTALL%\modules\%%X%mod_suffix% "httpd:%HTTPD_VERSION%")
 	call %PATH_MODULES_COMMON%\init.bat mod_wku_bt varonly
-	for %%X in (mod_backtrace mod_whatkilledus) do (call do_php %PATH_UTILS%\sub\version.php mod_wku_bt %PATH_INSTALL%\modules\%%X%mod_suffix% "httpd:%HTTPD_VERSION%")
+	for %%X in (mod_backtrace mod_whatkilledus mod_crash) do (call do_php %PATH_UTILS%\sub\version.php mod_wku_bt %PATH_INSTALL%\modules\%%X%mod_suffix% "httpd:%HTTPD_VERSION%")
 )
