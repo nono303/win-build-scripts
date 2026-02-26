@@ -15,7 +15,7 @@ call cl /nologo /c /DLUA_BUILD_AS_DLL /Fdliblua.pdb ^
 /cgthreads8 ^
 %AVX% ^
 /DNDEBUG ^
-/std:clatest ^
+/std:c%C_STD_VER% ^
 lapi.c ^
 lauxlib.c ^
 lbaselib.c ^
@@ -53,8 +53,8 @@ lzio.c
 
 ren lua.obj lua.o
 
-link /NOLOGO /LTCG /OPT:REF,ICF /DEBUG /DLL /IMPLIB:liblua.lib	/OUT:liblua.dll *.obj
-link /NOLOGO /LTCG /OPT:REF,ICF /DEBUG				/OUT:lua.exe lua.o liblua.lib
+link /NOLOGO /LTCG /OPT:REF,ICF /CGTHREADS:8 /machine:%ARCH% /DEBUG /DLL /IMPLIB:liblua.lib /OUT:liblua.dll *.obj
+link /NOLOGO /LTCG /OPT:REF,ICF /CGTHREADS:8 /machine:%ARCH% /DEBUG /OUT:lua.exe lua.o liblua.lib
 
 for %%X in (obj exp o) do (rm -fv *.%%X)
 
