@@ -38,14 +38,6 @@ sed -i 's/zlib_a/z/g' %CYGPATH_SRC%/php-src/configure.js
 	REM avif
 sed -i 's/avif.h/avif\/avif.h/g' %CYGPATH_SRC%/php-src/configure.js
 
-REM libs with STATIC deps
-
-	REM curl - add lib: cares 
-REM sed -i 's/libcurl_a.lib;libcurl.lib/libcurl.lib/g' %CYGPATH_SRC%/php-src/configure.js
-REM sed -i 's/EXTENSION("curl", "interface.c multi.c share.c curl_file.c");/EXTENSION("curl", "interface.c multi.c share.c curl_file.c"); CHECK_LIB("cares.lib", "curl", PHP_CURL);/g' %CYGPATH_SRC%/php-src/configure.js
-	REM freetype2 - add libs: bz2 et brotli
-REM sed -i -E 's/CHECK_LIB\("freetype_a.lib;freetype.lib", "gd", PHP_GD\) (..)/CHECK_LIB\("freetype.lib", "gd", PHP_GD\) \\1 CHECK_LIB\("bz2.lib", "gd", PHP_GD\) \1 CHECK_LIB\("brotlidec.lib", "gd", PHP_GD\) \1/g' %CYGPATH_SRC%/php-src/configure.js
-
 	REM ~~~~~~~~~~~~ export config options
 call configure --help > %PATH_LOGS%\configure_%PHPVER%.txt
 
