@@ -26,7 +26,7 @@ call %PATH_MODULES_COMMON%\init.bat %1%MOD_ZSTD_BRANCH% varonly
 cl.exe /nologo ^
 -IC:\sdk\release\vs18_x64-avx2\include ^
 /DWIN32 /DNDEBUG /D_WINDOWS ^
-/w /MD /Zi /Gw /Gy /Zc:inline /O2 /Ob3 /Zf /FS /GL /MP16 /cgthreads8 ^
+/w /MD /Zi /Gw /Gy /Zc:inline /O2 /Ob3 /Zf /FS /GL /MP%NUMBER_OF_PROCESSORS% /cgthreads8 ^
 %AVX% %__CNFC% ^
 -DLONG_NAME="mod_zstd for Apache HTTP Server" ^
 -DBIN_NAME=mod_zstd.so ^
@@ -39,7 +39,7 @@ link.exe /NOLOGO ^
 /out:%MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.so ^
 /implib:%MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.lib ^
 /pdb:%MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.pdb ^
-/dll /machine:x64 /DEBUG /LTCG /OPT:REF,ICF ^
+/dll /machine:%ARCH% /DEBUG /LTCG /OPT:REF,ICF ^
 C:\sdk\release\vs18_x64-avx2\lib\libzstd.lib ^
 C:\sdk\release\vs18_x64-avx2\lib\libhttpd.lib ^
 C:\sdk\release\vs18_x64-avx2\lib\libapr-1.lib ^
