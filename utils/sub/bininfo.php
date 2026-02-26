@@ -128,7 +128,7 @@
 			ksort($data[$cur],SORT_NUMERIC);
 			foreach($data[$cur] as $k => $v)
 				if($col[$k]["pad"] != -1)
-					echo str_pad($v,$col[$k]["pad"]+ (is_int(strpos($v ?: "","\033")) ? 10 : 0)," ");
+					echo str_pad($v ?: "",$col[$k]["pad"]+ (is_int(strpos($v ?: "","\033")) ? 10 : 0)," ");
 			echo PHP_EOL;
 			$cur++;
 		}
