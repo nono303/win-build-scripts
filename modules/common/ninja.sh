@@ -1,10 +1,10 @@
 avx=$(echo $1| sed 's#/#\\/#g')
-# LINK FLAGS (dll exe) (LINK_FLAGS with debug)
+# LINK FLAGS (dll exe) (LINK_FLAGS with debug for PDB generation)
 sed -i -E 's/LINK_FLAGS =(.*) \/INCREMENTAL[^ ]*(.*)/LINK_FLAGS =\1\2/gI' $2/build.ninja
 sed -i -E 's/LINK_FLAGS =(.*) \/WX(.*)/LINK_FLAGS =\1\2/gI' $2/build.ninja
-sed -i -E 's/LINK_FLAGS =(.*)\/machine:(...)(.*)\/debug(.*)/LINK_FLAGS =\1\/machine:\2 \/DEBUG\3\/NOLOGO \/LTCG \/OPT:REF,ICF\4/gI' $2/build.ninja
+sed -i -E 's/LINK_FLAGS =(.*)\/machine:(...)(.*)\/debug(.*)/LINK_FLAGS =\1\/machine:\2 \/DEBUG\3\/NOLOGO \/LTCG \/OPT:REF,ICF \/CGTHREADS:8/gI' $2/build.ninja
 # LINK FLAGS (lib)
-sed -i -E 's/LINK_FLAGS = \/machine:(...)/LINK_FLAGS = \/LTCG \/machine:\1/gI' $2/build.ninja
+sed -i -E 's/LINK_FLAGS = \/machine:(...)/LINK_FLAGS = \/LTCG \/machine:\1 \/CGTHREADS:8/gI' $2/build.ninja
 sed -i 's/\/INCREMENTAL //g' $2/build.ninja
 # RC FLAGS
 sed -i 's/FLAGS = -DWIN32/FLAGS = -DWIN32 -nologo/gI' $2/build.ninja
