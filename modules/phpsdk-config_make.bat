@@ -60,7 +60,7 @@ set CONFIGURE_COMMON=^
 	--disable-phpdbgs ^
 	--disable-security-flags ^
 	--enable-debug-pack ^
-	--enable-fd-setsize=2048 ^
+	--enable-fd-setsize=4096 ^
 	--enable-object-out-dir=../build/ ^
 	--with-toolset=vs ^
 	--with-cygwin=%PATH_BIN_CYGWIN% ^
@@ -143,22 +143,24 @@ echo %FINAL_CONFIGURE% | grep -o '\S\+' > %PATH_LOGS%\%PREFIXLOG%_%MSVC_DEPS%-%P
 call configure %FINAL_CONFIGURE%
 
 	REM ARFLAGS
-sed -i 's/ARFLAGS=\/nologo/ARFLAGS=\/nologo \/LTCG/g' %CYGPATH_SRC%/php-src/Makefile
+sed -i 's/ARFLAGS=\/nologo/ARFLAGS=\/nologo \/LTCG \/CGTHREADS:8/g' %CYGPATH_SRC%/php-src/Makefile
 	REM LDFLAGS 
 	REM	/NODEFAULTLIB:libcmt.lib	for freetype2
-	REM	/SAFESEH:NO			https://github.com/php/php-src/issues/15709#issuecomment-2522477075
-sed -i -E 's/incremental:no/incremental:no \/LTCG \/NODEFAULTLIB:libcmt.lib/g' %CYGPATH_SRC%/php-src/Makefile
+sed -i -E 's/incremental:no/incremental:no \/LTCG \/NODEFAULTLIB:libcmt.lib \/CGTHREADS:8/g' %CYGPATH_SRC%/php-src/Makefile
 	REM CFLAGS
-sed -i 's/\/Ox/\/std:c++latest \/O2 \/Ob3 \/MP%NUMBER_OF_PROCESSORS% \/cgthreads8 \/GL \/Zf \/Gy \/FS \/D PHP_ICONV_PREFIX=%PATH_INSTALL:\=\/%/g' %CYGPATH_SRC%/php-src/Makefile
+		REM only C++ and not C 
+			REM Both not compatible	https://developercommunity.visualstudio.com/t/C-and-C-standard-options-should-not-be/1289751
+			REM C++ required:	C:\sdk\release\vs18_x64-avx2\include\unicode/uversion.h(183): error C2429: language feature 'nested-namespace-definition' requires compiler flag '/std:c++17'
+sed -i 's/\/Ox/\/std:c++%C_STD_VER% \/O2 \/Ob3 \/cgthreads8 \/GL \/Zf \/Gy \/FS \/D PHP_ICONV_PREFIX=%PATH_INSTALL:\=\/%/g' %CYGPATH_SRC%/php-src/Makefile
 	REM no warn
 sed -i 's/d4996//g' %CYGPATH_SRC%/php-src/Makefile
 	REM fix for iconv shared : LINK : fatal error LNK1181: cannot open input file 'php_iconv.lib'
 sed -i -E 's/LIBS_LIBXML=(.*)php_iconv.lib(.*)/LIBS_LIBXML=\\1\\2/g' %CYGPATH_SRC%/php-src/Makefile
 
-	REM after sed:
-REM LDFLAGS=/nologo /incremental:no /LTCG /NODEFAULTLIB:libcmt.lib /SAFESEH:NO /debug /opt:ref,icf
-REM ARFLAGS=/nologo /LTCG
-REM CFLAGS=/nologo /D _WINDOWS /D WINDOWS=1 /D ZEND_WIN32=1 /D PHP_WIN32=1 /D WIN32 /D _MBCS /D _USE_MATH_DEFINES /FD /w /Zc:inline /Gw /Zc:__cplusplus /d2FuncCache1 /Zc:wchar_t /MP16 /Zi /LD /MD /std:c++latest /O2 /Ob3 /MP16 /cgthreads8 /GL /Zf /Gy /FS /D NDebug /D NDEBUG /GF /D ZEND_DEBUG=0 /D FD_SETSIZE=2048 /arch:AVX2 
+	REM after sed in /php-src/Makefile
+REM l:81	CFLAGS=/nologo /D _WINDOWS /D WINDOWS=1 /D ZEND_WIN32=1 /D PHP_WIN32=1 /D WIN32 /D _MBCS /D _USE_MATH_DEFINES /FD /wd4995 /w /Zc:inline /Gw /Zc:__cplusplus /d2FuncCache1 /Zc:preprocessor /Zc:wchar_t /DENABLE_INTSAFE_SIGNED_FUNCTIONS /MP16 /Zi /MD /std:c++latest /O2 /Ob3 /MP16 /cgthreads8 /GL /Zf /Gy /FS /D PHP_ICONV_PREFIX=C:/sdk/release/vs18_x64-avx2 /D NDebug /D NDEBUG /GF /D ZEND_DEBUG=0 /D ZTS=1 /D FD_SETSIZE=4096 /arch:AVX2
+REM l:587	LDFLAGS=/nologo /d2:-AllowCompatibleILVersions /incremental:no /LTCG /NODEFAULTLIB:libcmt.lib /CGTHREADS:8 /debug /opt:ref,icf
+REM l:589	ARFLAGS=/nologo /LTCG /CGTHREADS:8
 
 nmake %NMAKE_OPTS%
 
