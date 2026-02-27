@@ -26,8 +26,7 @@
 	$std = (array_key_exists(7,$argv) && $argv[7] == "nostd") ? "" :
 		"<LanguageStandard>stdcpplatest</LanguageStandard><LanguageStandard_C>stdclatest</LanguageStandard_C>";
 	$linklib =
-		"<AdditionalOptions>/CGTHREADS:8 %(AdditionalOptions)</AdditionalOptions>
-		<TargetMachine>MachineX64</TargetMachine>";
+		"<TargetMachine>MachineX64</TargetMachine>";
 
 	$removes = [
 		/* Task */		"CodeAnalysisRuleSet",
@@ -61,6 +60,7 @@
 				<EnableCOMDATFolding>true</EnableCOMDATFolding>
 				<OptimizeReferences>true</OptimizeReferences>
 				<GenerateDebugInformation>true</GenerateDebugInformation>
+				<AdditionalOptions>/CGTHREADS:8 %(AdditionalOptions)</AdditionalOptions>
 			</Link>",
 		/* Lib */
 			"<\/Lib>" => $linklib.
