@@ -6,7 +6,7 @@
 | [brotli](https://github.com/google/brotli) | 1.2.0 |
 | [bzip2](https://gitlab.com/bzip2/bzip2) | 1.1.0 - 66c46b8 |
 | [cares](https://github.com/c-ares/c-ares) | 1.34.6 |
-| [curl](https://github.com/curl/curl) | 8.19.0-rc1 |
+| [curl](https://github.com/curl/curl) | 8.19.0-rc2 |
 | [dav1d](https://code.videolan.org/videolan/dav1d) | 1.5.3 |
 | [dependencies](https://github.com/himeshsameera/Dependencies) | 2.2.0 - c205928 |
 | [fit2gpx](https://github.com/nono303/fit2gpx) - [*upstream + src*](https://github.com/MaksVasilev/fit2gpx) | 0.1.24 - a541814 |
@@ -35,7 +35,7 @@
 | [libiconv](https://github.com/kiyolee/libiconv-win-build) | 1.18-p1 |
 | [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) | 3.1.3 |
 | [liblzma](https://github.com/ShiftMediaProject/liblzma) | 5.8.2 |
-| [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.12.2 |
+| [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.13.2 |
 | [libpng](https://sourceforge.net/p/libpng/code/ci/master/tree/) | 1.6.55 |
 | [libsodium](https://github.com/jedisct1/libsodium) | 1.0.21.0 - 3d9d8f50 |
 | [libssh2](https://github.com/libssh2/libssh2) | 1.11.1 |
@@ -58,22 +58,22 @@
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.3.0 - ec0630f |
 | [mod_md](https://github.com/icing/mod_md) | 2.6.8 |
-| [mod_qos](https://sourceforge.net/p/mod-qos/source/HEAD/tree/trunk/httpd_src/modules/qos/) | 11.76 r2724 |
+| [mod_qos](https://sourceforge.net/p/mod-qos/source/HEAD/tree/trunk/httpd_src/modules/qos/) | 11.78 r2736 |
 | [mod_security](https://github.com/SpiderLabs/ModSecurity) | 2.9.12 |
 | [mod_security-sdbm-util](https://github.com/nono303/modsec-sdbm-util) - _[upstream + src](https://github.com/SpiderLabs/modsec-sdbm-util)_ | 1.1.0 |
-| [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) - _[src1](https://emptyhammock.com/media/downloads/wku_bt-2.01.zip)_- _[src2](https://github.com/nono303/mod_whatkilledus)_ | 2.0.2 - d1ec56b |
+| [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) - _[src1](https://emptyhammock.com/media/downloads/wku_bt-2.01.zip)_- _[src2](https://github.com/nono303/mod_whatkilledus)_ | 2.0.2 - 6d79721 |
 | [mod_zstd](https://github.com/nono303/mod_zstd) | 1.0.3 |
 | [mpir](https://github.com/BrianGladman/mpir) | 3.0.0 - 82a66ee7 |
 | [nghttp2](https://github.com/nghttp2/nghttp2) | 1.68.0 |
 | [nghttp3](https://github.com/ngtcp2/nghttp3) | 1.15.0 |
-| [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 1.20.0 |
+| [ngtcp2](https://github.com/ngtcp2/ngtcp2) | 1.21.0 |
 | [nssm](https://github.com/puppetlabs/nssm) | 2.25 - e627816 |
 | [openssl](https://github.com/openssl/openssl) | 3.6.1 |
 | [pcre2](https://github.com/PCRE2Project/pcre2) | 10.47 |
 | [pecl-datetime-timezonedb](https://github.com/php/pecl-datetime-timezonedb) | 2025.3 |
 | [pecl-igbinary](https://github.com/igbinary/igbinary) | 3.2.17-rc1 - edda710 |
 | [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | 8.2 - ac8e8c5 |
-| [pecl-parallel](https://github.com/krakjoe/parallel) | 1.2.11 |
+| [pecl-parallel](https://github.com/krakjoe/parallel) | :red_circle: [~~1.2.11~~](https://github.com/krakjoe/parallel/issues/369) 1.2.10 |
 | [pecl-system-sync](https://github.com/php/pecl-system-sync) | 1.1.3 |
 | [pecl-text-xdiff](https://github.com/php/pecl-text-xdiff) | 2.1.1 |
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.18.3 - 4924acc |
@@ -82,7 +82,7 @@
 | [php-ogr](https://github.com/nono303/php-ogr) - *[upstream + src](https://github.com/dvzgeo/php_ogr)* | 1.7.0 - db7aa8b |
 | [php-proj](https://github.com/swen100/phpng-proj) | 3.0.3 |
 | [php-sdk](https://github.com/php/php-sdk-binary-tools) | 2.6.0 |
-| [php-src](https://github.com/php/php-src) | 8.5.3 |
+| [php-src](https://github.com/php/php-src) | 8.5.4-rc1 |
 | [proj](https://github.com/OSGeo/PROJ) | 9.7.1 |
 | [proxytunnel](https://github.com/proxytunnel/proxytunnel) | 1.12.3 - 320ad4b |
 | [pthread-win32](https://github.com/GerHobbelt/pthread-win32) | 3.0.3.1 - c66d2aa |

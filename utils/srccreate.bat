@@ -34,7 +34,7 @@ git checkout tags/v1.34.6
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/rc-8_19_0-1
+git checkout tags/rc-8_19_0-2
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -150,7 +150,7 @@ git checkout tags/v5.8.2
 cd /D ..
 git clone https://github.com/maxmind/libmaxminddb.git libmaxminddb
 cd /D libmaxminddb
-git checkout tags/1.12.2
+git checkout tags/1.13.2
 cd /D ..
 git clone git://git.code.sf.net/p/libpng/code libpng
 cd /D libpng
@@ -274,7 +274,7 @@ git checkout tags/v1.15.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v1.20.0
+git checkout tags/v1.21.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -302,7 +302,7 @@ git checkout main
 cd /D ..
 git clone https://github.com/krakjoe/parallel.git pecl-parallel
 cd /D pecl-parallel
-git checkout tags/v1.2.11
+git checkout tags/v1.2.10
 cd /D ..
 git clone https://github.com/php/pecl-system-sync pecl-system-sync
 cd /D pecl-system-sync
@@ -338,7 +338,7 @@ git checkout tags/php-sdk-2.6.0
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.5.3
+git checkout tags/php-8.5.4RC1
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
@@ -358,7 +358,7 @@ git checkout tags/v8.1-alpha6
 cd /D ..
 git clone https://github.com/nono303/simpleDLNA.git sdlna
 cd /D sdlna
-git checkout tags/1.3.4
+git checkout master
 cd /D ..
 git clone https://github.com/apache/serf.git serf
 cd /D serf

@@ -54,7 +54,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2026](https://aka.ms/vs/18/Stable/vs_community.exe) |      | 18.3.1 (14.50, 14.44) | `.vsconfig`         |
+| [Visual Studio 2026](https://aka.ms/vs/18/Stable/vs_community.exe) |      | 18.3.2 (14.50, 14.44) | `.vsconfig`         |
 | :bookmark: [Microsoft Visual C++ Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170) | x64 & x86 | 14.50.35719 |  |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.7.0 | `cyg64.packagelist` |
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.14.3 |                     |
