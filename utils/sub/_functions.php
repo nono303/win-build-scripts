@@ -53,12 +53,12 @@
 			// echo "command returned $return_value\n";
 			return trim($out);
 		}
-		return null;		
+		return null;
 	}
 
 	function getLastModifiedFile($dir){
 		foreach (scandir($dir) as $file) {
-			if ($file == '.' || $file == '..' || is_dir($dir.'/'.$file)) 
+			if ($file == '.' || $file == '..' || is_dir($dir.'/'.$file))
 				continue;
 			if (is_file($dir.'/'.$file) && is_int(strpos($file,".log"))) {
 				if (filemtime($dir.'/'.$file) > $mdate) {
@@ -75,5 +75,34 @@
 		$dtT = new \DateTime("@$seconds");
 		// return $dtF->diff($dtT)->format('%a days, %h hours, %i minutes and %s seconds');
 		return $dtF->diff($dtT)->format('%a');
+	}
+
+	function getGitBranchAtCommit($commit, $repo){
+		preg_match("/HEAD ->(.*)\n/m",$res = execnono($cmd = "git branch -a --contains ".$commit." | grep -v detached", NULL, $repo, NULL), $matches);
+		if($matches[1]) {
+			$branch = $matches[1];
+		} else {
+			preg_match("/^\* (.*)/m",$res,$matches);
+			if($matches[1]) {
+				$branch = trim($matches[1]);
+			} else {
+				$allb = array_filter(explode("\n",$res));
+				if(sizeof($allb) == 0){
+					$branch = $allb[0];
+				} elseif(sizeof($allb) == 1){
+					$branch = $allb[0];
+				} else {
+					// print_r($allb);
+					// arbitraire
+					$branch = end($allb);
+				}
+			}
+		}
+		$branch ?
+			$branch = end(explode("/",$branch)) :
+			$branch = "";
+		if(is_int(strpos($branch,"no branch")))
+			$branch = "";
+		return $branch;
 	}
 ?>
