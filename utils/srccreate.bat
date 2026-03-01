@@ -34,7 +34,7 @@ git checkout tags/v1.34.6
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/rc-8_19_0-2
+git checkout tags/rc-8_19_0-3
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -54,7 +54,7 @@ git checkout tags/v3.8.0
 cd /D ..
 git clone https://gitlab.freedesktop.org/freetype/freetype.git freetype2
 cd /D freetype2
-git checkout tags/VER-2-14-1
+git checkout tags/VER-2-14-2
 cd /D ..
 git clone https://github.com/OSGeo/gdal gdal
 cd /D gdal
@@ -104,7 +104,7 @@ git clone https://github.com/ebiggers/libdeflate.git libdeflate
 cd /D libdeflate
 git checkout tags/v1.25
 cd /D ..
-git clone https://git.lighttpd.net/mirrors/libev.git libev
+git clone https://git.lighttpd.net/libev.git libev
 cd /D libev
 git checkout master
 cd /D ..
@@ -322,7 +322,7 @@ git checkout tags/0.15.2
 cd /D ..
 git clone https://github.com/nono303/php-geos.git php-geos
 cd /D php-geos
-git checkout master
+git checkout tags/1.0.1.2
 cd /D ..
 git clone https://github.com/nono303/php-ogr php-ogr
 cd /D php-ogr
@@ -356,6 +356,10 @@ git clone https://github.com/qhull/qhull qhull
 cd /D qhull
 git checkout tags/v8.1-alpha6
 cd /D ..
+git clone https://github.com/stax76/run-hidden.git run-hidden
+cd /D run-hidden
+git checkout master
+cd /D ..
 git clone https://github.com/nono303/simpleDLNA.git sdlna
 cd /D sdlna
 git checkout master
@@ -382,7 +386,7 @@ git checkout next
 cd /D ..
 git clone https://github.com/nono303/tzdataservice.git tzdataservice
 cd /D tzdataservice
-git checkout master
+git checkout tags/2.1
 cd /D ..
 git clone https://github.com/pavel-a/ddverpatch verpatch
 cd /D verpatch

@@ -171,7 +171,16 @@
 				unset($ret["scm"]["ltag"]);
 			}
 
-		} // TODO SVN
+		} elseif (is_dir(PATH_SRC."/".$src."/.svn")){
+			$ret["scm"]["name"] = "svn";
+			$svninfo = execnono($cmd = "svn info",NULL,realpath(PATH_SRC."/".$src),NULL);
+			preg_match("/Repository Root: ?(.*)\n/",$svninfo,$matches);
+			$ret["scm"]["urls"][REMOTE_URLS[0]] = trim($matches[1]);
+			preg_match("/Relative URL: \^\/(.*)\n/",$svninfo,$matches);
+			$ret["scm"]["branch"] = explode("/",trim($matches[1]))[0];
+			preg_match("/Revision: (.*)\n/",$svninfo,$matches);
+			$ret["scm"]["commit"] = "r".trim($matches[1]); // prefixe r for revision
+		}
 
 		// some verbose check
 		if($verbose) {
@@ -261,7 +270,7 @@
 	// default: return product
 	if(sizeof($argv) == 2) {
 		$ret = getVersion($argv[1], true);
-		print_r($ret);
+		// print_r($ret);
 		echo $ret["product"];
 	} elseif(sizeof($argv) >= 3){
 		if(is_dir($cur = PATH_SRC)."/".$argv[1]){

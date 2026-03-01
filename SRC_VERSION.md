@@ -6,12 +6,12 @@
 | [brotli](https://github.com/google/brotli) | 1.2.0 |
 | [bzip2](https://gitlab.com/bzip2/bzip2) | 1.1.0 - 66c46b8 |
 | [cares](https://github.com/c-ares/c-ares) | 1.34.6 |
-| [curl](https://github.com/curl/curl) | 8.19.0.2 |
+| [curl](https://github.com/curl/curl) | 8.19.0.3 |
 | [dav1d](https://code.videolan.org/videolan/dav1d) | 1.5.3 |
 | [dependencies](https://github.com/himeshsameera/Dependencies) | 2.2.0.11 - c205928 |
 | [fit2gpx](https://github.com/nono303/fit2gpx) - [*upstream + src*](https://github.com/MaksVasilev/fit2gpx) | 0.1.24.9 - a541814 |
 | [freeglut](https://github.com/dcnieho/FreeGLUT) | 3.8.0 |
-| [freetype2](https://gitlab.freedesktop.org/freetype/freetype) | 2.14.1 |
+| [freetype2](https://gitlab.freedesktop.org/freetype/freetype) | 2.14.2 |
 | [gdal](https://github.com/OSGeo/gdal) | 3.12.2 |
 | [geographiclib](https://github.com/geographiclib/geographiclib) | 2.7 |
 | [geos](https://github.com/libgeos/geos) | 3.14.1 |
@@ -58,7 +58,7 @@
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.3.0.65 - 3067d08 |
 | [mod_md](https://github.com/icing/mod_md) | 2.6.8 |
-| mod_qos | 11.78 -  |
+| [mod_qos](https://svn.code.sf.net/p/mod-qos/source) | 11.78 - 2738 |
 | [mod_security](https://github.com/SpiderLabs/ModSecurity) | 2.9.12 |
 | [mod_security-sdbm-util](https://github.com/nono303/modsec-sdbm-util) - [*upstream + src*](https://github.com/SpiderLabs/modsec-sdbm-util) | 1.1.0 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) - _[src1](https://emptyhammock.com/media/downloads/wku_bt-2.01.zip)_ | 2.0.2 |
@@ -91,7 +91,7 @@
 | [sdlna](https://github.com/nono303/simpleDLNA) - [*upstream + src*](https://github.com/nmaier/simpleDLNA) | 1.3.4.2 - 8c19a9c |
 | [serf](https://github.com/apache/serf) | 2.0.0 - 7e98c4d |
 | [sqlite](https://github.com/rhuijben/sqlite-amalgamation) - _[release](https://www.sqlite.org/changes.html)_ | 3.51.2 |
-| [sslh](https://github.com/yrutschle/sslh) | 2.3.0.12 - e2d01a7 |
+| [sslh](https://github.com/yrutschle/sslh) | 2.3.0.13 - 579baae |
 | [subversion](https://github.com/apache/subversion) | 1.16.0 - d8f58fdef6 |
 | [tidy](https://github.com/htacg/tidy-html5) | 5.9.20 - d08ddc2 |
 | [tzdataservice](https://github.com/nono303/tzdataservice) - [*upstream + src*](https://github.com/skaringa/tzdataservice) | 2.1 |
