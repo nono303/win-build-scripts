@@ -220,38 +220,36 @@
 			str_pad("commit", DEBUG_PAD).
 			str_pad("branch", DEBUG_PAD).
 			PHP_EOL;
-		foreach(scandir($cur = PATH_SRC) as $src) {
-			if(is_dir($cur."/".$src) & $src != "." && $src != ".."){
-				try {
-					$ret = getVersion($src, true);
-					$md .=
-						"| ".
-						($ret["scm"]["urls"]["origin"] ?
-							"[".$src."](".($ret["scm"]["urls"]["origin"]).")" :
-							$src).
-						($ret["scm"]["urls"]["upstream"] ?
-							" - [*upstream + src*](".($ret["scm"]["urls"]["upstream"]).")" :
-							"").
-						($addon["src"][$src] ? " ".$addon["src"][$src] : "").
-						" | ".$ret["product"].
-						(!str_ends_with($ret["from"], " tag") ?
-							" - ".$ret["scm"]["commit"] :
-							""
-							).
-						($addon["version"][$src] ? " ".$addon["version"][$src] : "").
-						" |".
-						PHP_EOL;
-				} catch(Exception $e){
-					echo PHP_EOL."! ".$e->getMessage();
-					$ret["product"] = "";
-					$md .= "| ".$src." | N/A |".PHP_EOL;
-				}
-				echo PHP_EOL;
+		foreach(glob(($cur = PATH_SRC)."/*",GLOB_ONLYDIR) as $srcpath) {
+			$src = basename($srcpath);
+			try {
+				$ret = getVersion($src, true);
+				$md .=
+					"| ".
+					($ret["scm"]["urls"]["origin"] ?
+						"[".$src."](".($ret["scm"]["urls"]["origin"]).")" :
+						$src).
+					($ret["scm"]["urls"]["upstream"] ?
+						" - [*upstream + src*](".($ret["scm"]["urls"]["upstream"]).")" :
+						"").
+					($addon["src"][$src] ? " ".$addon["src"][$src] : "").
+					" | ".$ret["product"].
+					(!str_ends_with($ret["from"], " tag") ?
+						" - ".$ret["scm"]["commit"] :
+						""
+						).
+					($addon["version"][$src] ? " ".$addon["version"][$src] : "").
+					" |".
+					PHP_EOL;
+			} catch(Exception $e){
+				echo PHP_EOL."! ".$e->getMessage();
+				$ret["product"] = "";
+				$md = "| ".$src." | `".$e->getMessage()."` |".PHP_EOL;
 			}
+			echo PHP_EOL;
 		}
-		file_put_contents($fn = dirname(__FILE__) . '/../../SRC_VERSION-gen.md',$md);
-		echo "> ".realpath($fn);
-		exit(0);
+		file_put_contents($fn = pathenv("PATH_BATCH").'/SRC_VERSION.md',$md);
+		echo PHP_EOL."> ".realpath($fn).exit(0);
 	} else {
 		$proot = $argv[1] = strtolower($argv[1]);
 		if(in_array($proot,["mod_bikeshed","mod_evasive","mod_fcgid","mod_h2","mod_h264_streaming","mod_maxminddb","mod_md","mod_qos","mod_security","mod_wku_bt","mod_zstd"]))

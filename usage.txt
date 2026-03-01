@@ -94,45 +94,45 @@ Usage: go command [options]
  + standalone httpd module
   * mod_fcgid
 - build full:
-    no param:    build ALL modules in the order listed above
-    _xx_anddeps: build ONLY _xx_ and all submodule required for _xx_ {httpdanddeps, phpanddeps, projgeolibanddeps}
-    module :     build FROM module in the order listed above
+  no param:    build ALL modules in the order listed above
+  _xx_anddeps: build ONLY _xx_ and all submodule required for _xx_ {httpdanddeps, phpanddeps, projgeolibanddeps}
+  module :     build FROM module in the order listed above
 - build options:
-    all:     build 'command' for all target combinations (vs17, vs18 / x64 / sse2, avx, avx2)
-    nolog:   don't tee stderr & stdout to a logfile in %PATH_LOGS% (...and show console colors)
-    verbose: disable all batch echo off and silent build option
-    keepsrc: don't clean, reset and potentially apply patch in src dir
-    cmopts:  stdout and logfile in %PATH_LOGS%/cmopts of cmake options set, not set or unknonw for cmake projects
+  all:     build 'command' for all target combinations (vs17, vs18 / x64 / sse2, avx, avx2)
+  nolog:   don't tee stderr & stdout to a logfile in %PATH_LOGS% (...and show console colors)
+  verbose: disable all batch echo off and silent build option
+  keepsrc: don't clean, reset and potentially apply patch in src dir
+  cmopts:  stdout and logfile in %PATH_LOGS%/cmopts of cmake options set, not set or unknonw for cmake projects
 ---------------------------
 - util command:
   * logcheck: check logfile(s) in to find 'strange' (warn, error, fatal...) loglines
     > param: MUST HAVE ONE OF THEM
-        full:           check all logfiles present in %PATH_LOGS%
-	last:           check last logfile present in %PATH_LOGS%
-	<filename.log>: check specified logfile if present in %PATH_LOGS%
+      full:           check all logfiles present in %PATH_LOGS%
+      last:           check last logfile present in %PATH_LOGS%
+      <filename.log>: check specified logfile if present in %PATH_LOGS%
   * srcstatus: get status (tag, revision, branch, commit behind...) of all src dir present in %PATH_SRC%, fetch remote scm and export a summarized csv file in %PATH_LOGS%
-               update srccreate with current your state
+    update srccreate with current your state
     > option:
-        gitcg:   do a GIT garbage collector on all git scm
-	nofetch: don't fetch remote
-	verbose: display all scm commands
+      gitcg:   do a GIT garbage collector on all git scm
+      nofetch: don't fetch remote
+      verbose: display all scm commands
   * srccreate: git clone & svn co all required src into %PATH_SRC% defined in env.bat
   * libcheck: check all librairies released (lib) have a pdb file
-    > param: a path to check
+    > param:  a path to check
   * bininfo: check all binaries released (exe dll so) for datetime, MSVC version, architecture and option, 'StringFileInfo' embedded and export a summarized csv file in %PATH_LOGS%
     > param: a path or a file to check
     > option:
-        checkavx: test cpu instruction to check if AVX are present (slow)
-	recurse:  check subdir
-	ext:[ex1-ex2...]: by default, bininfo check *.exe *.dll *.so. you can override (extend or restric) these extensions with a dash (-) separated list (without space) of extension to be checked. ex. ext:exe,dll
-	nb:[int]: number of file that must be present (and not only checked) in path param. can't be used with a file in param or recurse option
+      checkavx: test cpu instruction to check if AVX are present (slow)
+      recurse:  check subdir
+      ext:[ex1-ex2...]: by default, bininfo check *.exe *.dll *.so. you can override (extend or restric) these extensions with a dash (-) separated list (without space) of extension to be checked. ex. ext:exe,dll
+      nb:[int]: number of file that must be present (and not only checked) in path param. can't be used with a file in param or recurse option
   * version: 
-      no param: output and write csv file in %PATH_LOG% of current normalized version of each module present in %PATH_SRC%  
-      > param: module name to get version
-      > option: EXCLUSIVE - ONLY IF PARAM MODULE IS PRESENT
-        veronly:   return the module version in format x.x.x.x
-	<binfile>: write version information (verpatch) into the specified full path <binfile>
+    no param: output and write SRC_VERSION.md in %PATH_BATCH% of current normalized version of each module present in %PATH_SRC%  
+    > param:  module name to get version
+    > option: EXCLUSIVE - ONLY IF PARAM MODULE IS PRESENT
+      veronly:   return the module version in format x.x.x.x
+      <binfile>: write version information (verpatch) into the specified full path <binfile>
   * configexport: export cygwin and MSVS config to %PATH_BATCH%\config. 
-                  import .vsconfg for MSVS 
-		  use setup.exe -P `awk 'NR==1{printf \$1}{printf ",%s", \$1}' cyg_XX_.packagelist` for cygwin (where _XX_ is 32 or 64...)
+    import .vsconfg for MSVS 
+    use setup.exe -P `awk 'NR==1{printf \$1}{printf ",%s", \$1}' cyg_XX_.packagelist` for cygwin (where _XX_ is 32 or 64...)
 ---------------------------
