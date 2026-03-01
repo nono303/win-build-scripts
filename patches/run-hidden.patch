@@ -1,0 +1,13 @@
+diff --git a/run-hidden.vcxproj b/run-hidden.vcxproj
+index d28f15c..5447542 100644
+--- a/run-hidden.vcxproj
++++ b/run-hidden.vcxproj
+@@ -75,7 +75,7 @@
+     <IntDir>$(ShortProjectName)\$(Configuration)\$(Platform)\</IntDir>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Platform)'=='x64'">
+-    <TargetName>$(ProjectName)64</TargetName>
++    <TargetName>$(ProjectName)</TargetName>
+   </PropertyGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+     <ClCompile>

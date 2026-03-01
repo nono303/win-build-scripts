@@ -1,8 +1,9 @@
 <?php
 	const FORMAT_XML = false;
 /*
-		enabled:  dependencies icu jemalloc libiconv libsodium nssm subversion verpatch mpir
+		enabled:  dependencies icu jemalloc libiconv libsodium nssm subversion verpatch mpir run-hidden
 		disabled: libxpm
+		useless: sdnla
 */
 	# https://stackoverflow.com/a/54325258
 	function rsearch($folder, $pattern) {

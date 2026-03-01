@@ -1,11 +1,11 @@
 @echo off && call %PATH_MODULES_COMMON%\init.bat %1
-echo.
-echo ###############################################
-echo #  !! git disabled !! no version no copie !!  #
-echo # https://github.com/MolotovCherry/run-hidden #
-echo ###############################################
-echo.
+
+if %ARG_KEEPSRC% == 0 (call do_php %PATH_MODULES_COMMON%/msbuild.php "%PATH_SRC%/%1/" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%)
+
+set OUTDIR_CONF=Release
+
 MSBuild.exe run-hidden.sln %MSBUILD_OPTS% ^
-/p:Configuration=Release ^
+/p:Configuration=%OUTDIR_CONF% ^
 /p:Platform="%archmsbuild%"
-echo.
+
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_SRC%\%1\%OUTDIR_CONF%\%archmsbuild%\%1.exe
