@@ -1,7 +1,16 @@
 <?php
 	include( dirname(__FILE__) . '/_functions.php');
-	DEFINE("PAD",35);
+
+	const PAD = 35;
 	$afftype = ["pdb" => "STATIC","dll" => "SHARED"];
+
+	// arg to const
+	foreach([
+		"DEBUG"			=> "verbose",
+	] as $def => $argin) {
+		define($def, in_array($argin, $argv) ? true : false);
+		debug(str_pad($def.": ",12).(constant($def) ? "ON" : "OFF"));
+	}
 
 	if(is_dir($argv[1] = str_replace("\\","/",$argv[1]))){
 		echo ">>>>>> ".$argv[1]." <<<<<<".PHP_EOL;
@@ -17,7 +26,7 @@
 				$ret = explode(":",$entry);
 				if(!is_array($final[$k][$libname = end(explode("/",$ret[0]))]))
 					$final[$k][$libname] = [];
-				if(!in_array($value = str_replace("-Fd","",$ret[2]),$final[$k][$libname = end(explode("/",$ret[0]))])) 
+				if(!in_array($value = str_replace("-Fd","",$ret[2]),$final[$k][$libname = end(explode("/",$ret[0]))]))
 					array_push($final[$k][$libname],$value);
 			}
 			if(is_array($final[$k])){
@@ -50,8 +59,8 @@
 				}
 			}
 			if(
-				sizeof($pdbordlllist[$k]) > 0 
-				&& ($k == "dll" && !is_int(strpos($argv[1],pathenv("DIR_LIB_STATIC")))) 
+				sizeof($pdbordlllist[$k]) > 0
+				&& ($k == "dll" && !is_int(strpos($argv[1],pathenv("DIR_LIB_STATIC"))))
 			) {
 				echo "\033[96m# ".strtoupper($k)." WITH NO LIB\033[39m".PHP_EOL;
 				foreach($pdbordlllist[$k] as $unused)
