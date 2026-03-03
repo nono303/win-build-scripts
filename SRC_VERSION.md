@@ -58,7 +58,7 @@
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
 | [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.3.0.65 - 3067d08 |
 | [mod_md](https://github.com/icing/mod_md) | 2.6.8 |
-| [mod_qos](https://svn.code.sf.net/p/mod-qos/source) | 11.78 - 2738 |
+| [mod_qos](https://svn.code.sf.net/p/mod-qos/source) | 11.78 - 2736 |
 | [mod_security](https://github.com/SpiderLabs/ModSecurity) | 2.9.12 |
 | [mod_security-sdbm-util](https://github.com/nono303/modsec-sdbm-util) - [*upstream + src*](https://github.com/SpiderLabs/modsec-sdbm-util) | 1.1.0 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) - _[src1](https://emptyhammock.com/media/downloads/wku_bt-2.01.zip)_ | 2.0.2 |
@@ -70,7 +70,7 @@
 | [nssm](https://github.com/puppetlabs/nssm) | 2.25.0 - e627816 |
 | [openssl](https://github.com/openssl/openssl) | 3.6.1 |
 | [pcre2](https://github.com/PCRE2Project/pcre2) | 10.47 |
-| [pecl-datetime-timezonedb](https://github.com/php/pecl-datetime-timezonedb) | 2025.3 |
+| [pecl-datetime-timezonedb](https://github.com/php/pecl-datetime-timezonedb) | 2026.1 |
 | [pecl-igbinary](https://github.com/igbinary/igbinary) | 3.2.17.1 |
 | [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | 8.2 - ac8e8c5 |
 | [pecl-parallel](https://github.com/krakjoe/parallel) | 1.2.10 :red_circle: [~~1.2.11~~](https://github.com/krakjoe/parallel/issues/369) |
@@ -83,7 +83,7 @@
 | [php-proj](https://github.com/swen100/phpng-proj) | 3.0.3 |
 | [php-sdk](https://github.com/php/php-sdk-binary-tools) | 2.6.0 |
 | [php-src](https://github.com/php/php-src) | 8.5.4.1 |
-| [proj](https://github.com/OSGeo/PROJ) | 9.7.1 |
+| [proj](https://github.com/OSGeo/PROJ) | 9.8.0 |
 | [proxytunnel](https://github.com/proxytunnel/proxytunnel) | 1.12.3.23 - 7f32a09 |
 | [pthread-win32](https://github.com/GerHobbelt/pthread-win32) | 3.0.3.1.79 - 06e7608b |
 | [qhull](https://github.com/qhull/qhull) | 8.1.6 |

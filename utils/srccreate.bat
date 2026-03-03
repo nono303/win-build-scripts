@@ -58,7 +58,7 @@ git checkout tags/VER-2-14-2
 cd /D ..
 git clone https://github.com/OSGeo/gdal gdal
 cd /D gdal
-git checkout tags/v3.12.2RC1
+git checkout tags/v3.12.2
 cd /D ..
 git clone https://github.com/geographiclib/geographiclib.git geographiclib
 cd /D geographiclib
@@ -166,7 +166,7 @@ git checkout tags/libssh2-1.11.1
 cd /D ..
 git clone https://gitlab.com/libtiff/libtiff.git/ libtiff
 cd /D libtiff
-git checkout tags/v4.7.1rc1
+git checkout tags/v4.7.1
 cd /D ..
 git clone https://chromium.googlesource.com/webm/libwebp libwebp
 cd /D libwebp
@@ -242,7 +242,7 @@ git checkout tags/v2.6.8
 cd /D ..
 svn co https://svn.code.sf.net/p/mod-qos/source/trunk/httpd_src/modules/qos mod_qos
 cd /D mod_qos
-svn update -r 2738
+svn update -r 2736
 cd /D ..
 git clone https://github.com/SpiderLabs/ModSecurity mod_security
 cd /D mod_security
@@ -290,7 +290,7 @@ git checkout tags/pcre2-10.47
 cd /D ..
 git clone https://github.com/php/pecl-datetime-timezonedb.git pecl-datetime-timezonedb
 cd /D pecl-datetime-timezonedb
-git checkout tags/2025.3
+git checkout tags/2026.1
 cd /D ..
 git clone https://github.com/igbinary/igbinary pecl-igbinary
 cd /D pecl-igbinary
@@ -342,7 +342,7 @@ git checkout tags/php-8.5.4RC1
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
-git checkout tags/9.7.1
+git checkout tags/9.8.0
 cd /D ..
 git clone https://github.com/proxytunnel/proxytunnel.git proxytunnel
 cd /D proxytunnel

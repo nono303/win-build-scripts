@@ -1,5 +1,5 @@
 @echo off
-for %%D in (%PATH_BUILD% %PATH_INSTALL%) do (
+for %%D in (%PATH_BUILD% %PATH_INSTALL% %PATH_VERSION_BUILD%) do (
 	if exist %%D\. rmdir /S /Q %%D
 	mkdir %%D
 )
