@@ -1,6 +1,9 @@
 <?php
 	error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 
+	// json options for cached version file
+	const JSON_ENCODE_OPTIONS = JSON_PRETTY_PRINT | JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
+
 	function replace_extension($filename, $new_extension) {
 		return preg_replace('/\.[^\.]+$/', '.' . $new_extension, $filename);
 	}

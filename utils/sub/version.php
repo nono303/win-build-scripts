@@ -6,10 +6,11 @@
 	*/
 
 	const DEBUG = false;
-	const DEBUG_PAD = 12;
+	const VERBOSE_PAD = 12;
 	const REMOTE_URLS = ["origin","upstream"];
 
 	define("PATH_SRC",pathenv("PATH_SRC"));
+	define("CACHE_VERSION",pathenv("CACHE_VERSION") == "1" ? true : false);
 
 	/*
 		DATA ARRAYS
@@ -119,12 +120,17 @@
 	}
 
 	function getVersion($src, $verbose = false) {
+		if(CACHE_VERSION && is_file($fcache = pathenv("PATH_VERSION_BUILD")."/".$src.".json")) {
+			if(DEBUG)
+				echo "get cached result from ".realpath($fcache).PHP_EOL;
+			return json_decode(file_get_contents($fcache),true);
+		}
 		global $verfromfile;
 		if($verbose)
 			echo str_pad($src,25);
 		// git source overrided
 		if (is_array($verfromfile[$src])) {
-			if(!is_file($ret["vfile"]["from"] = $verfromfile[$src][1]))
+			if(!is_file($verfromfile[$src][1]))
 				throw new Exception("bad verfromfile file for ".$src." : ".$verfromfile[$src][1]);
 			preg_match($verfromfile[$src][0],file_get_contents($verfromfile[$src][1]),$matches);
 			for($i = 1; $i < sizeof($matches); $i++){
@@ -136,12 +142,19 @@
 			if(!$ret["vfile"])
 				throw new Exception("bad verfromfile regexp for ".$src." : ".$verfromfile[$src][0]);
 			$ret["vfile"] = getVerFileProduct($ret["vfile"], $src);
+			$ret["vfile"]["name"] = $verfromfile[$src][1];
 			if($verbose)
-				echo str_pad($ret["vfile"]["product"], DEBUG_PAD);
+				echo str_pad($ret["vfile"]["product"], VERBOSE_PAD);
 		} elseif($verbose) {
-			echo str_pad("N/A", DEBUG_PAD);
+			echo str_pad("N/A", VERBOSE_PAD);
 		}
-
+/*
+		FOR /F "tokens=* USEBACKQ" %%F in (`git rev-parse --short HEAD`) do (set SCM_COMORREV=%%F)
+		FOR /F "tokens=* USEBACKQ" %%F in (`git tag --points-at HEAD`) do (set SCM_TAG=%%F)
+		FOR /F "tokens=* USEBACKQ" %%F in (`git branch --show-current`) do (set SCM_BRANCH=%%F)
+		FOR /F "tokens=* USEBACKQ" %%F in (`git show -s --format^=%%cd --date=short !SCM_COMORREV!`) do (set SCM_COMORREV_DATE=%%F)
+		FOR /F "tokens=* USEBACKQ" %%F in (`git config --get remote.origin.url`) do (set SCM_URL=%%F)
+*/
 		if (is_dir(PATH_SRC."/".$src."/.git")){
 			$url = 0;
 			foreach(array_filter(explode("\n",execnono($cmd = "git config --get remote.".REMOTE_URLS[0].".url && git config --get remote.".REMOTE_URLS[1].".url",NULL,realpath(PATH_SRC."/".$src),NULL))) as $rurl)
@@ -150,11 +163,14 @@
 			if($ret["scm"]["tag"] = trim(explode("\n",execnono($cmd = "git tag --points-at HEAD",NULL,realpath(PATH_SRC."/".$src),NULL))[0])){
 				$ret["scm"]["tag"] = getVerFileProduct($ret["scm"]["tag"], $src);
 				if($verbose)
-					echo str_pad($ret["scm"]["tag"]["product"], DEBUG_PAD);
-			} elseif($verbose) {
-				echo str_pad("N/A", DEBUG_PAD);
+					echo str_pad($ret["scm"]["tag"]["product"], VERBOSE_PAD);
+			} else {
+				unset($ret["scm"]["tag"]);
+				if($verbose)
+					echo str_pad("N/A", VERBOSE_PAD);
 			}
 			$ret["scm"]["ltag"] = explode("-g",execnono($cmd = "git describe --tags --long --always",NULL,realpath(PATH_SRC."/".$src),NULL));
+
 			if(sizeof($ret["scm"]["ltag"]) == 2) { // have last tag
 				$ret["scm"]["commit"] = array_pop($ret["scm"]["ltag"]);
 				$ret["scm"]["branch"] = getGitBranchAtCommit($ret["scm"]["commit"], PATH_SRC."/".$src);
@@ -162,15 +178,23 @@
 					array_pop($ret["scm"]["ltag"]);
 				$ret["scm"]["ltag"] = getVerFileProduct(implode("-",$ret["scm"]["ltag"]), $src);
 				if($verbose)
-					echo str_pad($ret["scm"]["ltag"]["product"], DEBUG_PAD).str_pad($ret["scm"]["commit"], DEBUG_PAD).str_pad($ret["scm"]["branch"], DEBUG_PAD);
+					echo str_pad($ret["scm"]["ltag"]["product"], VERBOSE_PAD).str_pad($ret["scm"]["commit"], VERBOSE_PAD).str_pad($ret["scm"]["branch"], VERBOSE_PAD);
 			} else { //dont have last taf
 				$ret["scm"]["commit"] = $ret["scm"]["ltag"][0];
 				$ret["scm"]["branch"] = getGitBranchAtCommit($ret["scm"]["commit"], PATH_SRC."/".$src);
 				if($verbose)
-					echo str_pad("N/A", DEBUG_PAD).str_pad($ret["scm"]["commit"], DEBUG_PAD).str_pad($ret["scm"]["branch"], DEBUG_PAD);
+					echo str_pad("N/A", VERBOSE_PAD).str_pad($ret["scm"]["commit"], VERBOSE_PAD).str_pad($ret["scm"]["branch"], VERBOSE_PAD);
 				unset($ret["scm"]["ltag"]);
 			}
-
+			$ret["scm"]["date"] = trim(execnono($cmd = "git show -s --format=%cd --date=short ".$ret["scm"]["commit"],NULL,realpath(PATH_SRC."/".$src),NULL));
+/*
+		FOR /F "tokens=* USEBACKQ" %%F in (`svn info --show-item revision`) do (set SCM_COMORREV=%%F)
+		REM svn log %SCM_URL%/tags/
+		REM svn ls -v %SCM_URL%/tags/
+		FOR /F "tokens=* USEBACKQ" %%F in (`svn info ^| grep 'Relative URL' ^| grep -oE '/.*'`) do (set SCM_BRANCH=%%F)
+		FOR /F "tokens=* USEBACKQ" %%F in (`svn info ^| grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}'`) do (set SCM_COMORREV_DATE=%%F)
+		FOR /F "tokens=* USEBACKQ" %%F in (`svn info ^| grep 'Repository Root' ^| grep -oE 'http.*'`) do (set SCM_URL=%%F)
+*/
 		} elseif (is_dir(PATH_SRC."/".$src."/.svn")){
 			$ret["scm"]["name"] = "svn";
 			$svninfo = execnono($cmd = "svn info",NULL,realpath(PATH_SRC."/".$src),NULL);
@@ -178,8 +202,10 @@
 			$ret["scm"]["urls"][REMOTE_URLS[0]] = trim($matches[1]);
 			preg_match("/Relative URL: \^\/(.*)\n/",$svninfo,$matches);
 			$ret["scm"]["branch"] = explode("/",trim($matches[1]))[0];
-			preg_match("/Revision: (.*)\n/",$svninfo,$matches);
+			preg_match("/Last Changed Rev: (.*)\n/",$svninfo,$matches); // 'Revision' might not reflect last change of the module
 			$ret["scm"]["commit"] = "r".trim($matches[1]); // prefixe r for revision
+			preg_match("/Last Changed Date: ([^ ]*)/",$svninfo,$matches);
+			$ret["scm"]["date"] = trim($matches[1]); // prefixe r for revision
 		}
 
 		// some verbose check
@@ -197,7 +223,7 @@
 		if($ret[$current = "vfile"]){
 			$ret["file"] = $ret[$current]["file"];
 			$ret["product"] = $ret[$current]["product"];
-			$ret["from"] = $ret[$current]["product"];
+			$ret["from"] = $ret[$current]["name"];
 		} elseif($ret["scm"][$current = "tag"]){
 			$ret["file"] = $ret["scm"][$current]["file"];
 			$ret["product"] = $ret["scm"][$current]["product"];
@@ -209,25 +235,30 @@
 		} else {
 			Throw new Exception ($src.": no tag or version");
 		}
+		if(CACHE_VERSION){
+			file_put_contents($fcache,json_encode($ret, JSON_ENCODE_OPTIONS));
+			if(DEBUG)
+				echo PHP_EOL."cache result to ".realpath($fcache).PHP_EOL;
+		}
 		return $ret;
 	}
 
 	/*
 		MAIN
 	*/
-
-	// print_r($argv);
-
-	// all src: gen MD
-	if(sizeof($argv) == 1){
+	$nbargs = sizeof($argv);
+	if(DEBUG)
+		echo $nbargs.PHP_EOL.print_r($argv,true);
+	// no args: generate MD (+cache) for all scr
+	if($nbargs == 1){
 		$md = "| src | version |".PHP_EOL."| ---- | ---- |".PHP_EOL;
 		echo
 			str_pad("src",25).
-			str_pad("file", DEBUG_PAD).
-			str_pad("tag", DEBUG_PAD).
-			str_pad("ltag", DEBUG_PAD).
-			str_pad("commit", DEBUG_PAD).
-			str_pad("branch", DEBUG_PAD).
+			str_pad("file", VERBOSE_PAD).
+			str_pad("tag", VERBOSE_PAD).
+			str_pad("ltag", VERBOSE_PAD).
+			str_pad("commit", VERBOSE_PAD).
+			str_pad("branch", VERBOSE_PAD).
 			PHP_EOL;
 		foreach(glob(($cur = PATH_SRC)."/*",GLOB_ONLYDIR) as $srcpath) {
 			$src = basename($srcpath);
@@ -260,25 +291,36 @@
 		file_put_contents($fn = pathenv("PATH_BATCH").'/SRC_VERSION.md',$md);
 		echo PHP_EOL."> ".realpath($fn).exit(0);
 	} else {
-		$proot = $argv[1] = strtolower($argv[1]);
-		if(in_array($proot,["mod_bikeshed","mod_evasive","mod_fcgid","mod_h2","mod_h264_streaming","mod_maxminddb","mod_md","mod_qos","mod_security","mod_wku_bt","mod_zstd"]))
-			$proot = "httpd";
-		if(in_array($proot,["pecl-datetime-timezonedb","pecl-igbinary","pecl-memcache","pecl-parallel","pecl-system-sync","pecl-text-xdiff","php-ext-brotli","php-ext-zstd","php-geos","php-ogr","php-proj","php-src"]))
-			$proot = "php";
+		if(is_dir($cur = PATH_SRC)."/".$argv[1]) {
+			$current = getVersion($argv[1],DEBUG);
+		} else {
+			echo "version.php '".$argv[1]."' '".$argv[2]."': '".PATH_SRC."/".$argv[1]."' doesn't exist".PHP_EOL;
+			exit(-1);
+		}
 	}
 
+
 	// default: return product
-	if(sizeof($argv) == 2) {
-		$ret = getVersion($argv[1], true);
-		// print_r($ret);
-		echo $ret["product"];
-	} elseif(sizeof($argv) >= 3){
-		if(is_dir($cur = PATH_SRC)."/".$argv[1]){
-			$current = getVersion($argv[1]);
-			if($argv[2] == "veronly"){
-				echo $current["file"];
-				exit(1);
-			}
+	if($nbargs == 2) {
+		if(DEBUG)
+			print_r($current);
+		echo $current["product"];
+		exit(0);
+	} elseif($nbargs >= 3) {
+		// export env var for init
+		if($argv[2] == "env"){
+			echo
+				"SCM_COMORREV=".$current["scm"]["commit"].PHP_EOL.
+				"SCM_TAG=".($current["scm"]["tag"] ? $current["scm"]["tag"]["product"] : "").PHP_EOL.
+				"SCM_BRANCH=".$current["scm"]["branch"].PHP_EOL.
+				"SCM_COMORREV_DATE=".$current["scm"]["date"].PHP_EOL.
+				"SCM_URL=".$current["scm"]["urls"]["origin"].PHP_EOL.
+				"GET_VERSION=".$current["product"];
+			exit(0);
+		} elseif(!is_file($argv[2])) {
+			echo "[version] ERROR: file '".$argv[2]."' doesn't exist".PHP_EOL;
+			exit(-1);
+		} else {
 			if(pathenv("ARCH")){
 				$arch = pathenv("ARCH");
 			} elseif(pathenv("PHP_SDK_ARCH")){
@@ -286,6 +328,7 @@
 			}
 			$description .= "arch:".$arch.pathenv("AVXB")." vcver:".pathenv("vcvars_ver")."[".pathenv("MSVC_DEPS")."]";
 
+			// manage pdb
 			$rpdb = " /rpdb";
 			if($argv[3]){
 				if($argv[3] == "norpdb"){
@@ -293,9 +336,31 @@
 				} elseif($argv[3] == "memcached"){
 					preg_match("/(libevent-[0-9]\.[0-9])/",$argv[2],$matches);
 					$matches[1] ? $libdep = " ".str_replace("-",":",$matches[1]) : $libdep = "";
-				} elseif($argv[3] != "libconfig" ){
+				} elseif($argv[3] != "libconfig") {
+					// for GCC only
 					$libdep = " ".$argv[3];
-					$description .= " ".$argv[3];
+					/*
+						additionnal descritption (used in php & httpd). order
+							1. build:xxx
+							2. proot:xxx
+							3. libdeps:xxx
+						ex. do_php C:\sdk\batch\utils\sub\version.php pecl-text-xdiff C:\sdk\release\vs18_x64-avx2\_php-ts\php_xdiff.dll build:ts php:8.5.4.1 lib:1.2.3
+						do_php %PATH_UTILS%\sub\version.php php-ext-brotli C:\sdk\release\vs18_x64-avx2\_php-ts\php_brotli.dll build:ts php:8.5.4.1 brotli:1.2.10
+					*/
+					for($i = 3; $i < $nbargs; $i++){
+						if(str_starts_with($argv[$i],"build")){
+							$descargv .= " ".$argv[$i];
+						} else {
+							if(!$proot){
+								$proot = explode(":",$argv[$i])[0]; // prefix product
+								$descargv .= " (".$argv[$i];
+							} else {
+								$descargv .= " ".$argv[$i];
+							}
+						}
+					}
+					if($proot)
+						$descargv .= ")";
 				}
 				/* cygwin
 					[1] => libconfig
@@ -313,7 +378,7 @@
 					[4] => 	x%TARGET_ARCH%
 					[5] => 	%AVXECHO%
 				*/
-				if(in_array($argv[1],["memcached","sslh","libconfig"])){
+				if(in_array($argv[1],["memcached", "sslh", "libconfig"])){
 					$rpdb = "";
 					$arch = $argv[4];
 					$avx = $argv[5];
@@ -324,38 +389,31 @@
 						"gcc:".$gccver.$libdep;
 				}
 			}
-			if(pathenv("SCM_COMORREV"))
-				$description .= " commit:".pathenv("SCM_COMORREV");
-			if($ret["scm"]["tag"])
-				$description .= " tag:".$ret["scm"]["tag"];
-			if(!is_null(pathenv("SCM_BRANCH")) && pathenv("SCM_BRANCH") != "HEAD" && pathenv("SCM_BRANCH") != "")
-				$description .= " branch:".pathenv("SCM_BRANCH");
-			if(pathenv("SCM_COMORREV_DATE"))
-				$description .= " date:".pathenv("SCM_COMORREV_DATE");
-			$pname = basename($argv[2],".".pathinfo($argv[2], PATHINFO_EXTENSION));
-			if($pname != $proot)
-				$pname = $proot.":".$pname;
-			if(is_file($argv[2])){
-				$cmd = pathenv("BIN_VERPATCH")." ".$argv[2]." \"".$current["file"]."\" /va".$rpdb." /high /pv \"".$current["product"]."\" /s description \"".$description."\" /s product \"".$pname."\" /s LegalTrademarks \"".pathenv("SCM_URL")."\" /s LegalCopyright \"https://github.com/nono303/win-build-scripts\"";
-				if(DEBUG || pathenv("CUR_DEBUG") == 1){
-					echo $cmd.PHP_EOL;
-				} else {
-					echo "[version] '".$current["product"]."' ".$argv[2]." (".str_replace("/","\\",$current["from"]).")".PHP_EOL;
-				}
-				passthru($cmd);
+
+			if($current["scm"]["tag"]) {
+				$description .= " tag:".$current["scm"]["tag"]["product"];
 			} else {
-				echo "[version] ERROR: ".$argv[2]." doesn't exist".PHP_EOL;
-				exit(-1);
+				if(!is_null($current["scm"]["branch"]) && $current["scm"]["branch"] != "HEAD" && $current["scm"]["branch"] != "")
+					$description .= " branch:".array_filter(explode("/",$current["scm"]["branch"]))[0]; // fix svn like '/trunk/httpd_src/modules/qos'
+				if($current["scm"]["commit"])
+					$description .= " commit:".$current["scm"]["commit"];
 			}
-		} else {
-			echo "version.php '".$argv[1]."' '".$argv[2]."': '".PATH_SRC."/".$argv[1]."' doesn't exist".PHP_EOL;
-			exit(-1);
+			if($current["scm"]["date"])
+				$description .= " date:".$current["scm"]["date"];
+			$pname = basename($argv[2],".".pathinfo($argv[2], PATHINFO_EXTENSION));
+			if($proot)
+				$pname = $proot.":".$pname;
+
+			$cmd = pathenv("BIN_VERPATCH")." ".$argv[2]." \"".$current["file"]."\" /va".$rpdb." /high /pv \"".$current["product"]."\" /s description \"".$description.$descargv."\" /s product \"".$pname."\" /s LegalTrademarks \"".$current["scm"]["urls"][0]."\" /s LegalCopyright \"https://github.com/nono303/win-build-scripts\"";
+			if(DEBUG || pathenv("CUR_DEBUG") == 1){
+				echo $cmd.PHP_EOL;
+			} else {
+				echo "[version] '".$current["product"]."' ".$argv[2]." (".str_replace("/","\\",$current["from"]).")".PHP_EOL;
+			}
+			passthru($cmd);
 		}
 	} else {
-		echo
-			"Bad usage:".PHP_EOL.
-			"no params: export current version of all src modules to a csv file in %PATH_LOG%".PHP_EOL.
-			"version.php [src_module] [file_to_patch] patch 'file_to_patch' with version of 'src_module'".PHP_EOL;
+		echo "Bad usage:".PHP_EOL."type go help".PHP_EOL;
 		exit(-1);
 	}
 ?>

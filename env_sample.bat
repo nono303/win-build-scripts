@@ -6,6 +6,9 @@ CHCP 1251
 REM ########################## DEBUG (just echo for all build)
 set DEBUG_BUILD=0
 
+REM ########################## CACHE VERSION (avoid redundant scm cmd)
+set CACHE_VERSION=1
+
 REM ########################## GLOBAL PATH
 	REM sdk
 set PATH_SDK_ROOT=C:\sdk
@@ -13,6 +16,7 @@ set PATH_BATCH=%PATH_SDK_ROOT%\batch
 set PATH_BUILDROOT=%PATH_SDK_ROOT%\build
 	set PATH_PHP_BUILD=%PATH_BUILDROOT%\php
 	set PATH_GRADLE_BUILD=%PATH_BUILDROOT%\gradle
+	set PATH_VERSION_BUILD=%PATH_BUILDROOT%\version
 set PATH_MODULES=%PATH_BATCH%\modules
 set PATH_PATCHES=%PATH_BATCH%\patches
 set PATH_MODULES_COMMON=%PATH_MODULES%\common
@@ -157,7 +161,9 @@ for %%X in (vs17 vs18) do (
 		if not exist %PATH_BUILDROOT%\%%X_%%Y\. mkdir %PATH_BUILDROOT%\%%X_%%Y
 	)
 )
-if not exist %PATH_BUILDROOT%\php\. mkdir %PATH_BUILDROOT%\php
+if not exist %PATH_PHP_BUILD%\. mkdir %PATH_PHP_BUILD%
+if not exist %PATH_GRADLE_BUILD%\. mkdir %PATH_GRADLE_BUILD%
+if not exist %PATH_VERSION_BUILD%\. mkdir %PATH_VERSION_BUILD%
 
 REM ########################## LOCAL COPY PATH
 REM copy MOBAC, FIT2GPX, PHP & GEOGRAPHICLIB release to LOCAL_PATH_XXX

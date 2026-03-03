@@ -21,8 +21,6 @@ if NOT "%C_STD_VER%"=="" (set __CNFC=/std:c%C_STD_VER%)
 FOR /F "tokens=* USEBACKQ" %%F in (`do_php %PATH_UTILS%\sub\version.php zstd`) do (set ZSTD_VERSION=%%F)
 FOR /F "tokens=* USEBACKQ" %%F in (`do_php %PATH_UTILS%\sub\version.php httpd`) do (set HTTPD_VERSION=%%F)
 
-call %PATH_MODULES_COMMON%\init.bat %1%MOD_ZSTD_BRANCH% varonly
-
 cl.exe /nologo ^
 -IC:\sdk\release\vs18_x64-avx2\include ^
 /DWIN32 /DNDEBUG /D_WINDOWS ^
@@ -47,6 +45,7 @@ C:\sdk\release\vs18_x64-avx2\lib\libaprutil-1.lib
 
 rm -fv %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.exp
 rm -fv %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.lib
+echo.
 call do_php %PATH_UTILS%\sub\version.php %1 %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.so "httpd:%HTTPD_VERSION% libzstd:%ZSTD_VERSION%"
 
 if "%J8_TEST%"=="yes" (

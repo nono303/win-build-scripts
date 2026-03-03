@@ -129,10 +129,14 @@ Usage: go command [options]
   * version: 
     no param: output and write SRC_VERSION.md in %PATH_BATCH% of current normalized version of each module present in %PATH_SRC%  
     > param:  module name to get version
+      return the module version in format x.x.x.x
     > option: EXCLUSIVE - ONLY IF PARAM MODULE IS PRESENT
-      veronly:   return the module version in format x.x.x.x
+      env:   return the environment variables for init.bat
       <binfile>: write version information (verpatch) into the specified full path <binfile>
+        [desc1 desc2...] optional descriptions (appended to generated one) each description in format key:value separated by space.
+	the first optional description will be used as product root (ex. for httpd or php modules)
+	special key 'build' (ex. ts or nts for php) must be set first and is ignored as product root
   * configexport: export cygwin and MSVS config to %PATH_BATCH%\config. 
-    import .vsconfg for MSVS 
-    use setup.exe -P `awk 'NR==1{printf \$1}{printf ",%s", \$1}' cyg_XX_.packagelist` for cygwin (where _XX_ is 32 or 64...)
+      import .vsconfg for MSVS 
+      use setup.exe -P `awk 'NR==1{printf \$1}{printf ",%s", \$1}' cyg_XX_.packagelist` for cygwin (where _XX_ is 32 or 64...)
 ---------------------------
