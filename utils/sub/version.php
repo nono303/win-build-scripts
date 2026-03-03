@@ -121,8 +121,7 @@
 
 	function getVersion($src, $verbose = false) {
 		if(CACHE_VERSION && is_file($fcache = pathenv("PATH_VERSION_BUILD")."/".$src.".json")) {
-			if(DEBUG)
-				echo "get cached result from ".realpath($fcache).PHP_EOL;
+			debug("get cached result from ".realpath($fcache));
 			return json_decode(file_get_contents($fcache),true);
 		}
 		global $verfromfile;
@@ -148,13 +147,6 @@
 		} elseif($verbose) {
 			echo str_pad("N/A", VERBOSE_PAD);
 		}
-/*
-		FOR /F "tokens=* USEBACKQ" %%F in (`git rev-parse --short HEAD`) do (set SCM_COMORREV=%%F)
-		FOR /F "tokens=* USEBACKQ" %%F in (`git tag --points-at HEAD`) do (set SCM_TAG=%%F)
-		FOR /F "tokens=* USEBACKQ" %%F in (`git branch --show-current`) do (set SCM_BRANCH=%%F)
-		FOR /F "tokens=* USEBACKQ" %%F in (`git show -s --format^=%%cd --date=short !SCM_COMORREV!`) do (set SCM_COMORREV_DATE=%%F)
-		FOR /F "tokens=* USEBACKQ" %%F in (`git config --get remote.origin.url`) do (set SCM_URL=%%F)
-*/
 		if (is_dir(PATH_SRC."/".$src."/.git")){
 			$url = 0;
 			foreach(array_filter(explode("\n",execnono($cmd = "git config --get remote.".REMOTE_URLS[0].".url && git config --get remote.".REMOTE_URLS[1].".url",NULL,realpath(PATH_SRC."/".$src),NULL))) as $rurl)
@@ -187,14 +179,6 @@
 				unset($ret["scm"]["ltag"]);
 			}
 			$ret["scm"]["date"] = trim(execnono($cmd = "git show -s --format=%cd --date=short ".$ret["scm"]["commit"],NULL,realpath(PATH_SRC."/".$src),NULL));
-/*
-		FOR /F "tokens=* USEBACKQ" %%F in (`svn info --show-item revision`) do (set SCM_COMORREV=%%F)
-		REM svn log %SCM_URL%/tags/
-		REM svn ls -v %SCM_URL%/tags/
-		FOR /F "tokens=* USEBACKQ" %%F in (`svn info ^| grep 'Relative URL' ^| grep -oE '/.*'`) do (set SCM_BRANCH=%%F)
-		FOR /F "tokens=* USEBACKQ" %%F in (`svn info ^| grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}'`) do (set SCM_COMORREV_DATE=%%F)
-		FOR /F "tokens=* USEBACKQ" %%F in (`svn info ^| grep 'Repository Root' ^| grep -oE 'http.*'`) do (set SCM_URL=%%F)
-*/
 		} elseif (is_dir(PATH_SRC."/".$src."/.svn")){
 			$ret["scm"]["name"] = "svn";
 			$svninfo = execnono($cmd = "svn info",NULL,realpath(PATH_SRC."/".$src),NULL);
@@ -203,9 +187,9 @@
 			preg_match("/Relative URL: \^\/(.*)\n/",$svninfo,$matches);
 			$ret["scm"]["branch"] = explode("/",trim($matches[1]))[0];
 			preg_match("/Last Changed Rev: (.*)\n/",$svninfo,$matches); // 'Revision' might not reflect last change of the module
-			$ret["scm"]["commit"] = "r".trim($matches[1]); // prefixe r for revision
+			$ret["scm"]["commit"] = "r".trim($matches[1]); // add prefixe r for revision
 			preg_match("/Last Changed Date: ([^ ]*)/",$svninfo,$matches);
-			$ret["scm"]["date"] = trim($matches[1]); // prefixe r for revision
+			$ret["scm"]["date"] = trim($matches[1]);
 		}
 
 		// some verbose check
@@ -237,8 +221,7 @@
 		}
 		if(CACHE_VERSION){
 			file_put_contents($fcache,json_encode($ret, JSON_ENCODE_OPTIONS));
-			if(DEBUG)
-				echo PHP_EOL."cache result to ".realpath($fcache).PHP_EOL;
+			debug(PHP_EOL."cache result to ".realpath($fcache));
 		}
 		return $ret;
 	}
@@ -247,8 +230,7 @@
 		MAIN
 	*/
 	$nbargs = sizeof($argv);
-	if(DEBUG)
-		echo $nbargs.PHP_EOL.print_r($argv,true);
+	debug($nbargs.PHP_EOL.print_r($argv,true));
 	// no args: generate MD (+cache) for all scr
 	if($nbargs == 1){
 		$md = "| src | version |".PHP_EOL."| ---- | ---- |".PHP_EOL;
@@ -302,8 +284,7 @@
 
 	// default: return product
 	if($nbargs == 2) {
-		if(DEBUG)
-			print_r($current);
+		debug(print_r($current, true));
 		echo $current["product"];
 		exit(0);
 	} elseif($nbargs >= 3) {
