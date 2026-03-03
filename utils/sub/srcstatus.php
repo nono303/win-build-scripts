@@ -1,157 +1,96 @@
 <?php
-	include( dirname(__FILE__) . '/_functions.php');
+	include( dirname(__FILE__) . '/_functions-version.php');
 
-	date_default_timezone_set("Europe/Paris");
-	define("NB_TAGS",8);
+	// tag history to show in csv
+	const NB_TAGS = 8;
 
-	if(in_array("gitgc", $argv)){
-		define("GIT_GC",true);
-		echo "gitcg: ON".PHP_EOL;
-	} else {
-		define("GIT_GC",false);
-		echo "gitcg: OFF".PHP_EOL;
+	// arg to const
+	foreach([
+		"GITGC"		=> "gitgc",
+		"NOFETCH"	=> "nofetch",
+		"DEBUG"			=> "verbose",
+	] as $def => $argin) {
+		define($def, in_array($argin, $argv) ? true : false);
+		echo str_pad($def.": ",12).(constant($def) ? "ON" : "OFF").PHP_EOL;
 	}
 
-	if(in_array("nofetch", $argv)){
-		define("REPO_FETCH",false);
-		echo "nofetch: ON".PHP_EOL;
-	} else {
-		define("REPO_FETCH",true);
-		echo "nofetch: OFF".PHP_EOL;
-	}
-	if(in_array("verbose", $argv)){
-		define("VERBOSE",true);
-		echo "verbose: ON".PHP_EOL;
-	} else {
-		define("VERBOSE",false);
-		echo "verbose: OFF".PHP_EOL;
-	}
-
-	$srcdir = str_replace("\\","/",$_ENV["PATH_SRC"])."/";
-	echo "> ".$srcdir.PHP_EOL;
-
-	$listdir = scandir($srcdir);
-	$listdir[] = "libiconv\libiconv";
-	unset($listdir[0]); // .
-	unset($listdir[1]); // ..
-	sort($listdir);
-
+	echo "> ".PATH_SRC.PHP_EOL;
 	$srccreate = file_get_contents(dirname(__FILE__) . '/srccreate.bat.in');
-	file_put_contents($argv[1],'"name";"scm";"origin";"head";"status";"branch";"log tags";"last tag"'.PHP_EOL,FILE_APPEND);
+	file_put_contents($argv[1],'"name";"scm";"origin";"head";"branch";"log tags";"last tag"'.PHP_EOL,FILE_APPEND);
+	echo "* ".pathenv("PATH_VERSION_BUILD").($ret = cleanCache() ? " cleaned" : " unable to clear").PHP_EOL;
 	echo "*************************".PHP_EOL;
-	foreach($listdir as $ele){
-		$repo = $srcdir.$ele;
-		$type = "man";
+
+	foreach(glob(PATH_SRC."/*",GLOB_ONLYDIR) as $repo){
+		$content = getVersion($ele = basename($repo));
+		$logtags = "";
+		$from = "man";
 		if(is_dir($repo."/.git")){
-			$type = "git";
-			if(VERBOSE) echo $repo.PHP_EOL;
-			$upstream = execnono($cmd = "git config --get remote.origin.url",NULL,$repo,NULL);
-			if(VERBOSE) echo $cmd.PHP_EOL;
-			$head = explode("^",execnono($cmd = "git name-rev --name-only HEAD",NULL,$repo,NULL))[0]; //execnono($cmd = "git describe --tags",NULL,$repo,NULL);
-			if(VERBOSE) echo $cmd.PHP_EOL;
-			preg_match("/^\* \(HEAD detached at ([^\)]+)\)/",execnono($cmd = "git branch -a",NULL,$repo,NULL),$matches);
-			if(VERBOSE) echo $cmd.PHP_EOL;
-			if($matches[1] && is_int(strpos($matches[1],"/")))
-				$head = $matches[1];
-			$srccreate .= "git clone ".$upstream." ".$ele.PHP_EOL."cd /D ".$ele.PHP_EOL."git checkout ".$head.PHP_EOL."cd /D ..".PHP_EOL;
-			$gitclean = execnono($cmd = "git clean -fdx",NULL,$repo,NULL);
-			if(VERBOSE) echo $cmd.PHP_EOL;
-			if(REPO_FETCH){
-				execnono($cmd = "git fetch 2>&1",NULL,$repo,NULL);
-				if(VERBOSE) echo $cmd.PHP_EOL;
-				// https://stackoverflow.com/a/58438257
-				execnono($cmd = "git fetch --tags --force",NULL,$repo,NULL);
-				if(VERBOSE) echo $cmd.PHP_EOL;
-			}
-			$branch = getGitBranchAtCommit(
-				$commit = trim(execnono($cmd = "git rev-parse --short HEAD",NULL,$repo,NULL)),
-				$repo
-			);
-			// head is branch
-			if(!is_int(strpos($head,"/"))){
-				$branch = $head;
-				$reset = execnono($cmd = "git reset --hard",NULL,$repo,NULL);
-				$pullres = execnono($cmd = "git pull",NULL,$repo,NULL);
-				if(VERBOSE) echo $cmd.PHP_EOL.$pullres.PHP_EOL;
-				$tmp = explode(" ",$res = execnono($cmd = 'git log --no-walk --pretty="format:%h %ad" --date=iso-strict HEAD',NULL,$repo,NULL));
-				$ltd = secondsToNbDay(time() - ($strtime = strtotime($tmp[1])));
-				$logtags = date("Y-m-d H:i:s O",$strtime) ." (HEAD, commit: ".$tmp[0];
-				$head = "branch/".$head;
-				if ($ele == "libyuv"){
-					preg_match("/ LIBYUV_VERSION ([0-9]+)/",file_get_contents($srcdir."/libyuv/include/libyuv/version.h"),$matches);
-					$logtags .= ", ".$matches[1].")";
-				} else {
-					$logtags .= ", ".$head.")";
+			$from = "git";
+			if(!NOFETCH){
+				execnono("git clean -fdx", NULL, $repo, NULL);
+				execnono("git fetch 2>&1", NULL, $repo, NULL);
+				execnono("git fetch --tags --force", NULL, $repo, NULL); // https://stackoverflow.com/a/58438257
+				if($content["from"] == "git ltag") {
+					execnono("git reset --hard", NULL, $repo, NULL);
+					execnono("git pull", NULL, $repo, NULL);
 				}
-			// head is tag
-			} else {
-				$logtags = execnono($cmd = 'git log --tags --simplify-by-decoration --author-date-order --pretty="format:%ai %d" | head -n '.NB_TAGS,NULL,$repo,NULL);
+			}
+			if($content["from"] == "git tag") {	// head is tag
+				$logtags = execnono('git log --tags --simplify-by-decoration --author-date-order --pretty="format:%ai %d" | head -n '.NB_TAGS, NULL, $repo, NULL);
 				$ltd = secondsToNbDay(time() - ($strtime = strtotime(explode(" (",$logtags)[0])));
+				$head = "tags/".$content["scm"]["tag"]["raw"];
+			} else {							// head is branch
+				$ltd = secondsToNbDay(time() - ($strtime = strtotime($content["scm"]["dateiso"])));
+				$head = $content["scm"]["branch"];
+				$logtags =
+					date("Y-m-d H:i:s O",$strtime).
+					" (HEAD, commit: ".$content["scm"]["commit"].", ".
+					($ele == "libyuv" ? $content["product"] : $head).
+					")";
 			}
-			$status = explode("\t",execnono($cmd = "git rev-list --left-right --count ".$commit."...HEAD",NULL,$repo,NULL)) [0];
-			if(VERBOSE) echo $cmd.PHP_EOL;
-			if($status && $status != "0"){
-				$status = $status." commit(s) behind";
-			} else {
-				$status = "up to date";
+			$srccreate .=
+				"git clone ".$content["scm"]["urlsclone"]["origin"]." ".$ele.PHP_EOL.
+				"cd /D ".$ele.PHP_EOL.
+				"git checkout ".$head.PHP_EOL.
+				"cd /D ..".PHP_EOL;
+			if(GITGC){
+				foreach(explode("\n",execnono("git branch", NULL, $repo, NULL)) as $lb)
+					if(!str_starts_with($lb,"*"))
+						echo "\t↓".execnono("git branch -d ".$lb, NULL, $repo, NULL).PHP_EOL;
+				echo "\t↓".execnono("git reflog expire --all --expire=now --expire-unreachable=now", NULL, $repo, NULL).PHP_EOL;
+				echo "\t↓".execnono("git gc --prune=now --aggressive", NULL, $repo, NULL).PHP_EOL;
 			}
-			if(GIT_GC){
-				echo "\t↓".execnono($cmd = "git reflog expire --all --expire=now --expire-unreachable=now",NULL,$repo,NULL).PHP_EOL;
-				if(VERBOSE) echo $cmd.PHP_EOL;
-				echo "\t↓".execnono($cmd = "git gc --prune=now --aggressive",NULL,$repo,NULL).PHP_EOL;
-				if(VERBOSE) echo $cmd.PHP_EOL;
-				foreach(explode("\n",execnono($cmd = "git branch",NULL,$repo,NULL)) as $lb){
-					if(!str_starts_with($lb,"*")){
-						echo "\t↓".execnono($cmd = "git branch -d ".$lb,NULL,$repo,NULL).PHP_EOL;
-						if(VERBOSE) echo $cmd.PHP_EOL;
-					}
-				}
-			}
+			if($content["from"] != "git tag")
+				$head = "branch/".$head;
 		} elseif(is_dir($repo."/.svn")){
-			$type = "svn";
-			if(REPO_FETCH){
-				execnono($cmd = "svn update",NULL,$repo,NULL);
-				if(VERBOSE) echo $cmd.PHP_EOL;
-			}
-			$svninfo = execnono($cmd = "svn info",NULL,$repo,NULL);
-			if(VERBOSE) echo $cmd.PHP_EOL;
-			preg_match("/Repository Root: ?(.*)\n/",$svninfo,$matches);
-			$upstream = trim($matches[1]);
-			preg_match("/Relative URL: \^\/(.*)\n/",$svninfo,$matches);
-			$branch = trim($matches[1]);
-			preg_match("/Revision: (.*)\n/",$svninfo,$matches);
-			$head = trim($matches[1]);
-			$srccreate .= "svn co ".$upstream."/".$branch." ".$ele.PHP_EOL."cd /D ".$ele.PHP_EOL."svn update -r ".$head.PHP_EOL."cd /D ..".PHP_EOL;
-			$svninfo = execnono($cmd = "svn log -l ".NB_TAGS,NULL,$repo,NULL);
-			if(VERBOSE) echo $cmd.PHP_EOL;
-			$gitlasttags = "";
+			$from = "svn";
+			if(!NOFETCH)
+				execnono("svn update", NULL, $repo, NULL);
+			$head = $content["scm"]["commit"];
+			$srccreate .=
+				"svn co ".$content["scm"]["urls"]["origin"]."/".$content["scm"]["branchraw"]." ".$ele.PHP_EOL.
+				"cd /D ".$ele.PHP_EOL.
+				"svn update -r ".$head.PHP_EOL.
+				"cd /D ..".PHP_EOL;
+			$svninfo = execnono("svn log -l ".NB_TAGS, NULL, $repo, NULL);
 			foreach(explode("\n",$svninfo) as $line){
 				preg_match("/r([0-9]+) .* ([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} [+-][0-9]{2}00)/",$line,$matches);
 				if($matches[1] && $matches[2]){
 					$had = "";
-					if($gitlasttags == "")
-						$gitlasttags = $matches[1];
 					if($head == $matches[1])
 						$had = "HEAD, ";
 					$ltd = secondsToNbDay(time() - strtotime($matches[2]));
 					$logtags .= $matches[2]." (".$had.$matches[1].")".PHP_EOL;
 				}
 			}
-			if($gitlasttags != $head){
-				$status = $gitlasttags;
-			} else {
-				$status = "up to date";
-			}
 			$head = "revision/".$head;
 		}
-		echo str_pad($type,4).str_pad($ele,26).str_pad(str_replace(["tags/","branch/","revision/"],["\t\tt ","b ","\t\t\t\tr "],$head),26).PHP_EOL;//.str_pad($status,10," ")."  ".str_pad($branch,20).PHP_EOL;
-		file_put_contents($argv[1],'"'.$ele.'";"'.$type.'";"'.$upstream.'";"'.$head.'";"'.$status.'";"'.$branch.'";"'.$logtags.'";"'.$ltd.'"'.PHP_EOL,FILE_APPEND);
-		$ele = "";
-		$upstream = "";
-		$branch = "";
-		$status = "";
-		$head = "";
-		$logtags = "";
+		echo
+			str_pad($from,4).
+			str_pad($ele,26).
+			str_pad(str_replace(["tag/","branch/","revision/"],["\t\tt ","b ","\t\t\t\tr "],$head),26).
+			PHP_EOL;
+		file_put_contents($argv[1],'"'.$ele.'";"'.$from.'";"'.$content["scm"]["urls"]["origin"].'";"'.$head.'";"'.$content["scm"]["branch"].'";"'.$logtags.'";"'.$ltd.'"'.PHP_EOL,FILE_APPEND);
 	}
 	file_put_contents(dirname(__FILE__) . "/../srccreate.bat",$srccreate);
 ?>
