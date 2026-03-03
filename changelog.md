@@ -1,8 +1,116 @@
 # changelog
 
 
+## 1.16.0 _(2026-03-03)_
+
+*  update src
+`SRC_VERSION.md`
+`modules/clean.bat`
+`utils/srccreate.bat`
+*  refactor using _functions-version.php
+`utils/sub/srcstatus.php`
+*  + cleanCache() + getGitBranchAtCommit(): _functions.php > _functions-version.php add props urlsclone, dateiso, branchraw to scm version
+`utils/sub/_functions-version.php`
+`utils/sub/_functions.php`
+*  add verbose option
+`usage.txt`
+`utils/sub/libcheck.php`
+*  add verbose option clean cache dir before generate md fix svn branch description
+`usage.txt`
+`utils/sub/version.php`
+*  typo
+`utils/bininfo.bat`
+*  extract from version.php to _functions-version.php: init, const & functions
+`utils/sub/_functions-version.php`
+`utils/sub/version.php`
+*  use debug() instead of if(DEBUG) typo
+`utils/sub/version.php`
+*  Version improvement  * Add set CACHE_VERSION in env_sample.bat to enable or disable caching version result in PATH_VERSION_BUILD  (avoid redundant scm cmd with faster build)  * Refactor (Simplify & improve) init.bat to value SCM_* var with 'do_php version xxx env' results  * Fix and improve additional description when set version with VERPATCH for httpd & php  * Remove useless 'init.bat %%X varonly' for httpd php & mod_zstd
+`env_sample.bat`
+`modules/common/init.bat`
+`modules/httpd.bat`
+`modules/mod_zstd.bat`
+`modules/phpsdk-config_make.bat`
+`usage.txt`
+`utils/sub/_functions.php`
+`utils/sub/version.php`
+*  add svn version
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+`utils/sub/version.php`
+*  generate SRC_VERSION.md with 'go version'
+`SRC_VERSION.md`
+`usage.txt`
+`utils/sub/version.php`
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  global refactor
+`utils/sub/version.php`
+*  use https://github.com/stax76/run-hidden
+`modules/common/msbuild.php`
+`modules/run-hidden.bat`
+`patches/run-hidden.patch`
+*  extract getGitBranchAtCommit() to _function
+`utils/sub/_functions.php`
+`utils/sub/srcstatus.php`
+*  CGTHREADS:8 not supported for static linking
+`modules/common/meson.sh`
+`modules/common/msbuild.php`
+`modules/common/ninja.sh`
+*  fix cflags & ldflags dynamic value link:  CC /link > LD LDFLAGS
+`modules/mod_security.bat`
+`patches/mod_security.patch`
+*  fix cflags & ldflags dynamic value
+`modules/mod_security-sdbm-util.bat`
+`patches/mod_security-sdbm-util.patch`
+*  fd-setsize: 2048 > 4096 LINK & LIB: + /CGTHREADS:8
+`modules/phpsdk-config_make.bat`
+*  remove useless
+`modules/phpsdk-local.bat`
+*  replace hardcoded by ENV VAR
+`modules/mod_zstd.bat`
+*  CFLAGS  * /st: c++ > c  + DNDEBUG LDFLAGS  + /CGTHREADS:8
+`modules/openssl.bat`
+`patches/openssl.patch`
+*  +CGTHREADS:8 options for link & lib /std:clatest > /std:c%C_STD_VER%
+`modules/lua.bat`
+*  +CGTHREADS:8 options for link & lib fix common linklib options
+`modules/common/msbuild.php`
+*  +CGTHREADS:8 flag for link & lib
+`modules/common/meson.sh`
+`modules/common/ninja.sh`
+*  patch CMakeLists.txt with BUILD_MAN (OFF)
+`modules/libmaxminddb.bat`
+`patches/libmaxminddb.patch`
+*  fix null
+`utils/sub/bininfo.php`
+*  fix mod_crash version
+`modules/httpd.bat`
+*  8.5.4-rc1
+`patches/php-src/8.5/pr17848.patch`
+*  8.19.0-rc2
+`modules/curl.bat`
+`patches/curl.patch`
+*  https://github.com/BrianGladman/mpir/pull/34
+`SRC_VERSION.md`
+`patches/mpir.patch`
+*  fix libwebp remove .git ending url
+`SRC_VERSION.md`
+*  remove duplicate
+`env_sample.bat`
+*  https://github.com/BrianGladman/mpir/pull/34
+`modules/mpir.bat`
+`patches/mpir.patch`
+
+
 ## 1.15.4 _(2026-02-20)_
 
+*  1.15.4
+`README.md`
+`changelog.md`
+`modules/phpsdk-config_make.bat`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
