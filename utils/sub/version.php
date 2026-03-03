@@ -1,21 +1,27 @@
 <?php
 	include( dirname(__FILE__) . '/_functions-version.php');
 
-	/*
-		MAIN
-	*/
+	// arg to const
+	foreach([
+		"DEBUG"			=> "verbose",
+	] as $def => $argin) {
+		define($def, in_array($argin, $argv) ? true : false);
+		debug(str_pad($def.": ",12).(constant($def) ? "ON" : "OFF"));
+	}
+
 	$nbargs = sizeof($argv);
 	debug($nbargs.PHP_EOL.print_r($argv,true));
 	// no args: generate MD (+cache) for all scr
 	if($nbargs == 1){
+		echo "* ".pathenv("PATH_VERSION_BUILD").($ret = cleanCache() ? " cleaned" : " unable to clear").PHP_EOL;
 		$md = "| src | version |".PHP_EOL."| ---- | ---- |".PHP_EOL;
 		echo
 			str_pad("src",25).
-			str_pad("file", VERBOSE_PAD).
-			str_pad("tag", VERBOSE_PAD).
-			str_pad("ltag", VERBOSE_PAD).
-			str_pad("commit", VERBOSE_PAD).
-			str_pad("branch", VERBOSE_PAD).
+			str_pad("file",		VERBOSE_PAD).
+			str_pad("tag",		VERBOSE_PAD).
+			str_pad("ltag",		VERBOSE_PAD).
+			str_pad("commit",	VERBOSE_PAD).
+			str_pad("branch",	VERBOSE_PAD).
 			PHP_EOL;
 		foreach(glob(($cur = PATH_SRC)."/*",GLOB_ONLYDIR) as $srcpath) {
 			$src = basename($srcpath);
@@ -56,15 +62,12 @@
 		}
 	}
 
-
-	// default: return product
-	if($nbargs == 2) {
-		debug(print_r($current, true));
+	debug(print_r($current, true));
+	if($nbargs == 2) { // default: return product
 		echo $current["product"];
 		exit(0);
 	} elseif($nbargs >= 3) {
-		// export env var for init
-		if($argv[2] == "env"){
+		if($argv[2] == "env"){ // export env var for init
 			echo
 				"SCM_COMORREV=".$current["scm"]["commit"].PHP_EOL.
 				"SCM_TAG=".($current["scm"]["tag"] ? $current["scm"]["tag"]["product"] : "").PHP_EOL.
@@ -83,9 +86,7 @@
 				$arch = pathenv("PHP_SDK_ARCH");
 			}
 			$description .= "arch:".$arch.pathenv("AVXB")." vcver:".pathenv("vcvars_ver")."[".pathenv("MSVC_DEPS")."]";
-
-			// manage pdb
-			$rpdb = " /rpdb";
+			$rpdb = " /rpdb"; // manage pdb
 			if($argv[3]){
 				if($argv[3] == "norpdb"){
 					$rpdb = "";
@@ -93,8 +94,7 @@
 					preg_match("/(libevent-[0-9]\.[0-9])/",$argv[2],$matches);
 					$matches[1] ? $libdep = " ".str_replace("-",":",$matches[1]) : $libdep = "";
 				} elseif($argv[3] != "libconfig") {
-					// for GCC only
-					$libdep = " ".$argv[3];
+					$libdep = " ".$argv[3]; // for GCC only
 					/*
 						additionnal descritption (used in php & httpd). order
 							1. build:xxx
@@ -150,7 +150,7 @@
 				$description .= " tag:".$current["scm"]["tag"]["product"];
 			} else {
 				if(!is_null($current["scm"]["branch"]) && $current["scm"]["branch"] != "HEAD" && $current["scm"]["branch"] != "")
-					$description .= " branch:".array_filter(explode("/",$current["scm"]["branch"]))[0]; // fix svn like '/trunk/httpd_src/modules/qos'
+					$description .= " branch:".$current["scm"]["branch"];
 				if($current["scm"]["commit"])
 					$description .= " commit:".$current["scm"]["commit"];
 			}

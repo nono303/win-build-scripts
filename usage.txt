@@ -131,7 +131,8 @@ Usage: go command [options]
     > param:  module name to get version
       return the module version in format x.x.x.x
     > option: EXCLUSIVE - ONLY IF PARAM MODULE IS PRESENT
-      env:   return the environment variables for init.bat
+      env:     return the environment variables for init.bat
+      verbose: display scm commands and full results
       <binfile>: write version information (verpatch) into the specified full path <binfile>
         [desc1 desc2...] optional descriptions (appended to generated one) each description in format key:value separated by space.
 	the first optional description will be used as product root (ex. for httpd or php modules)
