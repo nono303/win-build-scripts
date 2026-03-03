@@ -5,7 +5,6 @@
 		CONST
 	*/
 
-	const DEBUG = false;
 	const VERBOSE_PAD = 12;
 	const REMOTE_URLS = ["origin","upstream"];
 
@@ -15,11 +14,6 @@
 	/*
 		DATA ARRAYS
 	*/
-
-	global $letterpos;
-	$pos = 1;
-	foreach (range('a', 'z') as $letter)
-		$letterpos[$letter] = $pos++;
 
 	global $verfromfile;
 	$verfromfile = [
@@ -101,6 +95,51 @@
 		FUNCTIONS
 	*/
 
+	function cleanCache() {
+		if(CACHE_VERSION) {
+			if(is_dir($dcache = pathenv("PATH_VERSION_BUILD"))) {
+				foreach(glob($dcache.'/*') as $file)
+					if(is_file($file))
+						unlink($file);
+				debug($dcache." cleaned");
+				return true;
+			} else {
+				throw new Exception("Unable to clear cach as '".$dcache."' doesn't exists");
+			}
+		}
+		return false;
+	}
+
+	// version
+	function getGitBranchAtCommit($commit, $repo){
+		preg_match("/HEAD ->(.*)\n/m",$res = execnono($cmd = "git branch -a --contains ".$commit." | grep -v detached", NULL, $repo, NULL), $matches);
+		if($matches[1]) {
+			$branch = $matches[1];
+		} else {
+			preg_match("/^\* (.*)/m",$res,$matches);
+			if($matches[1]) {
+				$branch = trim($matches[1]);
+			} else {
+				$allb = array_filter(explode("\n",$res));
+				if(sizeof($allb) == 0){
+					$branch = $allb[0];
+				} elseif(sizeof($allb) == 1){
+					$branch = $allb[0];
+				} else {
+					// print_r($allb);
+					// arbitraire
+					$branch = end($allb);
+				}
+			}
+		}
+		$branch ?
+			$branch = end(explode("/",$branch)) :
+			$branch = "";
+		if(is_int(strpos($branch,"no branch")))
+			$branch = "";
+		return $branch;
+	}
+
 	function getVerFileProduct($raw, $src) {
 		global $forcedelete;
 		preg_match_all('/\d+/', str_replace(array_merge([$src],$forcedelete),"",$raw), $matches);
@@ -149,8 +188,10 @@
 		}
 		if (is_dir(PATH_SRC."/".$src."/.git")){
 			$url = 0;
-			foreach(array_filter(explode("\n",execnono($cmd = "git config --get remote.".REMOTE_URLS[0].".url && git config --get remote.".REMOTE_URLS[1].".url",NULL,realpath(PATH_SRC."/".$src),NULL))) as $rurl)
+			foreach(array_filter(explode("\n",execnono($cmd = "git config --get remote.".REMOTE_URLS[0].".url && git config --get remote.".REMOTE_URLS[1].".url",NULL,realpath(PATH_SRC."/".$src),NULL))) as $rurl){
+				$ret["scm"]["urlsclone"][REMOTE_URLS[$url]] = $rurl;
 				$ret["scm"]["urls"][REMOTE_URLS[$url++]] = str_replace(".git","",$rurl);
+			}
 			$ret["scm"]["name"] = "git";
 			if($ret["scm"]["tag"] = trim(explode("\n",execnono($cmd = "git tag --points-at HEAD",NULL,realpath(PATH_SRC."/".$src),NULL))[0])){
 				$ret["scm"]["tag"] = getVerFileProduct($ret["scm"]["tag"], $src);
@@ -178,16 +219,18 @@
 					echo str_pad("N/A", VERBOSE_PAD).str_pad($ret["scm"]["commit"], VERBOSE_PAD).str_pad($ret["scm"]["branch"], VERBOSE_PAD);
 				unset($ret["scm"]["ltag"]);
 			}
-			$ret["scm"]["date"] = trim(execnono($cmd = "git show -s --format=%cd --date=short ".$ret["scm"]["commit"],NULL,realpath(PATH_SRC."/".$src),NULL));
+			$ret["scm"]["dateiso"] = trim(execnono($cmd = "git show -s --format=%cd --date=short --date=iso-strict ".$ret["scm"]["commit"],NULL,realpath(PATH_SRC."/".$src),NULL));
+			$ret["scm"]["date"] = explode("T",$ret["scm"]["dateiso"])[0];
 		} elseif (is_dir(PATH_SRC."/".$src."/.svn")){
 			$ret["scm"]["name"] = "svn";
 			$svninfo = execnono($cmd = "svn info",NULL,realpath(PATH_SRC."/".$src),NULL);
 			preg_match("/Repository Root: ?(.*)\n/",$svninfo,$matches);
 			$ret["scm"]["urls"][REMOTE_URLS[0]] = trim($matches[1]);
 			preg_match("/Relative URL: \^\/(.*)\n/",$svninfo,$matches);
-			$ret["scm"]["branch"] = explode("/",trim($matches[1]))[0];
+			$ret["scm"]["branch"] = array_filter(explode("/",trim($matches[1])))[0];
+			$ret["scm"]["branchraw"] = trim($matches[1]);
 			preg_match("/Last Changed Rev: (.*)\n/",$svninfo,$matches); // 'Revision' might not reflect last change of the module
-			$ret["scm"]["commit"] = "r".trim($matches[1]); // add prefixe r for revision
+			$ret["scm"]["commit"] = trim($matches[1]);
 			preg_match("/Last Changed Date: ([^ ]*)/",$svninfo,$matches);
 			$ret["scm"]["date"] = trim($matches[1]);
 		}
