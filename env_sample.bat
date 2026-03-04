@@ -1,7 +1,7 @@
 REM ########################## change Prompt charset
 REM https://ss64.com/nt/chcp.html
 REM CHCP 65001 > tee: 'standard output': Permission denied > accents
-CHCP 1251 
+CHCP 1250
 
 REM ########################## DEBUG (just echo for all build)
 set DEBUG_BUILD=0
