@@ -11,6 +11,7 @@ set ARG_DEBUG=0
 set ARG_KEEPSRC=0
 set ARG_SVN=0
 set ARG_CMOPTS=0
+set argCount=0
 for %%x in (%*) do (
 	set /A argCount+=1
 	set "argVec[!argCount!]=%%~x"
@@ -74,7 +75,6 @@ if "%BCMD%"=="" (
 for %%D in (EXTERNAL_INCLUDE INCLUDE LIB) do (for /F "tokens=* USEBACKQ" %%F in (`call do_php %PATH_UTILS%\sub\deduplicate.php %%D`) do (set %%D=%%F))
 
 	REM ~~~~~~~~~~~~ RUN
-echo ####### BEGIN %BAFF% %1 %MSVC_DEPS% %ARCH% %AVXECHO% [%ymdhis%] #######
 if "%ARG_SVN%" == "1" (
 	set PATH_INSTALL_SAV=%PATH_INSTALL%
 	set PATH_INSTALL=%PATH_INSTALL%.svn
@@ -82,10 +82,10 @@ if "%ARG_SVN%" == "1" (
 set STARTTIME=%TIME%
 if %ARG_ALL% == 1 (
 	for %%V in (vs17 vs18) do (
-		for %%A in (2 1 0) do (
+		for %%A in (0 1 2) do (
+			echo ####### BEGIN %BAFF% %1 %MSVC_DEPS% %ARCH% %AVXECHO% [%ymdhis%] #######
 			setlocal
 			call %PATH_BATCH%\%%V.bat
-			call %PATH_BATCH%\x64.bat
 			call %PATH_BATCH%\avx.bat %%A
 			call %BCMD% 2>&1 | tee -a %LOGNAME%
 			endlocal
@@ -93,6 +93,7 @@ if %ARG_ALL% == 1 (
 	)
 	call dos2unix -q -f %LOGNAME%
 ) else (
+	echo ####### BEGIN %BAFF% %1 %MSVC_DEPS% %ARCH% %AVXECHO% [%ymdhis%] #######
 	if %ARG_NOLOG% == 1 (
 		call %BCMD% 2>&1
 	) else (
