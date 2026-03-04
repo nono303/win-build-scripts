@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
+@echo off && call %PATH_UTILS%\init.bat %1 cmake
 
 	REM fix /src/gav1/symbol_visibility.h #define LIBGAV1_PUBLIC __declspec(dllexport)
 		REM libgav1_static.lib(internal_frame_buffer_list.cc.obj) : error LNK2001: unresolved external symbol __imp_Libgav1SetFrameBuffer
@@ -27,7 +27,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 @echo off
 if "%ARG_CMOPTS%"=="1" (exit /B)
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 sed -i 's/= libgav1_shared/= libgav1/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% libgav1_shared
 

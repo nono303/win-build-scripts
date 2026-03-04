@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
+@echo off && call %PATH_UTILS%\init.bat %1 cmake
 
 sed -i -E "s/20189999/%SCM_COMORREV_DATE:-=%/g" %CYGPATH_SRC%/%1/cmake/modules/thirdparty/GetGitHeadDate.cmake
 
@@ -125,7 +125,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 @echo off
 if "%ARG_CMOPTS%"=="1" (exit /B)
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% install python_wheel
 
 xcopy /C /F /Y %PATH_BUILD%\%1\libgdal.pdb %PATH_INSTALL%\_%1\bin\*

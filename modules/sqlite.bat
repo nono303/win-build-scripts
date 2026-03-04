@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
+@echo off && call %PATH_UTILS%\init.bat %1 cmake nocxx
 
 REM	SQLITE_ENABLE_COLUMN_METADATA=ON	SQLITE_OMIT_DECLTYPE=OFF
 REM		https://github.com/storesafe/cordova-sqlite-storage/issues/906
@@ -55,7 +55,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 @echo off
 if "%ARG_CMOPTS%"=="1" (exit /B)
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% install
 
 for %%Y in (%SQLITEOUT%) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%Y)

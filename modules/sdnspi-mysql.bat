@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1
+@echo off && call %PATH_UTILS%\init.bat %1
 
 set OUTDIR_CONF=Release
 

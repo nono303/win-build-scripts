@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1
+@echo off && call %PATH_UTILS%\init.bat %1
 
 	REM ~~~~~~~~~~~~ Create Outdir
 set OUTDIR_CONF=Release
@@ -27,7 +27,7 @@ python gen-make.py ^
 --with-httpd=%PATH_INSTALL% ^
 --with-py3c=%PATH_BIN_PYTHON%
 
-if %ARG_KEEPSRC% == 0 (call do_php %PATH_MODULES_COMMON%/msbuild.php "%PATH_SRC%/%1/build/win32/vcnet-vcproj/" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER% nostd)
+if %ARG_KEEPSRC% == 0 (call do_php %PATH_UTILS%/msbuild.php "%PATH_SRC%/%1/build/win32/vcnet-vcproj/" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER% nostd)
 
 	REM ~~~~~~~~~~~~ fix javac nowarn
 for %%V in (javahl-callback-java javahl-compat-java javahl-compat-tests javahl-java javahl-remote-java javahl-tests javahl-types-java javahl-util-java) do (
@@ -60,7 +60,7 @@ REM python win-tests.py --release --cleanup --parallel --bin=%PATH_RELEASE_SVN%\
 
 REM ---------------------------- Cmake Build (wait for SVN_ENABLE_JAVAHL)
 
-REM @echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
+REM @echo off && call %PATH_UTILS%\init.bat %1 cmake nocxx
 REM 
 REM if NOT "%ARG_SVN%" == "1" (
 REM 	set PATH_INSTALL_SAV=%PATH_INSTALL%
@@ -119,7 +119,7 @@ REM -DSVN_SQLITE_USE_AMALGAMATION=OFF ^
 REM %CMAKE_SERF% ^
 REM %PATH_SRC%\%1
 REM 
-REM %PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+REM %PATH_BIN_CYGWIN%\bash %CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 REM %NINJA% install
 REM 
 REM if NOT "%ARG_SVN%" == 1 (

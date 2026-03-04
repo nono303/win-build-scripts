@@ -1,9 +1,9 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1
+@echo off && call %PATH_UTILS%\init.bat %1
 
 set OUTDIR_CONF=Release
 set VCDIR=build-VS2026\libiconv
 
-if %ARG_KEEPSRC% == 0 (call do_php %PATH_MODULES_COMMON%/msbuild.php "%PATH_SRC%/%1/%VCDIR%;%PATH_SRC%/%1/%VCDIR%/../_props" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%)
+if %ARG_KEEPSRC% == 0 (call do_php %PATH_UTILS%/msbuild.php "%PATH_SRC%/%1/%VCDIR%;%PATH_SRC%/%1/%VCDIR%/../_props" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%)
 
 MSBuild.exe %VCDIR%/libiconv.vcxproj %MSBUILD_OPTS% ^
 /t:Clean,Build ^

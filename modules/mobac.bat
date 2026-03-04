@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1
+@echo off && call %PATH_UTILS%\init.bat %1
 if exist %PATH_SRC%\%1\mobac\build\. rmdir /S /Q %PATH_SRC%\%1\mobac\build
 
 xcopy /C /F /Y %PATH_PATCHES%\mobac_gradle-wrapper.jar %PATH_SRC%\%1\gradle\wrapper\gradle-wrapper.jar*

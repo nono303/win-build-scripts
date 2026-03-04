@@ -1,4 +1,4 @@
-@echo on && call %PATH_MODULES_COMMON%\init.bat %1
+@echo on && call %PATH_UTILS%\init.bat %1
 cd /D %PATH_SRC%\%1
 
 echo ^>^>^> gradlew --configuration-cache --project-cache-dir %PATH_GRADLE_BUILD% wrapper --gradle-version %GRADLEVER%

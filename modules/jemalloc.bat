@@ -1,8 +1,8 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1
+@echo off && call %PATH_UTILS%\init.bat %1
 
 %PATH_BIN_CYGWIN%\sh.exe -c "CC=cl ./autogen.sh"
 set JEMALLOC_VCVER=vc2017
-if %ARG_KEEPSRC% == 0 (call do_php %PATH_MODULES_COMMON%/msbuild.php "%PATH_SRC%/%1/msvc/projects/%JEMALLOC_VCVER%/jemalloc/" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER% nostd)
+if %ARG_KEEPSRC% == 0 (call do_php %PATH_UTILS%/msbuild.php "%PATH_SRC%/%1/msvc/projects/%JEMALLOC_VCVER%/jemalloc/" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER% nostd)
 set OUTDIR_CONF=Release
 
 MSBuild.exe msvc\jemalloc_%JEMALLOC_VCVER%.sln %MSBUILD_OPTS% ^

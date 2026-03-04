@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
+@echo off && call %PATH_UTILS%\init.bat %1 cmake nocxx
 
 	REM for PHP
 	REM - libxml2_a_dll MUST be used
@@ -45,7 +45,7 @@ for %%X in (OFF ON) do (
 	-DLIBXML2_WITH_ZLIB=ON ^
 	%PATH_SRC%\%1
 
-	%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+	%PATH_BIN_CYGWIN%\bash %CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 	%NINJA% install
 
 	if %%X == OFF (xcopy /C /F /Y %PATH_BUILD%\%1\libxml2_a_dll.pdb %PATH_INSTALL%\lib\*)

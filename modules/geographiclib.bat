@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
+@echo off && call %PATH_UTILS%\init.bat %1 cmake
 
 if not exist %PATH_INSTALL%\_%1\. mkdir %PATH_INSTALL%\_%1
 
@@ -19,7 +19,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 @echo off
 if "%ARG_CMOPTS%"=="1" (exit /B)
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 sed -i 's/GeographicLib-i/GeographicLib/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% src\install include\GeographicLib\install tools\install
 

@@ -1,5 +1,5 @@
 REM /cygdrive/c/sdk/src/php-src/ext/gmp/config.w32:6   if (CHECK_LIB("mpir_a.lib", "gmp", PHP_GMP)
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1
+@echo off && call %PATH_UTILS%\init.bat %1
 
 if %AVXECHO%==avx2 (
 	set MPIR_NAME=skylake-avx
@@ -21,7 +21,7 @@ set VCDIR=msvc
 
 call python %PATH_SRC%\%1\%VCDIR%\mpir_config.py %MPIRVCVER% %WKITVER% %MPIR_CONFIG%
 
-call do_php %PATH_MODULES_COMMON%/msbuild.php "%PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%MPIR_NAME:-=_%" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
+call do_php %PATH_UTILS%/msbuild.php "%PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%MPIR_NAME:-=_%" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
 
 MSBuild.exe %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%MPIR_NAME:-=_%\dll_mpir_%MPIR_NAME:-=_%.vcxproj %MSBUILD_OPTS% ^
 /p:Configuration=%OUTDIR_CONF% ^

@@ -19,7 +19,6 @@ set PATH_BUILDROOT=%PATH_SDK_ROOT%\build
 	set PATH_VERSION_BUILD=%PATH_BUILDROOT%\version
 set PATH_MODULES=%PATH_BATCH%\modules
 set PATH_PATCHES=%PATH_BATCH%\patches
-set PATH_MODULES_COMMON=%PATH_MODULES%\common
 set PATH_UTILS=%PATH_BATCH%\utils
 set PATH_LOGS=%PATH_SDK_ROOT%\logs
 set PATH_SRC=%PATH_SDK_ROOT%\src
@@ -77,7 +76,6 @@ set BIN_NINJA=%PATH_SOFTS%\ninja.exe
 REM ########################## CYGWIN PATH
 FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_SRC%`) do (set CYGPATH_SRC=%%F)
 FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_MODULES%`) do (set CYGPATH_MODULES=%%F)
-FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_MODULES_COMMON%`) do (set CYGPATH_MODULES_COMMON=%%F)
 FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_BATCH%`) do (set CYGPATH_BATCH=%%F)
 FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_UTILS%`) do (set CYGPATH_UTILS=%%F)
 

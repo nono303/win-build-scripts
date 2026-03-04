@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
+@echo off && call %PATH_UTILS%\init.bat %1 cmake
 
 	REM ninja: error: build.ninja:993: multiple rules generate yuv.lib [-w dupbuild=err]
 sed -i 's/ly_lib_name} )/ly_lib_name}_static \)/g' %CYGPATH_SRC%/%1/CMakeLists.txt
@@ -12,7 +12,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 @echo off
 if "%ARG_CMOPTS%"=="1" (exit /B)
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 	REM mjpeg_decoder.cc.obj : error LNK2001: unresolved external symbol jpeg_*
 sed -i 's/LINK_LIBRARIES = kernel32.lib/LINK_LIBRARIES = kernel32.lib %PATH_INSTALL:\=\\\%\\\lib\\\jpeg.lib/g' %CYGPATH_BUILD%/%1/build.ninja
 	REM shared lib for dll: include/libyuv/basic_types.h:48:#define LIBYUV_API __declspec(dllexport)

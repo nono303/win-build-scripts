@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1
+@echo off && call %PATH_UTILS%\init.bat %1
 call cl /nologo /c /DLUA_BUILD_AS_DLL /Fdliblua.pdb ^
 /w ^
 /Gw ^

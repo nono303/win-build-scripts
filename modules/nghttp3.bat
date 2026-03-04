@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
+@echo off && call %PATH_UTILS%\init.bat %1 cmake nocxx
 
 for %%X in (sfparse.c sfparse.h) do (
 	if not exist %PATH_SRC%\%1\lib\sfparse\%%X mklink /h %PATH_SRC%\%1\lib\sfparse\%%X %PATH_SRC%\nghttp2\lib\%%X
@@ -18,7 +18,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 @echo off
 if "%ARG_CMOPTS%"=="1" (exit /B)
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% install
 
 xcopy /C /F /Y %PATH_BUILD%\%1\lib\nghttp3.pdb %PATH_INSTALL%\bin\*

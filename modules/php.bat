@@ -10,7 +10,7 @@ REM * INIT *
 REM ********
 
 	REM ~~~~~~~~~~~~ php-src
-call %PATH_MODULES_COMMON%\init.bat php-src
+call %PATH_UTILS%\init.bat php-src
 set PHPVER=%GET_VERSION:~0,3%
 set PHPVERFULL=%GET_VERSION%
 
@@ -79,7 +79,7 @@ if %ARG_KEEPSRC% == 0 (
 )
 
 	REM ~~~~~~~~~~~~ pecl-memcache
-call %PATH_MODULES_COMMON%\init.bat pecl-memcache
+call %PATH_UTILS%\init.bat pecl-memcache
 	REM revision & version for pecl_memcache in phpinfo()
 FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\find -name 'memcache.c' -type f -exec dirname {} +`) do (set PECLMEMCACHECYGSRCDIR=%%F)
 FOR /F "tokens=* USEBACKQ" %%F in (`grep PHP_MEMCACHE_VERSION %CYGPATH_SRC%/pecl-memcache/%PECLMEMCACHECYGSRCDIR%/php_memcache.h ^| cut -d^'^"^' -f2`) do (set PECLMEMCACHEVERSION=%%F)
@@ -89,18 +89,18 @@ REM echo %PECLMEMCACHEVERSION% ^| branch: %SCM_BRANCH% ^| commit: %SCM_COMORREV%
 	REM ~~~~~~~~~~~~ pecl-text-xdiff : libxdiff version
 cd /D %PATH_SRC%\libxdiff
 FOR /F "tokens=* USEBACKQ" %%F in (`git describe --tags`) do (set LIB_VERSION=%%F)
-call %PATH_MODULES_COMMON%\init.bat pecl-text-xdiff
+call %PATH_UTILS%\init.bat pecl-text-xdiff
 sed -i 's/extern char libxdiff_version/\/\/ extern char libxdiff_version/g' %CYGPATH_SRC%/pecl-text-xdiff/xdiff.c
 sed -i 's/libxdiff_version)/"%LIB_VERSION:~1%")/g' %CYGPATH_SRC%/pecl-text-xdiff/xdiff.c
 
 	REM ~~~~~~~~~~~~ php-ext-brotli : brotli version
-call %PATH_MODULES_COMMON%\init.bat php-ext-brotli
+call %PATH_UTILS%\init.bat php-ext-brotli
 FOR /F "tokens=* USEBACKQ" %%F in (`do_php %PATH_UTILS%\sub\version.php brotli`) do (set BROTLI_VERSION=%%F)
 sed -i 's/AC_DEFINE..USE_BROTLI_DICTIONARY./AC_DEFINE\("BROTLI_LIB_VERSION", "%BROTLI_VERSION%", "system library version"\);\n    AC_DEFINE\("USE_BROTLI_DICTIONARY"/g' %CYGPATH_SRC%/php-ext-brotli/config.w32
 
 	REM ~~~~~~~~~~~~ other PECL init
 for %%E in (php-sdk xdebug php-geos php-proj php-ogr php-ext-zstd pecl-datetime-timezonedb pecl-system-sync pecl-igbinary pecl-parallel) do (
-	call %PATH_MODULES_COMMON%\init.bat %%E
+	call %PATH_UTILS%\init.bat %%E
 	if exist %PATH_PATCHES%\php-src\%PHPVER%\pecl-%%E.patch (call %PATH_UTILS%\gitapply %PATH_PATCHES%\php-src\%PHPVER%\pecl-%%E.patch)
 )
 

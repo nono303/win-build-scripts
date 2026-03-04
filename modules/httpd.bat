@@ -3,11 +3,11 @@ set mod_suffix=.so
 
 	REM ~~~~~~~~~~~ external modules
 if NOT "%2"=="svn" (
-	for %%M in (mod_maxminddb mod_fcgid mod_h2 mod_md mod_wku_bt mod_h264_streaming mod_qos mod_evasive mod_zstd) do (call %PATH_MODULES_COMMON%\init.bat %%M)
+	for %%M in (mod_maxminddb mod_fcgid mod_h2 mod_md mod_wku_bt mod_h264_streaming mod_qos mod_evasive mod_zstd) do (call %PATH_UTILS%\init.bat %%M)
 	if not exist %PATH_SRC%\mod_evasive\mod_evasive.c mklink /h %PATH_SRC%\mod_evasive\mod_evasive.c %PATH_SRC%\mod_evasive\mod_evasive24win.c
 )
 
-call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
+call %PATH_UTILS%\init.bat %1 cmake nocxx
 if "%2"=="svn" (sed -i 's/mod_dav_install_lib 0/mod_dav_install_lib 1/g' %CYGPATH_SRC%/%1/CMakeLists.txt)
 set HTTPD_VERSION=%SCM_TAG%
 
@@ -32,7 +32,7 @@ if "%2"=="svn" (
 	%PATH_SRC%\%1
 )
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% install
 
 	REM delete unused exp in /lib

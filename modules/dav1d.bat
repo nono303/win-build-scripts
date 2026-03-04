@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake
+@echo off && call %PATH_UTILS%\init.bat %1 cmake
 
 	REM remove useless warning
 sed -i -E 's/(warning\(.Compiler)/# \1/g' %CYGPATH_SRC%/%1/meson.build
@@ -25,7 +25,7 @@ meson setup ^
 -Dmacos_kperf=false ^
 %PATH_SRC%\%1
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/meson.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_UTILS%/meson.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% src/dav1d.dll
 
 for %%X in (dll pdb) do (xcopy /C /F /Y  %PATH_BUILD%\%1\src\dav1d.%%X %PATH_INSTALL%\bin\*)

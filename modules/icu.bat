@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1
+@echo off && call %PATH_UTILS%\init.bat %1
 REM ?icutu         # tool util
 REM ?icudt         # stub data
 REM +icuuc         # Common and Data libraries
@@ -12,7 +12,7 @@ set VCDIR=icu4c\source\allinone
 set OUTDIR_CONF=Release
 
 if %ARG_KEEPSRC% == 0 (
-	call do_php %PATH_MODULES_COMMON%/msbuild.php "%PATH_SRC%/%1/icu4c" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
+	call do_php %PATH_UTILS%/msbuild.php "%PATH_SRC%/%1/icu4c" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
 		REM icudtXX.pdb
 	sed -i 's/NXCOMPAT/NXCOMPAT \/OPT:REF,ICF \/DEBUG/g' %CYGPATH_SRC%/%1/icu4c/source/tools/pkgdata/pkgdata.cpp
 		REM avx2 compiler error - https://unicode-org.atlassian.net/browse/ICU-22715

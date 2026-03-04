@@ -2,7 +2,7 @@
 	REM warning: failed to remove NUL: Invalid argument
 if exist %PATH_SRC%\%1\NUL rm -fv  /S /Q %PATH_BUILD%\%PATH_SRC%\%1\NUL
 
-call %PATH_MODULES_COMMON%\init.bat %1
+call %PATH_UTILS%\init.bat %1
 	REM https://wiki.openssl.org/index.php/Compilation_and_Installation
 	REM no-deprecated / -DOPENSSL_NO_DEPRECATED_3_0 (https://github.com/openssl/openssl/pull/13866) : failed for libssh2 / apr
 	

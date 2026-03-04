@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake nocxx
+@echo off && call %PATH_UTILS%\init.bat %1 cmake nocxx
 
 	REM set LIBCURL_TIMESTAMP
 for /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\date -u`) do (set LIBCURL_TIMESTAMP=%%F)
@@ -79,7 +79,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCURL_DROP_UNUSED=ON ^
 %PATH_SRC%\%1
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 sed -i -E 's/TARGET_COMPILE_PDB.*/TARGET_COMPILE_PDB = lib\\\\%LIBCURL_STATIC_NAME%\.pdb/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% %LIBCURL_STATIC_NAME%.lib
 for %%E in (lib pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\lib\%LIBCURL_STATIC_NAME%.%%E %PATH_INSTALL%\%DIR_LIB_STATIC%\*)
@@ -164,7 +164,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 @echo off
 if "%ARG_CMOPTS%"=="1" (exit /B)
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 %NINJA% install
 
 xcopy /C /F /Y %PATH_BUILD%\%1\lib\libcurl.pdb %PATH_INSTALL%\bin\*

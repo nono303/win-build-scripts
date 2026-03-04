@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1
+@echo off && call %PATH_UTILS%\init.bat %1
 	REM 2024-02-29: libevent-2.0 discontinued
 set EVENT_VER=2.1
 

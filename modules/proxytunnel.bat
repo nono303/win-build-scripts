@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1
+@echo off && call %PATH_UTILS%\init.bat %1
 
 call %PATH_BIN_CYGWIN%\bash --login -c 'cd %CYGPATH_SRC%/%1 && make -j16 proxytunnel CFLAGS="-Wall -ggdb -O3 -s -march=skylake" OPTFLAGS="-DHAVE_GETOPT_LONG -DUSE_SSL -DSPT_TYPE=2 -DCYGWIN"'
 

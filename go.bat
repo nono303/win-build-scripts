@@ -43,7 +43,7 @@ if %CUR_DEBUG% == 1 (
 )
 
 	REM ~~~~~~~~~~~~ LOGNAME
-call %PATH_MODULES_COMMON%\ymdhis.bat
+call %PATH_UTILS%\ymdhis.bat
 set PREFIXLOG=%1
 if %1 == full (IF not [%2] == [] (set PREFIXLOG=%1-%2))
 if %ARG_ALL% == 1 (

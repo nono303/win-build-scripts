@@ -1,4 +1,4 @@
-@echo off && call %PATH_MODULES_COMMON%\init.bat %1 cmake nostd
+@echo off && call %PATH_UTILS%\init.bat %1 cmake nostd
 
 if "%ARG_CMOPTS%"=="1" (@echo on)
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
@@ -27,7 +27,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 @echo off
 if "%ARG_CMOPTS%"=="1" (exit /B)
 
-%PATH_BIN_CYGWIN%\bash %CYGPATH_MODULES_COMMON%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+%PATH_BIN_CYGWIN%\bash %CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 sed -i 's/lzma\.lib/liblzma\.lib/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
 
