@@ -53,13 +53,6 @@
 				"cd /D ".$ele.PHP_EOL.
 				"git checkout ".$head.PHP_EOL.
 				"cd /D ..".PHP_EOL;
-			if(GITGC){
-				foreach(explode("\n",execnono("git branch", NULL, $repo, NULL)) as $lb)
-					if(!str_starts_with($lb,"*"))
-						echo "\t↓".execnono("git branch -d ".$lb, NULL, $repo, NULL).PHP_EOL;
-				echo "\t↓".execnono("git reflog expire --all --expire=now --expire-unreachable=now", NULL, $repo, NULL).PHP_EOL;
-				echo "\t↓".execnono("git gc --prune=now --aggressive", NULL, $repo, NULL).PHP_EOL;
-			}
 			if($content["from"] != "git tag")
 				$head = "branch/".$head;
 		} elseif(is_dir($repo."/.svn")){
@@ -91,6 +84,18 @@
 			str_pad(str_replace(["tag/","branch/","revision/"],["\t\tt ","b ","\t\t\t\tr "],$head),26).
 			PHP_EOL;
 		file_put_contents($argv[1],'"'.$ele.'";"'.$from.'";"'.$content["scm"]["urls"]["origin"].'";"'.$head.'";"'.$content["scm"]["branch"].'";"'.$logtags.'";"'.$ltd.'"'.PHP_EOL,FILE_APPEND);
+		if(GITGC && $from == "git"){
+			foreach(explode("\n",execnono("git branch", NULL, $repo, NULL)) as $lb) {
+				if(!str_starts_with($lb,"*")) {
+					$cmd = "git branch -D ".$lb. " 2>&1";
+					echo "\t".$cmd.PHP_EOL."\t".execnono($cmd, NULL, $repo, NULL).PHP_EOL;
+				}
+			}
+			$cmd = "git gc --prune=now 2>&1";
+			echo "\t".$cmd." ".execnono($cmd, NULL, $repo, NULL).PHP_EOL;
+			$cmd = "git reflog expire --expire=now 2>&1";
+			echo "\t".$cmd." ".execnono($cmd, NULL, $repo, NULL).PHP_EOL;
+		}
 	}
 	file_put_contents(dirname(__FILE__) . "/../srccreate.bat",$srccreate);
 ?>
