@@ -97,7 +97,7 @@ if %ARG_ALL% == 1 (
 	if %ARG_NOLOG% == 1 (
 		call %BCMD% 2>&1
 	) else (
-		call %BCMD% 2>&1 | tee %LOGNAME%
+		call %BCMD% 2>&1 | tee-x64 %LOGNAME%
 		call dos2unix -q -f %LOGNAME%
 	)
 )
