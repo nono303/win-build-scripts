@@ -9,7 +9,7 @@
 | [curl](https://github.com/curl/curl) | 8.19.0.3 |
 | [dav1d](https://code.videolan.org/videolan/dav1d) | 1.5.3 |
 | [dependencies](https://github.com/himeshsameera/Dependencies) | 2.2.0.11 - c205928 |
-| [fit2gpx](https://github.com/nono303/fit2gpx) - [*upstream + src*](https://github.com/MaksVasilev/fit2gpx) | 0.1.24.9 - a541814 |
+| [fit2gpx](https://github.com/nono303/fit2gpx) - [*upstream + src*](https://github.com/MaksVasilev/fit2gpx) | 0.1.24.10 - 4ad0f6b |
 | [freeglut](https://github.com/dcnieho/FreeGLUT) | 3.8.0 |
 | [freetype2](https://gitlab.freedesktop.org/freetype/freetype) | 2.14.2 |
 | [gdal](https://github.com/OSGeo/gdal) | 3.12.2 |
@@ -48,9 +48,9 @@
 | [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1922 - 6067afde |
 | [libzip](https://github.com/nih-at/libzip) | 1.11.4 |
 | [lua](https://github.com/lua/lua) | 5.5.0 |
-| [mapsforgesrv](https://github.com/nono303/mapsforgesrv) - [*upstream + src*](https://github.com/telemaxx/mapsforgesrv) | 0.26.1.2.6 - a4d0b00 |
+| [mapsforgesrv](https://github.com/nono303/mapsforgesrv) - [*upstream + src*](https://github.com/telemaxx/mapsforgesrv) | 0.26.1.2.7 - 6978319 |
 | [memcached](https://github.com/memcached/memcached) | 1.6.40 |
-| [mobac](https://github.com/nono303/mobac) - [*upstream + src*](https://git.code.sf.net/p/mobac/git) | 2.3.3 - daef274 :warning: [apacheCommonsHttp](https://sourceforge.net/p/mobac/bugs/400/) |
+| [mobac](https://github.com/nono303/mobac) - [*upstream + src*](https://git.code.sf.net/p/mobac/git) | 2.3.3 - 1227647 :warning: [apacheCommonsHttp](https://sourceforge.net/p/mobac/bugs/400/) |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.0 |
 | [mod_evasive](https://github.com/jvdmr/mod_evasive) | 2.4.0 |
 | [mod_fcgid](https://github.com/nono303/mod_fcgid) - [*upstream + src*](https://github.com/pagespeed/mod_fcgid) | 2.3.10.6 |
@@ -91,10 +91,10 @@
 | [sdlna](https://github.com/nono303/simpleDLNA) - [*upstream + src*](https://github.com/nmaier/simpleDLNA) | 1.3.4.2 - 8c19a9c |
 | [serf](https://github.com/apache/serf) | 2.0.0 - 7e98c4d |
 | [sqlite](https://github.com/rhuijben/sqlite-amalgamation) - _[release](https://www.sqlite.org/changes.html)_ | 3.51.2 |
-| [sslh](https://github.com/yrutschle/sslh) | 2.3.0.13 - 579baae |
+| [sslh](https://github.com/yrutschle/sslh) | 2.3.0.17 - 9fadd60 |
 | [subversion](https://github.com/apache/subversion) | 1.16.0 - d8f58fdef6 |
 | [tidy](https://github.com/htacg/tidy-html5) | 5.9.20 - d08ddc2 |
-| [tzdataservice](https://github.com/nono303/tzdataservice) - [*upstream + src*](https://github.com/skaringa/tzdataservice) | 2.1 |
+| [tzdataservice](https://github.com/nono303/tzdataservice) - [*upstream + src*](https://github.com/skaringa/tzdataservice) | 2.1.1 - d4a38d9 |
 | [verpatch](https://github.com/pavel-a/ddverpatch) | 1.0.15.1 - 3cc989e |
 | [wineditline](https://github.com/ptosco/wineditline) | 2.208 |
 | [xdebug](https://github.com/xdebug/xdebug) | 3.5.1 |

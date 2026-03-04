@@ -67,8 +67,8 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [7z](https://www.7-zip.org/download.html)                    | x64  | 26.00 |                     |
 | [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.91     |                     |
 | [ChkMatch](https://web.archive.org/web/20210205095232/https://www.debuginfo.com/tools/chkmatch.html) | x86 | 1.0.3          |                     |
-| [Gradle](https://services.gradle.org/distributions/) | [java] | 9.4.0-rc1 | |
-| [CMake](https://cmake.org/download/) | x64 | 4.3.0-rc1 | |
+| [Gradle](https://services.gradle.org/distributions/) | [java] | 9.4.0 | |
+| [CMake](https://cmake.org/download/) | x64 | 4.3.0-rc2 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | x64 | 1.13.2 | |
 | [JOM](https://download.qt.io/official_releases/jom/) | x64 | 1.1.6 | |
 | [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 1.10.1 | |

@@ -386,7 +386,7 @@ git checkout next
 cd /D ..
 git clone https://github.com/nono303/tzdataservice.git tzdataservice
 cd /D tzdataservice
-git checkout tags/2.1
+git checkout master
 cd /D ..
 git clone https://github.com/pavel-a/ddverpatch verpatch
 cd /D verpatch
