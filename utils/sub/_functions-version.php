@@ -17,6 +17,9 @@
 
 	global $verfromfile;
 	$verfromfile = [
+		// no tag for 18
+		"libpng"			=> ["/#define PNG_LIBPNG_VER_STRING \"([0-9\.]+)/",
+							PATH_SRC."/libpng/png.h"],
 		// no tag
 		"libyuv"			=> ["/LIBYUV_VERSION (.*)/",
 							PATH_SRC."/libyuv/include/libyuv/version.h"],

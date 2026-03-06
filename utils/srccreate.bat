@@ -152,8 +152,12 @@ git clone https://github.com/maxmind/libmaxminddb.git libmaxminddb
 cd /D libmaxminddb
 git checkout tags/1.13.3
 cd /D ..
-git clone git://git.code.sf.net/p/libpng/code libpng
+git clone https://github.com/pnggroup/libpng libpng
 cd /D libpng
+git checkout libpng18
+cd /D ..
+git clone git://git.code.sf.net/p/libpng/code libpng.16
+cd /D libpng.16
 git checkout tags/v1.6.55
 cd /D ..
 git clone https://github.com/jedisct1/libsodium.git libsodium
@@ -178,7 +182,7 @@ git checkout tags/v0.23
 cd /D ..
 git clone https://gitlab.gnome.org/GNOME/libxml2.git libxml2
 cd /D libxml2
-git checkout tags/v2.15.1
+git checkout tags/v2.15.2
 cd /D ..
 git clone https://github.com/nono303/libxpm.git libxpm
 cd /D libxpm
@@ -295,6 +299,10 @@ cd /D ..
 git clone https://github.com/igbinary/igbinary pecl-igbinary
 cd /D pecl-igbinary
 git checkout tags/3.2.17RC1
+cd /D ..
+git clone https://github.com/supermetrics-public/pecl-jsonpath.git pecl-jsonpath
+cd /D pecl-jsonpath
+git checkout main
 cd /D ..
 git clone https://github.com/websupport-sk/pecl-memcache.git pecl-memcache
 cd /D pecl-memcache
