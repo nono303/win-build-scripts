@@ -1,8 +1,131 @@
 # changelog
 
 
+## 1.16.1 _(2026-03-06)_
+
+*  add jsonpath update src
+`SRC_VERSION.md`
+`modules/php.bat`
+`modules/phpsdk-config_make.bat`
+`utils/srccreate.bat`
+*  set make opts only build exe
+`modules/sslh.sh`
+*  1.4.0
+`modules/libavif.bat`
+*  build icuinfo install exe & pdb
+`modules/icu.bat`
+`utils/bininfo.bat`
+*  fix ARG_CMOPTS fix CMake opts require path for iconv, readline, zlib fix pkg_check_modules errors
+`modules/libxml2.bat`
+`patches/libxml2.patch`
+*  upgrade src & tools
+`README.md`
+`SRC_VERSION.md`
+`env_sample.bat`
+`go.bat`
+`utils/srccreate.bat`
+*  fix GIT GC
+`utils/sub/srcstatus.php`
+*  fix french encoding  (accent)
+`env_sample.bat`
+*  fix CRLF
+`avx.bat`
+`go.bat`
+*  fix argCount reste change avx order: 2 1 0 > 0 1 2 add 'BEGIN' log to each build for 'all' arg
+`go.bat`
+*  move scripts from PATH_MODULES_COMMON to PATH_UTILS
+`env_sample.bat`
+`go.bat`
+`modules/aom.bat`
+`modules/apr-util.bat`
+`modules/apr.bat`
+`modules/brotli.bat`
+`modules/bzip2.bat`
+`modules/cares.bat`
+`modules/curl.bat`
+`modules/dav1d.bat`
+`modules/dependencies.bat`
+`modules/fit2gpx.bat`
+`modules/freeglut.bat`
+`modules/freetype2.bat`
+`modules/gdal.bat`
+`modules/geographiclib.bat`
+`modules/geos.bat`
+`modules/giflib.bat`
+`modules/httpd.bat`
+`modules/icu.bat`
+`modules/jansson.bat`
+`modules/jemalloc.bat`
+`modules/lerc.bat`
+`modules/libavif.bat`
+`modules/libdeflate.bat`
+`modules/libev.bat`
+`modules/libevent.bat`
+`modules/libexpat.bat`
+`modules/libffi.bat`
+`modules/libgav1.bat`
+`modules/libgd.bat`
+`modules/libgeotiff.bat`
+`modules/libheif.bat`
+`modules/libiconv.bat`
+`modules/libjpeg-turbo.bat`
+`modules/liblzma.bat`
+`modules/libmaxminddb.bat`
+`modules/libpng.bat`
+`modules/libsodium.bat`
+`modules/libssh2.bat`
+`modules/libtiff.bat`
+`modules/libwebp.bat`
+`modules/libxdiff.bat`
+`modules/libxml2.bat`
+`modules/libxpm.bat`
+`modules/libxslt.bat`
+`modules/libyuv.bat`
+`modules/libzip.bat`
+`modules/lua.bat`
+`modules/mapsforgesrv.bat`
+`modules/memcached.bat`
+`modules/mobac.bat`
+`modules/mod_fcgid.bat`
+`modules/mod_security-sdbm-util.bat`
+`modules/mod_security.bat`
+`modules/mpir.bat`
+`modules/nghttp2.bat`
+`modules/nghttp3.bat`
+`modules/ngtcp2.bat`
+`modules/nssm.bat`
+`modules/openssl.bat`
+`modules/pcre2.bat`
+`modules/php.bat`
+`modules/proj.bat`
+`modules/proxytunnel.bat`
+`modules/pthread-win32.bat`
+`modules/qhull.bat`
+`modules/run-hidden.bat`
+`modules/sdlna.bat`
+`modules/sdnspi-mysql.bat`
+`modules/serf.bat`
+`modules/sqlite.bat`
+`modules/sslh.bat`
+`modules/subversion.bat`
+`modules/tidy.bat`
+`modules/tzdataservice.bat`
+`modules/verpatch.bat`
+`modules/wineditline.bat`
+`modules/yajl.bat`
+`modules/zlib.bat`
+`modules/zstd.bat`
+`utils/init.bat`
+`utils/meson.sh`
+`utils/msbuild.php`
+`utils/ninja.sh`
+`utils/ymdhis.bat`
+
+
 ## 1.16.0 _(2026-03-03)_
 
+*  1.16.0
+`changelog.md`
 *  update src
 `SRC_VERSION.md`
 `modules/clean.bat`
