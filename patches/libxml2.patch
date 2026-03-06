@@ -1,8 +1,52 @@
-diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
-index 116c77dd..d2cff670 100644
---- "a/CMakeLists.txt"
-+++ "b/CMakeLists.txt"
-@@ -408,15 +408,25 @@ if(MSVC)
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index bc4be5f4..35e1df52 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -25,6 +25,7 @@ include(FindPkgConfig)
+ include(GNUInstallDirs)
+ 
+ option(BUILD_SHARED_LIBS "Build shared libraries" ON)
++option(BUILD_STATIC_FOR_DLL "Build static libraries for dll" ON)
+ option(LIBXML2_WITH_CATALOG "Add the Catalog support" ON)
+ option(LIBXML2_WITH_DEBUG "Add the debugging module" ON)
+ option(LIBXML2_WITH_DOCS "Build documentation" OFF)
+@@ -378,12 +379,12 @@ if(LIBXML2_WITH_ICU)
+     target_link_libraries(LibXml2 PRIVATE ICU::uc)
+     set(ICU_LDFLAGS "-licuuc")
+     list(APPEND XML_PRIVATE_LIBS "${ICU_LDFLAGS}")
+-    pkg_check_modules(ICU_PC IMPORTED_TARGET icu-uc)
+-    if(ICU_PC_FOUND)
++    # pkg_check_modules(ICU_PC IMPORTED_TARGET icu-uc)
++    # if(ICU_PC_FOUND)
+         list(APPEND XML_PC_REQUIRES icu-uc)
+-    else()
+-        list(APPEND XML_PC_LIBS "${ICU_LDFLAGS}")
+-    endif()
++    # else()
++    #    list(APPEND XML_PC_LIBS "${ICU_LDFLAGS}")
++    # endif()
+ endif()
+ 
+ if(LIBXML2_WITH_THREADS)
+@@ -394,12 +395,12 @@ if(LIBXML2_WITH_ZLIB)
+     target_link_libraries(LibXml2 PRIVATE ZLIB::ZLIB)
+     set(ZLIB_LDFLAGS "-lz")
+     list(APPEND XML_PRIVATE_LIBS "${ZLIB_LDFLAGS}")
+-    pkg_check_modules(ZLIB_PC IMPORTED_TARGET zlib)
+-    if(ZLIB_PC_FOUND)
++   # pkg_check_modules(ZLIB_PC REQUIRED IMPORTED_TARGET zlib)
++   # if(ZLIB_PC_FOUND)
+         list(APPEND XML_PC_REQUIRES zlib)
+-    else()
+-        list(APPEND XML_PC_LIBS "${ZLIB_LDFLAGS}")
+-    endif()
++   # else()
++   #      list(APPEND XML_PC_LIBS "${ZLIB_LDFLAGS}")
++   #  endif()
+ endif()
+ 
+ if(CMAKE_C_COMPILER_ID MATCHES "Clang" OR CMAKE_C_COMPILER_ID STREQUAL "GNU")
+@@ -433,15 +434,25 @@ if(MSVC)
              LibXml2
              PROPERTIES
              DEBUG_POSTFIX d
@@ -32,7 +76,7 @@ index 116c77dd..d2cff670 100644
          )
      endif()
  endif()
-@@ -670,6 +680,11 @@ if(BUILD_SHARED_LIBS)
+@@ -759,6 +770,11 @@ if(BUILD_SHARED_LIBS)
      set(XML_PC_PRIVATE ".private")
      set(XML_PC_LIBS_PRIVATE "
  Libs.private:")

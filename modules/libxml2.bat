@@ -5,6 +5,7 @@
 	REM   - https://wiki.php.net/internals/windows/libs/libxml2
 	REM   - https://gist.github.com/auroraeosrose/3452993 (support libxml PHP extension shared and against shared dll on windows)
 	REM - legacy MUST be yes
+if "%ARG_CMOPTS%"=="1" (@echo on)
 for %%X in (OFF ON) do (
 	cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 	-DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
@@ -15,7 +16,7 @@ for %%X in (OFF ON) do (
 	-DLIBXML2_WITH_DEBUG=ON ^
 	-DLIBXML2_WITH_HTML=ON ^
 	-DLIBXML2_WITH_HTTP=ON ^
-	-DLIBXML2_WITH_ICONV=ON ^
+	-DLIBXML2_WITH_ICONV=%PATH_INSTALL% ^
 	-DLIBXML2_WITH_ICU=ON ^
 	-DLIBXML2_WITH_ISO8859X=ON ^
 	-DLIBXML2_WITH_LEGACY=ON ^
@@ -28,7 +29,7 @@ for %%X in (OFF ON) do (
 	-DLIBXML2_WITH_PYTHON=OFF ^
 	-DLIBXML2_WITH_READER=ON ^
 	-DLIBXML2_WITH_REGEXPS=ON ^
-	-DLIBXML2_WITH_READLINE=ON ^
+	-DLIBXML2_WITH_READLINE=%PATH_INSTALL% ^
 	-DLIBXML2_WITH_RELAXNG=ON ^
 	-DLIBXML2_WITH_SAX1=ON ^
 	-DLIBXML2_WITH_SCHEMAS=ON ^
@@ -42,8 +43,11 @@ for %%X in (OFF ON) do (
 	-DLIBXML2_WITH_XINCLUDE=ON ^
 	-DLIBXML2_WITH_XPATH=ON ^
 	-DLIBXML2_WITH_XPTR=ON ^
-	-DLIBXML2_WITH_ZLIB=ON ^
+	-DLIBXML2_WITH_ZLIB=%PATH_INSTALL% ^
+	-DLIBXML2_WITH_HISTORY=ON ^
 	%PATH_SRC%\%1
+	@echo off
+	if "%ARG_CMOPTS%"=="1" (exit /B)
 
 	%PATH_BIN_CYGWIN%\bash %CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
 	%NINJA% install
