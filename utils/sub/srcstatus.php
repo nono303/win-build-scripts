@@ -81,7 +81,7 @@
 		echo
 			str_pad($from,4).
 			str_pad($ele,26).
-			str_pad(str_replace(["tag/","branch/","revision/"],["\t\tt ","b ","\t\t\t\tr "],$head),26).
+			str_pad(str_replace(["tags/","branch/","revision/"],["\t\tt ","b ","\t\t\t\tr "],$head),26).
 			PHP_EOL;
 		file_put_contents($argv[1],'"'.$ele.'";"'.$from.'";"'.$content["scm"]["urls"]["origin"].'";"'.$head.'";"'.$content["scm"]["branch"].'";"'.$logtags.'";"'.$ltd.'"'.PHP_EOL,FILE_APPEND);
 		if(GITGC && $from == "git"){
