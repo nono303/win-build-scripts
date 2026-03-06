@@ -36,7 +36,7 @@
 | [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) | 3.1.3 |
 | [liblzma](https://git.tukaani.org/xz) | 5.8.2 |
 | [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.13.3 |
-| [libpng](git://git.code.sf.net/p/libpng/code) | 1.6.55 |
+| [libpng](https://github.com/pnggroup/libpng) | 1.8.0 - 203c843cd |
 | [libsodium](https://github.com/jedisct1/libsodium) | 1.0.23 - 148d2d60 |
 | [libssh2](https://github.com/libssh2/libssh2) | 1.11.1 |
 | [libtiff](https://gitlab.com/libtiff/libtiff/) | 4.7.1 |

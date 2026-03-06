@@ -7,6 +7,7 @@
 
 	const VERBOSE_PAD = 12;
 	const REMOTE_URLS = ["origin","upstream"];
+	const OUT_RELEASE = ["verpatch", "sslh", "libconfig", "nssm", "sdlna", "run-hidden", "proxytunnel", "memcached", "dependencies", "tzdataservice", "mapsforgesrv", "mobac", "fit2gpx", "subversion", "serf", "php-sdk", "geographiclib"];
 
 	define("PATH_SRC",pathenv("PATH_SRC"));
 	define("CACHE_VERSION",pathenv("CACHE_VERSION") == "1" ? true : false);

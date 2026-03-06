@@ -14,7 +14,7 @@
 	// no args: generate MD (+cache) for all scr
 	if($nbargs == 1){
 		echo "* ".pathenv("PATH_VERSION_BUILD").($ret = cleanCache() ? " cleaned" : " unable to clear").PHP_EOL;
-		$md = "| src | version |".PHP_EOL."| ---- | ---- |".PHP_EOL;
+		$mdh = "| src | version |".PHP_EOL."| ---- | ---- |".PHP_EOL;
 		echo
 			str_pad("src",25).
 			str_pad("file",		VERBOSE_PAD).
@@ -27,7 +27,7 @@
 			$src = basename($srcpath);
 			try {
 				$ret = getVersion($src, true);
-				$md .=
+				$md =
 					"| ".
 					($ret["scm"]["urls"]["origin"] ?
 						"[".$src."](".($ret["scm"]["urls"]["origin"]).")" :
@@ -49,9 +49,13 @@
 				$ret["product"] = "";
 				$md = "| ".$src." | `".$e->getMessage()."` |".PHP_EOL;
 			}
+			$mdf .= $md;
+			if(!in_array($src,OUT_RELEASE))
+				$mdr .= $md;
 			echo PHP_EOL;
 		}
-		file_put_contents($fn = pathenv("PATH_BATCH").'/SRC_VERSION.md',$md);
+		file_put_contents($fn = pathenv("PATH_BATCH").'/SRC_VERSION.md',$mdh.$mdf);
+		file_put_contents($fn = pathenv("PATH_BATCH").'/SRC_VERSION-release.md',$mdh.$mdr);
 		echo PHP_EOL."> ".realpath($fn).exit(0);
 	} else {
 		if(is_dir($cur = PATH_SRC)."/".$argv[1]) {
