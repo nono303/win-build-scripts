@@ -28,6 +28,7 @@ for /L %%i in (2,1,%argCount%) do (
 	if /I "!argVec[%%i]!"=="MEMCACHE"	set PHP_BUILD_TYPE=memcache
 	if /I "!argVec[%%i]!"=="BROTLI"		set PHP_BUILD_TYPE=brotli
 	if /I "!argVec[%%i]!"=="IGBINARY"	set PHP_BUILD_TYPE=igbinary
+	if /I "!argVec[%%i]!"=="JSONPATH"	set PHP_BUILD_TYPE=jsonpath
 	if /I "!argVec[%%i]!"=="PARALLEL"	set PHP_BUILD_TYPE=parallel
 	if /I "!argVec[%%i]!"=="FFI"		set PHP_BUILD_TYPE=ffi
 	if /I "!argVec[%%i]!"=="CORE" 		set PHP_BUILD_TYPE=core

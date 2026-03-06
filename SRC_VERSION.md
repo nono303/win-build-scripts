@@ -21,7 +21,7 @@
 | [jansson](https://github.com/akheron/jansson) | 2.15.0 |
 | [jemalloc](https://github.com/jemalloc/jemalloc) | 5.3.0 |
 | [lerc](https://github.com/Esri/lerc) | 4.0.4 |
-| [libavif](https://github.com/AOMediaCodec/libavif) | 1.3.0 |
+| [libavif](https://github.com/AOMediaCodec/libavif) | 1.4.0 |
 | [libconfig](https://github.com/hyperrealm/libconfig) | 1.8.2 |
 | [libdeflate](https://github.com/ebiggers/libdeflate) | 1.25 |
 | [libev](https://git.lighttpd.net/libev) | 4.33.17 - 26fa899 |
@@ -35,14 +35,14 @@
 | [libiconv](https://github.com/kiyolee/libiconv-win-build) | 1.18.1 |
 | [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) | 3.1.3 |
 | [liblzma](https://git.tukaani.org/xz) | 5.8.2 |
-| [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.13.2 |
+| [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.13.3 |
 | [libpng](git://git.code.sf.net/p/libpng/code) | 1.6.55 |
 | [libsodium](https://github.com/jedisct1/libsodium) | 1.0.23 - 148d2d60 |
 | [libssh2](https://github.com/libssh2/libssh2) | 1.11.1 |
 | [libtiff](https://gitlab.com/libtiff/libtiff/) | 4.7.1 |
 | [libwebp](https://chromium.googlesource.com/webm/libwebp) | 1.6.0 |
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
-| [libxml2](https://gitlab.gnome.org/GNOME/libxml2) | 2.15.1 |
+| [libxml2](https://gitlab.gnome.org/GNOME/libxml2) | 2.15.2 |
 | [libxpm](https://github.com/nono303/libxpm) - [*upstream + src*](https://github.com/winlibs/libxpm) - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.17.10 - b150b7e |
 | [libxslt](https://gitlab.gnome.org/GNOME/libxslt/) | 1.1.45 |
 | [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1922 - 6067afde |
@@ -72,6 +72,7 @@
 | [pcre2](https://github.com/PCRE2Project/pcre2) | 10.47 |
 | [pecl-datetime-timezonedb](https://github.com/php/pecl-datetime-timezonedb) | 2026.1 |
 | [pecl-igbinary](https://github.com/igbinary/igbinary) | 3.2.17.1 |
+| [pecl-jsonpath](https://github.com/supermetrics-public/pecl-jsonpath) | 3.1.0.8 - 3deea31 |
 | [pecl-memcache](https://github.com/websupport-sk/pecl-memcache) | 8.2 - ac8e8c5 |
 | [pecl-parallel](https://github.com/krakjoe/parallel) | 1.2.10 :red_circle: [~~1.2.11~~](https://github.com/krakjoe/parallel/issues/369) |
 | [pecl-system-sync](https://github.com/php/pecl-system-sync) | 1.1.3 - 36d5be0 |
@@ -91,7 +92,7 @@
 | [sdlna](https://github.com/nono303/simpleDLNA) - [*upstream + src*](https://github.com/nmaier/simpleDLNA) | 1.3.4.2 - 8c19a9c |
 | [serf](https://github.com/apache/serf) | 2.0.0 - 7e98c4d |
 | [sqlite](https://github.com/rhuijben/sqlite-amalgamation) - _[release](https://www.sqlite.org/changes.html)_ | 3.51.2 |
-| [sslh](https://github.com/yrutschle/sslh) | 2.3.0.17 - 9fadd60 |
+| [sslh](https://github.com/yrutschle/sslh) | 2.3.0.18 - 70a776f |
 | [subversion](https://github.com/apache/subversion) | 1.16.0 - d8f58fdef6 |
 | [tidy](https://github.com/htacg/tidy-html5) | 5.9.20 - d08ddc2 |
 | [tzdataservice](https://github.com/nono303/tzdataservice) - [*upstream + src*](https://github.com/skaringa/tzdataservice) | 2.1.1 - d4a38d9 |

@@ -72,6 +72,7 @@ if %PHP_BUILD_TYPE% == xdebug	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED
 if %PHP_BUILD_TYPE% == memcache	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --enable-memcache=shared --enable-zlib)
 if %PHP_BUILD_TYPE% == brotli	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --enable-brotli=shared)
 if %PHP_BUILD_TYPE% == igbinary	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --enable-igbinary=shared)
+if %PHP_BUILD_TYPE% == jsonpath	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --enable-jsonpath=shared)
 if %PHP_BUILD_TYPE% == parallel	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --with-parallel=shared)
 if %PHP_BUILD_TYPE% == ffi	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --with-ffi=shared)
 if %PHP_BUILD_TYPE% == core	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED%)
@@ -130,6 +131,7 @@ if %PHPVER% == %PHP_BUILD_TYPE% (set FINAL_CONFIGURE=^
 		--enable-timezonedb=shared ^
 		--enable-sync=shared ^
 		--enable-igbinary=shared ^
+		--enable-jsonpath=shared ^
 		--with-ffi=shared ^
 		--with-external-pcre
 ) else (set FINAL_CONFIGURE=^
@@ -194,6 +196,7 @@ if %PHPVER% == %PHP_BUILD_TYPE% (
 	call do_php %PATH_UTILS%\sub\version.php pecl-system-sync %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_sync.dll build:%TSNTS% php:%PHPVERFULL%
 	call do_php %PATH_UTILS%\sub\version.php pecl-memcache %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcache.dll build:%TSNTS% php:%PHPVERFULL%
 	call do_php %PATH_UTILS%\sub\version.php pecl-igbinary %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_igbinary.dll build:%TSNTS% php:%PHPVERFULL%
+	call do_php %PATH_UTILS%\sub\version.php pecl-jsonpath %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_jsonpath.dll build:%TSNTS% php:%PHPVERFULL%
 	call do_php %PATH_UTILS%\sub\version.php pecl-parallel %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_parallel.dll build:%TSNTS% php:%PHPVERFULL%
 )
 if %PHP_BUILD_TYPE% == win7 (
@@ -207,6 +210,9 @@ if %PHP_BUILD_TYPE% == xdebug	(
 )
 if %PHP_BUILD_TYPE% == igbinary	(
 	call do_php %PATH_UTILS%\sub\version.php pecl-igbinary %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_igbinary.dll build:%TSNTS% php:%PHPVERFULL%
+)
+if %PHP_BUILD_TYPE% == jsonpath	(
+	call do_php %PATH_UTILS%\sub\version.php pecl-jsonpath %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_jsonpath.dll build:%TSNTS% php:%PHPVERFULL%
 )
 if %PHP_BUILD_TYPE% == parallel	(
 	call do_php %PATH_UTILS%\sub\version.php pecl-parallel %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_parallel.dll build:%TSNTS% php:%PHPVERFULL%

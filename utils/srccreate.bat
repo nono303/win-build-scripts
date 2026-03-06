@@ -94,7 +94,7 @@ git checkout tags/js_v4.0.4
 cd /D ..
 git clone https://github.com/AOMediaCodec/libavif.git libavif
 cd /D libavif
-git checkout tags/v1.3.0
+git checkout tags/v1.4.0
 cd /D ..
 git clone https://github.com/hyperrealm/libconfig.git libconfig
 cd /D libconfig
@@ -150,7 +150,7 @@ git checkout tags/v5.8.2
 cd /D ..
 git clone https://github.com/maxmind/libmaxminddb.git libmaxminddb
 cd /D libmaxminddb
-git checkout tags/1.13.2
+git checkout tags/1.13.3
 cd /D ..
 git clone git://git.code.sf.net/p/libpng/code libpng
 cd /D libpng
