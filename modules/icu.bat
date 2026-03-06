@@ -35,20 +35,28 @@ if %ARG_KEEPSRC% == 0 (
 	REM	https://unicode-org.github.io/icu/userguide/icu4c/build.html#skipping-the-uwp-projects-on-the-command-line
 	REM 	derb,genbrk,genccode,gencfu,gencmn,gencnval,gendict,gennorm2,genrb,gensprep,icuinfo,icupkg,makeconv,uconv
 MSBuild.exe %PATH_SRC%\%1\%VCDIR%\allinone.sln %MSBUILD_OPTS% ^
-/t:common,i18n,icuexportdata,io,makedata,pkgdata,stubdata ^
+/t:common,i18n,icuexportdata,io,makedata,pkgdata,stubdata,icuinfo ^
 /nowarn:C4275;C4101;C4805;C4477;C4267;C4251;C4312;STL4005;C4068;C4715;C4996;MSB8028 ^
 /p:Configuration=%OUTDIR_CONF% ^
 /p:Platform=%archmsbuild% ^
 /p:SkipUWP=true
 
 if %ARCH% == x64 (set outarch=64)
-
+REM DLL
 for %%C in (dt in io tu uc) do (
 	xcopy /C /F /Y %PATH_SRC%\icu\icu4c\bin%outarch%\icu%%C%ICUV%.dll %PATH_INSTALL%\bin\*
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\icu%%C%ICUV%.dll
 	xcopy /C /F /Y %PATH_SRC%\icu\icu4c\lib%outarch%\icu%%C.pdb %PATH_INSTALL%\bin\icu%%C%ICUV%.pdb*
 	xcopy /C /F /Y %PATH_SRC%\icu\icu4c\lib%outarch%\icu%%C.lib %PATH_INSTALL%\lib\*
 )
+REM Signature mismatch
 xcopy /C /F /Y %PATH_SRC%\icu\icu4c\source\data\out\build\icudt%ICUV%l\icudt%ICUV%.pdb %PATH_INSTALL%\bin\*
+REM EXE
+for %%C in (extra\uconv\%ARCH%\%OUTDIR_CONF%\uconv tools\genbrk\%ARCH%\%OUTDIR_CONF%\genbrk tools\genccode\%ARCH%\%OUTDIR_CONF%\genccode tools\gencfu\%ARCH%\%OUTDIR_CONF%\gencfu tools\gencmn\%ARCH%\%OUTDIR_CONF%\gencmn tools\gencnval\%ARCH%\%OUTDIR_CONF%\gencnval tools\gendict\%ARCH%\%OUTDIR_CONF%\gendict tools\gennorm2\%ARCH%\%OUTDIR_CONF%\gennorm2 tools\genrb\%ARCH%\%OUTDIR_CONF%\derb tools\genrb\%ARCH%\%OUTDIR_CONF%\genrb tools\gensprep\%ARCH%\%OUTDIR_CONF%\gensprep tools\gentest\%ARCH%\%OUTDIR_CONF%\gentest tools\icuexportdata\%ARCH%\%OUTDIR_CONF%\icuexportdata tools\icupkg\%ARCH%\%OUTDIR_CONF%\icupkg tools\makeconv\%ARCH%\%OUTDIR_CONF%\makeconv tools\pkgdata\%ARCH%\%OUTDIR_CONF%\pkgdata tools\icuinfo\%ARCH%\%OUTDIR_CONF%\icuinfo) do (
+	xcopy /C /F /Y %PATH_SRC%\icu\icu4c\source\%%C.exe %PATH_INSTALL%\bin\*
+	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%~nxC.exe
+	xcopy /C /F /Y %PATH_SRC%\icu\icu4c\source\%%C.pdb %PATH_INSTALL%\bin\*
+)
+
 if not exist %PATH_INSTALL%\include\unicode\. mkdir %PATH_INSTALL%\include\unicode
 xcopy /C /F /Y %PATH_SRC%\%1\icu4c\include\unicode\*.h %PATH_INSTALL%\include\unicode\*
