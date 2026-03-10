@@ -41,6 +41,7 @@ if /I NOT "%~3"=="nostd"  (
 )
 
 REM CMake opts: path for find
+set PKG_CONFIG_PATH=%PATH_INSTALL:\=/%/lib/pkgconfig
 set CMAKE_OPTS=%CMAKE_OPTS% ^
 	-DCMAKE_PREFIX_PATH=%PATH_INSTALL%;%PATH_INSTALL%\_gdal;%PATH_INSTALL%\_proj;%PATH_MYSQL% ^
 	-DCMAKE_FIND_USE_CMAKE_PATH=ON ^

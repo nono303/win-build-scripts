@@ -28,24 +28,6 @@ index bc4be5f4..35e1df52 100644
  endif()
  
  if(LIBXML2_WITH_THREADS)
-@@ -394,12 +395,12 @@ if(LIBXML2_WITH_ZLIB)
-     target_link_libraries(LibXml2 PRIVATE ZLIB::ZLIB)
-     set(ZLIB_LDFLAGS "-lz")
-     list(APPEND XML_PRIVATE_LIBS "${ZLIB_LDFLAGS}")
--    pkg_check_modules(ZLIB_PC IMPORTED_TARGET zlib)
--    if(ZLIB_PC_FOUND)
-+   # pkg_check_modules(ZLIB_PC REQUIRED IMPORTED_TARGET zlib)
-+   # if(ZLIB_PC_FOUND)
-         list(APPEND XML_PC_REQUIRES zlib)
--    else()
--        list(APPEND XML_PC_LIBS "${ZLIB_LDFLAGS}")
--    endif()
-+   # else()
-+   #      list(APPEND XML_PC_LIBS "${ZLIB_LDFLAGS}")
-+   #  endif()
- endif()
- 
- if(CMAKE_C_COMPILER_ID MATCHES "Clang" OR CMAKE_C_COMPILER_ID STREQUAL "GNU")
 @@ -433,15 +434,25 @@ if(MSVC)
              LibXml2
              PROPERTIES

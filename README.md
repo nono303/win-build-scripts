@@ -73,6 +73,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [JOM](https://download.qt.io/official_releases/jom/) | x64 | 1.1.6 | |
 | [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 1.10.1 | |
 | [NuGet](https://www.nuget.org/downloads) | x86 | 7.3.0 | |
+| [pkg-config](https://packages.msys2.org/packages/mingw-w64-x86_64-pkg-config) | mingw-w64 | 0.29.2-6 | |
 
 ### [SOURCE VERSIONS](./SRC_VERSION.md)
 ### [CHANGELOG](./changelog.md)
