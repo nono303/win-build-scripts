@@ -6,20 +6,20 @@
 - Apache **subversion** and its deps
 - **PHP** and most of its deps
 - other cool stuff
-  - geographiclib
-    * dependencies
-    * sdlna
-    * verpatch
-    * run-hidden
-    * *cygwin*
-      * memcached
-      * proxytunnel
-      * sslh
-    * *Java*
-      * mapsforgesrv
-      * tzdataservice
-      * fit2gpx
-      * mobac
+  - *msvc*
+    - geographiclib
+    - dependencies
+    - sdlna
+    - verpatch
+    - run-hidden
+  - *cygwin*
+    - memcached
+    - proxytunnel
+    - sslh
+  - *Java*
+    - mapsforgesrv
+    - fit2gpx
+    - mobac
 
 This tool-chain is the result of... many years of “evolution” ^^
 

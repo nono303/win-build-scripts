@@ -34,7 +34,7 @@ git checkout tags/v1.34.6
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/rc-8_19_0-3
+git checkout tags/curl-8_19_0
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -90,7 +90,7 @@ git checkout tags/5.3.0
 cd /D ..
 git clone https://github.com/Esri/lerc.git lerc
 cd /D lerc
-git checkout tags/js_v4.0.4
+git checkout tags/v4.1.0
 cd /D ..
 git clone https://github.com/AOMediaCodec/libavif.git libavif
 cd /D libavif
@@ -156,10 +156,6 @@ git clone https://github.com/pnggroup/libpng libpng
 cd /D libpng
 git checkout libpng18
 cd /D ..
-git clone git://git.code.sf.net/p/libpng/code libpng.16
-cd /D libpng.16
-git checkout tags/v1.6.55
-cd /D ..
 git clone https://github.com/jedisct1/libsodium.git libsodium
 cd /D libsodium
 git checkout master
@@ -210,7 +206,7 @@ git checkout tasks
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
-git checkout tags/1.6.40
+git checkout tags/1.6.41
 cd /D ..
 git clone https://github.com/nono303/mobac.git mobac
 cd /D mobac
@@ -346,11 +342,11 @@ git checkout tags/php-sdk-2.6.0
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.5.4RC1
+git checkout tags/php-8.5.4
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
-git checkout tags/9.8.0
+git checkout tags/9.8.0-1
 cd /D ..
 git clone https://github.com/proxytunnel/proxytunnel.git proxytunnel
 cd /D proxytunnel
@@ -378,7 +374,7 @@ git checkout trunk
 cd /D ..
 git clone https://github.com/rhuijben/sqlite-amalgamation sqlite
 cd /D sqlite
-git checkout tags/3.51.2
+git checkout tags/3.52.0
 cd /D ..
 git clone https://github.com/yrutschle/sslh.git sslh
 cd /D sslh
@@ -391,10 +387,6 @@ cd /D ..
 git clone https://github.com/htacg/tidy-html5 tidy
 cd /D tidy
 git checkout next
-cd /D ..
-git clone https://github.com/nono303/tzdataservice.git tzdataservice
-cd /D tzdataservice
-git checkout master
 cd /D ..
 git clone https://github.com/pavel-a/ddverpatch verpatch
 cd /D verpatch
