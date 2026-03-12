@@ -80,7 +80,7 @@
 | [php-ext-brotli](https://github.com/kjdev/php-ext-brotli) | 0.18.3 |
 | [php-ext-zstd](https://github.com/kjdev/php-ext-zstd) | 0.15.2 |
 | [php-geos](https://github.com/nono303/php-geos) - [*upstream + src*](https://gitea.osgeo.org/geos/php-geos) | 1.0.1.2 |
-| [php-ogr](https://github.com/nono303/php-ogr) - [*upstream + src*](https://github.com/dvzgeo/php_ogr) | 1.6.1.25 - b7338fc |
+| [php-ogr](https://github.com/nono303/php-ogr) - [*upstream + src*](https://github.com/dvzgeo/php_ogr) | 1.6.1.26 - d3593c5 |
 | [php-proj](https://github.com/swen100/phpng-proj) | 3.0.3 |
 | [php-sdk](https://github.com/php/php-sdk-binary-tools) | 2.6.0 |
 | [php-src](https://github.com/php/php-src) | 8.5.4 |
