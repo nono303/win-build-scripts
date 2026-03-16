@@ -6,6 +6,7 @@
 		"DEBUG"			=> "verbose",
 	] as $def => $argin) {
 		define($def, in_array($argin, $argv) ? true : false);
+		$argv = array_diff($argv, [$argin]);
 		debug(str_pad($def.": ",12).(constant($def) ? "ON" : "OFF"));
 	}
 
