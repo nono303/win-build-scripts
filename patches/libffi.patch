@@ -1,29 +1,32 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 new file mode 100644
-index 0000000..16e23eb
+index 0000000..a8cc6f2
 --- /dev/null
 +++ b/CMakeLists.txt
-@@ -0,0 +1,104 @@
-+cmake_minimum_required(VERSION 3.5)
+@@ -0,0 +1,92 @@
++cmake_minimum_required(VERSION 3.10)
 +project(libffi C ASM_MASM)
 +
 +set(libname "libffi")
 +
 +option(BUILD_SHARED_LIBS "Build shared libraries" ON)
++option(TARGET_CONFIG "Build shared libraries")
 +
 +if (BUILD_SHARED_LIBS)
 +	add_library(${libname} SHARED)
 +	set(CMAKE_C_FLAGS  "/DFFI_BUILDING_DLL")
-+	set_target_properties(${libname} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
++	# FAILED: unrecognized file format in 'CMakeFiles\libffi.dir\src\x86\ffiw64.c.obj, 0
++	# sed -i 's/\/GL //g' %CYGPATH_BUILD%/%1/build.ninja
++	# set_target_properties(${libname} PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
 +else()
 +	add_library(${libname})
 +	set(CMAKE_C_FLAGS  "/DFFI_BUILDING")
 +endif (BUILD_SHARED_LIBS)
 +
 +list(APPEND include_dirs
-+	"." # fficonfig.h
++	"${TARGET_CONFIG}"         # fficonfig.h
++	"${TARGET_CONFIG}/include" # ffi.h
 +	"include"
-+	"src/x86"
 +)
 +
 +# option version of includes
@@ -32,20 +35,12 @@ index 0000000..16e23eb
 +endforeach()
 +
 +# select sources by platform
-+if("${CMAKE_SIZEOF_VOID_P}" STREQUAL "4")
-+	# Windows 32
++if("${CMAKE_SIZEOF_VOID_P}" STREQUAL "4") # x86
 +	list(APPEND asm_basenames "sysv_intel")
-+	target_sources(${libname} PRIVATE
-+		"src/x86/ffi.c"
-+		"src/x86/internal.h"
-+	)
-+else()
-+	# Windows 64
++	target_sources(${libname} PRIVATE "src/x86/ffi.c")
++else() # x64
 +	list(APPEND asm_basenames "win64_intel")
-+	target_sources(${libname} PRIVATE
-+		"src/x86/ffiw64.c"
-+		"src/x86/internal64.h"
-+	)
++	target_sources(${libname} PRIVATE "src/x86/ffiw64.c")
 +endif()
 +
 +# preprocess assembly files
@@ -75,19 +70,12 @@ index 0000000..16e23eb
 +endforeach()
 +
 +target_sources(${libname} PRIVATE
-+	# generated from *.in
-+	"fficonfig.h"
-+	"include/ffi.h"
-+
-+	# common source files
 +	"src/closures.c"
 +	"src/prep_cif.c"
 +	"src/raw_api.c"
 +	"src/types.c"
 +	"src/tramp.c"
-+	"src/x86/ffitarget.h"
-+	"src/x86/asmnames.h"
-+	)
++)
 +target_include_directories(${libname} PRIVATE ${include_dirs})
 +
 +# install the lib
@@ -99,7 +87,7 @@ index 0000000..16e23eb
 +
 +# install the headers
 +install(
-+	FILES include/ffi.h src/x86/ffitarget.h
++	FILES ${TARGET_CONFIG}/include/ffi.h ${TARGET_CONFIG}/include/ffitarget.h
 +	DESTINATION include
 +)
 +
@@ -109,12 +97,25 @@ index 0000000..16e23eb
 +	DESTINATION bin OPTIONAL
 +)
 \ No newline at end of file
-diff --git a/fficonfig.h b/fficonfig.h
+diff --git a/msvcc.sh b/msvcc.sh
+index 301e2fb..d0083a6 100755
+--- a/msvcc.sh
++++ b/msvcc.sh
+@@ -64,7 +64,7 @@ do
+       shift 1
+     ;;
+     --version)
+-      args="-help"
++      args="-?"
+       shift 1
+     ;;
+     -fexceptions)
+diff --git a/x86_64-pc-cygwin/fficonfig.h b/x86_64-pc-cygwin/fficonfig.h
 new file mode 100644
-index 0000000..106e6c8
+index 0000000..1e9e01f
 --- /dev/null
-+++ b/fficonfig.h
-@@ -0,0 +1,187 @@
++++ b/x86_64-pc-cygwin/fficonfig.h
+@@ -0,0 +1,190 @@
 +/* fficonfig.h.  Generated from fficonfig.h.in by configure.  */
 +/* fficonfig.h.in.  Generated from configure.ac by autoheader.  */
 +
@@ -177,6 +178,9 @@ index 0000000..106e6c8
 +/* Define if __attribute__((visibility("hidden"))) is supported. */
 +/* #undef HAVE_HIDDEN_VISIBILITY_ATTRIBUTE */
 +
++/* Define if __int128_t and __uint128_t are supported. */
++/* #undef HAVE_INT128 */
++
 +/* Define to 1 if you have the <inttypes.h> header file. */
 +#define HAVE_INTTYPES_H 1
 +
@@ -238,7 +242,7 @@ index 0000000..106e6c8
 +#define PACKAGE_NAME "libffi"
 +
 +/* Define to the full name and version of this package. */
-+#define PACKAGE_STRING "libffi 3.5.1"
++#define PACKAGE_STRING "libffi 3.5.2"
 +
 +/* Define to the one symbol short name of this package. */
 +#define PACKAGE_TARNAME "libffi"
@@ -247,7 +251,7 @@ index 0000000..106e6c8
 +#define PACKAGE_URL ""
 +
 +/* Define to the version of this package. */
-+#define PACKAGE_VERSION "3.5.1"
++#define PACKAGE_VERSION "3.5.2"
 +
 +/* The size of `double', as computed by sizeof. */
 +#define SIZEOF_DOUBLE 8
@@ -269,7 +273,7 @@ index 0000000..106e6c8
 +/* #undef USING_PURIFY */
 +
 +/* Version number of package */
-+#define VERSION "3.5.1"
++#define VERSION "3.5.2"
 +
 +/* Define WORDS_BIGENDIAN to 1 if your processor stores words with the most
 +   significant byte first (like Motorola and SPARC, unlike Intel). */
@@ -302,14 +306,14 @@ index 0000000..106e6c8
 +#endif
 +#endif
 +
-diff --git a/include/ffi.h b/include/ffi.h
+diff --git a/x86_64-pc-cygwin/include/ffi.h b/x86_64-pc-cygwin/include/ffi.h
 new file mode 100644
-index 0000000..8124bf8
+index 0000000..b2736b2
 --- /dev/null
-+++ b/include/ffi.h
-@@ -0,0 +1,536 @@
++++ b/x86_64-pc-cygwin/include/ffi.h
+@@ -0,0 +1,543 @@
 +/* -----------------------------------------------------------------*-C-*-
-+   libffi 3.5.1
++   libffi 3.5.2
 +     - Copyright (c) 2011, 2014, 2019, 2021, 2022, 2024, 2025 Anthony Green
 +     - Copyright (c) 1996-2003, 2007, 2008 Red Hat, Inc.
 +
@@ -387,9 +391,11 @@ index 0000000..8124bf8
 +#define FFI_TYPE_STRUCT     13
 +#define FFI_TYPE_POINTER    14
 +#define FFI_TYPE_COMPLEX    15
++#define FFI_TYPE_UINT128    16
++#define FFI_TYPE_SINT128    17
 +
 +/* This should always refer to the last type code (for sanity checks).  */
-+#define FFI_TYPE_LAST       FFI_TYPE_COMPLEX
++#define FFI_TYPE_LAST       FFI_TYPE_SINT128
 +
 +#include <ffitarget.h>
 +
@@ -537,6 +543,11 @@ index 0000000..8124bf8
 +FFI_EXTERN ffi_type ffi_type_complex_double;
 +FFI_EXTERN ffi_type ffi_type_complex_longdouble;
 +#endif
++
++#ifdef FFI_TARGET_HAS_INT128
++FFI_EXTERN ffi_type ffi_type_uint128;
++FFI_EXTERN ffi_type ffi_type_sint128;
++#endif
 +#endif /* LIBFFI_HIDE_BASIC_TYPES */
 +
 +typedef enum {
@@ -626,8 +637,8 @@ index 0000000..8124bf8
 +
 +/* ---- Version API ------------------------------------------------------ */
 +
-+#define FFI_VERSION_STRING "3.5.1"
-+#define FFI_VERSION_NUMBER 30501
++#define FFI_VERSION_STRING "3.5.2"
++#define FFI_VERSION_NUMBER 30502
 +
 +#ifndef LIBFFI_ASM
 +/* Return a version string. */
@@ -841,6 +852,177 @@ index 0000000..8124bf8
 +
 +#ifdef __cplusplus
 +}
++#endif
++
++#endif
+diff --git a/x86_64-pc-cygwin/include/ffitarget.h b/x86_64-pc-cygwin/include/ffitarget.h
+new file mode 100644
+index 0000000..995469b
+--- /dev/null
++++ b/x86_64-pc-cygwin/include/ffitarget.h
+@@ -0,0 +1,165 @@
++/* -----------------------------------------------------------------*-C-*-
++   ffitarget.h - Copyright (c) 2012, 2014, 2018  Anthony Green
++                 Copyright (c) 1996-2003, 2010  Red Hat, Inc.
++                 Copyright (C) 2008  Free Software Foundation, Inc.
++
++   Target configuration macros for x86 and x86-64.
++
++   Permission is hereby granted, free of charge, to any person obtaining
++   a copy of this software and associated documentation files (the
++   ``Software''), to deal in the Software without restriction, including
++   without limitation the rights to use, copy, modify, merge, publish,
++   distribute, sublicense, and/or sell copies of the Software, and to
++   permit persons to whom the Software is furnished to do so, subject to
++   the following conditions:
++
++   The above copyright notice and this permission notice shall be included
++   in all copies or substantial portions of the Software.
++
++   THE SOFTWARE IS PROVIDED ``AS IS'', WITHOUT WARRANTY OF ANY KIND,
++   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
++   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
++   NONINFRINGEMENT.  IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
++   HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
++   WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++   DEALINGS IN THE SOFTWARE.
++
++   ----------------------------------------------------------------------- */
++
++#ifndef LIBFFI_TARGET_H
++#define LIBFFI_TARGET_H
++
++#ifndef LIBFFI_H
++#error "Please do not include ffitarget.h directly into your source.  Use ffi.h instead."
++#endif
++
++/* ---- System specific configurations ----------------------------------- */
++
++/* For code common to all platforms on x86 and x86_64. */
++#define X86_ANY
++
++#if defined (X86_64) && defined (__i386__)
++#undef X86_64
++#define X86
++#endif
++
++#ifdef X86_WIN64
++#define FFI_SIZEOF_ARG 8
++#define USE_BUILTIN_FFS 0 /* not yet implemented in mingw-64 */
++#endif
++
++#define FFI_TARGET_SPECIFIC_STACK_SPACE_ALLOCATION
++#ifndef _MSC_VER
++#define FFI_TARGET_HAS_COMPLEX_TYPE
++#endif
++
++#ifdef X86_64
++#define FFI_TARGET_HAS_INT128
++#endif
++
++/* ---- Generic type definitions ----------------------------------------- */
++
++#ifndef LIBFFI_ASM
++#ifdef X86_WIN64
++#ifdef _MSC_VER
++typedef unsigned __int64       ffi_arg;
++typedef __int64                ffi_sarg;
++#else
++typedef unsigned long long     ffi_arg;
++typedef long long              ffi_sarg;
++#endif
++#else
++#if defined __x86_64__ && defined __ILP32__
++#define FFI_SIZEOF_ARG 8
++#define FFI_SIZEOF_JAVA_RAW  4
++typedef unsigned long long     ffi_arg;
++typedef long long              ffi_sarg;
++#else
++typedef unsigned long          ffi_arg;
++typedef signed long            ffi_sarg;
++#endif
++#endif
++
++typedef enum ffi_abi {
++#if defined(X86_WIN64)
++  FFI_FIRST_ABI = 0,
++  FFI_WIN64,            /* sizeof(long double) == 8  - microsoft compilers */
++  FFI_GNUW64,           /* sizeof(long double) == 16 - GNU compilers */
++  FFI_LAST_ABI,
++#ifdef __GNUC__
++  FFI_DEFAULT_ABI = FFI_GNUW64
++#else
++  FFI_DEFAULT_ABI = FFI_WIN64
++#endif
++
++#elif defined(X86_64) || (defined (__x86_64__) && defined (X86_DARWIN))
++  FFI_FIRST_ABI = 1,
++  FFI_UNIX64,
++  FFI_WIN64,
++  FFI_EFI64 = FFI_WIN64,
++  FFI_GNUW64,
++  FFI_LAST_ABI,
++  FFI_DEFAULT_ABI = FFI_UNIX64
++
++#elif defined(X86_WIN32)
++  FFI_FIRST_ABI = 0,
++  FFI_SYSV      = 1,
++  FFI_STDCALL   = 2,
++  FFI_THISCALL  = 3,
++  FFI_FASTCALL  = 4,
++  FFI_MS_CDECL  = 5,
++  FFI_PASCAL    = 6,
++  FFI_REGISTER  = 7,
++  FFI_LAST_ABI,
++  FFI_DEFAULT_ABI = FFI_MS_CDECL
++#else
++  FFI_FIRST_ABI = 0,
++  FFI_SYSV      = 1,
++  FFI_THISCALL  = 3,
++  FFI_FASTCALL  = 4,
++  FFI_STDCALL   = 5,
++  FFI_PASCAL    = 6,
++  FFI_REGISTER  = 7,
++  FFI_MS_CDECL  = 8,
++  FFI_LAST_ABI,
++  FFI_DEFAULT_ABI = FFI_SYSV
++#endif
++} ffi_abi;
++#endif
++
++/* ---- Definitions for closures ----------------------------------------- */
++
++#define FFI_CLOSURES 1
++#define FFI_GO_CLOSURES 1
++
++#define FFI_TYPE_SMALL_STRUCT_1B (FFI_TYPE_LAST + 1)
++#define FFI_TYPE_SMALL_STRUCT_2B (FFI_TYPE_LAST + 2)
++#define FFI_TYPE_SMALL_STRUCT_4B (FFI_TYPE_LAST + 3)
++#define FFI_TYPE_MS_STRUCT       (FFI_TYPE_LAST + 4)
++
++#if defined (X86_64) || defined(X86_WIN64) \
++    || (defined (__x86_64__) && defined (X86_DARWIN))
++/* 4 bytes of ENDBR64 + 7 bytes of LEA + 6 bytes of JMP + 7 bytes of NOP
++   + 8 bytes of pointer.  */
++# define FFI_TRAMPOLINE_SIZE 32
++# define FFI_NATIVE_RAW_API 0
++#else
++/* 4 bytes of ENDBR32 + 5 bytes of MOV + 5 bytes of JMP + 2 unused
++   bytes.  */
++# define FFI_TRAMPOLINE_SIZE 16
++# define FFI_NATIVE_RAW_API 1  /* x86 has native raw api support */
++#endif
++
++#if !defined(GENERATE_LIBFFI_MAP) && defined(__CET__)
++# include <cet.h>
++# if (__CET__ & 1) != 0
++#   define ENDBR_PRESENT
++# endif
++# define _CET_NOTRACK notrack
++#else
++# define _CET_ENDBR
++# define _CET_NOTRACK
 +#endif
 +
 +#endif
