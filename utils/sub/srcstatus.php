@@ -91,9 +91,9 @@
 					echo "\t".$cmd.PHP_EOL."\t".execnono($cmd, NULL, $repo, NULL).PHP_EOL;
 				}
 			}
-			$cmd = "git gc --prune=now 2>&1";
+			$cmd = "git gc --prune=now --aggressive 2>&1";
 			echo "\t".$cmd." ".execnono($cmd, NULL, $repo, NULL).PHP_EOL;
-			$cmd = "git reflog expire --expire=now 2>&1";
+			$cmd = "git reflog expire --all --expire=now 2>&1";
 			echo "\t".$cmd." ".execnono($cmd, NULL, $repo, NULL).PHP_EOL;
 		}
 	}
