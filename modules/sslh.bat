@@ -3,14 +3,14 @@ call %PATH_UTILS%\init.bat libconfig
 SET LIBCONFIG_NAME=cygconfig-15
 call %PATH_BIN_CYGWIN%\bash --login -c '%CYGPATH_MODULES%/libconfig.sh %CYGPATH_SRC%/libconfig %CYGPATH_MODULES% %AVX_GCC% %CUR_DEBUG%'
 xcopy /C /F /Y %PATH_BIN_CYGWIN%\..\usr\local\bin\%LIBCONFIG_NAME%.dll %PATH_GITHUB_SSLH%\%ARCH%\%AVXECHO%\cygconfig-11.dll*
-call do_php %PATH_UTILS%\sub\version.php libconfig %PATH_GITHUB_SSLH%\%ARCH%\%AVXECHO%\cygconfig-11.dll libconfig %ARCH% %AVXECHO%
+call do_php %PATH_UTILS%\sub\version.php libconfig %PATH_GITHUB_SSLH%\%ARCH%\%AVXECHO%\cygconfig-11.dll
 set LIBCONFIG_VER=%SCM_TAG%
 
 call %PATH_UTILS%\init.bat %1
 call %PATH_BIN_CYGWIN%\bash --login -c '%CYGPATH_MODULES%/%1.sh %CYGPATH_SRC%/%1 %AVX_GCC% %CUR_DEBUG%'
 for %%A in (echosrv.exe sslh-ev.exe sslh-fork.exe sslh-select.exe) do (
 	xcopy /C /F /Y %PATH_SRC%\%1\%%A %PATH_GITHUB_SSLH%\%ARCH%\%AVXECHO%\%%A*
-	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_GITHUB_SSLH%\%ARCH%\%AVXECHO%\%%A libconfig:%LIBCONFIG_VER% %ARCH% %AVXECHO%
+	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_GITHUB_SSLH%\%ARCH%\%AVXECHO%\%%A libconfig:%LIBCONFIG_VER%
 )
 if %AVXECHO%==avx2 (
 	if not "%PATH_GITHUB_SSLH%"=="" (

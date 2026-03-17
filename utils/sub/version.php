@@ -1,19 +1,19 @@
 <?php
 	include( dirname(__FILE__) . '/_functions-version.php');
 
+	const CYG_BUILDS = ["memcached", "sslh", "proxytunnel", "libconfig"];
+
 	// arg to const
 	foreach([
-		"DEBUG"			=> "verbose",
+		"DEBUG"		=> "verbose",
+		"NO_PDB"	=> "nopdb",
 	] as $def => $argin) {
 		define($def, in_array($argin, $argv) ? true : false);
 		$argv = array_diff($argv, [$argin]);
 		debug(str_pad($def.": ",12).(constant($def) ? "ON" : "OFF"));
 	}
-
-	$nbargs = sizeof($argv);
-	debug($nbargs.PHP_EOL.print_r($argv,true));
 	// no args: generate MD (+cache) for all scr
-	if($nbargs == 1){
+	if(($nbargs = sizeof($argv)) == 1) {
 		echo "* ".pathenv("PATH_VERSION_BUILD").($ret = cleanCache() ? " cleaned" : " unable to clear").PHP_EOL;
 		$mdh = "| src | version |".PHP_EOL."| ---- | ---- |".PHP_EOL;
 		echo
@@ -45,7 +45,7 @@
 					($addon["version"][$src] ? " ".$addon["version"][$src] : "").
 					" |".
 					PHP_EOL;
-			} catch(Exception $e){
+			} catch(Exception $e) {
 				echo PHP_EOL."! ".$e->getMessage();
 				$ret["product"] = "";
 				$md = "| ".$src." | `".$e->getMessage()."` |".PHP_EOL;
@@ -72,7 +72,7 @@
 		echo $current["product"];
 		exit(0);
 	} elseif($nbargs >= 3) {
-		if($argv[2] == "env"){ // export env var for init
+		if($argv[2] == "env") { // export env var for init
 			echo
 				"SCM_COMORREV=".$current["scm"]["commit"].PHP_EOL.
 				"SCM_TAG=".($current["scm"]["tag"] ? $current["scm"]["tag"]["product"] : "").PHP_EOL.
@@ -84,73 +84,47 @@
 		} elseif(!is_file($argv[2])) {
 			echo "[version] ERROR: file '".$argv[2]."' doesn't exist".PHP_EOL;
 			exit(-1);
-		} else {
-			if(pathenv("ARCH")){
-				$arch = pathenv("ARCH");
-			} elseif(pathenv("PHP_SDK_ARCH")){
-				$arch = pathenv("PHP_SDK_ARCH");
+		} else { // verpatch
+			$rpdb = NO_PDB ? "" : " /rpdb"; // manage pdb
+			// description
+			$description = "arch:".(pathenv("ARCH") ?: pathenv("PHP_SDK_ARCH")).pathenv("AVXB");
+			if(in_array($argv[1], CYG_BUILDS)) {
+				$rpdb = "";
+				preg_match("/ ([0-9\.]+) /",shell_exec("gcc --version"),$matches);
+				$description .= " gcc:".$matches[1]; // gcc version
+			} else {
+				$description .= " vcver:".pathenv("vcvars_ver")."[".pathenv("MSVC_DEPS")."]"; // msvc version
 			}
-			$description .= "arch:".$arch.pathenv("AVXB")." vcver:".pathenv("vcvars_ver")."[".pathenv("MSVC_DEPS")."]";
-			$rpdb = " /rpdb"; // manage pdb
-			if($argv[3]){
-				if($argv[3] == "norpdb"){
-					$rpdb = "";
-				} elseif($argv[3] == "memcached"){
-					preg_match("/(libevent-[0-9]\.[0-9])/",$argv[2],$matches);
-					$matches[1] ? $libdep = " ".str_replace("-",":",$matches[1]) : $libdep = "";
-				} elseif($argv[3] != "libconfig") {
-					$libdep = " ".$argv[3]; // for GCC only
-					/*
-						additionnal descritption (used in php & httpd). order
-							1. build:xxx
-							2. proot:xxx
-							3. libdeps:xxx
-						ex. do_php C:\sdk\batch\utils\sub\version.php pecl-text-xdiff C:\sdk\release\vs18_x64-avx2\_php-ts\php_xdiff.dll build:ts php:8.5.4.1 lib:1.2.3
-						do_php %PATH_UTILS%\sub\version.php php-ext-brotli C:\sdk\release\vs18_x64-avx2\_php-ts\php_brotli.dll build:ts php:8.5.4.1 brotli:1.2.10
-					*/
-					for($i = 3; $i < $nbargs; $i++){
-						if(str_starts_with($argv[$i],"build")){
-							$descargv .= " ".$argv[$i];
+			// additionnal params
+			if($argv[3]) {
+				/*
+					additionnal descritption. order:
+						1. build:xxx	php
+						2. proot:x.y.z	php, httpd
+						3. ldeps:x.y.z	php, memcached, sslh
+					ex.
+						go version pecl-text-xdiff C:\sdk\release\vs18_x64-avx2\_php-ts\php_xdiff.dll build:ts php:8.5.4.1 lib:1.2.3 verbose
+						go version memcached D:\github\NONO_memcached\libevent-2.1\x64\memcached-avx-tls.exe libevent:2.1 verbose
+						go version sslh D:\github\NONO_sslh\x64\avx2\sslh-ev.exe libconfig:1.8.2 verbose
+				*/
+				for($i = 3; $i < $nbargs; $i++) {
+					if(str_starts_with($argv[$i],"build")) {
+						$descargv .= " ".$argv[$i];
+					} else {
+						if(!$proot) {
+							$proot = explode(":",$argv[$i])[0]; // prefix product
+							$descargv .= " (".$argv[$i];
 						} else {
-							if(!$proot){
-								$proot = explode(":",$argv[$i])[0]; // prefix product
-								$descargv .= " (".$argv[$i];
-							} else {
-								$descargv .= " ".$argv[$i];
-							}
+							$descargv .= " ".$argv[$i];
 						}
 					}
-					if($proot)
-						$descargv .= ")";
 				}
-				/* cygwin
-					[1] => libconfig
-					[2] => D:\github\NONO_sslh\x64\avx2\cygconfig-11.dll
-					[3] => libconfig
-				---
-					[1] => sslh
-					[2] => D:\github\NONO_sslh\x64\avx2\echosrv.exe
-					[3] => libconfig:v1.7.3
-				---
-					[1] => memcached
-					[2] => D:\github\NONO_memcached\libevent-2.1\x64\memcached-avx-tls.exe
-					[3] => memcached
-				***
-					[4] => 	x%TARGET_ARCH%
-					[5] => 	%AVXECHO%
-				*/
-				if(in_array($argv[1],["memcached", "sslh", "libconfig"])){
-					$rpdb = "";
-					$arch = $argv[4];
-					$avx = $argv[5];
-					preg_match("/ ([0-9\.]+) /",shell_exec("gcc --version"),$matches);
-					$gccver = $matches[1];
-					$description =
-						"arch:".$arch."-".$avx." ".
-						"gcc:".$gccver.$libdep;
-				}
+				if($proot)
+					$descargv .= ")";
+				if(in_array($argv[1], CYG_BUILDS))
+					$proot = "";
 			}
-
+			// tag
 			if($current["scm"]["tag"]) {
 				$description .= " tag:".$current["scm"]["tag"]["product"];
 			} else {
@@ -164,9 +138,8 @@
 			$pname = basename($argv[2],".".pathinfo($argv[2], PATHINFO_EXTENSION));
 			if($proot)
 				$pname = $proot.":".$pname;
-
-			$cmd = pathenv("BIN_VERPATCH")." ".$argv[2]." \"".$current["file"]."\" /va".$rpdb." /high /pv \"".$current["product"]."\" /s description \"".$description.$descargv."\" /s product \"".$pname."\" /s LegalTrademarks \"".$current["scm"]["urls"][0]."\" /s LegalCopyright \"https://github.com/nono303/win-build-scripts\"";
-			if(DEBUG || pathenv("CUR_DEBUG") == 1){
+			$cmd = pathenv("BIN_VERPATCH")." ".$argv[2]." \"".$current["file"]."\" /va".$rpdb." /high /pv \"".$current["product"]."\" /s description \"".$description.$descargv."\" /s product \"".$pname."\" /s LegalTrademarks \"".$current["scm"]["urls"]["origin"]."\" /s LegalCopyright \"https://github.com/nono303/win-build-scripts\"";
+			if(DEBUG || pathenv("CUR_DEBUG") == 1) {
 				echo $cmd.PHP_EOL;
 			} else {
 				echo "[version] '".$current["product"]."' ".$argv[2]." (".str_replace("/","\\",$current["from"]).")".PHP_EOL;
