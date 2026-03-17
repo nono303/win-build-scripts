@@ -139,11 +139,11 @@ Usage: go command [options]
       nb:[int]: number of file that must be present (and not only checked) in path param. can't be used with a file in param or recurse option
   * version: 
     no param: output and write SRC_VERSION.md in %PATH_BATCH% of current normalized version of each module present in %PATH_SRC%  
-    > param:  module name to get version
-      return the module version in format x.x.x.x
-    > option: EXCLUSIVE - ONLY IF PARAM MODULE IS PRESENT
+    > param:  
+      <module_name>: display version in format x.x.x.x
+      verbose:       display scm commands and full results
+    > option: EXCLUSIVE - ONLY IF PARAM <module_name> IS PRESENT
       env:     return the environment variables for init.bat
-      verbose: display scm commands and full results
       <binfile>: write version information (verpatch) into the specified full path <binfile>
         [desc1 desc2...] optional descriptions (appended to generated one) each description in format key:value separated by space.
 	the first optional description will be used as product root (ex. for httpd or php modules)
