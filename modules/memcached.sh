@@ -9,9 +9,9 @@ then
 fi
 
 cd $1
-# ./vendor/fetch.sh
-./version.sh
 autoupdate -f
+./version.sh
+# ./vendor/fetch.sh
 ./autogen.sh
 
 	# STD
