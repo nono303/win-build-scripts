@@ -116,7 +116,7 @@ git clone https://github.com/libexpat/libexpat.git libexpat
 cd /D libexpat
 git checkout tags/R_2_7_4
 cd /D ..
-git clone https://github.com/libffi/libffi libffi
+git clone https://github.com/libffi/libffi.git libffi
 cd /D libffi
 git checkout master
 cd /D ..
@@ -374,7 +374,7 @@ git checkout trunk
 cd /D ..
 git clone https://github.com/rhuijben/sqlite-amalgamation sqlite
 cd /D sqlite
-git checkout tags/3.52.0
+git checkout tags/3.51.3
 cd /D ..
 git clone https://github.com/yrutschle/sslh.git sslh
 cd /D sslh
