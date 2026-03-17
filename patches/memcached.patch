@@ -1,8 +1,8 @@
 diff --git a/Makefile.am b/Makefile.am
-index 4603b80..0b4dc89 100644
+index a7a11ad..c655088 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -1,6 +1,6 @@
+@@ -1,13 +1,9 @@
  bin_PROGRAMS = memcached
  pkginclude_HEADERS = protocol_binary.h xxhash.h
 -noinst_PROGRAMS = memcached-debug sizes testapp timedrun
@@ -10,11 +10,84 @@ index 4603b80..0b4dc89 100644
  
  BUILT_SOURCES=
  
+-testapp_SOURCES = testapp.c util.c util.h stats_prefix.c stats_prefix.h jenkins_hash.c murmur3_hash.c hash.h cache.c crc32c.c
+-
+-timedrun_SOURCES = timedrun.c
+-
+ memcached_SOURCES = memcached.c memcached.h \
+                     hash.c hash.h \
+                     jenkins_hash.c jenkins_hash.h \
+@@ -88,21 +84,16 @@
+ memcached_SOURCES += tls.c tls.h
+ endif
+ 
+-memcached_debug_SOURCES = $(memcached_SOURCES)
+ memcached_CPPFLAGS = -DNDEBUG
+-memcached_debug_LDADD = @PROFILER_LDFLAGS@
+ memcached_debug_CFLAGS = @PROFILER_FLAGS@
+ 
+ memcached_LDADD =
+ memcached_LDFLAGS =
+-memcached_debug_LDFLAGS =
+ memcached_DEPENDENCIES =
+-memcached_debug_DEPENDENCIES =
+ CLEANFILES=
+ 
+ if BUILD_LINUX_PRIVS
+ memcached_LDADD += -lseccomp
+-memcached_debug_LDADD += -lseccomp
+ endif
+ 
+ if BUILD_DTRACE
+@@ -113,21 +104,16 @@
+ if DTRACE_INSTRUMENT_OBJ
+ memcached_LDADD += memcached_dtrace.o
+ memcached_DEPENDENCIES += memcached_dtrace.o
+-memcached_debug_LDADD += memcached_debug_dtrace.o
+-memcached_debug_DEPENDENCIES += memcached_debug_dtrace.o
+ CLEANFILES += memcached_dtrace.o memcached_debug_dtrace.o
+ endif
+ 
+ if ENABLE_PROXY
+ memcached_LDADD += vendor/lua/src/liblua.a
+-memcached_debug_LDADD += vendor/lua/src/liblua.a
+ memcached_LDFLAGS += -rdynamic
+-memcached_debug_LDFLAGS += -rdynamic
+ endif
+ 
+ if ENABLE_PROXY_URING
+ memcached_LDADD += vendor/liburing/src/liburing.a
+-memcached_debug_LDADD += vendor/liburing/src/liburing.a
+ endif
+ 
+ memcached_debug_CFLAGS += -DMEMCACHED_DEBUG
+@@ -199,18 +185,12 @@
+ 	  done && \
+ 	  for file in *.gcda; do \
+ 	    srcfile=`echo $$file | sed 's/.gcda/.c/'`; \
+-	    if test -n "`echo $(memcached_debug_SOURCES) | grep $$srcfile`"; then \
+-	      echo `$(PROFILER) $$srcfile` | sed 's/'$$srcfile':.*//'; \
+-	    fi \
+ 	  done \
+ 	elif test `basename $(PROFILER)` = "tcov"; then \
+ 	  files=`grep SRCFILE memcached-debug.profile/tcovd | sed 's/SRCFILE://' | sort | uniq` && \
+ 	  $(PROFILER) -x memcached-debug.profile $$files 2>&1; \
+ 	  for file in *.tcov; do \
+ 	    srcfile=`echo $$file | sed 's/.tcov//'`; \
+-	    if test -n "`echo $(memcached_debug_SOURCES) | grep $$srcfile`"; then \
+-	      echo $$srcfile : `grep 'Percent of the file executed' $$file`; \
+-	    fi \
+ 	  done \
+ 	else :; fi
+
 diff --git a/configure.ac b/configure.ac
-index 6f2ef97..784d518 100644
+index 6f2ef97..c6e412b 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -4,8 +4,8 @@ m4_include([m4/c99-backport.m4])
+@@ -1,11 +1,10 @@
+ AC_PREREQ(2.52)
+-m4_include([version.m4])
+ m4_include([m4/c99-backport.m4])
  AC_INIT([memcached], [VERSION_NUMBER], [memcached@googlegroups.com])
  AC_CANONICAL_HOST
  AC_CONFIG_SRCDIR([memcached.c])
@@ -25,7 +98,7 @@ index 6f2ef97..784d518 100644
  
  AC_PROG_CC
  
-@@ -90,7 +90,7 @@ dnl assembling crc instructions without this
+@@ -90,7 +89,7 @@ dnl assembling crc instructions without this
  AS_IF(test "$CLANG" = "yes",[CFLAGS="$CFLAGS -Wno-language-extension-token"])
  
  if test "$ICC" = "no"; then
@@ -34,7 +107,7 @@ index 6f2ef97..784d518 100644
  fi
  
  AM_PROG_CC_C_O
-@@ -885,5 +885,8 @@ then
+@@ -885,5 +884,8 @@ then
    CFLAGS="$CFLAGS -errfmt=error -errwarn -errshort=tags"
  fi
  
