@@ -36,7 +36,7 @@ enable-hqinterop ^
 zlib ^
 zlib-dynamic ^
 --with-zlib-include=%PATH_INSTALL:\=/%/include ^
---with-zlib-lib=zlib ^
+--with-zlib-lib=z ^
 /DNDEBUG /Ob3 /GL /Gw /Zc:inline /Zf /FS /MP%NUMBER_OF_PROCESSORS% /cgthreads8 %__CNFC% %AVX% ^
 %CONFIGURE_OPENSSL%
 
