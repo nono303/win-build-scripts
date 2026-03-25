@@ -1,5 +1,11 @@
 @echo off && call %PATH_UTILS%\init.bat %1 cmake nocxx
 
+REM NOT ENABLE_LIB_ONLY 
+	REM Libev
+	REM Libnghttp3
+	REM Libbrotlienc
+	REM Libbrotlidec
+
 REM /third-party/urlparse
 cd /D %PATH_SRC%\%1
 git submodule update --remote --merge

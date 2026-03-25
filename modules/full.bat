@@ -34,10 +34,6 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat wineditline NOLOG
 	:pcre2
 	call %PATH_BATCH%\go.bat pcre2 NOLOG
-	:libevent
-	call %PATH_BATCH%\go.bat libevent NOLOG
-	:libev
-	call %PATH_BATCH%\go.bat libev NOLOG
 	:cares
 	call %PATH_BATCH%\go.bat cares NOLOG
 	:nghttp3

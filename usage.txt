@@ -16,8 +16,6 @@ Usage: go command [options]
       * icu
       * libxml2
       * pcre2
-      * libevent
-      * libev
       * cares
       * nghttp3
       * ngtcp2

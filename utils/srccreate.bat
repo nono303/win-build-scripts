@@ -10,7 +10,7 @@ if not exist %PATH_SRC%\. mkdir %PATH_SRC%
 cd /D %PATH_SRC%
 git clone https://aomedia.googlesource.com/aom aom
 cd /D aom
-git checkout tags/v3.13.1
+git checkout tags/v3.13.2
 cd /D ..
 git clone https://github.com/apache/apr.git apr
 cd /D apr
@@ -54,11 +54,11 @@ git checkout tags/v3.8.0
 cd /D ..
 git clone https://gitlab.freedesktop.org/freetype/freetype.git freetype2
 cd /D freetype2
-git checkout tags/VER-2-14-2
+git checkout tags/VER-2-14-3
 cd /D ..
 git clone https://github.com/OSGeo/gdal gdal
 cd /D gdal
-git checkout tags/v3.12.2
+git checkout tags/v3.12.3
 cd /D ..
 git clone https://github.com/geographiclib/geographiclib.git geographiclib
 cd /D geographiclib
@@ -78,7 +78,7 @@ git checkout tags/2.4.66
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout tags/release-78.2
+git checkout tags/release-78.3
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -90,11 +90,11 @@ git checkout tags/5.3.0
 cd /D ..
 git clone https://github.com/Esri/lerc.git lerc
 cd /D lerc
-git checkout tags/v4.1.0
+git checkout tags/js_v4.1.1
 cd /D ..
 git clone https://github.com/AOMediaCodec/libavif.git libavif
 cd /D libavif
-git checkout tags/v1.4.0
+git checkout tags/v1.4.1
 cd /D ..
 git clone https://github.com/hyperrealm/libconfig.git libconfig
 cd /D libconfig
@@ -104,17 +104,9 @@ git clone https://github.com/ebiggers/libdeflate.git libdeflate
 cd /D libdeflate
 git checkout tags/v1.25
 cd /D ..
-git clone https://git.lighttpd.net/libev.git libev
-cd /D libev
-git checkout master
-cd /D ..
-git clone https://github.com/libevent/libevent.git libevent
-cd /D libevent
-git checkout tags/release-2.2.1-alpha
-cd /D ..
 git clone https://github.com/libexpat/libexpat.git libexpat
 cd /D libexpat
-git checkout tags/R_2_7_4
+git checkout tags/R_2_7_5
 cd /D ..
 git clone https://github.com/libffi/libffi.git libffi
 cd /D libffi
@@ -266,7 +258,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/nghttp2/nghttp2.git nghttp2
 cd /D nghttp2
-git checkout tags/v1.68.0
+git checkout tags/v1.68.1
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3
@@ -342,7 +334,7 @@ git checkout tags/php-sdk-2.6.0
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.5.4
+git checkout tags/php-8.5.5RC1
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
