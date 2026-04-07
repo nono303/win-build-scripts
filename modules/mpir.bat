@@ -1,5 +1,5 @@
-REM /cygdrive/c/sdk/src/php-src/ext/gmp/config.w32:6   if (CHECK_LIB("mpir_a.lib", "gmp", PHP_GMP)
 @echo off && call %PATH_UTILS%\init.bat %1
+REM /cygdrive/c/sdk/src/php-src/ext/gmp/config.w32:6   if (CHECK_LIB("mpir_a.lib", "gmp", PHP_GMP)
 
 if %AVXECHO%==avx2 (
 	set MPIR_NAME=skylake-avx
