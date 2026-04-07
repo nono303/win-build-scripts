@@ -1,11 +1,12 @@
 @echo off && call %PATH_UTILS%\init.bat %1
 
-set VCDIR=builds\msvc\vs2022
-if %ARG_KEEPSRC% == 0 (call do_php %PATH_UTILS%/msbuild.php "%PATH_SRC%/%1/%VCDIR%" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%)
+set VCDIR=builds\msvc\vs2026
+REM if %ARG_KEEPSRC% == 0 (call do_php %PATH_UTILS%/msbuild.php "%PATH_SRC%/%1/%VCDIR%" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%)
 	REM overriding '/Ob1' with '/Ob3'
 sed -i -E 's/.*OnlyExplicitInline.*//g' %CYGPATH_SRC%/%1/builds/msvc/properties/Release.props
 
 REM /p:Option-amd64asm=yes: nonstandard extension used: '__asm' keyword not supported on this architecture
+REM compiler does not support inline assembly in 64-bit - https://stackoverflow.com/a/14292031
 MSBuild.exe %PATH_SRC%\%1\%VCDIR%\libsodium.sln %MSBUILD_OPTS% ^
 /nowarn:C4101;C4319 ^
 /p:VCToolsInstallDir=%VCToolsInstallDir% ^
