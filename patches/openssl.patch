@@ -1,8 +1,8 @@
 diff --git a/Configurations/10-main.conf b/Configurations/10-main.conf
-index 7e9396868a..9fcf8c99a4 100644
+index e62721e22f..dee81a94a0 100644
 --- a/Configurations/10-main.conf
 +++ b/Configurations/10-main.conf
-@@ -1524,10 +1524,10 @@ my %targets = (
+@@ -1525,10 +1525,10 @@ my %targets = (
          template         => 1,
          CC               => "cl",
          CPP              => '$(CC) /EP /C',
@@ -15,7 +15,7 @@ index 7e9396868a..9fcf8c99a4 100644
          ldoutflag        => "/out:",
          ldpostoutflag    => "",
          ld_resp_delim    => "\n",
-@@ -1535,7 +1535,7 @@ my %targets = (
+@@ -1536,7 +1536,7 @@ my %targets = (
          makedepcmd       => '$(CC) /Zs /showIncludes',
          makedep_scheme   => 'VC',
          AR               => "lib",
