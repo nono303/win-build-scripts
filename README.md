@@ -54,24 +54,24 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2026](https://aka.ms/vs/18/Stable/vs_community.exe) |      | 18.4.0 (14.50, 14.44) | `.vsconfig`         |
+| [Visual Studio 2026](https://aka.ms/vs/18/Stable/vs_community.exe) |      | 18.4.2 (14.50, 14.44) | `.vsconfig`         |
 | :bookmark: [Microsoft Visual C++ Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170) | x64 & x86 | 14.50.35719 |  |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.7.0 | `cyg64.packagelist` |
-| [Python](https://www.python.org/downloads/)                  | x64  | 3.14.3 |                     |
-| [OpenJDK](https://jdk.java.net/25/)              | x64  | 25.0.2 |                     |
-| [Strawberry Perl](https://github.com/StrawberryPerl/Perl-Dist-Strawberry/releases) | x64  | 5.42.0.1 UCRT |                     |
-| [NASM](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 2.16.03 *:warning:  3.0.1* |                     |
-| [YASM](https://github.com/yasm/yasm) _mpir_ | x64 | 1.3.0 | |
-| [Git](https://git-scm.com/download/win)                      | x64  | 2.53.0 |                     |
+| [Python](https://www.python.org/downloads/)                  | x64  | 3.14.4 |                     |
+| [OpenJDK](https://jdk.java.net/26/)             | x64  | 26 |                     |
+| [Strawberry Perl](https://github.com/StrawberryPerl/Perl-Dist-Strawberry/releases) | x64  | 5.42.2.1 UCRT |                     |
+| [NASM](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 3.0.2-rc5 |                     |
+| [YASM](https://github.com/yasm/yasm) | x64 | 1.3.0 | |
+| [Git](https://git-scm.com/download/win)                      | x64  | 2.53.0.2 |                     |
 | verpatch                                                     | x64  | 1.0.15.1       |                     |
 | [7z](https://www.7-zip.org/download.html)                    | x64  | 26.00 |                     |
 | [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.91     |                     |
 | [ChkMatch](https://web.archive.org/web/20210205095232/https://www.debuginfo.com/tools/chkmatch.html) | x86 | 1.0.3          |                     |
-| [Gradle](https://services.gradle.org/distributions/) | [java] | 9.4.0 | |
-| [CMake](https://cmake.org/download/) | x64 | 4.3.0-rc3 | |
+| [Gradle](https://services.gradle.org/distributions/) | [java] | 9.4.1 | |
+| [CMake](https://cmake.org/download/) | x64 | 4.3.1 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | x64 | 1.13.2 | |
-| [JOM](https://download.qt.io/official_releases/jom/) | x64 | 1.1.6 | |
-| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 1.10.1 | |
+| [JOM](https://download.qt.io/official_releases/jom/) | x64 | 1.1.7 | |
+| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 1.11.0-rc3 | |
 | [NuGet](https://www.nuget.org/downloads) | x86 | 7.3.0 | |
 | [pkg-config](https://packages.msys2.org/packages/mingw-w64-x86_64-pkg-config) | mingw-w64 | 0.29.2-6 | |
 
