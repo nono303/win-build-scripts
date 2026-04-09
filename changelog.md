@@ -1,8 +1,107 @@
 # changelog
 
 
+## 1.16.2 _(2026-04-09)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  fix libevent & libev removed
+`utils/bininfo.bat`
+*  typo
+`modules/mpir.bat`
+*  +AOM_TARGET_CPU=x86_64
+`modules/aom.bat`
+*  8.20: +CURL_ENABLE_NTLM +CURL_ENABLE_SMB
+`modules/curl.bat`
+*  VCDIR: vs2022 > vs2026
+`modules/libsodium.bat`
+*  3.6.2
+`patches/openssl.patch`
+*  3.1.3 > 3.1.90
+`modules/libjpeg-turbo.bat`
+*  remove useless build of libevent & libev
+`SRC_VERSION.md`
+`config/cyg.required`
+`modules/full.bat`
+`modules/libev.bat`
+`modules/libevent.bat`
+`modules/nghttp2.bat`
+`modules/ngtcp2.bat`
+`usage.txt`
+`utils/srccreate.bat`
+*  build Dependencies.exe (cmd line)
+`modules/dependencies.bat`
+*  fix missing option BUILD_SHARED_LIBS
+`patches/freetype2.patch`
+*  fix zlib lib name: zlib > z
+`modules/openssl.bat`
+*  autoupdate must be done before version.sh with automake 15.2
+`modules/memcached.sh`
+*  fix residuals warning linked to debug
+`patches/memcached.patch`
+*  fix usage for version
+`usage.txt`
+*  refactor version.php * typo: norpdb > nopdb * same description pattern with msvc & cygwni build
+`modules/dependencies.bat`
+`modules/memcached.bat`
+`modules/sslh.bat`
+`utils/sub/version.php`
+`utils/version.bat`
+*  remove useless nopdb cflag: -Wall > -w
+`modules/proxytunnel.bat`
+*  fix params pass to php with batch call
+`utils/srccreate.bat`
+*  fix params when called from version.bat
+`utils/sub/version.php`
+`utils/version.bat`
+*  git gc + aggressive for prune + all for reflog
+`utils/sub/srcstatus.php`
+*  regenerate include file (to be cleaned)
+`modules/libffi.bat`
+`modules/libffi.sh`
+`patches/libffi.patch`
+*  rollback CMAKE_IMPORT_LIBRARY_SUFFIX > IMPORT_LIB_SUFFIX (does not work)
+`modules/curl.bat`
+*  update src & tools
+`README.md`
+`SRC_VERSION.md`
+*  rollback pkg_check_modules for icuuc
+`patches/libxml2.patch`
+*  8.19 https://www.apachelounge.com/viewtopic.php?p=44215#44215
+`modules/curl.bat`
+`patches/curl.patch`
+*  remove tzdataservice
+`.gradle-wrapper.properties/tzdataservice_gradle-wrapper.properties`
+`README.md`
+`SRC_VERSION.md`
+`usage.txt`
+`utils/srccreate.bat`
+`utils/sub/_functions-version.php`
+*  fix pkg-config issue https://gitlab.kitware.com/cmake/cmake/-/issues/18980#note_533908
+`README.md`
+`patches/libxml2.patch`
+`utils/init.bat`
+*  +option(SHAREDLIB_PREFIX)
+`patches/sqlite.patch`
+*  create SRC_VERSION-release.md on go version for release
+`SRC_VERSION.md`
+`utils/sub/_functions-version.php`
+`utils/sub/version.php`
+*  libpng: 1.6 > 1.8
+`modules/libpng.bat`
+`modules/phpsdk-local.bat`
+`utils/srccreate.bat`
+`utils/sub/_functions-version.php`
+*  typo
+`utils/sub/srcstatus.php`
+
+
 ## 1.16.1 _(2026-03-06)_
 
+*  1.16.1
+`changelog.md`
 *  add jsonpath update src
 `SRC_VERSION.md`
 `modules/php.bat`
