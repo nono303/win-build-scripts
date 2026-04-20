@@ -1,3 +1,24 @@
+diff --git a/configure.ac b/configure.ac
+index 2876572..ed8997c 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -4,6 +4,7 @@ AC_PREREQ([2.68])
+ 
+ AC_INIT([libffi],[3.5.2],[http://github.com/libffi/libffi/issues])
+ AC_CONFIG_HEADERS([fficonfig.h])
++AC_CANONICAL_HOST
+ 
+ FFI_VERSION_STRING="3.5.2"
+ FFI_VERSION_NUMBER=30502
+@@ -44,7 +45,7 @@ AC_SUBST(CFLAGS)
+ AM_PROG_AS
+ AM_PROG_CC_C_O
+ AC_PROG_EGREP
+-LT_INIT
++LT_INIT([win32-dll])
+ AC_CONFIG_MACRO_DIR([m4])
+ 
+ AC_CHECK_TOOLS([READELF], [readelf greadelf])
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 new file mode 100644
 index 0000000..a8cc6f2
@@ -115,7 +136,7 @@ new file mode 100644
 index 0000000..1e9e01f
 --- /dev/null
 +++ b/x86_64-pc-cygwin/fficonfig.h
-@@ -0,0 +1,190 @@
+@@ -0,0 +1,195 @@
 +/* fficonfig.h.  Generated from fficonfig.h.in by configure.  */
 +/* fficonfig.h.in.  Generated from configure.ac by autoheader.  */
 +
@@ -190,10 +211,10 @@ index 0000000..1e9e01f
 +/* Define if you support more than one size of the long double type */
 +/* #undef HAVE_LONG_DOUBLE_VARIANT */
 +
-+/* Define to 1 if you have the `memcpy' function. */
++/* Define to 1 if you have the 'memcpy' function. */
 +/* #undef HAVE_MEMCPY */
 +
-+/* Define to 1 if you have the `memfd_create' function. */
++/* Define to 1 if you have the 'memfd_create' function. */
 +/* #undef HAVE_MEMFD_CREATE */
 +
 +/* Define to 1 if you have the <memory.h> header file. */
@@ -204,6 +225,9 @@ index 0000000..1e9e01f
 +
 +/* Define to 1 if you have the <stdint.h> header file. */
 +#define HAVE_STDINT_H 1
++
++/* Define to 1 if you have the <stdio.h> header file. */
++#define HAVE_STDIO_H 1
 +
 +/* Define to 1 if you have the <stdlib.h> header file. */
 +#define HAVE_STDLIB_H 1
@@ -253,16 +277,18 @@ index 0000000..1e9e01f
 +/* Define to the version of this package. */
 +#define PACKAGE_VERSION "3.5.2"
 +
-+/* The size of `double', as computed by sizeof. */
++/* The size of 'double', as computed by sizeof. */
 +#define SIZEOF_DOUBLE 8
 +
-+/* The size of `long double', as computed by sizeof. */
++/* The size of 'long double', as computed by sizeof. */
 +#define SIZEOF_LONG_DOUBLE 8
 +
-+/* The size of `size_t', as computed by sizeof. */
++/* The size of 'size_t', as computed by sizeof. */
 +#define SIZEOF_SIZE_T 8
 +
-+/* Define to 1 if you have the ANSI C header files. */
++/* Define to 1 if all of the C89 standard headers exist (not just the ones
++   required in a freestanding environment). This macro is provided for
++   backward compatibility; new code need not use it. */
 +#define STDC_HEADERS 1
 +
 +/* Define if symbols are underscored. */
@@ -305,6 +331,7 @@ index 0000000..1e9e01f
 +#define FFI_HIDDEN
 +#endif
 +#endif
++
 +
 diff --git a/x86_64-pc-cygwin/include/ffi.h b/x86_64-pc-cygwin/include/ffi.h
 new file mode 100644
