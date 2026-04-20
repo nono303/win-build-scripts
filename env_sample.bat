@@ -72,6 +72,8 @@ set BIN_SYGCHECK=%PATH_SOFTS%\sigcheck64.exe
 set BIN_VSINSTALLER="C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe"
 	REM Ninja for compiling cmake build
 set BIN_NINJA=%PATH_SOFTS%\ninja.exe
+	REM autoconf cccl for libffi & jemalloc
+set BIN_CCCL=/cygdrive/c/sdk/softs/cccl/cccl
 
 REM ########################## CYGWIN PATH
 FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\cygpath -u %PATH_SRC%`) do (set CYGPATH_SRC=%%F)
