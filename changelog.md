@@ -1,8 +1,34 @@
 # changelog
 
 
+## 1.16.3 _(2026-04-20)_
+
+*  update tools & src
+`SRC_VERSION.md`
+`config/.vsconfig`
+`config/python.pip`
+`utils/srccreate.bat`
+*  3.13.0.1
+`modules/gdal.bat`
+*  +BIN_CCCL for jemalloc & libffi
+`README.md`
+`env_sample.bat`
+*  5.3.1 https://github.com/jemalloc/jemalloc/issues/2886
+`modules/jemalloc.bat`
+`patches/jemalloc.patch`
+*  use cccl instead of msvcc.sh for autoconf
+`modules/libffi.bat`
+`modules/libffi.sh`
+`patches/libffi.patch`
+*  2.15.3
+`modules/libxml2.bat`
+`patches/libxml2.patch`
+
+
 ## 1.16.2 _(2026-04-09)_
 
+*  1.16.2
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
