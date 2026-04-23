@@ -20,15 +20,3 @@ index e57d0667..3fa375ea 100644
          if test $? -eq 0 ; then
            mv "${objroot}VERSION.tmp" "${objroot}VERSION"
            break
-diff --git a/msvc/projects/vc2022/jemalloc/jemalloc.vcxproj b/msvc/projects/vc2022/jemalloc/jemalloc.vcxproj
-index 5e256ec6..eb72d2ae 100644
---- a/msvc/projects/vc2022/jemalloc/jemalloc.vcxproj
-+++ b/msvc/projects/vc2022/jemalloc/jemalloc.vcxproj
-@@ -44,6 +44,7 @@
-     <ClCompile Include="..\..\..\..\src\buf_writer.c" />
-     <ClCompile Include="..\..\..\..\src\cache_bin.c" />
-     <ClCompile Include="..\..\..\..\src\ckh.c" />
-+	<ClCompile Include="..\..\..\..\src\conf.c" />
-     <ClCompile Include="..\..\..\..\src\counter.c" />
-     <ClCompile Include="..\..\..\..\src\ctl.c" />
-     <ClCompile Include="..\..\..\..\src\decay.c" />
