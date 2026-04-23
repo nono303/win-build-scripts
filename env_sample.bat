@@ -137,7 +137,6 @@ set MSBUILD_OPTS_DBG=%MSBUILD_OPTS_COM% ^
 	/v:d
 set MSBUILD_OPTS_REL=%MSBUILD_OPTS_COM% ^
 	/clp:ForceConsoleColor;EnableMPLogging;NoSummary;NoItemAndPropertyList ^
-	/nowarn:MSB8012;C4244 ^
 	/v:m
 
 set CMAKE_OPTS_DBG=-LAH -DCMAKE_FIND_DEBUG_MODE=1

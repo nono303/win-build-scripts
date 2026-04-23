@@ -7,7 +7,6 @@ if %ARG_KEEPSRC% == 0 (call do_php %PATH_UTILS%/msbuild.php "%PATH_SRC%/%1/%VCDI
 
 MSBuild.exe %VCDIR%/libiconv.vcxproj %MSBUILD_OPTS% ^
 /t:Clean,Build ^
-/nowarn:C4311;C4267;C4090;C4311 ^
 /p:Configuration=%OUTDIR_CONF% ^
 /p:Platform="%archmsbuild%"
 

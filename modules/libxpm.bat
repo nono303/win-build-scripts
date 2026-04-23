@@ -8,7 +8,6 @@ REM call do_php %PATH_UTILS%/msbuild.php "%PATH_SRC%/%1/%VCDIR:\=/%" %AVX_MSBUIL
 
 MSBuild.exe %PATH_SRC%\%1\%VCDIR%\libxpm.sln %MSBUILD_OPTS% ^
 /t:Clean,libxpm ^
-/nowarn:C4018;C4244;C4267;C4311;C4312;C4013;MSB8012 ^
 /p:Configuration="%OUTDIR_CONF%" ^
 /p:Platform="%archmsbuild%"
 

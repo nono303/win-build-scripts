@@ -11,7 +11,6 @@ set OUTDIR_CONF=Release
 
 MSBuild.exe nssm.sln %MSBUILD_OPTS% ^
 /t:Build ^
-/nowarn:C4311;C4302;C4312 ^
 /p:Configuration=%OUTDIR_CONF% ^
 /p:Platform="%archmsbuild%"
 

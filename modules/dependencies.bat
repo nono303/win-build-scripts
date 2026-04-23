@@ -7,7 +7,6 @@ set OUTDIR_CONF=Release
 
 MSBuild.exe Dependencies.sln %MSBUILD_OPTS% ^
 /t:clean,DependenciesGui,Dependencies ^
-/nowarn:C4018;C4267;CS0169 ^
 /p:Configuration=%OUTDIR_CONF% ^
 /p:Platform="%ARCH%"
 

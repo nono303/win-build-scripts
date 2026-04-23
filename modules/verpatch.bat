@@ -6,7 +6,6 @@ set OUTDIR_CONF=Release
 
 MSBuild.exe verpatch.sln %MSBUILD_OPTS% ^
 /t:Clean,verpatch ^
-/nowarn:C4267;C4838;C4474;C4311;C4302;C4312 ^
 /p:Configuration=%OUTDIR_CONF% ^
 /p:Platform="%archmsbuild%"
 
