@@ -6,6 +6,7 @@
 	*/
 
 	const VERBOSE_PAD = 12;
+	const NA_STRING = "";
 	const REMOTE_URLS = ["origin","upstream"];
 	const OUT_RELEASE = ["verpatch", "sslh", "libconfig", "nssm", "sdlna", "run-hidden", "proxytunnel", "memcached", "dependencies", "mapsforgesrv", "mobac", "fit2gpx", "subversion", "serf", "php-sdk", "geographiclib"];
 
@@ -57,9 +58,10 @@
 		// tag lower than file
 		"yajl"				=> ["/SET \(YAJL_MAJOR ([0-9]+).*SET \(YAJL_MINOR ([0-9]+).*SET \(YAJL_MICRO ([0-9]+)/s",
 							PATH_SRC."/yajl/CMakeLists.txt"],
-		// tag lower than file
+		/* tag lower than file
 		"libsodium"			=> ["/#define LIBSODIUM_VERSION_STRING \"([0-9\.]+)/s",
 							PATH_SRC."/libsodium/builds/msvc/resource.rc"],
+		*/
 		// tag lower than file
 		"libgd"				=> ["/#define GD_MAJOR_VERSION *([0-9]+).*#define GD_MINOR_VERSION *([0-9]+).*#define GD_RELEASE_VERSION *([0-9]+).*#define GD_EXTRA_VERSION *\"([^\"]+)\".*/s",
 							PATH_SRC."/libgd/src/gd.h"],
@@ -188,7 +190,7 @@
 			if($verbose)
 				echo str_pad($ret["vfile"]["product"], VERBOSE_PAD);
 		} elseif($verbose) {
-			echo str_pad("N/A", VERBOSE_PAD);
+			echo str_pad(NA_STRING, VERBOSE_PAD);
 		}
 		if (is_dir(PATH_SRC."/".$src."/.git")){
 			$url = 0;
@@ -204,7 +206,7 @@
 			} else {
 				unset($ret["scm"]["tag"]);
 				if($verbose)
-					echo str_pad("N/A", VERBOSE_PAD);
+					echo str_pad(NA_STRING, VERBOSE_PAD);
 			}
 			$ret["scm"]["ltag"] = explode("-g",execnono($cmd = "git describe --tags --long --always",NULL,realpath(PATH_SRC."/".$src),NULL));
 
@@ -220,7 +222,7 @@
 				$ret["scm"]["commit"] = $ret["scm"]["ltag"][0];
 				$ret["scm"]["branch"] = getGitBranchAtCommit($ret["scm"]["commit"], PATH_SRC."/".$src);
 				if($verbose)
-					echo str_pad("N/A", VERBOSE_PAD).str_pad($ret["scm"]["commit"], VERBOSE_PAD).str_pad($ret["scm"]["branch"], VERBOSE_PAD);
+					echo str_pad(NA_STRING, VERBOSE_PAD).str_pad($ret["scm"]["commit"], VERBOSE_PAD).str_pad($ret["scm"]["branch"], VERBOSE_PAD);
 				unset($ret["scm"]["ltag"]);
 			}
 			$ret["scm"]["dateiso"] = trim(execnono($cmd = "git show -s --format=%cd --date=short --date=iso-strict ".$ret["scm"]["commit"],NULL,realpath(PATH_SRC."/".$src),NULL));
@@ -242,13 +244,13 @@
 		// some verbose check
 		if($verbose) {
 			if($ret["vfile"] && $ret["scm"]["tag"] && $ret["vfile"]["product"] == $ret["scm"]["tag"]["product"])
-				echo "file is useless";
+				echo "\tfile is useless";
 			if($ret["vfile"] && $ret["scm"]["ltag"] && str_starts_with($ret["scm"]["ltag"]["product"],$ret["vfile"]["product"]))
-				echo "file is useless";
+				echo "\tfile is useless";
 			if($ret["scm"]["tag"] && $ret["scm"]["ltag"] && !str_starts_with($ret["scm"]["ltag"]["product"],$ret["scm"]["tag"]["product"]))
-				echo "last tag mismatch tag";
+				echo "\tlast tag mismatch tag";
 			if($ret["scm"]["tag"] && $ret["scm"]["ltag"] && $ret["scm"]["ltag"]["product"] != $ret["scm"]["tag"]["product"] && !str_ends_with($ret["scm"]["ltag"]["product"],"0"))
-				echo "last tag != tag";
+				echo "\tlast tag != tag";
 		}
 		// order return by src
 		if($ret[$current = "vfile"]){
