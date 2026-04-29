@@ -1,8 +1,8 @@
 diff --git a/src/mod_md.c b/src/mod_md.c
-index 349d187..1c0c421 100644
+index 03862c2..e668051 100644
 --- a/src/mod_md.c
 +++ b/src/mod_md.c
-@@ -885,6 +885,35 @@ static apr_status_t md_post_config_before_ssl(apr_pool_t *p, apr_pool_t *plog,
+@@ -888,6 +888,35 @@ static apr_status_t md_post_config_before_ssl(apr_pool_t *p, apr_pool_t *plog,
      md_config_post_config(s, p);
      sc = md_config_get(s);
      mc = sc->mc;
