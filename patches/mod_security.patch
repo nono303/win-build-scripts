@@ -1,5 +1,5 @@
 diff --git a/apache2/Makefile.win b/apache2/Makefile.win
-index ed4bfc9e..7d0d3b5a 100644
+index 0ef99f40..f4c584f9 100644
 --- a/apache2/Makefile.win
 +++ b/apache2/Makefile.win
 @@ -10,9 +10,9 @@
@@ -15,7 +15,7 @@ index ed4bfc9e..7d0d3b5a 100644
         Ws2_32.lib \
         "iphlpapi.lib"
  
-@@ -20,30 +20,30 @@ LIBS = $(APACHE)\lib\libhttpd.lib \
+@@ -20,22 +20,22 @@ LIBS = $(APACHE)\lib\libhttpd.lib \
  ###########################################################################
  
  
@@ -33,7 +33,7 @@ index ed4bfc9e..7d0d3b5a 100644
  MT = mt
  
 -DEFS = /nologo /O2 /LD /W3 /wd4244 /wd4018 -DWIN32 -DWINNT -Dinline=APR_INLINE -D$(VERSION)
-+DEFS = /nologo /DWIN32 /DWINNT /D$(VERSION) /D_WINDOWS /DWITH_PCRE_JIT /DNDEBUG
++DEFS = /nologo /DWIN32 /DWINNT /D_WINDOWS /DWITH_PCRE_JIT /DNDEBUG
  
 -DLL = mod_security2.so
 +DLL = mod_security2
@@ -45,9 +45,8 @@ index ed4bfc9e..7d0d3b5a 100644
 +           -I$(LIBXML2)\include\libxml2 \
             -I$(APACHE)\include
  
--# Enables support for SecRemoteRules and external resources.
-+# Enables support for SecRemoteRules and external resources.
- DEFS=$(DEFS) -DWITH_CURL -DWITH_REMOTE_RULES
+ # Enables support for SecRemoteRules and external resources.
+@@ -43,7 +43,7 @@ DEFS=$(DEFS) -DWITH_CURL -DWITH_REMOTE_RULES
  
  # Lua is optional
  !IF "$(LUA)" != ""
@@ -64,12 +63,31 @@ index ed4bfc9e..7d0d3b5a 100644
 +CFLAGS= $(INCLUDES) $(DEFS)
  
 -LDFLAGS =
-+LDFLAGS =/nologo
++LDFLAGS =/nologo /machine:x64 /DEBUG /NOLOGO /LTCG /OPT:REF,ICF /CGTHREADS:8
  
  OBJS = mod_security2.obj apache2_config.obj apache2_io.obj apache2_util.obj \
         re.obj re_operators.obj re_actions.obj re_tfns.obj re_variables.obj \
-@@ -83,7 +83,7 @@ dll: $(DLL)
-         $(CC) $(CFLAGS) -c $< -Fo$@
+@@ -65,8 +65,8 @@ OBJS = mod_security2.obj apache2_config.obj apache2_io.obj apache2_util.obj \
+        msc_parsers.obj msc_util.obj msc_pcre.obj persist_dbm.obj \
+        msc_reqbody.obj msc_geo.obj msc_gsb.obj msc_crypt.obj msc_tree.obj msc_unicode.obj acmp.obj msc_lua.obj \
+        msc_release.obj \
+-       msc_status_engine.obj \
+-       msc_remote_rules.obj \
++       msc_status_engine.obj \
++       msc_remote_rules.obj \
+        msc_json.obj \
+        others/libinjection/src/libinjection_html5.obj \
+        others/libinjection/src/libinjection_sqli.obj \
+@@ -77,13 +77,13 @@ all: $(DLL)
+ dll: $(DLL)
+ 
+ .c.obj:
+-        $(CC) $(CFLAGS) -c $< -Fo$@
++        $(CC) $(CFLAGS) -Fd$O\ -c $< -Fo$@
+ 
+ .cpp.obj:
+-        $(CC) $(CFLAGS) -c $< -Fo$@
++        $(CC) $(CFLAGS) -Fd$O\ -c $< -Fo$@
  
  $(DLL): $(OBJS)
 -        $(CC) $(CFLAGS) $(LDFLAGS) -LD $(OBJS) -Fe$(DLL) $(LIBS) /link
@@ -78,7 +96,7 @@ index ed4bfc9e..7d0d3b5a 100644
  
  install: $(DLL)
 diff --git a/apache2/mod_security2.c b/apache2/mod_security2.c
-index 97c49646..dab4e522 100644
+index 73e424e5..32523f14 100644
 --- a/apache2/mod_security2.c
 +++ b/apache2/mod_security2.c
 @@ -117,25 +117,25 @@ static void version(apr_pool_t *mp, server_rec* s) {
@@ -105,12 +123,11 @@ index 97c49646..dab4e522 100644
  #endif
 -            "loaded version=\"%s\"", pcre_vrs, pcre_loaded_vrs);
  
--    if (strstr(pcre_loaded_vrs,pcre_vrs) == NULL)    {
 +    /* failed on PCRE-dev: PCRE compiled version="10.46 "; loaded version="10.46-DEV 2024-06-09"
-+	if (strstr(pcre_loaded_vrs,pcre_vrs) == NULL)    {
+     if (strstr(pcre_loaded_vrs,pcre_vrs) == NULL)    {
          ap_log_error(APLOG_MARK, APLOG_WARNING, 0, s, "ModSecurity: Loaded PCRE do not match with compiled!");
      }
-+	*/
++    */
  
      /* Lua version function was removed in current 5.1. Need to check in future versions if it's back */
  #if defined(WITH_LUA)
@@ -123,65 +140,20 @@ index 97c49646..dab4e522 100644
                  "%s configured.", MODSEC_MODULE_NAME_FULL);
  
          version(mp, s);
-@@ -786,17 +786,6 @@ static int hook_post_config(apr_pool_t *mp, apr_pool_t *mp_log, apr_pool_t *mp_t
+@@ -786,7 +786,7 @@ static int hook_post_config(apr_pool_t *mp, apr_pool_t *mp_log, apr_pool_t *mp_t
                      "ModSecurity: Original server signature: %s",
                      real_server_signature);
          }
 -
--#ifndef VERSION_IIS
--        if (status_engine_state != STATUS_ENGINE_DISABLED) {
--            msc_status_engine_call();
--        }
--        else {
--            ap_log_error(APLOG_MARK, APLOG_NOTICE, 0, NULL,
--                    "ModSecurity: Status engine is currently disabled, enable " \
--                    "it by set SecStatusEngine to On.");
--        }
--#endif
++/*
+ #ifndef VERSION_IIS
+         if (status_engine_state != STATUS_ENGINE_DISABLED) {
+             msc_status_engine_call();
+@@ -797,6 +797,7 @@ static int hook_post_config(apr_pool_t *mp, apr_pool_t *mp_log, apr_pool_t *mp_t
+                     "it by set SecStatusEngine to On.");
+         }
+ #endif
++*/
      }
  
      /**
-diff --git a/apache2/msc_lua.c b/apache2/msc_lua.c
-index e1715c03..b2b9c1f3 100644
---- a/apache2/msc_lua.c
-+++ b/apache2/msc_lua.c
-@@ -433,7 +433,7 @@ int lua_execute(msc_script *script, char *param, modsec_rec *msr, msre_rule *rul
- #else
- 
-     /* Create new state. */
--#if LUA_VERSION_NUM == 502 || LUA_VERSION_NUM == 503 || LUA_VERSION_NUM == 504 || LUA_VERSION_NUM == 501
-+#if LUA_VERSION_NUM == 501 || LUA_VERSION_NUM == 502 || LUA_VERSION_NUM == 503 || LUA_VERSION_NUM == 504 || LUA_VERSION_NUM == 505
-     L = luaL_newstate();
- #elif LUA_VERSION_NUM == 500
-     L = lua_open();
-@@ -463,7 +463,7 @@ int lua_execute(msc_script *script, char *param, modsec_rec *msr, msre_rule *rul
-     /* Register functions. */
- #if LUA_VERSION_NUM == 500 || LUA_VERSION_NUM == 501
-     luaL_register(L, "m", mylib);
--#elif LUA_VERSION_NUM == 502 || LUA_VERSION_NUM == 503 || LUA_VERSION_NUM == 504
-+#elif LUA_VERSION_NUM == 502 || LUA_VERSION_NUM == 503 || LUA_VERSION_NUM == 504 || LUA_VERSION_NUM == 505
-     luaL_setfuncs(L, mylib, 0);
- #else
- #error We are only tested under Lua 5.0, 5.1, 5.2, 5.3, or 5.4.
-diff --git a/apache2/msc_pcre.h b/apache2/msc_pcre.h
-index e693236e..ab5e4cba 100644
---- a/apache2/msc_pcre.h
-+++ b/apache2/msc_pcre.h
-@@ -24,7 +24,7 @@ typedef struct msc_regex_t msc_regex_t;
- #include "pcre.h"
- #endif
- 
--#ifndef WITH_PCRE2
-+// #ifndef WITH_PCRE2
- 
- #ifndef PCRE_ERROR_MATCHLIMIT
- /* Define for compile, but not valid in this version of PCRE. */
-@@ -36,7 +36,7 @@ typedef struct msc_regex_t msc_regex_t;
- #define PCRE_ERROR_RECURSIONLIMIT (-21)
- #endif /* PCRE_ERROR_RECURSIONLIMIT */
- 
--#endif
-+// #endif
- 
- #include "apr_general.h"
- #include "modsecurity.h"
