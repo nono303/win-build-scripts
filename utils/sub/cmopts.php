@@ -67,6 +67,6 @@
 				(array_key_exists("comment",$v) ? "// ".$v["comment"] : "").PHP_EOL;
 		$csv .= $v["status"].";"."-D".$v["key"]."=".$v["value"].(array_key_exists("comment",$v) ? ";".$v["comment"] : "").PHP_EOL;
 	}
-	file_put_contents($fn = $_ENV["PATH_LOGS"]."/cmopts/".$argv[1].".csv",$csv);
+	file_put_contents($fn = $_ENV["PATH_CMOPTS_BUILD"]."/".$argv[1].".csv",$csv);
 	echo PHP_EOL."> writing ".realpath($fn).PHP_EOL;
 ?>
