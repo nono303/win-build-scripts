@@ -54,6 +54,7 @@
 		"error:" => [31,"str"],
 		"stop" => [31,"str"],
 		"err open" => [31,"str"], // version
+		"Permission denied" => [31,"str"], // sed chmod
 /* Yellow */
 		"(Warning[: ])" => [33,"reg"],
 		"warning" => [33,"reg"],
