@@ -1,3 +1,5 @@
+# fix sed: preserving permissions for '/cygdrive/c/sdk/build/vs18_x64-avx2/$2/xxxx': Permission denied
+chmod -f -R +w $2
 avx=$(echo $1| sed 's#/#\\/#g')
 
 # LINK FLAGS (dll exe)

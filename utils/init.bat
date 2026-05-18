@@ -4,6 +4,8 @@ echo ** [init] %*
 REM Check src dir
 if exist %PATH_SRC%\%1\. (
 	cd %PATH_SRC%\%1
+	REM fix sed: preserving permissions for '/cygdrive/c/sdk/build/vs18_x64-avx2/$2/xxxx': Permission denied
+	chmod -f -R +w %CYGPATH_SRC%/%1
 ) else (
 	echo %PATH_SRC%\%1 doesn't exists
 	exit /B
