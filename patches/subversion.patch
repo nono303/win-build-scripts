@@ -1,3 +1,16 @@
+diff --git a/build.conf b/build.conf
+index 1f2d64ac43..29aef97632 100644
+--- a/build.conf
++++ b/build.conf
+@@ -225,7 +225,7 @@ manpages = subversion/svnmucc/svnmucc.1
+ [svnbrowse]
+ type = exe
+ path = subversion/svnbrowse
+-libs = libsvn_client libsvn_ra libsvn_subr libsvn_delta ncurses
++libs = libsvn_client libsvn_ra libsvn_subr libsvn_delta
+ install = tui
+ 
+ # Support for GNOME Keyring
 diff --git a/build/generator/gen_win_dependencies.py b/build/generator/gen_win_dependencies.py
 index b31ef62a6d..660dd213f7 100644
 --- a/build/generator/gen_win_dependencies.py
