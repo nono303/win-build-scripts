@@ -1,8 +1,99 @@
 # changelog
 
 
+## 1.16.4 _(2026-05-18)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  bump to deec25f7 with latest unmerged PR
+`modules/libgd.bat`
+`patches/libgd/pr974.patch`
+`patches/libgd/pr975.patch`
+`patches/libgd/pr976.patch`
+`patches/libgd/pr978.patch`
+`patches/libgd/pr980.patch`
+`patches/libgd/pr982.patch`
+`patches/libgd/pr984.patch`
+`patches/libgd/pr992.patch`
+*  vcvars_ver: 14.50 > 14.51
+`vs18.bat`
+*  check "Permission denied" on sed
+`utils/sub/logcheck.php`
+*  init & force rebuild libinjection
+`modules/mod_security.bat`
+*  always call msbuild.php for libxpm.bat
+`modules/libxpm.bat`
+`utils/msbuild.php`
+*  fix sed: preserving permissions for '/cygdrive/c/sdk/build/vs18_x64-avx2/$2/xxxx': Permission denied
+`utils/init.bat`
+`utils/meson.sh`
+`utils/ninja.sh`
+*  fix mkdir PATH_CMOPTS_BUILD upgrade GRADLEVER
+`env_sample.bat`
+*  https://github.com/krakjoe/parallel/issues/369 fixed
+`utils/sub/_functions-version.php`
+*  fix warning missing ncurses
+`patches/subversion.patch`
+*  fix git pull for all HEAD without tag
+`utils/sub/srcstatus.php`
+*  remove "LIBYUV_TARGET_AVX2 __attribute__((no_sanitize("cfi-icall")))" causing MSCV error sed to patch
+`modules/libyuv.bat`
+`patches/libyuv.patch`
+*  jemalloc useless with ENABLE_SHARED_LIB=ON
+`modules/full.bat`
+`modules/jemalloc.bat`
+`modules/nghttp2.bat`
+`modules/ngtcp2.bat`
+`patches/jemalloc.patch`
+`usage.txt`
+`utils/bininfo.bat`
+*  add git submodule init & update
+`modules/mod_security.bat`
+*  https://github.com/php/php-src/pull/21912
+`patches/php-src/8.5/ext-lexbor.patch`
+*  gradle: 9.4.0 > 9.5.0
+`env_sample.bat`
+*  https://github.com/php/php-src/issues/21911
+`patches/php-src/8.5/ext-lexbor.patch`
+*  typo
+`utils/ninja.sh`
+*  move output csv file: PATH_LOGS > PATH_CMOPTS_BUILD
+`env_sample.bat`
+`utils/sub/cmopts.php`
+*  fix mod_proxy_http2_extra_sources to ${mod_http2_src} add bcrypt dependency to mod_md (curl 8.20)
+`patches/httpd.patch`
+*  2.6.11
+`patches/mod_md.patch`
+*  2.9.13
+`patches/mod_security.patch`
+*  8.20
+`modules/curl.bat`
+*  remove useless msbuild /nowarn
+`env_sample.bat`
+`modules/dependencies.bat`
+`modules/icu.bat`
+`modules/libiconv.bat`
+`modules/libsodium.bat`
+`modules/libxpm.bat`
+`modules/nssm.bat`
+`modules/verpatch.bat`
+*  + CMAKE_DISABLE_FIND_PACKAGE for svn build
+`modules/httpd.bat`
+`modules/pcre2.bat`
+*  fix java version with only major value
+`patches/subversion.patch`
+*  https://github.com/jemalloc/jemalloc/pull/2889 merged
+`patches/jemalloc.patch`
+*  disable libsodium file Improve output
+`utils/sub/_functions-version.php`
+
+
 ## 1.16.3 _(2026-04-20)_
 
+*  1.16.3
+`changelog.md`
 *  update tools & src
 `SRC_VERSION.md`
 `config/.vsconfig`
