@@ -89,7 +89,6 @@
 			"sqlite"		=> "- _[release](https://www.sqlite.org/changes.html)_",
 
 		],"version" => [
-			"pecl-parallel"	=> ":red_circle: [~~1.2.11~~](https://github.com/krakjoe/parallel/issues/369)",
 			"mobac"			=> ":warning: [apacheCommonsHttp](https://sourceforge.net/p/mobac/bugs/400/)",
 		]
 	];
