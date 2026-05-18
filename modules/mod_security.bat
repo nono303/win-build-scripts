@@ -1,8 +1,13 @@
 @echo off && call %PATH_UTILS%\init.bat %1 
 
+REM init libinjection
 CD %PATH_SRC%\%1
 git submodule init
 git submodule update
+REM force rebuild
+cd %PATH_SRC%\%1\apache2\others\libinjection
+call git clean -fdx > NUL
+call git reset --hard > NUL
 
 sed -i 's/DNDEBUG/DNDEBUG \/w \/Gw \/Gy \/Zc:inline \/O2 \/Ob3 \/Zf \/Zi \/FS \/GL \/MD \/MP%NUMBER_OF_PROCESSORS% \/cgthreads8%AVX_SED% \/std:c%C_STD_VER%/g' %CYGPATH_SRC%/%1/apache2/Makefile.win
 sed -i 's/LDFLAGS =\/nologo/LDFLAGS =\/nologo \/machine:%ARCH% \/DEBUG \/NOLOGO \/LTCG \/OPT:REF,ICF \/CGTHREADS:8/g' %CYGPATH_SRC%/%1/apache2/Makefile.win
