@@ -73,7 +73,7 @@ set BIN_SYGCHECK=%PATH_SOFTS%\sigcheck64.exe
 set BIN_VSINSTALLER="C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe"
 	REM Ninja for compiling cmake build
 set BIN_NINJA=%PATH_SOFTS%\ninja.exe
-	REM autoconf cccl for libffi & jemalloc
+	REM autoconf cccl for libffi
 set BIN_CCCL=/cygdrive/c/sdk/softs/cccl/cccl
 
 REM ########################## CYGWIN PATH
@@ -109,7 +109,7 @@ cd /D %PATH_BATCH%
 
 REM ########################## BUILD OPTION
 	REM https://services.gradle.org/distributions/
-set GRADLEVER=9.5.0
+set GRADLEVER=9.5.1
 	REM see dir in C:\Windows Kits\10\Lib
 set WKITVER=10.0.26100.0
 	REM .NET installed SDK
@@ -164,6 +164,7 @@ for %%X in (vs17 vs18) do (
 if not exist %PATH_PHP_BUILD%\. mkdir %PATH_PHP_BUILD%
 if not exist %PATH_GRADLE_BUILD%\. mkdir %PATH_GRADLE_BUILD%
 if not exist %PATH_VERSION_BUILD%\. mkdir %PATH_VERSION_BUILD%
+if not exist %PATH_CMOPTS_BUILD%\. mkdir %PATH_CMOPTS_BUILD%
 
 REM ########################## LOCAL COPY PATH
 REM copy MOBAC, FIT2GPX, PHP & GEOGRAPHICLIB release to LOCAL_PATH_XXX
