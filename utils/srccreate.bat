@@ -10,7 +10,7 @@ if not exist %PATH_SRC%\. mkdir %PATH_SRC%
 cd /D %PATH_SRC%
 git clone https://aomedia.googlesource.com/aom aom
 cd /D aom
-git checkout tags/v3.13.3
+git checkout tags/v3.14.0
 cd /D ..
 git clone https://github.com/apache/apr.git apr
 cd /D apr
@@ -34,7 +34,7 @@ git checkout tags/v1.34.6
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/rc-8_20_0-2
+git checkout tags/curl-8_20_0
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -58,7 +58,7 @@ git checkout tags/VER-2-14-3
 cd /D ..
 git clone https://github.com/OSGeo/gdal gdal
 cd /D gdal
-git checkout tags/v3.13.0beta1
+git checkout tags/v3.13.0
 cd /D ..
 git clone https://github.com/geographiclib/geographiclib.git geographiclib
 cd /D geographiclib
@@ -74,7 +74,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
-git checkout tags/2.4.66
+git checkout tags/2.4.67
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
@@ -83,10 +83,6 @@ cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
 git checkout tags/v2.15.0
-cd /D ..
-git clone https://github.com/jemalloc/jemalloc.git jemalloc
-cd /D jemalloc
-git checkout tags/5.3.1
 cd /D ..
 git clone https://github.com/Esri/lerc.git lerc
 cd /D lerc
@@ -106,13 +102,13 @@ git checkout tags/v1.25
 cd /D ..
 git clone https://github.com/libexpat/libexpat.git libexpat
 cd /D libexpat
-git checkout tags/R_2_7_5
+git checkout tags/R_2_8_1
 cd /D ..
 git clone https://github.com/libffi/libffi.git libffi
 cd /D libffi
 git checkout master
 cd /D ..
-git clone https://chromium.googlesource.com/codecs/libgav1 libgav1
+git clone https://chromium.googlesource.com/codecs/libgav1.git libgav1
 cd /D libgav1
 git checkout tags/v0.20.0
 cd /D ..
@@ -130,7 +126,7 @@ git checkout tags/v1.21.2
 cd /D ..
 git clone https://github.com/kiyolee/libiconv-win-build.git libiconv
 cd /D libiconv
-git checkout tags/v1.18-p1
+git checkout tags/v1.19
 cd /D ..
 git clone https://github.com/libjpeg-turbo/libjpeg-turbo libjpeg-turbo
 cd /D libjpeg-turbo
@@ -206,7 +202,7 @@ git checkout apacheCommonsHttp
 cd /D ..
 git clone https://github.com/JBlond/mod_bikeshed.git mod_bikeshed
 cd /D mod_bikeshed
-git checkout tags/1.0.0
+git checkout tags/1.0.1
 cd /D ..
 git clone https://github.com/jvdmr/mod_evasive mod_evasive
 cd /D mod_evasive
@@ -230,15 +226,15 @@ git checkout main
 cd /D ..
 git clone https://github.com/icing/mod_md mod_md
 cd /D mod_md
-git checkout tags/v2.6.10
+git checkout tags/v2.6.11
 cd /D ..
 svn co https://svn.code.sf.net/p/mod-qos/source/trunk/httpd_src/modules/qos mod_qos
 cd /D mod_qos
 svn update -r 2736
 cd /D ..
-git clone https://github.com/SpiderLabs/ModSecurity mod_security
+git clone https://github.com/owasp-modsecurity/ModSecurity mod_security
 cd /D mod_security
-git checkout tags/v2.9.12
+git checkout tags/v2.9.13
 cd /D ..
 git clone https://github.com/nono303/modsec-sdbm-util mod_security-sdbm-util
 cd /D mod_security-sdbm-util
@@ -298,7 +294,7 @@ git checkout main
 cd /D ..
 git clone https://github.com/krakjoe/parallel.git pecl-parallel
 cd /D pecl-parallel
-git checkout tags/v1.2.10
+git checkout tags/v1.2.13
 cd /D ..
 git clone https://github.com/php/pecl-system-sync pecl-system-sync
 cd /D pecl-system-sync
@@ -318,7 +314,7 @@ git checkout tags/0.15.2
 cd /D ..
 git clone https://github.com/nono303/php-geos.git php-geos
 cd /D php-geos
-git checkout tags/1.0.1.2
+git checkout master
 cd /D ..
 git clone https://github.com/nono303/php-ogr php-ogr
 cd /D php-ogr
@@ -330,11 +326,11 @@ git checkout tags/v3.0.3
 cd /D ..
 git clone https://github.com/php/php-sdk-binary-tools.git php-sdk
 cd /D php-sdk
-git checkout tags/php-sdk-2.6.0
+git checkout tags/php-sdk-2.7.1
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.5.5
+git checkout tags/php-8.5.6
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
@@ -366,7 +362,7 @@ git checkout trunk
 cd /D ..
 git clone https://github.com/rhuijben/sqlite-amalgamation sqlite
 cd /D sqlite
-git checkout tags/3.53.0
+git checkout tags/3.53.1
 cd /D ..
 git clone https://github.com/yrutschle/sslh.git sslh
 cd /D sslh
