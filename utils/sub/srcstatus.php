@@ -30,7 +30,7 @@
 				execnono("git clean -fdx", NULL, $repo, NULL);
 				execnono("git fetch 2>&1", NULL, $repo, NULL);
 				execnono("git fetch --tags --force", NULL, $repo, NULL); // https://stackoverflow.com/a/58438257
-				if($content["from"] == "git ltag") {
+				if($content["from"] != "git tag") {
 					execnono("git reset --hard", NULL, $repo, NULL);
 					execnono("git pull", NULL, $repo, NULL);
 				}
