@@ -10,7 +10,6 @@ Usage: go command [options]
       * bzip2
       * zlib
       * openssl
-      * jemalloc
       * libiconv
       * liblzma
       * icu

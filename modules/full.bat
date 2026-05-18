@@ -22,8 +22,6 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat zstd NOLOG
 	:openssl
 	call %PATH_BATCH%\go.bat openssl NOLOG
-	:jemalloc
-	call %PATH_BATCH%\go.bat jemalloc NOLOG
 	:libiconv
 	call %PATH_BATCH%\go.bat libiconv NOLOG
 	:icu
