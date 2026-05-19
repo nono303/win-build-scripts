@@ -1,9 +1,9 @@
 @echo off && call %PATH_UTILS%\init.bat %1 
 
-REM init libinjection
+echo ** [submodule] libinjection
 CD %PATH_SRC%\%1
 git submodule init
-git submodule update
+git submodule update --remote --merge --progress
 REM force rebuild
 cd %PATH_SRC%\%1\apache2\others\libinjection
 call git clean -fdx > NUL

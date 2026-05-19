@@ -6,9 +6,10 @@ REM NOT ENABLE_LIB_ONLY
 	REM Libbrotlienc
 	REM Libbrotlidec
 
-REM /third-party/urlparse
+echo ** [submodule] urlparse
 cd /D %PATH_SRC%\%1
-git submodule update --remote --merge
+git submodule init
+git submodule update --remote --merge --progress
 cd /D %PATH_BUILD%\%1
 
 if "%ARG_CMOPTS%"=="1" (@echo on)

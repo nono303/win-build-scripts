@@ -7,6 +7,11 @@ if NOT "%2"=="svn" (
 	if not exist %PATH_SRC%\mod_evasive\mod_evasive.c mklink /h %PATH_SRC%\mod_evasive\mod_evasive.c %PATH_SRC%\mod_evasive\mod_evasive24win.c
 )
 
+echo ** [submodule] for mod_maxminddb
+cd /D %PATH_SRC%\mod_maxminddb
+git submodule init
+git submodule update --remote --merge --progress --progress
+
 call %PATH_UTILS%\init.bat %1 cmake nocxx
 if "%2"=="svn" (sed -i 's/mod_dav_install_lib 0/mod_dav_install_lib 1/g' %CYGPATH_SRC%/%1/CMakeLists.txt)
 set HTTPD_VERSION=%SCM_TAG%
