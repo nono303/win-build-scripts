@@ -1,5 +1,9 @@
+ Makefile.am  | 22 +---------------------
+ configure.ac | 11 +++++++----
+ 2 files changed, 8 insertions(+), 25 deletions(-)
+
 diff --git a/Makefile.am b/Makefile.am
-index a7a11ad..c655088 100644
+index a7a11ad..25e28d7 100644
 --- a/Makefile.am
 +++ b/Makefile.am
 @@ -1,13 +1,9 @@
@@ -17,7 +21,7 @@ index a7a11ad..c655088 100644
  memcached_SOURCES = memcached.c memcached.h \
                      hash.c hash.h \
                      jenkins_hash.c jenkins_hash.h \
-@@ -88,21 +84,16 @@
+@@ -88,21 +84,16 @@ if ENABLE_TLS
  memcached_SOURCES += tls.c tls.h
  endif
  
@@ -39,7 +43,7 @@ index a7a11ad..c655088 100644
  endif
  
  if BUILD_DTRACE
-@@ -113,21 +104,16 @@
+@@ -113,21 +104,16 @@ endif
  if DTRACE_INSTRUMENT_OBJ
  memcached_LDADD += memcached_dtrace.o
  memcached_DEPENDENCIES += memcached_dtrace.o
@@ -61,7 +65,7 @@ index a7a11ad..c655088 100644
  endif
  
  memcached_debug_CFLAGS += -DMEMCACHED_DEBUG
-@@ -199,18 +185,12 @@
+@@ -199,18 +185,12 @@ endif
  	  done && \
  	  for file in *.gcda; do \
  	    srcfile=`echo $$file | sed 's/.gcda/.c/'`; \
@@ -79,15 +83,16 @@ index a7a11ad..c655088 100644
 -	    fi \
  	  done \
  	else :; fi
-
+ 
 diff --git a/configure.ac b/configure.ac
-index 6f2ef97..c6e412b 100644
+index 6f2ef97..225a7c1 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -1,11 +1,10 @@
+@@ -1,11 +1,11 @@
  AC_PREREQ(2.52)
 -m4_include([version.m4])
  m4_include([m4/c99-backport.m4])
++m4_include([version.m4])
  AC_INIT([memcached], [VERSION_NUMBER], [memcached@googlegroups.com])
  AC_CANONICAL_HOST
  AC_CONFIG_SRCDIR([memcached.c])
@@ -98,7 +103,7 @@ index 6f2ef97..c6e412b 100644
  
  AC_PROG_CC
  
-@@ -90,7 +89,7 @@ dnl assembling crc instructions without this
+@@ -90,7 +90,7 @@ dnl assembling crc instructions without this
  AS_IF(test "$CLANG" = "yes",[CFLAGS="$CFLAGS -Wno-language-extension-token"])
  
  if test "$ICC" = "no"; then
@@ -107,7 +112,7 @@ index 6f2ef97..c6e412b 100644
  fi
  
  AM_PROG_CC_C_O
-@@ -885,5 +884,8 @@ then
+@@ -885,5 +885,8 @@ then
    CFLAGS="$CFLAGS -errfmt=error -errwarn -errshort=tags"
  fi
  
