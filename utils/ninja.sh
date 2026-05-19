@@ -1,5 +1,4 @@
 # fix sed: preserving permissions for '/cygdrive/c/sdk/build/vs18_x64-avx2/$2/xxxx': Permission denied
-chmod -f -R +w $2
 avx=$(echo $1| sed 's#/#\\/#g')
 # LINK FLAGS (dll exe) (LINK_FLAGS with debug for PDB generation)
 sed -i -E 's/LINK_FLAGS =(.*) \/INCREMENTAL[^ ]*(.*)/LINK_FLAGS =\1\2/gI' $2/build.ninja
