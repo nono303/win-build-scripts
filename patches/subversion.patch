@@ -1,32 +1,8 @@
-diff --git a/build.conf b/build.conf
-index 1f2d64ac43..29aef97632 100644
---- a/build.conf
-+++ b/build.conf
-@@ -225,7 +225,7 @@ manpages = subversion/svnmucc/svnmucc.1
- [svnbrowse]
- type = exe
- path = subversion/svnbrowse
--libs = libsvn_client libsvn_ra libsvn_subr libsvn_delta ncurses
-+libs = libsvn_client libsvn_ra libsvn_subr libsvn_delta
- install = tui
- 
- # Support for GNOME Keyring
 diff --git a/build/generator/gen_win_dependencies.py b/build/generator/gen_win_dependencies.py
-index b31ef62a6d..660dd213f7 100644
+index 6b7cdf1a88..cc5885da79 100644
 --- a/build/generator/gen_win_dependencies.py
 +++ b/build/generator/gen_win_dependencies.py
-@@ -761,8 +761,8 @@ class GenDependenciesBase(gen_base.GeneratorBase):
-         # Visual Studio project file default: zlibstat.lib (static) and zlibwapi.lib (dll)
-         lib_name = 'zlibstat.lib'
-       else:
--        # Standard makefile produces zlib.lib (static) and zdll.lib (dll)
--        lib_name = 'zlib.lib'
-+        # Standard makefile produces z.lib (static) and zdll.lib (dll)
-+        lib_name = 'z.lib'
-       debug_lib_name = None
-     else:
-       # We have a source location
-@@ -1109,7 +1109,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
+@@ -1111,7 +1111,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
  
      py3c_path = os.path.abspath(py3c_path)
      inc_path = os.path.join(py3c_path, 'include')
@@ -35,7 +11,7 @@ index b31ef62a6d..660dd213f7 100644
  
      pc_path = os.path.join(py3c_path, 'py3c.pc.in')
  
-@@ -1188,7 +1188,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
+@@ -1190,7 +1190,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
                                 stderr=subprocess.STDOUT).stdout
        line = outfp.read().decode('utf8')
        if line:
@@ -44,7 +20,7 @@ index b31ef62a6d..660dd213f7 100644
        else:
          vermatch = None
  
-@@ -1520,7 +1520,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
+@@ -1522,7 +1522,7 @@ class GenDependenciesBase(gen_base.GeneratorBase):
      dll_name = None
      defines = []
  
