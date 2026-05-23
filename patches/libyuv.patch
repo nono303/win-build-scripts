@@ -1,7 +1,3 @@
- CMakeLists.txt    | 2 +-
- source/row_win.cc | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 77e0527f..5b9db60a 100644
 --- a/CMakeLists.txt
@@ -16,10 +12,10 @@ index 77e0527f..5b9db60a 100644
  
  # We cannot use GLOB here since we want to be able to separate out files that
 diff --git a/source/row_win.cc b/source/row_win.cc
-index 1d92043b..2ed729d5 100644
+index cc0e67ae..4dc2183e 100644
 --- a/source/row_win.cc
 +++ b/source/row_win.cc
-@@ -382,7 +382,7 @@ void RGB24ToARGBRow_AVX512BW(const uint8_t* src_rgb24, uint8_t* dst_argb, int wi
+@@ -364,7 +364,7 @@ void RGB24ToARGBRow_AVX512BW(const uint8_t* src_rgb24, uint8_t* dst_argb, int wi
  #endif
  
  #ifdef HAS_ARGBTOUVMATRIXROW_AVX2
