@@ -110,6 +110,10 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat mpir NOLOG
 	:libxslt
 	call %PATH_BATCH%\go.bat libxslt NOLOG
+	:proj
+	call %PATH_BATCH%\go.bat proj NOLOG
+	:libgeotiff
+	call %PATH_BATCH%\go.bat libgeotiff NOLOG
 	:libheif
 	call %PATH_BATCH%\go.bat libheif NOLOG
 	:libgd
@@ -118,10 +122,6 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat libffi NOLOG
 	:geos
 	call %PATH_BATCH%\go.bat geos NOLOG
-	:proj
-	call %PATH_BATCH%\go.bat proj NOLOG
-	:libgeotiff
-	call %PATH_BATCH%\go.bat libgeotiff NOLOG
 	:qhull
 	call %PATH_BATCH%\go.bat qhull NOLOG
 	:gdal
