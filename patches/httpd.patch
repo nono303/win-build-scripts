@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 8e6c13f2d9..d5eb456b8a 100644
+index 8e6c13f2d9..97e03786c3 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -17,14 +17,26 @@
@@ -104,7 +104,7 @@ index 8e6c13f2d9..d5eb456b8a 100644
    "modules/mappers/mod_actions+I+Action triggering on requests"
    "modules/mappers/mod_alias+A+mapping of requests to different filesystem parts"
    "modules/mappers/mod_dir+A+directory request handling"
-@@ -391,19 +403,29 @@ SET(MODULE_LIST
+@@ -391,19 +403,28 @@ SET(MODULE_LIST
    "modules/proxy/mod_proxy_hcheck+I+Apache proxy health check module.  Requires and is enabled by --enable-proxy."
    "modules/proxy/mod_proxy_scgi+I+Apache proxy SCGI module.  Requires and is enabled by --enable-proxy."
    "modules/proxy/mod_proxy_wstunnel+I+Apache proxy Websocket Tunnel module.  Requires and is enabled by --enable-proxy."
@@ -131,13 +131,12 @@ index 8e6c13f2d9..d5eb456b8a 100644
 +  "../mod_wku_bt/mod_crash+O+FastCGI mod_crash"
 +  "../mod_wku_bt/mod_backtrace+O+mod_backtrace"
 +  "../mod_bikeshed/mod_bikeshed+O+mod_bikeshed"
-+  "../mod_qos/mod_qos+O+mod_qos"
 +  "../mod_evasive/mod_evasive+O+mod_evasive"
 +  "../mod_zstd/mod_zstd+O+mod_zstd"
  )
  
  # Track which modules actually built have APIs to link against.
-@@ -422,7 +444,7 @@ SET(mod_cache_extra_defines          CACHE_DECLARE_EXPORT)
+@@ -422,7 +443,7 @@ SET(mod_cache_extra_defines          CACHE_DECLARE_EXPORT)
  SET(mod_cache_extra_sources
    modules/cache/cache_storage.c      modules/cache/cache_util.c
  )
@@ -146,7 +145,7 @@ index 8e6c13f2d9..d5eb456b8a 100644
  SET(mod_cache_disk_extra_libs        mod_cache)
  SET(mod_cache_socache_extra_libs     mod_cache)
  SET(mod_charset_lite_requires        APR_HAS_XLATE)
-@@ -432,7 +454,7 @@ SET(mod_dav_extra_sources
+@@ -432,7 +453,7 @@ SET(mod_dav_extra_sources
    modules/dav/main/std_liveprop.c    modules/dav/main/providers.c
    modules/dav/main/util.c            modules/dav/main/util_lock.c
  )
@@ -155,7 +154,7 @@ index 8e6c13f2d9..d5eb456b8a 100644
  SET(mod_dav_fs_extra_sources
    modules/dav/fs/dbm.c               modules/dav/fs/lock.c
    modules/dav/fs/repos.c
-@@ -458,16 +480,33 @@ SET(mod_http2_extra_defines          ssize_t=long)
+@@ -458,16 +479,33 @@ SET(mod_http2_extra_defines          ssize_t=long)
  SET(mod_http2_extra_includes         ${NGHTTP2_INCLUDE_DIR})
  SET(mod_http2_extra_libs             ${NGHTTP2_LIBRARIES})
  SET(mod_http2_extra_sources
@@ -199,7 +198,7 @@ index 8e6c13f2d9..d5eb456b8a 100644
  )
  SET(mod_ldap_extra_defines           LDAP_DECLARE_EXPORT)
  SET(mod_ldap_extra_libs              wldap32)
-@@ -484,30 +523,48 @@ SET(mod_lua_extra_sources
+@@ -484,30 +522,48 @@ SET(mod_lua_extra_sources
    modules/lua/lua_passwd.c           modules/lua/lua_request.c
    modules/lua/lua_vmprep.c           modules/lua/lua_dbd.c
  )
@@ -265,7 +264,7 @@ index 8e6c13f2d9..d5eb456b8a 100644
  SET(mod_proxy_ajp_extra_sources
    modules/proxy/ajp_header.c         modules/proxy/ajp_link.c
    modules/proxy/ajp_msg.c            modules/proxy/ajp_utils.c
-@@ -527,13 +584,6 @@ IF(LIBXML2_FOUND)
+@@ -527,13 +583,6 @@ IF(LIBXML2_FOUND)
  ENDIF()
  SET(mod_proxy_scgi_extra_libs        mod_proxy)
  SET(mod_proxy_wstunnel_extra_libs    mod_proxy)
@@ -279,7 +278,7 @@ index 8e6c13f2d9..d5eb456b8a 100644
  SET(mod_ratelimit_extra_defines      AP_RL_DECLARE_EXPORT)
  SET(mod_sed_extra_sources
    modules/filters/regexp.c           modules/filters/sed0.c
-@@ -541,7 +591,7 @@ SET(mod_sed_extra_sources
+@@ -541,7 +590,7 @@ SET(mod_sed_extra_sources
  )
  SET(mod_serf_requires                AN_UNIMPLEMENTED_SUPPORT_LIBRARY_REQUIREMENT)
  SET(mod_session_extra_defines        SESSION_DECLARE_EXPORT)
@@ -288,7 +287,7 @@ index 8e6c13f2d9..d5eb456b8a 100644
  SET(mod_session_cookie_extra_libs    mod_session)
  SET(mod_session_crypto_requires      APU_HAVE_CRYPTO)
  SET(mod_session_crypto_extra_libs    mod_session)
-@@ -564,13 +614,56 @@ SET(mod_ssl_extra_sources
+@@ -564,13 +613,52 @@ SET(mod_ssl_extra_sources
    modules/ssl/ssl_util_ssl.c         modules/ssl/ssl_util_stapling.c
  )
  SET(mod_status_extra_defines         STATUS_DECLARE_EXPORT)
@@ -338,15 +337,11 @@ index 8e6c13f2d9..d5eb456b8a 100644
 +SET(mod_backtrace_extra_sources
 +../mod_wku_bt/diag.c          
 +)
-+SET(mod_qos_requires                 OPENSSL_FOUND)
-+SET(mod_qos_extra_defines            QS_NO_STATUS_HOOK)
-+SET(mod_qos_extra_includes           ${OPENSSL_INCLUDE_DIR})
-+SET(mod_qos_extra_libs               ${OPENSSL_LIBRARIES})
 +SET(mod_zstd_extra_libs              ${ZSTD_LIBRARIES})
  
  SET(MODULE_PATHS)
  FOREACH (modinfo ${MODULE_LIST})
-@@ -624,8 +717,9 @@ ENDFOREACH()
+@@ -624,8 +712,9 @@ ENDFOREACH()
  generate_builtin_modules_c("${PROJECT_BINARY_DIR}/modules.c" "${builtin_module_shortnames}")
  
  # for easy reference from .dll/.so builds
@@ -357,7 +352,7 @@ index 8e6c13f2d9..d5eb456b8a 100644
  ADD_EXECUTABLE(gen_test_char server/gen_test_char.c)
  ADD_CUSTOM_COMMAND(
    COMMENT "Generating character tables, test_char.h, for current locale"
-@@ -709,8 +803,8 @@ SET(HTTPD_INCLUDE_DIRECTORIES
+@@ -709,8 +798,8 @@ SET(HTTPD_INCLUDE_DIRECTORIES
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/dav/main
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/filters
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators
@@ -368,7 +363,7 @@ index 8e6c13f2d9..d5eb456b8a 100644
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/proxy
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/session
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl
-@@ -718,6 +812,13 @@ SET(HTTPD_INCLUDE_DIRECTORIES
+@@ -718,6 +807,12 @@ SET(HTTPD_INCLUDE_DIRECTORIES
    ${CMAKE_CURRENT_SOURCE_DIR}/server/mpm/winnt
    ${APR_INCLUDE_DIR}
    ${PCRE_INCLUDE_DIR}
@@ -376,13 +371,12 @@ index 8e6c13f2d9..d5eb456b8a 100644
 +  ${CMAKE_CURRENT_SOURCE_DIR}/../mod_h264_streaming
 +  ${CMAKE_CURRENT_SOURCE_DIR}/../mod_wku_bt
 +  ${CMAKE_CURRENT_SOURCE_DIR}/../mod_bikeshed
-+  ${CMAKE_CURRENT_SOURCE_DIR}/../mod_qos
 +  ${CMAKE_CURRENT_SOURCE_DIR}/../mod_evasive
 +  ${CMAKE_CURRENT_SOURCE_DIR}/../mod_zstd
  )
  
  # The .h files we install from outside the main include directory
-@@ -735,7 +836,7 @@ SET(other_installed_h
+@@ -735,7 +830,7 @@ SET(other_installed_h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/filters/mod_xml2enc.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators/mod_cgi.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators/mod_status.h
@@ -391,7 +385,7 @@ index 8e6c13f2d9..d5eb456b8a 100644
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/loggers/mod_log_config.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/mappers/mod_rewrite.h
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/proxy/mod_proxy.h
-@@ -800,10 +901,10 @@ FOREACH (mod ${MODULE_PATHS})
+@@ -800,10 +895,10 @@ FOREACH (mod ${MODULE_PATHS})
    ELSE()
      # Handle whether or not the LoadModule is commented out.
      IF(${enable_mod_val} STREQUAL "A")
@@ -404,7 +398,7 @@ index 8e6c13f2d9..d5eb456b8a 100644
        SET(mods_built_but_not_loaded ${mods_built_but_not_loaded} ${mod_name})
      ELSE()
        MESSAGE(FATAL_ERROR "${enable_mod} must be set to \"A\", \"I\", or \"O\" instead of \"${enable_mod_val}\"")
-@@ -831,12 +932,13 @@ FOREACH (mod ${MODULE_PATHS})
+@@ -831,12 +926,13 @@ FOREACH (mod ${MODULE_PATHS})
      ENDIF()
      SET(mod_extra_libs "${mod_name}_extra_libs")
      SET_TARGET_PROPERTIES(${mod_name} PROPERTIES
@@ -421,7 +415,7 @@ index 8e6c13f2d9..d5eb456b8a 100644
  
      # Extra defines?
      SET(mod_extra_defines "${mod_name}_extra_defines")
-@@ -858,7 +960,8 @@ ENDFOREACH()
+@@ -858,7 +954,8 @@ ENDFOREACH()
  ###########   HTTPD LIBRARIES   ############
  ADD_LIBRARY(libhttpd SHARED ${LIBHTTPD_SOURCES} build/win32/httpd.rc)
  SET_TARGET_PROPERTIES(libhttpd PROPERTIES
@@ -431,7 +425,7 @@ index 8e6c13f2d9..d5eb456b8a 100644
  )
  SET(install_targets ${install_targets} libhttpd)
  SET(install_bin_pdb ${install_bin_pdb} $<TARGET_PDB_FILE:libhttpd>)
-@@ -913,12 +1016,12 @@ ENDIF()
+@@ -913,12 +1010,12 @@ ENDIF()
  GET_PROPERTY(tmp_includes TARGET ab PROPERTY INCLUDE_DIRECTORIES)
  
  # getting duplicate manifest error with ApacheMonitor

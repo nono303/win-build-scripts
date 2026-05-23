@@ -24,11 +24,11 @@
 | [libconfig](https://github.com/hyperrealm/libconfig) | 1.8.2 |
 | [libdeflate](https://github.com/ebiggers/libdeflate) | 1.25 |
 | [libexpat](https://github.com/libexpat/libexpat) | 2.8.1 |
-| [libffi](https://github.com/libffi/libffi) | 3.5.2.19 - 9760868 |
+| [libffi](https://github.com/libffi/libffi) | 3.5.2.20 - c5abbda |
 | [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.20.0 |
-| [libgd](https://github.com/libgd/libgd) | 2.4.0 - deec25f7 |
+| [libgd](https://github.com/libgd/libgd) | 2.4.0 - 81d7f2e2 |
 | [libgeotiff](https://github.com/nono303/libgeotiff) - [*upstream + src*](https://github.com/OSGeo/libgeotiff) | 1.7.4.14 - 231ca71 |
-| [libheif](https://github.com/strukturag/libheif) | 1.21.2 |
+| [libheif](https://github.com/strukturag/libheif) | 1.22.0 |
 | [libiconv](https://github.com/kiyolee/libiconv-win-build) | 1.19 |
 | [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) | 3.1.90 |
 | [liblzma](https://git.tukaani.org/xz) | 5.8.3 |
@@ -42,20 +42,19 @@
 | [libxml2](https://gitlab.gnome.org/GNOME/libxml2) | 2.15.3 |
 | [libxpm](https://github.com/nono303/libxpm) - [*upstream + src*](https://github.com/winlibs/libxpm) - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.17.11 - 8a450cb |
 | [libxslt](https://gitlab.gnome.org/GNOME/libxslt/) | 1.1.45 |
-| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1939 - cda55fcf |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1941 - 9d98aaef |
 | [libzip](https://github.com/nih-at/libzip) | 1.11.4 |
 | [lua](https://github.com/lua/lua) | 5.5.0 |
 | [mapsforgesrv](https://github.com/nono303/mapsforgesrv) - [*upstream + src*](https://github.com/telemaxx/mapsforgesrv) | 0.26.1.2.16 - 202bce7 |
-| [memcached](https://github.com/memcached/memcached) | 1.6.41 |
+| [memcached](https://github.com/memcached/memcached) | 1.6.42 |
 | [mobac](https://github.com/nono303/mobac) - [*upstream + src*](https://git.code.sf.net/p/mobac/git) | 2.3.3 - 165e7a9 :warning: [apacheCommonsHttp](https://sourceforge.net/p/mobac/bugs/400/) |
 | [mod_bikeshed](https://github.com/JBlond/mod_bikeshed) | 1.0.1 |
 | [mod_evasive](https://github.com/jvdmr/mod_evasive) | 2.4.0 |
 | [mod_fcgid](https://github.com/nono303/mod_fcgid) - [*upstream + src*](https://github.com/pagespeed/mod_fcgid) | 2.3.10.6 |
 | [mod_h2](https://github.com/icing/mod_h2) | 2.0.39 |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
-| [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.3.0.83 - bc24e6a |
+| [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.3.0.101 - b17f2be |
 | [mod_md](https://github.com/icing/mod_md) | 2.6.11 |
-| [mod_qos](https://svn.code.sf.net/p/mod-qos/source) | 11.78 - 2736 |
 | [mod_security](https://github.com/owasp-modsecurity/ModSecurity) | 2.9.13 |
 | [mod_security-sdbm-util](https://github.com/nono303/modsec-sdbm-util) - [*upstream + src*](https://github.com/SpiderLabs/modsec-sdbm-util) | 1.1.0 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) - _[src1](https://emptyhammock.com/media/downloads/wku_bt-2.01.zip)_ | 2.0.2 |
@@ -80,7 +79,7 @@
 | [php-ogr](https://github.com/nono303/php-ogr) - [*upstream + src*](https://github.com/dvzgeo/php_ogr) | 1.6.1.26 - d3593c5 |
 | [php-proj](https://github.com/swen100/phpng-proj) | 3.0.3 |
 | [php-sdk](https://github.com/php/php-sdk-binary-tools) | 2.7.1 |
-| [php-src](https://github.com/php/php-src) | 8.5.6 |
+| [php-src](https://github.com/php/php-src) | 8.5.7.1 |
 | [proj](https://github.com/OSGeo/PROJ) | 9.8.1 |
 | [proxytunnel](https://github.com/proxytunnel/proxytunnel) | 1.12.3.57 - 6db7e50 |
 | [pthread-win32](https://github.com/GerHobbelt/pthread-win32) | 3.0.3.1.79 - 06e7608b |
@@ -90,7 +89,7 @@
 | [serf](https://github.com/apache/serf) | 2.0.0 - a7071c4 |
 | [sqlite](https://github.com/rhuijben/sqlite-amalgamation) - _[release](https://www.sqlite.org/changes.html)_ | 3.53.1 |
 | [sslh](https://github.com/yrutschle/sslh) | 2.3.1.4 - 4752c86 |
-| [subversion](https://github.com/apache/subversion) | 1.16.0 - 95f35ff427 |
+| [subversion](https://github.com/apache/subversion) | 1.16.0 - eb7a13baf0 |
 | [tidy](https://github.com/htacg/tidy-html5) | 5.9.20 - d08ddc2 |
 | [verpatch](https://github.com/pavel-a/ddverpatch) | 1.0.15.1 - 3cc989e |
 | [wineditline](https://github.com/ptosco/wineditline) | 2.208 |

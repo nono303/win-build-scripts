@@ -3,7 +3,7 @@ set mod_suffix=.so
 
 	REM ~~~~~~~~~~~ external modules
 if NOT "%2"=="svn" (
-	for %%M in (mod_maxminddb mod_fcgid mod_h2 mod_md mod_wku_bt mod_h264_streaming mod_qos mod_evasive mod_zstd) do (call %PATH_UTILS%\init.bat %%M)
+	for %%M in (mod_maxminddb mod_fcgid mod_h2 mod_md mod_wku_bt mod_h264_streaming mod_evasive mod_zstd) do (call %PATH_UTILS%\init.bat %%M)
 	if not exist %PATH_SRC%\mod_evasive\mod_evasive.c mklink /h %PATH_SRC%\mod_evasive\mod_evasive.c %PATH_SRC%\mod_evasive\mod_evasive24win.c
 )
 
@@ -51,7 +51,7 @@ for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\modules\*%mod_suffix% /b') do (cal
 
 	REM ~~~~~~~~~~~ external modules
 if NOT "%2"=="svn" (
-	for %%X in (mod_maxminddb mod_fcgid mod_h264_streaming mod_md mod_qos mod_evasive mod_zstd mod_bikeshed) do (call do_php %PATH_UTILS%\sub\version.php %%X %PATH_INSTALL%\modules\%%X%mod_suffix% httpd:%HTTPD_VERSION%)
+	for %%X in (mod_maxminddb mod_fcgid mod_h264_streaming mod_md mod_evasive mod_zstd mod_bikeshed) do (call do_php %PATH_UTILS%\sub\version.php %%X %PATH_INSTALL%\modules\%%X%mod_suffix% httpd:%HTTPD_VERSION%)
 	for %%X in (mod_http2 mod_proxy_http2) do (call do_php %PATH_UTILS%\sub\version.php mod_h2 %PATH_INSTALL%\modules\%%X%mod_suffix% httpd:%HTTPD_VERSION%)
 	for %%X in (mod_backtrace mod_whatkilledus mod_crash) do (call do_php %PATH_UTILS%\sub\version.php mod_wku_bt %PATH_INSTALL%\modules\%%X%mod_suffix% httpd:%HTTPD_VERSION%)
 )

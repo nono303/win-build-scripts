@@ -8,7 +8,7 @@ if exist %2\. (
 	call do_php %PATH_UTILS%\sub\%1.php %PATH_INSTALL%\bin %BININFO_LOG:\=/% %2 %3 nb:245 %4 %5 %6 %7
 	call do_php %PATH_UTILS%\sub\%1.php %PATH_INSTALL%\bin\engines-3 %BININFO_LOG:\=/% %2 %3 nb:8 %4 %5 %6 %7
 	call do_php %PATH_UTILS%\sub\%1.php %PATH_INSTALL%\bin\ossl-modules %BININFO_LOG:\=/% %2 %3 nb:2 %4 %5 %6 %7
-	call do_php %PATH_UTILS%\sub\%1.php %PATH_INSTALL%\modules %BININFO_LOG:\=/% %2 %3 nb:266 %4 %5 %6 %7
+	call do_php %PATH_UTILS%\sub\%1.php %PATH_INSTALL%\modules %BININFO_LOG:\=/% %2 %3 nb:264 %4 %5 %6 %7
 	REM call do_php %PATH_UTILS%\sub\%1.php %PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB% %BININFO_LOG:\=/% %2 %3 nb:61 %4 %5 %6 %7
 		REM !! (nts ts)
 	for %%E in (ts) do (call do_php %PATH_UTILS%\sub\%1.php %PATH_INSTALL%\_php-%%E %BININFO_LOG:\=/% %2 %3 nb:98 %4 %5 %6 %7)

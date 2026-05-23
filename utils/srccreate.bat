@@ -122,7 +122,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/strukturag/libheif.git libheif
 cd /D libheif
-git checkout tags/v1.21.2
+git checkout tags/v1.22.0
 cd /D ..
 git clone https://github.com/kiyolee/libiconv-win-build.git libiconv
 cd /D libiconv
@@ -194,7 +194,7 @@ git checkout tasks
 cd /D ..
 git clone https://github.com/memcached/memcached memcached
 cd /D memcached
-git checkout tags/1.6.41
+git checkout tags/1.6.42
 cd /D ..
 git clone https://github.com/nono303/mobac.git mobac
 cd /D mobac
@@ -227,10 +227,6 @@ cd /D ..
 git clone https://github.com/icing/mod_md mod_md
 cd /D mod_md
 git checkout tags/v2.6.11
-cd /D ..
-svn co https://svn.code.sf.net/p/mod-qos/source/trunk/httpd_src/modules/qos mod_qos
-cd /D mod_qos
-svn update -r 2736
 cd /D ..
 git clone https://github.com/owasp-modsecurity/ModSecurity mod_security
 cd /D mod_security
@@ -330,7 +326,7 @@ git checkout tags/php-sdk-2.7.1
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.5.6
+git checkout tags/php-8.5.7RC1
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
