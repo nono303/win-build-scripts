@@ -8,3 +8,22 @@ index a357cf77..d9970168 100644
  
  if(TARGET AOM::aom)
    if(NOT AOM_FIND_QUIETLY)
+diff --git a/heifio/decoder_tiff.cc b/heifio/decoder_tiff.cc
+index ef18f617..4d4d99dd 100644
+--- a/heifio/decoder_tiff.cc
++++ b/heifio/decoder_tiff.cc
+@@ -38,10 +38,10 @@ extern "C" {
+ }
+ 
+ #if HAVE_GEOTIFF
+-#include <geotiff/geotiff.h>
+-#include <geotiff/geotiffio.h>
+-#include <geotiff/geo_normalize.h>
+-#include <geotiff/xtiffio.h>
++#include <geotiff.h>
++#include <geotiffio.h>
++#include <geo_normalize.h>
++#include <xtiffio.h>
+ #endif
+ 
+ #include "decoder_tiff.h"
