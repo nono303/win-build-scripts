@@ -1,9 +1,11 @@
 @echo off && call %PATH_UTILS%\init.bat %1 cmake
 
-cd /D %PATH_SRC%\%1
-REM https://github.com/libgd/libgd/pull/
-for /f "tokens=*" %%P in ('dir %PATH_PATCHES%\libgd\pr*.patch /s/b') do (call %PATH_UTILS%\gitapply %%P)
-cd /D %PATH_BUILD%\%1
+if %ARG_KEEPSRC% == 0 (
+	cd /D %PATH_SRC%\%1
+	REM https://github.com/libgd/libgd/pull/
+	for /f "tokens=*" %%P in ('dir %PATH_PATCHES%\libgd\pr*.patch /s/b') do (call %PATH_UTILS%\gitapply %%P)
+	cd /D %PATH_BUILD%\%1
+)
 
 REM missing libraqm, libfontconfig, libimagequant
 if "%ARG_CMOPTS%"=="1" (@echo on)
@@ -17,6 +19,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DENABLE_ICONV=ON ^
 -DENABLE_XPM=ON ^
 -DENABLE_FREETYPE=ON ^
+-DENABLE_RAQM=ON ^
 -DENABLE_FONTCONFIG=OFF ^
 -DENABLE_WEBP=ON ^
 -DENABLE_HEIF=ON ^
@@ -24,7 +27,6 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DENABLE_RAQM=OFF ^
 -DENABLE_ASAN=OFF ^
 -DENABLE_CPP=ON ^
--DENABLE_FLAT_MEMORY=ON ^
 -DVERBOSE_MAKEFILE=ON ^
 -DBUILD_SHARED_LIBS=ON ^
 -DBUILD_STATIC_LIBS=OFF ^

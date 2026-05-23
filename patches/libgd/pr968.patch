@@ -12,7 +12,7 @@ diff --git a/src/gd.c b/src/gd.c
 index 768fd2065..58ab17c8f 100644
 --- a/src/gd.c
 +++ b/src/gd.c
-@@ -2620,6 +2620,12 @@ static void _gdImageFillTiled(gdImagePtr im, int x, int y, int nc)
+@@ -2630,6 +2630,12 @@ static void _gdImageFillTiled(gdImagePtr im, int x, int y, int nc)
  	FILL_PUSH(y+1, x, x, -1);
  	while (sp>stack) {
  		FILL_POP(y, x1, x2, dy);
@@ -26,59 +26,3 @@ index 768fd2065..58ab17c8f 100644
  			nc = gdImageTileGet(im,x,y);
  			pts[y + x*wy2]=1;
 
-From 42ded5548beecede1762a6c71793247b437b3f69 Mon Sep 17 00:00:00 2001
-From: David Carlier <devnexen@gmail.com>
-Date: Mon, 8 Sep 2025 22:06:33 +0100
-Subject: [PATCH 2/2] add test
-
----
- tests/gdimagefill/CMakeLists.txt |  1 +
- tests/gdimagefill/Makemodule.am  |  3 ++-
- tests/gdimagefill/gh968.c        | 12 ++++++++++++
- 3 files changed, 15 insertions(+), 1 deletion(-)
- create mode 100644 tests/gdimagefill/gh968.c
-
-diff --git a/tests/gdimagefill/CMakeLists.txt b/tests/gdimagefill/CMakeLists.txt
-index 457fd8d16..b9f91deb8 100644
---- a/tests/gdimagefill/CMakeLists.txt
-+++ b/tests/gdimagefill/CMakeLists.txt
-@@ -5,6 +5,7 @@ LIST(APPEND TESTS_FILES
- 	bug00002_3
- 	bug00002_4
- 	bug00104_1
-+	gh968
- )
- ENDIF(PNG_FOUND)
- 
-diff --git a/tests/gdimagefill/Makemodule.am b/tests/gdimagefill/Makemodule.am
-index 6a12c0684..0c70ec313 100644
---- a/tests/gdimagefill/Makemodule.am
-+++ b/tests/gdimagefill/Makemodule.am
-@@ -4,7 +4,8 @@ libgd_test_programs += \
- 	gdimagefill/bug00002_2 \
- 	gdimagefill/bug00002_3 \
- 	gdimagefill/bug00002_4 \
--	gdimagefill/bug00104_1
-+	gdimagefill/bug00104_1 \
-+        gdimagefill/gh968
- endif
- 
- EXTRA_DIST += \
-diff --git a/tests/gdimagefill/gh968.c b/tests/gdimagefill/gh968.c
-new file mode 100644
-index 000000000..66909b213
---- /dev/null
-+++ b/tests/gdimagefill/gh968.c
-@@ -0,0 +1,12 @@
-+#include "gd.h"
-+#include "gdtest.h"
-+
-+int main(void)
-+{
-+	gdImagePtr im;
-+
-+	im = gdImageCreate(2, 150);
-+	gdImageFill(im, 11, 12, gdTiled);
-+	gdImageDestroy(im);
-+	return 0;
-+}

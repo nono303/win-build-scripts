@@ -17,7 +17,7 @@ diff --git a/src/gd.c b/src/gd.c
 index 768fd2065..81d08b082 100644
 --- a/src/gd.c
 +++ b/src/gd.c
-@@ -3036,6 +3036,41 @@ BGD_DECLARE(gdImagePtr) gdImageClone (gdImagePtr src) {
+@@ -2989,6 +2989,41 @@ BGD_DECLARE(gdImagePtr) gdImageClone (gdImagePtr src) {
  	return dst;
  }
  
@@ -59,7 +59,7 @@ index 768fd2065..81d08b082 100644
  /**
   * Function: gdImageCopy
   *
-@@ -3058,6 +3093,10 @@ BGD_DECLARE(gdImagePtr) gdImageClone (gdImagePtr src) {
+@@ -3011,6 +3046,10 @@ BGD_DECLARE(gdImagePtr) gdImageClone (gdImagePtr src) {
  BGD_DECLARE(void) gdImageCopy (gdImagePtr dst, gdImagePtr src, int dstX, int dstY, int srcX,
  							   int srcY, int w, int h)
  {
@@ -70,7 +70,7 @@ index 768fd2065..81d08b082 100644
  	int c;
  	int x, y;
  	int tox, toy;
-@@ -3171,6 +3210,9 @@ BGD_DECLARE(void) gdImageCopy (gdImagePtr dst, gdImagePtr src, int dstX, int dst
+@@ -3125,6 +3164,9 @@ BGD_DECLARE(void) gdImageCopy (gdImagePtr dst, gdImagePtr src, int dstX, int dst
  BGD_DECLARE(void) gdImageCopyMerge (gdImagePtr dst, gdImagePtr src, int dstX, int dstY,
  									int srcX, int srcY, int w, int h, int pct)
  {
@@ -80,7 +80,7 @@ index 768fd2065..81d08b082 100644
  
  	int c, dc;
  	int x, y;
-@@ -3240,6 +3282,9 @@ BGD_DECLARE(void) gdImageCopyMerge (gdImagePtr dst, gdImagePtr src, int dstX, in
+@@ -3194,6 +3236,9 @@ BGD_DECLARE(void) gdImageCopyMerge (gdImagePtr dst, gdImagePtr src, int dstX, in
  BGD_DECLARE(void) gdImageCopyMergeGray (gdImagePtr dst, gdImagePtr src, int dstX, int dstY,
  										int srcX, int srcY, int w, int h, int pct)
  {
@@ -90,7 +90,7 @@ index 768fd2065..81d08b082 100644
  
  	int c, dc;
  	int x, y;
-@@ -3323,6 +3368,14 @@ BGD_DECLARE(void) gdImageCopyResized (gdImagePtr dst, gdImagePtr src, int dstX,
+@@ -3277,6 +3322,14 @@ BGD_DECLARE(void) gdImageCopyResized (gdImagePtr dst, gdImagePtr src, int dstX,
  									  int srcX, int srcY, int dstW, int dstH, int srcW,
  									  int srcH)
  {
@@ -105,7 +105,7 @@ index 768fd2065..81d08b082 100644
  	int c;
  	int x, y;
  	int tox, toy;
-@@ -3474,6 +3527,10 @@ BGD_DECLARE(void) gdImageCopyRotated (gdImagePtr dst,
+@@ -3428,6 +3481,10 @@ BGD_DECLARE(void) gdImageCopyRotated (gdImagePtr dst,
  									  int srcX, int srcY,
  									  int srcWidth, int srcHeight, int angle)
  {
@@ -116,7 +116,7 @@ index 768fd2065..81d08b082 100644
  	double dx, dy;
  	double radius = sqrt (srcWidth * srcWidth + srcHeight * srcHeight);
  	double aCos = cos (angle * .0174532925);
-@@ -3582,6 +3639,14 @@ BGD_DECLARE(void) gdImageCopyResampled (gdImagePtr dst,
+@@ -3536,6 +3593,14 @@ BGD_DECLARE(void) gdImageCopyResampled (gdImagePtr dst,
  										int srcX, int srcY,
  										int dstW, int dstH, int srcW, int srcH)
  {

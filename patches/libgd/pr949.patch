@@ -14,7 +14,7 @@ diff --git a/src/gd_filter.c b/src/gd_filter.c
 index 23bc564c0..936058467 100644
 --- a/src/gd_filter.c
 +++ b/src/gd_filter.c
-@@ -842,6 +842,8 @@ gaussian_coeffs(int radius, double sigmaArg) {
+@@ -857,6 +857,8 @@ gaussian_coeffs(int radius, double sigmaArg) {
      double sum = 0;
      int x, n, count;
  

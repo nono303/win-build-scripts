@@ -11,10 +11,10 @@ diff --git a/src/gdhelpers.h b/src/gdhelpers.h
 index 9b187af7f..1b0b91870 100644
 --- a/src/gdhelpers.h
 +++ b/src/gdhelpers.h
-@@ -16,6 +16,24 @@ extern "C" {
+@@ -15,6 +15,23 @@
+     #include <stdlib.h>
    #endif /* _WIN32_WCE */
  #endif /* _WIN32 */
- 
 +#if defined(_WIN32) || defined(CYGWIN) || defined(_WIN32_WCE)
 +# ifdef __GNUC__
 +#  if (__STDC_VERSION__ >= 201112L)
@@ -32,8 +32,8 @@ index 9b187af7f..1b0b91870 100644
 +#  define BGD_THREAD_LOCAL __thread
 +# endif
 +#endif
-+
- /* TBB: strtok_r is not universal; provide an implementation of it. */
+ 
+ 	/* TBB: strtok_r is not universal; provide an implementation of it. */
  
  char *gd_strtok_r(char *s, const char *sep, char **state);
 
