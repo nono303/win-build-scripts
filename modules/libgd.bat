@@ -1,12 +1,5 @@
 @echo off && call %PATH_UTILS%\init.bat %1 cmake
 
-if %ARG_KEEPSRC% == 0 (
-	cd /D %PATH_SRC%\%1
-	REM https://github.com/libgd/libgd/pull/
-	for /f "tokens=*" %%P in ('dir %PATH_PATCHES%\libgd\pr*.patch /s/b') do (call %PATH_UTILS%\gitapply %%P)
-	cd /D %PATH_BUILD%\%1
-)
-
 REM missing libraqm, libfontconfig, libimagequant
 if "%ARG_CMOPTS%"=="1" (@echo on)
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
@@ -30,10 +23,12 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DVERBOSE_MAKEFILE=ON ^
 -DBUILD_SHARED_LIBS=ON ^
 -DBUILD_STATIC_LIBS=OFF ^
+-DBUILD_TEST=OFF ^
 -DBUILD_TESTS=OFF ^
 -DBUILD_PROGRAMS=OFF ^
 -DBUILD_EXEMPLES=OFF ^
 -DBUILD_DOCS=OFF ^
+-DBUILD_CPACK=OFF ^
 %PATH_SRC%\%1
 @echo off
 if "%ARG_CMOPTS%"=="1" (exit /B)
