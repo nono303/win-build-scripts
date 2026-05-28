@@ -7,6 +7,7 @@
 	foreach([
 		"DEBUG"		=> "verbose",
 		"NO_PDB"	=> "nopdb",
+		"REFRESH"	=> "refresh",
 	] as $def => $argin) {
 		define($def, in_array($argin, $argv) ? true : false);
 		$argv = array_diff($argv, [$argin]);

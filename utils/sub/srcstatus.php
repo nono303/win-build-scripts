@@ -3,6 +3,8 @@
 
 	// tag history to show in csv
 	const NB_TAGS = 8;
+	// version refresh not required as folder flushed at beginning
+	const REFRESH = false;
 
 	// arg to const
 	foreach([
@@ -14,10 +16,10 @@
 		echo str_pad($def.": ",12).(constant($def) ? "ON" : "OFF").PHP_EOL;
 	}
 
+	echo "* ".pathenv("PATH_VERSION_BUILD").($ret = cleanCache() ? " cleaned" : " unable to clear").PHP_EOL;
 	echo "> ".PATH_SRC.PHP_EOL;
 	$srccreate = file_get_contents(dirname(__FILE__) . '/srccreate.bat.in');
 	file_put_contents($argv[1],'"name";"scm";"origin";"head";"branch";"log tags";"last tag"'.PHP_EOL,FILE_APPEND);
-	echo "* ".pathenv("PATH_VERSION_BUILD").($ret = cleanCache() ? " cleaned" : " unable to clear").PHP_EOL;
 	echo "*************************".PHP_EOL;
 
 	foreach(glob(PATH_SRC."/*",GLOB_ONLYDIR) as $repo){

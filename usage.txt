@@ -93,6 +93,7 @@ Usage: go command [options]
     * sslh
   * {java}
     * mapsforgesrv
+    * tzdataservice
     * fit2gpx
     * mobac
  + standalone httpd module
@@ -139,6 +140,7 @@ Usage: go command [options]
     > param:  
       <module_name>: display version in format x.x.x.x
       verbose:       display scm commands and full results
+      refresh:       clean cache & get fresh version
     > option: EXCLUSIVE - ONLY IF PARAM <module_name> IS PRESENT
       env:     return the environment variables for init.bat
       <binfile>: write version information (verpatch) into the specified full path <binfile>

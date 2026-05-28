@@ -8,7 +8,7 @@
 	const VERBOSE_PAD = 12;
 	const NA_STRING = "";
 	const REMOTE_URLS = ["origin","upstream"];
-	const OUT_RELEASE = ["verpatch", "sslh", "libconfig", "nssm", "sdlna", "run-hidden", "proxytunnel", "memcached", "dependencies", "mapsforgesrv", "mobac", "fit2gpx", "subversion", "serf", "php-sdk", "geographiclib"];
+	const OUT_RELEASE = ["verpatch", "sslh", "libconfig", "nssm", "sdlna", "run-hidden", "proxytunnel", "memcached", "dependencies", "tzdataservice", "mapsforgesrv", "mobac", "fit2gpx", "subversion", "serf", "php-sdk", "geographiclib"];
 
 	define("PATH_SRC",pathenv("PATH_SRC"));
 	define("CACHE_VERSION",pathenv("CACHE_VERSION") == "1" ? true : false);
@@ -161,7 +161,12 @@
 	}
 
 	function getVersion($src, $verbose = false) {
-		if(CACHE_VERSION && is_file($fcache = pathenv("PATH_VERSION_BUILD")."/".$src.".json")) {
+		$fcache = pathenv("PATH_VERSION_BUILD")."/".$src.".json";
+		if(REFRESH && is_file($fcache)) {
+			debug("clear cached result in ".realpath($fcache));
+			unlink($fcache);
+		}
+		if(CACHE_VERSION && is_file($fcache)) {
 			debug("get cached result from ".realpath($fcache));
 			return json_decode(file_get_contents($fcache),true);
 		}

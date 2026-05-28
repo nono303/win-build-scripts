@@ -10,7 +10,7 @@ if not exist %PATH_SRC%\. mkdir %PATH_SRC%
 cd /D %PATH_SRC%
 git clone https://aomedia.googlesource.com/aom aom
 cd /D aom
-git checkout tags/v3.14.0
+git checkout tags/v3.14.1
 cd /D ..
 git clone https://github.com/apache/apr.git apr
 cd /D apr
@@ -90,7 +90,7 @@ git checkout tags/js_v4.1.1
 cd /D ..
 git clone https://github.com/AOMediaCodec/libavif.git libavif
 cd /D libavif
-git checkout tags/v1.4.1
+git checkout tags/v1.4.2
 cd /D ..
 git clone https://github.com/hyperrealm/libconfig.git libconfig
 cd /D libconfig
@@ -122,7 +122,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/strukturag/libheif.git libheif
 cd /D libheif
-git checkout tags/v1.22.0
+git checkout tags/v1.22.2
 cd /D ..
 git clone https://github.com/kiyolee/libiconv-win-build.git libiconv
 cd /D libiconv
@@ -214,7 +214,7 @@ git checkout tags/2.3.10.6
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v2.0.39
+git checkout tags/v2.0.41
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -302,11 +302,11 @@ git checkout tags/2.2.0
 cd /D ..
 git clone https://github.com/kjdev/php-ext-brotli.git php-ext-brotli
 cd /D php-ext-brotli
-git checkout tags/0.18.3
+git checkout master
 cd /D ..
 git clone https://github.com/kjdev/php-ext-zstd.git php-ext-zstd
 cd /D php-ext-zstd
-git checkout tags/0.15.2
+git checkout master
 cd /D ..
 git clone https://github.com/nono303/php-geos.git php-geos
 cd /D php-geos
@@ -326,7 +326,7 @@ git checkout tags/php-sdk-2.7.1
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.5.7RC1
+git checkout tags/php-8.5.7RC2
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
@@ -371,6 +371,10 @@ cd /D ..
 git clone https://github.com/htacg/tidy-html5 tidy
 cd /D tidy
 git checkout next
+cd /D ..
+git clone https://github.com/nono303/tzdataservice.git tzdataservice
+cd /D tzdataservice
+git checkout master
 cd /D ..
 git clone https://github.com/pavel-a/ddverpatch verpatch
 cd /D verpatch
