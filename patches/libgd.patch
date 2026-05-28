@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 6d57d58b..2c3bdeb1 100644
+index 3d51cb0c..af7844df 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -26,13 +26,19 @@ OPTION(ENABLE_ASAN "Enable (gcc) ASAN support" 0)
@@ -24,7 +24,7 @@ index 6d57d58b..2c3bdeb1 100644
  
  # if you would like to pass C flags to the compiler, then just
  # - specify -DCMAKE_C_FLAGS=... on invocation of cmake, or
-@@ -289,7 +295,7 @@ else (USE_EXT_GD)
+@@ -290,7 +296,7 @@ else (USE_EXT_GD)
  
  	if (WIN32)
  		SET(GD_LIB libgd)
@@ -33,16 +33,25 @@ index 6d57d58b..2c3bdeb1 100644
  
  		if(NOT MINGW AND MSVC_VERSION GREATER 1399)
  			ADD_DEFINITIONS("/D_CRT_SECURE_NO_DEPRECATE")
-@@ -315,59 +321,64 @@ else (USE_EXT_GD)
+@@ -316,61 +322,71 @@ else (USE_EXT_GD)
  	add_subdirectory(src)
  endif (USE_EXT_GD)
  
 -add_subdirectory(tests)
 -add_subdirectory(examples)
 -add_subdirectory(docs)
--
- add_custom_target(distclean ${GD_SOURCE_DIR}/cmake/distclean.sh)
++if(BUILD_TESTS)
++	add_subdirectory(tests)
++endif (BUILD_TESTS)
++if(BUILD_EXEMPLES)
++	add_subdirectory(examples)
++endif(BUILD_EXEMPLES)
++if(BUILD_DOCS)
++	add_subdirectory(docs)
++endif(BUILD_DOCS)
  
+ add_custom_target(distclean ${GD_SOURCE_DIR}/cmake/distclean.sh)
+-
 -SET(CPACK_PACKAGE_NAME "libgd")
 -SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "libGD, powerful and easy to use graphic library")
 -SET(CPACK_PACKAGE_VENDOR "https://www.libgd.org")
@@ -69,6 +78,8 @@ index 6d57d58b..2c3bdeb1 100644
 -INSTALL(FILES examples/crop.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
 -INSTALL(FILES examples/flip.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
 -INSTALL(FILES examples/gif.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
+-INSTALL(FILES examples/gif_frames.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
+-INSTALL(FILES examples/gif_rewrite.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
 -INSTALL(FILES examples/nnquant.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
 -INSTALL(FILES examples/noIcon.pic DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
 -INSTALL(FILES examples/noIcon.sgi DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
@@ -93,37 +104,6 @@ index 6d57d58b..2c3bdeb1 100644
 -)
 -install(FILES ${top_level_DOCFILES} DESTINATION ${DOC_DIR})
 -INCLUDE(CPack)
-+if(BUILD_TESTS)
-+	add_subdirectory(tests)
-+endif (BUILD_TESTS)
-+
-+if(BUILD_EXEMPLES)
-+	add_subdirectory(examples)
-+	INSTALL(FILES examples/arc.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/copyrotated.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/crop.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/flip.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/gif.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/nnquant.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/noIcon.pic DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/noIcon.sgi DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/noIcon.tga DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/noIconAlpha.tga DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/test_crop_threshold.png DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/tgaread.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/tiffread.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/windows.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+endif(BUILD_EXEMPLES)
-+
-+if(BUILD_DOCS)
-+	add_subdirectory(docs)
-+	INSTALL(FILES docs/INSTALL DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES docs/README.JPN DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES docs/README.CMAKE DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES docs/README.TESTING DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES docs/README.TXT DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+endif(BUILD_DOCS)
-+
 +if(BUILD_CPACK)
 +	SET(CPACK_PACKAGE_NAME "libgd")
 +	SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "libGD, powerful and easy to use graphic library")
@@ -137,7 +117,36 @@ index 6d57d58b..2c3bdeb1 100644
 +	else(WIN32)
 +		set(CPACK_GENERATOR TGZ)
 +	endif(WIN32)
++endif (BUILD_CPACK)
 +
++if(BUILD_DOCS)
++	INSTALL(FILES docs/INSTALL DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES docs/README.JPN DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES docs/README.CMAKE DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES docs/README.TESTING DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES docs/README.TXT DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++endif(BUILD_DOCS)
++
++if(BUILD_EXEMPLES)
++	INSTALL(FILES examples/arc.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/copyrotated.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/crop.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/flip.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/gif.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/gif_frames.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/gif_rewrite.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/nnquant.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/noIcon.pic DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/noIcon.sgi DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/noIcon.tga DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/noIconAlpha.tga DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/test_crop_threshold.png DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/tgaread.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/tiffread.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++	INSTALL(FILES examples/windows.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
++endif(BUILD_EXEMPLES)
++
++if(BUILD_CPACK)
 +	set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/COPYING")
 +
 +	set(CPACK_SOURCE_GENERATOR TGZ)
@@ -153,23 +162,23 @@ index 6d57d58b..2c3bdeb1 100644
 +	INCLUDE(CPack)
 +endif(BUILD_CPACK)
 \ No newline at end of file
-diff --git "a/src/CMakeLists.txt" "b/src/CMakeLists.txt"
-index e24dc014..a4eba7d1 100644
---- "a/src/CMakeLists.txt"
-+++ "b/src/CMakeLists.txt"
-@@ -56,13 +56,14 @@ if(ENABLE_CPP)
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 86879079..c069fa69 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -57,13 +57,15 @@ if(ENABLE_CPP)
  endif(ENABLE_CPP)
  
  # Static library just for utility programs.
 -SET (GD_PROGRAMS_LIB_SRC_FILES)
--
++if (BUILD_PROGRAMS)
++	SET (GD_PROGRAMS_LIB_SRC_FILES)
+ 
 -if(MSVC)
 -	set(GD_PROGRAMS_LIB_SRC_FILES ${GD_PROGRAMS_LIB_SRC_FILES}
 -		getopt.c
 -	)
 -endif(MSVC)
-+if (BUILD_PROGRAMS)
-+	SET (GD_PROGRAMS_LIB_SRC_FILES)
 +	if(MSVC)
 +		set(GD_PROGRAMS_LIB_SRC_FILES ${GD_PROGRAMS_LIB_SRC_FILES}
 +			getopt.c
@@ -179,7 +188,7 @@ index e24dc014..a4eba7d1 100644
  
  include(GNUInstallDirs)
  
-@@ -83,9 +84,11 @@ if (BUILD_STATIC_LIBS)
+@@ -84,9 +86,11 @@ if (BUILD_STATIC_LIBS)
  	endif()
  endif()
  
@@ -194,7 +203,7 @@ index e24dc014..a4eba7d1 100644
  
  if (WIN32 AND NOT MINGW AND NOT MSYS)
    #	SET_TARGET_PROPERTIES(${GD_LIB} PROPERTIES LINK_FLAGS "/NODEFAULTLIB:msvcrt.lib")
-@@ -160,20 +163,23 @@ if (ZLIB_FOUND)
+@@ -161,20 +165,23 @@ if (ZLIB_FOUND)
  	set(GD_PROGRAMS ${GD_PROGRAMS} gd2copypal gd2togif giftogd2)
  endif()
  
@@ -210,8 +219,6 @@ index e24dc014..a4eba7d1 100644
 -		target_link_libraries(${program} gd_programs_lib)
 -	endif()
 -endforeach(program)
--
--set(GD_INSTALL_TARGETS ${GD_PROGRAMS})
 +if (BUILD_PROGRAMS)
 +	foreach(program ${GD_PROGRAMS})
 +	    add_executable(${program} ${program}.c)
@@ -225,14 +232,15 @@ index e24dc014..a4eba7d1 100644
 +			target_link_libraries(${program} gd_programs_lib)
 +		endif()
 +	endforeach(program)
-+
 +	set(GD_INSTALL_TARGETS ${GD_PROGRAMS})
 +	install(PROGRAMS bdftogd DESTINATION bin)
-+endif()
++endif(BUILD_PROGRAMS)
+ 
+-set(GD_INSTALL_TARGETS ${GD_PROGRAMS})
  if (BUILD_SHARED_LIBS)
  	set(GD_INSTALL_TARGETS ${GD_INSTALL_TARGETS} ${GD_LIB})
  endif()
-@@ -185,7 +191,6 @@ install(TARGETS ${GD_INSTALL_TARGETS}
+@@ -186,7 +193,6 @@ install(TARGETS ${GD_INSTALL_TARGETS}
          RUNTIME DESTINATION bin
          LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
          ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
@@ -240,30 +248,3 @@ index e24dc014..a4eba7d1 100644
  install(FILES
  	gd.h
  	gd_color_map.h
-
-diff --git a/src/gdhelpers.h b/src/gdhelpers.h
-index 9b187af7..a6a2ad54 100644
---- a/src/gdhelpers.h
-+++ b/src/gdhelpers.h
-@@ -5,12 +5,16 @@
- extern "C" {
- #endif
- 
--	/* sys/types.h is needed for size_t on Sparc-SunOS-4.1 */
--#ifndef _WIN32_WCE
--#include <sys/types.h>
-+#ifdef _MSC_VER
-+  #include <stdint.h>
- #else
--#include <stdlib.h>
--#endif /* _WIN32_WCE */
-+  /* sys/types.h is needed for size_t on Sparc-SunOS-4.1 */
-+  #ifndef _WIN32_WCE
-+    #include <sys/types.h>
-+  #else
-+    #include <stdlib.h>
-+  #endif /* _WIN32_WCE */
-+#endif /* _WIN32 */
- 
- 	/* TBB: strtok_r is not universal; provide an implementation of it. */
- 
