@@ -1,8 +1,8 @@
 diff --git a/Configurations/10-main.conf b/Configurations/10-main.conf
-index e62721e22f..dee81a94a0 100644
+index 76cbf0ffa0..f5ec3b7457 100644
 --- a/Configurations/10-main.conf
 +++ b/Configurations/10-main.conf
-@@ -1525,10 +1525,10 @@ my %targets = (
+@@ -1521,10 +1521,10 @@ my %targets = (
          template         => 1,
          CC               => "cl",
          CPP              => '$(CC) /EP /C',
@@ -15,7 +15,7 @@ index e62721e22f..dee81a94a0 100644
          ldoutflag        => "/out:",
          ldpostoutflag    => "",
          ld_resp_delim    => "\n",
-@@ -1536,7 +1536,7 @@ my %targets = (
+@@ -1532,7 +1532,7 @@ my %targets = (
          makedepcmd       => '$(CC) /Zs /showIncludes',
          makedep_scheme   => 'VC',
          AR               => "lib",
@@ -25,10 +25,10 @@ index e62721e22f..dee81a94a0 100644
          ar_resp_delim    => "\n",
          RC               => "rc",
 diff --git a/Configure b/Configure
-index 6cc03bf2fe..d9db0a7c28 100755
+index e87c9ea471..7ba39f6e42 100755
 --- a/Configure
 +++ b/Configure
-@@ -590,15 +590,12 @@ our %disabled = ( # "what"         => "comment"
+@@ -605,14 +605,11 @@ our %disabled = ( # "what"         => "comment"
                    "fips"                => "default",
                    "fips-jitter"         => "default",
                    "asan"                => "default",
@@ -37,14 +37,13 @@ index 6cc03bf2fe..d9db0a7c28 100755
                    "buildtest-c++"       => "default",
                    "crypto-mdebug"       => "default",
                    "allocfail-tests"     => "default",
-                   "crypto-mdebug-backtrace" => "default",
                    "demos"               => "default",
                    "h3demo"              => "default",
 -                  "hqinterop"           => "default",
-                   "devcryptoeng"        => "default",
+                   "ec_explicit_curves" => "default",
                    "ec_nistp_64_gcc_128" => "default",
                    "egd"                 => "default",
-@@ -621,10 +618,6 @@ our %disabled = ( # "what"         => "comment"
+@@ -636,10 +633,6 @@ our %disabled = ( # "what"         => "comment"
                    "ubsan"               => "default",
                    "unit-test"           => "default",
                    "weak-ssl-ciphers"    => "default",

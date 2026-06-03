@@ -26,7 +26,7 @@ index 6b51ac64..8be0c3d5 100644
          NAMES "crypto.dll"
            "libcrypto-1_1.dll" "libcrypto-1_1-x64.dll"
            "libcrypto-3.dll" "libcrypto-3-x64.dll"
-+          "libcrypto-81_3.dll" "libcrypto-81_3-x64.dll"
++          "libcrypto-4.dll" "libcrypto-4-x64.dll"
          HINTS ${_OPENSSL_ROOT_HINTS} PATHS ${_OPENSSL_ROOT_PATHS}
          PATH_SUFFIXES "bin" NO_DEFAULT_PATH)
        if(DLL_LIBCRYPTO)

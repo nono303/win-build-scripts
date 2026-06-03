@@ -108,6 +108,8 @@ C:\Windows\System32\WindowsPowerShell\v1.0\;
 cd /D %PATH_BATCH%
 
 REM ########################## BUILD OPTION
+	REM
+set OPENSSLVER=4
 	REM https://services.gradle.org/distributions/
 set GRADLEVER=9.5.1
 	REM see dir in C:\Windows Kits\10\Lib

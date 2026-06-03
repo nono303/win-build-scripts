@@ -34,7 +34,7 @@ git checkout tags/v1.34.6
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-8_20_0
+git checkout tags/rc-8_21_0-1
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -58,7 +58,7 @@ git checkout tags/VER-2-14-3
 cd /D ..
 git clone https://github.com/OSGeo/gdal gdal
 cd /D gdal
-git checkout tags/v3.13.0
+git checkout tags/v3.13.1RC1
 cd /D ..
 git clone https://github.com/geographiclib/geographiclib.git geographiclib
 cd /D geographiclib
@@ -122,7 +122,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/strukturag/libheif.git libheif
 cd /D libheif
-git checkout tags/v1.22.2
+git checkout tags/v1.23.0
 cd /D ..
 git clone https://github.com/kiyolee/libiconv-win-build.git libiconv
 cd /D libiconv
@@ -214,7 +214,7 @@ git checkout tags/2.3.10.6
 cd /D ..
 git clone https://github.com/icing/mod_h2.git mod_h2
 cd /D mod_h2
-git checkout tags/v2.0.41
+git checkout tags/v2.0.42
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -254,11 +254,11 @@ git checkout tags/v1.69.0
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3
-git checkout tags/v1.15.0
+git checkout tags/v1.16.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v1.22.1
+git checkout tags/v1.23.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -266,7 +266,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/openssl/openssl openssl
 cd /D openssl
-git checkout tags/openssl-3.6.2
+git checkout tags/openssl-4.0.0
 cd /D ..
 git clone https://github.com/PCRE2Project/pcre2.git pcre2
 cd /D pcre2
@@ -326,7 +326,7 @@ git checkout tags/php-sdk-2.7.1
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.5.7RC2
+git checkout tags/php-8.5.7
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
@@ -334,7 +334,7 @@ git checkout tags/9.8.1
 cd /D ..
 git clone https://github.com/proxytunnel/proxytunnel.git proxytunnel
 cd /D proxytunnel
-git checkout master
+git checkout tags/v1.13.0
 cd /D ..
 git clone https://github.com/GerHobbelt/pthread-win32.git pthread-win32
 cd /D pthread-win32
