@@ -142,7 +142,7 @@ git checkout tags/1.13.3
 cd /D ..
 git clone https://github.com/pnggroup/libpng libpng
 cd /D libpng
-git checkout libpng18
+git checkout 
 cd /D ..
 git clone https://github.com/jedisct1/libsodium.git libsodium
 cd /D libsodium
@@ -358,7 +358,7 @@ git checkout trunk
 cd /D ..
 git clone https://github.com/rhuijben/sqlite-amalgamation sqlite
 cd /D sqlite
-git checkout tags/3.53.1
+git checkout tags/3.53.2
 cd /D ..
 git clone https://github.com/yrutschle/sslh.git sslh
 cd /D sslh
