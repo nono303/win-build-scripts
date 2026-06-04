@@ -1,8 +1,125 @@
 # changelog
 
 
+## 1.16.5 _(2026-06-04)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  fix Cache entry deserialization failed, entry ignored
+`upgrade_pip.bat`
+*  add OPENSSLVER * OpenSSL: 3 > 4   + httpd patch https://github.com/apache/httpd/pull/642 (tmp until 2.4.68)   - /bin/engines-%OPENSSLVER%
+`env_sample.bat`
+`modules/httpd.bat`
+`modules/openssl.bat`
+`modules/subversionanddeps.bat`
+`patches/httpd642.patch`
+`patches/libssh2.patch`
+`patches/openssl.patch`
+`utils/bininfo.bat`
+`utils/srccreate.bat`
+`utils/sub/libcheck.php`
+*  https://github.com/libgd/libgd/commit/89b546b403c07ef225deaa19739cbfe00bbe7f0a
+`modules/libgd.bat`
+`patches/libgd.patch`
+*  rewrite static and shared build with CURL_CMAKE_COMMON
+`modules/curl.bat`
+*  7f7c669
+`patches/libgd.patch`
+*  version: add refresh arg (to clear cache) tzdataservice: readd it (removed at 838a644becdc72b98a2ecad8584f6dc8d81e5ed5)
+`.gradle-wrapper.properties/tzdataservice_gradle-wrapper.properties`
+`SRC_VERSION.md`
+`usage.txt`
+`utils/srccreate.bat`
+`utils/sub/_functions-version.php`
+`utils/sub/srcstatus.php`
+`utils/sub/version.php`
+*  don't apply PR patch anymore (WiP on master)
+`modules/libgd.bat`
+`patches/libgd/pr514.patch`
+`patches/libgd/pr692.patch`
+`patches/libgd/pr804.patch`
+`patches/libgd/pr851.patch`
+`patches/libgd/pr852.skip`
+`patches/libgd/pr876.skip`
+`patches/libgd/pr877.skip`
+`patches/libgd/pr883.ko`
+`patches/libgd/pr884.patch`
+`patches/libgd/pr895.patch`
+`patches/libgd/pr906.skip`
+`patches/libgd/pr913.ko`
+`patches/libgd/pr918.patch`
+`patches/libgd/pr920.patch`
+`patches/libgd/pr940.skip`
+`patches/libgd/pr949.patch`
+`patches/libgd/pr960.patch`
+`patches/libgd/pr966.patch`
+`patches/libgd/pr968.patch`
+`patches/libgd/pr969.patch`
+`patches/libgd/pr974.patch`
+`patches/libgd/pr975.patch`
+`patches/libgd/pr976.patch`
+`patches/libgd/pr978.ko`
+`patches/libgd/pr982.patch`
+`patches/libgd/pr984.patch`
+*  remove build of mod_qos
+`SRC_VERSION.md`
+`modules/httpd.bat`
+`patches/httpd.patch`
+`utils/bininfo.bat`
+`utils/srccreate.bat`
+`utils/sub/_functions-version.php`
+*  build libgeotiff before libheif
+`modules/full.bat`
+*  1941
+`patches/libyuv.patch`
+*  1.22.0 add geotiff support
+`modules/libheif.bat`
+`patches/libheif.patch`
+*  81d7f2e2
+`modules/libgd.bat`
+`patches/libgd.patch`
+`patches/libgd/pr804.patch`
+`patches/libgd/pr883.ko`
+`patches/libgd/pr884.patch`
+`patches/libgd/pr895.patch`
+`patches/libgd/pr912.patch`
+`patches/libgd/pr920.patch`
+`patches/libgd/pr939.patch`
+`patches/libgd/pr946.patch`
+`patches/libgd/pr949.patch`
+`patches/libgd/pr960.patch`
+`patches/libgd/pr961.patch`
+`patches/libgd/pr965.patch`
+`patches/libgd/pr967.patch`
+`patches/libgd/pr968.patch`
+`patches/libgd/pr969.patch`
+`patches/libgd/pr976.patch`
+`patches/libgd/pr978.ko`
+`patches/libgd/pr980.patch`
+`patches/libgd/pr982.patch`
+`patches/libgd/pr984.patch`
+`patches/libgd/pr992.patch`
+*  97bf0284c
+`patches/subversion.patch`
+*  remove chmod as fixed on cygwin side (bad group for user logged on)
+`utils/init.bat`
+`utils/meson.sh`
+`utils/ninja.sh`
+*  git submodule init & update properly
+`modules/httpd.bat`
+`modules/mod_security.bat`
+`modules/ngtcp2.bat`
+*  1.6.42 fix configure version
+`modules/memcached.bat`
+`patches/memcached.patch`
+
+
 ## 1.16.4 _(2026-05-18)_
 
+*  1.16.4
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
