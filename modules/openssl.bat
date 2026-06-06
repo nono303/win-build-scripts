@@ -33,6 +33,7 @@ no-allocfail-tests ^
 no-external-tests ^
 no-weak-ssl-ciphers ^
 no-buildtest-c++ ^
+no-ssl3 ^
 no-docs ^
 threads ^
 enable-hqinterop ^
@@ -44,10 +45,12 @@ zlib-dynamic ^
 %CONFIGURE_OPENSSL%
 
 jom %JOM_OPTS% build_modules build_programs install_dev
-REM install_modules install_programs cause 'Trying to rename makefile-21040 -> makefile: Permission denied'
+REM install_modules install_programs install_engines cause 'Trying to rename makefile-21040 -> makefile: Permission denied'
 
-if not exist %PATH_INSTALL%\lib\ossl-modules\. mkdir %PATH_INSTALL%\lib\ossl-modules
-
+for %%i in (engines-%OPENSSLVER% ossl-modules) do (
+	if not exist %PATH_INSTALL%\bin\%%i\. mkdir %PATH_INSTALL%\bin\%%i
+	if not exist %PATH_INSTALL%\lib\%%i\. mkdir %PATH_INSTALL%\lib\%%i
+)
 for %%i in (\apps\openssl.exe) do (
 	xcopy /C /F /Y %PATH_SRC%\%1\%%i %PATH_INSTALL%\bin\*
 	xcopy /C /F /Y %PATH_SRC%\%1\%%~pi%%~ni.pdb %PATH_INSTALL%\bin\*
@@ -57,11 +60,16 @@ for %%i in (libcrypto libssl) do (
 	xcopy /C /F /Y %PATH_SRC%\%1\%%i-%OPENSSLVER%-x64.pdb %PATH_INSTALL%\bin\*
 	xcopy /C /F /Y %PATH_SRC%\%1\%%i.lib %PATH_INSTALL%\lib\*
 )
+for %%i in (\engines\capi.dll \engines\dasync.dll \engines\loader_attic.dll \engines\padlock.dll) do (
+	xcopy /C /F /Y %PATH_SRC%\%1\%%i %PATH_INSTALL%\bin\engines-%OPENSSLVER%\*
+	xcopy /C /F /Y %PATH_SRC%\%1\%%~pi%%~ni.pdb %PATH_INSTALL%\bin\engines-%OPENSSLVER%\*
+	xcopy /C /F /Y %PATH_SRC%\%1\%%~pi%%~ni.lib %PATH_INSTALL%\lib\engines-%OPENSSLVER%\*
+)
 for %%i in (\providers\legacy.dll) do (
 	xcopy /C /F /Y %PATH_SRC%\%1\%%i %PATH_INSTALL%\bin\ossl-modules\*
 	xcopy /C /F /Y %PATH_SRC%\%1\%%~pi%%~ni.pdb %PATH_INSTALL%\bin\ossl-modules\*
 	xcopy /C /F /Y %PATH_SRC%\%1\%%~pi%%~ni.lib %PATH_INSTALL%\lib\ossl-modules\*
 )
-for %%i in (ossl-modules\legacy.dll libcrypto-%OPENSSLVER%-x64.dll libssl-%OPENSSLVER%-x64.dll openssl.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%i)
+for %%i in (engines-%OPENSSLVER%\dasync.dll engines-%OPENSSLVER%\capi.dll engines-%OPENSSLVER%\loader_attic.dll engines-%OPENSSLVER%\padlock.dll ossl-modules\legacy.dll libcrypto-%OPENSSLVER%-x64.dll libssl-%OPENSSLVER%-x64.dll openssl.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%i)
 
 rm -fv %PATH_INSTALL%\bin\c_rehash.pl

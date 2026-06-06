@@ -16,11 +16,6 @@ call %PATH_UTILS%\init.bat %1 cmake nocxx
 if "%2"=="svn" (sed -i 's/mod_dav_install_lib 0/mod_dav_install_lib 1/g' %CYGPATH_SRC%/%1/CMakeLists.txt)
 set HTTPD_VERSION=%SCM_TAG%
 
-	REM TEMP openssl 4.0
-cd /D %PATH_SRC%\%1
-call %PATH_UTILS%\gitapply %PATH_PATCHES%\%1642.patch
-cd /D %PATH_BUILD%\%1
-
 	REM EXTRA_INCLUDES for patched /support/ab.c(192): include: 'ms/applink.c'
 set CMAKE_HTTPD_COMMON=%CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 	-DCMAKE_INSTALL_PREFIX=%PATH_INSTALL:\=/% ^
