@@ -34,7 +34,7 @@ git checkout tags/v1.34.6
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/rc-8_21_0-1
+git checkout tags/rc-8_21_0-2
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -58,7 +58,7 @@ git checkout tags/VER-2-14-3
 cd /D ..
 git clone https://github.com/OSGeo/gdal gdal
 cd /D gdal
-git checkout tags/v3.13.1RC1
+git checkout tags/v3.13.1
 cd /D ..
 git clone https://github.com/geographiclib/geographiclib.git geographiclib
 cd /D geographiclib
@@ -74,7 +74,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
-git checkout tags/2.4.67
+git checkout tags/2.4.68
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
@@ -142,7 +142,7 @@ git checkout tags/1.13.3
 cd /D ..
 git clone https://github.com/pnggroup/libpng libpng
 cd /D libpng
-git checkout 
+git checkout libpng18
 cd /D ..
 git clone https://github.com/jedisct1/libsodium.git libsodium
 cd /D libsodium
@@ -212,10 +212,6 @@ git clone https://github.com/nono303/mod_fcgid.git mod_fcgid
 cd /D mod_fcgid
 git checkout tags/2.3.10.6
 cd /D ..
-git clone https://github.com/icing/mod_h2.git mod_h2
-cd /D mod_h2
-git checkout tags/v2.0.42
-cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
 git checkout master
@@ -266,7 +262,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/openssl/openssl openssl
 cd /D openssl
-git checkout tags/openssl-4.0.0
+git checkout tags/openssl-3.6.2
 cd /D ..
 git clone https://github.com/PCRE2Project/pcre2.git pcre2
 cd /D pcre2
@@ -302,11 +298,11 @@ git checkout tags/2.2.0
 cd /D ..
 git clone https://github.com/kjdev/php-ext-brotli.git php-ext-brotli
 cd /D php-ext-brotli
-git checkout master
+git checkout tags/0.19.0
 cd /D ..
 git clone https://github.com/kjdev/php-ext-zstd.git php-ext-zstd
 cd /D php-ext-zstd
-git checkout master
+git checkout tags/0.16.0
 cd /D ..
 git clone https://github.com/nono303/php-geos.git php-geos
 cd /D php-geos
@@ -386,7 +382,7 @@ git checkout tags/wineditline-2.208
 cd /D ..
 git clone https://github.com/xdebug/xdebug.git xdebug
 cd /D xdebug
-git checkout tags/3.5.1
+git checkout tags/3.5.3
 cd /D ..
 git clone https://github.com/lloyd/yajl.git yajl
 cd /D yajl
