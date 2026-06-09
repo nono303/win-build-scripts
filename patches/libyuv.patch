@@ -11,16 +11,3 @@ index 77e0527f..5b9db60a 100644
  set ( ly_lib_shared	${ly_lib_name}_shared )
  
  # We cannot use GLOB here since we want to be able to separate out files that
-diff --git a/source/row_win.cc b/source/row_win.cc
-index cc0e67ae..4dc2183e 100644
---- a/source/row_win.cc
-+++ b/source/row_win.cc
-@@ -364,7 +364,7 @@ void RGB24ToARGBRow_AVX512BW(const uint8_t* src_rgb24, uint8_t* dst_argb, int wi
- #endif
- 
- #ifdef HAS_ARGBTOUVMATRIXROW_AVX2
--LIBYUV_TARGET_AVX2 __attribute__((no_sanitize("cfi-icall")))
-+
- void ARGBToUVMatrixRow_AVX2(const uint8_t* src_argb,
-                             int src_stride_argb,
-                             uint8_t* dst_u,
