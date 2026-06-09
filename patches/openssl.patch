@@ -25,10 +25,10 @@ index e62721e22f..dee81a94a0 100644
          ar_resp_delim    => "\n",
          RC               => "rc",
 diff --git a/Configure b/Configure
-index 6cc03bf2fe..d9db0a7c28 100755
+index ac7f6af1bb..0ff07f940e 100755
 --- a/Configure
 +++ b/Configure
-@@ -590,15 +590,12 @@ our %disabled = ( # "what"         => "comment"
+@@ -595,15 +595,12 @@ our %disabled = ( # "what"         => "comment"
                    "fips"                => "default",
                    "fips-jitter"         => "default",
                    "asan"                => "default",
@@ -44,7 +44,7 @@ index 6cc03bf2fe..d9db0a7c28 100755
                    "devcryptoeng"        => "default",
                    "ec_nistp_64_gcc_128" => "default",
                    "egd"                 => "default",
-@@ -621,10 +618,6 @@ our %disabled = ( # "what"         => "comment"
+@@ -626,10 +623,6 @@ our %disabled = ( # "what"         => "comment"
                    "ubsan"               => "default",
                    "unit-test"           => "default",
                    "weak-ssl-ciphers"    => "default",
@@ -55,4 +55,3 @@ index 6cc03bf2fe..d9db0a7c28 100755
                  );
  
  # Note: => pair form used for aesthetics, not to truly make a hash table
- 
