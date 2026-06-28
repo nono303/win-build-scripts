@@ -1,27 +1,6 @@
-diff --git a/configure.ac b/configure.ac
-index 2876572..ed8997c 100644
---- a/configure.ac
-+++ b/configure.ac
-@@ -4,6 +4,7 @@ AC_PREREQ([2.68])
- 
- AC_INIT([libffi],[3.5.2],[http://github.com/libffi/libffi/issues])
- AC_CONFIG_HEADERS([fficonfig.h])
-+AC_CANONICAL_HOST
- 
- FFI_VERSION_STRING="3.5.2"
- FFI_VERSION_NUMBER=30502
-@@ -44,7 +45,7 @@ AC_SUBST(CFLAGS)
- AM_PROG_AS
- AM_PROG_CC_C_O
- AC_PROG_EGREP
--LT_INIT
-+LT_INIT([win32-dll])
- AC_CONFIG_MACRO_DIR([m4])
- 
- AC_CHECK_TOOLS([READELF], [readelf greadelf])
 diff --git a/CMakeLists.txt b/CMakeLists.txt
 new file mode 100644
-index 0000000..a8cc6f2
+index 00000000..a8cc6f2b
 --- /dev/null
 +++ b/CMakeLists.txt
 @@ -0,0 +1,92 @@
@@ -119,7 +98,7 @@ index 0000000..a8cc6f2
 +)
 \ No newline at end of file
 diff --git a/msvcc.sh b/msvcc.sh
-index 301e2fb..d0083a6 100755
+index 301e2fbd..d0083a66 100755
 --- a/msvcc.sh
 +++ b/msvcc.sh
 @@ -64,7 +64,7 @@ do
@@ -133,10 +112,10 @@ index 301e2fb..d0083a6 100755
      -fexceptions)
 diff --git a/x86_64-pc-cygwin/fficonfig.h b/x86_64-pc-cygwin/fficonfig.h
 new file mode 100644
-index 0000000..1e9e01f
+index 00000000..27315ee2
 --- /dev/null
 +++ b/x86_64-pc-cygwin/fficonfig.h
-@@ -0,0 +1,195 @@
+@@ -0,0 +1,192 @@
 +/* fficonfig.h.  Generated from fficonfig.h.in by configure.  */
 +/* fficonfig.h.in.  Generated from configure.ac by autoheader.  */
 +
@@ -217,9 +196,6 @@ index 0000000..1e9e01f
 +/* Define to 1 if you have the 'memfd_create' function. */
 +/* #undef HAVE_MEMFD_CREATE */
 +
-+/* Define to 1 if you have the <memory.h> header file. */
-+#define HAVE_MEMORY_H 1
-+
 +/* Define if .eh_frame sections should be read-only. */
 +/* #undef HAVE_RO_EH_FRAME */
 +
@@ -266,7 +242,7 @@ index 0000000..1e9e01f
 +#define PACKAGE_NAME "libffi"
 +
 +/* Define to the full name and version of this package. */
-+#define PACKAGE_STRING "libffi 3.5.2"
++#define PACKAGE_STRING "libffi 3.6.0"
 +
 +/* Define to the one symbol short name of this package. */
 +#define PACKAGE_TARNAME "libffi"
@@ -275,7 +251,7 @@ index 0000000..1e9e01f
 +#define PACKAGE_URL ""
 +
 +/* Define to the version of this package. */
-+#define PACKAGE_VERSION "3.5.2"
++#define PACKAGE_VERSION "3.6.0"
 +
 +/* The size of 'double', as computed by sizeof. */
 +#define SIZEOF_DOUBLE 8
@@ -299,7 +275,7 @@ index 0000000..1e9e01f
 +/* #undef USING_PURIFY */
 +
 +/* Version number of package */
-+#define VERSION "3.5.2"
++#define VERSION "3.6.0"
 +
 +/* Define WORDS_BIGENDIAN to 1 if your processor stores words with the most
 +   significant byte first (like Motorola and SPARC, unlike Intel). */
@@ -332,15 +308,14 @@ index 0000000..1e9e01f
 +#endif
 +#endif
 +
-+
 diff --git a/x86_64-pc-cygwin/include/ffi.h b/x86_64-pc-cygwin/include/ffi.h
 new file mode 100644
-index 0000000..b2736b2
+index 00000000..91ef9505
 --- /dev/null
 +++ b/x86_64-pc-cygwin/include/ffi.h
-@@ -0,0 +1,543 @@
+@@ -0,0 +1,574 @@
 +/* -----------------------------------------------------------------*-C-*-
-+   libffi 3.5.2
++   libffi 3.6.0
 +     - Copyright (c) 2011, 2014, 2019, 2021, 2022, 2024, 2025 Anthony Green
 +     - Copyright (c) 1996-2003, 2007, 2008 Red Hat, Inc.
 +
@@ -692,6 +667,11 @@ index 0000000..b2736b2
 +  void *trampoline_table;
 +  void *trampoline_table_entry;
 +#else
++  /* Anonymous unions are C11 (a GNU extension in C99); __extension__ keeps
++     the field names without tripping -Wpedantic under -std=c99 (#795).  */
++#ifdef __GNUC__
++  __extension__
++#endif
 +  union {
 +    char tramp[FFI_TRAMPOLINE_SIZE];
 +    void *ftramp;
@@ -860,6 +840,32 @@ index 0000000..b2736b2
 +	      void *rvalue,
 +	      void **avalue);
 +
++/* Reusable call plans.
++
++   A plan captures a signature's argument placement once so that repeated
++   calls skip the per-call work that ffi_call would otherwise redo.  Build one
++   with ffi_call_plan_alloc, invoke it as many times as you like, and release
++   it with ffi_call_plan_free.
++
++   The plan is opaque and caller-owned.  The cif must outlive the plan.
++   ffi_call_plan_alloc returns NULL only on allocation failure; a signature
++   with no fast path is still valid and ffi_call_plan_invoke falls back to
++   ffi_call for it.  A plan is immutable once built, so it may be shared and
++   invoked concurrently from multiple threads.  */
++typedef struct ffi_call_plan ffi_call_plan;
++
++FFI_API
++ffi_call_plan *ffi_call_plan_alloc (ffi_cif *cif);
++
++FFI_API
++void ffi_call_plan_invoke (ffi_call_plan *plan,
++			   void (*fn)(void),
++			   void *rvalue,
++			   void **avalue);
++
++FFI_API
++void ffi_call_plan_free (ffi_call_plan *plan);
++
 +FFI_API
 +ffi_status ffi_get_struct_offsets (ffi_abi abi, ffi_type *struct_type,
 +				   size_t *offsets);
@@ -884,7 +890,7 @@ index 0000000..b2736b2
 +#endif
 diff --git a/x86_64-pc-cygwin/include/ffitarget.h b/x86_64-pc-cygwin/include/ffitarget.h
 new file mode 100644
-index 0000000..995469b
+index 00000000..995469b0
 --- /dev/null
 +++ b/x86_64-pc-cygwin/include/ffitarget.h
 @@ -0,0 +1,165 @@
