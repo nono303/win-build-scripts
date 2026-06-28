@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index e7e111b7..8a5cc136 100644
+index 64777934..b3d720f1 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -27,6 +27,12 @@ OPTION(ENABLE_ASAN "Enable (gcc) ASAN support" 0)
@@ -15,167 +15,79 @@ index e7e111b7..8a5cc136 100644
  if (VERBOSE_MAKEFILE)
  	set(CMAKE_VERBOSE_MAKEFILE ON)
  endif (VERBOSE_MAKEFILE)
-@@ -324,7 +330,7 @@ else (USE_EXT_GD)
- 
- 	if (WIN32)
- 		SET(GD_LIB libgd)
--		ADD_DEFINITIONS( -DWIN32 -D_WIN32 -DMSWIN32 -DBGDWIN32 -DWINVER=0x0500  -D_WIN32_WINNT=0x0500 -D_WIN32_IE=0x0600)
-+		ADD_DEFINITIONS( -DWIN32 -D_WIN32 -DMSWIN32 -DBGDWIN32 -DWINVER=0x0A00  -D_WIN32_WINNT=0x0A00 -D_WIN32_IE=0x0600)
- 
- 		if(NOT MINGW AND MSVC_VERSION GREATER 1399)
- 			ADD_DEFINITIONS("/D_CRT_SECURE_NO_DEPRECATE")
-@@ -350,62 +356,71 @@ else (USE_EXT_GD)
+@@ -389,12 +395,18 @@ else (USE_EXT_GD)
  	add_subdirectory(src)
  endif (USE_EXT_GD)
  
--add_subdirectory(tests)
--add_subdirectory(examples)
--add_subdirectory(docs)
 +if(BUILD_TEST)
-+	add_subdirectory(tests)
+ add_subdirectory(tests)
 +endif (BUILD_TEST)
 +if(BUILD_EXEMPLES)
-+	add_subdirectory(examples)
+ add_subdirectory(examples)
 +endif(BUILD_EXEMPLES)
 +if(BUILD_DOCS)
-+	add_subdirectory(docs)
+ add_subdirectory(docs)
 +endif(BUILD_DOCS)
  
  add_custom_target(distclean ${GD_SOURCE_DIR}/cmake/distclean.sh)
 -
--SET(CPACK_PACKAGE_NAME "libgd")
--SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "libGD, powerful and easy to use graphic library")
--SET(CPACK_PACKAGE_VENDOR "https://libgd.github.io")
--SET(CPACK_PACKAGE_VERSION_MAJOR ${GDLIB_MAJOR})
--SET(CPACK_PACKAGE_VERSION_MINOR ${GDLIB_MINOR})
--SET(CPACK_PACKAGE_VERSION_PATCH ${GDLIB_REVISION}${GDLIB_EXTRA})
--
--if(WIN32)
--	set(CPACK_GENERATOR ZIP)
--else(WIN32)
--	set(CPACK_GENERATOR TGZ)
--endif(WIN32)
--
--
--INSTALL(FILES docs/INSTALL DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--INSTALL(FILES docs/README.JPN DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--INSTALL(FILES docs/README.CMAKE DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--INSTALL(FILES docs/README.TESTING DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--INSTALL(FILES docs/README.TXT DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--
--
--INSTALL(FILES examples/arc.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--INSTALL(FILES examples/copyrotated.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--INSTALL(FILES examples/crop.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--INSTALL(FILES examples/flip.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--INSTALL(FILES examples/gif.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--INSTALL(FILES examples/gif_frames.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--INSTALL(FILES examples/gif_rewrite.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--INSTALL(FILES examples/nnquant.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--INSTALL(FILES examples/noIcon.pic DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--INSTALL(FILES examples/noIcon.sgi DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--INSTALL(FILES examples/noIcon.tga DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--INSTALL(FILES examples/noIconAlpha.tga DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--INSTALL(FILES examples/test_crop_threshold.png DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--INSTALL(FILES examples/tgaread.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--INSTALL(FILES examples/tiffread.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--INSTALL(FILES examples/uhdr.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--INSTALL(FILES examples/windows.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
--
--
--set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/COPYING")
--
--set(CPACK_SOURCE_GENERATOR TGZ)
--set(CPACK_SOURCE_IGNORE_FILES
--"~$"
--"\\\\.swp$"
--"\\\\.gitignore$"
--"^${PROJECT_SOURCE_DIR}/debian/"
--"^${PROJECT_SOURCE_DIR}/old/"
--"^${PROJECT_SOURCE_DIR}/bld/"
--)
--install(FILES ${top_level_DOCFILES} DESTINATION ${DOC_DIR})
--INCLUDE(CPack)
 +if(BUILD_CPACK)
-+	SET(CPACK_PACKAGE_NAME "libgd")
-+	SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "libGD, powerful and easy to use graphic library")
-+	SET(CPACK_PACKAGE_VENDOR "https://www.libgd.org")
-+	SET(CPACK_PACKAGE_VERSION_MAJOR ${GDLIB_MAJOR})
-+	SET(CPACK_PACKAGE_VERSION_MINOR ${GDLIB_MINOR})
-+	SET(CPACK_PACKAGE_VERSION_PATCH ${GDLIB_REVISION}${GDLIB_EXTRA})
-+
-+	if(WIN32)
-+		set(CPACK_GENERATOR ZIP)
-+	else(WIN32)
-+		set(CPACK_GENERATOR TGZ)
-+	endif(WIN32)
+ SET(CPACK_PACKAGE_NAME "libgd")
+ SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "libGD, powerful and easy to use graphic library")
+ SET(CPACK_PACKAGE_VENDOR "https://libgd.github.io")
+@@ -407,15 +419,17 @@ if(WIN32)
+ else(WIN32)
+ 	set(CPACK_GENERATOR TGZ)
+ endif(WIN32)
 +endif (BUILD_CPACK)
-+
+ 
+-
 +if(BUILD_DOCS)
-+	INSTALL(FILES docs/INSTALL DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES docs/README.JPN DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES docs/README.CMAKE DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES docs/README.TESTING DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES docs/README.TXT DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
+ INSTALL(FILES docs/INSTALL DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
+ INSTALL(FILES docs/README.JPN DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
+ INSTALL(FILES docs/README.CMAKE DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
+ INSTALL(FILES docs/README.TESTING DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
+ INSTALL(FILES docs/README.TXT DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
 +endif(BUILD_DOCS)
-+
+ 
+-
 +if(BUILD_EXEMPLES)
-+	INSTALL(FILES examples/arc.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/copyrotated.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/crop.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/flip.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/gif.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/gif_frames.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/gif_rewrite.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/nnquant.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/noIcon.pic DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/noIcon.sgi DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/noIcon.tga DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/noIconAlpha.tga DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/test_crop_threshold.png DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/tgaread.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/tiffread.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
-+	INSTALL(FILES examples/windows.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
+ INSTALL(FILES examples/arc.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
+ INSTALL(FILES examples/copyrotated.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
+ INSTALL(FILES examples/crop.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
+@@ -434,8 +448,9 @@ INSTALL(FILES examples/tiffread.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLI
+ INSTALL(FILES examples/tiff_write_pages.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
+ INSTALL(FILES examples/uhdr.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
+ INSTALL(FILES examples/windows.c DESTINATION share/doc/gd-${GDLIB_MAJOR}.${GDLIB_MINOR})
 +endif(BUILD_EXEMPLES)
-+
+ 
+-
 +if(BUILD_CPACK)
-+	set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/COPYING")
-+
-+	set(CPACK_SOURCE_GENERATOR TGZ)
-+	set(CPACK_SOURCE_IGNORE_FILES
-+	"~$"
-+	"\\\\.swp$"
-+	"\\\\.gitignore$"
-+	"^${PROJECT_SOURCE_DIR}/debian/"
-+	"^${PROJECT_SOURCE_DIR}/old/"
-+	"^${PROJECT_SOURCE_DIR}/bld/"
-+	)
-+	install(FILES ${top_level_DOCFILES} DESTINATION ${DOC_DIR})
-+	INCLUDE(CPack)
+ set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/COPYING")
+ 
+ set(CPACK_SOURCE_GENERATOR TGZ)
+@@ -449,3 +464,4 @@ set(CPACK_SOURCE_IGNORE_FILES
+ )
+ install(FILES ${top_level_DOCFILES} DESTINATION ${DOC_DIR})
+ INCLUDE(CPack)
 +endif(BUILD_CPACK)
 \ No newline at end of file
 diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
-index c4ba0492..56040f4d 100644
+index c4ba0492..693a1627 100644
 --- a/src/CMakeLists.txt
 +++ b/src/CMakeLists.txt
-@@ -59,13 +59,15 @@ if(ENABLE_CPP)
+@@ -59,6 +59,7 @@ if(ENABLE_CPP)
  endif(ENABLE_CPP)
  
  # Static library just for utility programs.
--SET (GD_PROGRAMS_LIB_SRC_FILES)
 +if (BUILD_PROGRAMS)
-+	SET (GD_PROGRAMS_LIB_SRC_FILES)
+ SET (GD_PROGRAMS_LIB_SRC_FILES)
  
--if(MSVC)
--	set(GD_PROGRAMS_LIB_SRC_FILES ${GD_PROGRAMS_LIB_SRC_FILES}
--		getopt.c
--	)
--endif(MSVC)
-+	if(MSVC)
-+		set(GD_PROGRAMS_LIB_SRC_FILES ${GD_PROGRAMS_LIB_SRC_FILES}
-+			getopt.c
-+		)
-+	endif(MSVC)
+ if(MSVC)
+@@ -66,6 +67,7 @@ if(MSVC)
+ 		getopt.c
+ 	)
+ endif(MSVC)
 +endif(BUILD_PROGRAMS)
  
  include(GNUInstallDirs)
@@ -184,54 +96,26 @@ index c4ba0492..56040f4d 100644
  	endif()
  endif()
  
--if (NOT "${GD_PROGRAMS_LIB_SRC_FILES}" STREQUAL "")
--	add_library(gd_programs_lib STATIC ${GD_PROGRAMS_LIB_SRC_FILES})
--endif()
 +if (BUILD_PROGRAMS)
-+	if (NOT "${GD_PROGRAMS_LIB_SRC_FILES}" STREQUAL "")
-+		add_library(gd_programs_lib STATIC ${GD_PROGRAMS_LIB_SRC_FILES})
-+	endif()
+ if (NOT "${GD_PROGRAMS_LIB_SRC_FILES}" STREQUAL "")
+ 	add_library(gd_programs_lib STATIC ${GD_PROGRAMS_LIB_SRC_FILES})
+ endif()
 +endif(BUILD_PROGRAMS)
  
  if (WIN32 AND NOT MINGW AND NOT MSYS)
    #	SET_TARGET_PROPERTIES(${GD_LIB} PROPERTIES LINK_FLAGS "/NODEFAULTLIB:msvcrt.lib")
-@@ -120,7 +124,6 @@ SET(LIBGD_DEP_LIBS
- 	${FONTCONFIG_LIBRARY}
- 	${WEBP_LIBRARIES}
- 	${AVIF_LIBRARIES}
--	${UHDR_LIBRARIES}
- 	${RAQM_LIBRARIES}
- 	${HEIF_LIBRARIES}
- )
-@@ -164,20 +167,23 @@ if (ZLIB_FOUND)
+@@ -164,6 +168,7 @@ if (ZLIB_FOUND)
  	set(GD_PROGRAMS ${GD_PROGRAMS} gd2copypal gd2togif giftogd2)
  endif()
  
--foreach(program ${GD_PROGRAMS})
--    add_executable(${program} ${program}.c)
--
--    if (BUILD_SHARED_LIBS)
--        target_link_libraries(${program} ${GD_LIB})
--    else()
--        target_link_libraries(${program} ${GD_LIB_STATIC})
--    endif()
--	if (NOT "${GD_PROGRAMS_LIB_SRC_FILES}" STREQUAL "")
--		target_link_libraries(${program} gd_programs_lib)
--	endif()
--endforeach(program)
 +if (BUILD_PROGRAMS)
-+	foreach(program ${GD_PROGRAMS})
-+	    add_executable(${program} ${program}.c)
-+
-+	    if (BUILD_SHARED_LIBS)
-+		target_link_libraries(${program} ${GD_LIB})
-+	    else()
-+		target_link_libraries(${program} ${GD_LIB_STATIC})
-+	    endif()
-+		if (NOT "${GD_PROGRAMS_LIB_SRC_FILES}" STREQUAL "")
-+			target_link_libraries(${program} gd_programs_lib)
-+		endif()
-+	endforeach(program)
+ foreach(program ${GD_PROGRAMS})
+     add_executable(${program} ${program}.c)
+ 
+@@ -176,8 +181,10 @@ foreach(program ${GD_PROGRAMS})
+ 		target_link_libraries(${program} gd_programs_lib)
+ 	endif()
+ endforeach(program)
 +	set(GD_INSTALL_TARGETS ${GD_PROGRAMS})
 +	install(PROGRAMS bdftogd DESTINATION bin)
 +endif(BUILD_PROGRAMS)
@@ -240,7 +124,7 @@ index c4ba0492..56040f4d 100644
  if (BUILD_SHARED_LIBS)
  	set(GD_INSTALL_TARGETS ${GD_INSTALL_TARGETS} ${GD_LIB})
  endif()
-@@ -189,7 +195,6 @@ install(TARGETS ${GD_INSTALL_TARGETS}
+@@ -189,7 +196,6 @@ install(TARGETS ${GD_INSTALL_TARGETS}
          RUNTIME DESTINATION bin
          LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
          ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
