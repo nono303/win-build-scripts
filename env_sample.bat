@@ -111,7 +111,8 @@ REM ########################## BUILD OPTION
 	REM
 set OPENSSLVER=3
 	REM https://services.gradle.org/distributions/
-set GRADLEVER=9.5.1
+set GRADLEVER=9.6.1
+set GRADLEW_OPTS=--project-cache-dir %PATH_GRADLE_BUILD% --parallel --max-workers %NUMBER_OF_PROCESSORS%
 	REM see dir in C:\Windows Kits\10\Lib
 set WKITVER=10.0.26100.0
 	REM .NET installed SDK
