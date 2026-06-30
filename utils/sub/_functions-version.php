@@ -267,7 +267,8 @@
 			$ret["product"] = $ret["scm"][$current]["product"];
 			$ret["from"] = $ret["scm"]["name"]." ".$current;
 		} else {
-			Throw new Exception ($src.": no tag or version");
+			echo $src.": no tag or version";
+			exit(-1);
 		}
 		if(CACHE_VERSION){
 			file_put_contents($fcache,json_encode($ret, JSON_ENCODE_OPTIONS));
