@@ -1,3 +1,182 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+new file mode 100644
+index 00000000..aa0ebd75
+--- /dev/null
++++ b/CMakeLists.txt
+@@ -0,0 +1,173 @@
++# Licensed to the Apache Software Foundation (ASF) under one or more
++# contributor license agreements.  See the NOTICE file distributed with
++# this work for additional information regarding copyright ownership.
++# The ASF licenses this file to You under the Apache License, Version 2.0
++# (the "License"); you may not use this file except in compliance with
++# the License.  You may obtain a copy of the License at
++#
++#     http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an "AS IS" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++#
++CMAKE_MINIMUM_REQUIRED(VERSION 3.15)
++
++PROJECT(mod_security2 C)
++
++IF(NOT EXISTS ${CMAKE_INSTALL_PREFIX}/lib/libhttpd.lib)
++  MESSAGE(FATAL_ERROR "libhttpd.lib was not found in prefix ${CMAKE_INSTALL_PREFIX}")
++ENDIF()
++
++# Select APR trunk (libapr-2.lib) if it exists in PREFIX/lib; otherwise, select
++# APR 1.x + APR-util 1.x
++#
++IF(EXISTS "${CMAKE_INSTALL_PREFIX}/lib/libapr-2.lib")
++  SET(apr_libraries
++    ${CMAKE_INSTALL_PREFIX}/lib/libapr-2.lib)
++ELSEIF(EXISTS "${CMAKE_INSTALL_PREFIX}/lib/libapr-1.lib")
++  SET(apr_libraries
++    ${CMAKE_INSTALL_PREFIX}/lib/libapr-1.lib
++    ${CMAKE_INSTALL_PREFIX}/lib/libaprutil-1.lib)
++ELSE()
++  MESSAGE(FATAL_ERROR "APR libraries were not found in prefix ${CMAKE_INSTALL_PREFIX}")
++ENDIF()
++
++IF(EXISTS ${CMAKE_INSTALL_PREFIX}/lib/pcre2-8.lib)
++  SET(pcre_libraries
++    ${CMAKE_INSTALL_PREFIX}/lib/pcre2-8.lib)
++ELSE()
++  MESSAGE(FATAL_ERROR "pcre2-8.lib was not found in prefix ${CMAKE_INSTALL_PREFIX}")
++ENDIF()
++
++IF(EXISTS ${CMAKE_INSTALL_PREFIX}/lib/libxml2.lib)
++  SET(xml2_libraries
++    ${CMAKE_INSTALL_PREFIX}/lib/libxml2.lib)
++ELSE()
++  MESSAGE(FATAL_ERROR "libxml2.lib was not found in prefix ${CMAKE_INSTALL_PREFIX}")
++ENDIF()
++
++IF(EXISTS ${CMAKE_INSTALL_PREFIX}/lib/liblua.lib)
++  SET(lua_libraries
++    ${CMAKE_INSTALL_PREFIX}/lib/liblua.lib)
++ELSE()
++MESSAGE(FATAL_ERROR "LUA libraries were not found in prefix ${CMAKE_INSTALL_PREFIX}")
++ENDIF()
++
++IF(EXISTS ${CMAKE_INSTALL_PREFIX}/lib/libcurl.lib)
++  SET(curl_libraries
++    ${CMAKE_INSTALL_PREFIX}/lib/libcurl.lib)
++ELSE()
++  MESSAGE(FATAL_ERROR "libcurl.lib was not found in prefix ${CMAKE_INSTALL_PREFIX}")
++ENDIF()
++
++IF(EXISTS ${CMAKE_INSTALL_PREFIX}/lib/yajl.lib)
++  SET(yajl_libraries
++    ${CMAKE_INSTALL_PREFIX}/lib/yajl.lib)
++ELSE()
++  MESSAGE(FATAL_ERROR "yajl.lib was not found in prefix ${CMAKE_INSTALL_PREFIX}")
++ENDIF()
++
++# Extra libraries.
++#
++SET(extra_libraries ws2_32.lib iphlpapi.lib)
++
++# Miscellaneous options.
++#
++OPTION(INSTALL_PDB "Install .pdb file (if generated)" OFF)
++
++SET(mod_security2_sources
++    apache2/mod_security2.c
++    apache2/apache2_config.c
++    apache2/apache2_io.c
++    apache2/apache2_util.c
++    apache2/re.c
++    apache2/re_operators.c
++    apache2/re_actions.c
++    apache2/re_tfns.c
++    apache2/re_variables.c
++    apache2/msc_logging.c
++    apache2/msc_xml.c
++    apache2/msc_multipart.c
++    apache2/modsecurity.c
++    apache2/msc_parsers.c
++    apache2/msc_util.c
++    apache2/msc_pcre.c
++    apache2/persist_dbm.c
++    apache2/msc_reqbody.c
++    apache2/msc_geo.c
++    apache2/msc_gsb.c
++    apache2/msc_crypt.c
++    apache2/msc_tree.c
++    apache2/msc_unicode.c
++    apache2/acmp.c
++    apache2/msc_lua.c
++    apache2/msc_release.c
++    apache2/msc_status_engine.c
++    apache2/msc_remote_rules.c
++    apache2/msc_json.c
++    apache2/others/libinjection/src/libinjection_html5.c
++    apache2/others/libinjection/src/libinjection_sqli.c
++    apache2/others/libinjection/src/libinjection_xss.c
++)
++
++SET(mlogc_sources
++    mlogc/mlogc.c
++)
++
++INCLUDE_DIRECTORIES(${CMAKE_INSTALL_PREFIX}/include
++  ${CMAKE_INSTALL_PREFIX}/include/libxml2
++  ${CMAKE_SOURCE_DIR}/apache2
++)
++
++ADD_LIBRARY(mod_security2 SHARED ${mod_security2_sources})
++
++ADD_EXECUTABLE(mlogc ${mlogc_sources})
++
++# Configure mlogc file substituting PERL macro in target file as we go.
++#
++set(PERL "perl")
++CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/mlogc/mlogc-batch-load.pl.in
++  mlogc-batch-load.pl @ONLY
++)
++
++# Define extra macros to pass to C compiler.
++#
++ADD_DEFINITIONS(-DWITH_PCRE_JIT -DWITH_PCRE_STUDY -DWITH_PCRE2
++  -DWITH_LUA -DWITH_CURL -DWITH_REMOTE_RULES -DWITH_YAJL)
++
++SET_TARGET_PROPERTIES(mod_security2 PROPERTIES SUFFIX .so)
++TARGET_LINK_LIBRARIES(mod_security2 ${CMAKE_INSTALL_PREFIX}/lib/libhttpd.lib
++  ${apr_libraries} ${pcre_libraries} ${xml2_libraries} ${lua_libraries}
++  ${curl_libraries} ${yajl_libraries} ${extra_libraries})
++
++TARGET_LINK_LIBRARIES(mlogc ${apr_libraries} ${pcre_libraries} ${curl_libraries}
++  ${extra_libraries})
++
++INSTALL(TARGETS mod_security2 RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/modules)
++
++INSTALL(TARGETS mlogc RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
++
++INSTALL(FILES ${CMAKE_BINARY_DIR}/mod_security2.exp ${CMAKE_BINARY_DIR}/mod_security2.lib 
++  DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
++
++# Install extra configuration support files, if present.
++#
++INSTALL(FILES modsecurity.conf-recommended unicode.mapping
++  OPTIONAL DESTINATION ${CMAKE_INSTALL_PREFIX}/conf/extra)
++
++INSTALL(FILES ${CMAKE_SOURCE_DIR}/mlogc/mlogc-default.conf
++  OPTIONAL DESTINATION ${CMAKE_INSTALL_PREFIX}/conf)
++
++INSTALL(FILES ${CMAKE_BINARY_DIR}/mlogc-batch-load.pl
++  OPTIONAL DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
++
++IF(INSTALL_PDB)
++  INSTALL(FILES ${CMAKE_BINARY_DIR}/mod_security2.pdb DESTINATION modules
++    CONFIGURATIONS RelWithDebInfo Debug)
++
++  INSTALL(FILES ${CMAKE_BINARY_DIR}/mlogc.pdb DESTINATION bin
++    CONFIGURATIONS RelWithDebInfo Debug)
++ENDIF()
 diff --git a/apache2/Makefile.win b/apache2/Makefile.win
 index 0ef99f40..f4c584f9 100644
 --- a/apache2/Makefile.win
