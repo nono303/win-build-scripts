@@ -1,6 +1,6 @@
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -744,7 +744,7 @@ ADD_SUBDIRECTORY (include)
+@@ -769,7 +769,7 @@ ADD_SUBDIRECTORY (include)
  ADD_SUBDIRECTORY (src)
  
  # Docs
