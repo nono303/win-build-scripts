@@ -54,9 +54,9 @@ for %%X in (exe dll so) do (
 REM ---------------------------- Launch TESTS from a terminal
 
 REM cd %PATH_SRC%\%1
-REM set PATH=%PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%%DEPS%
+REM set PATH=%PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%;%PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%\deps
 REM set PYTHONPATH=%PYTHONPATH%;%PATH_SRC%\%1\subversion\tests\cmdline
-REM python win-tests.py --release --cleanup --parallel --bin=%PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%
+REM %PATH_BIN_PYTHON%\python win-tests.py --release --cleanup --parallel --bin=%PATH_RELEASE_SVN%\%MSVC_DEPS%\%ARCH%%AVXB%
 
 REM ---------------------------- Cmake Build (wait for SVN_ENABLE_JAVAHL)
 
