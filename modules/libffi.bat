@@ -1,14 +1,17 @@
 @echo off && call %PATH_UTILS%\init.bat %1 cmake nocxx
 set TARGET_CONFIG=x86_64-pc-cygwin
 
-	REM /c/sdk/src/libffi (master)
-	REM git add -N CMakeLists.txt
-	REM git add -f -N x86_64-pc-cygwin/fficonfig.h
-	REM git add -f -N x86_64-pc-cygwin/include/ffi.h
-	REM git add -f -N x86_64-pc-cygwin/include/ffitarget.h
-	REM git checkout HEAD configure.ac
-	REM git diff > /c/sdk/batch/patches/libffi.patch
+	REM regenerate includes after update
+REM @echo on
 REM call %PATH_BIN_CYGWIN%\bash --login -c '%CYGPATH_MODULES%/%1.sh %CYGPATH_SRC%/%1 %TARGET_CONFIG% %BIN_CCCL%
+REM cd /D %PATH_SRC%\%1 
+REM git add -N CMakeLists.txt
+REM git add -f -N x86_64-pc-cygwin/fficonfig.h
+REM git add -f -N x86_64-pc-cygwin/include/ffi.h
+REM git add -f -N x86_64-pc-cygwin/include/ffitarget.h
+REM git checkout HEAD configure.ac
+REM git diff > %PATH_MODULES%\..\patches\%1.patch
+REM exit /B
 
 if "%ARG_CMOPTS%"=="1" (@echo on)
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
