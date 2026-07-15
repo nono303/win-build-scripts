@@ -22,7 +22,6 @@ meson setup ^
 -Dxxhash_muxer=auto ^
 -Dtrim_dsp=true ^
 -Db_lto=true ^
--Dmacos_kperf=false ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash %CYGPATH_UTILS%/meson.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
