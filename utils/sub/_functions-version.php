@@ -19,64 +19,67 @@
 
 	global $verfromfile;
 	$verfromfile = [
+		// no tag
+		"mod_security-sdbm-util"	=> ["/\[modsec-sdbm-util\], \[([0-9\.]+)\]/",
+									PATH_SRC."/mod_security-sdbm-util/configure.ac"],
 		// no tag for 18
-		"libpng"			=> ["/#define PNG_LIBPNG_VER_STRING \"([0-9\.]+)/",
-							PATH_SRC."/libpng/png.h"],
+		"libpng"					=> ["/#define PNG_LIBPNG_VER_STRING \"([0-9\.]+)/",
+									PATH_SRC."/libpng/png.h"],
 		// no tag
-		"libyuv"			=> ["/LIBYUV_VERSION (.*)/",
-							PATH_SRC."/libyuv/include/libyuv/version.h"],
+		"libyuv"					=> ["/LIBYUV_VERSION (.*)/",
+									PATH_SRC."/libyuv/include/libyuv/version.h"],
 		// no tag
-		"mobac"				=> ["/version = '([0-9\.]+)/",
-							PATH_SRC."/mobac/build.gradle"],
+		"mobac"						=> ["/version = '([0-9\.]+)/",
+									PATH_SRC."/mobac/build.gradle"],
 		// no tag
-		"mod_h264_streaming"=> ["/#define VERSION \"([^\"]+)\"/",
-							PATH_SRC."/mod_h264_streaming/config.h"],
+		"mod_h264_streaming"		=> ["/#define VERSION \"([^\"]+)\"/",
+									PATH_SRC."/mod_h264_streaming/config.h"],
 		// no tag
-		"serf"				=> ["/#define SERF_MAJOR_VERSION *([0-9]+).*#define SERF_MINOR_VERSION *([0-9]+).*#define SERF_PATCH_VERSION *([0-9]+)/s",
-							PATH_SRC."/serf/serf.h"],
+		"serf"						=> ["/#define SERF_MAJOR_VERSION *([0-9]+).*#define SERF_MINOR_VERSION *([0-9]+).*#define SERF_PATCH_VERSION *([0-9]+)/s",
+									PATH_SRC."/serf/serf.h"],
 		// no tag
-		"apr"				=> ["/#define APR_MAJOR_VERSION *([0-9]+).*#define APR_MINOR_VERSION *([0-9]+).*#define APR_PATCH_VERSION *([0-9]+)/s",
-							PATH_SRC."/apr/include/apr_version.h"],
+		"apr"						=> ["/#define APR_MAJOR_VERSION *([0-9]+).*#define APR_MINOR_VERSION *([0-9]+).*#define APR_PATCH_VERSION *([0-9]+)/s",
+									PATH_SRC."/apr/include/apr_version.h"],
 		// no tag
-		"apr-util"			=> ["/#define APU_MAJOR_VERSION *([0-9]+).*#define APU_MINOR_VERSION *([0-9]+).*#define APU_PATCH_VERSION *([0-9]+)/s",
-							PATH_SRC."/apr-util/include/apu_version.h"],
+		"apr-util"					=> ["/#define APU_MAJOR_VERSION *([0-9]+).*#define APU_MINOR_VERSION *([0-9]+).*#define APU_PATCH_VERSION *([0-9]+)/s",
+									PATH_SRC."/apr-util/include/apu_version.h"],
 		// no tag
-		"giflib"			=> ['/ +VERSION ([0-9\.]+)/s',
-							PATH_SRC."/giflib/5.2.1/CMakeLists.txt"],
+		"giflib"					=> ['/ +VERSION ([0-9\.]+)/s',
+									PATH_SRC."/giflib/5.2.1/CMakeLists.txt"],
 		// no tag
-		"mpir"				=> ['/#define _MSC_MPIR_VERSION "([0-9\.]+)/s',
-							PATH_SRC."/mpir/gmp-h.in"],
+		"mpir"						=> ['/#define _MSC_MPIR_VERSION "([0-9\.]+)/s',
+									PATH_SRC."/mpir/gmp-h.in"],
 		// no tag
-		"pecl-system-sync"	=> ["/PHP_SYNC_VERSION +\"([0-9\.]+)/s",
-							PATH_SRC."/pecl-system-sync/php_sync.h"],
+		"pecl-system-sync"			=> ["/PHP_SYNC_VERSION +\"([0-9\.]+)/s",
+									PATH_SRC."/pecl-system-sync/php_sync.h"],
 		// no tag
-		"subversion"		=> ["/#define SVN_VER_MAJOR *([0-9]+).*#define SVN_VER_MINOR *([0-9]+).*#define SVN_VER_PATCH *([0-9]+)/s",
-							PATH_SRC."/subversion/subversion/include/svn_version.h"],
+		"subversion"				=> ["/#define SVN_VER_MAJOR *([0-9]+).*#define SVN_VER_MINOR *([0-9]+).*#define SVN_VER_PATCH *([0-9]+)/s",
+									PATH_SRC."/subversion/subversion/include/svn_version.h"],
 		// tag lower than file
-		"tidy"				=> ["/([0-9]{1,3}\.[0-9]+\.[0-9]+)/s",
-							PATH_SRC."/tidy/version.txt"],
+		"tidy"						=> ["/([0-9]{1,3}\.[0-9]+\.[0-9]+)/s",
+									PATH_SRC."/tidy/version.txt"],
 		// tag lower than file
-		"yajl"				=> ["/SET \(YAJL_MAJOR ([0-9]+).*SET \(YAJL_MINOR ([0-9]+).*SET \(YAJL_MICRO ([0-9]+)/s",
-							PATH_SRC."/yajl/CMakeLists.txt"],
+		"yajl"						=> ["/SET \(YAJL_MAJOR ([0-9]+).*SET \(YAJL_MINOR ([0-9]+).*SET \(YAJL_MICRO ([0-9]+)/s",
+									PATH_SRC."/yajl/CMakeLists.txt"],
 		/* tag lower than file
-		"libsodium"			=> ["/#define LIBSODIUM_VERSION_STRING \"([0-9\.]+)/s",
-							PATH_SRC."/libsodium/builds/msvc/resource.rc"],
+		"libsodium"					=> ["/#define LIBSODIUM_VERSION_STRING \"([0-9\.]+)/s",
+									PATH_SRC."/libsodium/builds/msvc/resource.rc"],
 		*/
 		// tag lower than file
-		"libgd"				=> ["/#define GD_MAJOR_VERSION *([0-9]+).*#define GD_MINOR_VERSION *([0-9]+).*#define GD_RELEASE_VERSION *([0-9]+).*#define GD_EXTRA_VERSION *\"([^\"]+)\".*/s",
-							PATH_SRC."/libgd/src/gd.h"],
+		"libgd"						=> ["/#define GD_MAJOR_VERSION *([0-9]+).*#define GD_MINOR_VERSION *([0-9]+).*#define GD_RELEASE_VERSION *([0-9]+).*#define GD_EXTRA_VERSION *\"([^\"]+)\".*/s",
+									PATH_SRC."/libgd/src/gd.h"],
 		// tag lower than file
-		"bzip2"				=> ['/VALUE "ProductVersion", "([0-9\.]+)/s',
-							PATH_SRC."/bzip2/version.rc"],
+		"bzip2"						=> ['/VALUE "ProductVersion", "([0-9\.]+)/s',
+									PATH_SRC."/bzip2/version.rc"],
 		// tag lower than file
-		"verpatch"			=> ["/set _ver=\"([^ ]+)/",
-							PATH_SRC."/verpatch/ver-self.cmd"],
+		"verpatch"					=> ["/set _ver=\"([^ ]+)/",
+									PATH_SRC."/verpatch/ver-self.cmd"],
 		// dirty version & last tag 8.0.1.xx
-		"pecl-memcache"		=> ["/PHP_MEMCACHE_VERSION \"([0-9\.]+)/",
-							PATH_SRC."/pecl-memcache/src/php_memcache.h"],
+		"pecl-memcache"				=> ["/PHP_MEMCACHE_VERSION \"([0-9\.]+)/",
+									PATH_SRC."/pecl-memcache/src/php_memcache.h"],
 		// see nssm.bat for explanation
-		"nssm"				=> ['/set NSSM_VER=([0-9\.]+)/s',
-							pathenv("PATH_MODULES")."/nssm.bat"],
+		"nssm"						=> ['/set NSSM_VER=([0-9\.]+)/s',
+									pathenv("PATH_MODULES")."/nssm.bat"],
 	];
 
 	$addon = [
