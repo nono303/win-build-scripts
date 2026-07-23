@@ -32,6 +32,7 @@ for /L %%i in (2,1,%argCount%) do (
 	if /I "!argVec[%%i]!"=="PARALLEL"	set PHP_BUILD_TYPE=parallel
 	if /I "!argVec[%%i]!"=="FFI"		set PHP_BUILD_TYPE=ffi
 	if /I "!argVec[%%i]!"=="GD"		set PHP_BUILD_TYPE=gd
+	if /I "!argVec[%%i]!"=="OGR"		set PHP_BUILD_TYPE=ogr
 	if /I "!argVec[%%i]!"=="CORE" 		set PHP_BUILD_TYPE=core
 	if /I "!argVec[%%i]!"=="WIN7" (
 		REM TODO comment for full build
