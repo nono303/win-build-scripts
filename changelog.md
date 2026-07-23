@@ -1,8 +1,165 @@
 # changelog
 
 
+## 1.17.0 _(2026-07-23)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`config/cyg64.packagelist`
+`config/python.pip`
+`utils/srccreate.bat`
+*  tmp ext-gd
+`modules/php.bat`
+*  tmp 1951
+`patches/libyuv.patch`
+*  fix cygwin bash login
+`modules/aom.bat`
+`modules/apr-util.bat`
+`modules/apr.bat`
+`modules/brotli.bat`
+`modules/bzip2.bat`
+`modules/cares.bat`
+`modules/curl.bat`
+`modules/dav1d.bat`
+`modules/freeglut.bat`
+`modules/freetype2.bat`
+`modules/gdal.bat`
+`modules/geographiclib.bat`
+`modules/geos.bat`
+`modules/giflib.bat`
+`modules/httpd.bat`
+`modules/jansson.bat`
+`modules/lerc.bat`
+`modules/libavif.bat`
+`modules/libdeflate.bat`
+`modules/libexpat.bat`
+`modules/libffi.bat`
+`modules/libgav1.bat`
+`modules/libgd.bat`
+`modules/libgeotiff.bat`
+`modules/libheif.bat`
+`modules/libjpeg-turbo.bat`
+`modules/liblzma.bat`
+`modules/libmaxminddb.bat`
+`modules/libpng.bat`
+`modules/libssh2.bat`
+`modules/libtiff.bat`
+`modules/libwebp.bat`
+`modules/libxdiff.bat`
+`modules/libxml2.bat`
+`modules/libxslt.bat`
+`modules/libyuv.bat`
+`modules/libzip.bat`
+`modules/mod_fcgid.bat`
+`modules/mod_security.bat`
+`modules/nghttp2.bat`
+`modules/nghttp3.bat`
+`modules/ngtcp2.bat`
+`modules/pcre2.bat`
+`modules/proj.bat`
+`modules/pthread-win32.bat`
+`modules/qhull.bat`
+`modules/serf.bat`
+`modules/sqlite.bat`
+`modules/subversion.bat`
+`modules/tidy.bat`
+`modules/wineditline.bat`
+`modules/yajl.bat`
+`modules/zlib.bat`
+`modules/zstd.bat`
+`patches/php-src/8.5/ext-gd.patch.disable`
+*  mod_security-sdbm-util from file
+`utils/sub/_functions-version.php`
+*  use upstream scm with patch instead of forked (PR) one's
+`patches/libgeotiff.patch`
+`patches/mod_security-sdbm-util.patch`
+`patches/php-geos.patch`
+`patches/php-ogr.patch`
+*  refactor
+`usage.txt`
+*  add ogr option
+`modules/php.bat`
+*  rename
+`modules/svnandeps.bat`
+*  useless
+`modules/sdnspi-mysql.bat`
+*  add ogr option
+`modules/phpsdk-config_make.bat`
+*  update CMAKE_OPTS_REL deprecated
+`env_sample.bat`
+*  typo
+`modules/mod_fcgid.bat`
+*  fix quote
+`modules/libffi.bat`
+*  1.5.4
+`modules/dav1d.bat`
+*  1.15.0-rc3
+`patches/subversion.patch`
+*  3.7.1
+`modules/libffi.bat`
+`patches/libffi.patch`
+*  3.15
+`modules/geos.bat`
+*  fix Launch TESTS from a terminal
+`modules/subversion.bat`
+*  1.34.8
+`modules/cares.bat`
+`patches/cares.patch`
+*  mod_security CMake build https://www.apachelounge.com/viewtopic.php?p=44446#44446 https://pastebin.com/U6d6uwFy
+`modules/mod_security.bat`
+`patches/mod_security.patch`
+`utils/bininfo.bat`
+*  https://github.com/OSGeo/libgeotiff/commit/ffafadec793e3813cc76711cd3374959c1c5dd31
+`modules/libgeotiff.bat`
+*  https://github.com/libgd/libgd/pull/1019#event-27514383886
+`patches/libgd.patch`
+*  add gd only build
+`modules/php.bat`
+`modules/phpsdk-config_make.bat`
+*  Exception > msg & exit -1
+`utils/sub/_functions-version.php`
+*  + ENABLE_JXL fix typo https://github.com/libgd/libgd/pull/1018
+`modules/libgd.bat`
+*  5d54e8b3
+`patches/libgd.patch`
+*  comment to clean C:\ProgramData\Package Cache after python upgrade
+`upgrade_pip.bat`
+*  pushed to scm
+`patches/mobac.patch`
+`patches/mobac_gradle-wrapper.jar`
+*  fix & refactor gradlew OPTS
+`env_sample.bat`
+`modules/fit2gpx.bat`
+`modules/mapsforgesrv.bat`
+`modules/mobac.bat`
+`modules/tzdataservice.bat`
+*  3.6.0
+`patches/libffi.patch`
+*  3.6.3
+`patches/openssl.patch`
+*  1948
+`patches/libyuv.patch`
+*  mod_h2 https://github.com/icing/mod_h2/commit/f1417a5d8ac478273aba14ffc591b46e321085b1 is now archived Many Thx @icing
+`SRC_VERSION.md`
+`modules/httpd.bat`
+`patches/httpd.patch`
+`patches/mod_h2.patch`
+`utils/srccreate.bat`
+*  openssl: 4 > 3.6
+`env_sample.bat`
+`modules/httpd.bat`
+`modules/openssl.bat`
+`patches/httpd.patch`
+`patches/httpd642.patch`
+`patches/openssl.patch`
+`utils/bininfo.bat`
+
+
 ## 1.16.5 _(2026-06-04)_
 
+*  1.16.5
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
