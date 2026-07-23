@@ -105,6 +105,7 @@ libguile2.2_1
 libguile3.0_1
 libhogweed4
 libhogweed6
+libhogweed7
 libiconv-devel
 libiconv2
 libidn12
@@ -135,6 +136,7 @@ libmpfr6
 libncursesw10
 libnettle6
 libnettle8
+libnettle9
 libnghttp2_14
 libnpth0
 libntlm0
