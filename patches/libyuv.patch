@@ -11,3 +11,22 @@ index 77e0527f..5b9db60a 100644
  set ( ly_lib_shared	${ly_lib_name}_shared )
  
  # We cannot use GLOB here since we want to be able to separate out files that
+diff --git a/source/row_win.cc b/source/row_win.cc
+index 9157f9c8..e5d3c230 100644
+--- a/source/row_win.cc
++++ b/source/row_win.cc
+@@ -1172,14 +1172,6 @@ void I422ToRGB24Row_AVX512VBMI(const uint8_t* src_y,
+     zmm1 = _mm512_packus_epi16(zmm1, zmm1);
+     zmm2 = _mm512_packus_epi16(zmm2, zmm2);
+ 
+-    // STORERGB24_AVX512VBMI
+-    __m512i zmm_BG = _mm512_permi2var_epi8(zmm0, zmm_mask_BG, zmm1);
+-    __m512i zmm_dst0 = _mm512_permi2var_epi8(zmm_BG, zmm_mask_DST0, zmm2);
+-    __m512i zmm_dst1 = _mm512_permi2var_epi8(zmm_BG, zmm_mask_DST1, zmm2);
+-
+-    _mm512_storeu_si512((__m512i*)dst_rgb24, zmm_dst0);
+-    _mm256_storeu_si256((__m256i*)(dst_rgb24 + 64), _mm512_castsi512_si256(zmm_dst1));
+-
+     dst_rgb24 += 96;
+     width -= 32;
+   }
