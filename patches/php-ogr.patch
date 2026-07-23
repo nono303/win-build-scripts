@@ -1,0 +1,504 @@
+diff --git a/config.w32 b/config.w32
+index 1e16c41..758f095 100644
+--- a/config.w32
++++ b/config.w32
+@@ -1,7 +1,18 @@
+ ARG_WITH("ogr", "OGR support", "no");
+ if (PHP_OGR != "no") {
+-  if(CHECK_LIB("gdal_i.lib", "ogr", PHP_OGR) && CHECK_HEADER_ADD_INCLUDE("ogr_srs_api.h", "CFLAGS_OGR", PHP_OGR+"\\include")
++  if(
++    CHECK_LIB("gdal.lib;gdal_i.lib;libgdal.lib", "ogr", PHP_OGR) && 
++    CHECK_HEADER_ADD_INCLUDE("ogr_srs_api.h", "CFLAGS_OGR", PHP_OGR + "\\include") &&
++    CHECK_HEADER_ADD_INCLUDE("gdal.h", "CFLAGS_OGR", PHP_OGR + "\\include")
+   ) {
+-    EXTENSION("ogr", "ogr.c", true);
++    if (get_define('PHPDLL').match(/^php[78]/) != null) {
++      EXTENSION("ogr", "ogr.c", true);
++      AC_DEFINE('HAVE_OGR', 1, 'Have ogr module');
++      PHP_INSTALL_HEADERS("ext/ogr/", "php_ogr.h");
++    } else {
++      WARNING("gdal support can't be enabled: " + dll + " unsupported")
++    }
++  } else {
++    WARNING("ogr support can't be enabled: libraries or headers are missing")
+   }
+ }
+diff --git a/ogr.c b/ogr.c
+index 32c5d04..5488cf4 100755
+--- a/ogr.c
++++ b/ogr.c
+@@ -51,6 +51,7 @@
+ #include "cpl_error.h"
+ #include "cpl_conv.h"
+ #include "cpl_string.h"
++#include "gdal.h"
+ 
+ /* If you declare any globals in php_ogr.h uncomment this:
+ ZEND_DECLARE_MODULE_GLOBALS(ogr)
+@@ -95,6 +96,7 @@ ZEND_GET_MODULE(ogr)
+ 
+ /* True global resources - no need for thread safety here */
+ 
++static int le_Dataset;
+ static int le_Datasource;
+ static int le_SFDriver;
+ static int le_Layer;
+@@ -114,6 +116,18 @@ static int le_Feature;
+ /*Resource destructors function.*/
+ /* }}} */
+ 
++/* {{{ gdal_free_Dataset() */
++
++static void 
++gdal_free_Dataset(zend_resource *resource) 
++{
++    GDALDatasetH hSrcDS = (GDALDatasetH)resource->ptr;
++    if (hSrcDS != NULL) 
++        GDALClose(hSrcDS);
++}
++
++/* }}} */
++
+ /* {{{ ogr_free_Datasource() */
+ 
+ static void
+@@ -289,6 +303,18 @@ ogr_free_Feature(zend_resource_t *rsrc TSRMLS_DC)
+ }
+ 
+ 
++/* }}} */
++
++/* {{{ handle_error_to_zend_exception() */
++
++// from https://github.com/shuhblam/simple-tiles/blob/master/src/error.c
++static void handle_error_to_zend_exception(CPLErr eclass, int err_no, const char *msg)
++{
++  // (void)eclass, (void)err_no, (void)msg;
++   zend_throw_exception(NULL, msg, err_no);
++   return;
++}
++
+ /* }}} */
+ 
+ /* {{{ PHP_MINIT_FUNCTION
+@@ -296,10 +322,16 @@ ogr_free_Feature(zend_resource_t *rsrc TSRMLS_DC)
+ PHP_MINIT_FUNCTION(ogr)
+ {
+ 
++    // Install custom error handler
++    CPLSetErrorHandler(handle_error_to_zend_exception);
+     /* If you have INI entries, uncomment these lines
+     ZEND_INIT_MODULE_GLOBALS(ogr, php_ogr_init_globals, NULL);
+     REGISTER_INI_ENTRIES();
+     */
++    le_Dataset = zend_register_list_destructors_ex(gdal_free_Dataset, 
++                                                    NULL, "GDALDataset",
++                                                    module_number);
++
+     le_Datasource = zend_register_list_destructors_ex(ogr_free_Datasource,
+                                                      NULL, "OGRDatasource",
+                                                      module_number);
+@@ -584,6 +616,8 @@ PHP_MSHUTDOWN_FUNCTION(ogr)
+     /* uncomment this line if you have INI entries
+     UNREGISTER_INI_ENTRIES();
+     */
++    GDALDumpOpenDatasets(stderr);
++    GDALDestroyDriverManager();
+     return SUCCESS;
+ }
+ /* }}} */
+@@ -614,6 +648,7 @@ PHP_MINFO_FUNCTION(ogr)
+     php_info_print_table_header(2, "ogr support", "enabled");
+     php_info_print_table_row(2, "PHP_OGR Version", PHP_OGR_VERSION);
+     php_info_print_table_row(2, "GDAL/OGR Version", GDAL_RELEASE_NAME);
++    php_info_print_table_row(2, "GDAL Build Info", GDALVersionInfo("BUILD_INFO"));
+     php_info_print_table_end();
+ 
+     /* Remove comments if you have entries in php.ini
+@@ -646,6 +681,30 @@ static char **  php_array2string(char **papszStrList, zval *refastrvalues)
+     return papszStrList;
+ }
+ 
++static char* get_ogr_error_string(int ogrerrid)
++{
++    switch ( ogrerrid ){
++        case OGRERR_NONE:
++            return "Success"; 
++        case OGRERR_NOT_ENOUGH_DATA:
++            return "Not enough data to deserialize";
++        case OGRERR_NOT_ENOUGH_MEMORY:
++            return "Not enough memory"; 
++        case OGRERR_UNSUPPORTED_GEOMETRY_TYPE:
++            return "Unsupported geometry type"; 
++        case OGRERR_UNSUPPORTED_OPERATION:
++            return "Unsupported operation";
++        case OGRERR_CORRUPT_DATA:
++            return "Corrupt data";
++        case OGRERR_FAILURE:
++            return "Failure";
++        case OGRERR_UNSUPPORTED_SRS:
++            return "Unsupported SRS";
++        case OGRERR_INVALID_HANDLE:
++            return "Invalid handle";
++    }
++}
++
+ /**********************************************************************
+  * Error handling functions
+  **********************************************************************/
+@@ -706,6 +765,293 @@ PHP_FUNCTION(cplgetlasterrormsg)
+             _RETURN_DUPLICATED_STRING((char *)pszMsg);
+ }
+ 
++/**********************************************************************
++ * GDAL functions
++ * v3.13.1 - 2026-07-01
++ * https://github.com/OSGeo/gdal/blob/master/apps/gdallocationinfo.cpp
++ **********************************************************************/
++
++/* {{{ proto void gdalregisterall()
++    */
++PHP_FUNCTION(gdalregisterall)
++{
++    if (ZEND_NUM_ARGS() != 0)
++        WRONG_PARAM_COUNT;
++    GDALAllRegister();
++}
++
++/* }}} */
++
++/* {{{ proto ressource gdalopen(string pszSrcFilename, int trgSRS)
++    */
++PHP_FUNCTION(gdalopen)
++{
++    zend_string *pszSrcFilename;
++    zval *trgSRS = NULL;
++
++    ZEND_PARSE_PARAMETERS_START(1, 2)
++        Z_PARAM_STR(pszSrcFilename)
++        Z_PARAM_OPTIONAL
++        Z_PARAM_ZVAL(trgSRS)
++    ZEND_PARSE_PARAMETERS_END();
++
++    if (GDALGetDriverCount() == 0) {
++        zend_throw_exception(NULL, "GDAL drivers not registered, make sure you call gdalregisterall() before gdalopen()", 0);
++        RETURN_NULL();
++    }
++    //  | GDAL_OF_VERBOSE_ERROR
++    GDALDatasetH hSrcDS = GDALOpenEx(ZSTR_VAL(pszSrcFilename), GDAL_OF_RASTER, NULL, NULL, NULL);
++    if (hSrcDS != NULL) {
++        if(ZEND_NUM_ARGS() == 2) {
++            OGRSpatialReferenceH *hTrgSRS = GDALGetSpatialRef(hSrcDS);
++            char *hTrgSRSCode = OSRGetAuthorityCode(hTrgSRS,NULL);
++            if(hTrgSRSCode != NULL) {
++                ZEND_TRY_ASSIGN_REF_STRING(trgSRS, hTrgSRSCode);
++            } else {
++                php_error_docref(NULL, E_WARNING, "'%s' don't have any SRS Authority Code", ZSTR_VAL(pszSrcFilename));
++            }
++        }
++        RETURN_RES(zend_register_resource(hSrcDS, le_Dataset));
++    } else {
++        char error[128];
++        sprintf(error, "Can not open GDALDataset '%s'", ZSTR_VAL(pszSrcFilename));
++        zend_throw_exception(NULL, error, 0);
++        RETURN_NULL();
++    }
++}
++
++/* }}} */
++
++/* {{{ proto string gdal_ds_getsrscode(resource zgdal)
++    */
++PHP_FUNCTION(gdal_ds_getsrscode)
++{
++    zval *zgdal = NULL;
++
++    ZEND_PARSE_PARAMETERS_START(1, 1)
++        Z_PARAM_RESOURCE(zgdal)
++    ZEND_PARSE_PARAMETERS_END();
++
++    GDALDatasetH *hSrcDS = (GDALDatasetH*) zend_fetch_resource_ex(zgdal, "GDALDataset", le_Dataset);
++    if (hSrcDS == NULL) {
++        zend_throw_exception(NULL, "Param zgdal is null", 0);
++        RETURN_NULL();
++    }
++    OGRSpatialReferenceH *hTrgSRS = GDALGetSpatialRef(hSrcDS);
++    char *hTrgSRSCode = OSRGetAuthorityCode(hTrgSRS, NULL);
++    if(hTrgSRSCode != NULL){
++        _RETURN_DUPLICATED_STRING((char *) hTrgSRSCode);
++    } else {
++        zend_throw_exception(NULL, "GDALDataset have no SRS Code", 0);
++        RETURN_NULL();
++    }
++}
++
++/* }}} */
++
++/* {{{ proto ressource gdal_tr_create(int srcSRS, int trgSRS)
++    */
++PHP_FUNCTION(gdal_tr_create)
++{
++    int srcSRS, trgSRS = -1;
++
++    ZEND_PARSE_PARAMETERS_START(2, 2)
++        Z_PARAM_LONG(srcSRS)
++        Z_PARAM_LONG(trgSRS)
++    ZEND_PARSE_PARAMETERS_END();
++
++    OGRSpatialReferenceH *hSrcSRS = OSRNewSpatialReference(NULL);
++    int *srcReterr = OSRImportFromEPSG(hSrcSRS, srcSRS);
++    if(srcReterr != OGRERR_NONE){
++        OSRDestroySpatialReference(hSrcSRS);
++        char error[64];
++        sprintf(error, "%s: Unknown srcSRS '%u'", get_ogr_error_string(srcReterr), srcSRS);
++        zend_throw_exception(NULL, error, srcReterr);
++        RETURN_NULL();
++    }
++    OSRSetAxisMappingStrategy(hSrcSRS, OAMS_TRADITIONAL_GIS_ORDER);
++    // TODO necessary ?
++    zend_register_resource(hSrcSRS, le_SpatialReference);
++
++    OGRSpatialReferenceH *hTrgSRS = OSRNewSpatialReference(NULL);
++    int *trgReterr = OSRImportFromEPSG(hTrgSRS, trgSRS);
++    if(trgReterr != OGRERR_NONE){
++        OSRDestroySpatialReference(hTrgSRS);
++        char error[64];
++        sprintf(error, "%s: Unknown trgSRS '%u'", get_ogr_error_string(trgReterr),trgSRS);
++        zend_throw_exception(NULL, error, trgReterr);
++        RETURN_NULL();
++    }
++    // TODO necessary ?
++    zend_register_resource(hTrgSRS, le_SpatialReference);
++    RETURN_RES(zend_register_resource(OCTNewCoordinateTransformation(hSrcSRS, hTrgSRS), le_CoordinateTransformation));
++}
++
++/* }}} */
++
++/* {{{ proto array gdal_locationinfo(resource zgdal, double lonX,
++   double latY, resource zhct)
++    */
++PHP_FUNCTION(gdal_locationinfo)
++{
++    double lonX, latY = 0;
++    zval *zgdal, *zhct = NULL;
++    
++    ZEND_PARSE_PARAMETERS_START(3, 4)
++        Z_PARAM_RESOURCE(zgdal)
++        Z_PARAM_DOUBLE(lonX)
++        Z_PARAM_DOUBLE(latY)
++        Z_PARAM_OPTIONAL
++        Z_PARAM_RESOURCE(zhct)
++    ZEND_PARSE_PARAMETERS_END();
++
++    array_init(return_value);
++    zval return_in;
++    array_init(&return_in);
++    zval return_raster;
++    array_init(&return_raster);
++    
++    // l. 247 Open source file
++    GDALDatasetH *hSrcDS = (GDALDatasetH*) zend_fetch_resource_ex(zgdal, "GDALDataset", le_Dataset);
++    if (hSrcDS == NULL) {
++        zend_throw_exception(NULL, "Param zgdal is null", 0);
++        RETURN_NULL();
++    }
++    
++    // l. 465 Process each band (Assume there is only one band in the raster source and use it)
++    GDALRasterBandH *hBand = GDALGetRasterBand(hSrcDS, 1);
++    if (hBand == NULL){
++        zend_throw_exception(NULL, "GDALDataset have no band", 0);
++        RETURN_NULL();
++    }
++    
++    // l. 364 GeoTransform
++    double adfGeoTransform[6];
++    if (GDALGetGeoTransform(hSrcDS, adfGeoTransform) != CE_None) { 
++        zend_throw_exception(NULL, "Cannot get geotransform", 0);
++        RETURN_NULL();
++    }
++    double adfInvGeoTransform[6];
++    if (!GDALInvGeoTransform(adfGeoTransform, adfInvGeoTransform)) {
++        zend_throw_exception(NULL, "Cannot invert geotransform", 0);
++        RETURN_NULL();
++    }
++    
++    double rasterXSize = GDALGetRasterXSize(hSrcDS);
++    double rasterYSize = GDALGetRasterYSize(hSrcDS);
++    
++    // l. 256 Setup coordinate transformation, if required
++    OGRSpatialReferenceH *hTrgSRS = GDALGetSpatialRef(hSrcDS);
++    char *hTrgSRSName = OSRGetName(hTrgSRS);
++    if(hTrgSRSName != NULL)
++        add_assoc_string(&return_raster, "srs", hTrgSRSName);
++    char *hTrgSRSCode = OSRGetAuthorityCode(hTrgSRS, NULL);
++    if(hTrgSRSCode != NULL)
++         add_assoc_string(&return_raster, "epsg", hTrgSRSCode);
++    double inX = lonX;
++    double inY = latY;
++    if (zhct) {
++        int hct_id = -1;
++        OGRCoordinateTransformationH *hCT = (OGRCoordinateTransformationH*) zend_fetch_resource_ex(zhct, "OGRCoordinateTransformation", le_CoordinateTransformation);
++        if(hCT == NULL){
++            zend_throw_exception(NULL, "Param zhct is null", 0);
++            RETURN_NULL();
++        }
++        OGRSpatialReferenceH *hSrcSRS = OCTGetSourceCS(hCT);
++        char *hSrcSRSName = OSRGetName(hSrcSRS);
++        if(hSrcSRSName != NULL)
++            add_assoc_string(&return_in, "srs", hSrcSRSName);
++        char *hSrcSRSCode = OSRGetAuthorityCode(hSrcSRS, NULL);
++        if(hSrcSRSCode != NULL)
++             add_assoc_string(&return_in, "epsg", hSrcSRSCode);
++        // l. 358
++        OCTTransform(hCT ,1 ,&lonX ,&latY ,NULL);
++    }
++    
++    add_assoc_double(&return_in, "x", inX);
++    add_assoc_double(&return_in, "y", inY);
++    add_assoc_double(&return_raster, "x", lonX);
++    add_assoc_double(&return_raster, "y", latY);
++    
++    // l. 380
++    int iPixel = floor(adfInvGeoTransform[0] +
++        adfInvGeoTransform[1] * lonX +
++        adfInvGeoTransform[2] * latY);
++    int iLine = floor(adfInvGeoTransform[3] +
++        adfInvGeoTransform[4] * lonX +
++        adfInvGeoTransform[5] * latY);
++    
++    // l. 573 Report the pixel value of this band
++    double adfPixel[2] = {0, 0};
++    const bool bIsComplex = GDALDataTypeIsComplex(GDALGetRasterDataType(hBand));
++    char osValue[30];
++    if (GDALRasterIO(
++            hBand, GF_Read, iPixel, iLine, 1, 1, 
++            adfPixel, 1, 1,
++            bIsComplex ? GDT_CFloat64 : GDT_Float64, 0, 0
++        ) == CE_None
++    ) {
++        if (bIsComplex){
++            sprintf(osValue, "%.15g+%.15gi", adfPixel[0], adfPixel[1]);
++        } else {
++           sprintf(osValue, "%.15g", adfPixel[0]);
++        }
++    }
++    // l. 623 Report unscaled if we have scale/offset values.
++    int bSuccess;
++    double dfOffset = GDALGetRasterOffset(hBand, &bSuccess);
++    double dfScale = GDALGetRasterScale(hBand, &bSuccess);
++    if (dfOffset != 0.0 || dfScale != 1.0) {
++        adfPixel[0] = adfPixel[0] * dfScale + dfOffset;
++        if (bIsComplex) {
++            adfPixel[1] = adfPixel[1] * dfScale + dfOffset;
++            sprintf(osValue, "%.15g+%.15gi", adfPixel[0], adfPixel[1]);
++        } else {
++            sprintf(osValue, "%.15g", adfPixel[0]);
++        }
++    }
++    
++    // l.525 Request location info for this location
++    char osItem[32];
++    sprintf(osItem,"Pixel_%d_%d", iPixel, iLine);
++    char *pszLI = GDALGetMetadataItem(hBand, osItem, "LocationInfo");
++    if(pszLI != NULL){
++        CPLXMLNode *psRoot = CPLParseXMLString(pszLI);
++        if (psRoot != NULL && psRoot->psChild != NULL &&
++            psRoot->eType == CXT_Element &&
++            EQUAL(psRoot->pszValue, "LocationInfo")
++        ) {
++            zval fileLocation;
++            array_init(&fileLocation);
++            for (CPLXMLNode *psNode = psRoot->psChild; psNode != NULL; psNode = psNode->psNext) {
++                if (psNode->eType == CXT_Element &&
++                    EQUAL(psNode->pszValue, "File") &&
++                    psNode->psChild != NULL) 
++                {
++                    char *pszUnescaped = CPLUnescapeString(psNode->psChild->pszValue, NULL, CPLES_XML);
++                    add_next_index_string(&fileLocation, pszUnescaped);
++                    CPLFree(pszUnescaped);
++                }
++            }
++            add_assoc_zval(&return_raster, "files", &fileLocation);
++        }
++    }
++    
++    add_assoc_double(&return_raster, "pixel", iPixel);
++    add_assoc_double(&return_raster, "line", iLine);
++    add_assoc_double(&return_raster, "xSize", rasterXSize);
++    add_assoc_double(&return_raster, "ySize", rasterYSize);
++    add_assoc_double(&return_raster, "bandCount", GDALGetRasterCount(hSrcDS));
++    /*
++        char *projectionRef = GDALGetProjectionRef(hSrcDS); 
++        if(*projectionRef)
++            add_assoc_string(&return_raster, "projectionRef", projectionRef);
++    */
++    add_assoc_string(return_value, "value", osValue);
++    add_assoc_zval(return_value, "in", &return_in);
++    add_assoc_zval(return_value, "raster", &return_raster);
++}
++
+ /**********************************************************************
+  * OGR functions
+  **********************************************************************/
+diff --git a/php_ogr_api.h b/php_ogr_api.h
+index 5aba80c..62c47e3 100755
+--- a/php_ogr_api.h
++++ b/php_ogr_api.h
+@@ -236,6 +236,12 @@ PHP_FUNCTION(osr_autoidentifyepsg);
+ PHP_FUNCTION(osr_epsgtreatsaslatlong);
+ PHP_FUNCTION(osr_getaxis);
+ PHP_FUNCTION(is_osr);
++/* gdal */
++PHP_FUNCTION(gdalregisterall);
++PHP_FUNCTION(gdalopen);
++PHP_FUNCTION(gdal_locationinfo);
++PHP_FUNCTION(gdal_ds_getsrscode);
++PHP_FUNCTION(gdal_tr_create);
+ 
+ /*
+  * Declaration of function signatures
+@@ -1166,6 +1172,31 @@ _ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_is_osr, 0, 1, _IS_BOOL, NULL, 0
+     ZEND_ARG_INFO(0, value)
+ ZEND_END_ARG_INFO()
+ 
++/* gdal */
++ZEND_BEGIN_ARG_INFO_EX(arginfo_gdalregisterall, 0, 0, 0)
++ZEND_END_ARG_INFO()
++
++_ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_gdalopen, 0, 1, IS_RESOURCE, NULL, 1)
++    _ZEND_ARG_TYPE_INFO(0, pszSrcFilename, IS_STRING, 0)
++    _ZEND_ARG_TYPE_INFO(1, trgSRS, IS_RESOURCE, 1)
++ZEND_END_ARG_INFO()
++
++_ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_gdal_locationinfo, 0, 3, IS_ARRAY, NULL, 1)
++    _ZEND_ARG_TYPE_INFO(0, zgdal, IS_RESOURCE, 1)
++    _ZEND_ARG_TYPE_INFO(0, lonX,  IS_DOUBLE, 0)
++    _ZEND_ARG_TYPE_INFO(0, latY,  IS_DOUBLE, 0)
++    _ZEND_ARG_TYPE_INFO(0, zhct,  IS_RESOURCE, 1)
++ZEND_END_ARG_INFO()
++
++_ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_gdal_ds_getsrscode, 0, 1, IS_STRING, NULL, 1)
++    _ZEND_ARG_TYPE_INFO(0, zgdal, IS_RESOURCE, 1)
++ZEND_END_ARG_INFO()
++
++_ZEND_BEGIN_ARG_WITH_RETURN_TYPE_INFO_EX(arginfo_gdal_tr_create, 0, 2, IS_RESOURCE, NULL, 1)
++    _ZEND_ARG_TYPE_INFO(0, srcSRS, IS_LONG, 0)
++    _ZEND_ARG_TYPE_INFO(0, trgSRS, IS_LONG, 0)
++ZEND_END_ARG_INFO()
++
+ /*
+  * Every user visible function must have an entry in ogr_functions[]
+  */
+@@ -1363,6 +1394,12 @@ static const zend_function_entry ogr_functions[] = {
+     PHP_FE(osr_epsgtreatsaslatlong, arginfo_osr_epsgtreatsaslatlong)
+     PHP_FE(osr_getaxis, arginfo_osr_getaxis)
+     PHP_FE(is_osr, arginfo_is_osr)
++    /* gdal */
++    PHP_FE(gdalregisterall, arginfo_gdalregisterall)
++    PHP_FE(gdalopen, arginfo_gdalopen)
++    PHP_FE(gdal_locationinfo, arginfo_gdal_locationinfo)
++    PHP_FE(gdal_ds_getsrscode, arginfo_gdal_ds_getsrscode)
++    PHP_FE(gdal_tr_create, arginfo_gdal_tr_create)
+     PHP_FE_END  /* Must be the last line in ogr_functions[] */
+ };
+ /* }}} */

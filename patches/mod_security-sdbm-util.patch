@@ -1,43 +1,149 @@
 diff --git a/Makefile.win b/Makefile.win
-index e28db0a..8bc3797 100644
---- a/Makefile.win
+new file mode 100644
+index 0000000..07fc60b
+--- /dev/null
 +++ b/Makefile.win
-@@ -16,13 +16,13 @@ includes = -I$(APRUTIL)\include -I$(APR)\include
- 
- libs = $(APR)\lib\libapr-1.lib $(APRUTIL)\lib\libaprutil-1.lib
- 
--cflags= $(includes) /nologo /DWIN32 /DWINNT /D_WINDOWS /Dinline=APR_INLINE /w /Zf /Zi /FS /O2 /GL /MD /DNDEBUG
+@@ -0,0 +1,40 @@
++###########################################################################
++#
++# Usage:   NMAKE -f Makefile.win APR={apr installion dir} APRUTIL={aprutil installion dir}
++#
++!IF "$(APR)" == "" || "$(APRUTIL)" == ""
++!ERROR NMAKE arguments: APR=dir and APRUTIL=dir are required to build modsec-sdbm-util for Windows
++!ENDIF
++
++###########################################################################
++
++cc = cl
++
++link = link
++
++includes = -I$(APRUTIL)\include -I$(APR)\include
++
++libs = $(APR)\lib\libapr-1.lib $(APRUTIL)\lib\libaprutil-1.lib
++
 +cflags= $(includes) /nologo /DWIN32 /DWINNT /D_WINDOWS /DNDEBUG
- 
--ldflags = /nologo /Incremental:no /LTCG /debug /opt:ref,icf 
++
 +ldflags = /nologo
- 
- objs = modsec-sdbm-util.obj
- 
--exe = modsec-sdbm-util.exe
++
++objs = modsec-sdbm-util.obj
++
 +exe = modsec-sdbm-util
- 
- ###########################################################################
- 
-@@ -34,7 +34,7 @@ exe: $(exe)
-         $(cc) $(cflags) -c $< -Fo$@
- 
- $(exe): $(objs)
--        $(link) $(ldflags) -out:$(exe) $(objs) $(libs)
++
++###########################################################################
++
++all: $(exe)
++
++exe: $(exe)
++
++.c.obj:
++        $(cc) $(cflags) -c $< -Fo$@
++
++$(exe): $(objs)
 +        $(link) $(ldflags) $(objs) /out:$(exe).exe /pdb:$(exe).pdb $(libs)
- 
- clean:
-         del $(objs) $(exe) *.exe *.pdb *.idb *.ilk *.exp *.res *.rc *.bin *.manifest
-
++
++clean:
++        del $(objs) $(exe) *.exe *.pdb *.idb *.ilk *.exp *.res *.rc *.bin *.manifest
 diff --git a/modsec-sdbm-util.c b/modsec-sdbm-util.c
-index 71af63f..3453018 100644
+index 420a493..b36d82b 100644
 --- a/modsec-sdbm-util.c
 +++ b/modsec-sdbm-util.c
-@@ -111,7 +111,23 @@ int
-   return (optopt);                        /* dump back option letter */
- }
+@@ -20,7 +20,7 @@
+ #include <ctype.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+-#include <unistd.h>
++
+ #include <apr.h>
+ #include <apr_errno.h>
+ #include <apr_general.h>
+@@ -29,17 +29,109 @@
+ #include <apr_sdbm.h>
+ #include <time.h>
  
--#define strndup strdup
+-#define VERSION "v1.0"
++#define VERSION "1.1.0"
+ 
+ #ifndef WIN32
++#include <unistd.h>
+ # define v(fmt, ARGS...) do { if (verbose) printf("%s:%d:%s(): " fmt, __FILE__, \
+         __LINE__, __func__, ## ARGS); } while (0)
+ # define p(fmt, ARGS...) do { printf(fmt, ## ARGS); } while (0)
+ #endif
+ #ifdef WIN32
++#include <windows.h>
++#include <string.h>
++
++int     opterr = 1,             /* if error message should be printed */
++  optind = 1,             /* index into parent argv vector */
++  optopt,                 /* character checked for validity */
++  optreset;               /* reset getopt */
++char    *optarg;                /* argument associated with option */
++
++#define BADCH   (int)'?'
++#define BADARG  (int)':'
++#define EMSG    ""
++
++/*
++* getopt --
++*      Parse argc/argv argument vector.
++*/
++int
++  getopt(int nargc, char * const nargv[], const char *ostr)
++{
++  static char *place = EMSG;              /* option letter processing */
++  const char *oli;                        /* option letter list index */
++
++  if (optreset || !*place) {              /* update scanning pointer */
++    optreset = 0;
++    if (optind >= nargc || *(place = nargv[optind]) != '-') {
++      place = EMSG;
++      return (-1);
++    }
++    if (place[1] && *++place == '-') {      /* found "--" */
++      ++optind;
++      place = EMSG;
++      return (-1);
++    }
++  }                                       /* option letter okay? */
++  if ((optopt = (int)*place++) == (int)':' ||
++    !(oli = strchr(ostr, optopt))) {
++      /*
++      * if the user didn't specify '-' as an option,
++      * assume it means -1.
++      */
++      if (optopt == (int)'-')
++        return (-1);
++      if (!*place)
++        ++optind;
++      if (opterr && *ostr != ':')
++        (void)printf("illegal option -- %c\n", optopt);
++      return (BADCH);
++  }
++  if (*++oli != ':') {                    /* don't need argument */
++    optarg = NULL;
++    if (!*place)
++      ++optind;
++  }
++  else {                                  /* need an argument */
++    if (*place)                     /* no white space */
++      optarg = place;
++    else if (nargc <= ++optind) {   /* no arg */
++      place = EMSG;
++      if (*ostr == ':')
++        return (BADARG);
++      if (opterr)
++        (void)printf("option requires an argument -- %c\n", optopt);
++      return (BADCH);
++    }
++    else                            /* white space */
++      optarg = nargv[optind];
++    place = EMSG;
++    ++optind;
++  }
++  return (optopt);                        /* dump back option letter */
++}
++
 +// https://stackoverflow.com/a/41523510
 +char *my_strndup(char *str, int chars)
 +{
@@ -58,3 +164,141 @@ index 71af63f..3453018 100644
  #define p  printf
  #define v  if (verbose) printf
  #endif
++#define p2  if (!quiet) printf
+ 
+ #define IS_EXPIRED 128
+ 
+@@ -51,7 +143,7 @@
+ #define EXTRACT 64
+ 
+ 
+-int verbose = 0;
++int verbose = 0, quiet = 0;
+ static char progress_feedback[] = {'|', '/', '-', '\\'};
+ 
+ 
+@@ -176,7 +268,7 @@ int modsec_unpack(apr_pool_t *pool, const unsigned char *blob,
+ 
+ void print_modsec_variables(apr_pool_t *pool, const unsigned char *blob, unsigned int blob_size)
+ {
+-    p(" - ModSecurity variables:\n");
++    p2(" - ModSecurity variables:\n");
+     modsec_unpack(pool, blob, blob_size, PRINT);
+ }
+ 
+@@ -231,6 +323,12 @@ static int dump_database(apr_pool_t *pool, apr_sdbm_t *db, int action, char *new
+         char *file_name = "/new_db";
+         int full_len = 1 + strlen(new_db_path) + strlen(file_name); 
+         char *full_path = (char *) malloc(full_len);
++        if (!full_path) {
++            v("Cannot allocate memory.\n");
++            fret = -1;
++            goto end;
++        }
++        
+         strcpy(full_path, new_db_path);
+         strcat(full_path, file_name);
+         full_path[full_len] = '\0';
+@@ -343,13 +441,13 @@ end:
+     }
+     if (action & SHRINK || action & STATUS)
+     {
+-        printf("\n");
+-        printf("Total of %.0f elements processed.\n", elements);
+-        printf("%d elements removed.\n", removed);
+-        printf("Expired elements: %d, inconsistent items: %d\n", expired_datum,
++        p2("\n");
++        p2("Total of %.0f elements processed.\n", elements);
++        p2("%d elements removed.\n", removed);
++        p2("Expired elements: %d, inconsistent items: %d\n", expired_datum,
+             bad_datum);
+         if (expired_datum+bad_datum != 0 && elements !=0)
+-            printf("Fragmentation rate: %2.2f%% of the database is/was dirty " \
++            p2("Fragmentation rate: %2.2f%% of the database is/was dirty " \
+                 "data.\n", 100*(expired_datum+bad_datum)/elements);
+     }
+ 
+@@ -397,6 +495,7 @@ void help (void) {
+     p("  -r, remove: Expects to receive a key as a paramter to be removed;\n");
+     p("  -V. version: Print version information.\n");    
+     p("  -v, verbose: Some extra information about what this utility is doing.\n");
++    p("  -q, quiet: Only display needed information.\n");
+     p("  -h, help: this message.\n\n");
+ 
+ }
+@@ -416,7 +515,7 @@ int main (int argc, char **argv)
+         return 0;
+     }
+ 
+-    while ((c = getopt (argc, argv, "nkxsdahVvur:D:")) != -1)
++    while ((c = getopt (argc, argv, "nkxsdahqVvur:D:")) != -1)
+     switch (c)
+     {
+         case 'd':
+@@ -447,6 +546,9 @@ int main (int argc, char **argv)
+         case 'v':
+             verbose = 1;
+             break;
++        case 'q':
++            quiet = 1;
++            break;
+         case 'V':
+             version();
+             return 0;
+@@ -485,7 +587,7 @@ int main (int argc, char **argv)
+         apr_dir_t *db_dest_dir;
+ 
+         // test to see if the target directory exists
+-        printf ("Checking target directory: %s\n", new_db_path);
++        p2("Checking target directory: %s\n", new_db_path);
+         ret = apr_dir_open(&db_dest_dir, new_db_path, pool);
+         if (ret != APR_SUCCESS) {
+             char errmsg[120];
+@@ -493,19 +595,19 @@ int main (int argc, char **argv)
+             goto that_is_all_folks;
+         }
+         apr_dir_close(db_dest_dir);
+-        printf("Target directory exists.\n");
++        p2("Target directory exists.\n");
+ 
+-        printf ("Opening file: %s\n", file);
++        p2("Opening file: %s\n", file);
+         ret = open_sdbm(pool, &db, argv[index]);
+         if (ret < 0)
+         {
+             printf("Failed to open sdbm: %s\n", file);
+             goto that_is_all_folks;
+         }
+-        printf("Database ready to be used.\n");
++        p2("Database ready to be used.\n");
+ 
+         if (to_remove) {
+-            printf("Removing key: %s\n", to_remove);
++            p2("Removing key: %s\n", to_remove);
+             remove_key(pool, db, to_remove);
+             continue;
+         }
+diff --git a/modsecSdbmUtilJson.php b/modsecSdbmUtilJson.php
+new file mode 100644
+index 0000000..94771ce
+--- /dev/null
++++ b/modsecSdbmUtilJson.php
+@@ -0,0 +1,17 @@
++<?php
++	function modsecSdbmUtilJson($cmdline) {
++		foreach(array_filter(array_map('trim', explode("\n",shell_exec($cmdline)))) as $line){
++			preg_match('/Key: "([^"]+)", Value len: [0-9]+/',$line,$matches);
++			if(sizeof($matches) == 2){
++				$key = $matches[1];
++			} else {
++				preg_match('/(.*): (.*)/',$line,$matches);
++				if(sizeof($matches) == 3)
++					$ret[$key][$matches[1]] = $matches[2];
++			}
++		}
++		return json_encode($ret,JSON_PRETTY_PRINT);
++	}
++
++	print_r(modsecSdbmUtilJson("modsec-sdbm-util.exe -q -D . -d -u httpd-ip"));
++?>
+\ No newline at end of file
