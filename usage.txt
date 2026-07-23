@@ -29,6 +29,15 @@ Usage: go command [options]
       * apr-util
       * lua
       * httpd
+       + {shared modules}
+        * mod_bikeshed
+        * mod_evasive
+        * mod_fcgid
+        * mod_h264_streaming
+        * mod_maxminddb
+        * mod_md
+        * mod_wku_bt
+        * mod_zstd
       * yajl
       * mod_security
       * mod_security-sdbm-util
@@ -64,7 +73,7 @@ Usage: go command [options]
       * qhull
       * gdal
       * php
-          + standalone shared module [arg]
+       + {shared extensions}
         * pecl-datetime-timezonedb
         * pecl-igbinary
         * pecl-jsonpath
@@ -78,28 +87,38 @@ Usage: go command [options]
         * php-ogr
         * php-proj
         * xdebug
-    * serf
+  * svnandeps
+    * zlib      
+    * pcre2     
+    * libexpat  
+    * openssl   
+    * sqlite    
+    * apr       
+    * libiconv  
+    * apr-util  
+    * serf      
+    * httpd     
+    * subversion
+  + {msvc} 
+    * geographiclib
+    * dependencies
     * nssm
-  * subversionanddeps
-  * subversion
-  * geographiclib
-  * dependencies
-  * sdlna
-  * verpatch
-  * run-hidden
-  * {cygwin}
+    * run-hidden
+    * sdlna
+    * verpatch
+  + {cygwin}
     * memcached
     * proxytunnel
     * sslh
-  * {java}
+  + {java}
     * mapsforgesrv
     * tzdataservice
     * fit2gpx
     * mobac
- + standalone httpd module
-  * mod_fcgid
-  * mod_zstd
-  
+  + {standalone}
+    * mod_fcgid
+    * mod_zstd
+
 - build full:
   no param:    build ALL modules in the order listed above
   _xx_anddeps: build ONLY _xx_ and all submodule required for _xx_ {httpdanddeps, phpanddeps, projgeolibanddeps}
