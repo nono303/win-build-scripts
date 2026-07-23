@@ -3,7 +3,7 @@ set TARGET_CONFIG=x86_64-pc-cygwin
 
 	REM regenerate includes after update
 REM @echo on
-REM call %PATH_BIN_CYGWIN%\bash --login -c '%CYGPATH_MODULES%/%1.sh %CYGPATH_SRC%/%1 %TARGET_CONFIG% %BIN_CCCL%
+REM call %PATH_BIN_CYGWIN%\bash --login -c '%CYGPATH_MODULES%/%1.sh %CYGPATH_SRC%/%1 %TARGET_CONFIG% %BIN_CCCL%'
 REM cd /D %PATH_SRC%\%1 
 REM git add -N CMakeLists.txt
 REM git add -f -N x86_64-pc-cygwin/fficonfig.h
