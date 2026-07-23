@@ -120,4 +120,9 @@ for %%E in (pecl-datetime-timezonedb pecl-memcache pecl-text-xdiff php-ext-brotl
 if exist %PATH_PHP_SDK%\phpsdk-local.bat rm -fv %PATH_PHP_SDK%\phpsdk-local.bat
 xcopy /C /F /Y %PATH_MODULES%\phpsdk-local.bat %PATH_PHP_SDK%\*
 
+	REM ---- TMP - ext-gd
+rmdir /S /Q %PATH_SRC%\php-src\ext\gd
+mklink /J %PATH_SRC%\php-src\ext\gd %PATH_SRC%\php-ext-gd\ext\gd
+call %PATH_UTILS%\init.bat php-ext-gd
+
 call %PATH_PHP_SDK%\phpsdk-starter.bat -c %MSVC_DEPS% -a %ARCH% -s %vcvars_ver%
