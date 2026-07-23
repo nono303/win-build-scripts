@@ -48,7 +48,7 @@ for %%X in (OFF ON) do (
 	@echo off
 	if "%ARG_CMOPTS%"=="1" (exit /B)
 
-	%PATH_BIN_CYGWIN%\bash %CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"
+	%PATH_BIN_CYGWIN%\bash --login -c '%CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"'
 	%NINJA% install
 
 	if %%X == OFF (xcopy /C /F /Y %PATH_BUILD%\%1\libxml2_a_dll.pdb %PATH_INSTALL%\lib\*)
