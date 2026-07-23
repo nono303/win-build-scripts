@@ -1,6 +1,4 @@
-@echo off
-
-call %PATH_UTILS%\init.bat %1 cmake nocxx
+@echo off && call %PATH_UTILS%\init.bat %1 cmake nocxx
 
 if "%ARG_CMOPTS%"=="1" (@echo on)
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
