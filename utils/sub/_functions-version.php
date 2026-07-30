@@ -90,6 +90,7 @@
 
 		],"version" => [
 			"mobac"			=> ":warning: [apacheCommonsHttp](https://sourceforge.net/p/mobac/bugs/400/)",
+			"libheif"		=> ":warning: [depends on ffmpeg](https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl-shared.zip)",
 		]
 	];
 
