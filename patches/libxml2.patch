@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 1641608b..0c263cea 100644
+index 5c5958c3..0c27b63e 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -25,6 +25,7 @@ include(FindPkgConfig)
@@ -40,7 +40,7 @@ index 1641608b..0c263cea 100644
          )
      endif()
  endif()
-@@ -763,6 +774,11 @@ if(BUILD_SHARED_LIBS)
+@@ -765,6 +776,11 @@ if(BUILD_SHARED_LIBS)
      set(XML_PC_PRIVATE ".private")
      set(XML_PC_LIBS_PRIVATE "
  Libs.private:")
