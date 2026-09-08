@@ -112,7 +112,7 @@ index a69f57fd..363dd0bb 100755
      -fexceptions)
 diff --git a/x86_64-pc-cygwin/fficonfig.h b/x86_64-pc-cygwin/fficonfig.h
 new file mode 100644
-index 00000000..2684a507
+index 00000000..6df1271b
 --- /dev/null
 +++ b/x86_64-pc-cygwin/fficonfig.h
 @@ -0,0 +1,192 @@
@@ -242,7 +242,7 @@ index 00000000..2684a507
 +#define PACKAGE_NAME "libffi"
 +
 +/* Define to the full name and version of this package. */
-+#define PACKAGE_STRING "libffi 3.7.1"
++#define PACKAGE_STRING "libffi 3.8.0"
 +
 +/* Define to the one symbol short name of this package. */
 +#define PACKAGE_TARNAME "libffi"
@@ -251,7 +251,7 @@ index 00000000..2684a507
 +#define PACKAGE_URL ""
 +
 +/* Define to the version of this package. */
-+#define PACKAGE_VERSION "3.7.1"
++#define PACKAGE_VERSION "3.8.0"
 +
 +/* The size of 'double', as computed by sizeof. */
 +#define SIZEOF_DOUBLE 8
@@ -275,7 +275,7 @@ index 00000000..2684a507
 +/* #undef USING_PURIFY */
 +
 +/* Version number of package */
-+#define VERSION "3.7.1"
++#define VERSION "3.8.0"
 +
 +/* Define WORDS_BIGENDIAN to 1 if your processor stores words with the most
 +   significant byte first (like Motorola and SPARC, unlike Intel). */
@@ -310,12 +310,12 @@ index 00000000..2684a507
 +
 diff --git a/x86_64-pc-cygwin/include/ffi.h b/x86_64-pc-cygwin/include/ffi.h
 new file mode 100644
-index 00000000..c1e258e4
+index 00000000..c5aa433a
 --- /dev/null
 +++ b/x86_64-pc-cygwin/include/ffi.h
-@@ -0,0 +1,574 @@
+@@ -0,0 +1,582 @@
 +/* -----------------------------------------------------------------*-C-*-
-+   libffi 3.7.1
++   libffi 3.8.0
 +     - Copyright (c) 2011, 2014, 2019, 2021, 2022, 2024, 2025, 2026 Anthony Green
 +     - Copyright (c) 1996-2003, 2007, 2008 Red Hat, Inc.
 +
@@ -395,9 +395,10 @@ index 00000000..c1e258e4
 +#define FFI_TYPE_COMPLEX    15
 +#define FFI_TYPE_UINT128    16
 +#define FFI_TYPE_SINT128    17
++#define FFI_TYPE_VECTOR     18
 +
 +/* This should always refer to the last type code (for sanity checks).  */
-+#define FFI_TYPE_LAST       FFI_TYPE_SINT128
++#define FFI_TYPE_LAST       FFI_TYPE_VECTOR
 +
 +#include <ffitarget.h>
 +
@@ -639,8 +640,8 @@ index 00000000..c1e258e4
 +
 +/* ---- Version API ------------------------------------------------------ */
 +
-+#define FFI_VERSION_STRING "3.7.1"
-+#define FFI_VERSION_NUMBER 30701
++#define FFI_VERSION_STRING "3.8.0"
++#define FFI_VERSION_NUMBER 30800
 +
 +#ifndef LIBFFI_ASM
 +/* Return a version string. */
@@ -851,7 +852,11 @@ index 00000000..c1e258e4
 +   ffi_call_plan_alloc returns NULL only on allocation failure; a signature
 +   with no fast path is still valid and ffi_call_plan_invoke falls back to
 +   ffi_call for it.  A plan is immutable once built, so it may be shared and
-+   invoked concurrently from multiple threads.  */
++   invoked concurrently from multiple threads.
++
++   ffi_call_plan_size reports the total number of bytes libffi allocated for a
++   plan, so that callers tracking the footprint of long-lived plans do not have
++   to guess at the size of an opaque type.  */
 +typedef struct ffi_call_plan ffi_call_plan;
 +
 +FFI_API
@@ -865,6 +870,9 @@ index 00000000..c1e258e4
 +
 +FFI_API
 +void ffi_call_plan_free (ffi_call_plan *plan);
++
++FFI_API
++size_t ffi_call_plan_size (ffi_call_plan *plan);
 +
 +FFI_API
 +ffi_status ffi_get_struct_offsets (ffi_abi abi, ffi_type *struct_type,
@@ -890,10 +898,10 @@ index 00000000..c1e258e4
 +#endif
 diff --git a/x86_64-pc-cygwin/include/ffitarget.h b/x86_64-pc-cygwin/include/ffitarget.h
 new file mode 100644
-index 00000000..d702235f
+index 00000000..eaf6a910
 --- /dev/null
 +++ b/x86_64-pc-cygwin/include/ffitarget.h
-@@ -0,0 +1,165 @@
+@@ -0,0 +1,184 @@
 +/* -----------------------------------------------------------------*-C-*-
 +   ffitarget.h - Copyright (c) 2012, 2014, 2018, 2026  Anthony Green
 +                 Copyright (c) 1996-2003, 2010  Red Hat, Inc.
@@ -952,6 +960,13 @@ index 00000000..d702235f
 +
 +#ifdef X86_64
 +#define FFI_TARGET_HAS_INT128
++#endif
++
++/* The System V x86-64 psABI passes 8- and 16-byte vectors in SSE registers;
++   this is implemented by the ffi64.c (FFI_UNIX64) backend only.  32-bit x86
++   and the Windows x86-64 backend (ffiw64.c) do not marshal vectors.  */
++#if defined(X86_64) && !defined(X86_WIN64)
++#define FFI_TARGET_HAS_VECTOR_TYPE
 +#endif
 +
 +/* ---- Generic type definitions ----------------------------------------- */
@@ -1033,6 +1048,18 @@ index 00000000..d702235f
 +#define FFI_TYPE_SMALL_STRUCT_2B (FFI_TYPE_LAST + 2)
 +#define FFI_TYPE_SMALL_STRUCT_4B (FFI_TYPE_LAST + 3)
 +#define FFI_TYPE_MS_STRUCT       (FFI_TYPE_LAST + 4)
++
++/* Tripwire: the win64.S / win64_intel.S return-value jump tables use one
++   8-byte slot per code value and place the FFI_TYPE_SMALL_STRUCT_* pseudo-types
++   (which are FFI_TYPE_LAST-relative) immediately after the generic FFI_TYPE_*
++   codes.  Adding a new generic type bumps FFI_TYPE_LAST, shifts those codes,
++   and opens a gap in the tables that silently misaligns small-struct returns.
++   When this fires: add a matching E() slot for the new type in both win64.S
++   and win64_intel.S, then bump FFI_X86_TYPE_LAST to match.  */
++#define FFI_X86_TYPE_LAST FFI_TYPE_VECTOR
++#if FFI_TYPE_LAST != FFI_X86_TYPE_LAST
++# error "new FFI_TYPE_* added: sync the win64.S/win64_intel.S jump tables and bump FFI_X86_TYPE_LAST"
++#endif
 +
 +#if defined (X86_64) || defined(X86_WIN64) \
 +    || (defined (__x86_64__) && defined (X86_DARWIN))
