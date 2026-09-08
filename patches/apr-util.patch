@@ -1,7 +1,7 @@
-diff --git "a/CMakeLists.txt" "b/CMakeLists.txt"
-index ed04f4c..95b35ec 100644
---- "a/CMakeLists.txt"
-+++ "b/CMakeLists.txt"
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 6d6d0d14..1ce8807a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -20,6 +20,7 @@
  CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
  
@@ -52,7 +52,7 @@ index ed04f4c..95b35ec 100644
  ADD_LIBRARY(libaprutil-1 ${APR_SOURCES} ${APU_EXTRA_SOURCES} ${APR_PUBLIC_HEADERS_GENERATED})
  LIST(APPEND install_targets libaprutil-1)
  TARGET_LINK_LIBRARIES(libaprutil-1
-@@ -471,6 +486,7 @@ MESSAGE(STATUS "  C compiler ...................... : ${CMAKE_C_COMPILER}")
+@@ -474,6 +489,7 @@ MESSAGE(STATUS "  C compiler ...................... : ${CMAKE_C_COMPILER}")
  MESSAGE(STATUS "  DBD ODBC driver ................. : ${APU_HAVE_ODBC}")
  MESSAGE(STATUS "  DBD SQLite3 driver .............. : ${APU_HAVE_SQLITE3}")
  MESSAGE(STATUS "  DBD PostgreSQL .................. : ${APU_HAVE_PGSQL}")
