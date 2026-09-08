@@ -19,6 +19,9 @@
 
 	global $verfromfile;
 	$verfromfile = [
+		// dirty tag
+		"icu"	=> ["/#define U_ICU_VERSION \"([^\"]+)\"/",
+									PATH_SRC."/icu/icu4c/source/common/unicode/uvernum.h"],
 		// no tag
 		"mod_security-sdbm-util"	=> ["/\[modsec-sdbm-util\], \[([0-9\.]+)\]/",
 									PATH_SRC."/mod_security-sdbm-util/configure.ac"],
