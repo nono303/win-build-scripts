@@ -11,6 +11,6 @@ MSBuild.exe %VCDIR%/libiconv.vcxproj %MSBUILD_OPTS% ^
 /p:Platform="%archmsbuild%"
 
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_SRC%\%1\%VCDIR%\%outmsbuild%\%1.dll
-for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\%VCDIR%\%outmsbuild%\%1.%%X %PATH_INSTALL%\bin\*)
-xcopy /C /F /Y %PATH_SRC%\%1\%VCDIR%\%outmsbuild%\%1.lib %PATH_INSTALL%\lib\*
-xcopy /C /F /Y %PATH_SRC%\%1\include\iconv.h %PATH_INSTALL%\include\*
+for %%X in (dll pdb) do (call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\%VCDIR%\%outmsbuild%\%1.%%X %PATH_INSTALL%\bin\*)
+call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\%VCDIR%\%outmsbuild%\%1.lib %PATH_INSTALL%\lib\*
+call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\include\iconv.h %PATH_INSTALL%\include\*

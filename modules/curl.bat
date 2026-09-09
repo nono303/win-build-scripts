@@ -86,7 +86,7 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% %CURL_CMAKE_COMMON% ^
 %PATH_BIN_CYGWIN%\bash --login -c '%CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"'
 sed -i -E 's/TARGET_COMPILE_PDB.*/TARGET_COMPILE_PDB = lib\\\\%LIBCURL_STATIC_NAME%\.pdb/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% %LIBCURL_STATIC_NAME%.lib
-for %%E in (lib pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\lib\%LIBCURL_STATIC_NAME%.%%E %PATH_INSTALL%\%DIR_LIB_STATIC%\*)
+for %%E in (lib pdb) do (call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\lib\%LIBCURL_STATIC_NAME%.%%E %PATH_INSTALL%\%DIR_LIB_STATIC%\*)
 )
 
 REM CURL_USE_SCHANNEL - MultiSSL cannot be enabled with HTTP/3 and vice versa
@@ -123,13 +123,13 @@ if "%ARG_CMOPTS%"=="1" (exit /B)
 %PATH_BIN_CYGWIN%\bash --login -c '%CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"'
 %NINJA% install
 
-xcopy /C /F /Y %PATH_BUILD%\%1\lib\libcurl.pdb %PATH_INSTALL%\bin\*
-xcopy /C /F /Y %PATH_BUILD%\%1\src\curl.pdb %PATH_INSTALL%\bin\*
+call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\lib\libcurl.pdb %PATH_INSTALL%\bin\*
+call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\src\curl.pdb %PATH_INSTALL%\bin\*
 
 for %%E in (libcurl.dll curl.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%E "%CURL_DESC%")
 
 REM curl https://curl.se/ca/cacert.pem -o %PATH_INSTALL%\bin\curl-ca-bundle.crt
 cd /D %PATH_INSTALL%\bin
 call perl %PATH_SRC%\%1\scripts\mk-ca-bundle.pl curl-ca-bundle.crt
-for %%E in (certdata.txt curl-config wcurl) do (rm -fv %PATH_INSTALL%\bin\%%E)
-if %LOCAL_COPY% == 1 if %LOCAL_COPY_AVX_ECHO% == %AVXECHO%  if %LOCAL_COPY_MSVC_VER% == %MSVC_VER% (xcopy /C /F /Y %PATH_INSTALL%\bin\curl-ca-bundle.crt %LOCAL_PATH_CURLCA%\*)
+for %%E in (certdata.txt curl-config wcurl) do (call %PATH_UTILS%\fileutils rm %PATH_INSTALL%\bin\%%E)
+if %LOCAL_COPY% == 1 if %LOCAL_COPY_AVX_ECHO% == %AVXECHO%  if %LOCAL_COPY_MSVC_VER% == %MSVC_VER% (call %PATH_UTILS%\fileutils cp %PATH_INSTALL%\bin\curl-ca-bundle.crt %LOCAL_PATH_CURLCA%\*)

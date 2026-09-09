@@ -25,5 +25,5 @@ sed -i 's/bin\\\libxml2.dll/lib\\\libxml2.lib/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
 
 for %%X in (libexslt.dll libxslt.dll) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
-for %%X in (bin\xslt-config lib\xsltConf.sh) do (rm -fv %PATH_INSTALL%\%%X)
+for %%X in (bin\xslt-config lib\xsltConf.sh) do (call %PATH_UTILS%\fileutils rm %PATH_INSTALL%\%%X)
 echo.

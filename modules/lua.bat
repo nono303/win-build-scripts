@@ -56,9 +56,9 @@ ren lua.obj lua.o
 link /NOLOGO /LTCG /OPT:REF,ICF /CGTHREADS:8 /machine:%ARCH% /DEBUG /DLL /IMPLIB:liblua.lib /OUT:liblua.dll *.obj
 link /NOLOGO /LTCG /OPT:REF,ICF /CGTHREADS:8 /machine:%ARCH% /DEBUG /OUT:lua.exe lua.o liblua.lib
 
-for %%X in (obj exp o) do (rm -fv *.%%X)
+for %%X in (obj exp o) do (call %PATH_UTILS%\fileutils rm *.%%X)
 
-for %%X in (liblua.dll lua.exe liblua.pdb lua.pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\%%X %PATH_INSTALL%\bin\*)
-xcopy /C /F /Y %PATH_SRC%\%1\liblua.lib %PATH_INSTALL%\lib\*
-for %%X in (lualib.h luaconf.h lua.h lauxlib.h) do (xcopy /C /F /Y %PATH_SRC%\%1\%%X %PATH_INSTALL%\include\*)
+for %%X in (liblua.dll lua.exe liblua.pdb lua.pdb) do (call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\%%X %PATH_INSTALL%\bin\*)
+call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\liblua.lib %PATH_INSTALL%\lib\*
+for %%X in (lualib.h luaconf.h lua.h lauxlib.h) do (call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\%%X %PATH_INSTALL%\include\*)
 for %%X in (liblua.dll lua.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)

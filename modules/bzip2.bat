@@ -25,8 +25,8 @@ if "%ARG_CMOPTS%"=="1" (exit /B)
 %PATH_BIN_CYGWIN%\bash --login -c '%CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"'
 %NINJA% install
 
-for %%X in (bunzip.exe bzcat.exe) do (rm -fv %PATH_INSTALL%\bin\%%X)
-move /Y %PATH_INSTALL%\lib\bz2.dll %PATH_INSTALL%\bin\bz2.dll
-xcopy /C /F /Y %PATH_BUILD%\%1\bz_version.h %PATH_INSTALL%\include\*
-for %%X in (bzip2recover.pdb bzip2.pdb bz2.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*)
+for %%X in (bunzip.exe bzcat.exe) do (call %PATH_UTILS%\fileutils rm %PATH_INSTALL%\bin\%%X)
+call %PATH_UTILS%\fileutils mv %PATH_INSTALL%\lib\bz2.dll %PATH_INSTALL%\bin\bz2.dll
+call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\bz_version.h %PATH_INSTALL%\include\*
+for %%X in (bzip2recover.pdb bzip2.pdb bz2.pdb) do (call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*)
 for %%X in (bzip2.exe bzip2recover.exe bz2.dll) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)

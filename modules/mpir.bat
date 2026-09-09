@@ -29,7 +29,7 @@ MSBuild.exe %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%MPIR_NAME:-=_%\dll_mpir_%M
 /p:YASM_PATH="%PATH_SOFTS%" ^
 /p:YASM_NAME="yasm-1.3.0-win64.exe"
 
-xcopy /C /F /Y %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%MPIR_NAME:-=_%\%archmsbuild%\%OUTDIR_CONF%\%1.lib %PATH_INSTALL%\lib\*
-for %%X in (dll pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%MPIR_NAME:-=_%\%archmsbuild%\%OUTDIR_CONF%\%1.%%X %PATH_INSTALL%\bin\*)
-for %%X in (config gmp-impl gmp-mparam gmp gmpxx longlong mpir mpirxx) do (xcopy /C /F /Y %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%MPIR_NAME:-=_%\%archmsbuild%\%OUTDIR_CONF%\%%X.h %PATH_INSTALL%\include\*)
+call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%MPIR_NAME:-=_%\%archmsbuild%\%OUTDIR_CONF%\%1.lib %PATH_INSTALL%\lib\*
+for %%X in (dll pdb) do (call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%MPIR_NAME:-=_%\%archmsbuild%\%OUTDIR_CONF%\%1.%%X %PATH_INSTALL%\bin\*)
+for %%X in (config gmp-impl gmp-mparam gmp gmpxx longlong mpir mpirxx) do (call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\%VCDIR%\%MPIRDIR%\dll_mpir_%MPIR_NAME:-=_%\%archmsbuild%\%OUTDIR_CONF%\%%X.h %PATH_INSTALL%\include\*)
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\mpir.dll

@@ -31,9 +31,9 @@ if "%ARG_CMOPTS%"=="1" (exit /B)
 sed -i 's/= libgav1_shared/= libgav1/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% libgav1_shared
 
-xcopy /C /F /Y %PATH_BUILD%\%1\libgav1.dll %PATH_INSTALL%\bin\*
-xcopy /C /F /Y %PATH_BUILD%\%1\libgav1.pdb %PATH_INSTALL%\bin\*
-xcopy /C /F /Y %PATH_BUILD%\%1\libgav1.lib %PATH_INSTALL%\lib\*
+call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\libgav1.dll %PATH_INSTALL%\bin\*
+call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\libgav1.pdb %PATH_INSTALL%\bin\*
+call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\libgav1.lib %PATH_INSTALL%\lib\*
 if not exist %PATH_INSTALL%\include\gav1\. mkdir %PATH_INSTALL%\include\gav1
-xcopy /C /F /Y %PATH_SRC%\%1\src\gav1\*.h %PATH_INSTALL%\include\gav1\*
+call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\src\gav1\*.h %PATH_INSTALL%\include\gav1\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libgav1.dll

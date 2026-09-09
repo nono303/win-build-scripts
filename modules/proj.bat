@@ -41,5 +41,5 @@ if "%ARG_CMOPTS%"=="1" (exit /B)
 %NINJA% install
 
 for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\_%1\bin\*.* /b') do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\_%1\bin\%%G)
-for /f "tokens=*" %%G in ('dir %PATH_BUILD%\%1\bin\*.pdb /b') do  (xcopy /C /F /Y %PATH_BUILD%\%1\bin\%%G %PATH_INSTALL%\_%1\bin\*)
-xcopy /C /F /Y %PATH_BUILD%\%1\lib\*.lib %PATH_INSTALL%\_%1\lib\*
+for /f "tokens=*" %%G in ('dir %PATH_BUILD%\%1\bin\*.pdb /b') do  (call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\bin\%%G %PATH_INSTALL%\_%1\bin\*)
+call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\lib\*.lib %PATH_INSTALL%\_%1\lib\*

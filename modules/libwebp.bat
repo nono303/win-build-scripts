@@ -33,6 +33,6 @@ sed -i -E 's/WEBP_EXTERN extern/WEBP_EXTERN __declspec^(dllexport^)/g' %CYGPATH_
 %NINJA% install
 
 for %%X in (libsharpyuv libwebpdecoder libwebp libwebpdemux libwebpmux) do (
-	xcopy /C /F /Y %PATH_BUILD%\%1\%%X.pdb %PATH_INSTALL%\bin\*
+	call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\%%X.pdb %PATH_INSTALL%\bin\*
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X.dll
 )

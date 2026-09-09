@@ -15,12 +15,12 @@ echo.
 REM -Dorg.gradle.deprecation.trace=true
 call gradlew %GRADLEW_OPTS% --warning-mode all --console=verbose mobac:jar 2>&1
 
-move /Y %PATH_SRC%\%1\mobac\build\libs\Mobile_Atlas_Creator.jar %PATH_SRC%\%1\Mobile_Atlas_Creator_%SCM_COMORREV%.jar
+call %PATH_UTILS%\fileutils mv %PATH_SRC%\%1\mobac\build\libs\Mobile_Atlas_Creator.jar %PATH_SRC%\%1\Mobile_Atlas_Creator_%SCM_COMORREV%.jar
 
 if %LOCAL_COPY% == 1 (
 echo on
 	del %LOCAL_PATH_MOBAC%\Mobile_Atlas_Creator*.jar
-	xcopy /C /F /Y %PATH_SRC%\%1\Mobile_Atlas_Creator_%SCM_COMORREV%.jar %LOCAL_PATH_MOBAC%\*
+	call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\Mobile_Atlas_Creator_%SCM_COMORREV%.jar %LOCAL_PATH_MOBAC%\*
 	del %LOCAL_PATH_MOBAC2%\Mobile_Atlas_Creator*.jar
-	xcopy /C /F /Y %PATH_SRC%\%1\Mobile_Atlas_Creator_%SCM_COMORREV%.jar %LOCAL_PATH_MOBAC2%\*
+	call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\Mobile_Atlas_Creator_%SCM_COMORREV%.jar %LOCAL_PATH_MOBAC2%\*
 )

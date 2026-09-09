@@ -43,20 +43,20 @@ C:\sdk\release\vs18_x64-avx2\lib\libhttpd.lib ^
 C:\sdk\release\vs18_x64-avx2\lib\libapr-1.lib ^
 C:\sdk\release\vs18_x64-avx2\lib\libaprutil-1.lib
 
-rm -fv %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.exp
-rm -fv %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.lib
+call %PATH_UTILS%\fileutils rm %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.exp
+call %PATH_UTILS%\fileutils rm %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.lib
 echo.
 call do_php %PATH_UTILS%\sub\version.php %1 %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.so "httpd:%HTTPD_VERSION% libzstd:%ZSTD_VERSION%"
 
 if "%J8_TEST%"=="yes" (
 	call C:\bin\wscc_sysinternals\pskill httpd
-	rm -fv S:/httpd/modules/mod_zstd.*
-	xcopy /C /F /Y %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.* S:\httpd\modules\*
+	call %PATH_UTILS%\fileutils rm S:/httpd/modules/mod_zstd.*
+	call %PATH_UTILS%\fileutils cp %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\mod_zstd.* S:\httpd\modules\*
 	net start Apache2.4
 ) else (
-	if exist %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%.zip rm -fv %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%.zip
+	if exist %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%.zip call %PATH_UTILS%\fileutils rm %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%.zip
 	REM call go zstd nolog
-	xcopy /C /F /Y %PATH_INSTALL%\bin\libzstd.pdb %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\*
-	xcopy /C /F /Y %PATH_INSTALL%\bin\libzstd.dll %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\*
+	call %PATH_UTILS%\fileutils cp %PATH_INSTALL%\bin\libzstd.pdb %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\*
+	call %PATH_UTILS%\fileutils cp %PATH_INSTALL%\bin\libzstd.dll %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\*
 	%BIN_SEVENZ% a -tzip -y -ba -bso1 %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%.zip %MOD_ZSTD_PATH%\releases\%MOD_ZSTD_RELEASE%\*.*
 )

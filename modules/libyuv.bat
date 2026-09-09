@@ -20,12 +20,12 @@ for %%Y in (cmake_install.cmake build.ninja) do (sed -i 's/ yuv\.lib/ libyuv\.li
 %NINJA%
 
 if not exist %PATH_INSTALL%\include\editline\. mkdir %PATH_INSTALL%\include\libyuv
-xcopy /C /F /Y %PATH_SRC%\%1\include\libyuv.h %PATH_INSTALL%\include\*
-xcopy /C /F /Y %PATH_SRC%\%1\include\libyuv\*.h %PATH_INSTALL%\include\libyuv\*
+call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\include\libyuv.h %PATH_INSTALL%\include\*
+call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\include\libyuv\*.h %PATH_INSTALL%\include\libyuv\*
 
-xcopy /C /F /Y %PATH_BUILD%\%1\libyuv.lib %PATH_INSTALL%\lib\*
+call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\libyuv.lib %PATH_INSTALL%\lib\*
 for %%X in (libyuv.dll yuvconvert.exe) do (
-	xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*
-	xcopy /C /F /Y %PATH_BUILD%\%1\%%~nX.pdb %PATH_INSTALL%\bin\*
+	call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*
+	call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\%%~nX.pdb %PATH_INSTALL%\bin\*
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X
 )

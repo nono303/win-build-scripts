@@ -22,4 +22,4 @@ if "%ARG_CMOPTS%"=="1" (exit /B)
 %NINJA% install
 
 for %%X in (modules\mod_security2.so bin\mlogc.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\%%X)
-for %%X in (lib\mod_security2.exp lib\mod_security2.lib bin\mlogc-batch-load.pl) do (rm -fv %PATH_INSTALL%\%%X)
+for %%X in (lib\mod_security2.exp lib\mod_security2.lib bin\mlogc-batch-load.pl) do (call %PATH_UTILS%\fileutils rm %PATH_INSTALL%\%%X)

@@ -23,7 +23,7 @@ if "%ARG_CMOPTS%"=="1" (exit /B)
 sed -i 's/CMAKE_C_FLAGS \//CMAKE_C_FLAGS \/nologo \//g' %CYGPATH_BUILD%/%1/scripts/cmake/genout.cmake
 %NINJA% install
 
-xcopy /C /F /Y %PATH_BUILD%\%1\libpng%PNG_VER%.pdb %PATH_INSTALL%\bin\*
+call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\libpng%PNG_VER%.pdb %PATH_INSTALL%\bin\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libpng%PNG_VER%.dll
 if exist %PATH_INSTALL%\lib\cmake\%1\. rmdir /S /Q %PATH_INSTALL%\lib\cmake\%1
-move /Y %PATH_INSTALL%\lib\%1 %PATH_INSTALL%\lib\cmake\%1
+call %PATH_UTILS%\fileutils mv %PATH_INSTALL%\lib\%1 %PATH_INSTALL%\lib\cmake\%1

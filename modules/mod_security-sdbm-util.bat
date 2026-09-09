@@ -8,5 +8,5 @@ NMAKE %NMAKE_OPTS% -f Makefile.win ^
 	APRUTIL=%PATH_INSTALL% ^
 	exe
 
-for %%X in (exe pdb) do (xcopy /C /F /Y %PATH_SRC%\%1\modsec-sdbm-util.%%X %PATH_INSTALL%\bin\*)
+for %%X in (exe pdb) do (call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\modsec-sdbm-util.%%X %PATH_INSTALL%\bin\*)
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\modsec-sdbm-util.exe

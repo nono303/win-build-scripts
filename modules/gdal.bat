@@ -129,16 +129,16 @@ if "%ARG_CMOPTS%"=="1" (exit /B)
 %PATH_BIN_CYGWIN%\bash --login -c '%CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"'
 %NINJA% install python_wheel
 
-xcopy /C /F /Y %PATH_BUILD%\%1\libgdal.pdb %PATH_INSTALL%\_%1\bin\*
+call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\libgdal.pdb %PATH_INSTALL%\_%1\bin\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\_%1\bin\libgdal.dll
 for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\_%1\bin\*.exe/b') do  (
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\_%1\bin\%%G
-	xcopy /C /F /Y %PATH_BUILD%\%1\apps\%%~nG.pdb %PATH_INSTALL%\_%1\bin\*
+	call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\apps\%%~nG.pdb %PATH_INSTALL%\_%1\bin\*
 )
-move /Y %PATH_INSTALL%\_%1\lib\gdalplugins %PATH_INSTALL%\_%1\bin\gdalplugins
+call %PATH_UTILS%\fileutils mv %PATH_INSTALL%\_%1\lib\gdalplugins %PATH_INSTALL%\_%1\bin\gdalplugins
 for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\_%1\bin\gdalplugins\*.dll /b') do  (
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\_%1\bin\gdalplugins\%%G
-	xcopy /C /F /Y %PATH_BUILD%\%1\gdalplugins\%%~nG.pdb %PATH_INSTALL%\_%1\bin\gdalplugins\*
+	call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\gdalplugins\%%~nG.pdb %PATH_INSTALL%\_%1\bin\gdalplugins\*
 )
 REM PYTHON WHEEL
 	REM pip:	numpy swig
@@ -154,5 +154,5 @@ REM PYTHON WHEEL
 set GDAL_WHELL_PATH=%PATH_BUILD%\%1\swig\python\dist\
 for /f "tokens=*" %%G in ('dir %GDAL_WHELL_PATH%*.whl /b') do (set GDAL_WHELL_FILE=%%G)
 echo %GDAL_WHELL_FILE%
-xcopy /C /F /Y %GDAL_WHELL_PATH%%GDAL_WHELL_FILE% %PATH_INSTALL%\_%1\*
+call %PATH_UTILS%\fileutils cp %GDAL_WHELL_PATH%%GDAL_WHELL_FILE% %PATH_INSTALL%\_%1\*
 call pip install --force-reinstall %PATH_INSTALL%\_%1\%GDAL_WHELL_FILE%

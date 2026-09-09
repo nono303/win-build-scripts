@@ -28,6 +28,6 @@ if "%ARG_CMOPTS%"=="1" (exit /B)
 %PATH_BIN_CYGWIN%\bash --login -c '%CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"'
 %NINJA% install
 
-move /Y %PATH_INSTALL%\lib\libtidy.pdb %PATH_INSTALL%\bin\libtidy.pdb
-xcopy /C /F /Y %PATH_BUILD%\%1\tidy.pdb %PATH_INSTALL%\bin\*
+call %PATH_UTILS%\fileutils mv %PATH_INSTALL%\lib\libtidy.pdb %PATH_INSTALL%\bin\libtidy.pdb
+call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\tidy.pdb %PATH_INSTALL%\bin\*
 for %%X in (tidy.exe libtidy.dll) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)

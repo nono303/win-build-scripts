@@ -53,6 +53,6 @@ sed -i 's/DWIN32/DWIN32 \/DLIBYUV_USING_SHARED_LIBRARY=1/g' %CYGPATH_BUILD%/%1/b
 
 	REM -DAVIF_BUILD_APPS=ON > avifenc.exe avifdec.exe
 for %%X in (avif.dll) do (
-	xcopy /C /F /Y %PATH_BUILD%\%1\%%~nX.pdb %PATH_INSTALL%\bin\*
+	call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\%%~nX.pdb %PATH_INSTALL%\bin\*
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X
 )

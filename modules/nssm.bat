@@ -15,6 +15,6 @@ MSBuild.exe nssm.sln %MSBUILD_OPTS% ^
 /p:Platform="%archmsbuild%"
 
 for %%E in (exe pdb) do (
-	xcopy /C /F /Y %PATH_SRC%\%1\out\%OUTDIR_CONF%\%archmsbuild%\nssm.%%E %PATH_INSTALL%\bin\nssm-%NSSM_VER%.%%E*
+	call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\out\%OUTDIR_CONF%\%archmsbuild%\nssm.%%E %PATH_INSTALL%\bin\nssm-%NSSM_VER%.%%E*
 )
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\nssm-%NSSM_VER%.exe

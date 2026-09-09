@@ -14,6 +14,6 @@ echo.
 call gradlew %GRADLEW_OPTS% --warning-mode all --console=verbose shadowJar 2>&1
 
 if %LOCAL_COPY% == 1 (
-	rm -fv "%LOCAL_PATH_FIT2GPX%\fit2gpx.jar"
-	xcopy /C /F /Y %PATH_SRC%\%1\build\libs\fit2gpx-all.jar %LOCAL_PATH_FIT2GPX%\fit2gpx.jar*
+	call %PATH_UTILS%\fileutils rm "%LOCAL_PATH_FIT2GPX%\fit2gpx.jar"
+	call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\build\libs\fit2gpx-all.jar %LOCAL_PATH_FIT2GPX%\fit2gpx.jar*
 )

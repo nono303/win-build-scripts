@@ -27,6 +27,6 @@ if "%ARG_CMOPTS%"=="1" (exit /B)
 %PATH_BIN_CYGWIN%\bash --login -c '%CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"'
 %NINJA% install
 
-xcopy /C /F /Y %PATH_BUILD%\%1\lib\*.pdb %PATH_INSTALL%\bin\*
+call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\lib\*.pdb %PATH_INSTALL%\bin\*
 
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\zip.dll

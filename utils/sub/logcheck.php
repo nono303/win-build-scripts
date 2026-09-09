@@ -55,6 +55,8 @@
 		"stop" => [31,"str"],
 		"err open" => [31,"str"], // version
 		"Permission denied" => [31,"str"], // sed chmod
+		"file not found" => [31,"str"], // fileutils
+		"directory not found" => [31,"str"], // fileutils
 /* Yellow */
 		"(Warning[: ])" => [33,"reg"],
 		"warning" => [33,"reg"],

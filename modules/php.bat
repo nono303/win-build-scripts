@@ -117,8 +117,8 @@ if not exist %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\pecl\. mkdir %PATH_PHP_
 for %%E in (pecl-datetime-timezonedb pecl-memcache pecl-text-xdiff php-ext-brotli php-ext-zstd php-geos php-ogr php-proj xdebug pecl-igbinary pecl-parallel pecl-system-sync) do (
 	if not exist %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\pecl\%%E\. mklink /J %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\pecl\%%E %PATH_SRC%\%%E
 )
-if exist %PATH_PHP_SDK%\phpsdk-local.bat rm -fv %PATH_PHP_SDK%\phpsdk-local.bat
-xcopy /C /F /Y %PATH_MODULES%\phpsdk-local.bat %PATH_PHP_SDK%\*
+if exist %PATH_PHP_SDK%\phpsdk-local.bat call %PATH_UTILS%\fileutils rm %PATH_PHP_SDK%\phpsdk-local.bat
+call %PATH_UTILS%\fileutils cp %PATH_MODULES%\phpsdk-local.bat %PATH_PHP_SDK%\*
 
 	REM ---- TMP - ext-gd
 rmdir /S /Q %PATH_SRC%\php-src\ext\gd

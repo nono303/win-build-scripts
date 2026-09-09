@@ -36,5 +36,5 @@ if "%ARG_CMOPTS%"=="1" (exit /B)
 %NINJA% install
 
 REM missing include
-REM for %%X in (%PATH_SRC%\%1\include\apr_ldap_common.h) do (xcopy /C /F /Y %%X %PATH_INSTALL%\include\*)
+REM for %%X in (%PATH_SRC%\%1\include\apr_ldap_common.h) do (call %PATH_UTILS%\fileutils cp %%X %PATH_INSTALL%\include\*)
 call do_php %PATH_UTILS%\sub\version.php apr-util %PATH_INSTALL%\bin\libaprutil-1.dll

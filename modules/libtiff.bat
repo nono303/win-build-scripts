@@ -49,4 +49,4 @@ if "%ARG_CMOPTS%"=="1" (exit /B)
 %NINJA% install
 
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\tiff.dll
-xcopy /C /F /Y %PATH_BUILD%\%1\libtiff\tiff.pdb %PATH_INSTALL%\bin\*
+call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\libtiff\tiff.pdb %PATH_INSTALL%\bin\*

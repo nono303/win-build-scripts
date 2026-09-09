@@ -39,11 +39,11 @@ for %%X in (dll pdb) do (
 for %%X in (turbojpeg jpeg) do (
 	sed -i -E 's/TARGET_COMPILE_PDB.*/TARGET_COMPILE_PDB = %%X\.pdb/g' %CYGPATH_BUILD%/%1/build.ninja
 	%NINJA% %%X
-	move /Y %PATH_BUILD%\%1\%%X.lib %PATH_INSTALL%\lib\%%X.lib
-	for %%Y in (pdb dll) do (move /Y %PATH_BUILD%\%1\%%X.%%Y %PATH_INSTALL%\bin\%%X.%%Y)
+	call %PATH_UTILS%\fileutils mv %PATH_BUILD%\%1\%%X.lib %PATH_INSTALL%\lib\%%X.lib
+	for %%Y in (pdb dll) do (call %PATH_UTILS%\fileutils mv %PATH_BUILD%\%1\%%X.%%Y %PATH_INSTALL%\bin\%%X.%%Y)
 	del /S %PATH_BUILD%\%1\*.obj
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X.dll
 )
 for %%X in (%PATH_BUILD%\%1\jconfig.h %PATH_SRC%\%1\src\jerror.h %PATH_SRC%\%1\src\jmorecfg.h %PATH_SRC%\%1\src\jpeglib.h %PATH_SRC%\%1\src\turbojpeg.h) do (
-	xcopy /C /F /Y %%X %PATH_INSTALL%\include\*
+	call %PATH_UTILS%\fileutils cp %%X %PATH_INSTALL%\include\*
 )

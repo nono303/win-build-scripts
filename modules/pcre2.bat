@@ -63,9 +63,9 @@ if "%ARG_CMOPTS%"=="1" (exit /B)
 
 	REM pcre2-16 pcre2-32
 for %%X in (pcre2-8 pcre2-posix) do (
-	xcopy /C /F /Y %PATH_BUILD%\%1\%%X.pdb %PATH_INSTALL%\bin\*
+	call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\%%X.pdb %PATH_INSTALL%\bin\*
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X.dll
 )
-xcopy /C /F /Y %PATH_BUILD%\%1\pcre2grep.pdb %PATH_INSTALL%\bin\*
+call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\pcre2grep.pdb %PATH_INSTALL%\bin\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\pcre2grep.exe
-rm -fv %PATH_INSTALL%\bin\pcre2-config
+call %PATH_UTILS%\fileutils rm %PATH_INSTALL%\bin\pcre2-config

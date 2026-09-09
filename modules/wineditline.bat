@@ -14,8 +14,8 @@ sed -i 's/\/DWIN32/\/DWIN32 \/DLIBRARY_EXPORTS=1/g' %CYGPATH_BUILD%/%1/build.nin
 %NINJA% src\edit.dll
 
 if not exist %PATH_INSTALL%\include\editline\. mkdir %PATH_INSTALL%\include\editline
-xcopy /C /F /Y %PATH_SRC%\%1\src\editline\readline.h %PATH_INSTALL%\include\editline\*
-xcopy /C /F /Y %PATH_BUILD%\%1\src\edit.dll %PATH_INSTALL%\bin\*
-xcopy /C /F /Y %PATH_BUILD%\%1\src\edit.pdb %PATH_INSTALL%\bin\*
-xcopy /C /F /Y %PATH_BUILD%\%1\src\edit.lib %PATH_INSTALL%\lib\*
+call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\src\editline\readline.h %PATH_INSTALL%\include\editline\*
+call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\src\edit.dll %PATH_INSTALL%\bin\*
+call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\src\edit.pdb %PATH_INSTALL%\bin\*
+call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\src\edit.lib %PATH_INSTALL%\lib\*
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\edit.dll

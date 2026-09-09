@@ -82,7 +82,7 @@ if "%ARG_CMOPTS%"=="1" (exit /B)
 sed -i 's/c++latest/c++latest \/Zc:strictStrings-/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
 
-for %%X in (examples\heif-thumbnailer.pdb examples\heif-enc.pdb examples\heif-dec.pdb examples\heif-info.pdb libheif\heif.pdb) do (xcopy /C /F /Y %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*)
+for %%X in (examples\heif-thumbnailer.pdb examples\heif-enc.pdb examples\heif-dec.pdb examples\heif-info.pdb libheif\heif.pdb) do (call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\%%X %PATH_INSTALL%\bin\*)
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\heif.dll
 for %%X in (heif-thumbnailer.exe heif-enc.exe heif-dec.exe heif-info.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X)
-rm -fv %PATH_INSTALL%\bin\heif-convert.exe
+call %PATH_UTILS%\fileutils rm %PATH_INSTALL%\bin\heif-convert.exe

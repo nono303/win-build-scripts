@@ -174,16 +174,16 @@ mkdir %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%
 for %%A in (exe dll) do (
 	for /f "tokens=*" %%G in ('dir %PHP_BUILD_DIR%\php*.%%A /s/b') do (
 		for %%E in (%%A pdb) do (
-			xcopy /C /F /Y %%~pG%%~nG.%%E %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\*
+			call %PATH_UTILS%\fileutils cp %%~pG%%~nG.%%E %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\*
 			if %LOCAL_COPY% == 1 if %LOCAL_COPY_AVX_ECHO% == %AVXECHO%  if %LOCAL_COPY_MSVC_VER% == %MSVC_VER% if %PHPVER% == %PHP_BUILD_TYPE% (
-				xcopy /C /F /Y %%~pG%%~nG.%%E %LOCAL_PATH_PHP%\*
+				call %PATH_UTILS%\fileutils cp %%~pG%%~nG.%%E %LOCAL_PATH_PHP%\*
 			)
 		)
 	)
 )
 
 if %PHPVER% == %PHP_BUILD_TYPE% (
-	for /f "tokens=*" %%G in ('dir %PHP_BUILD_DIR%\php8%TSLIBSUF%.lib /s/b') do (xcopy /C /F /Y %%G %PATH_INSTALL%\lib\*)
+	for /f "tokens=*" %%G in ('dir %PHP_BUILD_DIR%\php8%TSLIBSUF%.lib /s/b') do (call %PATH_UTILS%\fileutils cp %%G %PATH_INSTALL%\lib\*)
 	for %%X in (php-cgi.exe php.exe %SHARED_OPCACHE% php8%TSLIBSUF%.dll php_curl.dll php_fileinfo.dll php_gd.dll php_intl.dll php_openssl.dll php_tidy.dll php_bcmath.dll php_bz2.dll php_calendar.dll php_com_dotnet.dll php_ctype.dll php_dom.dll php_exif.dll php_ftp.dll php_iconv.dll php_mysqli.dll php_pdo_mysql.dll php_pdo_sqlite.dll php_readline.dll php_simplexml.dll php_soap.dll php_sockets.dll php_sodium.dll php_sqlite3.dll php_xml.dll php_xmlreader.dll php_xmlwriter.dll php_zip.dll php_zlib.dll php_xsl.dll php_mbstring.dll php_gmp.dll php_ffi.dll) do (
 		call do_php %PATH_UTILS%\sub\version.php php-src %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\%%X build:%TSNTS%
 	)
@@ -226,7 +226,7 @@ if %PHP_BUILD_TYPE% == memcache	(
 	call do_php %PATH_UTILS%\sub\version.php pecl-memcache %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcache.dll build:%TSNTS% php:%PHPVERFULL%
 	if not "%PATH_GITHUB_PHPMEMCACHE%"=="" (
 		for %%A in (pdb dll) do (
-			xcopy /C /F /Y %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcache.%%A %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXPATH%\php-%PHPVER%.x_memcache.%%A*
+			call %PATH_UTILS%\fileutils cp %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcache.%%A %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXPATH%\php-%PHPVER%.x_memcache.%%A*
 		)
 	)
 )
@@ -240,7 +240,7 @@ if %PHP_BUILD_TYPE% == brotli (
 	call do_php %PATH_UTILS%\sub\version.php php-ext-brotli %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_brotli.dll build:%TSNTS% php:%PHPVERFULL% brotli:!BROTLIVER:v=!
 	if not "%PATH_GITHUB_PHPBROTLI%"=="" (
 		for %%A in (pdb dll) do (
-			xcopy /C /F /Y %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_brotli.%%A %PATH_GITHUB_PHPBROTLI%\%MSVC_DEPS%-%PHP_SDK_ARCH%-%TSNTS%!AVXPATH!\php-%PHPVER%.x_brotli.%%A*
+			call %PATH_UTILS%\fileutils cp %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_brotli.%%A %PATH_GITHUB_PHPBROTLI%\%MSVC_DEPS%-%PHP_SDK_ARCH%-%TSNTS%!AVXPATH!\php-%PHPVER%.x_brotli.%%A*
 		)
 	)
 	endlocal

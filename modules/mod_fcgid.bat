@@ -15,7 +15,7 @@ if "%ARG_CMOPTS%"=="1" (exit /B)
 
 FOR /F "tokens=* USEBACKQ" %%F in (`do_php %PATH_UTILS%\sub\version.php httpd`) do (set HTTPD_VERSION=%%F)
 if not "%PATH_GITHUB_MODFCGID%"=="" (
-	for %%X in (so pdb lib) do (xcopy /C /F /Y %PATH_BUILD%\%1\%1.%%X %PATH_GITHUB_MODFCGID%\%MSVC_DEPS%\%ARCH%%AVXB%\*)
+	for %%X in (so pdb lib) do (call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\%1.%%X %PATH_GITHUB_MODFCGID%\%MSVC_DEPS%\%ARCH%%AVXB%\*)
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_GITHUB_MODFCGID%\%MSVC_DEPS%\%ARCH%%AVXB%\%1.so "httpd:%HTTPD_VERSION%"
 )
 

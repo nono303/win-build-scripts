@@ -10,8 +10,8 @@ MSBuild.exe %PATH_SRC%\%1\%VCDIR%\libxpm.sln %MSBUILD_OPTS% ^
 /p:Configuration="%OUTDIR_CONF%" ^
 /p:Platform="%archmsbuild%"
 
-for %%X in (dll pdb) do (xcopy /C /F /Y "%PATH_SRC%\%1\windows\builds\%archmsbuild%\%OUTDIR_CONF%\libxpm.%%X" %PATH_INSTALL%\bin\*)
-xcopy /C /F /Y "%PATH_SRC%\%1\windows\builds\%archmsbuild%\%OUTDIR_CONF%\libxpm.lib" %PATH_INSTALL%\lib\*
+for %%X in (dll pdb) do (call %PATH_UTILS%\fileutils cp "%PATH_SRC%\%1\windows\builds\%archmsbuild%\%OUTDIR_CONF%\libxpm.%%X" %PATH_INSTALL%\bin\*)
+call %PATH_UTILS%\fileutils cp "%PATH_SRC%\%1\windows\builds\%archmsbuild%\%OUTDIR_CONF%\libxpm.lib" %PATH_INSTALL%\lib\*
 if not exist %PATH_INSTALL%\include\X11\. mkdir %PATH_INSTALL%\include\X11
-xcopy /E /C /F /Y %PATH_SRC%\%1\include\X11 %PATH_INSTALL%\include\X11\
+call %PATH_UTILS%\fileutils cpdir  %PATH_SRC%\%1\include\X11 %PATH_INSTALL%\include\X11\
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libxpm.dll
