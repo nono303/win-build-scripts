@@ -1,0 +1,1047 @@
+From 43e5c60e45d813d56c905f019ad0c74415b0da24 Mon Sep 17 00:00:00 2001
+From: Mathias Berchtold <mberchtold@gmail.com>
+Date: Thu, 14 May 2026 18:30:22 +0200
+Subject: [PATCH] Check if the CC environment variable is defined in perlasm
+ scripts. When building on Windows, in a standard Visual Studio Developer
+ Command Prompt, the CC environment variable is not set by default.
+
+---
+ crypto/aes/asm/aes-cfb-avx512.pl       | 6 +++---
+ crypto/aes/asm/aes-parisc.pl           | 2 +-
+ crypto/aes/asm/aesni-mb-x86_64.pl      | 6 +++---
+ crypto/aes/asm/aesni-sha1-x86_64.pl    | 6 +++---
+ crypto/aes/asm/aesni-sha256-x86_64.pl  | 6 +++---
+ crypto/aes/asm/aesni-xts-avx512.pl     | 6 +++---
+ crypto/bn/asm/parisc-mont.pl           | 2 +-
+ crypto/bn/asm/rsaz-2k-avx512.pl        | 6 +++---
+ crypto/bn/asm/rsaz-2k-avxifma.pl       | 6 +++---
+ crypto/bn/asm/rsaz-3k-avx512.pl        | 6 +++---
+ crypto/bn/asm/rsaz-3k-avxifma.pl       | 6 +++---
+ crypto/bn/asm/rsaz-4k-avx512.pl        | 6 +++---
+ crypto/bn/asm/rsaz-4k-avxifma.pl       | 6 +++---
+ crypto/bn/asm/rsaz-avx2.pl             | 6 +++---
+ crypto/bn/asm/rsaz-x86_64.pl           | 6 +++---
+ crypto/bn/asm/x86_64-mont.pl           | 6 +++---
+ crypto/bn/asm/x86_64-mont5.pl          | 6 +++---
+ crypto/chacha/asm/chacha-x86.pl        | 6 +++---
+ crypto/chacha/asm/chacha-x86_64.pl     | 6 +++---
+ crypto/ec/asm/ecp_nistz256-x86_64.pl   | 6 +++---
+ crypto/ec/asm/x25519-x86_64.pl         | 6 +++---
+ crypto/modes/asm/aes-gcm-avx512.pl     | 6 +++---
+ crypto/modes/asm/aesni-gcm-x86_64.pl   | 6 +++---
+ crypto/modes/asm/ghash-parisc.pl       | 2 +-
+ crypto/modes/asm/ghash-x86_64.pl       | 6 +++---
+ crypto/pariscid.pl                     | 2 +-
+ crypto/perlasm/x86_64-xlate.pl         | 6 +++---
+ crypto/poly1305/asm/poly1305-x86.pl    | 6 +++---
+ crypto/poly1305/asm/poly1305-x86_64.pl | 6 +++---
+ crypto/rc4/asm/rc4-parisc.pl           | 2 +-
+ crypto/sha/asm/sha1-586.pl             | 6 +++---
+ crypto/sha/asm/sha1-mb-x86_64.pl       | 6 +++---
+ crypto/sha/asm/sha1-parisc.pl          | 2 +-
+ crypto/sha/asm/sha1-x86_64.pl          | 6 +++---
+ crypto/sha/asm/sha256-586.pl           | 6 +++---
+ crypto/sha/asm/sha256-mb-x86_64.pl     | 6 +++---
+ crypto/sha/asm/sha512-parisc.pl        | 2 +-
+ crypto/sha/asm/sha512-x86_64.pl        | 6 +++---
+ crypto/sm3/asm/sm3-x86_64.pl           | 4 ++--
+ crypto/sm4/asm/sm4-x86_64.pl           | 4 ++--
+ 41 files changed, 106 insertions(+), 106 deletions(-)
+
+diff --git a/crypto/aes/asm/aes-cfb-avx512.pl b/crypto/aes/asm/aes-cfb-avx512.pl
+index d9e1815ee69c0..42fe28ad8773b 100644
+--- a/crypto/aes/asm/aes-cfb-avx512.pl
++++ b/crypto/aes/asm/aes-cfb-avx512.pl
+@@ -21,7 +21,7 @@
+ ( $xlate="${dir}../../perlasm/x86_64-xlate.pl" and -f $xlate) or
+ die "can't locate x86_64-xlate.pl";
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+         =~ /GNU assembler version ([2-9]\.[0-9]+)/) {
+     $avx512vaes = ($1>=2.30);
+ }
+@@ -36,7 +36,7 @@
+     $avx512vaes = ($1>=14.16);
+ }
+ 
+-if (!$avx512vaes && `$ENV{CC} -v 2>&1`
++if (!$avx512vaes && defined $ENV{CC} && `$ENV{CC} -v 2>&1`
+     =~ /(Apple)?\s*((?:clang|LLVM) version|.*based on LLVM) ([0-9]+)\.([0-9]+)\.([0-9]+)?/) {
+     my $ver = $3 + $4/100.0 + $5/10000.0; # 3.1.0->3.01, 3.10.1->3.1001
+     if ($1) {
+@@ -49,7 +49,7 @@
+     }
+ }
+ 
+-if (!$avx512vaes && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$avx512vaes && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+     =~ /#define __clang_major__.([0-9]+)/) {
+     if ($1) {
+         $avx512vaes = ($1>=11); #icx started with clang 11
+diff --git a/crypto/aes/asm/aes-parisc.pl b/crypto/aes/asm/aes-parisc.pl
+index 1ae85ca00d098..cf90821bc90cf 100644
+--- a/crypto/aes/asm/aes-parisc.pl
++++ b/crypto/aes/asm/aes-parisc.pl
+@@ -1015,7 +1015,7 @@
+ 	.STRINGZ "AES for PA-RISC, CRYPTOGAMS by <https://github.com/dot-asm>"
+ ___
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 	=~ /GNU assembler/) {
+     $gnuas = 1;
+ }
+diff --git a/crypto/aes/asm/aesni-mb-x86_64.pl b/crypto/aes/asm/aesni-mb-x86_64.pl
+index 154f1bc70f1b4..bd804b3985c42 100644
+--- a/crypto/aes/asm/aesni-mb-x86_64.pl
++++ b/crypto/aes/asm/aesni-mb-x86_64.pl
+@@ -61,7 +61,7 @@
+ 
+ $avx=0;
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 		=~ /GNU assembler version ([2-9]\.[0-9]+)/) {
+ 	$avx = ($1>=2.19) + ($1>=2.22);
+ }
+@@ -76,11 +76,11 @@
+ 	$avx = ($1>=10) + ($1>=11);
+ }
+ 
+-if (!$avx && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
+ 	$avx = ($2>=3.0) + ($2>3.0);
+ }
+ 
+-if (!$avx && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+ 	=~ /#define __clang_major__.([0-9]+)/) {
+ 	if ($1) {
+ 		$avx = ($1>=11); #icx started with clang 11
+diff --git a/crypto/aes/asm/aesni-sha1-x86_64.pl b/crypto/aes/asm/aesni-sha1-x86_64.pl
+index 003c0e971662f..d424f0661c8bf 100644
+--- a/crypto/aes/asm/aesni-sha1-x86_64.pl
++++ b/crypto/aes/asm/aesni-sha1-x86_64.pl
+@@ -100,7 +100,7 @@
+ ( $xlate="${dir}../../perlasm/x86_64-xlate.pl" and -f $xlate) or
+ die "can't locate x86_64-xlate.pl";
+ 
+-$avx=1 if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++$avx=1 if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 		=~ /GNU assembler version ([2-9]\.[0-9]+)/ &&
+ 	   $1>=2.19);
+ $avx=1 if (!$avx && $win64 && ($flavour =~ /nasm/ || $ENV{ASM} =~ /nasm/) &&
+@@ -109,9 +109,9 @@
+ $avx=1 if (!$avx && $win64 && ($flavour =~ /masm/ || $ENV{ASM} =~ /ml64/) &&
+ 	   `ml64 2>&1` =~ /Version ([0-9]+)\./ &&
+ 	   $1>=10);
+-$avx=1 if (!$avx && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/ && $2>=3.0);
++$avx=1 if (!$avx && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/ && $2>=3.0);
+ 
+-$avx=1 if (!$avx && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__` =~ /#define __clang_major__.([0-9]+)/ &&
++$avx=1 if (!$avx && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__` =~ /#define __clang_major__.([0-9]+)/ &&
+ 	   $1>=11); #icx started with clang 11
+ 
+ $shaext=1;	### set to zero if compiling for 1.0.1
+diff --git a/crypto/aes/asm/aesni-sha256-x86_64.pl b/crypto/aes/asm/aesni-sha256-x86_64.pl
+index aecd6e7b40cd3..64cbd6417292c 100644
+--- a/crypto/aes/asm/aesni-sha256-x86_64.pl
++++ b/crypto/aes/asm/aesni-sha256-x86_64.pl
+@@ -56,7 +56,7 @@
+ ( $xlate="${dir}../../perlasm/x86_64-xlate.pl" and -f $xlate) or
+ die "can't locate x86_64-xlate.pl";
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 		=~ /GNU assembler version ([2-9]\.[0-9]+)/) {
+ 	$avx = ($1>=2.19) + ($1>=2.22);
+ }
+@@ -71,11 +71,11 @@
+ 	$avx = ($1>=10) + ($1>=12);
+ }
+ 
+-if (!$avx && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
+ 	$avx = ($2>=3.0) + ($2>3.0);
+ }
+ 
+-if (!$avx && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+ 	=~ /#define __clang_major__.([0-9]+)/) {
+ 	if ($1) {
+ 		$avx = ($1>=11); #icx started with clang 11
+diff --git a/crypto/aes/asm/aesni-xts-avx512.pl b/crypto/aes/asm/aesni-xts-avx512.pl
+index 16f2bbe789649..16796e811c29d 100644
+--- a/crypto/aes/asm/aesni-xts-avx512.pl
++++ b/crypto/aes/asm/aesni-xts-avx512.pl
+@@ -34,7 +34,7 @@
+ ( $xlate="${dir}../../perlasm/x86_64-xlate.pl" and -f $xlate) or
+ die "can't locate x86_64-xlate.pl";
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+         =~ /GNU assembler version ([0-9]+)\.([0-9]+)/) {
+     my $ver = $1 + $2/100.0; # 3.1->3.01, 3.10->3.10
+     $avx512vaes = ($ver >= 2.30);
+@@ -46,7 +46,7 @@
+     $avx512vaes = ($ver >= 2.1108);
+ }
+ 
+-if (!$avx512vaes && `$ENV{CC} -v 2>&1`
++if (!$avx512vaes && defined $ENV{CC} && `$ENV{CC} -v 2>&1`
+     =~ /(Apple)?\s*((?:clang|LLVM) version|.*based on LLVM) ([0-9]+)\.([0-9]+)\.([0-9]+)?/) {
+     my $ver = $3 + $4/100.0 + $5/10000.0; # 3.1.0->3.01, 3.10.1->3.1001
+     if ($1) {
+@@ -59,7 +59,7 @@
+     }
+ }
+ 
+-if (!$avx512vaes && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$avx512vaes && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+     =~ /#define __clang_major__.([0-9]+)/) {
+     if ($1) {
+         $avx512vaes = ($1>=11); #icx started with clang 11
+diff --git a/crypto/bn/asm/parisc-mont.pl b/crypto/bn/asm/parisc-mont.pl
+index bbe23bde7d491..b78357a6d82ec 100644
+--- a/crypto/bn/asm/parisc-mont.pl
++++ b/crypto/bn/asm/parisc-mont.pl
+@@ -986,7 +986,7 @@ sub assemble {
+     ref($opcode) eq 'CODE' ? &$opcode($mod,$args) : "\t$mnemonic$mod\t$args";
+ }
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 	=~ /GNU assembler/) {
+     $gnuas = 1;
+ }
+diff --git a/crypto/bn/asm/rsaz-2k-avx512.pl b/crypto/bn/asm/rsaz-2k-avx512.pl
+index 7e1db31e223ac..22aba5672d17b 100644
+--- a/crypto/bn/asm/rsaz-2k-avx512.pl
++++ b/crypto/bn/asm/rsaz-2k-avx512.pl
+@@ -39,7 +39,7 @@
+ ( $xlate="${dir}../../perlasm/x86_64-xlate.pl" and -f $xlate) or
+ die "can't locate x86_64-xlate.pl";
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+         =~ /GNU assembler version ([0-9]+)\.([0-9]+)/) {
+     my $ver = $1 + $2/100.0; # 3.1->3.01, 3.10->3.10
+     $avx512ifma = ($ver >= 2.26);
+@@ -51,7 +51,7 @@
+     $avx512ifma = ($ver >= 2.1108);
+ }
+ 
+-if (!$avx512ifma && `$ENV{CC} -v 2>&1`
++if (!$avx512ifma && defined $ENV{CC} && `$ENV{CC} -v 2>&1`
+     =~ /(Apple)?\s*((?:clang|LLVM) version|.*based on LLVM) ([0-9]+)\.([0-9]+)\.([0-9]+)?/) {
+     my $ver = $3 + $4/100.0 + $5/10000.0; # 3.1.0->3.01, 3.10.1->3.1001
+     if ($1) {
+@@ -64,7 +64,7 @@
+     }
+ }
+ 
+-if (!$avx512ifma && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$avx512ifma && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+     =~ /#define __clang_major__.([0-9]+)/) {
+     if ($1) {
+         $avx512ifma = ($1>=11); #icx started with clang 11
+diff --git a/crypto/bn/asm/rsaz-2k-avxifma.pl b/crypto/bn/asm/rsaz-2k-avxifma.pl
+index 652d659442892..534b582a43b9a 100644
+--- a/crypto/bn/asm/rsaz-2k-avxifma.pl
++++ b/crypto/bn/asm/rsaz-2k-avxifma.pl
+@@ -27,19 +27,19 @@
+ ( $xlate="${dir}../../perlasm/x86_64-xlate.pl" and -f $xlate) or
+ die "can't locate x86_64-xlate.pl";
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+         =~ /GNU assembler version ([0-9]+)\.([0-9]+)/) {
+     my $ver = $1 + $2/100.0;	# 3.1->3.01, 3.10->3.10
+     $avxifma = ($ver >= 2.40);
+ }
+ 
+-if (!$avxifma && `$ENV{CC} -v 2>&1`
++if (!$avxifma && defined $ENV{CC} && `$ENV{CC} -v 2>&1`
+     =~ /\s*((?:clang|LLVM) version|.*based on LLVM) ([0-9]+)\.([0-9]+)\.([0-9]+)?/) {
+     my $ver = $2 + $3/100.0 + $4/10000.0; # 3.1.0->3.01, 3.10.1->3.1001
+     $avxifma = ($ver>=16.0);
+ }
+ 
+-if (!$avxifma && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$avxifma && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+     =~ /#define __clang_major__.([0-9]+)/) {
+     if ($1) {
+         $avxifma = ($1>=16);
+diff --git a/crypto/bn/asm/rsaz-3k-avx512.pl b/crypto/bn/asm/rsaz-3k-avx512.pl
+index 403e09099f732..b4330eecc0d4b 100644
+--- a/crypto/bn/asm/rsaz-3k-avx512.pl
++++ b/crypto/bn/asm/rsaz-3k-avx512.pl
+@@ -38,7 +38,7 @@
+ ( $xlate="${dir}../../perlasm/x86_64-xlate.pl" and -f $xlate) or
+ die "can't locate x86_64-xlate.pl";
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+         =~ /GNU assembler version ([0-9]+)\.([0-9]+)/) {
+     my $ver = $1 + $2/100.0; # 3.1->3.01, 3.10->3.10
+     $avx512ifma = ($ver >= 2.26);
+@@ -50,7 +50,7 @@
+     $avx512ifma = ($ver >= 2.1108);
+ }
+ 
+-if (!$avx512ifma && `$ENV{CC} -v 2>&1`
++if (!$avx512ifma && defined $ENV{CC} && `$ENV{CC} -v 2>&1`
+     =~ /(Apple)?\s*((?:clang|LLVM) version|.*based on LLVM) ([0-9]+)\.([0-9]+)\.([0-9]+)?/) {
+     my $ver = $3 + $4/100.0 + $5/10000.0; # 3.1.0->3.01, 3.10.1->3.1001
+     if ($1) {
+@@ -63,7 +63,7 @@
+     }
+ }
+ 
+-if (!$avx512ifma && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$avx512ifma && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+     =~ /#define __clang_major__.([0-9]+)/) {
+     if ($1) {
+         $avx512ifma = ($1>=11); #icx started with clang 11
+diff --git a/crypto/bn/asm/rsaz-3k-avxifma.pl b/crypto/bn/asm/rsaz-3k-avxifma.pl
+index 9141e552bd334..5d917ae22e587 100644
+--- a/crypto/bn/asm/rsaz-3k-avxifma.pl
++++ b/crypto/bn/asm/rsaz-3k-avxifma.pl
+@@ -27,18 +27,18 @@
+ ( $xlate="${dir}../../perlasm/x86_64-xlate.pl" and -f $xlate) or
+ die "can't locate x86_64-xlate.pl";
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+         =~ /GNU assembler version ([2-9]\.[0-9]+)/) {
+     $avxifma = ($1>=2.40);
+ }
+ 
+-if (!$avxifma && `$ENV{CC} -v 2>&1`
++if (!$avxifma && defined $ENV{CC} && `$ENV{CC} -v 2>&1`
+     =~ /\s*((?:clang|LLVM) version|.*based on LLVM) ([0-9]+)\.([0-9]+)\.([0-9]+)?/) {
+     my $ver = $2 + $3/100.0 + $4/10000.0; # 3.1.0->3.01, 3.10.1->3.1001
+     $avxifma = ($ver>=16.0);
+ }
+ 
+-if (!$avxifma && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$avxifma && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+     =~ /#define __clang_major__.([0-9]+)/) {
+     if ($1) {
+         $avxifma = ($1>=16);
+diff --git a/crypto/bn/asm/rsaz-4k-avx512.pl b/crypto/bn/asm/rsaz-4k-avx512.pl
+index f41c1c60df838..4681ee811eaf0 100644
+--- a/crypto/bn/asm/rsaz-4k-avx512.pl
++++ b/crypto/bn/asm/rsaz-4k-avx512.pl
+@@ -38,7 +38,7 @@
+ ( $xlate="${dir}../../perlasm/x86_64-xlate.pl" and -f $xlate) or
+ die "can't locate x86_64-xlate.pl";
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+         =~ /GNU assembler version ([0-9]+)\.([0-9]+)/) {
+     my $ver = $1 + $2/100.0; # 3.1->3.01, 3.10->3.10
+     $avx512ifma = ($ver >= 2.26);
+@@ -50,7 +50,7 @@
+     $avx512ifma = ($ver >= 2.1108);
+ }
+ 
+-if (!$avx512ifma && `$ENV{CC} -v 2>&1`
++if (!$avx512ifma && defined $ENV{CC} && `$ENV{CC} -v 2>&1`
+     =~ /(Apple)?\s*((?:clang|LLVM) version|.*based on LLVM) ([0-9]+)\.([0-9]+)\.([0-9]+)?/) {
+     my $ver = $3 + $4/100.0 + $5/10000.0; # 3.1.0->3.01, 3.10.1->3.1001
+     if ($1) {
+@@ -63,7 +63,7 @@
+     }
+ }
+ 
+-if (!$avx512ifma && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$avx512ifma && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+     =~ /#define __clang_major__.([0-9]+)/) {
+     if ($1) {
+         $avx512ifma = ($1>=11); #icx started with clang 11
+diff --git a/crypto/bn/asm/rsaz-4k-avxifma.pl b/crypto/bn/asm/rsaz-4k-avxifma.pl
+index 2f7b036e5d5ba..00322f7df341d 100644
+--- a/crypto/bn/asm/rsaz-4k-avxifma.pl
++++ b/crypto/bn/asm/rsaz-4k-avxifma.pl
+@@ -27,18 +27,18 @@
+ ( $xlate="${dir}../../perlasm/x86_64-xlate.pl" and -f $xlate) or
+ die "can't locate x86_64-xlate.pl";
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+         =~ /GNU assembler version ([2-9]\.[0-9]+)/) {
+     $avxifma = ($1>=2.40);
+ }
+ 
+-if (!$avxifma && `$ENV{CC} -v 2>&1`
++if (!$avxifma && defined $ENV{CC} && `$ENV{CC} -v 2>&1`
+     =~ /\s*((?:clang|LLVM) version|.*based on LLVM) ([0-9]+)\.([0-9]+)\.([0-9]+)?/) {
+     my $ver = $2 + $3/100.0 + $4/10000.0; # 3.1.0->3.01, 3.10.1->3.1001
+     $avxifma = ($ver>=16.0);
+ }
+ 
+-if (!$avxifma && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$avxifma && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+     =~ /#define __clang_major__.([0-9]+)/) {
+     if ($1) {
+         $avxifma = ($1>=16);
+diff --git a/crypto/bn/asm/rsaz-avx2.pl b/crypto/bn/asm/rsaz-avx2.pl
+index 239ffb7e2b72c..9fc2e0f81d4a9 100755
+--- a/crypto/bn/asm/rsaz-avx2.pl
++++ b/crypto/bn/asm/rsaz-avx2.pl
+@@ -49,7 +49,7 @@
+ ( $xlate="${dir}../../perlasm/x86_64-xlate.pl" and -f $xlate) or
+ die "can't locate x86_64-xlate.pl";
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 		=~ /GNU assembler version ([2-9]\.[0-9]+)/) {
+ 	$avx = ($1>=2.19) + ($1>=2.22);
+ 	$addx = ($1>=2.23);
+@@ -67,13 +67,13 @@
+ 	$addx = ($1>=11);
+ }
+ 
+-if (!$avx && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|based on LLVM) ([0-9]+)\.([0-9]+)/) {
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|based on LLVM) ([0-9]+)\.([0-9]+)/) {
+ 	my $ver = $2 + $3/100.0;	# 3.1->3.01, 3.10->3.10
+ 	$avx = ($ver>=3.0) + ($ver>=3.01);
+ 	$addx = ($ver>=3.03);
+ }
+ 
+-if (!$avx && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+ 	=~ /#define __clang_major__.([0-9]+)/) {
+ 	if ($1) {
+ 		$addx = ($1>=11); #icx started with clang 11
+diff --git a/crypto/bn/asm/rsaz-x86_64.pl b/crypto/bn/asm/rsaz-x86_64.pl
+index ea6f3f2ac6c52..01a06ddebd435 100755
+--- a/crypto/bn/asm/rsaz-x86_64.pl
++++ b/crypto/bn/asm/rsaz-x86_64.pl
+@@ -68,7 +68,7 @@
+     or die "can't call $xlate: $!";
+ *STDOUT=*OUT;
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 		=~ /GNU assembler version ([0-9]+)\.([0-9]+)/) {
+ 	my $ver = $1 + $2/100.0;	# 3.1->3.01, 3.10->3.10
+ 	$addx = ($ver >= 2.23);
+@@ -85,12 +85,12 @@
+ 	$addx = ($1>=12);
+ }
+ 
+-if (!$addx && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+)\.([0-9]+)/) {
++if (!$addx && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+)\.([0-9]+)/) {
+ 	my $ver = $2 + $3/100.0;	# 3.1->3.01, 3.10->3.10
+ 	$addx = ($ver>=3.03);
+ }
+ 
+-if (!$addx && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$addx && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+ 	=~ /#define __clang_major__.([0-9]+)/) {
+ 	if ($1) {
+ 		$addx = ($1>=11); #icx started with clang 11
+diff --git a/crypto/bn/asm/x86_64-mont.pl b/crypto/bn/asm/x86_64-mont.pl
+index 3b3bd747e5a8a..683c402e8b4e0 100755
+--- a/crypto/bn/asm/x86_64-mont.pl
++++ b/crypto/bn/asm/x86_64-mont.pl
+@@ -62,7 +62,7 @@
+     or die "can't call $xlate: $!";
+ *STDOUT=*OUT;
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 		=~ /GNU assembler version ([2-9]\.[0-9]+)/) {
+ 	$addx = ($1>=2.23);
+ }
+@@ -77,12 +77,12 @@
+ 	$addx = ($1>=12);
+ }
+ 
+-if (!$addx && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+)\.([0-9]+)/) {
++if (!$addx && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+)\.([0-9]+)/) {
+ 	my $ver = $2 + $3/100.0;	# 3.1->3.01, 3.10->3.10
+ 	$addx = ($ver>=3.03);
+ }
+ 
+-if (!$addx && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$addx && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+ 	=~ /#define __clang_major__.([0-9]+)/) {
+ 	if ($1) {
+ 		$addx = ($1>=11); #icx started with clang 11
+diff --git a/crypto/bn/asm/x86_64-mont5.pl b/crypto/bn/asm/x86_64-mont5.pl
+index 95d34e0b50867..827ffa20eb040 100755
+--- a/crypto/bn/asm/x86_64-mont5.pl
++++ b/crypto/bn/asm/x86_64-mont5.pl
+@@ -47,7 +47,7 @@
+     or die "can't call $xlate: $!";
+ *STDOUT=*OUT;
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 		=~ /GNU assembler version ([0-9]+)\.([0-9]+)/) {
+ 	my $ver = $1 + $2/100.0;	# 3.1->3.01, 3.10->3.10
+ 	$addx = ($ver >= 2.23);
+@@ -64,12 +64,12 @@
+ 	$addx = ($1>=12);
+ }
+ 
+-if (!$addx && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+)\.([0-9]+)/) {
++if (!$addx && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+)\.([0-9]+)/) {
+ 	my $ver = $2 + $3/100.0;	# 3.1->3.01, 3.10->3.10
+ 	$addx = ($ver>=3.03);
+ }
+ 
+-if (!$addx && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$addx && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+ 	=~ /#define __clang_major__.([0-9]+)/) {
+ 	if ($1) {
+ 		$addx = ($1>=11); #icx started with clang 11
+diff --git a/crypto/chacha/asm/chacha-x86.pl b/crypto/chacha/asm/chacha-x86.pl
+index 6a64a57651dfa..dbd8c66a5ca54 100755
+--- a/crypto/chacha/asm/chacha-x86.pl
++++ b/crypto/chacha/asm/chacha-x86.pl
+@@ -48,7 +48,7 @@
+ for (@ARGV) { $xmm=1 if (/-DOPENSSL_IA32_SSE2/); }
+ 
+ $ymm=1 if ($xmm &&
+-		`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++		defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 			=~ /GNU assembler version ([0-9]+)\.([0-9]+)/ &&
+ 		($gasver = $1 + $2/100.0) >= 2.19);	# first version supporting AVX
+ 
+@@ -61,11 +61,11 @@
+ 		$1>=10);	# first version supporting AVX
+ 
+ $ymm=1 if ($xmm && !$ymm &&
+-		`$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|based on LLVM) ([0-9]+\.[0-9]+)/ &&
++		defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|based on LLVM) ([0-9]+\.[0-9]+)/ &&
+ 		$2>=3.0);	# first version supporting AVX
+ 
+ $ymm=1 if ($xmm && !$ymm &&
+-		`$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__` =~ /#define __clang_major__.([0-9]+)/ &&
++		defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__` =~ /#define __clang_major__.([0-9]+)/ &&
+ 		$1>=11); #icx started with clang 11
+ 
+ $a="eax";
+diff --git a/crypto/chacha/asm/chacha-x86_64.pl b/crypto/chacha/asm/chacha-x86_64.pl
+index ed54836dbf215..3d5e31ad398dc 100755
+--- a/crypto/chacha/asm/chacha-x86_64.pl
++++ b/crypto/chacha/asm/chacha-x86_64.pl
+@@ -70,7 +70,7 @@
+ ( $xlate="${dir}../../perlasm/x86_64-xlate.pl" and -f $xlate) or
+ die "can't locate x86_64-xlate.pl";
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 		=~ /GNU assembler version ([0-9]+)\.([0-9]+)/) {
+ 	my $ver = $1 + $2/100.0; # 3.1->3.01, 3.10->3.10
+ 	$avx = ($ver >= 2.19) + ($ver >= 2.22) + ($ver >= 2.25);
+@@ -87,11 +87,11 @@
+ 	$avx = ($1>=10) + ($1>=11);
+ }
+ 
+-if (!$avx && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
+ 	$avx = ($2>=3.0) + ($2>3.0);
+ }
+ 
+-if (!$avx && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+ 	=~ /#define __clang_major__.([0-9]+)/) {
+ 	if ($1) {
+ 		$avx = ($1>=11); #icx started with clang 11
+diff --git a/crypto/ec/asm/ecp_nistz256-x86_64.pl b/crypto/ec/asm/ecp_nistz256-x86_64.pl
+index f30811bc86602..4074fdbc76085 100755
+--- a/crypto/ec/asm/ecp_nistz256-x86_64.pl
++++ b/crypto/ec/asm/ecp_nistz256-x86_64.pl
+@@ -56,7 +56,7 @@
+     or die "can't call $xlate: $!";
+ *STDOUT=*OUT;
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 		=~ /GNU assembler version ([2-9]\.[0-9]+)/) {
+ 	$avx = ($1>=2.19) + ($1>=2.22);
+ 	$addx = ($1>=2.23);
+@@ -74,13 +74,13 @@
+ 	$addx = ($1>=12);
+ }
+ 
+-if (!$addx && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+)\.([0-9]+)/) {
++if (!$addx && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+)\.([0-9]+)/) {
+ 	my $ver = $2 + $3/100.0;	# 3.1->3.01, 3.10->3.10
+ 	$avx = ($ver>=3.0) + ($ver>=3.01);
+ 	$addx = ($ver>=3.03);
+ }
+ 
+-if (!$addx && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$addx && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+ 	=~ /#define __clang_major__.([0-9]+)/) {
+ 	if ($1) {
+ 		$avx = ($1>=11); #icx started with clang 11
+diff --git a/crypto/ec/asm/x25519-x86_64.pl b/crypto/ec/asm/x25519-x86_64.pl
+index d2fdd76948c39..1716f83163401 100755
+--- a/crypto/ec/asm/x25519-x86_64.pl
++++ b/crypto/ec/asm/x25519-x86_64.pl
+@@ -77,7 +77,7 @@
+     or die "can't call $xlate: $!";
+ *STDOUT=*OUT;
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 		=~ /GNU assembler version ([2-9]\.[0-9]+)/) {
+ 	$addx = ($1>=2.23);
+ }
+@@ -92,12 +92,12 @@
+ 	$addx = ($1>=12);
+ }
+ 
+-if (!$addx && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+)\.([0-9]+)/) {
++if (!$addx && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+)\.([0-9]+)/) {
+ 	my $ver = $2 + $3/100.0;	# 3.1->3.01, 3.10->3.10
+ 	$addx = ($ver>=3.03);
+ }
+ 
+-if (!$addx && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$addx && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+ 	=~ /#define __clang_major__.([0-9]+)/) {
+ 	if ($1) {
+ 		$addx = ($1>=11); #icx started with clang 11
+diff --git a/crypto/modes/asm/aes-gcm-avx512.pl b/crypto/modes/asm/aes-gcm-avx512.pl
+index ad6461f9e52fb..880ed525d0937 100644
+--- a/crypto/modes/asm/aes-gcm-avx512.pl
++++ b/crypto/modes/asm/aes-gcm-avx512.pl
+@@ -47,7 +47,7 @@
+   or ($xlate = "${dir}../../perlasm/x86_64-xlate.pl" and -f $xlate)
+   or die "can't locate x86_64-xlate.pl";
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1` =~ /GNU assembler version ([2-9]\.[0-9]+)/) {
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1` =~ /GNU assembler version ([2-9]\.[0-9]+)/) {
+   $avx512vaes = ($1 >= 2.30);
+ }
+ 
+@@ -59,7 +59,7 @@
+   $avx512vaes = ($1 == 2.13 && $2 >= 3) + ($1 >= 2.14);
+ }
+ 
+-if (!$avx512vaes && `$ENV{CC} -v 2>&1`
++if (!$avx512vaes && defined $ENV{CC} && `$ENV{CC} -v 2>&1`
+     =~ /(Apple)?\s*((?:clang|LLVM) version|.*based on LLVM) ([0-9]+)\.([0-9]+)\.([0-9]+)?/) {
+     my $ver = $3 + $4/100.0 + $5/10000.0; # 3.1.0->3.01, 3.10.1->3.1001
+     if ($1) {
+@@ -72,7 +72,7 @@
+     }
+ }
+ 
+-if (!$avx512vaes && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$avx512vaes && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+     =~ /#define __clang_major__.([0-9]+)/) {
+     if ($1) {
+         $avx512vaes = ($1>=11); #icx started with clang 11
+diff --git a/crypto/modes/asm/aesni-gcm-x86_64.pl b/crypto/modes/asm/aesni-gcm-x86_64.pl
+index f3b920bb3a7e1..b735f7fe5ed43 100644
+--- a/crypto/modes/asm/aesni-gcm-x86_64.pl
++++ b/crypto/modes/asm/aesni-gcm-x86_64.pl
+@@ -52,7 +52,7 @@
+ ( $xlate="${dir}../../perlasm/x86_64-xlate.pl" and -f $xlate) or
+ die "can't locate x86_64-xlate.pl";
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 		=~ /GNU assembler version ([0-9]+)\.([0-9]+)/) {
+ 	my $ver = $1 + $2/100.0; # 3.1->3.01, 3.10->3.10
+ 	$avx = ($ver >= 2.20) + ($ver >= 2.22);
+@@ -69,11 +69,11 @@
+ 	$avx = ($1>=10) + ($1>=11);
+ }
+ 
+-if (!$avx && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
+ 	$avx = ($2>=3.0) + ($2>3.0);
+ }
+ 
+-if (!$avx && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+ 	=~ /#define __clang_major__.([0-9]+)/) {
+ 	if ($1) {
+ 		$avx = ($1>=11); #icx started with clang 11
+diff --git a/crypto/modes/asm/ghash-parisc.pl b/crypto/modes/asm/ghash-parisc.pl
+index 94cce17f8d860..28a9724d96120 100644
+--- a/crypto/modes/asm/ghash-parisc.pl
++++ b/crypto/modes/asm/ghash-parisc.pl
+@@ -727,7 +727,7 @@ sub assemble {
+     ref($opcode) eq 'CODE' ? &$opcode($mod,$args) : "\t$mnemonic$mod\t$args";
+ }
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 	=~ /GNU assembler/) {
+     $gnuas = 1;
+ }
+diff --git a/crypto/modes/asm/ghash-x86_64.pl b/crypto/modes/asm/ghash-x86_64.pl
+index 5a761cfb1f62b..98b99e617a5c6 100644
+--- a/crypto/modes/asm/ghash-x86_64.pl
++++ b/crypto/modes/asm/ghash-x86_64.pl
+@@ -102,7 +102,7 @@
+ ( $xlate="${dir}../../perlasm/x86_64-xlate.pl" and -f $xlate) or
+ die "can't locate x86_64-xlate.pl";
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 		=~ /GNU assembler version ([2-9]\.[0-9]+)/) {
+ 	$avx = ($1>=2.20) + ($1>=2.22);
+ }
+@@ -117,11 +117,11 @@
+ 	$avx = ($1>=10) + ($1>=11);
+ }
+ 
+-if (!$avx && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
+ 	$avx = ($2>=3.0) + ($2>3.0);
+ }
+ 
+-if (!$avx && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+ 	=~ /#define __clang_major__.([0-9]+)/) {
+ 	if ($1) {
+ 		$avx = ($1>=11); #icx started with clang 11
+diff --git a/crypto/pariscid.pl b/crypto/pariscid.pl
+index 014d6e3397a70..8d868a20de903 100644
+--- a/crypto/pariscid.pl
++++ b/crypto/pariscid.pl
+@@ -219,7 +219,7 @@
+ ___
+ }
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 	=~ /GNU assembler/) {
+     $gnuas = 1;
+ }
+diff --git a/crypto/perlasm/x86_64-xlate.pl b/crypto/perlasm/x86_64-xlate.pl
+index cd8d35ea6795a..ab3d96011d79a 100755
+--- a/crypto/perlasm/x86_64-xlate.pl
++++ b/crypto/perlasm/x86_64-xlate.pl
+@@ -105,17 +105,17 @@
+     $decor="\$L\$";
+ }
+ # Find out if we're using GNU as
+-elsif (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++elsif (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 		=~ /GNU assembler version ([2-9]\.[0-9]+)/)
+ {
+     $gnuas=1;
+ }
+-elsif (`$ENV{CC} --version 2>/dev/null`
++elsif (defined $ENV{CC} && `$ENV{CC} --version 2>/dev/null`
+ 		=~ /(clang .*|Intel.*oneAPI .*)/)
+ {
+     $gnuas=1;
+ }
+-elsif (`$ENV{CC} -V 2>/dev/null`
++elsif (defined $ENV{CC} && `$ENV{CC} -V 2>/dev/null`
+ 		=~ /nvc .*/)
+ {
+     $gnuas=1;
+diff --git a/crypto/poly1305/asm/poly1305-x86.pl b/crypto/poly1305/asm/poly1305-x86.pl
+index 42e575516e18f..b7337013c6049 100755
+--- a/crypto/poly1305/asm/poly1305-x86.pl
++++ b/crypto/poly1305/asm/poly1305-x86.pl
+@@ -60,7 +60,7 @@
+ 	&static_label("enter_emit");
+ 	&external_label("OPENSSL_ia32cap_P");
+ 
+-	if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++	if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 			=~ /GNU assembler version ([2-9]\.[0-9]+)/) {
+ 		$avx = ($1>=2.19) + ($1>=2.22);
+ 	}
+@@ -70,11 +70,11 @@
+ 	$avx = ($1>=2.09) + ($1>=2.10);
+ 	}
+ 
+-	if (!$avx && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|based on LLVM) ([0-9]+\.[0-9]+)/) {
++	if (!$avx && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|based on LLVM) ([0-9]+\.[0-9]+)/) {
+ 		$avx = ($2>=3.0) + ($2>3.0);
+ 	}
+ 
+-	if (!$avx && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++	if (!$avx && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+ 		=~ /#define __clang_major__.([0-9]+)/) {
+ 		if ($1) {
+ 			$avx = ($1>=11); #icx started with clang 11
+diff --git a/crypto/poly1305/asm/poly1305-x86_64.pl b/crypto/poly1305/asm/poly1305-x86_64.pl
+index a70ec0f952cbb..5e07b34c7423f 100755
+--- a/crypto/poly1305/asm/poly1305-x86_64.pl
++++ b/crypto/poly1305/asm/poly1305-x86_64.pl
+@@ -75,7 +75,7 @@
+ ( $xlate="${dir}../../perlasm/x86_64-xlate.pl" and -f $xlate) or
+ die "can't locate x86_64-xlate.pl";
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 		=~ /GNU assembler version ([2-9]\.[0-9]+)/) {
+ 	$avx = ($1>=2.19) + ($1>=2.22) + ($1>=2.25) + ($1>=2.26);
+ }
+@@ -91,11 +91,11 @@
+ 	$avx = ($1>=10) + ($1>=12);
+ }
+ 
+-if (!$avx && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
+ 	$avx = ($2>=3.0) + ($2>3.0);
+ }
+ 
+-if (!$avx && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+ 	=~ /#define __clang_major__.([0-9]+)/) {
+ 	if ($1) {
+ 		$avx = ($1>=11); #icx started with clang 11
+diff --git a/crypto/rc4/asm/rc4-parisc.pl b/crypto/rc4/asm/rc4-parisc.pl
+index 37e7f77bcf865..cfca7c6339cf8 100644
+--- a/crypto/rc4/asm/rc4-parisc.pl
++++ b/crypto/rc4/asm/rc4-parisc.pl
+@@ -317,7 +317,7 @@ sub foldedloop {
+ 	.STRINGZ "RC4 for PA-RISC, CRYPTOGAMS by <https://github.com/dot-asm>"
+ ___
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 	=~ /GNU assembler/) {
+     $gnuas = 1;
+ }
+diff --git a/crypto/sha/asm/sha1-586.pl b/crypto/sha/asm/sha1-586.pl
+index 277c33ea7fb31..694b9eaad6af1 100644
+--- a/crypto/sha/asm/sha1-586.pl
++++ b/crypto/sha/asm/sha1-586.pl
+@@ -131,7 +131,7 @@
+ for (@ARGV) { $xmm=1 if (/-DOPENSSL_IA32_SSE2/); }
+ 
+ $ymm=1 if ($xmm &&
+-		`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++		defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 			=~ /GNU assembler version ([2-9]\.[0-9]+)/ &&
+ 		$1>=2.19);	# first version supporting AVX
+ 
+@@ -143,10 +143,10 @@
+ 		`ml 2>&1` =~ /Version ([0-9]+)\./ &&
+ 		$1>=10);	# first version supporting AVX
+ 
+-$ymm=1 if ($xmm && !$ymm && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|based on LLVM) ([0-9]+\.[0-9]+)/ &&
++$ymm=1 if ($xmm && !$ymm && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|based on LLVM) ([0-9]+\.[0-9]+)/ &&
+ 		$2>=3.0);	# first version supporting AVX
+ 
+-$ymm=1 if ($xmm && !$ymm && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__` =~ /#define __clang_major__.([0-9]+)/ &&
++$ymm=1 if ($xmm && !$ymm && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__` =~ /#define __clang_major__.([0-9]+)/ &&
+ 		$1>=11); #icx started with clang 11
+ 
+ $shaext=$xmm;	### set to zero if compiling for 1.0.1
+diff --git a/crypto/sha/asm/sha1-mb-x86_64.pl b/crypto/sha/asm/sha1-mb-x86_64.pl
+index 5a8c0755e1714..509bc3de38efc 100644
+--- a/crypto/sha/asm/sha1-mb-x86_64.pl
++++ b/crypto/sha/asm/sha1-mb-x86_64.pl
+@@ -57,7 +57,7 @@
+ 
+ $avx=0;
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 		=~ /GNU assembler version ([2-9]\.[0-9]+)/) {
+ 	$avx = ($1>=2.19) + ($1>=2.22);
+ }
+@@ -72,11 +72,11 @@
+ 	$avx = ($1>=10) + ($1>=11);
+ }
+ 
+-if (!$avx && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
+ 	$avx = ($2>=3.0) + ($2>3.0);
+ }
+ 
+-if (!$avx && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+ 	=~ /#define __clang_major__.([0-9]+)/) {
+ 	if ($1) {
+ 		$avx = ($1>=11); #icx started with clang 11
+diff --git a/crypto/sha/asm/sha1-parisc.pl b/crypto/sha/asm/sha1-parisc.pl
+index 7b5d00aa3626e..95a5a46666be3 100644
+--- a/crypto/sha/asm/sha1-parisc.pl
++++ b/crypto/sha/asm/sha1-parisc.pl
+@@ -263,7 +263,7 @@ sub BODY_40_59 {
+ 	.STRINGZ "SHA1 block transform for PA-RISC, CRYPTOGAMS by <https://github.com/dot-asm>"
+ ___
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 	=~ /GNU assembler/) {
+     $gnuas = 1;
+ }
+diff --git a/crypto/sha/asm/sha1-x86_64.pl b/crypto/sha/asm/sha1-x86_64.pl
+index af9d172153b5b..1ad6d029c6309 100755
+--- a/crypto/sha/asm/sha1-x86_64.pl
++++ b/crypto/sha/asm/sha1-x86_64.pl
+@@ -105,7 +105,7 @@
+ ( $xlate="${dir}../../perlasm/x86_64-xlate.pl" and -f $xlate) or
+ die "can't locate x86_64-xlate.pl";
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 		=~ /GNU assembler version ([2-9]\.[0-9]+)/) {
+ 	$avx = ($1>=2.19) + ($1>=2.22);
+ }
+@@ -120,11 +120,11 @@
+ 	$avx = ($1>=10) + ($1>=11);
+ }
+ 
+-if (!$avx && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
+ 	$avx = ($2>=3.0) + ($2>3.0);
+ }
+ 
+-if (!$avx && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+ 	=~ /#define __clang_major__.([0-9]+)/) {
+ 	if ($1) {
+ 		$avx = ($1>=11); #icx started with clang 11
+diff --git a/crypto/sha/asm/sha256-586.pl b/crypto/sha/asm/sha256-586.pl
+index 68a9fa9e6481e..0200bfdde5ae5 100644
+--- a/crypto/sha/asm/sha256-586.pl
++++ b/crypto/sha/asm/sha256-586.pl
+@@ -80,7 +80,7 @@
+ $xmm=$avx=0;
+ for (@ARGV) { $xmm=1 if (/-DOPENSSL_IA32_SSE2/); }
+ 
+-if ($xmm &&	`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if ($xmm &&	defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 			=~ /GNU assembler version ([2-9]\.[0-9]+)/) {
+ 	$avx = ($1>=2.19) + ($1>=2.22);
+ }
+@@ -95,11 +95,11 @@
+ 	$avx = ($1>=10) + ($1>=11);
+ }
+ 
+-if ($xmm && !$avx && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|based on LLVM) ([0-9]+\.[0-9]+)/) {
++if ($xmm && !$avx && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|based on LLVM) ([0-9]+\.[0-9]+)/) {
+ 	$avx = ($2>=3.0) + ($2>3.0);
+ }
+ 
+-if ($xmm && !$avx && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if ($xmm && !$avx && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+ 	=~ /#define __clang_major__.([0-9]+)/) {
+ 	if ($1) {
+ 		$avx = ($1>=11); #icx started with clang 11
+diff --git a/crypto/sha/asm/sha256-mb-x86_64.pl b/crypto/sha/asm/sha256-mb-x86_64.pl
+index 0175f5b36f4d0..936adc6380296 100644
+--- a/crypto/sha/asm/sha256-mb-x86_64.pl
++++ b/crypto/sha/asm/sha256-mb-x86_64.pl
+@@ -58,7 +58,7 @@
+ 
+ $avx=0;
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 		=~ /GNU assembler version ([2-9]\.[0-9]+)/) {
+ 	$avx = ($1>=2.19) + ($1>=2.22);
+ }
+@@ -73,11 +73,11 @@
+ 	$avx = ($1>=10) + ($1>=11);
+ }
+ 
+-if (!$avx && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
+ 	$avx = ($2>=3.0) + ($2>3.0);
+ }
+ 
+-if (!$avx && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+ 	=~ /#define __clang_major__.([0-9]+)/) {
+ 	if ($1) {
+ 		$avx = ($1>=11); #icx started with clang 11
+diff --git a/crypto/sha/asm/sha512-parisc.pl b/crypto/sha/asm/sha512-parisc.pl
+index 69869f6fabf58..ff350db7a4813 100755
+--- a/crypto/sha/asm/sha512-parisc.pl
++++ b/crypto/sha/asm/sha512-parisc.pl
+@@ -770,7 +770,7 @@ sub assemble {
+     ref($opcode) eq 'CODE' ? &$opcode($mod,$args) : "\t$mnemonic$mod\t$args";
+ }
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 	=~ /GNU assembler/) {
+     $gnuas = 1;
+ }
+diff --git a/crypto/sha/asm/sha512-x86_64.pl b/crypto/sha/asm/sha512-x86_64.pl
+index 4db4b1beb08f5..9b45b830412eb 100755
+--- a/crypto/sha/asm/sha512-x86_64.pl
++++ b/crypto/sha/asm/sha512-x86_64.pl
+@@ -125,7 +125,7 @@
+ ( $xlate="${dir}../../perlasm/x86_64-xlate.pl" and -f $xlate) or
+ die "can't locate x86_64-xlate.pl";
+ 
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 		=~ /GNU assembler version ([2-9]\.[0-9]+)/) {
+ 	$avx = ($1>=2.19) + ($1>=2.22);
+ }
+@@ -140,11 +140,11 @@
+ 	$avx = ($1>=10) + ($1>=11);
+ }
+ 
+-if (!$avx && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
+ 	$avx = ($2>=3.0) + ($2>3.0);
+ }
+ 
+-if (!$avx && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
++if (!$avx && defined $ENV{CC} && `$ENV{CC} -x c /dev/null -dM -E|grep __clang_major__`
+ 	=~ /#define __clang_major__.([0-9]+)/) {
+ 	if ($1) {
+ 		$avx = ($1>=11); #icx started with clang 11
+diff --git a/crypto/sm3/asm/sm3-x86_64.pl b/crypto/sm3/asm/sm3-x86_64.pl
+index d3c9d0541a9de..1c01d3294ca60 100755
+--- a/crypto/sm3/asm/sm3-x86_64.pl
++++ b/crypto/sm3/asm/sm3-x86_64.pl
+@@ -28,7 +28,7 @@
+ die "can't locate x86_64-xlate.pl";
+ 
+ # Check Intel(R) SM3 instructions support
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+ 		=~ /GNU assembler version ([2-9]\.[0-9]+)/) {
+ 	$avx2_sm3_ni = ($1>=2.22); # minimal avx2 supported version, binary translation for SM3 instructions (sub sm3op) is used
+     $avx2_sm3_ni_native = ($1>=2.42); # support added at GNU asm 2.42
+@@ -41,7 +41,7 @@
+ 	$avx2_sm3_ni_native = ($major > 2) || ($major == 2 && $minor > 16) || ($major == 2 && $minor == 16 && $patch >= 2); # support added at NASM 2.16.02
+ }
+ 
+-if (!$avx2_sm3_ni && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
++if (!$avx2_sm3_ni && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
+ 	$avx2_sm3_ni = ($2>=7.0); # minimal tested version, binary translation for SM3 instructions (sub sm3op) is used
+     $avx2_sm3_ni_native = ($2>=17.0); # support added at LLVM 17.0.1
+ }
+diff --git a/crypto/sm4/asm/sm4-x86_64.pl b/crypto/sm4/asm/sm4-x86_64.pl
+index 9fc40fb96a499..8e0480866bdc0 100644
+--- a/crypto/sm4/asm/sm4-x86_64.pl
++++ b/crypto/sm4/asm/sm4-x86_64.pl
+@@ -28,7 +28,7 @@
+ die "can't locate x86_64-xlate.pl";
+ 
+ # Check Intel(R) SM4 instructions support
+-if (`$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
++if (defined $ENV{CC} && `$ENV{CC} -Wa,-v -c -o /dev/null -x assembler /dev/null 2>&1`
+         =~ /GNU assembler version ([2-9]\.[0-9]+)/) {
+     $avx2_sm4_ni = ($1>=2.22); # minimal avx2 supported version, binary translation for SM4 instructions (sub sm4op) is used
+     $avx2_sm4_ni_native = ($1>=2.42); # support added at GNU asm 2.42
+@@ -41,7 +41,7 @@
+     $avx2_sm4_ni_native = ($major > 2) || ($major == 2 && $minor > 16) || ($major == 2 && $minor == 16 && $patch >= 2); # support added at NASM 2.16.02
+ }
+ 
+-if (!$avx2_sm4_ni && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
++if (!$avx2_sm4_ni && defined $ENV{CC} && `$ENV{CC} -v 2>&1` =~ /((?:clang|LLVM) version|.*based on LLVM) ([0-9]+\.[0-9]+)/) {
+     $avx2_sm4_ni = ($2>=7.0); # minimal tested version, binary translation for SM4 instructions (sub sm4op) is used
+     $avx2_sm4_ni_native = ($2>=17.0); # support added at LLVM 17.0.1
+ }

@@ -1,11 +1,11 @@
-@echo off
-	REM warning: failed to remove NUL: Invalid argument
-if exist %PATH_SRC%\%1\NUL rm -fv  /S /Q %PATH_BUILD%\%PATH_SRC%\%1\NUL
-
-call %PATH_UTILS%\init.bat %1
+@echo off && call %PATH_UTILS%\init.bat %1
 	REM https://wiki.openssl.org/index.php/Compilation_and_Installation
 	REM no-deprecated / -DOPENSSL_NO_DEPRECATED_3_0 (https://github.com/openssl/openssl/pull/13866) : failed for libssh2 / apr
-	
+
+	REM tmp https://github.com/openssl/openssl/pull/31183
+set "CC="
+call %PATH_UTILS%\gitapply %PATH_PATCHES%\openssl-pr31183.patch
+
 if NOT "%C_STD_VER%"=="" (
 	set __CNFC=/std:c%C_STD_VER%
 )
@@ -44,9 +44,7 @@ zlib-dynamic ^
 /DNDEBUG /Ob3 /GL /Gw /Zc:inline /Zf /FS /MP%NUMBER_OF_PROCESSORS% /cgthreads8 %__CNFC% %AVX% ^
 %CONFIGURE_OPENSSL%
 
-	REM 3.6.4 perl use ENV:CC
-set CC=cl
-
+	REM nmake mono-threaded build : slow
 REM nmake %NMAKE_OPTS% install_sw
 jom %JOM_OPTS% build_modules build_programs install_dev
 REM install_modules install_programs install_engines cause 'Trying to rename makefile-21040 -> makefile: Permission denied'
@@ -56,24 +54,22 @@ for %%i in (engines-%OPENSSLVER% ossl-modules) do (
 	if not exist %PATH_INSTALL%\lib\%%i\. mkdir %PATH_INSTALL%\lib\%%i
 )
 for %%i in (\apps\openssl.exe) do (
-	xcopy /C /F /Y %PATH_SRC%\%1\%%i %PATH_INSTALL%\bin\*
-	xcopy /C /F /Y %PATH_SRC%\%1\%%~pi%%~ni.pdb %PATH_INSTALL%\bin\*
+	call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\%%i %PATH_INSTALL%\bin\*
+	call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\%%~pi%%~ni.pdb %PATH_INSTALL%\bin\*
 )
 for %%i in (libcrypto libssl) do (
-	xcopy /C /F /Y %PATH_SRC%\%1\%%i-%OPENSSLVER%-x64.dll %PATH_INSTALL%\bin\*
-	xcopy /C /F /Y %PATH_SRC%\%1\%%i-%OPENSSLVER%-x64.pdb %PATH_INSTALL%\bin\*
-	xcopy /C /F /Y %PATH_SRC%\%1\%%i.lib %PATH_INSTALL%\lib\*
+	call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\%%i-%OPENSSLVER%-x64.dll %PATH_INSTALL%\bin\*
+	call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\%%i-%OPENSSLVER%-x64.pdb %PATH_INSTALL%\bin\*
+	call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\%%i.lib %PATH_INSTALL%\lib\*
 )
 for %%i in (\engines\capi.dll \engines\dasync.dll \engines\loader_attic.dll \engines\padlock.dll) do (
-	xcopy /C /F /Y %PATH_SRC%\%1\%%i %PATH_INSTALL%\bin\engines-%OPENSSLVER%\*
-	xcopy /C /F /Y %PATH_SRC%\%1\%%~pi%%~ni.pdb %PATH_INSTALL%\bin\engines-%OPENSSLVER%\*
-	xcopy /C /F /Y %PATH_SRC%\%1\%%~pi%%~ni.lib %PATH_INSTALL%\lib\engines-%OPENSSLVER%\*
+	call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\%%i %PATH_INSTALL%\bin\engines-%OPENSSLVER%\*
+	call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\%%~pi%%~ni.pdb %PATH_INSTALL%\bin\engines-%OPENSSLVER%\*
+	call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\%%~pi%%~ni.lib %PATH_INSTALL%\lib\engines-%OPENSSLVER%\*
 )
 for %%i in (\providers\legacy.dll) do (
-	xcopy /C /F /Y %PATH_SRC%\%1\%%i %PATH_INSTALL%\bin\ossl-modules\*
-	xcopy /C /F /Y %PATH_SRC%\%1\%%~pi%%~ni.pdb %PATH_INSTALL%\bin\ossl-modules\*
-	xcopy /C /F /Y %PATH_SRC%\%1\%%~pi%%~ni.lib %PATH_INSTALL%\lib\ossl-modules\*
+	call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\%%i %PATH_INSTALL%\bin\ossl-modules\*
+	call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\%%~pi%%~ni.pdb %PATH_INSTALL%\bin\ossl-modules\*
+	call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\%%~pi%%~ni.lib %PATH_INSTALL%\lib\ossl-modules\*
 )
 for %%i in (engines-%OPENSSLVER%\dasync.dll engines-%OPENSSLVER%\capi.dll engines-%OPENSSLVER%\loader_attic.dll engines-%OPENSSLVER%\padlock.dll ossl-modules\legacy.dll libcrypto-%OPENSSLVER%-x64.dll libssl-%OPENSSLVER%-x64.dll openssl.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%i)
-
-rm -fv %PATH_INSTALL%\bin\c_rehash.pl
