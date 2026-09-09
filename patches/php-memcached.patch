@@ -1,0 +1,26 @@
+diff --git a/config.w32 b/config.w32
+index 76d4ee3..ed56db1 100644
+--- a/config.w32
++++ b/config.w32
+@@ -13,6 +13,21 @@ if (PHP_MEMCACHED == "yes") {
+ 	ERROR("memcached: library 'memcached' not found");
+   }
+   
++  if (!CHECK_LIB("z.lib", "memcached", PHP_MEMCACHED)) {
++	  ERROR("memcached: library 'zlib' not found");
++  }
++  
++  if (
++	  CHECK_LIB("libzstd.lib;zstd.lib", "memcached", PHP_MEMCACHED) &&
++	  CHECK_HEADER_ADD_INCLUDE("zstd.h", "CFLAGS_MEMCACHED")
++  ) {
++	  AC_DEFINE("HAVE_MEMCACHED_ZSTD",1);
++	  ADD_FLAG("CFLAGS_MEMCACHED", "/D HAVE_ZSTD_H=1");
++	  MESSAGE("* zstd support enabled");
++  } else {
++	   MESSAGE("* zstd support not enabled");
++  }
++
+   if (!CHECK_HEADER_ADD_INCLUDE("libmemcached/memcached.h", "CFLAGS_MEMCACHED")) {
+ 	ERROR("memcached: header 'libmemcached/memcached.h' not found");
+   }

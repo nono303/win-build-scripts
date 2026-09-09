@@ -14,7 +14,7 @@ call %PATH_UTILS%\init.bat php-src
 set PHPVER=%GET_VERSION:~0,3%
 set PHPVERFULL=%GET_VERSION%
 
-	REM ~~~~~~~~~~~~ type of build : full / memcached / xdebug
+	REM ~~~~~~~~~~~~ type of build
 set PHP_BUILD_TYPE=%PHPVER%
 set PHP_XTRALIBS=
 setlocal enabledelayedexpansion
@@ -26,6 +26,7 @@ for %%x in (%*) do (
 for /L %%i in (2,1,%argCount%) do (
 	if /I "!argVec[%%i]!"=="XDEBUG"		set PHP_BUILD_TYPE=xdebug
 	if /I "!argVec[%%i]!"=="MEMCACHE"	set PHP_BUILD_TYPE=memcache
+	if /I "!argVec[%%i]!"=="MEMCACHED"	set PHP_BUILD_TYPE=memcached
 	if /I "!argVec[%%i]!"=="BROTLI"		set PHP_BUILD_TYPE=brotli
 	if /I "!argVec[%%i]!"=="IGBINARY"	set PHP_BUILD_TYPE=igbinary
 	if /I "!argVec[%%i]!"=="JSONPATH"	set PHP_BUILD_TYPE=jsonpath
@@ -102,7 +103,7 @@ FOR /F "tokens=* USEBACKQ" %%F in (`do_php %PATH_UTILS%\sub\version.php brotli`)
 sed -i 's/AC_DEFINE..USE_BROTLI_DICTIONARY./AC_DEFINE\("BROTLI_LIB_VERSION", "%BROTLI_VERSION%", "system library version"\);\n    AC_DEFINE\("USE_BROTLI_DICTIONARY"/g' %CYGPATH_SRC%/php-ext-brotli/config.w32
 
 	REM ~~~~~~~~~~~~ other PECL init
-for %%E in (php-sdk xdebug php-geos php-proj php-ogr php-ext-zstd pecl-datetime-timezonedb pecl-system-sync pecl-igbinary pecl-parallel) do (
+for %%E in (php-sdk xdebug php-geos php-proj php-ogr php-ext-zstd pecl-datetime-timezonedb pecl-system-sync pecl-igbinary pecl-parallel php-memcached) do (
 	call %PATH_UTILS%\init.bat %%E
 	if exist %PATH_PATCHES%\php-src\%PHPVER%\pecl-%%E.patch (call %PATH_UTILS%\gitapply %PATH_PATCHES%\php-src\%PHPVER%\pecl-%%E.patch)
 )
@@ -114,7 +115,7 @@ if not exist %PATH_SRC%\php-sdk\phpmaster\. mklink /J %PATH_SRC%\php-sdk\phpmast
 	REM create directory structure
 if not exist %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\php-src\. mklink /J %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\php-src %PATH_SRC%\php-src
 if not exist %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\pecl\. mkdir %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\pecl
-for %%E in (pecl-datetime-timezonedb pecl-memcache pecl-text-xdiff php-ext-brotli php-ext-zstd php-geos php-ogr php-proj xdebug pecl-igbinary pecl-parallel pecl-system-sync) do (
+for %%E in (pecl-datetime-timezonedb pecl-memcache php-memcached pecl-text-xdiff php-ext-brotli php-ext-zstd php-geos php-ogr php-proj xdebug pecl-igbinary pecl-parallel pecl-system-sync) do (
 	if not exist %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\pecl\%%E\. mklink /J %PATH_PHP_SDK%\phpmaster\%MSVC_DEPS%\%ARCH%\pecl\%%E %PATH_SRC%\%%E
 )
 if exist %PATH_PHP_SDK%\phpsdk-local.bat call %PATH_UTILS%\fileutils rm %PATH_PHP_SDK%\phpsdk-local.bat

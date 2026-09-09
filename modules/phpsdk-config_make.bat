@@ -64,21 +64,22 @@ set CONFIGURE_COMMON=^
 	--enable-object-out-dir=../build/ ^
 	--with-toolset=vs ^
 	--with-cygwin=%PATH_BIN_CYGWIN% ^
-	--with-extra-includes=%PATH_INSTALL%\include;%PATH_INSTALL%\_proj\include;%PATH_INSTALL%\_gdal\include ^
+	--with-extra-includes=%PATH_INSTALL%\include;%PATH_INSTALL%\_proj\include;%PATH_INSTALL%\_gdal\include;%PATH_SRC%\pecl-igbinary\src\php7 ^
 	--with-extra-libs=%PHP_XTRALIBS%;%PATH_INSTALL%\lib;%PATH_INSTALL%\_proj\lib;%PATH_INSTALL%\_gdal\lib ^
 	--with-mp=%NUMBER_OF_PROCESSORS%
 REM [%PHPVER% != %PHP_BUILD_TYPE%]: add --disable-zlib ^ if not memcache
-if %PHP_BUILD_TYPE% == xdebug	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --with-xdebug=shared --with-xdebug-compression)
-if %PHP_BUILD_TYPE% == memcache	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --enable-memcache=shared --enable-zlib)
-if %PHP_BUILD_TYPE% == brotli	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --enable-brotli=shared)
-if %PHP_BUILD_TYPE% == igbinary	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --enable-igbinary=shared)
-if %PHP_BUILD_TYPE% == jsonpath	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --enable-jsonpath=shared)
-if %PHP_BUILD_TYPE% == parallel	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --with-parallel=shared)
-if %PHP_BUILD_TYPE% == ffi	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --with-ffi=shared)
-if %PHP_BUILD_TYPE% == gd	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --with-gd=shared)
-if %PHP_BUILD_TYPE% == ogr	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --with-ogr=shared)
-if %PHP_BUILD_TYPE% == core	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED%)
-if %PHP_BUILD_TYPE% == win7	(set CONFIGURE_PARTIAL=%CONFIGURE_WIN7_DISABLED%)
+if %PHP_BUILD_TYPE% == xdebug		(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --with-xdebug=shared --with-xdebug-compression)
+if %PHP_BUILD_TYPE% == memcache		(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --enable-memcache=shared)
+if %PHP_BUILD_TYPE% == memcached	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --enable-memcached=shared --enable-memcached-session --enable-memcached-igbinary --enable-memcached-json --enable-igbinary=shared)
+if %PHP_BUILD_TYPE% == brotli		(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --enable-brotli=shared)
+if %PHP_BUILD_TYPE% == igbinary		(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --enable-igbinary=shared)
+if %PHP_BUILD_TYPE% == jsonpath		(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --enable-jsonpath=shared)
+if %PHP_BUILD_TYPE% == parallel		(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --with-parallel=shared)
+if %PHP_BUILD_TYPE% == ffi		(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --with-ffi=shared)
+if %PHP_BUILD_TYPE% == gd		(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --with-gd=shared)
+if %PHP_BUILD_TYPE% == ogr		(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --with-ogr=shared)
+if %PHP_BUILD_TYPE% == core		(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED%)
+if %PHP_BUILD_TYPE% == win7		(set CONFIGURE_PARTIAL=%CONFIGURE_WIN7_DISABLED%)
 
 if %PHPVER% == %PHP_BUILD_TYPE% (set FINAL_CONFIGURE=^
 	%CONFIGURE_COMMON% ^
@@ -128,6 +129,10 @@ if %PHPVER% == %PHP_BUILD_TYPE% (set FINAL_CONFIGURE=^
 		--with-proj=shared ^
 		--with-ogr=shared ^
 		--enable-memcache=shared ^
+		--enable-memcached=shared ^
+		--enable-memcached-session ^
+		--enable-memcached-igbinary ^
+		--enable-memcached-json ^
 		--with-xdebug=shared ^
 		--with-xdebug-compression ^
 		--enable-timezonedb=shared ^
@@ -197,6 +202,7 @@ if %PHPVER% == %PHP_BUILD_TYPE% (
 	call do_php %PATH_UTILS%\sub\version.php pecl-datetime-timezonedb %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_timezonedb.dll build:%TSNTS% php:%PHPVERFULL%
 	call do_php %PATH_UTILS%\sub\version.php pecl-system-sync %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_sync.dll build:%TSNTS% php:%PHPVERFULL%
 	call do_php %PATH_UTILS%\sub\version.php pecl-memcache %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcache.dll build:%TSNTS% php:%PHPVERFULL%
+	call do_php %PATH_UTILS%\sub\version.php php-memcached %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcached.dll build:%TSNTS% php:%PHPVERFULL%
 	call do_php %PATH_UTILS%\sub\version.php pecl-igbinary %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_igbinary.dll build:%TSNTS% php:%PHPVERFULL%
 	call do_php %PATH_UTILS%\sub\version.php pecl-jsonpath %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_jsonpath.dll build:%TSNTS% php:%PHPVERFULL%
 	call do_php %PATH_UTILS%\sub\version.php pecl-parallel %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_parallel.dll build:%TSNTS% php:%PHPVERFULL%
@@ -218,6 +224,9 @@ if %PHP_BUILD_TYPE% == jsonpath	(
 )
 if %PHP_BUILD_TYPE% == parallel	(
 	call do_php %PATH_UTILS%\sub\version.php pecl-parallel %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_parallel.dll build:%TSNTS% php:%PHPVERFULL%
+)
+if %PHP_BUILD_TYPE% == memcached	(
+	call do_php %PATH_UTILS%\sub\version.php php-memcached %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcached.dll build:%TSNTS% php:%PHPVERFULL%
 )
 if %PHP_BUILD_TYPE% == memcache	(
 	if %AVXECHO% == sse2 (set AVXPATH=) else (set AVXPATH=\%AVXB:-=%)
