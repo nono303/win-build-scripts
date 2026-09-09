@@ -10,7 +10,7 @@ if not exist %PATH_SRC%\. mkdir %PATH_SRC%
 cd /D %PATH_SRC%
 git clone https://aomedia.googlesource.com/aom aom
 cd /D aom
-git checkout tags/v3.14.1
+git checkout tags/v3.15.0
 cd /D ..
 git clone https://github.com/apache/apr.git apr
 cd /D apr
@@ -34,7 +34,7 @@ git checkout tags/v1.34.8
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-8_21_0
+git checkout tags/curl-8_22_0
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -58,7 +58,7 @@ git checkout tags/VER-2-14-3
 cd /D ..
 git clone https://github.com/OSGeo/gdal gdal
 cd /D gdal
-git checkout tags/v3.13.2
+git checkout tags/v3.13.3
 cd /D ..
 git clone https://github.com/geographiclib/geographiclib.git geographiclib
 cd /D geographiclib
@@ -66,7 +66,7 @@ git checkout tags/r2.7
 cd /D ..
 git clone https://github.com/libgeos/geos geos
 cd /D geos
-git checkout tags/3.15.0beta2
+git checkout tags/3.15.0
 cd /D ..
 git clone https://github.com/gongjianbo/GifLib giflib
 cd /D giflib
@@ -78,7 +78,7 @@ git checkout tags/2.4.68
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout tags/icu4x/2026-07-01/79.x
+git checkout main
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -86,7 +86,7 @@ git checkout tags/v2.15.1
 cd /D ..
 git clone https://github.com/Esri/lerc.git lerc
 cd /D lerc
-git checkout tags/js_v4.1.2
+git checkout tags/v4.2.0
 cd /D ..
 git clone https://github.com/AOMediaCodec/libavif.git libavif
 cd /D libavif
@@ -98,15 +98,15 @@ git checkout tags/v1.8.2
 cd /D ..
 git clone https://github.com/ebiggers/libdeflate.git libdeflate
 cd /D libdeflate
-git checkout tags/v1.25
+git checkout tags/v1.26
 cd /D ..
 git clone https://github.com/libexpat/libexpat.git libexpat
 cd /D libexpat
-git checkout tags/R_2_8_2
+git checkout tags/R_2_8_4
 cd /D ..
 git clone https://github.com/libffi/libffi.git libffi
 cd /D libffi
-git checkout tags/v3.7.1
+git checkout tags/v3.8.0
 cd /D ..
 git clone https://chromium.googlesource.com/codecs/libgav1.git libgav1
 cd /D libgav1
@@ -122,7 +122,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/strukturag/libheif.git libheif
 cd /D libheif
-git checkout tags/v1.23.1
+git checkout tags/v1.23.4
 cd /D ..
 git clone https://github.com/kiyolee/libiconv-win-build.git libiconv
 cd /D libiconv
@@ -138,7 +138,11 @@ git checkout tags/v5.8.3
 cd /D ..
 git clone https://github.com/maxmind/libmaxminddb.git libmaxminddb
 cd /D libmaxminddb
-git checkout tags/1.13.3
+git checkout tags/1.14.0
+cd /D ..
+git clone https://github.com/awesomized/libmemcached libmemcached
+cd /D libmemcached
+git checkout v1.x
 cd /D ..
 git clone https://github.com/pnggroup/libpng libpng
 cd /D libpng
@@ -166,7 +170,7 @@ git checkout tags/v0.23
 cd /D ..
 git clone https://gitlab.gnome.org/GNOME/libxml2.git libxml2
 cd /D libxml2
-git checkout tags/v2.15.3
+git checkout tags/v2.15.4
 cd /D ..
 git clone https://github.com/nono303/libxpm.git libxpm
 cd /D libxpm
@@ -186,7 +190,7 @@ git checkout tags/v1.11.4
 cd /D ..
 git clone https://github.com/lua/lua lua
 cd /D lua
-git checkout tags/v5.5.0
+git checkout tags/v5.5.1
 cd /D ..
 git clone https://github.com/nono303/mapsforgesrv.git mapsforgesrv
 cd /D mapsforgesrv
@@ -196,9 +200,9 @@ git clone https://github.com/memcached/memcached memcached
 cd /D memcached
 git checkout tags/1.6.45
 cd /D ..
-git clone https://github.com/nono303/mobac.git mobac
+git clone https://nono303@git.code.sf.net/u/nono303/mobac24 mobac
 cd /D mobac
-git checkout apacheCommonsHttp
+git checkout main
 cd /D ..
 git clone https://github.com/JBlond/mod_bikeshed.git mod_bikeshed
 cd /D mod_bikeshed
@@ -246,15 +250,15 @@ git checkout master
 cd /D ..
 git clone https://github.com/nghttp2/nghttp2.git nghttp2
 cd /D nghttp2
-git checkout tags/v1.69.0
+git checkout tags/v1.70.0
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3
-git checkout tags/v1.17.0
+git checkout tags/v1.18.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v1.24.0
+git checkout tags/v1.25.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -262,11 +266,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/openssl/openssl openssl
 cd /D openssl
-git checkout tags/openssl-3.6.3
+git checkout tags/openssl-3.6.4
 cd /D ..
 git clone https://github.com/PCRE2Project/pcre2.git pcre2
 cd /D pcre2
-git checkout tags/pcre2-10.47
+git checkout tags/pcre2-10.48
 cd /D ..
 git clone https://github.com/php/pecl-datetime-timezonedb.git pecl-datetime-timezonedb
 cd /D pecl-datetime-timezonedb
@@ -298,7 +302,7 @@ git checkout tags/2.2.0
 cd /D ..
 git clone https://github.com/kjdev/php-ext-brotli.git php-ext-brotli
 cd /D php-ext-brotli
-git checkout tags/0.20.0
+git checkout tags/0.21.0
 cd /D ..
 git clone https://github.com/nono303/php-src-syncgd.git php-ext-gd
 cd /D php-ext-gd
@@ -306,10 +310,14 @@ git checkout tags/2.4.0
 cd /D ..
 git clone https://github.com/kjdev/php-ext-zstd.git php-ext-zstd
 cd /D php-ext-zstd
-git checkout tags/0.17.0
+git checkout tags/0.18.0
 cd /D ..
 git clone https://gitea.osgeo.org/geos/php-geos php-geos
 cd /D php-geos
+git checkout master
+cd /D ..
+git clone https://github.com/php-memcached-dev/php-memcached php-memcached
+cd /D php-memcached
 git checkout master
 cd /D ..
 git clone https://github.com/dvzgeo/php_ogr.git php-ogr
@@ -322,11 +330,11 @@ git checkout tags/v3.0.3
 cd /D ..
 git clone https://github.com/php/php-sdk-binary-tools.git php-sdk
 cd /D php-sdk
-git checkout tags/php-sdk-2.7.3
+git checkout tags/php-sdk-2.8.3
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.5.9RC1
+git checkout tags/php-8.5.11RC1
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
@@ -358,7 +366,7 @@ git checkout trunk
 cd /D ..
 git clone https://github.com/rhuijben/sqlite-amalgamation sqlite
 cd /D sqlite
-git checkout tags/3.53.3
+git checkout tags/3.53.4
 cd /D ..
 git clone https://github.com/yrutschle/sslh.git sslh
 cd /D sslh
