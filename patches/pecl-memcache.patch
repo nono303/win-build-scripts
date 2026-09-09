@@ -1,5 +1,5 @@
 diff --git a/src/memcache.c b/src/memcache.c
-index 524ca47..e73aa75 100644
+index 524ca47..e36e901 100644
 --- a/src/memcache.c
 +++ b/src/memcache.c
 @@ -26,7 +26,7 @@
@@ -493,7 +493,7 @@ index 77a93f9..38f32c9 100644
  # else
  #  include <stdint.h>
 diff --git a/src/memcache_pool.c b/src/memcache_pool.c
-index bd1429c..767fcb2 100644
+index bd1429c..d23ebb0 100644
 --- a/src/memcache_pool.c
 +++ b/src/memcache_pool.c
 @@ -35,7 +35,6 @@
@@ -504,6 +504,16 @@ index bd1429c..767fcb2 100644
  #include "Zend/zend_smart_string.h"
  #include "zend_smart_str.h"
  #include "memcache_pool.h"
+@@ -809,7 +808,8 @@ static int mmc_server_connect(mmc_pool_t *pool, mmc_t *mmc, mmc_stream_t *io, in
+ 		mmc->error = NULL;
+ 	}
+ 
+-	return MMC_OK;
++	// return MMC_OK;
++	return fd;
+ }
+ /* }}} */
+ 
 diff --git a/src/memcache_pool.h b/src/memcache_pool.h
 index 106bf4e..cbf1380 100644
 --- a/src/memcache_pool.h
