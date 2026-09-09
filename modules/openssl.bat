@@ -44,6 +44,10 @@ zlib-dynamic ^
 /DNDEBUG /Ob3 /GL /Gw /Zc:inline /Zf /FS /MP%NUMBER_OF_PROCESSORS% /cgthreads8 %__CNFC% %AVX% ^
 %CONFIGURE_OPENSSL%
 
+	REM 3.6.4 perl use ENV:CC
+set CC=cl
+
+REM nmake %NMAKE_OPTS% install_sw
 jom %JOM_OPTS% build_modules build_programs install_dev
 REM install_modules install_programs install_engines cause 'Trying to rename makefile-21040 -> makefile: Permission denied'
 
