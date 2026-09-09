@@ -1,3 +1,16 @@
+diff --git a/config.w32 b/config.w32
+index 5df350a..bfe2001 100644
+--- a/config.w32
++++ b/config.w32
+@@ -4,7 +4,7 @@
+ ARG_ENABLE("memcache", "memcache support", "no");
+ 
+ if (PHP_MEMCACHE != "no") {
+-	if (!PHP_ZLIB_SHARED || CHECK_LIB("zlib_a.lib", "memcache", PHP_MEMCACHE)) {
++	if (CHECK_LIB("z.lib", "memcache", PHP_MEMCACHE)) {
+ 
+ 		var dll = get_define('PHPDLL');
+ 		var old_conf_dir = configure_module_dirname;
 diff --git a/src/memcache.c b/src/memcache.c
 index 524ca47..e36e901 100644
 --- a/src/memcache.c
@@ -504,16 +517,7 @@ index bd1429c..d23ebb0 100644
  #include "Zend/zend_smart_string.h"
  #include "zend_smart_str.h"
  #include "memcache_pool.h"
-@@ -809,7 +808,8 @@ static int mmc_server_connect(mmc_pool_t *pool, mmc_t *mmc, mmc_stream_t *io, in
- 		mmc->error = NULL;
- 	}
- 
--	return MMC_OK;
-+	// return MMC_OK;
-+	return fd;
- }
- /* }}} */
- 
+
 diff --git a/src/memcache_pool.h b/src/memcache_pool.h
 index 106bf4e..cbf1380 100644
 --- a/src/memcache_pool.h
