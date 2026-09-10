@@ -1,8 +1,144 @@
 # changelog
 
 
+## 1.18.0 _(2026-09-10)_
+
+*  add libmemcached
+`modules/full.bat`
+*  DISABLE_FIND_PACKAGE_Backtrace
+`modules/libmemcached.bat`
+*  subversion has now tag
+`SRC_VERSION.md`
+`utils/sub/_functions-version.php`
+*  + flex (for libmemcached)
+`README.md`
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  add libmemcached & php-memcached extension
+`modules/libmemcached.bat`
+`modules/php.bat`
+`modules/phpsdk-config_make.bat`
+`patches/php-memcached.patch`
+`utils/bininfo.bat`
+*  fix zlib unresolved external symbol
+`patches/pecl-memcache.patch`
+*  use fileutils instead of native cp mv rm clean useless rm add in comment monthread build (debug purpose) tmp patch for https://github.com/openssl/openssl/pull/31183
+`modules/openssl.bat`
+`patches/openssl-pr31183.patch`
+*  return number of file descriptor on connect
+`patches/pecl-memcache.patch`
+*  8.5.11
+`patches/php-src/8.5/pr17848.patch`
+*  use fileutils for cp mv rm instead of native Win or Cygwin cmd (allow better output and control)
+`modules/apr-util.bat`
+`modules/apr.bat`
+`modules/brotli.bat`
+`modules/bzip2.bat`
+`modules/cares.bat`
+`modules/curl.bat`
+`modules/dav1d.bat`
+`modules/dependencies.bat`
+`modules/fit2gpx.bat`
+`modules/freeglut.bat`
+`modules/freetype2.bat`
+`modules/gdal.bat`
+`modules/geographiclib.bat`
+`modules/geos.bat`
+`modules/giflib.bat`
+`modules/httpd.bat`
+`modules/icu.bat`
+`modules/jansson.bat`
+`modules/lerc.bat`
+`modules/libavif.bat`
+`modules/libdeflate.bat`
+`modules/libexpat.bat`
+`modules/libgav1.bat`
+`modules/libgd.bat`
+`modules/libheif.bat`
+`modules/libiconv.bat`
+`modules/libjpeg-turbo.bat`
+`modules/liblzma.bat`
+`modules/libmaxminddb.bat`
+`modules/libpng.bat`
+`modules/libsodium.bat`
+`modules/libssh2.bat`
+`modules/libtiff.bat`
+`modules/libwebp.bat`
+`modules/libxdiff.bat`
+`modules/libxml2.bat`
+`modules/libxpm.bat`
+`modules/libxslt.bat`
+`modules/libyuv.bat`
+`modules/libzip.bat`
+`modules/lua.bat`
+`modules/mobac.bat`
+`modules/mod_fcgid.bat`
+`modules/mod_security-sdbm-util.bat`
+`modules/mod_security.bat`
+`modules/mod_zstd.bat`
+`modules/mpir.bat`
+`modules/nghttp2.bat`
+`modules/nghttp3.bat`
+`modules/ngtcp2.bat`
+`modules/nssm.bat`
+`modules/pcre2.bat`
+`modules/php.bat`
+`modules/phpsdk-config_make.bat`
+`modules/proj.bat`
+`modules/proxytunnel.bat`
+`modules/qhull.bat`
+`modules/sdlna.bat`
+`modules/sslh.bat`
+`modules/subversion.bat`
+`modules/svnandeps.bat`
+`modules/tidy.bat`
+`modules/verpatch.bat`
+`modules/wineditline.bat`
+`modules/zstd.bat`
+`utils/fileutils.bat`
+`utils/sub/logcheck.php`
+*  add to /bin aomdec.exe aomenc.exe
+`modules/aom.bat`
+`utils/bininfo.bat`
+*  3.6.4 perl use ENV:CC
+`modules/openssl.bat`
+*  10.48
+`patches/pcre2.patch`
+*  1971
+`patches/libyuv.patch`
+*  2.15.4
+`patches/libxml2.patch`
+*  1.7.0 - 78161521
+`patches/apr-util.patch`
+*  mobac branch : apacheCommonsHttp > main
+`utils/sub/_functions-version.php`
+*  GRADLEVER: 9.6.1 > 9.7.1
+`env_sample.bat`
+*  v3.15.0
+`patches/aom.patch`
+*  v3.8.0
+`patches/libffi.patch`
+*  fix icu dirty tag
+`utils/sub/_functions-version.php`
+*  https://patch-diff.githubusercontent.com/raw/libgeos/php-geos/pull/5
+`patches/php-src/8.5/pecl-php-geos.patch`
+*  useless
+`patches/php-src/8.5/ext-gd.patch.disable`
+*  remove org.beanshell:bsh version display
+`modules/mobac.bat`
+*  add ENABLE_JEMALLOC=OFF
+`modules/nghttp2.bat`
+`modules/ngtcp2.bat`
+*  add warning for libheif depends on ffmpeg
+`utils/sub/_functions-version.php`
+
+
 ## 1.17.0 _(2026-07-23)_
 
+*  1.17.0
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
