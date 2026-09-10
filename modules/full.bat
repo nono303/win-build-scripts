@@ -66,6 +66,8 @@ call %PATH_BATCH%\go.bat clean NOLOG
 	call %PATH_BATCH%\go.bat mod_security-sdbm-util NOLOG
 	if  "%2" == "httpdanddeps" exit /B
 :phpanddeps
+	:libmemcached
+	call %PATH_BATCH%\go.bat libmemcached NOLOG
 	:libzip
 	call %PATH_BATCH%\go.bat libzip NOLOG
 	:libxpm
