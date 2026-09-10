@@ -75,6 +75,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [NuGet](https://www.nuget.org/downloads) | x86 | 7.6.0 | |
 | [pkg-config](https://packages.msys2.org/packages/mingw-w64-x86_64-pkg-config) | mingw-w64 | 0.29.2-6 | |
 | [cccl](https://github.com/nono303/cccl) | [shell] | 1.4 | |
+| [flex](https://github.com/lexxmark/winflexbison/releases) | x86 | 2.6.4 | |
 
 ### [SOURCE VERSIONS](./SRC_VERSION.md)
 ### [CHANGELOG](./changelog.md)
