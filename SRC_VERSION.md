@@ -17,7 +17,7 @@
 | [geos](https://github.com/libgeos/geos) | 3.15.0 |
 | [giflib](https://github.com/gongjianbo/GifLib) | 5.2.1 - 59eb9d1 |
 | [httpd](https://github.com/apache/httpd) | 2.4.68 |
-| [icu](https://github.com/unicode-org/icu) | 79.0.1 - 87ddc7af6f |
+| [icu](https://github.com/unicode-org/icu) | 79.0.1 - abe7123550 |
 | [jansson](https://github.com/akheron/jansson) | 2.15.1 |
 | [lerc](https://github.com/Esri/lerc) | 4.2.0 |
 | [libavif](https://github.com/AOMediaCodec/libavif) | 1.4.2 |
@@ -43,7 +43,7 @@
 | [libxml2](https://gitlab.gnome.org/GNOME/libxml2) | 2.15.4 |
 | [libxpm](https://github.com/nono303/libxpm) - [*upstream + src*](https://github.com/winlibs/libxpm) - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.17.11 - 8a450cb |
 | [libxslt](https://gitlab.gnome.org/GNOME/libxslt/) | 1.1.45 |
-| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1971 - fab11704 |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1971 - 3f3735e3 |
 | [libzip](https://github.com/nih-at/libzip) | 1.11.4 |
 | [lua](https://github.com/lua/lua) | 5.5.1 |
 | [mapsforgesrv](https://github.com/nono303/mapsforgesrv) - [*upstream + src*](https://github.com/telemaxx/mapsforgesrv) | 0.30.0.0.6 - 72318a5 |
@@ -91,7 +91,7 @@
 | [serf](https://github.com/apache/serf) | 2.0.0 - 1a26bcb |
 | [sqlite](https://github.com/rhuijben/sqlite-amalgamation) - _[release](https://www.sqlite.org/changes.html)_ | 3.53.4 |
 | [sslh](https://github.com/yrutschle/sslh) | 2.3.1.8 - 03067e9 |
-| [subversion](https://github.com/apache/subversion) | 1.15.0 - bad5f7b177 |
+| [subversion](https://github.com/apache/subversion) | 1.15.0.3 |
 | [tidy](https://github.com/htacg/tidy-html5) | 5.9.20 - d08ddc2 |
 | [tzdataservice](https://github.com/nono303/tzdataservice) - [*upstream + src*](https://github.com/skaringa/tzdataservice) | 2.1.6 - bf1c5d2 |
 | [verpatch](https://github.com/pavel-a/ddverpatch) | 1.0.15.1 - 3cc989e |

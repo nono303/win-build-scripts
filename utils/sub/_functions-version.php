@@ -55,9 +55,10 @@
 		// no tag
 		"pecl-system-sync"			=> ["/PHP_SYNC_VERSION +\"([0-9\.]+)/s",
 									PATH_SRC."/pecl-system-sync/php_sync.h"],
-		// no tag
+		/* no tag
 		"subversion"				=> ["/#define SVN_VER_MAJOR *([0-9]+).*#define SVN_VER_MINOR *([0-9]+).*#define SVN_VER_PATCH *([0-9]+)/s",
 									PATH_SRC."/subversion/subversion/include/svn_version.h"],
+		*/
 		// tag lower than file
 		"tidy"						=> ["/([0-9]{1,3}\.[0-9]+\.[0-9]+)/s",
 									PATH_SRC."/tidy/version.txt"],
