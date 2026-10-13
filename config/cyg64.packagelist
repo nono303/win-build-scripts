@@ -16,6 +16,7 @@ automake1.15
 automake1.16
 automake1.17
 automake1.18
+automake1.19
 base-cygwin
 base-files
 bash
@@ -81,6 +82,7 @@ libev-devel
 libev4
 libevent-devel
 libevent2.1_7
+libexpat1
 libfam0
 libfdisk1
 libffi6
@@ -156,6 +158,7 @@ libpkgconf4
 libpkgconf5
 libpkgconf6
 libpkgconf7
+libpkgconf8
 libpopt-common
 libpopt0
 libpsl5
@@ -174,6 +177,7 @@ libstdc++6
 libtasn1_6
 libtool
 libuchardet0
+libunistring-devel
 libunistring2
 libunistring5
 libusb1.0
@@ -196,10 +200,12 @@ p11-kit
 p11-kit-trust
 patch
 perl
+perl-Algorithm-Diff
 perl-Archive-Zip
 perl-Class-Inspector
+perl-Devel-Cycle
 perl-File-ShareDir
-perl-Scalar-List-Utils
+perl-Text-Diff
 perl-Win32-API
 perl_autorebase
 perl_base
@@ -209,6 +215,8 @@ pkgconf
 publicsuffix-list-dafsa
 python-pip-wheel
 python-setuptools-wheel
+python3
+python312
 rebase
 run
 sed
