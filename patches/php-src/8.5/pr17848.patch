@@ -244,7 +244,7 @@ index 6a8e8167b83..b322a845669 100644
  
  	php_info_print_table_end();
  
-@@ -975,104 +1035,173 @@ PHP_FUNCTION(curl_version)
+@@ -985,104 +1045,173 @@ PHP_FUNCTION(curl_version)
  
  	array_init(return_value);
  
