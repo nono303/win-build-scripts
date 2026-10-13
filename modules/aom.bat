@@ -4,6 +4,7 @@ if "%ARG_CMOPTS%"=="1" (@echo on)
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DBUILD_SHARED_LIBS=ON ^
+-DENABLE_APPS=OFF ^
 -DENABLE_CCACHE=OFF ^
 -DENABLE_DECODE_PERF_TESTS=OFF ^
 -DENABLE_DISTCC=OFF ^
@@ -46,6 +47,6 @@ sed -i 's/\/GL //g' %CYGPATH_BUILD%/%1/build.ninja
 
 %NINJA% install
 
-for %%E in (aom aomdec aomenc) do (call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\%%E.pdb %PATH_INSTALL%\bin\*)
+call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\aom.pdb %PATH_INSTALL%\bin\*
 call %PATH_UTILS%\fileutils rm %PATH_INSTALL%\lib\aom_static.lib
-for %%E in (aom.dll aomdec.exe aomenc.exe) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%E)
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\aom.dll
