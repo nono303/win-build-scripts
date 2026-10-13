@@ -2,7 +2,7 @@ diff --git a/mod_http2/h2_mplx.c b/mod_http2/h2_mplx.c
 index 8053f60..9c310c1 100644
 --- a/modules/http2/h2_mplx.c
 +++ b/modules/http2/h2_mplx.c
-@@ -1252,10 +1252,17 @@ static apr_status_t mplx_pollset_poll(h2_mplx *m, apr_interval_time_t timeout,
+@@ -1268,10 +1268,17 @@ static apr_status_t mplx_pollset_poll(h2_mplx *m, apr_interval_time_t timeout,
              H2_MPLX_LEAVE(m);
              rv = apr_pollset_poll(m->pollset, timeout >= 0? timeout : -1, &nresults, &results);
              H2_MPLX_ENTER_ALWAYS(m);
@@ -25,7 +25,7 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 628cf76535..2fb7fcfc2c 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -21,12 +21,23 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.16...3.29)
+@@ -21,12 +21,23 @@
  
  PROJECT(HTTPD C)
  
@@ -50,7 +50,7 @@ index 628cf76535..2fb7fcfc2c 100644
  FIND_PACKAGE(OpenSSL)
  FIND_PACKAGE(ZLIB)
  FIND_PACKAGE(CURL)
-@@ -249,7 +260,7 @@ MESSAGE(STATUS "")
+@@ -249,7 +260,7 @@
  MESSAGE(STATUS "Summary of feature detection:")
  MESSAGE(STATUS "")
  MESSAGE(STATUS "LIBXML2_FOUND ............ : ${LIBXML2_FOUND}")
@@ -59,7 +59,7 @@ index 628cf76535..2fb7fcfc2c 100644
  MESSAGE(STATUS "NGHTTP2_FOUND ............ : ${NGHTTP2_FOUND}")
  MESSAGE(STATUS "OPENSSL_FOUND ............ : ${OPENSSL_FOUND}")
  MESSAGE(STATUS "ZLIB_FOUND ............... : ${ZLIB_FOUND}")
-@@ -295,7 +306,7 @@ SET(MODULE_LIST
+@@ -295,7 +306,7 @@
    "modules/aaa/mod_authn_file+A+file-based authentication control"
    "modules/aaa/mod_authn_socache+I+Cached authentication control"
    "modules/aaa/mod_authnz_fcgi+I+FastCGI authorizer-based authentication and authorization"
@@ -68,7 +68,7 @@ index 628cf76535..2fb7fcfc2c 100644
    "modules/aaa/mod_authz_core+A+core authorization provider vector module"
    "modules/aaa/mod_authz_dbd+I+SQL based authorization and Login/Session support"
    "modules/aaa/mod_authz_dbm+I+DBM-based authorization control"
-@@ -309,7 +320,7 @@ SET(MODULE_LIST
+@@ -309,7 +320,7 @@
    "modules/cache/mod_cache_socache+I+shared object caching module"
    "modules/cache/mod_file_cache+I+File cache"
    "modules/cache/mod_socache_dbm+I+dbm small object cache provider"
@@ -77,7 +77,7 @@ index 628cf76535..2fb7fcfc2c 100644
    "modules/cache/mod_socache_memcache+I+memcache small object cache provider"
    "modules/cache/mod_socache_shmcb+I+ shmcb small object cache provider"
    "modules/cache/mod_socache_redis+I+redis small object cache provider"
-@@ -328,36 +339,36 @@ SET(MODULE_LIST
+@@ -328,36 +339,36 @@
    "modules/examples/mod_case_filter_in+O+Example uppercase conversion input filter"
    "modules/examples/mod_example_hooks+O+Example hook callback handler module"
    "modules/examples/mod_example_ipc+O+Example of shared memory and mutex usage"
@@ -123,7 +123,7 @@ index 628cf76535..2fb7fcfc2c 100644
    "modules/mappers/mod_actions+I+Action triggering on requests"
    "modules/mappers/mod_alias+A+mapping of requests to different filesystem parts"
    "modules/mappers/mod_dir+A+directory request handling"
-@@ -393,19 +404,28 @@ SET(MODULE_LIST
+@@ -393,19 +404,28 @@
    "modules/proxy/mod_proxy_hcheck+I+Apache proxy health check module.  Requires and is enabled by --enable-proxy."
    "modules/proxy/mod_proxy_scgi+I+Apache proxy SCGI module.  Requires and is enabled by --enable-proxy."
    "modules/proxy/mod_proxy_wstunnel+I+Apache proxy Websocket Tunnel module.  Requires and is enabled by --enable-proxy."
@@ -154,8 +154,8 @@ index 628cf76535..2fb7fcfc2c 100644
 +  "../mod_zstd/mod_zstd+O+mod_zstd"
  )
  
- # Track which modules actually built have APIs to link against.
-@@ -424,7 +444,7 @@ SET(mod_cache_extra_defines          CACHE_DECLARE_EXPORT)
+ IF(BUILD_TEST_MODULES)
+@@ -484,7 +504,7 @@
  SET(mod_cache_extra_sources
    modules/cache/cache_storage.c      modules/cache/cache_util.c
  )
@@ -164,7 +164,7 @@ index 628cf76535..2fb7fcfc2c 100644
  SET(mod_cache_disk_extra_libs        mod_cache)
  SET(mod_cache_socache_extra_libs     mod_cache)
  SET(mod_charset_lite_requires        APR_HAS_XLATE)
-@@ -434,7 +454,7 @@ SET(mod_dav_extra_sources
+@@ -494,7 +514,7 @@
    modules/dav/main/std_liveprop.c    modules/dav/main/providers.c
    modules/dav/main/util.c            modules/dav/main/util_lock.c
  )
@@ -173,7 +173,7 @@ index 628cf76535..2fb7fcfc2c 100644
  SET(mod_dav_fs_extra_sources
    modules/dav/fs/dbm.c               modules/dav/fs/lock.c
    modules/dav/fs/repos.c
-@@ -486,30 +506,48 @@ SET(mod_lua_extra_sources
+@@ -546,30 +566,48 @@
    modules/lua/lua_passwd.c           modules/lua/lua_request.c
    modules/lua/lua_vmprep.c           modules/lua/lua_dbd.c
  )
@@ -238,7 +238,7 @@ index 628cf76535..2fb7fcfc2c 100644
  SET(mod_proxy_ajp_extra_sources
    modules/proxy/ajp_header.c         modules/proxy/ajp_link.c
    modules/proxy/ajp_msg.c            modules/proxy/ajp_utils.c
-@@ -543,7 +581,7 @@ SET(mod_sed_extra_sources
+@@ -603,7 +641,7 @@
  )
  SET(mod_serf_requires                AN_UNIMPLEMENTED_SUPPORT_LIBRARY_REQUIREMENT)
  SET(mod_session_extra_defines        SESSION_DECLARE_EXPORT)
@@ -247,7 +247,7 @@ index 628cf76535..2fb7fcfc2c 100644
  SET(mod_session_cookie_extra_libs    mod_session)
  SET(mod_session_crypto_requires      APU_HAVE_CRYPTO)
  SET(mod_session_crypto_extra_libs    mod_session)
-@@ -566,13 +604,52 @@ SET(mod_ssl_extra_sources
+@@ -626,13 +664,52 @@
    modules/ssl/ssl_util_ssl.c         modules/ssl/ssl_util_stapling.c
  )
  SET(mod_status_extra_defines         STATUS_DECLARE_EXPORT)
@@ -301,7 +301,7 @@ index 628cf76535..2fb7fcfc2c 100644
  
  SET(MODULE_PATHS)
  FOREACH (modinfo ${MODULE_LIST})
-@@ -626,8 +703,9 @@ ENDFOREACH()
+@@ -686,8 +763,9 @@
  generate_builtin_modules_c("${PROJECT_BINARY_DIR}/modules.c" "${builtin_module_shortnames}")
  
  # for easy reference from .dll/.so builds
@@ -312,7 +312,7 @@ index 628cf76535..2fb7fcfc2c 100644
  ADD_EXECUTABLE(gen_test_char server/gen_test_char.c)
  ADD_CUSTOM_COMMAND(
    COMMENT "Generating character tables, test_char.h, for current locale"
-@@ -712,7 +790,7 @@ SET(HTTPD_INCLUDE_DIRECTORIES
+@@ -772,7 +850,7 @@
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/filters
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/http2
@@ -321,7 +321,7 @@ index 628cf76535..2fb7fcfc2c 100644
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/proxy
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/session
    ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl
-@@ -720,6 +798,12 @@ SET(HTTPD_INCLUDE_DIRECTORIES
+@@ -780,6 +858,12 @@
    ${CMAKE_CURRENT_SOURCE_DIR}/server/mpm/winnt
    ${APR_INCLUDE_DIR}
    ${PCRE_INCLUDE_DIR}
@@ -333,8 +333,8 @@ index 628cf76535..2fb7fcfc2c 100644
 +  ${CMAKE_CURRENT_SOURCE_DIR}/../mod_zstd
  )
  
- # The .h files we install from outside the main include directory
-@@ -802,10 +886,10 @@ FOREACH (mod ${MODULE_PATHS})
+ IF(BUILD_TEST_MODULES)
+@@ -868,10 +952,10 @@
    ELSE()
      # Handle whether or not the LoadModule is commented out.
      IF(${enable_mod_val} STREQUAL "A")
@@ -347,7 +347,7 @@ index 628cf76535..2fb7fcfc2c 100644
        SET(mods_built_but_not_loaded ${mods_built_but_not_loaded} ${mod_name})
      ELSE()
        MESSAGE(FATAL_ERROR "${enable_mod} must be set to \"A\", \"I\", or \"O\" instead of \"${enable_mod_val}\"")
-@@ -833,12 +917,13 @@ FOREACH (mod ${MODULE_PATHS})
+@@ -899,12 +983,13 @@
      ENDIF()
      SET(mod_extra_libs "${mod_name}_extra_libs")
      SET_TARGET_PROPERTIES(${mod_name} PROPERTIES
@@ -364,7 +364,7 @@ index 628cf76535..2fb7fcfc2c 100644
  
      # Extra defines?
      SET(mod_extra_defines "${mod_name}_extra_defines")
-@@ -860,7 +945,8 @@ ENDFOREACH()
+@@ -926,7 +1011,8 @@
  ###########   HTTPD LIBRARIES   ############
  ADD_LIBRARY(libhttpd SHARED ${LIBHTTPD_SOURCES} build/win32/httpd.rc)
  SET_TARGET_PROPERTIES(libhttpd PROPERTIES
@@ -374,7 +374,7 @@ index 628cf76535..2fb7fcfc2c 100644
  )
  SET(install_targets ${install_targets} libhttpd)
  SET(install_bin_pdb ${install_bin_pdb} $<TARGET_PDB_FILE:libhttpd>)
-@@ -915,12 +1001,12 @@ ENDIF()
+@@ -981,12 +1067,12 @@
  GET_PROPERTY(tmp_includes TARGET ab PROPERTY INCLUDE_DIRECTORIES)
  
  # getting duplicate manifest error with ApacheMonitor
