@@ -43,6 +43,7 @@ Usage: go command [options]
       * mod_security-sdbm-util
     * [phpanddeps]
       * wineditline
+      * libmemcached
       * libzip
       * libxpm
       * libpng
@@ -84,6 +85,7 @@ Usage: go command [options]
         * php-ext-brotli
         * php-ext-zstd
         * php-geos
+        * php-memcached
         * php-ogr
         * php-proj
         * xdebug
