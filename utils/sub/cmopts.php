@@ -60,12 +60,13 @@
 	}
 	$csv = "";
 	foreach($res as $k => $v){
-		if(!preg_match('(_INCLUDE_DIR|_LIBRARY|_INSTALL_BIN_DIR|_INSTALL_LIB_DIR|CPACK_|_EAY_|PKG_CONFIG_)', $k))
+		if(!preg_match('(_INCLUDE_DIR|_LIBRARY|_INSTALL_BIN_DIR|_INSTALL_LIB_DIR|CPACK_|_EAY_|PKG_CONFIG_|OPENSSL_APPLINK|_EXECUTABLE|CURL_DISABLE_)', $k)) {
 			echo
 				color($v["status"]).
 				str_pad("-D".$v["key"]."=".$v["value"],80).
 				(array_key_exists("comment",$v) ? "// ".$v["comment"] : "").PHP_EOL;
-		$csv .= $v["status"].";"."-D".$v["key"]."=".$v["value"].(array_key_exists("comment",$v) ? ";".$v["comment"] : "").PHP_EOL;
+			$csv .= $v["status"].";"."-D".$v["key"]."=".$v["value"].(array_key_exists("comment",$v) ? ";".$v["comment"] : "").PHP_EOL;
+		}
 	}
 	file_put_contents($fn = $_ENV["PATH_CMOPTS_BUILD"]."/".$argv[1].".csv",$csv);
 	echo PHP_EOL."> writing ".realpath($fn).PHP_EOL;

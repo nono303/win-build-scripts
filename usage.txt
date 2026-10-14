@@ -145,6 +145,7 @@ Usage: go command [options]
       nofetch: don't fetch remote
       verbose: display all scm commands
   * srccreate: git clone & svn co all required src into %PATH_SRC% defined in env.bat
+  * cmopts: check CMake option(s) set foreach module and produce csv report in PATH_CMOPTS_BUILD
   * libcheck: check all librairies released (lib) have a pdb file
     > param:  a path to check
     > option:
