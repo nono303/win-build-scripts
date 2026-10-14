@@ -1,6 +1,7 @@
 @echo off && call %PATH_UTILS%\init.bat %1 cmake
 
 if "%ARG_CMOPTS%"=="1" (@echo on)
+REM option list detailled at %PATH_SRC%\%1\cmake\aom_config_defaults.cmake
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DCMAKE_INSTALL_PREFIX=%PATH_INSTALL% ^
 -DBUILD_SHARED_LIBS=ON ^

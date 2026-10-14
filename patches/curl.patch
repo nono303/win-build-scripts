@@ -1,0 +1,13 @@
+diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
+index c202a6c6d7..1f13ecbb5d 100644
+--- a/lib/CMakeLists.txt
++++ b/lib/CMakeLists.txt
+@@ -60,7 +60,7 @@ if(CURL_BUILD_TESTING)
+ endif()
+ 
+ ## Library definition
+-
++option(IMPORT_LIB_SUFFIX "Suffix implib name with '_imp' by default" "_imp")
+ if(NOT DEFINED IMPORT_LIB_SUFFIX)
+   # Suffix implib name with "_imp" by default, to avoid conflicting with
+   # the generated static "libcurl.lib" (typically with MSVC).

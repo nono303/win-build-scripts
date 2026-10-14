@@ -15,7 +15,15 @@ diff --git a/build/cmake/lib/CMakeLists.txt b/build/cmake/lib/CMakeLists.txt
 index 4e902a1f..c9030496 100644
 --- a/build/cmake/lib/CMakeLists.txt
 +++ b/build/cmake/lib/CMakeLists.txt
-@@ -204,7 +204,7 @@ if (ZSTD_BUILD_SHARED)
+@@ -12,6 +12,7 @@
+ set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
+ option(ZSTD_BUILD_STATIC "BUILD STATIC LIBRARIES" ON)
+ option(ZSTD_BUILD_SHARED "BUILD SHARED LIBRARIES" ON)
++option(BUILD_SHARED_LIBS "BUILD SHARED LIBRARIES" ON)
+ option(ZSTD_BUILD_COMPRESSION "BUILD COMPRESSION MODULE" ON)
+ option(ZSTD_BUILD_DECOMPRESSION "BUILD DECOMPRESSION MODULE" ON)
+ option(ZSTD_BUILD_DICTBUILDER "BUILD DICTBUILDER MODULE" ON)
+@@ -204,7 +205,7 @@
      set_target_properties(
              libzstd_shared
              PROPERTIES

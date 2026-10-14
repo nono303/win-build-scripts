@@ -1,0 +1,36 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 73f27a1..14a4281 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -40,21 +40,16 @@ set(libgav1_source "${libgav1_root}/src")
+ 
+ include("${libgav1_root}/cmake/libgav1_options.cmake")
+ 
+-libgav1_option(NAME LIBGAV1_ENABLE_OPTIMIZATIONS HELPSTRING
+-               "Enables optimized code." VALUE ON)
+-libgav1_option(NAME LIBGAV1_ENABLE_AVX2 HELPSTRING "Enables avx2 optimizations."
+-               VALUE ON)
+-libgav1_option(NAME LIBGAV1_ENABLE_NEON HELPSTRING "Enables neon optimizations."
+-               VALUE ON)
+-libgav1_option(NAME LIBGAV1_ENABLE_SSE4_1 HELPSTRING
+-               "Enables sse4.1 optimizations." VALUE ON)
+-libgav1_option(NAME LIBGAV1_ENABLE_EXAMPLES HELPSTRING "Enables examples." VALUE
+-               ON)
+-libgav1_option(NAME LIBGAV1_ENABLE_TESTS HELPSTRING "Enables tests." VALUE ON)
+-libgav1_option(
+-  NAME LIBGAV1_VERBOSE HELPSTRING
+-  "Enables verbose build system output. Higher numbers are more verbose." VALUE
+-  OFF)
++libgav1_option(NAME LIBGAV1_ENABLE_OPTIMIZATIONS	HELPSTRING "Enables optimized code." VALUE ON)
++libgav1_option(NAME LIBGAV1_ENABLE_AVX2			HELPSTRING "Enables avx2 optimizations." VALUE ON)
++libgav1_option(NAME LIBGAV1_ENABLE_NEON			HELPSTRING "Enables neon optimizations." VALUE ON)
++libgav1_option(NAME LIBGAV1_ENABLE_SSE4_1		HELPSTRING "Enables sse4.1 optimizations." VALUE ON)
++libgav1_option(NAME LIBGAV1_ENABLE_EXAMPLES		HELPSTRING "Enables examples." VALUE ON)
++libgav1_option(NAME LIBGAV1_ENABLE_TESTS		HELPSTRING "Enables tests." VALUE ON)
++libgav1_option(NAME LIBGAV1_VERBOSE			HELPSTRING "Enables verbose build system output. Higher numbers are more verbose." VALUE OFF)
++libgav1_option(NAME BUILD_SHARED_LIBS			HELPSTRING "build shared libs." VALUE 1)
++libgav1_option(NAME LIBGAV1_THREADPOOL_USE_STD_MUTEX	HELPSTRING "Threadpool use std mutex." VALUE 1)
++libgav1_option(NAME LIBGAV1_MAX_BITDEPTH		HELPSTRING "Max bitdepth." VALUE 12)
+ 
+ if(NOT CMAKE_BUILD_TYPE)
+   set(CMAKE_BUILD_TYPE Release)
