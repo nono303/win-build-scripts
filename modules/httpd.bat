@@ -40,7 +40,7 @@ if "%2"=="svn" (
 	-DCURL_LIBRARIES=%PATH_INSTALL:\=/%/%DIR_LIB_STATIC%/%LIBCURL_STATIC_NAME%.lib ^
 	%PATH_SRC%\%1
 )
-
+if "%ARG_CMOPTS%"=="1" (exit /B)
 %PATH_BIN_CYGWIN%\bash --login -c '%CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"'
 %NINJA% install
 
