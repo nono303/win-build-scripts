@@ -1,8 +1,5 @@
- CMakeLists.txt | 13 +++++++------
- 1 file changed, 7 insertions(+), 6 deletions(-)
-
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 6b51ac64..8be0c3d5 100644
+index 6b51ac64..9e6b34a0 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -88,11 +88,11 @@ if(NOT LIBSSH2_VERSION OR
@@ -22,15 +19,28 @@ index 6b51ac64..8be0c3d5 100644
  
  include(PickyWarnings)
  
-@@ -321,6 +321,7 @@ if(CRYPTO_BACKEND STREQUAL "OpenSSL" OR NOT CRYPTO_BACKEND)
-         NAMES "crypto.dll"
-           "libcrypto-1_1.dll" "libcrypto-1_1-x64.dll"
-           "libcrypto-3.dll" "libcrypto-3-x64.dll"
-+          "libcrypto-4.dll" "libcrypto-4-x64.dll"
-         HINTS ${_OPENSSL_ROOT_HINTS} PATHS ${_OPENSSL_ROOT_PATHS}
-         PATH_SUFFIXES "bin" NO_DEFAULT_PATH)
-       if(DLL_LIBCRYPTO)
-@@ -466,7 +467,7 @@ if(LINT)
+@@ -315,17 +315,9 @@ if(CRYPTO_BACKEND STREQUAL "OpenSSL" OR NOT CRYPTO_BACKEND)
+       # This should really be handled by FindOpenSSL.cmake.
+       list(APPEND LIBSSH2_LIBS "crypt32" "bcrypt")
+ 
+-      #set(CMAKE_FIND_DEBUG_MODE ON)
+-
+-      find_file(DLL_LIBCRYPTO
+-        NAMES "crypto.dll"
+-          "libcrypto-1_1.dll" "libcrypto-1_1-x64.dll"
+-          "libcrypto-3.dll" "libcrypto-3-x64.dll"
+-        HINTS ${_OPENSSL_ROOT_HINTS} PATHS ${_OPENSSL_ROOT_PATHS}
+-        PATH_SUFFIXES "bin" NO_DEFAULT_PATH)
+-      if(DLL_LIBCRYPTO)
+-        list(APPEND _RUNTIME_DEPENDENCIES ${DLL_LIBCRYPTO})
+-        message(STATUS "Found libcrypto DLL: ${DLL_LIBCRYPTO}")
++      if(OPENSSL_CRYPTO_LIBRARY)
++        list(APPEND _RUNTIME_DEPENDENCIES ${OPENSSL_CRYPTO_LIBRARY})
++        message(STATUS "Found libcrypto DLL: ${OPENSSL_CRYPTO_LIBRARY}")
+       else()
+         message(WARNING "Unable to find OpenSSL libcrypto DLL, executables may not run")
+       endif()
+@@ -466,7 +458,7 @@ if(LINT)
    endif()
  endif()
  
