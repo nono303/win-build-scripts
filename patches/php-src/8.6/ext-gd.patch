@@ -1,0 +1,58 @@
+diff --git "a/ext/gd/config.w32" "b/ext/gd/config.w32"
+index fb3f0212729..c225af8180e 100644
+--- "a/ext/gd/config.w32"
++++ "b/ext/gd/config.w32"
+@@ -11,6 +11,45 @@
+ 
+ if (PHP_GD != "no") {
+ 	if (
++		CHECK_HEADER_ADD_INCLUDE("gd.h",	"CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include") &&
++		CHECK_HEADER_ADD_INCLUDE("gdfontg.h",	"CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include") &&
++		CHECK_HEADER_ADD_INCLUDE("gdfontl.h",	"CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include") &&
++		CHECK_HEADER_ADD_INCLUDE("gdfontmb.h",	"CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include") &&
++		CHECK_HEADER_ADD_INCLUDE("gdfonts.h",	"CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include") &&
++		CHECK_HEADER_ADD_INCLUDE("gdfontt.h",	"CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include") &&
++		CHECK_HEADER_ADD_INCLUDE("gd_errors.h",	"CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include") &&
++
++		CHECK_LIB("user32.lib",	"gd", PHP_GD) &&
++		CHECK_LIB("Gdi32.Lib",	"gd", PHP_GD) &&
++		CHECK_LIB("Advapi32.lib", "gd", PHP_GD) &&
++		(GD_EXTLIB_NAME=CHECK_LIB("libgd.lib",	"gd", PHP_GD))
++	) {
++		EXTENSION("gd", "gd.c gd_compat.c", null,	"-Iext/gd/libgd");
++		ADD_FLAG("CFLAGS_GD", "/D HAVE_CONFIG_H"); // gd_compat.c : overflow2()
++		AC_DEFINE('HAVE_LIBGD',			1,	"GD support");
++		AC_DEFINE('HAVE_CONFIG_H',		1,	"GD support");
++		AC_DEFINE('COMPILE_DL_GD',		1,	"Whether to build gd as dynamic module");
++		AC_DEFINE('PHP_GD_EXPORTS',		1,	"dllexport");
++		AC_DEFINE('HAVE_GD_PNG',		1,	"PNG support");
++		AC_DEFINE('HAVE_GD_AVIF',		1,	"AVIF support");
++		AC_DEFINE('HAVE_GD_WEBP',		1,	"WEBP support");
++		AC_DEFINE('HAVE_GD_JPG',		1,	"JPG support");
++		AC_DEFINE('HAVE_GD_XPM',		1,	"XPM support");
++		AC_DEFINE('HAVE_GD_HEIF',		1,	"HEIF support");
++		AC_DEFINE('HAVE_GD_FREETYPE',		1,	"FREETYPE support");
++		AC_DEFINE('HAVE_GD_LIBVERSION',		1,	"VERSION support");
++		AC_DEFINE('HAVE_GD_GET_INTERPOLATION',	1,	"INTERPOLATION support");
++		AC_DEFINE('HAVE_GD_TIFF',		1,	"TIFF support");
++		AC_DEFINE('USE_GD_JISX0208',		0,	"JIS-mapped Japanese Font Support");
++		AC_DEFINE('HAVE_GD_IMAGEQUANT',		0,	"IMAGEQUANT support");
++		AC_DEFINE('HAVE_GD_JXL',		0,	"JXL support");
++		AC_DEFINE('HAVE_GD_UHDR',		0,	"UHDR support");
++		if (ICC_TOOLSET) {
++			ADD_FLAG("LDFLAGS_GD", "/nodefaultlib:libcmt");
++		}
++		PHP_INSTALL_HEADERS("ext/gd","php_gd.h");
++		MESSAGE("* Use external library " + GD_EXTLIB_NAME.replace(/^.*[\\/]/, ''));
++	} else if (
+ 		CHECK_LIB("libjpeg_a.lib;libjpeg.lib", "gd", PHP_GD) &&
+ 		CHECK_LIB("freetype_a.lib;freetype.lib", "gd", PHP_GD) &&
+ 		CHECK_HEADER("ft2build.h", "CFLAGS_GD", PHP_GD + ";" + PHP_PHP_BUILD + "\\include\\freetype2;" + PHP_PHP_BUILD + "\\include\\freetype") &&
+@@ -173,6 +212,7 @@
+ 		}
+ 
+ 		PHP_INSTALL_HEADERS("ext/gd", "php_gd.h libgd/");
++		MESSAGE("* Use bundled library");
+ 	} else {
+ 		WARNING("gd not enabled; libraries and headers not found");
+ 	}
