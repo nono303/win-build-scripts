@@ -34,12 +34,8 @@ for /L %%i in (2,1,%argCount%) do (
 	if /I "!argVec[%%i]!"=="FFI"		set PHP_BUILD_TYPE=ffi
 	if /I "!argVec[%%i]!"=="GD"		set PHP_BUILD_TYPE=gd
 	if /I "!argVec[%%i]!"=="OGR"		set PHP_BUILD_TYPE=ogr
+	if /I "!argVec[%%i]!"=="SYNC"		set PHP_BUILD_TYPE=sync
 	if /I "!argVec[%%i]!"=="CORE" 		set PHP_BUILD_TYPE=core
-	if /I "!argVec[%%i]!"=="WIN7" (
-		REM TODO comment for full build
-		set PHP_BUILD_TYPE=win7
-		if %ARG_KEEPSRC% == 0 (call %PATH_UTILS%\gitapply %PATH_PATCHES%\php-src\%PHPVER%\win7.patch)
-	)
 )
 
 	REM ~~~~~~~~~~~~ check prereq deps
@@ -50,25 +46,16 @@ if %PHP_BUILD_TYPE% == brotli	(
 	if not exist %PATH_INSTALL%\%DIR_LIB_STATIC%\libbrotlicommon.lib (call go.bat brotli static NOLOG)
 	set PHP_XTRALIBS=;%PATH_INSTALL%\%DIR_LIB_STATIC%\
 )
-if %PHP_BUILD_TYPE% == win7	(
-	if not exist %PATH_INSTALL%\lib\z.lib (call go.bat zlib NOLOG)
-	if not exist %PATH_INSTALL%\lib\liblzma.lib (call go.bat liblzma NOLOG)
-	if not exist %PATH_INSTALL%\lib\icudt.lib (call go.bat icu NOLOG)
-	if not exist %PATH_INSTALL%\lib\libiconv.lib (call go.bat libiconv NOLOG)
-	if not exist %PATH_INSTALL%\lib\libxml2_a_dll.lib (call go.bat libxml2 NOLOG)
-)
 
 if %ARG_KEEPSRC% == 0 (
 	REM ~~~~~~~~~~~~ GENERATE zend_vm
 	echo    # generate zend_vm
 	call do_php %PATH_SRC%\php-src\Zend\zend_vm_gen.php | gawk '{print "     " $0}' 2>&1
 	
-	REM ~~~~~~~~~~~~ PHP-SRC version PATCH
-	REM if exist %PATH_PATCHES%\php-src\%PHPVER%\php-src.patch (call %PATH_UTILS%\gitapply %PATH_PATCHES%\php-src\%PHPVER%\php-src.patch)
 	REM ~~~~~~~~~~~~ PHP-SRC ext PATCH
 	for /f "tokens=*" %%P in ('dir %PATH_PATCHES%\php-src\%PHPVER%\ext-*.patch /s/b') do (call %PATH_UTILS%\gitapply %%P)
 	REM ~~~~~~~~~~~~ PHP-SRC pr PATCH
-	for /f "tokens=*" %%P in ('dir %PATH_PATCHES%\php-src\%PHPVER%\pr*.patch /s/b') do (call %PATH_UTILS%\gitapply %%P)
+	REM for /f "tokens=*" %%P in ('dir %PATH_PATCHES%\php-src\%PHPVER%\pr*.patch /s/b') do (call %PATH_UTILS%\gitapply %%P)
 	
 	REM ~~~~~~~~~~~~ DEF - Makefile: PHP_DLL_DEF_SOURCES
 	set DEF_EXPORTS=%PATH_SRC%\php-src\ext\libxml\php_libxml2.def
@@ -120,10 +107,5 @@ for %%E in (pecl-datetime-timezonedb pecl-memcache php-memcached pecl-text-xdiff
 )
 if exist %PATH_PHP_SDK%\phpsdk-local.bat call %PATH_UTILS%\fileutils rm %PATH_PHP_SDK%\phpsdk-local.bat
 call %PATH_UTILS%\fileutils cp %PATH_MODULES%\phpsdk-local.bat %PATH_PHP_SDK%\*
-
-	REM ---- TMP - ext-gd
-rmdir /S /Q %PATH_SRC%\php-src\ext\gd
-mklink /J %PATH_SRC%\php-src\ext\gd %PATH_SRC%\php-ext-gd\ext\gd
-call %PATH_UTILS%\init.bat php-ext-gd
 
 call %PATH_PHP_SDK%\phpsdk-starter.bat -c %MSVC_DEPS% -a %ARCH% -s %vcvars_ver%

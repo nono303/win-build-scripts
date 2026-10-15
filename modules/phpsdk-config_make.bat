@@ -2,30 +2,15 @@ echo phpsdk-config_make for %PHPVER%
 cd /D %PHP_SRC_DIR%
 
 REM ################# PHP8 #################
-if %PHPVER% == 8.4 (
-	set SHARED_OPCACHE=php_opcache.dll
-	set CONFIGURE_VERSION=^
-	--enable-opcache=shared ^
-	--without-uncritical-warn-choke
-	set CONFIGURE_VERSION_DISABLED=^
-	--disable-opcache
-)
 if %PHPVER% == 8.5 (
-	set SHARED_OPCACHE=
 	set CONFIGURE_VERSION=
 	set CONFIGURE_VERSION_DISABLED=
 )
-set CONFIGURE_WIN7_DISABLED=^
-	--without-geos ^
-	--disable-zstd ^
-	--without-gd ^
-	--without-readline ^
-	--disable-zip ^
-	--disable-com-dotnet ^
-	--disable-brotli ^
-	--disable-zlib
+if %PHPVER% == 8.6 (
+	set CONFIGURE_VERSION=
+	set CONFIGURE_VERSION_DISABLED=
+)
 set CONFIGURE_PARTIAL_DISABLED=^
-	%CONFIGURE_WIN7_DISABLED% ^
 	%CONFIGURE_VERSION_DISABLED% ^
 	--disable-bcmath ^
 	--disable-brotli ^
@@ -78,8 +63,8 @@ if %PHP_BUILD_TYPE% == parallel		(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISAB
 if %PHP_BUILD_TYPE% == ffi		(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --with-ffi=shared)
 if %PHP_BUILD_TYPE% == gd		(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --with-gd=shared)
 if %PHP_BUILD_TYPE% == ogr		(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --with-ogr=shared)
+if %PHP_BUILD_TYPE% == sync		(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED%	--enable-sync=shared)
 if %PHP_BUILD_TYPE% == core		(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED%)
-if %PHP_BUILD_TYPE% == win7		(set CONFIGURE_PARTIAL=%CONFIGURE_WIN7_DISABLED%)
 
 if %PHPVER% == %PHP_BUILD_TYPE% (set FINAL_CONFIGURE=^
 	%CONFIGURE_COMMON% ^
@@ -154,20 +139,25 @@ call configure %FINAL_CONFIGURE%
 	REM ARFLAGS
 sed -i 's/ARFLAGS=\/nologo/ARFLAGS=\/nologo \/LTCG \/CGTHREADS:8/g' %CYGPATH_SRC%/php-src/Makefile
 	REM LDFLAGS 
-	REM	/NODEFAULTLIB:libcmt.lib	for freetype2
+		REM	/NODEFAULTLIB:libcmt.lib	for freetype2
 sed -i -E 's/incremental:no/incremental:no \/LTCG \/NODEFAULTLIB:libcmt.lib \/CGTHREADS:8/g' %CYGPATH_SRC%/php-src/Makefile
 	REM CFLAGS
 		REM only C++ and not C 
 			REM Both not compatible	https://developercommunity.visualstudio.com/t/C-and-C-standard-options-should-not-be/1289751
-			REM C++ required:	C:\sdk\release\vs18_x64-avx2\include\unicode/uversion.h(183): error C2429: language feature 'nested-namespace-definition' requires compiler flag '/std:c++17'
-sed -i 's/\/Ox/\/std:c++%C_STD_VER% \/O2 \/Ob3 \/cgthreads8 \/GL \/Zf \/Gy \/FS \/D PHP_ICONV_PREFIX=%PATH_INSTALL:\=\/%/g' %CYGPATH_SRC%/php-src/Makefile
+			REM C++ required: C:\sdk\release\vs18_x64-avx2\include\unicode/uversion.h(183): error C2429: language feature 'nested-namespace-definition' requires compiler flag '/std:c++17'
+			REM ext/intl not compatible with latest: force 17 error C2440
+REM set CPP_STD_PHP=%C_STD_VER%
+set CPP_STD_PHP=17
+sed -i 's/\/Ox/\/std:c++%CPP_STD_PHP% \/O2 \/Ob3 \/cgthreads8 \/GL \/Zf \/Gy \/FS \/D PHP_ICONV_PREFIX=%PATH_INSTALL:\=\/%/g' %CYGPATH_SRC%/php-src/Makefile
 	REM no warn
 sed -i 's/d4996//g' %CYGPATH_SRC%/php-src/Makefile
 	REM fix for iconv shared : LINK : fatal error LNK1181: cannot open input file 'php_iconv.lib'
 sed -i -E 's/LIBS_LIBXML=(.*)php_iconv.lib(.*)/LIBS_LIBXML=\\1\\2/g' %CYGPATH_SRC%/php-src/Makefile
+	REM RE2C FLAGS: no warn
+sed -i -E 's/--no-generation-date -W/--no-generation-date/g' %CYGPATH_SRC%/php-src/Makefile
 
 	REM after sed in /php-src/Makefile
-REM l:81	CFLAGS=/nologo /D _WINDOWS /D WINDOWS=1 /D ZEND_WIN32=1 /D PHP_WIN32=1 /D WIN32 /D _MBCS /D _USE_MATH_DEFINES /FD /wd4995 /w /Zc:inline /Gw /Zc:__cplusplus /d2FuncCache1 /Zc:preprocessor /Zc:wchar_t /DENABLE_INTSAFE_SIGNED_FUNCTIONS /MP16 /Zi /MD /std:c++latest /O2 /Ob3 /MP16 /cgthreads8 /GL /Zf /Gy /FS /D PHP_ICONV_PREFIX=C:/sdk/release/vs18_x64-avx2 /D NDebug /D NDEBUG /GF /D ZEND_DEBUG=0 /D ZTS=1 /D FD_SETSIZE=4096 /arch:AVX2
+REM l:81	CFLAGS=/nologo /D _WINDOWS /D WINDOWS=1 /D ZEND_WIN32=1 /D PHP_WIN32=1 /D WIN32 /D _MBCS /D _USE_MATH_DEFINES /FD /wd4995 /w /Zc:inline /Gw /Zc:__cplusplus /d2FuncCache1 /Zc:preprocessor /Zc:wchar_t /DENABLE_INTSAFE_SIGNED_FUNCTIONS /MP16 /Zi /MD /std:c++17 /O2 /Ob3 /MP16 /cgthreads8 /GL /Zf /Gy /FS /D PHP_ICONV_PREFIX=C:/sdk/release/vs18_x64-avx2 /D NDebug /D NDEBUG /GF /D ZEND_DEBUG=0 /D ZTS=1 /D FD_SETSIZE=4096 /arch:AVX2
 REM l:587	LDFLAGS=/nologo /d2:-AllowCompatibleILVersions /incremental:no /LTCG /NODEFAULTLIB:libcmt.lib /CGTHREADS:8 /debug /opt:ref,icf
 REM l:589	ARFLAGS=/nologo /LTCG /CGTHREADS:8
 
@@ -189,7 +179,7 @@ for %%A in (exe dll) do (
 
 if %PHPVER% == %PHP_BUILD_TYPE% (
 	for /f "tokens=*" %%G in ('dir %PHP_BUILD_DIR%\php8%TSLIBSUF%.lib /s/b') do (call %PATH_UTILS%\fileutils cp %%G %PATH_INSTALL%\lib\*)
-	for %%X in (php-cgi.exe php.exe %SHARED_OPCACHE% php8%TSLIBSUF%.dll php_curl.dll php_fileinfo.dll php_gd.dll php_intl.dll php_openssl.dll php_tidy.dll php_bcmath.dll php_bz2.dll php_calendar.dll php_com_dotnet.dll php_ctype.dll php_dom.dll php_exif.dll php_ftp.dll php_iconv.dll php_mysqli.dll php_pdo_mysql.dll php_pdo_sqlite.dll php_readline.dll php_simplexml.dll php_soap.dll php_sockets.dll php_sodium.dll php_sqlite3.dll php_xml.dll php_xmlreader.dll php_xmlwriter.dll php_zip.dll php_zlib.dll php_xsl.dll php_mbstring.dll php_gmp.dll php_ffi.dll) do (
+	for %%X in (php-cgi.exe php.exe php8%TSLIBSUF%.dll php_curl.dll php_fileinfo.dll php_gd.dll php_intl.dll php_openssl.dll php_tidy.dll php_bcmath.dll php_bz2.dll php_calendar.dll php_com_dotnet.dll php_ctype.dll php_dom.dll php_exif.dll php_ftp.dll php_iconv.dll php_mysqli.dll php_pdo_mysql.dll php_pdo_sqlite.dll php_readline.dll php_simplexml.dll php_soap.dll php_sockets.dll php_sodium.dll php_sqlite3.dll php_xml.dll php_xmlreader.dll php_xmlwriter.dll php_zip.dll php_zlib.dll php_xsl.dll php_mbstring.dll php_gmp.dll php_ffi.dll) do (
 		call do_php %PATH_UTILS%\sub\version.php php-src %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\%%X build:%TSNTS%
 	)
 	call do_php %PATH_UTILS%\sub\version.php pecl-text-xdiff %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_xdiff.dll build:%TSNTS% php:%PHPVERFULL%
@@ -207,11 +197,17 @@ if %PHPVER% == %PHP_BUILD_TYPE% (
 	call do_php %PATH_UTILS%\sub\version.php pecl-jsonpath %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_jsonpath.dll build:%TSNTS% php:%PHPVERFULL%
 	call do_php %PATH_UTILS%\sub\version.php pecl-parallel %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_parallel.dll build:%TSNTS% php:%PHPVERFULL%
 )
-if %PHP_BUILD_TYPE% == win7 (
-	for %%X in (php-cgi.exe php.exe %SHARED_OPCACHE% php8%TSLIBSUF%.dll) do (
-		call do_php %PATH_UTILS%\sub\version.php php-src %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\%%X Win7-patched build:%TSNTS%
-	)
-	REM TODO nmake test
+if %PHP_BUILD_TYPE% == ffi	(
+	call do_php %PATH_UTILS%\sub\version.php php-src %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_ffi.dll build:%TSNTS% php:%PHPVERFULL%
+)
+if %PHP_BUILD_TYPE% == gd	(
+	call do_php %PATH_UTILS%\sub\version.php php-src %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_gd.dll build:%TSNTS% php:%PHPVERFULL%
+)
+if %PHP_BUILD_TYPE% == ogr	(
+	call do_php %PATH_UTILS%\sub\version.php php-ogr %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_ogr.dll build:%TSNTS% php:%PHPVERFULL%
+)
+if %PHP_BUILD_TYPE% == sync	(
+	call do_php %PATH_UTILS%\sub\version.php pecl-system-sync %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_sync.dll build:%TSNTS% php:%PHPVERFULL%
 )
 if %PHP_BUILD_TYPE% == xdebug	(
 	call do_php %PATH_UTILS%\sub\version.php xdebug %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_xdebug.dll build:%TSNTS% php:%PHPVERFULL%
