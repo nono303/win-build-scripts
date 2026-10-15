@@ -1,15 +1,5 @@
-https://github.com/php/pecl-system-sync/commit/b2251ec9fdf0af1c898ec8e0b0b03099c9f246af.patch
-From b2251ec9fdf0af1c898ec8e0b0b03099c9f246af Mon Sep 17 00:00:00 2001
-From: Remi Collet <remi@remirepo.net>
-Date: Thu, 17 Jul 2025 15:49:40 +0200
-Subject: [PATCH] copy zend_exception_get_default for 8.5
-
----
- sync.c | 7 +++++++
- 1 file changed, 7 insertions(+)
-
 diff --git a/sync.c b/sync.c
-index f235088..52aa4be 100644
+index f235088..b0f7407 100644
 --- a/sync.c
 +++ b/sync.c
 @@ -42,6 +42,13 @@
@@ -26,3 +16,57 @@ index f235088..52aa4be 100644
  /* {{{ sync_module_entry
   */
  zend_module_entry sync_module_entry = {
+@@ -1241,7 +1248,7 @@ PHP_METHOD(sync_Semaphore, unlock)
+ 	{
+ 		count = (PORTABLE_ZPP_ARG_long)PrevCount;
+ 
+-		zval_dtor(PORTABLE_ZPP_ARG_zval_ref_deref(zprevcount));
++		zval_ptr_dtor_nogc(PORTABLE_ZPP_ARG_zval_ref_deref(zprevcount));
+ 		ZVAL_LONG(PORTABLE_ZPP_ARG_zval_ref_deref(zprevcount), count);
+ 	}
+ 
+@@ -2246,7 +2253,7 @@ PHP_MINIT_FUNCTION(sync)
+ 	memcpy(&sync_Mutex_object_handlers, zend_get_std_object_handlers(), sizeof(zend_object_handlers));
+ 	sync_Mutex_object_handlers.clone_obj = NULL;
+ #if PHP_MAJOR_VERSION >= 7
+-	sync_Mutex_object_handlers.offset = XtOffsetOf(sync_Mutex_object, PORTABLE_default_zend_object_name);
++	sync_Mutex_object_handlers.offset = offsetof(sync_Mutex_object, PORTABLE_default_zend_object_name);
+ 	sync_Mutex_object_handlers.free_obj = sync_Mutex_free_object;
+ #endif
+ 
+@@ -2259,7 +2266,7 @@ PHP_MINIT_FUNCTION(sync)
+ 	memcpy(&sync_Semaphore_object_handlers, zend_get_std_object_handlers(), sizeof(zend_object_handlers));
+ 	sync_Semaphore_object_handlers.clone_obj = NULL;
+ #if PHP_MAJOR_VERSION >= 7
+-	sync_Semaphore_object_handlers.offset = XtOffsetOf(sync_Semaphore_object, PORTABLE_default_zend_object_name);
++	sync_Semaphore_object_handlers.offset = offsetof(sync_Semaphore_object, PORTABLE_default_zend_object_name);
+ 	sync_Semaphore_object_handlers.free_obj = sync_Semaphore_free_object;
+ #endif
+ 
+@@ -2272,7 +2279,7 @@ PHP_MINIT_FUNCTION(sync)
+ 	memcpy(&sync_Event_object_handlers, zend_get_std_object_handlers(), sizeof(zend_object_handlers));
+ 	sync_Event_object_handlers.clone_obj = NULL;
+ #if PHP_MAJOR_VERSION >= 7
+-	sync_Event_object_handlers.offset = XtOffsetOf(sync_Event_object, PORTABLE_default_zend_object_name);
++	sync_Event_object_handlers.offset = offsetof(sync_Event_object, PORTABLE_default_zend_object_name);
+ 	sync_Event_object_handlers.free_obj = sync_Event_free_object;
+ #endif
+ 
+@@ -2285,7 +2292,7 @@ PHP_MINIT_FUNCTION(sync)
+ 	memcpy(&sync_ReaderWriter_object_handlers, zend_get_std_object_handlers(), sizeof(zend_object_handlers));
+ 	sync_ReaderWriter_object_handlers.clone_obj = NULL;
+ #if PHP_MAJOR_VERSION >= 7
+-	sync_ReaderWriter_object_handlers.offset = XtOffsetOf(sync_ReaderWriter_object, PORTABLE_default_zend_object_name);
++	sync_ReaderWriter_object_handlers.offset = offsetof(sync_ReaderWriter_object, PORTABLE_default_zend_object_name);
+ 	sync_ReaderWriter_object_handlers.free_obj = sync_ReaderWriter_free_object;
+ #endif
+ 
+@@ -2298,7 +2305,7 @@ PHP_MINIT_FUNCTION(sync)
+ 	memcpy(&sync_SharedMemory_object_handlers, zend_get_std_object_handlers(), sizeof(zend_object_handlers));
+ 	sync_SharedMemory_object_handlers.clone_obj = NULL;
+ #if PHP_MAJOR_VERSION >= 7
+-	sync_SharedMemory_object_handlers.offset = XtOffsetOf(sync_SharedMemory_object, PORTABLE_default_zend_object_name);
++	sync_SharedMemory_object_handlers.offset = offsetof(sync_SharedMemory_object, PORTABLE_default_zend_object_name);
+ 	sync_SharedMemory_object_handlers.free_obj = sync_SharedMemory_free_object;
+ #endif
+ 
