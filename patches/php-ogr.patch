@@ -24,7 +24,7 @@ index 1e16c41..758f095 100644
    }
  }
 diff --git a/ogr.c b/ogr.c
-index 32c5d04..5488cf4 100755
+index 32c5d04..89edffb 100755
 --- a/ogr.c
 +++ b/ogr.c
 @@ -51,6 +51,7 @@
@@ -146,7 +146,46 @@ index 32c5d04..5488cf4 100755
  /**********************************************************************
   * Error handling functions
   **********************************************************************/
-@@ -706,6 +765,293 @@ PHP_FUNCTION(cplgetlasterrormsg)
+@@ -662,7 +721,8 @@ static char **  php_array2string(char **papszStrList, zval *refastrvalues)
+ PHP_FUNCTION(cplerrorreset)
+ {
+     if (ZEND_NUM_ARGS() != 0) {
+-        WRONG_PARAM_COUNT;
++        zend_wrong_param_count();
++        RETURN_THROWS();
+     }
+ 
+     CPLErrorReset();
+@@ -674,7 +734,8 @@ PHP_FUNCTION(cplerrorreset)
+ PHP_FUNCTION(cplgetlasterrorno)
+ {
+     if (ZEND_NUM_ARGS() != 0) {
+-        WRONG_PARAM_COUNT;
++        zend_wrong_param_count();
++        RETURN_THROWS();
+     }
+ 
+     RETURN_LONG(CPLGetLastErrorNo());
+@@ -686,7 +747,8 @@ PHP_FUNCTION(cplgetlasterrorno)
+ PHP_FUNCTION(cplgetlasterrortype)
+ {
+     if (ZEND_NUM_ARGS() != 0) {
+-        WRONG_PARAM_COUNT;
++        zend_wrong_param_count();
++        RETURN_THROWS();
+     }
+     RETURN_LONG(CPLGetLastErrorType());
+ }
+@@ -699,13 +761,303 @@ PHP_FUNCTION(cplgetlasterrormsg)
+     const char *pszMsg;
+ 
+     if (ZEND_NUM_ARGS() != 0) {
+-        WRONG_PARAM_COUNT;
++        zend_wrong_param_count();
++        RETURN_THROWS();
+     }
+ 
+     if ((pszMsg = CPLGetLastErrorMsg()) != NULL)
              _RETURN_DUPLICATED_STRING((char *)pszMsg);
  }
  
@@ -160,8 +199,10 @@ index 32c5d04..5488cf4 100755
 +    */
 +PHP_FUNCTION(gdalregisterall)
 +{
-+    if (ZEND_NUM_ARGS() != 0)
-+        WRONG_PARAM_COUNT;
++    if (ZEND_NUM_ARGS() != 0) {
++        zend_wrong_param_count();
++        RETURN_THROWS();
++    }
 +    GDALAllRegister();
 +}
 +
@@ -440,6 +481,26 @@ index 32c5d04..5488cf4 100755
  /**********************************************************************
   * OGR functions
   **********************************************************************/
+@@ -4904,7 +5256,8 @@ PHP_FUNCTION(ogrregisterdriver)
+ PHP_FUNCTION(ogrgetdrivercount)
+ {
+     if (ZEND_NUM_ARGS() != 0) {
+-        WRONG_PARAM_COUNT;
++        zend_wrong_param_count();
++        RETURN_THROWS();
+     }
+     RETURN_LONG(OGRGetDriverCount());
+ }
+@@ -4961,7 +5314,8 @@ PHP_FUNCTION(ogrgetdriverbyname)
+ PHP_FUNCTION(ogrregisterall)
+ {
+     if (ZEND_NUM_ARGS() != 0) {
+-        WRONG_PARAM_COUNT;
++        zend_wrong_param_count();
++        RETURN_THROWS();
+     }
+     OGRRegisterAll();
+ }
 diff --git a/php_ogr_api.h b/php_ogr_api.h
 index 5aba80c..62c47e3 100755
 --- a/php_ogr_api.h
