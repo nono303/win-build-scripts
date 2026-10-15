@@ -26,7 +26,8 @@ set CONFIGURE_PARTIAL_DISABLED=^
 	--disable-tokenizer ^
 	--without-xml ^
 	--disable-xmlwriter ^
-	--disable-xmlreader
+	--disable-xmlreader ^
+	--disable-zstd
 set CONFIGURE_COMMON_DISABLED=^
 	--without-analyzer ^
 	--without-enchant ^
@@ -225,13 +226,15 @@ if %PHP_BUILD_TYPE% == memcached	(
 	call do_php %PATH_UTILS%\sub\version.php php-memcached %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcached.dll build:%TSNTS% php:%PHPVERFULL%
 )
 if %PHP_BUILD_TYPE% == memcache	(
+	setlocal enabledelayedexpansion
+	
 	if %AVXECHO% == sse2 (set AVXPATH=) else (set AVXPATH=\%AVXB:-=%)
-	if not exist %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXPATH%\. mkdir %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXPATH%
+	if not exist %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%!AVXPATH!\. mkdir %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%!AVXPATH!
 
 	call do_php %PATH_UTILS%\sub\version.php pecl-memcache %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcache.dll build:%TSNTS% php:%PHPVERFULL%
 	if not "%PATH_GITHUB_PHPMEMCACHE%"=="" (
 		for %%A in (pdb dll) do (
-			call %PATH_UTILS%\fileutils cp %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcache.%%A %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%%AVXPATH%\php-%PHPVER%.x_memcache.%%A*
+			call %PATH_UTILS%\fileutils cp %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcache.%%A %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%!AVXPATH!\php-%PHPVER%.x_memcache.%%A*
 		)
 	)
 )
