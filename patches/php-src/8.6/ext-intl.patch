@@ -1,7 +1,7 @@
-diff --git "a/ext/intl/config.w32" "b/ext/intl/config.w32"
-index fb3f0212729..c225af8180e 100644
---- "a/ext/intl/config.w32"
-+++ "b/ext/intl/config.w32"
+diff --git a/ext/intl/config.w32 b/ext/intl/config.w32
+index fb30953697b..38a35f7f373 100644
+--- a/ext/intl/config.w32
++++ b/ext/intl/config.w32
 @@ -125,7 +125,7 @@ if (PHP_INTL != "no") {
  		/* Compat for ICU before 58.1.*/
  		CHECK_LIB("icule.lib", "intl", PHP_INTL);
@@ -11,3 +11,96 @@ index fb3f0212729..c225af8180e 100644
  	} else {
  		WARNING("intl not enabled; libraries and/or headers not found");
  	}
+diff --git a/ext/intl/converter/converter.cpp b/ext/intl/converter/converter.cpp
+index 1369b88742f..4073870f6cd 100644
+--- a/ext/intl/converter/converter.cpp
++++ b/ext/intl/converter/converter.cpp
+@@ -522,7 +522,7 @@ static void php_converter_resolve_callback(
+ /* {{{ */
+ PHP_METHOD(UConverter, __construct) {
+ 	php_converter_object *objval = CONV_GET(ZEND_THIS);
+-	char *src = "utf-8";
++	char *src = const_cast<char*>("utf-8");
+ 	size_t src_len = sizeof("utf-8") - 1;
+ 	char *dest = src;
+ 	size_t dest_len = src_len;
+diff --git a/ext/intl/dateformat/dateformat_format.cpp b/ext/intl/dateformat/dateformat_format.cpp
+index 8890332dd40..6a28c8e5a90 100644
+--- a/ext/intl/dateformat/dateformat_format.cpp
++++ b/ext/intl/dateformat/dateformat_format.cpp
+@@ -105,7 +105,7 @@ static UDate internal_get_timestamp(IntlDateFormatter_object *dfo,
+ 	intl_error	*err = &dfo->datef_data.error;
+ 
+ #define INTL_GET_ELEM(elem) \
+-	internal_get_arr_ele(dfo, hash_arr, (elem), err)
++	internal_get_arr_ele(dfo, hash_arr, const_cast<char*>(elem), err)
+ 
+ 	/* Fetch  values from the incoming array */
+ 	year	= INTL_GET_ELEM(CALENDAR_YEAR) + 1900; /* tm_year is years since 1900 */
+diff --git a/ext/intl/grapheme/grapheme_string.cpp b/ext/intl/grapheme/grapheme_string.cpp
+index acb7c50cb9e..62639d16b3b 100644
+--- a/ext/intl/grapheme/grapheme_string.cpp
++++ b/ext/intl/grapheme/grapheme_string.cpp
+@@ -88,7 +88,7 @@ U_CFUNC PHP_FUNCTION(grapheme_strlen)
+ /* {{{ Find position of first occurrence of a string within another */
+ U_CFUNC PHP_FUNCTION(grapheme_strpos)
+ {
+-	char *haystack, *needle, *locale = "";
++	char *haystack, *needle, *locale = const_cast<char*>("");
+ 	size_t haystack_len, needle_len, locale_len = 0;
+ 	const char *found;
+ 	zend_long loffset = 0;
+@@ -144,7 +144,7 @@ U_CFUNC PHP_FUNCTION(grapheme_strpos)
+ /* {{{ Find position of first occurrence of a string within another, ignoring case differences */
+ U_CFUNC PHP_FUNCTION(grapheme_stripos)
+ {
+-	char *haystack, *needle, *locale = "";
++	char *haystack, *needle, *locale = const_cast<char*>("");
+ 	size_t haystack_len, needle_len, locale_len = 0;
+ 	const char *found;
+ 	zend_long loffset = 0;
+@@ -211,7 +211,7 @@ U_CFUNC PHP_FUNCTION(grapheme_stripos)
+ U_CFUNC PHP_FUNCTION(grapheme_strrpos)
+ {
+ 	char *haystack, *needle;
+-	char *locale = "";
++	char *locale = const_cast<char*>("");
+ 	size_t haystack_len, needle_len, locale_len = 0;
+ 	zend_long loffset = 0;
+ 	int32_t offset = 0;
+@@ -270,7 +270,7 @@ U_CFUNC PHP_FUNCTION(grapheme_strrpos)
+ /* {{{ Find position of last occurrence of a string within another, ignoring case */
+ U_CFUNC PHP_FUNCTION(grapheme_strripos)
+ {
+-	char *haystack, *needle, *locale = "";
++	char *haystack, *needle, *locale = const_cast<char*>("");
+ 	size_t haystack_len, needle_len, locale_len = 0;
+ 	zend_long loffset = 0;
+ 	int32_t offset = 0;
+@@ -338,7 +338,7 @@ U_CFUNC PHP_FUNCTION(grapheme_strripos)
+ /* {{{ Returns part of a string */
+ U_CFUNC PHP_FUNCTION(grapheme_substr)
+ {
+-	char *str, *locale = "";
++	char *str, *locale = const_cast<char*>("");
+ 	zend_string *u8_sub_str;
+ 	UChar *ustr;
+ 	size_t str_len, locale_len = 0;
+@@ -551,7 +551,7 @@ U_CFUNC PHP_FUNCTION(grapheme_substr)
+ /* {{{	strstr_common_handler */
+ static void strstr_common_handler(INTERNAL_FUNCTION_PARAMETERS, int f_ignore_case)
+ {
+-	char *haystack, *needle, *locale = "";
++	char *haystack, *needle, *locale = const_cast<char*>("");
+ 	const char *found;
+ 	size_t haystack_len, needle_len, locale_len = 0;
+ 	int32_t ret_pos, uchar_pos;
+@@ -931,7 +931,7 @@ U_CFUNC PHP_FUNCTION(grapheme_levenshtein)
+ 	zend_long cost_ins = 1;
+ 	zend_long cost_rep = 1;
+ 	zend_long cost_del = 1;
+-	char *locale = "";
++	char *locale = const_cast<char*>("");
+ 	size_t locale_len = 0;
+ 
+ 	ZEND_PARSE_PARAMETERS_START(2, 6)
