@@ -1,8 +1,113 @@
 # changelog
 
 
+## 1.19.0 _(2026-10-16)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  disabling zstd for PHP_BUILD_TYPE != PHPVER fix copy in PATH_RELEASE for memcache
+`modules/phpsdk-config_make.bat`
+*  Move to PHP 8.6 * remove 8.4   * remove SHARED_OPCACHE PHP_BUILD_TYPE * remove win7 * add sync * fix version for ffi gd ogr CFLAGS * change /std:c++: latest > 17 as intl not compatible with latest and not able to set specific cflag only for this ext RE2C FLAGS * no warn MISC * https://github.com/nono303/php-src-syncgd to patch * remove pr17848.patch & disable pr patch
+`modules/php.bat`
+`modules/phpsdk-config_make.bat`
+*  from https://github.com/nono303/php-src-syncgd
+`patches/php-src/8.5/ext-gd.patch`
+*  Move to PHP 8.6 * adapt patch from 8.5
+`patches/php-src/8.6/ext-gd.patch`
+`patches/php-src/8.6/ext-gmp.patch`
+`patches/php-src/8.6/ext-iconv.patch`
+`patches/php-src/8.6/ext-intl.patch`
+`patches/php-src/8.6/ext-libxml.patch`
+`patches/php-src/8.6/ext-opcache.patch`
+`patches/php-src/8.6/ext-pcre.patch`
+`patches/php-src/8.6/ext-phar.patch`
+*  https://github.com/igbinary/igbinary/pull/408
+`patches/pecl-igbinary.patch`
+*  https://github.com/swen100/phpng-proj/commit/20a70a5afbefdcc98df049468a47cf4c37fe06cd
+`patches/php-proj.patch`
+*  merge pecl-php-geos.patch to main php-geos.patch
+`patches/php-geos.patch`
+`patches/php-src/8.5/pecl-php-geos.patch`
+*  Move to PHP 8.6 * https://github.com/dvzgeo/php_ogr/issues/26
+`patches/php-ogr.patch`
+*  Move to PHP 8.6 * https://github.com/php/pecl-system-sync/issues/14
+`patches/pecl-system-sync.patch`
+*  Move to PHP 8.6 * https://github.com/swen100/phpng-proj/issues/4
+`patches/php-proj.patch`
+*  Move to PHP 8.6 * https://github.com/igbinary/igbinary/issues/424
+`patches/pecl-igbinary.patch`
+*  Move to PHP 8.6 * remove 8.4
+`patches/php-src/8.4/ext-gd.patch`
+`patches/php-src/8.4/ext-gmp.patch`
+`patches/php-src/8.4/ext-iconv.patch`
+`patches/php-src/8.4/ext-intl.patch`
+`patches/php-src/8.4/ext-libxml.patch`
+`patches/php-src/8.4/ext-opcache.patch`
+`patches/php-src/8.4/ext-pcre.patch`
+`patches/php-src/8.4/ext-phar.patch`
+`patches/php-src/8.4/pr17848.patch`
+`patches/php-src/8.4/win7.patch`
+*  fix & clean CMake options
+`modules/aom.bat`
+`modules/libdeflate.bat`
+`modules/libexpat.bat`
+`modules/libgd.bat`
+`modules/libwebp.bat`
+`modules/libyuv.bat`
+`patches/curl.patch`
+`patches/libgav1.patch`
+`patches/libwebp.patch`
+`patches/zstd.patch`
+*  fix exit on cmopts
+`modules/httpd.bat`
+*  GDAL_ENABLE_PLUGINS_NO_DEPS=ON
+`modules/gdal.bat`
+*  fix bad CMake opensll find: DLL_LIBCRYPTO > OPENSSL_CRYPTO_LIBRARY
+`modules/libssh2.bat`
+`patches/libssh2.patch`
+*  improve cmopts.php filter & output add cmopts utils command to check all CMake modules
+`usage.txt`
+`utils/cmopts.bat`
+`utils/sub/cmopts.php`
+*  update python & cygwin config
+`config/cyg64.packagelist`
+`config/python.pip`
+*  1.12
+`patches/libzip.patch`
+*  + https://github.com/websupport-sk/pecl-memcache/pull/120 + https://github.com/websupport-sk/pecl-memcache/pull/122
+`patches/pecl-memcache.patch`
+*  8.5.12
+`patches/php-src/8.5/pr17848.patch`
+*  aom: ENABLE_APPS=OFF
+`modules/aom.bat`
+`utils/bininfo.bat`
+*  2.15
+`patches/freetype2.patch`
+*  2.4.69
+`modules/httpd.bat`
+`patches/httpd.patch`
+*  2.9.0
+`modules/libexpat.bat`
+*  3e04b12b
+`modules/libgd.bat`
+*  1.12
+`modules/libzip.bat`
+*  2.15.0
+`modules/freetype2.bat`
+*  8.23
+`modules/curl.bat`
+*  GRADLEVER: 9.7.1 > 9.8.1
+`env_sample.bat`
+*  + libmemcached, php-memcached
+`usage.txt`
+
+
 ## 1.18.0 _(2026-09-10)_
 
+*  1.18.0
+`changelog.md`
 *  add libmemcached
 `modules/full.bat`
 *  DISABLE_FIND_PACKAGE_Backtrace
