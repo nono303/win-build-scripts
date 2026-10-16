@@ -1,5 +1,111 @@
+https://github.com/php/pecl-system-sync/pull/9
+From 80cac173ce99332c04ca89fd36f17ebaaf011899 Mon Sep 17 00:00:00 2001
+From: determin1st <baklanoid@gmail.com>
+Date: Sat, 6 Jul 2024 02:16:51 +0500
+Subject: [PATCH] replaced obsolete macro AC_TRY_LINK
+
+---
+ config.m4 | 72 +++++++++++++++++++++++++++++++++----------------------
+ 1 file changed, 43 insertions(+), 29 deletions(-)
+
+diff --git a/config.m4 b/config.m4
+index 36c25b5..d29a791 100644
+--- a/config.m4
++++ b/config.m4
+@@ -11,37 +11,51 @@ if test "$PHP_SYNC" != "no"; then
+   SAVED_LIBS="$LIBS"
+   LIBS="$LIBS -pthread -lrt"
+ 
+-  AC_TRY_LINK([
+-    #include <fcntl.h>
+-    #include <sys/mman.h>
+-  ], [
+-    int fp = shm_open("", O_RDWR | O_CREAT | O_EXCL, 0666);
+-  ], [
+-    have_shm_open=yes
+-    AC_MSG_RESULT([yes])
+-
+-    PHP_ADD_LIBRARY(rt,,SYNC_SHARED_LIBADD)
+-    PHP_SUBST(SYNC_SHARED_LIBADD)
+-  ], [
+-    AC_MSG_RESULT([no (attempting fallback)])
+-
+-    dnl # Fallback attempt to link without -lrt.
+-    AC_MSG_CHECKING([for shm_open in -pthread])
+-
+-    LIBS="$SAVED_LIBS -pthread"
+-
+-    AC_TRY_LINK([
+-      #include <fcntl.h>
+-      #include <sys/mman.h>
+-    ], [
+-      int fp = shm_open("", O_RDWR | O_CREAT | O_EXCL, 0666);
+-    ], [
++  AC_LINK_IFELSE([
++    AC_LANG_PROGRAM(
++      [[
++        #include <fcntl.h>
++        #include <sys/mman.h>
++      ]],
++      [[
++        int fp = shm_open("", O_RDWR | O_CREAT | O_EXCL, 0666);
++      ]]
++    )],
++    [
+       have_shm_open=yes
+       AC_MSG_RESULT([yes])
+-    ], [
+-      AC_MSG_ERROR([shm_open() is not available on this platform])
+-    ])
+-  ])
++
++      PHP_ADD_LIBRARY(rt,,SYNC_SHARED_LIBADD)
++      PHP_SUBST(SYNC_SHARED_LIBADD)
++    ],
++    [
++      AC_MSG_RESULT([no (attempting fallback)])
++
++      dnl # Fallback attempt to link without -lrt.
++      AC_MSG_CHECKING([for shm_open in -pthread])
++
++      LIBS="$SAVED_LIBS -pthread"
++
++      AC_LINK_IFELSE(
++        [AC_LANG_PROGRAM(
++          [[
++            #include <fcntl.h>
++            #include <sys/mman.h>
++          ]],
++          [[
++            int fp = shm_open("", O_RDWR | O_CREAT | O_EXCL, 0666);
++          ]]
++        )],
++        [
++          have_shm_open=yes
++          AC_MSG_RESULT([yes])
++        ],
++        [
++          AC_MSG_ERROR([shm_open() is not available on this platform])
++        ]
++      )
++    ]
++  )
+ 
+   dnl # Finish defining the basic extension support.
+   AC_DEFINE(HAVE_SYNC, 1, [Whether you have synchronization object support])
+
+https://github.com/php/pecl-system-sync/pull/10
+From b2251ec9fdf0af1c898ec8e0b0b03099c9f246af Mon Sep 17 00:00:00 2001
+From: Remi Collet <remi@remirepo.net>
+Date: Thu, 17 Jul 2025 15:49:40 +0200
+Subject: [PATCH] copy zend_exception_get_default for 8.5
+
+---
+ sync.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
 diff --git a/sync.c b/sync.c
-index f235088..b0f7407 100644
+index f235088..52aa4be 100644
 --- a/sync.c
 +++ b/sync.c
 @@ -42,6 +42,13 @@
@@ -16,7 +122,187 @@ index f235088..b0f7407 100644
  /* {{{ sync_module_entry
   */
  zend_module_entry sync_module_entry = {
-@@ -1241,7 +1248,7 @@ PHP_METHOD(sync_Semaphore, unlock)
+
+https://github.com/php/pecl-system-sync/pull/11
+From ecb7e8dfd770e7a68ebe7836f641f9cf13602d4d Mon Sep 17 00:00:00 2001
+From: Jean-Baptiste Nahan <814683+macintoshplus@users.noreply.github.com>
+Date: Tue, 7 Oct 2025 17:39:51 +0200
+Subject: [PATCH] Fix zend_ce_exception for PHP 8.5
+
+---
+ sync.c | 53 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 53 insertions(+)
+
+diff --git a/sync.c b/sync.c
+index f235088..573f39a 100644
+--- a/sync.c
++++ b/sync.c
+@@ -907,7 +907,11 @@
+ 	obj->MxWinMutex = CreateMutexA(&SecAttr, FALSE, name);
+ 	if (obj->MxWinMutex == NULL)
+ 	{
++#if PHP_VERSION_ID < 80500
+ 		zend_throw_exception(zend_exception_get_default(TSRMLS_C), "Mutex could not be created", 0 TSRMLS_CC);
++#else
++		zend_throw_exception(zend_ce_exception, "Mutex could not be created", 0 TSRMLS_CC);
++#endif
+ 		return;
+ 	}
+ 
+@@ -919,7 +923,11 @@
+ 
+ 	if (Result < 0)
+ 	{
++#if PHP_VERSION_ID < 80500
+ 		zend_throw_exception(zend_exception_get_default(TSRMLS_C), "Mutex could not be created", 0 TSRMLS_CC);
++#else
++		zend_throw_exception(zend_ce_exception, "Mutex could not be created", 0 TSRMLS_CC);
++#endif
+ 
+ 		return;
+ 	}
+@@ -981,7 +989,12 @@
+ 
+ 	if (pthread_mutex_lock(&obj->MxPthreadCritSection) != 0)
+ 	{
++		
++#if PHP_VERSION_ID < 80500
+ 		zend_throw_exception(zend_exception_get_default(TSRMLS_C), "Unable to acquire mutex critical section", 0 TSRMLS_CC);
++#else
++		zend_throw_exception(zend_ce_exception, "Unable to acquire mutex critical section", 0 TSRMLS_CC);
++#endif
+ 
+ 		RETURN_FALSE;
+ 	}
+@@ -1150,7 +1163,11 @@
+ 	obj->MxWinSemaphore = CreateSemaphoreA(&SecAttr, (LONG)initialval, (LONG)initialval, name);
+ 	if (obj->MxWinSemaphore == NULL)
+ 	{
++#if PHP_VERSION_ID < 80500
+ 		zend_throw_exception(zend_exception_get_default(TSRMLS_C), "Semaphore could not be created", 0 TSRMLS_CC);
++#else
++		zend_throw_exception(zend_ce_exception, "Semaphore could not be created", 0 TSRMLS_CC);
++#endif
+ 		return;
+ 	}
+ 
+@@ -1162,7 +1179,11 @@
+ 
+ 	if (Result < 0)
+ 	{
++#if PHP_VERSION_ID < 80500
+ 		zend_throw_exception(zend_exception_get_default(TSRMLS_C), "Semaphore could not be created", 0 TSRMLS_CC);
++#else
++		zend_throw_exception(zend_ce_exception, "Semaphore could not be created", 0 TSRMLS_CC);
++#endif
+ 
+ 		return;
+ 	}
+@@ -1364,7 +1385,11 @@
+ 	obj->MxWinWaitEvent = CreateEventA(&SecAttr, (BOOL)manual, (prefire ? TRUE : FALSE), name);
+ 	if (obj->MxWinWaitEvent == NULL)
+ 	{
++#if PHP_VERSION_ID < 80500
+ 		zend_throw_exception(zend_exception_get_default(TSRMLS_C), "Event object could not be created", 0 TSRMLS_CC);
++#else
++		zend_throw_exception(zend_ce_exception, "Event object could not be created", 0 TSRMLS_CC);
++#endif
+ 		return;
+ 	}
+ 
+@@ -1376,7 +1401,11 @@
+ 
+ 	if (Result < 0)
+ 	{
++#if PHP_VERSION_ID < 80500
+ 		zend_throw_exception(zend_exception_get_default(TSRMLS_C), "Event object could not be created", 0 TSRMLS_CC);
++#else
++		zend_throw_exception(zend_ce_exception, "Event object could not be created", 0 TSRMLS_CC);
++#endif
+ 
+ 		return;
+ 	}
+@@ -1713,7 +1742,11 @@
+ 
+ 	if (obj->MxWinRSemMutex == NULL || obj->MxWinRSemaphore == NULL || obj->MxWinRWaitEvent == NULL || obj->MxWinWWaitMutex == NULL)
+ 	{
++#if PHP_VERSION_ID < 80500
+ 		zend_throw_exception(zend_exception_get_default(TSRMLS_C), "Reader-Writer object could not be created", 0 TSRMLS_CC);
++#else
++		zend_throw_exception(zend_ce_exception, "Reader-Writer object could not be created", 0 TSRMLS_CC);
++#endif
+ 
+ 		return;
+ 	}
+@@ -1726,7 +1759,11 @@
+ 
+ 	if (Result < 0)
+ 	{
++#if PHP_VERSION_ID < 80500
+ 		zend_throw_exception(zend_exception_get_default(TSRMLS_C), "Reader-Writer object could not be created", 0 TSRMLS_CC);
++#else
++		zend_throw_exception(zend_ce_exception, "Reader-Writer object could not be created", 0 TSRMLS_CC);
++#endif
+ 
+ 		return;
+ 	}
+@@ -2060,7 +2097,11 @@
+ 
+ 	if (name_len < 1)
+ 	{
++#if PHP_VERSION_ID < 80500
+ 		zend_throw_exception(zend_exception_get_default(TSRMLS_C), "An invalid name was passed", 0 TSRMLS_CC);
++#else
++		zend_throw_exception(zend_ce_exception, "An invalid name was passed", 0 TSRMLS_CC);
++#endif
+ 
+ 		return;
+ 	}
+@@ -2084,7 +2125,11 @@
+ 
+ 		if (obj->MxFile == NULL)
+ 		{
++#if PHP_VERSION_ID < 80500
+ 			zend_throw_exception(zend_exception_get_default(TSRMLS_C), "Shared memory file mapping could not be created/opened", 0 TSRMLS_CC);
++#else
++			zend_throw_exception(zend_ce_exception, "Shared memory file mapping could not be created/opened", 0 TSRMLS_CC);
++#endif
+ 
+ 			return;
+ 		}
+@@ -2100,7 +2145,11 @@
+ 
+ 	if (obj->MxMem == NULL)
+ 	{
++#if PHP_VERSION_ID < 80500
+ 		zend_throw_exception(zend_exception_get_default(TSRMLS_C), "Shared memory segment could not be mapped", 0 TSRMLS_CC);
++#else
++		zend_throw_exception(zend_ce_exception, "Shared memory segment could not be mapped", 0 TSRMLS_CC);
++#endif
+ 
+ 		return;
+ 	}
+@@ -2114,7 +2163,11 @@
+ 
+ 	if (Result < 0)
+ 	{
++#if PHP_VERSION_ID < 80500
+ 		zend_throw_exception(zend_exception_get_default(TSRMLS_C), "Shared memory object could not be created/opened", 0 TSRMLS_CC);
++#else
++		zend_throw_exception(zend_ce_exception, "Shared memory object could not be created/opened", 0 TSRMLS_CC);
++#endif
+ 
+ 		return;
+ 	}
+
+
+
+https://github.com/php/pecl-system-sync/issues/14
+diff --git a/sync.c b/sync.c
+index f235088..573f39a 100644
+--- a/sync.c
++++ b/sync.c
+@@ -1269,7 +1269,7 @@
  	{
  		count = (PORTABLE_ZPP_ARG_long)PrevCount;
  
@@ -25,7 +311,7 @@ index f235088..b0f7407 100644
  		ZVAL_LONG(PORTABLE_ZPP_ARG_zval_ref_deref(zprevcount), count);
  	}
  
-@@ -2246,7 +2253,7 @@ PHP_MINIT_FUNCTION(sync)
+@@ -2306,7 +2306,7 @@
  	memcpy(&sync_Mutex_object_handlers, zend_get_std_object_handlers(), sizeof(zend_object_handlers));
  	sync_Mutex_object_handlers.clone_obj = NULL;
  #if PHP_MAJOR_VERSION >= 7
@@ -34,7 +320,7 @@ index f235088..b0f7407 100644
  	sync_Mutex_object_handlers.free_obj = sync_Mutex_free_object;
  #endif
  
-@@ -2259,7 +2266,7 @@ PHP_MINIT_FUNCTION(sync)
+@@ -2319,7 +2319,7 @@
  	memcpy(&sync_Semaphore_object_handlers, zend_get_std_object_handlers(), sizeof(zend_object_handlers));
  	sync_Semaphore_object_handlers.clone_obj = NULL;
  #if PHP_MAJOR_VERSION >= 7
@@ -43,7 +329,7 @@ index f235088..b0f7407 100644
  	sync_Semaphore_object_handlers.free_obj = sync_Semaphore_free_object;
  #endif
  
-@@ -2272,7 +2279,7 @@ PHP_MINIT_FUNCTION(sync)
+@@ -2332,7 +2332,7 @@
  	memcpy(&sync_Event_object_handlers, zend_get_std_object_handlers(), sizeof(zend_object_handlers));
  	sync_Event_object_handlers.clone_obj = NULL;
  #if PHP_MAJOR_VERSION >= 7
@@ -52,7 +338,7 @@ index f235088..b0f7407 100644
  	sync_Event_object_handlers.free_obj = sync_Event_free_object;
  #endif
  
-@@ -2285,7 +2292,7 @@ PHP_MINIT_FUNCTION(sync)
+@@ -2345,7 +2345,7 @@
  	memcpy(&sync_ReaderWriter_object_handlers, zend_get_std_object_handlers(), sizeof(zend_object_handlers));
  	sync_ReaderWriter_object_handlers.clone_obj = NULL;
  #if PHP_MAJOR_VERSION >= 7
@@ -61,7 +347,7 @@ index f235088..b0f7407 100644
  	sync_ReaderWriter_object_handlers.free_obj = sync_ReaderWriter_free_object;
  #endif
  
-@@ -2298,7 +2305,7 @@ PHP_MINIT_FUNCTION(sync)
+@@ -2358,7 +2358,7 @@
  	memcpy(&sync_SharedMemory_object_handlers, zend_get_std_object_handlers(), sizeof(zend_object_handlers));
  	sync_SharedMemory_object_handlers.clone_obj = NULL;
  #if PHP_MAJOR_VERSION >= 7
