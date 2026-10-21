@@ -5,7 +5,6 @@
     "Microsoft.Net.Component.4.8.SDK",
     "Microsoft.Net.Component.4.8.TargetingPack",
     "Microsoft.VisualStudio.Component.CoreEditor",
-    "Microsoft.VisualStudio.Component.DiagnosticTools",
     "Microsoft.VisualStudio.Component.Roslyn.Compiler",
     "Microsoft.VisualStudio.Component.TextTemplating",
     "Microsoft.VisualStudio.Component.VC.14.44.17.14.ATL",
