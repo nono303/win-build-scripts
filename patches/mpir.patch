@@ -1,0 +1,12 @@
+diff --git a/mpn/x86_64w/bulldozer/mul_basecase.asm b/mpn/x86_64w/bulldozer/mul_basecase.asm
+index c75f8788..4101ee48 100644
+--- a/mpn/x86_64w/bulldozer/mul_basecase.asm
++++ b/mpn/x86_64w/bulldozer/mul_basecase.asm
+@@ -1,6 +1,6 @@
+ ;  AMD64 mpn_mul_basecase optimised for AMD Bulldozer and Piledriver.
+ 
+-;  Contributed to the GNU project by Torbjörn Granlund.
++;  Contributed to the GNU project by TorbjÃ¶rn Granlund.
+ 
+ ;  Copyright 2003-2005, 2007, 2008, 2011-2013 Free Software Foundation, Inc.
+ 
