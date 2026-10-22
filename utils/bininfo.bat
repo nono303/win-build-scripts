@@ -15,4 +15,5 @@ if exist %2\. (
 	REM call do_php %PATH_UTILS%\sub\%1.php %PATH_INSTALL%\_geographiclib\bin %BININFO_LOG:\=/% %2 %3 nb:26 %4 %5 %6 %7
 	call do_php %PATH_UTILS%\sub\%1.php %PATH_INSTALL%\_proj\bin %BININFO_LOG:\=/% %2 %3 nb:20 %4 %5 %6 %7
 	call do_php %PATH_UTILS%\sub\%1.php %PATH_INSTALL%\_gdal\bin %BININFO_LOG:\=/% %2 %3 nb:62 %4 %5 %6 %7
+	call do_php %PATH_UTILS%\sub\%1.php %PATH_INSTALL%\_gdal\bin\gdalplugins %BININFO_LOG:\=/% %2 %3 nb:221 %4 %5 %6 %7
 )
