@@ -84,7 +84,7 @@ Content-Transfer-Encoding: 8bit
  1 file changed, 9 insertions(+), 9 deletions(-)
 
 diff --git a/geos.c b/geos.c
-index 4e7ecc4..216a424 100644
+index 8193ad3..67ee101 100644
 --- a/geos.c
 +++ b/geos.c
 @@ -144,9 +144,9 @@ typedef struct Proxy_t {
@@ -117,7 +117,7 @@ index 4e7ecc4..216a424 100644
      return ret;
  }
  
-@@ -3118,7 +3118,7 @@ PHP_MINIT_FUNCTION(geos)
+@@ -3138,7 +3138,7 @@ PHP_MINIT_FUNCTION(geos)
      memcpy(&WKTReader_object_handlers,
          zend_get_std_object_handlers(), sizeof(zend_object_handlers));
      WKTReader_object_handlers.clone_obj = NULL;
@@ -126,7 +126,7 @@ index 4e7ecc4..216a424 100644
      WKTReader_object_handlers.free_obj = WKTReader_dtor;
  
      /* WKTWriter */
-@@ -3128,7 +3128,7 @@ PHP_MINIT_FUNCTION(geos)
+@@ -3148,7 +3148,7 @@ PHP_MINIT_FUNCTION(geos)
      memcpy(&WKTWriter_object_handlers,
          zend_get_std_object_handlers(), sizeof(zend_object_handlers));
      WKTWriter_object_handlers.clone_obj = NULL;
@@ -135,7 +135,7 @@ index 4e7ecc4..216a424 100644
      WKTWriter_object_handlers.free_obj = WKTWriter_dtor;
  
      /* Geometry */
-@@ -3141,7 +3141,7 @@ PHP_MINIT_FUNCTION(geos)
+@@ -3161,7 +3161,7 @@ PHP_MINIT_FUNCTION(geos)
      /* Geometry serialization */
      Geometry_ce_ptr->serialize = Geometry_serialize;
      Geometry_ce_ptr->unserialize = Geometry_deserialize;
@@ -144,7 +144,7 @@ index 4e7ecc4..216a424 100644
      Geometry_object_handlers.free_obj = Geometry_dtor;
  
      /* WKBWriter */
-@@ -3151,7 +3151,7 @@ PHP_MINIT_FUNCTION(geos)
+@@ -3171,7 +3171,7 @@ PHP_MINIT_FUNCTION(geos)
      memcpy(&WKBWriter_object_handlers,
          zend_get_std_object_handlers(), sizeof(zend_object_handlers));
      WKBWriter_object_handlers.clone_obj = NULL;
@@ -153,7 +153,7 @@ index 4e7ecc4..216a424 100644
      WKBWriter_object_handlers.free_obj = WKBWriter_dtor;
  
      /* WKBReader */
-@@ -3161,7 +3161,7 @@ PHP_MINIT_FUNCTION(geos)
+@@ -3181,7 +3181,7 @@ PHP_MINIT_FUNCTION(geos)
      memcpy(&WKBReader_object_handlers,
          zend_get_std_object_handlers(), sizeof(zend_object_handlers));
      WKBReader_object_handlers.clone_obj = NULL;
