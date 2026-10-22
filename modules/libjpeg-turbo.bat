@@ -28,22 +28,21 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 if "%ARG_CMOPTS%"=="1" (exit /B)
 
 %PATH_BIN_CYGWIN%\bash --login -c '%CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"'
-for %%Y in (cmake_install.cmake build.ninja) do (sed -i 's/-static\./_static\./g' %CYGPATH_BUILD%/%1/%%Y)
-REM fix unexistant option -nologo for nasm
-sed -i 's/ -nologo//g' %CYGPATH_BUILD%/%1/build.ninja
-
-for %%X in (dll pdb) do (
-	for %%Y in (sharedlib/cmake_install.cmake build.ninja) do (sed -i 's/jpeg8\.%%X/jpeg\.%%X/g' %CYGPATH_BUILD%/%1/%%Y)
+for %%Y in (cmake_install.cmake build.ninja) do (
+	sed -i 's/-static\./_static\./g' %CYGPATH_BUILD%/%1/%%Y
 )
+	REM fix unexistant option -nologo for nasm
+sed -i 's/ -nologo//g' %CYGPATH_BUILD%/%1/build.ninja
+for %%X in (dll pdb) do (
+	for %%Y in (sharedlib/cmake_install.cmake build.ninja) do (
+		sed -i 's/jpeg8\.%%X/jpeg\.%%X/g' %CYGPATH_BUILD%/%1/%%Y
+	)
+)
+
+sed -i -E 's/TARGET_COMPILE_PDB.*/TARGET_COMPILE_PDB = %%X\.pdb/g' %CYGPATH_BUILD%/%1/build.ninja
+%NINJA% install
 
 for %%X in (turbojpeg jpeg) do (
-	sed -i -E 's/TARGET_COMPILE_PDB.*/TARGET_COMPILE_PDB = %%X\.pdb/g' %CYGPATH_BUILD%/%1/build.ninja
-	%NINJA% %%X
-	call %PATH_UTILS%\fileutils mv %PATH_BUILD%\%1\%%X.lib %PATH_INSTALL%\lib\%%X.lib
-	for %%Y in (pdb dll) do (call %PATH_UTILS%\fileutils mv %PATH_BUILD%\%1\%%X.%%Y %PATH_INSTALL%\bin\%%X.%%Y)
-	del /S %PATH_BUILD%\%1\*.obj
+	call %PATH_UTILS%\fileutils mv %PATH_BUILD%\%1\%%X.pdb %PATH_INSTALL%\bin\%%X.pdb
 	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X.dll
-)
-for %%X in (%PATH_BUILD%\%1\jconfig.h %PATH_SRC%\%1\src\jerror.h %PATH_SRC%\%1\src\jmorecfg.h %PATH_SRC%\%1\src\jpeglib.h %PATH_SRC%\%1\src\turbojpeg.h) do (
-	call %PATH_UTILS%\fileutils cp %%X %PATH_INSTALL%\include\*
 )
