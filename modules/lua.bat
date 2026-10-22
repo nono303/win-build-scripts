@@ -6,6 +6,10 @@ call cl /nologo /c /DLUA_BUILD_AS_DLL /Fdliblua.pdb ^
 /Zc:inline ^
 /O2 ^
 /Ob3 ^
+/Oi ^
+/Ot ^
+/Oy ^
+/fp:fast ^
 /Zf ^
 /Zi ^
 /FS ^

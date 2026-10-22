@@ -18,6 +18,8 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 if "%ARG_CMOPTS%"=="1" (exit /B)
 
 %PATH_BIN_CYGWIN%\bash --login -c '%CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"'
+	REM warning D9025 : overriding '/fp:fast' with '/fp:precise'
+sed -i -E 's/\/fp:fast//g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
 
 for %%X in (geos.dll geos_c.dll geosop.exe) do (

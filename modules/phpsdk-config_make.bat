@@ -147,7 +147,7 @@ sed -i -E 's/incremental:no/incremental:no \/LTCG \/NODEFAULTLIB:libcmt.lib \/CG
 			REM Both not compatible	https://developercommunity.visualstudio.com/t/C-and-C-standard-options-should-not-be/1289751
 			REM C++ required: C:\sdk\release\vs18_x64-avx2\include\unicode/uversion.h(183): error C2429: language feature 'nested-namespace-definition' requires compiler flag '/std:c++17'
 			REM ext/intl is forced to 17 in config.w32 and not compatible with latest: works with /batch/patches/php-src/x.x/ext-intl.patch
-sed -i 's/\/Ox/\/std:c++%C_STD_VER% \/O2 \/Ob3 \/cgthreads8 \/GL \/Zf \/Gy \/FS \/D PHP_ICONV_PREFIX=%PATH_INSTALL:\=\/%/g' %CYGPATH_SRC%/php-src/Makefile
+sed -i 's/\/Ox/\/std:c++%C_STD_VER% \/O2 \/Ob3 \/Oi \/Ot \/Oy \/fp:fast \/MP%NUMBER_OF_PROCESSORS% \/cgthreads8 \/GL \/Zf \/Gy \/FS \/D PHP_ICONV_PREFIX=%PATH_INSTALL:\=\/%/g' %CYGPATH_SRC%/php-src/Makefile
 	REM no warn
 sed -i 's/d4996//g' %CYGPATH_SRC%/php-src/Makefile
 	REM fix for iconv shared : LINK : fatal error LNK1181: cannot open input file 'php_iconv.lib'

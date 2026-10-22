@@ -41,7 +41,7 @@ zlib ^
 zlib-dynamic ^
 --with-zlib-include=%PATH_INSTALL:\=/%/include ^
 --with-zlib-lib=z ^
-/DNDEBUG /Ob3 /GL /Gw /Zc:inline /Zf /FS /MP%NUMBER_OF_PROCESSORS% /cgthreads8 %__CNFC% %AVX% ^
+/DNDEBUG /Ob3 /Oi /Ot /Oy /fp:fast /GL /Gw /Zc:inline /Zf /FS /MP%NUMBER_OF_PROCESSORS% /cgthreads8 %__CNFC% %AVX% ^
 %CONFIGURE_OPENSSL%
 
 	REM nmake mono-threaded build : slow

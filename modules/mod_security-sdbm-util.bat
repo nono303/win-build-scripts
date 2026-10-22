@@ -1,6 +1,6 @@
 @echo off && call %PATH_UTILS%\init.bat %1 
 
-sed -i 's/DNDEBUG/DNDEBUG \/w \/Gw \/Gy \/Zc:inline \/O2 \/Ob3 \/Zf \/Zi \/FS \/GL \/MD \/MP%NUMBER_OF_PROCESSORS% \/cgthreads8%AVX_SED% \/std:c%C_STD_VER%/g' %CYGPATH_SRC%/%1/Makefile.win
+sed -i 's/DNDEBUG/DNDEBUG \/w \/Gw \/Gy \/Zc:inline \/O2 \/Ob3 \/Oi \/Ot \/Oy \/fp:fast \/Zf \/Zi \/FS \/GL \/MD \/MP%NUMBER_OF_PROCESSORS% \/cgthreads8%AVX_SED% \/std:c%C_STD_VER%/g' %CYGPATH_SRC%/%1/Makefile.win
 sed -i 's/ldflags = \/nologo/ldflags =\/nologo \/machine:%ARCH% \/DEBUG \/NOLOGO \/LTCG \/OPT:REF,ICF \/CGTHREADS:8/g' %CYGPATH_SRC%/%1/Makefile.win
 
 NMAKE %NMAKE_OPTS% -f Makefile.win ^

@@ -52,6 +52,10 @@
 				<MultiProcessorCompilation>true</MultiProcessorCompilation>
 				<FunctionLevelLinking>true</FunctionLevelLinking>
 				<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+				<EnableIntrinsicFunctions>true</EnableIntrinsicFunctions>
+				<FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+				<OmitFramePointers>true</OmitFramePointers>
+				<FloatingPointModel>Fast</FloatingPointModel>
 			</ClCompile>",
 			"<RuntimeLibrary>[^<]+" => "<RuntimeLibrary>MultiThreadedDLL",
 			"<AdditionalOptions>" => "<AdditionalOptions>/Zc:inline /FS /Zf /Gw /Ob3 /cgthreads8 ",
