@@ -33,16 +33,8 @@ for %%Y in (cmake_install.cmake build.ninja) do (
 )
 	REM fix unexistant option -nologo for nasm
 sed -i 's/ -nologo//g' %CYGPATH_BUILD%/%1/build.ninja
-for %%X in (dll pdb) do (
-	for %%Y in (sharedlib/cmake_install.cmake build.ninja) do (
-		sed -i 's/jpeg8\.%%X/jpeg\.%%X/g' %CYGPATH_BUILD%/%1/%%Y
-	)
-)
 
 sed -i -E 's/TARGET_COMPILE_PDB.*/TARGET_COMPILE_PDB = %%X\.pdb/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
 
-for %%X in (turbojpeg jpeg) do (
-	call %PATH_UTILS%\fileutils mv %PATH_BUILD%\%1\%%X.pdb %PATH_INSTALL%\bin\%%X.pdb
-	call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X.dll
-)
+for %%X in (turbojpeg jpeg8) do (call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\%%X.dll)
