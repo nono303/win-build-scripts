@@ -95,7 +95,7 @@ index acb7c50cb9e..62639d16b3b 100644
  	const char *found;
  	size_t haystack_len, needle_len, locale_len = 0;
  	int32_t ret_pos, uchar_pos;
-@@ -931,7 +931,7 @@ U_CFUNC PHP_FUNCTION(grapheme_levenshtein)
+@@ -940,7 +940,7 @@ U_CFUNC PHP_FUNCTION(grapheme_levenshtein)
  	zend_long cost_ins = 1;
  	zend_long cost_rep = 1;
  	zend_long cost_del = 1;
