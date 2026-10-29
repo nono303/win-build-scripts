@@ -10,7 +10,7 @@ if not exist %PATH_SRC%\. mkdir %PATH_SRC%
 cd /D %PATH_SRC%
 git clone https://aomedia.googlesource.com/aom aom
 cd /D aom
-git checkout tags/v3.15.2
+git checkout tags/v3.15.3-rc1
 cd /D ..
 git clone https://github.com/apache/apr.git apr
 cd /D apr
@@ -22,7 +22,7 @@ git checkout 1.7.x
 cd /D ..
 git clone https://github.com/google/brotli.git brotli
 cd /D brotli
-git checkout tags/v1.2.0
+git checkout tags/go/brotli/v1.2.1
 cd /D ..
 git clone https://gitlab.com/bzip2/bzip2.git bzip2
 cd /D bzip2
@@ -30,7 +30,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/c-ares/c-ares.git cares
 cd /D cares
-git checkout tags/v1.34.8
+git checkout tags/v1.34.9
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
@@ -42,7 +42,7 @@ git checkout tags/1.5.4
 cd /D ..
 git clone https://github.com/himeshsameera/Dependencies dependencies
 cd /D dependencies
-git checkout master
+git checkout tags/v2.4.0
 cd /D ..
 git clone https://github.com/nono303/fit2gpx.git fit2gpx
 cd /D fit2gpx
@@ -78,7 +78,7 @@ git checkout tags/2.4.69
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
-git checkout main
+git checkout 
 cd /D ..
 git clone https://github.com/akheron/jansson.git jansson
 cd /D jansson
@@ -94,7 +94,7 @@ git checkout tags/v1.4.2
 cd /D ..
 git clone https://github.com/hyperrealm/libconfig.git libconfig
 cd /D libconfig
-git checkout tags/v1.8.2
+git checkout tags/v1.8.3
 cd /D ..
 git clone https://github.com/ebiggers/libdeflate.git libdeflate
 cd /D libdeflate
@@ -122,7 +122,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/strukturag/libheif.git libheif
 cd /D libheif
-git checkout tags/v1.23.6
+git checkout tags/v1.23.7
 cd /D ..
 git clone https://github.com/kiyolee/libiconv-win-build.git libiconv
 cd /D libiconv
@@ -130,7 +130,7 @@ git checkout tags/v1.19
 cd /D ..
 git clone https://github.com/libjpeg-turbo/libjpeg-turbo libjpeg-turbo
 cd /D libjpeg-turbo
-git checkout tags/3.2.0
+git checkout tags/3.2.1
 cd /D ..
 git clone https://git.tukaani.org/xz.git liblzma
 cd /D liblzma
@@ -302,7 +302,7 @@ git checkout tags/2.2.0
 cd /D ..
 git clone https://github.com/kjdev/php-ext-brotli.git php-ext-brotli
 cd /D php-ext-brotli
-git checkout tags/0.21.0
+git checkout tags/0.21.1
 cd /D ..
 git clone https://github.com/kjdev/php-ext-zstd.git php-ext-zstd
 cd /D php-ext-zstd
@@ -326,11 +326,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/php/php-sdk-binary-tools.git php-sdk
 cd /D php-sdk
-git checkout tags/php-sdk-2.8.4
+git checkout tags/php-sdk-2.9.0
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.6.0RC3
+git checkout master
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
@@ -362,7 +362,7 @@ git checkout trunk
 cd /D ..
 git clone https://github.com/rhuijben/sqlite-amalgamation sqlite
 cd /D sqlite
-git checkout tags/3.54.0
+git checkout tags/3.54.1
 cd /D ..
 git clone https://github.com/yrutschle/sslh.git sslh
 cd /D sslh
