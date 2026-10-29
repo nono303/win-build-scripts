@@ -103,7 +103,8 @@ C:\Windows\SysWOW64;^
 C:\Windows\SysWOW64\wbem;^
 C:\Windows\system32;^
 C:\Windows\System32\Wbem;^
-C:\Windows\System32\WindowsPowerShell\v1.0\;
+C:\Windows\System32\WindowsPowerShell\v1.0\;^
+C:\Program Files\dotnet\
 
 cd /D %PATH_BATCH%
 
@@ -175,6 +176,8 @@ set LOCAL_COPY=1
 set LOCAL_PATH_FIT2GPX=B:\bin
 set LOCAL_PATH_MOBAC=C:\PROGRA~2\mobac
 set LOCAL_PATH_MOBAC2=F:\logiciels\_Carto
+set LOCAL_PATH_DEPENDENCIES=C:\PROGRA~1\Dependencies
+set LOCAL_PATH_DEPENDENCIES2=B:\PROGRA~1\Dependencies
 set LOCAL_PATH_GEOGRAPHICLIB=B:\serveur\_gis\geographiclib
 set LOCAL_PATH_PHP=C:\PROGRA~1\php
 set LOCAL_PATH_CURLCA=C:\bin
