@@ -1,8 +1,65 @@
 # changelog
 
 
+## 1.19.1 _(2026-10-29)_
+
+*  remove nuget (now useless) upgrade tools & src
+`README.md`
+`SRC_VERSION.md`
+`config/python.pip`
+`utils/srccreate.bat`
+*  a3314e70188
+`patches/php-src/8.6/ext-intl.patch`
+*  dependencies: 2.3.0 > 2.4.0 * Microsoft.NetCore.Component.SDK required   * C:\Program Files\dotnet\ required in path * restore: nuget > msbuild target * add 2 local copy
+`config/.vsconfig`
+`env_sample.bat`
+`modules/dependencies.bat`
+`patches/dependencies.patch`
+*  https://github.com/BrianGladman/mpir/commit/97cba292f84273364fbf51517ca93bafbef0a463
+`patches/mpir.patch`
+*  2.9.0
+`patches/php-sdk.patch`
+*  + php-src detached on branch head instead of tag
+`utils/sub/_functions-version.php`
+*  add cflags * /Oi /Ot /Oy /fp:fast * <EnableIntrinsicFunctions>true</EnableIntrinsicFunctions><FavorSizeOrSpeed>Speed</FavorSizeOrSpeed><OmitFramePointers>true</OmitFramePointers><FloatingPointModel>Fast</FloatingPointModel>
+`modules/geos.bat`
+`modules/lua.bat`
+`modules/mod_security-sdbm-util.bat`
+`modules/openssl.bat`
+`modules/phpsdk-config_make.bat`
+`utils/meson.sh`
+`utils/msbuild.php`
+`utils/ninja.sh`
+*  remove hack to rename jpeg8.dll > jpeg.dll issue with libtiff using  /lib/cmake/libjpeg-turbo/libjpeg-turboTargets-relwithdebinfo.cmake
+`modules/libjpeg-turbo.bat`
+*  https://github.com/BrianGladman/mpir/issues/38
+`patches/mpir.patch`
+*  add %PATH_INSTALL%\_gdal\bin\gdalplugins
+`utils/bininfo.bat`
+*  pip with `--no-binary :all:`
+`upgrade_pip.bat`
+*  1a1c6a9
+`patches/php-geos.patch`
+*  refactor with a clean install for libturbojpeg & libjpeg
+`modules/libjpeg-turbo.bat`
+*  GRADLEVER: 9.8.1 > 9.8.2
+`env_sample.bat`
+*  python: 3.14 > 3.15 msvc: remove useless DiagnosticTools
+`config/.vsconfig`
+`config/python.pip`
+*  1.34.9
+`patches/cares.patch`
+*  patch ext/intl for /std:c++ `latest` instead of `17`
+`modules/phpsdk-config_make.bat`
+`patches/php-src/8.6/ext-intl.patch`
+*  add * https://github.com/php/pecl-system-sync/pull/9 * https://github.com/php/pecl-system-sync/pull/10 * https://github.com/php/pecl-system-sync/pull/11
+`patches/pecl-system-sync.patch`
+
+
 ## 1.19.0 _(2026-10-16)_
 
+*  1.19.0
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
