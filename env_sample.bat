@@ -133,10 +133,11 @@ set MSBUILD_OPTS_COM=/nologo ^
 	/p:CL_MPCount=%NUMBER_OF_PROCESSORS% ^
 	/m:%NUMBER_OF_PROCESSORS% ^
 	/p:RunCodeAnalysis=false ^
-	/p:DebugType=None ^
+	/p:DebugType=pdbonly ^
 	/p:DebugSymbols=true ^
 	/p:WindowsTargetPlatformVersion=%WKITVER% ^
-	/p:PlatformToolset=v%PTFTS%
+	/p:PlatformToolset=v%PTFTS% ^
+	/p:TargetFrameworkVersion=v%DOTNETVER%
 set MSBUILD_OPTS_DBG=%MSBUILD_OPTS_COM% ^
 	/clp:ForceConsoleColor;EnableMPLogging;Summary;ShowCommandLine ^
 	/v:d
