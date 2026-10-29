@@ -1,11 +1,8 @@
- bin/phpsdk_setshell.bat | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
 diff --git a/bin/phpsdk_setshell.bat b/bin/phpsdk_setshell.bat
-index 8c41734..0dcb846 100644
+index a8164d8..ab9b175 100755
 --- a/bin/phpsdk_setshell.bat
 +++ b/bin/phpsdk_setshell.bat
-@@ -211,7 +211,7 @@ if 15 gtr %PHP_SDK_VS_NUM% (
+@@ -214,7 +214,7 @@ if 15 gtr %PHP_SDK_VS_NUM% (
      )
  ) else (
      if NOT "%TOOLSET%"=="" (
