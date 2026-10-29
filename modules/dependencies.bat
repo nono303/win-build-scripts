@@ -4,13 +4,15 @@ if %ARG_KEEPSRC% == 0 (call do_php %PATH_UTILS%/msbuild.php "%PATH_SRC%/%1" %AVX
 
 set OUTDIR_CONF=Release
 
-if exist %SRC%\%1\build\obj\. rmdir /S /Q %SRC%\%1\build\obj
-if exist %SRC%\%1\build\x64\. rmdir /S /Q %SRC%\%1\build\x64
+if exist %PATH_SRC%\%1\build\obj\. rmdir /S /Q %PATH_SRC%\%1\build\obj
+if exist %PATH_SRC%\%1\build\x64\. rmdir /S /Q %PATH_SRC%\%1\build\x64
 
 MSBuild.exe Dependencies.slnx %MSBUILD_OPTS% ^
-/t:clean,restore,DependenciesGui ^
+/restore ^
+/t:clean,DependenciesGui ^
 /p:Configuration=%OUTDIR_CONF% ^
-/p:Platform="%ARCH%"
+/p:Platform="%ARCH%" ^
+/p:Version=%GET_VERSION%
 
 if exist %PATH_INSTALL%\_%1\. rmdir /S /Q %PATH_INSTALL%\_%1
 mkdir %PATH_INSTALL%\_%1
