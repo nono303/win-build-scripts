@@ -19,6 +19,9 @@
 
 	global $verfromfile;
 	$verfromfile = [
+		// detached on branch
+		"php-src"	=> ["/AC_INIT\(\[PHP\],\[([^\]]+)\]/",
+									PATH_SRC."/php-src/configure.ac"],
 		// dirty tag
 		"icu"	=> ["/#define U_ICU_VERSION \"([^\"]+)\"/",
 									PATH_SRC."/icu/icu4c/source/common/unicode/uvernum.h"],
