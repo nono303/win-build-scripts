@@ -40,6 +40,8 @@ set PATH_GITHUB_SSLH=D:\github\NONO_sslh
 	REM JDK root (gradle projects, java_hl for subversion)
 set JAVA_HOME=%PATH_SOFTS%\openjdk
 set GRADLE_USER_HOME=%PATH_SOFTS%\gradle
+	REM harlink C:\Users\nono\.m2\repository <> S:\sdk\maven_repository
+set MAVEN_HOME=S:\sdk\maven_repository
 
 REM ########################## BIN PATH
 set PATH_VS=%PATH_SOFTS%\msvs\vs18
@@ -175,7 +177,7 @@ REM ########################## LOCAL COPY PATH
 REM copy MOBAC, FIT2GPX, PHP & GEOGRAPHICLIB release to LOCAL_PATH_XXX
 set LOCAL_COPY=1
 set LOCAL_PATH_FIT2GPX=B:\bin
-set LOCAL_PATH_MOBAC=C:\PROGRA~2\mobac
+set LOCAL_PATH_MOBAC=C:\PROGRA~1\mobac
 set LOCAL_PATH_MOBAC2=F:\logiciels\_Carto
 set LOCAL_PATH_DEPENDENCIES=C:\PROGRA~1\Dependencies
 set LOCAL_PATH_DEPENDENCIES2=B:\PROGRA~1\Dependencies
