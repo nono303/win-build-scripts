@@ -1,47 +1,8 @@
-diff --git a/mod_http2/h2_mplx.c b/mod_http2/h2_mplx.c
-index 8053f60..9c310c1 100644
---- a/modules/http2/h2_mplx.c
-+++ b/modules/http2/h2_mplx.c
-@@ -1268,10 +1268,17 @@ static apr_status_t mplx_pollset_poll(h2_mplx *m, apr_interval_time_t timeout,
-             H2_MPLX_LEAVE(m);
-             rv = apr_pollset_poll(m->pollset, timeout >= 0? timeout : -1, &nresults, &results);
-             H2_MPLX_ENTER_ALWAYS(m);
-+			// ap_log_cerror(APLOG_MARK, APLOG_ERR, rv, m->c1, APLOGNO(10310) H2_MPLX_MSG(m, "loop rv=%d eintr=%d shutdown=%d aborted=%d pcount=%d"),(int)rv,APR_STATUS_IS_EINTR(rv),m->shutdown,m->aborted,m->processing_count);
-             if (APR_STATUS_IS_EINTR(rv) && m->shutdown) {
-+#ifdef _WIN32
-+            /* See https://github.com/icing/mod_h2/issues/277
-+             * WSAPoll seems to always deliver EINTR during server graceful
-+             * restarts. Treat this is an error condition */
-+#else
-                 if (!m->aborted) {
-                     rv = APR_SUCCESS;
-                 }
-+#endif
-                 goto cleanup;
-             }
-         } while (APR_STATUS_IS_EINTR(rv));
-
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 628cf76535..2fb7fcfc2c 100644
+index 1d57889b18..9ebe2c5c88 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -21,12 +21,23 @@
- 
- PROJECT(HTTPD C)
- 
-+# SET(mod_md_src "modules/md")
-+SET(mod_md_src "../mod_md/src")
-+SET(mod_suffix ".so")
-+
-+# https://discourse.cmake.org/t/how-to-distinguish-windows-architecture/5104
-+if (CMAKE_SIZEOF_VOID_P EQUAL 4)
-+    SET(diag_bits 32)
-+ELSEIF(CMAKE_SIZEOF_VOID_P EQUAL 8)
-+    SET(diag_bits 64)
-+endif()
-+
- INCLUDE(CheckSymbolExists)
- INCLUDE(CheckCSourceCompiles)
+@@ -26,7 +26,7 @@ INCLUDE(CheckCSourceCompiles)
  INCLUDE("build/build-modules-c.cmake")
  
  FIND_PACKAGE(LibXml2)
@@ -50,7 +11,7 @@ index 628cf76535..2fb7fcfc2c 100644
  FIND_PACKAGE(OpenSSL)
  FIND_PACKAGE(ZLIB)
  FIND_PACKAGE(CURL)
-@@ -249,7 +260,7 @@
+@@ -249,7 +249,7 @@ MESSAGE(STATUS "")
  MESSAGE(STATUS "Summary of feature detection:")
  MESSAGE(STATUS "")
  MESSAGE(STATUS "LIBXML2_FOUND ............ : ${LIBXML2_FOUND}")
@@ -59,16 +20,7 @@ index 628cf76535..2fb7fcfc2c 100644
  MESSAGE(STATUS "NGHTTP2_FOUND ............ : ${NGHTTP2_FOUND}")
  MESSAGE(STATUS "OPENSSL_FOUND ............ : ${OPENSSL_FOUND}")
  MESSAGE(STATUS "ZLIB_FOUND ............... : ${ZLIB_FOUND}")
-@@ -295,7 +306,7 @@
-   "modules/aaa/mod_authn_file+A+file-based authentication control"
-   "modules/aaa/mod_authn_socache+I+Cached authentication control"
-   "modules/aaa/mod_authnz_fcgi+I+FastCGI authorizer-based authentication and authorization"
--  "modules/aaa/mod_authnz_ldap+i+LDAP based authentication"
-+  "modules/aaa/mod_authnz_ldap+I+LDAP based authentication"
-   "modules/aaa/mod_authz_core+A+core authorization provider vector module"
-   "modules/aaa/mod_authz_dbd+I+SQL based authorization and Login/Session support"
-   "modules/aaa/mod_authz_dbm+I+DBM-based authorization control"
-@@ -309,7 +320,7 @@
+@@ -309,7 +309,7 @@ SET(MODULE_LIST
    "modules/cache/mod_cache_socache+I+shared object caching module"
    "modules/cache/mod_file_cache+I+File cache"
    "modules/cache/mod_socache_dbm+I+dbm small object cache provider"
@@ -77,69 +29,7 @@ index 628cf76535..2fb7fcfc2c 100644
    "modules/cache/mod_socache_memcache+I+memcache small object cache provider"
    "modules/cache/mod_socache_shmcb+I+ shmcb small object cache provider"
    "modules/cache/mod_socache_redis+I+redis small object cache provider"
-@@ -328,36 +339,36 @@
-   "modules/examples/mod_case_filter_in+O+Example uppercase conversion input filter"
-   "modules/examples/mod_example_hooks+O+Example hook callback handler module"
-   "modules/examples/mod_example_ipc+O+Example of shared memory and mutex usage"
--  "modules/filters/mod_brotli+i+Brotli compression support"
-+  "modules/filters/mod_brotli+O+Brotli compression support"
-   "modules/filters/mod_buffer+I+Filter Buffering"
--  "modules/filters/mod_charset_lite+i+character set translation"
-+  "modules/filters/mod_charset_lite+I+character set translation"
-   "modules/filters/mod_data+O+RFC2397 data encoder"
--  "modules/filters/mod_deflate+i+Deflate transfer encoding support"
-+  "modules/filters/mod_deflate+I+Deflate transfer encoding support"
-   "modules/filters/mod_ext_filter+I+external filter module"
-   "modules/filters/mod_filter+A+Smart Filtering"
-   "modules/filters/mod_include+I+Server Side Includes"
--  "modules/filters/mod_proxy_html+i+Fix HTML Links in a Reverse Proxy"
-+  "modules/filters/mod_proxy_html+O+Fix HTML Links in a Reverse Proxy"
-   "modules/filters/mod_ratelimit+I+Output Bandwidth Limiting"
-   "modules/filters/mod_reflector+O+Reflect request through the output filter stack"
-   "modules/filters/mod_reqtimeout+A+Limit time waiting for request from client"
-   "modules/filters/mod_request+I+Request Body Filtering"
-   "modules/filters/mod_sed+I+filter request and/or response bodies through sed"
-   "modules/filters/mod_substitute+I+response content rewrite-like filtering"
--  "modules/filters/mod_xml2enc+i+i18n support for markup filters"
-+  "modules/filters/mod_xml2enc+O+i18n support for markup filters"
-   "modules/generators/mod_asis+I+as-is filetypes"
-   "modules/generators/mod_autoindex+A+directory listing"
-   "modules/generators/mod_cgi+I+CGI scripts"
-   "modules/generators/mod_info+I+server information"
-   "modules/generators/mod_status+I+process/thread monitoring"
-   "modules/http/mod_mime+A+mapping of file-extension to MIME.  Disabling this module is normally not recommended."
--  "modules/http2/mod_http2+i+HTTP/2 protocol support"
--  "modules/ldap/mod_ldap+i+LDAP caching and connection pooling services"
-+  "modules/http2/mod_http2+O+HTTP/2 protocol support"
-+  "modules/ldap/mod_ldap+I+LDAP caching and connection pooling services"
-   "modules/loggers/mod_log_config+A+logging configuration.  You won't be able to log requests to the server without this module."
-   "modules/loggers/mod_log_debug+I+configurable debug logging"
-   "modules/loggers/mod_log_forensic+I+forensic logging"
-   "modules/loggers/mod_logio+I+input and output logging"
--  "modules/lua/mod_lua+i+Apache Lua Framework"
--  "modules/md/mod_md+i+Apache Managed Domains (Certificates)"
-+  "modules/lua/mod_lua+O+Apache Lua Framework"
-+  "${mod_md_src}/mod_md+O+Apache Managed Domains (Certificates)"
-   "modules/mappers/mod_actions+I+Action triggering on requests"
-   "modules/mappers/mod_alias+A+mapping of requests to different filesystem parts"
-   "modules/mappers/mod_dir+A+directory request handling"
-@@ -393,19 +404,28 @@
-   "modules/proxy/mod_proxy_hcheck+I+Apache proxy health check module.  Requires and is enabled by --enable-proxy."
-   "modules/proxy/mod_proxy_scgi+I+Apache proxy SCGI module.  Requires and is enabled by --enable-proxy."
-   "modules/proxy/mod_proxy_wstunnel+I+Apache proxy Websocket Tunnel module.  Requires and is enabled by --enable-proxy."
--  "modules/http2/mod_proxy_http2+i+Apache proxy HTTP/2 module.  Requires --enable-proxy."
-+  "modules/http2/mod_proxy_http2+O+Apache proxy HTTP/2 module.  Requires --enable-proxy."
-   "modules/session/mod_session+I+session module"
-   "modules/session/mod_session_cookie+I+session cookie module"
--  "modules/session/mod_session_crypto+i+session crypto module"
-+  "modules/session/mod_session_crypto+I+session crypto module"
-   "modules/session/mod_session_dbd+I+session dbd module"
-   "modules/slotmem/mod_slotmem_plain+I+slotmem provider that uses plain memory"
-   "modules/slotmem/mod_slotmem_shm+I+slotmem provider that uses shared memory"
--  "modules/ssl/mod_ssl+i+SSL/TLS support"
-+  "modules/ssl/mod_ssl+I+SSL/TLS support"
-   "modules/test/mod_dialup+O+rate limits static files to dialup modem speeds"
-   "modules/test/mod_optional_fn_export+O+example optional function exporter"
+@@ -406,6 +406,15 @@ SET(MODULE_LIST
    "modules/test/mod_optional_fn_import+O+example optional function importer"
    "modules/test/mod_optional_hook_export+O+example optional hook exporter"
    "modules/test/mod_optional_hook_import+O+example optional hook importer"
@@ -155,7 +45,7 @@ index 628cf76535..2fb7fcfc2c 100644
  )
  
  IF(BUILD_TEST_MODULES)
-@@ -484,7 +504,7 @@
+@@ -484,7 +493,7 @@ SET(mod_cache_extra_defines          CACHE_DECLARE_EXPORT)
  SET(mod_cache_extra_sources
    modules/cache/cache_storage.c      modules/cache/cache_util.c
  )
@@ -164,7 +54,7 @@ index 628cf76535..2fb7fcfc2c 100644
  SET(mod_cache_disk_extra_libs        mod_cache)
  SET(mod_cache_socache_extra_libs     mod_cache)
  SET(mod_charset_lite_requires        APR_HAS_XLATE)
-@@ -494,7 +514,7 @@
+@@ -494,7 +503,7 @@ SET(mod_dav_extra_sources
    modules/dav/main/std_liveprop.c    modules/dav/main/providers.c
    modules/dav/main/util.c            modules/dav/main/util_lock.c
  )
@@ -173,7 +63,7 @@ index 628cf76535..2fb7fcfc2c 100644
  SET(mod_dav_fs_extra_sources
    modules/dav/fs/dbm.c               modules/dav/fs/lock.c
    modules/dav/fs/repos.c
-@@ -546,30 +566,48 @@
+@@ -546,10 +555,11 @@ SET(mod_lua_extra_sources
    modules/lua/lua_passwd.c           modules/lua/lua_request.c
    modules/lua/lua_vmprep.c           modules/lua/lua_dbd.c
  )
@@ -184,52 +74,9 @@ index 628cf76535..2fb7fcfc2c 100644
  SET(mod_md_extra_libs                ${OPENSSL_LIBRARIES} ${CURL_LIBRARIES} ${JANSSON_LIBRARIES} mod_watchdog)
 +SET(mod_md_extra_defines             CURL_STATICLIB)
  SET(mod_md_extra_sources
--  modules/md/md_acme.c               modules/md/md_acme_acct.c
--  modules/md/md_acme_authz.c         modules/md/md_acme_drive.c
--  modules/md/md_acmev2_drive.c       modules/md/md_event.c
--  modules/md/md_acme_order.c         modules/md/md_core.c
--  modules/md/md_curl.c               modules/md/md_crypt.c
--  modules/md/md_http.c               modules/md/md_json.c
--  modules/md/md_jws.c                modules/md/md_log.c
--  modules/md/md_result.c             modules/md/md_reg.c
--  modules/md/md_status.c             modules/md/md_store.c
--  modules/md/md_store_fs.c           modules/md/md_time.c
--  modules/md/md_ocsp.c               modules/md/md_util.c               
--  modules/md/mod_md_config.c         modules/md/mod_md_drive.c
--  modules/md/mod_md_os.c             modules/md/mod_md_status.c
--  modules/md/mod_md_ocsp.c
-+  ${mod_md_src}/md_acme.c
-+  ${mod_md_src}/md_acmev2_drive.c
-+  ${mod_md_src}/md_acme_acct.c
-+  ${mod_md_src}/md_acme_authz.c
-+  ${mod_md_src}/md_acme_drive.c
-+  ${mod_md_src}/md_acme_order.c
-+  ${mod_md_src}/md_cmd_acme.c
-+  ${mod_md_src}/md_cmd_main.c
-+  ${mod_md_src}/md_cmd_reg.c
-+  ${mod_md_src}/md_cmd_store.c
-+  ${mod_md_src}/md_core.c
-+  ${mod_md_src}/md_crypt.c
-+  ${mod_md_src}/md_curl.c
-+  ${mod_md_src}/md_event.c
-+  ${mod_md_src}/md_http.c
-+  ${mod_md_src}/md_json.c
-+  ${mod_md_src}/md_jws.c
-+  ${mod_md_src}/md_log.c
-+  ${mod_md_src}/md_ocsp.c
-+  ${mod_md_src}/md_reg.c
-+  ${mod_md_src}/md_result.c
-+  ${mod_md_src}/md_status.c
-+  ${mod_md_src}/md_store.c
-+  ${mod_md_src}/md_store_fs.c
-+  ${mod_md_src}/md_time.c
-+  ${mod_md_src}/md_util.c
-+  ${mod_md_src}/mod_md_config.c
-+  ${mod_md_src}/mod_md_drive.c
-+  ${mod_md_src}/mod_md_ocsp.c
-+  ${mod_md_src}/mod_md_os.c
-+  ${mod_md_src}/mod_md_status.c
- )
+   modules/md/md_acme.c               modules/md/md_acme_acct.c
+   modules/md/md_acme_authz.c         modules/md/md_acme_drive.c
+@@ -569,7 +579,7 @@ SET(mod_md_extra_sources
  SET(mod_optional_hook_export_extra_defines AP_DECLARE_EXPORT) # bogus reuse of core API prefix
  SET(mod_proxy_extra_defines          PROXY_DECLARE_EXPORT)
  SET(mod_proxy_extra_sources          modules/proxy/proxy_util.c)
@@ -238,7 +85,7 @@ index 628cf76535..2fb7fcfc2c 100644
  SET(mod_proxy_ajp_extra_sources
    modules/proxy/ajp_header.c         modules/proxy/ajp_link.c
    modules/proxy/ajp_msg.c            modules/proxy/ajp_utils.c
-@@ -603,7 +641,7 @@
+@@ -603,7 +613,7 @@ SET(mod_sed_extra_sources
  )
  SET(mod_serf_requires                AN_UNIMPLEMENTED_SUPPORT_LIBRARY_REQUIREMENT)
  SET(mod_session_extra_defines        SESSION_DECLARE_EXPORT)
@@ -247,7 +94,7 @@ index 628cf76535..2fb7fcfc2c 100644
  SET(mod_session_cookie_extra_libs    mod_session)
  SET(mod_session_crypto_requires      APU_HAVE_CRYPTO)
  SET(mod_session_crypto_extra_libs    mod_session)
-@@ -626,13 +664,52 @@
+@@ -626,13 +636,52 @@ SET(mod_ssl_extra_sources
    modules/ssl/ssl_util_ssl.c         modules/ssl/ssl_util_stapling.c
  )
  SET(mod_status_extra_defines         STATUS_DECLARE_EXPORT)
@@ -287,12 +134,12 @@ index 628cf76535..2fb7fcfc2c 100644
 +#../mod_h264_streaming/main.c
 +)
 +SET(mod_maxminddb_extra_libs       ${MAXMIND_LIBRARIES})
-+SET(mod_whatkilledus_extra_defines   DIAG_BITS_${diag_bits})
++SET(mod_whatkilledus_extra_defines   DIAG_BITS_64)
 +SET(mod_whatkilledus_extra_libs      "dbghelp.lib")
 +SET(mod_whatkilledus_extra_sources
 +../mod_wku_bt/diag.c          
 +)
-+SET(mod_backtrace_extra_defines      DIAG_BITS_${diag_bits})
++SET(mod_backtrace_extra_defines      DIAG_BITS_64)
 +SET(mod_backtrace_extra_libs         "dbghelp.lib")
 +SET(mod_backtrace_extra_sources
 +../mod_wku_bt/diag.c          
@@ -301,7 +148,7 @@ index 628cf76535..2fb7fcfc2c 100644
  
  SET(MODULE_PATHS)
  FOREACH (modinfo ${MODULE_LIST})
-@@ -686,8 +763,9 @@
+@@ -686,8 +735,9 @@ ENDFOREACH()
  generate_builtin_modules_c("${PROJECT_BINARY_DIR}/modules.c" "${builtin_module_shortnames}")
  
  # for easy reference from .dll/.so builds
@@ -312,16 +159,7 @@ index 628cf76535..2fb7fcfc2c 100644
  ADD_EXECUTABLE(gen_test_char server/gen_test_char.c)
  ADD_CUSTOM_COMMAND(
    COMMENT "Generating character tables, test_char.h, for current locale"
-@@ -772,7 +850,7 @@
-   ${CMAKE_CURRENT_SOURCE_DIR}/modules/filters
-   ${CMAKE_CURRENT_SOURCE_DIR}/modules/generators
-   ${CMAKE_CURRENT_SOURCE_DIR}/modules/http2
--  ${CMAKE_CURRENT_SOURCE_DIR}/modules/md
-+  ${CMAKE_CURRENT_SOURCE_DIR}/${mod_md_src}
-   ${CMAKE_CURRENT_SOURCE_DIR}/modules/proxy
-   ${CMAKE_CURRENT_SOURCE_DIR}/modules/session
-   ${CMAKE_CURRENT_SOURCE_DIR}/modules/ssl
-@@ -780,6 +858,12 @@
+@@ -780,6 +830,12 @@ SET(HTTPD_INCLUDE_DIRECTORIES
    ${CMAKE_CURRENT_SOURCE_DIR}/server/mpm/winnt
    ${APR_INCLUDE_DIR}
    ${PCRE_INCLUDE_DIR}
@@ -334,37 +172,17 @@ index 628cf76535..2fb7fcfc2c 100644
  )
  
  IF(BUILD_TEST_MODULES)
-@@ -868,10 +952,10 @@
-   ELSE()
-     # Handle whether or not the LoadModule is commented out.
-     IF(${enable_mod_val} STREQUAL "A")
--      SET(LoadModules "${LoadModules}LoadModule ${mod_module_name} modules/${mod_name}.so\n")
-+      SET(LoadModules "${LoadModules}LoadModule ${mod_module_name} modules/${mod_name}${mod_suffix}\n")
-       SET(mods_built_and_loaded ${mods_built_and_loaded} ${mod_name})
-     ELSEIF(${enable_mod_val} STREQUAL "I")
--      SET(LoadModules "${LoadModules}# LoadModule ${mod_module_name} modules/${mod_name}.so\n")
-+      SET(LoadModules "${LoadModules}# LoadModule ${mod_module_name} modules/${mod_name}${mod_suffix}\n")
-       SET(mods_built_but_not_loaded ${mods_built_but_not_loaded} ${mod_name})
-     ELSE()
-       MESSAGE(FATAL_ERROR "${enable_mod} must be set to \"A\", \"I\", or \"O\" instead of \"${enable_mod_val}\"")
-@@ -899,12 +983,13 @@
-     ENDIF()
+@@ -900,7 +956,8 @@ FOREACH (mod ${MODULE_PATHS})
      SET(mod_extra_libs "${mod_name}_extra_libs")
      SET_TARGET_PROPERTIES(${mod_name} PROPERTIES
--      SUFFIX .so
+       SUFFIX .so
 -      LINK_FLAGS /base:@${PROJECT_BINARY_DIR}/BaseAddr.ref,${mod_name}.so
-+      SUFFIX ${mod_suffix}
 +      # LINK_FLAGS /base:@${PROJECT_BINARY_DIR}/BaseAddr.ref,${mod_name}.so
 +      LINK_FLAGS /dynamicbase 
      )
      TARGET_LINK_LIBRARIES(${mod_name} ${${mod_extra_libs}} libhttpd ${EXTRA_LIBS} ${APR_LIBRARIES} ${HTTPD_SYSTEM_LIBS})
      DEFINE_WITH_BLANKS(define_long_name "LONG_NAME" "${mod_name} for Apache HTTP Server")
--    SET_TARGET_PROPERTIES(${mod_name} PROPERTIES COMPILE_FLAGS "${define_long_name} -DBIN_NAME=${mod_name}.so ${EXTRA_COMPILE_FLAGS}")
-+    SET_TARGET_PROPERTIES(${mod_name} PROPERTIES COMPILE_FLAGS "${define_long_name} -DBIN_NAME=${mod_name}${mod_suffix} ${EXTRA_COMPILE_FLAGS}")
- 
-     # Extra defines?
-     SET(mod_extra_defines "${mod_name}_extra_defines")
-@@ -926,7 +1011,8 @@
+@@ -926,7 +983,8 @@ ENDFOREACH()
  ###########   HTTPD LIBRARIES   ############
  ADD_LIBRARY(libhttpd SHARED ${LIBHTTPD_SOURCES} build/win32/httpd.rc)
  SET_TARGET_PROPERTIES(libhttpd PROPERTIES
@@ -374,7 +192,7 @@ index 628cf76535..2fb7fcfc2c 100644
  )
  SET(install_targets ${install_targets} libhttpd)
  SET(install_bin_pdb ${install_bin_pdb} $<TARGET_PDB_FILE:libhttpd>)
-@@ -981,12 +1067,12 @@
+@@ -981,12 +1039,12 @@ ENDIF()
  GET_PROPERTY(tmp_includes TARGET ab PROPERTY INCLUDE_DIRECTORIES)
  
  # getting duplicate manifest error with ApacheMonitor
@@ -393,6 +211,68 @@ index 628cf76535..2fb7fcfc2c 100644
  
  ###########  CONFIGURATION FILES ###########
  # Set up variables used in the .conf file templates
+diff --git a/modules/http2/h2_mplx.c b/modules/http2/h2_mplx.c
+index c008122db6..31123adb67 100644
+--- a/modules/http2/h2_mplx.c
++++ b/modules/http2/h2_mplx.c
+@@ -1268,10 +1268,17 @@ static apr_status_t mplx_pollset_poll(h2_mplx *m, apr_interval_time_t timeout,
+             H2_MPLX_LEAVE(m);
+             rv = apr_pollset_poll(m->pollset, timeout >= 0? timeout : -1, &nresults, &results);
+             H2_MPLX_ENTER_ALWAYS(m);
++			// ap_log_cerror(APLOG_MARK, APLOG_ERR, rv, m->c1, APLOGNO(10310) H2_MPLX_MSG(m, "loop rv=%d eintr=%d shutdown=%d aborted=%d pcount=%d"),(int)rv,APR_STATUS_IS_EINTR(rv),m->shutdown,m->aborted,m->processing_count);
+             if (APR_STATUS_IS_EINTR(rv) && m->shutdown) {
++#ifdef _WIN32
++            /* See https://github.com/icing/mod_h2/issues/277
++             * WSAPoll seems to always deliver EINTR during server graceful
++             * restarts. Treat this is an error condition */
++#else
+                 if (!m->aborted) {
+                     rv = APR_SUCCESS;
+                 }
++#endif
+                 goto cleanup;
+             }
+         } while (APR_STATUS_IS_EINTR(rv));
+diff --git a/modules/md/mod_md.c b/modules/md/mod_md.c
+index 349d18750c..22dac37424 100644
+--- a/modules/md/mod_md.c
++++ b/modules/md/mod_md.c
+@@ -885,6 +885,35 @@ static apr_status_t md_post_config_before_ssl(apr_pool_t *p, apr_pool_t *plog,
+     md_config_post_config(s, p);
+     sc = md_config_get(s);
+     mc = sc->mc;
++	
++    if (data != NULL) {
++        const char * const *argv;
++        const char *cmdline;
++        int exit_code;
++        if (mc->message_cmd) {
++            cmdline = apr_psprintf(p, "%s initialized MDMessageCmd", mc->message_cmd);
++            apr_tokenize_to_argv(cmdline, (char***)&argv, p);
++            rv = md_util_exec(p, argv[0], argv, &exit_code);
++        
++            if (APR_SUCCESS == rv && exit_code) rv = APR_EGENERAL;
++            if (APR_SUCCESS != rv) {
++                ap_log_error( APLOG_MARK, APLOG_INFO, 0, s, APLOGNO(10108)
++                         "MDMessageCmd %s failed with exit code %d.", mc->message_cmd, exit_code);
++            }
++        }
++        if (mc->notify_cmd) {
++            cmdline = apr_psprintf(p, "%s initialized MDNotifyCmd", mc->notify_cmd);
++            apr_tokenize_to_argv(cmdline, (char***)&argv, p);
++            rv = md_util_exec(p, argv[0], argv, &exit_code);
++        
++            if (APR_SUCCESS == rv && exit_code) rv = APR_EGENERAL;
++            if (APR_SUCCESS != rv) {
++                ap_log_error( APLOG_MARK, APLOG_INFO, 0, s, APLOGNO(10108)
++                         "MDNotifyCmd %s failed with exit code %d.", mc->notify_cmd, exit_code);
++            }
++        }
++    }
++	
+     mc->dry_run = dry_run;
+ 
+     md_event_init(p);
 diff --git a/modules/proxy/mod_proxy_fcgi.c b/modules/proxy/mod_proxy_fcgi.c
 index 82e0c1e421..c3d750c9c3 100644
 --- a/modules/proxy/mod_proxy_fcgi.c
