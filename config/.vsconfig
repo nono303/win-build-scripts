@@ -7,7 +7,6 @@
     "Microsoft.NetCore.Component.Runtime.10.0",
     "Microsoft.NetCore.Component.SDK",
     "Microsoft.VisualStudio.Component.CoreEditor",
-    "Microsoft.VisualStudio.Component.Debugger.JustInTime",
     "Microsoft.VisualStudio.Component.Roslyn.Compiler",
     "Microsoft.VisualStudio.Component.TextTemplating",
     "Microsoft.VisualStudio.Component.VC.14.44.17.14.ATL",
