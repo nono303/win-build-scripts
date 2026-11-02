@@ -35,7 +35,6 @@ Usage: go command [options]
         * mod_fcgid
         * mod_h264_streaming
         * mod_maxminddb
-        * mod_md
         * mod_wku_bt
         * mod_zstd
       * yajl
@@ -113,10 +112,11 @@ Usage: go command [options]
     * proxytunnel
     * sslh
   + {java}
+    * mapsforge (mavenlocal for mapsforgesrv & mobac)
     * mapsforgesrv
+    * mobac
     * tzdataservice
     * fit2gpx
-    * mobac
   + {standalone}
     * mod_fcgid
     * mod_zstd
