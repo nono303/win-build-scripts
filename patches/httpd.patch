@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 1d57889b18..9ebe2c5c88 100644
+index b114b9f44b..75942d6443 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -26,7 +26,7 @@ INCLUDE(CheckCSourceCompiles)
@@ -29,7 +29,7 @@ index 1d57889b18..9ebe2c5c88 100644
    "modules/cache/mod_socache_memcache+I+memcache small object cache provider"
    "modules/cache/mod_socache_shmcb+I+ shmcb small object cache provider"
    "modules/cache/mod_socache_redis+I+redis small object cache provider"
-@@ -406,6 +406,15 @@ SET(MODULE_LIST
+@@ -407,6 +407,15 @@ SET(MODULE_LIST
    "modules/test/mod_optional_fn_import+O+example optional function importer"
    "modules/test/mod_optional_hook_export+O+example optional hook exporter"
    "modules/test/mod_optional_hook_import+O+example optional hook importer"
@@ -45,7 +45,7 @@ index 1d57889b18..9ebe2c5c88 100644
  )
  
  IF(BUILD_TEST_MODULES)
-@@ -484,7 +493,7 @@ SET(mod_cache_extra_defines          CACHE_DECLARE_EXPORT)
+@@ -485,7 +494,7 @@ SET(mod_cache_extra_defines          CACHE_DECLARE_EXPORT)
  SET(mod_cache_extra_sources
    modules/cache/cache_storage.c      modules/cache/cache_util.c
  )
@@ -54,7 +54,7 @@ index 1d57889b18..9ebe2c5c88 100644
  SET(mod_cache_disk_extra_libs        mod_cache)
  SET(mod_cache_socache_extra_libs     mod_cache)
  SET(mod_charset_lite_requires        APR_HAS_XLATE)
-@@ -494,7 +503,7 @@ SET(mod_dav_extra_sources
+@@ -495,7 +504,7 @@ SET(mod_dav_extra_sources
    modules/dav/main/std_liveprop.c    modules/dav/main/providers.c
    modules/dav/main/util.c            modules/dav/main/util_lock.c
  )
@@ -63,7 +63,7 @@ index 1d57889b18..9ebe2c5c88 100644
  SET(mod_dav_fs_extra_sources
    modules/dav/fs/dbm.c               modules/dav/fs/lock.c
    modules/dav/fs/repos.c
-@@ -546,10 +555,11 @@ SET(mod_lua_extra_sources
+@@ -547,10 +556,11 @@ SET(mod_lua_extra_sources
    modules/lua/lua_passwd.c           modules/lua/lua_request.c
    modules/lua/lua_vmprep.c           modules/lua/lua_dbd.c
  )
@@ -76,7 +76,7 @@ index 1d57889b18..9ebe2c5c88 100644
  SET(mod_md_extra_sources
    modules/md/md_acme.c               modules/md/md_acme_acct.c
    modules/md/md_acme_authz.c         modules/md/md_acme_drive.c
-@@ -569,7 +579,7 @@ SET(mod_md_extra_sources
+@@ -570,7 +580,7 @@ SET(mod_md_extra_sources
  SET(mod_optional_hook_export_extra_defines AP_DECLARE_EXPORT) # bogus reuse of core API prefix
  SET(mod_proxy_extra_defines          PROXY_DECLARE_EXPORT)
  SET(mod_proxy_extra_sources          modules/proxy/proxy_util.c)
@@ -85,7 +85,7 @@ index 1d57889b18..9ebe2c5c88 100644
  SET(mod_proxy_ajp_extra_sources
    modules/proxy/ajp_header.c         modules/proxy/ajp_link.c
    modules/proxy/ajp_msg.c            modules/proxy/ajp_utils.c
-@@ -603,7 +613,7 @@ SET(mod_sed_extra_sources
+@@ -605,7 +615,7 @@ SET(mod_sed_extra_sources
  )
  SET(mod_serf_requires                AN_UNIMPLEMENTED_SUPPORT_LIBRARY_REQUIREMENT)
  SET(mod_session_extra_defines        SESSION_DECLARE_EXPORT)
@@ -94,7 +94,7 @@ index 1d57889b18..9ebe2c5c88 100644
  SET(mod_session_cookie_extra_libs    mod_session)
  SET(mod_session_crypto_requires      APU_HAVE_CRYPTO)
  SET(mod_session_crypto_extra_libs    mod_session)
-@@ -626,13 +636,52 @@ SET(mod_ssl_extra_sources
+@@ -628,13 +638,52 @@ SET(mod_ssl_extra_sources
    modules/ssl/ssl_util_ssl.c         modules/ssl/ssl_util_stapling.c
  )
  SET(mod_status_extra_defines         STATUS_DECLARE_EXPORT)
@@ -148,7 +148,7 @@ index 1d57889b18..9ebe2c5c88 100644
  
  SET(MODULE_PATHS)
  FOREACH (modinfo ${MODULE_LIST})
-@@ -686,8 +735,9 @@ ENDFOREACH()
+@@ -688,8 +737,9 @@ ENDFOREACH()
  generate_builtin_modules_c("${PROJECT_BINARY_DIR}/modules.c" "${builtin_module_shortnames}")
  
  # for easy reference from .dll/.so builds
@@ -159,7 +159,7 @@ index 1d57889b18..9ebe2c5c88 100644
  ADD_EXECUTABLE(gen_test_char server/gen_test_char.c)
  ADD_CUSTOM_COMMAND(
    COMMENT "Generating character tables, test_char.h, for current locale"
-@@ -780,6 +830,12 @@ SET(HTTPD_INCLUDE_DIRECTORIES
+@@ -782,6 +832,12 @@ SET(HTTPD_INCLUDE_DIRECTORIES
    ${CMAKE_CURRENT_SOURCE_DIR}/server/mpm/winnt
    ${APR_INCLUDE_DIR}
    ${PCRE_INCLUDE_DIR}
@@ -172,7 +172,7 @@ index 1d57889b18..9ebe2c5c88 100644
  )
  
  IF(BUILD_TEST_MODULES)
-@@ -900,7 +956,8 @@ FOREACH (mod ${MODULE_PATHS})
+@@ -902,7 +958,8 @@ FOREACH (mod ${MODULE_PATHS})
      SET(mod_extra_libs "${mod_name}_extra_libs")
      SET_TARGET_PROPERTIES(${mod_name} PROPERTIES
        SUFFIX .so
@@ -182,7 +182,7 @@ index 1d57889b18..9ebe2c5c88 100644
      )
      TARGET_LINK_LIBRARIES(${mod_name} ${${mod_extra_libs}} libhttpd ${EXTRA_LIBS} ${APR_LIBRARIES} ${HTTPD_SYSTEM_LIBS})
      DEFINE_WITH_BLANKS(define_long_name "LONG_NAME" "${mod_name} for Apache HTTP Server")
-@@ -926,7 +983,8 @@ ENDFOREACH()
+@@ -928,7 +985,8 @@ ENDFOREACH()
  ###########   HTTPD LIBRARIES   ############
  ADD_LIBRARY(libhttpd SHARED ${LIBHTTPD_SOURCES} build/win32/httpd.rc)
  SET_TARGET_PROPERTIES(libhttpd PROPERTIES
@@ -192,7 +192,7 @@ index 1d57889b18..9ebe2c5c88 100644
  )
  SET(install_targets ${install_targets} libhttpd)
  SET(install_bin_pdb ${install_bin_pdb} $<TARGET_PDB_FILE:libhttpd>)
-@@ -981,12 +1039,12 @@ ENDIF()
+@@ -983,12 +1041,12 @@ ENDIF()
  GET_PROPERTY(tmp_includes TARGET ab PROPERTY INCLUDE_DIRECTORIES)
  
  # getting duplicate manifest error with ApacheMonitor
@@ -234,10 +234,10 @@ index c008122db6..31123adb67 100644
              }
          } while (APR_STATUS_IS_EINTR(rv));
 diff --git a/modules/md/mod_md.c b/modules/md/mod_md.c
-index 349d18750c..22dac37424 100644
+index 03862c2298..ffd037a941 100644
 --- a/modules/md/mod_md.c
 +++ b/modules/md/mod_md.c
-@@ -885,6 +885,35 @@ static apr_status_t md_post_config_before_ssl(apr_pool_t *p, apr_pool_t *plog,
+@@ -888,6 +888,35 @@ static apr_status_t md_post_config_before_ssl(apr_pool_t *p, apr_pool_t *plog,
      md_config_post_config(s, p);
      sc = md_config_get(s);
      mc = sc->mc;
