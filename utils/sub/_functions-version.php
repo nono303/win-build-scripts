@@ -20,8 +20,12 @@
 	global $verfromfile;
 	$verfromfile = [
 		// detached on branch
+		"httpd"					=> ["/#define AP_SERVER_MAJORVERSION_NUMBER *([0-9]+).*#define AP_SERVER_MINORVERSION_NUMBER *([0-9]+).*#define AP_SERVER_PATCHLEVEL_NUMBER *([0-9]+)/s",
+									PATH_SRC."/httpd/include/ap_release.h"],
+		/* detached on branch
 		"php-src"	=> ["/AC_INIT\(\[PHP\],\[([^\]]+)\]/",
 									PATH_SRC."/php-src/configure.ac"],
+		*/
 		// dirty tag
 		"icu"	=> ["/#define U_ICU_VERSION \"([^\"]+)\"/",
 									PATH_SRC."/icu/icu4c/source/common/unicode/uvernum.h"],
