@@ -52,6 +52,6 @@ for /f "tokens=*" %%G in ('dir %PATH_INSTALL%\modules\*%mod_suffix% /b') do (cal
 
 	REM ~~~~~~~~~~~ external modules
 if NOT "%2"=="svn" (
-	for %%X in (mod_maxminddb mod_fcgid mod_h264_streaming mod_md mod_evasive mod_zstd mod_bikeshed) do (call do_php %PATH_UTILS%\sub\version.php %%X %PATH_INSTALL%\modules\%%X%mod_suffix% httpd:%HTTPD_VERSION%)
+	for %%X in (mod_maxminddb mod_fcgid mod_h264_streaming mod_evasive mod_zstd mod_bikeshed) do (call do_php %PATH_UTILS%\sub\version.php %%X %PATH_INSTALL%\modules\%%X%mod_suffix% httpd:%HTTPD_VERSION%)
 	for %%X in (mod_backtrace mod_whatkilledus mod_crash) do (call do_php %PATH_UTILS%\sub\version.php mod_wku_bt %PATH_INSTALL%\modules\%%X%mod_suffix% httpd:%HTTPD_VERSION%)
 )
