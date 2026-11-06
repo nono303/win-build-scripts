@@ -1,8 +1,8 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 17f6cbda..7fd31e1f 100644
+index 6bb297a2..b920bedd 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -14,7 +14,7 @@ set ( ly_src_dir	${ly_base_dir}/source )
+@@ -35,7 +35,7 @@ set ( ly_src_dir	${ly_base_dir}/source )
  set ( ly_inc_dir	${ly_base_dir}/include )
  set ( ly_tst_dir	${ly_base_dir}/unit_test )
  set ( ly_lib_name	yuv )
