@@ -7,7 +7,7 @@ index 5df350a..bfe2001 100644
  
  if (PHP_MEMCACHE != "no") {
 -	if (!PHP_ZLIB_SHARED || CHECK_LIB("zlib_a.lib", "memcache", PHP_MEMCACHE)) {
-+	if (CHECK_LIB("z.lib", "memcache", PHP_MEMCACHE)) {
++	if (CHECK_LIB("libz.lib", "memcache", PHP_MEMCACHE)) {
  
  		var dll = get_define('PHPDLL');
  		var old_conf_dir = configure_module_dirname;

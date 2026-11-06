@@ -14,7 +14,6 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 -DZLIB_BUILD_TESTZLIB=OFF ^
 -DZLIB_BUILD_ZLIB1_DLL=OFF ^
 -DZLIB_INSTALL=ON ^
--DZLIB_PREFIX=OFF ^
 -DZLIB_WITH_CRC32VX=OFF ^
 -DZLIB_WITH_GVMAT64=OFF ^
 -DZLIB_WITH_INFBACK9=OFF ^
@@ -25,4 +24,4 @@ if "%ARG_CMOPTS%"=="1" (exit /B)
 %PATH_BIN_CYGWIN%\bash --login -c '%CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"'
 %NINJA% install
 
-call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\z.dll
+call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libz.dll

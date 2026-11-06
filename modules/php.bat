@@ -40,7 +40,7 @@ for /L %%i in (2,1,%argCount%) do (
 
 	REM ~~~~~~~~~~~~ check prereq deps
 if %PHP_BUILD_TYPE% == memcache	(
-	if not exist %PATH_INSTALL%\lib\z.lib (call go.bat zlib NOLOG)
+	if not exist %PATH_INSTALL%\lib\libz.lib (call go.bat zlib NOLOG)
 )
 if %PHP_BUILD_TYPE% == brotli	(
 	if not exist %PATH_INSTALL%\%DIR_LIB_STATIC%\libbrotlicommon.lib (call go.bat brotli static NOLOG)

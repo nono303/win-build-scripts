@@ -6,7 +6,7 @@ index 76d4ee3..ed56db1 100644
  	ERROR("memcached: library 'memcached' not found");
    }
    
-+  if (!CHECK_LIB("z.lib", "memcached", PHP_MEMCACHED)) {
++  if (!CHECK_LIB("libz.lib", "memcached", PHP_MEMCACHED)) {
 +	  ERROR("memcached: library 'zlib' not found");
 +  }
 +  
