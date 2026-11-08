@@ -3,7 +3,8 @@ set mod_suffix=.so
 
 	REM ~~~~~~~~~~~ external modules
 if NOT "%2"=="svn" (
-	for %%M in (mod_maxminddb mod_fcgid mod_md mod_wku_bt mod_h264_streaming mod_evasive mod_zstd) do (call %PATH_UTILS%\init.bat %%M)
+     
+	for %%M in (mod_maxminddb mod_fcgid mod_wku_bt mod_h264_streaming mod_evasive mod_zstd mod_bikeshed) do (call %PATH_UTILS%\init.bat %%M)
 	if not exist %PATH_SRC%\mod_evasive\mod_evasive.c mklink /h %PATH_SRC%\mod_evasive\mod_evasive.c %PATH_SRC%\mod_evasive\mod_evasive24win.c
 )
 
