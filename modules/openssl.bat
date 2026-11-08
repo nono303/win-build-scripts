@@ -20,6 +20,7 @@ if "%2"=="svn" (
 )
 
 	REM !! --with-zlib-lib require the full path or name in PATH of zlib DLL without dll extension !!
+	REM    BC230000:error:12800067:DSO support routines:win32_load:could not load the shared library:crypto\dso\dso_win32.c:110:filename(ZLIB1.dll)
 perl Configure %perlbuild% ^
 --prefix=%PATH_INSTALL% ^
 --openssldir=%PATH_INSTALL%\conf ^
@@ -40,7 +41,7 @@ enable-hqinterop ^
 zlib ^
 zlib-dynamic ^
 --with-zlib-include=%PATH_INSTALL:\=/%/include ^
---with-zlib-lib=z ^
+--with-zlib-lib=libz ^
 /DNDEBUG /Ob3 /Oi /Ot /Oy /fp:fast /GL /Gw /Zc:inline /Zf /FS /MP%NUMBER_OF_PROCESSORS% /cgthreads8 %__CNFC% %AVX% ^
 %CONFIGURE_OPENSSL%
 
