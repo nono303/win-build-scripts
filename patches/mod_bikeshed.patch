@@ -1,0 +1,18 @@
+diff --git a/mod_bikeshed.c b/mod_bikeshed.c
+index 6245059..97bb75e 100644
+--- a/mod_bikeshed.c
++++ b/mod_bikeshed.c
+@@ -112,11 +112,11 @@ static int bikeshed_post_config(apr_pool_t * p, apr_pool_t * plog, apr_pool_t *
+       }
+ 
+       if (strcasecmp(svrcfg->bikeshed_tokens_string, "none") == 0) {
+-        ap_log_error(APLOG_MARK, APLOG_ERR | APLOG_NOERRNO, 0, s,
++        ap_log_error(APLOG_MARK, APLOG_INFO, 0, s,
+           "BikeShed: server signature/tokens successfully disabled."
+         );
+       } else {
+-        ap_log_error(APLOG_MARK, APLOG_ERR | APLOG_NOERRNO, 0, s,
++        ap_log_error(APLOG_MARK, APLOG_INFO, 0, s,
+           "BikeShed: server signature/tokens successfully changed to \"%s\".",
+           svrcfg->bikeshed_tokens_string
+         );

@@ -234,10 +234,10 @@ index c008122db6..31123adb67 100644
              }
          } while (APR_STATUS_IS_EINTR(rv));
 diff --git a/modules/md/mod_md.c b/modules/md/mod_md.c
-index 03862c2298..ffd037a941 100644
+index 349d18750c..22dac37424 100644
 --- a/modules/md/mod_md.c
 +++ b/modules/md/mod_md.c
-@@ -888,6 +888,35 @@ static apr_status_t md_post_config_before_ssl(apr_pool_t *p, apr_pool_t *plog,
+@@ -885,6 +885,35 @@ static apr_status_t md_post_config_before_ssl(apr_pool_t *p, apr_pool_t *plog,
      md_config_post_config(s, p);
      sc = md_config_get(s);
      mc = sc->mc;
@@ -317,6 +317,28 @@ index 81b7de2a69..506eba8880 100644
      }
  }
  
+diff --git a/modules/ssl/ssl_engine_init.c b/modules/ssl/ssl_engine_init.c
+index 0fecdcfa6e..ec8101acd1 100644
+--- a/modules/ssl/ssl_engine_init.c
++++ b/modules/ssl/ssl_engine_init.c
+@@ -436,7 +436,7 @@ apr_status_t ssl_init_Module(apr_pool_t *p, apr_pool_t *plog,
+         return rv;
+     }
+ 
+-    ap_log_error(APLOG_MARK, APLOG_INFO, 0, base_server, APLOGNO(01883)
++    ap_log_error(APLOG_MARK, APLOG_DEBUG, 0, base_server, APLOGNO(01883)
+                  "Init: Initialized %s library", MODSSL_LIBRARY_NAME);
+ 
+     /*
+@@ -494,7 +494,7 @@ apr_status_t ssl_init_Module(apr_pool_t *p, apr_pool_t *plog,
+     /*
+      *  initialize servers
+      */
+-    ap_log_error(APLOG_MARK, APLOG_INFO, 0, base_server, APLOGNO(01887)
++    ap_log_error(APLOG_MARK, APLOG_DEBUG, 0, base_server, APLOGNO(01887)
+                  "Init: Initializing (virtual) servers for SSL");
+ 
+     for (s = base_server; s; s = s->next) {
 diff --git a/server/main.c b/server/main.c
 index fb23f01d1d..7d42ec8128 100644
 --- a/server/main.c
@@ -335,6 +357,22 @@ index fb23f01d1d..7d42ec8128 100644
  
  /* WARNING: Win32 binds http_main.c dynamically to the server. Please place
   *          extern functions and global data in another appropriate module.
+diff --git a/server/mpm/winnt/mpm_winnt.c b/server/mpm/winnt/mpm_winnt.c
+index 1b8962e745..55dae0d1ac 100644
+--- a/server/mpm/winnt/mpm_winnt.c
++++ b/server/mpm/winnt/mpm_winnt.c
+@@ -1726,9 +1726,9 @@ static int winnt_run(apr_pool_t *_pconf, apr_pool_t *plog, server_rec *s )
+     {
+         /* A real-honest to goodness parent */
+         ap_log_error(APLOG_MARK, APLOG_NOTICE, 0, ap_server_conf, APLOGNO(00455)
+-                     "%s configured -- resuming normal operations",
++                     "%s configured",
+                      ap_get_server_description());
+-        ap_log_error(APLOG_MARK, APLOG_NOTICE, 0, ap_server_conf, APLOGNO(00456)
++        ap_log_error(APLOG_MARK, APLOG_DEBUG, 0, ap_server_conf, APLOGNO(00456)
+                      "Server built: %s", ap_get_server_built());
+         ap_log_command_line(plog, s);
+         ap_log_mpm_common(s);
 diff --git a/support/ab.c b/support/ab.c
 index 824bf808aa..ff66b600db 100644
 --- a/support/ab.c
