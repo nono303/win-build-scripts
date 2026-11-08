@@ -57,6 +57,7 @@
 		"Permission denied" => [31,"str"], // sed chmod
 		"file not found" => [31,"str"], // fileutils
 		"directory not found" => [31,"str"], // fileutils
+		"doesn't exists" => [31,"str"], // init failed
 /* Yellow */
 		"(Warning[: ])" => [33,"reg"],
 		"warning" => [33,"reg"],
