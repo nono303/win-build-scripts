@@ -1,0 +1,26 @@
+diff --git a/include/compat/msvc/stdatomic.h b/include/compat/msvc/stdatomic.h
+index 618f0ee8..1860d388 100644
+--- a/include/compat/msvc/stdatomic.h
++++ b/include/compat/msvc/stdatomic.h
+@@ -32,7 +32,7 @@
+ #pragma warning(push)
+ #pragma warning(disable:4067)    /* newline for __has_include_next */
+ 
+-#if defined(__clang__) && __has_include_next(<stdatomic.h>)
++#if !defined(_MSC_VER) defined(__clang__) && __has_include_next(<stdatomic.h>)
+    /* use the clang stdatomic.h with clang-cl*/
+ #  include_next <stdatomic.h>
+ #else /* ! stdatomic.h */
+diff --git a/meson.build b/meson.build
+index 90555e4c..e629ef9a 100644
+--- a/meson.build
++++ b/meson.build
+@@ -275,7 +275,7 @@ cdata.set10('HAVE_C11_GENERIC', cc.compiles('int x = _Generic(0, default: 0);',
+ if cc.has_argument('-fvisibility=hidden')
+     add_project_arguments('-fvisibility=hidden', language: 'c')
+ else
+-    warning('Compiler does not support -fvisibility=hidden, all symbols will be public!')
++    # warning('Compiler does not support -fvisibility=hidden, all symbols will be public!')
+ endif
+ 
+ # Compiler flags that should be set
