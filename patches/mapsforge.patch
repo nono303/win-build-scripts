@@ -1,5 +1,5 @@
 diff --git a/build.gradle b/build.gradle
-index daf3bbc6..e9b466e3 100644
+index daf3bbc6..351be84c 100644
 --- a/build.gradle
 +++ b/build.gradle
 @@ -29,13 +29,16 @@ def versionName() { return version }
@@ -45,14 +45,14 @@ index c2c5c5fc..bb05dbbd 100644
 +# Conserve le démon Gradle actif en arrière-plan pour les builds suivants
 +org.gradle.daemon=true
 diff --git a/gradle/wrapper/gradle-wrapper.properties b/gradle/wrapper/gradle-wrapper.properties
-index 93544766..91c4fc64 100644
+index 93544766..04d79595 100644
 --- a/gradle/wrapper/gradle-wrapper.properties
 +++ b/gradle/wrapper/gradle-wrapper.properties
 @@ -1,6 +1,6 @@
  distributionBase=GRADLE_USER_HOME
  distributionPath=wrapper/dists
 -distributionUrl=https\://services.gradle.org/distributions/gradle-9.3.1-bin.zip
-+distributionUrl=https\://services.gradle.org/distributions/gradle-9.8.2-bin.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-9.9.1-bin.zip
  networkTimeout=10000
  retries=0
  retryBackOffMs=500
