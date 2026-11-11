@@ -1,27 +1,30 @@
-# Dirty old-fashioned cook batch scripts for Windows MSVC building
+# Old-school batch cookbook for MSVC building
 
 ##### *[...OK, but for building what?](./SRC_VERSION.md)*
 
 - Apache **httpd** and its deps
 - Apache **subversion** and its deps
 - **PHP** and most of its deps
-- other cool stuff
+- Other cool stuff
   - *msvc*
     - geographiclib
     - dependencies
+    - nssm
+    - run-hidden
     - sdlna
     - verpatch
-    - run-hidden
   - *cygwin*
     - memcached
     - proxytunnel
     - sslh
   - *Java*
+    - mapsforge
     - mapsforgesrv
-    - fit2gpx
     - mobac
+    - tzdataservice
+    - fit2gpx
 
-This tool-chain is the result of... many years of “evolution” ^^
+This tool-chain is the result of... many years of work still in “evolution”
 
 I've done some job to make them readable, quite usable and contextualized but this is more for offering ideas to those who want to self-made some of these stuffs.
 
@@ -54,7 +57,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2026](https://aka.ms/vs/18/Stable/vs_community.exe) |      | 18.11.2 (14.51, 14.44) | `.vsconfig`         |
+| [Visual Studio 2026](https://aka.ms/vs/18/Stable/vs_community.exe) |      | 18.12.0 (14.51, 14.44) | `.vsconfig`         |
 | :bookmark: [Microsoft Visual C++ Redistributable](https://github.com/abbodi1406/vcredist/releases) | x64 & x86 | 14.52.37025 |  |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.7.0 | `cyg64.packagelist` |
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.15.2 |                     |
@@ -64,15 +67,15 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [YASM](https://github.com/yasm/yasm/releases) | x64 | 1.3.0 | |
 | [Git](https://git-scm.com/download/win)                      | x64  | 2.56.0.4 |                     |
 | verpatch                                                     | x64  | 1.0.15.1       |                     |
-| [7z](https://www.7-zip.org/download.html)                    | x64  | 26.05 |                     |
+| [7z](https://www.7-zip.org/download.html)                    | x64  | 26.06 |                     |
 | [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.93   |                     |
 | [ChkMatch](https://web.archive.org/web/20210205095232/https://www.debuginfo.com/tools/chkmatch.html) | x86 | 1.0.3          |                     |
-| [Gradle](https://services.gradle.org/distributions/) | [java] | 9.8.2 | |
-| [CMake](https://cmake.org/download/) | x64 | 4.5.0rc1 | |
+| [Gradle](https://services.gradle.org/distributions/) | [java] | 9.9.1 | |
+| [CMake](https://cmake.org/download/) | x64 | 4.5.0rc3 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | x64 | 1.13.2 | |
 | [JOM](https://download.qt.io/official_releases/jom/) | x64 | 1.1.7 | |
 | [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 1.12.1 | |
-| [pkg-config](packages.msys2.org/packages/mingw-w64-ucrt-x86_64-pkgconf) | x64 | 3.0.10 | |
+| [pkg-config](https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-pkgconf) | x64 | 3.0.10 | |
 | [cccl](https://github.com/nono303/cccl) | [shell] | 1.4 | |
 | [flex](https://github.com/lexxmark/winflexbison/releases) | x86 | 2.6.4 | |
 

@@ -10,7 +10,7 @@ if not exist %PATH_SRC%\. mkdir %PATH_SRC%
 cd /D %PATH_SRC%
 git clone https://aomedia.googlesource.com/aom aom
 cd /D aom
-git checkout tags/v3.15.3-rc1
+git checkout tags/v3.15.3
 cd /D ..
 git clone https://github.com/apache/apr.git apr
 cd /D apr
@@ -42,7 +42,7 @@ git checkout tags/1.5.4
 cd /D ..
 git clone https://github.com/himeshsameera/Dependencies dependencies
 cd /D dependencies
-git checkout tags/v2.4.0
+git checkout tags/v2.4.2
 cd /D ..
 git clone https://github.com/nono303/fit2gpx.git fit2gpx
 cd /D fit2gpx
@@ -74,7 +74,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
-git checkout tags/2.4.69
+git checkout tags/2.4.70
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
@@ -86,7 +86,7 @@ git checkout tags/v2.15.1
 cd /D ..
 git clone https://github.com/Esri/lerc.git lerc
 cd /D lerc
-git checkout tags/v4.2.0
+git checkout tags/v4.3.0
 cd /D ..
 git clone https://github.com/AOMediaCodec/libavif.git libavif
 cd /D libavif
@@ -102,7 +102,7 @@ git checkout tags/v1.26
 cd /D ..
 git clone https://github.com/libexpat/libexpat.git libexpat
 cd /D libexpat
-git checkout tags/R_2_9_0
+git checkout tags/R_2_10_0
 cd /D ..
 git clone https://github.com/libffi/libffi.git libffi
 cd /D libffi
@@ -162,7 +162,7 @@ git checkout tags/v4.7.2rc2
 cd /D ..
 git clone https://chromium.googlesource.com/webm/libwebp libwebp
 cd /D libwebp
-git checkout tags/v1.6.0
+git checkout main
 cd /D ..
 git clone https://github.com/opencor/libxdiff libxdiff
 cd /D libxdiff
@@ -192,6 +192,10 @@ git clone https://github.com/lua/lua lua
 cd /D lua
 git checkout tags/v5.5.1
 cd /D ..
+git clone https://github.com/mapsforge/mapsforge.git mapsforge
+cd /D mapsforge
+git checkout tags/0.31.0
+cd /D ..
 git clone https://github.com/nono303/mapsforgesrv.git mapsforgesrv
 cd /D mapsforgesrv
 git checkout tasks
@@ -214,7 +218,7 @@ git checkout tags/2.4.0
 cd /D ..
 git clone https://github.com/nono303/mod_fcgid.git mod_fcgid
 cd /D mod_fcgid
-git checkout tags/2.3.10.6
+git checkout master
 cd /D ..
 git clone https://github.com/traceypooh/mod_h264_streaming--intra-keyframes.git mod_h264_streaming
 cd /D mod_h264_streaming
@@ -223,10 +227,6 @@ cd /D ..
 git clone https://github.com/maxmind/mod_maxminddb.git mod_maxminddb
 cd /D mod_maxminddb
 git checkout main
-cd /D ..
-git clone https://github.com/icing/mod_md mod_md
-cd /D mod_md
-git checkout tags/v2.6.11
 cd /D ..
 git clone https://github.com/owasp-modsecurity/ModSecurity mod_security
 cd /D mod_security
@@ -250,15 +250,15 @@ git checkout master
 cd /D ..
 git clone https://github.com/nghttp2/nghttp2.git nghttp2
 cd /D nghttp2
-git checkout tags/v1.70.0
+git checkout tags/v1.71.0
 cd /D ..
 git clone https://github.com/ngtcp2/nghttp3.git nghttp3
 cd /D nghttp3
-git checkout tags/v1.18.0
+git checkout tags/v1.19.0
 cd /D ..
 git clone https://github.com/ngtcp2/ngtcp2.git ngtcp2
 cd /D ngtcp2
-git checkout tags/v1.25.0
+git checkout tags/v1.26.0
 cd /D ..
 git clone https://github.com/puppetlabs/nssm.git nssm
 cd /D nssm
@@ -274,7 +274,7 @@ git checkout tags/pcre2-10.49
 cd /D ..
 git clone https://github.com/php/pecl-datetime-timezonedb.git pecl-datetime-timezonedb
 cd /D pecl-datetime-timezonedb
-git checkout tags/2026.5
+git checkout tags/2026.6
 cd /D ..
 git clone https://github.com/igbinary/igbinary pecl-igbinary
 cd /D pecl-igbinary
@@ -330,7 +330,7 @@ git checkout tags/php-sdk-2.9.0
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout master
+git checkout tags/php-8.6.0RC6
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj
@@ -354,7 +354,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/nono303/simpleDLNA.git sdlna
 cd /D sdlna
-git checkout master
+git checkout tags/1.3.5
 cd /D ..
 git clone https://github.com/apache/serf.git serf
 cd /D serf
@@ -398,7 +398,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/madler/zlib.git zlib
 cd /D zlib
-git checkout tags/v1.3.2
+git checkout tags/v1.4
 cd /D ..
 git clone https://github.com/facebook/zstd.git zstd
 cd /D zstd
