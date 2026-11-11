@@ -515,20 +515,3 @@ See https://github.com/php/php-src/blob/php-8.6.0alpha1/UPGRADING.INTERNALS#L51
 ---
  php_ogr_shims.h | 7 ++++++-
  1 file changed, 6 insertions(+), 1 deletion(-)
-
-diff --git a/php_ogr_shims.h b/php_ogr_shims.h
-index 35f2401..2930c9d 100755
---- a/php_ogr_shims.h
-+++ b/php_ogr_shims.h
-@@ -182,4 +182,9 @@ typedef size_t strsize_t;
- }
- #else
- #define OBJECT_INIT(_zval) object_init(_zval);
--#endif
-\ No newline at end of file
-+#endif
-+
-+/* shim WRONG_PARAM_COUNT removed in PHP 8.6 using the recommended replacement */
-+#ifndef WRONG_PARAM_COUNT
-+#define WRONG_PARAM_COUNT { zend_wrong_param_count(); RETURN_THROWS(); }
-+#endif
