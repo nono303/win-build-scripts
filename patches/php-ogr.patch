@@ -24,7 +24,7 @@ index 1e16c41..758f095 100644
    }
  }
 diff --git a/ogr.c b/ogr.c
-index 32c5d04..89edffb 100755
+index 32c5d04..5488cf4 100755
 --- a/ogr.c
 +++ b/ogr.c
 @@ -51,6 +51,7 @@
@@ -146,46 +146,7 @@ index 32c5d04..89edffb 100755
  /**********************************************************************
   * Error handling functions
   **********************************************************************/
-@@ -662,7 +721,8 @@ static char **  php_array2string(char **papszStrList, zval *refastrvalues)
- PHP_FUNCTION(cplerrorreset)
- {
-     if (ZEND_NUM_ARGS() != 0) {
--        WRONG_PARAM_COUNT;
-+        zend_wrong_param_count();
-+        RETURN_THROWS();
-     }
- 
-     CPLErrorReset();
-@@ -674,7 +734,8 @@ PHP_FUNCTION(cplerrorreset)
- PHP_FUNCTION(cplgetlasterrorno)
- {
-     if (ZEND_NUM_ARGS() != 0) {
--        WRONG_PARAM_COUNT;
-+        zend_wrong_param_count();
-+        RETURN_THROWS();
-     }
- 
-     RETURN_LONG(CPLGetLastErrorNo());
-@@ -686,7 +747,8 @@ PHP_FUNCTION(cplgetlasterrorno)
- PHP_FUNCTION(cplgetlasterrortype)
- {
-     if (ZEND_NUM_ARGS() != 0) {
--        WRONG_PARAM_COUNT;
-+        zend_wrong_param_count();
-+        RETURN_THROWS();
-     }
-     RETURN_LONG(CPLGetLastErrorType());
- }
-@@ -699,13 +761,303 @@ PHP_FUNCTION(cplgetlasterrormsg)
-     const char *pszMsg;
- 
-     if (ZEND_NUM_ARGS() != 0) {
--        WRONG_PARAM_COUNT;
-+        zend_wrong_param_count();
-+        RETURN_THROWS();
-     }
- 
-     if ((pszMsg = CPLGetLastErrorMsg()) != NULL)
+@@ -706,6 +765,293 @@ PHP_FUNCTION(cplgetlasterrormsg)
              _RETURN_DUPLICATED_STRING((char *)pszMsg);
  }
  
@@ -199,10 +160,8 @@ index 32c5d04..89edffb 100755
 +    */
 +PHP_FUNCTION(gdalregisterall)
 +{
-+    if (ZEND_NUM_ARGS() != 0) {
-+        zend_wrong_param_count();
-+        RETURN_THROWS();
-+    }
++    if (ZEND_NUM_ARGS() != 0)
++        WRONG_PARAM_COUNT;
 +    GDALAllRegister();
 +}
 +
@@ -481,26 +440,6 @@ index 32c5d04..89edffb 100755
  /**********************************************************************
   * OGR functions
   **********************************************************************/
-@@ -4904,7 +5256,8 @@ PHP_FUNCTION(ogrregisterdriver)
- PHP_FUNCTION(ogrgetdrivercount)
- {
-     if (ZEND_NUM_ARGS() != 0) {
--        WRONG_PARAM_COUNT;
-+        zend_wrong_param_count();
-+        RETURN_THROWS();
-     }
-     RETURN_LONG(OGRGetDriverCount());
- }
-@@ -4961,7 +5314,8 @@ PHP_FUNCTION(ogrgetdriverbyname)
- PHP_FUNCTION(ogrregisterall)
- {
-     if (ZEND_NUM_ARGS() != 0) {
--        WRONG_PARAM_COUNT;
-+        zend_wrong_param_count();
-+        RETURN_THROWS();
-     }
-     OGRRegisterAll();
- }
 diff --git a/php_ogr_api.h b/php_ogr_api.h
 index 5aba80c..62c47e3 100755
 --- a/php_ogr_api.h
@@ -563,3 +502,33 @@ index 5aba80c..62c47e3 100755
      PHP_FE_END  /* Must be the last line in ogr_functions[] */
  };
  /* }}} */
+
+From abc32802cd0c32a183227048c2d22fafcf9c2c76 Mon Sep 17 00:00:00 2001
+From: Edward Nash <e.nash@dvz-mv.de>
+Date: Tue, 10 Nov 2026 15:33:13 +0100
+Subject: [PATCH] feature: shim WRONG_PARAM_COUNT removed in PHP 8.6
+
+Use the recommended replacement rather than how the macro was previously defined.
+This calls RETURN_THROWS() rather than just return.
+
+See https://github.com/php/php-src/blob/php-8.6.0alpha1/UPGRADING.INTERNALS#L51
+---
+ php_ogr_shims.h | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/php_ogr_shims.h b/php_ogr_shims.h
+index 35f2401..2930c9d 100755
+--- a/php_ogr_shims.h
++++ b/php_ogr_shims.h
+@@ -182,4 +182,9 @@ typedef size_t strsize_t;
+ }
+ #else
+ #define OBJECT_INIT(_zval) object_init(_zval);
+-#endif
+\ No newline at end of file
++#endif
++
++/* shim WRONG_PARAM_COUNT removed in PHP 8.6 using the recommended replacement */
++#ifndef WRONG_PARAM_COUNT
++#define WRONG_PARAM_COUNT { zend_wrong_param_count(); RETURN_THROWS(); }
++#endif
