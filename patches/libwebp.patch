@@ -1,8 +1,8 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 39d3d8f6..a953a9a9 100644
+index 96c7de95..18045306 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -120,6 +120,7 @@ endif()
+@@ -123,6 +123,7 @@ endif()
  include(cmake/deps.cmake)
  include(GNUInstallDirs)
  
@@ -10,3 +10,17 @@ index 39d3d8f6..a953a9a9 100644
  if(BUILD_SHARED_LIBS AND NOT DEFINED CMAKE_INSTALL_RPATH)
    # Set the rpath to match autoconf/libtool behavior. Note this must be set
    # before target creation.
+diff --git a/cmake/cpu.cmake b/cmake/cpu.cmake
+index 4e891c62..a65357a5 100644
+--- a/cmake/cpu.cmake
++++ b/cmake/cpu.cmake
+@@ -64,7 +64,7 @@ function(webp_check_compiler_flag WEBP_SIMD_FLAG ENABLE_SIMD)
+ endfunction()
+ 
+ # those are included in the names of WEBP_USE_* in c++ code.
+-set(WEBP_SIMD_FLAGS "AVX2;SSE41;SSE2;MIPS32;MIPS_DSP_R2;NEON;MSA;VSX")
++set(WEBP_SIMD_FLAGS "SSE41;SSE2;MIPS32;MIPS_DSP_R2;NEON;MSA;VSX")
+ set(WEBP_SIMD_FILE_EXTENSIONS
+     "_avx2.c;_sse41.c;_sse2.c;_mips32.c;_mips_dsp_r2.c;_neon.c;_msa.c;_vsx.c")
+ if(MSVC AND CMAKE_C_COMPILER_ID STREQUAL "MSVC")
+
