@@ -1,8 +1,94 @@
 # changelog
 
 
+## 1.20.0 _(2026-11-11)_
+
+*  fix useless CMake opts
+`modules/libpng.bat`
+*  https://github.com/dvzgeo/php_ogr/pull/27 merged https://github.com/dvzgeo/php_ogr/issues/26 closed https://github.com/dvzgeo/php_ogr/releases/tag/1.7.2 released
+`patches/php-ogr.patch`
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`utils/srccreate.bat`
+*  build vwebp.exe webpinfo.exe disable SWAP_16BIT_CSP, EXTRAS enable UNICODE
+`modules/libwebp.bat`
+*  In 14.52, std:c++latest is 23 causing  `C:\sdk\softs\msvs\vs18\VC\Tools\MSVC\14.52.37025\include\memory(3337): error C2027: use of undefined type 'geos::geom::SimpleCurve'` > force std:c++20 _(aka latest in 14.51)_
+`modules/geos.bat`
+*  sed replaced by patch
+`modules/dav1d.bat`
+*  vcvars_ver: 14.51 > 14.52 _(MSVS 18.12.0)_
+`vs18.bat`
+*  https://github.com/dvzgeo/php_ogr/pull/27
+`patches/php-ogr.patch`
+*  update gradle
+`env_sample.bat`
+`patches/mapsforge.patch`
+*  disable AVX2 in SIMD _(temporary, see  https://issues.webmproject.org/issues/584386498)_
+`patches/libwebp.patch`
+*  fix vs18 14.52 `\include\compat\msvc\stdatomic.h(35): error C7780: function-like macro '__has_include_next' is not defined`
+`patches/dav1d.patch`
+*  add libwebp: vwebp.exe && webpinfo.exe
+`utils/bininfo.bat`
+*  reduce some log level for startup
+`patches/httpd.patch`
+`patches/mod_bikeshed.patch`
+`patches/mod_security.patch`
+*  + 'doesn't exists' if init failed
+`utils/sub/logcheck.php`
+*  httpd back on tag
+`utils/sub/_functions-version.php`
+*  fix external modules list
+`modules/httpd.bat`
+*  zlib 1.4: fix lib name (unset cause `BC230000:error:12800067:DSO support routines:win32_load:could not load the shared library:crypto\dso\dso_win32.c:110:filename(ZLIB1.dll)`)
+`modules/openssl.bat`
+*  zlib 1.4 naming: z > libz
+`modules/php.bat`
+`modules/phpsdk-local.bat`
+`modules/zlib.bat`
+`patches/pecl-memcache.patch`
+`patches/php-memcached.patch`
+*  remove mod_md from external module version
+`modules/httpd.bat`
+*  1979
+`patches/libyuv.patch`
+*  2.4.70-dev
+`patches/httpd.patch`
+*  https://github.com/php/php-src/pull/22225/changes
+`patches/php-src/8.6/ext-opcache.patch`
+*  httpd: tag > head of 2.4.x php-src: head of PHP-8.6 > php-8.6.0rc5
+`utils/sub/_functions-version.php`
+*  httpd 2.4.70
+`utils/bininfo.bat`
+*  exclude pkgcfg_lib_PC_
+`utils/sub/cmopts.php`
+*  remove Debugger.JustInTime
+`config/.vsconfig`
+*  update mapsforge & mod_md
+`usage.txt`
+*  mod_md archived https://github.com/icing/mod_md/commit/2746100d4d3e0d9d89a423a69a7deb1ea9a23213 remove useless CMakeLists patch
+`patches/httpd.patch`
+`patches/mod_md.patch`
+*  add mapsfroge mavenlocal build for mapsforgesrv & mobac
+`.gradle-wrapper.properties/mapsforge_gradle-wrapper.properties`
+`env_sample.bat`
+`modules/mapsforge.bat`
+`modules/mobac.bat`
+`patches/mapsforge.patch`
+*  use mavenLocal for mapsforge
+`modules/mapsforgesrv.bat`
+*  force rmdir of /build use /restore as flag instead of target clean build dir with x64 dll only
+`modules/sdlna.bat`
+*  fix init rmdir %SRC% > %PATH_SRC% use /restore as flag instead of target fix missing version with /p:Version (cf. https://github.com/himeshsameera/Dependencies/issues/23 - https://github.com/himeshsameera/Dependencies/blob/master/build.ps1#L35)
+`modules/dependencies.bat`
+*  MSBUILD_OPTS: * DebugType: None > pdbonly * + TargetFrameworkVersion
+`env_sample.bat`
+
+
 ## 1.19.1 _(2026-10-29)_
 
+*  1.19.1
+`changelog.md`
 *  remove nuget (now useless) upgrade tools & src
 `README.md`
 `SRC_VERSION.md`
