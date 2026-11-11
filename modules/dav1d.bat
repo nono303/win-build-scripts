@@ -1,8 +1,5 @@
 @echo off && call %PATH_UTILS%\init.bat %1 cmake
 
-	REM remove useless warning
-sed -i -E 's/(warning\(.Compiler)/# \1/g' %CYGPATH_SRC%/%1/meson.build
-
 meson setup ^
 --prefix %PATH_INSTALL% ^
 -Dbuildtype=debugoptimized ^
