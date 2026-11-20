@@ -1,5 +1,8 @@
 @echo off && call %PATH_UTILS%\init.bat %1 cmake
 
+	REM FOR_MSW required for gdxpm.c
+sed -i 's/-DWINVER=0x0500  -D_WIN32_WINNT=0x0500 -D_WIN32_IE=0x0600/-DWINVER=_WIN32_WINNT_WIN10 -D_WIN32_WINNT=_WIN32_WINNT_WIN10 -D_WIN32_IE=_WIN32_IE_IE100 -DFOR_MSW/g' %CYGPATH_SRC%/%1/CMakeLists.txt
+
 REM missing libraqm, libfontconfig, libimagequant
 if "%ARG_CMOPTS%"=="1" (@echo on)
 cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
