@@ -34,11 +34,11 @@ git checkout tags/v1.34.9
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/curl-8_23_0
+git checkout tags/rc-8_24_0-1
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
-git checkout tags/1.5.4
+git checkout tags/1.5.5
 cd /D ..
 git clone https://github.com/himeshsameera/Dependencies dependencies
 cd /D dependencies
@@ -74,7 +74,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/apache/httpd.git httpd
 cd /D httpd
-git checkout tags/2.4.70
+git checkout tags/2.4.71
 cd /D ..
 git clone https://github.com/unicode-org/icu.git icu
 cd /D icu
@@ -106,7 +106,7 @@ git checkout tags/R_2_10_0
 cd /D ..
 git clone https://github.com/libffi/libffi.git libffi
 cd /D libffi
-git checkout tags/v3.8.0
+git checkout tags/v3.8.1
 cd /D ..
 git clone https://chromium.googlesource.com/codecs/libgav1.git libgav1
 cd /D libgav1
@@ -126,7 +126,7 @@ git checkout tags/v1.23.7
 cd /D ..
 git clone https://github.com/kiyolee/libiconv-win-build.git libiconv
 cd /D libiconv
-git checkout tags/v1.19
+git checkout tags/v1.19.1
 cd /D ..
 git clone https://github.com/libjpeg-turbo/libjpeg-turbo libjpeg-turbo
 cd /D libjpeg-turbo
@@ -142,7 +142,7 @@ git checkout tags/1.14.1
 cd /D ..
 git clone https://github.com/awesomized/libmemcached libmemcached
 cd /D libmemcached
-git checkout v1.x
+git checkout tags/1.2.0
 cd /D ..
 git clone https://github.com/pnggroup/libpng libpng
 cd /D libpng
@@ -172,9 +172,9 @@ git clone https://gitlab.gnome.org/GNOME/libxml2.git libxml2
 cd /D libxml2
 git checkout tags/v2.15.4
 cd /D ..
-git clone https://github.com/nono303/libxpm.git libxpm
+git clone https://github.com/nono303/libXpm.git libxpm
 cd /D libxpm
-git checkout master
+git checkout tags/msw-3.5.20
 cd /D ..
 git clone https://gitlab.gnome.org/GNOME/libxslt.git/ libxslt
 cd /D libxslt
@@ -318,7 +318,7 @@ git checkout master
 cd /D ..
 git clone https://github.com/dvzgeo/php_ogr.git php-ogr
 cd /D php-ogr
-git checkout master
+git checkout tags/1.7.2
 cd /D ..
 git clone https://github.com/swen100/phpng-proj.git php-proj
 cd /D php-proj
@@ -330,7 +330,7 @@ git checkout tags/php-sdk-2.9.0
 cd /D ..
 git clone https://github.com/php/php-src.git php-src
 cd /D php-src
-git checkout tags/php-8.6.0RC6
+git checkout tags/php-8.6.0
 cd /D ..
 git clone https://github.com/OSGeo/PROJ.git proj
 cd /D proj

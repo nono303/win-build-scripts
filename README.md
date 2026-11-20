@@ -57,7 +57,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 
 | soft                                                         | arch | version    | /config             |
 | ------------------------------------------------------------ | ---- | -------------- | ------------------- |
-| [Visual Studio 2026](https://aka.ms/vs/18/Stable/vs_community.exe) |      | 18.12.0 (14.51, 14.44) | `.vsconfig`         |
+| [Visual Studio 2026](https://aka.ms/vs/18/Stable/vs_community.exe) |      | 18.12.1 (14.51, 14.44) | `.vsconfig`         |
 | :bookmark: [Microsoft Visual C++ Redistributable](https://github.com/abbodi1406/vcredist/releases) | x64 & x86 | 14.52.37025 |  |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.7.0 | `cyg64.packagelist` |
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.15.2 |                     |
@@ -65,13 +65,13 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [Strawberry Perl](https://github.com/StrawberryPerl/Perl-Dist-Strawberry/releases) | x64  | 5.40.5.1 UCRT |                     |
 | [NASM](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 3.0.2 |                     |
 | [YASM](https://github.com/yasm/yasm/releases) | x64 | 1.3.0 | |
-| [Git](https://git-scm.com/download/win)                      | x64  | 2.56.0.4 |                     |
+| [Git](https://git-scm.com/download/win)                      | x64  | 2.56.1 |                     |
 | verpatch                                                     | x64  | 1.0.15.1       |                     |
 | [7z](https://www.7-zip.org/download.html)                    | x64  | 26.06 |                     |
 | [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.93   |                     |
 | [ChkMatch](https://web.archive.org/web/20210205095232/https://www.debuginfo.com/tools/chkmatch.html) | x86 | 1.0.3          |                     |
 | [Gradle](https://services.gradle.org/distributions/) | [java] | 9.9.1 | |
-| [CMake](https://cmake.org/download/) | x64 | 4.5.0rc3 | |
+| [CMake](https://cmake.org/download/) | x64 | 4.5.0 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | x64 | 1.13.2 | |
 | [JOM](https://download.qt.io/official_releases/jom/) | x64 | 1.1.7 | |
 | [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 1.12.1 | |

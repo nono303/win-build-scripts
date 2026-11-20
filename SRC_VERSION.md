@@ -1,49 +1,49 @@
 | src | version |
 | ---- | ---- |
 | [aom](https://aomedia.googlesource.com/aom) | 3.15.3 |
-| [apr](https://github.com/apache/apr) | 1.7.7 - f6c5dbb5b |
-| [apr-util](https://github.com/apache/apr-util) | 1.7.0 - c3e4da7b |
+| [apr](https://github.com/apache/apr) | 1.7.7 - 4c2a2c83a |
+| [apr-util](https://github.com/apache/apr-util) | 1.7.0 - f7fcd1b9 |
 | [brotli](https://github.com/google/brotli) | 1.2.1 |
 | [bzip2](https://gitlab.com/bzip2/bzip2) | 1.1.0 - 66c46b8 |
 | [cares](https://github.com/c-ares/c-ares) | 1.34.9 |
-| [curl](https://github.com/curl/curl) | 8.23.0 |
-| [dav1d](https://code.videolan.org/videolan/dav1d) | 1.5.4 |
+| [curl](https://github.com/curl/curl) | 8.24.0.1 |
+| [dav1d](https://code.videolan.org/videolan/dav1d) | 1.5.5 |
 | [dependencies](https://github.com/himeshsameera/Dependencies) | 2.4.2 |
-| [fit2gpx](https://github.com/nono303/fit2gpx) - [*upstream + src*](https://github.com/MaksVasilev/fit2gpx) | 0.1.24.21 - 049b344 |
+| [fit2gpx](https://github.com/nono303/fit2gpx) - [*upstream + src*](https://github.com/MaksVasilev/fit2gpx) | 0.1.24.22 - b32572d |
 | [freeglut](https://github.com/dcnieho/FreeGLUT) | 3.8.0 |
 | [freetype2](https://gitlab.freedesktop.org/freetype/freetype) | 2.15.0 |
 | [gdal](https://github.com/OSGeo/gdal) | 3.13.3 |
 | [geographiclib](https://github.com/geographiclib/geographiclib) | 2.7 |
 | [geos](https://github.com/libgeos/geos) | 3.15.0 |
 | [giflib](https://github.com/gongjianbo/GifLib) | 5.2.1 - 59eb9d1 |
-| [httpd](https://github.com/apache/httpd) | 2.4.70 |
-| [icu](https://github.com/unicode-org/icu) | 79.1 - ddc6b66926 |
+| [httpd](https://github.com/apache/httpd) | 2.4.71 |
+| [icu](https://github.com/unicode-org/icu) | 80.0.1 - ddc6b66926 |
 | [jansson](https://github.com/akheron/jansson) | 2.15.1 |
 | [lerc](https://github.com/Esri/lerc) | 4.3.0 |
 | [libavif](https://github.com/AOMediaCodec/libavif) | 1.4.2 |
 | [libconfig](https://github.com/hyperrealm/libconfig) | 1.8.3 |
 | [libdeflate](https://github.com/ebiggers/libdeflate) | 1.26 |
 | [libexpat](https://github.com/libexpat/libexpat) | 2.10.0 |
-| [libffi](https://github.com/libffi/libffi) | 3.8.0 |
+| [libffi](https://github.com/libffi/libffi) | 3.8.1 |
 | [libgav1](https://chromium.googlesource.com/codecs/libgav1) | 0.20.0 |
 | [libgd](https://github.com/libgd/libgd) | 2.4.0 - 3e04b12b |
 | [libgeotiff](https://github.com/OSGeo/libgeotiff) | 1.7.4.14 - 75cfca5 |
 | [libheif](https://github.com/strukturag/libheif) | 1.23.7 :warning: [depends on ffmpeg](https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl-shared.zip) |
-| [libiconv](https://github.com/kiyolee/libiconv-win-build) | 1.19 |
+| [libiconv](https://github.com/kiyolee/libiconv-win-build) | 1.19.1 |
 | [libjpeg-turbo](https://github.com/libjpeg-turbo/libjpeg-turbo) | 3.2.1 |
 | [liblzma](https://git.tukaani.org/xz) | 5.8.4 |
 | [libmaxminddb](https://github.com/maxmind/libmaxminddb) | 1.14.1 |
-| [libmemcached](https://github.com/awesomized/libmemcached) | 1.1.4.30 - aafec5eb |
-| [libpng](https://github.com/pnggroup/libpng) | 1.8.0 - b47027503 |
-| [libsodium](https://github.com/jedisct1/libsodium) | 1.0.22.62 - 1e1fcb9a |
+| [libmemcached](https://github.com/awesomized/libmemcached) | 1.2.0 |
+| [libpng](https://github.com/pnggroup/libpng) | 1.8.0 - 5408ee7a2 |
+| [libsodium](https://github.com/jedisct1/libsodium) | 1.0.22.121 - 0a5f2423 |
 | [libssh2](https://github.com/libssh2/libssh2) | 1.11.1 |
 | [libtiff](https://gitlab.com/libtiff/libtiff/) | 4.7.2.2 |
-| [libwebp](https://chromium.googlesource.com/webm/libwebp) | 1.6.0.383 - c3fe5bb6 |
+| [libwebp](https://chromium.googlesource.com/webm/libwebp) | 1.6.0.416 - 67b8deea |
 | [libxdiff](https://github.com/opencor/libxdiff) | 0.23 |
 | [libxml2](https://gitlab.gnome.org/GNOME/libxml2) | 2.15.4 |
-| [libxpm](https://github.com/nono303/libxpm) - [*upstream + src*](https://github.com/winlibs/libxpm) - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.17.11 - 8a450cb |
+| [libxpm](https://github.com/nono303/libXpm) - [*upstream + src*](https://gitlab.freedesktop.org/xorg/lib/libxpm) - _[src](https://gitlab.freedesktop.org/xorg/lib/libxpm)_ | 3.5.20 |
 | [libxslt](https://gitlab.gnome.org/GNOME/libxslt/) | 1.1.45 |
-| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1981 - 8fa7a7b3 |
+| [libyuv](https://chromium.googlesource.com/libyuv/libyuv) | 1984 - 8a0ee9fb |
 | [libzip](https://github.com/nih-at/libzip) | 1.12.1 |
 | [lua](https://github.com/lua/lua) | 5.5.1 |
 | [mapsforge](https://github.com/mapsforge/mapsforge) | 0.31.0 |
@@ -54,7 +54,7 @@
 | [mod_evasive](https://github.com/jvdmr/mod_evasive) | 2.4.0 |
 | [mod_fcgid](https://github.com/nono303/mod_fcgid) - [*upstream + src*](https://github.com/pagespeed/mod_fcgid) | 2.3.10.6.1 - e5c007d |
 | [mod_h264_streaming](https://github.com/traceypooh/mod_h264_streaming--intra-keyframes) | 2.2.7 - 0b64de4 |
-| [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.3.0.237 - d85f007 |
+| [mod_maxminddb](https://github.com/maxmind/mod_maxminddb) | 1.3.0.251 - 1563bfb |
 | [mod_security](https://github.com/owasp-modsecurity/ModSecurity) | 2.9.15 |
 | [mod_security-sdbm-util](https://github.com/SpiderLabs/modsec-sdbm-util) | 1.0 - e02b4a1 |
 | [mod_wku_bt](https://github.com/nono303/mod_whatkilledus) - _[src1](https://emptyhammock.com/media/downloads/wku_bt-2.01.zip)_ | 2.0.2 |
@@ -77,10 +77,10 @@
 | [php-ext-zstd](https://github.com/kjdev/php-ext-zstd) | 0.18.0 |
 | [php-geos](https://gitea.osgeo.org/geos/php-geos) | 1.0.0.63 - 1a1c6a9 |
 | [php-memcached](https://github.com/php-memcached-dev/php-memcached) | 3.4.0.3 - 0b52d36 |
-| [php-ogr](https://github.com/dvzgeo/php_ogr) | 1.7.1.1 - 5a66b48 |
+| [php-ogr](https://github.com/dvzgeo/php_ogr) | 1.7.2 |
 | [php-proj](https://github.com/swen100/phpng-proj) | 3.0.3.5 - 20a70a5 |
 | [php-sdk](https://github.com/php/php-sdk-binary-tools) | 2.9.0 |
-| [php-src](https://github.com/php/php-src) | 8.6.0.6 |
+| [php-src](https://github.com/php/php-src) | 8.6.0 |
 | [proj](https://github.com/OSGeo/PROJ) | 9.9.0 |
 | [proxytunnel](https://github.com/proxytunnel/proxytunnel) | 1.13.0 |
 | [pthread-win32](https://github.com/GerHobbelt/pthread-win32) | 3.0.3.1.79 - 06e7608b |
@@ -92,7 +92,7 @@
 | [sslh](https://github.com/yrutschle/sslh) | 2.3.1.29 - e722274 |
 | [subversion](https://github.com/apache/subversion) | 1.15.0 |
 | [tidy](https://github.com/htacg/tidy-html5) | 5.9.20 - d08ddc2 |
-| [tzdataservice](https://github.com/nono303/tzdataservice) - [*upstream + src*](https://github.com/skaringa/tzdataservice) | 2.1.9 - e04f7e9 |
+| [tzdataservice](https://github.com/nono303/tzdataservice) - [*upstream + src*](https://github.com/skaringa/tzdataservice) | 2.1.10 - db63eba |
 | [verpatch](https://github.com/pavel-a/ddverpatch) | 1.0.15.1 - 3cc989e |
 | [wineditline](https://github.com/ptosco/wineditline) | 2.208 |
 | [xdebug](https://github.com/xdebug/xdebug) | 3.6.0.1 |
