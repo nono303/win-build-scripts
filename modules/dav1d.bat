@@ -19,6 +19,7 @@ meson setup ^
 -Dxxhash_muxer=auto ^
 -Dtrim_dsp=true ^
 -Db_lto=true ^
+-Dc_args=%AVX% ^
 %PATH_SRC%\%1
 
 %PATH_BIN_CYGWIN%\bash --login -c '%CYGPATH_UTILS%/meson.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"'
