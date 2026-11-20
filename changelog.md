@@ -1,8 +1,36 @@
 # changelog
 
 
+## 1.20.1 _(2026-11-20)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`config/.vsconfig`
+`config/cyg64.packagelist`
+`utils/srccreate.bat`
+*  fix missing cflag FOR_MSW required for gdxpm.c
+`modules/libgd.bat`
+*  1.2.0
+`modules/libmemcached.bat`
+*  https://chromiumdash.appspot.com/commit/dc2a7e4056355dfbe0350ffae39800049ac06c19
+`patches/libwebp.patch`
+*  3.5.20
+`modules/libxpm.bat`
+*  2.4.71
+`patches/httpd.patch`
+*  1.5.5
+`modules/dav1d.bat`
+`patches/dav1d.patch`
+*  https://github.com/curl/curl/blob/rc-8_24_0-1/RELEASE-NOTES#L12
+`modules/curl.bat`
+
+
 ## 1.20.0 _(2026-11-11)_
 
+*  1.20.0
+`.gitignore`
+`changelog.md`
 *  fix useless CMake opts
 `modules/libpng.bat`
 *  https://github.com/dvzgeo/php_ogr/pull/27 merged https://github.com/dvzgeo/php_ogr/issues/26 closed https://github.com/dvzgeo/php_ogr/releases/tag/1.7.2 released
