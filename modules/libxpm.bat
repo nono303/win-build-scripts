@@ -1,6 +1,6 @@
 @echo off && call %PATH_UTILS%\init.bat %1
 
-set VCDIR=windows\nono
+set VCDIR=windows\msvs
 set OUTDIR_CONF=DLL Release
 
 call do_php %PATH_UTILS%/msbuild.php "%PATH_SRC%/%1/%VCDIR:\=/%" %AVX_MSBUILD% %PTFTS% %WKITVER% %VCTOOLSVER% %DOTNETVER%
@@ -13,5 +13,7 @@ MSBuild.exe %PATH_SRC%\%1\%VCDIR%\libxpm.sln %MSBUILD_OPTS% ^
 for %%X in (dll pdb) do (call %PATH_UTILS%\fileutils cp "%PATH_SRC%\%1\windows\builds\%archmsbuild%\%OUTDIR_CONF%\libxpm.%%X" %PATH_INSTALL%\bin\*)
 call %PATH_UTILS%\fileutils cp "%PATH_SRC%\%1\windows\builds\%archmsbuild%\%OUTDIR_CONF%\libxpm.lib" %PATH_INSTALL%\lib\*
 if not exist %PATH_INSTALL%\include\X11\. mkdir %PATH_INSTALL%\include\X11
-call %PATH_UTILS%\fileutils cpdir  %PATH_SRC%\%1\include\X11 %PATH_INSTALL%\include\X11\
+for %%X in (src\simx.h include\X11\xpm.h) do (
+	call %PATH_UTILS%\fileutils cp %PATH_SRC%\%1\%%X %PATH_INSTALL%\include\X11\*
+)
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libxpm.dll
