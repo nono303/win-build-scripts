@@ -40,7 +40,9 @@ for /L %%i in (2,1,%argCount%) do (
 
 	REM ~~~~~~~~~~~~ check prereq deps
 if %PHP_BUILD_TYPE% == memcache	(
-	if not exist %PATH_INSTALL%\lib\libz.lib (call go.bat zlib NOLOG)
+	if not exist %PATH_INSTALL%\%DIR_LIB_STATIC%\libzs.lib (call go.bat zlib NOLOG)
+	set PHP_XTRALIBS=;%PATH_INSTALL%\%DIR_LIB_STATIC%\
+	set PHP_BUILDNTS=1
 )
 if %PHP_BUILD_TYPE% == brotli	(
 	if not exist %PATH_INSTALL%\%DIR_LIB_STATIC%\libbrotlicommon.lib (call go.bat brotli static NOLOG)
@@ -71,6 +73,10 @@ if %ARG_KEEPSRC% == 0 (
 
 	REM ~~~~~~~~~~~~ pecl-memcache
 call %PATH_UTILS%\init.bat pecl-memcache
+	REM if standalon, build with static zlib
+if %PHP_BUILD_TYPE% == memcache	(
+	sed -i 's/libz.lib/libzs.lib/g' %CYGPATH_SRC%/pecl-memcache/config.w32
+)
 	REM revision & version for pecl_memcache in phpinfo()
 FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\find -name 'memcache.c' -type f -exec dirname {} +`) do (set PECLMEMCACHECYGSRCDIR=%%F)
 FOR /F "tokens=* USEBACKQ" %%F in (`grep PHP_MEMCACHE_VERSION %CYGPATH_SRC%/pecl-memcache/%PECLMEMCACHECYGSRCDIR%/php_memcache.h ^| cut -d^'^"^' -f2`) do (set PECLMEMCACHEVERSION=%%F)

@@ -8,7 +8,7 @@ if %PHPVER% == 8.5 (
 )
 if %PHPVER% == 8.6 (
 	set CONFIGURE_VERSION=
-	set CONFIGURE_VERSION_DISABLED=
+	set CONFIGURE_VERSION_DISABLED=--without-pcre
 )
 set CONFIGURE_PARTIAL_DISABLED=^
 	%CONFIGURE_VERSION_DISABLED% ^
@@ -27,7 +27,13 @@ set CONFIGURE_PARTIAL_DISABLED=^
 	--without-xml ^
 	--disable-xmlwriter ^
 	--disable-xmlreader ^
-	--disable-zstd
+	--disable-zstd ^
+	--disable-com-dotnet ^
+	--without-gd ^
+	--without-readline ^
+	--disable-zlib ^
+	--without-geos ^
+	--disable-zip
 set CONFIGURE_COMMON_DISABLED=^
 	--without-analyzer ^
 	--without-enchant ^
@@ -36,7 +42,7 @@ set CONFIGURE_COMMON_DISABLED=^
 	--without-pgsql ^
 	--disable-embed ^
 	--disable-ipv6 ^
-	--disable-cli-win32
+	--disable-cli-win32	
 set CONFIGURE_COMMON=^
 	--enable-native-intrinsics=sse,sse2%intrinsics% ^
 	--with-php-build=%PATH_INSTALL% ^
@@ -220,7 +226,7 @@ if %PHP_BUILD_TYPE% == jsonpath	(
 if %PHP_BUILD_TYPE% == parallel	(
 	call do_php %PATH_UTILS%\sub\version.php pecl-parallel %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_parallel.dll build:%TSNTS% php:%PHPVERFULL%
 )
-if %PHP_BUILD_TYPE% == memcached	(
+if %PHP_BUILD_TYPE% == memcached (
 	call do_php %PATH_UTILS%\sub\version.php php-memcached %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcached.dll build:%TSNTS% php:%PHPVERFULL%
 )
 if %PHP_BUILD_TYPE% == memcache	(
