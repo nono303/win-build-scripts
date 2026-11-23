@@ -22,7 +22,9 @@ cmake %CMAKE_OPTS% -G %CMAKE_TGT_NINJA% ^
 if "%ARG_CMOPTS%"=="1" (exit /B)
 
 %PATH_BIN_CYGWIN%\bash --login -c '%CYGPATH_UTILS%/ninja.sh "%AVX%" "%CYGPATH_BUILD%/%1" "%NUMBER_OF_PROCESSORS%"'
+sed -i 's/zlibstatic.pdb/libzs.pdb/g' %CYGPATH_BUILD%/%1/build.ninja
 %NINJA% install
 
 call do_php %PATH_UTILS%\sub\version.php %1 %PATH_INSTALL%\bin\libz.dll
 call %PATH_UTILS%\fileutils mv %PATH_INSTALL%\lib\libzs.lib %PATH_INSTALL%\%DIR_LIB_STATIC%\libzs.lib
+call %PATH_UTILS%\fileutils cp %PATH_BUILD%\%1\CMakeFiles\zlibstatic.dir\libzs.pdb %PATH_INSTALL%\%DIR_LIB_STATIC%\*
