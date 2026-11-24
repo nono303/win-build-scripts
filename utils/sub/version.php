@@ -87,6 +87,7 @@
 			exit(-1);
 		} else { // verpatch
 			$rpdb = NO_PDB ? "" : " /rpdb"; // manage pdb
+			$copyright = "https://github.com/nono303/win-build-scripts";
 			// description
 			$description = "arch:".(pathenv("ARCH") ?: pathenv("PHP_SDK_ARCH")).pathenv("AVXB");
 			if(in_array($argv[1], CYG_BUILDS)) {
@@ -101,9 +102,11 @@
 				/*
 					additionnal descritption. order:
 						1. build:xxx	php
+						1. phpver:x-y	php [module]
 						2. proot:x.y.z	php, httpd
 						3. ldeps:x.y.z	php, memcached, sslh
 					ex.
+						go version pecl-memcache C:\sdk\release\vs18_x64-avx2\_php-ts\php_memcache.dll phpver:8.5-ts
 						go version pecl-text-xdiff C:\sdk\release\vs18_x64-avx2\_php-ts\php_xdiff.dll build:ts php:8.5.4.1 lib:1.2.3 verbose
 						go version memcached D:\github\NONO_memcached\libevent-2.1\x64\memcached-avx-tls.exe libevent:2.1 verbose
 						go version sslh D:\github\NONO_sslh\x64\avx2\sslh-ev.exe libconfig:1.8.2 verbose
@@ -111,6 +114,11 @@
 				for($i = 3; $i < $nbargs; $i++) {
 					if(str_starts_with($argv[$i],"build")) {
 						$descargv .= " ".$argv[$i];
+					} elseif(str_starts_with($argv[$i],"phpver")) {
+						if($argv[1] == "pecl-memcache")
+							$copyright = "https://github.com/nono303/PHP-memcache-dll";
+						$parts = explode("-",$argv[$i]);
+						$descargv .= " ".$parts[0]."-".strtoupper($parts[1]);
 					} else {
 						if(!$proot) {
 							$proot = explode(":",$argv[$i])[0]; // prefix product
@@ -139,7 +147,7 @@
 			$pname = basename($argv[2],".".pathinfo($argv[2], PATHINFO_EXTENSION));
 			if($proot)
 				$pname = $proot.":".$pname;
-			$cmd = pathenv("BIN_VERPATCH")." ".$argv[2]." \"".$current["file"]."\" /va".$rpdb." /high /pv \"".$current["product"]."\" /s description \"".$description.$descargv."\" /s product \"".$pname."\" /s LegalTrademarks \"".$current["scm"]["urls"]["origin"]."\" /s LegalCopyright \"https://github.com/nono303/win-build-scripts\"";
+			$cmd = pathenv("BIN_VERPATCH")." ".$argv[2]." \"".$current["file"]."\" /va".$rpdb." /high /pv \"".$current["product"]."\" /s description \"".$description.$descargv."\" /s product \"".$pname."\" /s LegalTrademarks \"".$current["scm"]["urls"]["origin"]."\" /s LegalCopyright \"".$copyright."\"";
 			if(DEBUG || pathenv("CUR_DEBUG") == 1) {
 				echo $cmd.PHP_EOL;
 			} else {
