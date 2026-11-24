@@ -11,13 +11,25 @@ REM ********
 
 	REM ~~~~~~~~~~~~ php-src
 call %PATH_UTILS%\init.bat php-src
-set PHPVER=%GET_VERSION:~0,3%
 set PHPVERFULL=%GET_VERSION%
+
+	REM ~~~~~~~~~~~~ get php major version
+setlocal enabledelayedexpansion
+set PHPVER=
+set var=%GET_VERSION%
+:loop
+for /f "tokens=1* delims=." %%a in ("%var%") do (
+    if not "%%b"=="" (
+        if defined PHPVER (set "PHPVER=!PHPVER!.%%a") else (set "PHPVER=%%a")
+        set "var=%%b"
+        goto loop
+    )
+)
 
 	REM ~~~~~~~~~~~~ type of build
 set PHP_BUILD_TYPE=%PHPVER%
 set PHP_XTRALIBS=
-setlocal enabledelayedexpansion
+REM setlocal enabledelayedexpansion
 set argCount=0
 for %%x in (%*) do (
    set /A argCount+=1
@@ -75,12 +87,14 @@ if %ARG_KEEPSRC% == 0 (
 call %PATH_UTILS%\init.bat pecl-memcache
 	REM if standalon, build with static zlib
 if %PHP_BUILD_TYPE% == memcache	(
-	sed -i 's/libz.lib/libzs.lib/g' %CYGPATH_SRC%/pecl-memcache/config.w32
+	sed -i 's/zlib_a.lib/libzs.lib/g' %CYGPATH_SRC%/pecl-memcache/config.w32
+) else (
+	sed -i 's/zlib_a.lib/libz.lib/g' %CYGPATH_SRC%/pecl-memcache/config.w32
 )
 	REM revision & version for pecl_memcache in phpinfo()
 FOR /F "tokens=* USEBACKQ" %%F in (`%PATH_BIN_CYGWIN%\find -name 'memcache.c' -type f -exec dirname {} +`) do (set PECLMEMCACHECYGSRCDIR=%%F)
 FOR /F "tokens=* USEBACKQ" %%F in (`grep PHP_MEMCACHE_VERSION %CYGPATH_SRC%/pecl-memcache/%PECLMEMCACHECYGSRCDIR%/php_memcache.h ^| cut -d^'^"^' -f2`) do (set PECLMEMCACHEVERSION=%%F)
-sed -i -E 's/, PHP_MEMCACHE_VERSION/, "%PECLMEMCACHEVERSION% | branch: %SCM_BRANCH% | commit: %SCM_COMORREV% | date: %SCM_COMORREV_DATE% | https:\/\/github.com\/nono303\/PHP-memcache-dll"/g' %CYGPATH_SRC%/pecl-memcache/%PECLMEMCACHECYGSRCDIR%/memcache.c
+sed -i -E 's/, PHP_MEMCACHE_VERSION/, "version: %PECLMEMCACHEVERSION% | branch: %SCM_BRANCH% | commit: %SCM_COMORREV% | date: %SCM_COMORREV_DATE% | https:\/\/github.com\/nono303\/PHP-memcache-dll"/g' %CYGPATH_SRC%/pecl-memcache/%PECLMEMCACHECYGSRCDIR%/memcache.c
 REM echo %PECLMEMCACHEVERSION% ^| branch: %SCM_BRANCH% ^| commit: %SCM_COMORREV% ^| date: %SCM_COMORREV_DATE%
 
 	REM ~~~~~~~~~~~~ pecl-text-xdiff : libxdiff version
