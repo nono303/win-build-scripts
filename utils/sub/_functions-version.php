@@ -86,9 +86,6 @@
 		// tag lower than file
 		"verpatch"					=> ["/set _ver=\"([^ ]+)/",
 									PATH_SRC."/verpatch/ver-self.cmd"],
-		// dirty version & last tag 8.0.1.xx
-		"pecl-memcache"				=> ["/PHP_MEMCACHE_VERSION \"([0-9\.]+)/",
-									PATH_SRC."/pecl-memcache/src/php_memcache.h"],
 		// see nssm.bat for explanation
 		"nssm"						=> ['/set NSSM_VER=([0-9\.]+)/s',
 									pathenv("PATH_MODULES")."/nssm.bat"],
