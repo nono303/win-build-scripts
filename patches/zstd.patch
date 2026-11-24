@@ -1,21 +1,8 @@
-diff --git a/build/VS2010/libzstd-dll/libzstd-dll.rc b/build/VS2010/libzstd-dll/libzstd-dll.rc
-index 13e8746f..7099ddec 100644
---- a/build/VS2010/libzstd-dll/libzstd-dll.rc
-+++ b/build/VS2010/libzstd-dll/libzstd-dll.rc
-@@ -1,7 +1,7 @@
- // Microsoft Visual C++ generated resource script.
- //
- 
--#include "zstd.h" /* ZSTD_VERSION_STRING */
-+#include "../../../lib/zstd.h" /* ZSTD_VERSION_STRING */
- #define APSTUDIO_READONLY_SYMBOLS
- #include "verrsrc.h"
- #undef APSTUDIO_READONLY_SYMBOLS
 diff --git a/build/cmake/lib/CMakeLists.txt b/build/cmake/lib/CMakeLists.txt
-index 4e902a1f..c9030496 100644
+index 5ce2400b3..5386b7afb 100644
 --- a/build/cmake/lib/CMakeLists.txt
 +++ b/build/cmake/lib/CMakeLists.txt
-@@ -12,6 +12,7 @@
+@@ -12,6 +12,7 @@ project(libzstd C) # ASM language is conditionally enabled where supported
  set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
  option(ZSTD_BUILD_STATIC "BUILD STATIC LIBRARIES" ON)
  option(ZSTD_BUILD_SHARED "BUILD SHARED LIBRARIES" ON)
@@ -23,7 +10,7 @@ index 4e902a1f..c9030496 100644
  option(ZSTD_BUILD_COMPRESSION "BUILD COMPRESSION MODULE" ON)
  option(ZSTD_BUILD_DECOMPRESSION "BUILD DECOMPRESSION MODULE" ON)
  option(ZSTD_BUILD_DICTBUILDER "BUILD DICTBUILDER MODULE" ON)
-@@ -204,7 +205,7 @@
+@@ -203,7 +204,7 @@ if (ZSTD_BUILD_SHARED)
      set_target_properties(
              libzstd_shared
              PROPERTIES
@@ -31,4 +18,4 @@ index 4e902a1f..c9030496 100644
 +            OUTPUT_NAME libzstd
              VERSION ${ZSTD_FULL_VERSION}
              SOVERSION ${zstd_VERSION_MAJOR})
-             
+ 
