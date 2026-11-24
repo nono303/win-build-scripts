@@ -8,7 +8,7 @@ if %PHPVER% == 8.5 (
 )
 if %PHPVER% == 8.6 (
 	set CONFIGURE_VERSION=
-	set CONFIGURE_VERSION_DISABLED=--without-pcre
+	set CONFIGURE_VERSION_DISABLED=
 )
 set CONFIGURE_PARTIAL_DISABLED=^
 	%CONFIGURE_VERSION_DISABLED% ^
@@ -59,8 +59,10 @@ set CONFIGURE_COMMON=^
 	--with-extra-includes=%PATH_INSTALL%\include;%PATH_INSTALL%\_proj\include;%PATH_INSTALL%\_gdal\include;%PATH_SRC%\pecl-igbinary\src\php7 ^
 	--with-extra-libs=%PHP_XTRALIBS%;%PATH_INSTALL%\lib;%PATH_INSTALL%\_proj\lib;%PATH_INSTALL%\_gdal\lib ^
 	--with-mp=%NUMBER_OF_PROCESSORS%
-REM [%PHPVER% != %PHP_BUILD_TYPE%]: add --disable-zlib ^ if not memcache
+
 if %PHP_BUILD_TYPE% == xdebug		(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --with-xdebug=shared --with-xdebug-compression)
+REM with    --enable-zlib:  memcache build with PHP_ZLIB
+REM without --enable-zlib:  memcache build with libzs.lib (static)
 if %PHP_BUILD_TYPE% == memcache		(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --enable-memcache=shared)
 if %PHP_BUILD_TYPE% == memcached	(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --enable-memcached=shared --enable-memcached-session --enable-memcached-igbinary --enable-memcached-json --enable-igbinary=shared)
 if %PHP_BUILD_TYPE% == brotli		(set CONFIGURE_PARTIAL=%CONFIGURE_PARTIAL_DISABLED% %CONFIGURE_COMMON_DISABLED% --enable-brotli=shared)
@@ -203,31 +205,31 @@ if %PHPVER% == %PHP_BUILD_TYPE% (
 	call do_php %PATH_UTILS%\sub\version.php pecl-parallel %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_parallel.dll build:%TSNTS% php:%PHPVERFULL%
 )
 if %PHP_BUILD_TYPE% == ffi	(
-	call do_php %PATH_UTILS%\sub\version.php php-src %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_ffi.dll build:%TSNTS% php:%PHPVERFULL%
+	call do_php %PATH_UTILS%\sub\version.php php-src %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_ffi.dll phpver:%PHPVER%-%TSNTS%
 )
 if %PHP_BUILD_TYPE% == gd	(
-	call do_php %PATH_UTILS%\sub\version.php php-src %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_gd.dll build:%TSNTS% php:%PHPVERFULL%
+	call do_php %PATH_UTILS%\sub\version.php php-src %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_gd.dll phpver:%PHPVER%-%TSNTS%
 )
 if %PHP_BUILD_TYPE% == ogr	(
-	call do_php %PATH_UTILS%\sub\version.php php-ogr %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_ogr.dll build:%TSNTS% php:%PHPVERFULL%
+	call do_php %PATH_UTILS%\sub\version.php php-ogr %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_ogr.dll phpver:%PHPVER%-%TSNTS%
 )
 if %PHP_BUILD_TYPE% == sync	(
-	call do_php %PATH_UTILS%\sub\version.php pecl-system-sync %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_sync.dll build:%TSNTS% php:%PHPVERFULL%
+	call do_php %PATH_UTILS%\sub\version.php pecl-system-sync %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_sync.dll phpver:%PHPVER%-%TSNTS%
 )
 if %PHP_BUILD_TYPE% == xdebug	(
-	call do_php %PATH_UTILS%\sub\version.php xdebug %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_xdebug.dll build:%TSNTS% php:%PHPVERFULL%
+	call do_php %PATH_UTILS%\sub\version.php xdebug %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_xdebug.dll phpver:%PHPVER%-%TSNTS%
 )
 if %PHP_BUILD_TYPE% == igbinary	(
-	call do_php %PATH_UTILS%\sub\version.php pecl-igbinary %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_igbinary.dll build:%TSNTS% php:%PHPVERFULL%
+	call do_php %PATH_UTILS%\sub\version.php pecl-igbinary %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_igbinary.dll phpver:%PHPVER%-%TSNTS%
 )
 if %PHP_BUILD_TYPE% == jsonpath	(
-	call do_php %PATH_UTILS%\sub\version.php pecl-jsonpath %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_jsonpath.dll build:%TSNTS% php:%PHPVERFULL%
+	call do_php %PATH_UTILS%\sub\version.php pecl-jsonpath %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_jsonpath.dll phpver:%PHPVER%-%TSNTS%
 )
 if %PHP_BUILD_TYPE% == parallel	(
-	call do_php %PATH_UTILS%\sub\version.php pecl-parallel %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_parallel.dll build:%TSNTS% php:%PHPVERFULL%
+	call do_php %PATH_UTILS%\sub\version.php pecl-parallel %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_parallel.dll phpver:%PHPVER%-%TSNTS%
 )
 if %PHP_BUILD_TYPE% == memcached (
-	call do_php %PATH_UTILS%\sub\version.php php-memcached %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcached.dll build:%TSNTS% php:%PHPVERFULL%
+	call do_php %PATH_UTILS%\sub\version.php php-memcached %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcached.dll phpver:%PHPVER%-%TSNTS%
 )
 if %PHP_BUILD_TYPE% == memcache	(
 	setlocal enabledelayedexpansion
@@ -235,7 +237,7 @@ if %PHP_BUILD_TYPE% == memcache	(
 	if %AVXECHO% == sse2 (set AVXPATH=) else (set AVXPATH=\%AVXB:-=%)
 	if not exist %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%!AVXPATH!\. mkdir %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%!AVXPATH!
 
-	call do_php %PATH_UTILS%\sub\version.php pecl-memcache %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcache.dll build:%TSNTS% php:%PHPVERFULL%
+	call do_php %PATH_UTILS%\sub\version.php pecl-memcache %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcache.dll phpver:%PHPVER%-%TSNTS%
 	if not "%PATH_GITHUB_PHPMEMCACHE%"=="" (
 		for %%A in (pdb dll) do (
 			call %PATH_UTILS%\fileutils cp %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_memcache.%%A %PATH_GITHUB_PHPMEMCACHE%\%MSVC_DEPS%\%PHP_SDK_ARCH%\%TSNTS%!AVXPATH!\php-%PHPVER%.x_memcache.%%A*
@@ -249,7 +251,7 @@ if %PHP_BUILD_TYPE% == brotli (
 	if %AVXECHO% == sse2 (set AVXPATH=\sse2) else (set AVXPATH=\%AVXB:-=%)
 	if not exist %PATH_GITHUB_PHPBROTLI%\%MSVC_DEPS%-%PHP_SDK_ARCH%-%TSNTS%!AVXPATH!\. mkdir %PATH_GITHUB_PHPBROTLI%\%MSVC_DEPS%-%PHP_SDK_ARCH%-%TSNTS%!AVXPATH!
 
-	call do_php %PATH_UTILS%\sub\version.php php-ext-brotli %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_brotli.dll build:%TSNTS% php:%PHPVERFULL% brotli:!BROTLIVER:v=!
+	call do_php %PATH_UTILS%\sub\version.php php-ext-brotli %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_brotli.dll phpver:%PHPVER%-%TSNTS% brotli:!BROTLIVER:v=!
 	if not "%PATH_GITHUB_PHPBROTLI%"=="" (
 		for %%A in (pdb dll) do (
 			call %PATH_UTILS%\fileutils cp %PATH_RELEASE%\%MSVC_DEPS%_%PHP_SDK_ARCH%%AVXB%\_php-%TSNTS%\php_brotli.%%A %PATH_GITHUB_PHPBROTLI%\%MSVC_DEPS%-%PHP_SDK_ARCH%-%TSNTS%!AVXPATH!\php-%PHPVER%.x_brotli.%%A*
