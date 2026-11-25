@@ -65,6 +65,7 @@ index 0000000..602ccaa
 +}
 
 # https://github.com/libgeos/php-geos/pull/5
+# https://gitea.osgeo.org/geos/php-geos/pulls/43
 
 From de6129add91ef80b5cfaf12cb780fb2011b24929 Mon Sep 17 00:00:00 2001
 From: Remi Collet <remi@remirepo.net>
