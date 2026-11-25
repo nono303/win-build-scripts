@@ -1,8 +1,45 @@
 # changelog
 
 
+## 1.20.2 _(2026-11-25)_
+
+*  update tools & src
+`README.md`
+`SRC_VERSION.md`
+`config/cyg64.packagelist`
+`config/python.pip`
+`utils/srccreate.bat`
+*  ref to PR on main repo
+`patches/php-geos.patch`
+*  1.6.0
+`modules/zstd.bat`
+`patches/zstd.patch`
+*  improve get php major version memcache: * use shared lib if not build as standalone module * improve phpinfo 'Version'
+`modules/php.bat`
+*  remove bad --without-pcre in CONFIGURE_VERSION_DISABLED for php-8.6 If build module: `build:%TSNTS% php:%PHPVERFULL%` > `phpver:%PHPVER%-%TSNTS%`
+`modules/phpsdk-config_make.bat`
+*  fix test for building with lib zlib if `--disable-zlib`
+`patches/pecl-memcache.patch`
+*  add `phpver` for php [module] build extract copyright and set specific for `php memcache`
+`utils/sub/version.php`
+*  use git tag for pecl-memcache
+`utils/sub/_functions-version.php`
+*  fix name and install pdb for static lib
+`modules/zlib.bat`
+*  pr #120 & #122 merged https://github.com/websupport-sk/pecl-memcache/commit/b2f03e8789375133a744323b7a0a47755c733480
+`patches/pecl-memcache.patch`
+*  build php memcache with zlib static improve CONFIGURE_VERSION_DISABLED
+`modules/php.bat`
+`modules/phpsdk-config_make.bat`
+`modules/zlib.bat`
+*  rollback: disable `--no-binary :all:`
+`upgrade_pip.bat`
+
+
 ## 1.20.1 _(2026-11-20)_
 
+*  1.20.1
+`changelog.md`
 *  update tools & src
 `README.md`
 `SRC_VERSION.md`
