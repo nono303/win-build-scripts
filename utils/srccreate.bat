@@ -34,7 +34,7 @@ git checkout tags/v1.34.9
 cd /D ..
 git clone https://github.com/curl/curl.git curl
 cd /D curl
-git checkout tags/rc-8_24_0-1
+git checkout tags/rc-8_24_0-2
 cd /D ..
 git clone https://code.videolan.org/videolan/dav1d.git dav1d
 cd /D dav1d
@@ -66,7 +66,7 @@ git checkout tags/r2.7
 cd /D ..
 git clone https://github.com/libgeos/geos geos
 cd /D geos
-git checkout tags/3.15.0
+git checkout tags/3.15.1
 cd /D ..
 git clone https://github.com/gongjianbo/GifLib giflib
 cd /D giflib
@@ -102,7 +102,7 @@ git checkout tags/v1.26
 cd /D ..
 git clone https://github.com/libexpat/libexpat.git libexpat
 cd /D libexpat
-git checkout tags/R_2_10_0
+git checkout tags/R_2_11_0
 cd /D ..
 git clone https://github.com/libffi/libffi.git libffi
 cd /D libffi
@@ -282,11 +282,11 @@ git checkout master
 cd /D ..
 git clone https://github.com/supermetrics-public/pecl-jsonpath.git pecl-jsonpath
 cd /D pecl-jsonpath
-git checkout main
+git checkout tags/v4.0.0
 cd /D ..
 git clone https://github.com/websupport-sk/pecl-memcache.git pecl-memcache
 cd /D pecl-memcache
-git checkout main
+git checkout tags/8.6
 cd /D ..
 git clone https://github.com/krakjoe/parallel.git pecl-parallel
 cd /D pecl-parallel
@@ -306,7 +306,7 @@ git checkout tags/0.21.1
 cd /D ..
 git clone https://github.com/kjdev/php-ext-zstd.git php-ext-zstd
 cd /D php-ext-zstd
-git checkout tags/0.18.0
+git checkout tags/0.19.0
 cd /D ..
 git clone https://gitea.osgeo.org/geos/php-geos php-geos
 cd /D php-geos
@@ -322,7 +322,7 @@ git checkout tags/1.7.2
 cd /D ..
 git clone https://github.com/swen100/phpng-proj.git php-proj
 cd /D php-proj
-git checkout master
+git checkout tags/v3.1.0
 cd /D ..
 git clone https://github.com/php/php-sdk-binary-tools.git php-sdk
 cd /D php-sdk
@@ -402,5 +402,5 @@ git checkout tags/v1.4
 cd /D ..
 git clone https://github.com/facebook/zstd.git zstd
 cd /D zstd
-git checkout tags/v1.5.7
+git checkout tags/v1.6.0
 cd /D ..

@@ -61,7 +61,7 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | :bookmark: [Microsoft Visual C++ Redistributable](https://github.com/abbodi1406/vcredist/releases) | x64 & x86 | 14.52.37025 |  |
 | [Cygwin](https://cygwin.com/install.html)                    | x64  | 3.7.0 | `cyg64.packagelist` |
 | [Python](https://www.python.org/downloads/)                  | x64  | 3.15.2 |                     |
-| [OpenJDK](https://jdk.java.net/27/)            | x64  | 27.0.1.0.3 |                     |
+| [OpenJDK](https://jdk.java.net/27/)            | x64  | 27.0.1.1 |                     |
 | [Strawberry Perl](https://github.com/StrawberryPerl/Perl-Dist-Strawberry/releases) | x64  | 5.40.5.1 UCRT |                     |
 | [NASM](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D) | x64  | 3.0.2 |                     |
 | [YASM](https://github.com/yasm/yasm/releases) | x64 | 1.3.0 | |
@@ -70,12 +70,12 @@ Note, that the goal is to have quick pseudo-automated build for testing use I vo
 | [7z](https://www.7-zip.org/download.html)                    | x64  | 26.06 |                     |
 | [sigcheck64](https://docs.microsoft.com/en-us/sysinternals/downloads/sigcheck) | x64  | 2.93   |                     |
 | [ChkMatch](https://web.archive.org/web/20210205095232/https://www.debuginfo.com/tools/chkmatch.html) | x86 | 1.0.3          |                     |
-| [Gradle](https://services.gradle.org/distributions/) | [java] | 9.9.1 | |
-| [CMake](https://cmake.org/download/) | x64 | 4.5.0 | |
+| [Gradle](https://services.gradle.org/distributions/) | [java] | 9.9.2 | |
+| [CMake](https://cmake.org/download/) | x64 | 4.5.1 | |
 | [Ninja](https://github.com/ninja-build/ninja/releases) | x64 | 1.13.2 | |
 | [JOM](https://download.qt.io/official_releases/jom/) | x64 | 1.1.7 | |
-| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 1.12.1 | |
-| [pkg-config](https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-pkgconf) | x64 | 3.0.10 | |
+| [Meson](https://github.com/mesonbuild/meson/releases) | [python] | 1.13.0rc1 | |
+| [pkg-config](https://packages.msys2.org/packages/mingw-w64-ucrt-x86_64-pkgconf) | x64 | 3.0.11 | |
 | [cccl](https://github.com/nono303/cccl) | [shell] | 1.4 | |
 | [flex](https://github.com/lexxmark/winflexbison/releases) | x86 | 2.6.4 | |
 
